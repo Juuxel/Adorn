@@ -5,7 +5,7 @@ import juuxel.adorn.Adorn
 import juuxel.adorn.block.*
 import juuxel.adorn.util.WoodType
 import net.minecraft.util.DyeColor
-import net.minecraft.util.registry.Registry
+//import net.minecraft.util.registry.Registry
 
 object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
     val SOFAS: List<SofaBlock> = DyeColor.values().map {
@@ -36,7 +36,7 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
 
     fun init() {
         // Register here so they're only registered once
-        register(Registry.BLOCK_ENTITY, "kitchen_cupboard", KitchenCupboardBlock.BLOCK_ENTITY_TYPE)
-        register(Registry.BLOCK_ENTITY, "drawer", DrawerBlock.BLOCK_ENTITY_TYPE)
+        //register(Registry.BLOCK_ENTITY, "kitchen_cupboard", KitchenCupboardBlock.BLOCK_ENTITY_TYPE)
+        //register(Registry.BLOCK_ENTITY, "drawer", DrawerBlock.BLOCK_ENTITY_TYPE)
     }
 }
