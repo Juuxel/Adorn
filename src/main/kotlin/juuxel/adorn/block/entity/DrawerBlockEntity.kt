@@ -6,7 +6,7 @@ import net.minecraft.container.ContainerProvider
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 
-class KitchenCupboardBlockEntity : BaseInventoryBlockEntity(KitchenCupboardBlock.BLOCK_ENTITY_TYPE, 9), ContainerProvider {
+class DrawerBlockEntity : BaseInventoryBlockEntity(KitchenCupboardBlock.BLOCK_ENTITY_TYPE, 9), ContainerProvider {
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity): Container {
         TODO("add gui")
     }
