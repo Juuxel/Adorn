@@ -1,7 +1,7 @@
 {
   "elements": [{
-    "from": [4, 7, 14],
-    "to": [14, 13, 16],
+    "from": [5, 7, 13],
+    "to": [16, 13, 16],
     "faces": {
       "east": { "texture": "#wool" },
       "north": { "texture": "#wool" },

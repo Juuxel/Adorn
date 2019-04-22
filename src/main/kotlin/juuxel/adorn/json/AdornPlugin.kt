@@ -14,11 +14,13 @@ object AdornPlugin : Plugin {
     }
 
     //adorn:red,adorn:black,adorn:green,adorn:brown,adorn:blue,adorn:purple,adorn:cyan,adorn:light_gray,adorn:gray,adorn:pink,adorn:lime,adorn:yellow,adorn:light_blue,adorn:magenta,adorn:orange,adorn:white
+    //adorn:oak,adorn:spruce,adorn:birch,adorn:jungle,adorn:acacia,adorn:dark_oak
 
     val SOFA = GeneratorInfo(AdornCategory, Subcategories.Sofas)
     val CHAIR = GeneratorInfo(AdornCategory, Subcategories.Chairs)
     val TABLE = GeneratorInfo(AdornCategory, Subcategories.Tables)
     val KITCHEN = GeneratorInfo(AdornCategory, Subcategories.Kitchen)
+    val DRAWER = GeneratorInfo(AdornCategory, Subcategories.Drawers)
     override val generators: List<ContentGenerator> = listOf(
         SofaBlockModel,
         SofaBlockState,
@@ -43,7 +45,12 @@ object AdornPlugin : Plugin {
         KitchenCupboardBlockModel,
         KitchenCupboardBlockState,
         KitchenCupboardItemModel,
-        SuffixedLootTable("Kitcher Cupboard", "kitchen_cupboard", KITCHEN)
+        SuffixedLootTable("Kitcher Cupboard", "kitchen_cupboard", KITCHEN),
+
+        DrawerBlockModel,
+        DrawerBlockState,
+        SuffixedBlockItemModel("Drawer", "drawer", DRAWER),
+        SuffixedLootTable("Drawer", "drawer", DRAWER)
     )
 
     object AdornCategory : GeneratorInfo.Category {
@@ -57,7 +64,8 @@ object AdornPlugin : Plugin {
         Sofas("Sofas"),
         Chairs("Chairs"),
         Tables("Tables"),
-        Kitchen("Kitchen")
+        Kitchen("Kitchen"),
+        Drawers("Drawer")
     }
 
     @JvmStatic

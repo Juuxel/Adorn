@@ -66,6 +66,8 @@ class SofaBlock(variant: String) : Block(Settings.copy(Blocks.WHITE_WOOL)), Poly
         val CONNECTED_LEFT = BooleanProperty.create("connected_left")
         val CONNECTED_RIGHT = BooleanProperty.create("connected_right")
 
+        // TODO: Add back, fix arms
+        // TODO: Add arms to item model
         private val BOTTOM = createCuboidShape(0.0, 0.0, 0.0, 16.0, 7.0, 16.0)
         private val LEFT_ARMS = mapOf(
             Direction.EAST to box(4, 7, 14, 14, 13, 16),

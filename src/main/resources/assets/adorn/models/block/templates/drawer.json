@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "handle": "minecraft:block/iron_block",
+    "particle": "#planks"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [13, 16, 16],
+      "faces": {
+        "down": { "texture": "#planks", "cullface": "down" },
+        "up": { "texture": "#planks", "cullface": "up" },
+        "east": { "texture": "#planks" },
+        "west": { "texture": "#planks", "cullface": "west" },
+        "south": { "texture": "#planks", "cullface": "south" },
+        "north": { "texture": "#planks", "cullface": "north" }
+      }
+    },
+    {
+      "from": [13, 1, 1],
+      "to": [15, 7, 15],
+      "faces": {
+        "down": { "texture": "#planks" },
+        "up": { "texture": "#planks" },
+        "east": { "texture": "#planks" },
+        "south": { "texture": "#planks" },
+        "north": { "texture": "#planks" }
+      }
+    },
+    {
+      "from": [13, 9, 1],
+      "to": [15, 15, 15],
+      "faces": {
+        "down": { "texture": "#planks" },
+        "up": { "texture": "#planks" },
+        "east": { "texture": "#planks" },
+        "south": { "texture": "#planks" },
+        "north": { "texture": "#planks" }
+      }
+    },
+    {
+      "from": [15, 4, 6],
+      "to": [16, 5, 10],
+      "faces": {
+        "down": { "texture": "#handle" },
+        "up": { "texture": "#handle" },
+        "east": { "texture": "#handle" },
+        "south": { "texture": "#handle" },
+        "north": { "texture": "#handle" }
+      }
+    },
+    {
+      "from": [15, 12, 6],
+      "to": [16, 13, 10],
+      "faces": {
+        "down": { "texture": "#handle" },
+        "up": { "texture": "#handle" },
+        "east": { "texture": "#handle" },
+        "south": { "texture": "#handle" },
+        "north": { "texture": "#handle" }
+      }
+    }
+  ]
+}
