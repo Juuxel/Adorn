@@ -1,0 +1,29 @@
+{
+  "textures": {
+    "handle": "minecraft:block/iron_block"
+  },
+  "elements": [
+    {
+      "from": [14, 1, 1],
+      "to": [15, 13, 15],
+      "faces": {
+        "up": { "texture": "#planks" },
+        "down": { "texture": "#planks" },
+        "east": { "texture": "#planks" },
+        "south": { "texture": "#planks" },
+        "north": { "texture": "#planks" }
+      }
+    },
+    {
+      "from": [15, 6, 11],
+      "to": [16, 9, 12],
+      "faces": {
+        "up": { "texture": "#handle" },
+        "down": { "texture": "#handle" },
+        "east": { "texture": "#handle" },
+        "south": { "texture": "#handle" },
+        "north": { "texture": "#handle" }
+      }
+    }
+  ]
+}

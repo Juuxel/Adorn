@@ -28,5 +28,12 @@
   "block.adorn.birch_table": "Birch Table",
   "block.adorn.jungle_table": "Jungle Table",
   "block.adorn.acacia_table": "Acacia Table",
-  "block.adorn.dark_oak_table": "Dark Oak Table"
+  "block.adorn.dark_oak_table": "Dark Oak Table",
+
+  "block.adorn.oak_kitchen_counter": "Oak Kitchen Counter",
+  "block.adorn.spruce_kitchen_counter": "Spruce Kitchen Counter",
+  "block.adorn.birch_kitchen_counter": "Birch Kitchen Counter",
+  "block.adorn.jungle_kitchen_counter": "Jungle Kitchen Counter",
+  "block.adorn.acacia_kitchen_counter": "Acacia Kitchen Counter",
+  "block.adorn.dark_oak_kitchen_counter": "Dark Oak Kitchen Counter"
 }

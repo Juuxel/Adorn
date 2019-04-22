@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:item/templates/kitchen_cupboard",
+  "textures": {
+    "planks": "minecraft:block/jungle_planks"
+  }
+}

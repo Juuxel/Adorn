@@ -18,19 +18,32 @@ object AdornPlugin : Plugin {
     val SOFA = GeneratorInfo(AdornCategory, Subcategories.Sofas)
     val CHAIR = GeneratorInfo(AdornCategory, Subcategories.Chairs)
     val TABLE = GeneratorInfo(AdornCategory, Subcategories.Tables)
+    val KITCHEN = GeneratorInfo(AdornCategory, Subcategories.Kitchen)
     override val generators: List<ContentGenerator> = listOf(
         SofaBlockModel,
         SofaBlockState,
         SofaItemModel,
         SuffixedLootTable("Sofa", "sofa", SOFA),
+
         ChairBlockModel,
         ChairBlockState,
         SuffixedBlockItemModel("Chair", "chair", CHAIR),
         SuffixedLootTable("Chair", "chair", CHAIR),
+
         TableBlockModel,
         SuffixedBlockState("Table Block State", "table", TABLE),
         SuffixedBlockItemModel("Table", "table", TABLE),
-        SuffixedLootTable("Table", "table", TABLE)
+        SuffixedLootTable("Table", "table", TABLE),
+
+        KitchenCounterBlockModel,
+        KitchenCounterBlockState,
+        SuffixedBlockItemModel("Kitchen Counter", "kitchen_counter", KITCHEN),
+        SuffixedLootTable("Kitcher Counter", "kitchen_counter", KITCHEN),
+
+        KitchenCupboardBlockModel,
+        KitchenCupboardBlockState,
+        KitchenCupboardItemModel,
+        SuffixedLootTable("Kitcher Cupboard", "kitchen_cupboard", KITCHEN)
     )
 
     object AdornCategory : GeneratorInfo.Category {
@@ -43,7 +56,8 @@ object AdornPlugin : Plugin {
     enum class Subcategories(override val displayName: String, override val description: String? = null) : GeneratorInfo.Subcategory {
         Sofas("Sofas"),
         Chairs("Chairs"),
-        Tables("Tables")
+        Tables("Tables"),
+        Kitchen("Kitchen")
     }
 
     @JvmStatic

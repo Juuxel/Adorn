@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "adorn:block/oak_kitchen_counter"
+    },
+    "facing=south": {
+      "model": "adorn:block/oak_kitchen_counter",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "adorn:block/oak_kitchen_counter",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "adorn:block/oak_kitchen_counter",
+      "y": 180
+    }
+  }
+}

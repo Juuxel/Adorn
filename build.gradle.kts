@@ -32,6 +32,11 @@ repositories {
     maven(url = "https://minecraft.curseforge.com/api/maven") {
         name = "CurseForge"
     }
+
+    // For LBA
+    maven(url = "https://mod-buildcraft.com/maven") {
+        name = "BuildCraft"
+    }
 }
 
 val shortVersion = "0.1.0"
@@ -61,7 +66,10 @@ dependencies {
 
     // Other mods
     modCompile("com.github.Juuxel:Polyester:739dab2cf6")
+    include("com.github.Juuxel:Polyester:739dab2cf6")
     modCompile("towelette:Towelette:1.5.0")
+    modCompile("alexiil.mc.lib:libblockattributes:0.3.1")
+    include("alexiil.mc.lib:libblockattributes:0.4.0")
 
     // Other libraries
     implementation("io.github.cottonmc:json-factory:0.5.0-local.2-SNAPSHOT")
