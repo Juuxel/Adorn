@@ -1,0 +1,117 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "adorn:block/purple_sofa_center",
+        "y": 270
+      },
+      "when": {
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/purple_sofa_arm_left",
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "connected_left": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/purple_sofa_arm_right",
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "connected_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/purple_sofa_center",
+        "y": 90
+      },
+      "when": {
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/purple_sofa_arm_left",
+        "y": 90
+      },
+      "when": {
+        "facing": "south",
+        "connected_left": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/purple_sofa_arm_right",
+        "y": 90
+      },
+      "when": {
+        "facing": "south",
+        "connected_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/purple_sofa_center",
+        "y": 180
+      },
+      "when": {
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/purple_sofa_arm_left",
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "connected_left": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/purple_sofa_arm_right",
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "connected_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/purple_sofa_center"
+      },
+      "when": {
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/purple_sofa_arm_left"
+      },
+      "when": {
+        "facing": "east",
+        "connected_left": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/purple_sofa_arm_right"
+      },
+      "when": {
+        "facing": "east",
+        "connected_right": "false"
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "adorn:block/spruce_chair"
+    },
+    "facing=south": {
+      "model": "adorn:block/spruce_chair",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "adorn:block/spruce_chair",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "adorn:block/spruce_chair",
+      "y": 180
+    }
+  }
+}

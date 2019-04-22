@@ -1,0 +1,25 @@
+{
+  "block.adorn.white_sofa": "White Sofa",
+  "block.adorn.light_gray_sofa": "Light Gray Sofa",
+  "block.adorn.gray_sofa": "Gray Sofa",
+  "block.adorn.black_sofa": "Black Sofa",
+  "block.adorn.brown_sofa": "Brown Sofa",
+  "block.adorn.red_sofa": "Red Sofa",
+  "block.adorn.orange_sofa": "Orange Sofa",
+  "block.adorn.yellow_sofa": "Yellow Sofa",
+  "block.adorn.lime_sofa": "Lime Sofa",
+  "block.adorn.green_sofa": "Green Sofa",
+  "block.adorn.cyan_sofa": "Cyan Sofa",
+  "block.adorn.light_blue_sofa": "Light Blue Sofa",
+  "block.adorn.blue_sofa": "Blue Sofa",
+  "block.adorn.purple_sofa": "Purple Sofa",
+  "block.adorn.magenta_sofa": "Magenta Sofa",
+  "block.adorn.pink_sofa": "Pink Sofa",
+
+  "block.adorn.oak_chair": "Oak Chair",
+  "block.adorn.spruce_chair": "Spruce Chair",
+  "block.adorn.birch_chair": "Birch Chair",
+  "block.adorn.jungle_chair": "Jungle Chair",
+  "block.adorn.acacia_chair": "Acacia Chair",
+  "block.adorn.dark_oak_chair": "Dark Oak Chair"
+}

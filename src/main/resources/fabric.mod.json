@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "adorn",
+  "version": "$version",
+
+  "name": "Adorn",
+  "authors": ["Juuz"],
+
+  "entrypoints": {
+    "main": [
+      {
+        "value": "juuxel.adorn.Adorn",
+        "adapter": "kotlin"
+      }
+    ],
+    "json-factory": [
+      "juuxel.adorn.json.AdornPlugin"
+    ]
+  },
+
+  "depends": {
+    "fabric": ">=0.2.0",
+    "fabricloader": ">=0.4.0",
+    "fabric-language-kotlin": ">=1.3.30",
+    "towelette": ">=1.5.0",
+    "polyester": ">=0.1.0"
+  }
+}

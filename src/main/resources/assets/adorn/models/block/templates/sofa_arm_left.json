@@ -1,0 +1,12 @@
+{
+  "elements": [{
+    "from": [4, 7, 14],
+    "to": [14, 13, 16],
+    "faces": {
+      "east": { "texture": "#wool" },
+      "north": { "texture": "#wool" },
+      "south": { "texture": "#wool", "cullface": "south" },
+      "up": { "texture": "#wool" }
+    }
+  }]
+}

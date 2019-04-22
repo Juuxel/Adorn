@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:item/templates/sofa",
+  "textures": {
+    "wool": "minecraft:block/gray_wool"
+  }
+}
