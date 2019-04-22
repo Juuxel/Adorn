@@ -35,5 +35,14 @@
   "block.adorn.birch_kitchen_counter": "Birch Kitchen Counter",
   "block.adorn.jungle_kitchen_counter": "Jungle Kitchen Counter",
   "block.adorn.acacia_kitchen_counter": "Acacia Kitchen Counter",
-  "block.adorn.dark_oak_kitchen_counter": "Dark Oak Kitchen Counter"
+  "block.adorn.dark_oak_kitchen_counter": "Dark Oak Kitchen Counter",
+
+  "block.adorn.oak_kitchen_cupboard": "Oak Kitchen Cupboard",
+  "block.adorn.spruce_kitchen_cupboard": "Spruce Kitchen Cupboard",
+  "block.adorn.birch_kitchen_cupboard": "Birch Kitchen Cupboard",
+  "block.adorn.jungle_kitchen_cupboard": "Jungle Kitchen Cupboard",
+  "block.adorn.acacia_kitchen_cupboard": "Acacia Kitchen Cupboard",
+  "block.adorn.dark_oak_kitchen_cupboard": "Dark Oak Kitchen Cupboard",
+
+  "block.adorn.chimney": "Chimney"
 }

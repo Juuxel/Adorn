@@ -33,7 +33,7 @@ class ChairBlock(material: String) : Block(Settings.copy(Blocks.OAK_FENCE)), Pol
     companion object {
         val FACING = Properties.FACING_HORIZONTAL
         private val SEAT_SHAPE = VoxelShapes.union(
-            createCuboidShape(1.0, 8.0, 1.0, 15.0, 10.0, 15.0),
+            createCuboidShape(2.0, 8.0, 2.0, 14.0, 10.0, 14.0),
             // Legs
             createCuboidShape(2.0, 0.0, 2.0, 4.0, 8.0, 4.0),
             createCuboidShape(12.0, 0.0, 2.0, 14.0, 8.0, 4.0),

@@ -28,6 +28,8 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         registerBlock(KitchenCupboardBlock(it.id))
     }
 
+    val CHIMNEY: ChimneyBlock = registerBlock(ChimneyBlock())
+
     fun init() {
         // Register here so it's only registered once
         register(Registry.BLOCK_ENTITY, "kitchen_cupboard", KitchenCupboardBlock.BLOCK_ENTITY_TYPE)
