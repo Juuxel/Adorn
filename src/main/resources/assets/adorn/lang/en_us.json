@@ -21,5 +21,12 @@
   "block.adorn.birch_chair": "Birch Chair",
   "block.adorn.jungle_chair": "Jungle Chair",
   "block.adorn.acacia_chair": "Acacia Chair",
-  "block.adorn.dark_oak_chair": "Dark Oak Chair"
+  "block.adorn.dark_oak_chair": "Dark Oak Chair",
+
+  "block.adorn.oak_table": "Oak Table",
+  "block.adorn.spruce_table": "Spruce Table",
+  "block.adorn.birch_table": "Birch Table",
+  "block.adorn.jungle_table": "Jungle Table",
+  "block.adorn.acacia_table": "Acacia Table",
+  "block.adorn.dark_oak_table": "Dark Oak Table"
 }

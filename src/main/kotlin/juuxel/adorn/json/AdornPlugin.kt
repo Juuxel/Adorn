@@ -3,6 +3,7 @@ package juuxel.adorn.json
 import io.github.cottonmc.jsonfactory.gens.ContentGenerator
 import io.github.cottonmc.jsonfactory.gens.GeneratorInfo
 import io.github.cottonmc.jsonfactory.gens.block.SuffixedBlockItemModel
+import io.github.cottonmc.jsonfactory.gens.block.SuffixedBlockState
 import io.github.cottonmc.jsonfactory.gens.block.SuffixedLootTable
 import io.github.cottonmc.jsonfactory.plugin.Plugin
 
@@ -16,6 +17,7 @@ object AdornPlugin : Plugin {
 
     val SOFA = GeneratorInfo(AdornCategory, Subcategories.Sofas)
     val CHAIR = GeneratorInfo(AdornCategory, Subcategories.Chairs)
+    val TABLE = GeneratorInfo(AdornCategory, Subcategories.Tables)
     override val generators: List<ContentGenerator> = listOf(
         SofaBlockModel,
         SofaBlockState,
@@ -24,7 +26,11 @@ object AdornPlugin : Plugin {
         ChairBlockModel,
         ChairBlockState,
         SuffixedBlockItemModel("Chair", "chair", CHAIR),
-        SuffixedLootTable("Chair", "chair", CHAIR)
+        SuffixedLootTable("Chair", "chair", CHAIR),
+        TableBlockModel,
+        SuffixedBlockState("Table Block State", "table", TABLE),
+        SuffixedBlockItemModel("Table", "table", TABLE),
+        SuffixedLootTable("Table", "table", TABLE)
     )
 
     object AdornCategory : GeneratorInfo.Category {
@@ -36,7 +42,8 @@ object AdornPlugin : Plugin {
 
     enum class Subcategories(override val displayName: String, override val description: String? = null) : GeneratorInfo.Subcategory {
         Sofas("Sofas"),
-        Chairs("Chairs")
+        Chairs("Chairs"),
+        Tables("Tables")
     }
 
     @JvmStatic
