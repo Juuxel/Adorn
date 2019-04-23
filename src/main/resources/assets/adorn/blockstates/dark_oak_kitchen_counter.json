@@ -1,19 +1,117 @@
 {
-  "variants": {
-    "facing=east": {
-      "model": "adorn:block/dark_oak_kitchen_counter"
+  "multipart": [
+    {
+      "apply": {
+        "model": "adorn:block/dark_oak_kitchen_counter",
+        "y": 270
+      },
+      "when": {
+        "facing": "north"
+      }
     },
-    "facing=south": {
-      "model": "adorn:block/dark_oak_kitchen_counter",
-      "y": 90
+    {
+      "apply": {
+        "model": "adorn:block/dark_oak_kitchen_counter_connection_left",
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "front": "left"
+      }
     },
-    "facing=north": {
-      "model": "adorn:block/dark_oak_kitchen_counter",
-      "y": 270
+    {
+      "apply": {
+        "model": "adorn:block/dark_oak_kitchen_counter_connection_right",
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "front": "right"
+      }
     },
-    "facing=west": {
-      "model": "adorn:block/dark_oak_kitchen_counter",
-      "y": 180
+    {
+      "apply": {
+        "model": "adorn:block/dark_oak_kitchen_counter"
+      },
+      "when": {
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/dark_oak_kitchen_counter_connection_left"
+      },
+      "when": {
+        "facing": "east",
+        "front": "left"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/dark_oak_kitchen_counter_connection_right"
+      },
+      "when": {
+        "facing": "east",
+        "front": "right"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/dark_oak_kitchen_counter",
+        "y": 90
+      },
+      "when": {
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/dark_oak_kitchen_counter_connection_left",
+        "y": 90
+      },
+      "when": {
+        "facing": "south",
+        "front": "left"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/dark_oak_kitchen_counter_connection_right",
+        "y": 90
+      },
+      "when": {
+        "facing": "south",
+        "front": "right"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/dark_oak_kitchen_counter",
+        "y": 180
+      },
+      "when": {
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/dark_oak_kitchen_counter_connection_left",
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "front": "left"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/dark_oak_kitchen_counter_connection_right",
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "front": "right"
+      }
     }
-  }
+  ]
 }

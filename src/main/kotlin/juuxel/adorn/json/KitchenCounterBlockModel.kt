@@ -12,6 +12,18 @@ object KitchenCounterBlockModel : ContentGenerator("Kitchen Counter Block Model"
             textures = mapOf(
                 "planks" to Identifier.mc("block/${id.path}_planks")
             )
-        ).suffixed("kitchen_counter")
+        ).suffixed("kitchen_counter"),
+        Model(
+            parent = Identifier("adorn", "block/templates/kitchen_counter_connection_left"),
+            textures = mapOf(
+                "planks" to Identifier.mc("block/${id.path}_planks")
+            )
+        ).suffixed("kitchen_counter_connection_left"),
+        Model(
+            parent = Identifier("adorn", "block/templates/kitchen_counter_connection_right"),
+            textures = mapOf(
+                "planks" to Identifier.mc("block/${id.path}_planks")
+            )
+        ).suffixed("kitchen_counter_connection_right")
     )
 }

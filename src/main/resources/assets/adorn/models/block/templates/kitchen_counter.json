@@ -21,6 +21,7 @@
       "to": [16, 16, 16],
       "faces": {
         "up": { "texture": "#stone", "cullface": "up" },
+        "down": { "texture": "#stone" },
         "east": { "texture": "#stone", "cullface": "east" },
         "west": { "texture": "#stone", "cullface": "west" },
         "south": { "texture": "#stone", "cullface": "south" },
