@@ -13,6 +13,12 @@
         "adapter": "kotlin"
       }
     ],
+    "client": [
+      {
+        "value": "juuxel.adorn.Adorn$Client",
+        "adapter": "kotlin"
+      }
+    ],
     "json-factory": [
       "juuxel.adorn.json.AdornPlugin"
     ]

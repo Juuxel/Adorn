@@ -21,7 +21,7 @@ repositories {
     mavenCentral()
     mavenLocal()
 
-    // For json-factory
+    // For cotton and json-factory
     maven(url = "http://server.bbkr.space:8081/artifactory/libs-release")
     maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot")
 
@@ -68,8 +68,9 @@ dependencies {
     modCompile("com.github.Juuxel:Polyester:739dab2cf6")
     include("com.github.Juuxel:Polyester:739dab2cf6")
     modCompile("towelette:Towelette:1.5.0")
-//    modCompile("alexiil.mc.lib:libblockattributes:0.4.0")
-//    include("alexiil.mc.lib:libblockattributes:0.4.0")
+    modCompile("alexiil.mc.lib:libblockattributes:0.4.0")
+    include("alexiil.mc.lib:libblockattributes:0.4.0")
+    modCompile("io.github.cottonmc:cotton:0.6.1+1.14-SNAPSHOT")
 
     // Other libraries
     implementation("io.github.cottonmc:json-factory:0.5.0-local.2-SNAPSHOT")

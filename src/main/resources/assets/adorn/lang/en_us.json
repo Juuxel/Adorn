@@ -44,5 +44,12 @@
   "block.adorn.acacia_kitchen_cupboard": "Acacia Kitchen Cupboard",
   "block.adorn.dark_oak_kitchen_cupboard": "Dark Oak Kitchen Cupboard",
 
+  "block.adorn.oak_drawer": "Oak Drawer",
+  "block.adorn.spruce_drawer": "Spruce Drawer",
+  "block.adorn.birch_drawer": "Birch Drawer",
+  "block.adorn.jungle_drawer": "Jungle Drawer",
+  "block.adorn.acacia_drawer": "Acacia Drawer",
+  "block.adorn.dark_oak_drawer": "Dark Oak Drawer",
+
   "block.adorn.chimney": "Chimney"
 }
