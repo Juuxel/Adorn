@@ -40,7 +40,7 @@ repositories {
 }
 
 val shortVersion = "0.1.0"
-version = "$shortVersion+1.14-pre5"
+version = "$shortVersion+1.14"
 
 minecraft {
 }
@@ -55,12 +55,12 @@ configurations {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:1.14 Pre-Release 5")
-    mappings("net.fabricmc:yarn:1.14 Pre-Release 5+build.4")
+    minecraft("com.mojang:minecraft:1.14")
+    mappings("net.fabricmc:yarn:1.14+build.1")
 
     // Fabric
-    modCompile("net.fabricmc:fabric-loader:0.4.2+build.131")
-    modCompile("net.fabricmc:fabric:0.2.7+build.126")
+    modCompile("net.fabricmc:fabric-loader:0.4.2+build.132")
+    modCompile("net.fabricmc:fabric:0.2.7+build.127")
     modCompile("net.fabricmc:fabric-language-kotlin:1.3.30-SNAPSHOT")
     compileOnly("net.fabricmc:fabric-language-kotlin:1.3.30-SNAPSHOT")
 
