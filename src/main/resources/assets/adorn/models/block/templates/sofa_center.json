@@ -5,7 +5,7 @@
   },
   "elements": [
     {
-      "from": [0, 0, 0],
+      "from": [0, 2, 0],
       "to": [16, 7, 16],
       "faces": {
         "down":  { "texture": "#wool", "cullface": "down" },

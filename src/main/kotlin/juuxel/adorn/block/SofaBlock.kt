@@ -2,6 +2,7 @@ package juuxel.adorn.block
 
 import com.google.common.collect.Sets
 import io.github.juuxel.polyester.registry.PolyesterBlock
+import juuxel.adorn.util.shapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -59,56 +60,47 @@ class SofaBlock(variant: String) : Block(Settings.copy(Blocks.WHITE_WOOL)), Poly
     }
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, vep: VerticalEntityPosition?) =
-        SHAPE_MAP[Triple(state.get(FACING), state.get(CONNECTED_LEFT), state.get(CONNECTED_RIGHT))]
+        OUTLINE_SHAPE_MAP[Triple(state.get(FACING), state.get(CONNECTED_LEFT), state.get(CONNECTED_RIGHT))]
+
+    override fun getCollisionShape(state: BlockState, view: BlockView?, pos: BlockPos?, vep: VerticalEntityPosition?) =
+        COLLISION_SHAPE_MAP[Triple(state.get(FACING), state.get(CONNECTED_LEFT), state.get(CONNECTED_RIGHT))]
 
     companion object {
         val FACING = Properties.FACING_HORIZONTAL
         val CONNECTED_LEFT = BooleanProperty.create("connected_left")
         val CONNECTED_RIGHT = BooleanProperty.create("connected_right")
 
-        // TODO: Add back, fix arms
         // TODO: Add arms to item model
-        private val BOTTOM = createCuboidShape(0.0, 0.0, 0.0, 16.0, 7.0, 16.0)
-        private val LEFT_ARMS = mapOf(
-            Direction.EAST to box(4, 7, 14, 14, 13, 16),
-            Direction.WEST to box(2, 7, 0, 12, 13, 2),
+        private val BOTTOM = createCuboidShape(0.0, 2.0, 0.0, 16.0, 7.0, 16.0)
+        private val LEFT_ARMS = shapeRotations(5, 7, 13, 16, 13, 16)
+        private val RIGHT_ARMS = shapeRotations(5, 7, 0, 16, 13, 3)
+        private val THIN_LEFT_ARMS = shapeRotations(5, 7, 14, 16, 13, 16)
+        private val THIN_RIGHT_ARMS = shapeRotations(5, 7, 0, 16, 13, 2)
+        private val BACKS = shapeRotations(0, 7, 0, 5, 16, 16)
 
-            Direction.SOUTH to box(0, 7, 4, 2, 13, 14),
-            Direction.NORTH to box(14, 7, 2, 16, 13, 12)
-        )
-        private val RIGHT_ARMS = mapOf(
-            Direction.EAST to box(4, 7, 0, 14, 13, 2),
-            Direction.WEST to box(2, 7, 14, 12, 13, 16),
+        private val OUTLINE_SHAPE_MAP = buildShapeMap(thin = false)
+        private val COLLISION_SHAPE_MAP = buildShapeMap(thin = true)
 
-            Direction.SOUTH to box(14, 7, 4, 16, 13, 14),
-            Direction.NORTH to box(0, 7, 2, 2, 13, 12)
-        )
-
-        private val SHAPE_MAP: Map<Triple<Direction, Boolean, Boolean>, VoxelShape> =
+        private fun buildShapeMap(thin: Boolean): Map<Triple<Direction, Boolean, Boolean>, VoxelShape> =
             Sets.cartesianProduct(FACING.values.toSet(), setOf(true, false), setOf(true, false)).map {
                 val facing = it[0] as Direction
                 val left = it[1] as Boolean
                 val right = it[2] as Boolean
 
-                val arms = ArrayList<VoxelShape?>()
+                val parts = ArrayList<VoxelShape?>()
+                parts += BACKS[facing]
 
                 if (!left) {
-                    arms += LEFT_ARMS[facing]
+                    parts += if (thin) THIN_LEFT_ARMS[facing] else LEFT_ARMS[facing]
                 }
                 if (!right) {
-                    arms += RIGHT_ARMS[facing]
+                    parts += if (thin) THIN_RIGHT_ARMS[facing] else RIGHT_ARMS[facing]
                 }
 
                 Triple(facing, left, right) to VoxelShapes.union(
                     BOTTOM,
-                    *arms.filterNotNull().toTypedArray()
+                    *parts.filterNotNull().toTypedArray()
                 )
             }.toMap()
-        
-        private fun box(x1: Int, y1: Int, z1: Int, x2: Int, y2: Int, z2: Int) =
-            createCuboidShape(
-                x1.toDouble(), y1.toDouble(), z1.toDouble(),
-                x2.toDouble(), y2.toDouble(), z2.toDouble()
-            )
     }
 }
