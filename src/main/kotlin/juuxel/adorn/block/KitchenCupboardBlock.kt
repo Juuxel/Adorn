@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.util.Hand
+import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.BlockView
@@ -31,6 +32,19 @@ class KitchenCupboardBlock(
         }
 
         return true
+    }
+
+    override fun onBlockRemoved(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
+        if (state1.block != state2.block) {
+            val entity = world.getBlockEntity(pos)
+
+            if (entity is BaseInventoryBlockEntity) {
+                ItemScatterer.spawn(world, pos, getInventory(state1, world, pos))
+                world.updateHorizontalAdjacent(pos, this)
+            }
+
+            super.onBlockRemoved(state1, world, pos, state2, b)
+        }
     }
 
     companion object {
