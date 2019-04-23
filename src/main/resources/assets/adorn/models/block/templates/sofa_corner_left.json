@@ -1,0 +1,17 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "#wool"
+  },
+  "elements": [
+    {
+      "from": [5, 7, 11],
+      "to": [16, 16, 16],
+      "faces": {
+        "up":    { "texture": "#wool", "cullface": "up" },
+        "north": { "texture": "#wool" },
+        "south": { "texture": "#wool", "cullface": "south" }
+      }
+    }
+  ]
+}

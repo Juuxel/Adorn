@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/sofa_corner_right",
+  "textures": {
+    "wool": "minecraft:block/purple_wool"
+  }
+}

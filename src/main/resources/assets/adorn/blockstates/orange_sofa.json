@@ -3,7 +3,8 @@
     {
       "apply": {
         "model": "adorn:block/orange_sofa_center",
-        "y": 270
+        "y": 270,
+        "uvlock": true
       },
       "when": {
         "facing": "north"
@@ -16,7 +17,8 @@
       },
       "when": {
         "facing": "north",
-        "connected_left": "false"
+        "connected_left": "false",
+        "front": "none"
       }
     },
     {
@@ -26,13 +28,37 @@
       },
       "when": {
         "facing": "north",
-        "connected_right": "false"
+        "connected_right": "false",
+        "front": "none"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/orange_sofa_corner_left",
+        "y": 270,
+        "uvlock": true
+      },
+      "when": {
+        "facing": "north",
+        "front": "left"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/orange_sofa_corner_right",
+        "y": 270,
+        "uvlock": true
+      },
+      "when": {
+        "facing": "north",
+        "front": "right"
       }
     },
     {
       "apply": {
         "model": "adorn:block/orange_sofa_center",
-        "y": 90
+        "y": 90,
+        "uvlock": true
       },
       "when": {
         "facing": "south"
@@ -45,7 +71,8 @@
       },
       "when": {
         "facing": "south",
-        "connected_left": "false"
+        "connected_left": "false",
+        "front": "none"
       }
     },
     {
@@ -55,13 +82,37 @@
       },
       "when": {
         "facing": "south",
-        "connected_right": "false"
+        "connected_right": "false",
+        "front": "none"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/orange_sofa_corner_left",
+        "y": 90,
+        "uvlock": true
+      },
+      "when": {
+        "facing": "south",
+        "front": "left"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/orange_sofa_corner_right",
+        "y": 90,
+        "uvlock": true
+      },
+      "when": {
+        "facing": "south",
+        "front": "right"
       }
     },
     {
       "apply": {
         "model": "adorn:block/orange_sofa_center",
-        "y": 180
+        "y": 180,
+        "uvlock": true
       },
       "when": {
         "facing": "west"
@@ -74,7 +125,8 @@
       },
       "when": {
         "facing": "west",
-        "connected_left": "false"
+        "connected_left": "false",
+        "front": "none"
       }
     },
     {
@@ -84,12 +136,36 @@
       },
       "when": {
         "facing": "west",
-        "connected_right": "false"
+        "connected_right": "false",
+        "front": "none"
       }
     },
     {
       "apply": {
-        "model": "adorn:block/orange_sofa_center"
+        "model": "adorn:block/orange_sofa_corner_left",
+        "y": 180,
+        "uvlock": true
+      },
+      "when": {
+        "facing": "west",
+        "front": "left"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/orange_sofa_corner_right",
+        "y": 180,
+        "uvlock": true
+      },
+      "when": {
+        "facing": "west",
+        "front": "right"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/orange_sofa_center",
+        "uvlock": true
       },
       "when": {
         "facing": "east"
@@ -101,7 +177,8 @@
       },
       "when": {
         "facing": "east",
-        "connected_left": "false"
+        "connected_left": "false",
+        "front": "none"
       }
     },
     {
@@ -110,7 +187,28 @@
       },
       "when": {
         "facing": "east",
-        "connected_right": "false"
+        "connected_right": "false",
+        "front": "none"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/orange_sofa_corner_left",
+        "uvlock": true
+      },
+      "when": {
+        "facing": "east",
+        "front": "left"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/orange_sofa_corner_right",
+        "uvlock": true
+      },
+      "when": {
+        "facing": "east",
+        "front": "right"
       }
     }
   ]

@@ -24,6 +24,18 @@ internal object SofaBlockModel : ContentGenerator("Sofa Block Model", "models/bl
             textures = mapOf(
                 "wool" to Identifier.mc("block/${id.path}_wool")
             )
-        ).suffixed("sofa_arm_right")
+        ).suffixed("sofa_arm_right"),
+        Model(
+            parent = Identifier("adorn", "block/templates/sofa_corner_left"),
+            textures = mapOf(
+                "wool" to Identifier.mc("block/${id.path}_wool")
+            )
+        ).suffixed("sofa_corner_left"),
+        Model(
+            parent = Identifier("adorn", "block/templates/sofa_corner_right"),
+            textures = mapOf(
+                "wool" to Identifier.mc("block/${id.path}_wool")
+            )
+        ).suffixed("sofa_corner_right")
     )
 }

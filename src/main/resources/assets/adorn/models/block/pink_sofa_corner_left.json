@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/sofa_corner_left",
+  "textures": {
+    "wool": "minecraft:block/pink_wool"
+  }
+}
