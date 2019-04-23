@@ -17,7 +17,9 @@ object KitchenCupboardBlockState : ContentGenerator("Kitchen Cupboard Block Stat
                         `when` = When("facing", it),
                         apply = Variant(
                             model = id.wrapPath("block/", "_kitchen_counter"),
-                            y = getYRotation(it)
+                            y = getYRotation(it),
+                            // TODO: Generate with uvlock
+                            uvlock = true
                         )
                     ),
                     Multipart(
