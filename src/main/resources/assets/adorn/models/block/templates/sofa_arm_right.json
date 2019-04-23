@@ -34,5 +34,6 @@
         "south": { "texture": "#planks" },
         "down": { "texture": "#planks", "cullface": "down" }
       }
-    }]
+    }
+  ]
 }

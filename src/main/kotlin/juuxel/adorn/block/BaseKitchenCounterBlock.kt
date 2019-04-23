@@ -12,7 +12,6 @@ import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.BlockView
 
-// TODO: Outline shape
 abstract class BaseKitchenCounterBlock : Block(Settings.copy(Blocks.CRAFTING_TABLE)), PolyesterBlock {
     override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
 
