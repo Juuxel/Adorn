@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:kitchen_counter",
+  "pattern": [
+    "SS",
+    "PP"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:polished_andesite_slab"
+    },
+    "P": {
+      "item": "minecraft:spruce_planks"
+    }
+  },
+  "result": {
+    "item": "adorn:spruce_kitchen_counter",
+    "count": 3
+  }
+}

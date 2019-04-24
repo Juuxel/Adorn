@@ -5,22 +5,22 @@ import io.github.cottonmc.jsonfactory.gens.ContentGenerator
 import io.github.cottonmc.jsonfactory.output.suffixed
 import juuxel.adorn.json.output.MapOutput
 
-object DrawerRecipe : ContentGenerator("Drawer Recipe", "recipes", AdornPlugin.DRAWER, resourceRoot = ResourceRoot.Data) {
+object ChairRecipe : ContentGenerator("Chair Recipe", "recipes", AdornPlugin.CHAIR, resourceRoot = ResourceRoot.Data) {
     override fun generate(id: Identifier) = listOf(
         MapOutput(
             mapOf(
                 "type" to "crafting_shaped",
-                "group" to "adorn:drawer", // TODO: Regenerate
-                "pattern" to listOf("S", "C", "S"),
+                "group" to "adorn:chair",
+                "pattern" to listOf(" S", "SS", "##"),
                 "key" to mapOf(
-                    "C" to mapOf("item" to "minecraft:chest"),
-                    "S" to mapOf("item" to "minecraft:${id.path}_slab")
+                    "S" to mapOf("item" to "minecraft:${id.path}_slab"),
+                    "#" to mapOf("item" to "minecraft:stick")
                 ),
                 "result" to mapOf(
-                    "item" to id.suffixPath("_drawer"),
+                    "item" to id.suffixPath("_chair"),
                     "count" to 2
                 )
             )
-        ).suffixed("drawer")
+        ).suffixed("chair")
     )
 }

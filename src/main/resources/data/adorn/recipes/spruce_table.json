@@ -1,21 +1,20 @@
 {
   "type": "crafting_shaped",
-  "group": "adorn:drawer",
+  "group": "adorn:table",
   "pattern": [
-    "S",
-    "C",
-    "S"
+    "SS",
+    "##"
   ],
   "key": {
-    "C": {
-      "item": "minecraft:chest"
-    },
     "S": {
       "item": "minecraft:spruce_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "adorn:spruce_drawer",
+    "item": "adorn:spruce_table",
     "count": 2
   }
 }

@@ -32,21 +32,25 @@ object AdornPlugin : Plugin {
         ChairBlockState,
         SuffixedBlockItemModel("Chair", "chair", CHAIR),
         SuffixedLootTable("Chair", "chair", CHAIR),
+        ChairRecipe,
 
         TableBlockModel,
         TableBlockState,
         TableItemModel,
         SuffixedLootTable("Table", "table", TABLE),
+        TableRecipe,
 
         KitchenCounterBlockModel,
         KitchenCounterBlockState,
         SuffixedBlockItemModel("Kitchen Counter", "kitchen_counter", KITCHEN),
         SuffixedLootTable("Kitcher Counter", "kitchen_counter", KITCHEN),
+        KitchenCounterRecipe,
 
         KitchenCupboardBlockModel,
         KitchenCupboardBlockState,
         KitchenCupboardItemModel,
         SuffixedLootTable("Kitcher Cupboard", "kitchen_cupboard", KITCHEN),
+        KitchenCupboardRecipe,
 
         DrawerBlockModel,
         DrawerBlockState,

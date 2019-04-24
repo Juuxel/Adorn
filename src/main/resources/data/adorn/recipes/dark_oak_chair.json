@@ -1,21 +1,21 @@
 {
   "type": "crafting_shaped",
-  "group": "adorn:drawer",
+  "group": "adorn:chair",
   "pattern": [
-    "S",
-    "C",
-    "S"
+    " S",
+    "SS",
+    "##"
   ],
   "key": {
-    "C": {
-      "item": "minecraft:chest"
-    },
     "S": {
       "item": "minecraft:dark_oak_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "adorn:dark_oak_drawer",
+    "item": "adorn:dark_oak_chair",
     "count": 2
   }
 }
