@@ -18,7 +18,6 @@ object KitchenCupboardBlockState : ContentGenerator("Kitchen Cupboard Block Stat
                         apply = Variant(
                             model = id.wrapPath("block/", "_kitchen_counter"),
                             y = getYRotation(it),
-                            // TODO: Generate with uvlock
                             uvlock = true
                         )
                     ),

@@ -33,8 +33,8 @@ object AdornPlugin : Plugin {
         SuffixedLootTable("Chair", "chair", CHAIR),
 
         TableBlockModel,
-        SuffixedBlockState("Table Block State", "table", TABLE),
-        SuffixedBlockItemModel("Table", "table", TABLE),
+        TableBlockState,
+        TableItemModel,
         SuffixedLootTable("Table", "table", TABLE),
 
         KitchenCounterBlockModel,

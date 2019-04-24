@@ -73,8 +73,8 @@ dependencies {
     modCompile("io.github.cottonmc:cotton:0.6.1+1.14-SNAPSHOT")
 
     // Other libraries
-    implementation("io.github.cottonmc:json-factory:0.5.0-local.2-SNAPSHOT")
-    implementation("io.github.cottonmc:json-factory-gui:0.5.0-local.2-SNAPSHOT")
+    implementation("io.github.cottonmc:json-factory:0.5.0-SNAPSHOT")
+    implementation("io.github.cottonmc:json-factory-gui:0.5.0-SNAPSHOT")
 }
 
 tasks.withType<Jar> {

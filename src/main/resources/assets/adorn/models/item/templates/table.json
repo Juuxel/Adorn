@@ -1,0 +1,68 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "#planks"
+  },
+  "elements": [
+    {
+      "from": [0, 14, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "down": { "texture": "#planks" },
+        "up": { "texture": "#planks", "cullface": "up" },
+        "east": { "texture": "#planks" },
+        "west": { "texture": "#planks" },
+        "north": { "texture": "#planks" },
+        "south": { "texture": "#planks" }
+      }
+    },
+    {
+      "from": [1, 0, 1],
+      "to": [4, 14, 4],
+      "faces": {
+        "down": { "texture": "#planks", "cullface": "down" },
+        "up": { "texture": "#planks" },
+        "east": { "texture": "#planks" },
+        "west": { "texture": "#planks" },
+        "north": { "texture": "#planks" },
+        "south": { "texture": "#planks" }
+      }
+    },
+    {
+      "from": [12, 0, 1],
+      "to": [15, 14, 4],
+      "faces": {
+        "down": { "texture": "#planks", "cullface": "down" },
+        "up": { "texture": "#planks" },
+        "east": { "texture": "#planks" },
+        "west": { "texture": "#planks" },
+        "north": { "texture": "#planks" },
+        "south": { "texture": "#planks" }
+      }
+    },
+    {
+      "from": [1, 0, 12],
+      "to": [4, 14, 15],
+      "faces": {
+        "down": { "texture": "#planks", "cullface": "down" },
+        "up": { "texture": "#planks" },
+        "east": { "texture": "#planks" },
+        "west": { "texture": "#planks" },
+        "north": { "texture": "#planks" },
+        "south": { "texture": "#planks" }
+      }
+    },
+    {
+      "from": [12, 0, 12],
+      "to": [15, 14, 15],
+      "faces": {
+        "down": { "texture": "#planks", "cullface": "down" },
+        "up": { "texture": "#planks" },
+        "east": { "texture": "#planks" },
+        "west": { "texture": "#planks" },
+        "north": { "texture": "#planks" },
+        "south": { "texture": "#planks" }
+      }
+    }
+  ]
+}

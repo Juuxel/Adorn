@@ -3,7 +3,8 @@
     {
       "apply": {
         "model": "adorn:block/birch_kitchen_counter",
-        "y": 270
+        "y": 270,
+        "uvlock": true
       },
       "when": {
         "facing": "north"
@@ -31,7 +32,8 @@
     },
     {
       "apply": {
-        "model": "adorn:block/birch_kitchen_counter"
+        "model": "adorn:block/birch_kitchen_counter",
+        "uvlock": true
       },
       "when": {
         "facing": "east"
@@ -58,7 +60,8 @@
     {
       "apply": {
         "model": "adorn:block/birch_kitchen_counter",
-        "y": 90
+        "y": 90,
+        "uvlock": true
       },
       "when": {
         "facing": "south"
@@ -87,7 +90,8 @@
     {
       "apply": {
         "model": "adorn:block/birch_kitchen_counter",
-        "y": 180
+        "y": 180,
+        "uvlock": true
       },
       "when": {
         "facing": "west"

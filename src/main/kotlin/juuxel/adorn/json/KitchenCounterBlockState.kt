@@ -16,7 +16,7 @@ object KitchenCounterBlockState : ContentGenerator("Kitchen Counter Block State"
                 listOf(
                     Multipart(
                         `when` = When("facing", facing),
-                        apply = Variant(model = id.wrapPath("block/", "_kitchen_counter"), y = getYRotation(facing), uvlock = true) // TODO: Generate with uvlock
+                        apply = Variant(model = id.wrapPath("block/", "_kitchen_counter"), y = getYRotation(facing), uvlock = true)
                     ),
                     Multipart(
                         `when` = When(mapOf("facing" to facing, "front" to "left")),

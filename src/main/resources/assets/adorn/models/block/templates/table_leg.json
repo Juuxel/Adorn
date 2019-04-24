@@ -5,11 +5,11 @@
   },
   "elements": [
     {
-      "from": [0, 14, 0],
-      "to": [16, 16, 16],
+      "from": [1, 0, 1],
+      "to": [4, 14, 4],
       "faces": {
-        "down": { "texture": "#planks" },
-        "up": { "texture": "#planks", "cullface": "up" },
+        "down": { "texture": "#planks", "cullface": "down" },
+        "up": { "texture": "#planks" },
         "east": { "texture": "#planks" },
         "west": { "texture": "#planks" },
         "north": { "texture": "#planks" },
