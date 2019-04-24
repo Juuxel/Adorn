@@ -10,7 +10,7 @@ object DrawerRecipe : ContentGenerator("Drawer Recipe", "recipes", AdornPlugin.D
         MapOutput(
             mapOf(
                 "type" to "crafting_shaped",
-                "group" to "adorn:drawer", // TODO: Regenerate
+                "group" to "adorn:drawer",
                 "pattern" to listOf("S", "C", "S"),
                 "key" to mapOf(
                     "C" to mapOf("item" to "minecraft:chest"),
