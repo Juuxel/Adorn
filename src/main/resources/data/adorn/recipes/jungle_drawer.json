@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:sofa",
+  "pattern": [
+    "S",
+    "C",
+    "S"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "S": {
+      "item": "minecraft:jungle_slab"
+    }
+  },
+  "result": {
+    "item": "adorn:jungle_drawer",
+    "count": 2
+  }
+}

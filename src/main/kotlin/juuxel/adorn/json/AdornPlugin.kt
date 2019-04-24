@@ -26,6 +26,7 @@ object AdornPlugin : Plugin {
         SofaBlockState,
         SofaItemModel,
         SuffixedLootTable("Sofa", "sofa", SOFA),
+        SofaRecipe,
 
         ChairBlockModel,
         ChairBlockState,
@@ -50,7 +51,8 @@ object AdornPlugin : Plugin {
         DrawerBlockModel,
         DrawerBlockState,
         SuffixedBlockItemModel("Drawer", "drawer", DRAWER),
-        SuffixedLootTable("Drawer", "drawer", DRAWER)
+        SuffixedLootTable("Drawer", "drawer", DRAWER),
+        DrawerRecipe
     )
 
     object AdornCategory : GeneratorInfo.Category {

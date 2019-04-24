@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:sofa",
+  "pattern": [
+    " W",
+    "WW",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "minecraft:light_gray_wool"
+    }
+  },
+  "result": {
+    "item": "adorn:light_gray_sofa",
+    "count": 3
+  }
+}

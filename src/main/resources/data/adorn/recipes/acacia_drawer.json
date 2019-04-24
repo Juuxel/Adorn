@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:sofa",
+  "pattern": [
+    "S",
+    "C",
+    "S"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "S": {
+      "item": "minecraft:acacia_slab"
+    }
+  },
+  "result": {
+    "item": "adorn:acacia_drawer",
+    "count": 2
+  }
+}
