@@ -1,15 +1,16 @@
 {
   "type": "crafting_shaped",
   "pattern": [
-    "F",
-    "B"
+    " B ",
+    "BFB",
+    " B "
   ],
   "key": {
     "F": {
       "item": "minecraft:flint_and_steel"
     },
     "B": {
-      "item": "minecraft:bricks"
+      "item": "minecraft:brick"
     }
   },
   "result": {
