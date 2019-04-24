@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
+    "planks": "minecraft:block/oak_planks",
     "particle": "#wool"
   },
   "elements": [
@@ -11,6 +12,17 @@
         "up":    { "texture": "#wool", "cullface": "up" },
         "north": { "texture": "#wool", "cullface": "north" },
         "south": { "texture": "#wool" }
+      }
+    },
+    {
+      "from": [1, 0, 1],
+      "to": [3, 2, 3],
+      "faces": {
+        "east": { "texture": "#planks" },
+        "west": { "texture": "#planks" },
+        "north": { "texture": "#planks" },
+        "south": { "texture": "#planks" },
+        "down": { "texture": "#planks", "cullface": "down" }
       }
     }
   ]

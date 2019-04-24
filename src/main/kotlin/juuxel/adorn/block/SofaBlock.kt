@@ -61,8 +61,8 @@ class SofaBlock(variant: String) : Block(Settings.copy(Blocks.WHITE_WOOL)), Poly
         val rightState = world.getBlockState(pos.offset(direction.rotateYCounterclockwise()))
         val frontState = world.getBlockState(pos.offset(direction))
 
-        val connectedLeft = leftState.block is SofaBlock && (leftState[FACING] == direction || leftState[FACING] == direction.rotateYCounterclockwise())
-        val connectedRight = rightState.block is SofaBlock && (rightState[FACING] == direction || rightState[FACING] == direction.rotateYClockwise())
+        val connectedLeft = leftState.block is SofaBlock && (leftState[FACING] == direction || (leftState[FACING] == direction.rotateYCounterclockwise() && leftState[FRONT_CONNECTION] != FrontConnection.None))
+        val connectedRight = rightState.block is SofaBlock && (rightState[FACING] == direction || (rightState[FACING] == direction.rotateYClockwise() && rightState[FRONT_CONNECTION] != FrontConnection.None))
         val connectedFront = frontState.block is SofaBlock
         val connectedFrontLeft = connectedFront && !connectedLeft && frontState[FACING] == direction.rotateYCounterclockwise()
         val connectedFrontRight = connectedFront && !connectedRight && frontState[FACING] == direction.rotateYClockwise()
