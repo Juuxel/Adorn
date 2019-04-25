@@ -7,6 +7,11 @@
   "description": "Decorate your home!",
   "authors": ["Juuz"],
   "icon": "icon.png",
+  "contact": {
+    "homepage": "https://minecraft.curseforge.com/projects/adorn",
+    "source": "https://github.com/Juuxel/Adorn",
+    "issues": "https://github.com/Juuxel/Adorn/issues"
+  },
 
   "entrypoints": {
     "main": [
