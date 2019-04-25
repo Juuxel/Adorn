@@ -5,7 +5,8 @@ import io.github.cottonmc.jsonfactory.gens.ContentGenerator
 import io.github.cottonmc.jsonfactory.output.suffixed
 import juuxel.adorn.json.output.MapOutput
 
-object KitchenCupboardRecipe : ContentGenerator("Kitchen Cupboard Recipe", "recipes", AdornPlugin.KITCHEN, resourceRoot = ResourceRoot.Data) {
+object KitchenCupboardRecipe : ContentGenerator("Kitchen Cupboard Recipe", "recipes",
+    AdornPlugin.KITCHEN, resourceRoot = ResourceRoot.Data) {
     override fun generate(id: Identifier) = listOf(
         MapOutput(
             mapOf(

@@ -70,7 +70,10 @@ object TableBlockState : ContentGenerator("Table Block State", "blockstates", Ad
                                 )),
                                 apply = Variant(
                                     model = id.wrapPath("block/", "_table_leg"),
-                                    y = getCornerLegRotation(connectionNS, connectionWE),
+                                    y = getCornerLegRotation(
+                                        connectionNS,
+                                        connectionWE
+                                    ),
                                     uvlock = true
                                 )
                             )

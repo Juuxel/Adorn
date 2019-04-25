@@ -5,13 +5,15 @@ import io.github.cottonmc.jsonfactory.gens.ContentGenerator
 import io.github.cottonmc.jsonfactory.output.model.Model
 import io.github.cottonmc.jsonfactory.output.suffixed
 
-internal object KitchenCupboardItemModel : ContentGenerator("Kitchen Cupboard Item Model", "models/item", AdornPlugin.KITCHEN) {
+object KitchenCupboardBlockModel : ContentGenerator("Kitchen Cupboard Block Model", "models/block",
+    AdornPlugin.KITCHEN
+) {
     override fun generate(id: Identifier) = listOf(
         Model(
-            parent = Identifier("adorn", "item/templates/kitchen_cupboard"),
+            parent = Identifier("adorn", "block/templates/kitchen_cupboard_door"),
             textures = mapOf(
                 "planks" to Identifier.mc("block/${id.path}_planks")
             )
-        ).suffixed("kitchen_cupboard")
+        ).suffixed("kitchen_cupboard_door")
     )
 }

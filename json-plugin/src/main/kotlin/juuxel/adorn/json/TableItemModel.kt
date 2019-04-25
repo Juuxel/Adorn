@@ -5,7 +5,9 @@ import io.github.cottonmc.jsonfactory.gens.ContentGenerator
 import io.github.cottonmc.jsonfactory.output.model.Model
 import io.github.cottonmc.jsonfactory.output.suffixed
 
-internal object TableItemModel : ContentGenerator("Table Item Model", "models/item", AdornPlugin.TABLE) {
+internal object TableItemModel : ContentGenerator("Table Item Model", "models/item",
+    AdornPlugin.TABLE
+) {
     override fun generate(id: Identifier) = listOf(
         Model(
             parent = Identifier("adorn", "item/templates/table"),

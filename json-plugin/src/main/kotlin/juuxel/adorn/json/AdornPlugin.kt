@@ -15,11 +15,26 @@ object AdornPlugin : Plugin {
     private val slabItem = fun(id: Identifier) = Identifier.mc(id.path + "_slab")
     private val woolItem = fun(id: Identifier) = Identifier.mc(id.path + "_wool")
 
-    val SOFA = GeneratorInfo(AdornCategory, Subcategories.Sofas)
-    val CHAIR = GeneratorInfo(AdornCategory, Subcategories.Chairs)
-    val TABLE = GeneratorInfo(AdornCategory, Subcategories.Tables)
-    val KITCHEN = GeneratorInfo(AdornCategory, Subcategories.Kitchen)
-    val DRAWER = GeneratorInfo(AdornCategory, Subcategories.Drawers)
+    val SOFA = GeneratorInfo(
+        AdornCategory,
+        AdornPlugin.Subcategories.Sofas
+    )
+    val CHAIR = GeneratorInfo(
+        AdornCategory,
+        AdornPlugin.Subcategories.Chairs
+    )
+    val TABLE = GeneratorInfo(
+        AdornCategory,
+        AdornPlugin.Subcategories.Tables
+    )
+    val KITCHEN = GeneratorInfo(
+        AdornCategory,
+        AdornPlugin.Subcategories.Kitchen
+    )
+    val DRAWER = GeneratorInfo(
+        AdornCategory,
+        AdornPlugin.Subcategories.Drawers
+    )
 
     override val generators: List<ContentGenerator> = listOf(
         SofaBlockModel,

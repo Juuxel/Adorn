@@ -5,7 +5,9 @@ import io.github.cottonmc.jsonfactory.gens.ContentGenerator
 import io.github.cottonmc.jsonfactory.output.model.Model
 import io.github.cottonmc.jsonfactory.output.suffixed
 
-internal object SofaBlockModel : ContentGenerator("Sofa Block Model", "models/block", AdornPlugin.SOFA) {
+internal object SofaBlockModel : ContentGenerator("Sofa Block Model", "models/block",
+    AdornPlugin.SOFA
+) {
     override fun generate(id: Identifier) = listOf(
         Model(
             parent = Identifier("adorn", "block/templates/sofa_center"),

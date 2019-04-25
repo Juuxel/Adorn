@@ -8,4 +8,5 @@ pluginManagement {
     }
 }
 
+include("json-plugin")
 rootProject.name = "adorn"

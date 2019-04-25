@@ -1,0 +1,24 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'application'
+}
+
+archivesBaseName = 'AdornJsonPlugin'
+
+repositories {
+    mavenLocal()
+}
+
+dependencies {
+    def jsonFactory = '0.5.0+local.2019-04-05.1-SNAPSHOT'
+    implementation "io.github.cottonmc:json-factory:$jsonFactory"
+    implementation "io.github.cottonmc:json-factory-gui:$jsonFactory"
+}
+
+application {
+    mainClassName = "juuxel.adorn.json.AdornPlugin"
+}
+
+run {
+    workingDir = project.mkdir('run')
+}

@@ -8,7 +8,9 @@ import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState
 import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState.*
 import io.github.cottonmc.jsonfactory.output.suffixed
 
-object KitchenCupboardBlockState : ContentGenerator("Kitchen Cupboard Block State", "blockstates", AdornPlugin.KITCHEN) {
+object KitchenCupboardBlockState : ContentGenerator("Kitchen Cupboard Block State", "blockstates",
+    AdornPlugin.KITCHEN
+) {
     override fun generate(id: Identifier) = listOf(
         MultipartBlockState(
             multipart = BlockStateProperty.horizontalFacing.values.flatMap {

@@ -4,7 +4,9 @@
   "version": "$version",
 
   "name": "Adorn",
+  "description": "Decorate your home!",
   "authors": ["Juuz"],
+  "icon": "icon.png",
 
   "entrypoints": {
     "main": [
@@ -18,9 +20,6 @@
         "value": "juuxel.adorn.Adorn$Client",
         "adapter": "kotlin"
       }
-    ],
-    "json-factory": [
-      "juuxel.adorn.json.AdornPlugin"
     ]
   },
 

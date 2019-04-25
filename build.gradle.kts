@@ -8,50 +8,63 @@ plugins {
     id("fabric-loom") version "0.2.1-SNAPSHOT"
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
-
 base {
     archivesBaseName = "Adorn"
 }
 
-repositories {
-    mavenCentral()
-    mavenLocal()
+allprojects {
+    apply(plugin = "java")
 
-    // For cotton and json-factory
-    maven(url = "http://server.bbkr.space:8081/artifactory/libs-release")
-    maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot")
-
-    // For polyester
-    maven(url = "https://jitpack.io")
-
-    // For towelette
-    maven(url = "https://minecraft.curseforge.com/api/maven") {
-        name = "CurseForge"
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    // For LBA
-    maven(url = "https://mod-buildcraft.com/maven") {
-        name = "BuildCraft"
+    repositories {
+        mavenCentral()
+
+        // For cotton and json-factory
+        maven(url = "http://server.bbkr.space:8081/artifactory/libs-release")
+        maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot")
+
+        // For polyester
+        maven(url = "https://jitpack.io")
+
+        // For towelette
+        maven(url = "https://minecraft.curseforge.com/api/maven") {
+            name = "CurseForge"
+        }
+
+        // For LBA
+        maven(url = "https://mod-buildcraft.com/maven") {
+            name = "BuildCraft"
+        }
+    }
+
+    version = "0.1.0+1.14"
+
+    tasks.withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+
+    tasks.getByName<ProcessResources>("processResources") {
+        filesMatching("fabric.mod.json") {
+            expand(
+                mutableMapOf(
+                    "version" to project.version
+                )
+            )
+        }
     }
 }
-
-val shortVersion = "0.1.0"
-version = "$shortVersion+1.14"
 
 minecraft {
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
-}
+val shadow by configurations.creating
 
 configurations {
-    create("shadow")
-    this["compile"].extendsFrom(this["shadow"])
+    this["compile"].extendsFrom(shadow)
 }
 
 dependencies {
@@ -71,22 +84,8 @@ dependencies {
     modCompile("alexiil.mc.lib:libblockattributes:0.4.0")
     include("alexiil.mc.lib:libblockattributes:0.4.0")
     modCompile("io.github.cottonmc:cotton:0.6.1+1.14-SNAPSHOT")
-
-    // Other libraries
-    implementation("io.github.cottonmc:json-factory:0.5.0-SNAPSHOT")
-    implementation("io.github.cottonmc:json-factory-gui:0.5.0-SNAPSHOT")
 }
 
 tasks.withType<Jar> {
     from(configurations["shadow"].asFileTree.files.map { zipTree(it) })
-}
-
-tasks.getByName<ProcessResources>("processResources") {
-    filesMatching("fabric.mod.json") {
-        expand(
-            mutableMapOf(
-                "version" to shortVersion
-            )
-        )
-    }
 }

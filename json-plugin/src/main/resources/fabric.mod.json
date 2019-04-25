@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "adorn-json-plugin",
+  "name": "Adorn JSON Plugin",
+  "description": "Adorn's JSON Factory plugin, used for generating data files.",
+  "version": "$version",
+  "entrypoints": {
+    "json-factory": ["juuxel.adorn.json.AdornPlugin"]
+  }
+}
