@@ -80,7 +80,7 @@ dependencies {
     // Other mods
     modCompile("com.github.Juuxel:Polyester:739dab2cf6")
     include("com.github.Juuxel:Polyester:739dab2cf6")
-    modCompile("towelette:Towelette:1.5.0")
+    modCompile("towelette:Towelette:1.5.2")
     modCompile("alexiil.mc.lib:libblockattributes:0.4.0")
     include("alexiil.mc.lib:libblockattributes:0.4.0")
     modCompile("io.github.cottonmc:cotton:0.6.1+1.14-SNAPSHOT")
