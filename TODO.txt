@@ -1,2 +1,1 @@
 TODO: Fix chair item scaling
-TODO: Add icon/logo
