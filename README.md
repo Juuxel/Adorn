@@ -6,7 +6,7 @@
 
 *Decorate your home!* • [Downloads](https://github.com/Juuxel/Adorn/releases) • [CurseForge](https://minecraft.curseforge.com/projects/adorn)
 
-<p>&nbsp;</p><p>&nbsp;</p>
+<p>&nbsp;</p>
 
 ## Screenshots
 ![](https://i.imgur.com/tQbDWVY.jpg)
