@@ -12,6 +12,8 @@ base {
     archivesBaseName = "Adorn"
 }
 
+version = "0.1.0+1.14"
+
 allprojects {
     apply(plugin = "java")
 
@@ -41,30 +43,12 @@ allprojects {
         }
     }
 
-    version = "0.1.0+1.14"
-
     tasks.withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
-    }
-
-    tasks.getByName<ProcessResources>("processResources") {
-        filesMatching("fabric.mod.json") {
-            expand(
-                mutableMapOf(
-                    "version" to project.version
-                )
-            )
-        }
     }
 }
 
 minecraft {
-}
-
-val shadow by configurations.creating
-
-configurations {
-    this["compile"].extendsFrom(shadow)
 }
 
 fun DependencyHandler.modCompileAndInclude(str: String) {
@@ -89,6 +73,13 @@ dependencies {
     modCompileAndInclude("io.github.cottonmc:cotton:0.6.1+1.14-SNAPSHOT")
 }
 
-tasks.withType<Jar> {
-    from(configurations["shadow"].asFileTree.files.map { zipTree(it) })
+tasks.getByName<ProcessResources>("processResources") {
+    inputs.property("version", project.version)
+    filesMatching("fabric.mod.json") {
+        expand(
+            mutableMapOf(
+                "version" to project.version
+            )
+        )
+    }
 }
