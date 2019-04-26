@@ -32,14 +32,3 @@ application {
 tasks.getByName<JavaExec>("run") {
     workingDir = project.mkdir("run")
 }
-
-tasks.getByName<ProcessResources>("processResources") {
-    inputs.property("version", project.version)
-    filesMatching("fabric.mod.json") {
-        expand(
-            mutableMapOf(
-                "version" to project.version
-            )
-        )
-    }
-}

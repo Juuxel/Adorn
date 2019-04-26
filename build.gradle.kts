@@ -46,6 +46,17 @@ allprojects {
     tasks.withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
     }
+
+    tasks.getByName<ProcessResources>("processResources") {
+        inputs.property("version", project.version)
+        filesMatching("fabric.mod.json") {
+            expand(
+                mutableMapOf(
+                    "version" to project.version
+                )
+            )
+        }
+    }
 }
 
 minecraft {
@@ -71,15 +82,4 @@ dependencies {
     modCompileAndInclude("towelette:Towelette:1.5.2")
     modCompileAndInclude("alexiil.mc.lib:libblockattributes:0.4.0")
     modCompileAndInclude("io.github.cottonmc:cotton:0.6.1+1.14-SNAPSHOT")
-}
-
-tasks.getByName<ProcessResources>("processResources") {
-    inputs.property("version", project.version)
-    filesMatching("fabric.mod.json") {
-        expand(
-            mutableMapOf(
-                "version" to project.version
-            )
-        )
-    }
 }

@@ -22,7 +22,7 @@
     ],
     "client": [
       {
-        "value": "juuxel.adorn.Adorn$Client",
+        "value": "juuxel.adorn.Adorn::initClient",
         "adapter": "kotlin"
       }
     ]
