@@ -67,6 +67,11 @@ configurations {
     this["compile"].extendsFrom(shadow)
 }
 
+fun DependencyHandler.modCompileAndInclude(str: String) {
+    modCompile(str)
+    include(str)
+}
+
 dependencies {
     minecraft("com.mojang:minecraft:1.14")
     mappings("net.fabricmc:yarn:1.14+build.1")
@@ -78,12 +83,10 @@ dependencies {
     compileOnly("net.fabricmc:fabric-language-kotlin:1.3.30-SNAPSHOT")
 
     // Other mods
-    modCompile("com.github.Juuxel:Polyester:739dab2cf6")
-    include("com.github.Juuxel:Polyester:739dab2cf6")
-    modCompile("towelette:Towelette:1.5.2")
-    modCompile("alexiil.mc.lib:libblockattributes:0.4.0")
-    include("alexiil.mc.lib:libblockattributes:0.4.0")
-    modCompile("io.github.cottonmc:cotton:0.6.1+1.14-SNAPSHOT")
+    modCompileAndInclude("com.github.Juuxel:Polyester:0.1.0")
+    modCompileAndInclude("towelette:Towelette:1.5.2")
+    modCompileAndInclude("alexiil.mc.lib:libblockattributes:0.4.0")
+    modCompileAndInclude("io.github.cottonmc:cotton:0.6.1+1.14-SNAPSHOT")
 }
 
 tasks.withType<Jar> {
