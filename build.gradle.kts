@@ -1,4 +1,3 @@
-import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -12,7 +11,7 @@ base {
     archivesBaseName = "Adorn"
 }
 
-version = "0.1.0+1.14"
+version = "0.1.1+1.14"
 
 allprojects {
     apply(plugin = "java")
@@ -78,7 +77,7 @@ dependencies {
     compileOnly("net.fabricmc:fabric-language-kotlin:1.3.30-SNAPSHOT")
 
     // Other mods
-    modCompileAndInclude("com.github.Juuxel:Polyester:0.1.0")
+    modCompileAndInclude("com.github.Juuxel:Polyester:0.1.1")
     modCompileAndInclude("towelette:Towelette:1.5.2")
     modCompileAndInclude("alexiil.mc.lib:libblockattributes:0.4.0")
     modCompileAndInclude("io.github.cottonmc:cotton:0.6.1+1.14-SNAPSHOT")
