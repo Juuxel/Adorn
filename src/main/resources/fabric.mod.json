@@ -30,7 +30,7 @@
   },
 
   "depends": {
-    "fabric": [">=0.2.0", ">=0.3.0-pre"],
+    "fabric": ">=0.2.0",
     "fabricloader": ">=0.4.0",
     "fabric-language-kotlin": ">=1.3.30",
     "towelette": ">=1.5.0",
