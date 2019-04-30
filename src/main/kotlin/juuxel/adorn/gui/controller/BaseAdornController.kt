@@ -24,8 +24,12 @@ abstract class BaseAdornController(syncId: Int, playerInv: PlayerInventory, cont
 
             for (row in 0 until invHeight) {
                 for (col in 0 until invWidth) {
+                    val hasEvenWidth = invWidth % 2 == 0
+                    val xOffset =
+                        if (hasEvenWidth && col + 1 > invWidth / 2) 1
+                        else 0
                     val slot = WItemSlot.of(blockInventory, col + row * invWidth)
-                    add(slot, col + (9 - invWidth) / 2, row + 1)
+                    add(slot, col + (9 - invWidth) / 2 + xOffset, row + 1)
                 }
             }
 

@@ -1,9 +1,10 @@
 package juuxel.adorn.lib
 
+import io.github.juuxel.polyester.block.WoodType
+import io.github.juuxel.polyester.plugin.PolyesterPluginManager
 import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.Adorn
 import juuxel.adorn.block.*
-import juuxel.adorn.util.WoodType
 import net.minecraft.util.DyeColor
 import net.minecraft.util.registry.Registry
 
@@ -12,26 +13,30 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         registerBlock(SofaBlock(it.getName()))
     }
 
-    val CHAIRS: List<ChairBlock> = WoodType.values().map {
-        registerBlock(ChairBlock(it.id))
+    private val WOOD_TYPES = PolyesterPluginManager.plugins.flatMap { it.woodTypes }.map {
+        getVariantContentName(it)
     }
 
-    val TABLES: List<TableBlock> = WoodType.values().map {
-        registerBlock(TableBlock(it.id))
+    val CHAIRS: List<ChairBlock> = WOOD_TYPES.map {
+        registerBlock(ChairBlock(it))
     }
 
-    val KITCHEN_COUNTERS: List<KitchenCounterBlock> = WoodType.values().map {
-        registerBlock(KitchenCounterBlock(it.id))
+    val TABLES: List<TableBlock> = WOOD_TYPES.map {
+        registerBlock(TableBlock(it))
     }
 
-    val KITCHEN_CUPBOARDS: List<KitchenCupboardBlock> = WoodType.values().map {
-        registerBlock(KitchenCupboardBlock(it.id))
+    val KITCHEN_COUNTERS: List<KitchenCounterBlock> = WOOD_TYPES.map {
+        registerBlock(KitchenCounterBlock(it))
+    }
+
+    val KITCHEN_CUPBOARDS: List<KitchenCupboardBlock> = WOOD_TYPES.map {
+        registerBlock(KitchenCupboardBlock(it))
     }
 
     val CHIMNEY: ChimneyBlock = registerBlock(ChimneyBlock())
 
-    val DRAWERS: List<DrawerBlock> = WoodType.values().map {
-        registerBlock(DrawerBlock(it.id))
+    val DRAWERS: List<DrawerBlock> = WOOD_TYPES.map {
+        registerBlock(DrawerBlock(it))
     }
 
     fun init() {
@@ -39,4 +44,10 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         register(Registry.BLOCK_ENTITY, "kitchen_cupboard", KitchenCupboardBlock.BLOCK_ENTITY_TYPE)
         register(Registry.BLOCK_ENTITY, "drawer", DrawerBlock.BLOCK_ENTITY_TYPE)
     }
+
+    private fun getVariantContentName(woodType: WoodType): String =
+        when (woodType.id.namespace) {
+            "minecraft" -> woodType.id.path
+            else -> woodType.id.namespace + '_' + woodType.id.path
+        }
 }
