@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "S",
+    "S",
+    "P"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:spruce_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:spruce_post",
+    "count": 4
+  }
+}

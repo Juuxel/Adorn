@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "R",
+    "R",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:granite"
+    },
+    "R": {
+      "item": "adorn:stone_rod"
+    }
+  },
+  "result": {
+    "item": "adorn:granite_post",
+    "count": 4
+  }
+}

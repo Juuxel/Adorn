@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stone"
+    }
+  },
+  "result": {
+    "item": "adorn:stone_rod",
+    "count": 4
+  }
+}

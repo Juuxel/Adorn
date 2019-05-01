@@ -51,5 +51,57 @@
   "block.adorn.acacia_drawer": "Akaasialipasto",
   "block.adorn.dark_oak_drawer": "Tumma tammilipasto",
 
-  "block.adorn.chimney": "Savupiippu"
+  "block.adorn.stone_torch": "Kivisoihtu",
+  "block.adorn.stone_torch.desc": "Kirkkaampi kuin puinen soihtu",
+
+  "block.adorn.oak_post": "Tammipylväs",
+  "block.adorn.spruce_post": "Kuusipylväs",
+  "block.adorn.birch_post": "Koivupylväs",
+  "block.adorn.jungle_post": "Viidakkopuupylväs",
+  "block.adorn.acacia_post": "Akaasiapylväs",
+  "block.adorn.dark_oak_post": "Tumma tammipylväs",
+  "block.adorn.stone_post": "Kivipylväs",
+  "block.adorn.sandstone_post": "Hiekkakivipylväs",
+  "block.adorn.cobblestone_post": "Mukulakivipylväs",
+  "block.adorn.andesite_post": "Andesiittipylväs",
+  "block.adorn.diorite_post": "Dioriittipylväs",
+  "block.adorn.granite_post": "Graniittipylväs",
+  "block.adorn.post.desc": "Vähän kuin aidan tolppa",
+
+  "block.adorn.oak_platform": "Tammilava",
+  "block.adorn.spruce_platform": "Kuusilava",
+  "block.adorn.birch_platform": "Koivulava",
+  "block.adorn.jungle_platform": "Viidakkopuulava",
+  "block.adorn.acacia_platform": "Akaasialava",
+  "block.adorn.dark_oak_platform": "Tumma tammilava",
+  "block.adorn.stone_platform": "Kivilava",
+  "block.adorn.sandstone_platform": "Hiekkakivilava",
+  "block.adorn.cobblestone_platform": "Mukulakivilava",
+  "block.adorn.andesite_platform": "Andesiittilava",
+  "block.adorn.diorite_platform": "Dioriittilava",
+  "block.adorn.granite_platform": "Graniittilava",
+  "block.adorn.platform.desc": "Lava pylvään päällä",
+
+  "block.adorn.oak_step": "Tammiaskelma",
+  "block.adorn.spruce_step": "Kuusiaskelma",
+  "block.adorn.birch_step": "Koivuaskelma",
+  "block.adorn.jungle_step": "Viidakkopuuaskelma",
+  "block.adorn.acacia_step": "Akaasiaaskelma",
+  "block.adorn.dark_oak_step": "Tumma tammiaskelma",
+  "block.adorn.stone_step": "Kiviaskelma",
+  "block.adorn.sandstone_step": "Hiekkakiviaskelma",
+  "block.adorn.cobblestone_step": "Mukulakiviaskelma",
+  "block.adorn.andesite_step": "Andesiittiaskelma",
+  "block.adorn.diorite_step": "Dioriittiaskelma",
+  "block.adorn.granite_step": "Graniittiaskelma",
+  "block.adorn.step.desc": "Askelma pylvään päällä",
+
+  "block.adorn.chimney": "Savupiippu",
+  "block.adorn.chimney.desc": "Koriste",
+
+  "block.adorn.bubble_chimney": "Prismariinisavupiippu",
+  "block.adorn.bubble_chimney.desc": "Kuplii veden alla",
+
+  "item.adorn.stone_rod": "Kivisauva",
+  "item.adorn.stone_rod.desc": "Työstämisen raaka-aine"
 }

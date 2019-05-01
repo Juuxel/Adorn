@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=east": { "model": "adorn:block/wall_stone_torch" },
+        "facing=south": { "model": "adorn:block/wall_stone_torch", "y": 90 },
+        "facing=west": { "model": "adorn:block/wall_stone_torch", "y": 180 },
+        "facing=north": { "model": "adorn:block/wall_stone_torch", "y": 270 }
+    }
+}
