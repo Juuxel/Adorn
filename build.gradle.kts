@@ -11,7 +11,7 @@ base {
     archivesBaseName = "Adorn"
 }
 
-version = "0.1.4+1.14"
+version = "0.2.0+1.14"
 
 allprojects {
     apply(plugin = "java")

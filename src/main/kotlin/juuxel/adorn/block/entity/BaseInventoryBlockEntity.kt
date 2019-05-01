@@ -31,6 +31,8 @@ abstract class BaseInventoryBlockEntity(
         Inventories.fromTag(tag, items)
     }
 
+    // Inventory implementation
+
     override fun getInvStack(slot: Int) = items[slot]
 
     override fun clear() {
@@ -65,6 +67,8 @@ abstract class BaseInventoryBlockEntity(
 
         return true
     }
+
+    // InventoryProvider implementation for blocks
 
     interface InventoryProviderImpl : InventoryProvider {
         override fun getInventory(state: BlockState?, world: IWorld, pos: BlockPos): SidedInventory? =
