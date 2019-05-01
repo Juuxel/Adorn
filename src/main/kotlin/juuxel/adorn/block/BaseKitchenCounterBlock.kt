@@ -1,10 +1,12 @@
 package juuxel.adorn.block
 
 import io.github.juuxel.polyester.registry.PolyesterBlock
+import juuxel.adorn.util.shapeRotations
 import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
+import net.minecraft.entity.VerticalEntityPosition
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
@@ -13,6 +15,8 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.state.StateFactory
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.shape.VoxelShape
+import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 
 abstract class BaseKitchenCounterBlock : Block(
@@ -28,8 +32,8 @@ abstract class BaseKitchenCounterBlock : Block(
     override fun getPlacementState(context: ItemPlacementContext) =
         super.getPlacementState(context)!!.with(FACING, context.playerHorizontalFacing.opposite)
 
-    override fun isFullBoundsCubeForCulling(state: BlockState?) = false
-    override fun isSimpleFullBlock(state: BlockState?, view: BlockView?, pos: BlockPos?) = false
+    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, vep: VerticalEntityPosition?) =
+        SHAPES[state[FACING]]
 
     companion object {
         val FACING = Properties.FACING_HORIZONTAL
@@ -41,5 +45,12 @@ abstract class BaseKitchenCounterBlock : Block(
             SoundEvents.BLOCK_WOOD_HIT,
             SoundEvents.BLOCK_STONE_FALL
         )
+        private val TOP_SHAPE = createCuboidShape(0.0, 12.0, 0.0, 16.0, 16.0, 16.0)
+        val SHAPES = shapeRotations(
+            0, 0, 0,
+            14, 12, 16
+        ).mapValues { (_, shape) ->
+            VoxelShapes.union(shape, TOP_SHAPE)
+        }
     }
 }

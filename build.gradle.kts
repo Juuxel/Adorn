@@ -74,5 +74,5 @@ dependencies {
     // Other mods
     modCompileAndInclude("polyester:Polyester:0.2.1+1.14")
     modCompileAndInclude("towelette:Towelette:1.5.2")
-    modCompileAndInclude("io.github.cottonmc:cotton:0.6.1+1.14-SNAPSHOT")
+    modCompileAndInclude("io.github.cottonmc:cotton:0.6.3+1.14-SNAPSHOT")
 }
