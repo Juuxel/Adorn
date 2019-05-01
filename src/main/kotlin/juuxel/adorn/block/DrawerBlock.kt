@@ -22,7 +22,7 @@ import net.minecraft.world.World
 
 class DrawerBlock(
     material: String
-) : Block(Settings.copy(Blocks.OAK_PLANKS)), PolyesterBlock, BlockEntityProvider, BaseInventoryBlockEntity.BlockAttributeProviderImpl {
+) : Block(Settings.copy(Blocks.OAK_PLANKS)), PolyesterBlock, BlockEntityProvider, BaseInventoryBlockEntity.InventoryProviderImpl {
     override val name = "${material}_drawer"
     override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
 
@@ -55,7 +55,7 @@ class DrawerBlock(
             val entity = world.getBlockEntity(pos)
 
             if (entity is BaseInventoryBlockEntity) {
-                ItemScatterer.spawn(world, pos, getInventory(state1, world, pos))
+                ItemScatterer.spawn(world, pos, entity)
                 world.updateHorizontalAdjacent(pos, this)
             }
 

@@ -1,57 +1,75 @@
 package juuxel.adorn.block.entity
 
-import alexiil.mc.lib.attributes.AttributeList
-import alexiil.mc.lib.attributes.AttributeProvider
-import alexiil.mc.lib.attributes.item.impl.SimpleFixedItemInv
-import io.github.juuxel.polyester.registry.PolyesterBlock
-import juuxel.adorn.util.SidedFixedInventoryWrapper
+import juuxel.adorn.util.SidedInventoryImpl
 import net.minecraft.block.BlockState
 import net.minecraft.block.InventoryProvider
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.inventory.Inventories
+import net.minecraft.inventory.Inventory
+import net.minecraft.inventory.SidedInventory
+import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.util.DefaultedList
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IWorld
-import net.minecraft.world.World
 
 abstract class BaseInventoryBlockEntity(
     type: BlockEntityType<*>,
-    invSize: Int
-) : BlockEntity(type), AttributeProvider/*, InventoryProvider*/ {
-    val inventory = SimpleFixedItemInv(invSize)
-
-    init {
-        inventory.addListener({ _, _, _, _ -> markDirty() }, {})
-    }
+    private val invSize: Int
+) : BlockEntity(type), Inventory {
+    val items: DefaultedList<ItemStack> = DefaultedList.create(invSize, ItemStack.EMPTY)
+    val sidedInventory: SidedInventory = SidedInventoryImpl(this)
 
     override fun toTag(tag: CompoundTag) = super.toTag(tag).apply {
-        put("Items", inventory.toTag())
+        Inventories.toTag(tag, items)
     }
 
     override fun fromTag(tag: CompoundTag) {
         super.fromTag(tag)
-        inventory.fromTag(tag.getCompound("Items"))
+        Inventories.fromTag(tag, items)
     }
 
-    override fun addAllAttributes(world: World, pos: BlockPos, state: BlockState, attributes: AttributeList<*>) {
-        attributes.offer(inventory)
-        attributes.offer(inventory.extractable)
-        attributes.offer(inventory.insertable)
+    override fun getInvStack(slot: Int) = items[slot]
+
+    override fun clear() {
+        items.clear()
+        markDirty()
     }
 
-//    override fun getInventory(state: BlockState, world: IWorld, pos: BlockPos) =
-//        SidedFixedInventoryWrapper(inventory)
+    override fun setInvStack(slot: Int, stack: ItemStack) {
+        items[slot] = stack
+    }
 
-    // Uses PolyesterBlock to force being applied to a block
-    interface BlockAttributeProviderImpl : PolyesterBlock, AttributeProvider, InventoryProvider {
-        override fun addAllAttributes(world: World, pos: BlockPos, state: BlockState, attributes: AttributeList<*>) {
-            (world.getBlockEntity(pos) as? BaseInventoryBlockEntity)
-                ?.addAllAttributes(world, pos, state, attributes)
+    override fun removeInvStack(slot: Int) =
+        Inventories.removeStack(items, slot)
+
+    override fun canPlayerUseInv(player: PlayerEntity?) = true
+
+    override fun getInvSize() = invSize
+
+    override fun takeInvStack(p0: Int, p1: Int) =
+        Inventories.splitStack(items, p0, p1).also {
+            if (!it.isEmpty) {
+                markDirty()
+            }
         }
 
-        override fun getInventory(state: BlockState, world: IWorld, pos: BlockPos) =
+    override fun isInvEmpty(): Boolean {
+        for (stack in items) {
+            if (!stack.isEmpty) {
+                return false
+            }
+        }
+
+        return true
+    }
+
+    interface InventoryProviderImpl : InventoryProvider {
+        override fun getInventory(state: BlockState?, world: IWorld, pos: BlockPos): SidedInventory? =
             (world.getBlockEntity(pos) as? BaseInventoryBlockEntity)?.let {
-                SidedFixedInventoryWrapper(it.inventory)
+                it.sidedInventory
             }
     }
 }

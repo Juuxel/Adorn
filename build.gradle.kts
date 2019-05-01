@@ -11,7 +11,7 @@ base {
     archivesBaseName = "Adorn"
 }
 
-version = "0.1.3+1.14"
+version = "0.1.4+1.14"
 
 allprojects {
     apply(plugin = "java")
@@ -34,11 +34,6 @@ allprojects {
         // For polyester and towelette
         maven(url = "https://minecraft.curseforge.com/api/maven") {
             name = "CurseForge"
-        }
-
-        // For LBA
-        maven(url = "https://mod-buildcraft.com/maven") {
-            name = "BuildCraft"
         }
     }
 
@@ -79,6 +74,5 @@ dependencies {
     // Other mods
     modCompileAndInclude("polyester:Polyester:0.2.1+1.14")
     modCompileAndInclude("towelette:Towelette:1.5.2")
-    modCompileAndInclude("alexiil.mc.lib:libblockattributes:0.4.0")
     modCompileAndInclude("io.github.cottonmc:cotton:0.6.1+1.14-SNAPSHOT")
 }

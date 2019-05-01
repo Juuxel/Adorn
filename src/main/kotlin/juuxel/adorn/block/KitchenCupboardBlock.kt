@@ -17,7 +17,7 @@ import net.minecraft.world.World
 
 class KitchenCupboardBlock(
     material: String
-) : BaseKitchenCounterBlock(), BlockEntityProvider, BaseInventoryBlockEntity.BlockAttributeProviderImpl {
+) : BaseKitchenCounterBlock(), BlockEntityProvider, BaseInventoryBlockEntity.InventoryProviderImpl {
     override val name = "${material}_kitchen_cupboard"
 
     override fun createBlockEntity(view: BlockView?) = BLOCK_ENTITY_TYPE.instantiate()
@@ -39,7 +39,7 @@ class KitchenCupboardBlock(
             val entity = world.getBlockEntity(pos)
 
             if (entity is BaseInventoryBlockEntity) {
-                ItemScatterer.spawn(world, pos, getInventory(state1, world, pos))
+                ItemScatterer.spawn(world, pos, entity)
                 world.updateHorizontalAdjacent(pos, this)
             }
 
