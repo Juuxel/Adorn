@@ -72,7 +72,7 @@ dependencies {
     compileOnly("net.fabricmc:fabric-language-kotlin:1.3.30-SNAPSHOT")
 
     // Other mods
-    modCompileAndInclude("polyester:Polyester:0.2.1+1.14")
+    modCompileAndInclude("polyester:Polyester:0.2.2+1.14")
     modCompileAndInclude("towelette:Towelette:1.5.2")
     modCompileAndInclude("io.github.cottonmc:cotton:0.6.3+1.14-SNAPSHOT")
 }

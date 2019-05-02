@@ -3,8 +3,10 @@ package juuxel.adorn.lib
 import juuxel.adorn.Adorn
 import juuxel.adorn.gui.controller.DrawerController
 import juuxel.adorn.gui.controller.KitchenCupboardController
+import juuxel.adorn.gui.controller.TradingTableController
 import juuxel.adorn.gui.screen.DrawerScreen
 import juuxel.adorn.gui.screen.KitchenCupboardScreen
+import juuxel.adorn.gui.screen.TradingTableScreen
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry
@@ -19,16 +21,19 @@ import net.minecraft.util.Identifier
 object ModGuis {
     val DRAWER = Identifier(Adorn.NAMESPACE, "drawer")
     val KITCHEN_CUPBOARD = Identifier(Adorn.NAMESPACE, "kitchen_cupboard")
+    val TRADING_TABLE = Identifier(Adorn.NAMESPACE, "trading_table")
 
     fun init() {
         registerContainer(DRAWER, ::DrawerController)
         registerContainer(KITCHEN_CUPBOARD, ::KitchenCupboardController)
+        registerContainer(TRADING_TABLE, ::TradingTableController)
     }
 
     @Environment(EnvType.CLIENT)
     fun initClient() {
         registerScreen(DRAWER, ::DrawerController, ::DrawerScreen)
         registerScreen(KITCHEN_CUPBOARD, ::KitchenCupboardController, ::KitchenCupboardScreen)
+        registerScreen(TRADING_TABLE, ::TradingTableController, ::TradingTableScreen)
     }
 
     private inline fun registerContainer(id: Identifier, crossinline fn: (Int, PlayerInventory, BlockContext) -> Container) =
