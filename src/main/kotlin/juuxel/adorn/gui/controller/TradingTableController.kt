@@ -1,8 +1,10 @@
 package juuxel.adorn.gui.controller
 
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
+import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.block.entity.TradingTableBlockEntity
+import juuxel.adorn.gui.widget.ArrowWidget
 import net.minecraft.container.BlockContext
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.StringTextComponent
@@ -17,7 +19,14 @@ class TradingTableController(syncId: Int, playerInv: PlayerInventory, context: B
                 add(WLabel(StringTextComponent("Owner: ").append(be.ownerName), 0x404040), 0, 1)
             }
 
-            val playerInvY = if (be.owner == playerInv.player.gameProfile.id) {
+            val forOwner = be.owner == playerInv.player.gameProfile.id
+            val tradeInventory = be.trade.createInventory(forOwner)
+
+            add(WItemSlot.of(tradeInventory, 0), 1, 2)
+            add(WItemSlot.of(tradeInventory, 1), 4, 2)
+            add(ArrowWidget(), 2, 2, 2, 1)
+
+            val playerInvY = if (forOwner) {
                 setupOwnerGui(this)
             } else {
                 setupCustomerGui(this)
@@ -32,15 +41,15 @@ class TradingTableController(syncId: Int, playerInv: PlayerInventory, context: B
      * @return the player inventory Y position
      */
     private fun setupCustomerGui(rootPanel: WGridPanel): Int {
-        rootPanel.add(WLabel("WIP: Customer GUI"), 0, 2)
-        return 3
+        rootPanel.add(WLabel("WIP: Customer GUI"), 0, 3)
+        return 4
     }
 
     /**
      * @return the player inventory Y position
      */
     private fun setupOwnerGui(rootPanel: WGridPanel): Int {
-        rootPanel.add(WLabel("WIP: Owner GUI"), 0, 2)
-        return 3
+        rootPanel.add(WLabel("WIP: Owner GUI"), 0, 3)
+        return 4
     }
 }
