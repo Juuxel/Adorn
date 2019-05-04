@@ -3,10 +3,10 @@ package juuxel.adorn.lib
 import juuxel.adorn.Adorn
 import juuxel.adorn.gui.controller.DrawerController
 import juuxel.adorn.gui.controller.KitchenCupboardController
-import juuxel.adorn.gui.controller.TradingTableController
+import juuxel.adorn.gui.controller.TradingStationController
 import juuxel.adorn.gui.screen.DrawerScreen
 import juuxel.adorn.gui.screen.KitchenCupboardScreen
-import juuxel.adorn.gui.screen.TradingTableScreen
+import juuxel.adorn.gui.screen.TradingStationScreen
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry
@@ -26,14 +26,14 @@ object ModGuis {
     fun init() {
         registerContainer(DRAWER, ::DrawerController)
         registerContainer(KITCHEN_CUPBOARD, ::KitchenCupboardController)
-        registerContainer(TRADING_TABLE, ::TradingTableController)
+        registerContainer(TRADING_TABLE, ::TradingStationController)
     }
 
     @Environment(EnvType.CLIENT)
     fun initClient() {
         registerScreen(DRAWER, ::DrawerController, ::DrawerScreen)
         registerScreen(KITCHEN_CUPBOARD, ::KitchenCupboardController, ::KitchenCupboardScreen)
-        registerScreen(TRADING_TABLE, ::TradingTableController, ::TradingTableScreen)
+        registerScreen(TRADING_TABLE, ::TradingStationController, ::TradingStationScreen)
     }
 
     private inline fun registerContainer(id: Identifier, crossinline fn: (Int, PlayerInventory, BlockContext) -> Container) =

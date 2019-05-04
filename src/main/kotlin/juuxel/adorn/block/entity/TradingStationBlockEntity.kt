@@ -1,13 +1,12 @@
 package juuxel.adorn.block.entity
 
-import juuxel.adorn.block.TradingTableBlock
+import juuxel.adorn.block.TradingStationBlock
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.util.InventoryComponent
 import juuxel.adorn.util.getTextComponent
 import juuxel.adorn.util.putTextComponent
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.block.entity.HopperBlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
@@ -15,7 +14,7 @@ import net.minecraft.text.StringTextComponent
 import net.minecraft.text.TextComponent
 import java.util.UUID
 
-class TradingTableBlockEntity : BlockEntity(TradingTableBlock.BLOCK_ENTITY_TYPE), BlockEntityClientSerializable {
+class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_TYPE), BlockEntityClientSerializable {
     var owner: UUID? = null
     var ownerName: TextComponent = StringTextComponent("???")
     val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)

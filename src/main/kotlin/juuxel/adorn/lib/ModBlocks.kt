@@ -3,16 +3,12 @@ package juuxel.adorn.lib
 import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.Adorn
 import juuxel.adorn.block.*
-import juuxel.adorn.block.entity.TradingTableBlockEntity
-import juuxel.adorn.block.renderer.TradingTableRenderer
+import juuxel.adorn.block.entity.TradingStationBlockEntity
+import juuxel.adorn.block.renderer.TradingStationRenderer
 import juuxel.adorn.util.VanillaWoodType
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
-import net.fabricmc.fabric.api.registry.CommandRegistry
-import net.minecraft.command.arguments.GameProfileArgumentType
-import net.minecraft.server.command.CommandManager
-import net.minecraft.text.StringTextComponent
 import net.minecraft.util.DyeColor
 import net.minecraft.util.registry.Registry
 
@@ -43,30 +39,19 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         registerBlock(DrawerBlock(it.id))
     }
 
-    val TRADING_TABLE: TradingTableBlock = registerBlock(TradingTableBlock())
+    val TRADING_STATION: TradingStationBlock = registerBlock(TradingStationBlock())
 
     fun init() {
         // Register here so they're only registered once
         register(Registry.BLOCK_ENTITY, "kitchen_cupboard", KitchenCupboardBlock.BLOCK_ENTITY_TYPE)
         register(Registry.BLOCK_ENTITY, "drawer", DrawerBlock.BLOCK_ENTITY_TYPE)
-
-        CommandRegistry.INSTANCE.register(false) { dispatcher ->
-            dispatcher.register(CommandManager.literal("adorn-test").then(
-                CommandManager.argument("player", GameProfileArgumentType.create()).executes {
-                    it.source.sendFeedback(
-                        StringTextComponent(it.getArgument("player", GameProfileArgumentType.GameProfileArgument::class.java).getNames(it.source).joinToString()), false
-                    )
-                    1
-                }
-            ))
-        }
     }
 
     @Environment(EnvType.CLIENT)
     fun initClient() {
         BlockEntityRendererRegistry.INSTANCE.register(
-            TradingTableBlockEntity::class.java,
-            TradingTableRenderer()
+            TradingStationBlockEntity::class.java,
+            TradingStationRenderer()
         )
     }
 }

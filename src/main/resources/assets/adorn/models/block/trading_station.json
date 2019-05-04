@@ -1,0 +1,76 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "planks": "minecraft:block/oak_planks",
+    "particle": "minecraft:block/oak_planks"
+  },
+  "elements": [
+    {
+      "__comment": "Top",
+      "from": [0, 12, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "up": { "texture": "#planks", "cullface": "up" },
+        "down": { "texture": "#planks" },
+        "east": { "texture": "#planks", "cullface": "east" },
+        "west": { "texture": "#planks", "cullface": "west" },
+        "north": { "texture": "#planks", "cullface": "north" },
+        "south": { "texture": "#planks", "cullface": "south" }
+      }
+    },
+    {
+      "__comment": "Front",
+      "from": [13, 0, 0],
+      "to": [15, 12, 16],
+      "faces": {
+        "down": { "texture": "#planks", "cullface": "down" },
+        "east": { "texture": "#planks", "cullface": "east" },
+        "west": { "texture": "#planks", "cullface": "west" },
+        "north": { "texture": "#planks", "cullface": "north" },
+        "south": { "texture": "#planks", "cullface": "south" }
+      }
+    },
+    {
+      "__comment": "North side panel",
+      "from": [0, 0, 0],
+      "to": [13, 12, 2],
+      "faces": {
+        "down": { "texture": "#planks", "cullface": "down" },
+        "west": { "texture": "#planks", "cullface": "west" },
+        "north": { "texture": "#planks", "cullface": "north" },
+        "south": { "texture": "#planks" }
+      }
+    },
+    {
+      "__comment": "South side panel",
+      "from": [0, 0, 14],
+      "to": [13, 12, 16],
+      "faces": {
+        "down": { "texture": "#planks", "cullface": "down" },
+        "west": { "texture": "#planks", "cullface": "west" },
+        "north": { "texture": "#planks" },
+        "south": { "texture": "#planks", "cullface": "south" }
+      }
+    },
+    {
+      "__comment": "Top shelf",
+      "from": [3, 7, 2],
+      "to": [13, 8, 14],
+      "faces": {
+        "up": { "texture": "#planks" },
+        "down": { "texture": "#planks" },
+        "west": { "texture": "#planks" }
+      }
+    },
+    {
+      "__comment": "Bottom shelf",
+      "from": [3, 2, 2],
+      "to": [13, 3, 14],
+      "faces": {
+        "up": { "texture": "#planks" },
+        "down": { "texture": "#planks" },
+        "west": { "texture": "#planks" }
+      }
+    }
+  ]
+}

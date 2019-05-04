@@ -3,7 +3,7 @@ package juuxel.adorn.gui.screen
 import io.github.cottonmc.cotton.gui.client.CottonScreen
 import juuxel.adorn.gui.controller.DrawerController
 import juuxel.adorn.gui.controller.KitchenCupboardController
-import juuxel.adorn.gui.controller.TradingTableController
+import juuxel.adorn.gui.controller.TradingStationController
 import net.minecraft.entity.player.PlayerEntity
 
 class DrawerScreen(
@@ -16,7 +16,7 @@ class KitchenCupboardScreen(
     player: PlayerEntity
 ) : CottonScreen<KitchenCupboardController>(controller, player)
 
-class TradingTableScreen(
-    controller: TradingTableController,
+class TradingStationScreen(
+    controller: TradingStationController,
     player: PlayerEntity
-) : CottonScreen<TradingTableController>(controller, player)
+) : CottonScreen<TradingStationController>(controller, player)

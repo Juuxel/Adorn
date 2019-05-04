@@ -53,10 +53,10 @@
 
   "block.adorn.chimney": "Chimney",
 
-  "block.adorn.trading_table": "Trading Table",
-  "block.adorn.trading_table.selling": "Selling",
-  "block.adorn.trading_table.price": "Price",
-  "block.adorn.trading_table.label.1": "%s's Trading Table",
-  "block.adorn.trading_table.label.2": "Selling %s",
-  "block.adorn.trading_table.label.3": "for %s"
+  "block.adorn.trading_station": "Trading Station",
+  "block.adorn.trading_station.selling": "Selling",
+  "block.adorn.trading_station.price": "Price",
+  "block.adorn.trading_station.label.1": "%s's Trading Station",
+  "block.adorn.trading_station.label.2": "Selling %s",
+  "block.adorn.trading_station.label.3": "for %s"
 }

@@ -1,6 +1,6 @@
 package juuxel.adorn.block.renderer
 
-import juuxel.adorn.block.entity.TradingTableBlockEntity
+import juuxel.adorn.block.entity.TradingStationBlockEntity
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.item.ItemStack
 import net.minecraft.text.StringTextComponent
@@ -10,8 +10,8 @@ import net.minecraft.text.TranslatableTextComponent
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
 
-class TradingTableRenderer : BlockEntityRenderer<TradingTableBlockEntity>() {
-    override fun render(be: TradingTableBlockEntity, x: Double, y: Double, z: Double, f: Float, i: Int) {
+class TradingStationRenderer : BlockEntityRenderer<TradingStationBlockEntity>() {
+    override fun render(be: TradingStationBlockEntity, x: Double, y: Double, z: Double, f: Float, i: Int) {
         super.render(be, x, y, z, f, i)
         val hitResult = renderManager.hitResult
 
@@ -24,23 +24,23 @@ class TradingTableRenderer : BlockEntityRenderer<TradingTableBlockEntity>() {
         }
     }
 
-    private fun getLabelRows(be: TradingTableBlockEntity) : Sequence<String> =
+    private fun getLabelRows(be: TradingStationBlockEntity) : Sequence<String> =
         sequence {
             yield(TranslatableTextComponent(
-                "block.adorn.trading_table.label.1",
+                "block.adorn.trading_station.label.1",
                 be.ownerName.copy().applyFormat(TextFormat.GOLD)
             ))
 
             if (!be.trade.isEmpty()) {
                 yield(
                     TranslatableTextComponent(
-                        "block.adorn.trading_table.label.2",
+                        "block.adorn.trading_station.label.2",
                         be.trade.selling.toTextComponentWithCount()
                     )
                 )
                 yield(
                     TranslatableTextComponent(
-                        "block.adorn.trading_table.label.3",
+                        "block.adorn.trading_station.label.3",
                         be.trade.price.toTextComponentWithCount()
                     )
                 )
