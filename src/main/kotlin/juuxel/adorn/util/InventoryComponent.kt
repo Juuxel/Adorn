@@ -8,11 +8,100 @@ import net.minecraft.inventory.SidedInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.DefaultedList
+import kotlin.math.min
 
 class InventoryComponent(private val invSize: Int) : Inventory, NbtConvertible {
     private var listeners: MutableList<InventoryListener>? = null
     private val items: DefaultedList<ItemStack> = DefaultedList.create(invSize, ItemStack.EMPTY)
     val sidedInventory: SidedInventory by lazy { SidedInventoryImpl(this) }
+
+    private constructor(items: DefaultedList<ItemStack>) : this(items.size) {
+        for ((i, item) in items.withIndex()) {
+            this.items[i] = item
+        }
+    }
+
+    /**
+     * Creates a copy of this inventory, not retaining any listeners.
+     */
+    fun copy(): InventoryComponent = InventoryComponent(items)
+
+    /**
+     * Checks if the [stack] can be extracted from this inventory. Ignores NBT, durability and tags.
+     */
+    fun canExtract(stack: ItemStack): Boolean {
+        var remainingAmount = stack.amount
+
+        for (invStack in items) {
+            if (invStack.isEqualIgnoreTags(stack)) {
+                remainingAmount -= invStack.amount
+                if (remainingAmount <= 0) return true
+            }
+        }
+
+        return false
+    }
+
+    /**
+     * Tries to remove the [stack] from this inventory. Ignores NBT, durability and tags.
+     *
+     * @return `true` if extracted
+     */
+    fun tryExtract(stack: ItemStack): Boolean {
+        var remainingAmount = stack.amount
+
+        for (invStack in items) {
+            if (invStack.isEqualIgnoreTags(stack)) {
+                invStack.subtractAmount(min(invStack.amount, remainingAmount))
+                remainingAmount -= invStack.amount
+                if (remainingAmount <= 0) return true
+            }
+        }
+
+        return false
+    }
+
+    /**
+     * Checks if the [stack] can be inserted to this inventory. Ignores NBT, durability and tags.
+     */
+    fun canInsert(stack: ItemStack): Boolean {
+        var remainingAmount = stack.amount
+
+        for ((slot, invStack) in items.withIndex()) {
+            if (invStack.isEqualIgnoreTags(stack) && invStack.amount < invStack.maxAmount) {
+                val insertionAmount = min(invStack.maxAmount - invStack.amount, remainingAmount)
+                remainingAmount -= insertionAmount
+                if (remainingAmount <= 0) return true
+            } else if (invStack.isEmpty) {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    /**
+     * Tries to insert the [stack] to this inventory. Ignores NBT, durability and tags.
+     *
+     * @return `true` if inserted
+     */
+    fun tryInsert(stack: ItemStack): Boolean {
+        var remainingAmount = stack.amount
+
+        for ((slot, invStack) in items.withIndex()) {
+            if (invStack.isEqualIgnoreTags(stack) && invStack.amount < invStack.maxAmount) {
+                val insertionAmount = min(invStack.maxAmount - invStack.amount, remainingAmount)
+                remainingAmount -= insertionAmount
+                invStack.addAmount(insertionAmount)
+                if (remainingAmount <= 0) return true
+            } else if (invStack.isEmpty) {
+                items[slot] = stack.copy()
+                return true
+            }
+        }
+
+        return false
+    }
 
     //-----
     // NBT

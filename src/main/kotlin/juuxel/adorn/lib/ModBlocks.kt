@@ -3,7 +3,12 @@ package juuxel.adorn.lib
 import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.Adorn
 import juuxel.adorn.block.*
+import juuxel.adorn.block.entity.TradingTableBlockEntity
+import juuxel.adorn.block.renderer.TradingTableRenderer
 import juuxel.adorn.util.VanillaWoodType
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
+import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.registry.CommandRegistry
 import net.minecraft.command.arguments.GameProfileArgumentType
 import net.minecraft.server.command.CommandManager
@@ -55,5 +60,13 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
                 }
             ))
         }
+    }
+
+    @Environment(EnvType.CLIENT)
+    fun initClient() {
+        BlockEntityRendererRegistry.INSTANCE.register(
+            TradingTableBlockEntity::class.java,
+            TradingTableRenderer()
+        )
     }
 }

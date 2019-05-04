@@ -55,5 +55,8 @@
 
   "block.adorn.trading_table": "Trading Table",
   "block.adorn.trading_table.selling": "Selling",
-  "block.adorn.trading_table.price": "Price"
+  "block.adorn.trading_table.price": "Price",
+  "block.adorn.trading_table.label.1": "%s's Trading Table",
+  "block.adorn.trading_table.label.2": "Selling %s",
+  "block.adorn.trading_table.label.3": "for %s"
 }

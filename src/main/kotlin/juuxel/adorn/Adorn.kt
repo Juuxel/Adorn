@@ -17,6 +17,7 @@ object Adorn : ModInitializer {
     @Environment(EnvType.CLIENT)
     @Suppress("UNUSED")
     fun initClient() {
+        ModBlocks.initClient()
         ModGuis.initClient()
     }
 }

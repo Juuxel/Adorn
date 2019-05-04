@@ -1,0 +1,52 @@
+package juuxel.adorn.block.renderer
+
+import juuxel.adorn.block.entity.TradingTableBlockEntity
+import net.minecraft.client.render.block.entity.BlockEntityRenderer
+import net.minecraft.item.ItemStack
+import net.minecraft.text.StringTextComponent
+import net.minecraft.text.TextComponent
+import net.minecraft.text.TextFormat
+import net.minecraft.text.TranslatableTextComponent
+import net.minecraft.util.hit.BlockHitResult
+import net.minecraft.util.hit.HitResult
+
+class TradingTableRenderer : BlockEntityRenderer<TradingTableBlockEntity>() {
+    override fun render(be: TradingTableBlockEntity, x: Double, y: Double, z: Double, f: Float, i: Int) {
+        super.render(be, x, y, z, f, i)
+        val hitResult = renderManager.hitResult
+
+        if (hitResult != null && hitResult.type == HitResult.Type.BLOCK && be.pos == (hitResult as BlockHitResult).blockPos) {
+            disableLightmap(true)
+            for ((row, text) in getLabelRows(be).withIndex()) {
+                renderName(be, text, x, y + 0.25 - 0.25 * row, z, 12)
+            }
+            disableLightmap(false)
+        }
+    }
+
+    private fun getLabelRows(be: TradingTableBlockEntity) : Sequence<String> =
+        sequence {
+            yield(TranslatableTextComponent(
+                "block.adorn.trading_table.label.1",
+                be.ownerName.copy().applyFormat(TextFormat.GOLD)
+            ))
+
+            if (!be.trade.isEmpty()) {
+                yield(
+                    TranslatableTextComponent(
+                        "block.adorn.trading_table.label.2",
+                        be.trade.selling.toTextComponentWithCount()
+                    )
+                )
+                yield(
+                    TranslatableTextComponent(
+                        "block.adorn.trading_table.label.3",
+                        be.trade.price.toTextComponentWithCount()
+                    )
+                )
+            }
+        }.map(TextComponent::getFormattedText)
+
+    private fun ItemStack.toTextComponentWithCount(): TextComponent =
+        StringTextComponent("${amount}x ").append(toTextComponent())
+}

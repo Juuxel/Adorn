@@ -7,6 +7,7 @@ import juuxel.adorn.util.getTextComponent
 import juuxel.adorn.util.putTextComponent
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
 import net.minecraft.block.entity.BlockEntity
+import net.minecraft.block.entity.HopperBlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
@@ -16,7 +17,7 @@ import java.util.UUID
 
 class TradingTableBlockEntity : BlockEntity(TradingTableBlock.BLOCK_ENTITY_TYPE), BlockEntityClientSerializable {
     var owner: UUID? = null
-    var ownerName: TextComponent? = StringTextComponent("???")
+    var ownerName: TextComponent = StringTextComponent("???")
     val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
     val storage: InventoryComponent = InventoryComponent(12)
 
@@ -25,6 +26,9 @@ class TradingTableBlockEntity : BlockEntity(TradingTableBlock.BLOCK_ENTITY_TYPE)
         ownerName = StringTextComponent(player.gameProfile.name)
         markDirty()
     }
+
+    fun isStorageStocked(): Boolean =
+        storage.getInvAmountOf(trade.selling.item) >= trade.selling.amount
 
     // NBT
 
@@ -41,9 +45,7 @@ class TradingTableBlockEntity : BlockEntity(TradingTableBlock.BLOCK_ENTITY_TYPE)
             tag.putUuid(NBT_TRADING_OWNER, owner)
         }
 
-        ownerName?.let { name ->
-            tag.putTextComponent(NBT_TRADING_OWNER_NAME, name)
-        }
+        tag.putTextComponent(NBT_TRADING_OWNER_NAME, ownerName)
 
         tag.put(NBT_TRADE, trade.toTag(CompoundTag()))
         tag.put(NBT_STORAGE, storage.toTag(CompoundTag()))
@@ -52,16 +54,13 @@ class TradingTableBlockEntity : BlockEntity(TradingTableBlock.BLOCK_ENTITY_TYPE)
     // Client NBT
 
     override fun toClientTag(tag: CompoundTag) = tag.apply {
-        putTextComponent(NBT_TRADING_OWNER_NAME, ownerName ?: return@apply)
+        putTextComponent(NBT_TRADING_OWNER_NAME, ownerName)
         put(NBT_TRADE, trade.toTag(CompoundTag()))
     }
 
     override fun fromClientTag(tag: CompoundTag) {
-        if (ownerName != null) {
-            ownerName = tag.getTextComponent(NBT_TRADING_OWNER_NAME)
-        }
-
         trade.fromTag(tag.getCompound(NBT_TRADE))
+        ownerName = tag.getTextComponent(NBT_TRADING_OWNER_NAME) ?: return
     }
 
     companion object {
