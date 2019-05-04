@@ -12,11 +12,12 @@ import net.minecraft.text.TranslatableTextComponent
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-abstract class BaseAdornController(syncId: Int, playerInv: PlayerInventory, context: BlockContext, invWidth: Int, invHeight: Int) : CottonScreenController(
+abstract class BaseAdornController(syncId: Int, playerInv: PlayerInventory, context: BlockContext, invWidth: Int, invHeight: Int, titleColor: Int = WLabel.DEFAULT_TEXT_COLOR) : CottonScreenController(
     null, syncId, playerInv, getBlockInventory(context), getBlockPropertyDelegate(context)
 ) {
     // For inventories with no stored inventory slots
-    constructor(syncId: Int, playerInv: PlayerInventory, context: BlockContext) : this(syncId, playerInv, context, 0, 0)
+    constructor(syncId: Int, playerInv: PlayerInventory, context: BlockContext, titleColor: Int = WLabel.DEFAULT_TEXT_COLOR) :
+            this(syncId, playerInv, context, 0, 0, titleColor)
 
     init {
         (rootPanel as WGridPanel).apply {
@@ -24,7 +25,7 @@ abstract class BaseAdornController(syncId: Int, playerInv: PlayerInventory, cont
                 WLabel(
                     TranslatableTextComponent(
                         context.run<String> { world, pos -> world.getBlockState(pos).block.translationKey }.get()
-                    ), WLabel.DEFAULT_TEXT_COLOR
+                    ), titleColor
                 ), 0, 0
             )
 

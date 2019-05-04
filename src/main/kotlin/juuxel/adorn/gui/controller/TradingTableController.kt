@@ -3,59 +3,43 @@ package juuxel.adorn.gui.controller
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
-import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.block.entity.TradingTableBlockEntity
-import juuxel.adorn.gui.widget.ArrowWidget
+import juuxel.adorn.gui.widget.CenteredLabelWidget
 import juuxel.adorn.util.color
 import net.minecraft.container.BlockContext
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.text.StringTextComponent
+import net.minecraft.text.TranslatableTextComponent
 
 class TradingTableController(syncId: Int, playerInv: PlayerInventory, context: BlockContext) :
-    BaseAdornController(syncId, playerInv, context) {
+    BaseAdornController(syncId, playerInv, context, WHITE) {
     init {
         (rootPanel as WGridPanel).apply {
-            // TODO: L10n
             val be = getBlockEntity(context) as? TradingTableBlockEntity ?: return@apply
-            if (be.ownerName != null) {
-                add(WLabel(StringTextComponent("Owner: ").append(be.ownerName), 0x404040), 0, 1)
-            }
 
-            val forOwner = be.owner == playerInv.player.gameProfile.id
-            val tradeInventory = be.trade.createInventory(forOwner)
+            val tradeInventory = be.trade.createInventory()
 
             add(WItemSlot.of(tradeInventory, 0), 1, 2)
-            add(WItemSlot.of(tradeInventory, 1), 4, 2)
-            add(ArrowWidget(), 2, 2, 2, 1)
+            add(WItemSlot.of(tradeInventory, 1), 1, 4)
 
-            val playerInvY = if (forOwner) {
-                setupOwnerGui(this)
-            } else {
-                setupCustomerGui(this)
+            add(CenteredLabelWidget(TranslatableTextComponent("block.adorn.trading_table.selling"), WHITE), 1, 1)
+            add(CenteredLabelWidget(TranslatableTextComponent("block.adorn.trading_table.price"), WHITE), 1, 3)
+
+            for (row in 0..2) {
+                for (col in 0..3) {
+                    add(WItemSlot.of(be.storage, row * 4 + col), 3 + col, 2 + row)
+                }
             }
 
-            add(createPlayerInventoryPanel(), 0, playerInvY)
+            add(createPlayerInventoryPanel(), 0, 6)
             validate(this@TradingTableController)
         }
     }
 
-    /**
-     * @return the player inventory Y position
-     */
-    private fun setupCustomerGui(rootPanel: WGridPanel): Int {
-        rootPanel.add(WLabel("WIP: Customer GUI"), 0, 3)
-        return 4
-    }
-
-    /**
-     * @return the player inventory Y position
-     */
-    private fun setupOwnerGui(rootPanel: WGridPanel): Int {
-        rootPanel.add(WLabel("WIP: Owner GUI"), 0, 3)
-        return 4
-    }
-
     override fun addPainters() {
         rootPanel.setBackgroundPainter(BackgroundPainter.createColorful(color(0x359668)))
+    }
+
+    companion object {
+        val WHITE = color(0xFFFFFF)
     }
 }

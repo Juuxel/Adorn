@@ -38,6 +38,10 @@ class TradingTableBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTING
                 be.setOwner(player)
             }
 
+            if (player.gameProfile.id != be.owner) {
+                return false
+            }
+
             ContainerProviderRegistry.INSTANCE.openContainer(ModGuis.TRADING_TABLE, player) { buf ->
                 buf.writeBlockPos(pos)
             }

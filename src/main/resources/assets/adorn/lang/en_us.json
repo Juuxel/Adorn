@@ -52,5 +52,8 @@
   "block.adorn.dark_oak_drawer": "Dark Oak Drawer",
 
   "block.adorn.chimney": "Chimney",
-  "block.adorn.trading_table": "Trading Table"
+
+  "block.adorn.trading_table": "Trading Table",
+  "block.adorn.trading_table.selling": "Selling",
+  "block.adorn.trading_table.price": "Price"
 }
