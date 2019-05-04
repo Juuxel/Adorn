@@ -1,10 +1,12 @@
 package juuxel.adorn.gui.controller
 
+import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.block.entity.TradingTableBlockEntity
 import juuxel.adorn.gui.widget.ArrowWidget
+import juuxel.adorn.util.color
 import net.minecraft.container.BlockContext
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.StringTextComponent
@@ -51,5 +53,9 @@ class TradingTableController(syncId: Int, playerInv: PlayerInventory, context: B
     private fun setupOwnerGui(rootPanel: WGridPanel): Int {
         rootPanel.add(WLabel("WIP: Owner GUI"), 0, 3)
         return 4
+    }
+
+    override fun addPainters() {
+        rootPanel.setBackgroundPainter(BackgroundPainter.createColorful(color(0x359668)))
     }
 }

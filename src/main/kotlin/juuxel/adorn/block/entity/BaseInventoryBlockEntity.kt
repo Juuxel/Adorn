@@ -1,18 +1,12 @@
 package juuxel.adorn.block.entity
 
 import juuxel.adorn.util.InventoryComponent
-import juuxel.adorn.util.SidedInventoryImpl
 import net.minecraft.block.BlockState
 import net.minecraft.block.InventoryProvider
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.inventory.Inventories
-import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SidedInventory
-import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.util.DefaultedList
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IWorld
 
