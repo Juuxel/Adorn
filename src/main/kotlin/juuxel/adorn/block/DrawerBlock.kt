@@ -55,7 +55,7 @@ class DrawerBlock(
             val entity = world.getBlockEntity(pos)
 
             if (entity is BaseInventoryBlockEntity) {
-                ItemScatterer.spawn(world, pos, entity)
+                ItemScatterer.spawn(world, pos, getInventory(state1, world, pos))
                 world.updateHorizontalAdjacent(pos, this)
             }
 

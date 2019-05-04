@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.DefaultedList
 
-class InventoryComponent(private val invSize: Int) : Inventory {
+class InventoryComponent(private val invSize: Int) : Inventory, NbtConvertible {
     private var listeners: MutableList<InventoryListener>? = null
     private val items: DefaultedList<ItemStack> = DefaultedList.create(invSize, ItemStack.EMPTY)
     val sidedInventory: SidedInventory by lazy { SidedInventoryImpl(this) }
@@ -18,11 +18,11 @@ class InventoryComponent(private val invSize: Int) : Inventory {
     // NBT
     //-----
 
-    fun toTag(tag: CompoundTag) {
+    override fun toTag(tag: CompoundTag): CompoundTag = tag.apply {
         Inventories.toTag(tag, items)
     }
 
-    fun fromTag(tag: CompoundTag) {
+    override fun fromTag(tag: CompoundTag) {
         Inventories.fromTag(tag, items)
     }
 
