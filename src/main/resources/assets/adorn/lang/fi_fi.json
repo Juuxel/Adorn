@@ -51,5 +51,12 @@
   "block.adorn.acacia_drawer": "Akaasialipasto",
   "block.adorn.dark_oak_drawer": "Tumma tammilipasto",
 
-  "block.adorn.chimney": "Savupiippu"
+  "block.adorn.chimney": "Savupiippu",
+
+  "block.adorn.trading_station": "Myyntipöytä",
+  "block.adorn.trading_station.selling": "Myydään",
+  "block.adorn.trading_station.price": "Hinta",
+  "block.adorn.trading_station.label.1": "%s:n myyntipöytä",
+  "block.adorn.trading_station.label.2": "Myydään %s",
+  "block.adorn.trading_station.label.3": "hintaan %s"
 }

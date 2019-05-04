@@ -28,7 +28,10 @@ class SofaBlock(variant: String) : Block(Settings.copy(Blocks.WHITE_WOOL)), Poly
     override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
 
     init {
-        defaultState = defaultState.with(FRONT_CONNECTION, FrontConnection.None)
+        defaultState = defaultState
+            .with(FRONT_CONNECTION, FrontConnection.None)
+            .with(CONNECTED_LEFT, false)
+            .with(CONNECTED_RIGHT, false)
     }
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
