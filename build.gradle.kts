@@ -11,7 +11,7 @@ base {
     archivesBaseName = "Adorn"
 }
 
-version = "0.2.0+1.14"
+version = "0.2.0-pre.1+1.14"
 
 allprojects {
     apply(plugin = "java")
@@ -74,5 +74,5 @@ dependencies {
     // Other mods
     modCompileAndInclude("polyester:Polyester:0.2.2+1.14")
     modCompileAndInclude("towelette:Towelette:1.5.2")
-    modCompileAndInclude("io.github.cottonmc:cotton:0.6.3+1.14-SNAPSHOT")
+    modCompileAndInclude("io.github.cottonmc:cotton:0.6.4+1.14-SNAPSHOT")
 }
