@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:oak_chair",
+    "adorn:spruce_chair",
+    "adorn:birch_chair",
+    "adorn:jungle_chair",
+    "adorn:acacia_chair",
+    "adorn:dark_oak_chair"
+  ]
+}

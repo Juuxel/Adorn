@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:oak_kitchen_cupboard"
+    },
+    "title": {
+      "translate": "advancements.adorn.kitchen.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.kitchen.description"
+    }
+  },
+  "parent": "adorn:chair",
+  "criteria": {
+    "has_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:kitchen_blocks"
+          }
+        ]
+      }
+    }
+  }
+}

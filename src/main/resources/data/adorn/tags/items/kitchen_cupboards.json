@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:oak_kitchen_cupboard",
+    "adorn:spruce_kitchen_cupboard",
+    "adorn:birch_kitchen_cupboard",
+    "adorn:jungle_kitchen_cupboard",
+    "adorn:acacia_kitchen_cupboard",
+    "adorn:dark_oak_kitchen_cupboard"
+  ]
+}

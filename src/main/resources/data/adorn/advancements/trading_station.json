@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:trading_station"
+    },
+    "title": {
+      "translate": "advancements.adorn.trading_station.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.trading_station.description"
+    }
+  },
+  "parent": "adorn:kitchen",
+  "criteria": {
+    "has_trading_station": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "adorn:trading_station"
+          }
+        ]
+      }
+    }
+  }
+}

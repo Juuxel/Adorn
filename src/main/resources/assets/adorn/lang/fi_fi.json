@@ -61,5 +61,19 @@
   "block.adorn.trading_station.label.3": "hintaan %s",
   "block.adorn.trading_station.empty_trade": "Tällä pöydällä ei myydä mitään.",
   "block.adorn.trading_station.storage_not_stocked": "Tällä pöydällä ei ole tarpeeksi tuotteita.",
-  "block.adorn.trading_station.storage_full": "Pöydän varasto on täynnä."
+  "block.adorn.trading_station.storage_full": "Pöydän varasto on täynnä.",
+
+  "advancements.adorn.root.description": "Koristele kotisi!",
+
+  "advancements.adorn.chair.title": "Mukavaa istumista",
+  "advancements.adorn.chair.description": "Valmista tuoli.",
+
+  "advancements.adorn.sofa.title": "Mukavampaa istumista",
+  "advancements.adorn.sofa.description": "Tee sohva villasta ja kepeistä.",
+
+  "advancements.adorn.kitchen.title": "Keittiössä ohjeen mukaan",
+  "advancements.adorn.kitchen.description": "Tee keittiöpalikoita.",
+
+  "advancements.adorn.trading_station.title": "Päivä torilla",
+  "advancements.adorn.trading_station.description": "Valmista myyntipöytä."
 }

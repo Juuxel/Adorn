@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:oak_drawer",
+    "adorn:spruce_drawer",
+    "adorn:birch_drawer",
+    "adorn:jungle_drawer",
+    "adorn:acacia_drawer",
+    "adorn:dark_oak_drawer"
+  ]
+}

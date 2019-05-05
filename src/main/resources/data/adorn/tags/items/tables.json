@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:oak_table",
+    "adorn:spruce_table",
+    "adorn:birch_table",
+    "adorn:jungle_table",
+    "adorn:acacia_table",
+    "adorn:dark_oak_table"
+  ]
+}

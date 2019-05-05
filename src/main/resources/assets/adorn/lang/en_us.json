@@ -61,5 +61,19 @@
   "block.adorn.trading_station.label.3": "for %s",
   "block.adorn.trading_station.empty_trade": "This station is not selling anything.",
   "block.adorn.trading_station.storage_not_stocked": "The station doesn't have enough products.",
-  "block.adorn.trading_station.storage_full": "The station's storage is full."
+  "block.adorn.trading_station.storage_full": "The station's storage is full.",
+
+  "advancements.adorn.root.description": "Decorate your home!",
+
+  "advancements.adorn.chair.title": "Comfy Sitting",
+  "advancements.adorn.chair.description": "Craft a chair.",
+
+  "advancements.adorn.sofa.title": "Comfier Sitting",
+  "advancements.adorn.sofa.description": "Make a sofa from wool and sticks.",
+
+  "advancements.adorn.kitchen.title": "Cooking by the Book",
+  "advancements.adorn.kitchen.description": "Make some kitchen blocks.",
+
+  "advancements.adorn.trading_station.title": "Day at the Market",
+  "advancements.adorn.trading_station.description": "Craft a trading station."
 }
