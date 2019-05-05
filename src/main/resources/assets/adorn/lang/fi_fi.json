@@ -58,5 +58,8 @@
   "block.adorn.trading_station.price": "Hinta",
   "block.adorn.trading_station.label.1": "%s:n myyntipöytä",
   "block.adorn.trading_station.label.2": "Myydään %s",
-  "block.adorn.trading_station.label.3": "hintaan %s"
+  "block.adorn.trading_station.label.3": "hintaan %s",
+  "block.adorn.trading_station.empty_trade": "Tällä pöydällä ei myydä mitään.",
+  "block.adorn.trading_station.storage_not_stocked": "Tällä pöydällä ei ole tarpeeksi tuotteita.",
+  "block.adorn.trading_station.storage_full": "Pöydän varasto on täynnä."
 }

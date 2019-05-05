@@ -2,6 +2,7 @@
   "parent": "block/block",
   "textures": {
     "planks": "minecraft:block/oak_planks",
+    "top": "minecraft:block/polished_diorite",
     "particle": "minecraft:block/oak_planks"
   },
   "elements": [
@@ -10,12 +11,12 @@
       "from": [0, 12, 0],
       "to": [16, 16, 16],
       "faces": {
-        "up": { "texture": "#planks", "cullface": "up" },
-        "down": { "texture": "#planks" },
-        "east": { "texture": "#planks", "cullface": "east" },
-        "west": { "texture": "#planks", "cullface": "west" },
-        "north": { "texture": "#planks", "cullface": "north" },
-        "south": { "texture": "#planks", "cullface": "south" }
+        "up": { "texture": "#top", "cullface": "up" },
+        "down": { "texture": "#top" },
+        "east": { "texture": "#top", "cullface": "east" },
+        "west": { "texture": "#top", "cullface": "west" },
+        "north": { "texture": "#top", "cullface": "north" },
+        "south": { "texture": "#top", "cullface": "south" }
       }
     },
     {

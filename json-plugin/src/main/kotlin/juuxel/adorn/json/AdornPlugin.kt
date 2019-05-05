@@ -15,6 +15,8 @@ object AdornPlugin : Plugin {
     private val slabItem = fun(id: Identifier) = Identifier.mc(id.path + "_slab")
     private val woolItem = fun(id: Identifier) = Identifier.mc(id.path + "_wool")
 
+    private fun constItem(const: Identifier) = fun(_: Identifier) = const
+
     val SOFA = GeneratorInfo(
         AdornCategory,
         AdornPlugin.Subcategories.Sofas
@@ -35,6 +37,10 @@ object AdornPlugin : Plugin {
         AdornCategory,
         AdornPlugin.Subcategories.Drawers
     )
+    val OTHER = GeneratorInfo(
+        AdornCategory,
+        AdornPlugin.Subcategories.Other
+    )
 
     override val generators: List<ContentGenerator> = listOf(
         SofaBlockModel,
@@ -42,7 +48,7 @@ object AdornPlugin : Plugin {
         SofaItemModel,
         SuffixedLootTable("Sofa", "sofa", SOFA),
         SofaRecipe,
-        RecipeAdvancementGenerator(
+        SuffixedRecipeAdvancementGenerator(
             "Sofa Recipe Advancement",
             SOFA,
             "sofa",
@@ -54,7 +60,7 @@ object AdornPlugin : Plugin {
         SuffixedBlockItemModel("Chair", "chair", CHAIR),
         SuffixedLootTable("Chair", "chair", CHAIR),
         ChairRecipe,
-        RecipeAdvancementGenerator(
+        SuffixedRecipeAdvancementGenerator(
             "Chair Recipe Advancement",
             CHAIR,
             "chair",
@@ -66,7 +72,7 @@ object AdornPlugin : Plugin {
         TableItemModel,
         SuffixedLootTable("Table", "table", TABLE),
         TableRecipe,
-        RecipeAdvancementGenerator(
+        SuffixedRecipeAdvancementGenerator(
             "Table Recipe Advancement",
             TABLE,
             "table",
@@ -78,7 +84,7 @@ object AdornPlugin : Plugin {
         SuffixedBlockItemModel("Kitchen Counter", "kitchen_counter", KITCHEN),
         SuffixedLootTable("Kitcher Counter", "kitchen_counter", KITCHEN),
         KitchenCounterRecipe,
-        RecipeAdvancementGenerator(
+        SuffixedRecipeAdvancementGenerator(
             "Kitchen Counter Recipe Advancement",
             KITCHEN,
             "kitchen_counter",
@@ -90,7 +96,7 @@ object AdornPlugin : Plugin {
         KitchenCupboardItemModel,
         SuffixedLootTable("Kitcher Cupboard", "kitchen_cupboard", KITCHEN),
         KitchenCupboardRecipe,
-        RecipeAdvancementGenerator(
+        SuffixedRecipeAdvancementGenerator(
             "Kitchen Cupboard Recipe Advancement",
             KITCHEN,
             "kitchen_cupboard",
@@ -102,11 +108,17 @@ object AdornPlugin : Plugin {
         SuffixedBlockItemModel("Drawer", "drawer", DRAWER),
         SuffixedLootTable("Drawer", "drawer", DRAWER),
         DrawerRecipe,
-        RecipeAdvancementGenerator(
+        SuffixedRecipeAdvancementGenerator(
             "Drawer Recipe Advancement",
             DRAWER,
             "drawer",
             keyItems = listOf(slabItem)
+        ),
+
+        RecipeAdvancementGenerator(
+            "Trading Station Recipe Advancement",
+            OTHER,
+            keyItems = listOf(constItem(Identifier.mc("emerald")))
         )
     )
 
@@ -121,7 +133,8 @@ object AdornPlugin : Plugin {
         Chairs("Chairs"),
         Tables("Tables"),
         Kitchen("Kitchen"),
-        Drawers("Drawer")
+        Drawers("Drawer"),
+        Other("Other"),
     }
 
     @JvmStatic

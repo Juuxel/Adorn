@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:trading_station"
+    ]
+  },
+  "criteria": {
+    "has_key_item_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:emerald"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:trading_station"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_key_item_0",
+      "has_the_recipe"
+    ]
+  ]
+}

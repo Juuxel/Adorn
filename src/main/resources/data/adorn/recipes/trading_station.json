@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "DED",
+    "W W"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:polished_diorite_slab"
+    },
+    "W": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "E": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "result": {
+    "item": "adorn:trading_station",
+    "count": 1
+  }
+}

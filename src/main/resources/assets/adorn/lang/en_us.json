@@ -58,5 +58,8 @@
   "block.adorn.trading_station.price": "Price",
   "block.adorn.trading_station.label.1": "%s's Trading Station",
   "block.adorn.trading_station.label.2": "Selling %s",
-  "block.adorn.trading_station.label.3": "for %s"
+  "block.adorn.trading_station.label.3": "for %s",
+  "block.adorn.trading_station.empty_trade": "This station is not selling anything.",
+  "block.adorn.trading_station.storage_not_stocked": "The station doesn't have enough products.",
+  "block.adorn.trading_station.storage_full": "The station's storage is full."
 }

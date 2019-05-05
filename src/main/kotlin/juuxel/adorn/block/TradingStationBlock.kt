@@ -18,6 +18,7 @@ import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.state.StateFactory
 import net.minecraft.state.property.Properties
+import net.minecraft.text.TranslatableTextComponent
 import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
@@ -63,7 +64,13 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
                 val validPayment = handStack.isEqualIgnoreTags(trade.price) && handStack.amount >= trade.price.amount
                 val canInsertPayment = be.storage.canInsert(trade.price)
 
-                if (validPayment && be.isStorageStocked() && canInsertPayment) {
+                if (trade.isEmpty()) {
+                    player.addChatMessage(TranslatableTextComponent("block.adorn.trading_station.empty_trade"), true)
+                } else if (!be.isStorageStocked()) {
+                    player.addChatMessage(TranslatableTextComponent("block.adorn.trading_station.storage_not_stocked"), true)
+                } else if (!canInsertPayment) {
+                    player.addChatMessage(TranslatableTextComponent("block.adorn.trading_station.storage_full"), true)
+                } else if (validPayment) {
                     handStack.subtractAmount(trade.price.amount)
                     player.giveItemStack(trade.selling.copy())
                     be.storage.tryExtract(trade.selling)
@@ -85,6 +92,7 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
 
             if (entity is TradingStationBlockEntity) {
                 ItemScatterer.spawn(world, pos, entity.storage)
+                ItemScatterer.spawn(world, pos, entity.trade.createInventory())
                 world.updateHorizontalAdjacent(pos, this)
             }
 

@@ -1,6 +1,8 @@
 package juuxel.adorn.block.renderer
 
 import juuxel.adorn.block.entity.TradingStationBlockEntity
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.item.ItemStack
 import net.minecraft.text.StringTextComponent
@@ -10,9 +12,10 @@ import net.minecraft.text.TranslatableTextComponent
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
 
+@Environment(EnvType.CLIENT)
 class TradingStationRenderer : BlockEntityRenderer<TradingStationBlockEntity>() {
-    override fun render(be: TradingStationBlockEntity, x: Double, y: Double, z: Double, f: Float, i: Int) {
-        super.render(be, x, y, z, f, i)
+    override fun render(be: TradingStationBlockEntity, x: Double, y: Double, z: Double, tickDelta: Float, i: Int) {
+        super.render(be, x, y, z, tickDelta, i)
         val hitResult = renderManager.hitResult
 
         if (hitResult != null && hitResult.type == HitResult.Type.BLOCK && be.pos == (hitResult as BlockHitResult).blockPos) {
@@ -24,7 +27,7 @@ class TradingStationRenderer : BlockEntityRenderer<TradingStationBlockEntity>() 
         }
     }
 
-    private fun getLabelRows(be: TradingStationBlockEntity) : Sequence<String> =
+    private fun getLabelRows(be: TradingStationBlockEntity): Sequence<String> =
         sequence {
             yield(TranslatableTextComponent(
                 "block.adorn.trading_station.label.1",

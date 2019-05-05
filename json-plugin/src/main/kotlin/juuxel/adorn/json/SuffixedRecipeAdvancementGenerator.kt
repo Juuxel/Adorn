@@ -7,9 +7,10 @@ import io.github.cottonmc.jsonfactory.output.ExperimentalMapOutput
 import io.github.cottonmc.jsonfactory.output.MapJsonOutput
 import io.github.cottonmc.jsonfactory.output.suffixed
 
-class RecipeAdvancementGenerator(
+class SuffixedRecipeAdvancementGenerator(
     name: String,
     info: GeneratorInfo,
+    private val suffix: String,
     private val keyItems: List<(Identifier) -> Identifier>
 ) : ContentGenerator(name, "advancements/recipes", info, resourceRoot = ResourceRoot.Data) {
     @ExperimentalMapOutput
@@ -18,7 +19,7 @@ class RecipeAdvancementGenerator(
             mapOf(
                 "parent" to "minecraft:recipes/root",
                 "rewards" to mapOf(
-                    "recipes" to listOf(id)
+                    "recipes" to listOf(id.suffixPath("_$suffix"))
                 ),
                 "criteria" to (
                     keyItems.mapIndexed { i, itemFn ->
@@ -33,7 +34,7 @@ class RecipeAdvancementGenerator(
                     } + ("has_the_recipe" to mapOf(
                         "trigger" to "minecraft:recipe_unlocked",
                         "conditions" to mapOf(
-                            "recipe" to id
+                            "recipe" to id.suffixPath("_$suffix")
                         )
                     ))
                 ).toMap(),
@@ -41,6 +42,6 @@ class RecipeAdvancementGenerator(
                     keyItems.indices.map { "has_key_item_$it" } + "has_the_recipe"
                 )
             )
-        )
+        ).suffixed(suffix)
     )
 }
