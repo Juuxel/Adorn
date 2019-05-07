@@ -1,6 +1,7 @@
 package juuxel.adorn.block
 
-import io.github.juuxel.polyester.registry.PolyesterBlock
+import io.github.juuxel.polyester.block.PolyesterBlockEntityType
+import io.github.juuxel.polyester.block.PolyesterBlockWithEntity
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.DrawerBlockEntity
 import juuxel.adorn.lib.ModGuis
@@ -22,13 +23,14 @@ import net.minecraft.world.World
 
 class DrawerBlock(
     material: String
-) : Block(Settings.copy(Blocks.OAK_PLANKS)), PolyesterBlock, BlockEntityProvider, BaseInventoryBlockEntity.InventoryProviderImpl {
+) : PolyesterBlockWithEntity(Settings.copy(Blocks.OAK_PLANKS)), BaseInventoryBlockEntity.InventoryProviderImpl {
     override val name = "${material}_drawer"
     override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
+    override val blockEntityType = BLOCK_ENTITY_TYPE
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.with(FACING)
+        builder.add(FACING)
     }
 
     override fun getPlacementState(context: ItemPlacementContext) =
@@ -36,7 +38,6 @@ class DrawerBlock(
 
     override fun isFullBoundsCubeForCulling(state: BlockState?) = false
     override fun isSimpleFullBlock(state: BlockState?, view: BlockView?, pos: BlockPos?) = false
-    override fun createBlockEntity(var1: BlockView?) = BLOCK_ENTITY_TYPE.instantiate()
 
     override fun activate(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
@@ -66,6 +67,6 @@ class DrawerBlock(
     companion object {
         val FACING = Properties.FACING_HORIZONTAL
         val BLOCK_ENTITY_TYPE: BlockEntityType<DrawerBlockEntity> =
-            BlockEntityType(::DrawerBlockEntity, null)
+            PolyesterBlockEntityType(::DrawerBlockEntity)
     }
 }

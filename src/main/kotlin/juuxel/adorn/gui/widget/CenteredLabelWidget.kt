@@ -3,9 +3,9 @@ package juuxel.adorn.gui.widget
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.util.client.DrawableHelperInstance
 import net.minecraft.client.MinecraftClient
-import net.minecraft.text.TextComponent
+import net.minecraft.network.chat.Component
 
-class CenteredLabelWidget(text: TextComponent, color: Int) : WLabel(text, color) {
+class CenteredLabelWidget(text: Component, color: Int) : WLabel(text, color) {
     override fun paintBackground(x: Int, y: Int) {
         DrawableHelperInstance.drawCenteredString(
             MinecraftClient.getInstance().fontManager.getTextRenderer(MinecraftClient.DEFAULT_TEXT_RENDERER_ID),

@@ -8,7 +8,7 @@ import juuxel.adorn.gui.widget.CenteredLabelWidget
 import juuxel.adorn.util.color
 import net.minecraft.container.BlockContext
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.text.TranslatableTextComponent
+import net.minecraft.network.chat.TranslatableComponent
 
 class TradingStationController(syncId: Int, playerInv: PlayerInventory, context: BlockContext) :
     BaseAdornController(syncId, playerInv, context, WHITE) {
@@ -21,8 +21,8 @@ class TradingStationController(syncId: Int, playerInv: PlayerInventory, context:
             add(WItemSlot.of(tradeInventory, 0), 1, 2)
             add(WItemSlot.of(tradeInventory, 1), 1, 4)
 
-            add(CenteredLabelWidget(TranslatableTextComponent("block.adorn.trading_station.selling"), WHITE), 1, 1)
-            add(CenteredLabelWidget(TranslatableTextComponent("block.adorn.trading_station.price"), WHITE), 1, 3)
+            add(CenteredLabelWidget(TranslatableComponent("block.adorn.trading_station.selling"), WHITE), 1, 1)
+            add(CenteredLabelWidget(TranslatableComponent("block.adorn.trading_station.price"), WHITE), 1, 3)
 
             for (row in 0..2) {
                 for (col in 0..3) {

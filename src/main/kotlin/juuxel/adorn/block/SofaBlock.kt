@@ -7,7 +7,7 @@ import juuxel.adorn.util.shapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
-import net.minecraft.entity.VerticalEntityPosition
+import net.minecraft.entity.EntityContext
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
@@ -36,7 +36,7 @@ class SofaBlock(variant: String) : Block(Settings.copy(Blocks.WHITE_WOOL)), Poly
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.with(FACING, CONNECTED_LEFT, CONNECTED_RIGHT, FRONT_CONNECTION)
+        builder.add(FACING, CONNECTED_LEFT, CONNECTED_RIGHT, FRONT_CONNECTION)
     }
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState {
@@ -81,10 +81,10 @@ class SofaBlock(variant: String) : Block(Settings.copy(Blocks.WHITE_WOOL)), Poly
             .with(FRONT_CONNECTION, frontConnection)
     }
 
-    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, vep: VerticalEntityPosition?) =
+    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         OUTLINE_SHAPE_MAP[SofaState(state)]
 
-    override fun getCollisionShape(state: BlockState, view: BlockView?, pos: BlockPos?, vep: VerticalEntityPosition?) =
+    override fun getCollisionShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         COLLISION_SHAPE_MAP[SofaState(state)]
 
     companion object {

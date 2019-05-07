@@ -8,7 +8,7 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.container.BlockContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.text.TranslatableTextComponent
+import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
@@ -23,7 +23,7 @@ abstract class BaseAdornController(syncId: Int, playerInv: PlayerInventory, cont
         (rootPanel as WGridPanel).apply {
             add(
                 WLabel(
-                    TranslatableTextComponent(
+                    TranslatableComponent(
                         context.run<String> { world, pos -> world.getBlockState(pos).block.translationKey }.get()
                     ), titleColor
                 ), 0, 0

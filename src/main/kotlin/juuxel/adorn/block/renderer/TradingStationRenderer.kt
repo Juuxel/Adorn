@@ -3,12 +3,12 @@ package juuxel.adorn.block.renderer
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
+import net.minecraft.ChatFormat
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.item.ItemStack
-import net.minecraft.text.StringTextComponent
-import net.minecraft.text.TextComponent
-import net.minecraft.text.TextFormat
-import net.minecraft.text.TranslatableTextComponent
+import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.TextComponent
+import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
 
@@ -29,27 +29,27 @@ class TradingStationRenderer : BlockEntityRenderer<TradingStationBlockEntity>() 
 
     private fun getLabelRows(be: TradingStationBlockEntity): Sequence<String> =
         sequence {
-            yield(TranslatableTextComponent(
+            yield(TranslatableComponent(
                 "block.adorn.trading_station.label.1",
-                be.ownerName.copy().applyFormat(TextFormat.GOLD)
+                be.ownerName.copy().applyFormat(ChatFormat.GOLD)
             ))
 
             if (!be.trade.isEmpty()) {
                 yield(
-                    TranslatableTextComponent(
+                    TranslatableComponent(
                         "block.adorn.trading_station.label.2",
                         be.trade.selling.toTextComponentWithCount()
                     )
                 )
                 yield(
-                    TranslatableTextComponent(
+                    TranslatableComponent(
                         "block.adorn.trading_station.label.3",
                         be.trade.price.toTextComponentWithCount()
                     )
                 )
             }
-        }.map(TextComponent::getFormattedText)
+        }.map(Component::getFormattedText)
 
-    private fun ItemStack.toTextComponentWithCount(): TextComponent =
-        StringTextComponent("${amount}x ").append(toTextComponent())
+    private fun ItemStack.toTextComponentWithCount(): Component =
+        TextComponent("${amount}x ").append(toTextComponent())
 }

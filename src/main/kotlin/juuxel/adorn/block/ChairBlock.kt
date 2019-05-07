@@ -5,7 +5,7 @@ import juuxel.adorn.util.shapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
-import net.minecraft.entity.VerticalEntityPosition
+import net.minecraft.entity.EntityContext
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
@@ -23,13 +23,13 @@ class ChairBlock(material: String) : Block(Settings.copy(Blocks.OAK_FENCE)), Pol
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.with(FACING)
+        builder.add(FACING)
     }
 
     override fun getPlacementState(context: ItemPlacementContext) =
         super.getPlacementState(context)!!.with(FACING, context.playerHorizontalFacing.opposite)
 
-    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, vep: VerticalEntityPosition?) =
+    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         SHAPES[state[FACING]]
 
     companion object {

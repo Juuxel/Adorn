@@ -1,10 +1,11 @@
 package juuxel.adorn.block
 
+import io.github.juuxel.polyester.block.BlockEntityProviderImpl
+import io.github.juuxel.polyester.block.PolyesterBlockEntityType
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.lib.ModGuis
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry
-import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.player.PlayerEntity
@@ -12,15 +13,13 @@ import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
-import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
 class KitchenCupboardBlock(
     material: String
-) : BaseKitchenCounterBlock(), BlockEntityProvider, BaseInventoryBlockEntity.InventoryProviderImpl {
+) : BaseKitchenCounterBlock(), BlockEntityProviderImpl, BaseInventoryBlockEntity.InventoryProviderImpl {
     override val name = "${material}_kitchen_cupboard"
-
-    override fun createBlockEntity(view: BlockView?) = BLOCK_ENTITY_TYPE.instantiate()
+    override val blockEntityType = BLOCK_ENTITY_TYPE
 
     override fun activate(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
@@ -49,6 +48,6 @@ class KitchenCupboardBlock(
 
     companion object {
         val BLOCK_ENTITY_TYPE: BlockEntityType<KitchenCupboardBlockEntity> =
-            BlockEntityType(::KitchenCupboardBlockEntity, null)
+            PolyesterBlockEntityType(::KitchenCupboardBlockEntity)
     }
 }

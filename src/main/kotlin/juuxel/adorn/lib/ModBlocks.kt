@@ -41,11 +41,7 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
 
     val TRADING_STATION: TradingStationBlock = registerBlock(TradingStationBlock())
 
-    fun init() {
-        // Register here so they're only registered once
-        register(Registry.BLOCK_ENTITY, "kitchen_cupboard", KitchenCupboardBlock.BLOCK_ENTITY_TYPE)
-        register(Registry.BLOCK_ENTITY, "drawer", DrawerBlock.BLOCK_ENTITY_TYPE)
-    }
+    fun init() {}
 
     @Environment(EnvType.CLIENT)
     fun initClient() {

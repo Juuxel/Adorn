@@ -4,7 +4,7 @@ import io.github.juuxel.polyester.registry.PolyesterBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
-import net.minecraft.entity.VerticalEntityPosition
+import net.minecraft.entity.EntityContext
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
@@ -24,7 +24,7 @@ class TableBlock(material: String) : Block(Settings.copy(Blocks.CRAFTING_TABLE))
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.with(NORTH, EAST, SOUTH, WEST)
+        builder.add(NORTH, EAST, SOUTH, WEST)
     }
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState =
@@ -46,7 +46,7 @@ class TableBlock(material: String) : Block(Settings.copy(Blocks.CRAFTING_TABLE))
             .with(SOUTH, world.getBlockState(pos.offset(Direction.SOUTH)).block is TableBlock)
             .with(WEST, world.getBlockState(pos.offset(Direction.WEST)).block is TableBlock)
 
-    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, vep: VerticalEntityPosition?) =
+    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         SHAPES[TableState(state[NORTH], state[EAST], state[SOUTH], state[WEST])]
 
     companion object {

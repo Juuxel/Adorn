@@ -23,6 +23,7 @@ allprojects {
 
     repositories {
         mavenCentral()
+        mavenLocal()
 
         // For cotton and json-factory
         maven(url = "http://server.bbkr.space:8081/artifactory/libs-release")
@@ -62,8 +63,8 @@ fun DependencyHandler.modCompileAndInclude(str: String) {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:1.14")
-    mappings("net.fabricmc:yarn:1.14+build.1")
+    minecraft("com.mojang:minecraft:1.14.1 Pre-Release 1")
+    mappings("net.fabricmc:yarn:1.14.1 Pre-Release 1+build.1")
 
     // Fabric
     modCompile("net.fabricmc:fabric-loader:0.4.6+build.141")
@@ -72,7 +73,7 @@ dependencies {
     compileOnly("net.fabricmc:fabric-language-kotlin:1.3.30-SNAPSHOT")
 
     // Other mods
-    modCompileAndInclude("polyester:Polyester:0.2.2+1.14")
+    modCompileAndInclude("io.github.juuxel:Polyester:0.3.0+1.14.1-pre.1")
     modCompileAndInclude("towelette:Towelette:1.5.2")
     modCompileAndInclude("io.github.cottonmc:cotton:0.6.4+1.14-SNAPSHOT")
 }

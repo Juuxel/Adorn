@@ -7,13 +7,11 @@ import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
-import net.minecraft.block.CampfireBlock
-import net.minecraft.entity.VerticalEntityPosition
+import net.minecraft.entity.EntityContext
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
 import net.minecraft.world.BlockView
 import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
@@ -40,7 +38,7 @@ class ChimneyBlock : Block(FabricBlockSettings.copy(Blocks.BRICKS).ticksRandomly
 
     override fun getTickRate(world: ViewableWorld?) = 15
 
-    override fun getOutlineShape(state: BlockState?, view: BlockView?, pos: BlockPos?, vep: VerticalEntityPosition?) =
+    override fun getOutlineShape(state: BlockState?, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         SHAPE
 
     companion object {

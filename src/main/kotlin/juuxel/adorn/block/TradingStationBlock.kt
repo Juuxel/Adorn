@@ -1,5 +1,6 @@
 package juuxel.adorn.block
 
+import io.github.juuxel.polyester.block.PolyesterBlockEntityType
 import io.github.juuxel.polyester.block.PolyesterBlockWithEntity
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.lib.ModGuis
@@ -8,17 +9,16 @@ import net.fabricmc.fabric.api.container.ContainerProviderRegistry
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
-import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.entity.EntityContext
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.VerticalEntityPosition
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
+import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.state.StateFactory
 import net.minecraft.state.property.Properties
-import net.minecraft.text.TranslatableTextComponent
 import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
@@ -36,7 +36,7 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.with(FACING)
+        builder.add(FACING)
     }
 
     override fun getPlacementState(context: ItemPlacementContext) =
@@ -65,11 +65,11 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
                 val canInsertPayment = be.storage.canInsert(trade.price)
 
                 if (trade.isEmpty()) {
-                    player.addChatMessage(TranslatableTextComponent("block.adorn.trading_station.empty_trade"), true)
+                    player.addChatMessage(TranslatableComponent("block.adorn.trading_station.empty_trade"), true)
                 } else if (!be.isStorageStocked()) {
-                    player.addChatMessage(TranslatableTextComponent("block.adorn.trading_station.storage_not_stocked"), true)
+                    player.addChatMessage(TranslatableComponent("block.adorn.trading_station.storage_not_stocked"), true)
                 } else if (!canInsertPayment) {
-                    player.addChatMessage(TranslatableTextComponent("block.adorn.trading_station.storage_full"), true)
+                    player.addChatMessage(TranslatableComponent("block.adorn.trading_station.storage_full"), true)
                 } else if (validPayment) {
                     handStack.subtractAmount(trade.price.amount)
                     player.giveItemStack(trade.selling.copy())
@@ -100,11 +100,11 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
         }
     }
 
-    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, vep: VerticalEntityPosition?) =
+    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         SHAPES[state[FACING]]
 
     companion object {
-        val BLOCK_ENTITY_TYPE = BlockEntityType(::TradingStationBlockEntity, null)
+        val BLOCK_ENTITY_TYPE = PolyesterBlockEntityType(::TradingStationBlockEntity)
         val FACING = Properties.FACING_HORIZONTAL
         private val SHAPES: Map<Direction, VoxelShape>
 

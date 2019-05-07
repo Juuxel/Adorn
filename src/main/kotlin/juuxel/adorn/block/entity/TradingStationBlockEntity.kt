@@ -10,19 +10,19 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.text.StringTextComponent
-import net.minecraft.text.TextComponent
+import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.TextComponent
 import java.util.UUID
 
 class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_TYPE), BlockEntityClientSerializable {
     var owner: UUID? = null
-    var ownerName: TextComponent = StringTextComponent("???")
+    var ownerName: Component = TextComponent("???")
     val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
     val storage: InventoryComponent = InventoryComponent(12)
 
     fun setOwner(player: PlayerEntity) {
         owner = player.gameProfile.id
-        ownerName = StringTextComponent(player.gameProfile.name)
+        ownerName = TextComponent(player.gameProfile.name)
         markDirty()
     }
 
@@ -34,7 +34,7 @@ class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_T
     override fun fromTag(tag: CompoundTag) {
         super.fromTag(tag)
         owner = tag.getUuid(NBT_TRADING_OWNER)
-        ownerName = tag.getTextComponent(NBT_TRADING_OWNER_NAME) ?: StringTextComponent("??")
+        ownerName = tag.getTextComponent(NBT_TRADING_OWNER_NAME) ?: TextComponent("??")
         trade.fromTag(tag.getCompound(NBT_TRADE))
         storage.fromTag(tag.getCompound(NBT_STORAGE))
     }

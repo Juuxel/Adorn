@@ -19,7 +19,7 @@ class KitchenCounterBlock(material: String) : BaseKitchenCounterBlock() {
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.with(FRONT)
+        builder.add(FRONT)
     }
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState {
