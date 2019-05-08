@@ -1,6 +1,6 @@
 package juuxel.adorn.block
 
-import io.github.juuxel.polyester.registry.PolyesterBlock
+import io.github.juuxel.polyester.block.PolyesterBlock
 import juuxel.adorn.util.shapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState

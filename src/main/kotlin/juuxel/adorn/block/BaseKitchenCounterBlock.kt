@@ -1,6 +1,6 @@
 package juuxel.adorn.block
 
-import io.github.juuxel.polyester.registry.PolyesterBlock
+import io.github.juuxel.polyester.block.PolyesterBlock
 import juuxel.adorn.util.shapeRotations
 import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.Block
@@ -15,7 +15,6 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.state.StateFactory
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 

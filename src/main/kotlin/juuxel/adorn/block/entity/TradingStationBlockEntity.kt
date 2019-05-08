@@ -20,6 +20,12 @@ class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_T
     val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
     val storage: InventoryComponent = InventoryComponent(12)
 
+    init {
+        trade.addListener {
+            markDirty()
+        }
+    }
+
     fun setOwner(player: PlayerEntity) {
         owner = player.gameProfile.id
         ownerName = TextComponent(player.gameProfile.name)

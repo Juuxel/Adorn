@@ -1,6 +1,6 @@
 package juuxel.adorn.block
 
-import io.github.juuxel.polyester.registry.PolyesterBlock
+import io.github.juuxel.polyester.block.PolyesterBlock
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.block.FabricBlockSettings
@@ -16,7 +16,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
 import virtuoel.towelette.api.Fluidloggable
-import java.util.*
+import java.util.Random
 
 class ChimneyBlock : Block(FabricBlockSettings.copy(Blocks.BRICKS).ticksRandomly().build()), PolyesterBlock, Fluidloggable {
     override val name = "chimney"

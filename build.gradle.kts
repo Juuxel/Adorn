@@ -23,14 +23,10 @@ allprojects {
 
     repositories {
         mavenCentral()
-        mavenLocal()
 
-        // For cotton and json-factory
+        // For cotton, polyester and json-factory
         maven(url = "http://server.bbkr.space:8081/artifactory/libs-release")
         maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot")
-
-        // For polyester
-        maven(url = "https://jitpack.io")
 
         // For polyester and towelette
         maven(url = "https://minecraft.curseforge.com/api/maven") {
@@ -73,7 +69,7 @@ dependencies {
     compileOnly("net.fabricmc:fabric-language-kotlin:1.3.30-SNAPSHOT")
 
     // Other mods
-    modCompileAndInclude("io.github.juuxel:Polyester:0.3.0+1.14.1-pre.1")
+    modCompileAndInclude("io.github.juuxel:polyester:0.3.0+1.14.1-pre.1-SNAPSHOT")
     modCompileAndInclude("towelette:Towelette:1.5.2")
     modCompileAndInclude("io.github.cottonmc:cotton:0.6.4+1.14-SNAPSHOT")
 }
