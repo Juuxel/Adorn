@@ -5,13 +5,14 @@ import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.gui.widget.CenteredLabelWidget
+import juuxel.adorn.lib.ModGuis
 import juuxel.adorn.util.color
 import net.minecraft.container.BlockContext
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.network.chat.TranslatableComponent
 
 class TradingStationController(syncId: Int, playerInv: PlayerInventory, context: BlockContext) :
-    BaseAdornController(syncId, playerInv, context, WHITE) {
+    BaseAdornController(ModGuis.TRADING_STATION, syncId, playerInv, context, WHITE) {
     init {
         (rootPanel as WGridPanel).apply {
             val be = getBlockEntity(context) as? TradingStationBlockEntity ?: return@apply

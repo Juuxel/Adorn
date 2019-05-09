@@ -3,10 +3,9 @@ package juuxel.adorn.block
 import io.github.juuxel.polyester.block.PolyesterBlockEntityType
 import io.github.juuxel.polyester.block.PolyesterBlockWithEntity
 import juuxel.adorn.block.entity.TradingStationBlockEntity
-import juuxel.adorn.lib.ModGuis
 import juuxel.adorn.util.shapeRotations
-import net.fabricmc.fabric.api.container.ContainerProviderRegistry
 import net.minecraft.block.Block
+import net.minecraft.block.BlockRenderLayer
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityContext
@@ -53,12 +52,12 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult?
     ): Boolean {
         val be = world.getBlockEntity(pos)
-        if (!world.isClient && be is TradingStationBlockEntity) {
-            if (be.owner == null) {
+        if (be is TradingStationBlockEntity) {
+            if (!world.isClient && be.owner == null) {
                 be.setOwner(player)
             }
 
-            if (player.gameProfile.id != be.owner) {
+            if (!world.isClient && !be.isOwner(player)) {
                 val handStack = player.getStackInHand(hand)
                 val trade = be.trade
                 val validPayment = handStack.isEqualIgnoreTags(trade.price) && handStack.amount >= trade.price.amount
@@ -77,9 +76,7 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
                     be.storage.tryInsert(trade.price)
                 }
             } else {
-                ContainerProviderRegistry.INSTANCE.openContainer(ModGuis.TRADING_TABLE, player) { buf ->
-                    buf.writeBlockPos(pos)
-                }
+                player.openContainer(state.createContainerProvider(world, pos))
             }
         }
 
@@ -102,6 +99,8 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         SHAPES[state[FACING]]
+
+    override fun getRenderLayer() = BlockRenderLayer.TRANSLUCENT
 
     companion object {
         val BLOCK_ENTITY_TYPE = PolyesterBlockEntityType(::TradingStationBlockEntity)

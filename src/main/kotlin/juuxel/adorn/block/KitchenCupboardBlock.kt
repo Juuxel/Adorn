@@ -4,10 +4,9 @@ import io.github.juuxel.polyester.block.BlockEntityProviderImpl
 import io.github.juuxel.polyester.block.PolyesterBlockEntityType
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
-import juuxel.adorn.lib.ModGuis
-import net.fabricmc.fabric.api.container.ContainerProviderRegistry
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.container.NameableContainerProvider
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
@@ -24,14 +23,12 @@ class KitchenCupboardBlock(
     override fun activate(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): Boolean {
-        if (!world.isClient && world.getBlockEntity(pos) is KitchenCupboardBlockEntity) {
-            ContainerProviderRegistry.INSTANCE.openContainer(ModGuis.KITCHEN_CUPBOARD, player) { buf ->
-                buf.writeBlockPos(pos)
-            }
-        }
-
+        player.openContainer(state.createContainerProvider(world, pos))
         return true
     }
+
+    override fun createContainerProvider(state: BlockState, world: World, pos: BlockPos) =
+        world.getBlockEntity(pos) as? NameableContainerProvider
 
     override fun onBlockRemoved(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
         if (state1.block != state2.block) {

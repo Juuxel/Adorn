@@ -1,20 +1,26 @@
 package juuxel.adorn.block.entity
 
 import juuxel.adorn.block.TradingStationBlock
+import juuxel.adorn.gui.controller.DrawerController
+import juuxel.adorn.gui.controller.TradingStationController
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.util.InventoryComponent
 import juuxel.adorn.util.getTextComponent
 import juuxel.adorn.util.putTextComponent
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
 import net.minecraft.block.entity.BlockEntity
+import net.minecraft.container.BlockContext
+import net.minecraft.container.NameableContainerProvider
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
+import net.minecraft.network.chat.TranslatableComponent
 import java.util.UUID
 
-class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_TYPE), BlockEntityClientSerializable {
+class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_TYPE), BlockEntityClientSerializable, NameableContainerProvider {
     var owner: UUID? = null
     var ownerName: Component = TextComponent("???")
     val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
@@ -34,6 +40,15 @@ class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_T
 
     fun isStorageStocked(): Boolean =
         storage.getInvAmountOf(trade.selling.item) >= trade.selling.amount
+
+    fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
+
+    override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity) =
+        if (isOwner(player))
+            TradingStationController(syncId, playerInv, BlockContext.create(world, pos))
+        else null
+
+    override fun getDisplayName() = TranslatableComponent(cachedState.block.translationKey)
 
     // NBT
 

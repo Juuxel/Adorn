@@ -4,8 +4,6 @@ import io.github.juuxel.polyester.block.PolyesterBlockEntityType
 import io.github.juuxel.polyester.block.PolyesterBlockWithEntity
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.DrawerBlockEntity
-import juuxel.adorn.lib.ModGuis
-import net.fabricmc.fabric.api.container.ContainerProviderRegistry
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.player.PlayerEntity
@@ -42,12 +40,7 @@ class DrawerBlock(
     override fun activate(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): Boolean {
-        if (!world.isClient && world.getBlockEntity(pos) is DrawerBlockEntity) {
-            ContainerProviderRegistry.INSTANCE.openContainer(ModGuis.DRAWER, player) { buf ->
-                buf.writeBlockPos(pos)
-            }
-        }
-
+        player.openContainer(state.createContainerProvider(world, pos))
         return true
     }
 

@@ -3,6 +3,8 @@
   "textures": {
     "planks": "minecraft:block/oak_planks",
     "top": "minecraft:block/polished_diorite",
+    "top_overlay": "minecraft:block/lime_wool",
+    "side_overlay": "adorn:block/trading_station_side",
     "particle": "minecraft:block/oak_planks"
   },
   "elements": [
@@ -17,6 +19,18 @@
         "west": { "texture": "#top", "cullface": "west" },
         "north": { "texture": "#top", "cullface": "north" },
         "south": { "texture": "#top", "cullface": "south" }
+      }
+    },
+    {
+      "__comment": "Top overlay",
+      "from": [-0.01, -0.01, -0.01],
+      "to": [16.01, 16.01, 16.01],
+      "faces": {
+        "up": { "texture": "#top_overlay", "cullface": "up" },
+        "east": { "texture": "#side_overlay", "cullface": "east" },
+        "west": { "texture": "#side_overlay", "cullface": "west" },
+        "north": { "texture": "#side_overlay", "cullface": "north" },
+        "south": { "texture": "#side_overlay", "cullface": "south" }
       }
     },
     {

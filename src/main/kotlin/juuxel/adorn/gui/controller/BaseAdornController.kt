@@ -6,18 +6,19 @@ import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.container.BlockContext
+import net.minecraft.container.ContainerType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-abstract class BaseAdornController(syncId: Int, playerInv: PlayerInventory, context: BlockContext, invWidth: Int, invHeight: Int, titleColor: Int = WLabel.DEFAULT_TEXT_COLOR) : CottonScreenController(
+abstract class BaseAdornController(private val type: ContainerType<*>, syncId: Int, playerInv: PlayerInventory, context: BlockContext, invWidth: Int, invHeight: Int, titleColor: Int = WLabel.DEFAULT_TEXT_COLOR) : CottonScreenController(
     null, syncId, playerInv, getBlockInventory(context), getBlockPropertyDelegate(context)
 ) {
     // For inventories with no stored inventory slots
-    constructor(syncId: Int, playerInv: PlayerInventory, context: BlockContext, titleColor: Int = WLabel.DEFAULT_TEXT_COLOR) :
-            this(syncId, playerInv, context, 0, 0, titleColor)
+    constructor(type: ContainerType<*>, syncId: Int, playerInv: PlayerInventory, context: BlockContext, titleColor: Int = WLabel.DEFAULT_TEXT_COLOR) :
+            this(type, syncId, playerInv, context, 0, 0, titleColor)
 
     init {
         (rootPanel as WGridPanel).apply {
@@ -48,6 +49,8 @@ abstract class BaseAdornController(syncId: Int, playerInv: PlayerInventory, cont
             validate(this@BaseAdornController)
         }
     }
+
+    override fun getType() = type
 
     override fun canUse(player: PlayerEntity?) = true
 
