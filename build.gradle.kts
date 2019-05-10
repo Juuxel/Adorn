@@ -70,7 +70,7 @@ dependencies {
     compileOnly("net.fabricmc:fabric-language-kotlin:1.3.30-SNAPSHOT")
 
     // Other mods
-    modCompileAndInclude("io.github.juuxel:polyester:0.3.0-menu.5+1.14.1-pre.1-SNAPSHOT")
+    modCompileAndInclude("io.github.juuxel:polyester:0.3.0-menu.6+1.14.1-pre.1-SNAPSHOT")
     modCompileAndInclude("towelette:Towelette:1.5.2")
     // TODO: fix in fabric.mod.json
     // TODO: CottonMC/cotton#20

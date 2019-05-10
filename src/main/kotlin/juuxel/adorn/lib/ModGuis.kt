@@ -1,6 +1,6 @@
 package juuxel.adorn.lib
 
-import io.github.juuxel.polyester.menu.PolyesterContainerRegistry
+import io.github.juuxel.polyester.container.PolyesterContainerRegistry
 import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.Adorn
 import juuxel.adorn.gui.controller.DrawerController
