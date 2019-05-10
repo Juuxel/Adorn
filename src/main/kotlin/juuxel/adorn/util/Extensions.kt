@@ -5,6 +5,7 @@ import com.mojang.datafixers.types.JsonOps
 import net.minecraft.datafixers.NbtOps
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
+import java.util.Optional
 
 fun CompoundTag.putTextComponent(name: String, textComponent: Component) =
     put(
@@ -27,3 +28,5 @@ fun CompoundTag.getTextComponent(name: String): Component? {
         )
     )
 }
+
+fun <T> Optional<Optional<T>>.flatten(): Optional<T> = orElse(Optional.empty())

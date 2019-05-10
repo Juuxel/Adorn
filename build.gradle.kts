@@ -72,5 +72,7 @@ dependencies {
     // Other mods
     modCompileAndInclude("io.github.juuxel:polyester:0.3.0-menu.5+1.14.1-pre.1-SNAPSHOT")
     modCompileAndInclude("towelette:Towelette:1.5.2")
-    modCompileAndInclude("io.github.cottonmc:cotton:0.6.4+1.14-SNAPSHOT")
+    // TODO: fix in fabric.mod.json
+    // TODO: CottonMC/cotton#20
+    modCompileAndInclude("io.github.cottonmc:cotton:0.6.4-local+1.14-SNAPSHOT")
 }

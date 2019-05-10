@@ -11,14 +11,13 @@ import juuxel.adorn.gui.screen.KitchenCupboardScreen
 import juuxel.adorn.gui.screen.TradingStationScreen
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.ContainerScreen
 import net.minecraft.container.BlockContext
 import net.minecraft.container.Container
 import net.minecraft.container.ContainerType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.util.hit.BlockHitResult
+import net.minecraft.network.chat.Component
 import net.minecraft.util.registry.Registry
 
 object ModGuis : PolyesterRegistry(Adorn.NAMESPACE) {
@@ -37,16 +36,11 @@ object ModGuis : PolyesterRegistry(Adorn.NAMESPACE) {
 
     private inline fun <C : Container> registerContainer(name: String, crossinline fn: (Int, PlayerInventory, BlockContext) -> C) =
         register(Registry.CONTAINER, name, PolyesterContainerRegistry.createContainerType { syncId, playerInv ->
-            val context = BlockContext.create(
-                playerInv.player.world,
-                (MinecraftClient.getInstance().hitResult as? BlockHitResult)?.blockPos
-            )
-
-            fn(syncId, playerInv, context)
+            fn(syncId, playerInv, BlockContext.EMPTY)
         })
 
-    private inline fun <C : Container> registerScreen(type: ContainerType<C>, crossinline fn: (C, PlayerEntity) -> ContainerScreen<C>) =
-        PolyesterContainerRegistry.registerScreen(type) { container, playerInventory, _ ->
-            fn(container, playerInventory.player)
+    private inline fun <C : Container> registerScreen(type: ContainerType<C>, crossinline fn: (C, PlayerEntity, Component) -> ContainerScreen<C>) =
+        PolyesterContainerRegistry.registerScreen(type) { container, playerInventory, title ->
+            fn(container, playerInventory.player, title)
         }
 }

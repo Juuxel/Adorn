@@ -6,7 +6,13 @@ import juuxel.adorn.util.color
 import net.minecraft.container.BlockContext
 import net.minecraft.entity.player.PlayerInventory
 
-class DrawerController(syncId: Int, playerInv: PlayerInventory, context: BlockContext) : BaseAdornController(ModGuis.DRAWER, syncId, playerInv, context, 5, 3) {
+class DrawerController(syncId: Int, playerInv: PlayerInventory, context: BlockContext) : GenericInvAdornController(
+    ModGuis.DRAWER,
+    syncId,
+    playerInv,
+    context,
+    5, 3
+) {
     override fun addPainters() {
         rootPanel.setBackgroundPainter(BackgroundPainter.createColorful(color(0xD9CEB2)))
     }
