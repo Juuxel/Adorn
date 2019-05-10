@@ -11,7 +11,7 @@ base {
     archivesBaseName = "Adorn"
 }
 
-version = "0.2.0-pre.1+1.14"
+version = "0.2.0-pre.2+1.14.1-pre.2"
 
 allprojects {
     apply(plugin = "java")
@@ -60,8 +60,8 @@ fun DependencyHandler.modCompileAndInclude(str: String) {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:1.14.1 Pre-Release 1")
-    mappings("net.fabricmc:yarn:1.14.1 Pre-Release 1+build.1")
+    minecraft("com.mojang:minecraft:1.14.1 Pre-Release 2")
+    mappings("net.fabricmc:yarn:1.14.1 Pre-Release 2+build.2")
 
     // Fabric
     modCompile("net.fabricmc:fabric-loader:0.4.6+build.141")

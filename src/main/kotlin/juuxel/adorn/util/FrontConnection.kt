@@ -1,11 +1,11 @@
 package juuxel.adorn.util
 
-import net.minecraft.util.SnakeCaseIdentifiable
+import net.minecraft.util.StringIdentifiable
 
 /**
  * Note: sofas have left and right flipped
  */
-enum class FrontConnection(private val value: String) : SnakeCaseIdentifiable {
+enum class FrontConnection(private val value: String) : StringIdentifiable {
     /**
      * No connection to the block in front.
      */
@@ -21,5 +21,5 @@ enum class FrontConnection(private val value: String) : SnakeCaseIdentifiable {
      */
     Right("right");
 
-    override fun toSnakeCase() = value
+    override fun asString() = value
 }

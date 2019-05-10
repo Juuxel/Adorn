@@ -20,11 +20,11 @@ import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
 import java.util.UUID
 
-class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_TYPE), BlockEntityClientSerializable, NameableContainerProvider {
+class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_TYPE), BlockEntityClientSerializable, NameableContainerProvider, TradingStation {
     var owner: UUID? = null
     var ownerName: Component = TextComponent("???")
-    val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
-    val storage: InventoryComponent = InventoryComponent(12)
+    override val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
+    override val storage: InventoryComponent = InventoryComponent(12)
 
     init {
         trade.addListener {
