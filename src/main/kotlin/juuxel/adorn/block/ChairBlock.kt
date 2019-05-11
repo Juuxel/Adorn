@@ -79,7 +79,9 @@ class ChairBlock(material: String) : SeatBlock(Settings.copy(Blocks.OAK_FENCE)),
             player.incrementStat(Stats.MINED.getOrCreateStat(this))
         } else if (otherState.isAir && half == DoubleBlockHalf.LOWER) {
             // Allow breaking and dropping old chairs
-            super.afterBreak(world, player, pos, state, null, player.mainHandStack)
+            if (!world.isClient && !player.isCreative) {
+                super.afterBreak(world, player, pos, state, null, player.mainHandStack)
+            }
         }
 
         super.onBreak(world, pos, state, player)
