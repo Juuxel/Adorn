@@ -9,6 +9,8 @@ import juuxel.adorn.util.VanillaWoodType
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
+import net.fabricmc.fabric.api.event.player.UseBlockCallback
+import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
 import net.minecraft.util.registry.Registry
 
@@ -41,7 +43,15 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
 
     val TRADING_STATION: TradingStationBlock = registerBlock(TradingStationBlock())
 
-    fun init() {}
+    fun init() {
+        UseBlockCallback.EVENT.register(UseBlockCallback { player, world, _, hitResult ->
+            val state = world.getBlockState(hitResult.blockPos)
+            val block = state.block
+            if (block is SofaBlock && player.isSneaking) {
+                block.sneakClick(state, world, hitResult.blockPos, player)
+            } else ActionResult.PASS
+        })
+    }
 
     @Environment(EnvType.CLIENT)
     fun initClient() {

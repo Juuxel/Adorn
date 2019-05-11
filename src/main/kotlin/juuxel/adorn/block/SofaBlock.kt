@@ -17,8 +17,7 @@ import net.minecraft.state.StateFactory
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.EnumProperty
 import net.minecraft.state.property.Properties
-import net.minecraft.util.Hand
-import net.minecraft.util.hit.BlockHitResult
+import net.minecraft.util.ActionResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
@@ -39,21 +38,18 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
             .with(CONNECTED_RIGHT, false)
     }
 
-    override fun activate(
-        state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult
-    ): Boolean {
+    fun sneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity): ActionResult {
         val sleepingDirection = getSleepingDirection(world, pos)
         return if (world.dimension.canPlayersSleep() && sleepingDirection != null && !state[OCCUPIED]) {
             if (!world.isClient) {
-                // TODO: Move into sneak-clicking
                 world.setBlockState(pos, state.with(OCCUPIED, true))
                 val neighborPos = pos.offset(sleepingDirection)
                 world.setBlockState(neighborPos, world.getBlockState(neighborPos).with(OCCUPIED, true))
                 player.sleep(pos)
                 (world as? ServerWorld)?.updatePlayersSleeping()
             }
-            true
-        } else super.activate(state, world, pos, player, hand, hitResult)
+            ActionResult.SUCCESS
+        } else ActionResult.PASS
     }
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
