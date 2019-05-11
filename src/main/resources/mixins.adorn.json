@@ -9,6 +9,7 @@
     "PlayerEntityMixin"
   ],
   "client": [
+    "client.CottonScreenMixin",
     "client.LivingEntityMixin"
   ],
 
