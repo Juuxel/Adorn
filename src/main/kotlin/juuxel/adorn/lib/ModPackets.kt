@@ -2,15 +2,23 @@ package juuxel.adorn.lib
 
 import io.netty.buffer.Unpooled
 import juuxel.adorn.Adorn
+import juuxel.adorn.block.entity.TradingStationBlockEntity
+import juuxel.adorn.trading.Trade
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry
+import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
+import net.minecraft.client.MinecraftClient
 import net.minecraft.client.network.packet.CustomPayloadS2CPacket
 import net.minecraft.client.network.packet.EntitySpawnS2CPacket
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.Entity
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.PacketByteBuf
+import net.minecraft.util.hit.BlockHitResult
+import net.minecraft.util.math.BlockPos
 
 object ModPackets {
     val ENTITY_SPAWN = Adorn.id("entity_spawn")
+    val TRADE_SYNC = Adorn.id("trade_sync")
 
     fun init() {
         ClientSidePacketRegistry.INSTANCE.register(ENTITY_SPAWN) { context, buf ->
@@ -26,10 +34,22 @@ object ModPackets {
 
             (context.player.world as? ClientWorld)?.addEntity(packet.id, entity)
         }
+
+        ClientSidePacketRegistry.INSTANCE.register(TRADE_SYNC) { context, buf ->
+            val pos = buf.readBlockPos()
+            val be = context.player?.world?.getBlockEntity(pos) as? TradingStationBlockEntity ?: return@register
+            be.trade.fromTag(buf.readCompoundTag()!!)
+        }
     }
 
     fun createEntitySpawnPacket(entity: Entity) =
         CustomPayloadS2CPacket(ENTITY_SPAWN, PacketByteBuf(Unpooled.buffer()).apply {
             EntitySpawnS2CPacket(entity).write(this)
         })
+
+    fun createTradeSyncPacket(pos: BlockPos, trade: Trade) =
+       CustomPayloadS2CPacket(TRADE_SYNC, PacketByteBuf(Unpooled.buffer()).apply {
+           writeBlockPos(pos)
+           writeCompoundTag(trade.toTag(CompoundTag()))
+       })
 }

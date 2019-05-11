@@ -6,9 +6,12 @@ import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import juuxel.adorn.block.entity.TradingStation
 import juuxel.adorn.gui.widget.CenteredLabelWidget
 import juuxel.adorn.lib.ModGuis
+import juuxel.adorn.lib.ModPackets
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.trading.TradeInventory
 import juuxel.adorn.util.color
+import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
+import net.fabricmc.fabric.api.server.PlayerStream
 import net.minecraft.container.BlockContext
 import net.minecraft.container.SlotActionType
 import net.minecraft.entity.player.PlayerEntity
@@ -16,6 +19,8 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.util.math.BlockPos
+import net.minecraft.world.World
 
 // TODO: Multiple trades in one station
 class TradingStationController(
@@ -61,6 +66,18 @@ class TradingStationController(
                 SlotActionType.PICKUP -> {
                     slot.stack = cursorStack.copy()
                     slot.markDirty()
+
+                    if (!world.isClient) {
+                        blockContext.run { world, pos ->
+                            PlayerStream.watching(world, pos).forEach {
+                                ServerSidePacketRegistry.INSTANCE.sendToPlayer(
+                                    it,
+                                    ModPackets.createTradeSyncPacket(pos, getTrade(blockContext))
+                                )
+                            }
+                        }
+                    }
+
                     cursorStack
                 }
 
