@@ -22,14 +22,5 @@ data class Trade(var selling: ItemStack, var price: ItemStack) : Observable<Trad
     /**
      * Creates a modifiable inventory for this trade.
      */
-    fun createInventory() = InventoryComponent(2).also { inv ->
-        inv.addListener {
-            selling = it.getInvStack(0)
-            price = it.getInvStack(1)
-            callListeners()
-        }
-
-        inv.setInvStack(0, selling)
-        inv.setInvStack(1, price)
-    }
+    fun createInventory() = TradeInventory(this)
 }
