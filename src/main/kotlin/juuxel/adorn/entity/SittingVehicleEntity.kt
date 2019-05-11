@@ -24,7 +24,7 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
         x = pos.x + 0.5
         y = pos.y + 0.25
         z = pos.z + 0.5
-        PlayerStream.around(world, pos, 48.0).forEach {
+        PlayerStream.watching(this).forEach {
             ServerSidePacketRegistry.INSTANCE.sendToPlayer(it, EntityPositionS2CPacket(this))
         }
     }
