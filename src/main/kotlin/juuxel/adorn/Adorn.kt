@@ -2,6 +2,7 @@ package juuxel.adorn
 
 import juuxel.adorn.lib.ModBlocks
 import juuxel.adorn.lib.ModGuis
+import juuxel.adorn.lib.ModItems
 import juuxel.adorn.lib.ModTags
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -13,6 +14,7 @@ object Adorn : ModInitializer {
 
     override fun onInitialize() {
         ModBlocks.init()
+        ModItems.init()
         ModGuis.init()
         ModTags.init()
     }

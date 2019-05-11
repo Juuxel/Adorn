@@ -5,7 +5,16 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:spruce_chair"
+          "name": "adorn:spruce_chair",
+          "conditions": [
+            {
+              "block": "adorn:spruce_chair",
+              "properties": {
+                "half": "lower"
+              },
+              "condition": "minecraft:block_state_property"
+            }
+          ]
         }
       ],
       "conditions": [

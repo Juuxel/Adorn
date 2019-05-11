@@ -57,8 +57,8 @@ object AdornPlugin : Plugin {
 
         ChairBlockModel,
         ChairBlockState,
-        SuffixedBlockItemModel("Chair", "chair", CHAIR),
-        SuffixedLootTable("Chair", "chair", CHAIR),
+        ChairItemModel,
+        ChairLootTable,
         ChairRecipe,
         SuffixedRecipeAdvancementGenerator(
             "Chair Recipe Advancement",

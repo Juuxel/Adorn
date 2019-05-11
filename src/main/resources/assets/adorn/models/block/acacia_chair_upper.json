@@ -1,5 +1,5 @@
 {
-  "parent": "adorn:block/templates/chair",
+  "parent": "adorn:block/templates/chair_upper",
   "textures": {
     "planks": "minecraft:block/acacia_planks"
   }

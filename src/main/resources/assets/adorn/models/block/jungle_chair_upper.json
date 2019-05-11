@@ -1,5 +1,5 @@
 {
-  "parent": "adorn:item/templates/chair",
+  "parent": "adorn:block/templates/chair_upper",
   "textures": {
     "planks": "minecraft:block/jungle_planks"
   }

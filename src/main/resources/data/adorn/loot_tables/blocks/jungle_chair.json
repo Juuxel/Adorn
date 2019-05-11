@@ -5,7 +5,16 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:jungle_chair"
+          "name": "adorn:jungle_chair",
+          "conditions": [
+            {
+              "block": "adorn:jungle_chair",
+              "properties": {
+                "half": "lower"
+              },
+              "condition": "minecraft:block_state_property"
+            }
+          ]
         }
       ],
       "conditions": [

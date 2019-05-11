@@ -8,9 +8,9 @@ import io.github.cottonmc.jsonfactory.output.suffixed
 
 object ChairBlockState : ContentGenerator("Chair Block State", "blockstates", AdornPlugin.CHAIR) {
     override fun generate(id: Identifier) = listOf(
-        ModelBlockState.create(id, setOf(BlockStateProperty.horizontalFacing)) { values, variant ->
+        ModelBlockState.create(id, setOf(BlockStateProperty.horizontalFacing, BlockStateProperty.halfUL)) { values, variant ->
             variant.copy(
-                model = variant.model.suffixPath("_chair"),
+                model = variant.model.suffixPath("_chair_${values["half"]}"),
                 y = getYRotation(values["facing"] ?: "")
             )
         }.suffixed("chair")

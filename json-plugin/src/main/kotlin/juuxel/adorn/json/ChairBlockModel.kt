@@ -10,10 +10,16 @@ internal object ChairBlockModel : ContentGenerator("Chair Block Model", "models/
 ) {
     override fun generate(id: Identifier) = listOf(
         Model(
-            parent = Identifier("adorn", "block/templates/chair"),
+            parent = Identifier("adorn", "block/templates/chair_upper"),
             textures = mapOf(
                 "planks" to Identifier.mc("block/${id.path}_planks")
             )
-        ).suffixed("chair")
+        ).suffixed("chair_upper"),
+        Model(
+            parent = Identifier("adorn", "block/templates/chair_lower"),
+            textures = mapOf(
+                "planks" to Identifier.mc("block/${id.path}_planks")
+            )
+        ).suffixed("chair_lower")
     )
 }

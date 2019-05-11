@@ -5,7 +5,16 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:oak_chair"
+          "name": "adorn:oak_chair",
+          "conditions": [
+            {
+              "block": "adorn:oak_chair",
+              "properties": {
+                "half": "lower"
+              },
+              "condition": "minecraft:block_state_property"
+            }
+          ]
         }
       ],
       "conditions": [

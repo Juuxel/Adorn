@@ -5,7 +5,16 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:acacia_chair"
+          "name": "adorn:acacia_chair",
+          "conditions": [
+            {
+              "block": "adorn:acacia_chair",
+              "properties": {
+                "half": "lower"
+              },
+              "condition": "minecraft:block_state_property"
+            }
+          ]
         }
       ],
       "conditions": [
