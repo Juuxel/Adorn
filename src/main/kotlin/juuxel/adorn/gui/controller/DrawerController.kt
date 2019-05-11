@@ -6,7 +6,7 @@ import juuxel.adorn.util.color
 import net.minecraft.container.BlockContext
 import net.minecraft.entity.player.PlayerInventory
 
-class DrawerController(syncId: Int, playerInv: PlayerInventory, context: BlockContext) : GenericInvAdornController(
+class DrawerController(syncId: Int, playerInv: PlayerInventory, context: BlockContext) : BaseInvController(
     ModGuis.DRAWER,
     syncId,
     playerInv,

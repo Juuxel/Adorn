@@ -9,8 +9,10 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.DefaultedList
 import kotlin.math.min
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 
-class InventoryComponent(private val invSize: Int) : Inventory, NbtConvertible {
+open class InventoryComponent(private val invSize: Int) : Inventory, NbtConvertible {
     private var listeners: MutableList<InventoryListener>? = null
     private val items: DefaultedList<ItemStack> = DefaultedList.create(invSize, ItemStack.EMPTY)
     val sidedInventory: SidedInventory by lazy { SidedInventoryImpl(this) }
@@ -103,6 +105,11 @@ class InventoryComponent(private val invSize: Int) : Inventory, NbtConvertible {
         return false
     }
 
+    fun slot(slot: Int) = object : ReadWriteProperty<Any?, ItemStack> {
+        override fun getValue(thisRef: Any?, property: KProperty<*>) = getInvStack(slot)
+        override fun setValue(thisRef: Any?, property: KProperty<*>, value: ItemStack) = setInvStack(slot, value)
+    }
+
     //-----
     // NBT
     //-----
@@ -137,8 +144,8 @@ class InventoryComponent(private val invSize: Int) : Inventory, NbtConvertible {
 
     override fun getInvSize() = invSize
 
-    override fun takeInvStack(p0: Int, p1: Int) =
-        Inventories.splitStack(items, p0, p1).also {
+    override fun takeInvStack(slot: Int, amount: Int) =
+        Inventories.splitStack(items, slot, amount).also {
             if (!it.isEmpty) {
                 markDirty()
             }

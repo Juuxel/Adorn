@@ -1,6 +1,6 @@
 package juuxel.adorn.lib
 
-import io.github.juuxel.polyester.container.PolyesterContainerRegistry
+import io.github.juuxel.polyester.container.ContainerRegistry
 import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.Adorn
 import juuxel.adorn.gui.controller.DrawerController
@@ -35,12 +35,12 @@ object ModGuis : PolyesterRegistry(Adorn.NAMESPACE) {
     }
 
     private inline fun <C : Container> registerContainer(name: String, crossinline fn: (Int, PlayerInventory, BlockContext) -> C) =
-        register(Registry.CONTAINER, name, PolyesterContainerRegistry.createContainerType { syncId, playerInv ->
+        register(Registry.CONTAINER, name, ContainerRegistry.INSTANCE.createContainerType { syncId, playerInv ->
             fn(syncId, playerInv, BlockContext.EMPTY)
         })
 
     private inline fun <C : Container> registerScreen(type: ContainerType<C>, crossinline fn: (C, PlayerEntity, Component) -> ContainerScreen<C>) =
-        PolyesterContainerRegistry.registerScreen(type) { container, playerInventory, title ->
+        ContainerRegistry.INSTANCE.registerScreen(type) { container, playerInventory, title ->
             fn(container, playerInventory.player, title)
         }
 }

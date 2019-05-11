@@ -1,7 +1,6 @@
 package juuxel.adorn.block.entity
 
 import juuxel.adorn.block.TradingStationBlock
-import juuxel.adorn.gui.controller.DrawerController
 import juuxel.adorn.gui.controller.TradingStationController
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.util.InventoryComponent
@@ -28,6 +27,10 @@ class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_T
 
     init {
         trade.addListener {
+            markDirty()
+        }
+
+        storage.addListener {
             markDirty()
         }
     }

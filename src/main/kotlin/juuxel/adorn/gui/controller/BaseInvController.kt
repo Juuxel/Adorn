@@ -8,7 +8,7 @@ import net.minecraft.container.PropertyDelegate
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 
-open class GenericInvAdornController(
+open class BaseInvController(
     type: ContainerType<*>,
     syncId: Int,
     playerInv: PlayerInventory,
@@ -36,7 +36,7 @@ open class GenericInvAdornController(
                 add(createPlayerInventoryPanel(), 0, 2 + invHeight)
             }
 
-            validate(this@GenericInvAdornController)
+            validate(this@BaseInvController)
         }
     }
 }
