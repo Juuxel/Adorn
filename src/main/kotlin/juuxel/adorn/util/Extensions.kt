@@ -2,6 +2,7 @@ package juuxel.adorn.util
 
 import com.mojang.datafixers.Dynamic
 import com.mojang.datafixers.types.JsonOps
+import com.mojang.datafixers.util.Pair as DataFixPair
 import net.minecraft.datafixers.NbtOps
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -30,3 +31,6 @@ fun CompoundTag.getTextComponent(name: String): Component? {
 }
 
 fun <T> Optional<Optional<T>>.flatten(): Optional<T> = orElse(Optional.empty())
+
+operator fun <F, S> DataFixPair<F, S>.component1(): F = first
+operator fun <F, S> DataFixPair<F, S>.component2(): S = second

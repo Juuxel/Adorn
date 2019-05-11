@@ -7,7 +7,6 @@ import juuxel.adorn.util.InventoryComponent
 import juuxel.adorn.util.getTextComponent
 import juuxel.adorn.util.putTextComponent
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
-import net.minecraft.block.entity.BlockEntity
 import net.minecraft.container.BlockContext
 import net.minecraft.container.NameableContainerProvider
 import net.minecraft.entity.player.PlayerEntity
@@ -19,7 +18,7 @@ import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
 import java.util.UUID
 
-class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_TYPE), BlockEntityClientSerializable, NameableContainerProvider, TradingStation {
+class TradingStationBlockEntity : PatchableBlockEntity(TradingStationBlock.BLOCK_ENTITY_TYPE), BlockEntityClientSerializable, NameableContainerProvider, TradingStation {
     var owner: UUID? = null
     var ownerName: Component = TextComponent("???")
     override val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
