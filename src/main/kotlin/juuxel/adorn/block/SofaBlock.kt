@@ -8,19 +8,24 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityContext
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateFactory
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.EnumProperty
 import net.minecraft.state.property.Properties
+import net.minecraft.util.Hand
+import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
+import net.minecraft.world.World
 import virtuoel.towelette.api.Fluidloggable
 
 class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), PolyesterBlock, Fluidloggable {
@@ -32,6 +37,23 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
             .with(FRONT_CONNECTION, FrontConnection.None)
             .with(CONNECTED_LEFT, false)
             .with(CONNECTED_RIGHT, false)
+    }
+
+    override fun activate(
+        state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult
+    ): Boolean {
+        val sleepingDirection = getSleepingDirection(world, pos)
+        return if (world.dimension.canPlayersSleep() && sleepingDirection != null && !state[OCCUPIED]) {
+            if (!world.isClient) {
+                // TODO: Move into sneak-clicking
+                world.setBlockState(pos, state.with(OCCUPIED, true))
+                val neighborPos = pos.offset(sleepingDirection)
+                world.setBlockState(neighborPos, world.getBlockState(neighborPos).with(OCCUPIED, true))
+                player.sleep(pos)
+                (world as? ServerWorld)?.updatePlayersSleeping()
+            }
+            true
+        } else super.activate(state, world, pos, player, hand, hitResult)
     }
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
@@ -135,6 +157,39 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
                     *parts.filterNotNull().toTypedArray()
                 )
             }.toMap()
+
+        @JvmOverloads
+        fun getSleepingDirection(world: World, pos: BlockPos, ignoreNeighbors: Boolean = false): Direction? {
+            val state = world.getBlockState(pos)
+            if (state.block !is SofaBlock) return null
+
+            val connectedLeft = state[CONNECTED_LEFT]
+            val connectedRight = state[CONNECTED_RIGHT]
+            val frontConnection = state[FRONT_CONNECTION]
+            val facing = state[FACING]
+
+            if ((!connectedLeft && !connectedRight && frontConnection == FrontConnection.None) || (!ignoreNeighbors && state[OCCUPIED]))
+                return null
+
+            val result = when {
+                frontConnection != FrontConnection.None -> facing
+                connectedLeft -> facing.rotateYClockwise()
+                connectedRight -> facing.rotateYCounterclockwise()
+                else -> null
+            }
+
+            if (result != null) {
+                if (ignoreNeighbors) {
+                    return result
+                }
+                val neighborState = world.getBlockState(pos.offset(result))
+                if (neighborState.block is SofaBlock && !neighborState[OCCUPIED]) {
+                    return result
+                }
+            }
+
+            return null
+        }
     }
 
     private data class SofaState(val facing: Direction, val left: Boolean, val right: Boolean, val front: FrontConnection) {

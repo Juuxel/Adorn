@@ -1,5 +1,6 @@
 package juuxel.adorn.entity
 
+import juuxel.adorn.block.SeatBlock
 import juuxel.adorn.lib.ModPackets
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
 import net.fabricmc.fabric.api.server.PlayerStream
@@ -39,14 +40,20 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
         kill()
     }
 
+    override fun kill() {
+        super.kill()
+        val pos = BlockPos(this)
+        val state = world.getBlockState(pos)
+        if (state.block is SeatBlock) {
+            world.setBlockState(pos, state.with(SeatBlock.OCCUPIED, false))
+        }
+    }
+
     override fun canClimb() = false
     override fun collides() = false
     override fun getMountedHeightOffset() = 0.0
-
     override fun createSpawnPacket() = ModPackets.createEntitySpawnPacket(this)
-
     override fun hasNoGravity() = true
-
     override fun isInvisible() = true
 
     override fun initDataTracker() {}

@@ -29,6 +29,8 @@
     ]
   },
 
+  "mixins": ["mixins.adorn.json"],
+
   "depends": {
     "fabric": ">=0.2.7",
     "fabricloader": ">=0.4.0",

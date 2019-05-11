@@ -1,0 +1,18 @@
+{
+  "compatibilityLevel": "JAVA_8",
+  "minVersion": "0.7.11",
+  "package": "juuxel.adorn.mixin",
+  "required": true,
+
+  "mixins": [
+    "LivingEntityMixin",
+    "PlayerEntityMixin"
+  ],
+  "client": [
+    "client.LivingEntityMixin"
+  ],
+
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
