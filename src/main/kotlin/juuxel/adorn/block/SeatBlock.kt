@@ -12,7 +12,6 @@ import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import org.apache.logging.log4j.LogManager
 
 abstract class SeatBlock(settings: Settings) : Block(settings), PolyesterBlock {
     init {
@@ -41,7 +40,5 @@ abstract class SeatBlock(settings: Settings) : Block(settings), PolyesterBlock {
 
     companion object {
         @JvmField val OCCUPIED = Properties.OCCUPIED
-
-        private val LOGGER = LogManager.getLogger()
     }
 }
