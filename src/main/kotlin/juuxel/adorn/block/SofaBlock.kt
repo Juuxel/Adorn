@@ -23,7 +23,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
 import virtuoel.towelette.api.Fluidloggable
 
-class SofaBlock(variant: String) : Block(Settings.copy(Blocks.WHITE_WOOL)), PolyesterBlock, Fluidloggable {
+class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), PolyesterBlock, Fluidloggable {
     override val name = "${variant}_sofa"
     override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
 

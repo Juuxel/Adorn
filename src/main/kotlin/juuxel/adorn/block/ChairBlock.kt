@@ -25,7 +25,7 @@ import net.minecraft.world.World
 import virtuoel.towelette.api.FluidProperty
 import virtuoel.towelette.api.Fluidloggable
 
-class ChairBlock(material: String) : Block(Settings.copy(Blocks.OAK_FENCE)), PolyesterBlock, Fluidloggable {
+class ChairBlock(material: String) : SeatBlock(Settings.copy(Blocks.OAK_FENCE)), PolyesterBlock, Fluidloggable {
     override val name = "${material}_chair"
     // null to skip registration
     override val itemSettings: Nothing? = null
