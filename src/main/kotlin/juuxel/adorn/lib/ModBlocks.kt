@@ -12,7 +12,6 @@ import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
-import net.minecraft.util.registry.Registry
 
 object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
     val SOFAS: List<SofaBlock> = DyeColor.values().map {
