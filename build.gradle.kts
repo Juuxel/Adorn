@@ -73,6 +73,5 @@ dependencies {
     // TODO: Release Polyester 0.3.0
     modCompileAndInclude("io.github.juuxel:polyester:0.3.0-menu.10+1.14.1-pre.1-SNAPSHOT")
     modCompileAndInclude("towelette:Towelette:1.5.2")
-    // TODO: CottonMC/cotton#20
-    modCompileAndInclude("io.github.cottonmc:cotton:0.6.4+1.14-SNAPSHOT")
+    modCompileAndInclude("io.github.cottonmc:cotton:0.6.6+1.14-SNAPSHOT")
 }
