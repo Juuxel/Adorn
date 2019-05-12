@@ -89,6 +89,7 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
         // Show customer GUI
         if (!be.isOwner(player)) {
             player.openContainer(state.createContainerProvider(world, pos))
+            return ActionResult.SUCCESS
         }
 
         return ActionResult.PASS
