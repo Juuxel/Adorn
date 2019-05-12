@@ -3,9 +3,7 @@ package juuxel.adorn.block
 import io.github.juuxel.polyester.block.PolyesterBlockEntityType
 import io.github.juuxel.polyester.block.PolyesterBlockWithEntity
 import juuxel.adorn.block.entity.TradingStationBlockEntity
-import juuxel.adorn.util.shapeRotations
 import net.minecraft.block.Block
-import net.minecraft.block.BlockRenderLayer
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityContext
@@ -18,28 +16,27 @@ import net.minecraft.item.ItemStack
 import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.state.StateFactory
 import net.minecraft.state.property.Properties
+import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
-import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)) {
+class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)), SneakClickHandler {
     override val name = "trading_station"
     override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
     override val blockEntityType = BLOCK_ENTITY_TYPE
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.add(FACING)
+        builder.add(AXIS)
     }
 
     override fun getPlacementState(context: ItemPlacementContext) =
-        super.getPlacementState(context)!!.with(FACING, context.playerHorizontalFacing.opposite)
+        super.getPlacementState(context)!!.with(AXIS, context.playerHorizontalFacing.rotateYClockwise().axis)
 
     override fun onPlaced(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack?) {
         if (entity is PlayerEntity) {
@@ -60,7 +57,10 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
             if (!world.isClient && !be.isOwner(player)) {
                 val handStack = player.getStackInHand(hand)
                 val trade = be.trade
-                val validPayment = handStack.isEqualIgnoreTags(trade.price) && handStack.amount >= trade.price.amount
+                // TODO: Investigate buying damaged swords
+                val validPayment = handStack.isEqualIgnoreTags(trade.price) &&
+                        handStack.amount >= trade.price.amount &&
+                        handStack.tag == trade.price.tag
                 val canInsertPayment = be.storage.canInsert(trade.price)
 
                 if (trade.isEmpty()) {
@@ -83,13 +83,23 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
         return true
     }
 
+    override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity): ActionResult {
+        val be = world.getBlockEntity(pos) as? TradingStationBlockEntity ?: return ActionResult.PASS
+
+        // Show customer GUI
+        if (!be.isOwner(player)) {
+            player.openContainer(state.createContainerProvider(world, pos))
+        }
+
+        return ActionResult.PASS
+    }
+
     override fun onBlockRemoved(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
         if (state1.block != state2.block) {
             val entity = world.getBlockEntity(pos)
 
             if (entity is TradingStationBlockEntity) {
                 ItemScatterer.spawn(world, pos, entity.storage)
-                ItemScatterer.spawn(world, pos, entity.trade.createInventory())
                 world.updateHorizontalAdjacent(pos, this)
             }
 
@@ -97,25 +107,10 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
         }
     }
 
-    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
-        SHAPES[state[FACING]]
-
-    override fun getRenderLayer() = BlockRenderLayer.TRANSLUCENT
+    override fun isFullBoundsCubeForCulling(state: BlockState?) = false
 
     companion object {
         val BLOCK_ENTITY_TYPE = PolyesterBlockEntityType(::TradingStationBlockEntity)
-        val FACING = Properties.FACING_HORIZONTAL
-        private val SHAPES: Map<Direction, VoxelShape>
-
-        init {
-            val top = createCuboidShape(0.0, 12.0, 0.0, 16.0, 16.0, 16.0)
-            val front = shapeRotations(13, 0, 0, 15, 12, 16)
-            val north = shapeRotations(0, 0, 0, 13, 12, 2)
-            val south = shapeRotations(0, 0, 14, 13, 12, 16)
-
-            SHAPES = Direction.values().filter { it.horizontal != -1 }.map {
-                it to VoxelShapes.union(top, front[it], north[it], south[it])
-            }.toMap()
-        }
+        val AXIS = Properties.AXIS_XZ
     }
 }

@@ -3,8 +3,6 @@
   "textures": {
     "planks": "minecraft:block/oak_planks",
     "top": "minecraft:block/polished_diorite",
-    "top_overlay": "minecraft:block/lime_wool",
-    "side_overlay": "adorn:block/trading_station_side",
     "particle": "minecraft:block/oak_planks"
   },
   "elements": [
@@ -22,20 +20,8 @@
       }
     },
     {
-      "__comment": "Top overlay",
-      "from": [-0.01, -0.01, -0.01],
-      "to": [16.01, 16.01, 16.01],
-      "faces": {
-        "up": { "texture": "#top_overlay", "cullface": "up" },
-        "east": { "texture": "#side_overlay", "cullface": "east" },
-        "west": { "texture": "#side_overlay", "cullface": "west" },
-        "north": { "texture": "#side_overlay", "cullface": "north" },
-        "south": { "texture": "#side_overlay", "cullface": "south" }
-      }
-    },
-    {
-      "__comment": "Front",
-      "from": [13, 0, 0],
+      "__comment": "Main part",
+      "from": [1, 0, 0],
       "to": [15, 12, 16],
       "faces": {
         "down": { "texture": "#planks", "cullface": "down" },
@@ -43,48 +29,6 @@
         "west": { "texture": "#planks", "cullface": "west" },
         "north": { "texture": "#planks", "cullface": "north" },
         "south": { "texture": "#planks", "cullface": "south" }
-      }
-    },
-    {
-      "__comment": "North side panel",
-      "from": [0, 0, 0],
-      "to": [13, 12, 2],
-      "faces": {
-        "down": { "texture": "#planks", "cullface": "down" },
-        "west": { "texture": "#planks", "cullface": "west" },
-        "north": { "texture": "#planks", "cullface": "north" },
-        "south": { "texture": "#planks" }
-      }
-    },
-    {
-      "__comment": "South side panel",
-      "from": [0, 0, 14],
-      "to": [13, 12, 16],
-      "faces": {
-        "down": { "texture": "#planks", "cullface": "down" },
-        "west": { "texture": "#planks", "cullface": "west" },
-        "north": { "texture": "#planks" },
-        "south": { "texture": "#planks", "cullface": "south" }
-      }
-    },
-    {
-      "__comment": "Top shelf",
-      "from": [3, 7, 2],
-      "to": [13, 8, 14],
-      "faces": {
-        "up": { "texture": "#planks" },
-        "down": { "texture": "#planks" },
-        "west": { "texture": "#planks" }
-      }
-    },
-    {
-      "__comment": "Bottom shelf",
-      "from": [3, 2, 2],
-      "to": [13, 3, 14],
-      "faces": {
-        "up": { "texture": "#planks" },
-        "down": { "texture": "#planks" },
-        "west": { "texture": "#planks" }
       }
     }
   ]

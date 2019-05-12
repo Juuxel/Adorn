@@ -7,6 +7,7 @@ import net.minecraft.inventory.InventoryListener
 import net.minecraft.inventory.SidedInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.tag.Tag
 import net.minecraft.util.DefaultedList
 import kotlin.math.min
 import kotlin.properties.ReadWriteProperty
@@ -45,7 +46,7 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
     }
 
     /**
-     * Tries to remove the [stack] from this inventory. Ignores NBT, durability and tags.
+     * Tries to remove the [stack] from this inventory. Ignores tags.
      *
      * @return `true` if extracted
      */
@@ -53,7 +54,7 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
         var remainingAmount = stack.amount
 
         for (invStack in items) {
-            if (invStack.isEqualIgnoreTags(stack)) {
+            if (invStack.isEqualIgnoreTags(stack) && invStack.tag == stack.tag) {
                 invStack.subtractAmount(min(invStack.amount, remainingAmount))
                 remainingAmount -= invStack.amount
                 if (remainingAmount <= 0) return true
@@ -64,13 +65,13 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
     }
 
     /**
-     * Checks if the [stack] can be inserted to this inventory. Ignores NBT, durability and tags.
+     * Checks if the [stack] can be inserted to this inventory. Ignores tags.
      */
     fun canInsert(stack: ItemStack): Boolean {
         var remainingAmount = stack.amount
 
-        for ((slot, invStack) in items.withIndex()) {
-            if (invStack.isEqualIgnoreTags(stack) && invStack.amount < invStack.maxAmount) {
+        for (invStack in items) {
+            if (invStack.isEqualIgnoreTags(stack) && invStack.amount < invStack.maxAmount && stack.tag == invStack.tag) {
                 val insertionAmount = min(invStack.maxAmount - invStack.amount, remainingAmount)
                 remainingAmount -= insertionAmount
                 if (remainingAmount <= 0) return true
@@ -83,7 +84,7 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
     }
 
     /**
-     * Tries to insert the [stack] to this inventory. Ignores NBT, durability and tags.
+     * Tries to insert the [stack] to this inventory. Ignores tags.
      *
      * @return `true` if inserted
      */
@@ -91,7 +92,7 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
         var remainingAmount = stack.amount
 
         for ((slot, invStack) in items.withIndex()) {
-            if (invStack.isEqualIgnoreTags(stack) && invStack.amount < invStack.maxAmount) {
+            if (invStack.isEqualIgnoreTags(stack) && invStack.amount < invStack.maxAmount && invStack.tag == stack.tag) {
                 val insertionAmount = min(invStack.maxAmount - invStack.amount, remainingAmount)
                 remainingAmount -= insertionAmount
                 invStack.addAmount(insertionAmount)
@@ -104,6 +105,16 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
 
         return false
     }
+
+    /**
+     * Gets the amount of items with the same item and NBT as the [stack].
+     * Ignores the stack's amount.
+     */
+    fun getAmountWithNbt(stack: ItemStack): Int = items.map {
+        if (stack.item == it.item && stack.tag == it.tag)
+            it.amount
+        else 0
+    }.sum()
 
     fun slot(slot: Int) = object : ReadWriteProperty<Any?, ItemStack> {
         override fun getValue(thisRef: Any?, property: KProperty<*>) = getInvStack(slot)

@@ -22,7 +22,7 @@ import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-// TODO: Multiple trades in one station
+// TODO: Multiple trades in one station?
 class TradingStationController(
     syncId: Int,
     playerInv: PlayerInventory,
@@ -92,6 +92,8 @@ class TradingStationController(
         rootPanel.setBackgroundPainter(BackgroundPainter.createColorful(color(0x359668)))
     }
 
+    override fun getTitleColor() = WHITE
+
     companion object {
         val WHITE = color(0xFFFFFF)
 
@@ -106,12 +108,12 @@ class TradingStationController(
          * Gets the [TradingStation.storage] of the trading station at the [context]'s location.
          * Uses [getOrCreateTradingStation] for finding a trading station.
          */
-        private fun getStorage(context: BlockContext): Inventory = getOrCreateTradingStation(context).storage
+        fun getStorage(context: BlockContext): Inventory = getOrCreateTradingStation(context).storage
 
         /**
          * Gets the [TradingStation.trade] of the trading station at the [context]'s location.
          * Uses [getOrCreateTradingStation] for finding a trading station.
          */
-        private fun getTrade(context: BlockContext): Trade = getOrCreateTradingStation(context).trade
+        fun getTrade(context: BlockContext): Trade = getOrCreateTradingStation(context).trade
     }
 }

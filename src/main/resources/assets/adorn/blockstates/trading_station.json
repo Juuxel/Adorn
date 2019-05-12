@@ -1,19 +1,11 @@
 {
   "variants": {
-    "facing=east": {
+    "axis=z": {
       "model": "adorn:block/trading_station"
     },
-    "facing=south": {
+    "axis=x": {
       "model": "adorn:block/trading_station",
       "y": 90
-    },
-    "facing=north": {
-      "model": "adorn:block/trading_station",
-      "y": 270
-    },
-    "facing=west": {
-      "model": "adorn:block/trading_station",
-      "y": 180
     }
   }
 }

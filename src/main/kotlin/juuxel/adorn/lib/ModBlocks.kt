@@ -48,11 +48,11 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
             val state = world.getBlockState(hitResult.blockPos)
             val block = state.block
             // Check that:
-            // - the block is a sofa
+            // - the block is a sneak-click handler
             // - the player is sneaking
             // - the player isn't holding a block
-            if (block is SofaBlock && player.isSneaking && player.getStackInHand(hand).item !is BlockItem) {
-                block.sneakClick(state, world, hitResult.blockPos, player)
+            if (block is SneakClickHandler && player.isSneaking && player.getStackInHand(hand).item !is BlockItem) {
+                block.onSneakClick(state, world, hitResult.blockPos, player)
             } else ActionResult.PASS
         })
     }

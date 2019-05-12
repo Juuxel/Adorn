@@ -37,6 +37,7 @@ open class BaseInvController(
             }
 
             validate(this@BaseInvController)
+            println("isClient=" + world.isClient)
         }
     }
 }

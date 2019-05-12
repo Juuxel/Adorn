@@ -27,7 +27,7 @@ import net.minecraft.world.IWorld
 import net.minecraft.world.World
 import virtuoel.towelette.api.Fluidloggable
 
-class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), PolyesterBlock, Fluidloggable {
+class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), PolyesterBlock, Fluidloggable, SneakClickHandler {
     override val name = "${variant}_sofa"
     override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
 
@@ -38,7 +38,7 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
             .with(CONNECTED_RIGHT, false)
     }
 
-    fun sneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity): ActionResult {
+    override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity): ActionResult {
         val sleepingDirection = getSleepingDirection(world, pos)
         return if (world.dimension.canPlayersSleep() && sleepingDirection != null && !state[OCCUPIED]) {
             if (!world.isClient) {
