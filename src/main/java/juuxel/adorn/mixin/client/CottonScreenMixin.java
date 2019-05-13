@@ -24,6 +24,7 @@ public abstract class CottonScreenMixin<T extends CottonScreenController> extend
             )
     )
     private void onReposition(CallbackInfo info) {
+        // See CottonMC/cotton#21
         container.slotList.clear();
     }
 }

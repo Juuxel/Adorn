@@ -16,7 +16,7 @@ import net.minecraft.util.PacketByteBuf
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 
-object ModPackets {
+object ModNetworking {
     val ENTITY_SPAWN = Adorn.id("entity_spawn")
     val TRADE_SYNC = Adorn.id("trade_sync")
 
@@ -24,15 +24,17 @@ object ModPackets {
         ClientSidePacketRegistry.INSTANCE.register(ENTITY_SPAWN) { context, buf ->
             val packet = EntitySpawnS2CPacket()
             packet.read(buf)
-            val world = context.player?.world ?: return@register
-            val entity = packet.entityTypeId.create(world)!!
-            entity.entityId = packet.id
-            entity.uuid = packet.uuid
-            entity.method_18003(packet.x, packet.y, packet.z)
-            entity.pitch = packet.pitch * 360 / 256f
-            entity.yaw = packet.yaw * 360 / 256f
+            context.taskQueue.executeFuture {
+                val world = context.player?.world ?: return@executeFuture
+                val entity = packet.entityTypeId.create(world)!!
+                entity.entityId = packet.id
+                entity.uuid = packet.uuid
+                entity.method_18003(packet.x, packet.y, packet.z)
+                entity.pitch = packet.pitch * 360 / 256f
+                entity.yaw = packet.yaw * 360 / 256f
 
-            (context.player.world as? ClientWorld)?.addEntity(packet.id, entity)
+                (context.player.world as? ClientWorld)?.addEntity(packet.id, entity)
+            }
         }
 
         ClientSidePacketRegistry.INSTANCE.register(TRADE_SYNC) { context, buf ->

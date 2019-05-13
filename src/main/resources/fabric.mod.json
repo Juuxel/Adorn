@@ -32,11 +32,11 @@
   "mixins": ["mixins.adorn.json"],
 
   "depends": {
-    "fabric": ">=0.2.7",
-    "fabricloader": ">=0.4.0",
+    "fabricloader": ">=0.4.6",
+    "fabric": [">=0.2.7", ">=0.3.0-pre", ">=0.3.0"],
     "fabric-language-kotlin": ">=1.3.30",
     "towelette": ">=1.5.0",
     "polyester": "*",
-    "cotton": ">=0.6.4"
+    "cotton": ">=0.6.6"
   }
 }

@@ -83,7 +83,7 @@ class TradingStationRenderer : BlockEntityRenderer<TradingStationBlockEntity>() 
         TextComponent("${amount}x ").append(toTextComponent())
 
     companion object {
-        private const val SELLING_ROTATION_MULTIPLIER = 1f
+        private const val SELLING_ROTATION_MULTIPLIER = 1.2f
         //private const val PRICE_ROTATION_MULTIPLIER = -2.5f
     }
 }
