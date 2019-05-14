@@ -2,7 +2,7 @@ package juuxel.adorn.block
 
 import com.google.common.collect.Sets
 import io.github.juuxel.polyester.block.PolyesterBlock
-import juuxel.adorn.util.FrontConnection
+import juuxel.adorn.block.property.FrontConnection
 import juuxel.adorn.util.shapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState

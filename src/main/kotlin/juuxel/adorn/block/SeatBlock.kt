@@ -18,6 +18,8 @@ abstract class SeatBlock(settings: Settings) : Block(settings), PolyesterBlock {
         defaultState = defaultState.with(OCCUPIED, false)
     }
 
+    open val sittingYOffset: Double = 0.0
+
     override fun activate(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult
     ): Boolean {
@@ -26,7 +28,7 @@ abstract class SeatBlock(settings: Settings) : Block(settings), PolyesterBlock {
             !occupied
         } else if (!world.isClient && !state[OCCUPIED]) {
             val entity = ModEntities.SITTING_VEHICLE.spawn(world, null, null, player, pos, SpawnType.TRIGGERED, false, false)
-            entity?.setPos(pos)
+            entity?.setPos(pos, sittingYOffset)
             world.setBlockState(pos, state.with(OCCUPIED, true))
             player.startRiding(entity, true)
             true

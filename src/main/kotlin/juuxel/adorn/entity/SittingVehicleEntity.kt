@@ -19,12 +19,12 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
         isInvulnerable = true
     }
 
-    fun setPos(pos: BlockPos) {
+    fun setPos(pos: BlockPos, blockOffset: Double) {
         check(!world.isClient) {
             "setPos must be called on the logical server"
         }
         x = pos.x + 0.5
-        y = pos.y + 0.25
+        y = pos.y + 0.25 + blockOffset
         z = pos.z + 0.5
         PlayerStream.watching(this).forEach {
             ServerSidePacketRegistry.INSTANCE.sendToPlayer(it, EntityPositionS2CPacket(this))

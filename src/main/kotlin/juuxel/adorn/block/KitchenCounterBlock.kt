@@ -1,6 +1,6 @@
 package juuxel.adorn.block
 
-import juuxel.adorn.util.FrontConnection
+import juuxel.adorn.block.property.FrontConnection
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.item.ItemPlacementContext

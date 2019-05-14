@@ -1,4 +1,4 @@
-package juuxel.adorn.util
+package juuxel.adorn.block.property
 
 import net.minecraft.util.StringIdentifiable
 

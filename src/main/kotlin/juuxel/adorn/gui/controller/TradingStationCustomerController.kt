@@ -3,7 +3,7 @@ package juuxel.adorn.gui.controller
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
-import juuxel.adorn.gui.controller.TradingStationController.Companion.WHITE
+import juuxel.adorn.util.Colors.WHITE
 import juuxel.adorn.gui.widget.CenteredLabelWidget
 import juuxel.adorn.lib.ModGuis
 import juuxel.adorn.util.color

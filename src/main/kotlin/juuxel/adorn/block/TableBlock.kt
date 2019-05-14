@@ -18,9 +18,10 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
 import virtuoel.towelette.api.Fluidloggable
 
-class TableBlock(material: String) : Block(Settings.copy(Blocks.CRAFTING_TABLE)), PolyesterBlock, Fluidloggable {
+class TableBlock(material: String) : CarpetloggableBlock(Settings.copy(Blocks.CRAFTING_TABLE)), PolyesterBlock, Fluidloggable {
     override val name = "${material}_table"
-    override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
+    override val itemSettings: Nothing? = null
+    override val sittingYOffset = 0.75
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
@@ -28,32 +29,43 @@ class TableBlock(material: String) : Block(Settings.copy(Blocks.CRAFTING_TABLE))
     }
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState =
-        getStateForNeighborUpdate(
+        updateConnections(
             super.getPlacementState(context)!!,
-            null, null, context.world, context.blockPos, null
+            context.world,
+            context.blockPos
         )
 
     override fun getStateForNeighborUpdate(
         state: BlockState,
-        direction: Direction?,
-        neighborState: BlockState?,
+        direction: Direction,
+        neighborState: BlockState,
         world: IWorld,
         pos: BlockPos,
-        neighborPos: BlockPos?
-    ): BlockState =
-        state.with(NORTH, world.getBlockState(pos.offset(Direction.NORTH)).block is TableBlock)
-            .with(EAST, world.getBlockState(pos.offset(Direction.EAST)).block is TableBlock)
-            .with(SOUTH, world.getBlockState(pos.offset(Direction.SOUTH)).block is TableBlock)
-            .with(WEST, world.getBlockState(pos.offset(Direction.WEST)).block is TableBlock)
+        neighborPos: BlockPos
+    ) = updateConnections(
+        super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos),
+        world,
+        pos
+    )
+
+    private fun updateConnections(
+        state: BlockState,
+        world: IWorld,
+        pos: BlockPos
+    ) = state.with(NORTH, world.getBlockState(pos.offset(Direction.NORTH)).block is TableBlock)
+        .with(EAST, world.getBlockState(pos.offset(Direction.EAST)).block is TableBlock)
+        .with(SOUTH, world.getBlockState(pos.offset(Direction.SOUTH)).block is TableBlock)
+        .with(WEST, world.getBlockState(pos.offset(Direction.WEST)).block is TableBlock)
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
-        SHAPES[TableState(state[NORTH], state[EAST], state[SOUTH], state[WEST])]
+        SHAPES[TableState(state[NORTH], state[EAST], state[SOUTH], state[WEST], state[CARPET].isPresent)]
 
     companion object {
         val NORTH = BooleanProperty.create("north")
         val EAST = BooleanProperty.create("east")
         val SOUTH = BooleanProperty.create("south")
         val WEST = BooleanProperty.create("west")
+        val CARPET = CarpetloggableBlock.CARPET
 
         private val BASE_SHAPE = createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
         private val LEG_X0_Z0 = createCuboidShape(1.0, 0.0, 1.0, 4.0, 14.0, 4.0)
@@ -66,15 +78,18 @@ class TableBlock(material: String) : Block(Settings.copy(Blocks.CRAFTING_TABLE))
             BOOLEAN_SET.flatMap { north ->
                 BOOLEAN_SET.flatMap { east ->
                     BOOLEAN_SET.flatMap { south ->
-                        BOOLEAN_SET.map { west ->
-                            TableState(north, east, south, west) to makeShape(north, east, south, west)
+                        BOOLEAN_SET.flatMap { west ->
+                            BOOLEAN_SET.map { hasCarpet ->
+                                TableState(north, east, south, west, hasCarpet) to
+                                        makeShape(north, east, south, west, hasCarpet)
+                            }
                         }
                     }
                 }
             }.toMap()
         }
 
-        private fun makeShape(north: Boolean, east: Boolean, south: Boolean, west: Boolean): VoxelShape {
+        private fun makeShape(north: Boolean, east: Boolean, south: Boolean, west: Boolean, hasCarpet: Boolean): VoxelShape {
             val parts = arrayListOf<VoxelShape?>(BASE_SHAPE)
 
             if (north || east || south || west) {
@@ -124,9 +139,19 @@ class TableBlock(material: String) : Block(Settings.copy(Blocks.CRAFTING_TABLE))
                 parts += LEG_X1_Z1
             }
 
+            if (hasCarpet) {
+                parts += CARPET_SHAPE
+            }
+
             return parts.filterNotNull().reduce(VoxelShapes::union)
         }
     }
 
-    private data class TableState(val north: Boolean, val east: Boolean, val south: Boolean, val west: Boolean)
+    private data class TableState(
+        val north: Boolean,
+        val east: Boolean,
+        val south: Boolean,
+        val west: Boolean,
+        val hasCarpet: Boolean
+    )
 }

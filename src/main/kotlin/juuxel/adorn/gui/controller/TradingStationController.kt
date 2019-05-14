@@ -9,6 +9,7 @@ import juuxel.adorn.lib.ModGuis
 import juuxel.adorn.lib.ModNetworking
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.trading.TradeInventory
+import juuxel.adorn.util.Colors
 import juuxel.adorn.util.color
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
 import net.fabricmc.fabric.api.server.PlayerStream
@@ -40,8 +41,8 @@ class TradingStationController(
             add(WItemSlot.of(tradeInv, 0), 1, 2)
             add(WItemSlot.of(tradeInv, 1), 1, 4)
 
-            add(CenteredLabelWidget(TranslatableComponent("block.adorn.trading_station.selling"), WHITE), 1, 1)
-            add(CenteredLabelWidget(TranslatableComponent("block.adorn.trading_station.price"), WHITE), 1, 3)
+            add(CenteredLabelWidget(TranslatableComponent("block.adorn.trading_station.selling"), Colors.WHITE), 1, 1)
+            add(CenteredLabelWidget(TranslatableComponent("block.adorn.trading_station.price"), Colors.WHITE), 1, 3)
 
             for (row in 0..2) {
                 for (col in 0..3) {
@@ -90,10 +91,9 @@ class TradingStationController(
         rootPanel.setBackgroundPainter(BackgroundPainter.createColorful(color(0x359668)))
     }
 
-    override fun getTitleColor() = WHITE
+    override fun getTitleColor() = Colors.WHITE
 
     companion object {
-        val WHITE = color(0xFFFFFF)
 
         /**
          * Gets the [juuxel.adorn.block.entity.TradingStationBlockEntity] at the [context]'s location.

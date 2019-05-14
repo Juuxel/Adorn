@@ -3,11 +3,11 @@ package juuxel.adorn.json
 import io.github.cottonmc.jsonfactory.data.BlockStateProperty
 import io.github.cottonmc.jsonfactory.data.Identifier
 import io.github.cottonmc.jsonfactory.gens.ContentGenerator
+import io.github.cottonmc.jsonfactory.output.model.ModelBlockState.Variant
 import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState
 import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState.Multipart
 import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState.When
 import io.github.cottonmc.jsonfactory.output.suffixed
-import io.github.cottonmc.jsonfactory.output.model.ModelBlockState.Variant
 
 object TableBlockState : ContentGenerator("Table Block State", "blockstates", AdornPlugin.TABLE) {
     override fun generate(id: Identifier) = listOf(
@@ -62,12 +62,14 @@ object TableBlockState : ContentGenerator("Table Block State", "blockstates", Ad
                     for ((weIndex, connectionWE) in we.withIndex()) {
                         yield(
                             Multipart(
-                                `when` = When(mapOf(
-                                    connectionNS to "true",
-                                    connectionWE to "true",
-                                    ns[1 - nsIndex] to "false",
-                                    we[1 - weIndex] to "false"
-                                )),
+                                `when` = When(
+                                    mapOf(
+                                        connectionNS to "true",
+                                        connectionWE to "true",
+                                        ns[1 - nsIndex] to "false",
+                                        we[1 - weIndex] to "false"
+                                    )
+                                ),
                                 apply = Variant(
                                     model = id.wrapPath("block/", "_table_leg"),
                                     y = getCornerLegRotation(
@@ -79,6 +81,37 @@ object TableBlockState : ContentGenerator("Table Block State", "blockstates", Ad
                             )
                         )
                     }
+                }
+
+                val colors = arrayOf(
+                    "red",
+                    "black",
+                    "green",
+                    "brown",
+                    "blue",
+                    "purple",
+                    "cyan",
+                    "light_gray",
+                    "gray",
+                    "pink",
+                    "lime",
+                    "yellow",
+                    "light_blue",
+                    "magenta",
+                    "orange",
+                    "white"
+                )
+
+                // Carpets
+                for (color in colors) {
+                    yield(
+                        Multipart(
+                            `when` = When("carpet", color),
+                            apply = Variant(
+                                model = Identifier.mc("block/${color}_carpet")
+                            )
+                        )
+                    )
                 }
             }.toList()
         ).suffixed("table")
