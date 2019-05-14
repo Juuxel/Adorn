@@ -10,7 +10,7 @@ class OptionalProperty<T>(
     private val delegate: Property<T>
 ) : AbstractProperty<OptionalProperty.Value<T>>(delegate.name, Value::class.java as Class<Value<T>>)
     where T : Comparable<T>, T : StringIdentifiable {
-    val none: Value.None<T> = Value.None<T>()
+    val none: Value.None<T> = Value.None()
     private val values = delegate.values.map { Value.Some(it) } + none
 
     init {
