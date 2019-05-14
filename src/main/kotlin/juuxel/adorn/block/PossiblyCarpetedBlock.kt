@@ -1,44 +1,51 @@
 package juuxel.adorn.block
 
-import com.google.common.collect.ImmutableBiMap
-import juuxel.adorn.block.property.OptionalProperty
+import juuxel.adorn.block.entity.CarpetedBlockEntity
+import juuxel.adorn.item.CarpetedTopPlacementContext
 import net.minecraft.block.Block
+import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
-import net.minecraft.block.CarpetBlock
+import net.minecraft.block.entity.BlockEntity
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.state.StateFactory
-import net.minecraft.state.property.EnumProperty
+import net.minecraft.state.property.BooleanProperty
 import net.minecraft.util.DyeColor
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
+import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
 import net.minecraft.world.loot.context.LootContext
+import net.minecraft.world.loot.context.LootContextParameters
 import java.util.Random
 
-abstract class CarpetloggableBlock(settings: Settings) : SeatBlock(settings) {
-    init {
-        defaultState = defaultState.with(CARPET, CARPET.none)
-    }
-
+abstract class PossiblyCarpetedBlock(private val carpeted: Boolean, settings: Settings) : Block(settings), BlockEntityProvider {
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.add(CARPET)
     }
 
+    fun appendCarpetedProperty(builder: StateFactory.Builder<Block, BlockState>) {
+        builder.add(HAS_CARPET)
+    }
+
+    private fun getCarpetedBE(world: ViewableWorld, pos: BlockPos): CarpetedBlockEntity? =
+        if (carpeted) world.getBlockEntity(pos) as? CarpetedBlockEntity
+        else null
+
     override fun getPlacementState(context: ItemPlacementContext) =
-        super.getPlacementState(context)!!.with(CARPET, getCarpetColor(context)?.let(CARPET::wrap) ?: CARPET.none)
+        if (carpeted) super.getPlacementState(context)!!.with(HAS_CARPET, context is CarpetedTopPlacementContext)
+        else super.getPlacementState(context)!!
 
     override fun onScheduledTick(state: BlockState, world: World, pos: BlockPos, random: Random?) {
-        val carpet = state[CARPET]
-        if (carpet.isPresent) {
-            val carpetBlock = COLORS_TO_BLOCKS[carpet.value] ?: error("Unknown carpet state: $carpet")
-            if (!carpetBlock.defaultState.canPlaceAt(world, pos)) {
-                carpetBlock.onBreak(world, pos, state, null)
-                dropStacks(carpetBlock.defaultState, world, pos)
-                world.setBlockState(pos, state.with(CARPET, CARPET.none))
+        val be = getCarpetedBE(world, pos)
+        if (be != null) {
+            if (!be.carpetState.canPlaceAt(world, pos)) {
+                be.carpetState.block.onBreak(world, pos, state, null)
+                dropStacks(be.carpetState, world, pos)
+                world.setBlockState(pos, state.with(HAS_CARPET, false))
             }
         }
     }
@@ -47,8 +54,7 @@ abstract class CarpetloggableBlock(settings: Settings) : SeatBlock(settings) {
         state: BlockState, direction: Direction, neighborState: BlockState,
         world: IWorld, pos: BlockPos, neighborPos: BlockPos
     ): BlockState {
-        val carpet = state[ChairBlock.CARPET]
-        if (carpet.isPresent && !COLORS_TO_BLOCKS[carpet.value]!!.defaultState.canPlaceAt(world, pos))
+        if ((getCarpetedBE(world, pos)?.carpetState?.canPlaceAt(world, pos) == false))
             world.blockTickScheduler.schedule(pos, this, 1)
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
@@ -56,12 +62,16 @@ abstract class CarpetloggableBlock(settings: Settings) : SeatBlock(settings) {
 
     override fun getDroppedStacks(state: BlockState, builder: LootContext.Builder): List<ItemStack> {
         return super.getDroppedStacks(state, builder) +
-                (COLORS_TO_BLOCKS[state[CARPET].value]?.defaultState?.getDroppedStacks(builder) ?: emptyList())
+                (getCarpetedBE(builder.world, builder.get(LootContextParameters.POSITION))
+                    ?.getDroppedStacks(builder) ?: emptyList())
     }
 
+    override fun createBlockEntity(view: BlockView) =
+        if (carpeted) CarpetedBlockEntity()
+        else null
+
     companion object {
-        val CARPET = OptionalProperty(EnumProperty.create("carpet", DyeColor::class.java))
-        val CARPET_SHAPE = createCuboidShape(0.0, 0.0, 0.0, 16.0, 1.0, 16.0)
+        val HAS_CARPET = BooleanProperty.create("has_carpet")
         val COLORS_TO_BLOCKS: Map<DyeColor, Block> = mapOf(
             DyeColor.WHITE to Blocks.WHITE_CARPET,
             DyeColor.ORANGE to Blocks.ORANGE_CARPET,
@@ -79,12 +89,6 @@ abstract class CarpetloggableBlock(settings: Settings) : SeatBlock(settings) {
             DyeColor.GREEN to Blocks.GREEN_CARPET,
             DyeColor.RED to Blocks.RED_CARPET,
             DyeColor.BLACK to Blocks.BLACK_CARPET
-        )
-
-        private fun getCarpetColor(context: ItemPlacementContext): DyeColor? =
-            when (val block = context.world.getBlockState(context.blockPos).block) {
-                is CarpetBlock -> block.color
-                else -> null
-            }
+        ).withDefault { Blocks.WHITE_CARPET }
     }
 }

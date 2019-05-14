@@ -27,7 +27,7 @@ import net.minecraft.world.IWorld
 import net.minecraft.world.World
 import virtuoel.towelette.api.Fluidloggable
 
-class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), PolyesterBlock, Fluidloggable, SneakClickHandler {
+class SofaBlock(variant: String) : SeatBlock(false, Settings.copy(Blocks.WHITE_WOOL)), PolyesterBlock, Fluidloggable, SneakClickHandler {
     override val name = "${variant}_sofa"
     override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
 
@@ -67,11 +67,11 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
 
     override fun getStateForNeighborUpdate(
         state: BlockState,
-        direction: Direction?,
-        neighborState: BlockState?,
+        direction: Direction,
+        neighborState: BlockState,
         world: IWorld,
         pos: BlockPos,
-        neighborPos: BlockPos?
+        neighborPos: BlockPos
     ): BlockState {
         return updateConnections(state, world, pos)
     }

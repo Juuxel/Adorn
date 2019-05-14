@@ -1,6 +1,5 @@
 package juuxel.adorn.block
 
-import io.github.juuxel.polyester.block.PolyesterBlock
 import juuxel.adorn.lib.ModEntities
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -13,7 +12,7 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-abstract class SeatBlock(settings: Settings) : Block(settings), PolyesterBlock {
+abstract class SeatBlock(carpeted: Boolean, settings: Settings) : PossiblyCarpetedBlock(carpeted, settings) {
     init {
         defaultState = defaultState.with(OCCUPIED, false)
     }

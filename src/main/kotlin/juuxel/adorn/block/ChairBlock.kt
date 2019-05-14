@@ -1,6 +1,7 @@
 package juuxel.adorn.block
 
 import io.github.juuxel.polyester.block.PolyesterBlock
+import juuxel.adorn.block.entity.CarpetedBlockEntity
 import juuxel.adorn.util.shapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -25,10 +26,11 @@ import net.minecraft.world.World
 import virtuoel.towelette.api.FluidProperty
 import virtuoel.towelette.api.Fluidloggable
 
-class ChairBlock(material: String) : CarpetloggableBlock(Settings.copy(Blocks.OAK_FENCE)), PolyesterBlock, Fluidloggable {
+class ChairBlock(material: String) : SeatBlock(true, Settings.copy(Blocks.OAK_FENCE)), PolyesterBlock, Fluidloggable {
     override val name = "${material}_chair"
     // null to skip registration
     override val itemSettings: Nothing? = null
+    override val blockEntityType = CarpetedBlockEntity.BLOCK_ENTITY_TYPE
 
     init {
         defaultState = defaultState.with(HALF, DoubleBlockHalf.LOWER)
@@ -36,6 +38,7 @@ class ChairBlock(material: String) : CarpetloggableBlock(Settings.copy(Blocks.OA
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
+        appendCarpetedProperty(builder)
         builder.add(FACING, HALF)
     }
 
@@ -97,17 +100,11 @@ class ChairBlock(material: String) : CarpetloggableBlock(Settings.copy(Blocks.OA
     }
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
-        if (state[HALF] == DoubleBlockHalf.LOWER) {
-            if (state[CARPET].isPresent) LOWER_SHAPES_WITH_CARPET[state[FACING]]
-            else LOWER_SHAPES[state[FACING]]
-        }
+        if (state[HALF] == DoubleBlockHalf.LOWER) LOWER_SHAPES[state[FACING]]
         else UPPER_OUTLINE_SHAPES[state[FACING]]
 
     override fun getCollisionShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
-        if (state[HALF] == DoubleBlockHalf.LOWER) {
-            if (state[CARPET].isPresent) LOWER_SHAPES_WITH_CARPET[state[FACING]]
-            else LOWER_SHAPES[state[FACING]]
-        }
+        if (state[HALF] == DoubleBlockHalf.LOWER) LOWER_SHAPES[state[FACING]]
         else VoxelShapes.empty() // Let the bottom one handle the collision
 
     override fun getStateForNeighborUpdate(
@@ -131,7 +128,6 @@ class ChairBlock(material: String) : CarpetloggableBlock(Settings.copy(Blocks.OA
     companion object {
         val FACING = Properties.FACING_HORIZONTAL
         val HALF = Properties.DOUBLE_BLOCK_HALF
-        val CARPET = CarpetloggableBlock.CARPET
 
         private val LOWER_SEAT_SHAPE = VoxelShapes.union(
             createCuboidShape(2.0, 8.0, 2.0, 14.0, 10.0, 14.0),
@@ -145,9 +141,6 @@ class ChairBlock(material: String) : CarpetloggableBlock(Settings.copy(Blocks.OA
         private val LOWER_SHAPES = Direction.values().filter { it.horizontal != -1 }.map {
             it to VoxelShapes.union(LOWER_SEAT_SHAPE, LOWER_BACK_SHAPES[it])
         }.toMap()
-        private val LOWER_SHAPES_WITH_CARPET = LOWER_SHAPES.mapValues { (_, shape) ->
-            VoxelShapes.union(shape, CarpetloggableBlock.CARPET_SHAPE)
-        }
 
         private val UPPER_SEAT_SHAPE = VoxelShapes.union(
             createCuboidShape(2.0, -8.0, 2.0, 14.0, -6.0, 14.0),
