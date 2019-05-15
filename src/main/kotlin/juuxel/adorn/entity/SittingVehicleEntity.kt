@@ -1,11 +1,13 @@
 package juuxel.adorn.entity
 
+import com.mojang.datafixers.Dynamic
 import juuxel.adorn.block.SeatBlock
 import juuxel.adorn.lib.ModNetworking
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
 import net.fabricmc.fabric.api.server.PlayerStream
 import net.minecraft.client.network.packet.EntityPassengersSetS2CPacket
 import net.minecraft.client.network.packet.EntityPositionS2CPacket
+import net.minecraft.datafixers.NbtOps
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.player.PlayerEntity
@@ -20,6 +22,8 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
         isInvulnerable = true
     }
 
+    private var seatPos = BlockPos(this)
+
     fun setPos(pos: BlockPos, blockOffset: Double) {
         check(!world.isClient) {
             "setPos must be called on the logical server"
@@ -27,6 +31,7 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
         x = pos.x + 0.5
         y = pos.y + 0.25 + blockOffset
         z = pos.z + 0.5
+        seatPos = pos
         PlayerStream.watching(this).forEach {
             ServerSidePacketRegistry.INSTANCE.sendToPlayer(it, EntityPositionS2CPacket(this))
         }
@@ -51,10 +56,9 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
             }
         }
         super.kill()
-        val pos = BlockPos(this)
-        val state = world.getBlockState(pos)
+        val state = world.getBlockState(seatPos)
         if (state.block is SeatBlock) {
-            world.setBlockState(pos, state.with(SeatBlock.OCCUPIED, false))
+            world.setBlockState(seatPos, state.with(SeatBlock.OCCUPIED, false))
         }
     }
 
@@ -66,6 +70,11 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
     override fun isInvisible() = true
 
     override fun initDataTracker() {}
-    override fun readCustomDataFromTag(tag: CompoundTag?) {}
-    override fun writeCustomDataToTag(tag: CompoundTag?) {}
+    override fun readCustomDataFromTag(tag: CompoundTag) {
+        seatPos = BlockPos.deserialize(Dynamic(NbtOps.INSTANCE, tag.getTag("SeatPos")))
+    }
+
+    override fun writeCustomDataToTag(tag: CompoundTag) {
+        tag.put("SeatPos", seatPos.serialize(NbtOps.INSTANCE))
+    }
 }

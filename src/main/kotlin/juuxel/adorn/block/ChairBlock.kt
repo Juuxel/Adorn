@@ -69,7 +69,7 @@ class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENC
 
         // Check that the other block is the same and has the correct half, otherwise break
         if (otherState.block == this && otherState[HALF] != half) {
-            world.setBlockState(otherPos, Blocks.AIR.defaultState, 35)
+            world.setBlockState(otherPos, world.getFluidState(otherPos).blockState, 0b10_00_11)
             world.playLevelEvent(player, 2001, otherPos, getRawIdFromState(otherState))
             if (!player.isCreative) {
                 dropStacks(state, world, pos, null, player, player.mainHandStack)
@@ -92,7 +92,7 @@ class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENC
             pos.up(),
             defaultState.with(HALF, DoubleBlockHalf.UPPER)
                 .with(FACING, state[FACING])
-                .with(FluidProperty.FLUID, FluidProperty.FLUID.of(world.getFluidState(pos)))
+                .with(FluidProperty.FLUID, FluidProperty.FLUID.of(world.getFluidState(pos.up())))
         )
     }
 

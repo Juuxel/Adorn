@@ -19,7 +19,7 @@ import virtuoel.towelette.api.Fluidloggable
 class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING_TABLE)), PolyesterBlock, Fluidloggable {
     override val name = "${material}_table"
     override val itemSettings: Nothing? = null
-    override val sittingYOffset = 0.75
+    override val sittingYOffset = 0.6
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
