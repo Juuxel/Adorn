@@ -71,7 +71,7 @@ class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENC
         if (otherState.block == this && otherState[HALF] != half) {
             world.setBlockState(otherPos, Blocks.AIR.defaultState, 35)
             world.playLevelEvent(player, 2001, otherPos, getRawIdFromState(otherState))
-            if (!world.isClient && !player.isCreative) {
+            if (!player.isCreative) {
                 dropStacks(state, world, pos, null, player, player.mainHandStack)
                 dropStacks(otherState, world, otherPos, null, player, player.mainHandStack)
             }
@@ -79,7 +79,7 @@ class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENC
             player.incrementStat(Stats.MINED.getOrCreateStat(this))
         } else if (otherState.isAir && half == DoubleBlockHalf.LOWER) {
             // Allow breaking and dropping old chairs
-            if (!world.isClient && !player.isCreative) {
+            if (!player.isCreative) {
                 super.afterBreak(world, player, pos, state, null, player.mainHandStack)
             }
         }
@@ -127,6 +127,12 @@ class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENC
             super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
         }
     }
+
+    override fun getActualSeatPos(world: World, state: BlockState, pos: BlockPos) =
+        when (state[HALF]!!) {
+            DoubleBlockHalf.UPPER -> pos.down()
+            DoubleBlockHalf.LOWER -> pos
+        }
 
     companion object {
         val FACING = Properties.FACING_HORIZONTAL

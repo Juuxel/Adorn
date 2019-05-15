@@ -4,6 +4,7 @@ import juuxel.adorn.block.SeatBlock
 import juuxel.adorn.lib.ModNetworking
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
 import net.fabricmc.fabric.api.server.PlayerStream
+import net.minecraft.client.network.packet.EntityPassengersSetS2CPacket
 import net.minecraft.client.network.packet.EntityPositionS2CPacket
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -42,6 +43,13 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
     }
 
     override fun kill() {
+        removeAllPassengers()
+        if (!world.isClient) {
+            PlayerStream.watching(this).forEach {
+                ServerSidePacketRegistry.INSTANCE.sendToPlayer(it, EntityPassengersSetS2CPacket(this))
+                // TODO: Fix removing passengers when breaking the block
+            }
+        }
         super.kill()
         val pos = BlockPos(this)
         val state = world.getBlockState(pos)
