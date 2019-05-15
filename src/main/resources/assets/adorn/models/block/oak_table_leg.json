@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/table_leg",
   "textures": {
-    "planks": "minecraft:block/oak_planks"
+    "log": "minecraft:block/oak_log"
   }
 }

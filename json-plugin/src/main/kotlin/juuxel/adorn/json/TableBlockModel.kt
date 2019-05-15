@@ -16,7 +16,7 @@ object TableBlockModel : ContentGenerator("Table Block Model", "models/block", A
         Model(
             parent = Identifier("adorn", "block/templates/table_leg"),
             textures = mapOf(
-                "planks" to Identifier.mc("block/${id.path}_planks")
+                "log" to Identifier.mc("block/${id.path}_log")
             )
         ).suffixed("table_leg")
     )

@@ -1,19 +1,19 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "particle": "#planks"
+    "particle": "#log"
   },
   "elements": [
     {
       "from": [1, 0, 1],
       "to": [4, 14, 4],
       "faces": {
-        "down": { "texture": "#planks", "cullface": "down" },
-        "up": { "texture": "#planks" },
-        "east": { "texture": "#planks" },
-        "west": { "texture": "#planks" },
-        "north": { "texture": "#planks" },
-        "south": { "texture": "#planks" }
+        "down": { "texture": "#log", "cullface": "down" },
+        "up": { "texture": "#log" },
+        "east": { "texture": "#log" },
+        "west": { "texture": "#log" },
+        "north": { "texture": "#log" },
+        "south": { "texture": "#log" }
       }
     }
   ]
