@@ -1,6 +1,7 @@
 package juuxel.adorn.block
 
 import io.github.juuxel.polyester.block.PolyesterBlock
+import juuxel.adorn.block.entity.CarpetedBlockEntity
 import juuxel.adorn.util.shapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -25,10 +26,11 @@ import net.minecraft.world.World
 import virtuoel.towelette.api.FluidProperty
 import virtuoel.towelette.api.Fluidloggable
 
-class ChairBlock(material: String) : SeatBlock(Settings.copy(Blocks.OAK_FENCE)), PolyesterBlock, Fluidloggable {
+class ChairBlock(material: String) : SeatBlock(true, Settings.copy(Blocks.OAK_FENCE)), PolyesterBlock, Fluidloggable {
     override val name = "${material}_chair"
     // null to skip registration
     override val itemSettings: Nothing? = null
+    override val blockEntityType = CarpetedBlockEntity.BLOCK_ENTITY_TYPE
 
     init {
         defaultState = defaultState.with(HALF, DoubleBlockHalf.LOWER)
@@ -36,6 +38,7 @@ class ChairBlock(material: String) : SeatBlock(Settings.copy(Blocks.OAK_FENCE)),
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
+        appendCarpetedProperty(builder)
         builder.add(FACING, HALF)
     }
 

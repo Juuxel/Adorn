@@ -3,7 +3,9 @@ package juuxel.adorn.lib
 import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.Adorn
 import juuxel.adorn.block.*
+import juuxel.adorn.block.entity.CarpetedBlockEntity
 import juuxel.adorn.block.entity.TradingStationBlockEntity
+import juuxel.adorn.block.renderer.CarpetedBlockEntityRenderer
 import juuxel.adorn.block.renderer.TradingStationRenderer
 import juuxel.adorn.util.VanillaWoodType
 import net.fabricmc.api.EnvType
@@ -25,6 +27,10 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
 
     val TABLES: List<TableBlock> = VanillaWoodType.values().map {
         registerBlock(TableBlock(it.id))
+    }
+
+    val CARPETED_TABLES: List<TableBlock> = VanillaWoodType.values().map {
+        registerBlock(TableBlock.Carpeted(it.id))
     }
 
     val KITCHEN_COUNTERS: List<KitchenCounterBlock> = VanillaWoodType.values().map {
@@ -62,6 +68,11 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         BlockEntityRendererRegistry.INSTANCE.register(
             TradingStationBlockEntity::class.java,
             TradingStationRenderer()
+        )
+
+        BlockEntityRendererRegistry.INSTANCE.register(
+            CarpetedBlockEntity::class.java,
+            CarpetedBlockEntityRenderer()
         )
     }
 }

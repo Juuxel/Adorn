@@ -1,9 +1,11 @@
 package juuxel.adorn.block
 
 import io.github.juuxel.polyester.block.PolyesterBlock
+import juuxel.adorn.block.entity.CarpetedBlockEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
+import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityContext
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateFactory
@@ -16,9 +18,10 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
 import virtuoel.towelette.api.Fluidloggable
 
-class TableBlock(material: String) : Block(Settings.copy(Blocks.CRAFTING_TABLE)), PolyesterBlock, Fluidloggable {
-    override val name = "${material}_table"
+open class TableBlock(material: String, carpeted: Boolean = false) : PossiblyCarpetedBlock(carpeted, Settings.copy(Blocks.CRAFTING_TABLE)), PolyesterBlock, Fluidloggable {
+    override val name = "${material}_table" + if (carpeted) "_carpeted" else ""
     override val itemSettings: Nothing? = null
+    override val blockEntityType = CarpetedBlockEntity.BLOCK_ENTITY_TYPE
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
@@ -56,6 +59,8 @@ class TableBlock(material: String) : Block(Settings.copy(Blocks.CRAFTING_TABLE))
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         SHAPES[TableState(state[NORTH], state[EAST], state[SOUTH], state[WEST])]
+
+    class Carpeted(material: String) : TableBlock(material, true)
 
     companion object {
         val NORTH = BooleanProperty.create("north")
