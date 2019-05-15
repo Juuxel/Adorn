@@ -6,7 +6,7 @@ import io.github.juuxel.polyester.registry.PolyesterItem
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.ItemStack
 import net.minecraft.item.WallStandingBlockItem
-import net.minecraft.text.TextComponent
+import net.minecraft.network.chat.Component
 import net.minecraft.world.World
 
 class AdornWallBlockItem(ground: PolyesterBlock, wall: PolyesterBlock, settings: Settings) : WallStandingBlockItem(
@@ -16,7 +16,7 @@ class AdornWallBlockItem(ground: PolyesterBlock, wall: PolyesterBlock, settings:
 ), PolyesterItem, HasDescription by ground {
     override val name = ground.name
 
-    override fun buildTooltip(p0: ItemStack?, p1: World?, list: MutableList<TextComponent>, p3: TooltipContext?) {
+    override fun buildTooltip(p0: ItemStack?, p1: World?, list: MutableList<Component>, p3: TooltipContext?) {
         super.buildTooltip(p0, p1, list, p3)
         PolyesterItem.appendTooltipToList(list, this)
     }
