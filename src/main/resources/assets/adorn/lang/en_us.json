@@ -51,8 +51,6 @@
   "block.adorn.acacia_drawer": "Acacia Drawer",
   "block.adorn.dark_oak_drawer": "Dark Oak Drawer",
 
-  "block.adorn.chimney": "Chimney",
-
   "block.adorn.trading_station": "Trading Station",
   "block.adorn.trading_station.selling": "Selling",
   "block.adorn.trading_station.price": "Price",
@@ -75,5 +73,59 @@
   "advancements.adorn.kitchen.description": "Make some kitchen blocks.",
 
   "advancements.adorn.trading_station.title": "Day at the Market",
-  "advancements.adorn.trading_station.description": "Craft a trading station."
+  "advancements.adorn.trading_station.description": "Craft a trading station.",
+
+  "block.adorn.stone_torch": "Stone Torch",
+  "block.adorn.stone_torch.desc": "Brighter than a wooden torch",
+  
+  "block.adorn.oak_post": "Oak Post",
+  "block.adorn.spruce_post": "Spruce Post",
+  "block.adorn.birch_post": "Birch Post",
+  "block.adorn.jungle_post": "Jungle Post",
+  "block.adorn.acacia_post": "Acacia Post",
+  "block.adorn.dark_oak_post": "Dark Oak Post",
+  "block.adorn.stone_post": "Stone Post",
+  "block.adorn.sandstone_post": "Sandstone Post",
+  "block.adorn.cobblestone_post": "Cobblestone Post",
+  "block.adorn.andesite_post": "Andesite Post",
+  "block.adorn.diorite_post": "Diorite Post",
+  "block.adorn.granite_post": "Granite Post",
+  "block.adorn.post.desc": "A bit like a fence post",
+
+  "block.adorn.oak_platform": "Oak Platform",
+  "block.adorn.spruce_platform": "Spruce Platform",
+  "block.adorn.birch_platform": "Birch Platform",
+  "block.adorn.jungle_platform": "Jungle Platform",
+  "block.adorn.acacia_platform": "Acacia Platform",
+  "block.adorn.dark_oak_platform": "Dark Oak Platform",
+  "block.adorn.stone_platform": "Stone Platform",
+  "block.adorn.sandstone_platform": "Sandstone Platform",
+  "block.adorn.cobblestone_platform": "Cobblestone Platform",
+  "block.adorn.andesite_platform": "Andesite Platform",
+  "block.adorn.diorite_platform": "Diorite Platform",
+  "block.adorn.granite_platform": "Granite Platform",
+  "block.adorn.platform.desc": "A post with a platform on top",
+
+  "block.adorn.oak_step": "Oak Step",
+  "block.adorn.spruce_step": "Spruce Step",
+  "block.adorn.birch_step": "Birch Step",
+  "block.adorn.jungle_step": "Jungle Step",
+  "block.adorn.acacia_step": "Acacia Step",
+  "block.adorn.dark_oak_step": "Dark Oak Step",
+  "block.adorn.stone_step": "Stone Step",
+  "block.adorn.sandstone_step": "Sandstone Step",
+  "block.adorn.cobblestone_step": "Cobblestone Step",
+  "block.adorn.andesite_step": "Andesite Step",
+  "block.adorn.diorite_step": "Diorite Step",
+  "block.adorn.granite_step": "Granite Step",
+  "block.adorn.step.desc": "A small step with a post under it",
+
+  "block.adorn.chimney": "Chimney",
+  "block.adorn.chimney.desc": "Decoration block",
+  
+  "block.adorn.bubble_chimney": "Prismarine Chimney",
+  "block.adorn.bubble_chimney.desc": "Bubbles underwater",
+  
+  "item.adorn.stone_rod": "Stone Rod",
+  "item.adorn.stone_rod.desc": "Crafting ingredient"
 }

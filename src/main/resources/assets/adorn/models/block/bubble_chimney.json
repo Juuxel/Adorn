@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:block/chimney",
+  "textures": {
+    "brick": "block/prismarine_bricks",
+    "top": "block/prismarine",
+    "particle": "block/prismarine_bricks"
+  }
+}

@@ -51,5 +51,57 @@
   "block.adorn.acacia_drawer": "Акациево чекмедже",
   "block.adorn.dark_oak_drawer": "Чекмедже от черен дъб",
 
-  "block.adorn.chimney": "Комин"
+  "block.adorn.stone_torch": "Каменна факла",
+  "block.adorn.stone_torch.desc": "По-светла от дървена факла",
+  
+  "block.adorn.oak_post": "Дъбов стълб",
+  "block.adorn.spruce_post": "Смърчов стълб",
+  "block.adorn.birch_post": "Брезов стълб",
+  "block.adorn.jungle_post": "Джунглов стълб",
+  "block.adorn.acacia_post": "Акациев стълб",
+  "block.adorn.dark_oak_post": "Стълб от черен дъб",
+  "block.adorn.stone_post": "Каменен стълб",
+  "block.adorn.sandstone_post": "Стълб от пясъчник",
+  "block.adorn.cobblestone_post": "Стълб от калдъръмени камъни",
+  "block.adorn.andesite_post": "Andesite стълб",
+  "block.adorn.diorite_post": "Diorite стълб",
+  "block.adorn.granite_post": "Гранитен стълб",
+  "block.adorn.post.desc": "Подобно на стълб на ограда",
+
+  "block.adorn.oak_platform": "Дъбова платформа",
+  "block.adorn.spruce_platform": "Смърчова платформа",
+  "block.adorn.birch_platform": "Брезова платформа",
+  "block.adorn.jungle_platform": "Джунглова платформа",
+  "block.adorn.acacia_platform": "Акациева платформа",
+  "block.adorn.dark_oak_platform": "Платформа от черен дъб",
+  "block.adorn.stone_platform": "Каменна платформа",
+  "block.adorn.sandstone_platform": "Платформа от пясъчник",
+  "block.adorn.cobblestone_platform": "Платформа от калдъръмени камъни",
+  "block.adorn.andesite_platform": "Платформа от андезит",
+  "block.adorn.diorite_platform": "Платформа от диорит",
+  "block.adorn.granite_platform": "Платформа от гранит",
+  "block.adorn.platform.desc": "Стълб с платформа отгоре",
+
+  "block.adorn.oak_step": "Дъбово стъпало",
+  "block.adorn.spruce_step": "Смърчово стъпало",
+  "block.adorn.birch_step": "Брезово стъпало",
+  "block.adorn.jungle_step": "Джунглово стъпало",
+  "block.adorn.acacia_step": "Акациево стъпало",
+  "block.adorn.dark_oak_step": "Стъпало от черен дъб",
+  "block.adorn.stone_step": "Каменно стъпало",
+  "block.adorn.sandstone_step": "Стъпало от пясъчник",
+  "block.adorn.cobblestone_step": "Стъпало от калдъръмени камъни",
+  "block.adorn.andesite_step": "Стъпало от андезит",
+  "block.adorn.diorite_step": "Стъпало от диорит",
+  "block.adorn.granite_step": "Стъпало от гранит",
+  "block.adorn.step.desc": "Малко стъпало със стълб под него",
+
+  "block.adorn.chimney": "Комин",
+  "block.adorn.chimney.desc": "Декоративно блокче",
+  
+  "block.adorn.bubble_chimney": "Призмаринов комин",
+  "block.adorn.bubble_chimney.desc": "Прави балончета под вода",
+  
+  "item.adorn.stone_rod": "Каменна пръчка",
+  "item.adorn.stone_rod.desc": "Съставка за изработване"
 }

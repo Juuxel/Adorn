@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/step",
+  "textures": {
+    "texture": "minecraft:block/dark_oak_planks"
+  }
+}

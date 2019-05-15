@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:step",
+  "pattern": [
+    "S",
+    "#"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:birch_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:birch_step",
+    "count": 1
+  }
+}

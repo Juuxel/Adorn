@@ -4,16 +4,30 @@ import io.github.cottonmc.jsonfactory.data.Identifier
 import io.github.cottonmc.jsonfactory.gens.ContentGenerator
 import io.github.cottonmc.jsonfactory.gens.GeneratorInfo
 import io.github.cottonmc.jsonfactory.gens.block.SuffixedBlockItemModel
+import io.github.cottonmc.jsonfactory.gens.block.SuffixedBlockState
 import io.github.cottonmc.jsonfactory.gens.block.SuffixedLootTable
 import io.github.cottonmc.jsonfactory.plugin.Plugin
+import juuxel.adorn.json.post.StonePostBlockModel
+import juuxel.adorn.json.platform.PlatformRecipe
+import juuxel.adorn.json.platform.StonePlatformBlockModel
+import juuxel.adorn.json.platform.WoodenPlatformBlockModel
+import juuxel.adorn.json.post.StonePostRecipe
+import juuxel.adorn.json.post.WoodenPostBlockModel
+import juuxel.adorn.json.post.WoodenPostRecipe
+import juuxel.adorn.json.step.StoneStepBlockModel
+import juuxel.adorn.json.step.StoneStepRecipe
+import juuxel.adorn.json.step.WoodenStepBlockModel
+import juuxel.adorn.json.step.WoodenStepRecipe
 
 object AdornPlugin : Plugin {
     //adorn:red,adorn:black,adorn:green,adorn:brown,adorn:blue,adorn:purple,adorn:cyan,adorn:light_gray,adorn:gray,adorn:pink,adorn:lime,adorn:yellow,adorn:light_blue,adorn:magenta,adorn:orange,adorn:white
     //adorn:oak,adorn:spruce,adorn:birch,adorn:jungle,adorn:acacia,adorn:dark_oak
+    //adorn:stone,adorn:cobblestone,adorn:sandstone,adorn:andesite,adorn:granite,adorn:diorite
 
     private val planksItem = fun(id: Identifier) = Identifier.mc(id.path + "_planks")
     private val slabItem = fun(id: Identifier) = Identifier.mc(id.path + "_slab")
     private val woolItem = fun(id: Identifier) = Identifier.mc(id.path + "_wool")
+    private val selfItem = fun(id: Identifier) = Identifier.mc(id.path)
 
     private fun constItem(const: Identifier) = fun(_: Identifier) = const
 
@@ -37,6 +51,20 @@ object AdornPlugin : Plugin {
         AdornCategory,
         AdornPlugin.Subcategories.Drawers
     )
+
+    val POST = GeneratorInfo(
+        AdornCategory,
+        AdornPlugin.Subcategories.Posts
+    )
+    val PLATFORM = GeneratorInfo(
+        AdornCategory,
+        AdornPlugin.Subcategories.Platforms
+    )
+    val STEP = GeneratorInfo(
+        AdornCategory,
+        AdornPlugin.Subcategories.Steps
+    )
+
     val OTHER = GeneratorInfo(
         AdornCategory,
         AdornPlugin.Subcategories.Other
@@ -119,6 +147,55 @@ object AdornPlugin : Plugin {
             "Trading Station Recipe Advancement",
             OTHER,
             keyItems = listOf(constItem(Identifier.mc("emerald")))
+        ),
+
+        WoodenPostBlockModel,
+        StonePostBlockModel,
+        WoodenPostRecipe,
+        StonePostRecipe,
+        SuffixedBlockState("Post Block State", "post", POST),
+        SuffixedBlockItemModel("Post", "post", POST),
+        SuffixedLootTable("Post", "post", POST),
+        SuffixedRecipeAdvancementGenerator(
+            "Wooden Post Recipe Advancement",
+            POST,
+            "post",
+            keyItems = listOf(planksItem)
+        ),
+        SuffixedRecipeAdvancementGenerator(
+            "Stone Post Recipe Advancement",
+            POST,
+            "post",
+            keyItems = listOf(selfItem)
+        ),
+
+        WoodenPlatformBlockModel,
+        StonePlatformBlockModel,
+        SuffixedBlockState("Platform Block State", "platform", PLATFORM),
+        SuffixedBlockItemModel("Platform", "platform", PLATFORM),
+        SuffixedLootTable("Platform", "platform", PLATFORM),
+        PlatformRecipe,
+        SuffixedLootTable("Platform", "platform", PLATFORM),
+        SuffixedRecipeAdvancementGenerator(
+            "Platform Recipe Advancement",
+            PLATFORM,
+            "platform",
+            keyItems = listOf(slabItem)
+        ),
+
+        WoodenStepBlockModel,
+        StoneStepBlockModel,
+        SuffixedBlockState("Step Block State", "step", STEP),
+        SuffixedBlockItemModel("Step", "step", STEP),
+        SuffixedLootTable("Step", "step", STEP),
+        WoodenStepRecipe,
+        StoneStepRecipe,
+        SuffixedLootTable("Step", "step", STEP),
+        SuffixedRecipeAdvancementGenerator(
+            "Step Recipe Advancement",
+            STEP,
+            "step",
+            keyItems = listOf(slabItem)
         )
     )
 
@@ -134,6 +211,9 @@ object AdornPlugin : Plugin {
         Tables("Tables"),
         Kitchen("Kitchen"),
         Drawers("Drawer"),
+        Posts("Posts"),
+        Platforms("Platforms"),
+        Steps("Steps"),
         Other("Other"),
     }
 

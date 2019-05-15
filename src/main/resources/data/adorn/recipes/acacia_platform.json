@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:acacia_slab"
+    },
+    "P": {
+      "item": "adorn:acacia_post"
+    }
+  },
+  "result": {
+    "item": "adorn:acacia_platform",
+    "count": 2
+  }
+}
