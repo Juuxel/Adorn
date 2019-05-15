@@ -5,7 +5,6 @@ import juuxel.adorn.Adorn
 import juuxel.adorn.block.*
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.block.renderer.TradingStationRenderer
-import juuxel.adorn.item.AdornWallBlockItem
 import juuxel.adorn.util.BlockVariant
 import juuxel.adorn.util.VanillaWoodType
 import net.fabricmc.api.EnvType
@@ -14,12 +13,9 @@ import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
 import net.minecraft.item.BlockItem
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 
 object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
     val SOFAS: List<SofaBlock> = DyeColor.values().map {
@@ -51,19 +47,9 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
     val TRADING_STATION: TradingStationBlock = registerBlock(TradingStationBlock())
 
     val STONE_TORCH_GROUND = registerBlock(StoneTorchBlock())
-
     val STONE_TORCH_WALL = registerBlock(
         StoneTorchBlock.Wall(
-            Block.Settings.copy(STONE_TORCH_GROUND.unwrap()).dropsLike(STONE_TORCH_GROUND.unwrap())
-        )
-    )
-
-    val STONE_TORCH_ITEM = register(
-        Registry.ITEM,
-        AdornWallBlockItem(
-            STONE_TORCH_GROUND,
-            STONE_TORCH_WALL,
-            Item.Settings().itemGroup(ItemGroup.DECORATIONS)
+            Block.Settings.copy(STONE_TORCH_GROUND).dropsLike(STONE_TORCH_GROUND)
         )
     )
 
@@ -85,7 +71,6 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
     }
 
     val BUBBLE_CHIMNEY = registerBlock(BubbleChimneyBlock())
-
 
     fun init() {
         UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->

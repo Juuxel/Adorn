@@ -34,8 +34,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(method = "isSleepingLongEnough", at = @At("RETURN"), cancellable = true)
     private void onIsSleepingLongEnough(CallbackInfoReturnable<Boolean> info) {
-        // Allow sleeping on sofas at daytime
-        if (info.getReturnValue() && world.isDaylight() && getSleepingPosition().map(pos -> world.getBlockState(pos).getBlock() instanceof SofaBlock).orElse(false)) {
+        // Allow sleeping on sofas at daytime & prevent skipping the night on sofas
+        if (info.getReturnValue() && getSleepingPosition().map(pos -> world.getBlockState(pos).getBlock() instanceof SofaBlock).orElse(false)) {
             info.setReturnValue(false);
         }
     }

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:chimney"
+    },
+    "title": {
+      "translate": "advancements.adorn.chimney.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.chimney.description"
+    }
+  },
+  "parent": "adorn:stone_torch",
+  "criteria": {
+    "has_chimney": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "adorn:chimney"
+          }
+        ]
+      }
+    }
+  }
+}
