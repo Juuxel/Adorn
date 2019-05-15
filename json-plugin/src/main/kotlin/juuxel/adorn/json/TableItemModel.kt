@@ -12,7 +12,8 @@ internal object TableItemModel : ContentGenerator("Table Item Model", "models/it
         Model(
             parent = Identifier("adorn", "item/templates/table"),
             textures = mapOf(
-                "planks" to Identifier.mc("block/${id.path}_planks")
+                "planks" to Identifier.mc("block/${id.path}_planks"),
+                "log" to Identifier.mc("block/${id.path}_log")
             )
         ).suffixed("table")
     )

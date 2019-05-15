@@ -1,6 +1,7 @@
 {
   "parent": "adorn:item/templates/table",
   "textures": {
-    "planks": "minecraft:block/birch_planks"
+    "planks": "minecraft:block/birch_planks",
+    "log": "minecraft:block/birch_log"
   }
 }

@@ -3,6 +3,8 @@ package juuxel.adorn.api
 import io.github.juuxel.polyester.block.WoodType
 import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.block.*
+import juuxel.adorn.item.ChairBlockItem
+import juuxel.adorn.item.TableBlockItem
 
 /**
  * @since 0.2.0
@@ -41,8 +43,14 @@ class WoodFurnitureBuilder private constructor(private val woodType: WoodType) {
 
         fun register() {
             if (drawer) registerBlock(DrawerBlock(material))
-            if (chair) registerBlock(ChairBlock(material))
-            if (table) registerBlock(TableBlock(material))
+            if (chair) {
+                val block = registerBlock(ChairBlock(material))
+                registerItem(ChairBlockItem(block))
+            }
+            if (table) {
+                val block = registerBlock(TableBlock(material))
+                registerItem(TableBlockItem(block))
+            }
             if (kitchenCounter) registerBlock(KitchenCounterBlock(material))
             if (kitchenCupboard) registerBlock(KitchenCupboardBlock(material))
         }
