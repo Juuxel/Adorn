@@ -1,11 +1,9 @@
 package juuxel.adorn.block
 
 import io.github.juuxel.polyester.block.PolyesterBlock
-import juuxel.adorn.block.entity.CarpetedBlockEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
-import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityContext
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateFactory
@@ -18,10 +16,10 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
 import virtuoel.towelette.api.Fluidloggable
 
-open class TableBlock(material: String, carpeted: Boolean = false) : PossiblyCarpetedBlock(carpeted, Settings.copy(Blocks.CRAFTING_TABLE)), PolyesterBlock, Fluidloggable {
-    override val name = "${material}_table" + if (carpeted) "_carpeted" else ""
+class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING_TABLE)), PolyesterBlock, Fluidloggable {
+    override val name = "${material}_table"
     override val itemSettings: Nothing? = null
-    override val blockEntityType = CarpetedBlockEntity.BLOCK_ENTITY_TYPE
+    override val sittingYOffset = 0.75
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
@@ -58,15 +56,14 @@ open class TableBlock(material: String, carpeted: Boolean = false) : PossiblyCar
         .with(WEST, world.getBlockState(pos.offset(Direction.WEST)).block is TableBlock)
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
-        SHAPES[TableState(state[NORTH], state[EAST], state[SOUTH], state[WEST])]
-
-    class Carpeted(material: String) : TableBlock(material, true)
+        SHAPES[TableState(state[NORTH], state[EAST], state[SOUTH], state[WEST], state[CARPET].isPresent)]
 
     companion object {
         val NORTH = BooleanProperty.create("north")
         val EAST = BooleanProperty.create("east")
         val SOUTH = BooleanProperty.create("south")
         val WEST = BooleanProperty.create("west")
+        val CARPET = CarpetedBlock.CARPET
 
         private val BASE_SHAPE = createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
         private val LEG_X0_Z0 = createCuboidShape(1.0, 0.0, 1.0, 4.0, 14.0, 4.0)
@@ -79,15 +76,18 @@ open class TableBlock(material: String, carpeted: Boolean = false) : PossiblyCar
             BOOLEAN_SET.flatMap { north ->
                 BOOLEAN_SET.flatMap { east ->
                     BOOLEAN_SET.flatMap { south ->
-                        BOOLEAN_SET.map { west ->
-                            TableState(north, east, south, west) to makeShape(north, east, south, west)
+                        BOOLEAN_SET.flatMap { west ->
+                            BOOLEAN_SET.map { hasCarpet ->
+                                TableState(north, east, south, west, hasCarpet) to
+                                        makeShape(north, east, south, west, hasCarpet)
+                            }
                         }
                     }
                 }
             }.toMap()
         }
 
-        private fun makeShape(north: Boolean, east: Boolean, south: Boolean, west: Boolean): VoxelShape {
+        private fun makeShape(north: Boolean, east: Boolean, south: Boolean, west: Boolean, hasCarpet: Boolean): VoxelShape {
             val parts = arrayListOf<VoxelShape?>(BASE_SHAPE)
 
             if (north || east || south || west) {
@@ -137,6 +137,10 @@ open class TableBlock(material: String, carpeted: Boolean = false) : PossiblyCar
                 parts += LEG_X1_Z1
             }
 
+            if (hasCarpet) {
+                parts += CARPET_SHAPE
+            }
+
             return parts.filterNotNull().reduce(VoxelShapes::union)
         }
     }
@@ -145,6 +149,7 @@ open class TableBlock(material: String, carpeted: Boolean = false) : PossiblyCar
         val north: Boolean,
         val east: Boolean,
         val south: Boolean,
-        val west: Boolean
+        val west: Boolean,
+        val hasCarpet: Boolean
     )
 }

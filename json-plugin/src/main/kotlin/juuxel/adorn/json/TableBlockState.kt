@@ -82,6 +82,37 @@ object TableBlockState : ContentGenerator("Table Block State", "blockstates", Ad
                         )
                     }
                 }
+
+                val colors = arrayOf(
+                    "red",
+                    "black",
+                    "green",
+                    "brown",
+                    "blue",
+                    "purple",
+                    "cyan",
+                    "light_gray",
+                    "gray",
+                    "pink",
+                    "lime",
+                    "yellow",
+                    "light_blue",
+                    "magenta",
+                    "orange",
+                    "white"
+                )
+
+                // Carpets
+                for (color in colors) {
+                    yield(
+                        Multipart(
+                            `when` = When("carpet", color),
+                            apply = Variant(
+                                model = Identifier.mc("block/${color}_carpet")
+                            )
+                        )
+                    )
+                }
             }.toList()
         ).suffixed("table")
     )
