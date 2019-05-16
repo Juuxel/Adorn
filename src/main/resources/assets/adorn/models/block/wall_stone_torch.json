@@ -1,6 +1,6 @@
 {
     "parent": "block/torch_wall",
     "textures": {
-        "torch": "thisandthat:block/stone_torch"
+        "torch": "adorn:block/stone_torch"
     }
 }

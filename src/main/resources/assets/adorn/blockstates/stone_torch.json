@@ -1,5 +1,6 @@
 {
     "variants": {
-        "": { "model": "adorn:block/stone_torch" }
+        "lit=true": { "model": "adorn:block/stone_torch" },
+        "lit=false": { "model": "adorn:block/unlit_stone_torch" }
     }
 }
