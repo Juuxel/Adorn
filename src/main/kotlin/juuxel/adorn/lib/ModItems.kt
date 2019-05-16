@@ -1,5 +1,6 @@
 package juuxel.adorn.lib
 
+import io.github.cottonmc.cotton.registry.CommonItems
 import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.Adorn
 import juuxel.adorn.item.AdornWallBlockItem
@@ -9,7 +10,6 @@ import juuxel.adorn.item.TableBlockItem
 import juuxel.adorn.util.VanillaWoodType
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
-import net.minecraft.util.registry.Registry
 
 object ModItems : PolyesterRegistry(Adorn.NAMESPACE) {
     val CHAIRS: List<ChairBlockItem> = VanillaWoodType.values().indices.map {
@@ -20,10 +20,9 @@ object ModItems : PolyesterRegistry(Adorn.NAMESPACE) {
         registerItem(TableBlockItem(ModBlocks.TABLES[it]))
     }
 
-    val STONE_ROD = register(Registry.ITEM, StoneRodItem())
+    val STONE_ROD = CommonItems.register("stone_rod", StoneRodItem())
 
-    val STONE_TORCH = register(
-        Registry.ITEM,
+    val STONE_TORCH = registerItem(
         AdornWallBlockItem(
             ModBlocks.STONE_TORCH_GROUND,
             ModBlocks.STONE_TORCH_WALL,

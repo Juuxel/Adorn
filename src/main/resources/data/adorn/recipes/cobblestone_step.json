@@ -10,7 +10,7 @@
       "item": "minecraft:cobblestone_slab"
     },
     "#": {
-      "item": "adorn:stone_rod"
+      "item": "c:stone_rod"
     }
   },
   "result": {

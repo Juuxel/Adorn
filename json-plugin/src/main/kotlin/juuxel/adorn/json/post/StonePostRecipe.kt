@@ -15,7 +15,7 @@ object StonePostRecipe : ContentGenerator("Stone Post Recipe", "recipes", AdornP
                 "pattern" to listOf("R", "R", "S"),
                 "key" to mapOf(
                     "S" to mapOf("item" to "minecraft:${id.path}"),
-                    "R" to mapOf("item" to "adorn:stone_rod")
+                    "R" to mapOf("item" to "c:stone_rod")
                 ),
                 "result" to mapOf(
                     "item" to id.suffixPath("_post"),
