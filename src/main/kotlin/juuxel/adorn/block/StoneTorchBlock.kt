@@ -17,6 +17,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
 import virtuoel.towelette.api.Fluidloggable
+import java.util.Random
 
 class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Fluidloggable {
     override val name = "stone_torch"
@@ -50,6 +51,11 @@ class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Fluidloggable {
         if (!state[LIT] && stack.item == Items.FLINT_AND_STEEL) {
             if (world.getFluidState(pos).isEmpty) {
                 world.setBlockState(pos, state.with(LIT, true))
+                world.playSound(
+                    pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(),
+                    SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS,
+                    1f, 1f, false
+                )
             } else {
                 world.playSound(
                     pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(),
@@ -63,6 +69,12 @@ class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Fluidloggable {
         }
 
         return super.activate(state, world, pos, player, hand, hitResult)
+    }
+
+    override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
+        if (state[LIT]) {
+            super.randomDisplayTick(state, world, pos, random)
+        }
     }
 
     class Wall(settings: Settings) : WallTorchBlock(settings), PolyesterBlock, Fluidloggable {
@@ -92,6 +104,11 @@ class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Fluidloggable {
             if (!state[LIT] && stack.item == Items.FLINT_AND_STEEL) {
                 if (world.getFluidState(pos).isEmpty) {
                     world.setBlockState(pos, state.with(LIT, true))
+                    world.playSound(
+                        pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(),
+                        SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS,
+                        1f, 1f, false
+                    )
                 } else {
                     world.playSound(
                         pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(),
@@ -105,6 +122,12 @@ class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Fluidloggable {
             }
 
             return super.activate(state, world, pos, player, hand, hitResult)
+        }
+
+        override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
+            if (state[LIT]) {
+                super.randomDisplayTick(state, world, pos, random)
+            }
         }
     }
 
