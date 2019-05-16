@@ -1,8 +1,8 @@
 package juuxel.adorn.item
 
+import io.github.juuxel.polyester.block.PolyesterBlock
+import io.github.juuxel.polyester.item.PolyesterItem
 import io.github.juuxel.polyester.registry.HasDescription
-import io.github.juuxel.polyester.registry.PolyesterBlock
-import io.github.juuxel.polyester.registry.PolyesterItem
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.ItemStack
 import net.minecraft.item.WallStandingBlockItem

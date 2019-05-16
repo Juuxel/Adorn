@@ -7,7 +7,6 @@ import net.minecraft.inventory.InventoryListener
 import net.minecraft.inventory.SidedInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.tag.Tag
 import net.minecraft.util.DefaultedList
 import kotlin.math.min
 import kotlin.properties.ReadWriteProperty

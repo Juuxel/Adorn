@@ -1,6 +1,6 @@
 package juuxel.adorn.block
 
-import io.github.juuxel.polyester.registry.PolyesterBlock
+import io.github.juuxel.polyester.block.PolyesterBlock
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.block.Block

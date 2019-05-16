@@ -1,6 +1,6 @@
 package juuxel.adorn.block
 
-import io.github.juuxel.polyester.registry.PolyesterBlock
+import io.github.juuxel.polyester.block.PolyesterBlock
 import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.Blocks
 import net.minecraft.block.TorchBlock

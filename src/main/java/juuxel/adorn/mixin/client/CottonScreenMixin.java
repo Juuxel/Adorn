@@ -21,7 +21,8 @@ public abstract class CottonScreenMixin<T extends CottonScreenController> extend
                     target = "Lio/github/cottonmc/cotton/gui/widget/WPanel;validate(Lio/github/cottonmc/cotton/gui/CottonScreenController;)V",
                     remap = false,
                     shift = At.Shift.BEFORE
-            )
+            ),
+            remap = false
     )
     private void onReposition(CallbackInfo info) {
         // See CottonMC/cotton#21

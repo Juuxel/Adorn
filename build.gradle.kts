@@ -4,14 +4,21 @@ plugins {
     java
     kotlin("jvm") version "1.3.30"
     idea
-    id("fabric-loom") version "0.2.1-SNAPSHOT"
+    id("fabric-loom") version "0.2.2-SNAPSHOT"
 }
 
 base {
     archivesBaseName = "Adorn"
 }
 
-version = "0.2.0-pre.2+1.14.1-pre.2"
+val minecraft: String by ext
+val modVersion = ext["mod-version"] ?: error("Version was null")
+val localBuild = ext["local-build"].toString().toBoolean()
+version = "$modVersion+$minecraft" + if (localBuild) "-local" else ""
+
+if (localBuild) {
+    println("Note: local build mode enabled in gradle.properties; all dependencies might not work!")
+}
 
 allprojects {
     apply(plugin = "java")
@@ -23,7 +30,9 @@ allprojects {
 
     repositories {
         mavenCentral()
-        mavenLocal()
+        if (localBuild) {
+            mavenLocal()
+        }
 
         // For cotton, polyester and json-factory
         maven(url = "http://server.bbkr.space:8081/artifactory/libs-release")
@@ -54,24 +63,29 @@ allprojects {
 minecraft {
 }
 
-fun DependencyHandler.modCompileAndInclude(str: String) {
-    modCompile(str)
-    include(str)
+inline fun DependencyHandler.modCompileAndInclude(str: String, block: ExternalModuleDependency.() -> Unit = {}) {
+    modCompile(str, block)
+    include(str, block)
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:1.14.1 Pre-Release 2")
-    mappings("net.fabricmc:yarn:1.14.1 Pre-Release 2+build.2")
+    /**
+     * Gets a version string with the [key].
+     */
+    fun v(key: String) = ext[key].toString()
+
+    minecraft("com.mojang:minecraft:$minecraft")
+    mappings("net.fabricmc:yarn:" + v("minecraft") + '+' + v("mappings"))
 
     // Fabric
-    modCompile("net.fabricmc:fabric-loader:0.4.6+build.141")
-    modCompile("net.fabricmc:fabric:0.2.7+build.127")
-    modCompile("net.fabricmc:fabric-language-kotlin:1.3.30-SNAPSHOT")
-    compileOnly("net.fabricmc:fabric-language-kotlin:1.3.30-SNAPSHOT")
+    modCompile("net.fabricmc:fabric-loader:" + v("fabric-loader"))
+    modCompile("net.fabricmc.fabric-api:fabric-api:" + v("fabric-api"))
+    modCompile("net.fabricmc:fabric-language-kotlin:" + v("fabric-kotlin"))
+    compileOnly("net.fabricmc:fabric-language-kotlin:" + v("fabric-kotlin"))
 
     // Other mods
     // TODO: Release Polyester 0.3.0
-    modCompileAndInclude("io.github.juuxel:polyester:0.3.0-menu.10+1.14.1-pre.1-SNAPSHOT")
-    modCompileAndInclude("towelette:Towelette:1.5.2")
-    modCompileAndInclude("io.github.cottonmc:cotton:0.6.6+1.14-SNAPSHOT")
+    modCompileAndInclude("io.github.juuxel:polyester:" + v("polyester"))
+    modCompileAndInclude("towelette:Towelette:" + v("towelette"))
+    modCompileAndInclude("io.github.cottonmc:cotton:" + v("cotton")) { exclude(module = "fabric") }
 }
