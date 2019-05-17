@@ -56,7 +56,6 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
             if (!world.isClient && !be.isOwner(player)) {
                 val handStack = player.getStackInHand(hand)
                 val trade = be.trade
-                // TODO: Investigate buying damaged swords
                 val validPayment = handStack.isEqualIgnoreTags(trade.price) &&
                         handStack.amount >= trade.price.amount &&
                         handStack.tag == trade.price.tag

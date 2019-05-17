@@ -54,8 +54,9 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
 
         for (invStack in items) {
             if (invStack.isEqualIgnoreTags(stack) && invStack.tag == stack.tag) {
-                invStack.subtractAmount(min(invStack.amount, remainingAmount))
-                remainingAmount -= invStack.amount
+                val invStackAmount = invStack.amount
+                invStack.subtractAmount(min(invStackAmount, remainingAmount))
+                remainingAmount -= invStackAmount
                 if (remainingAmount <= 0) return true
             }
         }
