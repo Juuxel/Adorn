@@ -20,7 +20,7 @@ object ModNetworking {
     val ENTITY_SPAWN = Adorn.id("entity_spawn")
     val TRADE_SYNC = Adorn.id("trade_sync")
 
-    fun init() {
+    fun initClient() {
         ClientSidePacketRegistry.INSTANCE.register(ENTITY_SPAWN) { context, buf ->
             val packet = EntitySpawnS2CPacket()
             packet.read(buf)
