@@ -9,9 +9,15 @@ import java.util.Optional
 class OptionalProperty<T>(
     private val delegate: Property<T>
 ) : AbstractProperty<OptionalProperty.Value<T>>(delegate.name, Value::class.java as Class<Value<T>>)
-    where T : Comparable<T>, T : StringIdentifiable {
+    where T : Any, T : Comparable<T>, T : StringIdentifiable {
     val none: Value.None<T> = Value.None()
-    private val values = delegate.values.map { Value.Some(it) } + none
+    private val values = sequence {
+        for (value in delegate.values) {
+            yield(value to Value.Some(value))
+        }
+
+        yield(null to none)
+    }.toMap()
 
     init {
         require(delegate.values.none { it.asString() == "none" }) {
@@ -21,17 +27,14 @@ class OptionalProperty<T>(
 
     override fun getValue(str: String?): Optional<Value<T>> = when (str) {
         "none" -> Optional.of(none)
-        else -> delegate.getValue(str).map { Value.Some(it) }
+        else -> delegate.getValue(str).map { values[it] }
     }
 
-    override fun getValues() = values
+    override fun getValues() = values.values
 
-    override fun getValueAsString(value: Value<T>) = when (value) {
-        is Value.Some -> value.value.asString()
-        is Value.None -> "none"
-    }
+    override fun getValueAsString(value: Value<T>) = value.value?.asString() ?: "none"
 
-    fun wrap(value: T) = Value.Some(value)
+    fun wrap(value: T) = values[value]
 
     sealed class Value<T : Comparable<T>> : Comparable<Value<T>> {
         abstract val isPresent: Boolean

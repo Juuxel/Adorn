@@ -6,7 +6,6 @@ import juuxel.adorn.block.entity.TradingStationBlockEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
-import net.minecraft.entity.EntityContext
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
@@ -17,12 +16,12 @@ import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.state.StateFactory
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
+import net.minecraft.util.BlockRotation
 import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.shape.VoxelShapes
-import net.minecraft.world.BlockView
+import net.minecraft.util.math.Direction.Axis
 import net.minecraft.world.World
 
 class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)), SneakClickHandler {
@@ -109,6 +108,12 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
     }
 
     override fun isFullBoundsCubeForCulling(state: BlockState?) = false
+
+    override fun rotate(state: BlockState, rotation: BlockRotation) = when (rotation) {
+        BlockRotation.CLOCKWISE_90, BlockRotation.COUNTERCLOCKWISE_90 ->
+            state.with(AXIS, if (state[AXIS] == Axis.X) Axis.Z else Axis.X)
+        else -> state
+    }
 
     companion object {
         val BLOCK_ENTITY_TYPE = PolyesterBlockEntityType(::TradingStationBlockEntity)

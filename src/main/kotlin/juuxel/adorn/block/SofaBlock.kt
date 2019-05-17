@@ -18,6 +18,8 @@ import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.EnumProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
+import net.minecraft.util.BlockMirror
+import net.minecraft.util.BlockRotation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
@@ -104,6 +106,12 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
 
     override fun getCollisionShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         COLLISION_SHAPE_MAP[SofaState(state)]
+
+    override fun mirror(state: BlockState, mirror: BlockMirror) =
+        state.rotate(mirror.getRotation(state[FACING]))
+
+    override fun rotate(state: BlockState, rotation: BlockRotation) =
+        state.with(FACING, rotation.rotate(state[FACING]))
 
     companion object {
         val FACING = Properties.FACING_HORIZONTAL

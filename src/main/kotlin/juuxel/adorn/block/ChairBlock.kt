@@ -15,6 +15,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.stat.Stats
 import net.minecraft.state.StateFactory
 import net.minecraft.state.property.Properties
+import net.minecraft.util.BlockMirror
+import net.minecraft.util.BlockRotation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShapes
@@ -133,6 +135,12 @@ class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENC
             DoubleBlockHalf.UPPER -> pos.down()
             DoubleBlockHalf.LOWER -> pos
         }
+
+    override fun mirror(state: BlockState, mirror: BlockMirror) =
+        state.rotate(mirror.getRotation(state[FACING]))
+
+    override fun rotate(state: BlockState, rotation: BlockRotation) =
+        state.with(FACING, rotation.rotate(state[FACING]))
 
     companion object {
         val FACING = Properties.FACING_HORIZONTAL

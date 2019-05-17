@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.*
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.FluidState
+import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.Items
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundCategory
@@ -46,29 +47,8 @@ class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Fluidloggable {
 
     override fun activate(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult?
-    ): Boolean {
-        val stack = player.getStackInHand(hand)
-        if (!state[LIT] && stack.item == Items.FLINT_AND_STEEL) {
-            if (world.getFluidState(pos).isEmpty) {
-                world.setBlockState(pos, state.with(LIT, true))
-                world.playSound(
-                    pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(),
-                    SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS,
-                    1f, 1f, false
-                )
-            } else {
-                world.playSound(
-                    pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(),
-                    SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS,
-                    1f, 1f, false
-                )
-            }
-
-            stack.applyDamage(1, player) {}
-            return true
-        }
-
-        return super.activate(state, world, pos, player, hand, hitResult)
+    ) = activateImpl(state, world, pos, player, hand) {
+        super.activate(state, world, pos, player, hand, hitResult)
     }
 
     override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
@@ -76,6 +56,9 @@ class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Fluidloggable {
             super.randomDisplayTick(state, world, pos, random)
         }
     }
+
+    override fun getPlacementState(context: ItemPlacementContext) =
+        super.getPlacementState(context)?.let { it.with(LIT, it.fluidState.isEmpty) }
 
     class Wall(settings: Settings) : WallTorchBlock(settings), PolyesterBlock, Fluidloggable {
         override val name = "wall_stone_torch"
@@ -99,6 +82,30 @@ class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Fluidloggable {
 
         override fun activate(
             state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult?
+        ) = activateImpl(state, world, pos, player, hand) {
+            super.activate(state, world, pos, player, hand, hitResult)
+        }
+
+        override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
+            if (state[LIT]) {
+                super.randomDisplayTick(state, world, pos, random)
+            }
+        }
+
+        override fun getPlacementState(context: ItemPlacementContext) =
+            super.getPlacementState(context)?.let { it.with(LIT, it.fluidState.isEmpty) }
+    }
+
+    companion object {
+        val LIT = Properties.LIT
+        internal val settings = FabricBlockSettings.copy(Blocks.TORCH)
+            .lightLevel(15)
+            .sounds(BlockSoundGroup.STONE)
+            .build()
+
+        private inline fun activateImpl(
+            state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand,
+            superCallback: () -> Boolean
         ): Boolean {
             val stack = player.getStackInHand(hand)
             if (!state[LIT] && stack.item == Items.FLINT_AND_STEEL) {
@@ -121,21 +128,7 @@ class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Fluidloggable {
                 return true
             }
 
-            return super.activate(state, world, pos, player, hand, hitResult)
+            return superCallback()
         }
-
-        override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
-            if (state[LIT]) {
-                super.randomDisplayTick(state, world, pos, random)
-            }
-        }
-    }
-
-    companion object {
-        val LIT = Properties.LIT
-        internal val settings = FabricBlockSettings.copy(Blocks.TORCH)
-            .lightLevel(15)
-            .sounds(BlockSoundGroup.STONE)
-            .build()
     }
 }
