@@ -8,7 +8,7 @@ import java.util.EnumMap
 /**
  * Creates a map of horizontal VoxelShape rotations from the provided coordinates for **east**.
  */
-fun shapeRotations(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1: Int): Map<Direction, VoxelShape> = EnumMap(mapOf(
+fun buildShapeRotations(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1: Int): Map<Direction, VoxelShape> = EnumMap(mapOf(
     Direction.EAST to createCuboidShape(
         x0.toDouble(), y0.toDouble(), z0.toDouble(),
         x1.toDouble(), y1.toDouble(), z1.toDouble()

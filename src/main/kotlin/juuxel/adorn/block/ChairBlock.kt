@@ -1,7 +1,7 @@
 package juuxel.adorn.block
 
 import io.github.juuxel.polyester.block.PolyesterBlock
-import juuxel.adorn.util.shapeRotations
+import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -19,6 +19,7 @@ import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
@@ -26,6 +27,7 @@ import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
 import virtuoel.towelette.api.FluidProperty
 import virtuoel.towelette.api.Fluidloggable
+import java.util.EnumMap
 
 class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENCE)), PolyesterBlock, Fluidloggable {
     override val name = "${material}_chair"
@@ -155,13 +157,8 @@ class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENC
             createCuboidShape(2.0, 0.0, 12.0, 4.0, 8.0, 14.0),
             createCuboidShape(12.0, 0.0, 12.0, 14.0, 8.0, 14.0)
         )
-        private val LOWER_BACK_SHAPES = shapeRotations(2, 10, 2, 4, 24, 14)
-        private val LOWER_SHAPES = Direction.values().filter { it.horizontal != -1 }.map {
-            it to VoxelShapes.union(LOWER_SEAT_SHAPE, LOWER_BACK_SHAPES[it])
-        }.toMap()
-        private val LOWER_SHAPES_WITH_CARPET = LOWER_SHAPES.mapValues { (_, shape) ->
-            VoxelShapes.union(shape, CarpetedBlock.CARPET_SHAPE)
-        }
+        private val LOWER_SHAPES: EnumMap<Direction, VoxelShape>
+        private val LOWER_SHAPES_WITH_CARPET: EnumMap<Direction, VoxelShape>
 
         private val UPPER_SEAT_SHAPE = VoxelShapes.union(
             createCuboidShape(2.0, -8.0, 2.0, 14.0, -6.0, 14.0),
@@ -171,9 +168,30 @@ class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENC
             createCuboidShape(2.0, -16.0, 12.0, 4.0, -8.0, 14.0),
             createCuboidShape(12.0, -16.0, 12.0, 14.0, -8.0, 14.0)
         )
-        private val UPPER_BACK_SHAPES = shapeRotations(2, -6, 2, 4, 8, 14)
-        private val UPPER_OUTLINE_SHAPES = Direction.values().filter { it.horizontal != -1 }.map {
-            it to VoxelShapes.union(UPPER_SEAT_SHAPE, UPPER_BACK_SHAPES[it])
-        }.toMap()
+        private val UPPER_OUTLINE_SHAPES: EnumMap<Direction, VoxelShape>
+
+        init {
+            val lowerBackShapes = buildShapeRotations(2, 10, 2, 4, 24, 14)
+            LOWER_SHAPES = EnumMap(
+                Direction.values().filter { it.horizontal != -1 }.map {
+                    it to VoxelShapes.union(
+                        LOWER_SEAT_SHAPE, lowerBackShapes[it]
+                    )
+                }.toMap()
+            )
+
+            LOWER_SHAPES_WITH_CARPET = EnumMap(
+                LOWER_SHAPES.mapValues { (_, shape) ->
+                    VoxelShapes.union(shape, CARPET_SHAPE)
+                }
+            )
+
+            val upperBackShapes = buildShapeRotations(2, -6, 2, 4, 8, 14)
+            UPPER_OUTLINE_SHAPES = EnumMap(
+                Direction.values().filter { it.horizontal != -1 }.map {
+                    it to VoxelShapes.union(UPPER_SEAT_SHAPE, upperBackShapes[it])
+                }.toMap()
+            )
+        }
     }
 }

@@ -2,8 +2,10 @@ package juuxel.adorn.block
 
 import com.google.common.collect.Sets
 import io.github.juuxel.polyester.block.PolyesterBlock
+import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
+import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
 import juuxel.adorn.block.property.FrontConnection
-import juuxel.adorn.util.shapeRotations
+import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -102,10 +104,20 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
     }
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
-        OUTLINE_SHAPE_MAP[SofaState(state)]
+        OUTLINE_SHAPE_MAP[Bits.buildSofaState(
+            state[FACING],
+            state[CONNECTED_LEFT],
+            state[CONNECTED_RIGHT],
+            state[FRONT_CONNECTION]
+        )]
 
     override fun getCollisionShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
-        COLLISION_SHAPE_MAP[SofaState(state)]
+        COLLISION_SHAPE_MAP[Bits.buildSofaState(
+            state[FACING],
+            state[CONNECTED_LEFT],
+            state[CONNECTED_RIGHT],
+            state[FRONT_CONNECTION]
+        )]
 
     override fun mirror(state: BlockState, mirror: BlockMirror) =
         state.rotate(mirror.getRotation(state[FACING]))
@@ -120,20 +132,20 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
         val FRONT_CONNECTION = EnumProperty.create("front", FrontConnection::class.java)
 
         private val BOTTOM = createCuboidShape(0.0, 2.0, 0.0, 16.0, 7.0, 16.0)
-        private val LEFT_ARMS = shapeRotations(5, 7, 13, 16, 13, 16)
-        private val RIGHT_ARMS = shapeRotations(5, 7, 0, 16, 13, 3)
-        private val THIN_LEFT_ARMS = shapeRotations(5, 7, 14, 16, 13, 16)
-        private val THIN_RIGHT_ARMS = shapeRotations(5, 7, 0, 16, 13, 2)
-        private val BACKS = shapeRotations(0, 7, 0, 5, 16, 16)
-        private val LEFT_CORNERS = shapeRotations(5, 7, 11, 16, 16, 16)
-        private val RIGHT_CORNERS = shapeRotations(5, 7, 0, 16, 16, 5)
+        private val LEFT_ARMS = buildShapeRotations(5, 7, 13, 16, 13, 16)
+        private val RIGHT_ARMS = buildShapeRotations(5, 7, 0, 16, 13, 3)
+        private val THIN_LEFT_ARMS = buildShapeRotations(5, 7, 14, 16, 13, 16)
+        private val THIN_RIGHT_ARMS = buildShapeRotations(5, 7, 0, 16, 13, 2)
+        private val BACKS = buildShapeRotations(0, 7, 0, 5, 16, 16)
+        private val LEFT_CORNERS = buildShapeRotations(5, 7, 11, 16, 16, 16)
+        private val RIGHT_CORNERS = buildShapeRotations(5, 7, 0, 16, 16, 5)
 
         private val BOOLEAN_SET = setOf(true, false)
 
         private val OUTLINE_SHAPE_MAP = buildShapeMap(thin = false)
         private val COLLISION_SHAPE_MAP = buildShapeMap(thin = true)
 
-        private fun buildShapeMap(thin: Boolean): Map<SofaState, VoxelShape> =
+        private fun buildShapeMap(thin: Boolean): Byte2ObjectMap<VoxelShape> = Byte2ObjectOpenHashMap(
             Sets.cartesianProduct(FACING.values.toSet(), BOOLEAN_SET, BOOLEAN_SET, FRONT_CONNECTION.values.toSet()).map {
                 val facing = it[0] as Direction
                 val left = it[1] as Boolean
@@ -156,11 +168,12 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
                     else -> {}
                 }
 
-                SofaState(facing, left, right, front) to VoxelShapes.union(
+                Bits.buildSofaState(facing, left, right, front) to VoxelShapes.union(
                     BOTTOM,
                     *parts.filterNotNull().toTypedArray()
                 )
             }.toMap()
+        )
 
         @JvmOverloads
         fun getSleepingDirection(world: World, pos: BlockPos, ignoreNeighbors: Boolean = false): Direction? {
@@ -194,14 +207,5 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
 
             return null
         }
-    }
-
-    private data class SofaState(val facing: Direction, val left: Boolean, val right: Boolean, val front: FrontConnection) {
-        constructor(state: BlockState) : this(
-            state[FACING],
-            state[CONNECTED_LEFT],
-            state[CONNECTED_RIGHT],
-            state[FRONT_CONNECTION]
-        )
     }
 }

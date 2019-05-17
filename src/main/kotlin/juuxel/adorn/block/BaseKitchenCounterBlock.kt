@@ -1,7 +1,7 @@
 package juuxel.adorn.block
 
 import io.github.juuxel.polyester.block.PolyesterBlock
-import juuxel.adorn.util.shapeRotations
+import juuxel.adorn.util.buildShapeRotations
 import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -53,7 +53,7 @@ abstract class BaseKitchenCounterBlock : Block(
             SoundEvents.BLOCK_STONE_FALL
         )
         private val TOP_SHAPE = createCuboidShape(0.0, 12.0, 0.0, 16.0, 16.0, 16.0)
-        val SHAPES = shapeRotations(
+        val SHAPES = buildShapeRotations(
             0, 0, 0,
             14, 12, 16
         ).mapValues { (_, shape) ->

@@ -1,6 +1,8 @@
 package juuxel.adorn.block
 
 import io.github.juuxel.polyester.block.PolyesterBlock
+import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
+import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -56,7 +58,7 @@ class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING
         .with(WEST, world.getBlockState(pos.offset(Direction.WEST)).block is TableBlock)
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
-        SHAPES[TableState(state[NORTH], state[EAST], state[SOUTH], state[WEST], state[CARPET].isPresent)]
+        SHAPES[Bits.buildTableState(state[NORTH], state[EAST], state[SOUTH], state[WEST], state[CARPET].isPresent)]
 
     companion object {
         val NORTH = BooleanProperty.create("north")
@@ -72,20 +74,20 @@ class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING
         private val LEG_X1_Z1 = createCuboidShape(12.0, 0.0, 12.0, 15.0, 14.0, 15.0)
 
         private val BOOLEAN_SET = setOf(true, false)
-        private val SHAPES: Map<TableState, VoxelShape> = run {
+        private val SHAPES: Byte2ObjectMap<VoxelShape> = Byte2ObjectOpenHashMap(run {
             BOOLEAN_SET.flatMap { north ->
                 BOOLEAN_SET.flatMap { east ->
                     BOOLEAN_SET.flatMap { south ->
                         BOOLEAN_SET.flatMap { west ->
                             BOOLEAN_SET.map { hasCarpet ->
-                                TableState(north, east, south, west, hasCarpet) to
+                                Bits.buildTableState(north, east, south, west, hasCarpet) to
                                         makeShape(north, east, south, west, hasCarpet)
                             }
                         }
                     }
                 }
             }.toMap()
-        }
+        })
 
         private fun makeShape(north: Boolean, east: Boolean, south: Boolean, west: Boolean, hasCarpet: Boolean): VoxelShape {
             val parts = arrayListOf<VoxelShape?>(BASE_SHAPE)
@@ -144,12 +146,4 @@ class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING
             return parts.filterNotNull().reduce(VoxelShapes::union)
         }
     }
-
-    private data class TableState(
-        val north: Boolean,
-        val east: Boolean,
-        val south: Boolean,
-        val west: Boolean,
-        val hasCarpet: Boolean
-    )
 }
