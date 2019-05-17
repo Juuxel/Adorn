@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:stone_platform",
+    "adorn:cobblestone_platform",
+    "adorn:sandstone_platform",
+    "adorn:andesite_platform",
+    "adorn:granite_platform",
+    "adorn:diorite_platform"
+  ]
+}

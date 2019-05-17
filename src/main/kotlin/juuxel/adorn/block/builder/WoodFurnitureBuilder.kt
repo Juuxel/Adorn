@@ -1,4 +1,4 @@
-package juuxel.adorn.api
+package juuxel.adorn.block.builder
 
 import io.github.juuxel.polyester.block.WoodType
 import io.github.juuxel.polyester.registry.PolyesterRegistry
@@ -58,6 +58,7 @@ class WoodFurnitureBuilder private constructor(private val woodType: WoodType) {
 
     companion object {
         @JvmStatic
-        fun create(woodType: WoodType): WoodFurnitureBuilder = WoodFurnitureBuilder(woodType)
+        fun create(woodType: WoodType): WoodFurnitureBuilder =
+            WoodFurnitureBuilder(woodType)
     }
 }

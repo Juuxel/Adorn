@@ -84,7 +84,6 @@ dependencies {
     compileOnly("net.fabricmc:fabric-language-kotlin:" + v("fabric-kotlin"))
 
     // Other mods
-    // TODO: Release Polyester 0.3.0
     modCompileAndInclude("io.github.juuxel:polyester:" + v("polyester"))
     modCompileAndInclude("towelette:Towelette:" + v("towelette"))
     modCompileAndInclude("io.github.cottonmc:cotton:" + v("cotton")) { exclude(module = "fabric") }

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:oak_post",
+    "adorn:spruce_post",
+    "adorn:birch_post",
+    "adorn:jungle_post",
+    "adorn:acacia_post",
+    "adorn:dark_oak_post"
+  ]
+}

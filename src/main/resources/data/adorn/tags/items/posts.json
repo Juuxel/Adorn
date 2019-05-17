@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:oak_post",
+    "adorn:spruce_post",
+    "adorn:birch_post",
+    "adorn:jungle_post",
+    "adorn:acacia_post",
+    "adorn:dark_oak_post",
+    "adorn:stone_post",
+    "adorn:cobblestone_post",
+    "adorn:sandstone_post",
+    "adorn:andesite_post",
+    "adorn:granite_post",
+    "adorn:diorite_post"
+  ]
+}

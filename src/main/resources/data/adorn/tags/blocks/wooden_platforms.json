@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:oak_platform",
+    "adorn:spruce_platform",
+    "adorn:birch_platform",
+    "adorn:jungle_platform",
+    "adorn:acacia_platform",
+    "adorn:dark_oak_platform"
+  ]
+}

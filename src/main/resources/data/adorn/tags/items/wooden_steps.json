@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:oak_step",
+    "adorn:spruce_step",
+    "adorn:birch_step",
+    "adorn:jungle_step",
+    "adorn:acacia_step",
+    "adorn:dark_oak_step"
+  ]
+}

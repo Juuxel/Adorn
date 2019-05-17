@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:oak_platform",
+    "adorn:spruce_platform",
+    "adorn:birch_platform",
+    "adorn:jungle_platform",
+    "adorn:acacia_platform",
+    "adorn:dark_oak_platform",
+    "adorn:stone_platform",
+    "adorn:cobblestone_platform",
+    "adorn:sandstone_platform",
+    "adorn:andesite_platform",
+    "adorn:granite_platform",
+    "adorn:diorite_platform"
+  ]
+}

@@ -8,6 +8,7 @@ import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.StoneRodItem
 import juuxel.adorn.item.TableBlockItem
 import juuxel.adorn.util.VanillaWoodType
+import net.fabricmc.fabric.api.registry.FuelRegistry
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 
@@ -30,5 +31,16 @@ object ModItems : PolyesterRegistry(Adorn.NAMESPACE) {
         )
     )
 
-    fun init() {}
+    fun init() {
+        with(FuelRegistry.INSTANCE) {
+            add(ModTags.CHAIRS.item, 300)
+            add(ModTags.DRAWERS.item, 300)
+            add(ModTags.TABLES.item, 300)
+            add(ModTags.WOODEN_POSTS.item, 300)
+            add(ModTags.WOODEN_PLATFORMS.item, 300)
+            add(ModTags.WOODEN_STEPS.item, 300)
+
+            add(ModTags.SOFAS.item, 150)
+        }
+    }
 }

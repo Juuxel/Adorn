@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:stone_step",
+    "adorn:cobblestone_step",
+    "adorn:sandstone_step",
+    "adorn:andesite_step",
+    "adorn:granite_step",
+    "adorn:diorite_step"
+  ]
+}

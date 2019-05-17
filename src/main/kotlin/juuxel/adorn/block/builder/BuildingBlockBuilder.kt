@@ -1,4 +1,4 @@
-package juuxel.adorn.api
+package juuxel.adorn.block.builder
 
 import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.block.PlatformBlock
@@ -38,6 +38,7 @@ class BuildingBlockBuilder private constructor(private val material: BlockVarian
 
     companion object {
         @JvmStatic
-        fun create(material: BlockVariant): BuildingBlockBuilder = BuildingBlockBuilder(material)
+        fun create(material: BlockVariant): BuildingBlockBuilder =
+            BuildingBlockBuilder(material)
     }
 }
