@@ -2,6 +2,7 @@ package juuxel.adorn.block
 
 import io.github.juuxel.polyester.block.PolyesterBlockEntityType
 import io.github.juuxel.polyester.block.PolyesterBlockWithEntity
+import juuxel.adorn.api.block.SneakClickHandler
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -24,7 +25,8 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction.Axis
 import net.minecraft.world.World
 
-class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)), SneakClickHandler {
+class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)),
+    SneakClickHandler {
     override val name = "trading_station"
     override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
     override val blockEntityType = BLOCK_ENTITY_TYPE
@@ -81,7 +83,7 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
         return true
     }
 
-    override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity): ActionResult {
+    override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult): ActionResult {
         val be = world.getBlockEntity(pos) as? TradingStationBlockEntity ?: return ActionResult.PASS
 
         // Show customer GUI

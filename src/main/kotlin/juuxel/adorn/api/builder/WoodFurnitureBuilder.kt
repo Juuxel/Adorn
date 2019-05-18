@@ -1,14 +1,16 @@
-package juuxel.adorn.block.builder
+package juuxel.adorn.api.builder
 
 import io.github.juuxel.polyester.block.WoodType
 import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.block.*
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
+import org.apiguardian.api.API
 
 /**
- * @since 0.2.0
+ * @since 1.1.0
  */
+@API(status = API.Status.EXPERIMENTAL, since = "1.1.0")
 class WoodFurnitureBuilder private constructor(private val woodType: WoodType) {
     private var drawer = false
     private var chair = false

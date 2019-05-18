@@ -2,10 +2,11 @@ package juuxel.adorn.lib
 
 import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.Adorn
+import juuxel.adorn.api.block.SneakClickHandler
 import juuxel.adorn.block.*
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.block.renderer.TradingStationRenderer
-import juuxel.adorn.util.BlockVariant
+import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.util.VanillaWoodType
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment

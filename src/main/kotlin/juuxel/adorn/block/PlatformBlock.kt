@@ -1,7 +1,7 @@
 package juuxel.adorn.block
 
 import io.github.juuxel.polyester.block.PolyesterBlock
-import juuxel.adorn.util.BlockVariant
+import juuxel.adorn.api.util.BlockVariant
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.entity.EntityContext

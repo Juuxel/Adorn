@@ -1,14 +1,16 @@
-package juuxel.adorn.block.builder
+package juuxel.adorn.api.builder
 
 import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.block.PlatformBlock
 import juuxel.adorn.block.PostBlock
 import juuxel.adorn.block.StepBlock
-import juuxel.adorn.util.BlockVariant
+import juuxel.adorn.api.util.BlockVariant
+import org.apiguardian.api.API
 
 /**
- * @since 0.2.0
+ * @since 1.1.0
  */
+@API(status = API.Status.EXPERIMENTAL, since = "1.1.0")
 class BuildingBlockBuilder private constructor(private val material: BlockVariant) {
     private var post = false
     private var platform = false

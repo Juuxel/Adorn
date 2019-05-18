@@ -4,6 +4,7 @@ import com.google.common.collect.Sets
 import io.github.juuxel.polyester.block.PolyesterBlock
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
+import juuxel.adorn.api.block.SneakClickHandler
 import juuxel.adorn.block.property.FrontConnection
 import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
@@ -22,6 +23,8 @@ import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
+import net.minecraft.util.Hand
+import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
@@ -31,7 +34,8 @@ import net.minecraft.world.IWorld
 import net.minecraft.world.World
 import virtuoel.towelette.api.Fluidloggable
 
-class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), PolyesterBlock, Fluidloggable, SneakClickHandler {
+class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), PolyesterBlock, Fluidloggable,
+    SneakClickHandler {
     override val name = "${variant}_sofa"
     override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
 
@@ -42,7 +46,7 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
             .with(CONNECTED_RIGHT, false)
     }
 
-    override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity): ActionResult {
+    override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult): ActionResult {
         val sleepingDirection = getSleepingDirection(world, pos)
         return if (world.dimension.canPlayersSleep() && sleepingDirection != null && !state[OCCUPIED]) {
             if (!world.isClient) {

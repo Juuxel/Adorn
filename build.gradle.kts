@@ -87,4 +87,7 @@ dependencies {
     modCompileAndInclude("io.github.juuxel:polyester:" + v("polyester"))
     modCompileAndInclude("towelette:Towelette:" + v("towelette"))
     modCompileAndInclude("io.github.cottonmc:cotton:" + v("cotton")) { exclude(module = "fabric") }
+
+    // Other libraries
+    compileOnly("org.apiguardian:apiguardian-api:1.0.0")
 }

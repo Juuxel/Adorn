@@ -1,9 +1,11 @@
-package juuxel.adorn.util
+package juuxel.adorn.api.util
 
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.util.Identifier
+import org.apiguardian.api.API
 
+@API(status = API.Status.MAINTAINED)
 interface BlockVariant {
     val id: Identifier
     val settings: Block.Settings
