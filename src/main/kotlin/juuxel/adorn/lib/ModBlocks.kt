@@ -82,7 +82,7 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
             // - the player is sneaking
             // - the player isn't holding a block
             if (block is SneakClickHandler && player.isSneaking && player.getStackInHand(hand).item !is BlockItem) {
-                block.onSneakClick(state, world, hitResult.blockPos, player)
+                block.onSneakClick(state, world, hitResult.blockPos, player, hand, hitResult)
             } else ActionResult.PASS
         })
     }
