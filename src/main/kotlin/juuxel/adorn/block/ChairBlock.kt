@@ -149,33 +149,24 @@ class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENC
         val HALF = Properties.DOUBLE_BLOCK_HALF
         val CARPET = CarpetedBlock.CARPET
 
-        private val LOWER_SEAT_SHAPE = VoxelShapes.union(
-            createCuboidShape(2.0, 8.0, 2.0, 14.0, 10.0, 14.0),
-            // Legs
-            createCuboidShape(2.0, 0.0, 2.0, 4.0, 8.0, 4.0),
-            createCuboidShape(12.0, 0.0, 2.0, 14.0, 8.0, 4.0),
-            createCuboidShape(2.0, 0.0, 12.0, 4.0, 8.0, 14.0),
-            createCuboidShape(12.0, 0.0, 12.0, 14.0, 8.0, 14.0)
-        )
         private val LOWER_SHAPES: EnumMap<Direction, VoxelShape>
         private val LOWER_SHAPES_WITH_CARPET: EnumMap<Direction, VoxelShape>
-
-        private val UPPER_SEAT_SHAPE = VoxelShapes.union(
-            createCuboidShape(2.0, -8.0, 2.0, 14.0, -6.0, 14.0),
-            // Legs
-            createCuboidShape(2.0, -16.0, 2.0, 4.0, -8.0, 4.0),
-            createCuboidShape(12.0, -16.0, 2.0, 14.0, -8.0, 4.0),
-            createCuboidShape(2.0, -16.0, 12.0, 4.0, -8.0, 14.0),
-            createCuboidShape(12.0, -16.0, 12.0, 14.0, -8.0, 14.0)
-        )
         private val UPPER_OUTLINE_SHAPES: EnumMap<Direction, VoxelShape>
 
         init {
+            val lowerSeatShape = VoxelShapes.union(
+                createCuboidShape(2.0, 8.0, 2.0, 14.0, 10.0, 14.0),
+                // Legs
+                createCuboidShape(2.0, 0.0, 2.0, 4.0, 8.0, 4.0),
+                createCuboidShape(12.0, 0.0, 2.0, 14.0, 8.0, 4.0),
+                createCuboidShape(2.0, 0.0, 12.0, 4.0, 8.0, 14.0),
+                createCuboidShape(12.0, 0.0, 12.0, 14.0, 8.0, 14.0)
+            )
             val lowerBackShapes = buildShapeRotations(2, 10, 2, 4, 24, 14)
             LOWER_SHAPES = EnumMap(
                 Direction.values().filter { it.horizontal != -1 }.map {
                     it to VoxelShapes.union(
-                        LOWER_SEAT_SHAPE, lowerBackShapes[it]
+                        lowerSeatShape, lowerBackShapes[it]
                     )
                 }.toMap()
             )
@@ -186,10 +177,18 @@ class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENC
                 }
             )
 
+            val upperSeatShape = VoxelShapes.union(
+                createCuboidShape(2.0, -8.0, 2.0, 14.0, -6.0, 14.0),
+                // Legs
+                createCuboidShape(2.0, -16.0, 2.0, 4.0, -8.0, 4.0),
+                createCuboidShape(12.0, -16.0, 2.0, 14.0, -8.0, 4.0),
+                createCuboidShape(2.0, -16.0, 12.0, 4.0, -8.0, 14.0),
+                createCuboidShape(12.0, -16.0, 12.0, 14.0, -8.0, 14.0)
+            )
             val upperBackShapes = buildShapeRotations(2, -6, 2, 4, 8, 14)
             UPPER_OUTLINE_SHAPES = EnumMap(
                 Direction.values().filter { it.horizontal != -1 }.map {
-                    it to VoxelShapes.union(UPPER_SEAT_SHAPE, upperBackShapes[it])
+                    it to VoxelShapes.union(upperSeatShape, upperBackShapes[it])
                 }.toMap()
             )
         }

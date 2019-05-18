@@ -25,7 +25,7 @@ class BubbleChimneyBlock : Block(Settings.copy(Blocks.PRISMARINE)), PolyesterBlo
 
     @Environment(EnvType.CLIENT)
     override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
-        if (!getFluidState(state).matches(FluidTags.WATER)) return
+        if (!state.fluidState.matches(FluidTags.WATER)) return
 
         val x = pos.x + 0.5
         val y = pos.y + 0.9
@@ -38,9 +38,9 @@ class BubbleChimneyBlock : Block(Settings.copy(Blocks.PRISMARINE)), PolyesterBlo
 
     override fun hasRandomTicks(p0: BlockState?) = true
     override fun getTickRate(p0: ViewableWorld?) = 3
-    override fun getOutlineShape(p0: BlockState?, p1: BlockView?, p2: BlockPos?, context: EntityContext?) = shape
+    override fun getOutlineShape(p0: BlockState?, p1: BlockView?, p2: BlockPos?, context: EntityContext?) = SHAPE
 
     companion object {
-        private val shape = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
+        private val SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
     }
 }

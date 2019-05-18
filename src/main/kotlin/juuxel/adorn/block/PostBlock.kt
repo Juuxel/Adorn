@@ -19,5 +19,5 @@ class PostBlock(variant: BlockVariant) : Block(variant.settings), PolyesterBlock
     override val descriptionKey = "block.adorn.post.desc"
 
     override fun getOutlineShape(p0: BlockState?, p1: BlockView?, p2: BlockPos?, context: EntityContext?): VoxelShape =
-        PlatformBlock.postShape
+        PlatformBlock.POST_SHAPE
 }

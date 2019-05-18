@@ -20,10 +20,11 @@ class PlatformBlock(variant: BlockVariant) : Block(variant.settings), PolyesterB
     override val descriptionKey = "block.adorn.platform.desc"
 
     override fun getOutlineShape(p0: BlockState?, p1: BlockView?, p2: BlockPos?, context: EntityContext?): VoxelShape =
-        VoxelShapes.union(postShape, platformShape)
+        COMBINED_SHAPE
 
     companion object {
-        internal val postShape = Block.createCuboidShape(6.0, 0.0, 6.0, 10.0, 16.0, 10.0)
-        private val platformShape = Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
+        internal val POST_SHAPE = createCuboidShape(6.0, 0.0, 6.0, 10.0, 16.0, 10.0)
+        private val PLATFORM_SHAPE = createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
+        private val COMBINED_SHAPE = VoxelShapes.union(POST_SHAPE, PLATFORM_SHAPE)
     }
 }

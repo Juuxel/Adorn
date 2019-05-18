@@ -131,49 +131,53 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
         val CONNECTED_RIGHT = BooleanProperty.create("connected_right")
         val FRONT_CONNECTION = EnumProperty.create("front", FrontConnection::class.java)
 
-        private val BOTTOM = createCuboidShape(0.0, 2.0, 0.0, 16.0, 7.0, 16.0)
-        private val LEFT_ARMS = buildShapeRotations(5, 7, 13, 16, 13, 16)
-        private val RIGHT_ARMS = buildShapeRotations(5, 7, 0, 16, 13, 3)
-        private val THIN_LEFT_ARMS = buildShapeRotations(5, 7, 14, 16, 13, 16)
-        private val THIN_RIGHT_ARMS = buildShapeRotations(5, 7, 0, 16, 13, 2)
-        private val BACKS = buildShapeRotations(0, 7, 0, 5, 16, 16)
-        private val LEFT_CORNERS = buildShapeRotations(5, 7, 11, 16, 16, 16)
-        private val RIGHT_CORNERS = buildShapeRotations(5, 7, 0, 16, 16, 5)
+        private val OUTLINE_SHAPE_MAP: Byte2ObjectMap<VoxelShape>
+        private val COLLISION_SHAPE_MAP: Byte2ObjectMap<VoxelShape>
 
-        private val BOOLEAN_SET = setOf(true, false)
+        init {
+            val bottom = createCuboidShape(0.0, 2.0, 0.0, 16.0, 7.0, 16.0)
+            val leftArms = buildShapeRotations(5, 7, 13, 16, 13, 16)
+            val rightArms = buildShapeRotations(5, 7, 0, 16, 13, 3)
+            val thinLeftArms = buildShapeRotations(5, 7, 14, 16, 13, 16)
+            val thinRightArms = buildShapeRotations(5, 7, 0, 16, 13, 2)
+            val backs = buildShapeRotations(0, 7, 0, 5, 16, 16)
+            val leftCorners = buildShapeRotations(5, 7, 11, 16, 16, 16)
+            val rightCorners = buildShapeRotations(5, 7, 0, 16, 16, 5)
+            val booleans = setOf(true, false)
 
-        private val OUTLINE_SHAPE_MAP = buildShapeMap(thin = false)
-        private val COLLISION_SHAPE_MAP = buildShapeMap(thin = true)
+            fun buildShapeMap(thin: Boolean): Byte2ObjectMap<VoxelShape> = Byte2ObjectOpenHashMap(
+                Sets.cartesianProduct(FACING.values.toSet(), booleans, booleans, FRONT_CONNECTION.values.toSet()).map {
+                    val facing = it[0] as Direction
+                    val left = it[1] as Boolean
+                    val right = it[2] as Boolean
+                    val front = it[3] as FrontConnection
 
-        private fun buildShapeMap(thin: Boolean): Byte2ObjectMap<VoxelShape> = Byte2ObjectOpenHashMap(
-            Sets.cartesianProduct(FACING.values.toSet(), BOOLEAN_SET, BOOLEAN_SET, FRONT_CONNECTION.values.toSet()).map {
-                val facing = it[0] as Direction
-                val left = it[1] as Boolean
-                val right = it[2] as Boolean
-                val front = it[3] as FrontConnection
+                    val parts = ArrayList<VoxelShape?>()
+                    parts += backs[facing]
 
-                val parts = ArrayList<VoxelShape?>()
-                parts += BACKS[facing]
+                    if (!left && front == FrontConnection.None) {
+                        parts += if (thin) thinLeftArms[facing] else leftArms[facing]
+                    }
+                    if (!right && front == FrontConnection.None) {
+                        parts += if (thin) thinRightArms[facing] else rightArms[facing]
+                    }
 
-                if (!left && front == FrontConnection.None) {
-                    parts += if (thin) THIN_LEFT_ARMS[facing] else LEFT_ARMS[facing]
-                }
-                if (!right && front == FrontConnection.None) {
-                    parts += if (thin) THIN_RIGHT_ARMS[facing] else RIGHT_ARMS[facing]
-                }
+                    when (front) {
+                        FrontConnection.Left -> parts += leftCorners[facing]
+                        FrontConnection.Right -> parts += rightCorners[facing]
+                        else -> {}
+                    }
 
-                when (front) {
-                    FrontConnection.Left -> parts += LEFT_CORNERS[facing]
-                    FrontConnection.Right -> parts += RIGHT_CORNERS[facing]
-                    else -> {}
-                }
+                    Bits.buildSofaState(facing, left, right, front) to VoxelShapes.union(
+                        bottom,
+                        *parts.filterNotNull().toTypedArray()
+                    )
+                }.toMap()
+            )
 
-                Bits.buildSofaState(facing, left, right, front) to VoxelShapes.union(
-                    BOTTOM,
-                    *parts.filterNotNull().toTypedArray()
-                )
-            }.toMap()
-        )
+            OUTLINE_SHAPE_MAP = buildShapeMap(thin = false)
+            COLLISION_SHAPE_MAP = buildShapeMap(thin = true)
+        }
 
         @JvmOverloads
         fun getSleepingDirection(world: World, pos: BlockPos, ignoreNeighbors: Boolean = false): Direction? {

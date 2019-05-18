@@ -67,83 +67,94 @@ class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING
         val WEST = BooleanProperty.create("west")
         val CARPET = CarpetedBlock.CARPET
 
-        private val BASE_SHAPE = createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
-        private val LEG_X0_Z0 = createCuboidShape(1.0, 0.0, 1.0, 4.0, 14.0, 4.0)
-        private val LEG_X1_Z0 = createCuboidShape(12.0, 0.0, 1.0, 15.0, 14.0, 4.0)
-        private val LEG_X0_Z1 = createCuboidShape(1.0, 0.0, 12.0, 4.0, 14.0, 15.0)
-        private val LEG_X1_Z1 = createCuboidShape(12.0, 0.0, 12.0, 15.0, 14.0, 15.0)
+        private val SHAPES: Byte2ObjectMap<VoxelShape>
 
-        private val BOOLEAN_SET = setOf(true, false)
-        private val SHAPES: Byte2ObjectMap<VoxelShape> = Byte2ObjectOpenHashMap(run {
-            BOOLEAN_SET.flatMap { north ->
-                BOOLEAN_SET.flatMap { east ->
-                    BOOLEAN_SET.flatMap { south ->
-                        BOOLEAN_SET.flatMap { west ->
-                            BOOLEAN_SET.map { hasCarpet ->
-                                Bits.buildTableState(north, east, south, west, hasCarpet) to
-                                        makeShape(north, east, south, west, hasCarpet)
+        init {
+            val topShape = createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
+            val legX0Z0 = createCuboidShape(1.0, 0.0, 1.0, 4.0, 14.0, 4.0)
+            val legX1Z0 = createCuboidShape(12.0, 0.0, 1.0, 15.0, 14.0, 4.0)
+            val legX0Z1 = createCuboidShape(1.0, 0.0, 12.0, 4.0, 14.0, 15.0)
+            val legX1Z1 = createCuboidShape(12.0, 0.0, 12.0, 15.0, 14.0, 15.0)
+            val booleans = setOf(true, false)
+
+            fun makeShape(
+                north: Boolean,
+                east: Boolean,
+                south: Boolean,
+                west: Boolean,
+                hasCarpet: Boolean
+            ): VoxelShape {
+                val parts = arrayListOf<VoxelShape?>(topShape)
+
+                if (north || east || south || west) {
+                    val trueCount = booleanArrayOf(north, east, south, west).count { it }
+                    if (trueCount >= 3) return topShape
+                    if (north && south && !west && !east) return topShape
+                    if (!north && !south && west && east) return topShape
+
+                    if (trueCount == 2) {
+                        // Corners
+                        parts += when {
+                            north && west -> legX1Z1
+                            north && east -> legX0Z1
+                            south && west -> legX1Z0
+                            south && east -> legX0Z0
+                            else -> null
+                        }
+                    } else {
+                        // Ends
+                        when {
+                            north -> {
+                                parts += legX0Z1
+                                parts += legX1Z1
+                            }
+
+                            south -> {
+                                parts += legX0Z0
+                                parts += legX1Z0
+                            }
+
+                            east -> {
+                                parts += legX0Z0
+                                parts += legX0Z1
+                            }
+
+                            west -> {
+                                parts += legX1Z0
+                                parts += legX1Z1
                             }
                         }
                     }
-                }
-            }.toMap()
-        })
-
-        private fun makeShape(north: Boolean, east: Boolean, south: Boolean, west: Boolean, hasCarpet: Boolean): VoxelShape {
-            val parts = arrayListOf<VoxelShape?>(BASE_SHAPE)
-
-            if (north || east || south || west) {
-                val trueCount = booleanArrayOf(north, east, south, west).count { it }
-                if (trueCount >= 3) return BASE_SHAPE
-                if (north && south && !west && !east) return BASE_SHAPE
-                if (!north && !south && west && east) return BASE_SHAPE
-
-                if (trueCount == 2) {
-                    // Corners
-                    parts += when {
-                        north && west -> LEG_X1_Z1
-                        north && east -> LEG_X0_Z1
-                        south && west -> LEG_X1_Z0
-                        south && east -> LEG_X0_Z0
-                        else -> null
-                    }
                 } else {
-                    // Ends
-                    when {
-                        north -> {
-                            parts += LEG_X0_Z1
-                            parts += LEG_X1_Z1
-                        }
+                    // No connections = all legs
+                    parts += legX0Z0
+                    parts += legX1Z0
+                    parts += legX0Z1
+                    parts += legX1Z1
+                }
 
-                        south -> {
-                            parts += LEG_X0_Z0
-                            parts += LEG_X1_Z0
-                        }
+                if (hasCarpet) {
+                    parts += CARPET_SHAPE
+                }
 
-                        east -> {
-                            parts += LEG_X0_Z0
-                            parts += LEG_X0_Z1
-                        }
+                return parts.filterNotNull().reduce(VoxelShapes::union)
+            }
 
-                        west -> {
-                            parts += LEG_X1_Z0
-                            parts += LEG_X1_Z1
+            SHAPES = Byte2ObjectOpenHashMap(run {
+                booleans.flatMap { north ->
+                    booleans.flatMap { east ->
+                        booleans.flatMap { south ->
+                            booleans.flatMap { west ->
+                                booleans.map { hasCarpet ->
+                                    Bits.buildTableState(north, east, south, west, hasCarpet) to
+                                            makeShape(north, east, south, west, hasCarpet)
+                                }
+                            }
                         }
                     }
-                }
-            } else {
-                // No connections = all legs
-                parts += LEG_X0_Z0
-                parts += LEG_X1_Z0
-                parts += LEG_X0_Z1
-                parts += LEG_X1_Z1
-            }
+                }.toMap()
+            })
 
-            if (hasCarpet) {
-                parts += CARPET_SHAPE
-            }
-
-            return parts.filterNotNull().reduce(VoxelShapes::union)
         }
     }
 }

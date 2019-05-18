@@ -20,10 +20,12 @@ class StepBlock(variant: BlockVariant) : Block(variant.settings), PolyesterBlock
     override val descriptionKey = "block.adorn.step.desc"
 
     override fun getOutlineShape(p0: BlockState?, p1: BlockView?, p2: BlockPos?, context: EntityContext?): VoxelShape =
-        VoxelShapes.union(postShape, platformShape)
+        SHAPE
 
     companion object {
-        internal val postShape = Block.createCuboidShape(6.0, 0.0, 6.0, 10.0, 8.0, 10.0)
-        private val platformShape = Block.createCuboidShape(0.0, 6.0, 0.0, 16.0, 8.0, 16.0)
+        private val SHAPE = VoxelShapes.union(
+            /* Post     */ createCuboidShape(6.0, 0.0, 6.0, 10.0, 8.0, 10.0),
+            /* Platform */ createCuboidShape(0.0, 6.0, 0.0, 16.0, 8.0, 16.0)
+        )
     }
 }
