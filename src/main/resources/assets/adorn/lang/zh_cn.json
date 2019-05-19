@@ -50,9 +50,40 @@
   "block.adorn.jungle_drawer": "丛林木抽屉",
   "block.adorn.acacia_drawer": "金合欢木抽屉",
   "block.adorn.dark_oak_drawer": "深色橡木抽屉",
+  
+  "block.adorn.trading_station": "贸易站",
+  "block.adorn.trading_station.selling": "出售",
+  "block.adorn.trading_station.price": "价格",
+  "block.adorn.trading_station.label.1": "%s的贸易站",
+  "block.adorn.trading_station.label.2": "出售 %s",
+  "block.adorn.trading_station.label.3": "价格为 %s",
+  "block.adorn.trading_station.empty_trade": "这个贸易站没有卖任何东西.",
+  "block.adorn.trading_station.storage_not_stocked": "这个贸易站没有足够的商品.",
+  "block.adorn.trading_station.storage_full": "这个贸易站的存储满了.",
+
+  "advancements.adorn.root.description": "装饰你的家!",
+
+  "advancements.adorn.chair.title": "舒服的坐着",
+  "advancements.adorn.chair.description": "制造一把椅子.",
+
+  "advancements.adorn.sofa.title": "白日梦",
+  "advancements.adorn.sofa.description": "用羊毛和棍子做一个沙发.",
+
+  "advancements.adorn.kitchen.title": "照书做饭",
+  "advancements.adorn.kitchen.description": "制造一些厨房方块.",
+
+  "advancements.adorn.trading_station.title": "赶集日",
+  "advancements.adorn.trading_station.description": "制造一个贸易站.",
+
+  "advancements.adorn.chimney.title": "砖和烟",
+  "advancements.adorn.chimney.description": "制造一个烟囱.",
+
+  "advancements.adorn.stone_torch.title": "岩石照明",
+  "advancements.adorn.stone_torch.description": "制造一个石制火把.",
 
   "block.adorn.stone_torch": "石制火把",
   "block.adorn.stone_torch.desc": "比木制火把更亮",
+
   "block.adorn.oak_post": "橡木柱",
   "block.adorn.spruce_post": "云杉木柱",
   "block.adorn.birch_post": "白桦木柱",
@@ -97,10 +128,10 @@
 
   "block.adorn.chimney": "烟囱",
   "block.adorn.chimney.desc": "装饰方块",
-
+  
   "block.adorn.bubble_chimney": "海晶烟囱",
   "block.adorn.bubble_chimney.desc": "水下气泡",
-
+  
   "item.adorn.stone_rod": "石棒",
   "item.adorn.stone_rod.desc": "合成原料"
 }
