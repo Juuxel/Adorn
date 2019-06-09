@@ -162,15 +162,7 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
             }
         }
 
-    override fun isInvEmpty(): Boolean {
-        for (stack in items) {
-            if (!stack.isEmpty) {
-                return false
-            }
-        }
-
-        return true
-    }
+    override fun isInvEmpty(): Boolean = isInvEmpty(items)
 
     //-----------
     // Listeners
@@ -192,4 +184,8 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
         addListener(InventoryListener {
             block(it)
         })
+
+    companion object {
+        fun isInvEmpty(stacks: List<ItemStack>) = stacks.none { !it.isEmpty }
+    }
 }

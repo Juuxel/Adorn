@@ -25,8 +25,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction.Axis
 import net.minecraft.world.World
 
-class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)),
-    SneakClickHandler {
+class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)), SneakClickHandler {
     override val name = "trading_station"
     override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
     override val blockEntityType = BLOCK_ENTITY_TYPE
