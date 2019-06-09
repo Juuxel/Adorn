@@ -40,7 +40,7 @@ class DrawerBlock(
     override fun getPlacementState(context: ItemPlacementContext) =
         super.getPlacementState(context)!!.with(FACING, context.playerHorizontalFacing.opposite)
 
-    override fun isFullBoundsCubeForCulling(state: BlockState?) = false
+    override fun isOpaque(state: BlockState?) = false
     override fun isSimpleFullBlock(state: BlockState?, view: BlockView?, pos: BlockPos?) = false
 
     override fun activate(

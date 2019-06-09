@@ -107,7 +107,7 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
         }
     }
 
-    override fun isFullBoundsCubeForCulling(state: BlockState?) = false
+    override fun isOpaque(state: BlockState?) = false
 
     override fun rotate(state: BlockState, rotation: BlockRotation) = when (rotation) {
         BlockRotation.CLOCKWISE_90, BlockRotation.COUNTERCLOCKWISE_90 ->

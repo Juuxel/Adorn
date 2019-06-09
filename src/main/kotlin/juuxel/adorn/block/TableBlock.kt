@@ -3,29 +3,23 @@ package juuxel.adorn.block
 import io.github.juuxel.polyester.block.PolyesterBlock
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
-import juuxel.adorn.api.block.SneakClickHandler
+import juuxel.adorn.config.AdornConfig
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityContext
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateFactory
 import net.minecraft.state.property.BooleanProperty
-import net.minecraft.util.ActionResult
-import net.minecraft.util.Hand
-import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
-import net.minecraft.world.World
 import virtuoel.towelette.api.Fluidloggable
 
-class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING_TABLE)), PolyesterBlock, Fluidloggable,
-    SneakClickHandler {
+class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING_TABLE)), PolyesterBlock, Fluidloggable {
     override val name = "${material}_table"
     override val itemSettings: Nothing? = null
     override val sittingYOffset = 0.6
@@ -67,12 +61,7 @@ class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         SHAPES[Bits.buildTableState(state[NORTH], state[EAST], state[SOUTH], state[WEST], state[CARPET].isPresent)]
 
-    override fun activate(
-        state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult
-    ) = false
-
-    override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult) =
-        if (super.activate(state, world, pos, player, hand, hitResult)) ActionResult.SUCCESS else ActionResult.PASS
+    override fun isSittingEnabled() = AdornConfig.INSTANCE.sittingOnTables
 
     companion object {
         val NORTH = BooleanProperty.create("north")

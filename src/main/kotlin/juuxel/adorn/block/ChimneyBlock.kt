@@ -73,7 +73,7 @@ class ChimneyBlock : Block(FabricBlockSettings.copy(Blocks.BRICKS).ticksRandomly
     override fun getOutlineShape(state: BlockState?, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         SHAPE
 
-    override fun isFullBoundsCubeForCulling(state: BlockState?) = false
+    override fun isOpaque(state: BlockState?) = false
 
     companion object {
         val SMOKE_TYPE = EnumProperty.create("smoke_type", SmokeType::class.java)

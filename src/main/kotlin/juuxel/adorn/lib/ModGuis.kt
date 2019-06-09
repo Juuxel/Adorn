@@ -13,7 +13,7 @@ import juuxel.adorn.gui.screen.TradingStationScreen
 import juuxel.adorn.gui.screen.TradingStationCustomerScreen
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.client.gui.ContainerScreen
+import net.minecraft.client.gui.screen.ingame.AbstractContainerScreen
 import net.minecraft.container.BlockContext
 import net.minecraft.container.Container
 import net.minecraft.container.ContainerType
@@ -43,7 +43,7 @@ object ModGuis : PolyesterRegistry(Adorn.NAMESPACE) {
             fn(syncId, playerInv, BlockContext.EMPTY)
         })
 
-    private inline fun <C : Container> registerScreen(type: ContainerType<C>, crossinline fn: (C, PlayerEntity, Component) -> ContainerScreen<C>) =
+    private inline fun <C : Container> registerScreen(type: ContainerType<C>, crossinline fn: (C, PlayerEntity, Component) -> AbstractContainerScreen<C>) =
         ContainerRegistry.INSTANCE.registerScreen(type) { container, playerInventory, title ->
             fn(container, playerInventory.player, title)
         }

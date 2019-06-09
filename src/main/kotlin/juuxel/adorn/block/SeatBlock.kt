@@ -2,12 +2,8 @@ package juuxel.adorn.block
 
 import com.google.common.base.Predicates
 import juuxel.adorn.lib.ModEntities
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
-import net.fabricmc.fabric.api.server.PlayerStream
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.client.network.packet.EntityPassengersSetS2CPacket
-import net.minecraft.entity.Entity
 import net.minecraft.entity.SpawnType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.state.StateFactory
@@ -20,7 +16,8 @@ import net.minecraft.world.World
 
 abstract class SeatBlock(settings: Settings) : Block(settings) {
     init {
-        defaultState = defaultState.with(OCCUPIED, false)
+        if (@Suppress("LeakingThis") isSittingEnabled())
+            defaultState = defaultState.with(OCCUPIED, false)
     }
 
     open val sittingYOffset: Double = 0.0
@@ -28,6 +25,9 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
     override fun activate(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult
     ): Boolean {
+        if (!isSittingEnabled())
+            return super.activate(state, world, pos, player, hand, hitResult)
+
         val actualPos = getActualSeatPos(world, state, pos)
         val actualState = if (pos == actualPos) state else world.getBlockState(actualPos)
 
@@ -48,7 +48,7 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
 
     override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
         super.onBreak(world, pos, state, player)
-        if (world.isClient) return
+        if (world.isClient || !isSittingEnabled()) return
         world.getEntities(
             ModEntities.SITTING_VEHICLE,
             BoundingBox(getActualSeatPos(world, state, pos)),
@@ -63,8 +63,10 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.add(OCCUPIED)
+        if (isSittingEnabled()) builder.add(OCCUPIED)
     }
+
+    protected open fun isSittingEnabled() = true
 
     companion object {
         @JvmField val OCCUPIED = Properties.OCCUPIED
