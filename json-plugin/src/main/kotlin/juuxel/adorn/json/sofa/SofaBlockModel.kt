@@ -1,11 +1,12 @@
-package juuxel.adorn.json
+package juuxel.adorn.json.sofa
 
 import io.github.cottonmc.jsonfactory.data.Identifier
-import io.github.cottonmc.jsonfactory.gens.ContentGenerator
+import io.github.cottonmc.jsonfactory.gens.AbstractContentGenerator
 import io.github.cottonmc.jsonfactory.output.model.Model
 import io.github.cottonmc.jsonfactory.output.suffixed
+import juuxel.adorn.json.AdornPlugin
 
-internal object SofaBlockModel : ContentGenerator("Sofa Block Model", "models/block",
+internal object SofaBlockModel : AbstractContentGenerator("sofa.block_model", "models/block",
     AdornPlugin.SOFA
 ) {
     override fun generate(id: Identifier) = listOf(

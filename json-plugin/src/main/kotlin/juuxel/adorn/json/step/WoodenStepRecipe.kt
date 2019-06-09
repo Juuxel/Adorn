@@ -1,12 +1,13 @@
 package juuxel.adorn.json.step
 
 import io.github.cottonmc.jsonfactory.data.Identifier
-import io.github.cottonmc.jsonfactory.gens.ContentGenerator
+import io.github.cottonmc.jsonfactory.gens.AbstractContentGenerator
+import io.github.cottonmc.jsonfactory.gens.ResourceRoot
 import io.github.cottonmc.jsonfactory.output.suffixed
 import juuxel.adorn.json.AdornPlugin
 import juuxel.adorn.json.output.MapOutput
 
-object WoodenStepRecipe : ContentGenerator("Wooden Step Recipe", "recipes", AdornPlugin.STEP, resourceRoot = ResourceRoot.Data) {
+object WoodenStepRecipe : AbstractContentGenerator("step.wooden.recipe", "recipes", AdornPlugin.STEP, resourceRoot = ResourceRoot.Data) {
     override fun generate(id: Identifier) = listOf(
         MapOutput(
             mapOf(

@@ -1,8 +1,9 @@
 package juuxel.adorn.json.output
 
-import io.github.cottonmc.jsonfactory.output.Json
+import io.github.cottonmc.jsonfactory.output.ExperimentalMapOutput
+import io.github.cottonmc.jsonfactory.output.MapJsonOutput
 
 // This is evil and must *never* end up in json-factory
-class MapOutput(private val map: Map<*, *>) : Json {
-    override fun toJsonString() = Json.toJson(map)
-}
+// Edit: it already did
+@UseExperimental(ExperimentalMapOutput::class)
+typealias MapOutput = MapJsonOutput

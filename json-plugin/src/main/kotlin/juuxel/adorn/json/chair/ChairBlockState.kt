@@ -1,15 +1,18 @@
-package juuxel.adorn.json
+package juuxel.adorn.json.chair
 
 import io.github.cottonmc.jsonfactory.data.BlockStateProperty
 import io.github.cottonmc.jsonfactory.data.Identifier
-import io.github.cottonmc.jsonfactory.gens.ContentGenerator
-import io.github.cottonmc.jsonfactory.output.model.ModelBlockState
+import io.github.cottonmc.jsonfactory.gens.AbstractContentGenerator
+import io.github.cottonmc.jsonfactory.output.model.ModelVariant
 import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState
 import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState.Multipart
 import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState.When
 import io.github.cottonmc.jsonfactory.output.suffixed
+import juuxel.adorn.json.AdornPlugin
 
-object ChairBlockState : ContentGenerator("Chair Block State", "blockstates", AdornPlugin.CHAIR) {
+object ChairBlockState : AbstractContentGenerator("chair.block_state", "blockstates",
+    AdornPlugin.CHAIR
+) {
     override fun generate(id: Identifier) = listOf(
         MultipartBlockState(
             multipart = sequence {
@@ -18,7 +21,7 @@ object ChairBlockState : ContentGenerator("Chair Block State", "blockstates", Ad
                         yield(
                             Multipart(
                                 `when` = When(mapOf("half" to half, "facing" to facing)),
-                                apply = ModelBlockState.Variant(
+                                apply = ModelVariant(
                                     id.wrapPath("block/", "_chair_$half"),
                                     y = getYRotation(facing)
                                 )
@@ -51,7 +54,7 @@ object ChairBlockState : ContentGenerator("Chair Block State", "blockstates", Ad
                     yield(
                         Multipart(
                             `when` = When("carpet", color),
-                            apply = ModelBlockState.Variant(
+                            apply = ModelVariant(
                                 model = Identifier.mc("block/${color}_carpet")
                             )
                         )

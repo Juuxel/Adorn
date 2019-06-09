@@ -1,15 +1,16 @@
-package juuxel.adorn.json
+package juuxel.adorn.json.sofa
 
 import io.github.cottonmc.jsonfactory.data.BlockStateProperty
 import io.github.cottonmc.jsonfactory.data.Identifier
-import io.github.cottonmc.jsonfactory.gens.ContentGenerator
+import io.github.cottonmc.jsonfactory.gens.AbstractContentGenerator
+import io.github.cottonmc.jsonfactory.output.model.ModelVariant
 import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState
 import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState.Multipart
 import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState.When
 import io.github.cottonmc.jsonfactory.output.suffixed
-import io.github.cottonmc.jsonfactory.output.model.ModelBlockState.Variant
+import juuxel.adorn.json.AdornPlugin
 
-object SofaBlockState : ContentGenerator("Sofa Block State", "blockstates", AdornPlugin.SOFA) {
+object SofaBlockState : AbstractContentGenerator("sofa.block_state", "blockstates", AdornPlugin.SOFA) {
     override fun generate(id: Identifier) = listOf(
         MultipartBlockState(
             multipart = sequence {
@@ -18,7 +19,7 @@ object SofaBlockState : ContentGenerator("Sofa Block State", "blockstates", Ador
                     yield(
                         Multipart(
                             `when` = When("facing", facing),
-                            apply = Variant(
+                            apply = ModelVariant(
                                 model = id.wrapPath("block/", "_sofa_center"),
                                 y = getYRotation(facing),
                                 uvlock = true
@@ -33,7 +34,7 @@ object SofaBlockState : ContentGenerator("Sofa Block State", "blockstates", Ador
                                 "connected_left" to "false",
                                 "front" to "none"
                             )),
-                            apply = Variant(
+                            apply = ModelVariant(
                                 model = id.wrapPath("block/", "_sofa_arm_left"),
                                 y = getYRotation(facing)
                             )
@@ -47,7 +48,7 @@ object SofaBlockState : ContentGenerator("Sofa Block State", "blockstates", Ador
                                 "connected_right" to "false",
                                 "front" to "none"
                             )),
-                            apply = Variant(
+                            apply = ModelVariant(
                                 model = id.wrapPath("block/", "_sofa_arm_right"),
                                 y = getYRotation(facing)
                             )
@@ -60,7 +61,7 @@ object SofaBlockState : ContentGenerator("Sofa Block State", "blockstates", Ador
                                 "facing" to facing,
                                 "front" to "left"
                             )),
-                            apply = Variant(
+                            apply = ModelVariant(
                                 model = id.wrapPath("block/", "_sofa_corner_left"),
                                 y = getYRotation(facing),
                                 uvlock = true
@@ -74,7 +75,7 @@ object SofaBlockState : ContentGenerator("Sofa Block State", "blockstates", Ador
                                 "facing" to facing,
                                 "front" to "right"
                             )),
-                            apply = Variant(
+                            apply = ModelVariant(
                                 model = id.wrapPath("block/", "_sofa_corner_right"),
                                 y = getYRotation(facing),
                                 uvlock = true

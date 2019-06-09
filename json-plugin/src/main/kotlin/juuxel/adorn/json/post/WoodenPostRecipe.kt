@@ -1,12 +1,13 @@
 package juuxel.adorn.json.post
 
 import io.github.cottonmc.jsonfactory.data.Identifier
-import io.github.cottonmc.jsonfactory.gens.ContentGenerator
+import io.github.cottonmc.jsonfactory.gens.AbstractContentGenerator
+import io.github.cottonmc.jsonfactory.gens.ResourceRoot
 import io.github.cottonmc.jsonfactory.output.suffixed
 import juuxel.adorn.json.AdornPlugin
 import juuxel.adorn.json.output.MapOutput
 
-object WoodenPostRecipe : ContentGenerator("Wooden Post Recipe", "recipes", AdornPlugin.POST, resourceRoot = ResourceRoot.Data) {
+object WoodenPostRecipe : AbstractContentGenerator("post.wooden.recipe", "recipes", AdornPlugin.POST, resourceRoot = ResourceRoot.Data) {
     override fun generate(id: Identifier) = listOf(
         MapOutput(
             mapOf(

@@ -1,11 +1,12 @@
-package juuxel.adorn.json
+package juuxel.adorn.json.kitchen
 
 import io.github.cottonmc.jsonfactory.data.Identifier
-import io.github.cottonmc.jsonfactory.gens.ContentGenerator
+import io.github.cottonmc.jsonfactory.gens.AbstractContentGenerator
 import io.github.cottonmc.jsonfactory.output.model.Model
 import io.github.cottonmc.jsonfactory.output.suffixed
+import juuxel.adorn.json.AdornPlugin
 
-object KitchenCupboardBlockModel : ContentGenerator("Kitchen Cupboard Block Model", "models/block",
+object KitchenCupboardBlockModel : AbstractContentGenerator("kitchen_cupboard.block_model", "models/block",
     AdornPlugin.KITCHEN
 ) {
     override fun generate(id: Identifier) = listOf(

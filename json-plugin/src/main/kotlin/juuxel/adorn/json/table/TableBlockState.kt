@@ -1,21 +1,24 @@
-package juuxel.adorn.json
+package juuxel.adorn.json.table
 
 import io.github.cottonmc.jsonfactory.data.BlockStateProperty
 import io.github.cottonmc.jsonfactory.data.Identifier
-import io.github.cottonmc.jsonfactory.gens.ContentGenerator
-import io.github.cottonmc.jsonfactory.output.model.ModelBlockState.Variant
+import io.github.cottonmc.jsonfactory.gens.AbstractContentGenerator
+import io.github.cottonmc.jsonfactory.output.model.ModelVariant
 import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState
 import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState.Multipart
 import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState.When
 import io.github.cottonmc.jsonfactory.output.suffixed
+import juuxel.adorn.json.AdornPlugin
 
-object TableBlockState : ContentGenerator("Table Block State", "blockstates", AdornPlugin.TABLE) {
+object TableBlockState : AbstractContentGenerator("table.block_state", "blockstates",
+    AdornPlugin.TABLE
+) {
     override fun generate(id: Identifier) = listOf(
         MultipartBlockState(
             multipart = sequence {
                 yield(
                     Multipart(
-                        apply = Variant(model = id.wrapPath("block/", "_table"))
+                        apply = ModelVariant(model = id.wrapPath("block/", "_table"))
                     )
                 )
 
@@ -26,7 +29,7 @@ object TableBlockState : ContentGenerator("Table Block State", "blockstates", Ad
                             `when` = When(
                                 mapOf("north" to "false", "east" to "false", "south" to "false", "west" to "false")
                             ),
-                            apply = Variant(
+                            apply = ModelVariant(
                                 model = id.wrapPath("block/", "_table_leg"),
                                 y = rotation,
                                 uvlock = true
@@ -44,7 +47,7 @@ object TableBlockState : ContentGenerator("Table Block State", "blockstates", Ad
                         yield(
                             Multipart(
                                 `when` = When(map),
-                                apply = Variant(
+                                apply = ModelVariant(
                                     model = id.wrapPath("block/", "_table_leg"),
                                     y = getLegRotation(x, z),
                                     uvlock = true
@@ -70,7 +73,7 @@ object TableBlockState : ContentGenerator("Table Block State", "blockstates", Ad
                                         we[1 - weIndex] to "false"
                                     )
                                 ),
-                                apply = Variant(
+                                apply = ModelVariant(
                                     model = id.wrapPath("block/", "_table_leg"),
                                     y = getCornerLegRotation(
                                         connectionNS,
@@ -107,7 +110,7 @@ object TableBlockState : ContentGenerator("Table Block State", "blockstates", Ad
                     yield(
                         Multipart(
                             `when` = When("carpet", color),
-                            apply = Variant(
+                            apply = ModelVariant(
                                 model = Identifier.mc("block/${color}_carpet")
                             )
                         )

@@ -1,11 +1,12 @@
-package juuxel.adorn.json
+package juuxel.adorn.json.chair
 
 import io.github.cottonmc.jsonfactory.data.Identifier
-import io.github.cottonmc.jsonfactory.gens.ContentGenerator
+import io.github.cottonmc.jsonfactory.gens.AbstractContentGenerator
 import io.github.cottonmc.jsonfactory.output.model.Model
 import io.github.cottonmc.jsonfactory.output.suffixed
+import juuxel.adorn.json.AdornPlugin
 
-internal object ChairBlockModel : ContentGenerator("Chair Block Model", "models/block",
+internal object ChairBlockModel : AbstractContentGenerator("chair.block_model", "models/block",
     AdornPlugin.CHAIR
 ) {
     override fun generate(id: Identifier) = listOf(

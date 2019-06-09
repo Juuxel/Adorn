@@ -1,14 +1,15 @@
-package juuxel.adorn.json
+package juuxel.adorn.json.kitchen
 
 import io.github.cottonmc.jsonfactory.data.BlockStateProperty
 import io.github.cottonmc.jsonfactory.data.Identifier
-import io.github.cottonmc.jsonfactory.gens.ContentGenerator
-import io.github.cottonmc.jsonfactory.output.model.ModelBlockState.Variant
+import io.github.cottonmc.jsonfactory.gens.AbstractContentGenerator
+import io.github.cottonmc.jsonfactory.output.model.ModelVariant
 import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState
 import io.github.cottonmc.jsonfactory.output.model.MultipartBlockState.*
 import io.github.cottonmc.jsonfactory.output.suffixed
+import juuxel.adorn.json.AdornPlugin
 
-object KitchenCupboardBlockState : ContentGenerator("Kitchen Cupboard Block State", "blockstates",
+object KitchenCupboardBlockState : AbstractContentGenerator("kitchen_cupboard.block_state", "blockstates",
     AdornPlugin.KITCHEN
 ) {
     override fun generate(id: Identifier) = listOf(
@@ -17,7 +18,7 @@ object KitchenCupboardBlockState : ContentGenerator("Kitchen Cupboard Block Stat
                 listOf(
                     Multipart(
                         `when` = When("facing", it),
-                        apply = Variant(
+                        apply = ModelVariant(
                             model = id.wrapPath("block/", "_kitchen_counter"),
                             y = getYRotation(it),
                             uvlock = true
@@ -25,7 +26,7 @@ object KitchenCupboardBlockState : ContentGenerator("Kitchen Cupboard Block Stat
                     ),
                     Multipart(
                         `when` = When("facing", it),
-                        apply = Variant(
+                        apply = ModelVariant(
                             model = id.wrapPath("block/", "_kitchen_cupboard_door"),
                             y = getYRotation(it)
                         )

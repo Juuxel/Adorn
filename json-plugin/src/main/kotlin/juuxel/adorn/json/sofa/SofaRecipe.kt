@@ -1,11 +1,13 @@
-package juuxel.adorn.json
+package juuxel.adorn.json.sofa
 
 import io.github.cottonmc.jsonfactory.data.Identifier
-import io.github.cottonmc.jsonfactory.gens.ContentGenerator
+import io.github.cottonmc.jsonfactory.gens.AbstractContentGenerator
+import io.github.cottonmc.jsonfactory.gens.ResourceRoot
 import io.github.cottonmc.jsonfactory.output.suffixed
+import juuxel.adorn.json.AdornPlugin
 import juuxel.adorn.json.output.MapOutput
 
-object SofaRecipe : ContentGenerator("Sofa Recipe", "recipes", AdornPlugin.SOFA, resourceRoot = ResourceRoot.Data) {
+object SofaRecipe : AbstractContentGenerator("sofa.recipe", "recipes", AdornPlugin.SOFA, resourceRoot = ResourceRoot.Data) {
     override fun generate(id: Identifier) = listOf(
         MapOutput(
             mapOf(

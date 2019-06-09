@@ -1,14 +1,17 @@
-package juuxel.adorn.json
+package juuxel.adorn.json.drawer
 
 import io.github.cottonmc.jsonfactory.data.BlockStateProperty
 import io.github.cottonmc.jsonfactory.data.Identifier
-import io.github.cottonmc.jsonfactory.gens.ContentGenerator
-import io.github.cottonmc.jsonfactory.output.model.ModelBlockState
+import io.github.cottonmc.jsonfactory.gens.AbstractContentGenerator
+import io.github.cottonmc.jsonfactory.output.model.VariantBlockState
 import io.github.cottonmc.jsonfactory.output.suffixed
+import juuxel.adorn.json.AdornPlugin
 
-object DrawerBlockState : ContentGenerator("Drawer Block State", "blockstates", AdornPlugin.DRAWER) {
+object DrawerBlockState : AbstractContentGenerator("drawer.block_state", "blockstates",
+    AdornPlugin.DRAWER
+) {
     override fun generate(id: Identifier) = listOf(
-        ModelBlockState.create(id, setOf(BlockStateProperty.horizontalFacing)) { values, variant ->
+        VariantBlockState.create(id, setOf(BlockStateProperty.horizontalFacing)) { values, variant ->
             variant.copy(
                 model = variant.model.suffixPath("_drawer"),
                 y = getYRotation(values["facing"] ?: "")

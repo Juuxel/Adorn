@@ -1,4 +1,5 @@
 import moe.nikky.counter.CounterExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm")
@@ -11,7 +12,7 @@ base {
 }
 
 repositories {
-    mavenLocal()
+    //mavenLocal()
 }
 
 val counter: CounterExtension = project.extensions.getByType()
@@ -20,7 +21,7 @@ val buildNumber = counter.variable("buildNumber", rootProject.version.toString()
 version = "${rootProject.version}-$buildNumber"
 
 dependencies {
-    val jsonFactory = "0.5.0+local.2019-04-05.1-SNAPSHOT"
+    val jsonFactory = "0.5.0-beta.1-SNAPSHOT"
     implementation("io.github.cottonmc:json-factory:$jsonFactory")
     implementation("io.github.cottonmc:json-factory-gui:$jsonFactory")
 }
@@ -31,4 +32,10 @@ application {
 
 tasks.getByName<JavaExec>("run") {
     workingDir = project.mkdir("run")
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs += "-Xuse-experimental=kotlin.Experimental"
+    }
 }

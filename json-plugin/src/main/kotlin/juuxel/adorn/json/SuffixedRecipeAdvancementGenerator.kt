@@ -1,18 +1,19 @@
 package juuxel.adorn.json
 
 import io.github.cottonmc.jsonfactory.data.Identifier
-import io.github.cottonmc.jsonfactory.gens.ContentGenerator
+import io.github.cottonmc.jsonfactory.gens.AbstractContentGenerator
 import io.github.cottonmc.jsonfactory.gens.GeneratorInfo
+import io.github.cottonmc.jsonfactory.gens.ResourceRoot
 import io.github.cottonmc.jsonfactory.output.ExperimentalMapOutput
 import io.github.cottonmc.jsonfactory.output.MapJsonOutput
 import io.github.cottonmc.jsonfactory.output.suffixed
 
 class SuffixedRecipeAdvancementGenerator(
-    name: String,
+    id: String,
     info: GeneratorInfo,
     private val suffix: String,
     private val keyItems: List<(Identifier) -> Identifier>
-) : ContentGenerator(name, "advancements/recipes", info, resourceRoot = ResourceRoot.Data) {
+) : AbstractContentGenerator(id, "advancements/recipes", info, resourceRoot = ResourceRoot.Data) {
     @ExperimentalMapOutput
     override fun generate(id: Identifier) = listOf(
         MapJsonOutput(

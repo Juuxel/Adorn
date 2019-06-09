@@ -19,9 +19,8 @@ abstract class BaseInventoryBlockEntity(
     type: BlockEntityType<*>,
     private val invSize: Int
 ) : LootableContainerBlockEntity(type) {
-    var items: DefaultedList<ItemStack> = DefaultedList.create(invSize, ItemStack.EMPTY)
-        private set
-    val sidedInventory: SidedInventory = SidedInventoryImpl(this)
+    private var items: DefaultedList<ItemStack> = DefaultedList.create(invSize, ItemStack.EMPTY)
+    val sidedInventory: SidedInventory = @Suppress("LeakingThis") SidedInventoryImpl(this)
 
     override fun toTag(tag: CompoundTag) = super.toTag(tag).apply {
         if (!serializeLootTable(tag))
@@ -34,9 +33,9 @@ abstract class BaseInventoryBlockEntity(
             Inventories.fromTag(tag, items)
     }
 
-    override fun getInvStackList() = items
-
     override fun isInvEmpty() = InventoryComponent.isInvEmpty(items)
+
+    override fun getInvStackList() = items
 
     override fun setInvStackList(items: DefaultedList<ItemStack>) {
         this.items = items

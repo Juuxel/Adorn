@@ -1,11 +1,14 @@
-package juuxel.adorn.json
+package juuxel.adorn.json.table
 
 import io.github.cottonmc.jsonfactory.data.Identifier
-import io.github.cottonmc.jsonfactory.gens.ContentGenerator
+import io.github.cottonmc.jsonfactory.gens.AbstractContentGenerator
 import io.github.cottonmc.jsonfactory.output.model.Model
 import io.github.cottonmc.jsonfactory.output.suffixed
+import juuxel.adorn.json.AdornPlugin
 
-object TableBlockModel : ContentGenerator("Table Block Model", "models/block", AdornPlugin.TABLE) {
+object TableBlockModel : AbstractContentGenerator("table.block_model", "models/block",
+    AdornPlugin.TABLE
+) {
     override fun generate(id: Identifier) = listOf(
         Model(
             parent = Identifier("adorn", "block/templates/table"),

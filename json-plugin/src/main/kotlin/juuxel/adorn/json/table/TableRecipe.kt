@@ -1,11 +1,14 @@
-package juuxel.adorn.json
+package juuxel.adorn.json.table
 
 import io.github.cottonmc.jsonfactory.data.Identifier
-import io.github.cottonmc.jsonfactory.gens.ContentGenerator
+import io.github.cottonmc.jsonfactory.gens.AbstractContentGenerator
+import io.github.cottonmc.jsonfactory.gens.ResourceRoot
 import io.github.cottonmc.jsonfactory.output.suffixed
+import juuxel.adorn.json.AdornPlugin
 import juuxel.adorn.json.output.MapOutput
 
-object TableRecipe : ContentGenerator("Table Recipe", "recipes", AdornPlugin.TABLE, resourceRoot = ResourceRoot.Data) {
+object TableRecipe : AbstractContentGenerator("table.recipe", "recipes",
+    AdornPlugin.TABLE, resourceRoot = ResourceRoot.Data) {
     override fun generate(id: Identifier) = listOf(
         MapOutput(
             mapOf(
