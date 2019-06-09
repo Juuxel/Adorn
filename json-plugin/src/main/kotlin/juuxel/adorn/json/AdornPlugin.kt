@@ -1,7 +1,6 @@
 package juuxel.adorn.json
 
 import io.github.cottonmc.jsonfactory.data.Identifier
-import io.github.cottonmc.jsonfactory.frontend.i18n.I18n
 import io.github.cottonmc.jsonfactory.frontend.i18n.ResourceBundleI18n
 import io.github.cottonmc.jsonfactory.gens.ContentGenerator
 import io.github.cottonmc.jsonfactory.gens.GeneratorInfo
@@ -10,32 +9,13 @@ import io.github.cottonmc.jsonfactory.gens.block.SuffixedBlockState
 import io.github.cottonmc.jsonfactory.gens.block.SuffixedLootTable
 import io.github.cottonmc.jsonfactory.plugin.Plugin
 import juuxel.adorn.json.chair.*
-import juuxel.adorn.json.chair.ChairBlockModel
-import juuxel.adorn.json.chair.ChairItemModel
-import juuxel.adorn.json.drawer.DrawerBlockModel
-import juuxel.adorn.json.drawer.DrawerBlockState
-import juuxel.adorn.json.drawer.DrawerRecipe
+import juuxel.adorn.json.drawer.*
 import juuxel.adorn.json.kitchen.*
-import juuxel.adorn.json.kitchen.KitchenCupboardItemModel
-import juuxel.adorn.json.post.StonePostBlockModel
-import juuxel.adorn.json.platform.PlatformRecipe
-import juuxel.adorn.json.platform.StonePlatformBlockModel
-import juuxel.adorn.json.platform.WoodenPlatformBlockModel
-import juuxel.adorn.json.post.StonePostRecipe
-import juuxel.adorn.json.post.WoodenPostBlockModel
-import juuxel.adorn.json.post.WoodenPostRecipe
-import juuxel.adorn.json.sofa.SofaBlockModel
-import juuxel.adorn.json.sofa.SofaBlockState
-import juuxel.adorn.json.sofa.SofaItemModel
-import juuxel.adorn.json.sofa.SofaRecipe
-import juuxel.adorn.json.step.StoneStepBlockModel
-import juuxel.adorn.json.step.StoneStepRecipe
-import juuxel.adorn.json.step.WoodenStepBlockModel
-import juuxel.adorn.json.step.WoodenStepRecipe
-import juuxel.adorn.json.table.TableBlockModel
-import juuxel.adorn.json.table.TableBlockState
-import juuxel.adorn.json.table.TableItemModel
-import juuxel.adorn.json.table.TableRecipe
+import juuxel.adorn.json.platform.*
+import juuxel.adorn.json.post.*
+import juuxel.adorn.json.sofa.*
+import juuxel.adorn.json.step.*
+import juuxel.adorn.json.table.*
 
 object AdornPlugin : Plugin {
     //adorn:red,adorn:black,adorn:green,adorn:brown,adorn:blue,adorn:purple,adorn:cyan,adorn:light_gray,adorn:gray,adorn:pink,adorn:lime,adorn:yellow,adorn:light_blue,adorn:magenta,adorn:orange,adorn:white
@@ -142,7 +122,7 @@ object AdornPlugin : Plugin {
         KitchenCupboardBlockModel,
         KitchenCupboardBlockState,
         KitchenCupboardItemModel,
-        SuffixedLootTable("kitchen_cupboard", KITCHEN),
+        SuffixedContainerLootTable("kitchen_cupboard", KITCHEN),
         KitchenCupboardRecipe,
         SuffixedRecipeAdvancementGenerator(
             "kitchen_cupboard.recipe_advancement",
@@ -154,7 +134,7 @@ object AdornPlugin : Plugin {
         DrawerBlockModel,
         DrawerBlockState,
         SuffixedBlockItemModel("drawer", DRAWER),
-        SuffixedLootTable("drawer", DRAWER),
+        SuffixedContainerLootTable("drawer", DRAWER),
         DrawerRecipe,
         SuffixedRecipeAdvancementGenerator(
             "drawer.recipe_advancement",

@@ -5,7 +5,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:acacia_drawer"
+          "name": "adorn:acacia_drawer",
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            }
+          ]
         }
       ],
       "conditions": [

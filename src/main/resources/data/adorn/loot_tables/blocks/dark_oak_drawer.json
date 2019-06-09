@@ -5,7 +5,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:dark_oak_drawer"
+          "name": "adorn:dark_oak_drawer",
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            }
+          ]
         }
       ],
       "conditions": [

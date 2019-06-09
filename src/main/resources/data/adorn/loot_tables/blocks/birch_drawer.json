@@ -5,7 +5,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:birch_drawer"
+          "name": "adorn:birch_drawer",
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            }
+          ]
         }
       ],
       "conditions": [

@@ -8,10 +8,12 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
+import net.minecraft.item.ItemStack
 import net.minecraft.state.StateFactory
 import net.minecraft.state.property.Properties
 import net.minecraft.util.BlockMirror
@@ -66,6 +68,12 @@ class DrawerBlock(
 
     override fun rotate(state: BlockState, rotation: BlockRotation) =
         state.with(FACING, rotation.rotate(state[FACING]))
+
+    override fun onPlaced(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) {
+        if (stack.hasDisplayName()) {
+            (world.getBlockEntity(pos) as? DrawerBlockEntity)?.customName = stack.displayName
+        }
+    }
 
     companion object {
         val FACING = Properties.FACING_HORIZONTAL

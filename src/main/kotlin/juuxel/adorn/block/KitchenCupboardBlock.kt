@@ -7,7 +7,9 @@ import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.container.NameableContainerProvider
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.ItemStack
 import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
@@ -40,6 +42,12 @@ class KitchenCupboardBlock(
             }
 
             super.onBlockRemoved(state1, world, pos, state2, b)
+        }
+    }
+
+    override fun onPlaced(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) {
+        if (stack.hasDisplayName()) {
+            (world.getBlockEntity(pos) as? KitchenCupboardBlockEntity)?.customName = stack.displayName
         }
     }
 
