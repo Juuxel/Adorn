@@ -5,6 +5,7 @@ import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import juuxel.adorn.block.entity.TradingStation
 import juuxel.adorn.gui.widget.CenteredLabelWidget
+import juuxel.adorn.gui.widget.DisplayOnlySlot
 import juuxel.adorn.lib.ModGuis
 import juuxel.adorn.lib.ModNetworking
 import juuxel.adorn.trading.Trade
@@ -38,8 +39,8 @@ class TradingStationController(
         (rootPanel as WGridPanel).apply {
             val tradeInv = getTrade(blockContext).createInventory()
 
-            add(WItemSlot.of(tradeInv, 0), 1, 2)
-            add(WItemSlot.of(tradeInv, 1), 1, 4)
+            add(DisplayOnlySlot(tradeInv, 0), 1, 2)
+            add(DisplayOnlySlot(tradeInv, 1), 1, 4)
 
             add(CenteredLabelWidget(TranslatableComponent("block.adorn.trading_station.selling"), Colors.WHITE), 1, 1)
             add(CenteredLabelWidget(TranslatableComponent("block.adorn.trading_station.price"), Colors.WHITE), 1, 3)
