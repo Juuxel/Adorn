@@ -38,7 +38,7 @@ class DrawerBlock(
     }
 
     override fun getPlacementState(context: ItemPlacementContext) =
-        super.getPlacementState(context)!!.with(FACING, context.playerLookDirection.opposite)
+        super.getPlacementState(context)!!.with(FACING, context.playerFacing.opposite)
 
     override fun isOpaque(state: BlockState?) = false
     override fun isSimpleFullBlock(state: BlockState?, view: BlockView?, pos: BlockPos?) = false

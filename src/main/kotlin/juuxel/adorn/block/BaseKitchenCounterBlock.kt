@@ -31,7 +31,7 @@ abstract class BaseKitchenCounterBlock : Block(
     }
 
     override fun getPlacementState(context: ItemPlacementContext) =
-        super.getPlacementState(context)!!.with(FACING, context.playerLookDirection.opposite)
+        super.getPlacementState(context)!!.with(FACING, context.playerFacing.opposite)
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         SHAPES[state[FACING]]

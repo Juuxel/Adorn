@@ -67,7 +67,7 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState {
         return updateConnections(
-            super.getPlacementState(context)!!.with(FACING, context.playerLookDirection.opposite),
+            super.getPlacementState(context)!!.with(FACING, context.playerFacing.opposite),
             context.world,
             context.blockPos
         )

@@ -36,7 +36,7 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
     }
 
     override fun getPlacementState(context: ItemPlacementContext) =
-        super.getPlacementState(context)!!.with(AXIS, context.playerLookDirection.rotateYClockwise().axis)
+        super.getPlacementState(context)!!.with(AXIS, context.playerFacing.rotateYClockwise().axis)
 
     override fun onPlaced(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack?) {
         if (entity is PlayerEntity) {
