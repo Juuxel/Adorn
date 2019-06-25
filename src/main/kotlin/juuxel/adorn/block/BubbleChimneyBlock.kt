@@ -20,7 +20,7 @@ import java.util.*
 
 class BubbleChimneyBlock : Block(Settings.copy(Blocks.PRISMARINE)), PolyesterBlock, Fluidloggable {
     override val name = "bubble_chimney"
-    override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
+    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
     override val hasDescription = true
 
     @Environment(EnvType.CLIENT)

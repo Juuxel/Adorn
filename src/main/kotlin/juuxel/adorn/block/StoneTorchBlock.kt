@@ -124,7 +124,7 @@ class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Fluidloggable {
                     )
                 }
 
-                stack.applyDamage(1, player) {}
+                stack.damage(1, player) {}
                 return true
             }
 

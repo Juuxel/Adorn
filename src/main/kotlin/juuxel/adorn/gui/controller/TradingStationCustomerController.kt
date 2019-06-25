@@ -13,7 +13,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.BasicInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.text.TranslatableText
 
 class TradingStationCustomerController(
     syncId: Int,
@@ -35,8 +35,8 @@ class TradingStationCustomerController(
             add(WItemSlot.of(tradeInv, 0), 1, 2)
             add(WItemSlot.of(tradeInv, 1), 1, 4)
 
-            add(CenteredLabelWidget(TranslatableComponent("block.adorn.trading_station.selling"), WHITE), 1, 1)
-            add(CenteredLabelWidget(TranslatableComponent("block.adorn.trading_station.price"), WHITE), 1, 3)
+            add(CenteredLabelWidget(TranslatableText("block.adorn.trading_station.selling"), WHITE), 1, 1)
+            add(CenteredLabelWidget(TranslatableText("block.adorn.trading_station.price"), WHITE), 1, 3)
 
             for (row in 0..2) {
                 for (col in 0..3) {

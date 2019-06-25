@@ -4,14 +4,14 @@ import com.mojang.blaze3d.platform.GlStateManager
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.ChatFormat
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.client.render.model.json.ModelTransformation
 import net.minecraft.item.ItemStack
-import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.TextComponent
-import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.text.LiteralText
+import net.minecraft.text.Text
+import net.minecraft.text.TranslatableText
+import net.minecraft.util.Formatting
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
 
@@ -58,29 +58,29 @@ class TradingStationRenderer : BlockEntityRenderer<TradingStationBlockEntity>() 
 
     private fun getLabelRows(be: TradingStationBlockEntity): Sequence<String> =
         sequence {
-            yield(TranslatableComponent(
+            yield(TranslatableText(
                 "block.adorn.trading_station.label.1",
-                be.ownerName.copy().applyFormat(ChatFormat.GOLD)
+                be.ownerName.copy().formatted(Formatting.GOLD)
             ))
 
             if (!be.trade.isEmpty()) {
                 yield(
-                    TranslatableComponent(
+                    TranslatableText(
                         "block.adorn.trading_station.label.2",
                         be.trade.selling.toTextComponentWithCount()
                     )
                 )
                 yield(
-                    TranslatableComponent(
+                    TranslatableText(
                         "block.adorn.trading_station.label.3",
                         be.trade.price.toTextComponentWithCount()
                     )
                 )
             }
-        }.map(Component::getFormattedText)
+        }.map(Text::asFormattedString)
 
-    private fun ItemStack.toTextComponentWithCount(): Component =
-        TextComponent("${amount}x ").append(toTextComponent())
+    private fun ItemStack.toTextComponentWithCount(): Text =
+        LiteralText("${count}x ").append(toHoverableText())
 
     companion object {
         private const val SELLING_ROTATION_MULTIPLIER = 1.2f

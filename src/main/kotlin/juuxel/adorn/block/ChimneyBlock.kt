@@ -26,7 +26,7 @@ import java.util.Random
 
 class ChimneyBlock : Block(FabricBlockSettings.copy(Blocks.BRICKS).ticksRandomly().build()), PolyesterBlock, Fluidloggable {
     override val name = "chimney"
-    override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
+    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
     override val hasDescription = true
 
     init {
@@ -76,7 +76,7 @@ class ChimneyBlock : Block(FabricBlockSettings.copy(Blocks.BRICKS).ticksRandomly
     override fun isOpaque(state: BlockState?) = false
 
     companion object {
-        val SMOKE_TYPE = EnumProperty.create("smoke_type", SmokeType::class.java)
+        val SMOKE_TYPE = EnumProperty.of("smoke_type", SmokeType::class.java)
         private val SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
     }
 

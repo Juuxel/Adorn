@@ -32,11 +32,11 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
      * Checks if the [stack] can be extracted from this inventory. Ignores NBT, durability and tags.
      */
     fun canExtract(stack: ItemStack): Boolean {
-        var remainingAmount = stack.amount
+        var remainingAmount = stack.count
 
         for (invStack in items) {
-            if (invStack.isEqualIgnoreTags(stack)) {
-                remainingAmount -= invStack.amount
+            if (invStack.isItemEqual(stack)) {
+                remainingAmount -= invStack.count
                 if (remainingAmount <= 0) return true
             }
         }
@@ -50,12 +50,12 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
      * @return `true` if extracted
      */
     fun tryExtract(stack: ItemStack): Boolean {
-        var remainingAmount = stack.amount
+        var remainingAmount = stack.count
 
         for (invStack in items) {
-            if (invStack.isEqualIgnoreTags(stack) && invStack.tag == stack.tag) {
-                val invStackAmount = invStack.amount
-                invStack.subtractAmount(min(invStackAmount, remainingAmount))
+            if (invStack.isItemEqual(stack) && invStack.tag == stack.tag) {
+                val invStackAmount = invStack.count
+                invStack.decrement(min(invStackAmount, remainingAmount))
                 remainingAmount -= invStackAmount
                 if (remainingAmount <= 0) return true
             }
@@ -68,11 +68,11 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
      * Checks if the [stack] can be inserted to this inventory. Ignores tags.
      */
     fun canInsert(stack: ItemStack): Boolean {
-        var remainingAmount = stack.amount
+        var remainingAmount = stack.count
 
         for (invStack in items) {
-            if (invStack.isEqualIgnoreTags(stack) && invStack.amount < invStack.maxAmount && stack.tag == invStack.tag) {
-                val insertionAmount = min(invStack.maxAmount - invStack.amount, remainingAmount)
+            if (invStack.isItemEqual(stack) && invStack.count < invStack.maxCount && stack.tag == invStack.tag) {
+                val insertionAmount = min(invStack.maxCount - invStack.count, remainingAmount)
                 remainingAmount -= insertionAmount
                 if (remainingAmount <= 0) return true
             } else if (invStack.isEmpty) {
@@ -89,13 +89,13 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
      * @return `true` if inserted
      */
     fun tryInsert(stack: ItemStack): Boolean {
-        var remainingAmount = stack.amount
+        var remainingAmount = stack.count
 
         for ((slot, invStack) in items.withIndex()) {
-            if (invStack.isEqualIgnoreTags(stack) && invStack.amount < invStack.maxAmount && invStack.tag == stack.tag) {
-                val insertionAmount = min(invStack.maxAmount - invStack.amount, remainingAmount)
+            if (invStack.isItemEqual(stack) && invStack.count < invStack.maxCount && invStack.tag == stack.tag) {
+                val insertionAmount = min(invStack.maxCount - invStack.count, remainingAmount)
                 remainingAmount -= insertionAmount
-                invStack.addAmount(insertionAmount)
+                invStack.increment(insertionAmount)
                 if (remainingAmount <= 0) return true
             } else if (invStack.isEmpty) {
                 items[slot] = stack.copy()
@@ -107,12 +107,12 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
     }
 
     /**
-     * Gets the amount of items with the same item and NBT as the [stack].
-     * Ignores the stack's amount.
+     * Gets the count of items with the same item and NBT as the [stack].
+     * Ignores the stack's count.
      */
     fun getAmountWithNbt(stack: ItemStack): Int = items.map {
         if (stack.item == it.item && stack.tag == it.tag)
-            it.amount
+            it.count
         else 0
     }.sum()
 
@@ -155,8 +155,8 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
 
     override fun getInvSize() = invSize
 
-    override fun takeInvStack(slot: Int, amount: Int) =
-        Inventories.splitStack(items, slot, amount).also {
+    override fun takeInvStack(slot: Int, count: Int) =
+        Inventories.splitStack(items, slot, count).also {
             if (!it.isEmpty) {
                 markDirty()
             }

@@ -29,7 +29,7 @@ class DrawerBlock(
     material: String
 ) : PolyesterBlockWithEntity(Settings.copy(Blocks.OAK_PLANKS)), BaseInventoryBlockEntity.InventoryProviderImpl {
     override val name = "${material}_drawer"
-    override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
+    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
     override val blockEntityType = BLOCK_ENTITY_TYPE
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
@@ -38,7 +38,7 @@ class DrawerBlock(
     }
 
     override fun getPlacementState(context: ItemPlacementContext) =
-        super.getPlacementState(context)!!.with(FACING, context.playerHorizontalFacing.opposite)
+        super.getPlacementState(context)!!.with(FACING, context.playerLookDirection.opposite)
 
     override fun isOpaque(state: BlockState?) = false
     override fun isSimpleFullBlock(state: BlockState?, view: BlockView?, pos: BlockPos?) = false
@@ -70,13 +70,13 @@ class DrawerBlock(
         state.with(FACING, rotation.rotate(state[FACING]))
 
     override fun onPlaced(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) {
-        if (stack.hasDisplayName()) {
-            (world.getBlockEntity(pos) as? DrawerBlockEntity)?.customName = stack.displayName
+        if (stack.hasCustomName()) {
+            (world.getBlockEntity(pos) as? DrawerBlockEntity)?.customName = stack.name
         }
     }
 
     companion object {
-        val FACING = Properties.FACING_HORIZONTAL
+        val FACING = Properties.HORIZONTAL_FACING
         val BLOCK_ENTITY_TYPE: BlockEntityType<DrawerBlockEntity> =
             PolyesterBlockEntityType(::DrawerBlockEntity)
     }

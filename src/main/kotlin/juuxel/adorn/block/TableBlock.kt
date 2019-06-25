@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityContext
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateFactory
 import net.minecraft.state.property.BooleanProperty
+import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
@@ -64,10 +65,10 @@ class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING
     override fun isSittingEnabled() = AdornConfig.INSTANCE.sittingOnTables
 
     companion object {
-        val NORTH = BooleanProperty.create("north")
-        val EAST = BooleanProperty.create("east")
-        val SOUTH = BooleanProperty.create("south")
-        val WEST = BooleanProperty.create("west")
+        val NORTH = Properties.NORTH
+        val EAST = Properties.EAST
+        val SOUTH = Properties.SOUTH
+        val WEST = Properties.WEST
         val CARPET = CarpetedBlock.CARPET
 
         private val SHAPES: Byte2ObjectMap<VoxelShape>

@@ -47,7 +47,7 @@ class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENC
         val pos = context.blockPos
 
         return if (pos.y < 255 && context.world.getBlockState(pos.up()).canReplace(context))
-            super.getPlacementState(context)!!.with(FACING, context.playerHorizontalFacing.opposite)
+            super.getPlacementState(context)!!.with(FACING, context.playerLookDirection.opposite)
         else null
     }
 
@@ -145,7 +145,7 @@ class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENC
         state.with(FACING, rotation.rotate(state[FACING]))
 
     companion object {
-        val FACING = Properties.FACING_HORIZONTAL
+        val FACING = Properties.HORIZONTAL_FACING
         val HALF = Properties.DOUBLE_BLOCK_HALF
         val CARPET = CarpetedBlock.CARPET
 

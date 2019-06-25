@@ -13,9 +13,9 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.state.StateFactory
 import net.minecraft.state.property.Properties
+import net.minecraft.text.TranslatableText
 import net.minecraft.util.ActionResult
 import net.minecraft.util.BlockRotation
 import net.minecraft.util.Hand
@@ -27,7 +27,7 @@ import net.minecraft.world.World
 
 class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)), SneakClickHandler {
     override val name = "trading_station"
-    override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
+    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
     override val blockEntityType = BLOCK_ENTITY_TYPE
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
@@ -36,7 +36,7 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
     }
 
     override fun getPlacementState(context: ItemPlacementContext) =
-        super.getPlacementState(context)!!.with(AXIS, context.playerHorizontalFacing.rotateYClockwise().axis)
+        super.getPlacementState(context)!!.with(AXIS, context.playerLookDirection.rotateYClockwise().axis)
 
     override fun onPlaced(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack?) {
         if (entity is PlayerEntity) {
@@ -57,19 +57,19 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
             if (!world.isClient && !be.isOwner(player)) {
                 val handStack = player.getStackInHand(hand)
                 val trade = be.trade
-                val validPayment = handStack.isEqualIgnoreTags(trade.price) &&
-                        handStack.amount >= trade.price.amount &&
+                val validPayment = handStack.isItemEqual(trade.price) &&
+                        handStack.count >= trade.price.count &&
                         handStack.tag == trade.price.tag
                 val canInsertPayment = be.storage.canInsert(trade.price)
 
                 if (trade.isEmpty()) {
-                    player.addChatMessage(TranslatableComponent("block.adorn.trading_station.empty_trade"), true)
+                    player.addChatMessage(TranslatableText("block.adorn.trading_station.empty_trade"), true)
                 } else if (!be.isStorageStocked()) {
-                    player.addChatMessage(TranslatableComponent("block.adorn.trading_station.storage_not_stocked"), true)
+                    player.addChatMessage(TranslatableText("block.adorn.trading_station.storage_not_stocked"), true)
                 } else if (!canInsertPayment) {
-                    player.addChatMessage(TranslatableComponent("block.adorn.trading_station.storage_full"), true)
+                    player.addChatMessage(TranslatableText("block.adorn.trading_station.storage_full"), true)
                 } else if (validPayment) {
-                    handStack.subtractAmount(trade.price.amount)
+                    handStack.decrement(trade.price.count)
                     player.giveItemStack(trade.selling.copy())
                     be.storage.tryExtract(trade.selling)
                     be.storage.tryInsert(trade.price)
@@ -117,6 +117,6 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
 
     companion object {
         val BLOCK_ENTITY_TYPE = PolyesterBlockEntityType(::TradingStationBlockEntity)
-        val AXIS = Properties.AXIS_XZ
+        val AXIS = Properties.HORIZONTAL_AXIS
     }
 }

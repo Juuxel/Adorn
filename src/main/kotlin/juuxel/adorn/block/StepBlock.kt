@@ -15,7 +15,7 @@ import virtuoel.towelette.api.Fluidloggable
 
 class StepBlock(variant: BlockVariant) : Block(variant.settings), PolyesterBlock, Fluidloggable {
     override val name = "${variant.id.path}_step"
-    override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
+    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
     override val hasDescription = true
     override val descriptionKey = "block.adorn.step.desc"
 

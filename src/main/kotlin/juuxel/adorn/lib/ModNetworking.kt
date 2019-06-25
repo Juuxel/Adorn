@@ -24,8 +24,8 @@ object ModNetworking {
         ClientSidePacketRegistry.INSTANCE.register(ENTITY_SPAWN) { context, buf ->
             val packet = EntitySpawnS2CPacket()
             packet.read(buf)
-            context.taskQueue.executeFuture {
-                val world = context.player?.world ?: return@executeFuture
+            context.taskQueue.executeFuture<Unit> {
+                val world = context.player?.world ?: return@executeFuture Unit
                 val entity = packet.entityTypeId.create(world)!!
                 entity.entityId = packet.id
                 entity.uuid = packet.uuid

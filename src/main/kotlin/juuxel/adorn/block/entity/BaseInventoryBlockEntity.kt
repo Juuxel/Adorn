@@ -10,7 +10,7 @@ import net.minecraft.inventory.Inventories
 import net.minecraft.inventory.SidedInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.text.TranslatableText
 import net.minecraft.util.DefaultedList
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IWorld
@@ -43,7 +43,7 @@ abstract class BaseInventoryBlockEntity(
 
     override fun getInvSize() = invSize
 
-    override fun getContainerName() = TranslatableComponent(cachedState.block.translationKey)
+    override fun getContainerName() = TranslatableText(cachedState.block.translationKey)
 
     // InventoryProvider implementation for blocks
 

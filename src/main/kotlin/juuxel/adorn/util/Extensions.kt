@@ -4,23 +4,23 @@ import com.mojang.datafixers.Dynamic
 import com.mojang.datafixers.types.JsonOps
 import net.minecraft.datafixers.NbtOps
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.chat.Component
+import net.minecraft.text.Text
 import java.util.Optional
 
-fun CompoundTag.putTextComponent(name: String, textComponent: Component) =
+fun CompoundTag.putTextComponent(name: String, textComponent: Text) =
     put(
         name,
         Dynamic.convert(
             JsonOps.INSTANCE,
             NbtOps.INSTANCE,
-            Component.Serializer.toJson(textComponent)
+            Text.Serializer.toJsonTree(textComponent)
         )
     )
 
-fun CompoundTag.getTextComponent(name: String): Component? {
+fun CompoundTag.getTextComponent(name: String): Text? {
     val tag = getTag(name) ?: return null
 
-    return Component.Serializer.fromJson(
+    return Text.Serializer.fromJson(
         Dynamic.convert(
             NbtOps.INSTANCE,
             JsonOps.INSTANCE,

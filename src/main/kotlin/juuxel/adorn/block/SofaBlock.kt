@@ -37,7 +37,7 @@ import virtuoel.towelette.api.Fluidloggable
 class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), PolyesterBlock, Fluidloggable,
     SneakClickHandler {
     override val name = "${variant}_sofa"
-    override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
+    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
 
     init {
         defaultState = defaultState
@@ -67,7 +67,7 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState {
         return updateConnections(
-            super.getPlacementState(context)!!.with(FACING, context.playerHorizontalFacing.opposite),
+            super.getPlacementState(context)!!.with(FACING, context.playerLookDirection.opposite),
             context.world,
             context.blockPos
         )
@@ -130,10 +130,10 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
         state.with(FACING, rotation.rotate(state[FACING]))
 
     companion object {
-        val FACING = Properties.FACING_HORIZONTAL
-        val CONNECTED_LEFT = BooleanProperty.create("connected_left")
-        val CONNECTED_RIGHT = BooleanProperty.create("connected_right")
-        val FRONT_CONNECTION = EnumProperty.create("front", FrontConnection::class.java)
+        val FACING = Properties.HORIZONTAL_FACING
+        val CONNECTED_LEFT = BooleanProperty.of("connected_left")
+        val CONNECTED_RIGHT = BooleanProperty.of("connected_right")
+        val FRONT_CONNECTION = EnumProperty.of("front", FrontConnection::class.java)
 
         private val OUTLINE_SHAPE_MAP: Byte2ObjectMap<VoxelShape>
         private val COLLISION_SHAPE_MAP: Byte2ObjectMap<VoxelShape>

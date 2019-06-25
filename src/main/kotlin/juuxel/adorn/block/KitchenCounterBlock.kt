@@ -48,6 +48,6 @@ class KitchenCounterBlock(material: String) : BaseKitchenCounterBlock() {
     }
 
     companion object {
-        val FRONT = EnumProperty.create("front", FrontConnection::class.java)
+        val FRONT = EnumProperty.of("front", FrontConnection::class.java)
     }
 }

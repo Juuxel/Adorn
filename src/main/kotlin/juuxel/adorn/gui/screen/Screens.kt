@@ -7,12 +7,12 @@ import juuxel.adorn.gui.controller.KitchenCupboardController
 import juuxel.adorn.gui.controller.TradingStationController
 import juuxel.adorn.gui.controller.TradingStationCustomerController
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.network.chat.Component
+import net.minecraft.text.Text
 
 open class AdornScreen<C : CottonScreenController>(
     controller: C,
     player: PlayerEntity,
-    title: Component
+    title: Text
 ) : CottonScreen<C>(controller, player) {
     private val _title = title
 
@@ -22,23 +22,23 @@ open class AdornScreen<C : CottonScreenController>(
 class DrawerScreen(
     controller: DrawerController,
     player: PlayerEntity,
-    title: Component
+    title: Text
 ) : AdornScreen<DrawerController>(controller, player, title)
 
 class KitchenCupboardScreen(
     controller: KitchenCupboardController,
     player: PlayerEntity,
-    title: Component
+    title: Text
 ) : AdornScreen<KitchenCupboardController>(controller, player, title)
 
 class TradingStationScreen(
     controller: TradingStationController,
     player: PlayerEntity,
-    title: Component
+    title: Text
 ) : AdornScreen<TradingStationController>(controller, player, title)
 
 class TradingStationCustomerScreen(
     controller: TradingStationCustomerController,
     player: PlayerEntity,
-    title: Component
+    title: Text
 ) : AdornScreen<TradingStationCustomerController>(controller, player, title)

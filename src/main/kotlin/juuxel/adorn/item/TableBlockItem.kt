@@ -9,13 +9,13 @@ import net.minecraft.item.ItemUsageContext
 import net.minecraft.util.ActionResult
 import net.minecraft.util.math.Direction
 
-class TableBlockItem(block: PolyesterBlock) : BlockItem(block.unwrap(), Settings().itemGroup(ItemGroup.DECORATIONS)), PolyesterItem {
+class TableBlockItem(block: PolyesterBlock) : BlockItem(block.unwrap(), Settings().group(ItemGroup.DECORATIONS)), PolyesterItem {
     override val name = block.name
 
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
         val world = context.world
         val pos = context.blockPos
-        if (context.facing == Direction.UP && world.getBlockState(pos).block is CarpetBlock) {
+        if (context.side == Direction.UP && world.getBlockState(pos).block is CarpetBlock) {
             place(CarpetedTopPlacementContext(context))
             return ActionResult.SUCCESS
         }

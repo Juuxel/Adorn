@@ -23,7 +23,7 @@ import net.minecraft.world.BlockView
 abstract class BaseKitchenCounterBlock : Block(
     FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).sounds(SOUND_GROUP).build()
 ), PolyesterBlock {
-    override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
+    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
@@ -31,7 +31,7 @@ abstract class BaseKitchenCounterBlock : Block(
     }
 
     override fun getPlacementState(context: ItemPlacementContext) =
-        super.getPlacementState(context)!!.with(FACING, context.playerHorizontalFacing.opposite)
+        super.getPlacementState(context)!!.with(FACING, context.playerLookDirection.opposite)
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         SHAPES[state[FACING]]
@@ -43,7 +43,7 @@ abstract class BaseKitchenCounterBlock : Block(
         state.with(FACING, rotation.rotate(state[FACING]))
 
     companion object {
-        val FACING = Properties.FACING_HORIZONTAL
+        val FACING = Properties.HORIZONTAL_FACING
         val SOUND_GROUP = BlockSoundGroup(
             1.0F, 1.0F,
             SoundEvents.BLOCK_WOOD_BREAK,

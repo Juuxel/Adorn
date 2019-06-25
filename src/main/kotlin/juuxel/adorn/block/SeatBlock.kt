@@ -11,7 +11,7 @@ import net.minecraft.state.property.Properties
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.BoundingBox
+import net.minecraft.util.math.Box
 import net.minecraft.world.World
 
 abstract class SeatBlock(settings: Settings) : Block(settings) {
@@ -51,7 +51,7 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
         if (world.isClient || !isSittingEnabled()) return
         world.getEntities(
             ModEntities.SITTING_VEHICLE,
-            BoundingBox(getActualSeatPos(world, state, pos)),
+            Box(getActualSeatPos(world, state, pos)),
             Predicates.alwaysTrue()
         ).forEach {
             it.removeAllPassengers()

@@ -27,7 +27,7 @@ object ModItems : PolyesterRegistry(Adorn.NAMESPACE) {
         AdornWallBlockItem(
             ModBlocks.STONE_TORCH_GROUND,
             ModBlocks.STONE_TORCH_WALL,
-            Item.Settings().itemGroup(ItemGroup.DECORATIONS)
+            Item.Settings().group(ItemGroup.DECORATIONS)
         )
     )
 

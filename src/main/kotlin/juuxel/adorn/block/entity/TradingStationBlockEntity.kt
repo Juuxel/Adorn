@@ -15,14 +15,14 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.TextComponent
-import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.text.LiteralText
+import net.minecraft.text.Text
+import net.minecraft.text.TranslatableText
 import java.util.UUID
 
 class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_TYPE), BlockEntityClientSerializable, NameableContainerProvider, TradingStation {
     var owner: UUID? = null
-    var ownerName: Component = TextComponent("???")
+    var ownerName: Text = LiteralText("???")
     override val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
     override val storage: InventoryComponent = InventoryComponent(12)
 
@@ -38,12 +38,12 @@ class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_T
 
     fun setOwner(player: PlayerEntity) {
         owner = player.gameProfile.id
-        ownerName = TextComponent(player.gameProfile.name)
+        ownerName = LiteralText(player.gameProfile.name)
         markDirty()
     }
 
     fun isStorageStocked(): Boolean =
-        storage.getAmountWithNbt(trade.selling) >= trade.selling.amount
+        storage.getAmountWithNbt(trade.selling) >= trade.selling.count
 
     fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
 
@@ -51,14 +51,14 @@ class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_T
         if (isOwner(player)) TradingStationController(syncId, playerInv, BlockContext.create(world, pos))
         else TradingStationCustomerController(syncId, playerInv, BlockContext.create(world, pos))
 
-    override fun getDisplayName() = TranslatableComponent(cachedState.block.translationKey)
+    override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)
 
     // NBT
 
     override fun fromTag(tag: CompoundTag) {
         super.fromTag(tag)
         owner = tag.getUuid(NBT_TRADING_OWNER)
-        ownerName = tag.getTextComponent(NBT_TRADING_OWNER_NAME) ?: TextComponent("??")
+        ownerName = tag.getTextComponent(NBT_TRADING_OWNER_NAME) ?: LiteralText("??")
         trade.fromTag(tag.getCompound(NBT_TRADE))
         storage.fromTag(tag.getCompound(NBT_STORAGE))
     }

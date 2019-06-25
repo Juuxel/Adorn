@@ -20,7 +20,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
-import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.text.TranslatableText
 
 // TODO: Multiple trades in one station?
 class TradingStationController(
@@ -42,8 +42,8 @@ class TradingStationController(
             add(DisplayOnlySlot(tradeInv, 0), 1, 2)
             add(DisplayOnlySlot(tradeInv, 1), 1, 4)
 
-            add(CenteredLabelWidget(TranslatableComponent("block.adorn.trading_station.selling"), Colors.WHITE), 1, 1)
-            add(CenteredLabelWidget(TranslatableComponent("block.adorn.trading_station.price"), Colors.WHITE), 1, 3)
+            add(CenteredLabelWidget(TranslatableText("block.adorn.trading_station.selling"), Colors.WHITE), 1, 1)
+            add(CenteredLabelWidget(TranslatableText("block.adorn.trading_station.price"), Colors.WHITE), 1, 3)
 
             for (row in 0..2) {
                 for (col in 0..3) {

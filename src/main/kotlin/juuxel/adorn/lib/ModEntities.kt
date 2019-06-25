@@ -5,7 +5,7 @@ import juuxel.adorn.Adorn
 import juuxel.adorn.entity.SittingVehicleEntity
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder
 import net.minecraft.entity.EntityCategory
-import net.minecraft.entity.EntitySize
+import net.minecraft.entity.EntityDimensions
 import net.minecraft.util.registry.Registry
 
 object ModEntities : PolyesterRegistry(Adorn.NAMESPACE) {
@@ -13,7 +13,7 @@ object ModEntities : PolyesterRegistry(Adorn.NAMESPACE) {
         Registry.ENTITY_TYPE,
         "sitting_vehicle",
         FabricEntityTypeBuilder.create(EntityCategory.MISC, ::SittingVehicleEntity)
-            .size(EntitySize.constant(0f, 0f))
+            .size(EntityDimensions.fixed(0f, 0f))
             .build()
     )
 

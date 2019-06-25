@@ -14,7 +14,7 @@ import virtuoel.towelette.api.Fluidloggable
 
 class PostBlock(variant: BlockVariant) : Block(variant.settings), PolyesterBlock, Fluidloggable {
     override val name = "${variant.id.path}_post"
-    override val itemSettings = Item.Settings().itemGroup(ItemGroup.DECORATIONS)
+    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
     override val hasDescription = true
     override val descriptionKey = "block.adorn.post.desc"
 

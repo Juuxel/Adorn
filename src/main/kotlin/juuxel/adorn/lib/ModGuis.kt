@@ -19,7 +19,7 @@ import net.minecraft.container.Container
 import net.minecraft.container.ContainerType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.network.chat.Component
+import net.minecraft.text.Text
 import net.minecraft.util.registry.Registry
 
 object ModGuis : PolyesterRegistry(Adorn.NAMESPACE) {
@@ -43,7 +43,7 @@ object ModGuis : PolyesterRegistry(Adorn.NAMESPACE) {
             fn(syncId, playerInv, BlockContext.EMPTY)
         })
 
-    private inline fun <C : Container> registerScreen(type: ContainerType<C>, crossinline fn: (C, PlayerEntity, Component) -> AbstractContainerScreen<C>) =
+    private inline fun <C : Container> registerScreen(type: ContainerType<C>, crossinline fn: (C, PlayerEntity, Text) -> AbstractContainerScreen<C>) =
         ContainerRegistry.INSTANCE.registerScreen(type) { container, playerInventory, title ->
             fn(container, playerInventory.player, title)
         }

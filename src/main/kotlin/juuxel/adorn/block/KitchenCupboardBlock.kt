@@ -46,8 +46,8 @@ class KitchenCupboardBlock(
     }
 
     override fun onPlaced(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) {
-        if (stack.hasDisplayName()) {
-            (world.getBlockEntity(pos) as? KitchenCupboardBlockEntity)?.customName = stack.displayName
+        if (stack.hasCustomName()) {
+            (world.getBlockEntity(pos) as? KitchenCupboardBlockEntity)?.customName = stack.name
         }
     }
 

@@ -11,11 +11,11 @@ class CarpetedTopPlacementContext(parent: ItemUsageContext) : ItemPlacementConte
     parent.world,
     parent.player,
     parent.hand,
-    parent.itemStack,
-    BlockHitResult(parent.pos, parent.facing, parent.blockPos, parent.method_17699())
+    parent.stack,
+    BlockHitResult(parent.hitPos, parent.side, parent.blockPos, parent.method_17699())
 ) {
     init {
         // We know that the block is a carpet block
-        canReplaceHitBlock = true
+        canReplaceExisting = true
     }
 }

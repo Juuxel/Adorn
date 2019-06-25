@@ -11,9 +11,9 @@ class OptionalProperty<T>(
 ) : AbstractProperty<OptionalProperty.Value<T>>(delegate.name, Value::class.java as Class<Value<T>>)
     where T : Any, T : Comparable<T>, T : StringIdentifiable {
     val none: Value.None<T> = Value.None()
-    private val values = sequence {
+    private val values: Map<T?, Value<T>> = sequence {
         for (value in delegate.values) {
-            yield(value to Value.Some(value))
+            yield(value to Value.Some<T>(value))
         }
 
         yield(null to none)
@@ -32,7 +32,7 @@ class OptionalProperty<T>(
 
     override fun getValues() = values.values
 
-    override fun getValueAsString(value: Value<T>) = value.value?.asString() ?: "none"
+    override fun getName(value: Value<T>) = value.value?.asString() ?: "none"
 
     fun wrap(value: T) = values[value]
 
