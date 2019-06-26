@@ -1,3 +1,4 @@
+import net.fabricmc.loom.task.RemapJarTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -5,6 +6,7 @@ plugins {
     kotlin("jvm") version "1.3.30"
     idea
     id("fabric-loom") version "0.2.4-SNAPSHOT"
+    `maven-publish`
 }
 
 base {
@@ -91,4 +93,26 @@ dependencies {
 
     // Other libraries
     compileOnly("org.apiguardian:apiguardian-api:1.0.0")
+}
+
+val remapJar: RemapJarTask by tasks.getting {}
+
+publishing {
+    publications.create<MavenPublication>("maven") {
+        // Copied from the Cotton buildscript
+
+        artifact("${project.buildDir.absolutePath}/libs/${base.archivesBaseName}-${project.version}.jar") { //release jar - file location not provided anywhere in loom
+            classifier = null
+            builtBy(remapJar)
+        }
+
+        artifact ("${project.buildDir.absolutePath}/libs/${base.archivesBaseName}-${project.version}-dev.jar") { //release jar - file location not provided anywhere in loom
+            classifier = "dev"
+            builtBy(remapJar)
+        }
+
+        /*artifact(sourcesJar) {
+            builtBy remapSourcesJar
+        }*/
+    }
 }
