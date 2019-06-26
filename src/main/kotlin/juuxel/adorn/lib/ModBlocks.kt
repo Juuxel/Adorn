@@ -13,7 +13,6 @@ import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
-import net.minecraft.item.BlockItem
 import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
@@ -80,8 +79,8 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
             // Check that:
             // - the block is a sneak-click handler
             // - the player is sneaking
-            // - the player isn't holding a block
-            if (block is SneakClickHandler && player.isSneaking && player.getStackInHand(hand).item !is BlockItem) {
+            // - the player isn't holding an item (for block item and bucket support)
+            if (block is SneakClickHandler && player.isSneaking && player.getStackInHand(hand).isEmpty) {
                 block.onSneakClick(state, world, hitResult.blockPos, player, hand, hitResult)
             } else ActionResult.PASS
         })
