@@ -13,6 +13,9 @@ import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
+import net.minecraft.block.Blocks
+import net.minecraft.item.Item
+import net.minecraft.item.ItemGroup
 import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
@@ -71,6 +74,13 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
     }
 
     val BUBBLE_CHIMNEY = registerBlock(BubbleChimneyBlock())
+    val WHITE_WOODEN_GATE = registerBlock(
+        SidedGateBlock(
+            "white_wooden_gate",
+            Item.Settings().group(ItemGroup.DECORATIONS),
+            Block.Settings.copy(Blocks.OAK_FENCE_GATE)
+        )
+    )
 
     fun init() {
         UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->
