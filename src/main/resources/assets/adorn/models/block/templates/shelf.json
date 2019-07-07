@@ -1,4 +1,5 @@
 {
+  "__comment": "Y rotation fix applied from adorn:block/templates/rotatable (rotation: { y: 315 ... }}",
   "parent": "minecraft:block/block",
   "textures": {
     "supports": "#texture",
@@ -6,8 +7,8 @@
   },
   "display": {
     "gui": {
-      "rotation": [ 20, 225, 0 ],
-      "translation": [ -3, 0, 1 ],
+      "rotation": [ 12, 315, 0 ],
+      "translation": [ 3, 2, 1 ],
       "scale": [ 0.8, 0.8, 0.8 ]
     }
   },

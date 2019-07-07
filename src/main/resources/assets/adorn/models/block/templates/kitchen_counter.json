@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "adorn:block/templates/rotatable",
   "textures": {
     "stone": "minecraft:block/polished_andesite",
     "particle": "#planks"

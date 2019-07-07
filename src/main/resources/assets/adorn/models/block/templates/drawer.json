@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "adorn:block/templates/rotatable",
   "textures": {
     "handle": "minecraft:block/iron_block",
     "particle": "#planks"
