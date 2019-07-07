@@ -69,9 +69,6 @@
   "advancements.adorn.sofa.title": "Päiväunet",
   "advancements.adorn.sofa.description": "Tee sohva villasta ja kepeistä.",
 
-  "advancements.adorn.kitchen.title": "Keittiössä ohjeen mukaan",
-  "advancements.adorn.kitchen.description": "Tee keittiöpalikoita.",
-
   "advancements.adorn.trading_station.title": "Päivä torilla",
   "advancements.adorn.trading_station.description": "Valmista myyntipöytä.",
 
@@ -139,6 +136,7 @@
   "block.adorn.acacia_shelf": "Akaasiahylly",
   "block.adorn.dark_oak_shelf": "Tumma tammihylly",
   "block.adorn.iron_shelf": "Rautahylly",
+  "block.adorn.shelf.desc": "Kätevä paikka arkipäivän esineille",
 
   "item.adorn.stone_rod": "Kivisauva",
   "item.adorn.stone_rod.desc": "Työstämisen raaka-aine"

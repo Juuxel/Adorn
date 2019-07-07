@@ -10,7 +10,7 @@
       "translate": "advancements.adorn.trading_station.description"
     }
   },
-  "parent": "adorn:kitchen",
+  "parent": "adorn:sofa",
   "criteria": {
     "has_trading_station": {
       "trigger": "minecraft:inventory_changed",

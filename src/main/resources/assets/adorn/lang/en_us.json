@@ -69,9 +69,6 @@
   "advancements.adorn.sofa.title": "Daydreaming",
   "advancements.adorn.sofa.description": "Make a sofa from wool and sticks.",
 
-  "advancements.adorn.kitchen.title": "Cooking by the Book",
-  "advancements.adorn.kitchen.description": "Make some kitchen blocks.",
-
   "advancements.adorn.trading_station.title": "Day at the Market",
   "advancements.adorn.trading_station.description": "Craft a trading station.",
 
@@ -139,6 +136,7 @@
   "block.adorn.acacia_shelf": "Acacia Shelf",
   "block.adorn.dark_oak_shelf": "Dark Oak Shelf",
   "block.adorn.iron_shelf": "Iron Shelf",
+  "block.adorn.shelf.desc": "A handy place for everyday items",
 
   "item.adorn.stone_rod": "Stone Rod",
   "item.adorn.stone_rod.desc": "Crafting ingredient"

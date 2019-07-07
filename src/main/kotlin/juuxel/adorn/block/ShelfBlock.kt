@@ -31,6 +31,8 @@ class ShelfBlock(variant: BlockVariant) : PolyesterBlockWithEntity(variant.creat
     override val name = "${variant.variantName}_shelf"
     override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
     override val blockEntityType = BLOCK_ENTITY_TYPE
+    override val hasDescription = true
+    override val descriptionKey = "block.adorn.shelf.desc"
 
     init {
         defaultState = defaultState.with(WATERLOGGED, false)

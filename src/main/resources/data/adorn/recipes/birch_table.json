@@ -2,8 +2,9 @@
   "type": "crafting_shaped",
   "group": "adorn:table",
   "pattern": [
-    "SS",
-    "##"
+    "SSS",
+    "# #",
+    "# #"
   ],
   "key": {
     "S": {
@@ -15,6 +16,6 @@
   },
   "result": {
     "item": "adorn:birch_table",
-    "count": 2
+    "count": 3
   }
 }

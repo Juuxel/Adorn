@@ -14,14 +14,14 @@ object TableRecipe : AbstractContentGenerator("table.recipe", "recipes",
             mapOf(
                 "type" to "crafting_shaped",
                 "group" to "adorn:table",
-                "pattern" to listOf("SS", "##"),
+                "pattern" to listOf("SSS", "# #", "# #"),
                 "key" to mapOf(
                     "S" to mapOf("item" to "minecraft:${id.path}_slab"),
                     "#" to mapOf("item" to "minecraft:stick")
                 ),
                 "result" to mapOf(
                     "item" to id.suffixPath("_table"),
-                    "count" to 2
+                    "count" to 3
                 )
             )
         ).suffixed("table")

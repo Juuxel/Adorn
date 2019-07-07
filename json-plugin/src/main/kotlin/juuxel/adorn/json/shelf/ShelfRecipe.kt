@@ -21,7 +21,7 @@ object ShelfRecipe : AbstractContentGenerator("shelf.recipe", "recipes",
                 ),
                 "result" to mapOf(
                     "item" to id.suffixPath("_shelf"),
-                    "count" to 2
+                    "count" to 3
                 )
             )
         ).suffixed("shelf")
