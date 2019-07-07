@@ -128,10 +128,18 @@
 
   "block.adorn.chimney": "Chimney",
   "block.adorn.chimney.desc": "Decoration block",
-  
+
   "block.adorn.bubble_chimney": "Prismarine Chimney",
   "block.adorn.bubble_chimney.desc": "Bubbles underwater",
-  
+
+  "block.adorn.oak_shelf": "Oak Shelf",
+  "block.adorn.spruce_shelf": "Spruce Shelf",
+  "block.adorn.birch_shelf": "Birch Shelf",
+  "block.adorn.jungle_shelf": "Jungle Shelf",
+  "block.adorn.acacia_shelf": "Acacia Shelf",
+  "block.adorn.dark_oak_shelf": "Dark Oak Shelf",
+  "block.adorn.iron_shelf": "Iron Shelf",
+
   "item.adorn.stone_rod": "Stone Rod",
   "item.adorn.stone_rod.desc": "Crafting ingredient"
 }

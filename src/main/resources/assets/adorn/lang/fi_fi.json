@@ -132,6 +132,14 @@
   "block.adorn.bubble_chimney": "Prismariinisavupiippu",
   "block.adorn.bubble_chimney.desc": "Kuplii veden alla",
 
+  "block.adorn.oak_shelf": "Tammihylly",
+  "block.adorn.spruce_shelf": "Kuusihylly",
+  "block.adorn.birch_shelf": "Koivuhylly",
+  "block.adorn.jungle_shelf": "Viidakkopuuhylly",
+  "block.adorn.acacia_shelf": "Akaasiahylly",
+  "block.adorn.dark_oak_shelf": "Tumma tammihylly",
+  "block.adorn.iron_shelf": "Rautahylly",
+
   "item.adorn.stone_rod": "Kivisauva",
   "item.adorn.stone_rod.desc": "Työstämisen raaka-aine"
 }
