@@ -38,9 +38,9 @@ class WoodFurnitureBuilder private constructor(private val woodType: WoodType) {
         kitchenCupboard = true
     }
 
-    fun register(): Unit = Registry().register()
+    fun register(namespace: String): Unit = Registry(namespace).register()
 
-    private inner class Registry : PolyesterRegistry(woodType.id.namespace) {
+    private inner class Registry(namespace: String) : PolyesterRegistry(namespace) {
         private val material = woodType.id.path
 
         fun register() {

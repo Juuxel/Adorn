@@ -28,9 +28,9 @@ class BuildingBlockBuilder private constructor(private val material: BlockVarian
         step = true
     }
 
-    fun register(): Unit = Registry().register()
+    fun register(namespace: String): Unit = Registry(namespace).register()
 
-    private inner class Registry : PolyesterRegistry(material.id.namespace) {
+    private inner class Registry(namespace: String) : PolyesterRegistry(namespace) {
         fun register() {
             if (post) registerBlock(PostBlock(material))
             if (platform) registerBlock(PlatformBlock(material))

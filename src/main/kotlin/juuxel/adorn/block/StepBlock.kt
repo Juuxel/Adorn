@@ -17,8 +17,8 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 
-class StepBlock(variant: BlockVariant) : Block(variant.settings), PolyesterBlock, Waterloggable {
-    override val name = "${variant.id.path}_step"
+class StepBlock(variant: BlockVariant) : Block(variant.createSettings()), PolyesterBlock, Waterloggable {
+    override val name = "${variant.variantName}_step"
     override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
     override val hasDescription = true
     override val descriptionKey = "block.adorn.step.desc"

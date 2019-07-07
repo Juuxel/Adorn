@@ -1,0 +1,64 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "#texture"
+  },
+  "display": {
+    "gui": {
+      "rotation": [ 20, 225, 0 ],
+      "translation": [ -3, 0, 1 ],
+      "scale": [ 0.8, 0.8, 0.8 ]
+    }
+  },
+  "elements": [
+    {
+      "__comment": "Upper part",
+      "from": [0, 5, 0],
+      "to": [7, 6, 16],
+      "faces": {
+        "up": { "texture": "#texture" },
+        "down": { "texture": "#texture" },
+        "east": { "texture": "#texture" },
+        "north": { "texture": "#texture", "cullface": "north" },
+        "south": { "texture": "#texture", "cullface": "south" },
+        "west": { "texture": "#texture", "cullface": "west" }
+      }
+    },
+    {
+      "__comment": "Left support",
+      "from": [2, 0, 14],
+      "to": [3, 6, 15],
+      "faces": {
+        "up": { "texture": "#texture" },
+        "down": { "texture": "#texture" },
+        "east": { "texture": "#texture" },
+        "north": { "texture": "#texture" },
+        "south": { "texture": "#texture" },
+        "west": { "texture": "#texture" }
+      },
+      "rotation": {
+        "origin": [2.5, 4, 14.5],
+        "axis": "z",
+        "angle": -45
+      }
+    },
+    {
+      "__comment": "Right support",
+      "from": [2, 0, 1],
+      "to": [3, 6, 2],
+      "faces": {
+        "up": { "texture": "#texture" },
+        "down": { "texture": "#texture" },
+        "east": { "texture": "#texture" },
+        "north": { "texture": "#texture" },
+        "south": { "texture": "#texture" },
+        "west": { "texture": "#texture" }
+      },
+      "rotation": {
+        "origin": [2.5, 4, 1.5],
+        "axis": "z",
+        "angle": -45
+      }
+    }
+  ]
+}

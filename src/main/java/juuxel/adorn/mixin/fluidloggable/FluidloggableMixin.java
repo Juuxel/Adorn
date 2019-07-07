@@ -10,6 +10,7 @@ import virtuoel.towelette.api.Fluidloggable;
         ChimneyBlock.class,
         PlatformBlock.class,
         PostBlock.class,
+        ShelfBlock.class,
         SofaBlock.class,
         StepBlock.class,
         StoneTorchBlock.class,

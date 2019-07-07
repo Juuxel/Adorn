@@ -7,12 +7,15 @@ import juuxel.adorn.block.*
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.block.renderer.TradingStationRenderer
 import juuxel.adorn.api.util.BlockVariant
+import juuxel.adorn.block.entity.ShelfBlockEntity
+import juuxel.adorn.block.renderer.ShelfRenderer
 import juuxel.adorn.util.VanillaWoodType
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
+import net.minecraft.block.Blocks
 import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
@@ -53,8 +56,12 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         )
     )
 
+    private val WOODEN_VARIANTS = VanillaWoodType.values().map {
+        BlockVariant.Wood(Identifier("minecraft", it.id))
+    }
+
     private val BUILDING_BLOCK_VARIANTS = sequence {
-        yieldAll(VanillaWoodType.values().map { BlockVariant.Wood(Identifier("minecraft", it.id)) })
+        yieldAll(WOODEN_VARIANTS)
         yieldAll(BlockVariant.Stone.values().iterator())
     }.toList()
 
@@ -71,6 +78,18 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
     }
 
     val BUBBLE_CHIMNEY = registerBlock(BubbleChimneyBlock())
+
+    val WOODEN_SHELVES: List<ShelfBlock> = WOODEN_VARIANTS.map {
+        registerBlock(ShelfBlock(it))
+    }
+
+    val IRON_SHELF: ShelfBlock = registerBlock(
+        ShelfBlock(object : BlockVariant {
+            override val variantName = "iron"
+
+            override fun createSettings() = Block.Settings.copy(Blocks.IRON_BARS)
+        })
+    )
 
     fun init() {
         UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->
@@ -91,6 +110,10 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         BlockEntityRendererRegistry.INSTANCE.register(
             TradingStationBlockEntity::class.java,
             TradingStationRenderer()
+        )
+        BlockEntityRendererRegistry.INSTANCE.register(
+            ShelfBlockEntity::class.java,
+            ShelfRenderer()
         )
     }
 }

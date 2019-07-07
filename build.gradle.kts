@@ -88,8 +88,8 @@ dependencies {
 
     // Other mods
     includedMod("io.github.juuxel:polyester:" + v("polyester"), excludeFabric)
-    modImplementation("towelette:Towelette:" + v("towelette"))
     includedMod("io.github.cottonmc:cotton:" + v("cotton"), excludeFabric)
+    modImplementation("towelette:Towelette:" + v("towelette"))
 
     // Other libraries
     compileOnly("org.apiguardian:apiguardian-api:1.0.0")

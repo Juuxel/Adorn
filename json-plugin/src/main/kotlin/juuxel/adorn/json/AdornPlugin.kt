@@ -13,6 +13,8 @@ import juuxel.adorn.json.drawer.*
 import juuxel.adorn.json.kitchen.*
 import juuxel.adorn.json.platform.*
 import juuxel.adorn.json.post.*
+import juuxel.adorn.json.shelf.ShelfBlockModel
+import juuxel.adorn.json.shelf.ShelfBlockState
 import juuxel.adorn.json.sofa.*
 import juuxel.adorn.json.step.*
 import juuxel.adorn.json.table.*
@@ -63,6 +65,11 @@ object AdornPlugin : Plugin {
     val STEP = GeneratorInfo(
         AdornCategory,
         AdornPlugin.Subcategories.Steps
+    )
+
+    val SHELF = GeneratorInfo(
+        AdornCategory,
+        AdornPlugin.Subcategories.Shelves
     )
 
     val OTHER = GeneratorInfo(
@@ -131,8 +138,8 @@ object AdornPlugin : Plugin {
             keyItems = listOf(planksItem, { it.suffixPath("_kitchen_counter") })
         ),
 
-        DrawerBlockModel,
-        DrawerBlockState,
+        ShelfBlockModel,
+        ShelfBlockState,
         SuffixedBlockItemModel("drawer", DRAWER),
         SuffixedContainerLootTable("drawer", DRAWER),
         DrawerRecipe,
@@ -196,7 +203,12 @@ object AdornPlugin : Plugin {
             STEP,
             "step",
             keyItems = listOf(slabItem)
-        )
+        ),
+
+        ShelfBlockModel,
+        ShelfBlockState,
+        SuffixedBlockItemModel("shelf", SHELF),
+        SuffixedLootTable("shelf", SHELF)
     )
 
     object AdornCategory : GeneratorInfo.Category {
@@ -213,6 +225,7 @@ object AdornPlugin : Plugin {
         Posts("subcategories.posts"),
         Platforms("subcategories.platforms"),
         Steps("subcategories.steps"),
+        Shelves("subcategories.shelves"),
         Other("subcategories.other"),
     }
 

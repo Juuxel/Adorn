@@ -19,7 +19,7 @@ abstract class BaseInventoryBlockEntity(
     type: BlockEntityType<*>,
     private val invSize: Int
 ) : LootableContainerBlockEntity(type) {
-    private var items: DefaultedList<ItemStack> = DefaultedList.create(invSize, ItemStack.EMPTY)
+    protected var items: DefaultedList<ItemStack> = DefaultedList.create(invSize, ItemStack.EMPTY)
     val sidedInventory: SidedInventory = @Suppress("LeakingThis") SidedInventoryImpl(this)
 
     override fun toTag(tag: CompoundTag) = super.toTag(tag).apply {
