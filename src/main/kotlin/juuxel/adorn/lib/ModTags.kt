@@ -24,6 +24,7 @@ object ModTags {
     val STONE_POSTS = blockAndItem(Adorn.id("stone_posts"))
     val STONE_PLATFORMS = blockAndItem(Adorn.id("stone_platforms"))
     val STONE_STEPS = blockAndItem(Adorn.id("stone_steps"))
+    val SHELVES = blockAndItem(Adorn.id("shelves"))
 
     fun init() {}
 

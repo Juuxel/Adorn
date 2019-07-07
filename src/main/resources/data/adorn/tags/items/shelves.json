@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:oak_shelf",
+    "adorn:spruce_shelf",
+    "adorn:birch_shelf",
+    "adorn:jungle_shelf",
+    "adorn:acacia_shelf",
+    "adorn:dark_oak_shelf",
+    "adorn:iron_shelf"
+  ]
+}
