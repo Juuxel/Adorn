@@ -57,7 +57,7 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
     )
 
     private val WOODEN_VARIANTS = VanillaWoodType.values().map {
-        BlockVariant.Wood(Identifier("minecraft", it.id))
+        BlockVariant.Wood(it.id)
     }
 
     private val BUILDING_BLOCK_VARIANTS = sequence {
