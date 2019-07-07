@@ -6,22 +6,44 @@ import net.fabricmc.api.Environment
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
+import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
+import net.minecraft.fluid.Fluids
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
+import net.minecraft.item.ItemPlacementContext
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.state.StateFactory
+import net.minecraft.state.property.Properties
 import net.minecraft.tag.FluidTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.BlockView
 import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
-import virtuoel.towelette.api.Fluidloggable
 import java.util.*
 
-class BubbleChimneyBlock : Block(Settings.copy(Blocks.PRISMARINE)), PolyesterBlock, Fluidloggable {
+class BubbleChimneyBlock : Block(Settings.copy(Blocks.PRISMARINE)), PolyesterBlock, Waterloggable {
     override val name = "bubble_chimney"
     override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
     override val hasDescription = true
+
+    init {
+        defaultState = defaultState.with(Properties.WATERLOGGED, false)
+    }
+
+    override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+        super.appendProperties(builder)
+        builder.add(Properties.WATERLOGGED)
+    }
+
+    override fun getPlacementState(context: ItemPlacementContext) =
+        super.getPlacementState(context)?.run {
+            with(Properties.WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
+        }
+
+    override fun getFluidState(state: BlockState) =
+        if (state[Properties.WATERLOGGED]) Fluids.WATER.getStill(false)
+        else super.getFluidState(state)
 
     @Environment(EnvType.CLIENT)
     override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {

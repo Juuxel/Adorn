@@ -5,11 +5,14 @@ import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
+import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.enums.DoubleBlockHalf
 import net.minecraft.entity.EntityContext
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.fluid.FluidState
+import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.stat.Stats
@@ -25,22 +28,21 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
 import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
-import virtuoel.towelette.api.FluidProperty
-import virtuoel.towelette.api.Fluidloggable
 import java.util.EnumMap
 
-class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENCE)), PolyesterBlock, Fluidloggable {
+class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENCE)), PolyesterBlock, Waterloggable {
     override val name = "${material}_chair"
     // null to skip registration
     override val itemSettings: Nothing? = null
 
     init {
         defaultState = defaultState.with(HALF, DoubleBlockHalf.LOWER)
+            .with(WATERLOGGED, false)
     }
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.add(FACING, HALF)
+        builder.add(FACING, HALF, WATERLOGGED)
     }
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState? {
@@ -48,8 +50,13 @@ class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENC
 
         return if (pos.y < 255 && context.world.getBlockState(pos.up()).canReplace(context))
             super.getPlacementState(context)!!.with(FACING, context.playerFacing.opposite)
+                .with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
         else null
     }
+
+    override fun getFluidState(state: BlockState) =
+        if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
+        else super.getFluidState(state)
 
     override fun canPlaceAt(state: BlockState, world: ViewableWorld, pos: BlockPos): Boolean {
         return if (state[HALF] != DoubleBlockHalf.UPPER) {
@@ -96,9 +103,15 @@ class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENC
             pos.up(),
             defaultState.with(HALF, DoubleBlockHalf.UPPER)
                 .with(FACING, state[FACING])
-                .with(FluidProperty.FLUID, FluidProperty.FLUID.of(world.getFluidState(pos.up())))
+                .let { updateFluidPropertyOnPlaced(it, world.getFluidState(pos.up())) }
         )
     }
+
+    /**
+     * For using a mixin ([juuxel.adorn.mixin.fluidloggable.ChairBlockMixin]) to set the fluid property.
+     */
+    private fun updateFluidPropertyOnPlaced(state: BlockState, fluidState: FluidState) =
+        state.with(WATERLOGGED, fluidState.fluid == Fluids.WATER)
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         if (state[HALF] == DoubleBlockHalf.LOWER) {
@@ -148,6 +161,7 @@ class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENC
         val FACING = Properties.HORIZONTAL_FACING
         val HALF = Properties.DOUBLE_BLOCK_HALF
         val CARPET = CarpetedBlock.CARPET
+        val WATERLOGGED = Properties.WATERLOGGED
 
         private val LOWER_SHAPES: EnumMap<Direction, VoxelShape>
         private val LOWER_SHAPES_WITH_CARPET: EnumMap<Direction, VoxelShape>

@@ -88,7 +88,7 @@ dependencies {
 
     // Other mods
     includedMod("io.github.juuxel:polyester:" + v("polyester"), excludeFabric)
-    includedMod("towelette:Towelette:" + v("towelette"))
+    modImplementation("towelette:Towelette:" + v("towelette"))
     includedMod("io.github.cottonmc:cotton:" + v("cotton"), excludeFabric)
 
     // Other libraries

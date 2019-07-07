@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.*
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.FluidState
+import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.Items
 import net.minecraft.sound.BlockSoundGroup
@@ -17,21 +18,21 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
-import virtuoel.towelette.api.Fluidloggable
 import java.util.Random
 
-class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Fluidloggable {
+class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Waterloggable {
     override val name = "stone_torch"
     override val itemSettings = null
     override val hasDescription = true
 
     init {
         defaultState = defaultState.with(LIT, true)
+            .with(WATERLOGGED, false)
     }
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.add(LIT)
+        builder.add(LIT, WATERLOGGED)
     }
 
     override fun tryFillWithFluid(world: IWorld, pos: BlockPos, state: BlockState, fluidState: FluidState) =
@@ -58,15 +59,29 @@ class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Fluidloggable {
     }
 
     override fun getPlacementState(context: ItemPlacementContext) =
-        super.getPlacementState(context)?.let { it.with(LIT, it.fluidState.isEmpty) }
+        super.getPlacementState(context)?.let {
+            it.with(LIT, it.fluidState.isEmpty)
+                .with(
+                    Properties.WATERLOGGED,
+                    context.world.getFluidState(context.blockPos).fluid == Fluids.WATER
+                )
+        }
 
-    class Wall(settings: Settings) : WallTorchBlock(settings), PolyesterBlock, Fluidloggable {
+    override fun getFluidState(state: BlockState) =
+        if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
+        else super.getFluidState(state)
+
+    class Wall(settings: Settings) : WallTorchBlock(settings), PolyesterBlock, Waterloggable {
         override val name = "wall_stone_torch"
         override val itemSettings = null
 
+        init {
+            defaultState = defaultState.with(LIT, true).with(WATERLOGGED, false)
+        }
+
         override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
             super.appendProperties(builder)
-            builder.add(LIT)
+            builder.add(LIT, WATERLOGGED)
         }
 
         override fun tryFillWithFluid(world: IWorld, pos: BlockPos, state: BlockState, fluidState: FluidState) =
@@ -93,11 +108,22 @@ class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Fluidloggable {
         }
 
         override fun getPlacementState(context: ItemPlacementContext) =
-            super.getPlacementState(context)?.let { it.with(LIT, it.fluidState.isEmpty) }
+            super.getPlacementState(context)?.let {
+                it.with(LIT, it.fluidState.isEmpty)
+                    .with(
+                        Properties.WATERLOGGED,
+                        context.world.getFluidState(context.blockPos).fluid == Fluids.WATER
+                    )
+            }
+
+        override fun getFluidState(state: BlockState) =
+            if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
+            else super.getFluidState(state)
     }
 
     companion object {
         val LIT = Properties.LIT
+        val WATERLOGGED = Properties.WATERLOGGED
         internal val settings = FabricBlockSettings.copy(Blocks.TORCH)
             .lightLevel(15)
             .sounds(BlockSoundGroup.STONE)

@@ -7,10 +7,11 @@ import juuxel.adorn.config.AdornConfig
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
+import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
+import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateFactory
-import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
@@ -18,24 +19,28 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
-import virtuoel.towelette.api.Fluidloggable
 
-class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING_TABLE)), PolyesterBlock, Fluidloggable {
+class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING_TABLE)), PolyesterBlock, Waterloggable {
     override val name = "${material}_table"
     override val itemSettings: Nothing? = null
     override val sittingYOffset = 0.6
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.add(NORTH, EAST, SOUTH, WEST)
+        builder.add(NORTH, EAST, SOUTH, WEST, WATERLOGGED)
     }
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState =
         updateConnections(
-            super.getPlacementState(context)!!,
+            super.getPlacementState(context)!!
+                .with(Properties.WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER),
             context.world,
             context.blockPos
         )
+
+    override fun getFluidState(state: BlockState) =
+        if (state[Properties.WATERLOGGED]) Fluids.WATER.getStill(false)
+        else super.getFluidState(state)
 
     override fun getStateForNeighborUpdate(
         state: BlockState,
@@ -70,6 +75,7 @@ class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING
         val SOUTH = Properties.SOUTH
         val WEST = Properties.WEST
         val CARPET = CarpetedBlock.CARPET
+        val WATERLOGGED = Properties.WATERLOGGED
 
         private val SHAPES: Byte2ObjectMap<VoxelShape>
 

@@ -10,8 +10,10 @@ import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
+import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.fluid.Fluids
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
@@ -32,9 +34,8 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
-import virtuoel.towelette.api.Fluidloggable
 
-class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), PolyesterBlock, Fluidloggable,
+class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), PolyesterBlock, Waterloggable,
     SneakClickHandler {
     override val name = "${variant}_sofa"
     override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
@@ -44,6 +45,7 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
             .with(FRONT_CONNECTION, FrontConnection.None)
             .with(CONNECTED_LEFT, false)
             .with(CONNECTED_RIGHT, false)
+            .with(WATERLOGGED, false)
     }
 
     override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult): ActionResult {
@@ -62,16 +64,21 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.add(FACING, CONNECTED_LEFT, CONNECTED_RIGHT, FRONT_CONNECTION)
+        builder.add(FACING, CONNECTED_LEFT, CONNECTED_RIGHT, FRONT_CONNECTION, WATERLOGGED)
     }
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState {
         return updateConnections(
-            super.getPlacementState(context)!!.with(FACING, context.playerFacing.opposite),
+            super.getPlacementState(context)!!.with(FACING, context.playerFacing.opposite)
+                .with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER),
             context.world,
             context.blockPos
         )
     }
+
+    override fun getFluidState(state: BlockState) =
+        if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
+        else super.getFluidState(state)
 
     override fun getStateForNeighborUpdate(
         state: BlockState,
@@ -134,6 +141,7 @@ class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), 
         val CONNECTED_LEFT = BooleanProperty.of("connected_left")
         val CONNECTED_RIGHT = BooleanProperty.of("connected_right")
         val FRONT_CONNECTION = EnumProperty.of("front", FrontConnection::class.java)
+        val WATERLOGGED = Properties.WATERLOGGED
 
         private val OUTLINE_SHAPE_MAP: Byte2ObjectMap<VoxelShape>
         private val COLLISION_SHAPE_MAP: Byte2ObjectMap<VoxelShape>
