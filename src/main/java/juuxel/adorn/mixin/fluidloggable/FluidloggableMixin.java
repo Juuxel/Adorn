@@ -15,7 +15,8 @@ import virtuoel.towelette.api.Fluidloggable;
         StepBlock.class,
         StoneTorchBlock.class,
         StoneTorchBlock.Wall.class,
-        TableBlock.class
+        TableBlock.class,
+        TradingStationBlock.class
 })
 public class FluidloggableMixin implements Fluidloggable {
 }

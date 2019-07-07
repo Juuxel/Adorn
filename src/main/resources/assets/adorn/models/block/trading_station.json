@@ -1,14 +1,16 @@
 {
   "parent": "block/block",
   "textures": {
-    "planks": "minecraft:block/oak_planks",
-    "top": "minecraft:block/polished_diorite",
-    "particle": "minecraft:block/oak_planks"
+    "leg": "minecraft:block/dark_oak_log",
+    "top": "minecraft:block/dark_oak_planks",
+    "cloth_top": "adorn:block/trading_station_cloth_top",
+    "cloth_side": "adorn:block/trading_station_cloth_side",
+    "particle": "minecraft:block/dark_oak_planks"
   },
   "elements": [
     {
       "__comment": "Top",
-      "from": [0, 12, 0],
+      "from": [0, 14, 0],
       "to": [16, 16, 16],
       "faces": {
         "up": { "texture": "#top", "cullface": "up" },
@@ -20,15 +22,63 @@
       }
     },
     {
-      "__comment": "Main part",
-      "from": [1, 0, 0],
-      "to": [15, 12, 16],
+      "from": [1, 0, 1],
+      "to": [4, 14, 4],
       "faces": {
-        "down": { "texture": "#planks", "cullface": "down" },
-        "east": { "texture": "#planks", "cullface": "east" },
-        "west": { "texture": "#planks", "cullface": "west" },
-        "north": { "texture": "#planks", "cullface": "north" },
-        "south": { "texture": "#planks", "cullface": "south" }
+        "down": { "texture": "#leg", "cullface": "down" },
+        "up": { "texture": "#leg" },
+        "east": { "texture": "#leg" },
+        "west": { "texture": "#leg" },
+        "north": { "texture": "#leg" },
+        "south": { "texture": "#leg" }
+      }
+    },
+    {
+      "from": [12, 0, 1],
+      "to": [15, 14, 4],
+      "faces": {
+        "down": { "texture": "#leg", "cullface": "down" },
+        "up": { "texture": "#leg" },
+        "east": { "texture": "#leg" },
+        "west": { "texture": "#leg" },
+        "north": { "texture": "#leg" },
+        "south": { "texture": "#leg" }
+      }
+    },
+    {
+      "from": [1, 0, 12],
+      "to": [4, 14, 15],
+      "faces": {
+        "down": { "texture": "#leg", "cullface": "down" },
+        "up": { "texture": "#leg" },
+        "east": { "texture": "#leg" },
+        "west": { "texture": "#leg" },
+        "north": { "texture": "#leg" },
+        "south": { "texture": "#leg" }
+      }
+    },
+    {
+      "from": [12, 0, 12],
+      "to": [15, 14, 15],
+      "faces": {
+        "down": { "texture": "#leg", "cullface": "down" },
+        "up": { "texture": "#leg" },
+        "east": { "texture": "#leg" },
+        "west": { "texture": "#leg" },
+        "north": { "texture": "#leg" },
+        "south": { "texture": "#leg" }
+      }
+    },
+    {
+      "__comment": "Cloth",
+      "from": [-0.01, 11.01, -0.01],
+      "to": [16.01, 16.01, 16.01],
+      "faces": {
+        "up": { "texture": "#cloth_top", "cullface": "up" },
+        "east": { "texture": "#cloth_side", "cullface": "east" },
+        "west": { "texture": "#cloth_side", "cullface": "west" },
+        "north": { "texture": "#cloth_side", "cullface": "north" },
+        "south": { "texture": "#cloth_side", "cullface": "south" }
       }
     }
   ]

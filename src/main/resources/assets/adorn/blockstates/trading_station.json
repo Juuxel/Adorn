@@ -1,11 +1,5 @@
 {
   "variants": {
-    "axis=z": {
-      "model": "adorn:block/trading_station"
-    },
-    "axis=x": {
-      "model": "adorn:block/trading_station",
-      "y": 90
-    }
+    "": { "model": "adorn:block/trading_station" }
   }
 }
