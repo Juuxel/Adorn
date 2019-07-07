@@ -46,7 +46,7 @@ class ShelfBlock(variant: BlockVariant) : PolyesterBlockWithEntity(variant.creat
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState {
         val waterlogged = context.world.getFluidState(context.blockPos) == Fluids.WATER
-        return defaultState.with(FACING, context.playerFacing.opposite).with(WATERLOGGED, waterlogged)
+        return defaultState.with(FACING, context.side).with(WATERLOGGED, waterlogged)
     }
 
     override fun activate(

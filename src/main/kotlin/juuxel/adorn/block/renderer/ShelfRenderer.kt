@@ -43,14 +43,14 @@ class ShelfRenderer : BlockEntityRenderer<ShelfBlockEntity>() {
         GlStateManager.translatef(tx1, 0f, tz1)
         GlStateManager.scalef(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE)
         GlStateManager.rotatef(ITEM_1_Y_ROT, 0f, 1f, 0f)
-        GlStateManager.rotatef(ITEM_X_ROT, 1f, 0f, 0f)
+        //GlStateManager.rotatef(ITEM_X_ROT, 1f, 0f, 0f)
         itemRenderer.renderItem(be.getInvStack(0), ModelTransformation.Type.FIXED)
         GlStateManager.popMatrix()
 
         GlStateManager.translatef(tx2, 0f, tz2)
         GlStateManager.scalef(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE)
         GlStateManager.rotatef(ITEM_2_Y_ROT, 0f, 1f, 0f)
-        GlStateManager.rotatef(ITEM_X_ROT, 1f, 0f, 0f)
+        //GlStateManager.rotatef(ITEM_X_ROT, 1f, 0f, 0f)
         itemRenderer.renderItem(be.getInvStack(1), ModelTransformation.Type.FIXED)
 
         GlStateManager.popMatrix()
@@ -58,7 +58,7 @@ class ShelfRenderer : BlockEntityRenderer<ShelfBlockEntity>() {
 
     companion object {
         private const val ITEM_SCALE: Float = 0.5f
-        private const val ITEM_X_ROT: Float = 0f
+        //private const val ITEM_X_ROT: Float = 90f
         private const val ITEM_1_Y_ROT: Float = 10f
         private const val ITEM_2_Y_ROT: Float = -17f
     }

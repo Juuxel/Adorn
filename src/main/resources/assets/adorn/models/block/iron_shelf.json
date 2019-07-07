@@ -1,6 +1,7 @@
 {
   "parent": "adorn:block/templates/shelf",
   "textures": {
-    "texture": "minecraft:block/iron_block"
+    "texture": "minecraft:block/iron_block",
+    "supports": "minecraft:block/stone"
   }
 }

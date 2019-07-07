@@ -15,6 +15,7 @@ import juuxel.adorn.json.platform.*
 import juuxel.adorn.json.post.*
 import juuxel.adorn.json.shelf.ShelfBlockModel
 import juuxel.adorn.json.shelf.ShelfBlockState
+import juuxel.adorn.json.shelf.ShelfRecipe
 import juuxel.adorn.json.sofa.*
 import juuxel.adorn.json.step.*
 import juuxel.adorn.json.table.*
@@ -208,7 +209,14 @@ object AdornPlugin : Plugin {
         ShelfBlockModel,
         ShelfBlockState,
         SuffixedBlockItemModel("shelf", SHELF),
-        SuffixedLootTable("shelf", SHELF)
+        SuffixedLootTable("shelf", SHELF),
+        ShelfRecipe,
+        SuffixedRecipeAdvancementGenerator(
+            "shelf.recipe_advancement",
+            SHELF,
+            "shelf",
+            keyItems = listOf(slabItem)
+        )
     )
 
     object AdornCategory : GeneratorInfo.Category {
