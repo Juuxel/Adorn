@@ -1,16 +1,15 @@
 package juuxel.adorn.lib
 
-import io.github.cottonmc.cotton.registry.CommonItems
 import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.Adorn
-import juuxel.adorn.item.AdornWallBlockItem
-import juuxel.adorn.item.ChairBlockItem
-import juuxel.adorn.item.StoneRodItem
-import juuxel.adorn.item.TableBlockItem
+import juuxel.adorn.config.AdornConfigManager
+import juuxel.adorn.item.*
 import juuxel.adorn.util.VanillaWoodType
 import net.fabricmc.fabric.api.registry.FuelRegistry
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
+import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 
 object ModItems : PolyesterRegistry(Adorn.NAMESPACE) {
     val CHAIRS: List<ChairBlockItem> = VanillaWoodType.values().indices.map {
@@ -21,7 +20,7 @@ object ModItems : PolyesterRegistry(Adorn.NAMESPACE) {
         registerItem(TableBlockItem(ModBlocks.TABLES[it]))
     }
 
-    val STONE_ROD = CommonItems.register("stone_rod", StoneRodItem())
+    val STONE_ROD = registerItem(StoneRodItem())
 
     val STONE_TORCH = registerItem(
         AdornWallBlockItem(
@@ -39,8 +38,13 @@ object ModItems : PolyesterRegistry(Adorn.NAMESPACE) {
             add(ModTags.WOODEN_POSTS.item, 300)
             add(ModTags.WOODEN_PLATFORMS.item, 300)
             add(ModTags.WOODEN_STEPS.item, 300)
+            add(ModTags.WOODEN_SHELVES.item, 300)
 
             add(ModTags.SOFAS.item, 150)
+        }
+
+        if (AdornConfigManager.CONFIG.enableOldStoneRods && !Registry.ITEM.containsId(Identifier("c", "stone_rod"))) {
+            Registry.register(Registry.ITEM, Identifier("c", "stone_rod"), DeprecatedItem(STONE_ROD))
         }
     }
 }

@@ -1,6 +1,6 @@
 package juuxel.adorn
 
-import juuxel.adorn.config.AdornConfig
+import juuxel.adorn.config.AdornConfigManager
 import juuxel.adorn.lib.*
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -11,7 +11,7 @@ object Adorn : ModInitializer {
     const val NAMESPACE = "adorn"
 
     override fun onInitialize() {
-        AdornConfig.init()
+        AdornConfigManager.init()
         ModBlocks.init()
         ModItems.init()
         ModEntities.init()

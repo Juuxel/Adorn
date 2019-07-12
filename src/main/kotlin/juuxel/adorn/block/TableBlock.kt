@@ -3,7 +3,7 @@ package juuxel.adorn.block
 import io.github.juuxel.polyester.block.PolyesterBlock
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
-import juuxel.adorn.config.AdornConfig
+import juuxel.adorn.config.AdornConfigManager
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -67,7 +67,7 @@ class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         SHAPES[Bits.buildTableState(state[NORTH], state[EAST], state[SOUTH], state[WEST], state[CARPET].isPresent)]
 
-    override fun isSittingEnabled() = AdornConfig.INSTANCE.sittingOnTables
+    override fun isSittingEnabled() = AdornConfigManager.CONFIG.sittingOnTables
 
     companion object {
         val NORTH = Properties.NORTH

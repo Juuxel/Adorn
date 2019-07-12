@@ -26,6 +26,12 @@
         "value": "juuxel.adorn.Adorn::initClient",
         "adapter": "kotlin"
       }
+    ],
+    "modmenu": [
+      {
+        "value": "juuxel.adorn.compat.modmenu.AdornModMenuPlugin",
+        "adapter": "kotlin"
+      }
     ]
   },
 
@@ -36,6 +42,6 @@
     "fabric": [">=0.3.0-pre", ">=0.3.0"],
     "fabric-language-kotlin": ">=1.3.30",
     "polyester": ">=0.3.0",
-    "cotton": "*"
+    "autoconfig1": "*"
   }
 }

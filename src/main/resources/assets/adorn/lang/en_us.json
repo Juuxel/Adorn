@@ -139,5 +139,16 @@
   "block.adorn.shelf.desc": "A handy place for everyday items",
 
   "item.adorn.stone_rod": "Stone Rod",
-  "item.adorn.stone_rod.desc": "Crafting ingredient"
+  "item.adorn.stone_rod.desc": "Crafting ingredient",
+
+  "item.adorn.deprecated_item.desc.1": "This item has been moved.",
+  "item.adorn.deprecated_item.desc.2": "You can replace it in a crafting grid.",
+
+  "text.autoconfig.Adorn.title": "Adorn",
+  "text.autoconfig.Adorn.category.general": "General",
+  "text.autoconfig.Adorn.category.advanced": "Advanced",
+  "text.autoconfig.Adorn.option.enableOldStoneRods": "Enable old stone rods",
+  "text.autoconfig.Adorn.option.enableOldStoneRods.@Tooltip": "Enable old stone rods for backwards compatibility.",
+  "text.autoconfig.Adorn.option.sittingOnTables": "Sitting on tables",
+  "text.autoconfig.Adorn.option.sittingOnTables.@Tooltip": "Allows you to sit on tables."
 }

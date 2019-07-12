@@ -2,6 +2,8 @@ package juuxel.adorn.lib
 
 import juuxel.adorn.Adorn
 import net.fabricmc.fabric.api.tag.TagRegistry
+import net.fabricmc.fabric.api.tag.TagRegistry.block
+import net.fabricmc.fabric.api.tag.TagRegistry.item
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.tag.Tag
@@ -25,12 +27,15 @@ object ModTags {
     val STONE_PLATFORMS = blockAndItem(Adorn.id("stone_platforms"))
     val STONE_STEPS = blockAndItem(Adorn.id("stone_steps"))
     val SHELVES = blockAndItem(Adorn.id("shelves"))
+    val WOODEN_SHELVES = blockAndItem(Adorn.id("wooden_shelves"))
+
+    val STONE_ROD = item(Identifier("c", "stone_rod"))
 
     fun init() {}
 
     private fun blockAndItem(id: Identifier) = TagPair(
-        TagRegistry.block(id),
-        TagRegistry.item(id)
+        block(id),
+        item(id)
     )
 
     data class TagPair(val block: Tag<Block>, val item: Tag<Item>)

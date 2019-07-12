@@ -1,20 +1,22 @@
 package juuxel.adorn.config
 
-import blue.endless.jankson.Comment
-import io.github.cottonmc.cotton.config.ConfigManager
-import io.github.cottonmc.cotton.config.annotations.ConfigFile
+import me.sargunvohra.mcmods.autoconfig1.ConfigData
+import me.sargunvohra.mcmods.autoconfig1.annotation.Config
+import me.sargunvohra.mcmods.autoconfig1.annotation.ConfigEntry
+import me.sargunvohra.mcmods.autoconfig1.shadowed.blue.endless.jankson.Comment
 
-@ConfigFile(name = "Adorn")
-class AdornConfig {
+@Config(name = "Adorn")
+@Config.Gui.Background("minecraft:textures/block/lime_wool.png")
+class AdornConfig : ConfigData {
     @Comment("If true, you can sit on tables.")
+    @ConfigEntry.Category("general")
+    @ConfigEntry.Gui.Tooltip
     @JvmField
     var sittingOnTables: Boolean = false
 
-    companion object {
-        val INSTANCE by lazy {
-            ConfigManager.loadConfig(AdornConfig::class.java)
-        }
-
-        fun init() {}
-    }
+    @Comment("Enable old stone rods for backwards compatibility.")
+    @ConfigEntry.Category("advanced")
+    @ConfigEntry.Gui.Tooltip
+    @JvmField
+    var enableOldStoneRods: Boolean = true
 }

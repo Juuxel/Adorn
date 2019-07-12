@@ -44,6 +44,9 @@ allprojects {
         maven(url = "https://minecraft.curseforge.com/api/maven") {
             name = "CurseForge"
         }
+
+        // For auto-config
+        maven(url = "http://maven.sargunv.s3-website-us-west-2.amazonaws.com/")
     }
 
     tasks.withType<KotlinCompile> {
@@ -88,8 +91,11 @@ dependencies {
 
     // Other mods
     includedMod("io.github.juuxel:polyester:" + v("polyester"), excludeFabric)
-    includedMod("io.github.cottonmc:cotton:" + v("cotton"), excludeFabric)
+    includedMod("io.github.cottonmc:LibGui:" + v("libgui"))
+    includedMod("cloth-config:ClothConfig:" + v("cloth-config"))
+    includedMod("me.sargunvohra.mcmods:auto-config:" + v("auto-config"))
     modImplementation("towelette:Towelette:" + v("towelette"))
+    modRuntime("io.github.prospector.modmenu:ModMenu:" + v("modmenu"))
 
     // Other libraries
     compileOnly("org.apiguardian:apiguardian-api:1.0.0")

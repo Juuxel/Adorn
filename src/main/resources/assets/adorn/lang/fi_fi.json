@@ -139,5 +139,8 @@
   "block.adorn.shelf.desc": "Kätevä paikka arkipäivän esineille",
 
   "item.adorn.stone_rod": "Kivisauva",
-  "item.adorn.stone_rod.desc": "Työstämisen raaka-aine"
+  "item.adorn.stone_rod.desc": "Työstämisen raaka-aine",
+
+  "item.adorn.deprecated_item.desc.1": "Tämä esine on siirretty.",
+  "item.adorn.deprecated_item.desc.2": "Sen voi korvata työstöruudussa."
 }
