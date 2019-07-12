@@ -14,6 +14,20 @@ class AdornConfig : ConfigData {
     @JvmField
     var sittingOnTables: Boolean = false
 
+    @Comment("If true, sleeping on sofas can skip the night.")
+    @ConfigEntry.Category("general")
+    @ConfigEntry.Gui.Tooltip
+    @JvmField
+    // TODO: Should be a game rule
+    var skipNightOnSofas: Boolean = true
+
+    @Comment("Protects trading stations from other players.")
+    @ConfigEntry.Category("general")
+    @ConfigEntry.Gui.Tooltip
+    @JvmField
+    // TODO: Should be a game rule
+    var protectTradingStations: Boolean = true
+
     @Comment("Enable old stone rods for backwards compatibility.")
     @ConfigEntry.Category("advanced")
     @ConfigEntry.Gui.Tooltip

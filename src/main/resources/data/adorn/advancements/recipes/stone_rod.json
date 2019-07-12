@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:misc/chimney"
+        "recipe": "adorn:misc/stone_rod"
       }
     }
   },

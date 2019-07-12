@@ -149,6 +149,10 @@
   "text.autoconfig.Adorn.category.advanced": "Advanced",
   "text.autoconfig.Adorn.option.enableOldStoneRods": "Enable old stone rods",
   "text.autoconfig.Adorn.option.enableOldStoneRods.@Tooltip": "Enable old stone rods for backwards compatibility.",
-  "text.autoconfig.Adorn.option.sittingOnTables": "Sitting on tables",
-  "text.autoconfig.Adorn.option.sittingOnTables.@Tooltip": "Allows you to sit on tables."
+  "text.autoconfig.Adorn.option.sittingOnTables": "Allow sitting on tables",
+  "text.autoconfig.Adorn.option.sittingOnTables.@Tooltip": "Allows you to sit on tables.",
+  "text.autoconfig.Adorn.option.skipNightOnSofas": "Sleeping on sofas skips the night",
+  "text.autoconfig.Adorn.option.skipNightOnSofas.@Tooltip": "Allows you to skip the night when you sleep on a sofa.",
+  "text.autoconfig.Adorn.option.protectTradingStations": "Protect trading stations",
+  "text.autoconfig.Adorn.option.protectTradingStations.@Tooltip": "Prevents other players from breaking your trading stations."
 }
