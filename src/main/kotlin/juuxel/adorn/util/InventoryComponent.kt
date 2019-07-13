@@ -13,7 +13,7 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 open class InventoryComponent(private val invSize: Int) : Inventory, NbtConvertible {
-    private val listeners: MutableList<InventoryListener> by lazy { ArrayList<InventoryListener>(1) }
+    private val listeners: MutableList<InventoryListener> = ArrayList()
     private val items: DefaultedList<ItemStack> = DefaultedList.create(invSize, ItemStack.EMPTY)
     val sidedInventory: SidedInventory by lazy { SidedInventoryImpl(this) }
 
