@@ -13,7 +13,7 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 open class InventoryComponent(private val invSize: Int) : Inventory, NbtConvertible {
-    private var listeners: MutableList<InventoryListener>? = null
+    private val listeners: MutableList<InventoryListener> by lazy { ArrayList<InventoryListener>(1) }
     private val items: DefaultedList<ItemStack> = DefaultedList.create(invSize, ItemStack.EMPTY)
     val sidedInventory: SidedInventory by lazy { SidedInventoryImpl(this) }
 
@@ -169,15 +169,11 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
     //-----------
 
     override fun markDirty() {
-        listeners?.forEach { it.onInvChange(this) }
+        listeners.forEach { it.onInvChange(this) }
     }
 
     fun addListener(listener: InventoryListener) {
-        if (listeners == null) {
-            listeners = arrayListOf(listener)
-        } else {
-            listeners!!.add(listener)
-        }
+        listeners += listener
     }
 
     inline fun addListener(crossinline block: (Inventory) -> Unit) =

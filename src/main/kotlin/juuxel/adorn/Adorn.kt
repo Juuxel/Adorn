@@ -17,6 +17,7 @@ object Adorn : ModInitializer {
         ModEntities.init()
         ModGuis.init()
         ModTags.init()
+        ModRecipes.init()
     }
 
     @Environment(EnvType.CLIENT)

@@ -27,6 +27,7 @@ interface BlockVariant {
     fun createSettings(): Block.Settings
 
     data class Wood(override val variantName: String) : BlockVariant {
+        @API(status = API.Status.DEPRECATED, since = "1.2.0")
         @Deprecated("", ReplaceWith("Wood(id.path)"))
         constructor(id: Identifier) : this(id.path)
 

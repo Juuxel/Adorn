@@ -1,15 +1,5 @@
 {
-  "type": "crafting_shaped",
-  "pattern": [
-    "#"
-  ],
-  "key": {
-    "#": {
-      "item": "c:stone_rod"
-    }
-  },
-  "result": {
-    "item": "adorn:stone_rod",
-    "count": 1
-  }
+  "type": "adorn:deprecation_replacement",
+  "from": "c:stone_rod",
+  "to": "adorn:stone_rod"
 }

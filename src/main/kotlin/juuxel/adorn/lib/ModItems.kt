@@ -43,7 +43,7 @@ object ModItems : PolyesterRegistry(Adorn.NAMESPACE) {
             add(ModTags.SOFAS.item, 150)
         }
 
-        if (AdornConfigManager.CONFIG.enableOldStoneRods && !Registry.ITEM.containsId(Identifier("c", "stone_rod"))) {
+        if (AdornConfigManager.CONFIG.enableOldStoneRods && !Registry.ITEM.getOrEmpty(Identifier("c", "stone_rod")).isPresent) {
             Registry.register(Registry.ITEM, Identifier("c", "stone_rod"), DeprecatedItem(STONE_ROD))
         }
     }
