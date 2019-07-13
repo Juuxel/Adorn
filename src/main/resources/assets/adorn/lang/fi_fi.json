@@ -141,6 +141,7 @@
   "item.adorn.stone_rod": "Kivisauva",
   "item.adorn.stone_rod.desc": "Työstämisen raaka-aine",
 
+  "item.adorn.deprecated_item.name": "%s - vanhentunut",
   "item.adorn.deprecated_item.desc.1": "Tämä esine on siirretty.",
-  "item.adorn.deprecated_item.desc.2": "Sen voi korvata työstöruudussa."
+  "item.adorn.deprecated_item.desc.2": "Sen voi korvata painamalla %s."
 }

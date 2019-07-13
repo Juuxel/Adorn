@@ -141,8 +141,9 @@
   "item.adorn.stone_rod": "Stone Rod",
   "item.adorn.stone_rod.desc": "Crafting ingredient",
 
+  "item.adorn.deprecated_item.name": "%s - Deprecated",
   "item.adorn.deprecated_item.desc.1": "This item has been moved.",
-  "item.adorn.deprecated_item.desc.2": "You can replace it in a crafting grid.",
+  "item.adorn.deprecated_item.desc.2": "You can replace it by pressing %s.",
 
   "text.autoconfig.Adorn.title": "Adorn",
   "text.autoconfig.Adorn.category.general": "General",
