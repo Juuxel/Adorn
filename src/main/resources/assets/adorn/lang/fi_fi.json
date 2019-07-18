@@ -51,10 +51,10 @@
   "block.adorn.acacia_drawer": "Akaasialipasto",
   "block.adorn.dark_oak_drawer": "Tumma tammilipasto",
 
-  "block.adorn.trading_station": "Myyntipöytä",
+  "block.adorn.trading_station": "Kauppapöytä",
   "block.adorn.trading_station.selling": "Myydään",
   "block.adorn.trading_station.price": "Hinta",
-  "block.adorn.trading_station.label.1": "%s:n myyntipöytä",
+  "block.adorn.trading_station.label.1": "%s:n kauppapöytä",
   "block.adorn.trading_station.label.2": "Myydään %s",
   "block.adorn.trading_station.label.3": "hintaan %s",
   "block.adorn.trading_station.empty_trade": "Tällä pöydällä ei myydä mitään.",
@@ -70,7 +70,7 @@
   "advancements.adorn.sofa.description": "Tee sohva villasta ja kepeistä.",
 
   "advancements.adorn.trading_station.title": "Päivä torilla",
-  "advancements.adorn.trading_station.description": "Valmista myyntipöytä.",
+  "advancements.adorn.trading_station.description": "Valmista kauppapöytä.",
 
   "advancements.adorn.chimney.title": "Tiiliä ja savua",
   "advancements.adorn.chimney.description": "Tee savupiippu.",
@@ -143,5 +143,16 @@
 
   "item.adorn.deprecated_item.name": "%s - vanhentunut",
   "item.adorn.deprecated_item.desc.1": "Tämä esine on siirretty.",
-  "item.adorn.deprecated_item.desc.2": "Sen voi korvata painamalla %s."
+  "item.adorn.deprecated_item.desc.2": "Sen voi korvata painamalla %s.",
+
+  "text.autoconfig.Adorn.category.general": "Yleiset",
+  "text.autoconfig.Adorn.category.advanced": "Edistyneet",
+  "text.autoconfig.Adorn.option.enableOldStoneRods": "Käytä vanhoja kivisauvoja",
+  "text.autoconfig.Adorn.option.enableOldStoneRods.@Tooltip": "Käytä vanhoja kivisauvoja yhteensopivuutta varten.",
+  "text.autoconfig.Adorn.option.sittingOnTables": "Salli pöydillä istuminen",
+  "text.autoconfig.Adorn.option.sittingOnTables.@Tooltip": "Sallii pöydillä istumisen.",
+  "text.autoconfig.Adorn.option.skipNightOnSofas": "Ohita yöt nukkumalla sohvalla",
+  "text.autoconfig.Adorn.option.skipNightOnSofas.@Tooltip": "Sallii ohittaa yöt nukkumalla sohvalla.",
+  "text.autoconfig.Adorn.option.protectTradingStations": "Suojele kauppapöytiä",
+  "text.autoconfig.Adorn.option.protectTradingStations.@Tooltip": "Estää muita pelaajia hajottamasta kauppapöytiäsi."
 }
