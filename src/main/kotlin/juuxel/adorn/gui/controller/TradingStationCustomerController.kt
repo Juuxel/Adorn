@@ -3,9 +3,9 @@ package juuxel.adorn.gui.controller
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
-import juuxel.adorn.util.Colors.WHITE
 import juuxel.adorn.gui.widget.CenteredLabelWidget
 import juuxel.adorn.lib.ModGuis
+import juuxel.adorn.util.Colors.WHITE
 import juuxel.adorn.util.color
 import net.minecraft.container.BlockContext
 import net.minecraft.container.SlotActionType

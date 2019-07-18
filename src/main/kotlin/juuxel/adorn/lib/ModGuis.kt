@@ -9,8 +9,8 @@ import juuxel.adorn.gui.controller.TradingStationController
 import juuxel.adorn.gui.controller.TradingStationCustomerController
 import juuxel.adorn.gui.screen.DrawerScreen
 import juuxel.adorn.gui.screen.KitchenCupboardScreen
-import juuxel.adorn.gui.screen.TradingStationScreen
 import juuxel.adorn.gui.screen.TradingStationCustomerScreen
+import juuxel.adorn.gui.screen.TradingStationScreen
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.gui.screen.ingame.AbstractContainerScreen

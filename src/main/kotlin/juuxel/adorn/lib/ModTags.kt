@@ -1,7 +1,6 @@
 package juuxel.adorn.lib
 
 import juuxel.adorn.Adorn
-import net.fabricmc.fabric.api.tag.TagRegistry
 import net.fabricmc.fabric.api.tag.TagRegistry.block
 import net.fabricmc.fabric.api.tag.TagRegistry.item
 import net.minecraft.block.Block

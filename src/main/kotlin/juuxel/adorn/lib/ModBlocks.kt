@@ -3,12 +3,12 @@ package juuxel.adorn.lib
 import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.Adorn
 import juuxel.adorn.api.block.SneakClickHandler
-import juuxel.adorn.block.*
-import juuxel.adorn.block.entity.TradingStationBlockEntity
-import juuxel.adorn.block.renderer.TradingStationRenderer
 import juuxel.adorn.api.util.BlockVariant
+import juuxel.adorn.block.*
 import juuxel.adorn.block.entity.ShelfBlockEntity
+import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.block.renderer.ShelfRenderer
+import juuxel.adorn.block.renderer.TradingStationRenderer
 import juuxel.adorn.util.VanillaWoodType
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -18,7 +18,6 @@ import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
-import net.minecraft.util.Identifier
 
 object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
     val SOFAS: List<SofaBlock> = DyeColor.values().map {

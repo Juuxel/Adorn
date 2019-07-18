@@ -5,15 +5,12 @@ import juuxel.adorn.Adorn
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.trading.Trade
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
-import net.minecraft.client.MinecraftClient
 import net.minecraft.client.network.packet.CustomPayloadS2CPacket
 import net.minecraft.client.network.packet.EntitySpawnS2CPacket
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.Entity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.PacketByteBuf
-import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 
 object ModNetworking {

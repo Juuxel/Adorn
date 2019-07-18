@@ -25,8 +25,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.BlockView
 import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
-import virtuoel.towelette.api.Fluidloggable
-import java.util.Random
+import java.util.*
 
 class ChimneyBlock : Block(FabricBlockSettings.copy(Blocks.BRICKS).ticksRandomly().build()), PolyesterBlock, Waterloggable {
     override val name = "chimney"

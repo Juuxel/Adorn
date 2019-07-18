@@ -1,6 +1,5 @@
 package juuxel.adorn.trading
 
-import juuxel.adorn.util.InventoryComponent
 import juuxel.adorn.util.NbtConvertible
 import juuxel.adorn.util.Observable
 import net.minecraft.item.ItemStack
