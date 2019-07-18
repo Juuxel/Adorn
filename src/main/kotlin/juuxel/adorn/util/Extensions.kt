@@ -5,7 +5,7 @@ import com.mojang.datafixers.types.JsonOps
 import net.minecraft.datafixers.NbtOps
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.text.Text
-import java.util.*
+import java.util.Optional
 
 fun CompoundTag.putTextComponent(name: String, textComponent: Text) =
     put(

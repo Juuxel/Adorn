@@ -15,7 +15,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
 import net.minecraft.world.loot.context.LootContext
-import java.util.*
+import java.util.Random
 
 abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
     init {

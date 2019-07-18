@@ -28,7 +28,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
 import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
-import java.util.*
+import java.util.EnumMap
 
 class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENCE)), PolyesterBlock, Waterloggable {
     override val name = "${material}_chair"

@@ -5,7 +5,7 @@ import juuxel.adorn.Adorn
 import juuxel.adorn.config.AdornConfig
 import me.sargunvohra.mcmods.autoconfig1.AutoConfig
 import net.minecraft.client.gui.screen.Screen
-import java.util.*
+import java.util.Optional
 
 object AdornModMenuPlugin : ModMenuApi {
     override fun getModId() = Adorn.NAMESPACE

@@ -3,7 +3,7 @@ package juuxel.adorn.block.property
 import net.minecraft.state.property.AbstractProperty
 import net.minecraft.state.property.Property
 import net.minecraft.util.StringIdentifiable
-import java.util.*
+import java.util.Optional
 
 @Suppress("UNCHECKED_CAST")
 class OptionalProperty<T>(

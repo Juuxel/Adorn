@@ -18,7 +18,7 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
-import java.util.*
+import java.util.Random
 
 class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Waterloggable {
     override val name = "stone_torch"
