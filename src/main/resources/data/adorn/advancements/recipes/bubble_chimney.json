@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:misc/bubble_chimney"
+      "adorn:bubble_chimney"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:misc/bubble_chimney"
+        "recipe": "adorn:bubble_chimney"
       }
     }
   },

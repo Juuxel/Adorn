@@ -1,20 +1,10 @@
 {
-  "type": "crafting_shaped",
-  "pattern": [
-    "DED",
-    "W W"
+  "type": "crafting_shapeless",
+  "ingredients": [
+    { "tag": "adorn:tables" },
+    { "item": "minecraft:emerald" },
+    { "item": "minecraft:emerald" }
   ],
-  "key": {
-    "D": {
-      "item": "minecraft:polished_diorite_slab"
-    },
-    "W": {
-      "tag": "minecraft:wooden_slabs"
-    },
-    "E": {
-      "item": "minecraft:emerald"
-    }
-  },
   "result": {
     "item": "adorn:trading_station",
     "count": 1

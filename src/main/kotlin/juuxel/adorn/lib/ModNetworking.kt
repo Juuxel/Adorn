@@ -26,7 +26,7 @@ object ModNetworking {
                 val entity = packet.entityTypeId.create(world)!!
                 entity.entityId = packet.id
                 entity.uuid = packet.uuid
-                entity.method_18003(packet.x, packet.y, packet.z)
+                entity.updateTrackedPosition(packet.x, packet.y, packet.z)
                 entity.pitch = packet.pitch * 360 / 256f
                 entity.yaw = packet.yaw * 360 / 256f
 

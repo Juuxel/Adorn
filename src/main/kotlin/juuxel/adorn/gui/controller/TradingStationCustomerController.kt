@@ -15,6 +15,7 @@ import net.minecraft.inventory.BasicInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.text.TranslatableText
 
+// TODO: Combine the two trading station guis
 class TradingStationCustomerController(
     syncId: Int,
     playerInv: PlayerInventory,
