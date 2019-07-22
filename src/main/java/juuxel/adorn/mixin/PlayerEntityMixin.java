@@ -37,6 +37,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         // Allow sleeping on sofas at daytime
     }
 
+    // Lambda: Optional.ifPresent in wakeUp(boolean, boolean, boolean)
     @Inject(method = "method_18452", at = @At("HEAD"), cancellable = true)
     private void onWakeUpSetSpawn(BlockPos pos, CallbackInfo info) {
         if (world.getBlockState(pos).getBlock() instanceof SofaBlock) {
@@ -49,7 +50,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         // Allow sleeping on sofas at daytime and (depending on config)
         // prevent skipping the night on sofas
         boolean skipNight = AdornConfigManager.INSTANCE.getConfig().skipNightOnSofas;
-        if (info.getReturnValue() && (!skipNight || world.isDaylight()) &&
+        if (info.getReturnValueZ() && (!skipNight || world.isDaylight()) &&
                 getSleepingPosition().map(pos -> world.getBlockState(pos).getBlock() instanceof SofaBlock).orElse(false)) {
             info.setReturnValue(false);
         }
