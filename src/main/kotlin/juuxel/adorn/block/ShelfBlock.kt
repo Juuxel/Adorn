@@ -8,6 +8,7 @@ import juuxel.adorn.block.entity.ShelfBlockEntity
 import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
 import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityContext
@@ -25,6 +26,8 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.BlockView
+import net.minecraft.world.IWorld
+import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
 
 class ShelfBlock(variant: BlockVariant) : PolyesterBlockWithEntity(variant.createSettings()), Waterloggable {
@@ -46,10 +49,39 @@ class ShelfBlock(variant: BlockVariant) : PolyesterBlockWithEntity(variant.creat
     override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: EntityContext) =
         SHAPES[state[FACING]]
 
-    override fun getPlacementState(context: ItemPlacementContext): BlockState {
-        val waterlogged = context.world.getFluidState(context.blockPos) == Fluids.WATER
-        return defaultState.with(FACING, context.side).with(WATERLOGGED, waterlogged)
+    // Based on WallTorchBlock.canPlaceAt
+    override fun canPlaceAt(state: BlockState, world: ViewableWorld, pos: BlockPos): Boolean {
+        val facing = state[FACING]
+        val neighborPos = pos.offset(facing.opposite)
+        return world.getBlockState(neighborPos).method_20827(world, neighborPos, facing)
     }
+
+    // Based on WallTorchBlock.getPlacementState
+    override fun getPlacementState(context: ItemPlacementContext): BlockState? {
+        val waterlogged = context.world.getFluidState(context.blockPos) == Fluids.WATER
+        context.placementDirections.asSequence()
+            .filter { it.axis.isHorizontal }
+            .map { it.opposite }
+            .forEach {
+                val state = defaultState.with(FACING, it).with(WATERLOGGED, waterlogged)
+                if (state.canPlaceAt(context.world, context.blockPos))
+                    return state
+            }
+
+        return null
+    }
+
+    // Based on WallTorchBlock.getStateForNeighborUpdate
+    override fun getStateForNeighborUpdate(
+        state: BlockState,
+        side: Direction,
+        neighborState: BlockState?,
+        world: IWorld,
+        pos: BlockPos,
+        neighborPos: BlockPos?
+    ): BlockState =
+        if (state[FACING].opposite == side && !state.canPlaceAt(world, pos)) Blocks.AIR.defaultState
+        else state
 
     override fun activate(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult
