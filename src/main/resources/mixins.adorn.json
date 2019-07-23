@@ -12,6 +12,7 @@
     "PlayerEntityMixin"
   ],
   "client": [
+    "client.AdvancementTreeWidgetMixin",
     "client.LivingEntityMixin"
   ],
 

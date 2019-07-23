@@ -1,23 +1,23 @@
 {
   "display": {
     "icon": {
-      "item": "adorn:red_sofa"
+      "item": "adorn:stone_torch"
     },
     "title": {
-      "translate": "advancements.adorn.sofa.title"
+      "translate": "advancements.adorn.rocky_lighting.title"
     },
     "description": {
-      "translate": "advancements.adorn.sofa.description"
+      "translate": "advancements.adorn.rocky_lighting.description"
     }
   },
-  "parent": "adorn:chair",
+  "parent": "adorn:root",
   "criteria": {
-    "has_sofa": {
+    "has_chimney": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "adorn:sofas"
+            "item": "adorn:stone_torch"
           }
         ]
       }

@@ -66,17 +66,14 @@
   "advancements.adorn.chair.title": "舒服的坐着",
   "advancements.adorn.chair.description": "制造一把椅子.",
 
-  "advancements.adorn.sofa.title": "白日梦",
-  "advancements.adorn.sofa.description": "用羊毛和棍子做一个沙发.",
+  "advancements.adorn.daydreaming.title": "白日梦",
+  "advancements.adorn.daydreaming.description": "用羊毛和棍子做一个沙发.",
 
-  "advancements.adorn.trading_station.title": "赶集日",
-  "advancements.adorn.trading_station.description": "制造一个贸易站.",
+  "advancements.adorn.day_at_the_market.title": "赶集日",
+  "advancements.adorn.day_at_the_market.description": "制造一个贸易站.",
 
-  "advancements.adorn.chimney.title": "砖和烟",
-  "advancements.adorn.chimney.description": "制造一个烟囱.",
-
-  "advancements.adorn.stone_torch.title": "岩石照明",
-  "advancements.adorn.stone_torch.description": "制造一个石制火把.",
+  "advancements.adorn.rocky_lighting.title": "岩石照明",
+  "advancements.adorn.rocky_lighting.description": "制造一个石制火把.",
 
   "block.adorn.stone_torch": "石制火把",
   "block.adorn.stone_torch.desc": "比木制火把更亮",

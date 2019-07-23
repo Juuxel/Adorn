@@ -66,17 +66,14 @@
   "advancements.adorn.chair.title": "Bequemes Sitzen",
   "advancements.adorn.chair.description": "Stelle einen Stuhl her.",
 
-  "advancements.adorn.sofa.title": "Tagträumerei",
-  "advancements.adorn.sofa.description": "Machen Sie ein Sofa aus Wolle und Stöckern.",
+  "advancements.adorn.daydreaming.title": "Tagträumerei",
+  "advancements.adorn.daydreaming.description": "Machen Sie ein Sofa aus Wolle und Stöckern.",
 
-  "advancements.adorn.trading_station.title": "Ein Tag auf dem Markt",
-  "advancements.adorn.trading_station.description": "Baue eine Handelsstation.",
+  "advancements.adorn.day_at_the_market.title": "Ein Tag auf dem Markt",
+  "advancements.adorn.day_at_the_market.description": "Baue eine Handelsstation.",
 
-  "advancements.adorn.chimney.title": "Ziegel und Rauch",
-  "advancements.adorn.chimney.description": "Bauen Sie einen Schornstein.",
-
-  "advancements.adorn.stone_torch.title": "Felsige Beleuchtung",
-  "advancements.adorn.stone_torch.description": "Baue eine Steinfackel.",
+  "advancements.adorn.rocky_lighting.title": "Felsige Beleuchtung",
+  "advancements.adorn.rocky_lighting.description": "Baue eine Steinfackel.",
 
   "block.adorn.stone_torch": "Stein Fackel",
   "block.adorn.stone_torch.desc": "Heller als eine Holzfackel",
