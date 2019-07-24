@@ -4,13 +4,13 @@
       "item": "adorn:trading_station"
     },
     "title": {
-      "translate": "advancements.adorn.day_at_the_market.title"
+      "translate": "advancements.adorn.trading_station.title"
     },
     "description": {
-      "translate": "advancements.adorn.day_at_the_market.description"
+      "translate": "advancements.adorn.trading_station.description"
     }
   },
-  "parent": "adorn:daydreaming",
+  "parent": "adorn:sofa",
   "criteria": {
     "has_trading_station": {
       "trigger": "minecraft:inventory_changed",

@@ -66,17 +66,17 @@
   "advancements.adorn.chair.title": "Comfy Sitting",
   "advancements.adorn.chair.description": "Craft a chair.",
 
-  "advancements.adorn.daydreaming.title": "Daydreaming",
-  "advancements.adorn.daydreaming.description": "Make a sofa from wool and sticks.",
+  "advancements.adorn.sofa.title": "Daydreaming",
+  "advancements.adorn.sofa.description": "Make a sofa from wool and sticks.",
 
-  "advancements.adorn.day_at_the_market.title": "Day at the Market",
-  "advancements.adorn.day_at_the_market.description": "Craft a trading station.",
+  "advancements.adorn.trading_station.title": "Day at the Market",
+  "advancements.adorn.trading_station.description": "Craft a trading station.",
 
-  "advancements.adorn.happy_little_clouds.title": "Happy Little Clouds",
-  "advancements.adorn.happy_little_clouds.description": "Craft a chimney.",
+  "advancements.adorn.chimney.title": "Bricks and Smoke",
+  "advancements.adorn.chimney.description": "Craft a chimney.",
 
-  "advancements.adorn.rocky_lighting.title": "Rocky Lighting",
-  "advancements.adorn.rocky_lighting.description": "Craft a stone torch.",
+  "advancements.adorn.stone_torch.title": "Rocky Lighting",
+  "advancements.adorn.stone_torch.description": "Craft a stone torch.",
 
   "block.adorn.stone_torch": "Stone Torch",
   "block.adorn.stone_torch.desc": "Brighter than a wooden torch",

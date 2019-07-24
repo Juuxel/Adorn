@@ -66,17 +66,17 @@
   "advancements.adorn.chair.title": "Mukavaa istumista",
   "advancements.adorn.chair.description": "Valmista tuoli.",
 
-  "advancements.adorn.daydreaming.title": "Päiväunet",
-  "advancements.adorn.daydreaming.description": "Tee sohva villasta ja kepeistä.",
+  "advancements.adorn.sofa.title": "Päiväunet",
+  "advancements.adorn.sofa.description": "Tee sohva villasta ja kepeistä.",
 
-  "advancements.adorn.day_at_the_market.title": "Päivä torilla",
-  "advancements.adorn.day_at_the_market.description": "Valmista kauppapöytä.",
+  "advancements.adorn.trading_station.title": "Päivä torilla",
+  "advancements.adorn.trading_station.description": "Valmista kauppapöytä.",
 
-  "advancements.adorn.happy_little_clouds.title": "Hilpeät pilvenhattarat",
-  "advancements.adorn.happy_little_clouds.description": "Tee savupiippu.",
+  "advancements.adorn.chimney.title": "Tiiliä ja savua",
+  "advancements.adorn.chimney.description": "Tee savupiippu.",
 
-  "advancements.adorn.rocky_lighting.title": "Kivinen hehku",
-  "advancements.adorn.rocky_lighting.description": "Valmista kivisoihtu.",
+  "advancements.adorn.stone_torch.title": "Kivinen hehku",
+  "advancements.adorn.stone_torch.description": "Valmista kivisoihtu.",
 
   "block.adorn.stone_torch": "Kivisoihtu",
   "block.adorn.stone_torch.desc": "Kirkkaampi kuin puinen soihtu",

@@ -4,13 +4,13 @@
       "item": "adorn:chimney"
     },
     "title": {
-      "translate": "advancements.adorn.happy_little_clouds.title"
+      "translate": "advancements.adorn.chimney.title"
     },
     "description": {
-      "translate": "advancements.adorn.happy_little_clouds.description"
+      "translate": "advancements.adorn.chimney.description"
     }
   },
-  "parent": "adorn:rocky_lighting",
+  "parent": "adorn:stone_torch",
   "criteria": {
     "has_chimney": {
       "trigger": "minecraft:inventory_changed",
