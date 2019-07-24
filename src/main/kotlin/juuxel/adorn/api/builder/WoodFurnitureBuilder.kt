@@ -1,10 +1,10 @@
 package juuxel.adorn.api.builder
 
-import io.github.juuxel.polyester.block.WoodType
-import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.block.*
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
+import juuxel.polyester.block.WoodType
+import juuxel.polyester.registry.PolyesterRegistry
 import org.apiguardian.api.API
 
 /**

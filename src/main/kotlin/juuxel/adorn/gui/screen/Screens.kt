@@ -7,38 +7,28 @@ import juuxel.adorn.gui.controller.KitchenCupboardController
 import juuxel.adorn.gui.controller.TradingStationController
 import juuxel.adorn.gui.controller.TradingStationCustomerController
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.text.Text
 
 open class AdornScreen<C : CottonScreenController>(
     controller: C,
-    player: PlayerEntity,
-    title: Text
-) : CottonScreen<C>(controller, player) {
-    private val _title = title
-
-    override fun getTitle() = _title
-}
+    player: PlayerEntity
+) : CottonScreen<C>(controller, player)
 
 class DrawerScreen(
     controller: DrawerController,
-    player: PlayerEntity,
-    title: Text
-) : AdornScreen<DrawerController>(controller, player, title)
+    player: PlayerEntity
+) : AdornScreen<DrawerController>(controller, player)
 
 class KitchenCupboardScreen(
     controller: KitchenCupboardController,
-    player: PlayerEntity,
-    title: Text
-) : AdornScreen<KitchenCupboardController>(controller, player, title)
+    player: PlayerEntity
+) : AdornScreen<KitchenCupboardController>(controller, player)
 
 class TradingStationScreen(
     controller: TradingStationController,
-    player: PlayerEntity,
-    title: Text
-) : AdornScreen<TradingStationController>(controller, player, title)
+    player: PlayerEntity
+) : AdornScreen<TradingStationController>(controller, player)
 
 class TradingStationCustomerScreen(
     controller: TradingStationCustomerController,
-    player: PlayerEntity,
-    title: Text
-) : AdornScreen<TradingStationCustomerController>(controller, player, title)
+    player: PlayerEntity
+) : AdornScreen<TradingStationCustomerController>(controller, player)

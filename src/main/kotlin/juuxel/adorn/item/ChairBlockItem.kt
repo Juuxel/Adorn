@@ -1,6 +1,6 @@
 package juuxel.adorn.item
 
-import io.github.juuxel.polyester.block.PolyesterBlock
+import juuxel.polyester.block.PolyesterBlock
 import net.minecraft.block.CarpetBlock
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemUsageContext

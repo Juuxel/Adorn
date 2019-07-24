@@ -3,8 +3,8 @@ package juuxel.adorn.gui.controller
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
+import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.gui.widget.CenteredLabelWidget
-import juuxel.adorn.lib.ModGuis
 import juuxel.adorn.util.Colors.WHITE
 import juuxel.adorn.util.color
 import net.minecraft.container.BlockContext
@@ -21,7 +21,6 @@ class TradingStationCustomerController(
     playerInv: PlayerInventory,
     private val blockContext: BlockContext
 ) : BaseAdornController(
-    ModGuis.TRADING_STATION_CUSTOMER,
     syncId,
     playerInv,
     blockContext,
@@ -30,6 +29,14 @@ class TradingStationCustomerController(
 ) {
     init {
         (rootPanel as WGridPanel).apply {
+            add(
+                WLabel(
+                    TranslatableText(
+                        blockContext.run<String> { world, pos -> world.getBlockState(pos).block.translationKey }.get()
+                    ), titleColor
+                ), 0, 0
+            )
+
             val tradeInv = TradingStationController.getTrade(blockContext).createInventory()
             val storage = TradingStationController.getStorage(blockContext)
 

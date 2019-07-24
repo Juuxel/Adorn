@@ -1,10 +1,12 @@
 package juuxel.adorn.block
 
-import io.github.juuxel.polyester.block.PolyesterBlockEntityType
-import io.github.juuxel.polyester.block.PolyesterBlockWithEntity
 import juuxel.adorn.api.block.SneakClickHandler
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.config.AdornConfigManager
+import juuxel.adorn.lib.ModGuis
+import juuxel.adorn.lib.openFabricContainer
+import juuxel.polyester.block.PolyesterBlockEntityType
+import juuxel.polyester.block.PolyesterBlockWithEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockRenderLayer
 import net.minecraft.block.BlockState
@@ -88,7 +90,7 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
                     be.storage.tryInsert(trade.price)
                 }
             } else {
-                player.openContainer(state.createContainerProvider(world, pos))
+                player.openFabricContainer(ModGuis.TRADING_STATION, pos)
             }
         }
 
@@ -102,7 +104,7 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
 
         // Show customer GUI
         if (!be.isOwner(player)) {
-            player.openContainer(state.createContainerProvider(world, pos))
+            player.openFabricContainer(ModGuis.TRADING_STATION_CUSTOMER, pos)
             return ActionResult.SUCCESS
         }
 

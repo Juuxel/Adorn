@@ -2,14 +2,14 @@ package juuxel.adorn.gui.controller
 
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
+import io.github.cottonmc.cotton.gui.widget.WLabel
 import net.minecraft.container.BlockContext
-import net.minecraft.container.ContainerType
 import net.minecraft.container.PropertyDelegate
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
+import net.minecraft.text.TranslatableText
 
-open class BaseInvController(
-    type: ContainerType<*>,
+open class SimpleInvController(
     syncId: Int,
     playerInv: PlayerInventory,
     context: BlockContext,
@@ -17,9 +17,17 @@ open class BaseInvController(
     invHeight: Int,
     blockInventory: Inventory = getBlockInventoryOrCreate(context, invWidth * invHeight),
     propertyDelegate: PropertyDelegate = getBlockPropertyDelegate(context)
-) : BaseAdornController(type, syncId, playerInv, context, blockInventory, propertyDelegate) {
+) : BaseAdornController(syncId, playerInv, context, blockInventory, propertyDelegate) {
     init {
         (rootPanel as WGridPanel).apply {
+            add(
+                WLabel(
+                    TranslatableText(
+                        context.run<String> { world, pos -> world.getBlockState(pos).block.translationKey }.get()
+                    ), titleColor
+                ), 0, 0
+            )
+
             for (row in 0 until invHeight) {
                 for (col in 0 until invWidth) {
                     val hasEvenWidth = invWidth % 2 == 0
@@ -36,7 +44,7 @@ open class BaseInvController(
                 add(createPlayerInventoryPanel(), 0, 2 + invHeight)
             }
 
-            validate(this@BaseInvController)
+            validate(this@SimpleInvController)
         }
     }
 }

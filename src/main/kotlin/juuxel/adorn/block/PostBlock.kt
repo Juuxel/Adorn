@@ -1,7 +1,7 @@
 package juuxel.adorn.block
 
-import io.github.juuxel.polyester.block.PolyesterBlock
 import juuxel.adorn.api.util.BlockVariant
+import juuxel.polyester.block.PolyesterBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable

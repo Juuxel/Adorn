@@ -3,17 +3,14 @@ package juuxel.adorn.gui.controller
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
+import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.block.entity.TradingStation
 import juuxel.adorn.gui.widget.CenteredLabelWidget
 import juuxel.adorn.gui.widget.DisplayOnlySlot
-import juuxel.adorn.lib.ModGuis
-import juuxel.adorn.lib.ModNetworking
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.trading.TradeInventory
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.color
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
-import net.fabricmc.fabric.api.server.PlayerStream
 import net.minecraft.container.BlockContext
 import net.minecraft.container.SlotActionType
 import net.minecraft.entity.player.PlayerEntity
@@ -28,7 +25,6 @@ class TradingStationController(
     playerInv: PlayerInventory,
     private val blockContext: BlockContext
 ) : BaseAdornController(
-    ModGuis.TRADING_STATION,
     syncId,
     playerInv,
     blockContext,
@@ -37,6 +33,14 @@ class TradingStationController(
 ) {
     init {
         (rootPanel as WGridPanel).apply {
+            add(
+                WLabel(
+                    TranslatableText(
+                        blockContext.run<String> { world, pos -> world.getBlockState(pos).block.translationKey }.get()
+                    ), titleColor
+                ), 0, 0
+            )
+
             val tradeInv = getTrade(blockContext).createInventory()
 
             add(DisplayOnlySlot(tradeInv, 0), 1, 2)
@@ -66,17 +70,6 @@ class TradingStationController(
                 SlotActionType.PICKUP -> {
                     slot.stack = cursorStack.copy()
                     slot.markDirty()
-
-                    if (!world.isClient) {
-                        blockContext.run { world, pos ->
-                            PlayerStream.watching(world, pos).forEach {
-                                ServerSidePacketRegistry.INSTANCE.sendToPlayer(
-                                    it,
-                                    ModNetworking.createTradeSyncPacket(pos, getTrade(blockContext))
-                                )
-                            }
-                        }
-                    }
 
                     cursorStack
                 }

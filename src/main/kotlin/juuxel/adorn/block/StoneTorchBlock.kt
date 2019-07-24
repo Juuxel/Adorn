@@ -1,6 +1,6 @@
 package juuxel.adorn.block
 
-import io.github.juuxel.polyester.block.PolyesterBlock
+import juuxel.polyester.block.PolyesterBlock
 import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.*
 import net.minecraft.entity.player.PlayerEntity
@@ -18,7 +18,7 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
-import java.util.Random
+import java.util.*
 
 class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Waterloggable {
     override val name = "stone_torch"

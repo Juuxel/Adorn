@@ -1,11 +1,11 @@
 package juuxel.adorn.block
 
-import io.github.juuxel.polyester.block.PolyesterBlockEntityType
-import io.github.juuxel.polyester.block.PolyesterBlockWithEntity
 import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.ShelfBlockEntity
 import juuxel.adorn.util.buildShapeRotations
+import juuxel.polyester.block.PolyesterBlockEntityType
+import juuxel.polyester.block.PolyesterBlockWithEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks

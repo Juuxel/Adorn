@@ -1,9 +1,11 @@
 package juuxel.adorn.block
 
-import io.github.juuxel.polyester.block.BlockEntityProviderImpl
-import io.github.juuxel.polyester.block.PolyesterBlockEntityType
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
+import juuxel.adorn.lib.ModGuis
+import juuxel.adorn.lib.openFabricContainer
+import juuxel.polyester.block.BlockEntityProviderImpl
+import juuxel.polyester.block.PolyesterBlockEntityType
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.container.NameableContainerProvider
@@ -25,7 +27,7 @@ class KitchenCupboardBlock(
     override fun activate(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): Boolean {
-        player.openContainer(state.createContainerProvider(world, pos))
+        player.openFabricContainer(ModGuis.KITCHEN_CUPBOARD, pos)
         return true
     }
 

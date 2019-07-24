@@ -1,10 +1,10 @@
 package juuxel.adorn.api.builder
 
-import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.block.PlatformBlock
 import juuxel.adorn.block.PostBlock
 import juuxel.adorn.block.StepBlock
+import juuxel.polyester.registry.PolyesterRegistry
 import org.apiguardian.api.API
 
 /**

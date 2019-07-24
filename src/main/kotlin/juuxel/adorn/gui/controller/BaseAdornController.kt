@@ -4,7 +4,6 @@ import io.github.cottonmc.cotton.gui.CottonScreenController
 import io.github.cottonmc.cotton.gui.EmptyInventory
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.container.BlockContext
-import net.minecraft.container.ContainerType
 import net.minecraft.container.PropertyDelegate
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
@@ -14,7 +13,6 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 abstract class BaseAdornController(
-    private val type: ContainerType<*>,
     syncId: Int,
     playerInv: PlayerInventory,
     context: BlockContext,
@@ -23,11 +21,14 @@ abstract class BaseAdornController(
 ) : CottonScreenController(
     null, syncId, playerInv, blockInventory, propertyDelegate
 ) {
-    override fun getType() = type
-
     override fun canUse(player: PlayerEntity?) = true
 
     override fun getCraftingResultSlotIndex() = -1
+
+    // TODO: Remove this
+    override fun setPropertyDelegate(delegate: PropertyDelegate) = apply {
+        this.propertyDelegate = delegate
+    }
 
     companion object {
         fun getBlockEntity(context: BlockContext): BlockEntity? =

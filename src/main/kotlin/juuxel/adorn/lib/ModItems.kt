@@ -1,10 +1,10 @@
 package juuxel.adorn.lib
 
-import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.Adorn
 import juuxel.adorn.config.AdornConfigManager
 import juuxel.adorn.item.*
 import juuxel.adorn.util.VanillaWoodType
+import juuxel.polyester.registry.PolyesterRegistry
 import net.fabricmc.fabric.api.registry.FuelRegistry
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup

@@ -1,7 +1,5 @@
 package juuxel.adorn.lib
 
-import io.github.juuxel.polyester.container.ContainerRegistry
-import io.github.juuxel.polyester.registry.PolyesterRegistry
 import juuxel.adorn.Adorn
 import juuxel.adorn.gui.controller.DrawerController
 import juuxel.adorn.gui.controller.KitchenCupboardController
@@ -13,38 +11,57 @@ import juuxel.adorn.gui.screen.TradingStationCustomerScreen
 import juuxel.adorn.gui.screen.TradingStationScreen
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
+import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry
+import net.fabricmc.fabric.api.container.ContainerProviderRegistry
 import net.minecraft.client.gui.screen.ingame.AbstractContainerScreen
 import net.minecraft.container.BlockContext
 import net.minecraft.container.Container
-import net.minecraft.container.ContainerType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.text.Text
-import net.minecraft.util.registry.Registry
+import net.minecraft.util.Identifier
+import net.minecraft.util.math.BlockPos
 
-object ModGuis : PolyesterRegistry(Adorn.NAMESPACE) {
-    val DRAWER = registerContainer("drawer", ::DrawerController)
-    val KITCHEN_CUPBOARD = registerContainer("kitchen_cupboard", ::KitchenCupboardController)
-    val TRADING_STATION = registerContainer("trading_station", ::TradingStationController)
-    val TRADING_STATION_CUSTOMER = registerContainer("trading_station_customer", ::TradingStationCustomerController)
+object ModGuis {
+    val DRAWER = Adorn.id("drawer")
+    val KITCHEN_CUPBOARD = Adorn.id("kitchen_cupboard")
+    val TRADING_STATION = Adorn.id("trading_station")
+    val TRADING_STATION_CUSTOMER = Adorn.id("trading_station_customer")
 
-    fun init() {}
+    fun init() {
+        registerContainer(DRAWER, ::DrawerController)
+        registerContainer(KITCHEN_CUPBOARD, ::KitchenCupboardController)
+        registerContainer(TRADING_STATION,::TradingStationController)
+        registerContainer(TRADING_STATION_CUSTOMER, ::TradingStationCustomerController)
+    }
 
     @Environment(EnvType.CLIENT)
     fun initClient() {
-        registerScreen(DRAWER, ::DrawerScreen)
-        registerScreen(KITCHEN_CUPBOARD, ::KitchenCupboardScreen)
-        registerScreen(TRADING_STATION, ::TradingStationScreen)
-        registerScreen(TRADING_STATION_CUSTOMER, ::TradingStationCustomerScreen)
+        registerScreen(DRAWER, ::DrawerController, ::DrawerScreen)
+        registerScreen(KITCHEN_CUPBOARD, ::KitchenCupboardController, ::KitchenCupboardScreen)
+        registerScreen(TRADING_STATION,::TradingStationController, ::TradingStationScreen)
+        registerScreen(TRADING_STATION_CUSTOMER, ::TradingStationCustomerController, ::TradingStationCustomerScreen)
     }
 
-    private inline fun <C : Container> registerContainer(name: String, crossinline fn: (Int, PlayerInventory, BlockContext) -> C) =
-        register(Registry.CONTAINER, name, ContainerRegistry.INSTANCE.createContainerType { syncId, playerInv ->
-            fn(syncId, playerInv, BlockContext.EMPTY)
-        })
-
-    private inline fun <C : Container> registerScreen(type: ContainerType<C>, crossinline fn: (C, PlayerEntity, Text) -> AbstractContainerScreen<C>) =
-        ContainerRegistry.INSTANCE.registerScreen(type) { container, playerInventory, title ->
-            fn(container, playerInventory.player, title)
+    private inline fun registerContainer(id: Identifier, crossinline fn: (Int, PlayerInventory, BlockContext) -> Container) =
+        ContainerProviderRegistry.INSTANCE.registerFactory(id) { syncId, _, player, buf ->
+            fn(syncId, player.inventory, BlockContext.create(player.world, buf.readBlockPos()))
         }
+
+    private inline fun <C : Container> registerScreen(
+        id: Identifier,
+        crossinline containerFn: (Int, PlayerInventory, BlockContext) -> C,
+        crossinline screenFn: (C, PlayerEntity) -> AbstractContainerScreen<in C>
+    ) =
+        ScreenProviderRegistry.INSTANCE.registerFactory(id) { syncId, _, player, buf ->
+            screenFn(
+                containerFn(syncId, player.inventory, BlockContext.create(player.world, buf.readBlockPos())),
+                player
+            )
+        }
+}
+
+fun PlayerEntity.openFabricContainer(id: Identifier, pos: BlockPos) {
+    if (!world.isClient) {
+        ContainerProviderRegistry.INSTANCE.openContainer(id, this) { it.writeBlockPos(pos) }
+    }
 }

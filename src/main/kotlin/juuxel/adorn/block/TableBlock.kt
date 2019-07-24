@@ -1,9 +1,9 @@
 package juuxel.adorn.block
 
-import io.github.juuxel.polyester.block.PolyesterBlock
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
 import juuxel.adorn.config.AdornConfigManager
+import juuxel.polyester.block.PolyesterBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -20,7 +20,8 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
 
-class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING_TABLE)), PolyesterBlock, Waterloggable {
+class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING_TABLE)),
+    PolyesterBlock, Waterloggable {
     override val name = "${material}_table"
     override val itemSettings: Nothing? = null
     override val sittingYOffset = 0.6

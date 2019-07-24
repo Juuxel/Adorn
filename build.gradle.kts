@@ -78,7 +78,6 @@ dependencies {
      * Gets a version string with the [key].
      */
     fun v(key: String) = ext[key].toString()
-    val excludeFabric: ExternalModuleDependency.() -> Unit = { exclude(module = "fabric-api") }
 
     minecraft("com.mojang:minecraft:$minecraft")
     mappings("net.fabricmc:yarn:" + v("minecraft") + '+' + v("mappings"))
@@ -90,8 +89,7 @@ dependencies {
     compileOnly("net.fabricmc:fabric-language-kotlin:" + v("fabric-kotlin"))
 
     // Other mods
-    includedMod("io.github.juuxel:polyester:" + v("polyester"), excludeFabric)
-    includedMod("io.github.cottonmc:LibGui:" + v("libgui"))
+    includedMod("io.github.cottonmc:LibGUI:" + v("libgui")) { exclude(module = "modmenu") }
     includedMod("cloth-config:ClothConfig:" + v("cloth-config"))
     includedMod("me.sargunvohra.mcmods:auto-config:" + v("auto-config"))
     modImplementation("towelette:Towelette:" + v("towelette"))

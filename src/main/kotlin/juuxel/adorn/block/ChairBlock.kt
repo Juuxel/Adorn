@@ -1,7 +1,7 @@
 package juuxel.adorn.block
 
-import io.github.juuxel.polyester.block.PolyesterBlock
 import juuxel.adorn.util.buildShapeRotations
+import juuxel.polyester.block.PolyesterBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -28,9 +28,10 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
 import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
-import java.util.EnumMap
+import java.util.*
 
-class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENCE)), PolyesterBlock, Waterloggable {
+class ChairBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.OAK_FENCE)),
+    PolyesterBlock, Waterloggable {
     override val name = "${material}_chair"
     // null to skip registration
     override val itemSettings: Nothing? = null

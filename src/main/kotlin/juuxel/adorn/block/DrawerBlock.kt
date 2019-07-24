@@ -1,9 +1,11 @@
 package juuxel.adorn.block
 
-import io.github.juuxel.polyester.block.PolyesterBlockEntityType
-import io.github.juuxel.polyester.block.PolyesterBlockWithEntity
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.DrawerBlockEntity
+import juuxel.adorn.lib.ModGuis
+import juuxel.adorn.lib.openFabricContainer
+import juuxel.polyester.block.PolyesterBlockEntityType
+import juuxel.polyester.block.PolyesterBlockWithEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -46,7 +48,7 @@ class DrawerBlock(
     override fun activate(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): Boolean {
-        player.openContainer(state.createContainerProvider(world, pos))
+        player.openFabricContainer(ModGuis.DRAWER, pos)
         return true
     }
 
