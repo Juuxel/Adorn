@@ -39,8 +39,9 @@
 
   "depends": {
     "fabricloader": ">=0.4.6",
-    "fabric": [">=0.3.0-pre", ">=0.3.0"],
+    "fabric": ">=0.3.0",
     "fabric-language-kotlin": ">=1.3.30",
+    "libgui": ">=1.2.1 <1.3",
     "autoconfig1": "*"
   }
 }

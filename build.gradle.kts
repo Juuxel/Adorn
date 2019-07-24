@@ -89,7 +89,7 @@ dependencies {
     compileOnly("net.fabricmc:fabric-language-kotlin:" + v("fabric-kotlin"))
 
     // Other mods
-    includedMod("io.github.cottonmc:LibGUI:" + v("libgui")) { exclude(module = "modmenu") }
+    includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { exclude(module = "modmenu") }
     includedMod("cloth-config:ClothConfig:" + v("cloth-config"))
     includedMod("me.sargunvohra.mcmods:auto-config:" + v("auto-config"))
     modImplementation("towelette:Towelette:" + v("towelette"))

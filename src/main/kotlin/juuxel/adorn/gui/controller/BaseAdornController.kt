@@ -11,6 +11,7 @@ import net.minecraft.inventory.BasicInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import org.apache.logging.log4j.LogManager
 
 abstract class BaseAdornController(
     syncId: Int,
@@ -23,14 +24,9 @@ abstract class BaseAdornController(
 ) {
     override fun canUse(player: PlayerEntity?) = true
 
-    override fun getCraftingResultSlotIndex() = -1
-
-    // TODO: Remove this
-    override fun setPropertyDelegate(delegate: PropertyDelegate) = apply {
-        this.propertyDelegate = delegate
-    }
-
     companion object {
+        private val LOGGER = LogManager.getLogger()
+
         fun getBlockEntity(context: BlockContext): BlockEntity? =
             context.run<BlockEntity?> { world: World, pos: BlockPos ->
                 world.getBlockEntity(pos)
@@ -41,7 +37,15 @@ abstract class BaseAdornController(
                 if (it is EmptyInventory)
                     when (fallbackSize) {
                         0 -> EmptyInventory.INSTANCE
-                        else -> BasicInventory(fallbackSize)
+                        else -> {
+                            LOGGER.warn(
+                                "[Adorn] No block inventory found at {}",
+                                context.run<BlockPos> { _, pos -> pos }
+                                    .map(BlockPos::toString)
+                                    .orElse("missing position")
+                            )
+                            BasicInventory(fallbackSize)
+                        }
                     }
                 else it
             }
