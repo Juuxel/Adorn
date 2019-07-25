@@ -28,6 +28,6 @@ class DrawerController(syncId: Int, playerInv: PlayerInventory, private val cont
 
 
     companion object {
-        private val PALETTE_ID = Adorn.id("drawer_backgrounds")
+        private val PALETTE_ID = Adorn.id("drawer")
     }
 }

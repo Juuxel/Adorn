@@ -2,6 +2,7 @@ package juuxel.adorn.gui.controller
 
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
+import io.github.cottonmc.cotton.gui.widget.WWidget
 import juuxel.adorn.gui.painter.Painters
 import juuxel.adorn.gui.widget.WColorableLabel
 import net.fabricmc.api.EnvType
@@ -27,17 +28,8 @@ open class SimpleInvController(
     private val slot: WItemSlot
 
     init {
-        val block = getBlock(context).get()
-        val blockId = Registry.BLOCK.getId(block)
-
         (rootPanel as WGridPanel).apply {
-            add(
-                WColorableLabel(
-                    TranslatableText(
-                        block.translationKey
-                    ), paletteId, blockId
-                ), 0, 0
-            )
+            add(createTitle(context), 0, 0)
 
             slot = WItemSlot.of(blockInventory, 0, invWidth, invHeight)
             add(slot, (9 - invWidth) / 2, 1)
@@ -54,5 +46,16 @@ open class SimpleInvController(
     override fun addPainters() {
         super.addPainters()
         slot.setBackgroundPainter(Painters.LIBGUI_STYLE_SLOT)
+    }
+
+    protected open fun createTitle(context: BlockContext): WWidget {
+        val block = getBlock(context).get()
+        val blockId = Registry.BLOCK.getId(block)
+
+        return WColorableLabel(
+            TranslatableText(
+                block.translationKey
+            ), paletteId, blockId
+        )
     }
 }

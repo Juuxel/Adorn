@@ -5,6 +5,7 @@ import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.block.entity.TradingStation
+import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.gui.painter.Painters
 import juuxel.adorn.gui.widget.CenteredLabelWidget
 import juuxel.adorn.gui.widget.DisplayOnlySlot
@@ -24,35 +25,37 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.text.TranslatableText
+import org.apache.logging.log4j.LogManager
 
-// TODO: Multiple trades in one station?
 class TradingStationController(
     syncId: Int,
     playerInv: PlayerInventory,
-    private val blockContext: BlockContext
+    private val context: BlockContext
 ) : BaseAdornController(
     syncId,
     playerInv,
-    blockContext,
-    getStorage(blockContext),
-    getBlockPropertyDelegate(blockContext)
+    context,
+    getStorage(context),
+    getBlockPropertyDelegate(context)
 ) {
-    // TODO: Remove
-    private val slots = ArrayList<WItemSlot>()
+    private val slots: List<WItemSlot>
+    private val forOwner =
+        (getTradingStation(context) as? TradingStationBlockEntity)?.isOwner(playerInv.player) == true
 
     init {
         (rootPanel as WGridPanel).apply {
             add(
                 WLabel(
                     TranslatableText(
-                        blockContext.run<String> { world, pos -> world.getBlockState(pos).block.translationKey }.get()
+                        context.run<String> { world, pos -> world.getBlockState(pos).block.translationKey }.get()
                     ), titleColor
                 ), 0, 0
             )
 
-            val tradeInv = getTrade(blockContext).createInventory()
+            val tradeInv = getTrade(context).createInventory()
 
-            fun WItemSlot.addToSlots() = apply { slots += this }
+            val mutableSlots = ArrayList<WItemSlot>()
+            fun WItemSlot.addToSlots() = apply { mutableSlots += this }
 
             add(DisplayOnlySlot(tradeInv, 0).addToSlots(), 1, 2)
             add(DisplayOnlySlot(tradeInv, 1).addToSlots(), 1, 4)
@@ -64,26 +67,27 @@ class TradingStationController(
 
             add(playerInvPanel, 0, 6)
             validate(this@TradingStationController)
+
+            slots = mutableSlots
         }
     }
 
     override fun onSlotClick(slotNumber: Int, button: Int, action: SlotActionType, player: PlayerEntity): ItemStack {
         val slot = slotList.getOrNull(slotNumber)
+        val cursorStack = player.inventory.cursorStack
 
-        return if (slot?.inventory is TradeInventory) {
-            val cursorStack = player.inventory.cursorStack
-
+        return if (forOwner && slot?.inventory is TradeInventory) {
             when (action) {
                 SlotActionType.PICKUP -> {
                     slot.stack = cursorStack.copy()
                     slot.markDirty()
 
                     if (!world.isClient) {
-                        blockContext.run { world, pos ->
+                        context.run { world, pos ->
                             PlayerStream.watching(world, pos).forEach {
                                 ServerSidePacketRegistry.INSTANCE.sendToPlayer(
                                     it,
-                                    ModNetworking.createTradeSyncPacket(pos, getTrade(blockContext))
+                                    ModNetworking.createTradeSyncPacket(pos, getTrade(context))
                                 )
                             }
                         }
@@ -94,9 +98,9 @@ class TradingStationController(
 
                 else -> cursorStack
             }
-        } else {
+        } else if (forOwner || (slot?.inventory is PlayerInventory && action != SlotActionType.QUICK_MOVE)) {
             super.onSlotClick(slotNumber, button, action, player)
-        }
+        } else cursorStack
     }
 
     @Environment(EnvType.CLIENT)
@@ -109,24 +113,28 @@ class TradingStationController(
     override fun getTitleColor() = Colors.WHITE
 
     companion object {
+        private val LOGGER = LogManager.getLogger()
 
         /**
          * Gets the [juuxel.adorn.block.entity.TradingStationBlockEntity] at the [context]'s location.
          * If it's not present, creates an empty trading station using [TradingStation.createEmpty].
          */
-        private fun getOrCreateTradingStation(context: BlockContext) =
-            getBlockEntity(context) as? TradingStation ?: TradingStation.createEmpty()
+        private fun getTradingStation(context: BlockContext) =
+            getBlockEntity(context) as? TradingStation ?: run {
+                LOGGER.warn("[Adorn] Trading station not found, creating fake one")
+                TradingStation.createEmpty()
+            }
 
         /**
          * Gets the [TradingStation.storage] of the trading station at the [context]'s location.
-         * Uses [getOrCreateTradingStation] for finding a trading station.
+         * Uses [getTradingStation] for finding a trading station.
          */
-        fun getStorage(context: BlockContext): Inventory = getOrCreateTradingStation(context).storage
+        fun getStorage(context: BlockContext): Inventory = getTradingStation(context).storage
 
         /**
          * Gets the [TradingStation.trade] of the trading station at the [context]'s location.
-         * Uses [getOrCreateTradingStation] for finding a trading station.
+         * Uses [getTradingStation] for finding a trading station.
          */
-        fun getTrade(context: BlockContext): Trade = getOrCreateTradingStation(context).trade
+        fun getTrade(context: BlockContext): Trade = getTradingStation(context).trade
     }
 }

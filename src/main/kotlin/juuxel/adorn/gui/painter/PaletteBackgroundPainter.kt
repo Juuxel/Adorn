@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier
 
 class PaletteBackgroundPainter(private val palette: ColorPalette, private val key: Identifier) : BackgroundPainter {
     private val panelColor by lazy {
-        color(palette.getValue(key).bg)
+        color(palette[key].bg)
     }
 
     override fun paintBackground(left: Int, top: Int, panel: WWidget) {

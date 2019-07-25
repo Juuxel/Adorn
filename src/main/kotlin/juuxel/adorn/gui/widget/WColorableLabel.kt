@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier
 class WColorableLabel(text: Text, private val paletteId: Identifier, private val colorKey: Identifier) :
     WLabel(text, WLabel.DEFAULT_TEXT_COLOR) {
     private val _color by lazy {
-        color(ColorManager.getColors(paletteId).getValue(colorKey).fg)
+        color(ColorManager.getColors(paletteId)[colorKey].fg)
     }
 
     override fun paintBackground(x: Int, y: Int) {

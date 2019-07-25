@@ -104,7 +104,7 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
 
         // Show customer GUI
         if (!be.isOwner(player)) {
-            player.openFabricContainer(ModGuis.TRADING_STATION_CUSTOMER, pos)
+            player.openFabricContainer(ModGuis.TRADING_STATION, pos)
             return ActionResult.SUCCESS
         }
 

@@ -10,11 +10,16 @@ import net.minecraft.util.Identifier
 import org.apache.logging.log4j.LogManager
 import java.lang.reflect.Type
 
-typealias ColorPalette = Map<Identifier, ColorManager.ColorPair>
-
 private val DEFAULT_COLOR_ID = Adorn.id("default")
 
-val ColorPalette.defaultColor: ColorManager.ColorPair get() = this.getValue(DEFAULT_COLOR_ID)
+class ColorPalette(map: Map<Identifier, ColorManager.ColorPair>) {
+    private val map = ImmutableMap.copyOf(map)
+
+    operator fun get(key: Identifier): ColorManager.ColorPair =
+        map.getOrElse(key) {
+            map[DEFAULT_COLOR_ID] ?: error("Couldn't read default value from palette map")
+        }
+}
 
 object ColorManager : SimpleSynchronousResourceReloadListener {
     private val LOGGER = LogManager.getLogger()
@@ -61,9 +66,7 @@ object ColorManager : SimpleSynchronousResourceReloadListener {
 
             // id without prefix (adorn_colors/) and suffix (.json)
             val newId = Identifier(id.namespace, id.path.substring(PREFIX.length + 1, id.path.length - SUFFIX_LENGTH))
-            map[newId] = ImmutableMap.copyOf(scheme).let {
-                it.withDefault { _ -> it[DEFAULT_COLOR_ID] }
-            }
+            map[newId] = ColorPalette(scheme)
         }
     }
 
@@ -71,7 +74,7 @@ object ColorManager : SimpleSynchronousResourceReloadListener {
         str.substring(1).toInt(16)
 
     fun getColors(id: Identifier): ColorPalette =
-        map.getOrElse(id) { emptyMap() }
+        map[id] ?: throw IllegalArgumentException("Unknown palette $id")
 
     data class ColorPair(val bg: Int, val fg: Int = WLabel.DEFAULT_TEXT_COLOR) {
         companion object : JsonDeserializer<ColorPair> {

@@ -56,6 +56,6 @@ object Painters {
 
     val LIBGUI_STYLE_SLOT = TEXTURED_SLOT
 
-    fun palette(scheme: Identifier, key: Identifier): BackgroundPainter =
-        PaletteBackgroundPainter(ColorManager.getColors(scheme), key)
+    fun palette(palette: Identifier, key: Identifier): BackgroundPainter =
+        PaletteBackgroundPainter(ColorManager.getColors(palette), key)
 }
