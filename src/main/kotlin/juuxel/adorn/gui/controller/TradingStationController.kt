@@ -4,11 +4,9 @@ import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.WLabel
-import io.github.cottonmc.cotton.gui.widget.WWidget
 import juuxel.adorn.block.entity.TradingStation
 import juuxel.adorn.gui.widget.CenteredLabelWidget
 import juuxel.adorn.gui.widget.DisplayOnlySlot
-import juuxel.adorn.gui.widget.Painters
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.trading.TradeInventory
 import juuxel.adorn.util.Colors
@@ -45,19 +43,19 @@ class TradingStationController(
 
             val tradeInv = getTrade(blockContext).createInventory()
 
-            add(DisplayOnlySlot(tradeInv, 0).withLibguiStyle(), 1, 2)
-            add(DisplayOnlySlot(tradeInv, 1).withLibguiStyle(), 1, 4)
+            add(DisplayOnlySlot(tradeInv, 0), 1, 2)
+            add(DisplayOnlySlot(tradeInv, 1), 1, 4)
 
             add(CenteredLabelWidget(TranslatableText("block.adorn.trading_station.selling"), Colors.WHITE), 1, 1)
             add(CenteredLabelWidget(TranslatableText("block.adorn.trading_station.price"), Colors.WHITE), 1, 3)
 
             for (row in 0..2) {
                 for (col in 0..3) {
-                    add(WItemSlot.of(blockInventory, row * 4 + col).withLibguiStyle(), 3 + col, 2 + row)
+                    add(WItemSlot.of(blockInventory, row * 4 + col), 3 + col, 2 + row)
                 }
             }
 
-            add(playerInvPanel, 0, 6)
+            add(createPlayerInventoryPanel(), 0, 6)
             validate(this@TradingStationController)
         }
     }
@@ -84,15 +82,10 @@ class TradingStationController(
     }
 
     override fun addPainters() {
-        super.addPainters()
         rootPanel.setBackgroundPainter(BackgroundPainter.createColorful(color(0x359668)))
     }
 
     override fun getTitleColor() = Colors.WHITE
-
-    private fun WItemSlot.withLibguiStyle() = apply {
-        setBackgroundPainter(Painters.LIBGUI_STYLE_SLOT)
-    }
 
     companion object {
 
