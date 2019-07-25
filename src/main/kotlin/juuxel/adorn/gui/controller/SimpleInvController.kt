@@ -2,6 +2,10 @@ package juuxel.adorn.gui.controller
 
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
+import io.github.cottonmc.cotton.gui.widget.WLabel
+import juuxel.adorn.gui.widget.Painters
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import juuxel.adorn.gui.widget.Painters
 import juuxel.adorn.gui.widget.WColorableLabel
 import net.minecraft.container.BlockContext
@@ -22,6 +26,8 @@ open class SimpleInvController(
     blockInventory: Inventory = getBlockInventoryOrCreate(context, invWidth * invHeight),
     propertyDelegate: PropertyDelegate = getBlockPropertyDelegate(context)
 ) : BaseAdornController(syncId, playerInv, context, blockInventory, propertyDelegate) {
+    private val slot: WItemSlot
+
     init {
         val block = getBlock(context).get()
         val blockId = Registry.BLOCK.getId(block)
@@ -35,18 +41,8 @@ open class SimpleInvController(
                 ), 0, 0
             )
 
-            for (row in 0 until invHeight) {
-                for (col in 0 until invWidth) {
-                    val hasEvenWidth = invWidth % 2 == 0
-                    // Creates a gap for even-width inventories, looks really weird
-                    val xOffset =
-                        if (hasEvenWidth && col + 1 > invWidth / 2) 1
-                        else 0
-                    val slot = WItemSlot.of(blockInventory, col + row * invWidth)
-                    slot.setBackgroundPainter(Painters.TEXTURED_SLOT)
-                    add(slot, col + (9 - invWidth) / 2 + xOffset, row + 1)
-                }
-            }
+            slot = WItemSlot.of(blockInventory, 0, invWidth, invHeight)
+            add(slot, (9 - invWidth) / 2, 1)
 
             if (invHeight > 0) {
                 add(playerInvPanel, 0, 2 + invHeight)
@@ -54,5 +50,11 @@ open class SimpleInvController(
 
             validate(this@SimpleInvController)
         }
+    }
+
+    @Environment(EnvType.CLIENT)
+    override fun addPainters() {
+        super.addPainters()
+        slot.setBackgroundPainter(Painters.LIBGUI_STYLE_SLOT)
     }
 }

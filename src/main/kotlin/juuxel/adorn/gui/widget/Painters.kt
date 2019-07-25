@@ -3,16 +3,12 @@ package juuxel.adorn.gui.widget
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
-import juuxel.adorn.Adorn
-import juuxel.adorn.util.Colors
 
 object Painters {
-    private val SLOT_BG = Adorn.id("textures/gui/slot.png")
-
     /**
      * A background painter that paints LibGui-style slots.
      */
-    val _LIBGUI_STYLE_SLOT: BackgroundPainter = BackgroundPainter { left, top, panel ->
+    val LIBGUI_STYLE_SLOT: BackgroundPainter = BackgroundPainter { left, top, panel ->
         if (panel !is WItemSlot) {
             ScreenDrawing.drawBeveledPanel(
                 left - 1,
@@ -45,12 +41,4 @@ object Painters {
             }
         }
     }
-
-    val TEXTURED_SLOT: BackgroundPainter = BackgroundPainter { left, top, panel ->
-        for (x in 0 until panel.width step 18)
-            for (y in 0 until panel.height step 18)
-                ScreenDrawing.rect(SLOT_BG, left - 1 + x, top - 1 + y, 18, 18, Colors.WHITE)
-    }
-
-    val LIBGUI_STYLE_SLOT = TEXTURED_SLOT
 }
