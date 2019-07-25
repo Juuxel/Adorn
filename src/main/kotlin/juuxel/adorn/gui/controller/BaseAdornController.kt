@@ -3,10 +3,10 @@ package juuxel.adorn.gui.controller
 import io.github.cottonmc.cotton.gui.CottonScreenController
 import io.github.cottonmc.cotton.gui.EmptyInventory
 import io.github.cottonmc.cotton.gui.widget.WPlayerInvPanel
-import juuxel.adorn.gui.widget.Painters
-import net.minecraft.block.Block
+import juuxel.adorn.gui.painter.Painters
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
+import net.minecraft.block.Block
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.container.BlockContext
 import net.minecraft.container.PropertyDelegate

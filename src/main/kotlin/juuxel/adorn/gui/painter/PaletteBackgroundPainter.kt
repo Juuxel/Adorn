@@ -1,15 +1,15 @@
-package juuxel.adorn.gui.widget
+package juuxel.adorn.gui.painter
 
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WWidget
-import juuxel.adorn.resources.ColorMap
+import juuxel.adorn.resources.ColorPalette
 import juuxel.adorn.util.color
 import net.minecraft.util.Identifier
 
-class ManagedColorPainter(private val colorMap: ColorMap, private val key: Identifier) : BackgroundPainter {
+class PaletteBackgroundPainter(private val palette: ColorPalette, private val key: Identifier) : BackgroundPainter {
     private val panelColor by lazy {
-        color(colorMap.getValue(key).bg)
+        color(palette.getValue(key).bg)
     }
 
     override fun paintBackground(left: Int, top: Int, panel: WWidget) {

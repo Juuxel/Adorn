@@ -7,10 +7,10 @@ import juuxel.adorn.util.color
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 
-class WColorableLabel(text: Text, private val colorMapId: Identifier, private val colorKey: Identifier) :
+class WColorableLabel(text: Text, private val paletteId: Identifier, private val colorKey: Identifier) :
     WLabel(text, WLabel.DEFAULT_TEXT_COLOR) {
     private val _color by lazy {
-        color(ColorManager.getColors(colorMapId).getValue(colorKey).fg)
+        color(ColorManager.getColors(paletteId).getValue(colorKey).fg)
     }
 
     override fun paintBackground(x: Int, y: Int) {

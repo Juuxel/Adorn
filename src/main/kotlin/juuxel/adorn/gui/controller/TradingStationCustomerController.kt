@@ -4,8 +4,8 @@ import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.WLabel
+import juuxel.adorn.gui.painter.Painters
 import juuxel.adorn.gui.widget.CenteredLabelWidget
-import juuxel.adorn.gui.widget.Painters
 import juuxel.adorn.util.Colors.WHITE
 import juuxel.adorn.util.color
 import net.fabricmc.api.EnvType

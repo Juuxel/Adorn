@@ -2,12 +2,10 @@ package juuxel.adorn.gui.controller
 
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
-import io.github.cottonmc.cotton.gui.widget.WLabel
-import juuxel.adorn.gui.widget.Painters
+import juuxel.adorn.gui.painter.Painters
+import juuxel.adorn.gui.widget.WColorableLabel
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import juuxel.adorn.gui.widget.Painters
-import juuxel.adorn.gui.widget.WColorableLabel
 import net.minecraft.container.BlockContext
 import net.minecraft.container.PropertyDelegate
 import net.minecraft.entity.player.PlayerInventory
@@ -22,7 +20,7 @@ open class SimpleInvController(
     context: BlockContext,
     invWidth: Int,
     invHeight: Int,
-    private val colorMapId: Identifier,
+    private val paletteId: Identifier,
     blockInventory: Inventory = getBlockInventoryOrCreate(context, invWidth * invHeight),
     propertyDelegate: PropertyDelegate = getBlockPropertyDelegate(context)
 ) : BaseAdornController(syncId, playerInv, context, blockInventory, propertyDelegate) {
@@ -37,7 +35,7 @@ open class SimpleInvController(
                 WColorableLabel(
                     TranslatableText(
                         block.translationKey
-                    ), colorMapId, blockId
+                    ), paletteId, blockId
                 ), 0, 0
             )
 

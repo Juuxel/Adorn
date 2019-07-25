@@ -5,9 +5,9 @@ import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.block.entity.TradingStation
+import juuxel.adorn.gui.painter.Painters
 import juuxel.adorn.gui.widget.CenteredLabelWidget
 import juuxel.adorn.gui.widget.DisplayOnlySlot
-import juuxel.adorn.gui.widget.Painters
 import juuxel.adorn.lib.ModNetworking
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.trading.TradeInventory
@@ -17,7 +17,6 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
 import net.fabricmc.fabric.api.server.PlayerStream
-import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.container.BlockContext
 import net.minecraft.container.SlotActionType
 import net.minecraft.entity.player.PlayerEntity
