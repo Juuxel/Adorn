@@ -5,7 +5,6 @@ import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.gui.widget.CenteredLabelWidget
-import juuxel.adorn.gui.widget.Painters
 import juuxel.adorn.util.Colors.WHITE
 import juuxel.adorn.util.color
 import net.minecraft.container.BlockContext
@@ -41,19 +40,19 @@ class TradingStationCustomerController(
             val tradeInv = TradingStationController.getTrade(blockContext).createInventory()
             val storage = TradingStationController.getStorage(blockContext)
 
-            add(WItemSlot.of(tradeInv, 0).withLibguiStyle(), 1, 2)
-            add(WItemSlot.of(tradeInv, 1).withLibguiStyle(), 1, 4)
+            add(WItemSlot.of(tradeInv, 0), 1, 2)
+            add(WItemSlot.of(tradeInv, 1), 1, 4)
 
             add(CenteredLabelWidget(TranslatableText("block.adorn.trading_station.selling"), WHITE), 1, 1)
             add(CenteredLabelWidget(TranslatableText("block.adorn.trading_station.price"), WHITE), 1, 3)
 
             for (row in 0..2) {
                 for (col in 0..3) {
-                    add(WItemSlot.of(storage, row * 4 + col).withLibguiStyle(), 3 + col, 2 + row)
+                    add(WItemSlot.of(storage, row * 4 + col), 3 + col, 2 + row)
                 }
             }
 
-            add(playerInvPanel, 0, 6)
+            add(createPlayerInventoryPanel(), 0, 6)
             validate(this@TradingStationCustomerController)
         }
     }
@@ -69,12 +68,7 @@ class TradingStationCustomerController(
     }
 
     override fun addPainters() {
-        super.addPainters()
         rootPanel.setBackgroundPainter(BackgroundPainter.createColorful(color(0x359668)))
-    }
-
-    private fun WItemSlot.withLibguiStyle() = apply {
-        setBackgroundPainter(Painters.LIBGUI_STYLE_SLOT)
     }
 
     override fun getTitleColor() = WHITE
