@@ -93,7 +93,7 @@ dependencies {
     includedMod("cloth-config:ClothConfig:" + v("cloth-config"))
     includedMod("me.sargunvohra.mcmods:auto-config:" + v("auto-config"))
     modImplementation("towelette:Towelette:" + v("towelette"))
-    modRuntime("io.github.prospector.modmenu:ModMenu:" + v("modmenu"))
+    modImplementation("io.github.prospector.modmenu:ModMenu:" + v("modmenu"))
 
     // Other libraries
     compileOnly("org.apiguardian:apiguardian-api:1.0.0")

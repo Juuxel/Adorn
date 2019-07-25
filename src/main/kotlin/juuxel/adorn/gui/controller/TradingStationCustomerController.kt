@@ -5,8 +5,12 @@ import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.gui.widget.CenteredLabelWidget
+import juuxel.adorn.gui.widget.Painters
 import juuxel.adorn.util.Colors.WHITE
 import juuxel.adorn.util.color
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.container.BlockContext
 import net.minecraft.container.SlotActionType
 import net.minecraft.entity.player.PlayerEntity
@@ -27,6 +31,9 @@ class TradingStationCustomerController(
     BasicInventory(0),
     getBlockPropertyDelegate(blockContext)
 ) {
+    // TODO: Remove
+    private val slots = ArrayList<WItemSlot>()
+
     init {
         (rootPanel as WGridPanel).apply {
             add(
@@ -40,19 +47,17 @@ class TradingStationCustomerController(
             val tradeInv = TradingStationController.getTrade(blockContext).createInventory()
             val storage = TradingStationController.getStorage(blockContext)
 
-            add(WItemSlot.of(tradeInv, 0), 1, 2)
-            add(WItemSlot.of(tradeInv, 1), 1, 4)
+            fun WItemSlot.addToSlots() = apply { slots += this }
+
+            add(WItemSlot.of(tradeInv, 0).addToSlots(), 1, 2)
+            add(WItemSlot.of(tradeInv, 1).addToSlots(), 1, 4)
 
             add(CenteredLabelWidget(TranslatableText("block.adorn.trading_station.selling"), WHITE), 1, 1)
             add(CenteredLabelWidget(TranslatableText("block.adorn.trading_station.price"), WHITE), 1, 3)
 
-            for (row in 0..2) {
-                for (col in 0..3) {
-                    add(WItemSlot.of(storage, row * 4 + col), 3 + col, 2 + row)
-                }
-            }
+            add(WItemSlot.of(storage, 0, 4, 3).addToSlots(), 3, 2)
 
-            add(createPlayerInventoryPanel(), 0, 6)
+            add(playerInvPanel, 0, 6)
             validate(this@TradingStationCustomerController)
         }
     }
@@ -67,8 +72,11 @@ class TradingStationCustomerController(
         } else cursorStack
     }
 
+    @Environment(EnvType.CLIENT)
     override fun addPainters() {
+        super.addPainters()
         rootPanel.setBackgroundPainter(BackgroundPainter.createColorful(color(0x359668)))
+        slots.forEach { it.setBackgroundPainter(Painters.LIBGUI_STYLE_SLOT) }
     }
 
     override fun getTitleColor() = WHITE

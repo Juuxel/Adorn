@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos
 
 object ModNetworking {
     val ENTITY_SPAWN = Adorn.id("entity_spawn")
+    val TRADE_SYNC = Adorn.id("trade_sync")
 
     fun initClient() {
         ClientSidePacketRegistry.INSTANCE.register(ENTITY_SPAWN) { context, buf ->
@@ -32,10 +33,22 @@ object ModNetworking {
                 (context.player.world as? ClientWorld)?.addEntity(packet.id, entity)
             }
         }
+
+        ClientSidePacketRegistry.INSTANCE.register(TRADE_SYNC) { context, buf ->
+            val pos = buf.readBlockPos()
+            val be = context.player?.world?.getBlockEntity(pos) as? TradingStationBlockEntity ?: return@register
+            be.trade.fromTag(buf.readCompoundTag()!!)
+        }
     }
 
     fun createEntitySpawnPacket(entity: Entity) =
         CustomPayloadS2CPacket(ENTITY_SPAWN, PacketByteBuf(Unpooled.buffer()).apply {
             EntitySpawnS2CPacket(entity).write(this)
+        })
+
+    fun createTradeSyncPacket(pos: BlockPos, trade: Trade) =
+        CustomPayloadS2CPacket(TRADE_SYNC, PacketByteBuf(Unpooled.buffer()).apply {
+            writeBlockPos(pos)
+            writeCompoundTag(trade.toTag(CompoundTag()))
         })
 }
