@@ -43,7 +43,7 @@ open class SimpleInvController(
                         if (hasEvenWidth && col + 1 > invWidth / 2) 1
                         else 0
                     val slot = WItemSlot.of(blockInventory, col + row * invWidth)
-                    slot.setBackgroundPainter(Painters.LIBGUI_STYLE_SLOT)
+                    slot.setBackgroundPainter(Painters.TEXTURED_SLOT)
                     add(slot, col + (9 - invWidth) / 2 + xOffset, row + 1)
                 }
             }
