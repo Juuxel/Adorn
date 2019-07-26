@@ -7,8 +7,8 @@ import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.block.entity.TradingStation
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.gui.painter.Painters
-import juuxel.adorn.gui.widget.CenteredLabelWidget
-import juuxel.adorn.gui.widget.DisplayOnlySlot
+import juuxel.adorn.gui.widget.WCenteredLabel
+import juuxel.adorn.gui.widget.WDisplayOnlySlot
 import juuxel.adorn.lib.ModNetworking
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.trading.TradeInventory
@@ -57,11 +57,11 @@ class TradingStationController(
             val mutableSlots = ArrayList<WItemSlot>()
             fun WItemSlot.addToSlots() = apply { mutableSlots += this }
 
-            add(DisplayOnlySlot(tradeInv, 0).addToSlots(), 1, 2)
-            add(DisplayOnlySlot(tradeInv, 1).addToSlots(), 1, 4)
+            add(WDisplayOnlySlot(tradeInv, 0).addToSlots(), 1, 2)
+            add(WDisplayOnlySlot(tradeInv, 1).addToSlots(), 1, 4)
 
-            add(CenteredLabelWidget(TranslatableText("block.adorn.trading_station.selling"), Colors.WHITE), 1, 1)
-            add(CenteredLabelWidget(TranslatableText("block.adorn.trading_station.price"), Colors.WHITE), 1, 3)
+            add(WCenteredLabel(TranslatableText("block.adorn.trading_station.selling"), Colors.WHITE), 1, 1)
+            add(WCenteredLabel(TranslatableText("block.adorn.trading_station.price"), Colors.WHITE), 1, 3)
 
             add(WItemSlot.of(blockInventory, 0, 4, 3).addToSlots(), 3, 2)
 
