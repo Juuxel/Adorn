@@ -145,14 +145,17 @@
   "item.adorn.deprecated_item.desc.1": "Tämä esine on siirretty.",
   "item.adorn.deprecated_item.desc.2": "Sen voi korvata painamalla %s.",
 
-  "text.autoconfig.Adorn.category.general": "Yleiset",
-  "text.autoconfig.Adorn.category.advanced": "Edistyneet",
-  "text.autoconfig.Adorn.option.enableOldStoneRods": "Käytä vanhoja kivisauvoja",
-  "text.autoconfig.Adorn.option.enableOldStoneRods.@Tooltip": "Käytä vanhoja kivisauvoja yhteensopivuutta varten.",
-  "text.autoconfig.Adorn.option.sittingOnTables": "Salli pöydillä istuminen",
-  "text.autoconfig.Adorn.option.sittingOnTables.@Tooltip": "Sallii pöydillä istumisen.",
-  "text.autoconfig.Adorn.option.skipNightOnSofas": "Ohita yöt nukkumalla sohvalla",
-  "text.autoconfig.Adorn.option.skipNightOnSofas.@Tooltip": "Sallii ohittaa yöt nukkumalla sohvalla.",
-  "text.autoconfig.Adorn.option.protectTradingStations": "Suojele kauppapöytiä",
-  "text.autoconfig.Adorn.option.protectTradingStations.@Tooltip": "Estää muita pelaajia hajottamasta kauppapöytiäsi."
+  "gui.adorn.config.category.general": "Yleiset",
+  "gui.adorn.config.category.advanced": "Edistyneet",
+  "gui.adorn.config.option.enableOldStoneRods": "Käytä vanhoja kivisauvoja",
+  "gui.adorn.config.option.enableOldStoneRods.tooltip": "Käytä vanhoja kivisauvoja yhteensopivuutta varten.",
+  "gui.adorn.config.option.sittingOnTables": "Salli pöydillä istuminen",
+  "gui.adorn.config.option.sittingOnTables.tooltip": "Sallii pöydillä istumisen.",
+  "gui.adorn.config.option.skipNightOnSofas": "Ohita yöt nukkumalla sohvalla",
+  "gui.adorn.config.option.skipNightOnSofas.tooltip": "Sallii ohittaa yöt nukkumalla sohvalla.",
+  "gui.adorn.config.option.protectTradingStations": "Suojele kauppapöytiä",
+  "gui.adorn.config.option.protectTradingStations.tooltip": "Estää muita pelaajia hajottamasta kauppapöytiäsi.",
+  "gui.adorn.config.requires_restart": "Requires restart",
+  "gui.adorn.config.restart_required.title": "Restart required!",
+  "gui.adorn.config.restart_required.message": "One of your changed options requires Minecraft to be restarted."
 }

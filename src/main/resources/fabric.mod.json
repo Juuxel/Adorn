@@ -6,7 +6,7 @@
   "name": "Adorn",
   "description": "Decorate your home!",
   "authors": ["Juuz"],
-  "icon": "icon.png",
+  "icon": "assets/adorn/icon.png",
   "license": "MIT",
   "contact": {
     "homepage": "https://minecraft.curseforge.com/projects/adorn",
