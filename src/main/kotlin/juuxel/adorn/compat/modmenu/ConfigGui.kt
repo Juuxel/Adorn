@@ -96,7 +96,7 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
                 if (restartRequired) {
                     information +=
                         TranslatableText("gui.adorn.config.requires_restart")
-                            .formatted(Formatting.ITALIC, Formatting.DARK_GRAY)
+                            .formatted(Formatting.ITALIC, Formatting.GOLD)
                             .asFormattedString()
                 }
             }
