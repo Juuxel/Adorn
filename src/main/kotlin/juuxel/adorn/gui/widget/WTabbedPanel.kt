@@ -1,5 +1,6 @@
 package juuxel.adorn.gui.widget
 
+import io.github.cottonmc.cotton.gui.widget.WPanel
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel
 import io.github.cottonmc.cotton.gui.widget.WWidget
 import net.minecraft.text.Text
@@ -8,15 +9,21 @@ import net.minecraft.text.Text
  * A panel that shows one widget at a time like [a card panel][WCardPanel],
  * but allows the user to change the tabs with buttons.
  */
-class WTabbedPanel : WPlainPanel() {
+class WTabbedPanel : WPanel() {
     private val buttonBar: WPlainPanel = WPlainPanel()
     private val cardPanel = WCardPanel()
     private val buttonGroup = WToggleableButton.Group()
     private var nextButtonX = 0
 
     init {
-        _add(buttonBar, 0, 0, 9 * 18, 18)
-        _add(cardPanel, 0, 30)
+        val panel = WPlainPanel()
+        panel.add(buttonBar, 0, 0, 9 * 18, 18)
+        panel.add(cardPanel, 0, 30)
+
+        children.add(panel)
+        panel.setLocation(0, 0)
+        panel.setParent(this)
+        expandToFit(panel)
     }
 
     fun addTab(label: Text, tab: WWidget, buttonWidth: Int = 3 * 18 + 9) {
@@ -36,20 +43,4 @@ class WTabbedPanel : WPlainPanel() {
 
     fun select(tab: Int) =
         cardPanel.select(tab)
-
-    @Suppress("FunctionName")
-    private fun _add(w: WWidget, x: Int, y: Int) = super.add(w, x, y)
-
-    @Suppress("FunctionName")
-    private fun _add(w: WWidget, x: Int, y: Int, width: Int, height: Int) = super.add(w, x, y, width, height)
-
-    @Deprecated("Cannot add contents directly to a tabbed panel", level = DeprecationLevel.ERROR)
-    override fun add(w: WWidget, x: Int, y: Int) {
-        throw UnsupportedOperationException()
-    }
-
-    @Deprecated("Cannot add contents directly to a tabbed panel", level = DeprecationLevel.ERROR)
-    override fun add(w: WWidget, x: Int, y: Int, width: Int, height: Int) {
-        throw UnsupportedOperationException()
-    }
 }
