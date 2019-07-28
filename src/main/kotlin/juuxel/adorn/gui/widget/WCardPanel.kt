@@ -3,7 +3,6 @@ package juuxel.adorn.gui.widget
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.widget.WPanel
 import io.github.cottonmc.cotton.gui.widget.WWidget
-import juuxel.adorn.mixin.WWidgetAccessor
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import kotlin.math.max
@@ -22,9 +21,7 @@ class WCardPanel : WPanel() {
     fun addCard(w: WWidget) {
         children += w
 
-        // FIXME: Remove the accessor mixin
-        (w as WWidgetAccessor).setParent(this)
-
+        w.setParent(this)
         w.setLocation(0, 0)
         expandToFit(w)
     }

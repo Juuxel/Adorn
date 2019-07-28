@@ -9,8 +9,7 @@
     "fluidloggable.ChairBlockMixin",
     "fluidloggable.FluidloggableMixin",
     "LivingEntityMixin",
-    "PlayerEntityMixin",
-    "WWidgetAccessor"
+    "PlayerEntityMixin"
   ],
   "client": [
     "client.LivingEntityMixin"
