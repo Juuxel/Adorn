@@ -12,7 +12,8 @@
     "PlayerEntityMixin"
   ],
   "client": [
-    "client.LivingEntityMixin"
+    "client.LivingEntityMixin",
+    "client.WWidgetMixin"
   ],
 
   "injectors": {

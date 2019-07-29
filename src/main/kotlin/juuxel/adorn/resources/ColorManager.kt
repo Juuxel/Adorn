@@ -32,7 +32,6 @@ object ColorManager : SimpleSynchronousResourceReloadListener {
     override fun getFabricId() = ID
 
     override fun apply(manager: ResourceManager) {
-        LOGGER.info("[Adorn] Reloading colors")
         map.clear()
         val ids = manager.findResources(PREFIX) { it.endsWith(".json") }
         for (id in ids) {
@@ -87,9 +86,7 @@ object ColorManager : SimpleSynchronousResourceReloadListener {
                                 fg = parseHexColor(json.get("fg").asString)
                             )
                         } else {
-                            ColorPair(
-                                bg = parseHexColor(json.get("bg").asString)
-                            )
+                            ColorPair(bg = parseHexColor(json.get("bg").asString))
                         }
                     }
 
