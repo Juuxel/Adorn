@@ -1,10 +1,6 @@
 package juuxel.adorn.lib
 
 import juuxel.adorn.Adorn
-import juuxel.adorn.gui.controller.DrawerController
-import juuxel.adorn.gui.controller.KitchenCupboardController
-import juuxel.adorn.gui.controller.TradingStationController
-import juuxel.adorn.gui.controller.TradingStationCustomerController
 import juuxel.adorn.gui.screen.DrawerScreen
 import juuxel.adorn.gui.screen.KitchenCupboardScreen
 import juuxel.adorn.gui.screen.TradingStationCustomerScreen
@@ -14,10 +10,8 @@ import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry
 import net.minecraft.client.gui.screen.ingame.AbstractContainerScreen
-import net.minecraft.container.BlockContext
 import net.minecraft.container.Container
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 
@@ -28,36 +22,40 @@ object ModGuis {
     val TRADING_STATION_CUSTOMER = Adorn.id("trading_station_customer")
 
     fun init() {
-        registerContainer(DRAWER, ::DrawerController)
-        registerContainer(KITCHEN_CUPBOARD, ::KitchenCupboardController)
-        registerContainer(TRADING_STATION,::TradingStationController)
-        registerContainer(TRADING_STATION_CUSTOMER, ::TradingStationCustomerController)
+        registerContainer(DRAWER)
+        registerContainer(KITCHEN_CUPBOARD)
+        registerContainer(TRADING_STATION)
+        registerContainer(TRADING_STATION_CUSTOMER)
     }
 
     @Environment(EnvType.CLIENT)
     fun initClient() {
-        registerScreen(DRAWER, ::DrawerController, ::DrawerScreen)
-        registerScreen(KITCHEN_CUPBOARD, ::KitchenCupboardController, ::KitchenCupboardScreen)
-        registerScreen(TRADING_STATION,::TradingStationController, ::TradingStationScreen)
-        registerScreen(TRADING_STATION_CUSTOMER, ::TradingStationCustomerController, ::TradingStationCustomerScreen)
+        registerScreen(DRAWER, ::DrawerScreen)
+        registerScreen(KITCHEN_CUPBOARD, ::KitchenCupboardScreen)
+        registerScreen(TRADING_STATION, ::TradingStationScreen)
+        registerScreen(TRADING_STATION_CUSTOMER, ::TradingStationCustomerScreen)
     }
 
-    private inline fun registerContainer(id: Identifier, crossinline fn: (Int, PlayerInventory, BlockContext) -> Container) =
-        ContainerProviderRegistry.INSTANCE.registerFactory(id) { syncId, _, player, buf ->
-            fn(syncId, player.inventory, BlockContext.create(player.world, buf.readBlockPos()))
-        }
+    private inline fun registerContainer(
+        id: Identifier
+    ) = ContainerProviderRegistry.INSTANCE.registerFactory(id) { syncId, _, player, buf ->
+        val world = player.world
+        val pos = buf.readBlockPos()
+        val provider = world.getBlockState(pos).createContainerProvider(world, pos)
+        provider?.createMenu(syncId, player.inventory, player)
+    }
 
-    private inline fun <C : Container> registerScreen(
+    private inline fun <reified C : Container> registerScreen(
         id: Identifier,
-        crossinline containerFn: (Int, PlayerInventory, BlockContext) -> C,
         crossinline screenFn: (C, PlayerEntity) -> AbstractContainerScreen<in C>
-    ) =
-        ScreenProviderRegistry.INSTANCE.registerFactory(id) { syncId, _, player, buf ->
-            screenFn(
-                containerFn(syncId, player.inventory, BlockContext.create(player.world, buf.readBlockPos())),
-                player
-            )
+    ) = ScreenProviderRegistry.INSTANCE.registerFactory(id) { syncId, _, player, buf ->
+        val world = player.world
+        val pos = buf.readBlockPos()
+        val provider = world.getBlockState(pos).createContainerProvider(world, pos)
+        provider?.let {
+            screenFn(it.createMenu(syncId, player.inventory, player) as C, player)
         }
+    }
 }
 
 fun PlayerEntity.openFabricContainer(id: Identifier, pos: BlockPos) {
