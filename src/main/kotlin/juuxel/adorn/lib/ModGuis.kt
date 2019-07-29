@@ -36,7 +36,7 @@ object ModGuis {
         registerScreen(TRADING_STATION_CUSTOMER, ::TradingStationCustomerScreen)
     }
 
-    private inline fun registerContainer(
+    private fun registerContainer(
         id: Identifier
     ) = ContainerProviderRegistry.INSTANCE.registerFactory(id) { syncId, _, player, buf ->
         val world = player.world
