@@ -5,7 +5,7 @@ import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
 import io.github.cottonmc.cotton.gui.widget.*
 import juuxel.adorn.config.AdornConfigManager
 import juuxel.adorn.gui.painter.Painters
-import juuxel.adorn.gui.widget.WCenteredLabel
+import juuxel.adorn.gui.widget.WTitleLabel
 import juuxel.adorn.gui.widget.WTabbedPanel
 import juuxel.adorn.util.Colors
 import net.fabricmc.api.EnvType
@@ -26,10 +26,7 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
         root.setBackgroundPainter(null)
         setRootPanel(root)
 
-        root.add(
-            WCenteredLabel(TranslatableText("gui.adorn.config.title"), Colors.WHITE),
-            0, 0, 11 * 18, 18
-        )
+        root.add(WTitleLabel(TranslatableText("gui.adorn.config.title"), Colors.WHITE), 0, 0, 11 * 18, 18)
 
         val tabbed = WTabbedPanel()
         val config = AdornConfigManager.CONFIG
@@ -44,7 +41,8 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
             setSize(11 * 18, height)
         }
 
-        val appearance = WPlainPanel()
+        // TODO: Slot style configuration
+        /*val appearance = WPlainPanel()
         with(appearance) {
             val slotShowcase = WSlotShowcase(
                 BackgroundPainter.SLOT,
@@ -57,7 +55,7 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
 
             setBackgroundPainter(BackgroundPainter.VANILLA)
             setSize(11 * 18, height)
-        }
+        }*/
 
         val advanced = WGridPanel()
         with(advanced) {
@@ -68,7 +66,7 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
         }
 
         tabbed.addTab(TranslatableText("gui.adorn.config.category.general"), general)
-        tabbed.addTab(TranslatableText("gui.adorn.config.category.appearance"), appearance)
+        //tabbed.addTab(TranslatableText("gui.adorn.config.category.appearance"), appearance)
         tabbed.addTab(TranslatableText("gui.adorn.config.category.advanced"), advanced)
 
         root.add(tabbed, 0, 18 + 5)

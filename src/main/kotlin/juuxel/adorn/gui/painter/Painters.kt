@@ -36,12 +36,6 @@ object Painters {
         }
     }
 
-    val TEXTURED_SLOT: BackgroundPainter = BackgroundPainter { left, top, panel ->
-        for (x in 0 until panel.width step 18)
-            for (y in 0 until panel.height step 18)
-                ScreenDrawing.rect(SLOT_BG, left - 1 + x, top - 1 + y, 18, 18, Colors.WHITE)
-    }
-
     fun palette(palette: Identifier, key: Identifier): BackgroundPainter =
         PaletteBackgroundPainter(ColorManager.getColors(palette), key)
 }

@@ -47,7 +47,7 @@ class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_T
     fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
 
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity) =
-        TradingStationController(syncId, playerInv, BlockContext.create(world, pos))
+        TradingStationController(syncId, playerInv, BlockContext.create(world, pos), isOwner(player))
 
     override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)
 

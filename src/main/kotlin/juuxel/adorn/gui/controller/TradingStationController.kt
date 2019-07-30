@@ -5,7 +5,6 @@ import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.block.entity.TradingStation
-import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.gui.painter.Painters
 import juuxel.adorn.gui.widget.WCenteredLabel
 import juuxel.adorn.gui.widget.WDisplayOnlySlot
@@ -30,7 +29,8 @@ import org.apache.logging.log4j.LogManager
 class TradingStationController(
     syncId: Int,
     playerInv: PlayerInventory,
-    private val context: BlockContext
+    private val context: BlockContext,
+    private val forOwner: Boolean
 ) : BaseAdornController(
     syncId,
     playerInv,
@@ -39,18 +39,10 @@ class TradingStationController(
     getBlockPropertyDelegate(context)
 ) {
     private val slots: List<WItemSlot>
-    private val forOwner =
-        (getTradingStation(context) as? TradingStationBlockEntity)?.isOwner(playerInv.player) == true
 
     init {
         (rootPanel as WGridPanel).apply {
-            add(
-                WLabel(
-                    TranslatableText(
-                        context.run<String> { world, pos -> world.getBlockState(pos).block.translationKey }.get()
-                    ), titleColor
-                ), 0, 0
-            )
+            add(WLabel(TranslatableText(getBlock(context).translationKey), Colors.WHITE), 0, 0)
 
             val tradeInv = getTrade(context).createInventory()
 
