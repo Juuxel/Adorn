@@ -4,6 +4,8 @@ import io.netty.buffer.Unpooled
 import juuxel.adorn.Adorn
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.trading.Trade
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry
 import net.minecraft.client.network.packet.CustomPayloadS2CPacket
 import net.minecraft.client.network.packet.EntitySpawnS2CPacket
@@ -17,6 +19,7 @@ object ModNetworking {
     val ENTITY_SPAWN = Adorn.id("entity_spawn")
     val TRADE_SYNC = Adorn.id("trade_sync")
 
+    @Environment(EnvType.CLIENT)
     fun initClient() {
         ClientSidePacketRegistry.INSTANCE.register(ENTITY_SPAWN) { context, buf ->
             val packet = EntitySpawnS2CPacket()
