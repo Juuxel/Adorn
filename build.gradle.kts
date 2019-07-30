@@ -90,8 +90,7 @@ dependencies {
 
     // Other mods
     includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { exclude(module = "modmenu") }
-    includedMod("cloth-config:ClothConfig:" + v("cloth-config"))
-    includedMod("me.sargunvohra.mcmods:auto-config:" + v("auto-config"))
+    includedMod("io.github.cottonmc:Jankson:" + v("jankson"))
     modImplementation("towelette:Towelette:" + v("towelette"))
     modImplementation("io.github.prospector.modmenu:ModMenu:" + v("modmenu"))
 

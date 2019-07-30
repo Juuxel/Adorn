@@ -2,7 +2,6 @@ package juuxel.adorn.block.entity
 
 import juuxel.adorn.block.TradingStationBlock
 import juuxel.adorn.gui.controller.TradingStationController
-import juuxel.adorn.gui.controller.TradingStationCustomerController
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.util.InventoryComponent
 import juuxel.adorn.util.getTextComponent
@@ -48,8 +47,7 @@ class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_T
     fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
 
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity) =
-        if (isOwner(player)) TradingStationController(syncId, playerInv, BlockContext.create(world, pos))
-        else TradingStationCustomerController(syncId, playerInv, BlockContext.create(world, pos))
+        TradingStationController(syncId, playerInv, BlockContext.create(world, pos), isOwner(player))
 
     override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)
 

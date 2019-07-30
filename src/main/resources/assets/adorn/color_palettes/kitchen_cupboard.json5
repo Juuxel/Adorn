@@ -1,0 +1,11 @@
+{
+  "adorn:oak_kitchen_cupboard": "#BE9A60",
+  "adorn:spruce_kitchen_cupboard": { "bg": "#70522E", "fg": "#BCBCBC" },
+  "adorn:birch_kitchen_cupboard": "#D3BD82",
+  "adorn:jungle_kitchen_cupboard": "#B48462",
+  "adorn:acacia_kitchen_cupboard": "#B66136",
+  "adorn:dark_oak_kitchen_cupboard": { "bg": "#4D3117", "fg": "#BCBCBC" },
+
+  // The default color is the oak color
+  "adorn:default": "#BE9A60"
+}

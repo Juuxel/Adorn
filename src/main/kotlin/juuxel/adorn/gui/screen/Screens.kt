@@ -5,7 +5,6 @@ import io.github.cottonmc.cotton.gui.client.CottonScreen
 import juuxel.adorn.gui.controller.DrawerController
 import juuxel.adorn.gui.controller.KitchenCupboardController
 import juuxel.adorn.gui.controller.TradingStationController
-import juuxel.adorn.gui.controller.TradingStationCustomerController
 import net.minecraft.entity.player.PlayerEntity
 
 open class AdornScreen<C : CottonScreenController>(
@@ -27,8 +26,3 @@ class TradingStationScreen(
     controller: TradingStationController,
     player: PlayerEntity
 ) : AdornScreen<TradingStationController>(controller, player)
-
-class TradingStationCustomerScreen(
-    controller: TradingStationCustomerController,
-    player: PlayerEntity
-) : AdornScreen<TradingStationCustomerController>(controller, player)

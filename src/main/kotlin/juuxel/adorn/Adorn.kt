@@ -25,6 +25,7 @@ object Adorn : ModInitializer {
         ModBlocks.initClient()
         ModGuis.initClient()
         ModNetworking.initClient()
+        AdornResources.initClient()
     }
 
     fun id(path: String) = Identifier(NAMESPACE, path)
