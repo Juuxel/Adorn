@@ -1,5 +1,6 @@
 package juuxel.adorn.gui.controller
 
+import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.WWidget
@@ -11,6 +12,7 @@ import net.minecraft.container.BlockContext
 import net.minecraft.container.PropertyDelegate
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
+import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
@@ -21,6 +23,7 @@ open class SimpleInvController(
     context: BlockContext,
     invWidth: Int,
     invHeight: Int,
+    title: Text,
     private val paletteId: Identifier,
     blockInventory: Inventory = getBlockInventoryOrCreate(context, invWidth * invHeight),
     propertyDelegate: PropertyDelegate = getBlockPropertyDelegate(context)
@@ -29,7 +32,7 @@ open class SimpleInvController(
 
     init {
         (rootPanel as WGridPanel).apply {
-            add(createTitle(context), 0, 0)
+            add(WLabel(title, WLabel.DEFAULT_TEXT_COLOR), 0, 0)
 
             slot = WItemSlot.of(blockInventory, 0, invWidth, invHeight)
             add(slot, (9 - invWidth) / 2, 1)
@@ -45,17 +48,8 @@ open class SimpleInvController(
     @Environment(EnvType.CLIENT)
     override fun addPainters() {
         super.addPainters()
+        // TODO: Readd palette painter here
+        rootPanel.setBackgroundPainter(BackgroundPainter.VANILLA)
         slot.setBackgroundPainter(Painters.LIBGUI_STYLE_SLOT)
-    }
-
-    protected open fun createTitle(context: BlockContext): WWidget {
-        val block = getBlock(context).get()
-        val blockId = Registry.BLOCK.getId(block)
-
-        return WColorableLabel(
-            TranslatableText(
-                block.translationKey
-            ), paletteId, blockId
-        )
     }
 }
