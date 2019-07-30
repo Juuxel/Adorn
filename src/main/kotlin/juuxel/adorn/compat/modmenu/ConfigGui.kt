@@ -4,9 +4,8 @@ import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
 import io.github.cottonmc.cotton.gui.widget.*
 import juuxel.adorn.config.AdornConfigManager
-import juuxel.adorn.gui.painter.Painters
-import juuxel.adorn.gui.widget.WTitleLabel
 import juuxel.adorn.gui.widget.WTabbedPanel
+import juuxel.adorn.gui.widget.WTitleLabel
 import juuxel.adorn.util.Colors
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -41,22 +40,6 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
             setSize(11 * 18, height)
         }
 
-        // TODO: Slot style configuration
-        /*val appearance = WPlainPanel()
-        with(appearance) {
-            val slotShowcase = WSlotShowcase(
-                BackgroundPainter.SLOT,
-                Painters.LIBGUI_STYLE_SLOT,
-                Painters.TEXTURED_SLOT
-            ) { /* TODO */ }
-
-            add(WLabel(TranslatableText("gui.adorn.config.option.slotStyle"), WLabel.DEFAULT_TEXT_COLOR), 0, 0)
-            add(slotShowcase, 9, 24)
-
-            setBackgroundPainter(BackgroundPainter.VANILLA)
-            setSize(11 * 18, height)
-        }*/
-
         val advanced = WGridPanel()
         with(advanced) {
             add(createConfigToggle(config::enableOldStoneRods, true), 0, 0)
@@ -66,7 +49,6 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
         }
 
         tabbed.addTab(TranslatableText("gui.adorn.config.category.general"), general)
-        //tabbed.addTab(TranslatableText("gui.adorn.config.category.appearance"), appearance)
         tabbed.addTab(TranslatableText("gui.adorn.config.category.advanced"), advanced)
 
         root.add(tabbed, 0, 18 + 5)
