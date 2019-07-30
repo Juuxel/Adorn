@@ -1,5 +1,6 @@
 package juuxel.adorn.block
 
+import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.DrawerBlockEntity
 import juuxel.adorn.lib.ModGuis
@@ -27,10 +28,10 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-class DrawerBlock(
-    material: String
-) : PolyesterBlockWithEntity(Settings.copy(Blocks.OAK_PLANKS)), BaseInventoryBlockEntity.InventoryProviderImpl {
-    override val name = "${material}_drawer"
+open class DrawerBlock(
+    variant: BlockVariant
+) : PolyesterBlockWithEntity(variant.createSettings()), BaseInventoryBlockEntity.InventoryProviderImpl {
+    override val name = "${variant.variantName}_drawer"
     override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
     override val blockEntityType = BLOCK_ENTITY_TYPE
 

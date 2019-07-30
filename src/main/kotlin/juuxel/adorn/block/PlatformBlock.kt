@@ -17,7 +17,7 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 
-class PlatformBlock(variant: BlockVariant) : Block(variant.createSettings()), PolyesterBlock, Waterloggable {
+open class PlatformBlock(variant: BlockVariant) : Block(variant.createSettings()), PolyesterBlock, Waterloggable {
     override val name = "${variant.variantName}_platform"
     override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
     override val hasDescription = true

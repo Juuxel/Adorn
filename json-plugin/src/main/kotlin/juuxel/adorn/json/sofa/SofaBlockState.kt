@@ -15,7 +15,6 @@ object SofaBlockState : AbstractContentGenerator("sofa.block_state", "blockstate
         MultipartBlockState(
             multipart = sequence {
                 for (facing in BlockStateProperty.horizontalFacing.values) {
-
                     yield(
                         Multipart(
                             `when` = When("facing", facing),

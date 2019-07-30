@@ -20,16 +20,31 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
 
 object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
+    // BlockVariants
+    private val WOODEN_VARIANTS = VanillaWoodType.values().map {
+        BlockVariant.Wood(it.id)
+    }
+
+    private val BUILDING_BLOCK_VARIANTS = sequence {
+        yieldAll(WOODEN_VARIANTS)
+        yieldAll(BlockVariant.Stone.values().iterator())
+    }.toList()
+
+    // Blocks
     val SOFAS: List<SofaBlock> = DyeColor.values().map {
-        registerBlock(SofaBlock(it.getName()))
+        registerBlock(SofaBlock(object : BlockVariant {
+            override val variantName = it.asString()
+
+            override fun createSettings() = Block.Settings.copy(Blocks.WHITE_WOOL)
+        }))
     }
 
-    val CHAIRS: List<ChairBlock> = VanillaWoodType.values().map {
-        registerBlock(ChairBlock(it.id))
+    val CHAIRS: List<ChairBlock> = WOODEN_VARIANTS.map {
+        registerBlock(ChairBlock(it))
     }
 
-    val TABLES: List<TableBlock> = VanillaWoodType.values().map {
-        registerBlock(TableBlock(it.id))
+    val TABLES: List<TableBlock> = WOODEN_VARIANTS.map {
+        registerBlock(TableBlock(it))
     }
 
     val KITCHEN_COUNTERS: List<KitchenCounterBlock> = VanillaWoodType.values().map {
@@ -42,8 +57,8 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
 
     val CHIMNEY: ChimneyBlock = registerBlock(ChimneyBlock())
 
-    val DRAWERS: List<DrawerBlock> = VanillaWoodType.values().map {
-        registerBlock(DrawerBlock(it.id))
+    val DRAWERS: List<DrawerBlock> = WOODEN_VARIANTS.map {
+        registerBlock(DrawerBlock(it))
     }
 
     val TRADING_STATION: TradingStationBlock = registerBlock(TradingStationBlock())
@@ -54,15 +69,6 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
             Block.Settings.copy(STONE_TORCH_GROUND).dropsLike(STONE_TORCH_GROUND)
         )
     )
-
-    private val WOODEN_VARIANTS = VanillaWoodType.values().map {
-        BlockVariant.Wood(it.id)
-    }
-
-    private val BUILDING_BLOCK_VARIANTS = sequence {
-        yieldAll(WOODEN_VARIANTS)
-        yieldAll(BlockVariant.Stone.values().iterator())
-    }.toList()
 
     val POSTS = BUILDING_BLOCK_VARIANTS.map {
         registerBlock(PostBlock(it))

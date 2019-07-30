@@ -36,17 +36,10 @@ allprojects {
             mavenLocal()
         }
 
-        // For cotton, polyester and json-factory
-        maven(url = "http://server.bbkr.space:8081/artifactory/libs-release")
-        maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot")
-
-        // For towelette
-        maven(url = "https://minecraft.curseforge.com/api/maven") {
-            name = "CurseForge"
-        }
-
-        // For auto-config
-        maven(url = "http://maven.sargunv.s3-website-us-west-2.amazonaws.com/")
+        maven(url = "http://server.bbkr.space:8081/artifactory/libs-release") { name = "Cotton" }
+        maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot") { name = "Cotton (snapshots)" }
+        maven(url = "https://minecraft.curseforge.com/api/maven") { name = "CurseForge" }
+        maven(url = "https://jitpack.io")
     }
 
     tasks.withType<KotlinCompile> {
@@ -93,6 +86,8 @@ dependencies {
     includedMod("io.github.cottonmc:Jankson:" + v("jankson"))
     modImplementation("towelette:Towelette:" + v("towelette"))
     modImplementation("io.github.prospector.modmenu:ModMenu:" + v("modmenu"))
+    modImplementation("extra-pieces:extrapieces:" + v("extra-pieces"))
+    modImplementation("com.github.artificemc:artifice:" + v("artifice"))
 
     // Other libraries
     compileOnly("org.apiguardian:apiguardian-api:1.0.0")

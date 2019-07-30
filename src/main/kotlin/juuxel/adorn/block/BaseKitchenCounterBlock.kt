@@ -20,9 +20,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 
-abstract class BaseKitchenCounterBlock : Block(
-    FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).sounds(SOUND_GROUP).build()
-), PolyesterBlock {
+abstract class BaseKitchenCounterBlock(
+    settings: Settings = FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).sounds(SOUND_GROUP).build()
+) : Block(settings), PolyesterBlock {
     override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {

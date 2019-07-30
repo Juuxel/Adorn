@@ -1,5 +1,6 @@
 package juuxel.adorn.block
 
+import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.lib.ModGuis
@@ -18,10 +19,16 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-class KitchenCupboardBlock(
-    material: String
-) : BaseKitchenCounterBlock(), BlockEntityProviderImpl, BaseInventoryBlockEntity.InventoryProviderImpl {
-    override val name = "${material}_kitchen_cupboard"
+open class KitchenCupboardBlock : BaseKitchenCounterBlock, BlockEntityProviderImpl, BaseInventoryBlockEntity.InventoryProviderImpl {
+    constructor(material: String) : super() {
+        this.name = "${material}_kitchen_cupboard"
+    }
+
+    constructor(variant: BlockVariant) : super(variant.createSettings()) {
+        this.name = "${variant.variantName}_kitchen_cupboard"
+    }
+
+    override val name: String
     override val blockEntityType = BLOCK_ENTITY_TYPE
 
     override fun activate(

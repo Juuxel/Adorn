@@ -158,5 +158,27 @@
   "gui.adorn.config.option.protectTradingStations.tooltip": "Prevents other players from breaking your trading stations.",
   "gui.adorn.config.requires_restart": "Requires restart",
   "gui.adorn.config.restart_required.title": "Restart required!",
-  "gui.adorn.config.restart_required.message": "One of your changed options requires Minecraft to be restarted."
+  "gui.adorn.config.restart_required.message": "One of your changed options requires Minecraft to be restarted.",
+
+  "piece.adorn.drawer": "%s Drawer",
+  "piece.adorn.table": "%s Table",
+  "piece.adorn.shelf": "%s Shelf",
+  "piece.adorn.post": "%s Post",
+  "piece.adorn.platform": "%s Platform",
+  "piece.adorn.step": "%s Step",
+  "piece.adorn.chair": "%s Chair",
+  "piece.adorn.sofa": "%s Sofa",
+  "piece.adorn.kitchen_counter": "%s Kitchen Counter",
+  "piece.adorn.kitchen_cupboard": "%s Kitchen Cupboard",
+
+  "itemGroup.adorn.drawer": "Adorn + Extra Pieces: Drawers",
+  "itemGroup.adorn.table": "Adorn + Extra Pieces: Tables",
+  "itemGroup.adorn.shelf": "Adorn + Extra Pieces: Shelves",
+  "itemGroup.adorn.post": "Adorn + Extra Pieces: Posts",
+  "itemGroup.adorn.platform": "Adorn + Extra Pieces: Platforms",
+  "itemGroup.adorn.step": "Adorn + Extra Pieces: Steps",
+  "itemGroup.adorn.chair": "Adorn + Extra Pieces: Chairs",
+  "itemGroup.adorn.sofa": "Adorn + Extra Pieces: Sofas",
+  "itemGroup.adorn.kitchen_counter": "Adorn + Extra Pieces: Kitchen Counters",
+  "itemGroup.adorn.kitchen_cupboard": "Adorn + Extra Pieces: Kitchen Cupboards"
 }

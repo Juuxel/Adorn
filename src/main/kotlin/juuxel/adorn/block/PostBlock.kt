@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 
-class PostBlock(variant: BlockVariant) : Block(variant.createSettings()), PolyesterBlock, Waterloggable {
+open class PostBlock(variant: BlockVariant) : Block(variant.createSettings()), PolyesterBlock, Waterloggable {
     override val name = "${variant.variantName}_post"
     override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
     override val hasDescription = true

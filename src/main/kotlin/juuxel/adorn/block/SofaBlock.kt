@@ -4,6 +4,7 @@ import com.google.common.collect.Sets
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
 import juuxel.adorn.api.block.SneakClickHandler
+import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.block.property.FrontConnection
 import juuxel.adorn.util.buildShapeRotations
 import juuxel.polyester.block.PolyesterBlock
@@ -35,9 +36,9 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
 
-class SofaBlock(variant: String) : SeatBlock(Settings.copy(Blocks.WHITE_WOOL)), PolyesterBlock, Waterloggable,
+open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), PolyesterBlock, Waterloggable,
     SneakClickHandler {
-    override val name = "${variant}_sofa"
+    override val name = "${variant.variantName}_sofa"
     override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
 
     init {

@@ -30,7 +30,7 @@ import net.minecraft.world.IWorld
 import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
 
-class ShelfBlock(variant: BlockVariant) : PolyesterBlockWithEntity(variant.createSettings()), Waterloggable {
+open class ShelfBlock(variant: BlockVariant) : PolyesterBlockWithEntity(variant.createSettings()), Waterloggable {
     override val name = "${variant.variantName}_shelf"
     override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
     override val blockEntityType = BLOCK_ENTITY_TYPE

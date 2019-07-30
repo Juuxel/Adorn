@@ -19,6 +19,10 @@ abstract class BaseInventoryBlockEntity(
     type: BlockEntityType<*>,
     private val invSize: Int
 ) : LootableContainerBlockEntity(type) {
+    private val _containerName by lazy {
+        // For EP names
+        ItemStack(cachedState.block).name
+    }
     protected var items: DefaultedList<ItemStack> = DefaultedList.ofSize(invSize, ItemStack.EMPTY)
     val sidedInventory: SidedInventory = @Suppress("LeakingThis") SidedInventoryImpl(this)
 
@@ -43,7 +47,7 @@ abstract class BaseInventoryBlockEntity(
 
     override fun getInvSize() = invSize
 
-    override fun getContainerName() = TranslatableText(cachedState.block.translationKey)
+    override fun getContainerName() = _containerName
 
     // InventoryProvider implementation for blocks
 

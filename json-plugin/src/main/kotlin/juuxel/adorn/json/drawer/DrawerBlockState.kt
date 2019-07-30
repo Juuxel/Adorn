@@ -7,9 +7,7 @@ import io.github.cottonmc.jsonfactory.output.model.VariantBlockState
 import io.github.cottonmc.jsonfactory.output.suffixed
 import juuxel.adorn.json.AdornPlugin
 
-object DrawerBlockState : AbstractContentGenerator("drawer.block_state", "blockstates",
-    AdornPlugin.DRAWER
-) {
+object DrawerBlockState : AbstractContentGenerator("drawer.block_state", "blockstates", AdornPlugin.DRAWER) {
     override fun generate(id: Identifier) = listOf(
         VariantBlockState.create(id, setOf(BlockStateProperty.horizontalFacing)) { values, variant ->
             variant.copy(

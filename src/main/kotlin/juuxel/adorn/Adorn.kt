@@ -9,6 +9,8 @@ import net.minecraft.util.Identifier
 
 object Adorn : ModInitializer {
     const val NAMESPACE = "adorn"
+    private var runTasksImmediately = false
+    private val tasks = ArrayList<() -> Unit>()
 
     override fun onInitialize() {
         AdornConfigManager.init()
@@ -17,6 +19,11 @@ object Adorn : ModInitializer {
         ModEntities.init()
         ModGuis.init()
         ModTags.init()
+
+        // Run post-init tasks
+        tasks.forEach { it() }
+        tasks.clear()
+        runTasksImmediately = true
     }
 
     @Environment(EnvType.CLIENT)
@@ -29,4 +36,9 @@ object Adorn : ModInitializer {
     }
 
     fun id(path: String) = Identifier(NAMESPACE, path)
+
+    internal fun runTaskAfterInit(task: () -> Unit) {
+        if (runTasksImmediately) task()
+        else tasks += task
+    }
 }

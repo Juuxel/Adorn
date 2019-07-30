@@ -2,11 +2,11 @@ package juuxel.adorn.block
 
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
+import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.config.AdornConfigManager
 import juuxel.polyester.block.PolyesterBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
 import net.minecraft.fluid.Fluids
@@ -20,9 +20,9 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
 
-class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING_TABLE)),
+open class TableBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()),
     PolyesterBlock, Waterloggable {
-    override val name = "${material}_table"
+    override val name = "${variant.variantName}_table"
     override val itemSettings: Nothing? = null
     override val sittingYOffset = 0.6
 
@@ -66,7 +66,7 @@ class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING
         .with(WEST, world.getBlockState(pos.offset(Direction.WEST)).block is TableBlock)
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
-        SHAPES[Bits.buildTableState(state[NORTH], state[EAST], state[SOUTH], state[WEST], state[CARPET].isPresent)]
+        SHAPES[Bits.buildTableState(state[NORTH], state[EAST], state[SOUTH], state[WEST]/*, state[CARPET].isPresent*/)]
 
     override fun isSittingEnabled() = AdornConfigManager.CONFIG.sittingOnTables
 
@@ -75,7 +75,7 @@ class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING
         val EAST = Properties.EAST
         val SOUTH = Properties.SOUTH
         val WEST = Properties.WEST
-        val CARPET = CarpetedBlock.CARPET
+//        val CARPET = CarpetedBlock.CARPET
         val WATERLOGGED = Properties.WATERLOGGED
 
         private val SHAPES: Byte2ObjectMap<VoxelShape>
@@ -92,8 +92,7 @@ class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING
                 north: Boolean,
                 east: Boolean,
                 south: Boolean,
-                west: Boolean,
-                hasCarpet: Boolean
+                west: Boolean
             ): VoxelShape {
                 val parts = arrayListOf<VoxelShape?>(topShape)
 
@@ -144,9 +143,9 @@ class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING
                     parts += legX1Z1
                 }
 
-                if (hasCarpet) {
-                    parts += CARPET_SHAPE
-                }
+//                if (hasCarpet) {
+//                    parts += CARPET_SHAPE
+//                }
 
                 return parts.filterNotNull().reduce(VoxelShapes::union)
             }
@@ -155,11 +154,11 @@ class TableBlock(material: String) : CarpetedBlock(Settings.copy(Blocks.CRAFTING
                 booleans.flatMap { north ->
                     booleans.flatMap { east ->
                         booleans.flatMap { south ->
-                            booleans.flatMap { west ->
-                                booleans.map { hasCarpet ->
-                                    Bits.buildTableState(north, east, south, west, hasCarpet) to
-                                            makeShape(north, east, south, west, hasCarpet)
-                                }
+                            booleans.map { west ->
+//                                booleans.map { hasCarpet ->
+                                    Bits.buildTableState(north, east, south, west/*, hasCarpet*/) to
+                                            makeShape(north, east, south, west/*, hasCarpet*/)
+//                                }
                             }
                         }
                     }

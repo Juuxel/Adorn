@@ -1,5 +1,6 @@
 package juuxel.adorn.block
 
+import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.block.property.FrontConnection
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -10,8 +11,16 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.IWorld
 
-class KitchenCounterBlock(material: String) : BaseKitchenCounterBlock() {
-    override val name = "${material}_kitchen_counter"
+open class KitchenCounterBlock : BaseKitchenCounterBlock {
+    constructor(material: String) : super() {
+        this.name = "${material}_kitchen_counter"
+    }
+
+    constructor(variant: BlockVariant) : super(variant.createSettings()) {
+        this.name = "${variant.variantName}_kitchen_counter"
+    }
+
+    override val name: String
 
     init {
         defaultState = defaultState.with(FRONT, FrontConnection.None)
