@@ -121,12 +121,12 @@ class TradingStationController(
          * Gets the [TradingStation.storage] of the trading station at the [context]'s location.
          * Uses [getTradingStation] for finding a trading station.
          */
-        fun getStorage(context: BlockContext): Inventory = getTradingStation(context).storage
+        private fun getStorage(context: BlockContext): Inventory = getTradingStation(context).storage
 
         /**
          * Gets the [TradingStation.trade] of the trading station at the [context]'s location.
          * Uses [getTradingStation] for finding a trading station.
          */
-        fun getTrade(context: BlockContext): Trade = getTradingStation(context).trade
+        private fun getTrade(context: BlockContext): Trade = getTradingStation(context).trade
     }
 }

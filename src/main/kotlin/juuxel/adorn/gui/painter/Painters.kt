@@ -3,14 +3,10 @@ package juuxel.adorn.gui.painter
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
-import juuxel.adorn.Adorn
 import juuxel.adorn.resources.ColorManager
-import juuxel.adorn.util.Colors
 import net.minecraft.util.Identifier
 
 object Painters {
-    private val SLOT_BG = Adorn.id("textures/gui/slot.png")
-
     /**
      * A background painter that paints LibGui-style slots.
      */
