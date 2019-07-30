@@ -1,32 +1,22 @@
 package juuxel.adorn.resources
 
-import com.google.common.collect.ImmutableMap
 import com.google.gson.*
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.Adorn
+import juuxel.adorn.util.color
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener
 import net.minecraft.resource.ResourceManager
 import net.minecraft.util.Identifier
 import org.apache.logging.log4j.LogManager
 import java.lang.reflect.Type
 
-private val DEFAULT_COLOR_ID = Adorn.id("default")
-
-class ColorPalette(map: Map<Identifier, ColorManager.ColorPair>) {
-    private val map = ImmutableMap.copyOf(map)
-
-    operator fun get(key: Identifier): ColorManager.ColorPair =
-        map.getOrElse(key) {
-            map[DEFAULT_COLOR_ID] ?: error("Couldn't read default value from palette map")
-        }
-}
-
 object ColorManager : SimpleSynchronousResourceReloadListener {
     private val LOGGER = LogManager.getLogger()
     private val GSON = GsonBuilder().registerTypeAdapter(ColorPair::class.java, ColorPair).create()
     private val ID = Adorn.id("color_manager")
     private const val PREFIX = "color_palettes"
-    private val SUFFIX_LENGTH = ".json".length
+    private const val SUFFIX_LENGTH = ".json".length
+    private val COLOR_REGEX = Regex("#(?:[0-9A-Fa-f]{2})?[0-9A-Fa-f]{6}")
     private val map: MutableMap<Identifier, ColorPalette> = HashMap()
 
     override fun getFabricId() = ID
@@ -69,8 +59,18 @@ object ColorManager : SimpleSynchronousResourceReloadListener {
         }
     }
 
-    private fun parseHexColor(str: String): Int =
-        str.substring(1).toInt(16)
+    private fun parseHexColor(str: String): Int {
+        require(str.matches(COLOR_REGEX)) {
+            "Color must be a hex color beginning with '#' - found '$str'"
+        }
+
+        val colorStr = str.substring(1)
+        return when (val len = colorStr.length) {
+            6 -> color(colorStr.toInt(16))
+            8 -> colorStr.toInt(16)
+            else -> error("Invalid color length: $len")
+        }
+    }
 
     fun getColors(id: Identifier): ColorPalette =
         map[id] ?: throw IllegalArgumentException("Unknown palette $id")
