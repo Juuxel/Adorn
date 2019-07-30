@@ -25,7 +25,7 @@ object ColorManager : SimpleSynchronousResourceReloadListener {
     private val LOGGER = LogManager.getLogger()
     private val GSON = GsonBuilder().registerTypeAdapter(ColorPair::class.java, ColorPair).create()
     private val ID = Adorn.id("color_manager")
-    private const val PREFIX = "adorn_colors"
+    private const val PREFIX = "color_palettes"
     private val SUFFIX_LENGTH = ".json".length
     private val map: MutableMap<Identifier, ColorPalette> = HashMap()
 

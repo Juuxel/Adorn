@@ -7,6 +7,7 @@ import juuxel.adorn.gui.painter.Painters
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.block.Block
+import net.minecraft.block.Blocks
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.container.BlockContext
 import net.minecraft.container.PropertyDelegate
@@ -40,10 +41,10 @@ abstract class BaseAdornController(
     companion object {
         private val LOGGER = LogManager.getLogger()
 
-        fun getBlock(context: BlockContext): Optional<Block> =
+        fun getBlock(context: BlockContext) =
             context.run<Block> { world: World, pos: BlockPos ->
                 world.getBlockState(pos).block
-            }
+            }.orElse(Blocks.AIR)
 
         fun getBlockEntity(context: BlockContext): BlockEntity? =
             context.run<BlockEntity?> { world: World, pos: BlockPos ->
