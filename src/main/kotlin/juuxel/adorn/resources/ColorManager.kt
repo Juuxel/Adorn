@@ -1,6 +1,9 @@
 package juuxel.adorn.resources
 
-import com.google.gson.*
+import blue.endless.jankson.Jankson
+import blue.endless.jankson.JsonElement
+import blue.endless.jankson.JsonObject
+import blue.endless.jankson.JsonPrimitive
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.Adorn
 import juuxel.adorn.util.color
@@ -8,14 +11,13 @@ import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener
 import net.minecraft.resource.ResourceManager
 import net.minecraft.util.Identifier
 import org.apache.logging.log4j.LogManager
-import java.lang.reflect.Type
 
 object ColorManager : SimpleSynchronousResourceReloadListener {
     private val LOGGER = LogManager.getLogger()
-    private val GSON = GsonBuilder().registerTypeAdapter(ColorPair::class.java, ColorPair).create()
+    private val JANKSON = Jankson.builder().build()
     private val ID = Adorn.id("color_manager")
     private const val PREFIX = "color_palettes"
-    private const val SUFFIX_LENGTH = ".json".length
+    private const val SUFFIX_LENGTH = ".json5".length
     private val COLOR_REGEX = Regex("#(?:[0-9A-Fa-f]{2})?[0-9A-Fa-f]{6}")
     private val map: MutableMap<Identifier, ColorPalette> = HashMap()
 
@@ -23,32 +25,30 @@ object ColorManager : SimpleSynchronousResourceReloadListener {
 
     override fun apply(manager: ResourceManager) {
         map.clear()
-        val ids = manager.findResources(PREFIX) { it.endsWith(".json") }
+        val ids = manager.findResources(PREFIX) { it.endsWith(".json5") }
         for (id in ids) {
             val scheme = HashMap<Identifier, ColorPair>()
 
             for (resource in manager.getAllResources(id)) {
                 resource.inputStream.use { input ->
-                    input.reader().use { reader ->
-                        try {
-                            val json = GSON.fromJson(reader, JsonObject::class.java)
-                            for ((key, value) in json.entrySet()) {
-                                val keyId = Identifier.tryParse(key)
+                    try {
+                        val json = JANKSON.load(input)
+                        for ((key, value) in json) {
+                            val keyId = Identifier.tryParse(key)
 
-                                if (keyId == null) {
-                                    LOGGER.warn(
-                                        "[Adorn] Invalid key '{}' in color palette {} - must be a valid identifier",
-                                        key,
-                                        resource.id
-                                    )
-                                    continue
-                                }
-
-                                scheme[keyId] = GSON.fromJson(value, ColorPair::class.java)
+                            if (keyId == null) {
+                                LOGGER.warn(
+                                    "[Adorn] Invalid key '{}' in color palette {} - must be a valid identifier",
+                                    key,
+                                    resource.id
+                                )
+                                continue
                             }
-                        } catch (e: Exception) {
-                            LOGGER.warn("[Adorn] Exception thrown while reading color palette in {}", resource.id, e)
+
+                            scheme[keyId] = ColorPair.fromJson(value)
                         }
+                    } catch (e: Exception) {
+                        LOGGER.warn("[Adorn] Exception thrown while reading color palette in {}", resource.id, e)
                     }
                 }
             }
@@ -76,21 +76,23 @@ object ColorManager : SimpleSynchronousResourceReloadListener {
         map[id] ?: throw IllegalArgumentException("Unknown palette $id")
 
     data class ColorPair(val bg: Int, val fg: Int = WLabel.DEFAULT_TEXT_COLOR) {
-        companion object : JsonDeserializer<ColorPair> {
-            override fun deserialize(json: JsonElement, typeOfT: Type?, context: JsonDeserializationContext?) =
+        companion object {
+            private fun JsonElement?.asString() = (this as JsonPrimitive).asString()
+
+            fun fromJson(json: JsonElement) =
                 when (json) {
                     is JsonObject -> {
-                        if (json.has("fg")) {
+                        if (json.containsKey("fg")) {
                             ColorPair(
-                                bg = parseHexColor(json.get("bg").asString),
-                                fg = parseHexColor(json.get("fg").asString)
+                                bg = parseHexColor(json["bg"].asString()),
+                                fg = parseHexColor(json["fg"].asString())
                             )
                         } else {
-                            ColorPair(bg = parseHexColor(json.get("bg").asString))
+                            ColorPair(bg = parseHexColor(json["bg"].asString()))
                         }
                     }
 
-                    is JsonPrimitive -> ColorPair(bg = parseHexColor(json.asString))
+                    is JsonPrimitive -> ColorPair(bg = parseHexColor(json.asString()))
 
                     else -> throw IllegalArgumentException("Invalid color value: $json")
                 }
