@@ -6,9 +6,7 @@ import juuxel.adorn.api.util.BlockVariant
 
 object AdornTraverseCompat {
     fun init() {
-        // TODO: fir -> traverse_fir
-        val fir = BlockVariant.Wood("fir")
-
+        val fir = BlockVariant.Wood("traverse_fir")
         AdornBlockBuilder.create(fir)
             .withChair()
             .withDrawer()
