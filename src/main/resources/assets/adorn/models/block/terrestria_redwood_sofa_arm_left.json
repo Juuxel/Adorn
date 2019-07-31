@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/sofa_arm_left",
-  "textures": {
-    "wool": "terrestria:block/redwood_wool"
-  }
-}
