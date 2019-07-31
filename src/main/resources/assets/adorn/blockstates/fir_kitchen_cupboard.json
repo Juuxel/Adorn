@@ -1,0 +1,78 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "adorn:block/fir_kitchen_counter",
+        "y": 270,
+        "uvlock": true
+      },
+      "when": {
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/fir_kitchen_cupboard_door",
+        "y": 270
+      },
+      "when": {
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/fir_kitchen_counter",
+        "uvlock": true
+      },
+      "when": {
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/fir_kitchen_cupboard_door"
+      },
+      "when": {
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/fir_kitchen_counter",
+        "y": 90,
+        "uvlock": true
+      },
+      "when": {
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/fir_kitchen_cupboard_door",
+        "y": 90
+      },
+      "when": {
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/fir_kitchen_counter",
+        "y": 180,
+        "uvlock": true
+      },
+      "when": {
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/fir_kitchen_cupboard_door",
+        "y": 180
+      },
+      "when": {
+        "facing": "west"
+      }
+    }
+  ]
+}

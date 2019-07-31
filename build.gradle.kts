@@ -93,9 +93,7 @@ dependencies {
     includedMod("io.github.cottonmc:Jankson:" + v("jankson"))
     modImplementation("towelette:Towelette:" + v("towelette"))
     modImplementation("io.github.prospector.modmenu:ModMenu:" + v("modmenu"))
-
-    // Other libraries
-    compileOnly("org.apiguardian:apiguardian-api:1.0.0")
+    modRuntime("com.terraformersmc", "traverse", v("traverse"))
 }
 
 val remapJar: RemapJarTask by tasks.getting {}
