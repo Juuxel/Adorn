@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:sofa",
+  "pattern": [
+    " W",
+    "WW",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "terrestria:cypress_wool"
+    }
+  },
+  "result": {
+    "item": "adorn:terrestria_cypress_sofa",
+    "count": 3
+  }
+}

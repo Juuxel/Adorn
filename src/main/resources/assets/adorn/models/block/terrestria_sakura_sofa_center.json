@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/sofa_center",
+  "textures": {
+    "wool": "terrestria:block/sakura_wool"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/sofa_corner_right",
+  "textures": {
+    "wool": "terrestria:block/rainbow_eucalyptus_wool"
+  }
+}

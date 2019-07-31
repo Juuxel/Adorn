@@ -73,6 +73,11 @@ inline fun DependencyHandler.includedMod(str: String, block: ExternalModuleDepen
     include(str, block)
 }
 
+inline fun DependencyHandler.includedMod(group: String, name: String, version: String, block: ExternalModuleDependency.() -> Unit = {}) {
+    modImplementation(group, name, version, dependencyConfiguration = block)
+    include(group, name, version, dependencyConfiguration = block)
+}
+
 dependencies {
     /**
      * Gets a version string with the [key].
@@ -91,9 +96,11 @@ dependencies {
     // Other mods
     includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { exclude(module = "modmenu") }
     includedMod("io.github.cottonmc:Jankson:" + v("jankson"))
+    includedMod("io.github.cottonmc", "LibCD", v("libcd"))
     modImplementation("towelette:Towelette:" + v("towelette"))
     modImplementation("io.github.prospector.modmenu:ModMenu:" + v("modmenu"))
     modRuntime("com.terraformersmc", "traverse", v("traverse"))
+    modRuntime("com.terraformersmc", "terrestria", v("terrestria"))
 }
 
 val remapJar: RemapJarTask by tasks.getting {}

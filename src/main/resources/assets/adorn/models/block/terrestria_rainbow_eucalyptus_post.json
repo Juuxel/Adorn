@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/post",
+  "textures": {
+    "texture": "terrestria:block/rainbow_eucalyptus_planks"
+  }
+}

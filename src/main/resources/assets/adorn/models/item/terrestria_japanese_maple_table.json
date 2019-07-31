@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:item/templates/table",
+  "textures": {
+    "planks": "terrestria:block/japanese_maple_planks",
+    "log": "terrestria:block/japanese_maple_log"
+  }
+}

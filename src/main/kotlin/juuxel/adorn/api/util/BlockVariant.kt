@@ -18,8 +18,12 @@ interface BlockVariant {
         override fun createSettings() = Block.Settings.copy(Blocks.OAK_FENCE)
     }
 
-    enum class Stone(override val variantName: String) : BlockVariant {
-        SmoothStone("stone"), Cobblestone("cobblestone"), Sandstone("sandstone"),
+    data class Stone(override val variantName: String) : BlockVariant {
+        override fun createSettings() = Block.Settings.copy(Blocks.COBBLESTONE_WALL)
+    }
+
+    enum class VanillaStone(override val variantName: String) : BlockVariant {
+        Stone("stone"), Cobblestone("cobblestone"), Sandstone("sandstone"),
         Diorite("diorite"), Andesite("andesite"), Granite("granite");
 
         override fun createSettings() = Block.Settings.copy(Blocks.COBBLESTONE_WALL)

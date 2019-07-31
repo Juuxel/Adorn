@@ -183,7 +183,6 @@ object AdornPlugin : Plugin {
         SuffixedBlockItemModel("platform", PLATFORM),
         SuffixedLootTable("platform", PLATFORM),
         PlatformRecipe,
-        SuffixedLootTable("platform", PLATFORM),
         SuffixedRecipeAdvancementGenerator(
             "platform.recipe_advancement",
             PLATFORM,
@@ -198,7 +197,6 @@ object AdornPlugin : Plugin {
         SuffixedLootTable("step", STEP),
         WoodenStepRecipe,
         StoneStepRecipe,
-        SuffixedLootTable("step", STEP),
         SuffixedRecipeAdvancementGenerator(
             "step.recipe_advancement",
             STEP,
