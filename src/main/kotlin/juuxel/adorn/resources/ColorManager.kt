@@ -7,12 +7,14 @@ import blue.endless.jankson.JsonPrimitive
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.Adorn
 import juuxel.adorn.util.color
-import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener
+import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
 import net.minecraft.resource.ResourceManager
+import net.minecraft.resource.SinglePreparationResourceReloadListener
 import net.minecraft.util.Identifier
+import net.minecraft.util.profiler.Profiler
 import org.apache.logging.log4j.LogManager
 
-object ColorManager : SimpleSynchronousResourceReloadListener {
+object ColorManager : SinglePreparationResourceReloadListener<Map<Identifier, List<JsonObject>>>(), IdentifiableResourceReloadListener {
     private val LOGGER = LogManager.getLogger()
     private val JANKSON = Jankson.builder().build()
     private val ID = Adorn.id("color_manager")
