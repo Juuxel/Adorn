@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "adorn:block/terrestria_redwood_shelf"
+    },
+    "facing=south": {
+      "model": "adorn:block/terrestria_redwood_shelf",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "adorn:block/terrestria_redwood_shelf",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "adorn:block/terrestria_redwood_shelf",
+      "y": 180
+    }
+  }
+}

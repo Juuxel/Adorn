@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:kitchen_cupboard",
+  "ingredients": [
+    {
+      "item": "minecraft:chest"
+    },
+    {
+      "item": "adorn:traverse_fir_kitchen_counter"
+    },
+    {
+      "item": "adorn:traverse_fir_kitchen_counter"
+    }
+  ],
+  "result": {
+    "item": "adorn:traverse_fir_kitchen_cupboard",
+    "count": 2
+  }
+}

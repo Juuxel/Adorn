@@ -2,12 +2,12 @@ package juuxel.adorn.json
 
 import io.github.cottonmc.jsonfactory.data.Identifier
 import io.github.cottonmc.jsonfactory.frontend.i18n.ResourceBundleI18n
+import io.github.cottonmc.jsonfactory.frontend.plugin.Plugin
 import io.github.cottonmc.jsonfactory.gens.ContentGenerator
 import io.github.cottonmc.jsonfactory.gens.GeneratorInfo
 import io.github.cottonmc.jsonfactory.gens.block.SuffixedBlockItemModel
 import io.github.cottonmc.jsonfactory.gens.block.SuffixedBlockState
 import io.github.cottonmc.jsonfactory.gens.block.SuffixedLootTable
-import io.github.cottonmc.jsonfactory.plugin.Plugin
 import juuxel.adorn.json.chair.*
 import juuxel.adorn.json.drawer.*
 import juuxel.adorn.json.kitchen.*
@@ -139,8 +139,8 @@ object AdornPlugin : Plugin {
             keyItems = listOf(planksItem, { it.suffixPath("_kitchen_counter") })
         ),
 
-        ShelfBlockModel,
-        ShelfBlockState,
+        DrawerBlockModel,
+        DrawerBlockState,
         SuffixedBlockItemModel("drawer", DRAWER),
         SuffixedContainerLootTable("drawer", DRAWER),
         DrawerRecipe,
@@ -183,7 +183,6 @@ object AdornPlugin : Plugin {
         SuffixedBlockItemModel("platform", PLATFORM),
         SuffixedLootTable("platform", PLATFORM),
         PlatformRecipe,
-        SuffixedLootTable("platform", PLATFORM),
         SuffixedRecipeAdvancementGenerator(
             "platform.recipe_advancement",
             PLATFORM,
@@ -198,7 +197,6 @@ object AdornPlugin : Plugin {
         SuffixedLootTable("step", STEP),
         WoodenStepRecipe,
         StoneStepRecipe,
-        SuffixedLootTable("step", STEP),
         SuffixedRecipeAdvancementGenerator(
             "step.recipe_advancement",
             STEP,

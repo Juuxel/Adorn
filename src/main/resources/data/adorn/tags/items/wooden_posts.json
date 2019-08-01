@@ -7,5 +7,20 @@
     "adorn:jungle_post",
     "adorn:acacia_post",
     "adorn:dark_oak_post"
-  ]
+  ],
+  "adorn_extensions": {
+    "traverse": [
+      "adorn:traverse_fir_post"
+    ],
+    "terrestria": [
+      "adorn:terrestria_cypress_post",
+      "adorn:terrestria_hemlock_post",
+      "adorn:terrestria_japanese_maple_post",
+      "adorn:terrestria_rainbow_eucalyptus_post",
+      "adorn:terrestria_redwood_post",
+      "adorn:terrestria_rubber_post",
+      "adorn:terrestria_sakura_post",
+      "adorn:terrestria_willow_post"
+    ]
+  }
 }

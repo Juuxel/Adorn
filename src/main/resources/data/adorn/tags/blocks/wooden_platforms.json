@@ -7,5 +7,20 @@
     "adorn:jungle_platform",
     "adorn:acacia_platform",
     "adorn:dark_oak_platform"
-  ]
+  ],
+  "adorn_extensions": {
+    "traverse": [
+      "adorn:traverse_fir_platform"
+    ],
+    "terrestria": [
+      "adorn:terrestria_cypress_platform",
+      "adorn:terrestria_hemlock_platform",
+      "adorn:terrestria_japanese_maple_platform",
+      "adorn:terrestria_rainbow_eucalyptus_platform",
+      "adorn:terrestria_redwood_platform",
+      "adorn:terrestria_rubber_platform",
+      "adorn:terrestria_sakura_platform",
+      "adorn:terrestria_willow_platform"
+    ]
+  }
 }

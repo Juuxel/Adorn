@@ -9,7 +9,6 @@
       "to": [4, 14, 4],
       "faces": {
         "down": { "texture": "#log", "cullface": "down" },
-        "up": { "texture": "#log" },
         "east": { "texture": "#log" },
         "west": { "texture": "#log" },
         "north": { "texture": "#log" },

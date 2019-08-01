@@ -66,6 +66,11 @@ inline fun DependencyHandler.includedMod(str: String, block: ExternalModuleDepen
     include(str, block)
 }
 
+inline fun DependencyHandler.includedMod(group: String, name: String, version: String, block: ExternalModuleDependency.() -> Unit = {}) {
+    modImplementation(group, name, version, dependencyConfiguration = block)
+    include(group, name, version, dependencyConfiguration = block)
+}
+
 dependencies {
     /**
      * Gets a version string with the [key].
@@ -82,15 +87,16 @@ dependencies {
     compileOnly("net.fabricmc:fabric-language-kotlin:" + v("fabric-kotlin"))
 
     // Other mods
-    includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { exclude(module = "modmenu") }
-    includedMod("io.github.cottonmc:Jankson:" + v("jankson"))
-    modImplementation("towelette:Towelette:" + v("towelette"))
-    modImplementation("io.github.prospector.modmenu:ModMenu:" + v("modmenu"))
+    includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { exclude(module = "modmenu"); exclude(group = "net.fabricmc.fabric-api") }
+    includedMod("io.github.cottonmc:Jankson:" + v("jankson")) { exclude(group = "net.fabricmc.fabric-api") }
+    includedMod("io.github.cottonmc", "LibCD", v("libcd")) { exclude(group = "net.fabricmc.fabric-api") }
+    modImplementation("towelette:Towelette:" + v("towelette")) { exclude(group = "net.fabricmc.fabric-api") }
+    modImplementation("io.github.prospector.modmenu:ModMenu:" + v("modmenu")) { exclude(group = "net.fabricmc.fabric-api") }
     modImplementation("extra-pieces:extrapieces:" + v("extra-pieces"))
     modImplementation("com.github.artificemc:artifice:" + v("artifice"))
-
-    // Other libraries
-    compileOnly("org.apiguardian:apiguardian-api:1.0.0")
+    modRuntime("com.terraformersmc", "traverse", v("traverse")) { exclude(group = "net.fabricmc.fabric-api") }
+    modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { exclude(group = "net.fabricmc.fabric-api") }
+    modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); exclude(group = "net.fabricmc.fabric-api") }
 }
 
 val remapJar: RemapJarTask by tasks.getting {}

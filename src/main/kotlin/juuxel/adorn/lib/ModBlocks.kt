@@ -27,7 +27,7 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
 
     private val BUILDING_BLOCK_VARIANTS = sequence {
         yieldAll(WOODEN_VARIANTS)
-        yieldAll(BlockVariant.Stone.values().iterator())
+        yieldAll(BlockVariant.VanillaStone.values().iterator())
     }.toList()
 
     // Blocks
