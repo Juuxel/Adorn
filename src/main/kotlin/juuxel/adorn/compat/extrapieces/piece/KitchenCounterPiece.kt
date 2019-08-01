@@ -4,11 +4,16 @@ import com.shnupbups.extrapieces.ExtraPieces
 import com.shnupbups.extrapieces.blocks.PieceBlock
 import com.shnupbups.extrapieces.core.PieceSet
 import com.shnupbups.extrapieces.core.PieceType
+import com.shnupbups.extrapieces.core.PieceTypes
+import com.shnupbups.extrapieces.recipe.ShapedPieceRecipe
 import com.swordglowsblue.artifice.api.ArtificeResourcePack
 import juuxel.adorn.Adorn
 import juuxel.adorn.compat.extrapieces.AdornPieces
 import juuxel.adorn.compat.extrapieces.block.KitchenCounterPieceBlock
 import juuxel.adorn.compat.extrapieces.getRegistryId
+import juuxel.adorn.compat.extrapieces.item.AdornPieceRecipe
+import net.minecraft.item.Items
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.Direction
 
 object KitchenCounterPiece : AdornPiece(Adorn.id("kitchen_counter")) {
@@ -79,4 +84,10 @@ object KitchenCounterPiece : AdornPiece(Adorn.id("kitchen_counter")) {
             it.texture("planks", pb.set.mainTexture)
         }
     }
+
+    override fun getRecipes() = arrayListOf<ShapedPieceRecipe>(
+        AdornPieceRecipe(this, 3, "SS", "##")
+            .addToKey('S', Items.POLISHED_ANDESITE_SLAB)
+            .addToKey('#', PieceTypes.BASE)
+    )
 }
