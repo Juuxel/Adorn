@@ -7,5 +7,11 @@
     "adorn:andesite_step",
     "adorn:granite_step",
     "adorn:diorite_step"
-  ]
+  ],
+  "adorn_extensions": {
+    "terrestria": [
+      "adorn:terrestria_basalt_step",
+      "adorn:terrestria_basalt_cobblestone_step"
+    ]
+  }
 }

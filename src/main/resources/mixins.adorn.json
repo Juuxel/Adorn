@@ -9,7 +9,8 @@
     "fluidloggable.ChairBlockMixin",
     "fluidloggable.FluidloggableMixin",
     "LivingEntityMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "TagBuilderMixin"
   ],
   "client": [
     "client.LivingEntityMixin",

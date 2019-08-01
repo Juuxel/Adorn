@@ -13,5 +13,22 @@
     "adorn:andesite_step",
     "adorn:granite_step",
     "adorn:diorite_step"
-  ]
+  ],
+  "adorn_extensions": {
+    "traverse": [
+      "adorn:traverse_fir_step"
+    ],
+    "terrestria": [
+      "adorn:terrestria_basalt_step",
+      "adorn:terrestria_basalt_cobblestone_step",
+      "adorn:terrestria_cypress_step",
+      "adorn:terrestria_hemlock_step",
+      "adorn:terrestria_japanese_maple_step",
+      "adorn:terrestria_rainbow_eucalyptus_step",
+      "adorn:terrestria_redwood_step",
+      "adorn:terrestria_rubber_step",
+      "adorn:terrestria_sakura_step",
+      "adorn:terrestria_willow_step"
+    ]
+  }
 }

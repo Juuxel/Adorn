@@ -7,5 +7,11 @@
     "adorn:andesite_platform",
     "adorn:granite_platform",
     "adorn:diorite_platform"
-  ]
+  ],
+  "adorn_extensions": {
+    "terrestria": [
+      "adorn:terrestria_basalt_platform",
+      "adorn:terrestria_basalt_cobblestone_platform"
+    ]
+  }
 }

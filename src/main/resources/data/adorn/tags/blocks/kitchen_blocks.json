@@ -1,17 +1,7 @@
 {
   "replace": false,
   "values": [
-    "adorn:oak_kitchen_counter",
-    "adorn:spruce_kitchen_counter",
-    "adorn:birch_kitchen_counter",
-    "adorn:jungle_kitchen_counter",
-    "adorn:acacia_kitchen_counter",
-    "adorn:dark_oak_kitchen_counter",
-    "adorn:oak_kitchen_cupboard",
-    "adorn:spruce_kitchen_cupboard",
-    "adorn:birch_kitchen_cupboard",
-    "adorn:jungle_kitchen_cupboard",
-    "adorn:acacia_kitchen_cupboard",
-    "adorn:dark_oak_kitchen_cupboard"
+    "#adorn:kitchen_counters",
+    "#adorn:kitchen_cupboards"
   ]
 }

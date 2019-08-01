@@ -7,5 +7,20 @@
     "adorn:jungle_kitchen_cupboard",
     "adorn:acacia_kitchen_cupboard",
     "adorn:dark_oak_kitchen_cupboard"
-  ]
+  ],
+  "adorn_extensions": {
+    "traverse": [
+      "adorn:traverse_fir_kitchen_cupboard"
+    ],
+    "terrestria": [
+      "adorn:terrestria_cypress_kitchen_cupboard",
+      "adorn:terrestria_hemlock_kitchen_cupboard",
+      "adorn:terrestria_japanese_maple_kitchen_cupboard",
+      "adorn:terrestria_rainbow_eucalyptus_kitchen_cupboard",
+      "adorn:terrestria_redwood_kitchen_cupboard",
+      "adorn:terrestria_rubber_kitchen_cupboard",
+      "adorn:terrestria_sakura_kitchen_cupboard",
+      "adorn:terrestria_willow_kitchen_cupboard"
+    ]
+  }
 }

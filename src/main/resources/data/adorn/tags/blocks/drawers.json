@@ -7,5 +7,20 @@
     "adorn:jungle_drawer",
     "adorn:acacia_drawer",
     "adorn:dark_oak_drawer"
-  ]
+  ],
+  "adorn_extensions": {
+    "traverse": [
+      "adorn:traverse_fir_drawer"
+    ],
+    "terrestria": [
+      "adorn:terrestria_cypress_drawer",
+      "adorn:terrestria_hemlock_drawer",
+      "adorn:terrestria_japanese_maple_drawer",
+      "adorn:terrestria_rainbow_eucalyptus_drawer",
+      "adorn:terrestria_redwood_drawer",
+      "adorn:terrestria_rubber_drawer",
+      "adorn:terrestria_sakura_drawer",
+      "adorn:terrestria_willow_drawer"
+    ]
+  }
 }

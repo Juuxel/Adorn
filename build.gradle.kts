@@ -94,13 +94,14 @@ dependencies {
     compileOnly("net.fabricmc:fabric-language-kotlin:" + v("fabric-kotlin"))
 
     // Other mods
-    includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { exclude(module = "modmenu") }
-    includedMod("io.github.cottonmc:Jankson:" + v("jankson"))
-    includedMod("io.github.cottonmc", "LibCD", v("libcd"))
-    modImplementation("towelette:Towelette:" + v("towelette"))
-    modImplementation("io.github.prospector.modmenu:ModMenu:" + v("modmenu"))
-    modRuntime("com.terraformersmc", "traverse", v("traverse"))
-    modRuntime("com.terraformersmc", "terrestria", v("terrestria"))
+    includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { exclude(module = "modmenu"); exclude(group = "net.fabricmc.fabric-api") }
+    includedMod("io.github.cottonmc:Jankson:" + v("jankson")) { exclude(group = "net.fabricmc.fabric-api") }
+    includedMod("io.github.cottonmc", "LibCD", v("libcd")) { exclude(group = "net.fabricmc.fabric-api") }
+    modImplementation("towelette:Towelette:" + v("towelette")) { exclude(group = "net.fabricmc.fabric-api") }
+    modImplementation("io.github.prospector.modmenu:ModMenu:" + v("modmenu")) { exclude(group = "net.fabricmc.fabric-api") }
+    modRuntime("com.terraformersmc", "traverse", v("traverse")) { exclude(group = "net.fabricmc.fabric-api") }
+    modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { exclude(group = "net.fabricmc.fabric-api") }
+    modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); exclude(group = "net.fabricmc.fabric-api") }
 }
 
 val remapJar: RemapJarTask by tasks.getting {}

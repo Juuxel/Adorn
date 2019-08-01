@@ -23,39 +23,42 @@ object ColorManager : SimpleSynchronousResourceReloadListener {
 
     override fun getFabricId() = ID
 
-    override fun apply(manager: ResourceManager) {
-        map.clear()
+    override fun prepare(manager: ResourceManager, profiler: Profiler): Map<Identifier, List<JsonObject>> {
         val ids = manager.findResources(PREFIX) { it.endsWith(".json5") }
-        for (id in ids) {
+        return ids.associateWith { id ->
+            manager.getAllResources(id).map { resource ->
+                resource.inputStream.use { input ->
+                    JANKSON.load(input)
+                }
+            }
+        }
+    }
+
+    override fun apply(map: Map<Identifier, List<JsonObject>>, manager: ResourceManager, profiler: Profiler) {
+        for ((id, jsons) in map) {
             val scheme = HashMap<Identifier, ColorPair>()
 
-            for (resource in manager.getAllResources(id)) {
-                resource.inputStream.use { input ->
-                    try {
-                        val json = JANKSON.load(input)
-                        for ((key, value) in json) {
-                            val keyId = Identifier.tryParse(key)
+            for (json in jsons) {
+                for ((key, value) in json) {
+                    val keyId = Identifier.tryParse(key)
 
-                            if (keyId == null) {
-                                LOGGER.warn(
-                                    "[Adorn] Invalid key '{}' in color palette {} - must be a valid identifier",
-                                    key,
-                                    resource.id
-                                )
-                                continue
-                            }
-
-                            scheme[keyId] = ColorPair.fromJson(value)
-                        }
-                    } catch (e: Exception) {
-                        LOGGER.warn("[Adorn] Exception thrown while reading color palette in {}", resource.id, e)
+                    if (keyId == null) {
+                        LOGGER.warn(
+                            "[Adorn] Invalid key '{}' in color palette {} - must be a valid identifier",
+                            key,
+                            id
+                        )
+                        continue
                     }
+
+                    scheme[keyId] = ColorPair.fromJson(value)
                 }
             }
 
             // id without prefix (adorn_colors/) and suffix (.json)
-            val newId = Identifier(id.namespace, id.path.substring(PREFIX.length + 1, id.path.length - SUFFIX_LENGTH))
-            map[newId] = ColorPalette(scheme)
+            val newId =
+                Identifier(id.namespace, id.path.substring(PREFIX.length + 1, id.path.length - SUFFIX_LENGTH))
+            this.map[newId] = ColorPalette(scheme)
         }
     }
 
