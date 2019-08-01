@@ -12,7 +12,7 @@ import juuxel.adorn.compat.extrapieces.getRegistryId
 import net.minecraft.block.enums.DoubleBlockHalf
 import net.minecraft.util.math.Direction
 
-object ChairPiece : PieceType(Adorn.id("chair")) {
+object ChairPiece : AdornPiece(Adorn.id("chair")) {
     private val UPPER_MODEL_PARENT = Adorn.id("block/templates/chair_upper")
     private val LOWER_MODEL_PARENT = Adorn.id("block/templates/chair_lower")
     private val ITEM_MODEL_PARENT = Adorn.id("item/templates/chair")

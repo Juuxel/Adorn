@@ -11,7 +11,7 @@ import juuxel.adorn.compat.extrapieces.block.SofaPieceBlock
 import juuxel.adorn.compat.extrapieces.getRegistryId
 import net.minecraft.util.math.Direction
 
-object SofaPiece : PieceType(Adorn.id("sofa")) {
+object SofaPiece : AdornPiece(Adorn.id("sofa")) {
     private val MODEL_PARENT = Adorn.id("block/templates/sofa")
     private val ITEM_MODEL_PARENT = Adorn.id("item/templates/sofa")
 

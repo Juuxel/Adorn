@@ -6,18 +6,15 @@ import juuxel.adorn.item.*
 import juuxel.adorn.util.VanillaWoodType
 import juuxel.polyester.registry.PolyesterRegistry
 import net.fabricmc.fabric.api.registry.FuelRegistry
+import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
 object ModItems : PolyesterRegistry(Adorn.NAMESPACE) {
-    val CHAIRS: List<ChairBlockItem> = VanillaWoodType.values().indices.map {
-        registerItem(ChairBlockItem(ModBlocks.CHAIRS[it]))
-    }
-
-    val TABLES: List<TableBlockItem> = VanillaWoodType.values().indices.map {
-        registerItem(TableBlockItem(ModBlocks.TABLES[it]))
+    val CHAIRS: List<BlockItem> = VanillaWoodType.values().indices.map {
+        registerItem(AdornTallBlockItem(ModBlocks.CHAIRS[it], Item.Settings().group(ItemGroup.DECORATIONS)))
     }
 
     val STONE_ROD = registerItem(StoneRodItem())

@@ -6,7 +6,7 @@ import com.swordglowsblue.artifice.api.ArtificeResourcePack
 import juuxel.adorn.compat.extrapieces.getRegistryId
 import net.minecraft.util.Identifier
 
-abstract class SimplePiece(id: Identifier, private val modelTemplate: Identifier) : PieceType(id) {
+abstract class SimplePiece(id: Identifier, private val modelTemplate: Identifier) : AdornPiece(id) {
     override fun addBlockModels(pack: ArtificeResourcePack.ClientResourcePackBuilder, pb: PieceBlock) {
         val id = pb.getRegistryId()
         pack.addBlockModel(id) {

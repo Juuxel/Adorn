@@ -9,7 +9,7 @@ import juuxel.adorn.compat.extrapieces.getRegistryId
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Direction
 
-abstract class SimpleRotatingPiece(id: Identifier) : PieceType(id) {
+abstract class SimpleRotatingPiece(id: Identifier) : AdornPiece(id) {
     override fun addBlockstate(pack: ArtificeResourcePack.ClientResourcePackBuilder, pb: PieceBlock) {
         val id = pb.getRegistryId()
         fun getYRotation(facing: Direction): Int = when (facing) {

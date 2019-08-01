@@ -12,7 +12,7 @@ import juuxel.adorn.compat.extrapieces.getRegistryId
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Direction
 
-object KitchenCupboardPiece : PieceType(Adorn.id("kitchen_cupboard")) {
+object KitchenCupboardPiece : AdornPiece(Adorn.id("kitchen_cupboard")) {
     private val MODEL_PARENT = Adorn.id("block/templates/kitchen_cupboard_door")
     private val ITEM_MODEL_PARENT = Adorn.id("item/templates/kitchen_cupboard")
 

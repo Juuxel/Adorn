@@ -11,7 +11,7 @@ import juuxel.adorn.compat.extrapieces.block.TablePieceBlock
 import juuxel.adorn.compat.extrapieces.getRegistryId
 import net.minecraft.util.Identifier
 
-object TablePiece : PieceType(Adorn.id("table")) {
+object TablePiece : AdornPiece(Adorn.id("table")) {
     private val MODEL_PARENT = Adorn.id("block/templates/table")
     private val LEG_MODEL_PARENT = Adorn.id("block/templates/table_leg")
     private val ITEM_MODEL_PARENT = Adorn.id("item/templates/table")

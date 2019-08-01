@@ -25,5 +25,19 @@ interface PolyesterItem : PolyesterContent<Item>,
                 )
             }
         }
+
+        fun appendTooltipToList(texts: MutableList<Text>, item: Item, descriptionKey: String) {
+            texts.add(
+                TranslatableText(
+                    descriptionKey.replace(
+                        "%TranslationKey",
+                        item.translationKey
+                    )
+                ).styled {
+                    it.isItalic = true
+                    it.color = Formatting.DARK_GRAY
+                }
+            )
+        }
     }
 }

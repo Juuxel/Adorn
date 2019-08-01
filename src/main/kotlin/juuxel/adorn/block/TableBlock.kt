@@ -10,6 +10,8 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
 import net.minecraft.fluid.Fluids
+import net.minecraft.item.Item
+import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateFactory
 import net.minecraft.state.property.Properties
@@ -23,7 +25,7 @@ import net.minecraft.world.IWorld
 open class TableBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()),
     PolyesterBlock, Waterloggable {
     override val name = "${variant.variantName}_table"
-    override val itemSettings: Nothing? = null
+    override val itemSettings: Item.Settings = Item.Settings().group(ItemGroup.DECORATIONS)
     override val sittingYOffset = 0.6
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {

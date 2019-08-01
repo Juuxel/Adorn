@@ -258,14 +258,14 @@
   "piece.adorn.kitchen_counter": "%s Kitchen Counter",
   "piece.adorn.kitchen_cupboard": "%s Kitchen Cupboard",
 
-  "itemGroup.adorn.drawer": "Adorn + Extra Pieces: Drawers",
-  "itemGroup.adorn.table": "Adorn + Extra Pieces: Tables",
-  "itemGroup.adorn.shelf": "Adorn + Extra Pieces: Shelves",
-  "itemGroup.adorn.post": "Adorn + Extra Pieces: Posts",
-  "itemGroup.adorn.platform": "Adorn + Extra Pieces: Platforms",
-  "itemGroup.adorn.step": "Adorn + Extra Pieces: Steps",
-  "itemGroup.adorn.chair": "Adorn + Extra Pieces: Chairs",
-  "itemGroup.adorn.sofa": "Adorn + Extra Pieces: Sofas",
-  "itemGroup.adorn.kitchen_counter": "Adorn + Extra Pieces: Kitchen Counters",
-  "itemGroup.adorn.kitchen_cupboard": "Adorn + Extra Pieces: Kitchen Cupboards"
+  "itemGroup.adorn.drawer": "Adorn+EP: Drawers",
+  "itemGroup.adorn.table": "Adorn+EP: Tables",
+  "itemGroup.adorn.shelf": "Adorn+EP: Shelves",
+  "itemGroup.adorn.post": "Adorn+EP: Posts",
+  "itemGroup.adorn.platform": "Adorn+EP: Platforms",
+  "itemGroup.adorn.step": "Adorn+EP: Steps",
+  "itemGroup.adorn.chair": "Adorn+EP: Chairs",
+  "itemGroup.adorn.sofa": "Adorn+EP: Sofas",
+  "itemGroup.adorn.kitchen_counter": "Adorn+EP: Kitchen Counters",
+  "itemGroup.adorn.kitchen_cupboard": "Adorn+EP: Kitchen Cupboards"
 }

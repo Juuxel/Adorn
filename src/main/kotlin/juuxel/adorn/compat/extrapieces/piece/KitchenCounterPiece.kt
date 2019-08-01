@@ -11,7 +11,7 @@ import juuxel.adorn.compat.extrapieces.block.KitchenCounterPieceBlock
 import juuxel.adorn.compat.extrapieces.getRegistryId
 import net.minecraft.util.math.Direction
 
-object KitchenCounterPiece : PieceType(Adorn.id("kitchen_counter")) {
+object KitchenCounterPiece : AdornPiece(Adorn.id("kitchen_counter")) {
     private val MODEL_PARENT = Adorn.id("block/templates/kitchen_counter")
 
     override fun getNew(set: PieceSet) = KitchenCounterPieceBlock(set)
