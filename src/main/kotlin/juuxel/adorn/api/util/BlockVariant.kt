@@ -32,7 +32,7 @@ interface BlockVariant {
 
     companion object {
         val WOOLS: Map<DyeColor, BlockVariant> = DyeColor.values().asSequence().associateWith {
-            variant("${it.asString()}_wool") { Block.Settings.copy(Blocks.WHITE_WOOL) }
+            variant(it.asString()) { Block.Settings.copy(Blocks.WHITE_WOOL) }
         }
 
         val IRON = variant("iron") { Block.Settings.copy(Blocks.IRON_BARS) }

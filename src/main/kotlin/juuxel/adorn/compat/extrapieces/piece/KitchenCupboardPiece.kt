@@ -8,10 +8,8 @@ import juuxel.adorn.Adorn
 import juuxel.adorn.compat.extrapieces.AdornPieces
 import juuxel.adorn.compat.extrapieces.block.KitchenCupboardPieceBlock
 import juuxel.adorn.compat.extrapieces.getRegistryId
-import net.minecraft.item.Items
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Direction
-import net.minecraft.util.registry.Registry
 
 object KitchenCupboardPiece : AdornPiece(Adorn.id("kitchen_cupboard")) {
     private val MODEL_PARENT = Adorn.id("block/templates/kitchen_cupboard_door")
@@ -70,23 +68,6 @@ object KitchenCupboardPiece : AdornPiece(Adorn.id("kitchen_cupboard")) {
         pack.addItemModel(id) {
             it.parent(ITEM_MODEL_PARENT)
             it.texture("planks", pb.set.mainTexture)
-        }
-    }
-
-    override fun addLootTable(data: ArtificeResourcePack.ServerResourcePackBuilder, pb: PieceBlock) {
-        super.addLootTable(data, pb)
-
-        // Putting this here for the lack of a better method
-        if (pb.set.hasPiece(AdornPieces.KITCHEN_COUNTER)) {
-            val id = pb.getRegistryId()
-            data.addShapelessRecipe(id) {
-                it.result(id, 2)
-                it.group(Adorn.id(pb.set.originalName))
-
-                it.ingredientItem(Registry.ITEM.getId(Items.CHEST))
-                it.ingredientItem(Registry.ITEM.getId(pb.set.getPiece(AdornPieces.KITCHEN_COUNTER).asItem()))
-                it.ingredientItem(Registry.ITEM.getId(pb.set.getPiece(AdornPieces.KITCHEN_COUNTER).asItem()))
-            }
         }
     }
 
