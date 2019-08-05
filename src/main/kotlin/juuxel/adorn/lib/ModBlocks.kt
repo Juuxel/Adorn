@@ -15,9 +15,7 @@ import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
-import net.minecraft.block.Blocks
 import net.minecraft.util.ActionResult
-import net.minecraft.util.DyeColor
 
 object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
     // BlockVariants
@@ -31,12 +29,8 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
     }.toList()
 
     // Blocks
-    val SOFAS: List<SofaBlock> = DyeColor.values().map {
-        registerBlock(SofaBlock(object : BlockVariant {
-            override val variantName = it.asString()
-
-            override fun createSettings() = Block.Settings.copy(Blocks.WHITE_WOOL)
-        }))
+    val SOFAS: List<SofaBlock> = BlockVariant.WOOLS.values.map {
+        registerBlock(SofaBlock(it))
     }
 
     val CHAIRS: List<ChairBlock> = WOODEN_VARIANTS.map {
@@ -88,13 +82,7 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         registerBlock(ShelfBlock(it))
     }
 
-    val IRON_SHELF: ShelfBlock = registerBlock(
-        ShelfBlock(object : BlockVariant {
-            override val variantName = "iron"
-
-            override fun createSettings() = Block.Settings.copy(Blocks.IRON_BARS)
-        })
-    )
+    val IRON_SHELF: ShelfBlock = registerBlock(ShelfBlock(BlockVariant.IRON))
 
     fun init() {
         UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->

@@ -11,8 +11,11 @@ import juuxel.adorn.Adorn
 import juuxel.adorn.compat.extrapieces.AdornPieces
 import juuxel.adorn.compat.extrapieces.block.ChairPieceBlock
 import juuxel.adorn.compat.extrapieces.getRegistryId
+import juuxel.adorn.compat.extrapieces.item.AdornPieceBlockItem
 import juuxel.adorn.compat.extrapieces.item.AdornPieceRecipe
+import juuxel.adorn.compat.extrapieces.item.AdornTallPieceBlockItem
 import net.minecraft.block.enums.DoubleBlockHalf
+import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Direction
@@ -78,4 +81,6 @@ object ChairPiece : AdornPiece(Adorn.id("chair")) {
             .addToKey('#', Items.STICK)
             .addTagToKey('#', Identifier("c", "stone_rod"))
     )
+
+    override fun getBlockItem(pb: PieceBlock) = AdornTallPieceBlockItem(pb, Item.Settings())
 }
