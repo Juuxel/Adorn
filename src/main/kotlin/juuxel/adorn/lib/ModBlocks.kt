@@ -16,6 +16,8 @@ import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
+import net.minecraft.item.Item
+import net.minecraft.item.ItemGroup
 import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
 
@@ -89,6 +91,9 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
             override fun createSettings() = Block.Settings.copy(Blocks.IRON_BARS)
         })
     )
+
+    val STONE_BRICK_CHIMNEY = registerBlock("stone_brick_chimney", ChimneyBlock(), Item.Settings().group(ItemGroup.DECORATIONS))
+    val NETHER_BRICK_CHIMNEY = registerBlock("nether_brick_chimney", ChimneyBlock(), Item.Settings().group(ItemGroup.DECORATIONS))
 
     fun init() {
         UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->

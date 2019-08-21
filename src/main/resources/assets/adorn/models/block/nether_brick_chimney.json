@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/chimney",
+  "textures": {
+    "brick": "block/nether_bricks",
+    "particle": "block/nether_bricks"
+  }
+}

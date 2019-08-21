@@ -2,18 +2,18 @@
   "parent": "minecraft:block/block",
   "textures": {
     "brick": "minecraft:block/bricks",
-    "top": "adorn:block/chimney_top",
+    "top": "minecraft:block/coal_block",
     "particle": "minecraft:block/bricks"
   },
   "elements": [
     { "from": [ 5, 0, 5 ],
       "to": [ 11, 10, 11 ],
       "faces": {
-        "down":  { "uv": [ 5, 5, 11, 11 ], "texture": "#brick", "cullface": "down" },
-        "north": { "uv": [ 5, 0, 11, 5 ], "texture": "#brick" },
-        "south": { "uv": [ 5, 0, 11, 5 ], "texture": "#brick" },
-        "west":  { "uv": [ 5, 0, 11, 5 ], "texture": "#brick" },
-        "east":  { "uv": [ 5, 0, 11, 5 ], "texture": "#brick" }
+        "down":  { "texture": "#brick", "cullface": "down" },
+        "north": { "texture": "#brick" },
+        "south": { "texture": "#brick" },
+        "west":  { "texture": "#brick" },
+        "east":  { "texture": "#brick" }
       },
       "__comment": "Base"
     },

@@ -3,8 +3,10 @@ package juuxel.polyester.registry
 import juuxel.polyester.block.PolyesterBlock
 import juuxel.polyester.block.PolyesterBlockEntityType
 import juuxel.polyester.item.PolyesterItem
+import net.minecraft.block.Block
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.BlockItem
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeType
@@ -29,6 +31,12 @@ abstract class PolyesterRegistry(private val namespace: String) {
             Identifier(namespace, name),
             content
         )
+    }
+
+    protected fun <T : Block> registerBlock(name: String, block: T, itemSettings: Item.Settings): T {
+        Registry.register(Registry.BLOCK, Identifier(namespace, name), block)
+        Registry.register(Registry.ITEM, Identifier(namespace, name), BlockItem(block, itemSettings))
+        return block
     }
 
     protected fun <T : PolyesterBlock> registerBlock(content: T): T {
