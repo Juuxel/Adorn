@@ -23,7 +23,7 @@ version = "${rootProject.version}-$buildNumber"
 dependencies {
     val jsonFactory = "0.5.0-beta.3-SNAPSHOT"
     implementation("io.github.cottonmc:json-factory:$jsonFactory")
-    implementation("io.github.cottonmc:json-factory-gui:$jsonFactory")
+    implementation("io.github.cottonmc:json-factory-gui:$jsonFactory") { exclude(module = "example-plugin") }
 }
 
 application {

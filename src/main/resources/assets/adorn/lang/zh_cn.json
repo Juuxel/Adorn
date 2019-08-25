@@ -50,7 +50,7 @@
   "block.adorn.jungle_drawer": "丛林木抽屉",
   "block.adorn.acacia_drawer": "金合欢木抽屉",
   "block.adorn.dark_oak_drawer": "深色橡木抽屉",
-  
+
   "block.adorn.trading_station": "贸易站",
   "block.adorn.trading_station.selling": "出售",
   "block.adorn.trading_station.price": "价格",
@@ -125,10 +125,10 @@
 
   "block.adorn.chimney": "烟囱",
   "block.adorn.chimney.desc": "装饰方块",
-  
+
   "block.adorn.bubble_chimney": "海晶烟囱",
   "block.adorn.bubble_chimney.desc": "水下气泡",
-  
+
   "item.adorn.stone_rod": "石棒",
   "item.adorn.stone_rod.desc": "合成原料"
 }

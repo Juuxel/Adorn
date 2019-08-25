@@ -1,0 +1,17 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+
+[*.java]
+ij_continuation_indent_size = 8
+
+[*.{json,mcmeta,json5}]
+indent_size = 2
+ij_json_keep_blank_lines_in_code = 1
+ij_json_keep_line_breaks = true
+ij_json_spaces_within_braces = true

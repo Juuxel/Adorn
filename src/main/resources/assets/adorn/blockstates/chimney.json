@@ -1,5 +1,5 @@
 {
-    "variants": {
-        "": { "model": "adorn:block/chimney" }
-    }
+  "variants": {
+    "": { "model": "adorn:block/chimney" }
+  }
 }

@@ -5,11 +5,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import virtuoel.towelette.api.Fluidloggable;
 
 @Mixin({
-        BubbleChimneyBlock.class,
         ChairBlock.class,
         ChimneyBlock.class,
         PlatformBlock.class,
         PostBlock.class,
+        PrismarineChimneyBlock.class,
         ShelfBlock.class,
         SofaBlock.class,
         StepBlock.class,

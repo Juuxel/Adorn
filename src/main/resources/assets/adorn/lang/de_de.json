@@ -125,10 +125,10 @@
 
   "block.adorn.chimney": "Schornstein",
   "block.adorn.chimney.desc": "Decoration block",
-  
+
   "block.adorn.bubble_chimney": "Prismarin Schornstein",
   "block.adorn.bubble_chimney.desc": "Bubbles underwater",
-  
+
   "item.adorn.stone_rod": "Steinstange",
   "item.adorn.stone_rod.desc": "Handwerkliche Zutat"
 }

@@ -53,7 +53,7 @@
 
   "block.adorn.stone_torch": "Каменна факла",
   "block.adorn.stone_torch.desc": "По-светла от дървена факла",
-  
+
   "block.adorn.oak_post": "Дъбов стълб",
   "block.adorn.spruce_post": "Смърчов стълб",
   "block.adorn.birch_post": "Брезов стълб",
@@ -98,10 +98,10 @@
 
   "block.adorn.chimney": "Комин",
   "block.adorn.chimney.desc": "Декоративно блокче",
-  
+
   "block.adorn.bubble_chimney": "Призмаринов комин",
   "block.adorn.bubble_chimney.desc": "Прави балончета под вода",
-  
+
   "item.adorn.stone_rod": "Каменна пръчка",
   "item.adorn.stone_rod.desc": "Съставка за изработване"
 }

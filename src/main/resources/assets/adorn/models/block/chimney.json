@@ -2,37 +2,40 @@
   "parent": "minecraft:block/block",
   "textures": {
     "brick": "minecraft:block/bricks",
-    "top": "adorn:block/chimney_top",
+    "top": "minecraft:block/coal_block",
     "particle": "minecraft:block/bricks"
   },
   "elements": [
-    { "from": [ 5, 0, 5 ],
-      "to": [ 11, 10, 11 ],
+    {
+      "from": [5, 0, 5],
+      "to": [11, 10, 11],
       "faces": {
-        "down":  { "uv": [ 5, 5, 11, 11 ], "texture": "#brick", "cullface": "down" },
-        "north": { "uv": [ 5, 0, 11, 5 ], "texture": "#brick" },
-        "south": { "uv": [ 5, 0, 11, 5 ], "texture": "#brick" },
-        "west":  { "uv": [ 5, 0, 11, 5 ], "texture": "#brick" },
-        "east":  { "uv": [ 5, 0, 11, 5 ], "texture": "#brick" }
+        "down": { "texture": "#brick", "cullface": "down" },
+        "north": { "texture": "#brick" },
+        "south": { "texture": "#brick" },
+        "west": { "texture": "#brick" },
+        "east": { "texture": "#brick" }
       },
       "__comment": "Base"
     },
-    { "from": [ 4, 10, 4 ],
-      "to": [ 12, 12, 12 ],
+    {
+      "from": [4, 10, 4],
+      "to": [12, 12, 12],
       "faces": {
-        "up":    { "texture": "#brick" },
-        "down":  { "texture": "#brick" },
+        "up": { "texture": "#brick" },
+        "down": { "texture": "#brick" },
         "north": { "texture": "#brick" },
         "south": { "texture": "#brick" },
-        "west":  { "texture": "#brick" },
-        "east":  { "texture": "#brick" }
+        "west": { "texture": "#brick" },
+        "east": { "texture": "#brick" }
       },
       "__comment": "Top"
     },
-    { "from": [ 5, 12, 5 ],
-      "to": [ 11, 12.01, 11 ],
+    {
+      "from": [5, 12, 5],
+      "to": [11, 12.01, 11],
       "faces": {
-        "up": { "texture": "#top"   }
+        "up": { "texture": "#top" }
       },
       "__comment": "Top #2, overlay"
     }

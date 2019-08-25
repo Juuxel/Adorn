@@ -16,8 +16,4 @@ class AdornConfig {
     @JvmField
     // TODO: Should be a game rule
     var protectTradingStations: Boolean = true
-
-    @Comment("Enable old stone rods for backwards compatibility.")
-    @JvmField
-    var enableOldStoneRods: Boolean = true
 }

@@ -56,3 +56,6 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 *.hprof
+
+# Custom ignores
+local.json

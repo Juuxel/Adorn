@@ -123,7 +123,10 @@
   "block.adorn.granite_step": "Graniittiaskelma",
   "block.adorn.step.desc": "Askelma pylvään päällä",
 
-  "block.adorn.chimney": "Savupiippu",
+  "block.adorn.chimney": "Tiilisavupiippu",
+  "block.adorn.stone_brick_chimney": "Kivitiilisavupiippu",
+  "block.adorn.nether_brick_chimney": "Nether-tiilisavupiippu",
+  "block.adorn.red_nether_brick_chimney": "Punainen Nether-tiilisavupiippu",
   "block.adorn.chimney.desc": "Koriste",
 
   "block.adorn.bubble_chimney": "Prismariinisavupiippu",

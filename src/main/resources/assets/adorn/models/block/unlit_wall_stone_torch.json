@@ -1,6 +1,6 @@
 {
-    "parent": "block/torch_wall",
-    "textures": {
-        "torch": "adorn:block/unlit_stone_torch"
-    }
+  "parent": "block/torch_wall",
+  "textures": {
+    "torch": "adorn:block/unlit_stone_torch"
+  }
 }

@@ -15,6 +15,9 @@ import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
+import net.minecraft.block.Blocks
+import net.minecraft.item.Item
+import net.minecraft.item.ItemGroup
 import net.minecraft.util.ActionResult
 
 object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
@@ -49,7 +52,6 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         registerBlock(KitchenCupboardBlock(it.id))
     }
 
-    val CHIMNEY: ChimneyBlock = registerBlock(ChimneyBlock())
 
     val DRAWERS: List<DrawerBlock> = WOODEN_VARIANTS.map {
         registerBlock(DrawerBlock(it))
@@ -76,13 +78,18 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         registerBlock(StepBlock(it))
     }
 
-    val BUBBLE_CHIMNEY = registerBlock(BubbleChimneyBlock())
 
     val WOODEN_SHELVES: List<ShelfBlock> = WOODEN_VARIANTS.map {
         registerBlock(ShelfBlock(it))
     }
 
     val IRON_SHELF: ShelfBlock = registerBlock(ShelfBlock(BlockVariant.IRON))
+
+    val BRICK_CHIMNEY: ChimneyBlock = registerBlock("chimney", ChimneyBlock(), ItemGroup.DECORATIONS)
+    val STONE_BRICK_CHIMNEY = registerBlock("stone_brick_chimney", ChimneyBlock(), ItemGroup.DECORATIONS)
+    val NETHER_BRICK_CHIMNEY = registerBlock("nether_brick_chimney", ChimneyBlock(), ItemGroup.DECORATIONS)
+    val RED_NETHER_BRICK_CHIMNEY = registerBlock("red_nether_brick_chimney", ChimneyBlock(), ItemGroup.DECORATIONS)
+    val PRISMARINE_CHIMNEY = registerBlock("bubble_chimney", PrismarineChimneyBlock(), ItemGroup.DECORATIONS)
 
     fun init() {
         UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->

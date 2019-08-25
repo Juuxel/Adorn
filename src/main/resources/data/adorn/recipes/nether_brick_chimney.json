@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    " B ",
+    "BFB",
+    " B "
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "B": {
+      "item": "minecraft:nether_brick"
+    }
+  },
+  "result": {
+    "item": "adorn:nether_brick_chimney",
+    "count": 1
+  }
+}

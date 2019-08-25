@@ -1,12 +1,12 @@
 {
-    "variants": {
-        "lit=true,facing=east": { "model": "adorn:block/wall_stone_torch" },
-        "lit=false,facing=east": { "model": "adorn:block/unlit_wall_stone_torch" },
-        "lit=true,facing=south": { "model": "adorn:block/wall_stone_torch", "y": 90 },
-        "lit=false,facing=south": { "model": "adorn:block/unlit_wall_stone_torch", "y": 90 },
-        "lit=true,facing=west": { "model": "adorn:block/wall_stone_torch", "y": 180 },
-        "lit=false,facing=west": { "model": "adorn:block/unlit_wall_stone_torch", "y": 180 },
-        "lit=true,facing=north": { "model": "adorn:block/wall_stone_torch", "y": 270 },
-        "lit=false,facing=north": { "model": "adorn:block/unlit_wall_stone_torch", "y": 270 }
-    }
+  "variants": {
+    "lit=true,facing=east": { "model": "adorn:block/wall_stone_torch" },
+    "lit=false,facing=east": { "model": "adorn:block/unlit_wall_stone_torch" },
+    "lit=true,facing=south": { "model": "adorn:block/wall_stone_torch", "y": 90 },
+    "lit=false,facing=south": { "model": "adorn:block/unlit_wall_stone_torch", "y": 90 },
+    "lit=true,facing=west": { "model": "adorn:block/wall_stone_torch", "y": 180 },
+    "lit=false,facing=west": { "model": "adorn:block/unlit_wall_stone_torch", "y": 180 },
+    "lit=true,facing=north": { "model": "adorn:block/wall_stone_torch", "y": 270 },
+    "lit=false,facing=north": { "model": "adorn:block/unlit_wall_stone_torch", "y": 270 }
+  }
 }

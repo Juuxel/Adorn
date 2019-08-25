@@ -1,6 +1,5 @@
 package juuxel.adorn.block
 
-import juuxel.polyester.block.PolyesterBlock
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.block.Block
@@ -9,8 +8,6 @@ import net.minecraft.block.Blocks
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
 import net.minecraft.fluid.Fluids
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.state.StateFactory
@@ -22,11 +19,7 @@ import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
 import java.util.*
 
-class BubbleChimneyBlock : Block(Settings.copy(Blocks.PRISMARINE)), PolyesterBlock, Waterloggable {
-    override val name = "bubble_chimney"
-    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
-    override val hasDescription = true
-
+class PrismarineChimneyBlock : Block(Settings.copy(Blocks.PRISMARINE)), BlockWithDescription, Waterloggable {
     init {
         defaultState = defaultState.with(Properties.WATERLOGGED, false)
     }

@@ -16,9 +16,7 @@
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
-          {
-            "item": "adorn:chimney"
-          }
+          { "tag": "adorn:chimneys" }
         ]
       }
     }

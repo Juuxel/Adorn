@@ -13,10 +13,13 @@ base {
     archivesBaseName = "Adorn"
 }
 
+apply(from = "load-heavyweight-mode.gradle")
+
 val minecraft: String by ext
 val modVersion = ext["mod-version"] ?: error("Version was null")
 val localBuild = ext["local-build"].toString().toBoolean()
 version = "$modVersion+$minecraft" + if (localBuild) "-local" else ""
+val heavyweight = ext["heavyweight"].toString().toBoolean()
 
 if (localBuild) {
     println("Note: local build mode enabled in gradle.properties; all dependencies might not work!")
@@ -94,9 +97,12 @@ dependencies {
     modImplementation("io.github.prospector.modmenu:ModMenu:" + v("modmenu")) { exclude(group = "net.fabricmc.fabric-api") }
     modImplementation("extra-pieces:extrapieces:" + v("extra-pieces"))
     modImplementation("com.github.artificemc:artifice:" + v("artifice"))
-    modRuntime("com.terraformersmc", "traverse", v("traverse")) { exclude(group = "net.fabricmc.fabric-api") }
-    modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { exclude(group = "net.fabricmc.fabric-api") }
-    modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); exclude(group = "net.fabricmc.fabric-api") }
+
+    if (heavyweight) {
+        modRuntime("com.terraformersmc", "traverse", v("traverse")) { exclude(group = "net.fabricmc.fabric-api") }
+        modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { exclude(group = "net.fabricmc.fabric-api") }
+        modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); exclude(group = "net.fabricmc.fabric-api") }
+    }
 }
 
 val remapJar: RemapJarTask by tasks.getting {}
