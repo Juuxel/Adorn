@@ -27,6 +27,7 @@ object ModTags {
     val STONE_STEPS = blockAndItem(Adorn.id("stone_steps"))
     val SHELVES = blockAndItem(Adorn.id("shelves"))
     val WOODEN_SHELVES = blockAndItem(Adorn.id("wooden_shelves"))
+    val CHIMNEYS = blockAndItem(Adorn.id("chimneys"))
 
     val STONE_ROD = item(Identifier("c", "stone_rod"))
 

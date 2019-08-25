@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:chimney",
+    "adorn:stone_brick_chimney",
+    "adorn:nether_brick_chimney"
+  ]
+}

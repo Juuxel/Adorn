@@ -201,7 +201,9 @@
   "block.adorn.terrestria_basalt_cobblestone_step": "Basalt Cobblestone Step",
   "block.adorn.step.desc": "A small step with a post under it",
 
-  "block.adorn.chimney": "Chimney",
+  "block.adorn.chimney": "Brick Chimney",
+  "block.adorn.stone_brick_chimney": "Stone Brick Chimney",
+  "block.adorn.nether_brick_chimney": "Nether Brick Chimney",
   "block.adorn.chimney.desc": "Decoration block",
 
   "block.adorn.bubble_chimney": "Prismarine Chimney",
