@@ -1,15 +1,12 @@
 package juuxel.adorn.lib
 
 import juuxel.adorn.Adorn
-import juuxel.adorn.config.AdornConfigManager
 import juuxel.adorn.item.*
 import juuxel.adorn.util.VanillaWoodType
 import juuxel.polyester.registry.PolyesterRegistry
 import net.fabricmc.fabric.api.registry.FuelRegistry
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
-import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 
 object ModItems : PolyesterRegistry(Adorn.NAMESPACE) {
     val CHAIRS: List<ChairBlockItem> = VanillaWoodType.values().indices.map {
@@ -41,10 +38,6 @@ object ModItems : PolyesterRegistry(Adorn.NAMESPACE) {
             add(ModTags.WOODEN_SHELVES.item, 300)
 
             add(ModTags.SOFAS.item, 150)
-        }
-
-        if (AdornConfigManager.CONFIG.enableOldStoneRods && !Registry.ITEM.getOrEmpty(Identifier("c", "stone_rod")).isPresent) {
-            Registry.register(Registry.ITEM, Identifier("c", "stone_rod"), DeprecatedItem(STONE_ROD))
         }
     }
 }

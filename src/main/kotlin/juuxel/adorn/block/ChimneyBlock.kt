@@ -1,6 +1,5 @@
 package juuxel.adorn.block
 
-import juuxel.polyester.block.PolyesterBlock
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.block.FabricBlockSettings
@@ -11,8 +10,6 @@ import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.state.StateFactory
@@ -28,10 +25,8 @@ import net.minecraft.world.World
 import java.util.*
 
 class ChimneyBlock : Block(FabricBlockSettings.copy(Blocks.BRICKS).ticksRandomly().build()),
-    PolyesterBlock, Waterloggable {
-    override val name = "chimney"
-    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
-    override val hasDescription = true
+    BlockWithDescription, Waterloggable {
+    override val descriptionKey = "block.adorn.chimney.desc"
 
     init {
         defaultState = defaultState.with(SMOKE_TYPE, SmokeType.CAMPFIRE)

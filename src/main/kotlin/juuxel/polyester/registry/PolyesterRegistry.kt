@@ -1,5 +1,6 @@
 package juuxel.polyester.registry
 
+import juuxel.adorn.block.BlockWithDescription
 import juuxel.polyester.block.PolyesterBlock
 import juuxel.polyester.block.PolyesterBlockEntityType
 import juuxel.polyester.item.PolyesterItem
@@ -7,10 +8,13 @@ import net.minecraft.block.Block
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
+import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeType
 import net.minecraft.text.Text
+import net.minecraft.text.TranslatableText
+import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
@@ -33,11 +37,37 @@ abstract class PolyesterRegistry(private val namespace: String) {
         )
     }
 
+    /**
+     * Registers a [block] with the [name] and an item in the [itemGroup].
+     */
+    protected fun <T : Block> registerBlock(name: String, block: T, itemGroup: ItemGroup): T =
+        registerBlock(name, block, Item.Settings().group(itemGroup))
+
+    /**
+     * Registers a [block] with the [name] and the [itemSettings].
+     */
     protected fun <T : Block> registerBlock(name: String, block: T, itemSettings: Item.Settings): T {
         Registry.register(Registry.BLOCK, Identifier(namespace, name), block)
-        Registry.register(Registry.ITEM, Identifier(namespace, name), BlockItem(block, itemSettings))
+        Registry.register(Registry.ITEM, Identifier(namespace, name), makeItemForBlock(block, itemSettings))
         return block
     }
+
+    private fun makeItemForBlock(block: Block, itemSettings: Item.Settings): Item =
+        if (block is BlockWithDescription) {
+            object : BlockItem(block, itemSettings) {
+                override fun appendTooltip(
+                    stack: ItemStack?, world: World?, texts: MutableList<Text>, context: TooltipContext?
+                ) {
+                    super.appendTooltip(stack, world, texts, context)
+                    texts.add(TranslatableText(block.descriptionKey).styled {
+                        it.isItalic = true
+                        it.color = Formatting.DARK_GRAY
+                    })
+                }
+            }
+        } else {
+            BlockItem(block, itemSettings)
+        }
 
     protected fun <T : PolyesterBlock> registerBlock(content: T): T {
         register(Registry.BLOCK, content)

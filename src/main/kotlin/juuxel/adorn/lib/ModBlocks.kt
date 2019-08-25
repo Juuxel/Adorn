@@ -42,7 +42,6 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         registerBlock(KitchenCupboardBlock(it.id))
     }
 
-    val CHIMNEY: ChimneyBlock = registerBlock(ChimneyBlock())
 
     val DRAWERS: List<DrawerBlock> = VanillaWoodType.values().map {
         registerBlock(DrawerBlock(it.id))
@@ -78,7 +77,6 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         registerBlock(StepBlock(it))
     }
 
-    val BUBBLE_CHIMNEY = registerBlock(BubbleChimneyBlock())
 
     val WOODEN_SHELVES: List<ShelfBlock> = WOODEN_VARIANTS.map {
         registerBlock(ShelfBlock(it))
@@ -92,8 +90,11 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         })
     )
 
-    val STONE_BRICK_CHIMNEY = registerBlock("stone_brick_chimney", ChimneyBlock(), Item.Settings().group(ItemGroup.DECORATIONS))
-    val NETHER_BRICK_CHIMNEY = registerBlock("nether_brick_chimney", ChimneyBlock(), Item.Settings().group(ItemGroup.DECORATIONS))
+    val BRICK_CHIMNEY: ChimneyBlock = registerBlock("chimney", ChimneyBlock(), ItemGroup.DECORATIONS)
+    val STONE_BRICK_CHIMNEY = registerBlock("stone_brick_chimney", ChimneyBlock(), ItemGroup.DECORATIONS)
+    val NETHER_BRICK_CHIMNEY = registerBlock("nether_brick_chimney", ChimneyBlock(), ItemGroup.DECORATIONS)
+    val RED_NETHER_BRICK_CHIMNEY = registerBlock("red_nether_brick_chimney", ChimneyBlock(), ItemGroup.DECORATIONS)
+    val PRISMARINE_CHIMNEY = registerBlock("bubble_chimney", PrismarineChimneyBlock(), ItemGroup.DECORATIONS)
 
     fun init() {
         UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->

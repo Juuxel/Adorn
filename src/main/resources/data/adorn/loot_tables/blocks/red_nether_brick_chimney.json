@@ -5,7 +5,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:nether_brick_chimney"
+          "name": "adorn:red_nether_brick_chimney"
         }
       ],
       "conditions": [
