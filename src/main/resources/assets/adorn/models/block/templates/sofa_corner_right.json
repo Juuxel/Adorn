@@ -9,7 +9,7 @@
       "from": [5, 7, 0],
       "to": [16, 16, 5],
       "faces": {
-        "up":    { "texture": "#wool", "cullface": "up" },
+        "up": { "texture": "#wool", "cullface": "up" },
         "north": { "texture": "#wool", "cullface": "north" },
         "south": { "texture": "#wool" }
       }

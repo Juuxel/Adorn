@@ -1,6 +1,6 @@
 {
-    "variants": {
-        "lit=true": { "model": "adorn:block/stone_torch" },
-        "lit=false": { "model": "adorn:block/unlit_stone_torch" }
-    }
+  "variants": {
+    "lit=true": { "model": "adorn:block/stone_torch" },
+    "lit=false": { "model": "adorn:block/unlit_stone_torch" }
+  }
 }
