@@ -16,6 +16,7 @@ object Adorn : ModInitializer {
         ModItems.init()
         ModEntities.init()
         ModGuis.init()
+        ModNetworking.init()
         ModTags.init()
         AdornCompat.init()
     }

@@ -1,0 +1,21 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "lamp": "adorn:block/rgb_lamp_on",
+    "particle": "adorn:block/rgb_lamp_on"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "down": { "texture": "#lamp", "cullface": "down", "tintindex": 1 },
+        "up": { "texture": "#lamp", "cullface": "up", "tintindex": 1 },
+        "north": { "texture": "#lamp", "cullface": "north", "tintindex": 1 },
+        "south": { "texture": "#lamp", "cullface": "south", "tintindex": 1 },
+        "west": { "texture": "#lamp", "cullface": "west", "tintindex": 1 },
+        "east": { "texture": "#lamp", "cullface": "east", "tintindex": 1 }
+      }
+    }
+  ]
+}

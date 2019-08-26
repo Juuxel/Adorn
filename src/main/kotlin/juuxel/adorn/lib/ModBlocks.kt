@@ -4,22 +4,27 @@ import juuxel.adorn.Adorn
 import juuxel.adorn.api.block.SneakClickHandler
 import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.block.*
+import juuxel.adorn.block.entity.RgbLampBlockEntity
 import juuxel.adorn.block.entity.ShelfBlockEntity
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.block.renderer.ShelfRenderer
 import juuxel.adorn.block.renderer.TradingStationRenderer
 import juuxel.adorn.util.VanillaWoodType
+import juuxel.adorn.util.color
+import juuxel.adorn.util.colorFromUBytes
 import juuxel.polyester.registry.PolyesterRegistry
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
+import net.fabricmc.fabric.api.client.render.ColorProviderRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
-import net.minecraft.item.Item
+import net.minecraft.client.color.block.BlockColorProvider
 import net.minecraft.item.ItemGroup
 import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
+import net.minecraft.util.registry.Registry
 
 object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
     val SOFAS: List<SofaBlock> = DyeColor.values().map {
@@ -77,7 +82,6 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         registerBlock(StepBlock(it))
     }
 
-
     val WOODEN_SHELVES: List<ShelfBlock> = WOODEN_VARIANTS.map {
         registerBlock(ShelfBlock(it))
     }
@@ -95,6 +99,7 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
     val NETHER_BRICK_CHIMNEY = registerBlock("nether_brick_chimney", ChimneyBlock(), ItemGroup.DECORATIONS)
     val RED_NETHER_BRICK_CHIMNEY = registerBlock("red_nether_brick_chimney", ChimneyBlock(), ItemGroup.DECORATIONS)
     val PRISMARINE_CHIMNEY = registerBlock("bubble_chimney", PrismarineChimneyBlock(), ItemGroup.DECORATIONS)
+    val RGB_LAMP = registerBlock("rgb_lamp", RgbLampBlock(), ItemGroup.REDSTONE)
 
     fun init() {
         UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->
@@ -108,6 +113,8 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
                 block.onSneakClick(state, world, hitResult.blockPos, player, hand, hitResult)
             } else ActionResult.PASS
         })
+
+        register(Registry.BLOCK_ENTITY, "rgb_lamp", RgbLampBlock.BLOCK_ENTITY_TYPE)
     }
 
     @Environment(EnvType.CLIENT)
@@ -119,6 +126,14 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         BlockEntityRendererRegistry.INSTANCE.register(
             ShelfBlockEntity::class.java,
             ShelfRenderer()
+        )
+
+        ColorProviderRegistry.BLOCK.register(
+            BlockColorProvider provider@{ _, world, pos, _ ->
+                val be = world?.getBlockEntity(pos) as? RgbLampBlockEntity ?: return@provider -1
+                color(colorFromUBytes(be.red, be.green, be.blue))
+            },
+            RGB_LAMP
         )
     }
 }

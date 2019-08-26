@@ -3,6 +3,7 @@ package juuxel.adorn.lib
 import juuxel.adorn.Adorn
 import juuxel.adorn.gui.screen.DrawerScreen
 import juuxel.adorn.gui.screen.KitchenCupboardScreen
+import juuxel.adorn.gui.screen.RgbLampScreen
 import juuxel.adorn.gui.screen.TradingStationScreen
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -18,11 +19,13 @@ object ModGuis {
     val DRAWER = Adorn.id("drawer")
     val KITCHEN_CUPBOARD = Adorn.id("kitchen_cupboard")
     val TRADING_STATION = Adorn.id("trading_station")
+    val RGB_LAMP = Adorn.id("rgb_lamp")
 
     fun init() {
         registerContainer(DRAWER)
         registerContainer(KITCHEN_CUPBOARD)
         registerContainer(TRADING_STATION)
+        registerContainer(RGB_LAMP)
     }
 
     @Environment(EnvType.CLIENT)
@@ -30,6 +33,7 @@ object ModGuis {
         registerScreen(DRAWER, ::DrawerScreen)
         registerScreen(KITCHEN_CUPBOARD, ::KitchenCupboardScreen)
         registerScreen(TRADING_STATION, ::TradingStationScreen)
+        registerScreen(RGB_LAMP, ::RgbLampScreen)
     }
 
     private fun registerContainer(

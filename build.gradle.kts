@@ -110,6 +110,10 @@ dependencies {
     }
 }
 
+tasks.withType<KotlinCompile> {
+    kotlinOptions.freeCompilerArgs += "-Xuse-experimental=kotlin.Experimental"
+}
+
 val remapJar: RemapJarTask by tasks.getting {}
 
 publishing {
