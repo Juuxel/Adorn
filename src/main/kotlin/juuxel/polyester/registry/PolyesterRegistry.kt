@@ -121,4 +121,7 @@ abstract class PolyesterRegistry(private val namespace: String) {
 
     protected fun <T : PolyesterItem> registerItem(content: T): T =
         register(Registry.ITEM, content)
+
+    protected fun <T : Item> registerItem(name: String, content: T): T =
+        register(Registry.ITEM, name, content)
 }

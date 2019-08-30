@@ -25,46 +25,39 @@ if (localBuild) {
     println("Note: local build mode enabled in gradle.properties; all dependencies might not work!")
 }
 
-allprojects {
-    apply(plugin = "java")
-
-    java {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+repositories {
+    mavenCentral()
+    if (localBuild) {
+        mavenLocal()
     }
 
-    repositories {
-        mavenCentral()
-        if (localBuild) {
-            mavenLocal()
-        }
+    // For cotton, polyester and json-factory
+    maven(url = "http://server.bbkr.space:8081/artifactory/libs-release")
+    maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot")
 
-        // For cotton, polyester and json-factory
-        maven(url = "http://server.bbkr.space:8081/artifactory/libs-release")
-        maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot")
-
-        // For towelette
-        maven(url = "https://minecraft.curseforge.com/api/maven") {
-            name = "CurseForge"
-        }
-
-        // For auto-config
-        maven(url = "http://maven.sargunv.s3-website-us-west-2.amazonaws.com/")
+    // For towelette
+    maven(url = "https://minecraft.curseforge.com/api/maven") {
+        name = "CurseForge"
     }
+}
 
-    tasks.withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
-    }
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
 
-    tasks.getByName<ProcessResources>("processResources") {
-        inputs.property("version", project.version)
-        filesMatching("fabric.mod.json") {
-            expand(
-                mutableMapOf(
-                    "version" to project.version
-                )
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+tasks.getByName<ProcessResources>("processResources") {
+    inputs.property("version", project.version)
+    filesMatching("fabric.mod.json") {
+        expand(
+            mutableMapOf(
+                "version" to project.version
             )
-        }
+        )
     }
 }
 

@@ -10,8 +10,7 @@ import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.block.renderer.ShelfRenderer
 import juuxel.adorn.block.renderer.TradingStationRenderer
 import juuxel.adorn.util.VanillaWoodType
-import juuxel.adorn.util.color
-import juuxel.adorn.util.colorFromUBytes
+import juuxel.adorn.util.colorFromComponents
 import juuxel.polyester.registry.PolyesterRegistry
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -131,7 +130,7 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
         ColorProviderRegistry.BLOCK.register(
             BlockColorProvider provider@{ _, world, pos, _ ->
                 val be = world?.getBlockEntity(pos) as? RgbLampBlockEntity ?: return@provider -1
-                color(colorFromUBytes(be.red, be.green, be.blue))
+                colorFromComponents(be.red, be.green, be.blue)
             },
             RGB_LAMP
         )

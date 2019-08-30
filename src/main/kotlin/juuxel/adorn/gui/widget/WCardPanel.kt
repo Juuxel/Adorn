@@ -1,6 +1,5 @@
 package juuxel.adorn.gui.widget
 
-import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.widget.WPanel
 import io.github.cottonmc.cotton.gui.widget.WWidget
 import net.fabricmc.api.EnvType
@@ -14,7 +13,6 @@ import kotlin.math.max
  */
 class WCardPanel : WPanel() {
     private var selectedIndex: Int = 0
-    private var backgroundPainter: BackgroundPainter? = null
 
     // Cards
 
@@ -36,17 +34,30 @@ class WCardPanel : WPanel() {
 
     // Mouse
 
-    override fun onMouseUp(x: Int, y: Int, button: Int) =
-        children[selectedIndex].onMouseUp(x, y, button)
+    override fun onMouseUp(x: Int, y: Int, button: Int): WWidget {
+        val child = children[selectedIndex]
+        return child.onMouseUp(x - child.x, y - child.y, button)
+    }
 
-    override fun onMouseDown(x: Int, y: Int, button: Int) =
-        children[selectedIndex].onMouseDown(x, y, button)
+    override fun onMouseDown(x: Int, y: Int, button: Int): WWidget {
+        val child = children[selectedIndex]
+        return child.onMouseDown(x - child.x, y - child.y, button)
+    }
 
-    override fun onMouseDrag(x: Int, y: Int, button: Int) =
-        children[selectedIndex].onMouseDrag(x, y, button)
+    override fun onMouseDrag(x: Int, y: Int, button: Int) {
+        val child = children[selectedIndex]
+        child.onMouseDrag(x - child.x, y - child.y, button)
+    }
 
-    override fun onClick(x: Int, y: Int, button: Int) =
-        children[selectedIndex].onClick(x, y, button)
+    override fun onClick(x: Int, y: Int, button: Int) {
+        val child = children[selectedIndex]
+        child.onClick(x - child.x, y - child.y, button)
+    }
+
+    override fun hit(x: Int, y: Int): WWidget {
+        val child = children[selectedIndex]
+        return child.hit(x - child.x, y - child.y)
+    }
 
     // Layout
 
@@ -62,15 +73,8 @@ class WCardPanel : WPanel() {
     // Painting
 
     @Environment(EnvType.CLIENT)
-    override fun setBackgroundPainter(painter: BackgroundPainter?): WPanel = apply {
-        backgroundPainter = painter
-    }
-
-    @Environment(EnvType.CLIENT)
     override fun paintBackground(x: Int, y: Int) {
-        backgroundPainter?.let { painter ->
-            painter.paintBackground(x, y, this)
-        }
+        backgroundPainter?.paintBackground(x, y, this)
 
         if (selectedIndex < children.size) {
             val child = children[selectedIndex]

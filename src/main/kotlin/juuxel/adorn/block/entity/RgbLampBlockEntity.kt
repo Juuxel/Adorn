@@ -15,9 +15,9 @@ import net.minecraft.text.TranslatableText
 @UseExperimental(ExperimentalUnsignedTypes::class)
 class RgbLampBlockEntity : BlockEntity(RgbLampBlock.BLOCK_ENTITY_TYPE), BlockEntityClientSerializable,
     NameableContainerProvider {
-    var red: UByte = 50U
-    var green: UByte = 50U
-    var blue: UByte = 50U
+    var red: Int = 50
+    var green: Int = 50
+    var blue: Int = 50
 
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity) =
         RgbLampController(syncId, playerInv, BlockContext.create(world, pos), displayName)
@@ -26,15 +26,15 @@ class RgbLampBlockEntity : BlockEntity(RgbLampBlock.BLOCK_ENTITY_TYPE), BlockEnt
 
     // Tag (de)serialization
     private fun writeColorToTag(): CompoundTag = CompoundTag().apply {
-        putByte("Red", red.toByte())
-        putByte("Green", green.toByte())
-        putByte("Blue", blue.toByte())
+        putInt("Red", red)
+        putInt("Green", green)
+        putInt("Blue", blue)
     }
 
     private fun readColorFromTag(tag: CompoundTag) = with(tag) {
-        red = getByte("Red").toUByte()
-        green = getByte("Green").toUByte()
-        blue = getByte("Blue").toUByte()
+        red = getInt("Red")
+        green = getInt("Green")
+        blue = getInt("Blue")
     }
 
     override fun toClientTag(tag: CompoundTag) =
