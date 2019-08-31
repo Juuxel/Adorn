@@ -64,4 +64,6 @@ object AdornPieces : EPInitializer {
             //ModItemGroups.groups[type] = ItemGroup.DECORATIONS
         }
     }
+
+    override fun toString() = "from Adorn is wondering why Extra Pieces is using toString()"
 }

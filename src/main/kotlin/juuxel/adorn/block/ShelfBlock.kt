@@ -53,7 +53,7 @@ open class ShelfBlock(variant: BlockVariant) : PolyesterBlockWithEntity(variant.
     override fun canPlaceAt(state: BlockState, world: ViewableWorld, pos: BlockPos): Boolean {
         val facing = state[FACING]
         val neighborPos = pos.offset(facing.opposite)
-        return world.getBlockState(neighborPos).method_20827(world, neighborPos, facing)
+        return world.getBlockState(neighborPos).isSideSolidFullSquare(world, neighborPos, facing)
     }
 
     // Based on WallTorchBlock.getPlacementState

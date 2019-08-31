@@ -15,16 +15,17 @@ class AdornPieceRecipe(output: PieceType, count: Int, vararg pattern: String) :
     private val ingredientItems: Multimap<Char, Identifier> = MultimapBuilder.hashKeys().hashSetValues().build()
     private val ingredientTags: Multimap<Char, Identifier> = MultimapBuilder.hashKeys().hashSetValues().build()
 
-    fun addToKey(key: Char, item: Item) = apply {
-        ingredientItems.put(key, Registry.ITEM.getId(item))
-    }
-
     fun addTagToKey(key: Char, id: Identifier) = apply {
         ingredientTags.put(key, id)
     }
 
     override fun addToKey(c: Char, type: PieceType): AdornPieceRecipe {
         super.addToKey(c, type)
+        return this
+    }
+
+    override fun addToKey(c: Char, item: Item): AdornPieceRecipe {
+        super.addToKey(c, item)
         return this
     }
 
