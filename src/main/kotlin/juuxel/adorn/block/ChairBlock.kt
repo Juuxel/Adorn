@@ -31,7 +31,7 @@ import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
 import java.util.*
 
-open class ChairBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()),
+open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()),
     PolyesterBlock, Waterloggable {
     override val name = "${variant.variantName}_chair"
     // null to skip registration
@@ -116,12 +116,23 @@ open class ChairBlock(variant: BlockVariant) : SeatBlock(variant.createSettings(
         state.with(WATERLOGGED, fluidState.fluid == Fluids.WATER)
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
-        if (state[HALF] == DoubleBlockHalf.LOWER) LOWER_SHAPES[state[FACING]]
+        if (state[HALF] == DoubleBlockHalf.LOWER) {
+            if (isCarpetingEnabled && state[CARPET].isPresent) {
+                LOWER_SHAPES_WITH_CARPET[state[FACING]]
+            } else {
+                LOWER_SHAPES[state[FACING]]
+            }
+        }
         else UPPER_OUTLINE_SHAPES[state[FACING]]
 
     override fun getCollisionShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
-        if (state[HALF] == DoubleBlockHalf.LOWER) LOWER_SHAPES[state[FACING]]
-        else VoxelShapes.empty() // Let the bottom one handle the collision
+        if (state[HALF] == DoubleBlockHalf.LOWER) {
+            if (isCarpetingEnabled && state[CARPET].isPresent) {
+                LOWER_SHAPES_WITH_CARPET[state[FACING]]
+            } else {
+                LOWER_SHAPES[state[FACING]]
+            }
+        } else VoxelShapes.empty() // Let the bottom one handle the collision
 
     override fun getStateForNeighborUpdate(
         state: BlockState, direction: Direction, neighborState: BlockState,
@@ -156,9 +167,11 @@ open class ChairBlock(variant: BlockVariant) : SeatBlock(variant.createSettings(
     companion object {
         val FACING = Properties.HORIZONTAL_FACING
         val HALF = Properties.DOUBLE_BLOCK_HALF
+        val CARPET = CarpetedBlock.CARPET
         val WATERLOGGED = Properties.WATERLOGGED
 
         private val LOWER_SHAPES: EnumMap<Direction, VoxelShape>
+        private val LOWER_SHAPES_WITH_CARPET: EnumMap<Direction, VoxelShape>
         private val UPPER_OUTLINE_SHAPES: EnumMap<Direction, VoxelShape>
 
         init {
@@ -177,6 +190,12 @@ open class ChairBlock(variant: BlockVariant) : SeatBlock(variant.createSettings(
                         lowerSeatShape, lowerBackShapes[it]
                     )
                 }.toMap()
+            )
+
+            LOWER_SHAPES_WITH_CARPET = EnumMap(
+                LOWER_SHAPES.mapValues { (_, shape) ->
+                    VoxelShapes.union(shape, CARPET_SHAPE)
+                }
             )
 
             val upperSeatShape = VoxelShapes.union(

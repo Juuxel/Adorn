@@ -10,8 +10,6 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
 import net.minecraft.fluid.Fluids
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateFactory
 import net.minecraft.state.property.Properties
@@ -22,10 +20,10 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
 
-open class TableBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()),
+open class TableBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()),
     PolyesterBlock, Waterloggable {
     override val name = "${variant.variantName}_table"
-    override val itemSettings: Item.Settings = Item.Settings().group(ItemGroup.DECORATIONS)
+    override val itemSettings: Nothing? = null
     override val sittingYOffset = 0.6
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
@@ -68,7 +66,12 @@ open class TableBlock(variant: BlockVariant) : SeatBlock(variant.createSettings(
         .with(WEST, world.getBlockState(pos.offset(Direction.WEST)).block is TableBlock)
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
-        SHAPES[Bits.buildTableState(state[NORTH], state[EAST], state[SOUTH], state[WEST]/*, state[CARPET].isPresent*/)]
+        SHAPES[
+            Bits.buildTableState(
+                state[NORTH], state[EAST], state[SOUTH], state[WEST],
+                isCarpetingEnabled && state[CARPET].isPresent
+            )
+        ]
 
     override fun isSittingEnabled() = AdornConfigManager.CONFIG.sittingOnTables
 
@@ -77,7 +80,7 @@ open class TableBlock(variant: BlockVariant) : SeatBlock(variant.createSettings(
         val EAST = Properties.EAST
         val SOUTH = Properties.SOUTH
         val WEST = Properties.WEST
-//        val CARPET = CarpetedBlock.CARPET
+        val CARPET = CarpetedBlock.CARPET
         val WATERLOGGED = Properties.WATERLOGGED
 
         private val SHAPES: Byte2ObjectMap<VoxelShape>
@@ -94,7 +97,8 @@ open class TableBlock(variant: BlockVariant) : SeatBlock(variant.createSettings(
                 north: Boolean,
                 east: Boolean,
                 south: Boolean,
-                west: Boolean
+                west: Boolean,
+                hasCarpet: Boolean
             ): VoxelShape {
                 val parts = arrayListOf<VoxelShape?>(topShape)
 
@@ -145,9 +149,9 @@ open class TableBlock(variant: BlockVariant) : SeatBlock(variant.createSettings(
                     parts += legX1Z1
                 }
 
-//                if (hasCarpet) {
-//                    parts += CARPET_SHAPE
-//                }
+                if (hasCarpet) {
+                    parts += CARPET_SHAPE
+                }
 
                 return parts.filterNotNull().reduce(VoxelShapes::union)
             }
@@ -156,11 +160,11 @@ open class TableBlock(variant: BlockVariant) : SeatBlock(variant.createSettings(
                 booleans.flatMap { north ->
                     booleans.flatMap { east ->
                         booleans.flatMap { south ->
-                            booleans.map { west ->
-//                                booleans.map { hasCarpet ->
-                                    Bits.buildTableState(north, east, south, west/*, hasCarpet*/) to
-                                            makeShape(north, east, south, west/*, hasCarpet*/)
-//                                }
+                            booleans.flatMap { west ->
+                                booleans.map { hasCarpet ->
+                                    Bits.buildTableState(north, east, south, west, hasCarpet) to
+                                            makeShape(north, east, south, west, hasCarpet)
+                                }
                             }
                         }
                     }

@@ -12,8 +12,12 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 
 object ModItems : PolyesterRegistry(Adorn.NAMESPACE) {
-    val CHAIRS: List<BlockItem> = VanillaWoodType.values().indices.map {
-        registerItem(AdornTallBlockItem(ModBlocks.CHAIRS[it], Item.Settings().group(ItemGroup.DECORATIONS)))
+    val CHAIRS: List<BlockItem> = ModBlocks.CHAIRS.map {
+        registerItem(ChairBlockItem(it))
+    }
+
+    val TABLES: List<TableBlockItem> = ModBlocks.TABLES.map {
+        registerItem(TableBlockItem(it))
     }
 
     val STONE_ROD = registerItem("stone_rod", ItemWithDescription(Item.Settings().group(ItemGroup.MISC)))

@@ -2,10 +2,9 @@ package juuxel.adorn.api.block
 
 import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.block.*
-import juuxel.adorn.item.AdornTallBlockItem
+import juuxel.adorn.item.ChairBlockItem
+import juuxel.adorn.item.TableBlockItem
 import juuxel.polyester.registry.PolyesterRegistry
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 
 class AdornBlockBuilder private constructor(private val material: BlockVariant) {
     private var post = false
@@ -64,9 +63,12 @@ class AdornBlockBuilder private constructor(private val material: BlockVariant) 
             if (drawer) registerBlock(DrawerBlock(material))
             if (chair) {
                 val block = registerBlock(ChairBlock(material))
-                registerItem(AdornTallBlockItem(block, Item.Settings().group(ItemGroup.DECORATIONS)))
+                registerItem(ChairBlockItem(block))
             }
-            if (table) registerBlock(TableBlock(material))
+            if (table) {
+                val block = registerBlock(TableBlock(material))
+                registerItem(TableBlockItem(block))
+            }
             if (kitchenCounter) registerBlock(KitchenCounterBlock(material))
             if (kitchenCupboard) registerBlock(KitchenCupboardBlock(material))
             if (shelf) registerBlock(ShelfBlock(material))
