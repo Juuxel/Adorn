@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "brick": "minecraft:block/bricks",
+    "particle": "minecraft:block/bricks"
+  },
+  "elements": [
+    {
+      "from": [5, 0, 5],
+      "to": [11, 16, 11],
+      "faces": {
+        "down": { "texture": "#brick", "cullface": "down" },
+        "up": { "texture": "#brick", "cullface": "up" },
+        "north": { "texture": "#brick" },
+        "south": { "texture": "#brick" },
+        "west": { "texture": "#brick" },
+        "east": { "texture": "#brick" }
+      }
+    }
+  ]
+}
