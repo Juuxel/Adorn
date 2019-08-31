@@ -24,10 +24,11 @@ object ModItems : PolyesterRegistry(Adorn.NAMESPACE) {
         registerItem(TableBlockItem(ModBlocks.TABLES[it]))
     }
 
-    val STONE_ROD = registerItem(StoneRodItem())
+    val STONE_ROD = registerItem("stone_rod", ItemWithDescription(Item.Settings().group(ItemGroup.MISC)))
 
     val STONE_TORCH = registerItem(
-        AdornWallBlockItem(
+        "stone_torch",
+        WallBlockItemWithDescription(
             ModBlocks.STONE_TORCH_GROUND,
             ModBlocks.STONE_TORCH_WALL,
             Item.Settings().group(ItemGroup.DECORATIONS)

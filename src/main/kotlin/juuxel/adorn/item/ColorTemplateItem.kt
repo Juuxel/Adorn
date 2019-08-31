@@ -17,7 +17,7 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-class ColorTemplateItem(settings: Settings) : Item(settings) {
+class ColorTemplateItem(settings: Settings) : ItemWithDescription(settings) {
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
         val world = context.world
         val pos = context.blockPos
@@ -45,13 +45,4 @@ class ColorTemplateItem(settings: Settings) : Item(settings) {
 
     private fun getColor(stack: ItemStack): ListTag? =
         stack.tag?.getList(NbtKeys.COLOR_TEMPLATE_COLOR, NbtType.INT)
-
-    @Environment(EnvType.CLIENT)
-    override fun appendTooltip(stack: ItemStack, world: World?, texts: MutableList<Text>, context: TooltipContext) {
-        super.appendTooltip(stack, world, texts, context)
-        texts.add(TranslatableText("$translationKey.desc").styled {
-            it.isItalic = true
-            it.color = Formatting.DARK_GRAY
-        })
-    }
 }
