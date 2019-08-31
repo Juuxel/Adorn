@@ -2,15 +2,11 @@ package juuxel.adorn.lib
 
 import io.netty.buffer.Unpooled
 import juuxel.adorn.Adorn
-import juuxel.adorn.block.entity.RgbLampBlockEntity
 import juuxel.adorn.block.entity.TradingStationBlockEntity
-import juuxel.adorn.network.RgbLampColorUpdateC2SPacket
-import juuxel.adorn.network.RgbLampColorUpdateS2CPacket
 import juuxel.adorn.trading.Trade
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
 import net.minecraft.client.network.packet.CustomPayloadS2CPacket
 import net.minecraft.client.network.packet.EntitySpawnS2CPacket
 import net.minecraft.client.world.ClientWorld
@@ -22,23 +18,8 @@ import net.minecraft.util.math.BlockPos
 object ModNetworking {
     val ENTITY_SPAWN = Adorn.id("entity_spawn")
     val TRADE_SYNC = Adorn.id("trade_sync")
-    val RGB_LAMP_COLOR_UPDATE_C2S = Adorn.id("rgb_lamp_color_update_c2s")
-    val RGB_LAMP_COLOR_UPDATE_S2C = Adorn.id("rgb_lamp_color_update_s2c")
 
     fun init() {
-        ServerSidePacketRegistry.INSTANCE.register(RGB_LAMP_COLOR_UPDATE_C2S) { context, buf ->
-            val packet = RgbLampColorUpdateC2SPacket.read(buf)
-            val player = context.player
-            context.taskQueue.execute {
-                if (player.container.syncId == packet.syncId && player.container.isRestricted(player)) {
-                    val be = player.world.getBlockEntity(packet.pos) as? RgbLampBlockEntity ?: return@execute
-                    be.red = packet.red
-                    be.green = packet.green
-                    be.blue = packet.blue
-                    be.markDirty()
-                }
-            }
-        }
     }
 
     @Environment(EnvType.CLIENT)
@@ -63,19 +44,6 @@ object ModNetworking {
             val pos = buf.readBlockPos()
             val be = context.player?.world?.getBlockEntity(pos) as? TradingStationBlockEntity ?: return@register
             be.trade.fromTag(buf.readCompoundTag()!!)
-        }
-
-        ClientSidePacketRegistry.INSTANCE.register(RGB_LAMP_COLOR_UPDATE_S2C) { context, buf ->
-            val packet = RgbLampColorUpdateS2CPacket.read(buf)
-            val player = context.player
-            context.taskQueue.execute {
-                val be = player.world.getBlockEntity(packet.pos) as? RgbLampBlockEntity ?: return@execute
-                be.red = packet.red
-                be.green = packet.green
-                be.blue = packet.blue
-                be.markDirty()
-                player.world.updateListeners(packet.pos, be.cachedState, be.cachedState, 3)
-            }
         }
     }
 

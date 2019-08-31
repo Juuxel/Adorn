@@ -1,6 +1,0 @@
-{
-  "variants": {
-    "lit=true": { "model": "adorn:block/rgb_lamp_on" },
-    "lit=false": { "model": "adorn:block/rgb_lamp_off" }
-  }
-}
