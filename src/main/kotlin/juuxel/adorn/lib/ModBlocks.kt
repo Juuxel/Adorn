@@ -16,7 +16,6 @@ import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
-import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.util.ActionResult
 
@@ -77,7 +76,6 @@ object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
     val STEPS = BUILDING_BLOCK_VARIANTS.map {
         registerBlock(StepBlock(it))
     }
-
 
     val WOODEN_SHELVES: List<ShelfBlock> = WOODEN_VARIANTS.map {
         registerBlock(ShelfBlock(it))

@@ -1,8 +1,6 @@
 package juuxel.polyester.registry
 
-import juuxel.polyester.block.PolyesterBlock
-import juuxel.polyester.item.PolyesterItem
-
+@Deprecated("PolyesterContent can be replaced with a cleaner registry system.")
 interface PolyesterContent<out T> {
     val name: String
 
@@ -14,9 +12,3 @@ interface HasDescription {
     val hasDescription: Boolean get() = false
     val descriptionKey: String get() = "%TranslationKey.desc"
 }
-
-@Deprecated("PolyesterBlock has been moved.", ReplaceWith("PolyesterBlock", imports = ["io.github.juuxel.polyester.block.PolyesterBlock"]))
-typealias PolyesterBlock = PolyesterBlock
-
-@Deprecated("PolyesterItem has been moved.", ReplaceWith("PolyesterItem", imports = ["io.github.juuxel.polyester.item.PolyesterItem"]))
-typealias PolyesterItem = PolyesterItem

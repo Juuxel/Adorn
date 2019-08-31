@@ -12,7 +12,9 @@ base {
 }
 
 repositories {
-    //mavenLocal()
+    mavenCentral()
+    maven(url = "http://server.bbkr.space:8081/artifactory/libs-release")
+    maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot")
 }
 
 val counter: CounterExtension = project.extensions.getByType()
@@ -37,5 +39,6 @@ tasks.getByName<JavaExec>("run") {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs += "-Xuse-experimental=kotlin.Experimental"
+        jvmTarget = "1.8"
     }
 }

@@ -10,7 +10,8 @@
     "fluidloggable.FluidloggableMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin",
-    "TagBuilderMixin"
+    "TagBuilderMixin",
+    "WPanelMixin"
   ],
   "client": [
     "client.LivingEntityMixin",

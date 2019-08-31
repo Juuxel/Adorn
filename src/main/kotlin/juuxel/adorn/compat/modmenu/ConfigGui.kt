@@ -19,10 +19,10 @@ import kotlin.reflect.KMutableProperty
 @Environment(EnvType.CLIENT)
 class ConfigGui(previous: Screen) : LightweightGuiDescription() {
     internal var restartRequired: Boolean = false
+    private val general: WGridPanel
 
     init {
         val root = WPlainPanel()
-        root.setBackgroundPainter(null)
         setRootPanel(root)
 
         root.add(WTitleLabel(TranslatableText("gui.adorn.config.title"), Colors.WHITE), 0, 0, 11 * 18, 18)
@@ -30,13 +30,13 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
         val tabbed = WTabbedPanel()
         val config = AdornConfigManager.CONFIG
 
-        val general = WGridPanel()
+        general = WGridPanel()
         with(general) {
             add(createConfigToggle(config::skipNightOnSofas), 0, 0)
             add(createConfigToggle(config::protectTradingStations), 0, 1)
             add(createConfigToggle(config::sittingOnTables, true), 0, 2)
 
-            setBackgroundPainter(BackgroundPainter.VANILLA)
+            backgroundPainter = BackgroundPainter.VANILLA
             setSize(11 * 18, height)
         }
 
@@ -56,6 +56,11 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
             setOnClick { close(previous) }
         }, 11 * 9 - 5 * 9, 6 * 18 + 9, 5 * 18, 18)
         root.validate(this)
+    }
+
+    override fun addPainters() {
+        rootPanel?.backgroundPainter = null
+        general.backgroundPainter = BackgroundPainter.VANILLA
     }
 
     fun close(previous: Screen) {

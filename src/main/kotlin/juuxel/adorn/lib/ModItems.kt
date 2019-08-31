@@ -4,6 +4,8 @@ import juuxel.adorn.Adorn
 import juuxel.adorn.item.*
 import juuxel.adorn.util.VanillaWoodType
 import juuxel.polyester.registry.PolyesterRegistry
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.registry.FuelRegistry
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
@@ -14,10 +16,11 @@ object ModItems : PolyesterRegistry(Adorn.NAMESPACE) {
         registerItem(AdornTallBlockItem(ModBlocks.CHAIRS[it], Item.Settings().group(ItemGroup.DECORATIONS)))
     }
 
-    val STONE_ROD = registerItem(StoneRodItem())
+    val STONE_ROD = registerItem("stone_rod", ItemWithDescription(Item.Settings().group(ItemGroup.MISC)))
 
     val STONE_TORCH = registerItem(
-        AdornWallBlockItem(
+        "stone_torch",
+        WallBlockItemWithDescription(
             ModBlocks.STONE_TORCH_GROUND,
             ModBlocks.STONE_TORCH_WALL,
             Item.Settings().group(ItemGroup.DECORATIONS)
@@ -36,5 +39,9 @@ object ModItems : PolyesterRegistry(Adorn.NAMESPACE) {
 
             add(ModTags.SOFAS.item, 150)
         }
+    }
+
+    @Environment(EnvType.CLIENT)
+    fun initClient() {
     }
 }

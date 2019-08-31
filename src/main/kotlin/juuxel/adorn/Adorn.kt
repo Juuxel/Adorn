@@ -16,6 +16,7 @@ object Adorn : ModInitializer {
         ModItems.init()
         ModEntities.init()
         ModGuis.init()
+        ModNetworking.init()
         ModTags.init()
         AdornCompat.init()
     }
@@ -24,6 +25,7 @@ object Adorn : ModInitializer {
     @Suppress("UNUSED")
     fun initClient() {
         ModBlocks.initClient()
+        ModItems.initClient()
         ModGuis.initClient()
         ModNetworking.initClient()
         AdornResources.initClient()

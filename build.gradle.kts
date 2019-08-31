@@ -25,39 +25,35 @@ if (localBuild) {
     println("Note: local build mode enabled in gradle.properties; all dependencies might not work!")
 }
 
-allprojects {
-    apply(plugin = "java")
-
-    java {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+repositories {
+    mavenCentral()
+    if (localBuild) {
+        mavenLocal()
     }
 
-    repositories {
-        mavenCentral()
-        if (localBuild) {
-            mavenLocal()
-        }
+    maven(url = "http://server.bbkr.space:8081/artifactory/libs-release") { name = "Cotton" }
+    maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot") { name = "Cotton (snapshots)" }
+    maven(url = "https://minecraft.curseforge.com/api/maven") { name = "CurseForge" }
+    maven(url = "https://jitpack.io")
+}
 
-        maven(url = "http://server.bbkr.space:8081/artifactory/libs-release") { name = "Cotton" }
-        maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot") { name = "Cotton (snapshots)" }
-        maven(url = "https://minecraft.curseforge.com/api/maven") { name = "CurseForge" }
-        maven(url = "https://jitpack.io")
-    }
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
 
-    tasks.withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
-    }
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
+}
 
-    tasks.getByName<ProcessResources>("processResources") {
-        inputs.property("version", project.version)
-        filesMatching("fabric.mod.json") {
-            expand(
-                mutableMapOf(
-                    "version" to project.version
-                )
+tasks.getByName<ProcessResources>("processResources") {
+    inputs.property("version", project.version)
+    filesMatching("fabric.mod.json") {
+        expand(
+            mutableMapOf(
+                "version" to project.version
             )
-        }
+        )
     }
 }
 
@@ -103,6 +99,10 @@ dependencies {
         modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { exclude(group = "net.fabricmc.fabric-api") }
         modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); exclude(group = "net.fabricmc.fabric-api") }
     }
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.freeCompilerArgs += "-Xuse-experimental=kotlin.Experimental"
 }
 
 val remapJar: RemapJarTask by tasks.getting {}

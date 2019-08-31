@@ -37,6 +37,10 @@ abstract class PolyesterRegistry(private val namespace: String) {
         )
     }
 
+    //----------------------------------
+    // Functions for registering blocks
+    //----------------------------------
+
     /**
      * Registers a [block] with the [name] and an item in the [itemGroup].
      */
@@ -51,6 +55,21 @@ abstract class PolyesterRegistry(private val namespace: String) {
         Registry.register(Registry.ITEM, Identifier(namespace, name), makeItemForBlock(block, itemSettings))
         return block
     }
+
+//    /**
+//     * Registers a [block] with the [name] and an item created by the [itemProvider].
+//     */
+//    protected inline fun <T : Block> registerBlock(name: String, block: T, itemProvider: (T) -> Item): T {
+//        register(Registry.BLOCK, name, block)
+//        register(Registry.ITEM, name, itemProvider(block))
+//        return block
+//    }
+
+    /**
+     * Registers a [block] with the [name] and without an item.
+     */
+    protected fun <T : Block> registerBlock(name: String, block: T): T =
+        register(Registry.BLOCK, name, block)
 
     private fun makeItemForBlock(block: Block, itemSettings: Item.Settings): Item =
         if (block is BlockWithDescription) {
@@ -111,6 +130,10 @@ abstract class PolyesterRegistry(private val namespace: String) {
         return content
     }
 
+    //-----------------------------------------
+    // Functions for registering other content
+    //-----------------------------------------
+
     protected fun <R : Recipe<*>> registerRecipe(name: String): RecipeType<R> {
         return register(Registry.RECIPE_TYPE, object : RecipeType<R>,
             PolyesterContent<RecipeType<R>> {
@@ -121,4 +144,7 @@ abstract class PolyesterRegistry(private val namespace: String) {
 
     protected fun <T : PolyesterItem> registerItem(content: T): T =
         register(Registry.ITEM, content)
+
+    protected fun <T : Item> registerItem(name: String, content: T): T =
+        register(Registry.ITEM, name, content)
 }
