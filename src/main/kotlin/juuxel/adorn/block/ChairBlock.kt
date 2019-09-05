@@ -31,6 +31,7 @@ import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
 import java.util.*
 
+// TODO: Figure out what special casing vanilla does for doors so I can fix the rotation
 open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()),
     PolyesterBlock, Waterloggable {
     override val name = "${variant.variantName}_chair"
