@@ -18,27 +18,25 @@ import net.minecraft.world.loot.context.LootContext
 import java.util.Random
 
 abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
-    open val isCarpetingEnabled: Boolean get() = true
-
     init {
-        if (isCarpetingEnabled) {
+        if (isCarpetingEnabled()) {
             defaultState = defaultState.with(CARPET, CARPET.none)
         }
     }
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        if (isCarpetingEnabled) builder.add(CARPET)
+        if (isCarpetingEnabled()) builder.add(CARPET)
     }
 
     override fun getPlacementState(context: ItemPlacementContext) =
-        if (isCarpetingEnabled)
+        if (isCarpetingEnabled())
             super.getPlacementState(context)!!.with(CARPET, getCarpetColor(context)?.let(CARPET::wrap) ?: CARPET.none)
         else
             super.getPlacementState(context)
 
     override fun onScheduledTick(state: BlockState, world: World, pos: BlockPos, random: Random?) {
-        if (!isCarpetingEnabled) return
+        if (!isCarpetingEnabled()) return
         val carpet = state[CARPET]
         if (carpet.isPresent) {
             val carpetBlock = COLORS_TO_BLOCKS[carpet.value] ?: error("Unknown carpet state: $carpet")
@@ -54,7 +52,7 @@ abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
         state: BlockState, direction: Direction, neighborState: BlockState,
         world: IWorld, pos: BlockPos, neighborPos: BlockPos
     ): BlockState {
-        if (isCarpetingEnabled) {
+        if (isCarpetingEnabled()) {
             val carpet = state[CARPET]
             if (carpet.isPresent && !COLORS_TO_BLOCKS[carpet.value]!!.defaultState.canPlaceAt(world, pos))
                 world.blockTickScheduler.schedule(pos, this, 1)
@@ -64,12 +62,14 @@ abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
     }
 
     override fun getDroppedStacks(state: BlockState, builder: LootContext.Builder): List<ItemStack> =
-        if (isCarpetingEnabled) {
+        if (isCarpetingEnabled()) {
             super.getDroppedStacks(state, builder) +
                 (COLORS_TO_BLOCKS[state[CARPET].value]?.defaultState?.getDroppedStacks(builder) ?: emptyList())
         } else {
             super.getDroppedStacks(state, builder)
         }
+
+    open fun isCarpetingEnabled() = true
 
     companion object {
         val CARPET = OptionalProperty(EnumProperty.of("carpet", DyeColor::class.java))

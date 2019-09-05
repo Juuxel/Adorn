@@ -117,7 +117,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         if (state[HALF] == DoubleBlockHalf.LOWER) {
-            if (isCarpetingEnabled && state[CARPET].isPresent) {
+            if (isCarpetingEnabled() && state[CARPET].isPresent) {
                 LOWER_SHAPES_WITH_CARPET[state[FACING]]
             } else {
                 LOWER_SHAPES[state[FACING]]
@@ -127,7 +127,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
 
     override fun getCollisionShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         if (state[HALF] == DoubleBlockHalf.LOWER) {
-            if (isCarpetingEnabled && state[CARPET].isPresent) {
+            if (isCarpetingEnabled() && state[CARPET].isPresent) {
                 LOWER_SHAPES_WITH_CARPET[state[FACING]]
             } else {
                 LOWER_SHAPES[state[FACING]]

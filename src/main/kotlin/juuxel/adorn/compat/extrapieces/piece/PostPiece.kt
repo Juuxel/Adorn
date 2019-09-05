@@ -5,18 +5,17 @@ import com.shnupbups.extrapieces.core.PieceTypes
 import com.shnupbups.extrapieces.recipe.ShapedPieceRecipe
 import juuxel.adorn.Adorn
 import juuxel.adorn.compat.extrapieces.block.PostPieceBlock
-import juuxel.adorn.compat.extrapieces.item.AdornPieceRecipe
+import juuxel.adorn.lib.AdornTags
 import net.minecraft.item.Items
-import net.minecraft.util.Identifier
 
 object PostPiece : SimplePiece(Adorn.id("post"), Adorn.id("block/templates/post")) {
     override fun getNew(set: PieceSet) = PostPieceBlock(set)
 
-    override fun getRecipes() = arrayListOf<ShapedPieceRecipe>(
-        AdornPieceRecipe(this, 4, "#", "#", "-")
+    override fun getRecipes() = arrayListOf(
+        ShapedPieceRecipe(this, 4, "#", "#", "-")
             .addToKey('-', PieceTypes.BASE)
             .addToKey('#', Items.STICK)
-            .addTagToKey('#', Identifier("c", "stone_rod"))
+            .addToKey('#', AdornTags.STONE_ROD)
     )
 
     override fun getStonecuttingCount() = 2

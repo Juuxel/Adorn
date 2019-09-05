@@ -15,7 +15,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.PacketByteBuf
 import net.minecraft.util.math.BlockPos
 
-object ModNetworking {
+object AdornNetworking {
     val ENTITY_SPAWN = Adorn.id("entity_spawn")
     val TRADE_SYNC = Adorn.id("trade_sync")
 

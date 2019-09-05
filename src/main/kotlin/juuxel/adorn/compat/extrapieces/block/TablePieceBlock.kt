@@ -6,7 +6,7 @@ import juuxel.adorn.compat.extrapieces.AdornPieces
 import juuxel.adorn.compat.extrapieces.toVariant
 
 class TablePieceBlock(private val set: PieceSet) : TableBlock(set.toVariant()), AdornPieceBlock {
-    override val isCarpetingEnabled get() = false
+    override fun isCarpetingEnabled() = false
 
     override fun getSet() = set
 

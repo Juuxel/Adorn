@@ -3,8 +3,8 @@ package juuxel.adorn.block
 import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
-import juuxel.adorn.lib.ModGuis
-import juuxel.adorn.lib.openFabricContainer
+import juuxel.adorn.gui.AdornGuis
+import juuxel.adorn.gui.openFabricContainer
 import juuxel.polyester.block.BlockEntityProviderImpl
 import juuxel.polyester.block.PolyesterBlockEntityType
 import net.minecraft.block.BlockState
@@ -34,7 +34,7 @@ open class KitchenCupboardBlock : BaseKitchenCounterBlock, BlockEntityProviderIm
     override fun activate(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): Boolean {
-        player.openFabricContainer(ModGuis.KITCHEN_CUPBOARD, pos)
+        player.openFabricContainer(AdornGuis.KITCHEN_CUPBOARD, pos)
         return true
     }
 

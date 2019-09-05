@@ -1,6 +1,5 @@
-package juuxel.adorn.lib
+package juuxel.adorn.resources
 
-import juuxel.adorn.resources.ColorManager
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper

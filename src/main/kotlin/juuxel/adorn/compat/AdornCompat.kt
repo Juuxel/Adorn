@@ -1,4 +1,4 @@
-package juuxel.adorn.lib
+package juuxel.adorn.compat
 
 import juuxel.adorn.compat.terrestria.AdornTerrestriaCompat
 import juuxel.adorn.compat.traverse.AdornTraverseCompat
@@ -6,11 +6,11 @@ import net.fabricmc.loader.api.FabricLoader
 
 object AdornCompat {
     fun init() {
-        ifMod("traverse") { AdornTraverseCompat.init() }
-        ifMod("terrestria") { AdornTerrestriaCompat.init() }
+        ifModLoaded("traverse") { AdornTraverseCompat.init() }
+        ifModLoaded("terrestria") { AdornTerrestriaCompat.init() }
     }
 
-    private inline fun ifMod(mod: String, fn: () -> Unit) {
+    private inline fun ifModLoaded(mod: String, fn: () -> Unit) {
         if (FabricLoader.getInstance().isModLoaded(mod)) {
             fn()
         }

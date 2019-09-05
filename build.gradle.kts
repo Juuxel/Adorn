@@ -90,7 +90,7 @@ dependencies {
     includedMod("io.github.cottonmc:Jankson:" + v("jankson")) { exclude(group = "net.fabricmc.fabric-api") }
     includedMod("io.github.cottonmc", "LibCD", v("libcd")) { exclude(group = "net.fabricmc.fabric-api") }
     modImplementation("towelette:Towelette:" + v("towelette")) { exclude(group = "net.fabricmc.fabric-api") }
-    modImplementation("io.github.prospector.modmenu:ModMenu:" + v("modmenu")) { exclude(group = "net.fabricmc.fabric-api") }
+    modImplementation("io.github.prospector:modmenu:" + v("modmenu")) { exclude(group = "net.fabricmc.fabric-api") }
     modImplementation("extra-pieces:extrapieces:" + v("extra-pieces"))
     modImplementation("com.github.artificemc:artifice:" + v("artifice"))
 

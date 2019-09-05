@@ -16,4 +16,8 @@ class AdornConfig {
     @JvmField
     // TODO: Should be a game rule
     var protectTradingStations: Boolean = true
+
+    @Comment("If true, enables debug features (currently: /adorn resource)")
+    @JvmField
+    var debug: Boolean = false
 }

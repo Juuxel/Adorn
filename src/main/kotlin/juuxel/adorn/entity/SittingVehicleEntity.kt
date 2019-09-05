@@ -2,7 +2,7 @@ package juuxel.adorn.entity
 
 import com.mojang.datafixers.Dynamic
 import juuxel.adorn.block.SeatBlock
-import juuxel.adorn.lib.ModNetworking
+import juuxel.adorn.lib.AdornNetworking
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
 import net.fabricmc.fabric.api.server.PlayerStream
 import net.minecraft.client.network.packet.EntityPassengersSetS2CPacket
@@ -65,7 +65,7 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
     override fun canClimb() = false
     override fun collides() = false
     override fun getMountedHeightOffset() = 0.0
-    override fun createSpawnPacket() = ModNetworking.createEntitySpawnPacket(this)
+    override fun createSpawnPacket() = AdornNetworking.createEntitySpawnPacket(this)
     override fun hasNoGravity() = true
     override fun isInvisible() = true
 

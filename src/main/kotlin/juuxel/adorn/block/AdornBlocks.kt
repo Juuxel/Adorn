@@ -1,9 +1,8 @@
-package juuxel.adorn.lib
+package juuxel.adorn.block
 
 import juuxel.adorn.Adorn
 import juuxel.adorn.api.block.SneakClickHandler
 import juuxel.adorn.api.util.BlockVariant
-import juuxel.adorn.block.*
 import juuxel.adorn.block.entity.ShelfBlockEntity
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.block.renderer.ShelfRenderer
@@ -15,11 +14,10 @@ import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
-import net.minecraft.block.Blocks
 import net.minecraft.item.ItemGroup
 import net.minecraft.util.ActionResult
 
-object ModBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
+object AdornBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
     // BlockVariants
     private val WOODEN_VARIANTS = VanillaWoodType.values().map {
         BlockVariant.Wood(it.id)

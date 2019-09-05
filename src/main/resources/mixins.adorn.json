@@ -14,8 +14,7 @@
     "WPanelMixin"
   ],
   "client": [
-    "client.LivingEntityMixin",
-    "client.WWidgetMixin"
+    "client.LivingEntityMixin"
   ],
 
   "injectors": {

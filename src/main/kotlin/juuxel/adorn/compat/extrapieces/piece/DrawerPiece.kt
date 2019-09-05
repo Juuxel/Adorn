@@ -8,7 +8,6 @@ import com.swordglowsblue.artifice.api.ArtificeResourcePack
 import juuxel.adorn.Adorn
 import juuxel.adorn.compat.extrapieces.block.DrawerPieceBlock
 import juuxel.adorn.compat.extrapieces.getRegistryId
-import juuxel.adorn.compat.extrapieces.item.AdornPieceRecipe
 import net.minecraft.item.Items
 
 object DrawerPiece : SimpleRotatingPiece(Adorn.id("drawer")) {
@@ -24,8 +23,8 @@ object DrawerPiece : SimpleRotatingPiece(Adorn.id("drawer")) {
         }
     }
 
-    override fun getRecipes() = arrayListOf<ShapedPieceRecipe>(
-        AdornPieceRecipe(this, 2, "S", "C", "S")
+    override fun getRecipes() = arrayListOf(
+        ShapedPieceRecipe(this, 2, "S", "C", "S")
             .addToKey('S', PieceTypes.SLAB)
             .addToKey('C', Items.CHEST)
     )

@@ -1,6 +1,6 @@
 package juuxel.adorn.block
 
-import juuxel.adorn.lib.ModTags
+import juuxel.adorn.lib.AdornTags
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
@@ -33,7 +33,7 @@ abstract class AbstractChimneyBlock(settings: Settings) : Block(settings), Water
         }?.updateConnections(context.world.getBlockState(context.blockPos.up()))
 
     private fun BlockState.updateConnections(neighborState: BlockState): BlockState = run {
-        with(CONNECTED, neighborState.matches(ModTags.CHIMNEYS.block))
+        with(CONNECTED, neighborState.matches(AdornTags.CHIMNEYS.block))
     }
 
     override fun getStateForNeighborUpdate(

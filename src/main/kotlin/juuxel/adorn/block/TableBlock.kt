@@ -69,7 +69,7 @@ open class TableBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
         SHAPES[
             Bits.buildTableState(
                 state[NORTH], state[EAST], state[SOUTH], state[WEST],
-                isCarpetingEnabled && state[CARPET].isPresent
+                isCarpetingEnabled() && state[CARPET].isPresent
             )
         ]
 

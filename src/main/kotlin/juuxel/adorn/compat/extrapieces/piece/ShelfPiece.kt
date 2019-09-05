@@ -8,9 +8,8 @@ import com.swordglowsblue.artifice.api.ArtificeResourcePack
 import juuxel.adorn.Adorn
 import juuxel.adorn.compat.extrapieces.block.ShelfPieceBlock
 import juuxel.adorn.compat.extrapieces.getRegistryId
-import juuxel.adorn.compat.extrapieces.item.AdornPieceRecipe
+import juuxel.adorn.lib.AdornTags
 import net.minecraft.item.Items
-import net.minecraft.util.Identifier
 
 object ShelfPiece : SimpleRotatingPiece(Adorn.id("shelf")) {
     private val MODEL_PARENT = Adorn.id("block/templates/shelf")
@@ -28,10 +27,10 @@ object ShelfPiece : SimpleRotatingPiece(Adorn.id("shelf")) {
 
     override fun getTagId() = Adorn.id("shelves")
 
-    override fun getRecipes() = arrayListOf<ShapedPieceRecipe>(
-        AdornPieceRecipe(this, 3, "SSS", "/ /")
+    override fun getRecipes() = arrayListOf(
+        ShapedPieceRecipe(this, 3, "SSS", "/ /")
             .addToKey('S', PieceTypes.SLAB)
             .addToKey('/', Items.STICK)
-            .addTagToKey('/', Identifier("c", "stone_rod"))
+            .addToKey('/', AdornTags.STONE_ROD)
     )
 }

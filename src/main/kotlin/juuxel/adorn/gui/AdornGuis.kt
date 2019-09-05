@@ -1,4 +1,4 @@
-package juuxel.adorn.lib
+package juuxel.adorn.gui
 
 import juuxel.adorn.Adorn
 import juuxel.adorn.gui.screen.DrawerScreen
@@ -14,7 +14,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 
-object ModGuis {
+object AdornGuis {
     val DRAWER = Adorn.id("drawer")
     val KITCHEN_CUPBOARD = Adorn.id("kitchen_cupboard")
     val TRADING_STATION = Adorn.id("trading_station")

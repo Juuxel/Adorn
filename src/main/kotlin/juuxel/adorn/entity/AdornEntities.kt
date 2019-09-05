@@ -1,4 +1,4 @@
-package juuxel.adorn.lib
+package juuxel.adorn.entity
 
 import juuxel.adorn.Adorn
 import juuxel.adorn.entity.SittingVehicleEntity
@@ -8,7 +8,7 @@ import net.minecraft.entity.EntityCategory
 import net.minecraft.entity.EntityDimensions
 import net.minecraft.util.registry.Registry
 
-object ModEntities : PolyesterRegistry(Adorn.NAMESPACE) {
+object AdornEntities : PolyesterRegistry(Adorn.NAMESPACE) {
     val SITTING_VEHICLE = register(
         Registry.ENTITY_TYPE,
         "sitting_vehicle",

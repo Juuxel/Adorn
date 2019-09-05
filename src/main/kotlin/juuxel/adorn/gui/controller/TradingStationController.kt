@@ -8,7 +8,7 @@ import juuxel.adorn.block.entity.TradingStation
 import juuxel.adorn.gui.painter.Painters
 import juuxel.adorn.gui.widget.WCenteredLabel
 import juuxel.adorn.gui.widget.WDisplayOnlySlot
-import juuxel.adorn.lib.ModNetworking
+import juuxel.adorn.lib.AdornNetworking
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.trading.TradeInventory
 import juuxel.adorn.util.Colors
@@ -79,7 +79,7 @@ class TradingStationController(
                             PlayerStream.watching(world, pos).forEach {
                                 ServerSidePacketRegistry.INSTANCE.sendToPlayer(
                                     it,
-                                    ModNetworking.createTradeSyncPacket(pos, getTrade(context))
+                                    AdornNetworking.createTradeSyncPacket(pos, getTrade(context))
                                 )
                             }
                         }

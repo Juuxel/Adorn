@@ -8,7 +8,7 @@ import net.minecraft.item.Item
 import net.minecraft.tag.Tag
 import net.minecraft.util.Identifier
 
-object ModTags {
+object AdornTags {
     val CHAIRS = blockAndItem(Adorn.id("chairs"))
     val TABLES = blockAndItem(Adorn.id("tables"))
     val DRAWERS = blockAndItem(Adorn.id("drawers"))
