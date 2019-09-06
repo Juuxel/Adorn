@@ -31,7 +31,6 @@ import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
 import java.util.*
 
-// TODO: Figure out what special casing vanilla does for doors so I can fix the rotation
 open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()),
     PolyesterBlock, Waterloggable {
     override val name = "${variant.variantName}_chair"
@@ -142,12 +141,13 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
         val half = state[HALF]
         return if (
             // Updated from other half's direction vertically (LOWER + UP or UPPER + DOWN)
-            // and vertical pair is invalid (either not a chair or the wrong half)
-            direction.axis == Direction.Axis.Y &&
-                (half == DoubleBlockHalf.LOWER) == (direction == Direction.UP) &&
-                (neighborState.block != this || neighborState.get(HALF) == half)
+            direction.axis == Direction.Axis.Y && (half == DoubleBlockHalf.LOWER) == (direction == Direction.UP)
         ) {
-            Blocks.AIR.defaultState
+            // If the other half is not a chair, break block
+            if (neighborState.block != this)
+                Blocks.AIR.defaultState
+            else
+                state.with(FACING, neighborState[FACING])
         } else {
             super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
         }
