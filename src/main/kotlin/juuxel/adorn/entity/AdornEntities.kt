@@ -1,7 +1,6 @@
 package juuxel.adorn.entity
 
 import juuxel.adorn.Adorn
-import juuxel.adorn.entity.SittingVehicleEntity
 import juuxel.polyester.registry.PolyesterRegistry
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder
 import net.minecraft.entity.EntityCategory

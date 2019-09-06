@@ -2,8 +2,6 @@ package juuxel.adorn.compat.extrapieces.piece
 
 import com.shnupbups.extrapieces.blocks.PieceBlock
 import com.shnupbups.extrapieces.core.PieceType
-import com.shnupbups.extrapieces.recipe.StonecuttingPieceRecipe
-import com.shnupbups.extrapieces.recipe.WoodmillingPieceRecipe
 import juuxel.adorn.compat.extrapieces.item.AdornPieceBlockItem
 import net.minecraft.item.Item
 import net.minecraft.util.Identifier

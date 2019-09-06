@@ -10,7 +10,6 @@ import juuxel.adorn.util.buildShapeRotations
 import juuxel.polyester.block.PolyesterBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
 import net.minecraft.entity.player.PlayerEntity

@@ -1,8 +1,8 @@
 package juuxel.adorn.item
 
 import juuxel.adorn.Adorn
-import juuxel.adorn.lib.AdornTags
 import juuxel.adorn.block.AdornBlocks
+import juuxel.adorn.lib.AdornTags
 import juuxel.polyester.registry.PolyesterRegistry
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment

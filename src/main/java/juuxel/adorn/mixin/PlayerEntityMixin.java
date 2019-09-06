@@ -1,7 +1,6 @@
 package juuxel.adorn.mixin;
 
 import juuxel.adorn.block.SofaBlock;
-import juuxel.adorn.config.AdornConfig;
 import juuxel.adorn.config.AdornConfigManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

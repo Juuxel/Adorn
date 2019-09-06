@@ -18,7 +18,6 @@ import net.minecraft.inventory.Inventory
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import org.apache.logging.log4j.LogManager
-import java.util.*
 
 abstract class BaseAdornController(
     syncId: Int,

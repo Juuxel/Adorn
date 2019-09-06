@@ -2,7 +2,6 @@ package juuxel.adorn.compat.extrapieces.piece
 
 import com.shnupbups.extrapieces.ExtraPieces
 import com.shnupbups.extrapieces.blocks.PieceBlock
-import com.shnupbups.extrapieces.core.PieceType
 import com.swordglowsblue.artifice.api.ArtificeResourcePack
 import juuxel.adorn.compat.extrapieces.AdornPieces
 import juuxel.adorn.compat.extrapieces.getRegistryId
