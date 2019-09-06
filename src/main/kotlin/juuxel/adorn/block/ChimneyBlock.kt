@@ -43,15 +43,17 @@ class ChimneyBlock : AbstractChimneyBlock(FabricBlockSettings.copy(Blocks.BRICKS
         if (state[CONNECTED]) return
 
         when (state[SMOKE_TYPE]!!) {
-            SmokeType.CLASSIC -> for (i in 1..3) {
+            SmokeType.CLASSIC -> for (i in 1..(3 + random.nextInt(2))) {
                 world.addImportantParticle(
                     ParticleTypes.LARGE_SMOKE,
-                    pos.x + 0.5, pos.y + 0.9, pos.z + 0.5,
+                    pos.x + 0.3 + random.nextDouble() * 0.4,
+                    pos.y + 0.9,
+                    pos.z + 0.3 + random.nextDouble() * 0.4,
                     0.0, 0.0, 0.0
                 )
             }
 
-            SmokeType.CAMPFIRE -> for (i in 0 until 2 + random.nextInt(2)) {
+            SmokeType.CAMPFIRE -> for (i in 1..(3 + random.nextInt(2))) {
                 world.addImportantParticle(
                     ParticleTypes.CAMPFIRE_COSY_SMOKE, true,
                     pos.x + 0.3 + random.nextDouble() * 0.4,
