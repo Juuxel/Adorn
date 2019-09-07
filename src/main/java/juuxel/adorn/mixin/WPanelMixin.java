@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  */
 @Mixin(WPanel.class)
 public class WPanelMixin extends WWidget {
-    @Redirect(method = "hit", at = @At(value = "INVOKE", target = "Lio/github/cottonmc/cotton/gui/widget/WWidget;hit(II)Lio/github/cottonmc/cotton/gui/widget/WWidget;"))
+    @Redirect(method = "hit", at = @At(value = "INVOKE", target = "Lio/github/cottonmc/cotton/gui/widget/WWidget;hit(II)Lio/github/cottonmc/cotton/gui/widget/WWidget;"), remap = false)
     private WWidget onHit(WWidget child, int x, int y, int x2, int y2) {
         return child.hit(x2 - child.getX(), y2 - child.getY());
     }
