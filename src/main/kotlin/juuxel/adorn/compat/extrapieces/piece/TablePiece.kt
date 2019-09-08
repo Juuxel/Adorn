@@ -8,9 +8,12 @@ import com.shnupbups.extrapieces.recipe.ShapedPieceRecipe
 import com.swordglowsblue.artifice.api.ArtificeResourcePack
 import juuxel.adorn.Adorn
 import juuxel.adorn.compat.extrapieces.AdornPieces
+import juuxel.adorn.compat.extrapieces.AdornPiecesClient
 import juuxel.adorn.compat.extrapieces.block.TablePieceBlock
 import juuxel.adorn.compat.extrapieces.getRegistryId
+import juuxel.adorn.compat.extrapieces.item.TablePieceBlockItem
 import juuxel.adorn.lib.AdornTags
+import net.minecraft.item.Item
 import net.minecraft.item.Items
 
 object TablePiece : AdornPiece(Adorn.id("table")) {
@@ -92,32 +95,7 @@ object TablePiece : AdornPiece(Adorn.id("table")) {
                 }
             }
 
-            /*val colors = arrayOf(
-                "red",
-                "black",
-                "green",
-                "brown",
-                "blue",
-                "purple",
-                "cyan",
-                "light_gray",
-                "gray",
-                "pink",
-                "lime",
-                "yellow",
-                "light_blue",
-                "magenta",
-                "orange",
-                "white"
-            )
-
-            // Carpets
-            for (color in colors) {
-                state.multipartCase {
-                    it.`when`("carpet", color)
-                    it.apply { variant -> variant.model(Identifier("block/${color}_carpet")) }
-                }
-            }*/
+            AdornPiecesClient.addCarpets(state, pb.set)
         }
     }
 
@@ -169,4 +147,6 @@ object TablePiece : AdornPiece(Adorn.id("table")) {
             .addToKey('|', Items.STICK)
             .addToKey('|', AdornTags.STONE_ROD)
     )
+
+    override fun getBlockItem(pb: PieceBlock) = TablePieceBlockItem(pb, Item.Settings())
 }

@@ -8,9 +8,10 @@ import com.shnupbups.extrapieces.recipe.ShapedPieceRecipe
 import com.swordglowsblue.artifice.api.ArtificeResourcePack
 import juuxel.adorn.Adorn
 import juuxel.adorn.compat.extrapieces.AdornPieces
+import juuxel.adorn.compat.extrapieces.AdornPiecesClient
 import juuxel.adorn.compat.extrapieces.block.ChairPieceBlock
 import juuxel.adorn.compat.extrapieces.getRegistryId
-import juuxel.adorn.compat.extrapieces.item.AdornTallPieceBlockItem
+import juuxel.adorn.compat.extrapieces.item.ChairPieceBlockItem
 import juuxel.adorn.lib.AdornTags
 import net.minecraft.block.enums.DoubleBlockHalf
 import net.minecraft.item.Item
@@ -49,6 +50,8 @@ object ChairPiece : AdornPiece(Adorn.id("chair")) {
                     }
                 }
             }
+
+            AdornPiecesClient.addCarpets(state, pb.set)
         }
     }
 
@@ -79,5 +82,5 @@ object ChairPiece : AdornPiece(Adorn.id("chair")) {
             .addToKey('#', AdornTags.STONE_ROD)
     )
 
-    override fun getBlockItem(pb: PieceBlock) = AdornTallPieceBlockItem(pb, Item.Settings())
+    override fun getBlockItem(pb: PieceBlock) = ChairPieceBlockItem(pb, Item.Settings())
 }

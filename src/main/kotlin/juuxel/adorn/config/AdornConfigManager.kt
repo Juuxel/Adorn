@@ -25,6 +25,6 @@ object AdornConfigManager {
     fun save() = save(CONFIG)
 
     private fun save(config: AdornConfig) {
-        Files.write(CONFIG_PATH, JANKSON.toJson(config).toJson().lines())
+        Files.write(CONFIG_PATH, JANKSON.toJson(config).toJson(true, true).lines())
     }
 }

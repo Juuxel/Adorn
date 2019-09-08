@@ -1,16 +1,19 @@
 package juuxel.adorn.compat.extrapieces
 
 import com.shnupbups.extrapieces.api.EPInitializer
+import com.shnupbups.extrapieces.core.PieceSet
 import com.shnupbups.extrapieces.core.PieceSets
 import com.shnupbups.extrapieces.core.PieceType
 import com.shnupbups.extrapieces.core.PieceTypes
 import com.swordglowsblue.artifice.api.ArtificeResourcePack
 import juuxel.adorn.Adorn
 import juuxel.adorn.compat.extrapieces.piece.*
+import juuxel.adorn.config.AdornConfigManager
 import juuxel.polyester.block.PolyesterBlock
 import juuxel.polyester.block.PolyesterBlockEntityType
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback
 import net.minecraft.block.Block
+import net.minecraft.block.Blocks
 import net.minecraft.item.Items
 import net.minecraft.util.math.Direction
 import net.minecraft.util.registry.Registry
@@ -28,6 +31,8 @@ object AdornPieces : EPInitializer {
     val SOFA = SofaPiece
     val KITCHEN_COUNTER = KitchenCounterPiece
     val KITCHEN_CUPBOARD = KitchenCupboardPiece
+
+    private val carpetedSets: MutableMap<PieceSet, Boolean> = HashMap()
 
     override fun addData(data: ArtificeResourcePack.ServerResourcePackBuilder) {
         PieceSets.registry.values.forEach { set ->
@@ -57,6 +62,12 @@ object AdornPieces : EPInitializer {
             }
         })
     }
+
+    fun isCarpetingEnabled(set: PieceSet): Boolean =
+        carpetedSets.getOrPut(set) {
+            AdornConfigManager.CONFIG.extraPieces.carpetedEverything ||
+                set.originalName in AdornConfigManager.CONFIG.extraPieces.carpetedPieceSets
+        }
 
     private fun register(vararg types: PieceType) {
         for (type in types) {
