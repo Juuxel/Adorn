@@ -104,9 +104,6 @@ open class TableBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
 
                 if (north || east || south || west) {
                     val trueCount = booleanArrayOf(north, east, south, west).count { it }
-                    if (trueCount >= 3) return topShape
-                    if (north && south && !west && !east) return topShape
-                    if (!north && !south && west && east) return topShape
 
                     if (trueCount == 2) {
                         // Corners
@@ -115,9 +112,9 @@ open class TableBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
                             north && east -> legX0Z1
                             south && west -> legX1Z0
                             south && east -> legX0Z0
-                            else -> null
+                            else -> null // Straight lines ignored
                         }
-                    } else {
+                    } else if (trueCount == 1) {
                         // Ends
                         when {
                             north -> {

@@ -71,6 +71,9 @@ abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
 
     open fun isCarpetingEnabled() = true
 
+    open fun canStateBeCarpeted(state: BlockState) =
+        isCarpetingEnabled() && state[CARPET] == CARPET.none
+
     companion object {
         val CARPET = OptionalProperty(EnumProperty.of("carpet", DyeColor::class.java))
         val CARPET_SHAPE = createCuboidShape(0.0, 0.0, 0.0, 16.0, 1.0, 16.0)

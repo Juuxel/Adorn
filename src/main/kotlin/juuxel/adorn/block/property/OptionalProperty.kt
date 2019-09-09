@@ -34,7 +34,8 @@ class OptionalProperty<T>(
 
     override fun getName(value: Value<T>) = value.value?.asString() ?: "none"
 
-    fun wrap(value: T) = values[value]
+    fun wrap(value: T): Value<T>? = values[value]
+    fun wrapOrNone(value: T): Value<T> = values[value] ?: none
 
     sealed class Value<T : Comparable<T>> : Comparable<Value<T>> {
         abstract val isPresent: Boolean

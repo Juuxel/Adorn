@@ -32,6 +32,6 @@ class AdornConfig {
 
         @Comment("A list of piece sets that will have carpeting support.")
         @JvmField
-        var carpetedPieceSets: Array<String> = emptyArray()
+        var carpetedPieceSets: List<String> = ArrayList() // ArrayList so that Jankson deserializes it properly
     }
 }

@@ -13,7 +13,6 @@ import juuxel.polyester.block.PolyesterBlock
 import juuxel.polyester.block.PolyesterBlockEntityType
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback
 import net.minecraft.block.Block
-import net.minecraft.block.Blocks
 import net.minecraft.item.Items
 import net.minecraft.util.math.Direction
 import net.minecraft.util.registry.Registry
@@ -64,10 +63,10 @@ object AdornPieces : EPInitializer {
     }
 
     fun isCarpetingEnabled(set: PieceSet): Boolean =
-        carpetedSets.getOrPut(set) {
-            AdornConfigManager.CONFIG.extraPieces.carpetedEverything ||
+        AdornConfigManager.CONFIG.extraPieces.carpetedEverything ||
+            carpetedSets.getOrPut(set) {
                 set.originalName in AdornConfigManager.CONFIG.extraPieces.carpetedPieceSets
-        }
+            }
 
     private fun register(vararg types: PieceType) {
         for (type in types) {

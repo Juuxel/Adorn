@@ -165,6 +165,9 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
     override fun rotate(state: BlockState, rotation: BlockRotation) =
         state.with(FACING, rotation.rotate(state[FACING]))
 
+    override fun canStateBeCarpeted(state: BlockState) =
+        super.canStateBeCarpeted(state) && state[HALF] == DoubleBlockHalf.LOWER
+
     companion object {
         val FACING = Properties.HORIZONTAL_FACING
         val HALF = Properties.DOUBLE_BLOCK_HALF

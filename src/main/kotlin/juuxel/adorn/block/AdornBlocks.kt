@@ -14,7 +14,10 @@ import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
+import net.minecraft.block.CarpetBlock
+import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemGroup
+import net.minecraft.sound.SoundCategory
 import net.minecraft.util.ActionResult
 
 object AdornBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
@@ -98,6 +101,26 @@ object AdornBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
             if (block is SneakClickHandler && player.isSneaking && player.getStackInHand(hand).isEmpty) {
                 block.onSneakClick(state, world, hitResult.blockPos, player, hand, hitResult)
             } else ActionResult.PASS
+        })
+
+        UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->
+            val pos = hitResult.blockPos.offset(hitResult.side)
+            val state = world.getBlockState(pos)
+            val block = state.block
+            val stack = player.getStackInHand(hand)
+            val item = stack.item
+            if (block is CarpetedBlock && block.canStateBeCarpeted(state) && item is BlockItem) {
+                val carpet = item.block
+                if (carpet is CarpetBlock) {
+                    world.setBlockState(pos, state.with(CarpetedBlock.CARPET, CarpetedBlock.CARPET.wrapOrNone(carpet.color)))
+                    val soundGroup = carpet.defaultState.soundGroup
+                    world.playSound(player, pos, soundGroup.placeSound, SoundCategory.BLOCKS, (soundGroup.volume + 1f) / 2f, soundGroup.pitch * 0.8f)
+                    if (!player.abilities.creativeMode) stack.decrement(1)
+                    ActionResult.SUCCESS
+                }
+            }
+
+            ActionResult.PASS
         })
     }
 

@@ -14,7 +14,11 @@ object AdornConfigManager {
             save(AdornConfig())
         }
 
-        JANKSON.fromJson(Files.readAllLines(CONFIG_PATH).joinToString("\n"), AdornConfig::class.java)
+        try {
+            JANKSON.fromJsonCarefully(Files.readAllLines(CONFIG_PATH).joinToString("\n"), AdornConfig::class.java)
+        } catch (e: Exception) {
+            throw RuntimeException("Failed to load Adorn config file!", e)
+        }
     }
 
     fun init() {
