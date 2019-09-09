@@ -116,6 +116,7 @@ object AdornBlocks : PolyesterRegistry(Adorn.NAMESPACE) {
                     val soundGroup = carpet.defaultState.soundGroup
                     world.playSound(player, pos, soundGroup.placeSound, SoundCategory.BLOCKS, (soundGroup.volume + 1f) / 2f, soundGroup.pitch * 0.8f)
                     if (!player.abilities.creativeMode) stack.decrement(1)
+                    player.swingHand(hand)
                     ActionResult.SUCCESS
                 }
             }
