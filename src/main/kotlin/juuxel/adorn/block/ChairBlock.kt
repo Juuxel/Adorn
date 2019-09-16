@@ -2,7 +2,6 @@ package juuxel.adorn.block
 
 import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.util.buildShapeRotations
-import juuxel.polyester.block.PolyesterBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -31,12 +30,7 @@ import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
 import java.util.*
 
-open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()),
-    PolyesterBlock, Waterloggable {
-    override val name = "${variant.variantName}_chair"
-    // null to skip registration
-    override val itemSettings: Nothing? = null
-
+open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()), Waterloggable {
     init {
         defaultState = defaultState.with(HALF, DoubleBlockHalf.LOWER)
             .with(WATERLOGGED, false)

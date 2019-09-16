@@ -5,15 +5,12 @@ import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.DrawerBlockEntity
 import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.gui.openFabricContainer
-import juuxel.polyester.block.PolyesterBlockEntityType
-import juuxel.polyester.block.PolyesterBlockWithEntity
+import juuxel.adorn.block.entity.MutableBlockEntityType
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.state.StateFactory
@@ -29,9 +26,7 @@ import net.minecraft.world.World
 
 open class DrawerBlock(
     variant: BlockVariant
-) : PolyesterBlockWithEntity(variant.createSettings()), BaseInventoryBlockEntity.InventoryProviderImpl {
-    override val name = "${variant.variantName}_drawer"
-    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
+) : VisibleBlockWithEntity(variant.createSettings()), BaseInventoryBlockEntity.InventoryProviderImpl {
     override val blockEntityType = BLOCK_ENTITY_TYPE
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
@@ -80,6 +75,6 @@ open class DrawerBlock(
     companion object {
         val FACING = Properties.HORIZONTAL_FACING
         val BLOCK_ENTITY_TYPE: BlockEntityType<DrawerBlockEntity> =
-            PolyesterBlockEntityType(::DrawerBlockEntity)
+            MutableBlockEntityType(::DrawerBlockEntity)
     }
 }

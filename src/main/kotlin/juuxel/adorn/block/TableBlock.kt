@@ -4,7 +4,6 @@ import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
 import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.config.AdornConfigManager
-import juuxel.polyester.block.PolyesterBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
@@ -20,10 +19,7 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
 
-open class TableBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()),
-    PolyesterBlock, Waterloggable {
-    override val name = "${variant.variantName}_table"
-    override val itemSettings: Nothing? = null
+open class TableBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()), Waterloggable {
     override val sittingYOffset = 0.6
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {

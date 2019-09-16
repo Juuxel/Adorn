@@ -47,7 +47,9 @@
     "fabricloader": ">=0.4.6",
     "fabric": ">=0.3.0",
     "fabric-language-kotlin": "^1.3.30",
-    "libgui": "^1.3.2"
+    "libgui": "^1.3.2",
+    "jankson": "^1.0.0",
+    "libcd": "^1.3.1"
   },
   "custom": {
     "extrapieces:piecepack": "data/adorn/adorn_vanilla_pieces.json"

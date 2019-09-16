@@ -3,23 +3,14 @@ package juuxel.adorn.item
 import juuxel.adorn.Adorn
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.lib.AdornTags
-import juuxel.polyester.registry.PolyesterRegistry
+import juuxel.adorn.lib.RegistryHelper
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.registry.FuelRegistry
-import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 
-object AdornItems : PolyesterRegistry(Adorn.NAMESPACE) {
-    val CHAIRS: List<BlockItem> = AdornBlocks.CHAIRS.map {
-        registerItem(ChairBlockItem(it))
-    }
-
-    val TABLES: List<TableBlockItem> = AdornBlocks.TABLES.map {
-        registerItem(TableBlockItem(it))
-    }
-
+object AdornItems : RegistryHelper(Adorn.NAMESPACE) {
     val STONE_ROD = registerItem("stone_rod", ItemWithDescription(Item.Settings().group(ItemGroup.MISC)))
 
     val STONE_TORCH = registerItem(

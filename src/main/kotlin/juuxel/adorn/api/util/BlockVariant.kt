@@ -23,21 +23,26 @@ interface BlockVariant {
         override fun createSettings() = Block.Settings.copy(Blocks.COBBLESTONE_WALL)
     }
 
-    enum class VanillaStone(override val variantName: String) : BlockVariant {
-        Stone("stone"), Cobblestone("cobblestone"), Sandstone("sandstone"),
-        Diorite("diorite"), Andesite("andesite"), Granite("granite");
-
-        override fun createSettings() = Block.Settings.copy(Blocks.COBBLESTONE_WALL)
-    }
-
     companion object {
         val WOOLS: Map<DyeColor, BlockVariant> = DyeColor.values().asSequence().associateWith {
             variant(it.asString()) { Block.Settings.copy(Blocks.WHITE_WOOL) }
         }
 
         val IRON = variant("iron") { Block.Settings.copy(Blocks.IRON_BARS) }
+        val OAK = variant("oak") { Block.Settings.copy(Blocks.OAK_PLANKS) }
+        val SPRUCE = variant("spruce") { Block.Settings.copy(Blocks.SPRUCE_PLANKS) }
+        val BIRCH = variant("birch") { Block.Settings.copy(Blocks.BIRCH_PLANKS) }
+        val JUNGLE = variant("jungle") { Block.Settings.copy(Blocks.JUNGLE_PLANKS) }
+        val ACACIA = variant("acacia") { Block.Settings.copy(Blocks.ACACIA_PLANKS) }
+        val DARK_OAK = variant("dark_oak") { Block.Settings.copy(Blocks.DARK_OAK_PLANKS) }
+        val STONE = variant("stone") { Block.Settings.copy(Blocks.STONE) }
+        val COBBLESTONE = variant("cobblestone") { Block.Settings.copy(Blocks.COBBLESTONE) }
+        val SANDSTONE = variant("sandstone") { Block.Settings.copy(Blocks.SANDSTONE) }
+        val DIORITE = variant("diorite") { Block.Settings.copy(Blocks.DIORITE) }
+        val ANDESITE = variant("andesite") { Block.Settings.copy(Blocks.ANDESITE) }
+        val GRANITE = variant("granite") { Block.Settings.copy(Blocks.GRANITE) }
 
-        private inline fun variant(name: String, crossinline settings: () -> Block.Settings): BlockVariant =
+        inline fun variant(name: String, crossinline settings: () -> Block.Settings): BlockVariant =
             object : BlockVariant {
                 override val variantName = name
 

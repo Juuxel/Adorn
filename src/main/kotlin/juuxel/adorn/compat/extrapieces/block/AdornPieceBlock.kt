@@ -1,8 +1,8 @@
 package juuxel.adorn.compat.extrapieces.block
 
 import com.shnupbups.extrapieces.blocks.PieceBlock
-import juuxel.polyester.block.PolyesterBlock
+import net.minecraft.block.Block
 
-interface AdornPieceBlock : PolyesterBlock, PieceBlock {
-    override fun getBlock() = unwrap()
+interface AdornPieceBlock : PieceBlock {
+    override fun getBlock() = this as Block
 }

@@ -1,6 +1,5 @@
 package juuxel.adorn.block
 
-import juuxel.polyester.block.PolyesterBlock
 import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.*
 import net.minecraft.entity.player.PlayerEntity
@@ -20,11 +19,7 @@ import net.minecraft.world.IWorld
 import net.minecraft.world.World
 import java.util.*
 
-class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Waterloggable {
-    override val name = "stone_torch"
-    override val itemSettings = null
-    override val hasDescription = true
-
+class StoneTorchBlock : TorchBlock(settings), Waterloggable, BlockWithDescription {
     init {
         defaultState = defaultState.with(LIT, true)
             .with(WATERLOGGED, false)
@@ -71,10 +66,7 @@ class StoneTorchBlock : TorchBlock(settings), PolyesterBlock, Waterloggable {
         if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
         else super.getFluidState(state)
 
-    class Wall(settings: Settings) : WallTorchBlock(settings), PolyesterBlock, Waterloggable {
-        override val name = "wall_stone_torch"
-        override val itemSettings = null
-
+    class Wall(settings: Settings) : WallTorchBlock(settings), Waterloggable {
         init {
             defaultState = defaultState.with(LIT, true).with(WATERLOGGED, false)
         }

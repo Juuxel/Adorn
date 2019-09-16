@@ -4,8 +4,7 @@ import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.ShelfBlockEntity
 import juuxel.adorn.util.buildShapeRotations
-import juuxel.polyester.block.PolyesterBlockEntityType
-import juuxel.polyester.block.PolyesterBlockWithEntity
+import juuxel.adorn.block.entity.MutableBlockEntityType
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -14,8 +13,6 @@ import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.state.StateFactory
@@ -32,12 +29,9 @@ import net.minecraft.world.IWorld
 import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
 
-open class ShelfBlock(variant: BlockVariant) : PolyesterBlockWithEntity(variant.createSettings()), Waterloggable {
-    override val name = "${variant.variantName}_shelf"
-    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
-    override val blockEntityType = BLOCK_ENTITY_TYPE
-    override val hasDescription = true
+open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createSettings()), Waterloggable, BlockWithDescription {
     override val descriptionKey = "block.adorn.shelf.desc"
+    override val blockEntityType = BLOCK_ENTITY_TYPE
 
     init {
         defaultState = defaultState.with(WATERLOGGED, false)
@@ -173,7 +167,7 @@ open class ShelfBlock(variant: BlockVariant) : PolyesterBlockWithEntity(variant.
         val FACING = Properties.HORIZONTAL_FACING
         val WATERLOGGED = Properties.WATERLOGGED
         val BLOCK_ENTITY_TYPE: BlockEntityType<ShelfBlockEntity> =
-            PolyesterBlockEntityType(::ShelfBlockEntity)
+            MutableBlockEntityType(::ShelfBlockEntity)
 
         private val SHAPES = buildShapeRotations(0, 5, 0, 7, 6, 16)
     }

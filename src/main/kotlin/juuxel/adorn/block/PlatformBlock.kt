@@ -1,14 +1,11 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.api.util.BlockVariant
-import juuxel.polyester.block.PolyesterBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
 import net.minecraft.fluid.Fluids
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateFactory
 import net.minecraft.state.property.Properties
@@ -17,10 +14,7 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 
-open class PlatformBlock(variant: BlockVariant) : Block(variant.createSettings()), PolyesterBlock, Waterloggable {
-    override val name = "${variant.variantName}_platform"
-    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
-    override val hasDescription = true
+open class PlatformBlock(variant: BlockVariant) : Block(variant.createSettings()), BlockWithDescription, Waterloggable {
     override val descriptionKey = "block.adorn.platform.desc"
 
     init {

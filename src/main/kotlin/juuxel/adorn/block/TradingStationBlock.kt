@@ -5,8 +5,7 @@ import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.config.AdornConfigManager
 import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.gui.openFabricContainer
-import juuxel.polyester.block.PolyesterBlockEntityType
-import juuxel.polyester.block.PolyesterBlockWithEntity
+import juuxel.adorn.block.entity.MutableBlockEntityType
 import net.minecraft.block.Block
 import net.minecraft.block.BlockRenderLayer
 import net.minecraft.block.BlockState
@@ -15,8 +14,6 @@ import net.minecraft.entity.EntityContext
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.state.StateFactory
@@ -31,9 +28,7 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)), SneakClickHandler {
-    override val name = "trading_station"
-    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
+class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)), SneakClickHandler {
     override val blockEntityType = BLOCK_ENTITY_TYPE
 
     init {
@@ -148,7 +143,7 @@ class TradingStationBlock : PolyesterBlockWithEntity(Settings.copy(Blocks.CRAFTI
             super.calcBlockBreakingDelta(state, player, world, pos)
 
     companion object {
-        val BLOCK_ENTITY_TYPE = PolyesterBlockEntityType(::TradingStationBlockEntity)
+        val BLOCK_ENTITY_TYPE = MutableBlockEntityType(::TradingStationBlockEntity)
         val WATERLOGGED = Properties.WATERLOGGED
 
         private val LEG_SHAPE = VoxelShapes.union(

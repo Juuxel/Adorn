@@ -1,13 +1,14 @@
 package juuxel.adorn.item
 
-import juuxel.polyester.block.PolyesterBlock
+import net.minecraft.block.Block
 import net.minecraft.block.CarpetBlock
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemUsageContext
+import net.minecraft.item.TallBlockItem
 import net.minecraft.util.ActionResult
 import net.minecraft.util.math.Direction
 
-class ChairBlockItem(block: PolyesterBlock) : AdornTallBlockItem(block, Settings().group(ItemGroup.DECORATIONS)) {
+class ChairBlockItem(block: Block) : TallBlockItem(block, Settings().group(ItemGroup.DECORATIONS)) {
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
         val world = context.world
         val pos = context.blockPos

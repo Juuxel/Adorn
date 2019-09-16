@@ -7,7 +7,6 @@ import juuxel.adorn.api.block.SneakClickHandler
 import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.block.property.FrontConnection
 import juuxel.adorn.util.buildShapeRotations
-import juuxel.polyester.block.PolyesterBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
@@ -35,11 +34,8 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
 
-open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), PolyesterBlock, Waterloggable,
+open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), Waterloggable,
     SneakClickHandler {
-    override val name = "${variant.variantName}_sofa"
-    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
-
     init {
         defaultState = defaultState
             .with(FRONT_CONNECTION, FrontConnection.None)

@@ -4,7 +4,7 @@ import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.block.*
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
-import juuxel.polyester.registry.PolyesterRegistry
+import juuxel.adorn.lib.RegistryHelper
 
 class AdornBlockBuilder private constructor(private val material: BlockVariant) {
     private var post = false
@@ -55,23 +55,24 @@ class AdornBlockBuilder private constructor(private val material: BlockVariant) 
 
     fun registerIn(namespace: String): Unit = Registry(namespace).register()
 
-    private inner class Registry(namespace: String) : PolyesterRegistry(namespace) {
+    private inner class Registry(namespace: String) : RegistryHelper(namespace) {
         fun register() {
-            if (post) registerBlock(PostBlock(material))
-            if (platform) registerBlock(PlatformBlock(material))
-            if (step) registerBlock(StepBlock(material))
-            if (drawer) registerBlock(DrawerBlock(material))
+            val name = material.variantName
+            if (post) registerBlock("${name}_post", PostBlock(material))
+            if (platform) registerBlock("${name}_platform", PlatformBlock(material))
+            if (step) registerBlock("${name}_step", StepBlock(material))
+            if (drawer) registerBlock("${name}_drawer", DrawerBlock(material))
             if (chair) {
-                val block = registerBlock(ChairBlock(material))
-                registerItem(ChairBlockItem(block))
+                val block = registerBlockWithoutItem("${name}_chair", ChairBlock(material))
+                registerItem("${name}_chair", ChairBlockItem(block))
             }
             if (table) {
-                val block = registerBlock(TableBlock(material))
-                registerItem(TableBlockItem(block))
+                val block = registerBlockWithoutItem("${name}_table", TableBlock(material))
+                registerItem("${name}_table", TableBlockItem(block))
             }
-            if (kitchenCounter) registerBlock(KitchenCounterBlock(material))
-            if (kitchenCupboard) registerBlock(KitchenCupboardBlock(material))
-            if (shelf) registerBlock(ShelfBlock(material))
+            if (kitchenCounter) registerBlock("${name}_kitchen_counter", KitchenCounterBlock(material))
+            if (kitchenCupboard) registerBlock("${name}_kitchen_cupboard", KitchenCupboardBlock(material))
+            if (shelf) registerBlock("${name}_shelf", ShelfBlock(material))
         }
     }
 

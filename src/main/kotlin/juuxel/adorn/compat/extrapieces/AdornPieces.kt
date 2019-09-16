@@ -7,10 +7,10 @@ import com.shnupbups.extrapieces.core.PieceType
 import com.shnupbups.extrapieces.core.PieceTypes
 import com.swordglowsblue.artifice.api.ArtificeResourcePack
 import juuxel.adorn.Adorn
+import juuxel.adorn.block.entity.BETypeProvider
 import juuxel.adorn.compat.extrapieces.piece.*
 import juuxel.adorn.config.AdornConfigManager
-import juuxel.polyester.block.PolyesterBlock
-import juuxel.polyester.block.PolyesterBlockEntityType
+import juuxel.adorn.block.entity.MutableBlockEntityType
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback
 import net.minecraft.block.Block
 import net.minecraft.item.Items
@@ -54,10 +54,8 @@ object AdornPieces : EPInitializer {
         register(DRAWER, TABLE, SHELF, POST, PLATFORM, STEP, CHAIR, SOFA, KITCHEN_COUNTER, KITCHEN_CUPBOARD)
 
         RegistryEntryAddedCallback.event(Registry.BLOCK).register(RegistryEntryAddedCallback { _, _, block: Block ->
-            if (block is PolyesterBlock) {
-                (block.blockEntityType as? PolyesterBlockEntityType<*>)?.let { type ->
-                    type.addBlock(block)
-                }
+            if (block is BETypeProvider) {
+                (block.blockEntityType as? MutableBlockEntityType<*>)?.addBlock(block)
             }
         })
     }

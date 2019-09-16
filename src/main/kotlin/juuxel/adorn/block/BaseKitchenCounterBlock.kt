@@ -1,14 +1,11 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.util.buildShapeRotations
-import juuxel.polyester.block.PolyesterBlock
 import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityContext
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundEvents
@@ -22,9 +19,7 @@ import net.minecraft.world.BlockView
 
 abstract class BaseKitchenCounterBlock(
     settings: Settings = FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).sounds(SOUND_GROUP).build()
-) : Block(settings), PolyesterBlock {
-    override val itemSettings = Item.Settings().group(ItemGroup.DECORATIONS)
-
+) : Block(settings) {
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(FACING)

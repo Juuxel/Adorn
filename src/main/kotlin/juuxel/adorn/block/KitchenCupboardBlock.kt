@@ -1,12 +1,12 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.api.util.BlockVariant
+import juuxel.adorn.block.entity.BETypeProvider
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.gui.openFabricContainer
-import juuxel.polyester.block.BlockEntityProviderImpl
-import juuxel.polyester.block.PolyesterBlockEntityType
+import juuxel.adorn.block.entity.MutableBlockEntityType
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.container.NameableContainerProvider
@@ -19,16 +19,10 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-open class KitchenCupboardBlock : BaseKitchenCounterBlock, BlockEntityProviderImpl, BaseInventoryBlockEntity.InventoryProviderImpl {
-    constructor(material: String) : super() {
-        this.name = "${material}_kitchen_cupboard"
-    }
+open class KitchenCupboardBlock : BaseKitchenCounterBlock, BETypeProvider, BaseInventoryBlockEntity.InventoryProviderImpl {
+    constructor() : super()
+    constructor(variant: BlockVariant) : super(variant.createSettings())
 
-    constructor(variant: BlockVariant) : super(variant.createSettings()) {
-        this.name = "${variant.variantName}_kitchen_cupboard"
-    }
-
-    override val name: String
     override val blockEntityType = BLOCK_ENTITY_TYPE
 
     override fun activate(
@@ -62,6 +56,6 @@ open class KitchenCupboardBlock : BaseKitchenCounterBlock, BlockEntityProviderIm
 
     companion object {
         val BLOCK_ENTITY_TYPE: BlockEntityType<KitchenCupboardBlockEntity> =
-            PolyesterBlockEntityType(::KitchenCupboardBlockEntity)
+            MutableBlockEntityType(::KitchenCupboardBlockEntity)
     }
 }
