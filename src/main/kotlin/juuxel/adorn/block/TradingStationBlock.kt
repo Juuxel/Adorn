@@ -1,6 +1,5 @@
 package juuxel.adorn.block
 
-import juuxel.adorn.api.block.SneakClickHandler
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.config.AdornConfigManager
 import juuxel.adorn.gui.AdornGuis
@@ -28,7 +27,8 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)), SneakClickHandler {
+class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)),
+    SneakClickHandler {
     override val blockEntityType = BLOCK_ENTITY_TYPE
 
     init {

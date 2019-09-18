@@ -1,6 +1,6 @@
 package juuxel.adorn.block
 
-import juuxel.adorn.api.util.BlockVariant
+import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState

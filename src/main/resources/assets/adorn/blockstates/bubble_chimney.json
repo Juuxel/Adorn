@@ -1,6 +1,0 @@
-{
-  "variants": {
-    "connected=false": { "model": "adorn:block/bubble_chimney" },
-    "connected=true": { "model": "adorn:block/bubble_chimney_middle" }
-  }
-}

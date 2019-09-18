@@ -1,9 +1,7 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "brick": "minecraft:block/bricks",
-    "top": "minecraft:block/coal_block",
-    "particle": "minecraft:block/bricks"
+    "top": "minecraft:block/coal_block"
   },
   "elements": [
     {

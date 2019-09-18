@@ -1,8 +1,7 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.Adorn
-import juuxel.adorn.api.block.SneakClickHandler
-import juuxel.adorn.api.util.BlockVariant
+import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.entity.ShelfBlockEntity
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.block.renderer.ShelfRenderer

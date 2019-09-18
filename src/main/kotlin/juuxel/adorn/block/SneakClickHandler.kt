@@ -1,4 +1,4 @@
-package juuxel.adorn.api.block
+package juuxel.adorn.block
 
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity

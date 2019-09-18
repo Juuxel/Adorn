@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "adorn:chimney"
+      "item": "adorn:brick_chimney"
     },
     "title": {
       "translate": "advancements.adorn.chimney.title"

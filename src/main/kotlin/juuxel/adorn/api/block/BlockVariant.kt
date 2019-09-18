@@ -1,4 +1,4 @@
-package juuxel.adorn.api.util
+package juuxel.adorn.api.block
 
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks

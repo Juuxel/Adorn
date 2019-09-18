@@ -1,6 +1,6 @@
 package juuxel.adorn.block
 
-import juuxel.adorn.api.util.BlockVariant
+import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.entity.BETypeProvider
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity

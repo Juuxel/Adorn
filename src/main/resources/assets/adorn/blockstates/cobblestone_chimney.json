@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "connected=false": { "model": "adorn:block/cobblestone_chimney" },
+    "connected=true": { "model": "adorn:block/cobblestone_chimney_middle" }
+  }
+}

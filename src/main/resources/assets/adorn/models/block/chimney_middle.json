@@ -1,9 +1,5 @@
 {
   "parent": "minecraft:block/block",
-  "textures": {
-    "brick": "minecraft:block/bricks",
-    "particle": "minecraft:block/bricks"
-  },
   "elements": [
     {
       "from": [5, 0, 5],

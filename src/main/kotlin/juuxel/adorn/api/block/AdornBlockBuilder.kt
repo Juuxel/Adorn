@@ -1,6 +1,5 @@
 package juuxel.adorn.api.block
 
-import juuxel.adorn.api.util.BlockVariant
 import juuxel.adorn.block.*
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem

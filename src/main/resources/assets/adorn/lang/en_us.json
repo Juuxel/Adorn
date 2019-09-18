@@ -201,14 +201,15 @@
   "block.adorn.terrestria_basalt_cobblestone_step": "Basalt Cobblestone Step",
   "block.adorn.step.desc": "A small step with a post under it",
 
-  "block.adorn.chimney": "Brick Chimney",
+  "block.adorn.brick_chimney": "Brick Chimney",
   "block.adorn.stone_brick_chimney": "Stone Brick Chimney",
   "block.adorn.nether_brick_chimney": "Nether Brick Chimney",
   "block.adorn.red_nether_brick_chimney": "Red Nether Brick Chimney",
+  "block.adorn.cobblestone_chimney": "Cobblestone Chimney",
   "block.adorn.chimney.desc": "Decoration block",
 
-  "block.adorn.bubble_chimney": "Prismarine Chimney",
-  "block.adorn.bubble_chimney.desc": "Bubbles underwater",
+  "block.adorn.prismarine_chimney": "Prismarine Chimney",
+  "block.adorn.prismarine_chimney.desc": "Bubbles underwater",
 
   "block.adorn.oak_shelf": "Oak Shelf",
   "block.adorn.spruce_shelf": "Spruce Shelf",

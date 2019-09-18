@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:chimney"
+          "name": "adorn:cobblestone_chimney"
         }
       ],
       "conditions": [

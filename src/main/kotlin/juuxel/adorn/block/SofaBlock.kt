@@ -3,8 +3,7 @@ package juuxel.adorn.block
 import com.google.common.collect.Sets
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
-import juuxel.adorn.api.block.SneakClickHandler
-import juuxel.adorn.api.util.BlockVariant
+import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.property.FrontConnection
 import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
@@ -13,8 +12,6 @@ import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateFactory

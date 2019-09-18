@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:bubble_chimney"
+          "name": "adorn:brick_chimney"
         }
       ],
       "conditions": [

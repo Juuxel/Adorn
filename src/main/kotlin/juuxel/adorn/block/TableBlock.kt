@@ -2,7 +2,7 @@ package juuxel.adorn.block
 
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
-import juuxel.adorn.api.util.BlockVariant
+import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.config.AdornConfigManager
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState

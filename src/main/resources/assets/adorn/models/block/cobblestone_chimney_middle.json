@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/chimney_middle",
+  "textures": {
+    "brick": "block/cobblestone",
+    "particle": "block/cobblestone"
+  }
+}

@@ -10,11 +10,11 @@
       "item": "minecraft:flint_and_steel"
     },
     "B": {
-      "item": "minecraft:brick"
+      "item": "minecraft:cobblestone"
     }
   },
   "result": {
-    "item": "adorn:brick_chimney",
-    "count": 1
+    "item": "adorn:cobblestone_chimney",
+    "count": 4
   }
 }

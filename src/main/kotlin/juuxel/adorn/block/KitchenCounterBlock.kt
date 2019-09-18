@@ -1,6 +1,6 @@
 package juuxel.adorn.block
 
-import juuxel.adorn.api.util.BlockVariant
+import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.property.FrontConnection
 import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.Block
