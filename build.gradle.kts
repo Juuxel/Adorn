@@ -9,6 +9,8 @@ plugins {
     `maven-publish`
 }
 
+group = "io.github.juuxel"
+
 base {
     archivesBaseName = "Adorn"
 }
@@ -23,6 +25,10 @@ val heavyweight = ext["heavyweight"].toString().toBoolean()
 
 if (localBuild) {
     println("Note: local build mode enabled in gradle.properties; all dependencies might not work!")
+}
+
+if (file("private.gradle").exists()) {
+    apply(from = "private.gradle")
 }
 
 repositories {
@@ -109,6 +115,8 @@ val remapJar: RemapJarTask by tasks.getting {}
 
 publishing {
     publications.create<MavenPublication>("maven") {
+        artifactId = "adorn"
+
         // Copied from the Cotton buildscript
 
         artifact("${project.buildDir.absolutePath}/libs/${base.archivesBaseName}-${project.version}.jar") { //release jar - file location not provided anywhere in loom
@@ -116,10 +124,10 @@ publishing {
             builtBy(remapJar)
         }
 
-        artifact ("${project.buildDir.absolutePath}/libs/${base.archivesBaseName}-${project.version}-dev.jar") { //release jar - file location not provided anywhere in loom
+        /*artifact ("${project.buildDir.absolutePath}/libs/${base.archivesBaseName}-${project.version}-dev.jar") { //release jar - file location not provided anywhere in loom
             classifier = "dev"
             builtBy(remapJar)
-        }
+        }*/
 
         /*artifact(sourcesJar) {
             builtBy remapSourcesJar
