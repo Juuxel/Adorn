@@ -40,16 +40,16 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
             setSize(11 * 18, height)
         }
 
-        /*val advanced = WGridPanel()
+        val advanced = WGridPanel()
         with(advanced) {
-            add(createConfigToggle(config::enableOldStoneRods, true), 0, 0)
+            add(createConfigToggle(config::debug, true), 0, 0)
 
-            setBackgroundPainter(BackgroundPainter.VANILLA)
+            backgroundPainter = BackgroundPainter.VANILLA
             setSize(11 * 18, height)
-        }*/
+        }
 
         tabbed.addTab(TranslatableText("gui.adorn.config.category.general"), general)
-        //tabbed.addTab(TranslatableText("gui.adorn.config.category.advanced"), advanced)
+        tabbed.addTab(TranslatableText("gui.adorn.config.category.advanced"), advanced)
 
         root.add(tabbed, 0, 18 + 5)
         root.add(WButton(TranslatableText("gui.done")).apply {
@@ -81,7 +81,7 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
     private fun createConfigToggle(property: KMutableProperty<Boolean>, restartRequired: Boolean = false): WWidget =
         object : WToggleButton(TranslatableText("gui.adorn.config.option.${property.name}")) {
             init {
-                setToggle(property.getter.call())
+                toggle = property.getter.call()
             }
 
             override fun onToggle(on: Boolean) {

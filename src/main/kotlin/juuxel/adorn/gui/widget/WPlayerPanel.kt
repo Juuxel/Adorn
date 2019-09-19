@@ -12,9 +12,7 @@ class WPlayerPanel : WWidget() {
         super.setSize(2 * 18, 2 * 18 + 9)
     }
 
-    override fun canResize(): Boolean {
-        return false
-    }
+    override fun canResize() = false
 
     override fun setSize(x: Int, y: Int) {}
 
