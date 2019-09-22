@@ -4,7 +4,10 @@ import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import juuxel.adorn.resources.ColorManager
+import juuxel.adorn.util.Colors
+import net.minecraft.client.gui.screen.ingame.BookScreen
 import net.minecraft.util.Identifier
+import kotlin.math.max
 
 object Painters {
     /**
@@ -30,6 +33,20 @@ object Painters {
                 }
             }
         }
+    }
+
+    /**
+     * A painter that paints book backgrounds.
+     */
+    val BOOK: BackgroundPainter = BackgroundPainter { x, y, widget ->
+        val px = 1 / 256f
+        ScreenDrawing.rect(
+            BookScreen.BOOK_TEXTURE,
+            x + (max(widget.width, 192) - 192) / 2, y + 2,
+            192, 192,
+            0f, 0f, 192 * px, 192 * px,
+            Colors.WHITE
+        )
     }
 
     fun palette(palette: Identifier, key: Identifier): BackgroundPainter =

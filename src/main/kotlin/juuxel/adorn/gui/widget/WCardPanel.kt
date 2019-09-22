@@ -11,10 +11,13 @@ import kotlin.math.max
  *
  * Inspired by AWT's [java.awt.CardLayout].
  */
-class WCardPanel : WPanel() {
+class WCardPanel : WPanel(), PageContainer {
     val cardCount: Int get() = children.size
     var selectedCard: Int = 0
         private set
+
+    override val currentPage get() = selectedCard
+    override val pageCount get() = cardCount
 
     // Cards
 
@@ -106,4 +109,11 @@ class WCardPanel : WPanel() {
             child.paintForeground(x + child.x, y + child.y, mouseX, mouseY)
         }
     }
+
+    // Pages
+
+    override fun hasPreviousPage() = hasPrevious()
+    override fun hasNextPage() = hasNext()
+    override fun showPreviousPage() = selectPrevious()
+    override fun showNextPage() = selectNext()
 }
