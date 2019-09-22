@@ -2,6 +2,7 @@ package juuxel.adorn.config
 
 import blue.endless.jankson.Jankson
 import blue.endless.jankson.JsonObject
+import blue.endless.jankson.impl.DeserializationException
 import net.fabricmc.loader.api.FabricLoader
 import org.apache.logging.log4j.LogManager
 import java.nio.file.Files
@@ -20,7 +21,12 @@ object AdornConfigManager {
 
         try {
             val obj = JANKSON.load(Files.readAllLines(CONFIG_PATH).joinToString("\n"))
-            val config = JANKSON.fromJsonCarefully(obj, AdornConfig::class.java)
+            val config = try {
+                JANKSON.fromJsonCarefully(obj, AdornConfig::class.java)
+            } catch (e: DeserializationException) {
+                // Try deserializing carelessly and throw the exception if it returns null
+                JANKSON.fromJson(obj, AdornConfig::class.java) ?: throw e
+            }
 
             if (isMissingKeys(obj, DEFAULT)) {
                 LOGGER.info("[Adorn] Upgrading config...")
