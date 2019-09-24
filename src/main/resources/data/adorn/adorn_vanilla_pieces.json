@@ -185,13 +185,6 @@
     "brown_sofa": { "base": "minecraft:brown_wool", "type": "adorn:sofa", "piece": "adorn:brown_sofa" },
     "green_sofa": { "base": "minecraft:green_wool", "type": "adorn:sofa", "piece": "adorn:green_sofa" },
     "red_sofa": { "base": "minecraft:red_wool", "type": "adorn:sofa", "piece": "adorn:red_sofa" },
-    "black_sofa": { "base": "minecraft:black_wool", "type": "adorn:sofa", "piece": "adorn:black_sofa" },
-
-    "brick_chimney": { "base": "minecraft:bricks", "type": "adorn:chimney", "piece": "adorn:brick_chimney" },
-    "stone_brick_chimney": { "base": "minecraft:stone_bricks", "type": "adorn:chimney", "piece": "adorn:stone_brick_chimney" },
-    "nether_brick_chimney": { "base": "minecraft:nether_bricks", "type": "adorn:chimney", "piece": "adorn:nether_brick_chimney" },
-    "red_nether_brick_chimney": { "base": "minecraft:red_nether_bricks", "type": "adorn:chimney", "piece": "adorn:red_nether_brick_chimney" },
-    "cobblestone_chimney": { "base": "minecraft:bricks", "type": "adorn:chimney", "piece": "adorn:cobblestone_chimney" },
-    "prismarine_chimney": { "base": "minecraft:prismarine_bricks", "type": "adorn:chimney", "piece": "adorn:prismarine_chimney" }
+    "black_sofa": { "base": "minecraft:black_wool", "type": "adorn:sofa", "piece": "adorn:black_sofa" }
   }
 }
