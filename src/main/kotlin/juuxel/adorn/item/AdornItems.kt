@@ -9,6 +9,7 @@ import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.registry.FuelRegistry
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
+import net.minecraft.util.Rarity
 
 object AdornItems : RegistryHelper(Adorn.NAMESPACE) {
     val STONE_ROD = registerItem("stone_rod", ItemWithDescription(Item.Settings().group(ItemGroup.MISC)))
@@ -22,7 +23,12 @@ object AdornItems : RegistryHelper(Adorn.NAMESPACE) {
         )
     )
 
-    val GUIDE_BOOK = registerItem("guide_book", GuideBookItem(Adorn.id("guide"), Item.Settings().group(ItemGroup.MISC)))
+    val GUIDE_BOOK = registerItem(
+        "guide_book",
+        GuideBookItem(
+            Adorn.id("guide"), Item.Settings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)
+        )
+    )
 
     fun init() {
         with(FuelRegistry.INSTANCE) {

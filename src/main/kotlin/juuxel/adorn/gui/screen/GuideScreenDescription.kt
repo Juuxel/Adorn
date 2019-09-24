@@ -9,27 +9,18 @@ import juuxel.adorn.Adorn
 import juuxel.adorn.gui.painter.Painters
 import juuxel.adorn.gui.widget.*
 import juuxel.adorn.guide.Guide
+import juuxel.adorn.guide.Topic
 import juuxel.adorn.util.Colors
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.sound.PositionedSoundInstance
-import net.minecraft.client.util.TextComponentUtil
 import net.minecraft.sound.SoundEvents
-import net.minecraft.text.LiteralText
-import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 
 @Environment(EnvType.CLIENT)
 class GuideScreenDescription(guide: Guide) : LightweightGuiDescription() {
-    private val pages: List<List<Text>>
-
     init {
-        val font = MinecraftClient.getInstance().textRenderer
-        pages = guide.topics.flatMap {
-            TextComponentUtil.wrapLines(it.text, 114, font, true, true).chunked(12)
-        }
-
         val root = WPlainPanel()
         val pageCards = WCardPanel()
         val prev = WPageTurnButton(pageCards, WPageTurnButton.Direction.Previous)
@@ -37,11 +28,12 @@ class GuideScreenDescription(guide: Guide) : LightweightGuiDescription() {
         val indicator = WPageIndicator(pageCards, Colors.BLACK, Alignment.CENTER)
 
         pageCards.addCard(createTitlePage(guide))
+        for (topic in guide.topics) pageCards.addCard(createPage(topic))
 
         root.add(pageCards, 35, 14, 116, 145)
-        root.add(prev, 36, 159, 23, 13)
-        root.add(next, 123, 159, 23, 13)
-        root.add(indicator, 36, 159, 113, 13)
+        root.add(indicator, 34, 159, 113, 13)
+        root.add(prev, 34, 159, 23, 13)
+        root.add(next, 120, 159, 23, 13)
         root.add(WCloseButton(), 142, 14)
         root.setSize(192, 192)
         root.backgroundPainter = Painters.BOOK
@@ -53,8 +45,15 @@ class GuideScreenDescription(guide: Guide) : LightweightGuiDescription() {
     private fun createTitlePage(guide: Guide): WWidget {
         val result = WPlainPanel()
         result.add(WBigLabel(guide.title, WLabel.DEFAULT_TEXT_COLOR), 0, 25, 116, 20)
-        result.add(WCenteredLabel(TranslatableText("book.byAuthor", guide.author), WLabel.DEFAULT_TEXT_COLOR), 0, 50, 116, 20)
+        result.add(WCenteredLabel(guide.subtitle, WLabel.DEFAULT_TEXT_COLOR), 0, 45, 116, 20)
+        result.add(WCenteredLabel(TranslatableText("book.byAuthor", guide.author), WLabel.DEFAULT_TEXT_COLOR), 0, 60, 116, 20)
         return result
+    }
+
+    private fun createPage(topic: Topic): WWidget = WPlainPanel().apply {
+        add(WItem(topic.icon), 0, 0)
+        add(WCenteredLabel(topic.title.styled { it.isBold = true }, WLabel.DEFAULT_TEXT_COLOR), 0, 0, 116, 20)
+        add(WText(topic.text), 4, 24, 116 - 4, 145 - 24)
     }
 
     private class WCloseButton : WWidget() {

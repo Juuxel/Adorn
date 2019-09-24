@@ -3,6 +3,8 @@ package juuxel.adorn.item
 import io.github.cottonmc.cotton.gui.client.ClientCottonScreen
 import juuxel.adorn.gui.screen.GuideScreenDescription
 import juuxel.adorn.resources.GuideManager
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
@@ -27,4 +29,7 @@ class GuideBookItem(private val guideId: Identifier, settings: Item.Settings) : 
 
         return TypedActionResult(ActionResult.SUCCESS, player.getStackInHand(hand))
     }
+
+    @Environment(EnvType.CLIENT)
+    override fun hasEnchantmentGlint(stack: ItemStack) = true
 }

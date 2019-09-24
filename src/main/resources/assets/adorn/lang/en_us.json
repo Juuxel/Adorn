@@ -232,6 +232,12 @@
   "item.adorn.stone_rod": "Stone Rod",
   "item.adorn.stone_rod.desc": "Crafting ingredient",
 
+  "item.adorn.guide_book": "Decorating your home",
+  "item.adorn.guide_book.topic.chair.title": "Chairs",
+  "item.adorn.guide_book.topic.chair.text": "You can sit on chairs.",
+  "item.adorn.guide_book.topic.table.title": "Tables",
+  "item.adorn.guide_book.topic.table.text": "You can put taters on tables. :tiny_potato:",
+
   "item.adorn.deprecated_item.name": "%s - Deprecated",
   "item.adorn.deprecated_item.desc.1": "This item has been moved.",
   "item.adorn.deprecated_item.desc.2": "You can replace it by pressing %s.",

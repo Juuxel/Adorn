@@ -8,17 +8,23 @@ import com.mojang.datafixers.types.JsonOps
 import juuxel.adorn.util.JanksonOps
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
+import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
+import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 
 @Environment(EnvType.CLIENT)
 data class Guide(
     val title: Text,
+    val subtitle: Text,
     val author: Text,
     val topics: List<Topic>
 ) {
     companion object {
+        private val MISSINGNO: Text = LiteralText("missingno")
+
         private fun readText(json: JsonElement): Text? =
             Text.Serializer.fromJson(Dynamic.convert(JanksonOps, JsonOps.INSTANCE, json))
 
@@ -27,7 +33,8 @@ data class Guide(
                 // TODO: In 1.15 and J-Fabric 2.0.0, include text arrays
                 .registerTypeAdapter(Text::class.java, ::readText)
                 .registerPrimitiveTypeAdapter(Text::class.java) { readText(JsonPrimitive(it)) }
-                .registerTypeFactory(Guide::class.java) { Guide(LiteralText("missingno"), LiteralText("missingno"), ArrayList()) }
-                .registerTypeFactory(Topic::class.java) { Topic(Items.AIR, LiteralText("missingno"), LiteralText("missingno")) }
+                .registerTypeFactory(Guide::class.java) { Guide(MISSINGNO, MISSINGNO, MISSINGNO, ArrayList()) }
+                .registerTypeFactory(Topic::class.java) { Topic(Items.AIR, MISSINGNO, MISSINGNO) }
+                .registerPrimitiveTypeAdapter(Item::class.java) { Registry.ITEM.getOrEmpty(Identifier(it.toString())).orElse(Items.AIR) }
     }
 }

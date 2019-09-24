@@ -1,8 +1,14 @@
 {
   title: "Adorn",
+  subtitle: { translate: "item.adorn.guide_book", italic: true },
   author: { text: "Juuz", color: "dark_green" },
 
   topics: [
+    {
+      icon: "adorn:oak_table",
+      title: { translate: "item.adorn.guide_book.topic.table.title" },
+      text: { translate: "item.adorn.guide_book.topic.table.text" }
+    },
     {
       icon: "adorn:oak_chair",
       title: { translate: "item.adorn.guide_book.topic.chair.title" },
