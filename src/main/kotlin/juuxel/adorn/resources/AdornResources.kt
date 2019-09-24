@@ -8,7 +8,9 @@ import net.minecraft.resource.ResourceType
 object AdornResources {
     @Environment(EnvType.CLIENT)
     fun initClient() {
-        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES)
-            .registerReloadListener(ColorManager)
+        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).apply {
+            registerReloadListener(ColorManager)
+            registerReloadListener(GuideManager)
+        }
     }
 }

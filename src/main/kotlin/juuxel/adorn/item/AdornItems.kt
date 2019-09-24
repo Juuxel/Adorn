@@ -22,6 +22,8 @@ object AdornItems : RegistryHelper(Adorn.NAMESPACE) {
         )
     )
 
+    val GUIDE_BOOK = registerItem("guide_book", GuideBookItem(Adorn.id("guide"), Item.Settings().group(ItemGroup.MISC)))
+
     fun init() {
         with(FuelRegistry.INSTANCE) {
             add(AdornTags.CHAIRS.item, 300)

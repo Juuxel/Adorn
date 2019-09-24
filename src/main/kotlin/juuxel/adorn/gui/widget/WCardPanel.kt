@@ -6,6 +6,7 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import kotlin.math.max
 
+// TODO: Handle events on empty card panels safely
 /**
  * A panel that shows one widget at a time.
  *
@@ -23,6 +24,14 @@ class WCardPanel : WPanel(), PageContainer {
 
     fun addCard(w: WWidget) {
         children += w
+
+        w.setParent(this)
+        w.setLocation(0, 0)
+        expandToFit(w)
+    }
+
+    fun addCard(index: Int, w: WWidget) {
+        children.add(index, w)
 
         w.setParent(this)
         w.setLocation(0, 0)

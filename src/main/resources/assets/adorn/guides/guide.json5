@@ -1,0 +1,12 @@
+{
+  title: "Adorn",
+  author: { text: "Juuz", color: "dark_green" },
+
+  topics: [
+    {
+      icon: "adorn:oak_chair",
+      title: { translate: "item.adorn.guide_book.topic.chair.title" },
+      text: { translate: "item.adorn.guide_book.topic.chair.text" }
+    }
+  ]
+}

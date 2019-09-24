@@ -4,15 +4,20 @@ import io.github.cottonmc.cotton.gui.client.LibGuiClient
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import io.github.cottonmc.cotton.gui.widget.WWidget
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.text.Text
+
+// TODO: Text hover/click events, requires caching the wrapped text (look at TextComponentUtil)
 
 /**
  * Like WLabel, but multiline.
  */
-class WText(var text: Text, val color: Int = WLabel.DEFAULT_TEXT_COLOR) : WWidget() {
+class WText(private val text: Text, private val color: Int = WLabel.DEFAULT_TEXT_COLOR) : WWidget() {
     override fun canResize() = true
 
+    @Environment(EnvType.CLIENT)
     override fun paintBackground(x: Int, y: Int, mouseX: Int, mouseY: Int) {
         val textRenderer = MinecraftClient.getInstance().textRenderer
         for ((i, str) in textRenderer.wrapStringToWidthAsList(text.asFormattedString(), width).withIndex()) {

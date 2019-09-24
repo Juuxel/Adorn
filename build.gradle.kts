@@ -7,6 +7,7 @@ plugins {
     idea
     id("fabric-loom") version "0.2.5-SNAPSHOT"
     `maven-publish`
+    //id("com.github.johnrengelman.shadow") version "5.1.0"
 }
 
 group = "io.github.juuxel"
@@ -66,12 +67,12 @@ tasks.getByName<ProcessResources>("processResources") {
 minecraft {
 }
 
-inline fun DependencyHandler.includedMod(str: String, block: ExternalModuleDependency.() -> Unit = {}) {
+fun DependencyHandler.includedMod(str: String, block: ExternalModuleDependency.() -> Unit = {}) {
     modImplementation(str, block)
     include(str, block)
 }
 
-inline fun DependencyHandler.includedMod(group: String, name: String, version: String, block: ExternalModuleDependency.() -> Unit = {}) {
+fun DependencyHandler.includedMod(group: String, name: String, version: String, block: ExternalModuleDependency.() -> Unit = {}) {
     modImplementation(group, name, version, dependencyConfiguration = block)
     include(group, name, version, dependencyConfiguration = block)
 }
@@ -80,7 +81,9 @@ dependencies {
     /**
      * Gets a version string with the [key].
      */
-    fun v(key: String) = ext[key].toString()
+    fun v(key: String) = project.properties[key].toString()
+
+    fun ExternalModuleDependency.byeFabric() = exclude(group = "net.fabricmc.fabric-api")
 
     minecraft("com.mojang:minecraft:$minecraft")
     mappings("net.fabricmc:yarn:" + v("minecraft") + '+' + v("mappings"))
@@ -92,18 +95,18 @@ dependencies {
     compileOnly("net.fabricmc:fabric-language-kotlin:" + v("fabric-kotlin"))
 
     // Other mods
-    includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { exclude(module = "modmenu"); exclude(group = "net.fabricmc.fabric-api") }
-    includedMod("io.github.cottonmc:Jankson:" + v("jankson")) { exclude(group = "net.fabricmc.fabric-api") }
-    includedMod("io.github.cottonmc", "LibCD", v("libcd")) { exclude(group = "net.fabricmc.fabric-api") }
-    modImplementation("towelette:Towelette:" + v("towelette")) { exclude(group = "net.fabricmc.fabric-api") }
-    modImplementation("io.github.prospector:modmenu:" + v("modmenu")) { exclude(group = "net.fabricmc.fabric-api") }
+    includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { isTransitive = false }
+    includedMod("io.github.cottonmc:Jankson:" + v("jankson")) { byeFabric() }
+    includedMod("io.github.cottonmc", "LibCD", v("libcd")) { byeFabric(); exclude(module = "Jankson") }
+    modImplementation("towelette:Towelette:" + v("towelette")) { byeFabric() }
+    modImplementation("io.github.prospector:modmenu:" + v("modmenu")) { byeFabric() }
     modImplementation("extra-pieces:extrapieces:" + v("extra-pieces"))
     modImplementation("com.github.artificemc:artifice:" + v("artifice"))
 
     if (heavyweight) {
-        modRuntime("com.terraformersmc", "traverse", v("traverse")) { exclude(group = "net.fabricmc.fabric-api") }
-        modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { exclude(group = "net.fabricmc.fabric-api") }
-        modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); exclude(group = "net.fabricmc.fabric-api") }
+        modRuntime("com.terraformersmc", "traverse", v("traverse")) { byeFabric() }
+        modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { byeFabric() }
+        modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); byeFabric() }
     }
 }
 
@@ -111,26 +114,21 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.freeCompilerArgs += "-Xuse-experimental=kotlin.Experimental"
 }
 
-val remapJar: RemapJarTask by tasks.getting {}
+val remapJar = tasks.getByName<RemapJarTask>("remapJar")
+// Turns out I can't even use this version of Jankson, but I'll keep the code here if I ever need it.
+/*val shadowJar = tasks.getByName<ShadowJar>("shadowJar")
+
+remapJar.input.set(shadowJar.archiveFile.get())
+
+shadowJar.relocate("blue.endless.jankson", "juuxel.adorn.repackage.jankson")*/
 
 publishing {
     publications.create<MavenPublication>("maven") {
         artifactId = "adorn"
 
-        // Copied from the Cotton buildscript
-
-        artifact("${project.buildDir.absolutePath}/libs/${base.archivesBaseName}-${project.version}.jar") { //release jar - file location not provided anywhere in loom
+        artifact(remapJar) {
             classifier = null
             builtBy(remapJar)
         }
-
-        /*artifact ("${project.buildDir.absolutePath}/libs/${base.archivesBaseName}-${project.version}-dev.jar") { //release jar - file location not provided anywhere in loom
-            classifier = "dev"
-            builtBy(remapJar)
-        }*/
-
-        /*artifact(sourcesJar) {
-            builtBy remapSourcesJar
-        }*/
     }
 }

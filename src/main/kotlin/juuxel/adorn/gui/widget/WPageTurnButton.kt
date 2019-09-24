@@ -4,6 +4,8 @@ import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel
 import io.github.cottonmc.cotton.gui.widget.WWidget
 import juuxel.adorn.util.Colors
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.ingame.BookScreen
 import net.minecraft.client.resource.language.I18n
@@ -16,7 +18,14 @@ class WPageTurnButton(private val pages: PageContainer, private val direction: D
         super.setSize(23, y)
     }
 
+    @Environment(EnvType.CLIENT)
     override fun paintBackground(x: Int, y: Int, mouseX: Int, mouseY: Int) {
+        val enabled = when (direction) {
+            Direction.Previous -> pages.hasPreviousPage()
+            Direction.Next -> pages.hasNextPage()
+        }
+
+        if (!enabled) return
         val px = 1 / 256f
         val tx = if (isWithinBounds(mouseX, mouseY)) 23 else 0
         var ty = 192
@@ -28,11 +37,20 @@ class WPageTurnButton(private val pages: PageContainer, private val direction: D
     }
 
     override fun onClick(x: Int, y: Int, button: Int) {
-        MinecraftClient.getInstance().soundManager.play(PositionedSoundInstance.master(SoundEvents.ITEM_BOOK_PAGE_TURN, 1f))
+        val enabled = when (direction) {
+            Direction.Previous -> pages.hasPreviousPage()
+            Direction.Next -> pages.hasNextPage()
+        }
 
-        when (direction) {
-            Direction.Previous -> if (pages.hasPreviousPage()) pages.showPreviousPage()
-            Direction.Next -> if (pages.hasNextPage()) pages.showNextPage()
+        if (enabled) {
+            MinecraftClient.getInstance().soundManager.play(
+                PositionedSoundInstance.master(SoundEvents.ITEM_BOOK_PAGE_TURN, 1f)
+            )
+
+            when (direction) {
+                Direction.Previous -> pages.showPreviousPage()
+                Direction.Next -> pages.showNextPage()
+            }
         }
     }
 
