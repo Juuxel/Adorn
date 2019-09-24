@@ -5,14 +5,24 @@
 
   topics: [
     {
-      icon: "adorn:oak_table",
+      icons: ["adorn:oak_table"],
       title: { translate: "item.adorn.guide_book.topic.table.title" },
       text: { translate: "item.adorn.guide_book.topic.table.text" }
     },
     {
-      icon: "adorn:oak_chair",
+      icons: ["adorn:oak_chair"],
       title: { translate: "item.adorn.guide_book.topic.chair.title" },
       text: { translate: "item.adorn.guide_book.topic.chair.text" }
+    },
+    {
+      icons: ["adorn:cobblestone_post", "adorn:cobblestone_step", "adorn:cobblestone_platform"],
+      title: { translate: "item.adorn.guide_book.topic.building_blocks.title" },
+      text: { translate: "item.adorn.guide_book.topic.building_blocks.text" }
+    },
+    {
+      icons: ["adorn:oak_kitchen_counter", "adorn:oak_kitchen_cupboard"],
+      title: { translate: "item.adorn.guide_book.topic.kitchen.title" },
+      text: { translate: "item.adorn.guide_book.topic.kitchen.text" }
     }
   ]
 }

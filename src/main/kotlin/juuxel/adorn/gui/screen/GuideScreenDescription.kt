@@ -17,9 +17,12 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.TranslatableText
+import net.minecraft.util.Tickable
 
 @Environment(EnvType.CLIENT)
-class GuideScreenDescription(guide: Guide) : LightweightGuiDescription() {
+class GuideScreenDescription(guide: Guide) : LightweightGuiDescription(), Tickable {
+    private val tickers: MutableList<Tickable> = ArrayList()
+
     init {
         val root = WPlainPanel()
         val pageCards = WCardPanel()
@@ -50,8 +53,14 @@ class GuideScreenDescription(guide: Guide) : LightweightGuiDescription() {
         return result
     }
 
+    override fun tick() {
+        tickers.forEach { it.tick() }
+    }
+
     private fun createPage(topic: Topic): WWidget = WPlainPanel().apply {
-        add(WItem(topic.icon), 0, 0)
+        val item = WItem(topic.icons)
+        tickers += item
+        add(item, 0, 0)
         add(WCenteredLabel(topic.title.styled { it.isBold = true }, WLabel.DEFAULT_TEXT_COLOR), 0, 0, 116, 20)
         add(WText(topic.text), 4, 24, 116 - 4, 145 - 24)
     }

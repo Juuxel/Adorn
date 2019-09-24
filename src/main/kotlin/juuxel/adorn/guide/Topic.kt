@@ -7,7 +7,7 @@ import net.minecraft.text.Text
 
 @Environment(EnvType.CLIENT)
 data class Topic(
-    val icon: Item,
+    val icons: List<Item>,
     val title: Text,
     val text: Text
 )

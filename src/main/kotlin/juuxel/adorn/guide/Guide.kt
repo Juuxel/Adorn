@@ -10,6 +10,7 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.item.Item
 import net.minecraft.item.Items
+import net.minecraft.tag.ItemTags
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
@@ -34,7 +35,7 @@ data class Guide(
                 .registerTypeAdapter(Text::class.java, ::readText)
                 .registerPrimitiveTypeAdapter(Text::class.java) { readText(JsonPrimitive(it)) }
                 .registerTypeFactory(Guide::class.java) { Guide(MISSINGNO, MISSINGNO, MISSINGNO, ArrayList()) }
-                .registerTypeFactory(Topic::class.java) { Topic(Items.AIR, MISSINGNO, MISSINGNO) }
+                .registerTypeFactory(Topic::class.java) { Topic(ArrayList(), MISSINGNO, MISSINGNO) }
                 .registerPrimitiveTypeAdapter(Item::class.java) { Registry.ITEM.getOrEmpty(Identifier(it.toString())).orElse(Items.AIR) }
     }
 }

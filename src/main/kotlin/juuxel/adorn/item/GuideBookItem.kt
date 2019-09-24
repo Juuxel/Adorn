@@ -1,7 +1,7 @@
 package juuxel.adorn.item
 
-import io.github.cottonmc.cotton.gui.client.ClientCottonScreen
 import juuxel.adorn.gui.screen.GuideScreenDescription
+import juuxel.adorn.gui.screen.TickingClientScreen
 import juuxel.adorn.resources.GuideManager
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -20,7 +20,7 @@ class GuideBookItem(private val guideId: Identifier, settings: Item.Settings) : 
     override fun use(world: World, player: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         if (world.isClient) {
             MinecraftClient.getInstance().openScreen(
-                ClientCottonScreen(
+                TickingClientScreen(
                     GuideScreenDescription(GuideManager[guideId])
                 )
             )
