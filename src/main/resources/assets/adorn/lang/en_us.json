@@ -237,6 +237,9 @@
   "item.adorn.guide_book.topic.chair.text": "You can sit on chairs.",
   "item.adorn.guide_book.topic.table.title": "Tables",
   "item.adorn.guide_book.topic.table.text": "You can put taters on tables. :tiny_potato:",
+  "item.adorn.guide_book.topic.kitchen.title": "Kitchen blocks",
+  "item.adorn.guide_book.topic.kitchen.text": "The kitchen counters and cupboards can be used to decorate your kitchens. You can store items in the cupboards.",
+  "item.adorn.guide_book.topic.building_blocks.title": "Building blocks",
 
   "item.adorn.deprecated_item.name": "%s - Deprecated",
   "item.adorn.deprecated_item.desc.1": "This item has been moved.",

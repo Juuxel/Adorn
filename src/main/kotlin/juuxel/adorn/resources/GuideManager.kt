@@ -23,6 +23,8 @@ object GuideManager : Json5DataLoader(Adorn.id("guide_manager"), "guides", Guide
             }.toMap()
     }
 
+    operator fun contains(id: Identifier): Boolean = guides.contains(id)
+
     operator fun get(id: Identifier): Guide =
         guides.getOrElse(id) { throw IllegalArgumentException("Tried to get unknown guide '$id' from GuideManager") }
 }

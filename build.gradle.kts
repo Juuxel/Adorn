@@ -98,15 +98,19 @@ dependencies {
     includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { isTransitive = false }
     includedMod("io.github.cottonmc:Jankson:" + v("jankson")) { byeFabric() }
     includedMod("io.github.cottonmc", "LibCD", v("libcd")) { byeFabric(); exclude(module = "Jankson") }
-    modImplementation("towelette:Towelette:" + v("towelette")) { byeFabric() }
-    modImplementation("io.github.prospector:modmenu:" + v("modmenu")) { byeFabric() }
-    modImplementation("extra-pieces:extrapieces:" + v("extra-pieces"))
-    modImplementation("com.github.artificemc:artifice:" + v("artifice"))
+    modCompileOnly("towelette:Towelette:" + v("towelette")) { byeFabric() }
+    modCompileOnly("io.github.prospector:modmenu:" + v("modmenu")) { byeFabric() }
+    modCompileOnly("extra-pieces:extrapieces:" + v("extra-pieces"))
+    modCompileOnly("com.github.artificemc:artifice:" + v("artifice"))
 
     if (heavyweight) {
         modRuntime("com.terraformersmc", "traverse", v("traverse")) { byeFabric() }
         modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { byeFabric() }
         modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); byeFabric() }
+        modRuntime("towelette:Towelette:" + v("towelette")) { byeFabric() }
+        modRuntime("io.github.prospector:modmenu:" + v("modmenu")) { byeFabric() }
+        modRuntime("extra-pieces:extrapieces:" + v("extra-pieces"))
+        modRuntime("com.github.artificemc:artifice:" + v("artifice"))
     }
 }
 

@@ -31,7 +31,7 @@ class GuideScreenDescription(guide: Guide) : LightweightGuiDescription(), Tickab
         val indicator = WPageIndicator(pageCards, Colors.BLACK, Alignment.CENTER)
 
         pageCards.addCard(createTitlePage(guide))
-        for (topic in guide.topics) pageCards.addCard(createPage(topic))
+        for (topic in guide.topics) pageCards.addCard(createPage(pageCards, topic))
 
         root.add(pageCards, 35, 14, 116, 145)
         root.add(indicator, 34, 159, 113, 13)
@@ -57,12 +57,12 @@ class GuideScreenDescription(guide: Guide) : LightweightGuiDescription(), Tickab
         tickers.forEach { it.tick() }
     }
 
-    private fun createPage(topic: Topic): WWidget = WPlainPanel().apply {
+    private fun createPage(pages: PageContainer, topic: Topic): WWidget = WPlainPanel().apply {
         val item = WItem(topic.icons)
         tickers += item
         add(item, 0, 0)
         add(WCenteredLabel(topic.title.styled { it.isBold = true }, WLabel.DEFAULT_TEXT_COLOR), 0, 0, 116, 20)
-        add(WText(topic.text), 4, 24, 116 - 4, 145 - 24)
+        add(WText(topic.text, pages = pages), 4, 24, 116 - 4, 145 - 24)
     }
 
     private class WCloseButton : WWidget() {

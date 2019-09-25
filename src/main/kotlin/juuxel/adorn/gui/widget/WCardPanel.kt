@@ -17,7 +17,9 @@ class WCardPanel : WPanel(), PageContainer {
     var selectedCard: Int = 0
         private set
 
-    override val currentPage get() = selectedCard
+    override var currentPage: Int
+        get() = selectedCard
+        set(value) { selectedCard = value }
     override val pageCount get() = cardCount
 
     // Cards

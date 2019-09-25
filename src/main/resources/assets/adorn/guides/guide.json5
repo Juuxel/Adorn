@@ -1,13 +1,34 @@
 {
   title: "Adorn",
   subtitle: { translate: "item.adorn.guide_book", italic: true },
-  author: { text: "Juuz", color: "dark_green" },
+  author: "Juuz",
 
   topics: [
     {
       icons: ["adorn:oak_table"],
       title: { translate: "item.adorn.guide_book.topic.table.title" },
-      text: { translate: "item.adorn.guide_book.topic.table.text" }
+      text: {
+        text: "You can put ",
+        extra: [
+          {
+            text: "taters",
+            underlined: true,
+            clickEvent: {
+              action: "change_page",
+              value: "3"
+            }
+          },
+          " on ",
+          {
+            text: "tables",
+            hoverEvent: {
+              action: "show_item",
+              value: '{id:"adorn:oak_table",Count:1b}'
+            }
+          },
+          "."
+        ]
+      }
     },
     {
       icons: ["adorn:oak_chair"],
