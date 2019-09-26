@@ -61,7 +61,15 @@ class GuideScreenDescription(guide: Guide) : LightweightGuiDescription(), Tickab
         val item = WItem(topic.icons)
         tickers += item
         add(item, 0, 0)
-        add(WCenteredLabel(topic.title.styled { it.isBold = true }, WLabel.DEFAULT_TEXT_COLOR), 0, 0, 116, 20)
+        add(
+            WText(
+                topic.title.styled { it.isBold = true },
+                WLabel.DEFAULT_TEXT_COLOR,
+                alignment = Alignment.CENTER,
+                centerVertically = true
+            ),
+            20, 0, 116 - 40, 20
+        )
         add(WText(topic.text, pages = pages), 4, 24, 116 - 4, 145 - 24)
     }
 

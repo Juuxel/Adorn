@@ -19,8 +19,16 @@ import net.minecraft.text.Text
  * @property text the text
  * @property color the text color
  * @property pages an optional page container for click events
+ * @property alignment the horizontal text alignment
+ * @property centerVertically true if the text is vertically centered (TODO: A vertical alignment?)
  */
-class WText(private val text: Text, private val color: Int = WLabel.DEFAULT_TEXT_COLOR, private val pages: PageContainer? = null) : WWidget() {
+class WText(
+    private val text: Text,
+    private val color: Int = WLabel.DEFAULT_TEXT_COLOR,
+    private val pages: PageContainer? = null,
+    private val alignment: Alignment = Alignment.LEFT,
+    private val centerVertically: Boolean = false
+) : WWidget() {
     private var wrappedLines: List<Text> = listOf(text)
 
     override fun canResize() = true
@@ -41,6 +49,7 @@ class WText(private val text: Text, private val color: Int = WLabel.DEFAULT_TEXT
     @Environment(EnvType.CLIENT)
     override fun paintBackground(x: Int, y: Int, mouseX: Int, mouseY: Int) {
         val font = MinecraftClient.getInstance().textRenderer
+        val yOffset = if (centerVertically) height / 2 - wrappedLines.size * font.fontHeight / 2 else 0
         for ((i, text) in wrappedLines.withIndex()) {
             val actualColor =
                 if (color == WLabel.DEFAULT_TEXT_COLOR && LibGuiClient.config.darkMode)
@@ -48,7 +57,13 @@ class WText(private val text: Text, private val color: Int = WLabel.DEFAULT_TEXT
                 else
                     color
 
-            ScreenDrawing.drawString(text.asFormattedString(), x, y + i * font.fontHeight, actualColor)
+            val str = text.asFormattedString()
+            val xOffset = when (alignment) {
+                Alignment.LEFT -> 0
+                Alignment.CENTER -> width / 2 - font.getStringWidth(str) / 2
+                Alignment.RIGHT -> width - font.getStringWidth(str)
+            }
+            ScreenDrawing.drawString(str, x + xOffset, y + yOffset + i * font.fontHeight, actualColor)
         }
 
         val text = getTextAt(mouseX, mouseY)
