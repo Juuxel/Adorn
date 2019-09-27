@@ -28,15 +28,13 @@ class GuideScreenDescription(guide: Guide) : LightweightGuiDescription(), Tickab
         val pageCards = WCardPanel()
         val prev = WPageTurnButton(pageCards, WPageTurnButton.Direction.Previous)
         val next = WPageTurnButton(pageCards, WPageTurnButton.Direction.Next)
-        val indicator = WPageIndicator(pageCards, Colors.BLACK, Alignment.CENTER)
 
         pageCards.addCard(createTitlePage(guide))
         for (topic in guide.topics) pageCards.addCard(createPage(pageCards, topic))
 
+        root.add(prev, 49, 159, 23, 13)
+        root.add(next, 116, 159, 23, 13)
         root.add(pageCards, 35, 14, 116, 145)
-        root.add(indicator, 34, 159, 113, 13)
-        root.add(prev, 34, 159, 23, 13)
-        root.add(next, 120, 159, 23, 13)
         root.add(WCloseButton(), 142, 14)
         root.setSize(192, 192)
         root.backgroundPainter = Painters.BOOK

@@ -9,7 +9,9 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.client.util.TextComponentUtil
+import net.minecraft.sound.SoundEvents
 import net.minecraft.text.ClickEvent
 import net.minecraft.text.Text
 
@@ -80,6 +82,9 @@ class WText(
                         val pageIndex = page - 1
                         if (pageIndex >= 0 && pageIndex < pages.pageCount) {
                             pages.currentPage = pageIndex
+                            MinecraftClient.getInstance().soundManager.play(
+                                PositionedSoundInstance.master(SoundEvents.ITEM_BOOK_PAGE_TURN, 1f)
+                            )
                         }
                     }
                 } else {

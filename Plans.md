@@ -6,12 +6,13 @@
   - [X] Chairs
   - [X] Tables
   - [ ] Containers
-  - [ ] The building block trio
+  - [X] The building block trio
   - [ ] Sofas
   - [ ] Stone torches
   - [ ] Chimneys
-  - [ ] Kitchen blocks
+  - [X] Kitchen blocks
   - [ ] Trading stations
+  - [ ] Shelves
 - Kitchen sinks
 - Stone brick variants for the building block trio
 

@@ -5,45 +5,159 @@
 
   topics: [
     {
-      icons: ["adorn:oak_table"],
-      title: { translate: "item.adorn.guide_book.topic.table.title" },
+      icons: ["minecraft:book"],
+      title: { translate: "guide.adorn.contents.title" },
       text: {
-        text: "You can put ",
+        text: "",
         extra: [
           {
-            text: "taters",
+            translate: "guide.adorn.topic.table.title",
             underlined: true,
-            clickEvent: {
-              action: "change_page",
-              value: "3"
-            }
+            clickEvent: { action: "change_page", value: "3" },
+            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["3"], italic: true } }
           },
-          " on ",
+          "\n",
           {
-            text: "tables",
-            hoverEvent: {
-              action: "show_item",
-              value: '{id:"adorn:oak_table",Count:1b}'
-            }
+            translate: "guide.adorn.topic.chair.title",
+            underlined: true,
+            clickEvent: { action: "change_page", value: "4" },
+            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["4"], italic: true } }
           },
-          "."
+          "\n",
+          {
+            translate: "guide.adorn.topic.building_blocks.title",
+            underlined: true,
+            clickEvent: { action: "change_page", value: "5" },
+            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["5"], italic: true } }
+          },
+          "\n",
+          {
+            translate: "guide.adorn.topic.kitchen.title",
+            underlined: true,
+            clickEvent: { action: "change_page", value: "9" },
+            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["9"], italic: true } }
+          },
+          "\n",
+          {
+            translate: "guide.adorn.topic.sofa.title",
+            underlined: true,
+            clickEvent: { action: "change_page", value: "10" },
+            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["10"], italic: true } }
+          },
+          "\n",
+          {
+            translate: "guide.adorn.topic.trading_station.title",
+            underlined: true,
+            clickEvent: { action: "change_page", value: "11" },
+            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["11"], italic: true } }
+          },
+          "\n",
+          {
+            translate: "guide.adorn.topic.drawer.title",
+            underlined: true,
+            clickEvent: { action: "change_page", value: "12" },
+            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["12"], italic: true } }
+          },
+          "\n",
+          {
+            translate: "guide.adorn.topic.shelf.title",
+            underlined: true,
+            clickEvent: { action: "change_page", value: "13" },
+            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["13"], italic: true } }
+          },
+          "\n",
+          {
+            translate: "guide.adorn.topic.chimney.title",
+            underlined: true,
+            clickEvent: { action: "change_page", value: "14" },
+            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["14"], italic: true } }
+          }
         ]
       }
     },
     {
+      icons: ["adorn:oak_table"],
+      title: { translate: "guide.adorn.topic.table.title" },
+      text: { translate: "guide.adorn.topic.table.text" }
+    },
+    {
       icons: ["adorn:oak_chair"],
-      title: { translate: "item.adorn.guide_book.topic.chair.title" },
-      text: { translate: "item.adorn.guide_book.topic.chair.text" }
+      title: { translate: "guide.adorn.topic.chair.title" },
+      text: { translate: "guide.adorn.topic.chair.text" }
     },
     {
       icons: ["adorn:cobblestone_post", "adorn:cobblestone_step", "adorn:cobblestone_platform"],
-      title: { translate: "item.adorn.guide_book.topic.building_blocks.title" },
-      text: { translate: "item.adorn.guide_book.topic.building_blocks.text" }
+      title: { translate: "guide.adorn.topic.building_blocks.title" },
+      text: {
+        text: "",
+        extra: [
+          {
+            translate: "guide.adorn.topic.post.title",
+            underlined: true,
+            clickEvent: { action: "change_page", value: "6" },
+            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["6"], italic: true } }
+          },
+          "\n",
+          {
+            translate: "guide.adorn.topic.platform.title",
+            underlined: true,
+            clickEvent: { action: "change_page", value: "7" },
+            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["7"], italic: true } }
+          },
+          "\n",
+          {
+            translate: "guide.adorn.topic.step.title",
+            underlined: true,
+            clickEvent: { action: "change_page", value: "8" },
+            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["8"], italic: true } }
+          }
+        ]
+      }
+    },
+    {
+      icons: ["adorn:cobblestone_post"],
+      title: { translate: "guide.adorn.topic.post.title" },
+      text: { translate: "guide.adorn.topic.post.text" }
+    },
+    {
+      icons: ["adorn:cobblestone_platform"],
+      title: { translate: "guide.adorn.topic.platform.title" },
+      text: { translate: "guide.adorn.topic.platform.text" }
+    },
+    {
+      icons: ["adorn:cobblestone_step"],
+      title: { translate: "guide.adorn.topic.step.title" },
+      text: { translate: "guide.adorn.topic.step.text" }
     },
     {
       icons: ["adorn:oak_kitchen_counter", "adorn:oak_kitchen_cupboard"],
-      title: { translate: "item.adorn.guide_book.topic.kitchen.title" },
-      text: { translate: "item.adorn.guide_book.topic.kitchen.text" }
+      title: { translate: "guide.adorn.topic.kitchen.title" },
+      text: { translate: "guide.adorn.topic.kitchen.text" }
+    },
+    {
+      icons: ["adorn:red_sofa"],
+      title: { translate: "guide.adorn.topic.sofa.title" },
+      text: { translate: "guide.adorn.topic.sofa.text" }
+    },
+    {
+      icons: ["adorn:trading_station"],
+      title: { translate: "guide.adorn.topic.trading_station.title" },
+      text: { translate: "guide.adorn.topic.trading_station.text" }
+    },
+    {
+      icons: ["adorn:oak_drawer"],
+      title: { translate: "guide.adorn.topic.drawer.title" },
+      text: { translate: "guide.adorn.topic.drawer.text" }
+    },
+    {
+      icons: ["adorn:oak_shelf", "adorn:iron_shelf"],
+      title: { translate: "guide.adorn.topic.shelf.title" },
+      text: { translate: "guide.adorn.topic.shelf.text" }
+    },
+    {
+      icons: ["adorn:brick_chimney", "adorn:prismarine_chimney"],
+      title: { translate: "guide.adorn.topic.chimney.title" },
+      text: { translate: "guide.adorn.topic.chimney.text" }
     }
   ]
 }
