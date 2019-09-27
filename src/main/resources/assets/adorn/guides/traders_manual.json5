@@ -1,0 +1,19 @@
+{
+  title: { translate: "item.adorn.traders_manual", underlined: true, bold: true },
+  titleScale: 1.0,
+  subtitle: { translate: "item.adorn.traders_manual.subtitle", italic: true },
+  author: "Juuz",
+
+  topics: [
+    {
+      icons: ["minecraft:emerald"],
+      title: { translate: "item.adorn.traders_manual.buying.title" },
+      text: { translate: "item.adorn.traders_manual.buying.text" }
+    },
+    {
+      icons: ["minecraft:gold_ingot"],
+      title: { translate: "item.adorn.traders_manual.selling.title" },
+      text: { translate: "item.adorn.traders_manual.selling.text" }
+    }
+  ]
+}

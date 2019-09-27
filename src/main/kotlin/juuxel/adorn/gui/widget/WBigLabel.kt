@@ -24,6 +24,6 @@ class WBigLabel(private val text: Text, private val color: Int, private val scal
     override fun canResize() = true
 
     companion object {
-        private const val DEFAULT_SCALE = 1.5f
+        const val DEFAULT_SCALE = 1.5f
     }
 }

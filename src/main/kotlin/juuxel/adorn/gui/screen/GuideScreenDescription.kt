@@ -45,7 +45,7 @@ class GuideScreenDescription(guide: Guide) : LightweightGuiDescription(), Tickab
 
     private fun createTitlePage(guide: Guide): WWidget {
         val result = WPlainPanel()
-        result.add(WBigLabel(guide.title, WLabel.DEFAULT_TEXT_COLOR), 0, 25, 116, 20)
+        result.add(WBigLabel(guide.title, WLabel.DEFAULT_TEXT_COLOR, scale = guide.titleScale), 0, 25, 116, 20)
         result.add(WCenteredLabel(guide.subtitle, WLabel.DEFAULT_TEXT_COLOR), 0, 45, 116, 20)
         result.add(WCenteredLabel(TranslatableText("book.byAuthor", guide.author), WLabel.DEFAULT_TEXT_COLOR), 0, 60, 116, 20)
         return result
