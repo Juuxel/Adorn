@@ -10,7 +10,7 @@ object AdornResources {
     fun initClient() {
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).apply {
             registerReloadListener(ColorManager)
-            registerReloadListener(GuideManager)
+            registerReloadListener(BookManager)
         }
     }
 }

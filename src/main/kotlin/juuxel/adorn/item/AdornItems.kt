@@ -25,14 +25,14 @@ object AdornItems : RegistryHelper(Adorn.NAMESPACE) {
 
     val GUIDE_BOOK = registerItem(
         "guide_book",
-        GuideBookItem(
+        AdornBookItem(
             Adorn.id("guide"), Item.Settings().group(ItemGroup.MISC).rarity(Rarity.UNCOMMON)
         )
     )
 
     val TRADERS_MANUAL = registerItem(
         "traders_manual",
-        GuideBookItem(Adorn.id("traders_manual"), Item.Settings().group(ItemGroup.MISC))
+        AdornBookItem(Adorn.id("traders_manual"), Item.Settings().group(ItemGroup.MISC))
     )
 
     fun init() {

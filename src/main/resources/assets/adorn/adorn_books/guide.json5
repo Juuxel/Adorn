@@ -3,7 +3,7 @@
   subtitle: { translate: "item.adorn.guide_book", italic: true },
   author: "Juuz",
 
-  topics: [
+  pages: [
     {
       icons: ["minecraft:book"],
       title: { translate: "guide.adorn.contents.title" },

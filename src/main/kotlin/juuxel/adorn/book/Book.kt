@@ -1,4 +1,4 @@
-package juuxel.adorn.guide
+package juuxel.adorn.book
 
 import blue.endless.jankson.Jankson
 import blue.endless.jankson.JsonElement
@@ -17,11 +17,11 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
 @Environment(EnvType.CLIENT)
-data class Guide(
+data class Book(
     val title: Text,
     val subtitle: Text = LiteralText(""),
     val author: Text,
-    val topics: List<Topic>,
+    val pages: List<Page>,
     val titleScale: Float = WBigLabel.DEFAULT_SCALE
 ) {
     companion object {
@@ -35,8 +35,8 @@ data class Guide(
                 // TODO: In 1.15 and J-Fabric 2.0.0, include text arrays
                 .registerTypeAdapter(Text::class.java, ::readText)
                 .registerPrimitiveTypeAdapter(Text::class.java) { readText(JsonPrimitive(it)) }
-                .registerTypeFactory(Guide::class.java) { Guide(MISSINGNO, MISSINGNO, MISSINGNO, ArrayList()) }
-                .registerTypeFactory(Topic::class.java) { Topic(ArrayList(), MISSINGNO, MISSINGNO) }
+                .registerTypeFactory(Book::class.java) { Book(MISSINGNO, MISSINGNO, MISSINGNO, ArrayList()) }
+                .registerTypeFactory(Page::class.java) { Page(ArrayList(), MISSINGNO, MISSINGNO) }
                 .registerPrimitiveTypeAdapter(Item::class.java) { Registry.ITEM.getOrEmpty(Identifier(it.toString())).orElse(Items.AIR) }
     }
 }

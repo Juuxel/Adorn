@@ -8,8 +8,8 @@ import io.github.cottonmc.cotton.gui.widget.WWidget
 import juuxel.adorn.Adorn
 import juuxel.adorn.gui.painter.Painters
 import juuxel.adorn.gui.widget.*
-import juuxel.adorn.guide.Guide
-import juuxel.adorn.guide.Topic
+import juuxel.adorn.book.Book
+import juuxel.adorn.book.Page
 import juuxel.adorn.util.Colors
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -20,7 +20,7 @@ import net.minecraft.text.TranslatableText
 import net.minecraft.util.Tickable
 
 @Environment(EnvType.CLIENT)
-class GuideScreenDescription(guide: Guide) : LightweightGuiDescription(), Tickable {
+class BookScreenDescription(book: Book) : LightweightGuiDescription(), Tickable {
     private val tickers: MutableList<Tickable> = ArrayList()
 
     init {
@@ -29,8 +29,8 @@ class GuideScreenDescription(guide: Guide) : LightweightGuiDescription(), Tickab
         val prev = WPageTurnButton(pageCards, WPageTurnButton.Direction.Previous)
         val next = WPageTurnButton(pageCards, WPageTurnButton.Direction.Next)
 
-        pageCards.addCard(createTitlePage(guide))
-        for (topic in guide.topics) pageCards.addCard(createPage(pageCards, topic))
+        pageCards.addCard(createTitlePage(book))
+        for (topic in book.pages) pageCards.addCard(createPageWidget(pageCards, topic))
 
         root.add(prev, 49, 159, 23, 13)
         root.add(next, 116, 159, 23, 13)
@@ -43,11 +43,11 @@ class GuideScreenDescription(guide: Guide) : LightweightGuiDescription(), Tickab
 
     override fun addPainters() {}
 
-    private fun createTitlePage(guide: Guide): WWidget {
+    private fun createTitlePage(book: Book): WWidget {
         val result = WPlainPanel()
-        result.add(WBigLabel(guide.title, WLabel.DEFAULT_TEXT_COLOR, scale = guide.titleScale), 0, 25, 116, 20)
-        result.add(WCenteredLabel(guide.subtitle, WLabel.DEFAULT_TEXT_COLOR), 0, 45, 116, 20)
-        result.add(WCenteredLabel(TranslatableText("book.byAuthor", guide.author), WLabel.DEFAULT_TEXT_COLOR), 0, 60, 116, 20)
+        result.add(WBigLabel(book.title, WLabel.DEFAULT_TEXT_COLOR, scale = book.titleScale), 0, 25, 116, 20)
+        result.add(WCenteredLabel(book.subtitle, WLabel.DEFAULT_TEXT_COLOR), 0, 45, 116, 20)
+        result.add(WCenteredLabel(TranslatableText("book.byAuthor", book.author), WLabel.DEFAULT_TEXT_COLOR), 0, 60, 116, 20)
         return result
     }
 
@@ -55,20 +55,20 @@ class GuideScreenDescription(guide: Guide) : LightweightGuiDescription(), Tickab
         tickers.forEach { it.tick() }
     }
 
-    private fun createPage(pages: PageContainer, topic: Topic): WWidget = WPlainPanel().apply {
-        val item = WItem(topic.icons)
+    private fun createPageWidget(pages: PageContainer, page: Page): WWidget = WPlainPanel().apply {
+        val item = WItem(page.icons)
         tickers += item
         add(item, 0, 0)
         add(
             WText(
-                topic.title.styled { it.isBold = true },
+                page.title.styled { it.isBold = true },
                 WLabel.DEFAULT_TEXT_COLOR,
                 alignment = Alignment.CENTER,
                 centerVertically = true
             ),
             20, 0, 116 - 40, 20
         )
-        add(WText(topic.text, pages = pages), 4, 24, 116 - 4, 145 - 24)
+        add(WText(page.text, pages = pages), 4, 24, 116 - 4, 145 - 24)
     }
 
     private class WCloseButton : WWidget() {

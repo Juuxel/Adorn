@@ -4,7 +4,7 @@
   subtitle: { translate: "item.adorn.traders_manual.subtitle", italic: true },
   author: "Juuz",
 
-  topics: [
+  pages: [
     {
       icons: ["minecraft:emerald"],
       title: { translate: "item.adorn.traders_manual.buying.title" },
