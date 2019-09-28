@@ -3,8 +3,10 @@ package juuxel.adorn.block
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.block.FabricBlockSettings
+import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
+import net.minecraft.block.BubbleColumnBlock
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.tag.FluidTags
 import net.minecraft.util.math.BlockPos
@@ -15,6 +17,20 @@ import java.util.*
 class PrismarineChimneyBlock : AbstractChimneyBlock(
     FabricBlockSettings.copy(Blocks.PRISMARINE).ticksRandomly().build()
 ), BlockWithDescription {
+    override fun onScheduledTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
+        BubbleColumnBlock.update(world, pos.up(), false)
+    }
+
+    override fun onBlockAdded(state: BlockState, world: World, pos: BlockPos, oldState: BlockState, moved: Boolean) {
+        world.blockTickScheduler.schedule(pos, this, getTickRate(world))
+    }
+
+    override fun neighborUpdate(
+        state: BlockState, world: World, pos: BlockPos, neighbor: Block, neighborPos: BlockPos, moved: Boolean
+    ) {
+        world.blockTickScheduler.schedule(pos, this, getTickRate(world))
+    }
+
     @Environment(EnvType.CLIENT)
     override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
         if (!state.fluidState.matches(FluidTags.WATER) || state[CONNECTED]) return
@@ -28,5 +44,5 @@ class PrismarineChimneyBlock : AbstractChimneyBlock(
         }
     }
 
-    override fun getTickRate(p0: ViewableWorld?) = 3
+    override fun getTickRate(world: ViewableWorld) = if (world.isClient) 3 else 20
 }

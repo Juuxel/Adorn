@@ -8,6 +8,7 @@
   "mixins": [
     "fluidloggable.ChairBlockMixin",
     "fluidloggable.FluidloggableMixin",
+    "BubbleColumnBlockMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin",
     "ScreenAccessor",
