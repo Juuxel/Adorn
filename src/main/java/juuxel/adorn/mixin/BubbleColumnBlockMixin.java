@@ -1,6 +1,6 @@
 package juuxel.adorn.mixin;
 
-import juuxel.adorn.block.AdornBlocks;
+import juuxel.adorn.block.PrismarineChimneyBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BubbleColumnBlock;
@@ -17,15 +17,15 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 public class BubbleColumnBlockMixin {
     @Inject(method = "canPlaceAt", at = @At("RETURN"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
     private void onCanPlaceAt(BlockState state, ViewableWorld world, BlockPos pos, CallbackInfoReturnable<Boolean> info, Block downBlock) {
-        if (!info.getReturnValueZ() && downBlock == AdornBlocks.PRISMARINE_CHIMNEY) {
+        if (!info.getReturnValueZ() && downBlock instanceof PrismarineChimneyBlock.WithColumn) {
             info.setReturnValue(true);
         }
     }
 
     @Inject(method = "calculateDrag", at = @At("RETURN"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
     private static void onCalculateDrag(BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> info, BlockState state, Block block) {
-        if (info.getReturnValueZ() && block == AdornBlocks.PRISMARINE_CHIMNEY) {
-            info.setReturnValue(false);
+        if (info.getReturnValueZ() && block instanceof PrismarineChimneyBlock.WithColumn) {
+            info.setReturnValue(((PrismarineChimneyBlock.WithColumn) block).getDrag());
         }
     }
 }

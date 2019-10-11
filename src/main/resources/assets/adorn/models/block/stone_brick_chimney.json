@@ -1,5 +1,5 @@
 {
-  "parent": "adorn:block/chimney",
+  "parent": "adorn:block/templates/chimney",
   "textures": {
     "brick": "block/stone_bricks",
     "particle": "block/stone_bricks"

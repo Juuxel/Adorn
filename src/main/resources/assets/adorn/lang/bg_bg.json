@@ -96,11 +96,9 @@
   "block.adorn.granite_step": "Стъпало от гранит",
   "block.adorn.step.desc": "Малко стъпало със стълб под него",
 
-  "block.adorn.chimney": "Комин",
   "block.adorn.chimney.desc": "Декоративно блокче",
-
-  "block.adorn.bubble_chimney": "Призмаринов комин",
-  "block.adorn.bubble_chimney.desc": "Прави балончета под вода",
+  "block.adorn.prismarine_chimney": "Призмаринов комин",
+  "block.adorn.prismarine_chimney.desc": "Прави балончета под вода",
 
   "item.adorn.stone_rod": "Каменна пръчка",
   "item.adorn.stone_rod.desc": "Съставка за изработване"

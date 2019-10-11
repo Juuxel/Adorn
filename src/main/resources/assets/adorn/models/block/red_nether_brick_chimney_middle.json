@@ -1,5 +1,5 @@
 {
-  "parent": "adorn:block/chimney_middle",
+  "parent": "adorn:block/templates/chimney_middle",
   "textures": {
     "brick": "block/red_nether_bricks",
     "particle": "block/red_nether_bricks"

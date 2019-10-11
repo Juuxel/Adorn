@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "connected=false": { "model": "adorn:block/magmatic_prismarine_chimney" },
+    "connected=true": { "model": "adorn:block/magmatic_prismarine_chimney_middle" }
+  }
+}

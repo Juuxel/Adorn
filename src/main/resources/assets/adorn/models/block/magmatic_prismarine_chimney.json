@@ -2,7 +2,7 @@
   "parent": "adorn:block/templates/chimney",
   "textures": {
     "brick": "block/prismarine_bricks",
-    "top": "block/prismarine",
+    "top": "block/magma",
     "particle": "block/prismarine_bricks"
   }
 }

@@ -123,11 +123,10 @@
   "block.adorn.granite_step": "花岗岩平台踏板",
   "block.adorn.step.desc": "下方有柱子的小台阶",
 
-  "block.adorn.chimney": "烟囱",
   "block.adorn.chimney.desc": "装饰方块",
 
-  "block.adorn.bubble_chimney": "海晶烟囱",
-  "block.adorn.bubble_chimney.desc": "水下气泡",
+  "block.adorn.prismarine_chimney": "海晶烟囱",
+  "block.adorn.prismarine_chimney.desc": "水下气泡",
 
   "item.adorn.stone_rod": "石棒",
   "item.adorn.stone_rod.desc": "合成原料"

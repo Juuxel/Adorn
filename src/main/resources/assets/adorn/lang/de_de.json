@@ -123,11 +123,7 @@
   "block.adorn.granite_step": "Granit Stufe",
   "block.adorn.step.desc": "Eine kleine Stufe mit einem Pfosten darunter",
 
-  "block.adorn.chimney": "Schornstein",
-  "block.adorn.chimney.desc": "Decoration block",
-
-  "block.adorn.bubble_chimney": "Prismarin Schornstein",
-  "block.adorn.bubble_chimney.desc": "Bubbles underwater",
+  "block.adorn.prismarine_chimney": "Prismarin Schornstein",
 
   "item.adorn.stone_rod": "Steinstange",
   "item.adorn.stone_rod.desc": "Handwerkliche Zutat"

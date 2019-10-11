@@ -123,14 +123,16 @@
   "block.adorn.granite_step": "Graniittiaskelma",
   "block.adorn.step.desc": "Askelma pylvään päällä",
 
-  "block.adorn.chimney": "Tiilisavupiippu",
+  "block.adorn.brick_chimney": "Tiilisavupiippu",
   "block.adorn.stone_brick_chimney": "Kivitiilisavupiippu",
   "block.adorn.nether_brick_chimney": "Nether-tiilisavupiippu",
   "block.adorn.red_nether_brick_chimney": "Punainen Nether-tiilisavupiippu",
   "block.adorn.chimney.desc": "Koriste",
 
-  "block.adorn.bubble_chimney": "Prismariinisavupiippu",
-  "block.adorn.bubble_chimney.desc": "Kuplii veden alla",
+  "block.adorn.prismarine_chimney": "Prismariinisavupiippu",
+  "block.adorn.magmatic_prismarine_chimney": "Magmakas prismariinisavupiippu",
+  "block.adorn.soulful_prismarine_chimney": "Sielukas prismariinisavupiippu",
+  "block.adorn.prismarine_chimney.desc": "Kuplii veden alla",
 
   "block.adorn.oak_shelf": "Tammihylly",
   "block.adorn.spruce_shelf": "Kuusihylly",
