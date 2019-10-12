@@ -1,6 +1,8 @@
 {
-  "parent": "adorn:block/templates/post",
+  "parent": "adorn:block/templates/post_with_sides",
   "textures": {
-    "texture": "minecraft:block/sandstone"
+    "side": "minecraft:block/sandstone",
+    "up": "minecraft:block/sandstone_top",
+    "down": "minecraft:block/sandstone_bottom"
   }
 }

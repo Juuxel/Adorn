@@ -93,6 +93,10 @@
   "block.adorn.andesite_post": "Andesiittipylväs",
   "block.adorn.diorite_post": "Dioriittipylväs",
   "block.adorn.granite_post": "Graniittipylväs",
+  "block.adorn.brick_post": "Tiilipylväs",
+  "block.adorn.stone_brick_post": "Kivitiilipylväs",
+  "block.adorn.red_sandstone_post": "Punainen hiekkakivipylväs",
+  "block.adorn.nether_brick_post": "Nether-tiilipylväs",
   "block.adorn.post.desc": "Vähän kuin aidan tolppa",
 
   "block.adorn.oak_platform": "Tammilava",
@@ -107,6 +111,10 @@
   "block.adorn.andesite_platform": "Andesiittilava",
   "block.adorn.diorite_platform": "Dioriittilava",
   "block.adorn.granite_platform": "Graniittilava",
+  "block.adorn.brick_platform": "Tiililava",
+  "block.adorn.stone_brick_platform": "Kivitiililava",
+  "block.adorn.red_sandstone_platform": "Punainen hiekkakivilava",
+  "block.adorn.nether_brick_platform": "Nether-tiililava",
   "block.adorn.platform.desc": "Lava pylvään päällä",
 
   "block.adorn.oak_step": "Tammiaskelma",
@@ -121,6 +129,10 @@
   "block.adorn.andesite_step": "Andesiittiaskelma",
   "block.adorn.diorite_step": "Dioriittiaskelma",
   "block.adorn.granite_step": "Graniittiaskelma",
+  "block.adorn.brick_step": "Tiiliaskelma",
+  "block.adorn.stone_brick_step": "Kivitiiliaskelma",
+  "block.adorn.red_sandstone_step": "Punainen hiekkakiviaskelma",
+  "block.adorn.nether_brick_step": "Nether-tiiliaskelma",
   "block.adorn.step.desc": "Askelma pylvään päällä",
 
   "block.adorn.brick_chimney": "Tiilisavupiippu",

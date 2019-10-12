@@ -6,7 +6,11 @@
     "adorn:sandstone_platform",
     "adorn:andesite_platform",
     "adorn:granite_platform",
-    "adorn:diorite_platform"
+    "adorn:diorite_platform",
+    "adorn:brick_platform",
+    "adorn:stone_brick_platform",
+    "adorn:red_sandstone_platform",
+    "adorn:nether_brick_platform"
   ],
   "adorn_extensions": {
     "terrestria": [

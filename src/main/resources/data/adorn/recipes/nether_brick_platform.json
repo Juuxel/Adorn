@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:nether_brick_slab"
+    },
+    "P": {
+      "item": "adorn:nether_brick_post"
+    }
+  },
+  "result": {
+    "item": "adorn:nether_brick_platform",
+    "count": 2
+  }
+}

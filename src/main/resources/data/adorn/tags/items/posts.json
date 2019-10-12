@@ -12,7 +12,11 @@
     "adorn:sandstone_post",
     "adorn:andesite_post",
     "adorn:granite_post",
-    "adorn:diorite_post"
+    "adorn:diorite_post",
+    "adorn:brick_post",
+    "adorn:stone_brick_post",
+    "adorn:red_sandstone_post",
+    "adorn:nether_brick_post"
   ],
   "adorn_extensions": {
     "traverse": [
