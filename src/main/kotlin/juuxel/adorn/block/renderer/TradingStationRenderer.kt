@@ -7,10 +7,10 @@ import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.client.render.model.json.ModelTransformation
+import net.minecraft.client.resource.language.I18n
 import net.minecraft.item.ItemStack
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
@@ -49,35 +49,17 @@ class TradingStationRenderer : BlockEntityRenderer<TradingStationBlockEntity>() 
 
         if (lookingAtBlock) {
             disableLightmap(true)
-            for ((row, text) in getLabelRows(be).withIndex()) {
-                renderName(be, text, x, y + 0.9 - 0.25 * row, z, 12)
+            val label1 = I18n.translate(LABEL_1, be.ownerName.copy().formatted(Formatting.GOLD).asFormattedString())
+            renderName(be, label1, x, y + 0.9, z, 12)
+            if (!be.trade.isEmpty()) {
+                val label2 = I18n.translate(LABEL_2, be.trade.selling.toTextComponentWithCount().asFormattedString())
+                val label3 = I18n.translate(LABEL_3, be.trade.price.toTextComponentWithCount().asFormattedString())
+                renderName(be, label2, x, y + 0.9 - 0.25, z, 12)
+                renderName(be, label3, x, y + 0.9 - 0.5, z, 12)
             }
             disableLightmap(false)
         }
     }
-
-    private fun getLabelRows(be: TradingStationBlockEntity): Sequence<String> =
-        sequence {
-            yield(TranslatableText(
-                "block.adorn.trading_station.label.1",
-                be.ownerName.copy().formatted(Formatting.GOLD)
-            ))
-
-            if (!be.trade.isEmpty()) {
-                yield(
-                    TranslatableText(
-                        "block.adorn.trading_station.label.2",
-                        be.trade.selling.toTextComponentWithCount()
-                    )
-                )
-                yield(
-                    TranslatableText(
-                        "block.adorn.trading_station.label.3",
-                        be.trade.price.toTextComponentWithCount()
-                    )
-                )
-            }
-        }.map(Text::asFormattedString)
 
     private fun ItemStack.toTextComponentWithCount(): Text =
         LiteralText("${count}x ").append(toHoverableText())
@@ -85,5 +67,9 @@ class TradingStationRenderer : BlockEntityRenderer<TradingStationBlockEntity>() 
     companion object {
         private const val SELLING_ROTATION_MULTIPLIER = 1.2f
         //private const val PRICE_ROTATION_MULTIPLIER = -2.5f
+
+        private const val LABEL_1 = "block.adorn.trading_station.label.1"
+        private const val LABEL_2 = "block.adorn.trading_station.label.2"
+        private const val LABEL_3 = "block.adorn.trading_station.label.3"
     }
 }
