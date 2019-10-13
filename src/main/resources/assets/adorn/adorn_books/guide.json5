@@ -167,7 +167,7 @@
       text: { translate: "guide.adorn.topic.chimney.text" }
     },
     {
-      icons: ["adorn:prismarine_chimney"],
+      icons: ["adorn:prismarine_chimney", "adorn:magmatic_prismarine_chimney", "adorn:soulful_prismarine_chimney"],
       title: { translate: "guide.adorn.topic.prismarine_chimney.title" },
       text: { translate: "guide.adorn.topic.prismarine_chimney.text" }
     }
