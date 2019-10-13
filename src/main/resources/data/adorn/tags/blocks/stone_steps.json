@@ -12,13 +12,10 @@
     "adorn:red_sandstone_step",
     "adorn:nether_brick_step"
   ],
-  "libcd": {
-    "entries": [{
-      "when": [{ "libcd:mod_loaded": "terrestria" }],
-      "values": [
-        "adorn:terrestria_basalt_step",
-        "adorn:terrestria_basalt_cobblestone_step"
-      ]
-    }]
+  "adorn_extensions": {
+    "terrestria": [
+      "adorn:terrestria_basalt_step",
+      "adorn:terrestria_basalt_cobblestone_step"
+    ]
   }
 }

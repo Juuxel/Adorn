@@ -8,27 +8,19 @@
     "adorn:acacia_step",
     "adorn:dark_oak_step"
   ],
-  "libcd": {
-    "entries": [
-      {
-        "when": [{ "libcd:mod_loaded": "traverse" }],
-        "values": [
-          "adorn:traverse_fir_step"
-        ]
-      },
-      {
-        "when": [{ "libcd:mod_loaded": "terrestria" }],
-        "values": [
-          "adorn:terrestria_cypress_step",
-          "adorn:terrestria_hemlock_step",
-          "adorn:terrestria_japanese_maple_step",
-          "adorn:terrestria_rainbow_eucalyptus_step",
-          "adorn:terrestria_redwood_step",
-          "adorn:terrestria_rubber_step",
-          "adorn:terrestria_sakura_step",
-          "adorn:terrestria_willow_step"
-        ]
-      }
+  "adorn_extensions": {
+    "traverse": [
+      "adorn:traverse_fir_step"
+    ],
+    "terrestria": [
+      "adorn:terrestria_cypress_step",
+      "adorn:terrestria_hemlock_step",
+      "adorn:terrestria_japanese_maple_step",
+      "adorn:terrestria_rainbow_eucalyptus_step",
+      "adorn:terrestria_redwood_step",
+      "adorn:terrestria_rubber_step",
+      "adorn:terrestria_sakura_step",
+      "adorn:terrestria_willow_step"
     ]
   }
 }
