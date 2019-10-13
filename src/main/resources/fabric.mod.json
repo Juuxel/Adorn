@@ -55,7 +55,8 @@
     "extrapieces:piecepack": "data/adorn/adorn_vanilla_pieces.json"
   },
 
-  "conflicts": {
-    "minecraft": ">=1.15-"
+  "breaks": {
+    "minecraft": ">=1.15-",
+    "towelette": "<2.0.0"
   }
 }
