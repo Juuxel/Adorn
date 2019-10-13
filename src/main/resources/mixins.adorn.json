@@ -12,7 +12,6 @@
     "LivingEntityMixin",
     "PlayerEntityMixin",
     "ScreenAccessor",
-    "TagBuilderMixin",
     "WPanelMixin"
   ],
   "client": [

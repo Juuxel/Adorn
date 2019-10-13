@@ -8,19 +8,27 @@
     "adorn:acacia_kitchen_counter",
     "adorn:dark_oak_kitchen_counter"
   ],
-  "adorn_extensions": {
-    "traverse": [
-      "adorn:traverse_fir_kitchen_counter"
-    ],
-    "terrestria": [
-      "adorn:terrestria_cypress_kitchen_counter",
-      "adorn:terrestria_hemlock_kitchen_counter",
-      "adorn:terrestria_japanese_maple_kitchen_counter",
-      "adorn:terrestria_rainbow_eucalyptus_kitchen_counter",
-      "adorn:terrestria_redwood_kitchen_counter",
-      "adorn:terrestria_rubber_kitchen_counter",
-      "adorn:terrestria_sakura_kitchen_counter",
-      "adorn:terrestria_willow_kitchen_counter"
+  "libcd": {
+    "entries": [
+      {
+        "when": [{ "libcd:mod_loaded": "traverse" }],
+        "values": [
+          "adorn:traverse_fir_kitchen_counter"
+        ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "terrestria" }],
+        "values": [
+          "adorn:terrestria_cypress_kitchen_counter",
+          "adorn:terrestria_hemlock_kitchen_counter",
+          "adorn:terrestria_japanese_maple_kitchen_counter",
+          "adorn:terrestria_rainbow_eucalyptus_kitchen_counter",
+          "adorn:terrestria_redwood_kitchen_counter",
+          "adorn:terrestria_rubber_kitchen_counter",
+          "adorn:terrestria_sakura_kitchen_counter",
+          "adorn:terrestria_willow_kitchen_counter"
+        ]
+      }
     ]
   }
 }

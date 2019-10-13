@@ -8,19 +8,27 @@
     "adorn:acacia_drawer",
     "adorn:dark_oak_drawer"
   ],
-  "adorn_extensions": {
-    "traverse": [
-      "adorn:traverse_fir_drawer"
-    ],
-    "terrestria": [
-      "adorn:terrestria_cypress_drawer",
-      "adorn:terrestria_hemlock_drawer",
-      "adorn:terrestria_japanese_maple_drawer",
-      "adorn:terrestria_rainbow_eucalyptus_drawer",
-      "adorn:terrestria_redwood_drawer",
-      "adorn:terrestria_rubber_drawer",
-      "adorn:terrestria_sakura_drawer",
-      "adorn:terrestria_willow_drawer"
+  "libcd": {
+    "entries": [
+      {
+        "when": [{ "libcd:mod_loaded": "traverse" }],
+        "values": [
+          "adorn:traverse_fir_drawer"
+        ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "terrestria" }],
+        "values": [
+          "adorn:terrestria_cypress_drawer",
+          "adorn:terrestria_hemlock_drawer",
+          "adorn:terrestria_japanese_maple_drawer",
+          "adorn:terrestria_rainbow_eucalyptus_drawer",
+          "adorn:terrestria_redwood_drawer",
+          "adorn:terrestria_rubber_drawer",
+          "adorn:terrestria_sakura_drawer",
+          "adorn:terrestria_willow_drawer"
+        ]
+      }
     ]
   }
 }

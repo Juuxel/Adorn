@@ -1,38 +1,7 @@
 {
   "replace": false,
   "values": [
-    "adorn:oak_post",
-    "adorn:spruce_post",
-    "adorn:birch_post",
-    "adorn:jungle_post",
-    "adorn:acacia_post",
-    "adorn:dark_oak_post",
-    "adorn:stone_post",
-    "adorn:cobblestone_post",
-    "adorn:sandstone_post",
-    "adorn:andesite_post",
-    "adorn:granite_post",
-    "adorn:diorite_post",
-    "adorn:brick_post",
-    "adorn:stone_brick_post",
-    "adorn:red_sandstone_post",
-    "adorn:nether_brick_post"
-  ],
-  "adorn_extensions": {
-    "traverse": [
-      "adorn:traverse_fir_post"
-    ],
-    "terrestria": [
-      "adorn:terrestria_basalt_post",
-      "adorn:terrestria_basalt_cobblestone_post",
-      "adorn:terrestria_cypress_post",
-      "adorn:terrestria_hemlock_post",
-      "adorn:terrestria_japanese_maple_post",
-      "adorn:terrestria_rainbow_eucalyptus_post",
-      "adorn:terrestria_redwood_post",
-      "adorn:terrestria_rubber_post",
-      "adorn:terrestria_sakura_post",
-      "adorn:terrestria_willow_post"
-    ]
-  }
+    "#adorn:wooden_posts",
+    "#adorn:stone_posts"
+  ]
 }
