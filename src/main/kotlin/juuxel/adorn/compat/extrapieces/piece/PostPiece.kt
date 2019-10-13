@@ -8,7 +8,7 @@ import juuxel.adorn.compat.extrapieces.block.PostPieceBlock
 import juuxel.adorn.lib.AdornTags
 import net.minecraft.item.Items
 
-object PostPiece : SimplePiece(Adorn.id("post"), Adorn.id("block/templates/post")) {
+object PostPiece : SimpleSidedPiece(Adorn.id("post"), Adorn.id("block/templates/post")) {
     override fun getNew(set: PieceSet) = PostPieceBlock(set)
 
     override fun getRecipes() = arrayListOf(

@@ -8,7 +8,7 @@ import juuxel.adorn.compat.extrapieces.block.StepPieceBlock
 import juuxel.adorn.lib.AdornTags
 import net.minecraft.item.Items
 
-object StepPiece : SimplePiece(Adorn.id("step"), Adorn.id("block/templates/step")) {
+object StepPiece : SimpleSidedPiece(Adorn.id("step"), Adorn.id("block/templates/step")) {
     override fun getNew(set: PieceSet) = StepPieceBlock(set)
 
     override fun getRecipes() = arrayListOf(

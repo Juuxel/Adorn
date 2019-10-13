@@ -7,7 +7,7 @@ import juuxel.adorn.Adorn
 import juuxel.adorn.compat.extrapieces.AdornPieces
 import juuxel.adorn.compat.extrapieces.block.PlatformPieceBlock
 
-object PlatformPiece : SimplePiece(Adorn.id("platform"), Adorn.id("block/templates/platform")) {
+object PlatformPiece : SimpleSidedPiece(Adorn.id("platform"), Adorn.id("block/templates/platform")) {
     override fun getNew(set: PieceSet) = PlatformPieceBlock(set)
 
     override fun getRecipes() = arrayListOf(

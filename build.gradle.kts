@@ -108,6 +108,7 @@ dependencies {
         modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { byeFabric() }
         modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); byeFabric() }
         modRuntime("towelette:Towelette:" + v("towelette")) { byeFabric() }
+        modRuntime("statement:Statement:" + v("statement")) { byeFabric() }
         modRuntime("io.github.prospector:modmenu:" + v("modmenu")) { byeFabric() }
         modRuntime("extra-pieces:extrapieces:" + v("extra-pieces"))
         modRuntime("com.github.artificemc:artifice:" + v("artifice"))
