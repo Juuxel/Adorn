@@ -12,10 +12,13 @@
     "adorn:red_sandstone_platform",
     "adorn:nether_brick_platform"
   ],
-  "adorn_extensions": {
-    "terrestria": [
-      "adorn:terrestria_basalt_platform",
-      "adorn:terrestria_basalt_cobblestone_platform"
-    ]
+  "libcd": {
+    "entries": [{
+      "when": [{ "libcd:mod_loaded": "terrestria" }],
+      "values": [
+        "adorn:terrestria_basalt_platform",
+        "adorn:terrestria_basalt_cobblestone_platform"
+      ]
+    }]
   }
 }

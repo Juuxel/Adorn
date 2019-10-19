@@ -8,19 +8,27 @@
     "adorn:acacia_table",
     "adorn:dark_oak_table"
   ],
-  "adorn_extensions": {
-    "traverse": [
-      "adorn:traverse_fir_table"
-    ],
-    "terrestria": [
-      "adorn:terrestria_cypress_table",
-      "adorn:terrestria_hemlock_table",
-      "adorn:terrestria_japanese_maple_table",
-      "adorn:terrestria_rainbow_eucalyptus_table",
-      "adorn:terrestria_redwood_table",
-      "adorn:terrestria_rubber_table",
-      "adorn:terrestria_sakura_table",
-      "adorn:terrestria_willow_table"
+  "libcd": {
+    "entries": [
+      {
+        "when": [{ "libcd:mod_loaded": "traverse" }],
+        "values": [
+          "adorn:traverse_fir_table"
+        ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "terrestria" }],
+        "values": [
+          "adorn:terrestria_cypress_table",
+          "adorn:terrestria_hemlock_table",
+          "adorn:terrestria_japanese_maple_table",
+          "adorn:terrestria_rainbow_eucalyptus_table",
+          "adorn:terrestria_redwood_table",
+          "adorn:terrestria_rubber_table",
+          "adorn:terrestria_sakura_table",
+          "adorn:terrestria_willow_table"
+        ]
+      }
     ]
   }
 }

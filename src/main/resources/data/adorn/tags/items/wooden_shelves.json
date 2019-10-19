@@ -8,19 +8,27 @@
     "adorn:acacia_shelf",
     "adorn:dark_oak_shelf"
   ],
-  "adorn_extensions": {
-    "traverse": [
-      "adorn:traverse_fir_shelf"
-    ],
-    "terrestria": [
-      "adorn:terrestria_cypress_shelf",
-      "adorn:terrestria_hemlock_shelf",
-      "adorn:terrestria_japanese_maple_shelf",
-      "adorn:terrestria_rainbow_eucalyptus_shelf",
-      "adorn:terrestria_redwood_shelf",
-      "adorn:terrestria_rubber_shelf",
-      "adorn:terrestria_sakura_shelf",
-      "adorn:terrestria_willow_shelf"
+  "libcd": {
+    "entries": [
+      {
+        "when": [{ "libcd:mod_loaded": "traverse" }],
+        "values": [
+          "adorn:traverse_fir_shelf"
+        ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "terrestria" }],
+        "values": [
+          "adorn:terrestria_cypress_shelf",
+          "adorn:terrestria_hemlock_shelf",
+          "adorn:terrestria_japanese_maple_shelf",
+          "adorn:terrestria_rainbow_eucalyptus_shelf",
+          "adorn:terrestria_redwood_shelf",
+          "adorn:terrestria_rubber_shelf",
+          "adorn:terrestria_sakura_shelf",
+          "adorn:terrestria_willow_shelf"
+        ]
+      }
     ]
   }
 }

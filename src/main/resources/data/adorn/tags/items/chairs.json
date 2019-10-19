@@ -8,19 +8,27 @@
     "adorn:acacia_chair",
     "adorn:dark_oak_chair"
   ],
-  "adorn_extensions": {
-    "traverse": [
-      "adorn:traverse_fir_chair"
-    ],
-    "terrestria": [
-      "adorn:terrestria_cypress_chair",
-      "adorn:terrestria_hemlock_chair",
-      "adorn:terrestria_japanese_maple_chair",
-      "adorn:terrestria_rainbow_eucalyptus_chair",
-      "adorn:terrestria_redwood_chair",
-      "adorn:terrestria_rubber_chair",
-      "adorn:terrestria_sakura_chair",
-      "adorn:terrestria_willow_chair"
+  "libcd": {
+    "entries": [
+      {
+        "when": [{ "libcd:mod_loaded": "traverse" }],
+        "values": [
+          "adorn:traverse_fir_chair"
+        ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "terrestria" }],
+        "values": [
+          "adorn:terrestria_cypress_chair",
+          "adorn:terrestria_hemlock_chair",
+          "adorn:terrestria_japanese_maple_chair",
+          "adorn:terrestria_rainbow_eucalyptus_chair",
+          "adorn:terrestria_redwood_chair",
+          "adorn:terrestria_rubber_chair",
+          "adorn:terrestria_sakura_chair",
+          "adorn:terrestria_willow_chair"
+        ]
+      }
     ]
   }
 }
