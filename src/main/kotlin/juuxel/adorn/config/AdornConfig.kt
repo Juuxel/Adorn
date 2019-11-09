@@ -26,6 +26,10 @@ class AdornConfig {
     var extraPieces: EPConfig = EPConfig()
 
     class EPConfig {
+        @Comment("If true, Adorn's EP support is enabled. You can disable it by setting this property to false.")
+        @JvmField
+        var enabled: Boolean = true
+
         @Comment("If true, enables carpeting for all Adorn chair and table piece blocks (warning: resource heavy).")
         @JvmField
         var carpetedEverything: Boolean = false

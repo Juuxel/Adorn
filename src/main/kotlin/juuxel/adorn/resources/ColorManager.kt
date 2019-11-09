@@ -18,6 +18,7 @@ object ColorManager : SinglePreparationResourceReloadListener<Map<Identifier, Li
     private val LOGGER = LogManager.getLogger()
     private val JANKSON = Jankson.builder().build()
     private val ID = Adorn.id("color_manager")
+    private val FALLBACK = Adorn.id("fallback")
     private const val PREFIX = "color_palettes"
     private const val SUFFIX_LENGTH = ".json5".length
     private val COLOR_REGEX = Regex("#(?:[0-9A-Fa-f]{2})?[0-9A-Fa-f]{6}")
@@ -78,7 +79,7 @@ object ColorManager : SinglePreparationResourceReloadListener<Map<Identifier, Li
     }
 
     fun getColors(id: Identifier): ColorPalette =
-        map[id] ?: throw IllegalArgumentException("Unknown palette $id")
+        map[id] ?: map[FALLBACK] ?: throw IllegalStateException("Could not find fallback palette!")
 
     data class ColorPair(val bg: Int, val fg: Int = WLabel.DEFAULT_TEXT_COLOR) {
         companion object {

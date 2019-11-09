@@ -5,6 +5,7 @@ import io.github.cottonmc.cotton.gui.client.CottonScreen
 import juuxel.adorn.gui.controller.DrawerController
 import juuxel.adorn.gui.controller.KitchenCupboardController
 import juuxel.adorn.gui.controller.TradingStationController
+import juuxel.adorn.gui.controller.WardrobeController
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.entity.player.PlayerEntity
@@ -32,3 +33,9 @@ class TradingStationScreen(
     controller: TradingStationController,
     player: PlayerEntity
 ) : AdornScreen<TradingStationController>(controller, player)
+
+@Environment(EnvType.CLIENT)
+class WardrobeScreen(
+    controller: WardrobeController,
+    player: PlayerEntity
+) : AdornScreen<WardrobeController>(controller, player)

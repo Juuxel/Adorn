@@ -34,6 +34,7 @@ object AdornPieces : EPInitializer {
     private val carpetedSets: MutableMap<PieceSet, Boolean> = HashMap()
 
     override fun addData(data: ArtificeResourcePack.ServerResourcePackBuilder) {
+        if (!AdornConfigManager.CONFIG.extraPieces.enabled) return
         PieceSets.registry.values.forEach { set ->
             if (set.hasPiece(KITCHEN_COUNTER) && set.hasPiece(KITCHEN_CUPBOARD)) {
                 val id = Registry.BLOCK.getId(set.getPiece(KITCHEN_CUPBOARD))
@@ -51,6 +52,7 @@ object AdornPieces : EPInitializer {
     }
 
     override fun onInitialize() {
+        if (!AdornConfigManager.CONFIG.extraPieces.enabled) return
         register(DRAWER, TABLE, SHELF, POST, PLATFORM, STEP, CHAIR, SOFA, KITCHEN_COUNTER, KITCHEN_CUPBOARD)
 
         RegistryEntryAddedCallback.event(Registry.BLOCK).register(RegistryEntryAddedCallback { _, _, block: Block ->
