@@ -125,13 +125,6 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val DARK_OAK_SHELF: ShelfBlock = registerBlock("dark_oak_shelf", ShelfBlock(BlockVariant.DARK_OAK))
     val IRON_SHELF: ShelfBlock = registerBlock("iron_shelf", ShelfBlock(BlockVariant.IRON))
 
-    val OAK_WARDROBE: Block = registerBlock("oak_wardrobe", WardrobeBlock(BlockVariant.OAK)) { TallBlockItem(it, newItemSettings()) }
-    val SPRUCE_WARDROBE: Block = registerBlock("spruce_wardrobe", WardrobeBlock(BlockVariant.SPRUCE)) { TallBlockItem(it, newItemSettings()) }
-    val BIRCH_WARDROBE: Block = registerBlock("birch_wardrobe", WardrobeBlock(BlockVariant.BIRCH)) { TallBlockItem(it, newItemSettings()) }
-    val JUNGLE_WARDROBE: Block = registerBlock("jungle_wardrobe", WardrobeBlock(BlockVariant.JUNGLE)) { TallBlockItem(it, newItemSettings()) }
-    val ACACIA_WARDROBE: Block = registerBlock("acacia_wardrobe", WardrobeBlock(BlockVariant.ACACIA)) { TallBlockItem(it, newItemSettings()) }
-    val DARK_OAK_WARDROBE: Block = registerBlock("dark_oak_wardrobe", WardrobeBlock(BlockVariant.DARK_OAK)) { TallBlockItem(it, newItemSettings()) }
-
     val BRICK_CHIMNEY: Block = registerBlock("brick_chimney", ChimneyBlock())
     val STONE_BRICK_CHIMNEY: Block = registerBlock("stone_brick_chimney", ChimneyBlock())
     val NETHER_BRICK_CHIMNEY: Block = registerBlock("nether_brick_chimney", ChimneyBlock())

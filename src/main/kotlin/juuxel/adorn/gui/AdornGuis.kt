@@ -19,13 +19,11 @@ object AdornGuis {
     val DRAWER = Adorn.id("drawer")
     val KITCHEN_CUPBOARD = Adorn.id("kitchen_cupboard")
     val TRADING_STATION = Adorn.id("trading_station")
-    val WARDROBE = Adorn.id("wardrobe")
 
     fun init() {
         registerContainer(DRAWER)
         registerContainer(KITCHEN_CUPBOARD)
         registerContainer(TRADING_STATION)
-        registerContainer(WARDROBE)
     }
 
     @Environment(EnvType.CLIENT)
@@ -33,7 +31,6 @@ object AdornGuis {
         registerScreen(DRAWER, ::DrawerScreen)
         registerScreen(KITCHEN_CUPBOARD, ::KitchenCupboardScreen)
         registerScreen(TRADING_STATION, ::TradingStationScreen)
-        registerScreen(WARDROBE, ::WardrobeScreen)
     }
 
     private fun registerContainer(
