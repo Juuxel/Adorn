@@ -5,7 +5,7 @@ plugins {
     java
     kotlin("jvm") version "1.3.40"
     idea
-    id("fabric-loom") version "0.2.5-SNAPSHOT"
+    id("fabric-loom") version "0.2.6-SNAPSHOT"
     `maven-publish`
     //id("com.github.johnrengelman.shadow") version "5.1.0"
 }
@@ -86,7 +86,7 @@ dependencies {
     fun ExternalModuleDependency.byeFabric() = exclude(group = "net.fabricmc.fabric-api")
 
     minecraft("com.mojang:minecraft:$minecraft")
-    mappings("net.fabricmc:yarn:" + v("minecraft") + '+' + v("mappings"))
+    mappings("net.fabricmc:yarn:" + v("minecraft") + '+' + v("mappings") + ":v2")
 
     // Fabric
     modImplementation("net.fabricmc:fabric-loader:" + v("fabric-loader"))

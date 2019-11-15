@@ -15,6 +15,7 @@ import juuxel.adorn.util.Colors
 import juuxel.adorn.util.color
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
+import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
 import net.fabricmc.fabric.api.server.PlayerStream
 import net.minecraft.container.BlockContext
@@ -75,13 +76,10 @@ class TradingStationController(
                     slot.markDirty()
 
                     if (!world.isClient) {
-                        context.run { world, pos ->
-                            PlayerStream.watching(world, pos).forEach {
-                                ServerSidePacketRegistry.INSTANCE.sendToPlayer(
-                                    it,
-                                    AdornNetworking.createTradeSyncPacket(pos, getTrade(context))
-                                )
-                            }
+                        (getTradingStation(context) as? BlockEntityClientSerializable)?.sync() ?: run {
+                            val exception = Exception("Stack trace")
+                            exception.fillInStackTrace()
+                            LOGGER.warn("[Adorn] Could not sync empty trading station, report this!", exception)
                         }
                     }
 
