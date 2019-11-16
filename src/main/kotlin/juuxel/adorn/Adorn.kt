@@ -9,6 +9,7 @@ import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.lib.AdornNetworking
 import juuxel.adorn.lib.AdornTags
+import juuxel.adorn.part.AdornParts
 import juuxel.adorn.resources.AdornResources
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -26,6 +27,7 @@ object Adorn : ModInitializer {
         AdornGuis.init()
         AdornNetworking.init()
         AdornTags.init()
+        AdornParts.init()
         AdornCompat.init()
 
         if (Debug.shouldLoad()) {

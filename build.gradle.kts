@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    kotlin("jvm") version "1.3.40"
+    kotlin("jvm") version "1.3.50"
     idea
     id("fabric-loom") version "0.2.6-SNAPSHOT"
     `maven-publish`
@@ -42,6 +42,7 @@ repositories {
     maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot") { name = "Cotton (snapshots)" }
     maven(url = "https://minecraft.curseforge.com/api/maven") { name = "CurseForge" }
     maven(url = "https://jitpack.io")
+    maven(url = "https://mod-buildcraft.com/maven") { name = "BuildCraft" }
 }
 
 java {
@@ -98,10 +99,13 @@ dependencies {
     includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { isTransitive = false }
     includedMod("io.github.cottonmc:Jankson:" + v("jankson")) { byeFabric() }
     includedMod("io.github.cottonmc", "LibCD", v("libcd")) { byeFabric(); exclude(module = "Jankson") }
+    includedMod("alexiil.mc.lib", "libmultipart-all", v("libmultipart"))
+    includedMod("io.github.juuxel", "BlocksToParts", v("blocks-to-parts"))
     modCompileOnly("towelette:Towelette:" + v("towelette")) { byeFabric() }
     modCompileOnly("io.github.prospector:modmenu:" + v("modmenu")) { byeFabric() }
     modCompileOnly("extra-pieces:extrapieces:" + v("extra-pieces"))
     modCompileOnly("com.github.artificemc:artifice:" + v("artifice"))
+    modCompileOnly("io.github.juuxel", "VanillaParts", v("vanilla-parts"))
 
     if (heavyweight) {
         modRuntime("com.terraformersmc", "traverse", v("traverse")) { byeFabric() }
@@ -112,6 +116,7 @@ dependencies {
         modRuntime("io.github.prospector:modmenu:" + v("modmenu")) { byeFabric() }
         modRuntime("extra-pieces:extrapieces:" + v("extra-pieces"))
         modRuntime("com.github.artificemc:artifice:" + v("artifice"))
+        modRuntime("io.github.juuxel", "VanillaParts", v("vanilla-parts"))
     }
 }
 

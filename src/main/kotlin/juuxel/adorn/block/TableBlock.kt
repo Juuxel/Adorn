@@ -1,9 +1,15 @@
 package juuxel.adorn.block
 
+import alexiil.mc.lib.multipart.api.MultipartContainer
+import alexiil.mc.lib.multipart.api.NativeMultipart
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
 import juuxel.adorn.api.block.BlockVariant
+import juuxel.adorn.compat.AdornCompat
 import juuxel.adorn.config.AdornConfigManager
+import juuxel.adorn.part.AdornParts
+import juuxel.adorn.part.TablePart
+import juuxel.adorn.part.creator
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
@@ -18,8 +24,9 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
+import net.minecraft.world.World
 
-open class TableBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()), Waterloggable {
+open class TableBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()), Waterloggable, NativeMultipart {
     override val sittingYOffset = 0.6
 
     override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
@@ -70,6 +77,25 @@ open class TableBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
         ]
 
     override fun isSittingEnabled() = AdornConfigManager.CONFIG.sittingOnTables
+
+    override fun getMultipartConversion(
+        world: World, pos: BlockPos, state: BlockState
+    ): List<MultipartContainer.MultipartCreator> = ArrayList<MultipartContainer.MultipartCreator>().apply {
+        this += creator {
+            TablePart(
+                AdornParts.TABLE, it,
+                this@TableBlock,
+                north = state[NORTH], east = state[EAST], south = state[SOUTH], west = state[WEST]
+            )
+        }
+
+        if (state[CARPET].isPresent) {
+            val carpetCreator = AdornCompat.Variables.carpetCreatorCreator(state[CARPET].value!!)
+            if (carpetCreator != null) {
+                this += carpetCreator
+            }
+        }
+    }
 
     companion object {
         val NORTH = Properties.NORTH
@@ -156,7 +182,7 @@ open class TableBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
                             booleans.flatMap { west ->
                                 booleans.map { hasCarpet ->
                                     Bits.buildTableState(north, east, south, west, hasCarpet) to
-                                            makeShape(north, east, south, west, hasCarpet)
+                                        makeShape(north, east, south, west, hasCarpet)
                                 }
                             }
                         }
