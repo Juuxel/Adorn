@@ -2,6 +2,9 @@ package juuxel.adorn.entity
 
 import juuxel.adorn.Adorn
 import juuxel.adorn.lib.RegistryHelper
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
+import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder
 import net.minecraft.entity.EntityCategory
 import net.minecraft.entity.EntityDimensions
@@ -17,4 +20,9 @@ object AdornEntities : RegistryHelper(Adorn.NAMESPACE) {
     )
 
     fun init() {}
+
+    @Environment(EnvType.CLIENT)
+    fun initClient() {
+        EntityRendererRegistry.INSTANCE.register(SITTING_VEHICLE) { manager, _ -> InvisibleEntityRenderer(manager) }
+    }
 }

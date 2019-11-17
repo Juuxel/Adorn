@@ -33,7 +33,7 @@ class WPageTurnButton(private val pages: PageContainer, private val direction: D
             ty += 13
         }
 
-        ScreenDrawing.rect(BookScreen.BOOK_TEXTURE, x, y + height / 2 - 7, 23, 13, tx * px, ty * px, (tx + 23) * px, (ty + 13) * px, Colors.WHITE)
+        ScreenDrawing.texturedRect(x, y + height / 2 - 7, 23, 13, BookScreen.BOOK_TEXTURE, tx * px, ty * px, (tx + 23) * px, (ty + 13) * px, Colors.WHITE)
     }
 
     override fun onClick(x: Int, y: Int, button: Int) {

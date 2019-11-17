@@ -6,8 +6,9 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.entity.SpawnType
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.state.StateFactory
+import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
+import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
@@ -22,28 +23,31 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
 
     open val sittingYOffset: Double = 0.0
 
-    override fun activate(
+    override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult
-    ): Boolean {
+    ): ActionResult {
         if (!isSittingEnabled())
-            return super.activate(state, world, pos, player, hand, hitResult)
+            return super.onUse(state, world, pos, player, hand, hitResult)
 
         val actualPos = getActualSeatPos(world, state, pos)
         val actualState = if (pos == actualPos) state else world.getBlockState(actualPos)
 
         if (state !== actualState && actualState.block !is SeatBlock)
-            return false
+            return ActionResult.PASS
 
         val occupied = actualState[OCCUPIED]
-        return if (world.isClient) {
-            !occupied
-        } else if (!world.isClient && !occupied) {
-            val entity = AdornEntities.SITTING_VEHICLE.spawn(world, null, null, player, actualPos, SpawnType.TRIGGERED, false, false)
-            entity?.setPos(actualPos, sittingYOffset)
-            world.setBlockState(actualPos, actualState.with(OCCUPIED, true))
-            player.startRiding(entity, true)
-            true
-        } else false
+        return if (!occupied) {
+            if (!world.isClient) {
+                val entity = AdornEntities.SITTING_VEHICLE.spawn(world, null, null, player, actualPos, SpawnType.TRIGGERED, false, false)
+                entity?.setPos(actualPos, sittingYOffset)
+                world.setBlockState(actualPos, actualState.with(OCCUPIED, true))
+                player.startRiding(entity, true)
+                ActionResult.SUCCESS
+            }
+            ActionResult.SUCCESS
+        } else {
+            ActionResult.PASS
+        }
     }
 
     override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
@@ -61,7 +65,7 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
 
     protected open fun getActualSeatPos(world: World, state: BlockState, pos: BlockPos) = pos
 
-    override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         if (isSittingEnabled()) builder.add(OCCUPIED)
     }

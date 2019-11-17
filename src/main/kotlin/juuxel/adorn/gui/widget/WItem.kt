@@ -1,15 +1,13 @@
 package juuxel.adorn.gui.widget
 
-import com.mojang.blaze3d.platform.GlStateManager
+import com.mojang.blaze3d.systems.RenderSystem
 import io.github.cottonmc.cotton.gui.widget.WWidget
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
-import net.minecraft.client.render.GuiLighting
 import net.minecraft.item.Item
-import net.minecraft.util.Tickable
 
-class WItem(private val items: List<Item>) : WWidget(), Tickable {
+class WItem(private val items: List<Item>) : WWidget() {
     private var countdown = COUNTDOWN
     private var index = 0
 
@@ -27,18 +25,18 @@ class WItem(private val items: List<Item>) : WWidget(), Tickable {
 
     @Environment(EnvType.CLIENT)
     override fun paintBackground(x: Int, y: Int) {
-        GlStateManager.pushMatrix()
-        GlStateManager.enableDepthTest()
-        GlStateManager.translatef(x.toFloat(), y.toFloat(), 0f)
-        GlStateManager.scalef(1.2f, 1.2f, 1.0f)
-        GuiLighting.enableForItems()
+        RenderSystem.pushMatrix()
+        RenderSystem.enableDepthTest()
+        RenderSystem.translatef(x.toFloat(), y.toFloat(), 0f)
+        RenderSystem.scalef(1.2f, 1.2f, 1.0f)
+        //GuiLighting.enableForItems()
         val client = MinecraftClient.getInstance()
         val renderer = client.itemRenderer
         renderer.zOffset = 100f
         renderer.renderGuiItem(client.player, items[index].stackForRender, 0, 0)
         renderer.zOffset = 0f
-        GuiLighting.disable()
-        GlStateManager.popMatrix()
+        //GuiLighting.disable()
+        RenderSystem.popMatrix()
     }
 
     override fun canResize() = false

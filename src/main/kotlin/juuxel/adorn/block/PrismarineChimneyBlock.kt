@@ -6,10 +6,11 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.BubbleColumnBlock
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.tag.FluidTags
 import net.minecraft.util.math.BlockPos
-import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
+import net.minecraft.world.WorldView
 import java.util.*
 
 open class PrismarineChimneyBlock(settings: Settings) : AbstractChimneyBlock(settings), BlockWithDescription {
@@ -28,10 +29,10 @@ open class PrismarineChimneyBlock(settings: Settings) : AbstractChimneyBlock(set
         }
     }
 
-    override fun getTickRate(world: ViewableWorld) = if (world.isClient) 3 else 20
+    override fun getTickRate(world: WorldView) = if (world.isClient) 3 else 20
 
     class WithColumn(val drag: Boolean, settings: Settings) : PrismarineChimneyBlock(settings) {
-        override fun onScheduledTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
+        override fun scheduledTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random) {
             BubbleColumnBlock.update(world, pos.up(), drag)
         }
 

@@ -7,7 +7,7 @@ import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
-import net.minecraft.state.StateFactory
+import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.shape.VoxelShape
@@ -21,7 +21,7 @@ open class PlatformBlock(variant: BlockVariant) : Block(variant.createSettings()
         defaultState = defaultState.with(Properties.WATERLOGGED, false)
     }
 
-    override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(Properties.WATERLOGGED)
     }

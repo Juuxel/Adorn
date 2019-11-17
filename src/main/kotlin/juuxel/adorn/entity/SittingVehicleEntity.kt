@@ -28,9 +28,7 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
         check(!world.isClient) {
             "setPos must be called on the logical server"
         }
-        x = pos.x + 0.5
-        y = pos.y + 0.25 + blockOffset
-        z = pos.z + 0.5
+        setPosition(pos.x + 0.5, pos.y + 0.25 + blockOffset, pos.z + 0.5)
         seatPos = pos
         PlayerStream.watching(this).forEach {
             ServerSidePacketRegistry.INSTANCE.sendToPlayer(it, EntityPositionS2CPacket(this))
@@ -71,7 +69,7 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
 
     override fun initDataTracker() {}
     override fun readCustomDataFromTag(tag: CompoundTag) {
-        seatPos = BlockPos.deserialize(Dynamic(NbtOps.INSTANCE, tag.getTag("SeatPos")))
+        seatPos = BlockPos.deserialize(Dynamic(NbtOps.INSTANCE, tag["SeatPos"]))
     }
 
     override fun writeCustomDataToTag(tag: CompoundTag) {

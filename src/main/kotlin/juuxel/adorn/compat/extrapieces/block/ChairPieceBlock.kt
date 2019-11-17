@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.block
 
-import com.shnupbups.extrapieces.core.PieceSet
+/*import com.shnupbups.extrapieces.core.PieceSet
 import juuxel.adorn.block.ChairBlock
 import juuxel.adorn.compat.extrapieces.AdornPieces
 import juuxel.adorn.compat.extrapieces.toVariant
@@ -45,4 +45,4 @@ open class ChairPieceBlock private constructor(private val set: PieceSet) : Chai
         operator fun invoke(set: PieceSet): ChairPieceBlock =
             if (AdornPieces.isCarpetingEnabled(set)) Carpeted(set) else ChairPieceBlock(set)
     }
-}
+}*/

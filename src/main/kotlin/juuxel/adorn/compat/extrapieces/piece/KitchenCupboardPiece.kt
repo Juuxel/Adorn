@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.piece
 
-import com.shnupbups.extrapieces.ExtraPieces
+/*import com.shnupbups.extrapieces.ExtraPieces
 import com.shnupbups.extrapieces.blocks.PieceBlock
 import com.shnupbups.extrapieces.core.PieceSet
 import com.swordglowsblue.artifice.api.ArtificeResourcePack
@@ -72,4 +72,4 @@ object KitchenCupboardPiece : AdornPiece(Adorn.id("kitchen_cupboard")) {
     }
 
     override fun getStonecuttingCount() = 0
-}
+}*/

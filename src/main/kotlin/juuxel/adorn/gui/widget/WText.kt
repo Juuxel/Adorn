@@ -10,7 +10,7 @@ import net.fabricmc.api.Environment
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.sound.PositionedSoundInstance
-import net.minecraft.client.util.TextComponentUtil
+import net.minecraft.client.util.Texts
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.ClickEvent
 import net.minecraft.text.Text
@@ -45,7 +45,7 @@ class WText(
     @Environment(EnvType.CLIENT)
     private fun wrapLines(width: Int) {
         val font = MinecraftClient.getInstance().textRenderer
-        wrappedLines = TextComponentUtil.wrapLines(text, width, font, true, true)
+        wrappedLines = Texts.wrapLines(text, width, font, true, true)
     }
 
     @Environment(EnvType.CLIENT)

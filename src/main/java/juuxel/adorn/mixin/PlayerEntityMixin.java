@@ -22,24 +22,24 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         super(entityType_1, world_1);
     }
 
-    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;wakeUp(ZZZ)V", ordinal = 0))
-    private void redirectWakeUp(PlayerEntity player, boolean sleepTimeSomething, boolean updatePlayersSleeping, boolean updateSpawn) {
+    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;wakeUp(ZZ)V", ordinal = 0))
+    private void redirectWakeUp(PlayerEntity player, boolean sleepTimeSomething, boolean updatePlayersSleeping) {
         Block sleepingBlock = player.getSleepingPosition()
                 .map(pos -> world.getBlockState(pos).getBlock())
                 .orElse(Blocks.AIR);
         if (!(sleepingBlock instanceof SofaBlock)) {
-            player.wakeUp(sleepTimeSomething, updatePlayersSleeping, updateSpawn);
-        } else if (AdornConfigManager.INSTANCE.getConfig().skipNightOnSofas && !world.isDaylight()) {
-            player.wakeUp(sleepTimeSomething, updatePlayersSleeping, false);
+            player.wakeUp(sleepTimeSomething, updatePlayersSleeping);
+        } else if (AdornConfigManager.INSTANCE.getConfig().skipNightOnSofas) {
+            player.wakeUp(sleepTimeSomething, updatePlayersSleeping);
         }
 
         // Allow sleeping on sofas at daytime
     }
 
-    // Lambda: Optional.ifPresent in wakeUp(boolean, boolean, boolean)
-    @Inject(method = "method_18452", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "sleep", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setPlayerSpawn(Lnet/minecraft/util/math/BlockPos;Z)V"), cancellable = true)
     private void onWakeUpSetSpawn(BlockPos pos, CallbackInfo info) {
         if (world.getBlockState(pos).getBlock() instanceof SofaBlock) {
+            super.sleep(pos);
             info.cancel();
         }
     }

@@ -20,9 +20,7 @@ import net.minecraft.text.TranslatableText
 import net.minecraft.util.Tickable
 
 @Environment(EnvType.CLIENT)
-class BookScreenDescription(book: Book) : LightweightGuiDescription(), Tickable {
-    private val tickers: MutableList<Tickable> = ArrayList()
-
+class BookScreenDescription(book: Book) : LightweightGuiDescription() {
     init {
         val root = WPlainPanel()
         val pageCards = WCardPanel()
@@ -51,13 +49,8 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription(), Tickable 
         return result
     }
 
-    override fun tick() {
-        tickers.forEach { it.tick() }
-    }
-
     private fun createPageWidget(pages: PageContainer, page: Page): WWidget = WPlainPanel().apply {
         val item = WItem(page.icons)
-        tickers += item
         add(item, 0, 0)
         add(
             WText(
@@ -82,7 +75,7 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription(), Tickable 
 
         override fun paintBackground(x: Int, y: Int, mouseX: Int, mouseY: Int) {
             val texture = if (isWithinBounds(mouseX, mouseY)) ACTIVE_TEXTURE else INACTIVE_TEXTURE
-            ScreenDrawing.rect(texture, x, y, 8, 8, Colors.WHITE)
+            ScreenDrawing.texturedRect(x, y, 8, 8, texture, Colors.WHITE)
         }
 
         override fun onClick(x: Int, y: Int, button: Int) {

@@ -10,8 +10,9 @@ import net.minecraft.item.Items
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
-import net.minecraft.state.StateFactory
+import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
+import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
@@ -25,7 +26,7 @@ class StoneTorchBlock : TorchBlock(settings), Waterloggable, BlockWithDescriptio
             .with(WATERLOGGED, false)
     }
 
-    override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(LIT, WATERLOGGED)
     }
@@ -41,10 +42,10 @@ class StoneTorchBlock : TorchBlock(settings), Waterloggable, BlockWithDescriptio
         return if (state[LIT]) super.getLuminance(state) else 0
     }
 
-    override fun activate(
+    override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult?
-    ) = activateImpl(state, world, pos, player, hand) {
-        super.activate(state, world, pos, player, hand, hitResult)
+    ): ActionResult = onUseImpl(state, world, pos, player, hand) {
+        super.onUse(state, world, pos, player, hand, hitResult)
     }
 
     override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
@@ -71,7 +72,7 @@ class StoneTorchBlock : TorchBlock(settings), Waterloggable, BlockWithDescriptio
             defaultState = defaultState.with(LIT, true).with(WATERLOGGED, false)
         }
 
-        override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+        override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
             super.appendProperties(builder)
             builder.add(LIT, WATERLOGGED)
         }
@@ -87,10 +88,10 @@ class StoneTorchBlock : TorchBlock(settings), Waterloggable, BlockWithDescriptio
             return if (state[LIT]) super.getLuminance(state) else 0
         }
 
-        override fun activate(
+        override fun onUse(
             state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult?
-        ) = activateImpl(state, world, pos, player, hand) {
-            super.activate(state, world, pos, player, hand, hitResult)
+        ): ActionResult = onUseImpl(state, world, pos, player, hand) {
+            super.onUse(state, world, pos, player, hand, hitResult)
         }
 
         override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
@@ -121,10 +122,10 @@ class StoneTorchBlock : TorchBlock(settings), Waterloggable, BlockWithDescriptio
             .sounds(BlockSoundGroup.STONE)
             .build()
 
-        private inline fun activateImpl(
+        private inline fun onUseImpl(
             state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand,
-            superCallback: () -> Boolean
-        ): Boolean {
+            superCallback: () -> ActionResult
+        ): ActionResult {
             val stack = player.getStackInHand(hand)
             if (!state[LIT] && stack.item == Items.FLINT_AND_STEEL) {
                 if (world.getFluidState(pos).isEmpty) {
@@ -143,7 +144,7 @@ class StoneTorchBlock : TorchBlock(settings), Waterloggable, BlockWithDescriptio
                 }
 
                 stack.damage(1, player) {}
-                return true
+                return ActionResult.SUCCESS
             }
 
             return superCallback()

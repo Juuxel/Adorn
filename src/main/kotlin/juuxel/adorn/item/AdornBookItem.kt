@@ -1,7 +1,7 @@
 package juuxel.adorn.item
 
+import io.github.cottonmc.cotton.gui.client.CottonClientScreen
 import juuxel.adorn.gui.screen.BookScreenDescription
-import juuxel.adorn.gui.screen.TickingClientScreen
 import juuxel.adorn.resources.BookManager
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -20,7 +20,7 @@ class AdornBookItem(private val bookId: Identifier, settings: Settings) : Item(s
     override fun use(world: World, player: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         if (world.isClient) {
             MinecraftClient.getInstance().openScreen(
-                TickingClientScreen(
+                CottonClientScreen(
                     BookScreenDescription(BookManager[bookId])
                 )
             )

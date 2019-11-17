@@ -13,12 +13,9 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
-import net.minecraft.state.StateFactory
+import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
-import net.minecraft.util.BlockMirror
-import net.minecraft.util.BlockRotation
-import net.minecraft.util.Hand
-import net.minecraft.util.ItemScatterer
+import net.minecraft.util.*
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.BlockView
@@ -26,10 +23,10 @@ import net.minecraft.world.World
 
 open class DrawerBlock(
     variant: BlockVariant
-) : VisibleBlockWithEntity(variant.createSettings()), BaseInventoryBlockEntity.InventoryProviderImpl {
+) : VisibleBlockWithEntity(variant.createSettings().nonOpaque()), BaseInventoryBlockEntity.InventoryProviderImpl {
     override val blockEntityType = BLOCK_ENTITY_TYPE
 
-    override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(FACING)
     }
@@ -37,14 +34,13 @@ open class DrawerBlock(
     override fun getPlacementState(context: ItemPlacementContext) =
         super.getPlacementState(context)!!.with(FACING, context.playerFacing.opposite)
 
-    override fun isOpaque(state: BlockState?) = false
     override fun isSimpleFullBlock(state: BlockState?, view: BlockView?, pos: BlockPos?) = false
 
-    override fun activate(
+    override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
-    ): Boolean {
+    ): ActionResult {
         player.openFabricContainer(AdornGuis.DRAWER, pos)
-        return true
+        return ActionResult.SUCCESS
     }
 
     override fun onBlockRemoved(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {

@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.item
 
-import com.shnupbups.extrapieces.blocks.PieceBlock
+/*import com.shnupbups.extrapieces.blocks.PieceBlock
 import juuxel.adorn.compat.extrapieces.AdornPieces
 import juuxel.adorn.item.CarpetedTopPlacementContext
 import net.minecraft.block.BlockState
@@ -29,4 +29,4 @@ class ChairPieceBlockItem(pb: PieceBlock, settings: Settings) : AdornPieceBlockI
 
         return super.useOnBlock(context)
     }
-}
+}*/

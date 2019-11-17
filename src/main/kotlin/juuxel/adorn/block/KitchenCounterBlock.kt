@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.item.ItemPlacementContext
-import net.minecraft.state.StateFactory
+import net.minecraft.state.StateManager
 import net.minecraft.state.property.EnumProperty
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
@@ -20,7 +20,7 @@ open class KitchenCounterBlock : BaseKitchenCounterBlock {
         defaultState = defaultState.with(FRONT, FrontConnection.None)
     }
 
-    override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(FRONT)
     }

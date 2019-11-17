@@ -6,7 +6,6 @@ import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.gui.openFabricContainer
 import juuxel.adorn.block.entity.MutableBlockEntityType
 import net.minecraft.block.Block
-import net.minecraft.block.BlockRenderLayer
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityContext
@@ -15,7 +14,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
-import net.minecraft.state.StateFactory
+import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.ActionResult
@@ -35,7 +34,7 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
         defaultState = defaultState.with(WATERLOGGED, false)
     }
 
-    override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(WATERLOGGED)
     }
@@ -55,9 +54,9 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
         }
     }
 
-    override fun activate(
+    override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult?
-    ): Boolean {
+    ): ActionResult {
         val be = world.getBlockEntity(pos)
         if (be is TradingStationBlockEntity) {
             if (!world.isClient && be.owner == null) {
@@ -89,7 +88,7 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
             }
         }
 
-        return true
+        return ActionResult.SUCCESS
     }
 
     override fun onSneakClick(
@@ -118,8 +117,6 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
             super.onBlockRemoved(state1, world, pos, state2, b)
         }
     }
-
-    override fun getRenderLayer() = BlockRenderLayer.CUTOUT
 
     override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: EntityContext) =
         OUTLINE_SHAPE

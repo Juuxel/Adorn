@@ -7,7 +7,7 @@ import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
-import net.minecraft.state.StateFactory
+import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
@@ -22,7 +22,7 @@ abstract class AbstractChimneyBlock(settings: Settings) : Block(settings), Water
             .with(WATERLOGGED, false)
     }
 
-    override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(CONNECTED, WATERLOGGED)
     }
@@ -47,8 +47,6 @@ abstract class AbstractChimneyBlock(settings: Settings) : Block(settings), Water
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         if (state[CONNECTED]) MIDDLE_SHAPE else TOP_SHAPE
-
-    override fun isOpaque(state: BlockState?) = false
 
     companion object {
         val CONNECTED = BooleanProperty.of("connected")

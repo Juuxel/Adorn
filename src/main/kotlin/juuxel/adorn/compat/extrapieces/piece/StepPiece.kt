@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.piece
 
-import com.shnupbups.extrapieces.core.PieceSet
+/*import com.shnupbups.extrapieces.core.PieceSet
 import com.shnupbups.extrapieces.core.PieceTypes
 import com.shnupbups.extrapieces.recipe.ShapedPieceRecipe
 import juuxel.adorn.Adorn
@@ -17,4 +17,4 @@ object StepPiece : SimpleSidedPiece(Adorn.id("step"), Adorn.id("block/templates/
             .addToKey('#', Items.STICK)
             .addToKey('#', AdornTags.STONE_ROD)
     )
-}
+}*/

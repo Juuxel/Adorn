@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces
 
-import com.shnupbups.extrapieces.blocks.PieceBlock
+/*import com.shnupbups.extrapieces.blocks.PieceBlock
 import com.shnupbups.extrapieces.core.PieceSet
 import juuxel.adorn.api.block.BlockVariant
 import net.minecraft.block.Block
@@ -14,4 +14,4 @@ fun PieceSet.toVariant(): BlockVariant =
         override fun createSettings() = Block.Settings.copy(base)
     }
 
-fun PieceBlock.getRegistryId(): Identifier = Registry.BLOCK.getId(block)
+fun PieceBlock.getRegistryId(): Identifier = Registry.BLOCK.getId(block)*/

@@ -44,11 +44,12 @@
   "mixins": ["mixins.adorn.json"],
 
   "depends": {
+    "minecraft": ">=1.15-",
     "fabricloader": ">=0.4.6",
     "fabric": ">=0.4.0",
     "fabric-language-kotlin": "^1.3.30",
     "libgui": "^1.3.2",
-    "jankson": "^1.0.0",
+    "jankson": "^2.0.0",
     "libcd": "^1.3.1"
   },
   "custom": {
@@ -56,7 +57,6 @@
   },
 
   "breaks": {
-    "minecraft": ">=1.15-",
     "towelette": "<2.0.0"
   }
 }

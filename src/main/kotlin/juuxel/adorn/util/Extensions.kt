@@ -18,7 +18,7 @@ fun CompoundTag.putTextComponent(name: String, textComponent: Text) =
     )
 
 fun CompoundTag.getTextComponent(name: String): Text? {
-    val tag = getTag(name) ?: return null
+    val tag = get(name) ?: return null
 
     return Text.Serializer.fromJson(
         Dynamic.convert(

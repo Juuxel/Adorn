@@ -43,10 +43,10 @@ object Painters {
      */
     val BOOK: BackgroundPainter = BackgroundPainter { x, y, widget ->
         val px = 1 / 256f
-        ScreenDrawing.rect(
-            BookScreen.BOOK_TEXTURE,
+        ScreenDrawing.texturedRect(
             x + (max(widget.width, 192) - 192) / 2, y + 2,
             192, 192,
+            BookScreen.BOOK_TEXTURE,
             0f, 0f, 192 * px, 192 * px,
             Colors.WHITE
         )

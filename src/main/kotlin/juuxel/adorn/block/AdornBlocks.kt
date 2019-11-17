@@ -2,8 +2,6 @@ package juuxel.adorn.block
 
 import juuxel.adorn.Adorn
 import juuxel.adorn.api.block.BlockVariant
-import juuxel.adorn.block.entity.ShelfBlockEntity
-import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.block.renderer.ShelfRenderer
 import juuxel.adorn.block.renderer.TradingStationRenderer
 import juuxel.adorn.item.ChairBlockItem
@@ -12,15 +10,17 @@ import juuxel.adorn.lib.RegistryHelper
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.block.FabricBlockSettings
-import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
+import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.CarpetBlock
+import net.minecraft.client.render.RenderLayer
+import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
-import net.minecraft.item.TallBlockItem
 import net.minecraft.sound.SoundCategory
 import net.minecraft.util.ActionResult
 
@@ -195,13 +195,14 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     @Environment(EnvType.CLIENT)
     fun initClient() {
         BlockEntityRendererRegistry.INSTANCE.register(
-            TradingStationBlockEntity::class.java,
-            TradingStationRenderer()
+            TradingStationBlock.BLOCK_ENTITY_TYPE,
+            TradingStationRenderer(BlockEntityRenderDispatcher.INSTANCE)
         )
         BlockEntityRendererRegistry.INSTANCE.register(
-            ShelfBlockEntity::class.java,
-            ShelfRenderer()
+            ShelfBlock.BLOCK_ENTITY_TYPE,
+            ShelfRenderer(BlockEntityRenderDispatcher.INSTANCE)
         )
+        BlockRenderLayerMap.INSTANCE.putBlock(TRADING_STATION, RenderLayer.getCutout())
     }
 
     private fun newItemSettings() = Item.Settings().group(ItemGroup.DECORATIONS)

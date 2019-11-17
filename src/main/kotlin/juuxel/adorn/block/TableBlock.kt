@@ -10,7 +10,7 @@ import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
-import net.minecraft.state.StateFactory
+import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
@@ -22,7 +22,7 @@ import net.minecraft.world.IWorld
 open class TableBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()), Waterloggable {
     override val sittingYOffset = 0.6
 
-    override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(NORTH, EAST, SOUTH, WEST, WATERLOGGED)
     }

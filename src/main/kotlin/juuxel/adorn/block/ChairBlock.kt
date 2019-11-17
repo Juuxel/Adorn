@@ -16,7 +16,7 @@ import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.stat.Stats
-import net.minecraft.state.StateFactory
+import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
@@ -24,10 +24,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
-import net.minecraft.world.BlockView
-import net.minecraft.world.IWorld
-import net.minecraft.world.ViewableWorld
-import net.minecraft.world.World
+import net.minecraft.world.*
 import java.util.*
 
 open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()), Waterloggable {
@@ -36,7 +33,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
             .with(WATERLOGGED, false)
     }
 
-    override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(FACING, HALF, WATERLOGGED)
     }
@@ -54,11 +51,11 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
         if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
         else super.getFluidState(state)
 
-    override fun canPlaceAt(state: BlockState, world: ViewableWorld, pos: BlockPos): Boolean {
+    override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
         return if (state[HALF] != DoubleBlockHalf.UPPER) {
             super.canPlaceAt(state, world, pos)
         } else {
-            val downState = world.getBlockState(pos.down())
+            val downState = world.getBlockState(pos.method_10074())
             downState.block == this && downState[HALF] == DoubleBlockHalf.LOWER
         }
     }
@@ -71,7 +68,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
 
     override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
         val half = state[HALF]
-        val otherPos = if (half == DoubleBlockHalf.LOWER) pos.up() else pos.down()
+        val otherPos = if (half == DoubleBlockHalf.LOWER) pos.up() else pos.method_10074()
         val otherState = world.getBlockState(otherPos)
 
         // Check that the other block is the same and has the correct half, otherwise break
@@ -149,7 +146,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
 
     override fun getActualSeatPos(world: World, state: BlockState, pos: BlockPos) =
         when (state[HALF]!!) {
-            DoubleBlockHalf.UPPER -> pos.down()
+            DoubleBlockHalf.UPPER -> pos.method_10074()
             DoubleBlockHalf.LOWER -> pos
         }
 

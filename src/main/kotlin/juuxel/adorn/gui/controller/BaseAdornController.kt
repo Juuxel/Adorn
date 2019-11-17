@@ -1,6 +1,6 @@
 package juuxel.adorn.gui.controller
 
-import io.github.cottonmc.cotton.gui.CottonScreenController
+import io.github.cottonmc.cotton.gui.CottonCraftingController
 import io.github.cottonmc.cotton.gui.EmptyInventory
 import io.github.cottonmc.cotton.gui.widget.WPlayerInvPanel
 import juuxel.adorn.gui.painter.Painters
@@ -25,7 +25,7 @@ abstract class BaseAdornController(
     context: BlockContext,
     blockInventory: Inventory,
     propertyDelegate: PropertyDelegate = getBlockPropertyDelegate(context)
-) : CottonScreenController(
+) : CottonCraftingController(
     null, syncId, playerInv, blockInventory, propertyDelegate
 ) {
     protected val playerInvPanel: WPlayerInvPanel by lazy { createPlayerInventoryPanel() }
