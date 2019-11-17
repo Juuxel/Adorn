@@ -1,6 +1,5 @@
 package juuxel.adorn.block.renderer
 
-import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.util.Colors
 import net.fabricmc.api.EnvType
@@ -22,7 +21,7 @@ import net.minecraft.util.hit.HitResult
 
 @Environment(EnvType.CLIENT)
 class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEntityRenderer<TradingStationBlockEntity>(dispatcher) {
-    override fun render(be: TradingStationBlockEntity, tickDelta: Float, matrix: MatrixStack, vertexConsumerProvider: VertexConsumerProvider, i: Int, j: Int) {
+    override fun render(be: TradingStationBlockEntity, tickDelta: Float, matrix: MatrixStack, vertexConsumerProvider: VertexConsumerProvider, light: Int, overlay: Int) {
         val hitResult = blockEntityRenderDispatcher.crosshairTarget
         val lookingAtBlock = hitResult != null &&
                 hitResult.type == HitResult.Type.BLOCK &&
@@ -39,7 +38,7 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
             matrix.scale(0.6f, 0.6f, 0.6f)
             matrix.translate(0.0, 0.3, 0.0)
             val itemRenderer = MinecraftClient.getInstance().itemRenderer
-            itemRenderer.method_23178(trade.selling, ModelTransformation.Type.FIXED, i, j, matrix, vertexConsumerProvider)
+            itemRenderer.method_23178(trade.selling, ModelTransformation.Type.FIXED, light, overlay, matrix, vertexConsumerProvider)
             matrix.pop()
 
             /*if (lookingAtBlock) {
@@ -52,35 +51,21 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
         }
 
         if (lookingAtBlock) {
-            //disableLightmap(true)
             val label1 = I18n.translate(LABEL_1, be.ownerName.copy().formatted(Formatting.GOLD).asFormattedString())
-            renderLabel(be, label1, 0.0,  0.9, 0.0, 12, matrix, vertexConsumerProvider, i)
+            renderLabel(be, label1, 0.0,  0.9, 0.0, 12, matrix, vertexConsumerProvider, light)
             if (!be.trade.isEmpty()) {
                 val label2 = I18n.translate(LABEL_2, be.trade.selling.toTextComponentWithCount().asFormattedString())
                 val label3 = I18n.translate(LABEL_3, be.trade.price.toTextComponentWithCount().asFormattedString())
-                renderLabel(be, label2, 0.0, 0.9 - 0.25, 0.0, 12, matrix, vertexConsumerProvider, i)
-                renderLabel(be, label3, 0.0, 0.9 - 0.5, 0.0, 12, matrix, vertexConsumerProvider, i)
+                renderLabel(be, label2, 0.0, 0.9 - 0.25, 0.0, 12, matrix, vertexConsumerProvider, light)
+                renderLabel(be, label3, 0.0, 0.9 - 0.5, 0.0, 12, matrix, vertexConsumerProvider, light)
             }
-            //disableLightmap(false)
         }
     }
 
-    private fun disableLightmap(b: Boolean) {
-        RenderSystem.activeTexture(33985)
-        if (b) {
-            RenderSystem.disableTexture()
-        } else {
-            RenderSystem.enableTexture()
-        }
-        RenderSystem.activeTexture(33984)
-    }
-
-    private fun renderLabel(be: TradingStationBlockEntity, name: String, x: Double, y: Double, z: Double, maxDistance: Int, matrix: MatrixStack, vcp: VertexConsumerProvider, i: Int) {
+    private fun renderLabel(be: TradingStationBlockEntity, name: String, x: Double, y: Double, z: Double, maxDistance: Int, matrix: MatrixStack, vcp: VertexConsumerProvider, light: Int) {
         val camera = blockEntityRenderDispatcher.camera
         val dist = be.getSquaredDistance(camera.pos.x, camera.pos.y, camera.pos.z)
         if (dist < maxDistance * maxDistance) {
-            val yaw = camera.yaw
-            val pitch = camera.pitch
             matrix.push()
             matrix.translate(x + 0.5, y + 1.5, z + 0.5)
             matrix.multiply(camera.method_23767())
@@ -91,7 +76,7 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
             val opacityAsAlpha = (opacity * 255.0f).toInt() shl 24
             val textRenderer = blockEntityRenderDispatcher.textRenderer
             val textX = -textRenderer.getStringWidth(name) / 2f
-            textRenderer.draw(name, textX, 0f, Colors.WHITE, false, matrixModel, vcp, true, opacityAsAlpha, i)
+            textRenderer.draw(name, textX, 0f, Colors.WHITE, false, matrixModel, vcp, true, opacityAsAlpha, light)
 
             matrix.pop()
         }
