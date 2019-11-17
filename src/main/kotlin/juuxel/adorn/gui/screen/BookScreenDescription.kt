@@ -5,6 +5,7 @@ import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel
 import io.github.cottonmc.cotton.gui.widget.WWidget
+import io.github.cottonmc.cotton.gui.widget.data.Alignment
 import juuxel.adorn.Adorn
 import juuxel.adorn.gui.painter.Painters
 import juuxel.adorn.gui.widget.*
@@ -17,7 +18,6 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.TranslatableText
-import net.minecraft.util.Tickable
 
 @Environment(EnvType.CLIENT)
 class BookScreenDescription(book: Book) : LightweightGuiDescription() {
@@ -44,8 +44,8 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription() {
     private fun createTitlePage(book: Book): WWidget {
         val result = WPlainPanel()
         result.add(WBigLabel(book.title, WLabel.DEFAULT_TEXT_COLOR, scale = book.titleScale), 0, 25, 116, 20)
-        result.add(WCenteredLabel(book.subtitle, WLabel.DEFAULT_TEXT_COLOR), 0, 45, 116, 20)
-        result.add(WCenteredLabel(TranslatableText("book.byAuthor", book.author), WLabel.DEFAULT_TEXT_COLOR), 0, 60, 116, 20)
+        result.add(WLabel(book.subtitle, WLabel.DEFAULT_TEXT_COLOR).setAlignment(Alignment.CENTER).disableDarkmode(), 0, 45, 116, 20)
+        result.add(WLabel(TranslatableText("book.byAuthor", book.author), WLabel.DEFAULT_TEXT_COLOR).setAlignment(Alignment.CENTER).disableDarkmode(), 0, 60, 116, 20)
         return result
     }
 

@@ -4,6 +4,7 @@ import io.github.cottonmc.cotton.gui.client.LibGuiClient
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import io.github.cottonmc.cotton.gui.widget.WWidget
+import io.github.cottonmc.cotton.gui.widget.data.Alignment
 import juuxel.adorn.mixin.ScreenAccessor
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -60,12 +61,7 @@ class WText(
                     color
 
             val str = text.asFormattedString()
-            val xOffset = when (alignment) {
-                Alignment.LEFT -> 0
-                Alignment.CENTER -> width / 2 - font.getStringWidth(str) / 2
-                Alignment.RIGHT -> width - font.getStringWidth(str)
-            }
-            ScreenDrawing.drawString(str, x + xOffset, y + yOffset + i * font.fontHeight, actualColor)
+            ScreenDrawing.drawString(str, alignment, x, y + yOffset, width, actualColor)
         }
 
         val text = getTextAt(mouseX, mouseY)

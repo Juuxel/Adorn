@@ -8,7 +8,6 @@ import juuxel.adorn.block.entity.TradingStation
 import juuxel.adorn.gui.painter.Painters
 import juuxel.adorn.gui.widget.WCenteredLabel
 import juuxel.adorn.gui.widget.WDisplayOnlySlot
-import juuxel.adorn.lib.AdornNetworking
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.trading.TradeInventory
 import juuxel.adorn.util.Colors
@@ -16,8 +15,6 @@ import juuxel.adorn.util.color
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
-import net.fabricmc.fabric.api.server.PlayerStream
 import net.minecraft.container.BlockContext
 import net.minecraft.container.SlotActionType
 import net.minecraft.entity.player.PlayerEntity
