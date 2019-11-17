@@ -1,6 +1,7 @@
 package juuxel.adorn.block
 
 import alexiil.mc.lib.multipart.api.MultipartContainer
+import alexiil.mc.lib.multipart.api.MultipartUtil
 import alexiil.mc.lib.multipart.api.NativeMultipart
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
@@ -63,10 +64,10 @@ open class TableBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
         state: BlockState,
         world: IWorld,
         pos: BlockPos
-    ) = state.with(NORTH, world.getBlockState(pos.offset(Direction.NORTH)).block is TableBlock)
-        .with(EAST, world.getBlockState(pos.offset(Direction.EAST)).block is TableBlock)
-        .with(SOUTH, world.getBlockState(pos.offset(Direction.SOUTH)).block is TableBlock)
-        .with(WEST, world.getBlockState(pos.offset(Direction.WEST)).block is TableBlock)
+    ) = state.with(NORTH, canConnect(world, pos.offset(Direction.NORTH)))
+        .with(EAST, canConnect(world, pos.offset(Direction.EAST)))
+        .with(SOUTH, canConnect(world, pos.offset(Direction.SOUTH)))
+        .with(WEST, canConnect(world, pos.offset(Direction.WEST)))
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         SHAPES[
@@ -189,7 +190,9 @@ open class TableBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
                     }
                 }.toMap()
             })
-
         }
+
+        fun canConnect(world: IWorld, pos: BlockPos): Boolean =
+            world.getBlockState(pos) is TableBlock || (world is World && MultipartUtil.get(world, pos)?.getParts(TablePart::class.java)?.isNotEmpty() == true)
     }
 }
