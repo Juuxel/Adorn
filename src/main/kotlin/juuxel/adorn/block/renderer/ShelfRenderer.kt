@@ -17,7 +17,7 @@ import net.minecraft.util.math.Direction
 class ShelfRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEntityRenderer<ShelfBlockEntity>(dispatcher) {
     override fun render(
         be: ShelfBlockEntity, tickDelta: Float,
-        matrix: MatrixStack, vertexConsumerProvider: VertexConsumerProvider, light: Int, overlay: Int
+        matrices: MatrixStack, vertexConsumerProvider: VertexConsumerProvider, light: Int, overlay: Int
     ) {
         val facing = be.cachedState[ShelfBlock.FACING]
 
@@ -43,21 +43,21 @@ class ShelfRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEntityRender
 
         val itemRenderer = MinecraftClient.getInstance().itemRenderer
 
-        matrix.push()
-        matrix.translate(tx1, 9.6 / 16.0, tz1)
-        matrix.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE)
-        matrix.multiply(Vector3f.POSITIVE_Y.getRotationQuaternion(ITEM_1_Y_ROT + facing.asRotation()))
+        matrices.push()
+        matrices.translate(tx1, 9.6 / 16.0, tz1)
+        matrices.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE)
+        matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(ITEM_1_Y_ROT + facing.asRotation()))
         //GlStateManager.rotatef(ITEM_X_ROT, 1f, 0f, 0f)
-        itemRenderer.method_23178(be.getInvStack(0), ModelTransformation.Type.FIXED, light, overlay, matrix, vertexConsumerProvider)
-        matrix.pop()
+        itemRenderer.method_23178(be.getInvStack(0), ModelTransformation.Type.FIXED, light, overlay, matrices, vertexConsumerProvider)
+        matrices.pop()
 
-        matrix.push()
-        matrix.translate(tx2, 9.6 / 16.0, tz2)
-        matrix.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE)
-        matrix.multiply(Vector3f.POSITIVE_Y.getRotationQuaternion(ITEM_2_Y_ROT + facing.asRotation()))
+        matrices.push()
+        matrices.translate(tx2, 9.6 / 16.0, tz2)
+        matrices.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE)
+        matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(ITEM_2_Y_ROT + facing.asRotation()))
         //GlStateManager.rotatef(ITEM_X_ROT, 1f, 0f, 0f)
-        itemRenderer.method_23178(be.getInvStack(1), ModelTransformation.Type.FIXED, light, overlay, matrix, vertexConsumerProvider)
-        matrix.pop()
+        itemRenderer.method_23178(be.getInvStack(1), ModelTransformation.Type.FIXED, light, overlay, matrices, vertexConsumerProvider)
+        matrices.pop()
     }
 
     companion object {

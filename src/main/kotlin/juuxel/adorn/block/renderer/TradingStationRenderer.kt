@@ -21,7 +21,7 @@ import net.minecraft.util.hit.HitResult
 
 @Environment(EnvType.CLIENT)
 class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEntityRenderer<TradingStationBlockEntity>(dispatcher) {
-    override fun render(be: TradingStationBlockEntity, tickDelta: Float, matrix: MatrixStack, vertexConsumerProvider: VertexConsumerProvider, light: Int, overlay: Int) {
+    override fun render(be: TradingStationBlockEntity, tickDelta: Float, matrices: MatrixStack, vertexConsumerProvider: VertexConsumerProvider, light: Int, overlay: Int) {
         val hitResult = blockEntityRenderDispatcher.crosshairTarget
         val lookingAtBlock = hitResult != null &&
                 hitResult.type == HitResult.Type.BLOCK &&
@@ -29,17 +29,17 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
 
         val trade = be.trade
         if (!trade.isEmpty()) {
-            matrix.push()
-            matrix.translate(0.5, 1.2, 0.5)
+            matrices.push()
+            matrices.translate(0.5, 1.2, 0.5)
             val playerAge = MinecraftClient.getInstance().player!!.age
 
-            matrix.push()
-            matrix.multiply(Vector3f.POSITIVE_Y.getRotationQuaternion((playerAge + tickDelta) * SELLING_ROTATION_MULTIPLIER))
-            matrix.scale(0.6f, 0.6f, 0.6f)
-            matrix.translate(0.0, 0.3, 0.0)
+            matrices.push()
+            matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion((playerAge + tickDelta) * SELLING_ROTATION_MULTIPLIER))
+            matrices.scale(0.6f, 0.6f, 0.6f)
+            matrices.translate(0.0, 0.3, 0.0)
             val itemRenderer = MinecraftClient.getInstance().itemRenderer
-            itemRenderer.method_23178(trade.selling, ModelTransformation.Type.FIXED, light, overlay, matrix, vertexConsumerProvider)
-            matrix.pop()
+            itemRenderer.method_23178(trade.selling, ModelTransformation.Type.FIXED, light, overlay, matrices, vertexConsumerProvider)
+            matrices.pop()
 
             /*if (lookingAtBlock) {
                 GlStateManager.rotatef((playerAge + tickDelta) * PRICE_ROTATION_MULTIPLIER, 0f, 1f, 0f)
@@ -47,17 +47,17 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
                 itemRenderer.renderItem(trade.price, ModelTransformation.Type.GROUND)
             }*/
 
-            matrix.pop()
+            matrices.pop()
         }
 
         if (lookingAtBlock) {
             val label1 = I18n.translate(LABEL_1, be.ownerName.copy().formatted(Formatting.GOLD).asFormattedString())
-            renderLabel(be, label1, 0.0,  0.9, 0.0, 12, matrix, vertexConsumerProvider, light)
+            renderLabel(be, label1, 0.0,  0.9, 0.0, 12, matrices, vertexConsumerProvider, light)
             if (!be.trade.isEmpty()) {
                 val label2 = I18n.translate(LABEL_2, be.trade.selling.toTextComponentWithCount().asFormattedString())
                 val label3 = I18n.translate(LABEL_3, be.trade.price.toTextComponentWithCount().asFormattedString())
-                renderLabel(be, label2, 0.0, 0.9 - 0.25, 0.0, 12, matrix, vertexConsumerProvider, light)
-                renderLabel(be, label3, 0.0, 0.9 - 0.5, 0.0, 12, matrix, vertexConsumerProvider, light)
+                renderLabel(be, label2, 0.0, 0.9 - 0.25, 0.0, 12, matrices, vertexConsumerProvider, light)
+                renderLabel(be, label3, 0.0, 0.9 - 0.5, 0.0, 12, matrices, vertexConsumerProvider, light)
             }
         }
     }
