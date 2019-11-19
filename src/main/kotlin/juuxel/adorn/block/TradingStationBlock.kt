@@ -1,10 +1,10 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.block.entity.TradingStationBlockEntity
-import juuxel.adorn.config.AdornConfigManager
 import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.gui.openFabricContainer
 import juuxel.adorn.block.entity.MutableBlockEntityType
+import juuxel.adorn.lib.AdornGameRules
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -128,7 +128,7 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
      * Disables block breaking for non-owners.
      */
     override fun calcBlockBreakingDelta(state: BlockState, player: PlayerEntity, world: BlockView, pos: BlockPos) =
-        if (AdornConfigManager.CONFIG.protectTradingStations)
+        if (world is World && world.gameRules.getBoolean(AdornGameRules.PROTECT_TRADING_STATIONS))
             (world.getBlockEntity(pos) as? TradingStationBlockEntity).let {
                 if (it != null && !it.isOwner(player)) {
                     0f

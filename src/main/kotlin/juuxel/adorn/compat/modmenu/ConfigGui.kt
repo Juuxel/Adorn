@@ -32,9 +32,7 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
 
         general = WGridPanel()
         with(general) {
-            add(createConfigToggle(config::skipNightOnSofas), 0, 0)
-            add(createConfigToggle(config::protectTradingStations), 0, 1)
-            add(createConfigToggle(config::sittingOnTables, true), 0, 2)
+            add(createConfigToggle(config::sittingOnTables, true), 0, 0)
 
             backgroundPainter = BackgroundPainter.VANILLA
             setSize(11 * 18, height)

@@ -33,6 +33,8 @@ object AdornConfigManager {
                 save(config)
             }
 
+            logDeprecationWarnings(obj)
+
             config
         } catch (e: Exception) {
             throw RuntimeException("Failed to load Adorn config file!", e)
@@ -60,5 +62,12 @@ object AdornConfigManager {
         }
 
         return false
+    }
+
+    private fun logDeprecationWarnings(config: JsonObject) {
+        if (config.containsKey("skipNightOnSofas") || config.containsKey("protectTradingStations")) {
+            LOGGER.warn("[Adorn] The config file contains deprecated keys " +
+                "('skipNightOnSofas' or 'protectTradingStations') that have been replaced by game rules.")
+        }
     }
 }

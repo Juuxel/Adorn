@@ -1,7 +1,7 @@
 package juuxel.adorn.mixin;
 
 import juuxel.adorn.block.SofaBlock;
-import juuxel.adorn.config.AdornConfigManager;
+import juuxel.adorn.lib.AdornGameRules;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -29,7 +29,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 .orElse(Blocks.AIR);
         if (!(sleepingBlock instanceof SofaBlock)) {
             player.wakeUp(sleepTimeSomething, updatePlayersSleeping);
-        } else if (AdornConfigManager.INSTANCE.getConfig().skipNightOnSofas) {
+        } else if (world.getGameRules().getBoolean(AdornGameRules.SKIP_NIGHT_ON_SOFAS)) {
             player.wakeUp(sleepTimeSomething, updatePlayersSleeping);
         }
 
@@ -48,7 +48,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private void onIsSleepingLongEnough(CallbackInfoReturnable<Boolean> info) {
         // Allow sleeping on sofas at daytime and (depending on config)
         // prevent skipping the night on sofas
-        boolean skipNight = AdornConfigManager.INSTANCE.getConfig().skipNightOnSofas;
+        boolean skipNight = world.getGameRules().getBoolean(AdornGameRules.SKIP_NIGHT_ON_SOFAS);
         if (info.getReturnValueZ() && (!skipNight || world.isDaylight()) &&
                 getSleepingPosition().map(pos -> world.getBlockState(pos).getBlock() instanceof SofaBlock).orElse(false)) {
             info.setReturnValue(false);

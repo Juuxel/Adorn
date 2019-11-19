@@ -8,6 +8,10 @@
   "mixins": [
     "fluidloggable.ChairBlockMixin",
     "fluidloggable.FluidloggableMixin",
+    "gamerule.BooleanRuleAccessor",
+    "gamerule.GameRulesAccessor",
+    "gamerule.GameRulesMixin",
+    "gamerule.RuleAccessor",
     "BubbleColumnBlockMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin",
