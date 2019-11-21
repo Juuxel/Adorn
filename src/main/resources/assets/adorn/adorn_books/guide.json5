@@ -69,15 +69,15 @@
           {
             translate: "guide.adorn.topic.chimney.title",
             underlined: true,
-            clickEvent: { action: "change_page", value: "15" },
-            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["15"], italic: true } }
+            clickEvent: { action: "change_page", value: "14" },
+            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["14"], italic: true } }
           },
           "\n",
           {
             translate: "guide.adorn.topic.prismarine_chimney.title",
             underlined: true,
-            clickEvent: { action: "change_page", value: "16" },
-            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["16"], italic: true } }
+            clickEvent: { action: "change_page", value: "15" },
+            hoverEvent: { action: "show_text", value: { translate: "guide.adorn.contents.jump_to_page", with: ["15"], italic: true } }
           }
         ]
       }
