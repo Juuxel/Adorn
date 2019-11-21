@@ -1,6 +1,6 @@
 package juuxel.adorn.gui.widget
 
-import com.mojang.blaze3d.platform.GlStateManager
+import com.mojang.blaze3d.systems.RenderSystem
 import io.github.cottonmc.cotton.gui.widget.WWidget
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -13,12 +13,12 @@ class WBigLabel(private val text: Text, private val color: Int, private val scal
 
     @Environment(EnvType.CLIENT)
     override fun paintBackground(x: Int, y: Int) {
-        GlStateManager.pushMatrix()
-        GlStateManager.translatef((x + width / 2).toFloat(), (y + height / 2 - 3).toFloat(), 0f)
-        GlStateManager.scalef(scale, scale, 1.0f)
+        RenderSystem.pushMatrix()
+        RenderSystem.translatef((x + width / 2).toFloat(), (y + height / 2 - 3).toFloat(), 0f)
+        RenderSystem.scalef(scale, scale, 1.0f)
         val s = text.asFormattedString()
         font.draw(s, (-font.getStringWidth(s) / 2).toFloat(), 0f, color)
-        GlStateManager.popMatrix()
+        RenderSystem.popMatrix()
     }
 
     override fun canResize() = true
