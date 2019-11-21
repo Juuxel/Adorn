@@ -61,7 +61,7 @@ class WText(
                     color
 
             val str = text.asFormattedString()
-            ScreenDrawing.drawString(str, alignment, x, y + yOffset, width, actualColor)
+            ScreenDrawing.drawString(str, alignment, x, y + yOffset + i * font.fontHeight, width, actualColor)
         }
 
         val text = getTextAt(mouseX, mouseY)
