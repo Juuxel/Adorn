@@ -203,6 +203,4 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
             ShelfRenderer()
         )
     }
-
-    private fun newItemSettings() = Item.Settings().group(ItemGroup.DECORATIONS)
 }
