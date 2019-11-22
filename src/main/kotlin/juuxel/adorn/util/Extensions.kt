@@ -3,8 +3,11 @@ package juuxel.adorn.util
 import com.mojang.datafixers.Dynamic
 import com.mojang.datafixers.types.JsonOps
 import net.minecraft.datafixers.NbtOps
+import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
+import net.minecraft.text.TranslatableText
 import java.util.Optional
 
 fun CompoundTag.putTextComponent(name: String, textComponent: Text) =
@@ -29,4 +32,5 @@ fun CompoundTag.getTextComponent(name: String): Text? {
     )
 }
 
-fun <T> Optional<Optional<T>>.flatten(): Optional<T> = orElse(Optional.empty())
+fun ItemStack.toTextWithCount(): Text =
+    TranslatableText("text.adorn.item_stack_with_count", count, toHoverableText())

@@ -3,6 +3,7 @@ package juuxel.adorn.block.renderer
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.color
+import juuxel.adorn.util.toTextWithCount
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
@@ -13,9 +14,6 @@ import net.minecraft.client.render.model.json.ModelTransformation
 import net.minecraft.client.resource.language.I18n
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.client.util.math.Vector3f
-import net.minecraft.item.ItemStack
-import net.minecraft.text.LiteralText
-import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
@@ -52,11 +50,11 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
         }
 
         if (lookingAtBlock) {
-            val label1 = I18n.translate(LABEL_1, be.ownerName.copy().formatted(Formatting.GOLD).asFormattedString())
+            val label1 = I18n.translate(OWNER_LABEL, be.ownerName.copy().formatted(Formatting.GOLD).asFormattedString())
             renderLabel(be, label1, 0.0,  0.9, 0.0, 12, matrices, vertexConsumerProvider, light)
             if (!be.trade.isEmpty()) {
-                val label2 = I18n.translate(LABEL_2, be.trade.selling.toTextComponentWithCount().asFormattedString())
-                val label3 = I18n.translate(LABEL_3, be.trade.price.toTextComponentWithCount().asFormattedString())
+                val label2 = I18n.translate(SELLING_LABEL, be.trade.selling.toTextWithCount().asFormattedString())
+                val label3 = I18n.translate(PRICE_LABEL, be.trade.price.toTextWithCount().asFormattedString())
                 renderLabel(be, label2, 0.0, 0.9 - 0.25, 0.0, 12, matrices, vertexConsumerProvider, light)
                 renderLabel(be, label3, 0.0, 0.9 - 0.5, 0.0, 12, matrices, vertexConsumerProvider, light)
             }
@@ -83,15 +81,12 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
         }
     }
 
-    private fun ItemStack.toTextComponentWithCount(): Text =
-        LiteralText("${count}x ").append(toHoverableText())
-
     companion object {
         private const val SELLING_ROTATION_MULTIPLIER = 1.2f
         //private const val PRICE_ROTATION_MULTIPLIER = -2.5f
 
-        private const val LABEL_1 = "block.adorn.trading_station.label.1"
-        private const val LABEL_2 = "block.adorn.trading_station.label.2"
-        private const val LABEL_3 = "block.adorn.trading_station.label.3"
+        private const val OWNER_LABEL = "block.adorn.trading_station.label.owner"
+        private const val SELLING_LABEL = "block.adorn.trading_station.label.selling"
+        private const val PRICE_LABEL = "block.adorn.trading_station.label.price"
     }
 }
