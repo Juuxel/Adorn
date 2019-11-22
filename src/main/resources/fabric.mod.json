@@ -44,7 +44,7 @@
   "mixins": ["mixins.adorn.json"],
 
   "depends": {
-    "fabricloader": ">=0.4.6",
+    "fabricloader": ">=0.7.0",
     "fabric": ">=0.4.0",
     "fabric-language-kotlin": "^1.3.30",
     "libgui": "^1.3.2",
