@@ -206,6 +206,4 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
         BlockRenderLayerMap.INSTANCE.putBlock(STONE_TORCH_GROUND, RenderLayer.getCutout())
         BlockRenderLayerMap.INSTANCE.putBlock(STONE_TORCH_WALL, RenderLayer.getCutout())
     }
-
-    private fun newItemSettings() = Item.Settings().group(ItemGroup.DECORATIONS)
 }

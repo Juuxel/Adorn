@@ -2,6 +2,7 @@ package juuxel.adorn.block.renderer
 
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.util.Colors
+import juuxel.adorn.util.color
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
@@ -73,10 +74,10 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
 
             val matrixModel = matrix.peek().model
             val opacity = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25f)
-            val opacityAsAlpha = (opacity * 255.0f).toInt() shl 24
+            val backgroundColor = color(0x000000, opacity)
             val textRenderer = blockEntityRenderDispatcher.textRenderer
             val textX = -textRenderer.getStringWidth(name) / 2f
-            textRenderer.draw(name, textX, 0f, Colors.WHITE, false, matrixModel, vcp, true, opacityAsAlpha, light)
+            textRenderer.draw(name, textX, 0f, Colors.WHITE, false, matrixModel, vcp, false, backgroundColor, light)
 
             matrix.pop()
         }
