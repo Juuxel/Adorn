@@ -259,6 +259,23 @@
   "block.adorn.terrestria_willow_shelf": "Willow Shelf",
   "block.adorn.shelf.desc": "A handy place for everyday items",
 
+  "block.adorn.white_table_lamp": "White Table Lamp",
+  "block.adorn.light_gray_table_lamp": "Light Gray Table Lamp",
+  "block.adorn.gray_table_lamp": "Gray Table Lamp",
+  "block.adorn.black_table_lamp": "Black Table Lamp",
+  "block.adorn.brown_table_lamp": "Brown Table Lamp",
+  "block.adorn.red_table_lamp": "Red Table Lamp",
+  "block.adorn.orange_table_lamp": "Orange Table Lamp",
+  "block.adorn.yellow_table_lamp": "Yellow Table Lamp",
+  "block.adorn.lime_table_lamp": "Lime Table Lamp",
+  "block.adorn.green_table_lamp": "Green Table Lamp",
+  "block.adorn.cyan_table_lamp": "Cyan Table Lamp",
+  "block.adorn.light_blue_table_lamp": "Light Blue Table Lamp",
+  "block.adorn.blue_table_lamp": "Blue Table Lamp",
+  "block.adorn.purple_table_lamp": "Purple Table Lamp",
+  "block.adorn.magenta_table_lamp": "Magenta Table Lamp",
+  "block.adorn.pink_table_lamp": "Pink Table Lamp",
+
   "item.adorn.stone_rod": "Stone Rod",
   "item.adorn.stone_rod.desc": "Crafting ingredient",
 

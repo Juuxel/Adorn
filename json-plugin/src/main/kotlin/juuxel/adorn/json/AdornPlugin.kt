@@ -11,6 +11,7 @@ import io.github.cottonmc.jsonfactory.gens.block.SuffixedLootTable
 import juuxel.adorn.json.chair.*
 import juuxel.adorn.json.drawer.*
 import juuxel.adorn.json.kitchen.*
+import juuxel.adorn.json.lamp.TableLampBlockModel
 import juuxel.adorn.json.platform.*
 import juuxel.adorn.json.post.*
 import juuxel.adorn.json.shelf.ShelfBlockModel
@@ -22,6 +23,7 @@ import juuxel.adorn.json.table.*
 
 object AdornPlugin : Plugin {
     //adorn:red,adorn:black,adorn:green,adorn:brown,adorn:blue,adorn:purple,adorn:cyan,adorn:light_gray,adorn:gray,adorn:pink,adorn:lime,adorn:yellow,adorn:light_blue,adorn:magenta,adorn:orange,adorn:white
+    //adorn:red_table_lamp,adorn:black_table_lamp,adorn:green_table_lamp,adorn:brown_table_lamp,adorn:blue_table_lamp,adorn:purple_table_lamp,adorn:cyan_table_lamp,adorn:light_gray_table_lamp,adorn:gray_table_lamp,adorn:pink_table_lamp,adorn:lime_table_lamp,adorn:yellow_table_lamp,adorn:light_blue_table_lamp,adorn:magenta_table_lamp,adorn:orange_table_lamp,adorn:white_table_lamp
     //adorn:oak,adorn:spruce,adorn:birch,adorn:jungle,adorn:acacia,adorn:dark_oak
     //adorn:stone,adorn:cobblestone,adorn:sandstone,adorn:andesite,adorn:granite,adorn:diorite
 
@@ -226,7 +228,9 @@ object AdornPlugin : Plugin {
             SHELF,
             "shelf",
             keyItems = listOf(slabItem)
-        )
+        ),
+
+        TableLampBlockModel
     )
 
     object AdornCategory : GeneratorInfo.Category {

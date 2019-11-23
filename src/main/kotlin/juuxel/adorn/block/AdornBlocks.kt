@@ -18,11 +18,14 @@ import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.CarpetBlock
+import net.minecraft.block.Material
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher
 import net.minecraft.item.BlockItem
+import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundCategory
 import net.minecraft.util.ActionResult
+import net.minecraft.util.DyeColor
 
 object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val SOFAS: List<SofaBlock> = BlockVariant.WOOLS.values.map {
@@ -97,7 +100,8 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val GRANITE_PLATFORM: Block = registerBlock("granite_platform", PlatformBlock(BlockVariant.GRANITE))
     val BRICK_PLATFORM: Block = registerBlock("brick_platform", PlatformBlock(BlockVariant.BRICK))
     val STONE_BRICK_PLATFORM: Block = registerBlock("stone_brick_platform", PlatformBlock(BlockVariant.STONE_BRICK))
-    val RED_SANDSTONE_PLATFORM: Block = registerBlock("red_sandstone_platform", PlatformBlock(BlockVariant.RED_SANDSTONE))
+    val RED_SANDSTONE_PLATFORM: Block =
+        registerBlock("red_sandstone_platform", PlatformBlock(BlockVariant.RED_SANDSTONE))
     val NETHER_BRICK_PLATFORM: Block = registerBlock("nether_brick_platform", PlatformBlock(BlockVariant.NETHER_BRICK))
 
     val OAK_STEP: Block = registerBlock("oak_step", StepBlock(BlockVariant.OAK))
@@ -154,6 +158,19 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val ACACIA_KITCHEN_SINK: Block = registerBlock("acacia_kitchen_sink", KitchenSinkBlock(BlockVariant.ACACIA))
     val DARK_OAK_KITCHEN_SINK: Block = registerBlock("dark_oak_kitchen_sink", KitchenSinkBlock(BlockVariant.DARK_OAK))
 
+    val TABLE_LAMPS: Map<DyeColor, Block> = DyeColor.values().associate {
+        it to registerBlock(
+            "${it.asString()}_table_lamp",
+            TableLampBlock(
+                FabricBlockSettings.of(Material.REDSTONE_LAMP, it)
+                    .hardness(0.3f)
+                    .resistance(0.3f)
+                    .sounds(BlockSoundGroup.WOOL)
+                    .build()
+            )
+        )
+    }
+
     val TRADING_STATION: TradingStationBlock = registerBlock("trading_station", TradingStationBlock())
 
     val STONE_TORCH_GROUND = registerBlockWithoutItem("stone_torch", StoneTorchBlock())
@@ -186,9 +203,19 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
             if (block is CarpetedBlock && block.canStateBeCarpeted(state) && item is BlockItem) {
                 val carpet = item.block
                 if (carpet is CarpetBlock) {
-                    world.setBlockState(pos, state.with(CarpetedBlock.CARPET, CarpetedBlock.CARPET.wrapOrNone(carpet.color)))
+                    world.setBlockState(
+                        pos,
+                        state.with(CarpetedBlock.CARPET, CarpetedBlock.CARPET.wrapOrNone(carpet.color))
+                    )
                     val soundGroup = carpet.defaultState.soundGroup
-                    world.playSound(player, pos, soundGroup.placeSound, SoundCategory.BLOCKS, (soundGroup.volume + 1f) / 2f, soundGroup.pitch * 0.8f)
+                    world.playSound(
+                        player,
+                        pos,
+                        soundGroup.placeSound,
+                        SoundCategory.BLOCKS,
+                        (soundGroup.volume + 1f) / 2f,
+                        soundGroup.pitch * 0.8f
+                    )
                     if (!player.abilities.creativeMode) stack.decrement(1)
                     player.swingHand(hand)
                     ActionResult.SUCCESS

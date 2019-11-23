@@ -6,14 +6,18 @@ import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
 import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.property.FrontConnection
 import juuxel.adorn.util.buildShapeRotations
+import juuxel.adorn.util.withBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
+import net.minecraft.item.DyeItem
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.EnumProperty
@@ -39,6 +43,24 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
             .with(CONNECTED_LEFT, false)
             .with(CONNECTED_RIGHT, false)
             .with(WATERLOGGED, false)
+    }
+
+    override fun onUse(
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        player: PlayerEntity,
+        hand: Hand,
+        hitResult: BlockHitResult
+    ): ActionResult {val stack = player.getStackInHand(hand)
+        val item = stack.item
+        if (item is DyeItem) {
+            //world.setBlockState(pos, state.withBlock(AdornBlocks.TABLE_LAMPS[item.color]!!)) // TODO
+            world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.6f)
+            return ActionResult.SUCCESS
+        }
+
+        return super.onUse(state, world, pos, player, hand, hitResult)
     }
 
     override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult): ActionResult {

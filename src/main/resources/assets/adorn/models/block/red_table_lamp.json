@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/table_lamp",
+  "textures": {
+    "wool": "minecraft:block/red_wool"
+  }
+}
