@@ -6,8 +6,8 @@
   },
   "elements": [
     {
-      "from": [2, 1, 3],
-      "to": [12, 15, 13],
+      "from": [2, 7, 2],
+      "to": [13, 15, 14],
       "faces": {
         "up": { "texture": "#water", "tintindex": 1 }
       }

@@ -46,21 +46,18 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
     }
 
     override fun onUse(
-        state: BlockState,
-        world: World,
-        pos: BlockPos,
-        player: PlayerEntity,
-        hand: Hand,
-        hitResult: BlockHitResult
-    ): ActionResult {val stack = player.getStackInHand(hand)
+        state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hit: BlockHitResult
+    ): ActionResult {
+        val stack = player.getStackInHand(hand)
         val item = stack.item
         if (item is DyeItem) {
             world.setBlockState(pos, state.withBlock(AdornBlocks.SOFAS[item.color]!!))
-            world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.6f)
+            world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.8f)
+            if (!player.abilities.creativeMode) stack.decrement(1)
             return ActionResult.SUCCESS
         }
 
-        return super.onUse(state, world, pos, player, hand, hitResult)
+        return super.onUse(state, world, pos, player, hand, hit)
     }
 
     override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult): ActionResult {

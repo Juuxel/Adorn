@@ -41,8 +41,8 @@ open class KitchenSinkBlock(variant: BlockVariant) : KitchenCounterBlock(variant
 
         init {
             val sinkShapes = buildShapeRotations(
-                3, 1, 3,
-                12, 16, 13
+                2, 7, 2,
+                13, 16, 14
             )
             SHAPES = BaseKitchenCounterBlock.SHAPES.mapValues { (direction, shape) ->
                 VoxelShapes.combineAndSimplify(

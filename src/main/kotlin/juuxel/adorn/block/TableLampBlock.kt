@@ -41,7 +41,8 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable {
         val item = stack.item
         if (item is DyeItem) {
             world.setBlockState(pos, state.withBlock(AdornBlocks.TABLE_LAMPS[item.color]!!))
-            world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.6f)
+            world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.8f)
+            if (!player.abilities.creativeMode) stack.decrement(1)
         } else {
             val wasLit = state[LIT]
             world.setBlockState(pos, state.with(LIT, !wasLit))

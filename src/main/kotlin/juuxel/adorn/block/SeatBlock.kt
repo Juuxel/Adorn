@@ -24,10 +24,10 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
     open val sittingYOffset: Double = 0.0
 
     override fun onUse(
-        state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult
+        state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hit: BlockHitResult
     ): ActionResult {
         if (!isSittingEnabled())
-            return super.onUse(state, world, pos, player, hand, hitResult)
+            return super.onUse(state, world, pos, player, hand, hit)
 
         val actualPos = getActualSeatPos(world, state, pos)
         val actualState = if (pos == actualPos) state else world.getBlockState(actualPos)
