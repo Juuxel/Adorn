@@ -131,7 +131,7 @@
       text: { translate: "guide.adorn.topic.step.text" }
     },
     {
-      icons: ["adorn:oak_kitchen_counter", "adorn:oak_kitchen_cupboard"],
+      icons: ["adorn:oak_kitchen_counter", "adorn:oak_kitchen_cupboard", "adorn:oak_kitchen_sink"],
       title: { translate: "guide.adorn.topic.kitchen.title" },
       text: { translate: "guide.adorn.topic.kitchen.text" }
     },

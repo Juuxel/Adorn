@@ -127,6 +127,18 @@ object AdornPlugin : Plugin {
             keyItems = listOf(planksItem)
         ),
 
+        KitchenSinkBlockModel,
+        KitchenSinkBlockState,
+        SuffixedBlockItemModel("kitchen_sink", KITCHEN),
+        SuffixedLootTable("kitchen_sink", KITCHEN),
+        KitchenSinkRecipe,
+        SuffixedRecipeAdvancementGenerator(
+            "kitchen_sink.recipe_advancement",
+            KITCHEN,
+            "kitchen_sink",
+            keyItems = listOf(planksItem)
+        ),
+
         KitchenCupboardBlockModel,
         KitchenCupboardBlockState,
         KitchenCupboardItemModel,

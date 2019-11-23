@@ -4,6 +4,7 @@ import juuxel.adorn.Adorn
 import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.renderer.ShelfRenderer
 import juuxel.adorn.block.renderer.TradingStationRenderer
+import juuxel.adorn.client.SinkColorProvider
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
 import juuxel.adorn.lib.RegistryHelper
@@ -11,6 +12,7 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
+import net.fabricmc.fabric.api.client.render.ColorProviderRegistry
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
@@ -19,8 +21,6 @@ import net.minecraft.block.CarpetBlock
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher
 import net.minecraft.item.BlockItem
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.sound.SoundCategory
 import net.minecraft.util.ActionResult
 
@@ -147,6 +147,13 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
         )
     )
 
+    val OAK_KITCHEN_SINK: Block = registerBlock("oak_kitchen_sink", KitchenSinkBlock(BlockVariant.OAK))
+    val SPRUCE_KITCHEN_SINK: Block = registerBlock("spruce_kitchen_sink", KitchenSinkBlock(BlockVariant.SPRUCE))
+    val BIRCH_KITCHEN_SINK: Block = registerBlock("birch_kitchen_sink", KitchenSinkBlock(BlockVariant.BIRCH))
+    val JUNGLE_KITCHEN_SINK: Block = registerBlock("jungle_kitchen_sink", KitchenSinkBlock(BlockVariant.JUNGLE))
+    val ACACIA_KITCHEN_SINK: Block = registerBlock("acacia_kitchen_sink", KitchenSinkBlock(BlockVariant.ACACIA))
+    val DARK_OAK_KITCHEN_SINK: Block = registerBlock("dark_oak_kitchen_sink", KitchenSinkBlock(BlockVariant.DARK_OAK))
+
     val TRADING_STATION: TradingStationBlock = registerBlock("trading_station", TradingStationBlock())
 
     val STONE_TORCH_GROUND = registerBlockWithoutItem("stone_torch", StoneTorchBlock())
@@ -194,6 +201,7 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
 
     @Environment(EnvType.CLIENT)
     fun initClient() {
+        // BlockEntityRenderers
         BlockEntityRendererRegistry.INSTANCE.register(
             TradingStationBlock.BLOCK_ENTITY_TYPE,
             TradingStationRenderer(BlockEntityRenderDispatcher.INSTANCE)
@@ -202,8 +210,38 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
             ShelfBlock.BLOCK_ENTITY_TYPE,
             ShelfRenderer(BlockEntityRenderDispatcher.INSTANCE)
         )
-        BlockRenderLayerMap.INSTANCE.putBlock(TRADING_STATION, RenderLayer.getCutout())
-        BlockRenderLayerMap.INSTANCE.putBlock(STONE_TORCH_GROUND, RenderLayer.getCutout())
-        BlockRenderLayerMap.INSTANCE.putBlock(STONE_TORCH_WALL, RenderLayer.getCutout())
+
+        // RenderLayers
+        setRenderLayer(
+            RenderLayer.getCutout(),
+            TRADING_STATION, STONE_TORCH_GROUND, STONE_TORCH_WALL
+        )
+//        setRenderLayer(
+//            RenderLayer.getTranslucent(),
+//            OAK_KITCHEN_SINK,
+//            SPRUCE_KITCHEN_SINK,
+//            BIRCH_KITCHEN_SINK,
+//            JUNGLE_KITCHEN_SINK,
+//            ACACIA_KITCHEN_SINK,
+//            DARK_OAK_KITCHEN_SINK
+//        )
+
+        // BlockColorProviders
+        ColorProviderRegistry.BLOCK.register(
+            SinkColorProvider,
+            OAK_KITCHEN_SINK,
+            SPRUCE_KITCHEN_SINK,
+            BIRCH_KITCHEN_SINK,
+            JUNGLE_KITCHEN_SINK,
+            ACACIA_KITCHEN_SINK,
+            DARK_OAK_KITCHEN_SINK
+        )
+    }
+
+    @Environment(EnvType.CLIENT)
+    private fun setRenderLayer(layer: RenderLayer, vararg blocks: Block) {
+        for (block in blocks) {
+            BlockRenderLayerMap.INSTANCE.putBlock(block, layer)
+        }
     }
 }

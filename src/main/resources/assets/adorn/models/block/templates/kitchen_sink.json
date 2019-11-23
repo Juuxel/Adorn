@@ -1,0 +1,128 @@
+{
+  "parent": "adorn:block/templates/rotatable",
+  "textures": {
+    "stone": "minecraft:block/polished_andesite",
+    "iron": "minecraft:block/iron_block",
+    "particle": "#planks"
+  },
+  "elements": [
+    {
+      "from": [13, 0, 0],
+      "to": [14, 12, 16],
+      "faces": {
+        "down": { "texture": "#planks", "cullface": "down" },
+        "east": { "texture": "#planks" },
+        "south": { "texture": "#planks", "cullface": "south" },
+        "north": { "texture": "#planks", "cullface": "north" }
+      }
+    },
+    {
+      "from": [0, 0, 0],
+      "to": [2, 12, 16],
+      "faces": {
+        "down": { "texture": "#planks", "cullface": "down" },
+        "west": { "texture": "#planks", "cullface": "west" },
+        "south": { "texture": "#planks", "cullface": "south" },
+        "north": { "texture": "#planks", "cullface": "north" }
+      }
+    },
+    {
+      "from": [2, 0, 0],
+      "to": [13, 12, 2],
+      "faces": {
+        "down": { "texture": "#planks", "cullface": "down" },
+        "north": { "texture": "#planks", "cullface": "north" }
+      }
+    },
+    {
+      "from": [2, 0, 14],
+      "to": [13, 12, 16],
+      "faces": {
+        "down": { "texture": "#planks", "cullface": "down" },
+        "south": { "texture": "#planks", "cullface": "south" }
+      }
+    },
+
+    {
+      "from": [2, 12, 0],
+      "to": [13, 16, 2],
+      "faces": {
+        "up": { "texture": "#stone", "cullface": "up" },
+        "north": { "texture": "#stone", "cullface": "north" }
+      }
+    },
+    {
+      "from": [0, 12, 0],
+      "to": [2, 16, 16],
+      "faces": {
+        "up": { "texture": "#stone", "cullface": "up" },
+        "west": { "texture": "#stone", "cullface": "west" },
+        "south": { "texture": "#stone", "cullface": "south" },
+        "north": { "texture": "#stone", "cullface": "north" }
+      }
+    },
+    {
+      "from": [2, 12, 14],
+      "to": [13, 16, 16],
+      "faces": {
+        "up": { "texture": "#stone", "cullface": "up" },
+        "south": { "texture": "#stone", "cullface": "south" }
+      }
+    },
+    {
+      "__comment": "EAST/The part that sticks out",
+      "from": [13, 12, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "up": { "texture": "#stone", "cullface": "up" },
+        "down": { "texture": "#stone" },
+        "east": { "texture": "#stone", "cullface": "east" },
+        "south": { "texture": "#stone", "cullface": "south" },
+        "north": { "texture": "#stone", "cullface": "north" }
+      }
+    },
+
+    {
+      "from": [2, 1, 2],
+      "to": [13, 16, 3],
+      "faces": {
+        "up": { "texture": "#iron", "cullface": "up" },
+        "south": { "texture": "#iron" }
+      }
+    },
+    {
+      "from": [2, 1, 13],
+      "to": [13, 16, 14],
+      "faces": {
+        "up": { "texture": "#iron", "cullface": "up" },
+        "north": { "texture": "#iron" }
+      }
+    },
+    {
+      "from": [2, 1, 3],
+      "to": [3, 16, 13],
+      "faces": {
+        "up": { "texture": "#iron", "cullface": "up" },
+        "east": { "texture": "#iron" }
+      }
+    },
+    {
+      "from": [12, 1, 3],
+      "to": [13, 16, 13],
+      "faces": {
+        "up": { "texture": "#iron", "cullface": "up" },
+        "west": { "texture": "#iron" }
+      }
+    },
+
+    {
+      "__comment": "Bottom",
+      "from": [2, 0, 2],
+      "to": [14, 1, 14],
+      "faces": {
+        "down": { "texture": "#planks", "cullface": "down" },
+        "up": { "texture": "#iron" }
+      }
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "version": "1.2.1",
+  "version": "1.3.0",
   "vanilla_pieces": {
     "oak_drawer": { "base": "minecraft:oak_planks", "type": "adorn:drawer", "piece": "adorn:oak_drawer" },
     "spruce_drawer": { "base": "minecraft:spruce_planks", "type": "adorn:drawer", "piece": "adorn:spruce_drawer" },
@@ -64,6 +64,22 @@
     "terrestria_sakura_kitchen_cupboard": { "base": "terrestria:sakura_planks", "type": "adorn:kitchen_cupboard", "piece": "adorn:terrestria_sakura_kitchen_cupboard" },
     "terrestria_willow_kitchen_cupboard": { "base": "terrestria:willow_planks", "type": "adorn:kitchen_cupboard", "piece": "adorn:terrestria_willow_kitchen_cupboard" },
     "traverse_fir_kitchen_cupboard": { "base": "traverse:fir_planks", "type": "adorn:kitchen_cupboard", "piece": "adorn:traverse_fir_kitchen_cupboard" },
+
+    "oak_kitchen_sink": { "base": "minecraft:oak_planks", "type": "adorn:kitchen_sink", "piece": "adorn:oak_kitchen_sink" },
+    "spruce_kitchen_sink": { "base": "minecraft:spruce_planks", "type": "adorn:kitchen_sink", "piece": "adorn:spruce_kitchen_sink" },
+    "birch_kitchen_sink": { "base": "minecraft:birch_planks", "type": "adorn:kitchen_sink", "piece": "adorn:birch_kitchen_sink" },
+    "jungle_kitchen_sink": { "base": "minecraft:jungle_planks", "type": "adorn:kitchen_sink", "piece": "adorn:jungle_kitchen_sink" },
+    "acacia_kitchen_sink": { "base": "minecraft:acacia_planks", "type": "adorn:kitchen_sink", "piece": "adorn:acacia_kitchen_sink" },
+    "dark_oak_kitchen_sink": { "base": "minecraft:dark_oak_planks", "type": "adorn:kitchen_sink", "piece": "adorn:dark_oak_kitchen_sink" },
+    "terrestria_cypress_kitchen_sink": { "base": "terrestria:cypress_planks", "type": "adorn:kitchen_sink", "piece": "adorn:terrestria_cypress_kitchen_sink" },
+    "terrestria_hemlock_kitchen_sink": { "base": "terrestria:hemlock_planks", "type": "adorn:kitchen_sink", "piece": "adorn:terrestria_hemlock_kitchen_sink" },
+    "terrestria_japanese_maple_kitchen_sink": { "base": "terrestria:japanese_maple_planks", "type": "adorn:kitchen_sink", "piece": "adorn:terrestria_japanese_maple_kitchen_sink" },
+    "terrestria_rainbow_eucalyptus_kitchen_sink": { "base": "terrestria:rainbow_eucalyptus_planks", "type": "adorn:kitchen_sink", "piece": "adorn:terrestria_rainbow_eucalyptus_kitchen_sink" },
+    "terrestria_redwood_kitchen_sink": { "base": "terrestria:redwood_planks", "type": "adorn:kitchen_sink", "piece": "adorn:terrestria_redwood_kitchen_sink" },
+    "terrestria_rubber_kitchen_sink": { "base": "terrestria:rubber_planks", "type": "adorn:kitchen_sink", "piece": "adorn:terrestria_rubber_kitchen_sink" },
+    "terrestria_sakura_kitchen_sink": { "base": "terrestria:sakura_planks", "type": "adorn:kitchen_sink", "piece": "adorn:terrestria_sakura_kitchen_sink" },
+    "terrestria_willow_kitchen_sink": { "base": "terrestria:willow_planks", "type": "adorn:kitchen_sink", "piece": "adorn:terrestria_willow_kitchen_sink" },
+    "traverse_fir_kitchen_sink": { "base": "traverse:fir_planks", "type": "adorn:kitchen_sink", "piece": "adorn:traverse_fir_kitchen_sink" },
 
     "oak_table": { "base": "minecraft:oak_planks", "type": "adorn:table", "piece": "adorn:oak_table" },
     "spruce_table": { "base": "minecraft:spruce_planks", "type": "adorn:table", "piece": "adorn:spruce_table" },
