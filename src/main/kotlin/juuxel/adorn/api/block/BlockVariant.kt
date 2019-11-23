@@ -52,5 +52,7 @@ interface BlockVariant {
 
                 override fun createSettings() = settings()
             }
+
+        fun wool(color: DyeColor): BlockVariant = WOOLS[color] ?: error("Could not find wool variant for color $color")
     }
 }

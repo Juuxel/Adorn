@@ -19,4 +19,6 @@ class ChairBlockItem(block: Block) : TallBlockItem(block, Settings().group(ItemG
 
         return super.useOnBlock(context)
     }
+
+    override fun isIn(group: ItemGroup?) = super.isIn(group) || group === AdornItems.GROUP
 }

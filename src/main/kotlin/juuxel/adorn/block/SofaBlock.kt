@@ -55,7 +55,7 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
     ): ActionResult {val stack = player.getStackInHand(hand)
         val item = stack.item
         if (item is DyeItem) {
-            //world.setBlockState(pos, state.withBlock(AdornBlocks.TABLE_LAMPS[item.color]!!)) // TODO
+            world.setBlockState(pos, state.withBlock(AdornBlocks.SOFAS[item.color]!!))
             world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.6f)
             return ActionResult.SUCCESS
         }

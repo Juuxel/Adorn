@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.block.Block
 import net.minecraft.client.item.TooltipContext
+import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.item.WallStandingBlockItem
 import net.minecraft.text.Text
@@ -22,4 +23,6 @@ class WallBlockItemWithDescription(
             it.color = Formatting.DARK_GRAY
         })
     }
+
+    override fun isIn(group: ItemGroup?) = super.isIn(group) || group === AdornItems.GROUP
 }

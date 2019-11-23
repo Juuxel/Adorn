@@ -348,6 +348,7 @@
   "piece.adorn.kitchen_cupboard": "%s Kitchen Cupboard",
   "piece.adorn.kitchen_sink": "%s Kitchen Sink",
 
+  "itemGroup.adorn.items": "Adorn",
   "itemGroup.adorn.drawer": "Adorn+EP: Drawers",
   "itemGroup.adorn.table": "Adorn+EP: Tables",
   "itemGroup.adorn.shelf": "Adorn+EP: Shelves",

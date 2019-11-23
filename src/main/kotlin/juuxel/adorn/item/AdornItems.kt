@@ -6,12 +6,17 @@ import juuxel.adorn.lib.AdornTags
 import juuxel.adorn.lib.RegistryHelper
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.fabricmc.fabric.api.registry.FuelRegistry
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
+import net.minecraft.item.ItemStack
+import net.minecraft.util.DyeColor
 import net.minecraft.util.Rarity
 
 object AdornItems : RegistryHelper(Adorn.NAMESPACE) {
+    val GROUP = FabricItemGroupBuilder.build(Adorn.id("items")) { ItemStack(AdornBlocks.SOFAS[DyeColor.LIME]) }
+
     val STONE_ROD = registerItem("stone_rod", ItemWithDescription(Item.Settings().group(ItemGroup.MISC)))
 
     val STONE_TORCH = registerItem(

@@ -3,9 +3,9 @@ package juuxel.adorn.lib
 import juuxel.adorn.block.BlockWithDescription
 import juuxel.adorn.block.entity.BETypeProvider
 import juuxel.adorn.block.entity.MutableBlockEntityType
+import juuxel.adorn.item.BaseBlockItem
 import net.minecraft.block.Block
 import net.minecraft.client.item.TooltipContext
-import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
@@ -68,7 +68,7 @@ abstract class RegistryHelper(private val namespace: String) {
 
     private fun makeItemForBlock(block: Block, itemSettings: Item.Settings): Item =
         if (block is BlockWithDescription) {
-            object : BlockItem(block, itemSettings) {
+            object : BaseBlockItem(block, itemSettings) {
                 override fun appendTooltip(
                     stack: ItemStack?, world: World?, texts: MutableList<Text>, context: TooltipContext?
                 ) {
@@ -80,7 +80,7 @@ abstract class RegistryHelper(private val namespace: String) {
                 }
             }
         } else {
-            BlockItem(block, itemSettings)
+            BaseBlockItem(block, itemSettings)
         }
 
     //-----------------------------------------

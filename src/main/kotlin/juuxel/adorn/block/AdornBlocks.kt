@@ -28,10 +28,10 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
 
 object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
-    val SOFAS: List<SofaBlock> = BlockVariant.WOOLS.values.map {
+    val SOFAS: Map<DyeColor, SofaBlock> = DyeColor.values().associate {
         // This is one place where the BlockVariant mapping is kept.
         // I will not write out sixteen sofa registrations.
-        registerBlock(it.variantName + "_sofa", SofaBlock(it))
+        it to registerBlock(it.asString() + "_sofa", SofaBlock(BlockVariant.wool(it)))
     }
 
     val OAK_CHAIR: Block = registerBlock("oak_chair", ChairBlock(BlockVariant.OAK), ::ChairBlockItem)

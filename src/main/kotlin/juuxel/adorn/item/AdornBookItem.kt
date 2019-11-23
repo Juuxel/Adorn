@@ -9,6 +9,7 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
+import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.stat.Stats
 import net.minecraft.text.Text
@@ -40,4 +41,6 @@ class AdornBookItem(private val bookId: Identifier, settings: Settings) : Item(s
             texts.add(TranslatableText("book.byAuthor", BookManager[bookId].author).formatted(Formatting.GRAY))
         }
     }
+
+    override fun isIn(group: ItemGroup?) = super.isIn(group) || group === AdornItems.GROUP
 }
