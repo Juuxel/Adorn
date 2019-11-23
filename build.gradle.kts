@@ -41,7 +41,7 @@ repositories {
     maven(url = "http://server.bbkr.space:8081/artifactory/libs-release") { name = "Cotton" }
     maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot") { name = "Cotton (snapshots)" }
     maven(url = "https://minecraft.curseforge.com/api/maven") { name = "CurseForge" }
-    maven(url = "https://jitpack.io")
+    //maven(url = "https://jitpack.io")
 }
 
 java {
