@@ -276,6 +276,22 @@
   "block.adorn.magenta_table_lamp": "Magenta Table Lamp",
   "block.adorn.pink_table_lamp": "Pink Table Lamp",
 
+  "block.adorn.oak_coffee_table": "Oak Coffee Table",
+  "block.adorn.spruce_coffee_table": "Spruce Coffee Table",
+  "block.adorn.birch_coffee_table": "Birch Coffee Table",
+  "block.adorn.jungle_coffee_table": "Jungle Coffee Table",
+  "block.adorn.acacia_coffee_table": "Acacia Coffee Table",
+  "block.adorn.dark_oak_coffee_table": "Dark Oak Coffee Table",
+  "block.adorn.traverse_fir_coffee_table": "Fir Coffee Table",
+  "block.adorn.terrestria_cypress_coffee_table": "Cypress Coffee Table",
+  "block.adorn.terrestria_hemlock_coffee_table": "Hemlock Coffee Table",
+  "block.adorn.terrestria_japanese_maple_coffee_table": "Japanese Maple Coffee Table",
+  "block.adorn.terrestria_rainbow_eucalyptus_coffee_table": "Rainbow Eucalyptus Coffee Table",
+  "block.adorn.terrestria_redwood_coffee_table": "Redwood Coffee Table",
+  "block.adorn.terrestria_rubber_coffee_table": "Rubber Coffee Table",
+  "block.adorn.terrestria_sakura_coffee_table": "Sakura Coffee Table",
+  "block.adorn.terrestria_willow_coffee_table": "Willow Coffee Table",
+
   "item.adorn.stone_rod": "Stone Rod",
   "item.adorn.stone_rod.desc": "Crafting ingredient",
 
