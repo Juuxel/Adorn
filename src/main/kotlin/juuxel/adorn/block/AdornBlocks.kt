@@ -158,6 +158,13 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val ACACIA_KITCHEN_SINK: Block = registerBlock("acacia_kitchen_sink", KitchenSinkBlock(BlockVariant.ACACIA))
     val DARK_OAK_KITCHEN_SINK: Block = registerBlock("dark_oak_kitchen_sink", KitchenSinkBlock(BlockVariant.DARK_OAK))
 
+    val OAK_COFFEE_TABLE: Block = registerBlock("oak_coffee_table", CoffeeTableBlock(BlockVariant.OAK))
+    val SPRUCE_COFFEE_TABLE: Block = registerBlock("spruce_coffee_table", CoffeeTableBlock(BlockVariant.SPRUCE))
+    val BIRCH_COFFEE_TABLE: Block = registerBlock("birch_coffee_table", CoffeeTableBlock(BlockVariant.BIRCH))
+    val JUNGLE_COFFEE_TABLE: Block = registerBlock("jungle_coffee_table", CoffeeTableBlock(BlockVariant.JUNGLE))
+    val ACACIA_COFFEE_TABLE: Block = registerBlock("acacia_coffee_table", CoffeeTableBlock(BlockVariant.ACACIA))
+    val DARK_OAK_COFFEE_TABLE: Block = registerBlock("dark_oak_coffee_table", CoffeeTableBlock(BlockVariant.DARK_OAK))
+
     val TABLE_LAMPS: Map<DyeColor, Block> = DyeColor.values().associate {
         it to registerBlock(
             "${it.asString()}_table_lamp",
@@ -243,15 +250,16 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
             RenderLayer.getCutout(),
             TRADING_STATION, STONE_TORCH_GROUND, STONE_TORCH_WALL
         )
-//        setRenderLayer(
-//            RenderLayer.getTranslucent(),
-//            OAK_KITCHEN_SINK,
-//            SPRUCE_KITCHEN_SINK,
-//            BIRCH_KITCHEN_SINK,
-//            JUNGLE_KITCHEN_SINK,
-//            ACACIA_KITCHEN_SINK,
-//            DARK_OAK_KITCHEN_SINK
-//        )
+
+        setRenderLayer(
+            RenderLayer.getTranslucent(),
+            OAK_COFFEE_TABLE,
+            SPRUCE_COFFEE_TABLE,
+            BIRCH_COFFEE_TABLE,
+            JUNGLE_COFFEE_TABLE,
+            ACACIA_COFFEE_TABLE,
+            DARK_OAK_COFFEE_TABLE
+        )
 
         // BlockColorProviders
         ColorProviderRegistry.BLOCK.register(

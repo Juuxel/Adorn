@@ -8,15 +8,7 @@ object AdornTraverseCompat {
     fun init() {
         val fir = BlockVariant.Wood("traverse_fir")
         AdornBlockBuilder.create(fir)
-            .withChair()
-            .withDrawer()
-            .withKitchenCounter()
-            .withKitchenCupboard()
-            .withPlatform()
-            .withPost()
-            .withShelf()
-            .withStep()
-            .withTable()
+            .withEverything()
             .registerIn(Adorn.NAMESPACE)
     }
 }

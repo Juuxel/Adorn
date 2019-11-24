@@ -25,6 +25,7 @@ class AdornBlockBuilder private constructor(private val material: BlockVariant) 
     private var kitchenCupboard = false
     private var kitchenSink = false
     private var shelf = false
+    private var coffeeTable = false
 
     fun withPost() = apply {
         post = true
@@ -72,11 +73,29 @@ class AdornBlockBuilder private constructor(private val material: BlockVariant) 
         shelf = true
     }
 
+    fun withCoffeeTable() = apply {
+        coffeeTable = true
+    }
+
+    fun withEverything() = apply {
+        post = true
+        platform = true
+        step = true
+        drawer = true
+        chair = true
+        table = true
+        kitchenCounter = true
+        kitchenCupboard = true
+        kitchenSink = true
+        shelf = true
+        coffeeTable = true
+    }
+
     fun registerIn(namespace: String): Unit = Registry(namespace).register()
 
     private inner class Registry(private val namespace: String) : RegistryHelper(namespace) {
         fun register() {
-            val name = material.variantName
+            val name = material.name
             if (post) registerBlock("${name}_post", PostBlock(material))
             if (platform) registerBlock("${name}_platform", PlatformBlock(material))
             if (step) registerBlock("${name}_step", StepBlock(material))
@@ -93,6 +112,7 @@ class AdornBlockBuilder private constructor(private val material: BlockVariant) 
             if (kitchenCupboard) registerBlock("${name}_kitchen_cupboard", KitchenCupboardBlock(material))
             if (kitchenSink) registerBlock("${name}_kitchen_sink", KitchenSinkBlock(material))
             if (shelf) registerBlock("${name}_shelf", ShelfBlock(material))
+            if (coffeeTable) registerBlock("${name}_coffee_table", CoffeeTableBlock(material))
 
             if (FabricLoader.getInstance().environmentType == EnvType.CLIENT) {
                 registerClient()
@@ -101,9 +121,13 @@ class AdornBlockBuilder private constructor(private val material: BlockVariant) 
 
         @Environment(EnvType.CLIENT)
         private fun registerClient() {
-            val sink = GameRegistry.BLOCK[Identifier(namespace, material.variantName + "_kitchen_sink")]
+            fun block(type: String) =
+                GameRegistry.BLOCK[Identifier(namespace, "${material.name}_$type")]
+
+            val sink = block("kitchen_sink")
             ColorProviderRegistry.BLOCK.register(SinkColorProvider, sink)
-            BlockRenderLayerMap.INSTANCE.putBlock(sink, RenderLayer.getTranslucent())
+            val coffeeTable = block("coffee_table")
+            BlockRenderLayerMap.INSTANCE.putBlock(coffeeTable, RenderLayer.getTranslucent())
         }
     }
 
