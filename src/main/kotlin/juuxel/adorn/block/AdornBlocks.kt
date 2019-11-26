@@ -196,11 +196,11 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     fun initClient() {
         BlockEntityRendererRegistry.INSTANCE.register(
             TradingStationBlock.BLOCK_ENTITY_TYPE,
-            TradingStationRenderer(BlockEntityRenderDispatcher.INSTANCE)
+            ::TradingStationRenderer
         )
         BlockEntityRendererRegistry.INSTANCE.register(
             ShelfBlock.BLOCK_ENTITY_TYPE,
-            ShelfRenderer(BlockEntityRenderDispatcher.INSTANCE)
+            ::ShelfRenderer
         )
         BlockRenderLayerMap.INSTANCE.putBlock(TRADING_STATION, RenderLayer.getCutout())
         BlockRenderLayerMap.INSTANCE.putBlock(STONE_TORCH_GROUND, RenderLayer.getCutout())
