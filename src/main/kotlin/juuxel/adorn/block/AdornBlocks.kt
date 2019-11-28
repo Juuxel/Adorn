@@ -246,12 +246,12 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
         )
 
         // RenderLayers
-        setRenderLayer(
+        BlockRenderLayerMap.INSTANCE.putBlocks(
             RenderLayer.getCutout(),
             TRADING_STATION, STONE_TORCH_GROUND, STONE_TORCH_WALL
         )
 
-        setRenderLayer(
+        BlockRenderLayerMap.INSTANCE.putBlocks(
             RenderLayer.getTranslucent(),
             OAK_COFFEE_TABLE,
             SPRUCE_COFFEE_TABLE,
@@ -271,12 +271,5 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
             ACACIA_KITCHEN_SINK,
             DARK_OAK_KITCHEN_SINK
         )
-    }
-
-    @Environment(EnvType.CLIENT)
-    private fun setRenderLayer(layer: RenderLayer, vararg blocks: Block) {
-        for (block in blocks) {
-            BlockRenderLayerMap.INSTANCE.putBlock(block, layer)
-        }
     }
 }

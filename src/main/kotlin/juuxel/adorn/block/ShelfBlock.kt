@@ -91,6 +91,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
                 stack.count = 1
                 be.setInvStack(slot, stack)
                 be.markDirty()
+                be.sync()
 
                 if (!player.abilities.creativeMode) {
                     handStack.decrement(1)
@@ -102,6 +103,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
             }
             be.setInvStack(slot, ItemStack.EMPTY)
             be.markDirty()
+            be.sync()
         }
 
         return ActionResult.SUCCESS

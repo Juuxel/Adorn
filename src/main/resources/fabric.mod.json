@@ -46,8 +46,11 @@
   "depends": {
     "minecraft": ">=1.15-",
     "fabricloader": ">=0.7.0",
-    "fabric": ">=0.4.0",
     "fabric-language-kotlin": "^1.3.30",
+
+    "fabric": ">=0.4.0",
+    "fabric-blockrenderlayer-v1": "^1.1.4",
+
     "libgui": "^1.3.2",
     "jankson": "^2.0.0",
     "libcd": "^1.6.0"
