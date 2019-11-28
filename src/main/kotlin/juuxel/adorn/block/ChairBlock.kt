@@ -55,7 +55,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
         return if (state[HALF] != DoubleBlockHalf.UPPER) {
             super.canPlaceAt(state, world, pos)
         } else {
-            val downState = world.getBlockState(pos.method_10074())
+            val downState = world.getBlockState(pos.down())
             downState.block == this && downState[HALF] == DoubleBlockHalf.LOWER
         }
     }
@@ -68,7 +68,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
 
     override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
         val half = state[HALF]
-        val otherPos = if (half == DoubleBlockHalf.LOWER) pos.up() else pos.method_10074()
+        val otherPos = if (half == DoubleBlockHalf.LOWER) pos.up() else pos.down()
         val otherState = world.getBlockState(otherPos)
 
         // Check that the other block is the same and has the correct half, otherwise break
@@ -146,7 +146,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
 
     override fun getActualSeatPos(world: World, state: BlockState, pos: BlockPos) =
         when (state[HALF]!!) {
-            DoubleBlockHalf.UPPER -> pos.method_10074()
+            DoubleBlockHalf.UPPER -> pos.down()
             DoubleBlockHalf.LOWER -> pos
         }
 

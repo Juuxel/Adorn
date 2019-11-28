@@ -43,7 +43,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         // Allow sleeping on sofas at daytime
     }
 
-    @Inject(method = "sleep", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setPlayerSpawn(Lnet/minecraft/util/math/BlockPos;Z)V"), cancellable = true)
+    @Inject(method = "sleep", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setPlayerSpawn(Lnet/minecraft/util/math/BlockPos;ZZ)V"), cancellable = true)
     private void onWakeUpSetSpawn(BlockPos pos, CallbackInfo info) {
         if (world.getBlockState(pos).getBlock() instanceof SofaBlock) {
             super.sleep(pos);
@@ -56,7 +56,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         // Allow sleeping on sofas at daytime and (depending on config)
         // prevent skipping the night on sofas
         boolean skipNight = AdornConfigManager.INSTANCE.getConfig().skipNightOnSofas;
-        if (info.getReturnValueZ() && (!skipNight || world.isDaylight()) &&
+        if (info.getReturnValueZ() && (!skipNight || world.isDay()) &&
                 getSleepingPosition().map(pos -> world.getBlockState(pos).getBlock() instanceof SofaBlock).orElse(false)) {
             info.setReturnValue(false);
         }

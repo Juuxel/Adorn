@@ -238,11 +238,11 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
         // BlockEntityRenderers
         BlockEntityRendererRegistry.INSTANCE.register(
             TradingStationBlock.BLOCK_ENTITY_TYPE,
-            TradingStationRenderer(BlockEntityRenderDispatcher.INSTANCE)
+            ::TradingStationRenderer
         )
         BlockEntityRendererRegistry.INSTANCE.register(
             ShelfBlock.BLOCK_ENTITY_TYPE,
-            ShelfRenderer(BlockEntityRenderDispatcher.INSTANCE)
+            ::ShelfRenderer
         )
 
         // RenderLayers
