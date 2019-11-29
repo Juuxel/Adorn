@@ -1,0 +1,34 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:oak_kitchen_sink",
+    "adorn:spruce_kitchen_sink",
+    "adorn:birch_kitchen_sink",
+    "adorn:jungle_kitchen_sink",
+    "adorn:acacia_kitchen_sink",
+    "adorn:dark_oak_kitchen_sink"
+  ],
+  "libcd": {
+    "entries": [
+      {
+        "when": [{ "libcd:mod_loaded": "traverse" }],
+        "values": [
+          "adorn:traverse_fir_kitchen_sink"
+        ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "terrestria" }],
+        "values": [
+          "adorn:terrestria_cypress_kitchen_sink",
+          "adorn:terrestria_hemlock_kitchen_sink",
+          "adorn:terrestria_japanese_maple_kitchen_sink",
+          "adorn:terrestria_rainbow_eucalyptus_kitchen_sink",
+          "adorn:terrestria_redwood_kitchen_sink",
+          "adorn:terrestria_rubber_kitchen_sink",
+          "adorn:terrestria_sakura_kitchen_sink",
+          "adorn:terrestria_willow_kitchen_sink"
+        ]
+      }
+    ]
+  }
+}

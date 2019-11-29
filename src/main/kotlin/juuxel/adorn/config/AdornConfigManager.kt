@@ -2,7 +2,7 @@ package juuxel.adorn.config
 
 import blue.endless.jankson.Jankson
 import blue.endless.jankson.JsonObject
-import blue.endless.jankson.impl.DeserializationException
+import blue.endless.jankson.api.DeserializationException
 import net.fabricmc.loader.api.FabricLoader
 import org.apache.logging.log4j.LogManager
 import java.nio.file.Files

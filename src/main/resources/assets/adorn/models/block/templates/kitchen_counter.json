@@ -11,9 +11,9 @@
       "faces": {
         "down": { "texture": "#planks", "cullface": "down" },
         "east": { "texture": "#planks" },
-        "west": { "texture": "#planks" },
-        "south": { "texture": "#planks" },
-        "north": { "texture": "#planks" }
+        "west": { "texture": "#planks", "cullface": "west" },
+        "south": { "texture": "#planks", "cullface": "south" },
+        "north": { "texture": "#planks", "cullface": "north" }
       }
     },
     {

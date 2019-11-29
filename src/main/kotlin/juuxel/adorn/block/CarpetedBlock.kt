@@ -5,16 +5,17 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.CarpetBlock
+import net.minecraft.loot.context.LootContext
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
-import net.minecraft.state.StateFactory
+import net.minecraft.server.world.ServerWorld
+import net.minecraft.state.StateManager
 import net.minecraft.state.property.EnumProperty
 import net.minecraft.util.DyeColor
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
-import net.minecraft.world.loot.context.LootContext
 import java.util.Random
 
 abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
@@ -24,7 +25,7 @@ abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
         }
     }
 
-    override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         if (isCarpetingEnabled()) builder.add(CARPET)
     }
@@ -35,7 +36,7 @@ abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
         else
             super.getPlacementState(context)
 
-    override fun onScheduledTick(state: BlockState, world: World, pos: BlockPos, random: Random?) {
+    override fun scheduledTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random?) {
         if (!isCarpetingEnabled()) return
         val carpet = state[CARPET]
         if (carpet.isPresent) {

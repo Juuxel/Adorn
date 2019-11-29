@@ -8,17 +8,18 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.particle.ParticleTypes
-import net.minecraft.state.StateFactory
+import net.minecraft.state.StateManager
 import net.minecraft.state.property.EnumProperty
+import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
-import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
+import net.minecraft.world.WorldView
 import java.util.*
 
-class ChimneyBlock : AbstractChimneyBlock(FabricBlockSettings.copy(Blocks.BRICKS).ticksRandomly().build()),
+class ChimneyBlock : AbstractChimneyBlock(FabricBlockSettings.copy(Blocks.BRICKS).ticksRandomly().build().nonOpaque()),
     BlockWithDescription {
     override val descriptionKey = "block.adorn.chimney.desc"
 
@@ -26,16 +27,16 @@ class ChimneyBlock : AbstractChimneyBlock(FabricBlockSettings.copy(Blocks.BRICKS
         defaultState = defaultState.with(SMOKE_TYPE, SmokeType.CAMPFIRE)
     }
 
-    override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(SMOKE_TYPE)
     }
 
-    override fun activate(
+    override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity?, hand: Hand?, hitResult: BlockHitResult?
-    ): Boolean {
+    ): ActionResult {
         world.setBlockState(pos, state.cycle(SMOKE_TYPE))
-        return true
+        return ActionResult.SUCCESS
     }
 
     @Environment(EnvType.CLIENT)
@@ -65,7 +66,7 @@ class ChimneyBlock : AbstractChimneyBlock(FabricBlockSettings.copy(Blocks.BRICKS
         }
     }
 
-    override fun getTickRate(world: ViewableWorld?) = 15
+    override fun getTickRate(world: WorldView?) = 15
 
     companion object {
         val SMOKE_TYPE = EnumProperty.of("smoke_type", SmokeType::class.java)

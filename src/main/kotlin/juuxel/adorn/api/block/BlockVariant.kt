@@ -8,18 +8,18 @@ interface BlockVariant {
     /**
      * The name of this variant. Must be a valid identifier path.
      */
-    val variantName: String
+    val name: String
 
     /**
      * Creates a *new* `Block.Settings`.
      */
     fun createSettings(): Block.Settings
 
-    data class Wood(override val variantName: String) : BlockVariant {
+    data class Wood(override val name: String) : BlockVariant {
         override fun createSettings() = Block.Settings.copy(Blocks.OAK_FENCE)
     }
 
-    data class Stone(override val variantName: String) : BlockVariant {
+    data class Stone(override val name: String) : BlockVariant {
         override fun createSettings() = Block.Settings.copy(Blocks.COBBLESTONE_WALL)
     }
 
@@ -48,9 +48,11 @@ interface BlockVariant {
 
         inline fun variant(name: String, crossinline settings: () -> Block.Settings): BlockVariant =
             object : BlockVariant {
-                override val variantName = name
+                override val name = name
 
                 override fun createSettings() = settings()
             }
+
+        fun wool(color: DyeColor): BlockVariant = WOOLS[color] ?: error("Could not find wool variant for color $color")
     }
 }

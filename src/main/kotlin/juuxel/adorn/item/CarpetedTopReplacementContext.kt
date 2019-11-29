@@ -12,7 +12,7 @@ class CarpetedTopPlacementContext(parent: ItemUsageContext) : ItemPlacementConte
     parent.player,
     parent.hand,
     parent.stack,
-    BlockHitResult(parent.hitPos, parent.side, parent.blockPos, parent.method_17699())
+    BlockHitResult(parent.hitPos, parent.side, parent.blockPos, parent.hitsInsideBlock())
 ) {
     init {
         // We know that the block is a carpet block

@@ -13,6 +13,7 @@ import net.minecraft.container.NameableContainerProvider
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
@@ -25,11 +26,11 @@ open class KitchenCupboardBlock : BaseKitchenCounterBlock, BETypeProvider, BaseI
 
     override val blockEntityType = BLOCK_ENTITY_TYPE
 
-    override fun activate(
+    override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
-    ): Boolean {
+    ): ActionResult {
         player.openFabricContainer(AdornGuis.KITCHEN_CUPBOARD, pos)
-        return true
+        return ActionResult.SUCCESS
     }
 
     override fun createContainerProvider(state: BlockState, world: World, pos: BlockPos) =

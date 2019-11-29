@@ -6,7 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.BubbleColumnBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.ViewableWorld;
+import net.minecraft.world.WorldView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(BubbleColumnBlock.class)
 public class BubbleColumnBlockMixin {
     @Inject(method = "canPlaceAt", at = @At("RETURN"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
-    private void onCanPlaceAt(BlockState state, ViewableWorld world, BlockPos pos, CallbackInfoReturnable<Boolean> info, Block downBlock) {
+    private void onCanPlaceAt(BlockState state, WorldView world, BlockPos pos, CallbackInfoReturnable<Boolean> info, Block downBlock) {
         if (!info.getReturnValueZ() && downBlock instanceof PrismarineChimneyBlock.WithColumn) {
             info.setReturnValue(true);
         }

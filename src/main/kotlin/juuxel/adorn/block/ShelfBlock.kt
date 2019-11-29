@@ -15,19 +15,16 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
-import net.minecraft.state.StateFactory
+import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
-import net.minecraft.util.BlockMirror
-import net.minecraft.util.BlockRotation
-import net.minecraft.util.Hand
-import net.minecraft.util.ItemScatterer
+import net.minecraft.util.*
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
-import net.minecraft.world.ViewableWorld
 import net.minecraft.world.World
+import net.minecraft.world.WorldView
 
 open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createSettings()), Waterloggable, BlockWithDescription {
     override val descriptionKey = "block.adorn.shelf.desc"
@@ -37,7 +34,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
         defaultState = defaultState.with(WATERLOGGED, false)
     }
 
-    override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(FACING, WATERLOGGED)
     }
@@ -46,7 +43,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
         SHAPES[state[FACING]]
 
     // Based on WallTorchBlock.canPlaceAt
-    override fun canPlaceAt(state: BlockState, world: ViewableWorld, pos: BlockPos): Boolean {
+    override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
         val facing = state[FACING]
         val neighborPos = pos.offset(facing.opposite)
         return world.getBlockState(neighborPos).isSideSolidFullSquare(world, neighborPos, facing)
@@ -79,10 +76,10 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
         if (state[FACING].opposite == side && !state.canPlaceAt(world, pos)) Blocks.AIR.defaultState
         else state
 
-    override fun activate(
+    override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult
-    ): Boolean {
-        val be = world.getBlockEntity(pos) as? ShelfBlockEntity ?: return true
+    ): ActionResult {
+        val be = world.getBlockEntity(pos) as? ShelfBlockEntity ?: return ActionResult.PASS
         val slot = getSlot(state, hitResult)
         val existing = be.getInvStack(slot)
 
@@ -94,6 +91,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
                 stack.count = 1
                 be.setInvStack(slot, stack)
                 be.markDirty()
+                be.sync()
 
                 if (!player.abilities.creativeMode) {
                     handStack.decrement(1)
@@ -105,9 +103,10 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
             }
             be.setInvStack(slot, ItemStack.EMPTY)
             be.markDirty()
+            be.sync()
         }
 
-        return true
+        return ActionResult.SUCCESS
     }
 
     /**

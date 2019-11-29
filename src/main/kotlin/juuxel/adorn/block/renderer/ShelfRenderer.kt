@@ -1,59 +1,63 @@
 package juuxel.adorn.block.renderer
 
-import com.mojang.blaze3d.platform.GlStateManager
 import juuxel.adorn.block.ShelfBlock
 import juuxel.adorn.block.entity.ShelfBlockEntity
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.render.VertexConsumerProvider
+import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.client.render.model.json.ModelTransformation
+import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.client.util.math.Vector3f
 import net.minecraft.util.math.Direction
 
 @Environment(EnvType.CLIENT)
-class ShelfRenderer : BlockEntityRenderer<ShelfBlockEntity>() {
-    override fun render(be: ShelfBlockEntity, x: Double, y: Double, z: Double, tickDelta: Float, i: Int) {
+class ShelfRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEntityRenderer<ShelfBlockEntity>(dispatcher) {
+    override fun render(
+        be: ShelfBlockEntity, tickDelta: Float,
+        matrices: MatrixStack, vertexConsumerProvider: VertexConsumerProvider, light: Int, overlay: Int
+    ) {
         val facing = be.cachedState[ShelfBlock.FACING]
 
         // For first item
         val tx1 = when (facing) {
-            Direction.SOUTH, Direction.WEST -> 12f / 16f
-            else -> 4f / 16f
+            Direction.SOUTH, Direction.WEST -> 12 / 16.0
+            else -> 4 / 16.0
         }
         val tz1 = when (facing) {
-            Direction.NORTH, Direction.WEST -> 12 / 16f
-            else -> 4 / 16f
+            Direction.NORTH, Direction.WEST -> 12 / 16.0
+            else -> 4 / 16.0
         }
 
         // For second item
         val tx2 = when (facing) {
-            Direction.NORTH, Direction.WEST -> 12f / 16f
-            else -> 4f / 16f
+            Direction.NORTH, Direction.WEST -> 12 / 16.0
+            else -> 4 / 16.0
         }
         val tz2 = when (facing) {
-            Direction.NORTH, Direction.EAST -> 12 / 16f
-            else -> 4 / 16f
+            Direction.NORTH, Direction.EAST -> 12 / 16.0
+            else -> 4 / 16.0
         }
 
-        GlStateManager.pushMatrix()
-        GlStateManager.translated(x, y + /*7.1f*/ 9.6f / 16f, z)
         val itemRenderer = MinecraftClient.getInstance().itemRenderer
 
-        GlStateManager.pushMatrix()
-        GlStateManager.translatef(tx1, 0f, tz1)
-        GlStateManager.scalef(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE)
-        GlStateManager.rotatef(ITEM_1_Y_ROT + facing.asRotation(), 0f, 1f, 0f)
+        matrices.push()
+        matrices.translate(tx1, 9.6 / 16.0, tz1)
+        matrices.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE)
+        matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(ITEM_1_Y_ROT + facing.asRotation()))
         //GlStateManager.rotatef(ITEM_X_ROT, 1f, 0f, 0f)
-        itemRenderer.renderItem(be.getInvStack(0), ModelTransformation.Type.FIXED)
-        GlStateManager.popMatrix()
+        itemRenderer.method_23178(be.getInvStack(0), ModelTransformation.Type.FIXED, light, overlay, matrices, vertexConsumerProvider)
+        matrices.pop()
 
-        GlStateManager.translatef(tx2, 0f, tz2)
-        GlStateManager.scalef(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE)
-        GlStateManager.rotatef(ITEM_2_Y_ROT + facing.asRotation(), 0f, 1f, 0f)
+        matrices.push()
+        matrices.translate(tx2, 9.6 / 16.0, tz2)
+        matrices.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE)
+        matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(ITEM_2_Y_ROT + facing.asRotation()))
         //GlStateManager.rotatef(ITEM_X_ROT, 1f, 0f, 0f)
-        itemRenderer.renderItem(be.getInvStack(1), ModelTransformation.Type.FIXED)
-
-        GlStateManager.popMatrix()
+        itemRenderer.method_23178(be.getInvStack(1), ModelTransformation.Type.FIXED, light, overlay, matrices, vertexConsumerProvider)
+        matrices.pop()
     }
 
     companion object {

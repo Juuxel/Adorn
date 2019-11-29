@@ -1,0 +1,9 @@
+{
+  "parent": "adorn:block/templates/coffee_table",
+  "textures": {
+    "glass": "minecraft:block/orange_stained_glass",
+    "planks": "minecraft:block/acacia_planks",
+    "leg": "minecraft:block/acacia_log",
+    "rim": "minecraft:block/acacia_log"
+  }
+}

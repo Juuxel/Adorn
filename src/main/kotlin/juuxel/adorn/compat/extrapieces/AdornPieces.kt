@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces
 
-import com.shnupbups.extrapieces.api.EPInitializer
+/*import com.shnupbups.extrapieces.api.EPInitializer
 import com.shnupbups.extrapieces.core.PieceSet
 import com.shnupbups.extrapieces.core.PieceSets
 import com.shnupbups.extrapieces.core.PieceType
@@ -76,4 +76,4 @@ object AdornPieces : EPInitializer {
     }
 
     override fun toString() = "from Adorn is wondering why Extra Pieces is using toString()"
-}
+}*/

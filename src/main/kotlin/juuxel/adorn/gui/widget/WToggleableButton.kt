@@ -29,7 +29,7 @@ class WToggleableButton(private val label: Text) : WButton(label) {
         group.buttons += this
     }
 
-    override fun setOnClick(r: Runnable) {
+    override fun setOnClick(r: Runnable): WButton = apply {
         this.onClick = r
     }
 

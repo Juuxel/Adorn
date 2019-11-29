@@ -4,13 +4,14 @@ import io.github.cottonmc.cotton.gui.client.LibGuiClient
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import io.github.cottonmc.cotton.gui.widget.WWidget
+import io.github.cottonmc.cotton.gui.widget.data.Alignment
 import juuxel.adorn.mixin.ScreenAccessor
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.sound.PositionedSoundInstance
-import net.minecraft.client.util.TextComponentUtil
+import net.minecraft.client.util.Texts
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.ClickEvent
 import net.minecraft.text.Text
@@ -45,7 +46,7 @@ class WText(
     @Environment(EnvType.CLIENT)
     private fun wrapLines(width: Int) {
         val font = MinecraftClient.getInstance().textRenderer
-        wrappedLines = TextComponentUtil.wrapLines(text, width, font, true, true)
+        wrappedLines = Texts.wrapLines(text, width, font, true, true)
     }
 
     @Environment(EnvType.CLIENT)
@@ -60,12 +61,7 @@ class WText(
                     color
 
             val str = text.asFormattedString()
-            val xOffset = when (alignment) {
-                Alignment.LEFT -> 0
-                Alignment.CENTER -> width / 2 - font.getStringWidth(str) / 2
-                Alignment.RIGHT -> width - font.getStringWidth(str)
-            }
-            ScreenDrawing.drawString(str, x + xOffset, y + yOffset + i * font.fontHeight, actualColor)
+            ScreenDrawing.drawString(str, alignment, x, y + yOffset + i * font.fontHeight, width, actualColor)
         }
 
         val text = getTextAt(mouseX, mouseY)

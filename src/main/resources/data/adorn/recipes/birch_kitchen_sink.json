@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:kitchen_sink",
+  "ingredients": [
+    {
+      "item": "adorn:birch_kitchen_counter"
+    },
+    {
+      "item": "minecraft:bucket"
+    }
+  ],
+  "result": {
+    "item": "adorn:birch_kitchen_sink",
+    "count": 1
+  }
+}

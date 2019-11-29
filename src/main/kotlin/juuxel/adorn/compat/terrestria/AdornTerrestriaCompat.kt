@@ -17,15 +17,7 @@ object AdornTerrestriaCompat {
 
         for (wood in woodTypes) {
             AdornBlockBuilder.create(wood)
-                .withChair()
-                .withDrawer()
-                .withKitchenCounter()
-                .withKitchenCupboard()
-                .withPlatform()
-                .withPost()
-                .withShelf()
-                .withStep()
-                .withTable()
+                .withEverything()
                 .registerIn(Adorn.NAMESPACE)
         }
 

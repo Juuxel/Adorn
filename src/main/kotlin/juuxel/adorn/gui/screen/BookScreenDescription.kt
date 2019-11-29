@@ -5,6 +5,7 @@ import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel
 import io.github.cottonmc.cotton.gui.widget.WWidget
+import io.github.cottonmc.cotton.gui.widget.data.Alignment
 import juuxel.adorn.Adorn
 import juuxel.adorn.gui.painter.Painters
 import juuxel.adorn.gui.widget.*
@@ -17,12 +18,9 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.TranslatableText
-import net.minecraft.util.Tickable
 
 @Environment(EnvType.CLIENT)
-class BookScreenDescription(book: Book) : LightweightGuiDescription(), Tickable {
-    private val tickers: MutableList<Tickable> = ArrayList()
-
+class BookScreenDescription(book: Book) : LightweightGuiDescription() {
     init {
         val root = WPlainPanel()
         val pageCards = WCardPanel()
@@ -46,18 +44,13 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription(), Tickable 
     private fun createTitlePage(book: Book): WWidget {
         val result = WPlainPanel()
         result.add(WBigLabel(book.title, WLabel.DEFAULT_TEXT_COLOR, scale = book.titleScale), 0, 25, 116, 20)
-        result.add(WCenteredLabel(book.subtitle, WLabel.DEFAULT_TEXT_COLOR), 0, 45, 116, 20)
-        result.add(WCenteredLabel(TranslatableText("book.byAuthor", book.author), WLabel.DEFAULT_TEXT_COLOR), 0, 60, 116, 20)
+        result.add(WLabel(book.subtitle, WLabel.DEFAULT_TEXT_COLOR).setAlignment(Alignment.CENTER).disableDarkmode(), 0, 45, 116, 20)
+        result.add(WLabel(TranslatableText("book.byAuthor", book.author), WLabel.DEFAULT_TEXT_COLOR).setAlignment(Alignment.CENTER).disableDarkmode(), 0, 60, 116, 20)
         return result
-    }
-
-    override fun tick() {
-        tickers.forEach { it.tick() }
     }
 
     private fun createPageWidget(pages: PageContainer, page: Page): WWidget = WPlainPanel().apply {
         val item = WItem(page.icons)
-        tickers += item
         add(item, 0, 0)
         add(
             WText(
@@ -82,7 +75,7 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription(), Tickable 
 
         override fun paintBackground(x: Int, y: Int, mouseX: Int, mouseY: Int) {
             val texture = if (isWithinBounds(mouseX, mouseY)) ACTIVE_TEXTURE else INACTIVE_TEXTURE
-            ScreenDrawing.rect(texture, x, y, 8, 8, Colors.WHITE)
+            ScreenDrawing.texturedRect(x, y, 8, 8, texture, Colors.WHITE)
         }
 
         override fun onClick(x: Int, y: Int, button: Int) {

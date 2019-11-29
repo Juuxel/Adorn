@@ -2,33 +2,36 @@ package juuxel.adorn.block
 
 import juuxel.adorn.Adorn
 import juuxel.adorn.api.block.BlockVariant
-import juuxel.adorn.block.entity.ShelfBlockEntity
-import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.block.renderer.ShelfRenderer
 import juuxel.adorn.block.renderer.TradingStationRenderer
+import juuxel.adorn.client.SinkColorProvider
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
 import juuxel.adorn.lib.RegistryHelper
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.block.FabricBlockSettings
-import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
+import net.fabricmc.fabric.api.client.render.ColorProviderRegistry
+import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.CarpetBlock
+import net.minecraft.block.Material
+import net.minecraft.client.render.RenderLayer
+import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher
 import net.minecraft.item.BlockItem
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
-import net.minecraft.item.TallBlockItem
+import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundCategory
 import net.minecraft.util.ActionResult
+import net.minecraft.util.DyeColor
 
 object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
-    val SOFAS: List<SofaBlock> = BlockVariant.WOOLS.values.map {
+    val SOFAS: Map<DyeColor, SofaBlock> = DyeColor.values().associate {
         // This is one place where the BlockVariant mapping is kept.
         // I will not write out sixteen sofa registrations.
-        registerBlock(it.variantName + "_sofa", SofaBlock(it))
+        it to registerBlock(it.asString() + "_sofa", SofaBlock(BlockVariant.wool(it)))
     }
 
     val OAK_CHAIR: Block = registerBlock("oak_chair", ChairBlock(BlockVariant.OAK), ::ChairBlockItem)
@@ -97,7 +100,8 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val GRANITE_PLATFORM: Block = registerBlock("granite_platform", PlatformBlock(BlockVariant.GRANITE))
     val BRICK_PLATFORM: Block = registerBlock("brick_platform", PlatformBlock(BlockVariant.BRICK))
     val STONE_BRICK_PLATFORM: Block = registerBlock("stone_brick_platform", PlatformBlock(BlockVariant.STONE_BRICK))
-    val RED_SANDSTONE_PLATFORM: Block = registerBlock("red_sandstone_platform", PlatformBlock(BlockVariant.RED_SANDSTONE))
+    val RED_SANDSTONE_PLATFORM: Block =
+        registerBlock("red_sandstone_platform", PlatformBlock(BlockVariant.RED_SANDSTONE))
     val NETHER_BRICK_PLATFORM: Block = registerBlock("nether_brick_platform", PlatformBlock(BlockVariant.NETHER_BRICK))
 
     val OAK_STEP: Block = registerBlock("oak_step", StepBlock(BlockVariant.OAK))
@@ -147,6 +151,33 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
         )
     )
 
+    val OAK_KITCHEN_SINK: Block = registerBlock("oak_kitchen_sink", KitchenSinkBlock(BlockVariant.OAK))
+    val SPRUCE_KITCHEN_SINK: Block = registerBlock("spruce_kitchen_sink", KitchenSinkBlock(BlockVariant.SPRUCE))
+    val BIRCH_KITCHEN_SINK: Block = registerBlock("birch_kitchen_sink", KitchenSinkBlock(BlockVariant.BIRCH))
+    val JUNGLE_KITCHEN_SINK: Block = registerBlock("jungle_kitchen_sink", KitchenSinkBlock(BlockVariant.JUNGLE))
+    val ACACIA_KITCHEN_SINK: Block = registerBlock("acacia_kitchen_sink", KitchenSinkBlock(BlockVariant.ACACIA))
+    val DARK_OAK_KITCHEN_SINK: Block = registerBlock("dark_oak_kitchen_sink", KitchenSinkBlock(BlockVariant.DARK_OAK))
+
+    val OAK_COFFEE_TABLE: Block = registerBlock("oak_coffee_table", CoffeeTableBlock(BlockVariant.OAK))
+    val SPRUCE_COFFEE_TABLE: Block = registerBlock("spruce_coffee_table", CoffeeTableBlock(BlockVariant.SPRUCE))
+    val BIRCH_COFFEE_TABLE: Block = registerBlock("birch_coffee_table", CoffeeTableBlock(BlockVariant.BIRCH))
+    val JUNGLE_COFFEE_TABLE: Block = registerBlock("jungle_coffee_table", CoffeeTableBlock(BlockVariant.JUNGLE))
+    val ACACIA_COFFEE_TABLE: Block = registerBlock("acacia_coffee_table", CoffeeTableBlock(BlockVariant.ACACIA))
+    val DARK_OAK_COFFEE_TABLE: Block = registerBlock("dark_oak_coffee_table", CoffeeTableBlock(BlockVariant.DARK_OAK))
+
+    val TABLE_LAMPS: Map<DyeColor, Block> = DyeColor.values().associate {
+        it to registerBlock(
+            "${it.asString()}_table_lamp",
+            TableLampBlock(
+                FabricBlockSettings.of(Material.REDSTONE_LAMP, it)
+                    .hardness(0.3f)
+                    .resistance(0.3f)
+                    .sounds(BlockSoundGroup.WOOL)
+                    .build()
+            )
+        )
+    }
+
     val TRADING_STATION: TradingStationBlock = registerBlock("trading_station", TradingStationBlock())
 
     val STONE_TORCH_GROUND = registerBlockWithoutItem("stone_torch", StoneTorchBlock())
@@ -179,9 +210,19 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
             if (block is CarpetedBlock && block.canStateBeCarpeted(state) && item is BlockItem) {
                 val carpet = item.block
                 if (carpet is CarpetBlock) {
-                    world.setBlockState(pos, state.with(CarpetedBlock.CARPET, CarpetedBlock.CARPET.wrapOrNone(carpet.color)))
+                    world.setBlockState(
+                        pos,
+                        state.with(CarpetedBlock.CARPET, CarpetedBlock.CARPET.wrapOrNone(carpet.color))
+                    )
                     val soundGroup = carpet.defaultState.soundGroup
-                    world.playSound(player, pos, soundGroup.placeSound, SoundCategory.BLOCKS, (soundGroup.volume + 1f) / 2f, soundGroup.pitch * 0.8f)
+                    world.playSound(
+                        player,
+                        pos,
+                        soundGroup.placeSound,
+                        SoundCategory.BLOCKS,
+                        (soundGroup.volume + 1f) / 2f,
+                        soundGroup.pitch * 0.8f
+                    )
                     if (!player.abilities.creativeMode) stack.decrement(1)
                     player.swingHand(hand)
                     ActionResult.SUCCESS
@@ -194,13 +235,41 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
 
     @Environment(EnvType.CLIENT)
     fun initClient() {
+        // BlockEntityRenderers
         BlockEntityRendererRegistry.INSTANCE.register(
-            TradingStationBlockEntity::class.java,
-            TradingStationRenderer()
+            TradingStationBlock.BLOCK_ENTITY_TYPE,
+            ::TradingStationRenderer
         )
         BlockEntityRendererRegistry.INSTANCE.register(
-            ShelfBlockEntity::class.java,
-            ShelfRenderer()
+            ShelfBlock.BLOCK_ENTITY_TYPE,
+            ::ShelfRenderer
+        )
+
+        // RenderLayers
+        BlockRenderLayerMap.INSTANCE.putBlocks(
+            RenderLayer.getCutout(),
+            TRADING_STATION, STONE_TORCH_GROUND, STONE_TORCH_WALL
+        )
+
+        BlockRenderLayerMap.INSTANCE.putBlocks(
+            RenderLayer.getTranslucent(),
+            OAK_COFFEE_TABLE,
+            SPRUCE_COFFEE_TABLE,
+            BIRCH_COFFEE_TABLE,
+            JUNGLE_COFFEE_TABLE,
+            ACACIA_COFFEE_TABLE,
+            DARK_OAK_COFFEE_TABLE
+        )
+
+        // BlockColorProviders
+        ColorProviderRegistry.BLOCK.register(
+            SinkColorProvider,
+            OAK_KITCHEN_SINK,
+            SPRUCE_KITCHEN_SINK,
+            BIRCH_KITCHEN_SINK,
+            JUNGLE_KITCHEN_SINK,
+            ACACIA_KITCHEN_SINK,
+            DARK_OAK_KITCHEN_SINK
         )
     }
 }

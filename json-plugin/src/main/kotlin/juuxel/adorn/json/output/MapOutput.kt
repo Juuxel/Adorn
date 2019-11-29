@@ -7,3 +7,7 @@ import io.github.cottonmc.jsonfactory.output.MapJsonOutput
 // Edit: it already did
 @UseExperimental(ExperimentalMapOutput::class)
 typealias MapOutput = MapJsonOutput
+
+@Suppress("FunctionName")
+fun MapOutput(vararg pairs: Pair<*, *>): MapOutput =
+    MapOutput(mapOf(*pairs))

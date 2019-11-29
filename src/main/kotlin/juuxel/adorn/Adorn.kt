@@ -38,6 +38,7 @@ object Adorn : ModInitializer {
     fun initClient() {
         AdornBlocks.initClient()
         AdornItems.initClient()
+        AdornEntities.initClient()
         AdornGuis.initClient()
         AdornNetworking.initClient()
         AdornResources.initClient()

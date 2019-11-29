@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -18,28 +19,34 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
+    @Shadow
+    private int sleepTimer;
+
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType_1, World world_1) {
         super(entityType_1, world_1);
     }
 
-    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;wakeUp(ZZZ)V", ordinal = 0))
-    private void redirectWakeUp(PlayerEntity player, boolean sleepTimeSomething, boolean updatePlayersSleeping, boolean updateSpawn) {
+    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;wakeUp(ZZ)V", ordinal = 0))
+    private void redirectWakeUp(PlayerEntity player, boolean sleepTimeSomething, boolean updatePlayersSleeping) {
         Block sleepingBlock = player.getSleepingPosition()
                 .map(pos -> world.getBlockState(pos).getBlock())
                 .orElse(Blocks.AIR);
         if (!(sleepingBlock instanceof SofaBlock)) {
-            player.wakeUp(sleepTimeSomething, updatePlayersSleeping, updateSpawn);
-        } else if (AdornConfigManager.INSTANCE.getConfig().skipNightOnSofas && !world.isDaylight()) {
-            player.wakeUp(sleepTimeSomething, updatePlayersSleeping, false);
+            player.wakeUp(sleepTimeSomething, updatePlayersSleeping);
+        } else if (AdornConfigManager.INSTANCE.getConfig().skipNightOnSofas) {
+            // Decrease the timer during daylight. If the player *has* slept before (= at night), they will wake up.
+            if (--sleepTimer > 0) {
+                player.wakeUp(sleepTimeSomething, updatePlayersSleeping);
+            }
         }
 
         // Allow sleeping on sofas at daytime
     }
 
-    // Lambda: Optional.ifPresent in wakeUp(boolean, boolean, boolean)
-    @Inject(method = "method_18452", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "sleep", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setPlayerSpawn(Lnet/minecraft/util/math/BlockPos;ZZ)V"), cancellable = true)
     private void onWakeUpSetSpawn(BlockPos pos, CallbackInfo info) {
         if (world.getBlockState(pos).getBlock() instanceof SofaBlock) {
+            super.sleep(pos);
             info.cancel();
         }
     }
@@ -49,7 +56,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         // Allow sleeping on sofas at daytime and (depending on config)
         // prevent skipping the night on sofas
         boolean skipNight = AdornConfigManager.INSTANCE.getConfig().skipNightOnSofas;
-        if (info.getReturnValueZ() && (!skipNight || world.isDaylight()) &&
+        if (info.getReturnValueZ() && (!skipNight || world.isDay()) &&
                 getSleepingPosition().map(pos -> world.getBlockState(pos).getBlock() instanceof SofaBlock).orElse(false)) {
             info.setReturnValue(false);
         }

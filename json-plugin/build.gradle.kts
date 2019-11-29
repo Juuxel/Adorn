@@ -1,10 +1,8 @@
-import moe.nikky.counter.CounterExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm")
+    kotlin("jvm") version "1.3.60"
     application
-    id("moe.nikky.persistentCounter") version "0.0.8-SNAPSHOT"
 }
 
 base {
@@ -17,10 +15,7 @@ repositories {
     maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot")
 }
 
-val counter: CounterExtension = project.extensions.getByType()
-val buildNumber = counter.variable("buildNumber", rootProject.version.toString())
-
-version = "${rootProject.version}-$buildNumber"
+version = "1.6.0"
 
 dependencies {
     val jsonFactory = "0.5.0-beta.3-SNAPSHOT"

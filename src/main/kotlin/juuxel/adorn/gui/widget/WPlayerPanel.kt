@@ -21,7 +21,7 @@ class WPlayerPanel : WWidget() {
     @Environment(EnvType.CLIENT)
     override fun paintBackground(x: Int, y: Int, mouseX: Int, mouseY: Int) {
         val px = 1 / 256f
-        ScreenDrawing.rect(TEXTURE, x, y, width, height, 72 * px, 5 * px, 106 * px, 50 * px, Colors.WHITE)
+        ScreenDrawing.texturedRect(x, y, width, height, TEXTURE, 72 * px, 5 * px, 106 * px, 50 * px, Colors.WHITE)
         InventoryScreen.drawEntity(x + width / 2, y + height - 4, 20, -mouseX.toFloat(), -mouseY.toFloat(), MinecraftClient.getInstance().player)
     }
 

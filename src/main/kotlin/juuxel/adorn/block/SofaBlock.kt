@@ -6,15 +6,19 @@ import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
 import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.property.FrontConnection
 import juuxel.adorn.util.buildShapeRotations
+import juuxel.adorn.util.withBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
+import net.minecraft.item.DyeItem
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.state.StateFactory
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
+import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.EnumProperty
 import net.minecraft.state.property.Properties
@@ -41,6 +45,21 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
             .with(WATERLOGGED, false)
     }
 
+    override fun onUse(
+        state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hit: BlockHitResult
+    ): ActionResult {
+        val stack = player.getStackInHand(hand)
+        val item = stack.item
+        if (item is DyeItem) {
+            world.setBlockState(pos, state.withBlock(AdornBlocks.SOFAS[item.color]!!))
+            world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.8f)
+            if (!player.abilities.creativeMode) stack.decrement(1)
+            return ActionResult.SUCCESS
+        }
+
+        return super.onUse(state, world, pos, player, hand, hit)
+    }
+
     override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult): ActionResult {
         val sleepingDirection = getSleepingDirection(world, pos)
         return if (world.dimension.canPlayersSleep() && sleepingDirection != null && !state[OCCUPIED]) {
@@ -55,7 +74,7 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
         } else ActionResult.PASS
     }
 
-    override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(FACING, CONNECTED_LEFT, CONNECTED_RIGHT, FRONT_CONNECTION, WATERLOGGED)
     }

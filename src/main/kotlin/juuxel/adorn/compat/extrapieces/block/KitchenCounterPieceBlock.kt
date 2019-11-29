@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.block
 
-import com.shnupbups.extrapieces.core.PieceSet
+/*import com.shnupbups.extrapieces.core.PieceSet
 import juuxel.adorn.block.KitchenCounterBlock
 import juuxel.adorn.compat.extrapieces.AdornPieces
 import juuxel.adorn.compat.extrapieces.toVariant
@@ -34,4 +34,4 @@ class KitchenCounterPieceBlock(private val set: PieceSet) : KitchenCounterBlock(
         super.randomDisplayTick(state, world, pos, random)
         base.randomDisplayTick(base.defaultState, world, pos, random)
     }
-}
+}*/

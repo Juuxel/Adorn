@@ -3,9 +3,9 @@ package juuxel.adorn.compat.modmenu
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
 import io.github.cottonmc.cotton.gui.widget.*
+import io.github.cottonmc.cotton.gui.widget.data.Alignment
 import juuxel.adorn.config.AdornConfigManager
 import juuxel.adorn.gui.widget.WTabbedPanel
-import juuxel.adorn.gui.widget.WTitleLabel
 import juuxel.adorn.util.Colors
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -25,7 +25,7 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
         val root = WPlainPanel()
         setRootPanel(root)
 
-        root.add(WTitleLabel(TranslatableText("gui.adorn.config.title"), Colors.WHITE), 0, 0, 11 * 18, 18)
+        root.add(WLabel(TranslatableText("gui.adorn.config.title"), Colors.WHITE).setAlignment(Alignment.CENTER), 0, 0, 11 * 18, 18)
 
         val tabbed = WTabbedPanel()
         val config = AdornConfigManager.CONFIG

@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces
 
-import com.shnupbups.extrapieces.core.PieceSet
+/*import com.shnupbups.extrapieces.core.PieceSet
 import com.swordglowsblue.artifice.api.builder.assets.BlockStateBuilder
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -38,4 +38,4 @@ object AdornPiecesClient {
             }
         }
     }
-}
+}*/

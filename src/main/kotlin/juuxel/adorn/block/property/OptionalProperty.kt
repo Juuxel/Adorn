@@ -25,14 +25,14 @@ class OptionalProperty<T>(
         }
     }
 
-    override fun getValue(str: String?): Optional<Value<T>> = when (str) {
+    override fun parse(str: String?): Optional<Value<T>> = when (str) {
         "none" -> Optional.of(none)
-        else -> delegate.getValue(str).map { values[it] }
+        else -> delegate.parse(str).map { values[it] }
     }
 
     override fun getValues() = values.values
 
-    override fun getName(value: Value<T>) = value.value?.asString() ?: "none"
+    override fun name(value: Value<T>) = value.value?.asString() ?: "none"
 
     fun wrap(value: T): Value<T>? = values[value]
     fun wrapOrNone(value: T): Value<T> = values[value] ?: none

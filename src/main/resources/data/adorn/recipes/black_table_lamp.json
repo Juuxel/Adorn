@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:table_lamp",
+  "pattern": [
+    "-",
+    "|"
+  ],
+  "key": {
+    "-": {
+      "item": "minecraft:black_carpet"
+    },
+    "|": {
+      "item": "adorn:stone_torch"
+    }
+  },
+  "result": {
+    "item": "adorn:black_table_lamp",
+    "count": 1
+  }
+}

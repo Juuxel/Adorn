@@ -1,0 +1,16 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "water": "minecraft:block/water_still",
+    "particle": "minecraft:block/water_still"
+  },
+  "elements": [
+    {
+      "from": [2, 7, 2],
+      "to": [13, 15, 14],
+      "faces": {
+        "up": { "texture": "#water", "tintindex": 1 }
+      }
+    }
+  ]
+}

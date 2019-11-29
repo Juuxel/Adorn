@@ -16,7 +16,7 @@ import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.stat.Stats
-import net.minecraft.state.StateFactory
+import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
@@ -24,10 +24,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
-import net.minecraft.world.BlockView
-import net.minecraft.world.IWorld
-import net.minecraft.world.ViewableWorld
-import net.minecraft.world.World
+import net.minecraft.world.*
 import java.util.*
 
 open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()), Waterloggable {
@@ -36,7 +33,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
             .with(WATERLOGGED, false)
     }
 
-    override fun appendProperties(builder: StateFactory.Builder<Block, BlockState>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(FACING, HALF, WATERLOGGED)
     }
@@ -54,7 +51,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
         if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
         else super.getFluidState(state)
 
-    override fun canPlaceAt(state: BlockState, world: ViewableWorld, pos: BlockPos): Boolean {
+    override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
         return if (state[HALF] != DoubleBlockHalf.UPPER) {
             super.canPlaceAt(state, world, pos)
         } else {
