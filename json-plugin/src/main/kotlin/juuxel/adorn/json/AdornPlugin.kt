@@ -230,7 +230,14 @@ object AdornPlugin : Plugin {
             keyItems = listOf(slabItem)
         ),
 
-        TableLampBlockModel
+        TableLampBlockModel,
+        CoffeeTableRecipe,
+        SuffixedRecipeAdvancementGenerator(
+            "coffee_table.recipe_advancement",
+            TABLE,
+            "coffee_table",
+            keyItems = listOf(slabItem)
+        )
     )
 
     object AdornCategory : GeneratorInfo.Category {
