@@ -9,6 +9,7 @@ import juuxel.adorn.gui.openFabricContainer
 import juuxel.adorn.block.entity.MutableBlockEntityType
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.container.Container
 import net.minecraft.container.NameableContainerProvider
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -54,6 +55,11 @@ open class KitchenCupboardBlock : BaseKitchenCounterBlock, BETypeProvider, BaseI
             (world.getBlockEntity(pos) as? KitchenCupboardBlockEntity)?.customName = stack.name
         }
     }
+
+    override fun hasComparatorOutput(state: BlockState) = true
+
+    override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
+        Container.calculateComparatorOutput(world.getBlockEntity(pos))
 
     companion object {
         val BLOCK_ENTITY_TYPE: BlockEntityType<KitchenCupboardBlockEntity> =

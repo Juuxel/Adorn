@@ -9,6 +9,7 @@ import juuxel.adorn.block.entity.MutableBlockEntityType
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.container.Container
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
@@ -67,6 +68,11 @@ open class DrawerBlock(
             (world.getBlockEntity(pos) as? DrawerBlockEntity)?.customName = stack.name
         }
     }
+
+    override fun hasComparatorOutput(state: BlockState) = true
+
+    override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
+        Container.calculateComparatorOutput(world.getBlockEntity(pos))
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING

@@ -5,11 +5,13 @@ import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.ShelfBlockEntity
 import juuxel.adorn.util.buildShapeRotations
 import juuxel.adorn.block.entity.MutableBlockEntityType
+import juuxel.adorn.util.count
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.container.Container
 import net.minecraft.entity.EntityContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
@@ -91,7 +93,9 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
                 stack.count = 1
                 be.setInvStack(slot, stack)
                 be.markDirty()
-                be.sync()
+                if (!world.isClient) {
+                    be.sync()
+                }
 
                 if (!player.abilities.creativeMode) {
                     handStack.decrement(1)
@@ -103,7 +107,9 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
             }
             be.setInvStack(slot, ItemStack.EMPTY)
             be.markDirty()
-            be.sync()
+            if (!world.isClient) {
+                be.sync()
+            }
         }
 
         return ActionResult.SUCCESS
@@ -161,6 +167,11 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
 
     override fun rotate(state: BlockState, rotation: BlockRotation) =
         state.with(FACING, rotation.rotate(state[FACING]))
+
+    override fun hasComparatorOutput(state: BlockState) = true
+
+    override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
+        Container.calculateComparatorOutput(world.getBlockEntity(pos))
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING
