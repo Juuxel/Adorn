@@ -5,7 +5,6 @@ import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.ShelfBlockEntity
 import juuxel.adorn.util.buildShapeRotations
 import juuxel.adorn.block.entity.MutableBlockEntityType
-import juuxel.adorn.util.count
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
