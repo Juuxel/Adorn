@@ -12,6 +12,7 @@ import juuxel.adorn.json.chair.*
 import juuxel.adorn.json.drawer.*
 import juuxel.adorn.json.kitchen.*
 import juuxel.adorn.json.lamp.TableLampBlockModel
+import juuxel.adorn.json.lamp.TableLampRecipe
 import juuxel.adorn.json.platform.*
 import juuxel.adorn.json.post.*
 import juuxel.adorn.json.shelf.ShelfBlockModel
@@ -30,6 +31,7 @@ object AdornPlugin : Plugin {
     private val planksItem = fun(id: Identifier) = Identifier.mc(id.path + "_planks")
     private val slabItem = fun(id: Identifier) = Identifier.mc(id.path + "_slab")
     private val woolItem = fun(id: Identifier) = Identifier.mc(id.path + "_wool")
+    private val carpetItem = fun(id: Identifier) = Identifier.mc(id.path + "_carpet")
     private val selfItem = fun(id: Identifier) = Identifier.mc(id.path)
 
     private fun constItem(const: Identifier) = fun(_: Identifier) = const
@@ -231,6 +233,14 @@ object AdornPlugin : Plugin {
         ),
 
         TableLampBlockModel,
+        TableLampRecipe,
+        SuffixedRecipeAdvancementGenerator(
+            "table_lamp.recipe_advancement",
+            OTHER,
+            "table_lamp",
+            keyItems = listOf(carpetItem)
+        ),
+
         CoffeeTableRecipe,
         SuffixedRecipeAdvancementGenerator(
             "coffee_table.recipe_advancement",
