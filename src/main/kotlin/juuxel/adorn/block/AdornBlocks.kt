@@ -5,6 +5,7 @@ import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.renderer.ShelfRenderer
 import juuxel.adorn.block.renderer.TradingStationRenderer
 import juuxel.adorn.client.SinkColorProvider
+import juuxel.adorn.item.AdornTallBlockItem
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
 import juuxel.adorn.lib.RegistryHelper
@@ -18,11 +19,10 @@ import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.CarpetBlock
-import net.minecraft.block.Material
 import net.minecraft.client.render.RenderLayer
-import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher
 import net.minecraft.item.BlockItem
-import net.minecraft.sound.BlockSoundGroup
+import net.minecraft.item.Item
+import net.minecraft.item.ItemGroup
 import net.minecraft.sound.SoundCategory
 import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
@@ -168,13 +168,15 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val TABLE_LAMPS: Map<DyeColor, Block> = DyeColor.values().associate {
         it to registerBlock(
             "${it.asString()}_table_lamp",
-            TableLampBlock(
-                FabricBlockSettings.of(Material.REDSTONE_LAMP, it)
-                    .hardness(0.3f)
-                    .resistance(0.3f)
-                    .sounds(BlockSoundGroup.WOOL)
-                    .build()
-            )
+            TableLampBlock(TableLampBlock.createBlockSettings(it))
+        )
+    }
+
+    val TALL_LAMPS: Map<DyeColor, Block> = DyeColor.values().associate {
+        it to registerBlock(
+            "${it.asString()}_tall_lamp",
+            TallLampBlock(TableLampBlock.createBlockSettings(it)),
+            itemProvider = { block -> AdornTallBlockItem(block, Item.Settings().group(ItemGroup.DECORATIONS)) }
         )
     }
 

@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin({
         ChairBlock.class,
         ChimneyBlock.class,
+        CoffeeTableBlock.class,
         PlatformBlock.class,
         PostBlock.class,
         PrismarineChimneyBlock.class,
@@ -16,6 +17,8 @@ import org.spongepowered.asm.mixin.Mixin;
         StoneTorchBlock.class,
         StoneTorchBlock.Wall.class,
         TableBlock.class,
+        TableLampBlock.class,
+        TallLampBlock.class,
         TradingStationBlock.class
 })
 public class FluidloggableMixin /*implements Fluidloggable*/ {

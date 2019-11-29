@@ -6,8 +6,8 @@
   "plugin": "juuxel.adorn.AdornMixinPlugin",
 
   "mixins": [
-    "fluidloggable.ChairBlockMixin",
     "fluidloggable.FluidloggableMixin",
+    "fluidloggable.FluidUtilMixin",
     "BubbleColumnBlockMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin",

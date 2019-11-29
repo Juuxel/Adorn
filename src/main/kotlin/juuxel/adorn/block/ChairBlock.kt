@@ -11,7 +11,6 @@ import net.minecraft.block.enums.DoubleBlockHalf
 import net.minecraft.entity.EntityContext
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
@@ -96,15 +95,9 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
             pos.up(),
             defaultState.with(HALF, DoubleBlockHalf.UPPER)
                 .with(FACING, state[FACING])
-                .let { updateFluidPropertyOnPlaced(it, world.getFluidState(pos.up())) }
+                .let { FluidUtil.updateFluidFromState(it, world.getFluidState(pos.up())) }
         )
     }
-
-    /**
-     * For using a mixin ([juuxel.adorn.mixin.fluidloggable.ChairBlockMixin]) to set the fluid property.
-     */
-    private fun updateFluidPropertyOnPlaced(state: BlockState, fluidState: FluidState) =
-        state.with(WATERLOGGED, fluidState.fluid == Fluids.WATER)
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         if (state[HALF] == DoubleBlockHalf.LOWER) {

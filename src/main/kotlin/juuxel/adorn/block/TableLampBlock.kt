@@ -1,20 +1,24 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.util.withBlock
+import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.Material
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.DyeItem
 import net.minecraft.item.ItemPlacementContext
+import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
+import net.minecraft.util.DyeColor
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
@@ -81,5 +85,12 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable {
 
         val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
         val LIT: BooleanProperty = Properties.LIT
+
+        fun createBlockSettings(color: DyeColor): Block.Settings =
+            FabricBlockSettings.of(Material.REDSTONE_LAMP, color)
+                .hardness(0.3f)
+                .resistance(0.3f)
+                .sounds(BlockSoundGroup.WOOL)
+                .build()
     }
 }
