@@ -190,6 +190,25 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
         )
     )
 
+    val CRATE: Block = registerBlock("crate", Block(Block.Settings.copy(Blocks.OAK_PLANKS)))
+    val APPLE_CRATE: Block = registerCrate("apple_crate")
+    val WHEAT_CRATE: Block = registerCrate("wheat_crate")
+    val CARROT_CRATE: Block = registerCrate("carrot_crate")
+    val POTATO_CRATE: Block = registerCrate("potato_crate")
+    val MELON_CRATE: Block = registerCrate("melon_crate")
+    val WHEAT_SEED_CRATE: Block = registerCrate("wheat_seed_crate")
+    val MELON_SEED_CRATE: Block = registerCrate("melon_seed_crate")
+    val PUMPKIN_SEED_CRATE: Block = registerCrate("pumpkin_seed_crate")
+    val BEETROOT_CRATE: Block = registerCrate("beetroot_crate")
+    val BEETROOT_SEED_CRATE: Block = registerCrate("beetroot_seed_crate")
+    val SWEET_BERRY_CRATE: Block = registerCrate("sweet_berry_crate")
+    val COCOA_BEAN_CRATE: Block = registerCrate("cocoa_bean_crate")
+    val NETHER_WART_CRATE: Block = registerCrate("nether_wart_crate")
+    val SUGAR_CANE_CRATE: Block = registerCrate("sugar_cane_crate")
+    val EGG_CRATE: Block = registerCrate("egg_crate")
+    val HONEYCOMB_CRATE: Block = registerCrate("honeycomb_crate")
+    val LIL_TATER_CRATE: Block = registerCrate("lil_tater_crate")
+
     fun init() {
         UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->
             val state = world.getBlockState(hitResult.blockPos)
@@ -274,4 +293,11 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
             DARK_OAK_KITCHEN_SINK
         )
     }
+
+    private fun registerCrate(name: String): Block =
+        registerBlock(
+            name,
+            Block(Block.Settings.copy(CRATE)),
+            Item.Settings().group(ItemGroup.DECORATIONS).recipeRemainder(CRATE.asItem())
+        )
 }

@@ -1,0 +1,11 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:unpack_crate",
+  "ingredients": [
+    { "item": "adorn:apple_crate" }
+  ],
+  "result": {
+    "item": "minecraft:apple",
+    "count": 8
+  }
+}

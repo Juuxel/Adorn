@@ -1,0 +1,11 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:unpack_crate",
+  "ingredients": [
+    { "item": "adorn:sugar_cane_crate" }
+  ],
+  "result": {
+    "item": "minecraft:sugar_cane",
+    "count": 8
+  }
+}

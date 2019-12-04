@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:pack_crate",
+  "pattern": [
+    "...",
+    ".#.",
+    "..."
+  ],
+  "key": {
+    ".": { "item": "minecraft:egg" },
+    "#": { "item": "adorn:crate" }
+  },
+  "result": {
+    "item": "adorn:egg_crate"
+  }
+}

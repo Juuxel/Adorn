@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:pack_crate",
+  "pattern": [
+    "...",
+    ".#.",
+    "..."
+  ],
+  "key": {
+    ".": { "item": "minecraft:wheat_seeds" },
+    "#": { "item": "adorn:crate" }
+  },
+  "result": {
+    "item": "adorn:wheat_seed_crate"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:unpack_crate",
+  "ingredients": [
+    { "item": "adorn:lil_tater_crate" }
+  ],
+  "result": {
+    "item": "lil-tater:lil_tater",
+    "count": 8
+  }
+}

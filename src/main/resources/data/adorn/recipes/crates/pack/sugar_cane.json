@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:pack_crate",
+  "pattern": [
+    "...",
+    ".#.",
+    "..."
+  ],
+  "key": {
+    ".": { "item": "minecraft:sugar_cane" },
+    "#": { "item": "adorn:crate" }
+  },
+  "result": {
+    "item": "adorn:sugar_cane_crate"
+  }
+}

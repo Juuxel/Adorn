@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/crate",
+  "textures": {
+    "side": "adorn:block/beetroot_crate"
+  }
+}

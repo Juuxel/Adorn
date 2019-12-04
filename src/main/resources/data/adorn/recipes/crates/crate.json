@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "psp",
+    "s s",
+    "psp"
+  ],
+  "key": {
+    "p": { "tag": "minecraft:planks" },
+    "s": { "tag": "minecraft:wooden_slabs" }
+  },
+  "result": {
+    "item": "adorn:crate",
+    "count": 4
+  }
+}

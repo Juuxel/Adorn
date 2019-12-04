@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:pack_crate",
+  "pattern": [
+    "...",
+    ".#.",
+    "..."
+  ],
+  "key": {
+    ".": { "item": "minecraft:melon_slice" },
+    "#": { "item": "adorn:crate" }
+  },
+  "result": {
+    "item": "adorn:melon_crate"
+  }
+}

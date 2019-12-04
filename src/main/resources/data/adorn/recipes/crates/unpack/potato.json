@@ -1,0 +1,11 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:unpack_crate",
+  "ingredients": [
+    { "item": "adorn:potato_crate" }
+  ],
+  "result": {
+    "item": "minecraft:potato",
+    "count": 8
+  }
+}

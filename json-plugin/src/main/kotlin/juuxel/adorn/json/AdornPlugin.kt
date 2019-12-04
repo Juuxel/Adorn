@@ -9,6 +9,7 @@ import io.github.cottonmc.jsonfactory.gens.block.SuffixedBlockItemModel
 import io.github.cottonmc.jsonfactory.gens.block.SuffixedBlockState
 import io.github.cottonmc.jsonfactory.gens.block.SuffixedLootTable
 import juuxel.adorn.json.chair.*
+import juuxel.adorn.json.crate.CrateBlockModel
 import juuxel.adorn.json.drawer.*
 import juuxel.adorn.json.kitchen.*
 import juuxel.adorn.json.lamp.TableLampBlockModel
@@ -247,7 +248,12 @@ object AdornPlugin : Plugin {
             TABLE,
             "coffee_table",
             keyItems = listOf(slabItem)
-        )
+        ),
+
+        CrateBlockModel,
+        SuffixedBlockItemModel("crate", OTHER),
+        SuffixedBlockState("crate", OTHER),
+        SuffixedLootTable("crate", OTHER)
     )
 
     object AdornCategory : GeneratorInfo.Category {

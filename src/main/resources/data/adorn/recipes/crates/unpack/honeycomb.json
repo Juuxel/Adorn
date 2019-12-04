@@ -1,0 +1,11 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:unpack_crate",
+  "ingredients": [
+    { "item": "adorn:honeycomb_crate" }
+  ],
+  "result": {
+    "item": "minecraft:honeycomb",
+    "count": 8
+  }
+}

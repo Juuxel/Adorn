@@ -1,0 +1,11 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:unpack_crate",
+  "ingredients": [
+    { "item": "adorn:pumpkin_seed_crate" }
+  ],
+  "result": {
+    "item": "minecraft:pumpkin_seeds",
+    "count": 8
+  }
+}

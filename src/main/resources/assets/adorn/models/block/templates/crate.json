@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "adorn:block/crate",
+    "particle": "adorn:block/crate"
+  }
+}

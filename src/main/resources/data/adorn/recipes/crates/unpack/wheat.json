@@ -1,0 +1,11 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:unpack_crate",
+  "ingredients": [
+    { "item": "adorn:wheat_crate" }
+  ],
+  "result": {
+    "item": "minecraft:wheat",
+    "count": 8
+  }
+}

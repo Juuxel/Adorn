@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:pack_crate",
+  "pattern": [
+    "...",
+    ".#.",
+    "..."
+  ],
+  "key": {
+    ".": { "item": "minecraft:cocoa_beans" },
+    "#": { "item": "adorn:crate" }
+  },
+  "result": {
+    "item": "adorn:cocoa_bean_crate"
+  }
+}

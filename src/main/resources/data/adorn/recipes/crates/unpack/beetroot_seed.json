@@ -1,0 +1,11 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:unpack_crate",
+  "ingredients": [
+    { "item": "adorn:beetroot_seed_crate" }
+  ],
+  "result": {
+    "item": "minecraft:beetroot_seeds",
+    "count": 8
+  }
+}

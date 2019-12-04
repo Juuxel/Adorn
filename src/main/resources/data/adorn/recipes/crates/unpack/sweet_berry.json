@@ -1,0 +1,11 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:unpack_crate",
+  "ingredients": [
+    { "item": "adorn:sweet_berry_crate" }
+  ],
+  "result": {
+    "item": "minecraft:sweet_berries",
+    "count": 8
+  }
+}
