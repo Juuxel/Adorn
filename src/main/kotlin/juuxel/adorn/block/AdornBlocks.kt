@@ -172,14 +172,6 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
         )
     }
 
-    val TALL_LAMPS: Map<DyeColor, Block> = DyeColor.values().associate {
-        it to registerBlock(
-            "${it.asString()}_tall_lamp",
-            TallLampBlock(TableLampBlock.createBlockSettings(it)),
-            itemProvider = { block -> AdornTallBlockItem(block, Item.Settings().group(ItemGroup.DECORATIONS)) }
-        )
-    }
-
     val TRADING_STATION: TradingStationBlock = registerBlock("trading_station", TradingStationBlock())
 
     val STONE_TORCH_GROUND = registerBlockWithoutItem("stone_torch", StoneTorchBlock())

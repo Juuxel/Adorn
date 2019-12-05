@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/tall_lamp_upper",
-  "textures": {
-    "wool": "adorn:block/red_lamp"
-  }
-}
