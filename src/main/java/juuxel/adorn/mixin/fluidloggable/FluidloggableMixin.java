@@ -18,7 +18,6 @@ import org.spongepowered.asm.mixin.Mixin;
         StoneTorchBlock.Wall.class,
         TableBlock.class,
         TableLampBlock.class,
-        TallLampBlock.class,
         TradingStationBlock.class
 })
 public class FluidloggableMixin /*implements Fluidloggable*/ {

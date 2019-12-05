@@ -21,7 +21,7 @@ import net.minecraft.util.hit.HitResult
 @Environment(EnvType.CLIENT)
 class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEntityRenderer<TradingStationBlockEntity>(dispatcher) {
     override fun render(be: TradingStationBlockEntity, tickDelta: Float, matrices: MatrixStack, vertexConsumerProvider: VertexConsumerProvider, light: Int, overlay: Int) {
-        val hitResult = blockEntityRenderDispatcher.crosshairTarget
+        val hitResult = dispatcher.crosshairTarget
         val lookingAtBlock = hitResult != null &&
                 hitResult.type == HitResult.Type.BLOCK &&
                 be.pos == (hitResult as BlockHitResult).blockPos
@@ -62,18 +62,18 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
     }
 
     private fun renderLabel(be: TradingStationBlockEntity, name: String, x: Double, y: Double, z: Double, maxDistance: Int, matrix: MatrixStack, vcp: VertexConsumerProvider, light: Int) {
-        val camera = blockEntityRenderDispatcher.camera
+        val camera = dispatcher.camera
         val dist = be.getSquaredDistance(camera.pos.x, camera.pos.y, camera.pos.z)
         if (dist < maxDistance * maxDistance) {
             matrix.push()
             matrix.translate(x + 0.5, y + 1.5, z + 0.5)
-            matrix.multiply(camera.method_23767())
+            matrix.multiply(camera.rotation)
             matrix.scale(-0.025f, -0.025f, +0.025f)
 
             val matrixModel = matrix.peek().model
             val opacity = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25f)
             val backgroundColor = color(0x000000, opacity)
-            val textRenderer = blockEntityRenderDispatcher.textRenderer
+            val textRenderer = dispatcher.textRenderer
             val textX = -textRenderer.getStringWidth(name) / 2f
             textRenderer.draw(name, textX, 0f, Colors.WHITE, false, matrixModel, vcp, false, backgroundColor, light)
 
