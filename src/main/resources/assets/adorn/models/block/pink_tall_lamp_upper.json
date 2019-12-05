@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/tall_lamp_upper",
+  "textures": {
+    "wool": "minecraft:block/pink_wool"
+  }
+}

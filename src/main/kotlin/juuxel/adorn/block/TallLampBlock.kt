@@ -164,7 +164,13 @@ class TallLampBlock(settings: Settings) : Block(settings), Waterloggable {
         val LIT: BooleanProperty = Properties.LIT
         val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
 
-        private val TOP_SHAPE: VoxelShape = VoxelShapes.fullCube()
-        private val BOTTOM_SHAPE: VoxelShape = VoxelShapes.fullCube()
+        private val TOP_SHAPE: VoxelShape = createCuboidShape(
+            2.0, 0.0, 2.0,
+            14.0, 14.0, 14.0
+        )
+        private val BOTTOM_SHAPE: VoxelShape = createCuboidShape(
+            2.0, 0.0, 2.0,
+            14.0, 16.0, 14.0
+        )
     }
 }

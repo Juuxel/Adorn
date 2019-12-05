@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:tall_lamp",
+  "pattern": [
+    "-",
+    "|",
+    "|"
+  ],
+  "key": {
+    "-": {
+      "item": "minecraft:lime_carpet"
+    },
+    "|": {
+      "item": "adorn:stone_torch"
+    }
+  },
+  "result": {
+    "item": "adorn:lime_tall",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "adorn:block/pink_tall_lamp_upper"
+      },
+      "when": {
+        "half": "upper"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/templates/tall_lamp_lower"
+      },
+      "when": {
+        "half": "lower"
+      }
+    }
+  ]
+}

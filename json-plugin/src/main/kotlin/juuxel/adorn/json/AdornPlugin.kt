@@ -12,8 +12,7 @@ import juuxel.adorn.json.chair.*
 import juuxel.adorn.json.crate.CrateBlockModel
 import juuxel.adorn.json.drawer.*
 import juuxel.adorn.json.kitchen.*
-import juuxel.adorn.json.lamp.TableLampBlockModel
-import juuxel.adorn.json.lamp.TableLampRecipe
+import juuxel.adorn.json.lamp.*
 import juuxel.adorn.json.platform.*
 import juuxel.adorn.json.post.*
 import juuxel.adorn.json.shelf.ShelfBlockModel
@@ -253,7 +252,19 @@ object AdornPlugin : Plugin {
         CrateBlockModel,
         SuffixedBlockItemModel("crate", OTHER),
         SuffixedBlockState("crate", OTHER),
-        SuffixedLootTable("crate", OTHER)
+        SuffixedLootTable("crate", OTHER),
+
+        TallLampBlockModel,
+        TallLampBlockState,
+        TallLampItemModel,
+        TallLampLootTable,
+        TallLampRecipe,
+        SuffixedRecipeAdvancementGenerator(
+            "tall_lamp.recipe_advancement",
+            OTHER,
+            "tall_lamp",
+            keyItems = listOf(carpetItem)
+        )
     )
 
     object AdornCategory : GeneratorInfo.Category {
