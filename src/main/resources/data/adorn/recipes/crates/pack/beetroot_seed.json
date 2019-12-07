@@ -7,7 +7,7 @@
     "..."
   ],
   "key": {
-    ".": { "item": "minecraft:beetroot_seed" },
+    ".": { "item": "minecraft:beetroot_seeds" },
     "#": { "item": "adorn:crate" }
   },
   "result": {
