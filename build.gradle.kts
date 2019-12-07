@@ -97,7 +97,7 @@ dependencies {
     // Other mods
     includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { isTransitive = false }
     includedMod("io.github.cottonmc:Jankson-Fabric:" + v("jankson")) { byeFabric() }
-    includedMod("io.github.cottonmc", "LibCD", v("libcd")) { byeFabric(); exclude(module = "Jankson") }
+    includedMod("io.github.cottonmc", "LibCD", v("libcd")) { byeFabric(); exclude(module = "Jankson"); exclude(module = "nbt-crafting") }
 //    modCompileOnly("towelette:Towelette:" + v("towelette")) { byeFabric() }
     modCompileOnly("io.github.prospector:modmenu:" + v("modmenu")) { byeFabric() }
 //    modCompileOnly("extra-pieces:extrapieces:" + v("extra-pieces"))
