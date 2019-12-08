@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:kitchen_sink",
+  "ingredients": [
+    {
+      "tag": "adorn:kitchen_counters"
+    },
+    {
+      "item": "minecraft:bucket"
+    }
+  ],
+  "result": {
+    "item": "adorn:terrestria_rainbow_eucalyptus_kitchen_sink",
+    "count": 1
+  }
+}

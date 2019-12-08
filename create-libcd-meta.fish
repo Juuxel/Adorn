@@ -13,6 +13,12 @@ function create-wood-libcd-meta
     end
 end
 
+function create-1-6-wood-libcd-meta
+    for name in $argv[3..-1]
+        create-libcd-meta $argv[1] $argv[2] $name kitchen_sink coffee_table
+    end
+end
+
 function create-stone-libcd-meta
     for name in $argv[3..-1]
         create-libcd-meta $argv[1] $argv[2] $name platform post step

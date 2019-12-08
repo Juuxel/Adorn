@@ -27,6 +27,7 @@ object AdornPlugin : Plugin {
     //adorn:red_table_lamp,adorn:black_table_lamp,adorn:green_table_lamp,adorn:brown_table_lamp,adorn:blue_table_lamp,adorn:purple_table_lamp,adorn:cyan_table_lamp,adorn:light_gray_table_lamp,adorn:gray_table_lamp,adorn:pink_table_lamp,adorn:lime_table_lamp,adorn:yellow_table_lamp,adorn:light_blue_table_lamp,adorn:magenta_table_lamp,adorn:orange_table_lamp,adorn:white_table_lamp
     //adorn:oak,adorn:spruce,adorn:birch,adorn:jungle,adorn:acacia,adorn:dark_oak
     //adorn:stone,adorn:cobblestone,adorn:sandstone,adorn:andesite,adorn:granite,adorn:diorite
+    //adorn:terrestria_cypress,adorn:terrestria_hemlock,adorn:terrestria_japanese_maple,adorn:terrestria_rainbow_eucalyptus,adorn:terrestria_redwood,adorn:terrestria_rubber,adorn:terrestria_sakura,adorn:terrestria_willow,adorn:traverse_fir
 
     private val planksItem = fun(id: Identifier) = Identifier.mc(id.path + "_planks")
     private val slabItem = fun(id: Identifier) = Identifier.mc(id.path + "_slab")
@@ -241,6 +242,10 @@ object AdornPlugin : Plugin {
             keyItems = listOf(carpetItem)
         ),
 
+        SuffixedBlockState("coffee_table", TABLE),
+        CoffeeTableBlockModel,
+        SuffixedBlockItemModel("coffee_table", TABLE),
+        SuffixedLootTable("coffee_table", TABLE),
         CoffeeTableRecipe,
         SuffixedRecipeAdvancementGenerator(
             "coffee_table.recipe_advancement",

@@ -104,8 +104,8 @@ dependencies {
 //    modCompileOnly("com.github.artificemc:artifice:" + v("artifice"))
 
     if (heavyweight) {
-//        modRuntime("com.terraformersmc", "traverse", v("traverse")) { byeFabric() }
-//        modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { byeFabric() }
+        modRuntime("com.terraformersmc", "traverse", v("traverse")) { byeFabric() }
+        modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { byeFabric() }
         modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); byeFabric() }
 //        modRuntime("towelette:Towelette:" + v("towelette")) { byeFabric() }
 //        modRuntime("statement:Statement:" + v("statement")) { byeFabric() }
