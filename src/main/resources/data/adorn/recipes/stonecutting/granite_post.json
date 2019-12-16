@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "minecraft:granite"
+  },
+  "result": "adorn:granite_post",
+  "count": 2
+}

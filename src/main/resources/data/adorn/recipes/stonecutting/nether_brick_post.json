@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "minecraft:nether_bricks"
+  },
+  "result": "adorn:nether_brick_post",
+  "count": 2
+}

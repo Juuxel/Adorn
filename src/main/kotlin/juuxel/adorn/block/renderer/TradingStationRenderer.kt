@@ -37,7 +37,7 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
             matrices.scale(0.6f, 0.6f, 0.6f)
             matrices.translate(0.0, 0.3, 0.0)
             val itemRenderer = MinecraftClient.getInstance().itemRenderer
-            itemRenderer.method_23178(trade.selling, ModelTransformation.Type.FIXED, light, overlay, matrices, vertexConsumerProvider)
+            itemRenderer.renderItem(trade.selling, ModelTransformation.Type.FIXED, light, overlay, matrices, vertexConsumerProvider)
             matrices.pop()
 
             /*if (lookingAtBlock) {

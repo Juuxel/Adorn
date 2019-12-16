@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "minecraft:red_sandstone"
+  },
+  "result": "adorn:red_sandstone_post",
+  "count": 2
+}
