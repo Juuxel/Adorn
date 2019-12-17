@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "minecraft:birch_planks"
+  },
+  "result": "adorn:birch_platform",
+  "count": 1
+}

@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "terrestria:sakura_planks"
+  },
+  "result": "adorn:terrestria_sakura_post",
+  "count": 2
+}

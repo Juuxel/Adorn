@@ -1,0 +1,5 @@
+{
+  "when": [{
+    "libcd:mod_loaded": "traverse"
+  }]
+}
