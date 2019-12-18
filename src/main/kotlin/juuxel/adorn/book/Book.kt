@@ -5,8 +5,8 @@ import blue.endless.jankson.JsonElement
 import com.mojang.datafixers.Dynamic
 import com.mojang.datafixers.types.JsonOps
 import io.github.cottonmc.jankson.JanksonFactory
+import io.github.cottonmc.jankson.JanksonOps
 import juuxel.adorn.gui.widget.WBigLabel
-import juuxel.adorn.util.JanksonOps
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.text.LiteralText
@@ -24,7 +24,7 @@ data class Book(
         private val MISSINGNO: Text = LiteralText("missingno")
 
         private fun readText(json: JsonElement): Text? =
-            Text.Serializer.fromJson(Dynamic.convert(JanksonOps, JsonOps.INSTANCE, json))
+            Text.Serializer.fromJson(Dynamic.convert(JanksonOps.INSTANCE, JsonOps.INSTANCE, json))
 
         fun jankson(): Jankson.Builder =
             JanksonFactory.builder()
