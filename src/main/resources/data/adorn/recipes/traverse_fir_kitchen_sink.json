@@ -3,7 +3,7 @@
   "group": "adorn:kitchen_sink",
   "ingredients": [
     {
-      "tag": "adorn:kitchen_counters"
+      "tag": "adorn:traverse_fir_kitchen_counter"
     },
     {
       "item": "minecraft:bucket"

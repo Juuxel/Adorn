@@ -15,7 +15,7 @@ object KitchenSinkRecipe : AbstractContentGenerator("kitchen_sink.recipe", "reci
             "group" to "adorn:kitchen_sink",
             "ingredients" to listOf(
                 mapOf(
-                    "tag" to "adorn:kitchen_counters"
+                    "item" to id.suffixPath("_kitchen_counter")
                 ),
                 mapOf(
                     "item" to "minecraft:bucket"
