@@ -2,7 +2,7 @@ package juuxel.adorn.mixin.fluidloggable;
 
 import juuxel.adorn.block.*;
 import org.spongepowered.asm.mixin.Mixin;
-//import virtuoel.towelette.api.Fluidloggable;
+import virtuoel.towelette.api.Fluidloggable;
 
 @Mixin({
         ChairBlock.class,
@@ -20,5 +20,5 @@ import org.spongepowered.asm.mixin.Mixin;
         TableLampBlock.class,
         TradingStationBlock.class
 })
-public class FluidloggableMixin /*implements Fluidloggable*/ {
+public class FluidloggableMixin implements Fluidloggable {
 }

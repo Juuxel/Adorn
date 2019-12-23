@@ -5,7 +5,7 @@ plugins {
     java
     kotlin("jvm") version "1.3.60"
     idea
-    id("fabric-loom") version "0.2.6-SNAPSHOT"
+    id("fabric-loom") version "0.2.7-SNAPSHOT"
     `maven-publish`
     //id("com.github.johnrengelman.shadow") version "5.1.0"
 }
@@ -98,7 +98,8 @@ dependencies {
     includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { isTransitive = false }
     includedMod("io.github.cottonmc:Jankson-Fabric:" + v("jankson")) { byeFabric() }
     includedMod("io.github.cottonmc", "LibCD", v("libcd")) { byeFabric(); exclude(module = "Jankson"); exclude(module = "nbt-crafting") }
-//    modCompileOnly("towelette:Towelette:" + v("towelette")) { byeFabric() }
+    modCompileOnly("towelette:Towelette:" + v("towelette")) { byeFabric() }
+    modRuntime("statement:Statement:" + v("statement")) { byeFabric() }
     modCompileOnly("io.github.prospector:modmenu:" + v("modmenu")) { byeFabric() }
 //    modCompileOnly("extra-pieces:extrapieces:" + v("extra-pieces"))
 //    modCompileOnly("com.github.artificemc:artifice:" + v("artifice"))
@@ -107,8 +108,8 @@ dependencies {
         modRuntime("com.terraformersmc", "traverse", v("traverse")) { byeFabric() }
         modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { byeFabric() }
         modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); byeFabric() }
-//        modRuntime("towelette:Towelette:" + v("towelette")) { byeFabric() }
-//        modRuntime("statement:Statement:" + v("statement")) { byeFabric() }
+        modRuntime("towelette:Towelette:" + v("towelette")) { byeFabric() }
+        modRuntime("statement:Statement:" + v("statement")) { byeFabric() }
         modRuntime("io.github.prospector:modmenu:" + v("modmenu")) { byeFabric() }
 //        modRuntime("extra-pieces:extrapieces:" + v("extra-pieces"))
 //        modRuntime("com.github.artificemc:artifice:" + v("artifice"))
