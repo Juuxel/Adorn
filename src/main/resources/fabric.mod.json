@@ -60,6 +60,6 @@
   },
 
   "breaks": {
-    "towelette": "<2.0.0"
+    "towelette": "<3.0.0"
   }
 }

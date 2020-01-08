@@ -99,7 +99,7 @@ dependencies {
     includedMod("io.github.cottonmc:Jankson-Fabric:" + v("jankson")) { byeFabric() }
     includedMod("io.github.cottonmc", "LibCD", v("libcd")) { byeFabric(); exclude(module = "Jankson"); exclude(module = "nbt-crafting") }
     modCompileOnly("towelette:Towelette:" + v("towelette")) { byeFabric() }
-    modRuntime("statement:Statement:" + v("statement")) { byeFabric() }
+    modCompileOnly("statement:Statement:" + v("statement")) { byeFabric() }
     modCompileOnly("io.github.prospector:modmenu:" + v("modmenu")) { byeFabric() }
 //    modCompileOnly("extra-pieces:extrapieces:" + v("extra-pieces"))
 //    modCompileOnly("com.github.artificemc:artifice:" + v("artifice"))
