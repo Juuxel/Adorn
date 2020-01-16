@@ -8,6 +8,7 @@ import virtuoel.towelette.api.Fluidloggable;
         ChairBlock.class,
         ChimneyBlock.class,
         CoffeeTableBlock.class,
+        PicketFenceBlock.class,
         PlatformBlock.class,
         PostBlock.class,
         PrismarineChimneyBlock.class,

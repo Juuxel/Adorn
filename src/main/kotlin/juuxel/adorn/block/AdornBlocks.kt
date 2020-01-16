@@ -5,7 +5,6 @@ import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.renderer.ShelfRenderer
 import juuxel.adorn.block.renderer.TradingStationRenderer
 import juuxel.adorn.client.SinkColorProvider
-import juuxel.adorn.item.AdornTallBlockItem
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
 import juuxel.adorn.lib.RegistryHelper
@@ -201,6 +200,10 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val HONEYCOMB_CRATE: Block = registerCrate("honeycomb_crate")
     val LIL_TATER_CRATE: Block = registerCrate("lil_tater_crate")
 
+    val PICKET_FENCE: Block = registerBlock("picket_fence", PicketFenceBlock(Block.Settings.copy(Blocks.OAK_FENCE)))
+    val CHAIN_LINK_FENCE: Block =
+        registerBlock("chain_link_fence", ChainLinkFenceBlock(Block.Settings.copy(Blocks.IRON_BARS)))
+
     fun init() {
         UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->
             val state = world.getBlockState(hitResult.blockPos)
@@ -261,7 +264,7 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
         // RenderLayers
         BlockRenderLayerMap.INSTANCE.putBlocks(
             RenderLayer.getCutout(),
-            TRADING_STATION, STONE_TORCH_GROUND, STONE_TORCH_WALL
+            TRADING_STATION, STONE_TORCH_GROUND, STONE_TORCH_WALL, CHAIN_LINK_FENCE
         )
 
         BlockRenderLayerMap.INSTANCE.putBlocks(

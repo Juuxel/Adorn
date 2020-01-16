@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
 import net.fabricmc.fabric.api.server.PlayerStream
 import net.minecraft.client.network.packet.EntityPassengersSetS2CPacket
 import net.minecraft.client.network.packet.EntityPositionS2CPacket
-import net.minecraft.datafixers.NbtOps
+import net.minecraft.datafixer.NbtOps
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.player.PlayerEntity

@@ -48,7 +48,7 @@ class ShelfRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEntityRender
         matrices.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE)
         matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(ITEM_1_Y_ROT + facing.asRotation()))
         //GlStateManager.rotatef(ITEM_X_ROT, 1f, 0f, 0f)
-        itemRenderer.renderItem(be.getInvStack(0), ModelTransformation.Type.FIXED, light, overlay, matrices, vertexConsumerProvider)
+        itemRenderer.renderItem(be.getInvStack(0), ModelTransformation.Mode.FIXED, light, overlay, matrices, vertexConsumerProvider)
         matrices.pop()
 
         matrices.push()
@@ -56,7 +56,7 @@ class ShelfRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEntityRender
         matrices.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE)
         matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(ITEM_2_Y_ROT + facing.asRotation()))
         //GlStateManager.rotatef(ITEM_X_ROT, 1f, 0f, 0f)
-        itemRenderer.renderItem(be.getInvStack(1), ModelTransformation.Type.FIXED, light, overlay, matrices, vertexConsumerProvider)
+        itemRenderer.renderItem(be.getInvStack(1), ModelTransformation.Mode.FIXED, light, overlay, matrices, vertexConsumerProvider)
         matrices.pop()
     }
 

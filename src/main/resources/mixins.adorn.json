@@ -10,6 +10,7 @@
     "fluidloggable.FluidUtilMixin",
     "BubbleColumnBlockMixin",
     "LivingEntityMixin",
+    "PaneBlockMixin",
     "PlayerEntityMixin",
     "ScreenAccessor",
     "WPanelMixin"
