@@ -200,7 +200,10 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val HONEYCOMB_CRATE: Block = registerCrate("honeycomb_crate")
     val LIL_TATER_CRATE: Block = registerCrate("lil_tater_crate")
 
-    val PICKET_FENCE: Block = registerBlock("picket_fence", PicketFenceBlock(Block.Settings.copy(Blocks.OAK_FENCE)))
+    val PICKET_FENCE: Block = registerBlock(
+        "picket_fence",
+        PicketFenceBlock(Block.Settings.copy(Blocks.OAK_FENCE).nonOpaque())
+    )
     val CHAIN_LINK_FENCE: Block =
         registerBlock("chain_link_fence", ChainLinkFenceBlock(Block.Settings.copy(Blocks.IRON_BARS)))
 
