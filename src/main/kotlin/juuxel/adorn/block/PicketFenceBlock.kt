@@ -1,10 +1,12 @@
 package juuxel.adorn.block
 
+import juuxel.adorn.util.buildShapeRotations
+import juuxel.adorn.util.buildShapeRotationsFromNorth
+import juuxel.adorn.util.mergeShapeMaps
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
-import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
@@ -17,6 +19,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
+import net.minecraft.world.IWorld
 
 class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
     init {
@@ -36,21 +39,45 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
             state.with(FACING, ctx.playerFacing.opposite)
                 .with(SHAPE, Shape.Straight)
                 .with(WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).fluid === Fluids.WATER)
+                .let {
+                    val side = it[FACING].opposite
+                    val pos = ctx.blockPos.offset(side)
+                    val world = ctx.world
+                    it.getStateForNeighborUpdate(side, world.getBlockState(pos), world, ctx.blockPos, pos)
+                }
         }
+    }
+
+    override fun getStateForNeighborUpdate(
+        state: BlockState, facing: Direction, neighborState: BlockState,
+        world: IWorld, pos: BlockPos, neighborPos: BlockPos
+    ): BlockState {
+        val fenceFacing = state[FACING]
+        if (facing == fenceFacing.opposite) {
+            val neighborFacing = if (neighborState.block is PicketFenceBlock) neighborState[FACING] else null
+            return when (neighborFacing) {
+                fenceFacing.rotateYClockwise() -> state.with(SHAPE, Shape.ClockwiseCorner)
+                fenceFacing.rotateYCounterclockwise() -> state.with(SHAPE, Shape.CounterclockwiseCorner)
+                else -> state.with(SHAPE, Shape.Straight)
+            }
+        }
+        return state
     }
 
     override fun getOutlineShape(
         state: BlockState, view: BlockView, pos: BlockPos, ePos: EntityContext
-    ): VoxelShape {
-        // TODO: Outline shape
-        return super.getOutlineShape(state, view, pos, ePos)
+    ): VoxelShape = when (state[SHAPE]) {
+        Shape.Straight -> STRAIGHT_OUTLINE_SHAPES.getValue(state[FACING])
+        Shape.ClockwiseCorner -> CORNER_OUTLINE_SHAPES.getValue(state[FACING])
+        Shape.CounterclockwiseCorner -> CORNER_OUTLINE_SHAPES.getValue(state[FACING].rotateYCounterclockwise())
     }
 
     override fun getCollisionShape(
         state: BlockState, view: BlockView, pos: BlockPos, ePos: EntityContext
-    ): VoxelShape {
-        // TODO: Collision shape
-        return super.getCollisionShape(state, view, pos, ePos)
+    ): VoxelShape = when (state[SHAPE]) {
+        Shape.Straight -> STRAIGHT_COLLISION_SHAPES.getValue(state[FACING])
+        Shape.ClockwiseCorner -> CORNER_COLLISION_SHAPES.getValue(state[FACING])
+        Shape.CounterclockwiseCorner -> CORNER_COLLISION_SHAPES.getValue(state[FACING].rotateYCounterclockwise())
     }
 
     override fun getFluidState(state: BlockState) =
@@ -61,13 +88,23 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
         val SHAPE: EnumProperty<Shape> = EnumProperty.of("shape", Shape::class.java)
         val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
         val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
+
+        private val STRAIGHT_OUTLINE_SHAPES = buildShapeRotationsFromNorth(0, 0, 7, 16, 16, 9)
+        private val CORNER_OUTLINE_SHAPES = mergeShapeMaps(
+            buildShapeRotationsFromNorth(0, 0, 7, 9, 16, 9),
+            buildShapeRotationsFromNorth(7, 0, 9, 9, 16, 16)
+        )
+        private val STRAIGHT_COLLISION_SHAPES = buildShapeRotationsFromNorth(0, 0, 7, 16, 24, 9)
+        private val CORNER_COLLISION_SHAPES = mergeShapeMaps(
+            buildShapeRotationsFromNorth(0, 0, 7, 9, 24, 9),
+            buildShapeRotationsFromNorth(7, 0, 9, 9, 24, 16)
+        )
     }
 
     enum class Shape(private val id: String) : StringIdentifiable {
         Straight("straight"),
-        OuterCorner("outer_corner"),
-        InnerCorner("inner_corner"),
-        MismatchedCorner("mismatched_corner"),
+        ClockwiseCorner("clockwise_corner"),
+        CounterclockwiseCorner("counterclockwise_corner"),
         ;
 
         override fun asString() = id

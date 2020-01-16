@@ -9,6 +9,7 @@
     "fluidloggable.FluidloggableMixin",
     "fluidloggable.FluidUtilMixin",
     "BubbleColumnBlockMixin",
+    "FenceGateBlockMixin",
     "LivingEntityMixin",
     "PaneBlockMixin",
     "PlayerEntityMixin",
