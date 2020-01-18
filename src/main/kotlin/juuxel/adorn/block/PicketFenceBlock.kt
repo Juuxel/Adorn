@@ -1,6 +1,5 @@
 package juuxel.adorn.block
 
-import juuxel.adorn.util.buildShapeRotations
 import juuxel.adorn.util.buildShapeRotationsFromNorth
 import juuxel.adorn.util.mergeShapeMaps
 import net.minecraft.block.Block
@@ -55,11 +54,19 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
         val fenceFacing = state[FACING]
         if (facing == fenceFacing.opposite) {
             val neighborFacing = if (neighborState.block is PicketFenceBlock) neighborState[FACING] else null
-            return when (neighborFacing) {
-                fenceFacing.rotateYClockwise() -> state.with(SHAPE, Shape.ClockwiseCorner)
-                fenceFacing.rotateYCounterclockwise() -> state.with(SHAPE, Shape.CounterclockwiseCorner)
-                else -> state.with(SHAPE, Shape.Straight)
+            val neighborShape = if (neighborState.block is PicketFenceBlock) neighborState[SHAPE] else null
+
+            var shape = when (neighborFacing) {
+                fenceFacing.rotateYClockwise() -> Shape.ClockwiseCorner
+                fenceFacing.rotateYCounterclockwise() -> Shape.CounterclockwiseCorner
+                else -> Shape.Straight
             }
+
+            // Prevent funny connections
+            if (neighborShape != shape && neighborShape != Shape.Straight)
+                shape = Shape.Straight
+
+            return state.with(SHAPE, shape)
         }
         return state
     }

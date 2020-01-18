@@ -8,6 +8,7 @@
   "mixins": [
     "fluidloggable.FluidloggableMixin",
     "fluidloggable.FluidUtilMixin",
+    "BlockMixin",
     "BubbleColumnBlockMixin",
     "FenceGateBlockMixin",
     "LivingEntityMixin",
