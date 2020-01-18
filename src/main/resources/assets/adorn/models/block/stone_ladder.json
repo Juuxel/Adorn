@@ -1,0 +1,7 @@
+{
+  "parent": "block/ladder",
+  "textures": {
+    "texture": "adorn:block/stone_ladder",
+    "particle": "adorn:block/stone_ladder"
+  }
+}

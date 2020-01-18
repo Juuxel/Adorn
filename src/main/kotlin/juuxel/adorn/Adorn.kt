@@ -8,6 +8,7 @@ import juuxel.adorn.entity.AdornEntities
 import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.lib.AdornNetworking
+import juuxel.adorn.lib.AdornSounds
 import juuxel.adorn.lib.AdornTags
 import juuxel.adorn.resources.AdornResources
 import net.fabricmc.api.EnvType
@@ -20,6 +21,7 @@ object Adorn : ModInitializer {
 
     override fun onInitialize() {
         AdornConfigManager.init()
+        AdornSounds.init()
         AdornBlocks.init()
         AdornItems.init()
         AdornEntities.init()

@@ -29,8 +29,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @ModifyVariable(method = "isClimbing", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/block/BlockState;getBlock()Lnet/minecraft/block/Block;"))
     private Block replaceClimbableBlocksWithLadders(Block original) {
-        if (original.matches(AdornTags.CLIMBABLE)) return Blocks.LADDER;
-        else return original;
+        return original.matches(AdornTags.CLIMBABLE) ? Blocks.LADDER : original;
     }
 
     // Lambda: Optional.map in isSleepingInBed()

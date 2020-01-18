@@ -1,0 +1,11 @@
+{
+  "block.adorn.chain_link_fence.step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      { "name": "adorn:block.chain_link_fence.step", "weight": 2 },
+      { "name": "adorn:block.chain_link_fence.step", "pitch": 0.7 },
+      { "name": "adorn:block.chain_link_fence.step", "pitch": 0.8 },
+      { "name": "adorn:block.chain_link_fence.step", "pitch": 1.1 }
+    ]
+  }
+}

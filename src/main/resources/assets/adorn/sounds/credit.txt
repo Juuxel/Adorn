@@ -1,0 +1,3 @@
+Adorn's sounds are from Freesound, links:
+
+block.chain_link_fence.step: https://freesound.org/people/Starvolt/sounds/189219/

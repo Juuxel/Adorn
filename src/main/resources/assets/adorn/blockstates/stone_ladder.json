@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "adorn:block/stone_ladder" },
+    "facing=east": { "model": "adorn:block/stone_ladder", "y": 90 },
+    "facing=south": { "model": "adorn:block/stone_ladder", "y": 180 },
+    "facing=west": { "model": "adorn:block/stone_ladder", "y": 270 }
+  }
+}

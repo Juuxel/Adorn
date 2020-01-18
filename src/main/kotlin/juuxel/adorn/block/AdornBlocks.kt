@@ -7,6 +7,7 @@ import juuxel.adorn.block.renderer.TradingStationRenderer
 import juuxel.adorn.client.SinkColorProvider
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
+import juuxel.adorn.lib.AdornSounds
 import juuxel.adorn.lib.RegistryHelper
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -15,6 +16,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.render.ColorProviderRegistry
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
+import net.fabricmc.fabric.api.tools.FabricToolTags
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.CarpetBlock
@@ -22,10 +24,13 @@ import net.minecraft.client.render.RenderLayer
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
+import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
 
+@Suppress("UNUSED", "MemberVisibilityCanBePrivate")
 object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val SOFAS: Map<DyeColor, SofaBlock> = DyeColor.values().associate {
         // This is one place where the BlockVariant mapping is kept.
@@ -204,8 +209,20 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
         "picket_fence",
         PicketFenceBlock(Block.Settings.copy(Blocks.OAK_FENCE).nonOpaque())
     )
-    val CHAIN_LINK_FENCE: Block =
-        registerBlock("chain_link_fence", ChainLinkFenceBlock(Block.Settings.copy(Blocks.IRON_BARS)))
+    val CHAIN_LINK_FENCE: Block = registerBlock(
+        "chain_link_fence",
+        ChainLinkFenceBlock(
+            FabricBlockSettings.copy(Blocks.IRON_BARS)
+                .sounds(AdornSounds.CHAIN_LINK_FENCE)
+                .build()
+        )
+    )
+    val STONE_LADDER: Block = registerBlock(
+        "stone_ladder",
+        StoneLadderBlock(
+            FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).nonOpaque().build()
+        )
+    )
 
     fun init() {
         UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->
@@ -267,7 +284,7 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
         // RenderLayers
         BlockRenderLayerMap.INSTANCE.putBlocks(
             RenderLayer.getCutout(),
-            TRADING_STATION, STONE_TORCH_GROUND, STONE_TORCH_WALL, CHAIN_LINK_FENCE
+            TRADING_STATION, STONE_TORCH_GROUND, STONE_TORCH_WALL, CHAIN_LINK_FENCE, STONE_LADDER
         )
 
         BlockRenderLayerMap.INSTANCE.putBlocks(
