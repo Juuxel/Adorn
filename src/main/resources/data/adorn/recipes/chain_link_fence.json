@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    ". .",
+    " - ",
+    ". ."
+  ],
+  "key": {
+    ".": {
+      "item": "minecraft:iron_nugget"
+    },
+    "-": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "adorn:chain_link_fence",
+    "count": 4
+  }
+}
