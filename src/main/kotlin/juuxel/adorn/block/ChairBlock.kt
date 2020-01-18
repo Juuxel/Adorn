@@ -2,6 +2,7 @@ package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.util.buildShapeRotations
+import juuxel.adorn.util.mergeIntoShapeMap
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -24,7 +25,6 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.*
-import java.util.*
 
 open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()), Waterloggable {
     init {
@@ -158,9 +158,9 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
         val CARPET = CarpetedBlock.CARPET
         val WATERLOGGED = Properties.WATERLOGGED
 
-        private val LOWER_SHAPES: EnumMap<Direction, VoxelShape>
-        private val LOWER_SHAPES_WITH_CARPET: EnumMap<Direction, VoxelShape>
-        private val UPPER_OUTLINE_SHAPES: EnumMap<Direction, VoxelShape>
+        private val LOWER_SHAPES: Map<Direction, VoxelShape>
+        private val LOWER_SHAPES_WITH_CARPET: Map<Direction, VoxelShape>
+        private val UPPER_OUTLINE_SHAPES: Map<Direction, VoxelShape>
 
         init {
             val lowerSeatShape = VoxelShapes.union(
@@ -172,19 +172,8 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
                 createCuboidShape(12.0, 0.0, 12.0, 14.0, 8.0, 14.0)
             )
             val lowerBackShapes = buildShapeRotations(2, 10, 2, 4, 24, 14)
-            LOWER_SHAPES = EnumMap(
-                Direction.values().filter { it.horizontal != -1 }.map {
-                    it to VoxelShapes.union(
-                        lowerSeatShape, lowerBackShapes[it]
-                    )
-                }.toMap()
-            )
-
-            LOWER_SHAPES_WITH_CARPET = EnumMap(
-                LOWER_SHAPES.mapValues { (_, shape) ->
-                    VoxelShapes.union(shape, CARPET_SHAPE)
-                }
-            )
+            LOWER_SHAPES = mergeIntoShapeMap(lowerBackShapes, lowerSeatShape)
+            LOWER_SHAPES_WITH_CARPET = mergeIntoShapeMap(LOWER_SHAPES, CARPET_SHAPE)
 
             val upperSeatShape = VoxelShapes.union(
                 createCuboidShape(2.0, -8.0, 2.0, 14.0, -6.0, 14.0),
@@ -195,11 +184,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
                 createCuboidShape(12.0, -16.0, 12.0, 14.0, -8.0, 14.0)
             )
             val upperBackShapes = buildShapeRotations(2, -6, 2, 4, 8, 14)
-            UPPER_OUTLINE_SHAPES = EnumMap(
-                Direction.values().filter { it.horizontal != -1 }.map {
-                    it to VoxelShapes.union(upperSeatShape, upperBackShapes[it])
-                }.toMap()
-            )
+            UPPER_OUTLINE_SHAPES = mergeIntoShapeMap(upperBackShapes, upperSeatShape)
         }
     }
 }

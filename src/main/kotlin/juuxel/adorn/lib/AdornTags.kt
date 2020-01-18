@@ -28,6 +28,7 @@ object AdornTags {
     val SHELVES = blockAndItem(Adorn.id("shelves"))
     val WOODEN_SHELVES = blockAndItem(Adorn.id("wooden_shelves"))
     val CHIMNEYS = blockAndItem(Adorn.id("chimneys"))
+    @JvmField val CLIMBABLE = block(Adorn.id("climbable"))
 
     val STONE_ROD = item(Identifier("c", "stone_rod"))
 

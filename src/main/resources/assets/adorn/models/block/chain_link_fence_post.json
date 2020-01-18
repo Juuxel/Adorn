@@ -1,5 +1,6 @@
 {
   "parent": "block/block",
+  "ambientocclusion": false,
   "textures": {
     "main": "adorn:block/chain_link_fence",
     "edge": "adorn:block/chain_link_fence_edge",
@@ -7,44 +8,12 @@
   },
   "elements": [
     {
-      "from": [7, 0, 7],
-      "to": [9, 2, 9],
-      "faces": {
-        "down": { "texture": "#edge", "cullface": "down" },
-        "up": { "texture": "#edge" },
-        "north": { "texture": "#edge" },
-        "east": { "texture": "#edge" },
-        "south": { "texture": "#edge" },
-        "west": { "texture": "#edge" }
-      }
-    },
-    {
-      "from": [7, 14, 7],
-      "to": [9, 16, 9],
-      "faces": {
-        "up": { "texture": "#edge", "cullface": "up" },
-        "down": { "texture": "#edge" },
-        "north": { "texture": "#edge" },
-        "east": { "texture": "#edge" },
-        "south": { "texture": "#edge" },
-        "west": { "texture": "#edge" }
-      }
-    },
-    {
-      "from": [7, 2, 8],
-      "to": [9, 14, 8],
-      "shade": false,
+      "from": [7, 2, 7],
+      "to": [9, 14, 9],
       "faces": {
         "north": { "texture": "#main" },
-        "south": { "texture": "#main" }
-      }
-    },
-    {
-      "from": [8, 2, 7],
-      "to": [8, 14, 9],
-      "shade": false,
-      "faces": {
         "east": { "texture": "#main" },
+        "south": { "texture": "#main" },
         "west": { "texture": "#main" }
       }
     }

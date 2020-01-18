@@ -2,8 +2,11 @@ package juuxel.adorn.mixin;
 
 import juuxel.adorn.block.SeatBlock;
 import juuxel.adorn.block.SofaBlock;
+import juuxel.adorn.lib.AdornTags;
 import net.minecraft.block.BedBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -13,6 +16,7 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
@@ -21,6 +25,12 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 public abstract class LivingEntityMixin extends Entity {
     public LivingEntityMixin(EntityType<?> entityType_1, World world_1) {
         super(entityType_1, world_1);
+    }
+
+    @ModifyVariable(method = "isClimbing", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/block/BlockState;getBlock()Lnet/minecraft/block/Block;"))
+    private Block replaceClimbableBlocksWithLadders(Block original) {
+        if (original.matches(AdornTags.CLIMBABLE)) return Blocks.LADDER;
+        else return original;
     }
 
     // Lambda: Optional.map in isSleepingInBed()

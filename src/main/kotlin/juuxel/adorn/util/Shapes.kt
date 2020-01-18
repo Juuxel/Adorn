@@ -7,7 +7,10 @@ import net.minecraft.util.shape.VoxelShapes
 import java.util.EnumMap
 
 /**
- * Creates a map of horizontal VoxelShape rotations from the provided coordinates for **east**.
+ * Creates a map of horizontal cuboid VoxelShape rotations from the provided coordinates for **east**.
+ *
+ * The coordinates are specified like in a model json or [createCuboidShape]:
+ * { from: ([x0], [y0], [z0]), to: ([x1], [y1], [z1]) }
  */
 fun buildShapeRotations(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1: Int): Map<Direction, VoxelShape> = EnumMap(mapOf(
     Direction.EAST to createCuboidShape(
@@ -32,7 +35,10 @@ fun buildShapeRotations(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1: Int): M
 ))
 
 /**
- * Creates a map of horizontal VoxelShape rotations from the provided coordinates for **north**.
+ * Creates a map of horizontal cuboid VoxelShape rotations from the provided coordinates for **north**.
+ *
+ * The coordinates are specified like in a model json or [createCuboidShape]:
+ * { from: ([x0], [y0], [z0]), to: ([x1], [y1], [z1]) }
  */
 fun buildShapeRotationsFromNorth(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1: Int): Map<Direction, VoxelShape> = EnumMap(mapOf(
     Direction.NORTH to createCuboidShape(
@@ -56,6 +62,9 @@ fun buildShapeRotationsFromNorth(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1
     )
 ))
 
+/**
+ * Merges the [shape maps][maps] together.
+ */
 fun mergeShapeMaps(vararg maps: Map<Direction, VoxelShape>): Map<Direction, VoxelShape> {
     fun Map<Direction, VoxelShape>.getShape(direction: Direction) =
         getOrElse(direction) { throw IllegalArgumentException("Map is missing shape for $direction!") }
@@ -64,3 +73,9 @@ fun mergeShapeMaps(vararg maps: Map<Direction, VoxelShape>): Map<Direction, Voxe
         maps.map { it.getShape(direction) }.reduce { a, b -> VoxelShapes.union(a, b) }.simplify()
     })
 }
+
+/**
+ * Merges the [shape] into the [shape map][map].
+ */
+fun mergeIntoShapeMap(map: Map<Direction, VoxelShape>, shape: VoxelShape): Map<Direction, VoxelShape> =
+    EnumMap(map.mapValues { (_, it) -> VoxelShapes.union(it, shape) })

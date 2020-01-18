@@ -1,23 +1,109 @@
 {
   "multipart": [
     {
+      "when": { "up": false },
+      "apply": { "model": "adorn:block/chain_link_fence_center_up" }
+    },
+    {
+      "when": { "down": false },
+      "apply": { "model": "adorn:block/chain_link_fence_center_down" }
+    },
+
+    {
+      "when": { "north": false, "east": false, "south": false, "west": false },
       "apply": { "model": "adorn:block/chain_link_fence_post" }
     },
+    {
+      "when": { "north": false, "east": false, "south": false, "west": false, "up": true },
+      "apply": { "model": "adorn:block/chain_link_fence_post_up" }
+    },
+    {
+      "when": { "north": false, "east": false, "south": false, "west": false, "down": true },
+      "apply": { "model": "adorn:block/chain_link_fence_post_down" }
+    },
+
     {
       "when": { "north": true },
       "apply": { "model": "adorn:block/chain_link_fence_side" }
     },
     {
+      "when": { "north": true, "up": true },
+      "apply": { "model": "adorn:block/chain_link_fence_side_up" }
+    },
+    {
+      "when": { "north": true, "up": false },
+      "apply": { "model": "adorn:block/chain_link_fence_side_edge_up" }
+    },
+    {
+      "when": { "north": true, "down": true },
+      "apply": { "model": "adorn:block/chain_link_fence_side_down" }
+    },
+    {
+      "when": { "north": true, "down": false },
+      "apply": { "model": "adorn:block/chain_link_fence_side_edge_down" }
+    },
+
+    {
       "when": { "east": true },
       "apply": { "model": "adorn:block/chain_link_fence_side", "y": 90 }
     },
+    {
+      "when": { "east": true, "up": true },
+      "apply": { "model": "adorn:block/chain_link_fence_side_up", "y": 90 }
+    },
+    {
+      "when": { "east": true, "up": false },
+      "apply": { "model": "adorn:block/chain_link_fence_side_edge_up", "y": 90 }
+    },
+    {
+      "when": { "east": true, "down": true },
+      "apply": { "model": "adorn:block/chain_link_fence_side_down", "y": 90 }
+    },
+    {
+      "when": { "east": true, "down": false },
+      "apply": { "model": "adorn:block/chain_link_fence_side_edge_down", "y": 90 }
+    },
+
     {
       "when": { "south": true },
       "apply": { "model": "adorn:block/chain_link_fence_side", "y": 180 }
     },
     {
+      "when": { "south": true, "up": true },
+      "apply": { "model": "adorn:block/chain_link_fence_side_up", "y": 180 }
+    },
+    {
+      "when": { "south": true, "up": false },
+      "apply": { "model": "adorn:block/chain_link_fence_side_edge_up", "y": 180 }
+    },
+    {
+      "when": { "south": true, "down": true },
+      "apply": { "model": "adorn:block/chain_link_fence_side_down", "y": 180 }
+    },
+    {
+      "when": { "south": true, "down": false },
+      "apply": { "model": "adorn:block/chain_link_fence_side_edge_down", "y": 180 }
+    },
+
+    {
       "when": { "west": true },
       "apply": { "model": "adorn:block/chain_link_fence_side", "y": 270 }
+    },
+    {
+      "when": { "west": true, "up": true },
+      "apply": { "model": "adorn:block/chain_link_fence_side_up", "y": 270 }
+    },
+    {
+      "when": { "west": true, "up": false },
+      "apply": { "model": "adorn:block/chain_link_fence_side_edge_up", "y": 270 }
+    },
+    {
+      "when": { "west": true, "down": true },
+      "apply": { "model": "adorn:block/chain_link_fence_side_down", "y": 270 }
+    },
+    {
+      "when": { "west": true, "down": false },
+      "apply": { "model": "adorn:block/chain_link_fence_side_edge_down", "y": 270 }
     }
   ]
 }
