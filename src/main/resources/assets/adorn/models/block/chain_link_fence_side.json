@@ -1,8 +1,44 @@
 {
-  "parent": "block/iron_bars_side",
-  "textures": {
-    "particle": "adorn:block/chain_link_fence",
-    "bars": "adorn:block/chain_link_fence",
-    "edge": "adorn:block/chain_link_fence"
+    "parent": "block/block",
+    "textures": {
+      "main": "adorn:block/chain_link_fence",
+      "edge": "adorn:block/chain_link_fence_edge",
+      "particle": "adorn:block/chain_link_fence"
+    },
+    "elements": [
+      {
+        "from": [7, 0, 0],
+        "to": [9, 2, 7],
+        "faces": {
+          "down": { "texture": "#edge", "cullface": "down" },
+          "up": { "texture": "#edge" },
+          "north": { "texture": "#edge" },
+          "east": { "texture": "#edge" },
+          "south": { "texture": "#edge" },
+          "west": { "texture": "#edge" }
+        }
+      },
+      {
+        "from": [7, 14, 0],
+        "to": [9, 16, 7],
+        "faces": {
+          "up": { "texture": "#edge", "cullface": "up" },
+          "down": { "texture": "#edge" },
+          "north": { "texture": "#edge" },
+          "east": { "texture": "#edge" },
+          "south": { "texture": "#edge" },
+          "west": { "texture": "#edge" }
+        }
+      },
+      {
+        "from": [8, 2, 0],
+        "to": [8, 14, 7],
+        "shade": false,
+        "faces": {
+          "east": { "texture": "#main" },
+          "west": { "texture": "#main" }
+        }
+      }
+    ]
   }
-}
+  

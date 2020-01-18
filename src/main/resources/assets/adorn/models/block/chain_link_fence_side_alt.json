@@ -1,8 +1,0 @@
-{
-  "parent": "block/iron_bars_side_alt",
-  "textures": {
-    "particle": "adorn:block/chain_link_fence",
-    "bars": "adorn:block/chain_link_fence",
-    "edge": "adorn:block/chain_link_fence"
-  }
-}
