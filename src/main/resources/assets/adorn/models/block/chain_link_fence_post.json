@@ -8,13 +8,19 @@
   },
   "elements": [
     {
-      "from": [7, 2, 7],
-      "to": [9, 14, 9],
+      "from": [8, 2, 7],
+      "to": [8, 14, 9],
+      "faces": {
+        "east": { "texture": "#main" },
+        "west": { "texture": "#main" }
+      }
+    },
+    {
+      "from": [7, 2, 8],
+      "to": [9, 14, 8],
       "faces": {
         "north": { "texture": "#main" },
-        "east": { "texture": "#main" },
-        "south": { "texture": "#main" },
-        "west": { "texture": "#main" }
+        "south": { "texture": "#main" }
       }
     }
   ]
