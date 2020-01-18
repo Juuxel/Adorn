@@ -7,5 +7,37 @@
       { "name": "adorn:block.chain_link_fence.step", "pitch": 0.8 },
       { "name": "adorn:block.chain_link_fence.step", "pitch": 1.1 }
     ]
+  },
+  "block.adorn.chain_link_fence.fall": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      { "name": "adorn:block.chain_link_fence.step", "weight": 2 },
+      { "name": "adorn:block.chain_link_fence.step", "pitch": 0.7 },
+      { "name": "adorn:block.chain_link_fence.step", "pitch": 0.8 },
+      { "name": "adorn:block.chain_link_fence.step", "pitch": 1.1 }
+    ]
+  },
+  "block.adorn.chain_link_fence.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      { "name": "adorn:block.chain_link_fence.step", "volume": 0.7, "weight": 2 },
+      { "name": "adorn:block.chain_link_fence.step", "volume": 0.7, "pitch": 1.1 }
+    ]
+  },
+  "block.adorn.chain_link_fence.hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      { "name": "adorn:block.chain_link_fence.step", "pitch": 0.7 },
+      { "name": "adorn:block.chain_link_fence.step", "pitch": 0.8 },
+      { "name": "adorn:block.chain_link_fence.step", "pitch": 0.9 }
+    ]
+  },
+  "block.adorn.chain_link_fence.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      { "name": "adorn:block.chain_link_fence.step", "volume": 0.7, "pitch": 0.7 },
+      { "name": "adorn:block.chain_link_fence.step", "volume": 0.7, "pitch": 0.8 },
+      { "name": "adorn:block.chain_link_fence.step", "volume": 0.7, "pitch": 0.9 }
+    ]
   }
 }
