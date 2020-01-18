@@ -13,6 +13,8 @@ import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.DirectionProperty
 import net.minecraft.state.property.EnumProperty
 import net.minecraft.state.property.Properties
+import net.minecraft.util.BlockMirror
+import net.minecraft.util.BlockRotation
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
@@ -90,6 +92,12 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
     override fun getFluidState(state: BlockState) =
         if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
         else super.getFluidState(state)
+
+    override fun rotate(state: BlockState, rotation: BlockRotation): BlockState =
+        state.with(FACING, rotation.rotate(state[FACING]))
+
+    override fun mirror(state: BlockState, mirror: BlockMirror): BlockState =
+        state.with(FACING, mirror.apply(state[FACING]))
 
     companion object {
         val SHAPE: EnumProperty<Shape> = EnumProperty.of("shape", Shape::class.java)
