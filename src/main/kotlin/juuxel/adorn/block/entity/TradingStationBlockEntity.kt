@@ -1,6 +1,6 @@
 package juuxel.adorn.block.entity
 
-import juuxel.adorn.block.TradingStationBlock
+import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.gui.controller.TradingStationController
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.util.InventoryComponent
@@ -17,9 +17,9 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
-import java.util.UUID
+import java.util.*
 
-class TradingStationBlockEntity : BlockEntity(TradingStationBlock.BLOCK_ENTITY_TYPE), BlockEntityClientSerializable, NameableContainerProvider, TradingStation {
+class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION), BlockEntityClientSerializable, NameableContainerProvider, TradingStation {
     var owner: UUID? = null
     var ownerName: Text = LiteralText("???")
     override val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)

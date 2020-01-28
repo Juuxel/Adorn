@@ -1,5 +1,6 @@
 package juuxel.adorn
 
+import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.compat.AdornCompat
 import juuxel.adorn.config.AdornConfigManager
@@ -23,6 +24,7 @@ object Adorn : ModInitializer {
         AdornConfigManager.init()
         AdornSounds.init()
         AdornBlocks.init()
+        AdornBlockEntities.init()
         AdornItems.init()
         AdornEntities.init()
         AdornGuis.init()

@@ -24,9 +24,7 @@ import net.minecraft.client.render.RenderLayer
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
-import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundCategory
-import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
 
@@ -273,11 +271,11 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     fun initClient() {
         // BlockEntityRenderers
         BlockEntityRendererRegistry.INSTANCE.register(
-            TradingStationBlock.BLOCK_ENTITY_TYPE,
+            AdornBlockEntities.TRADING_STATION,
             ::TradingStationRenderer
         )
         BlockEntityRendererRegistry.INSTANCE.register(
-            ShelfBlock.BLOCK_ENTITY_TYPE,
+            AdornBlockEntities.SHELF,
             ::ShelfRenderer
         )
 

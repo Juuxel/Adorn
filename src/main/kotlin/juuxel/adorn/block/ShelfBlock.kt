@@ -4,12 +4,10 @@ import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.ShelfBlockEntity
 import juuxel.adorn.util.buildShapeRotations
-import juuxel.adorn.block.entity.MutableBlockEntityType
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.Waterloggable
-import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.container.Container
 import net.minecraft.entity.EntityContext
 import net.minecraft.entity.player.PlayerEntity
@@ -29,7 +27,7 @@ import net.minecraft.world.WorldView
 
 open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createSettings()), Waterloggable, BlockWithDescription {
     override val descriptionKey = "block.adorn.shelf.desc"
-    override val blockEntityType = BLOCK_ENTITY_TYPE
+    override val blockEntityType = AdornBlockEntities.SHELF
 
     init {
         defaultState = defaultState.with(WATERLOGGED, false)
@@ -175,8 +173,6 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
     companion object {
         val FACING = Properties.HORIZONTAL_FACING
         val WATERLOGGED = Properties.WATERLOGGED
-        val BLOCK_ENTITY_TYPE: BlockEntityType<ShelfBlockEntity> =
-            MutableBlockEntityType(::ShelfBlockEntity)
 
         private val SHAPES = buildShapeRotations(0, 5, 0, 7, 6, 16)
     }

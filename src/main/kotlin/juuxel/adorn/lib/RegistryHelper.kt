@@ -49,9 +49,6 @@ abstract class RegistryHelper(private val namespace: String) {
         register(Registry.ITEM, name, itemProvider(block))
         if (block is BETypeProvider) {
             val type = block.blockEntityType
-            if (!Registry.BLOCK_ENTITY_TYPE.contains(type)) {
-                register(Registry.BLOCK_ENTITY_TYPE, name, type)
-            }
 
             if (type is MutableBlockEntityType<*>) {
                 type.addBlock(block)

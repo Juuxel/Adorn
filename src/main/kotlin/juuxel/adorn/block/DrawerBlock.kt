@@ -5,10 +5,8 @@ import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.DrawerBlockEntity
 import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.gui.openFabricContainer
-import juuxel.adorn.block.entity.MutableBlockEntityType
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.container.Container
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -25,7 +23,7 @@ import net.minecraft.world.World
 open class DrawerBlock(
     variant: BlockVariant
 ) : VisibleBlockWithEntity(variant.createSettings().nonOpaque()), BaseInventoryBlockEntity.InventoryProviderImpl {
-    override val blockEntityType = BLOCK_ENTITY_TYPE
+    override val blockEntityType = AdornBlockEntities.DRAWER
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
@@ -76,7 +74,5 @@ open class DrawerBlock(
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING
-        val BLOCK_ENTITY_TYPE: BlockEntityType<DrawerBlockEntity> =
-            MutableBlockEntityType(::DrawerBlockEntity)
     }
 }

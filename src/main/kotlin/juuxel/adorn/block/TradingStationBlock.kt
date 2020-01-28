@@ -4,7 +4,6 @@ import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.config.AdornConfigManager
 import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.gui.openFabricContainer
-import juuxel.adorn.block.entity.MutableBlockEntityType
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -28,7 +27,7 @@ import net.minecraft.world.World
 
 class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)),
     SneakClickHandler {
-    override val blockEntityType = BLOCK_ENTITY_TYPE
+    override val blockEntityType = AdornBlockEntities.TRADING_STATION
 
     init {
         defaultState = defaultState.with(WATERLOGGED, false)
@@ -140,7 +139,6 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
             super.calcBlockBreakingDelta(state, player, world, pos)
 
     companion object {
-        val BLOCK_ENTITY_TYPE = MutableBlockEntityType(::TradingStationBlockEntity)
         val WATERLOGGED = Properties.WATERLOGGED
 
         private val LEG_SHAPE = VoxelShapes.union(

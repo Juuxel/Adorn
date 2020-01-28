@@ -1,12 +1,12 @@
 package juuxel.adorn.block.entity
 
-import juuxel.adorn.block.ShelfBlock
+import juuxel.adorn.block.AdornBlockEntities
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventories
 import net.minecraft.nbt.CompoundTag
 
-class ShelfBlockEntity : BaseInventoryBlockEntity(ShelfBlock.BLOCK_ENTITY_TYPE, 2), BlockEntityClientSerializable {
+class ShelfBlockEntity : BaseInventoryBlockEntity(AdornBlockEntities.SHELF, 2), BlockEntityClientSerializable {
     // No menus for shelves
     override fun createContainer(syncId: Int, playerInv: PlayerInventory?) = null
 
