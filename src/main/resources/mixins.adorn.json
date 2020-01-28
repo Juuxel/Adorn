@@ -15,11 +15,11 @@
     "LivingEntityMixin",
     "PaneBlockMixin",
     "PlayerEntityMixin",
-    "ScreenAccessor",
     "WPanelMixin"
   ],
   "client": [
-    "client.LivingEntityMixin"
+    "client.LivingEntityMixin",
+    "client.ScreenAccessor"
   ],
 
   "injectors": {
