@@ -7,7 +7,7 @@ plugins {
     idea
     id("fabric-loom") version "0.2.7-SNAPSHOT"
     `maven-publish`
-    //id("com.github.johnrengelman.shadow") version "5.1.0"
+    id("org.jmailen.kotlinter") version "2.3.0"
 }
 
 group = "io.github.juuxel"
@@ -41,7 +41,7 @@ repositories {
     maven(url = "http://server.bbkr.space:8081/artifactory/libs-release") { name = "Cotton" }
     maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot") { name = "Cotton (snapshots)" }
     maven(url = "https://minecraft.curseforge.com/api/maven") { name = "CurseForge" }
-    //maven(url = "https://jitpack.io")
+    // maven(url = "https://jitpack.io")
 }
 
 java {
@@ -121,12 +121,10 @@ tasks.withType<KotlinCompile> {
 }
 
 val remapJar = tasks.getByName<RemapJarTask>("remapJar")
-// Turns out I can't even use this version of Jankson, but I'll keep the code here if I ever need it.
-/*val shadowJar = tasks.getByName<ShadowJar>("shadowJar")
 
-remapJar.input.set(shadowJar.archiveFile.get())
-
-shadowJar.relocate("blue.endless.jankson", "juuxel.adorn.repackage.jankson")*/
+kotlinter {
+    disabledRules = arrayOf("parameter-list-wrapping")
+}
 
 publishing {
     publications.create<MavenPublication>("maven") {

@@ -29,13 +29,13 @@ class WItem(private val items: List<Item>) : WWidget() {
         RenderSystem.enableDepthTest()
         RenderSystem.translatef(x.toFloat(), y.toFloat(), 0f)
         RenderSystem.scalef(1.2f, 1.2f, 1.0f)
-        //GuiLighting.enableForItems()
+        // GuiLighting.enableForItems()
         val client = MinecraftClient.getInstance()
         val renderer = client.itemRenderer
         renderer.zOffset = 100f
         renderer.renderGuiItem(client.player, items[index].stackForRender, 0, 0)
         renderer.zOffset = 0f
-        //GuiLighting.disable()
+        // GuiLighting.disable()
         RenderSystem.popMatrix()
     }
 

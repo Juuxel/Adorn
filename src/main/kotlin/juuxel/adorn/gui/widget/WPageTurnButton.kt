@@ -2,13 +2,11 @@ package juuxel.adorn.gui.widget
 
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel
-import io.github.cottonmc.cotton.gui.widget.WWidget
 import juuxel.adorn.util.Colors
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.ingame.BookScreen
-import net.minecraft.client.resource.language.I18n
 import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.sound.SoundEvents
 

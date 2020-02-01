@@ -5,11 +5,11 @@ import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import juuxel.adorn.resources.ColorManager
 import juuxel.adorn.util.Colors
+import kotlin.math.max
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.gui.screen.ingame.BookScreen
 import net.minecraft.util.Identifier
-import kotlin.math.max
 
 @Environment(EnvType.CLIENT)
 object Painters {

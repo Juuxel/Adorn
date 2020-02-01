@@ -14,7 +14,11 @@ import net.minecraft.item.ItemStack
 import net.minecraft.stat.Stats
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
-import net.minecraft.util.*
+import net.minecraft.util.ActionResult
+import net.minecraft.util.Formatting
+import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
+import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
 class AdornBookItem(private val bookId: Identifier, settings: Settings) : Item(settings) {

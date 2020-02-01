@@ -65,8 +65,8 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable {
         if (state[Properties.WATERLOGGED]) Fluids.WATER.getStill(false)
         else super.getFluidState(state)
 
-    override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, ePos: EntityContext)
-        = SHAPE
+    override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, ePos: EntityContext) =
+        SHAPE
 
     @Suppress("deprecation")
     override fun getLuminance(state: BlockState) =

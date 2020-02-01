@@ -64,8 +64,7 @@ abstract class BaseAdornController(
                             )
                             BasicInventory(fallbackSize)
                         }
-                    }
-                else it
+                    } else it
             }
     }
 }

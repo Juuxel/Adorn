@@ -4,20 +4,10 @@ import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
 import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.config.AdornConfigManager
-import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.block.Waterloggable
-import net.minecraft.entity.EntityContext
-import net.minecraft.fluid.Fluids
-import net.minecraft.item.ItemPlacementContext
-import net.minecraft.state.StateManager
-import net.minecraft.state.property.Properties
-import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
-import net.minecraft.world.BlockView
-import net.minecraft.world.IWorld
 
 open class TableBlock(variant: BlockVariant) : AbstractTableBlock(variant.createSettings()) {
     override val sittingYOffset = 0.6

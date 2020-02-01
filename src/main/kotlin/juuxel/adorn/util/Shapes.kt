@@ -1,10 +1,10 @@
 package juuxel.adorn.util
 
+import java.util.EnumMap
 import net.minecraft.block.Block.createCuboidShape
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
-import java.util.EnumMap
 
 /**
  * Creates a map of horizontal cuboid VoxelShape rotations from the provided coordinates for **east**.

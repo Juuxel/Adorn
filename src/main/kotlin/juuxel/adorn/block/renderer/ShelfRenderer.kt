@@ -47,7 +47,7 @@ class ShelfRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEntityRender
         matrices.translate(tx1, 9.6 / 16.0, tz1)
         matrices.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE)
         matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(ITEM_1_Y_ROT + facing.asRotation()))
-        //GlStateManager.rotatef(ITEM_X_ROT, 1f, 0f, 0f)
+        // GlStateManager.rotatef(ITEM_X_ROT, 1f, 0f, 0f)
         itemRenderer.renderItem(be.getInvStack(0), ModelTransformation.Mode.FIXED, light, overlay, matrices, vertexConsumerProvider)
         matrices.pop()
 
@@ -55,14 +55,14 @@ class ShelfRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEntityRender
         matrices.translate(tx2, 9.6 / 16.0, tz2)
         matrices.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE)
         matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(ITEM_2_Y_ROT + facing.asRotation()))
-        //GlStateManager.rotatef(ITEM_X_ROT, 1f, 0f, 0f)
+        // GlStateManager.rotatef(ITEM_X_ROT, 1f, 0f, 0f)
         itemRenderer.renderItem(be.getInvStack(1), ModelTransformation.Mode.FIXED, light, overlay, matrices, vertexConsumerProvider)
         matrices.pop()
     }
 
     companion object {
         private const val ITEM_SCALE: Float = 0.5f
-        //private const val ITEM_X_ROT: Float = 90f
+        // private const val ITEM_X_ROT: Float = 90f
         private const val ITEM_1_Y_ROT: Float = 10f
         private const val ITEM_2_Y_ROT: Float = -17f
     }

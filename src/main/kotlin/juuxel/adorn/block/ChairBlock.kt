@@ -24,7 +24,10 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
-import net.minecraft.world.*
+import net.minecraft.world.BlockView
+import net.minecraft.world.IWorld
+import net.minecraft.world.World
+import net.minecraft.world.WorldView
 
 open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()), Waterloggable {
     init {
@@ -106,8 +109,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
             } else {
                 LOWER_SHAPES[state[FACING]]
             }
-        }
-        else UPPER_OUTLINE_SHAPES[state[FACING]]
+        } else UPPER_OUTLINE_SHAPES[state[FACING]]
 
     override fun getCollisionShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
         if (state[HALF] == DoubleBlockHalf.LOWER) {

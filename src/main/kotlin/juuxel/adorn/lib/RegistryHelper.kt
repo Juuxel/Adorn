@@ -25,9 +25,9 @@ abstract class RegistryHelper(private val namespace: String) {
         )
     }
 
-    //----------------------------------
+    // ----------------------------------
     // Functions for registering blocks
-    //----------------------------------
+    // ----------------------------------
 
     /**
      * Registers a [block] with the [name] and an item in the [itemGroup].
@@ -80,9 +80,9 @@ abstract class RegistryHelper(private val namespace: String) {
             BaseBlockItem(block, itemSettings)
         }
 
-    //-----------------------------------------
+    // -----------------------------------------
     // Functions for registering other content
-    //-----------------------------------------
+    // -----------------------------------------
 
     protected fun <T : Item> registerItem(name: String, content: T): T =
         register(Registry.ITEM, name, content)

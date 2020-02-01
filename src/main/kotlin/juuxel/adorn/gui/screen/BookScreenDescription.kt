@@ -7,10 +7,15 @@ import io.github.cottonmc.cotton.gui.widget.WPlainPanel
 import io.github.cottonmc.cotton.gui.widget.WWidget
 import io.github.cottonmc.cotton.gui.widget.data.Alignment
 import juuxel.adorn.Adorn
-import juuxel.adorn.gui.painter.Painters
-import juuxel.adorn.gui.widget.*
 import juuxel.adorn.book.Book
 import juuxel.adorn.book.Page
+import juuxel.adorn.gui.painter.Painters
+import juuxel.adorn.gui.widget.PageContainer
+import juuxel.adorn.gui.widget.WBigLabel
+import juuxel.adorn.gui.widget.WCardPanel
+import juuxel.adorn.gui.widget.WItem
+import juuxel.adorn.gui.widget.WPageTurnButton
+import juuxel.adorn.gui.widget.WText
 import juuxel.adorn.util.Colors
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment

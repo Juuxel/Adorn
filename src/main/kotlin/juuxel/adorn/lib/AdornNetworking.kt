@@ -2,8 +2,6 @@ package juuxel.adorn.lib
 
 import io.netty.buffer.Unpooled
 import juuxel.adorn.Adorn
-import juuxel.adorn.block.entity.TradingStationBlockEntity
-import juuxel.adorn.trading.Trade
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry
@@ -11,9 +9,7 @@ import net.minecraft.client.network.packet.CustomPayloadS2CPacket
 import net.minecraft.client.network.packet.EntitySpawnS2CPacket
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.Entity
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.PacketByteBuf
-import net.minecraft.util.math.BlockPos
 
 object AdornNetworking {
     val ENTITY_SPAWN = Adorn.id("entity_spawn")

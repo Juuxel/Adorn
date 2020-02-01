@@ -1,5 +1,6 @@
 package juuxel.adorn.block
 
+import java.util.Random
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.block.Block
@@ -11,7 +12,6 @@ import net.minecraft.tag.FluidTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraft.world.WorldView
-import java.util.*
 
 open class PrismarineChimneyBlock(settings: Settings) : AbstractChimneyBlock(settings), BlockWithDescription {
     override val descriptionKey get() = AdornBlocks.PRISMARINE_CHIMNEY.translationKey + ".desc"

@@ -1,7 +1,13 @@
 package juuxel.adorn.block
 
+import java.util.Random
 import net.fabricmc.fabric.api.block.FabricBlockSettings
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.TorchBlock
+import net.minecraft.block.WallTorchBlock
+import net.minecraft.block.Waterloggable
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -18,7 +24,6 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
-import java.util.*
 
 class StoneTorchBlock : TorchBlock(settings), Waterloggable, BlockWithDescription {
     init {

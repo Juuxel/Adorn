@@ -1,5 +1,6 @@
 package juuxel.adorn.block
 
+import java.util.Random
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.block.FabricBlockSettings
@@ -17,7 +18,6 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraft.world.WorldView
-import java.util.*
 
 class ChimneyBlock : AbstractChimneyBlock(FabricBlockSettings.copy(Blocks.BRICKS).ticksRandomly().build().nonOpaque()),
     BlockWithDescription {

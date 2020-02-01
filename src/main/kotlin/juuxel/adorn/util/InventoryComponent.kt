@@ -1,5 +1,8 @@
 package juuxel.adorn.util
 
+import kotlin.math.min
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventories
 import net.minecraft.inventory.Inventory
@@ -8,9 +11,6 @@ import net.minecraft.inventory.SidedInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.DefaultedList
-import kotlin.math.min
-import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KProperty
 
 open class InventoryComponent(private val invSize: Int) : Inventory, NbtConvertible {
     private val listeners: MutableList<InventoryListener> = ArrayList()
@@ -121,9 +121,9 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
         override fun setValue(thisRef: Any?, property: KProperty<*>, value: ItemStack) = setInvStack(slot, value)
     }
 
-    //-----
+    // -----
     // NBT
-    //-----
+    // -----
 
     override fun toTag(tag: CompoundTag): CompoundTag = tag.apply {
         Inventories.toTag(tag, items)
@@ -133,9 +133,9 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
         Inventories.fromTag(tag, items)
     }
 
-    //-------------------------------
+    // -------------------------------
     // Inventory management/transfer
-    //-------------------------------
+    // -------------------------------
 
     override fun getInvStack(slot: Int) = items[slot]
 
@@ -164,9 +164,9 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
 
     override fun isInvEmpty(): Boolean = isInvEmpty(items)
 
-    //-----------
+    // -----------
     // Listeners
-    //-----------
+    // -----------
 
     override fun markDirty() {
         listeners.forEach { it.onInvChange(this) }

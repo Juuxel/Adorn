@@ -51,7 +51,7 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
 
         if (lookingAtBlock) {
             val label1 = I18n.translate(OWNER_LABEL, be.ownerName.copy().formatted(Formatting.GOLD).asFormattedString())
-            renderLabel(be, label1, 0.0,  0.9, 0.0, 12, matrices, vertexConsumerProvider, light)
+            renderLabel(be, label1, 0.0, 0.9, 0.0, 12, matrices, vertexConsumerProvider, light)
             if (!be.trade.isEmpty()) {
                 val label2 = I18n.translate(SELLING_LABEL, be.trade.selling.toTextWithCount().asFormattedString())
                 val label3 = I18n.translate(PRICE_LABEL, be.trade.price.toTextWithCount().asFormattedString())
@@ -83,7 +83,7 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
 
     companion object {
         private const val SELLING_ROTATION_MULTIPLIER = 1.2f
-        //private const val PRICE_ROTATION_MULTIPLIER = -2.5f
+        // private const val PRICE_ROTATION_MULTIPLIER = -2.5f
 
         private const val OWNER_LABEL = "block.adorn.trading_station.label.owner"
         private const val SELLING_LABEL = "block.adorn.trading_station.label.selling"

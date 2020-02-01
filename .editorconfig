@@ -10,6 +10,11 @@ insert_final_newline = true
 [*.java]
 ij_continuation_indent_size = 8
 
+[*.{kt,kts}]
+# 2147483647 = some max int (infinity)
+ij_kotlin_name_count_to_use_star_import = 2147483647
+ij_kotlin_name_count_to_use_star_import_for_members = 2147483647
+
 [*.{json,mcmeta,json5}]
 indent_size = 2
 ij_json_keep_blank_lines_in_code = 1

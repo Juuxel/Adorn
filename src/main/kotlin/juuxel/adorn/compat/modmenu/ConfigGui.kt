@@ -2,11 +2,17 @@ package juuxel.adorn.compat.modmenu
 
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
-import io.github.cottonmc.cotton.gui.widget.*
+import io.github.cottonmc.cotton.gui.widget.WButton
+import io.github.cottonmc.cotton.gui.widget.WGridPanel
+import io.github.cottonmc.cotton.gui.widget.WLabel
+import io.github.cottonmc.cotton.gui.widget.WPlainPanel
+import io.github.cottonmc.cotton.gui.widget.WToggleButton
+import io.github.cottonmc.cotton.gui.widget.WWidget
 import io.github.cottonmc.cotton.gui.widget.data.Alignment
 import juuxel.adorn.config.AdornConfigManager
 import juuxel.adorn.gui.widget.WTabbedPanel
 import juuxel.adorn.util.Colors
+import kotlin.reflect.KMutableProperty
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
@@ -14,7 +20,6 @@ import net.minecraft.client.gui.screen.NoticeScreen
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
-import kotlin.reflect.KMutableProperty
 
 @Environment(EnvType.CLIENT)
 class ConfigGui(previous: Screen) : LightweightGuiDescription() {

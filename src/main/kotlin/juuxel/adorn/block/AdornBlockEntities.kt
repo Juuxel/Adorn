@@ -1,7 +1,11 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.Adorn
-import juuxel.adorn.block.entity.*
+import juuxel.adorn.block.entity.DrawerBlockEntity
+import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
+import juuxel.adorn.block.entity.MutableBlockEntityType
+import juuxel.adorn.block.entity.ShelfBlockEntity
+import juuxel.adorn.block.entity.TradingStationBlockEntity
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.util.registry.Registry
