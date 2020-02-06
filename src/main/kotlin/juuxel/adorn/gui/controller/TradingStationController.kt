@@ -36,7 +36,7 @@ class TradingStationController(
     getStorage(context),
     getBlockPropertyDelegate(context)
 ) {
-    private val slots: List<WItemSlot>
+    private val slotWidgets: List<WItemSlot>
 
     init {
         (rootPanel as WGridPanel).apply {
@@ -58,12 +58,12 @@ class TradingStationController(
             add(playerInvPanel, 0, 6)
             validate(this@TradingStationController)
 
-            slots = mutableSlots
+            slotWidgets = mutableSlots
         }
     }
 
     override fun onSlotClick(slotNumber: Int, button: Int, action: SlotActionType, player: PlayerEntity): ItemStack {
-        val slot = slotList.getOrNull(slotNumber)
+        val slot = slots.getOrNull(slotNumber)
         val cursorStack = player.inventory.cursorStack
 
         return if (forOwner && slot?.inventory is TradeInventory) {
@@ -94,7 +94,7 @@ class TradingStationController(
     override fun addPainters() {
         super.addPainters()
         rootPanel.setBackgroundPainter(BackgroundPainter.createColorful(color(0x359668)))
-        slots.forEach { it.setBackgroundPainter(Painters.LIBGUI_STYLE_SLOT) }
+        slotWidgets.forEach { it.setBackgroundPainter(Painters.LIBGUI_STYLE_SLOT) }
     }
 
     override fun getTitleColor() = Colors.WHITE

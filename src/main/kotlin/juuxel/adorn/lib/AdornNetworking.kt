@@ -5,10 +5,10 @@ import juuxel.adorn.Adorn
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry
-import net.minecraft.client.network.packet.CustomPayloadS2CPacket
-import net.minecraft.client.network.packet.EntitySpawnS2CPacket
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.Entity
+import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket
+import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
 import net.minecraft.util.PacketByteBuf
 
 object AdornNetworking {

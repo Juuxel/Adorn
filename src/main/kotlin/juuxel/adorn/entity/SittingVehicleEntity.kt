@@ -5,13 +5,13 @@ import juuxel.adorn.block.SeatBlock
 import juuxel.adorn.lib.AdornNetworking
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
 import net.fabricmc.fabric.api.server.PlayerStream
-import net.minecraft.client.network.packet.EntityPassengersSetS2CPacket
-import net.minecraft.client.network.packet.EntityPositionS2CPacket
 import net.minecraft.datafixer.NbtOps
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket
+import net.minecraft.network.packet.s2c.play.EntityPositionS2CPacket
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
@@ -28,7 +28,7 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
         check(!world.isClient) {
             "setPos must be called on the logical server"
         }
-        setPosition(pos.x + 0.5, pos.y + 0.25 + blockOffset, pos.z + 0.5)
+        updatePosition(pos.x + 0.5, pos.y + 0.25 + blockOffset, pos.z + 0.5)
         seatPos = pos
         PlayerStream.watching(this).forEach {
             ServerSidePacketRegistry.INSTANCE.sendToPlayer(it, EntityPositionS2CPacket(this))

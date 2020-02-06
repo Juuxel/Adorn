@@ -8,7 +8,7 @@ import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.gui.openFabricContainer
 import net.minecraft.block.BlockState
 import net.minecraft.container.Container
-import net.minecraft.container.NameableContainerProvider
+import net.minecraft.container.NameableContainerFactory
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
@@ -32,8 +32,8 @@ open class KitchenCupboardBlock : BaseKitchenCounterBlock, BETypeProvider, BaseI
         return ActionResult.SUCCESS
     }
 
-    override fun createContainerProvider(state: BlockState, world: World, pos: BlockPos) =
-        world.getBlockEntity(pos) as? NameableContainerProvider
+    override fun createContainerFactory(state: BlockState, world: World, pos: BlockPos) =
+        world.getBlockEntity(pos) as? NameableContainerFactory
 
     override fun onBlockRemoved(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
         if (state1.block != state2.block) {
