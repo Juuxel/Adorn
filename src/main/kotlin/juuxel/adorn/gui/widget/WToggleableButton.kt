@@ -7,7 +7,7 @@ import net.minecraft.text.Text
  * Toggleable and groupable buttons.
  * Can be grouped with [setGroup] and a [Group] instance.
  */
-class WToggleableButton(private val label: Text) : WButton(label) {
+class WToggleableButton(label: Text) : WButton(label) {
     private var group: Group? = null
     private var onClick: Runnable? = null
 

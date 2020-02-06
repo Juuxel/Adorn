@@ -51,7 +51,7 @@ public abstract class LivingEntityMixin extends Entity {
                 BlockPos upPos = pos.up();
                 return new Vec3d((double)upPos.getX() + 0.5D, (double)upPos.getY() + 0.1D, (double)upPos.getZ() + 0.5D);
             });
-            setPosition(wakeUpPos.x, wakeUpPos.y, wakeUpPos.z);
+            updatePosition(wakeUpPos.x, wakeUpPos.y, wakeUpPos.z);
         }
     }
 }
