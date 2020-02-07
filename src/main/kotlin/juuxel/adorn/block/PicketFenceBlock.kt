@@ -1,6 +1,7 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.util.buildShapeRotationsFromNorth
+import juuxel.adorn.util.mergeIntoShapeMap
 import juuxel.adorn.util.mergeShapeMaps
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -105,14 +106,20 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
         val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
 
         private val STRAIGHT_OUTLINE_SHAPES = buildShapeRotationsFromNorth(0, 0, 7, 16, 16, 9)
-        private val CORNER_OUTLINE_SHAPES = mergeShapeMaps(
-            buildShapeRotationsFromNorth(0, 0, 7, 9, 16, 9),
-            buildShapeRotationsFromNorth(7, 0, 9, 9, 16, 16)
+        private val CORNER_OUTLINE_SHAPES = mergeIntoShapeMap(
+            mergeShapeMaps(
+                buildShapeRotationsFromNorth(0, 0, 7, 9, 16, 9),
+                buildShapeRotationsFromNorth(7, 0, 9, 9, 16, 16)
+            ),
+            PlatformBlock.POST_SHAPE
         )
         private val STRAIGHT_COLLISION_SHAPES = buildShapeRotationsFromNorth(0, 0, 7, 16, 24, 9)
-        private val CORNER_COLLISION_SHAPES = mergeShapeMaps(
-            buildShapeRotationsFromNorth(0, 0, 7, 9, 24, 9),
-            buildShapeRotationsFromNorth(7, 0, 9, 9, 24, 16)
+        private val CORNER_COLLISION_SHAPES = mergeIntoShapeMap(
+            mergeShapeMaps(
+                buildShapeRotationsFromNorth(0, 0, 7, 9, 24, 9),
+                buildShapeRotationsFromNorth(7, 0, 9, 9, 24, 16)
+            ),
+            createCuboidShape(6.0, 0.0, 6.0, 10.0, 24.0, 10.0)
         )
     }
 
