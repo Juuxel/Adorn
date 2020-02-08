@@ -6,6 +6,8 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.EntityContext
+import net.minecraft.fluid.FluidState
+import net.minecraft.fluid.Fluids
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.BooleanBiFunction
@@ -34,6 +36,10 @@ open class KitchenSinkBlock(variant: BlockVariant) : KitchenCounterBlock(variant
     override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
         if (state[WATERLOGGED]) 15
         else 0
+
+    // This is needed so that Towelette's default impl of getFluidState doesn't return water here.
+    override fun getFluidState(state: BlockState?): FluidState =
+        Fluids.EMPTY.defaultState
 
     companion object {
         private val WATERLOGGED = Properties.WATERLOGGED
