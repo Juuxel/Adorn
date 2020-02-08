@@ -19,9 +19,9 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-open class KitchenCupboardBlock(variant: BlockVariant) : BaseKitchenCounterBlock(
-    variant.createSettings()
-), BETypeProvider, BaseInventoryBlockEntity.InventoryProviderImpl {
+open class KitchenCupboardBlock(
+    variant: BlockVariant
+) : AbstractKitchenCounterBlock(variant), BETypeProvider, BaseInventoryBlockEntity.InventoryProviderImpl {
     override val blockEntityType = AdornBlockEntities.KITCHEN_CUPBOARD
 
     override fun onUse(

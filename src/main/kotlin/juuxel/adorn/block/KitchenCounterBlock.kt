@@ -2,7 +2,6 @@ package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.property.FrontConnection
-import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.item.ItemPlacementContext
@@ -12,9 +11,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.IWorld
 
-open class KitchenCounterBlock(variant: BlockVariant) : BaseKitchenCounterBlock(
-    FabricBlockSettings.copyOf(variant.createSettings()).sounds(SOUND_GROUP).build()
-) {
+open class KitchenCounterBlock(variant: BlockVariant) : AbstractKitchenCounterBlock(variant) {
     init {
         defaultState = defaultState.with(FRONT, FrontConnection.None)
     }
@@ -38,7 +35,7 @@ open class KitchenCounterBlock(variant: BlockVariant) : BaseKitchenCounterBlock(
         val facing = state[FACING]
         val frontState = world.getBlockState(pos.offset(facing))
         val frontConnection =
-            if (frontState.block is BaseKitchenCounterBlock) {
+            if (frontState.block is AbstractKitchenCounterBlock) {
                 when (frontState[FACING]) {
                     facing.rotateYClockwise() -> FrontConnection.Left
                     facing.rotateYCounterclockwise() -> FrontConnection.Right

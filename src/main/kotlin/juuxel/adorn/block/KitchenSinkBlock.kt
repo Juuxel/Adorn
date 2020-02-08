@@ -50,7 +50,7 @@ open class KitchenSinkBlock(variant: BlockVariant) : KitchenCounterBlock(variant
                 2, 7, 2,
                 13, 16, 14
             )
-            SHAPES = BaseKitchenCounterBlock.SHAPES.mapValues { (direction, shape) ->
+            SHAPES = AbstractKitchenCounterBlock.SHAPES.mapValues { (direction, shape) ->
                 VoxelShapes.combineAndSimplify(
                     shape,
                     sinkShapes[direction] ?: error(
