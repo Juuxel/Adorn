@@ -1,6 +1,15 @@
 {
   "variants": {
-    "": {
+    "axis=z": {
+      "model": "adorn:block/terrestria_cypress_post",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "adorn:block/terrestria_cypress_post",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
       "model": "adorn:block/terrestria_cypress_post"
     }
   }

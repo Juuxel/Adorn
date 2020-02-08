@@ -111,7 +111,7 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
                 buildShapeRotationsFromNorth(0, 0, 7, 9, 16, 9),
                 buildShapeRotationsFromNorth(7, 0, 9, 9, 16, 16)
             ),
-            PlatformBlock.POST_SHAPE
+            PostBlock.Y_SHAPE
         )
         private val STRAIGHT_COLLISION_SHAPES = buildShapeRotationsFromNorth(0, 0, 7, 16, 24, 9)
         private val CORNER_COLLISION_SHAPES = mergeIntoShapeMap(

@@ -178,7 +178,7 @@ object AdornPlugin : Plugin {
         StonePostBlockModel,
         WoodenPostRecipe,
         StonePostRecipe,
-        SuffixedBlockState("post", POST),
+        PostBlockState,
         SuffixedBlockItemModel("post", POST),
         SuffixedLootTable("post", POST),
         SuffixedRecipeAdvancementGenerator(

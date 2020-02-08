@@ -39,8 +39,7 @@ open class PlatformBlock(variant: BlockVariant) : Block(variant.createSettings()
         COMBINED_SHAPE
 
     companion object {
-        internal val POST_SHAPE = createCuboidShape(6.0, 0.0, 6.0, 10.0, 16.0, 10.0)
         private val PLATFORM_SHAPE = createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
-        private val COMBINED_SHAPE = VoxelShapes.union(POST_SHAPE, PLATFORM_SHAPE)
+        private val COMBINED_SHAPE = VoxelShapes.union(PostBlock.Y_SHAPE, PLATFORM_SHAPE)
     }
 }
