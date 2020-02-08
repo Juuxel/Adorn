@@ -17,9 +17,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 
-abstract class BaseKitchenCounterBlock(
-    settings: Settings = FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).sounds(SOUND_GROUP).build()
-) : Block(settings) {
+abstract class BaseKitchenCounterBlock(settings: Settings) : Block(settings) {
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(FACING)

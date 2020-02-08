@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:item/templates/table",
+  "textures": {
+    "planks": "minecraft:block/crimson_planks",
+    "log": "minecraft:block/crimson_stem"
+  }
+}

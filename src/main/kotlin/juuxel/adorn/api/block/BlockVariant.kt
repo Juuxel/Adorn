@@ -35,6 +35,8 @@ interface BlockVariant {
         val JUNGLE = variant("jungle") { Block.Settings.copy(Blocks.JUNGLE_PLANKS) }
         val ACACIA = variant("acacia") { Block.Settings.copy(Blocks.ACACIA_PLANKS) }
         val DARK_OAK = variant("dark_oak") { Block.Settings.copy(Blocks.DARK_OAK_PLANKS) }
+        val CRIMSON = variant("crimson") { Block.Settings.copy(Blocks.CRIMSON_PLANKS) }
+        val WARPED = variant("warped") { Block.Settings.copy(Blocks.WARPED_PLANKS) }
         val STONE = variant("stone") { Block.Settings.copy(Blocks.STONE) }
         val COBBLESTONE = variant("cobblestone") { Block.Settings.copy(Blocks.COBBLESTONE) }
         val SANDSTONE = variant("sandstone") { Block.Settings.copy(Blocks.SANDSTONE) }

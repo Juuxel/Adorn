@@ -13,6 +13,7 @@ import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.Items
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
@@ -25,7 +26,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
 
-class StoneTorchBlock : TorchBlock(settings), Waterloggable, BlockWithDescription {
+class StoneTorchBlock : TorchBlock(settings, ParticleTypes.FLAME), Waterloggable, BlockWithDescription {
     init {
         defaultState = defaultState.with(LIT, true)
             .with(WATERLOGGED, false)
@@ -72,7 +73,7 @@ class StoneTorchBlock : TorchBlock(settings), Waterloggable, BlockWithDescriptio
         if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
         else super.getFluidState(state)
 
-    class Wall(settings: Settings) : WallTorchBlock(settings), Waterloggable {
+    class Wall(settings: Settings) : WallTorchBlock(settings, ParticleTypes.FLAME), Waterloggable {
         init {
             defaultState = defaultState.with(LIT, true).with(WATERLOGGED, false)
         }

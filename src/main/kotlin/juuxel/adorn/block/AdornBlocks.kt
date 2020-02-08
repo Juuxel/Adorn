@@ -42,6 +42,8 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val JUNGLE_CHAIR: Block = registerBlock("jungle_chair", ChairBlock(BlockVariant.JUNGLE), ::ChairBlockItem)
     val ACACIA_CHAIR: Block = registerBlock("acacia_chair", ChairBlock(BlockVariant.ACACIA), ::ChairBlockItem)
     val DARK_OAK_CHAIR: Block = registerBlock("dark_oak_chair", ChairBlock(BlockVariant.DARK_OAK), ::ChairBlockItem)
+    val CRIMSON_CHAIR: Block = registerBlock("crimson_chair", ChairBlock(BlockVariant.CRIMSON), ::ChairBlockItem)
+    val WARPED_CHAIR: Block = registerBlock("warped_chair", ChairBlock(BlockVariant.WARPED), ::ChairBlockItem)
 
     val OAK_TABLE: Block = registerBlock("oak_table", TableBlock(BlockVariant.OAK), ::TableBlockItem)
     val SPRUCE_TABLE: Block = registerBlock("spruce_table", TableBlock(BlockVariant.SPRUCE), ::TableBlockItem)
@@ -49,20 +51,26 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val JUNGLE_TABLE: Block = registerBlock("jungle_table", TableBlock(BlockVariant.JUNGLE), ::TableBlockItem)
     val ACACIA_TABLE: Block = registerBlock("acacia_table", TableBlock(BlockVariant.ACACIA), ::TableBlockItem)
     val DARK_OAK_TABLE: Block = registerBlock("dark_oak_table", TableBlock(BlockVariant.DARK_OAK), ::TableBlockItem)
+    val CRIMSON_TABLE: Block = registerBlock("crimson_table", TableBlock(BlockVariant.CRIMSON), ::TableBlockItem)
+    val WARPED_TABLE: Block = registerBlock("warped_table", TableBlock(BlockVariant.WARPED), ::TableBlockItem)
 
-    val OAK_KITCHEN_COUNTER: Block = registerBlock("oak_kitchen_counter", KitchenCounterBlock())
-    val SPRUCE_KITCHEN_COUNTER: Block = registerBlock("spruce_kitchen_counter", KitchenCounterBlock())
-    val BIRCH_KITCHEN_COUNTER: Block = registerBlock("birch_kitchen_counter", KitchenCounterBlock())
-    val JUNGLE_KITCHEN_COUNTER: Block = registerBlock("jungle_kitchen_counter", KitchenCounterBlock())
-    val ACACIA_KITCHEN_COUNTER: Block = registerBlock("acacia_kitchen_counter", KitchenCounterBlock())
-    val DARK_OAK_KITCHEN_COUNTER: Block = registerBlock("dark_oak_kitchen_counter", KitchenCounterBlock())
+    val OAK_KITCHEN_COUNTER: Block = registerBlock("oak_kitchen_counter", KitchenCounterBlock(BlockVariant.OAK))
+    val SPRUCE_KITCHEN_COUNTER: Block = registerBlock("spruce_kitchen_counter", KitchenCounterBlock(BlockVariant.SPRUCE))
+    val BIRCH_KITCHEN_COUNTER: Block = registerBlock("birch_kitchen_counter", KitchenCounterBlock(BlockVariant.BIRCH))
+    val JUNGLE_KITCHEN_COUNTER: Block = registerBlock("jungle_kitchen_counter", KitchenCounterBlock(BlockVariant.JUNGLE))
+    val ACACIA_KITCHEN_COUNTER: Block = registerBlock("acacia_kitchen_counter", KitchenCounterBlock(BlockVariant.ACACIA))
+    val DARK_OAK_KITCHEN_COUNTER: Block = registerBlock("dark_oak_kitchen_counter", KitchenCounterBlock(BlockVariant.DARK_OAK))
+    val CRIMSON_KITCHEN_COUNTER: Block = registerBlock("crimson_kitchen_counter", KitchenCounterBlock(BlockVariant.CRIMSON))
+    val WARPED_KITCHEN_COUNTER: Block = registerBlock("warped_kitchen_counter", KitchenCounterBlock(BlockVariant.WARPED))
 
-    val OAK_KITCHEN_CUPBOARD: Block = registerBlock("oak_kitchen_cupboard", KitchenCupboardBlock())
-    val SPRUCE_KITCHEN_CUPBOARD: Block = registerBlock("spruce_kitchen_cupboard", KitchenCupboardBlock())
-    val BIRCH_KITCHEN_CUPBOARD: Block = registerBlock("birch_kitchen_cupboard", KitchenCupboardBlock())
-    val JUNGLE_KITCHEN_CUPBOARD: Block = registerBlock("jungle_kitchen_cupboard", KitchenCupboardBlock())
-    val ACACIA_KITCHEN_CUPBOARD: Block = registerBlock("acacia_kitchen_cupboard", KitchenCupboardBlock())
-    val DARK_OAK_KITCHEN_CUPBOARD: Block = registerBlock("dark_oak_kitchen_cupboard", KitchenCupboardBlock())
+    val OAK_KITCHEN_CUPBOARD: Block = registerBlock("oak_kitchen_cupboard", KitchenCupboardBlock(BlockVariant.OAK))
+    val SPRUCE_KITCHEN_CUPBOARD: Block = registerBlock("spruce_kitchen_cupboard", KitchenCupboardBlock(BlockVariant.SPRUCE))
+    val BIRCH_KITCHEN_CUPBOARD: Block = registerBlock("birch_kitchen_cupboard", KitchenCupboardBlock(BlockVariant.BIRCH))
+    val JUNGLE_KITCHEN_CUPBOARD: Block = registerBlock("jungle_kitchen_cupboard", KitchenCupboardBlock(BlockVariant.JUNGLE))
+    val ACACIA_KITCHEN_CUPBOARD: Block = registerBlock("acacia_kitchen_cupboard", KitchenCupboardBlock(BlockVariant.ACACIA))
+    val DARK_OAK_KITCHEN_CUPBOARD: Block = registerBlock("dark_oak_kitchen_cupboard", KitchenCupboardBlock(BlockVariant.DARK_OAK))
+    val CRIMSON_KITCHEN_CUPBOARD: Block = registerBlock("crimson_kitchen_cupboard", KitchenCupboardBlock(BlockVariant.CRIMSON))
+    val WARPED_KITCHEN_CUPBOARD: Block = registerBlock("warped_kitchen_cupboard", KitchenCupboardBlock(BlockVariant.WARPED))
 
     val OAK_DRAWER: Block = registerBlock("oak_drawer", DrawerBlock(BlockVariant.OAK))
     val SPRUCE_DRAWER: Block = registerBlock("spruce_drawer", DrawerBlock(BlockVariant.SPRUCE))
@@ -70,6 +78,8 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val JUNGLE_DRAWER: Block = registerBlock("jungle_drawer", DrawerBlock(BlockVariant.JUNGLE))
     val ACACIA_DRAWER: Block = registerBlock("acacia_drawer", DrawerBlock(BlockVariant.ACACIA))
     val DARK_OAK_DRAWER: Block = registerBlock("dark_oak_drawer", DrawerBlock(BlockVariant.DARK_OAK))
+    val CRIMSON_DRAWER: Block = registerBlock("crimson_drawer", DrawerBlock(BlockVariant.CRIMSON))
+    val WARPED_DRAWER: Block = registerBlock("warped_drawer", DrawerBlock(BlockVariant.WARPED))
 
     val OAK_POST: Block = registerBlock("oak_post", PostBlock(BlockVariant.OAK))
     val SPRUCE_POST: Block = registerBlock("spruce_post", PostBlock(BlockVariant.SPRUCE))
@@ -77,6 +87,8 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val JUNGLE_POST: Block = registerBlock("jungle_post", PostBlock(BlockVariant.JUNGLE))
     val ACACIA_POST: Block = registerBlock("acacia_post", PostBlock(BlockVariant.ACACIA))
     val DARK_OAK_POST: Block = registerBlock("dark_oak_post", PostBlock(BlockVariant.DARK_OAK))
+    val CRIMSON_POST: Block = registerBlock("crimson_post", PostBlock(BlockVariant.CRIMSON))
+    val WARPED_POST: Block = registerBlock("warped_post", PostBlock(BlockVariant.WARPED))
     val STONE_POST: Block = registerBlock("stone_post", PostBlock(BlockVariant.STONE))
     val COBBLESTONE_POST: Block = registerBlock("cobblestone_post", PostBlock(BlockVariant.COBBLESTONE))
     val SANDSTONE_POST: Block = registerBlock("sandstone_post", PostBlock(BlockVariant.SANDSTONE))
@@ -94,6 +106,8 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val JUNGLE_PLATFORM: Block = registerBlock("jungle_platform", PlatformBlock(BlockVariant.JUNGLE))
     val ACACIA_PLATFORM: Block = registerBlock("acacia_platform", PlatformBlock(BlockVariant.ACACIA))
     val DARK_OAK_PLATFORM: Block = registerBlock("dark_oak_platform", PlatformBlock(BlockVariant.DARK_OAK))
+    val CRIMSON_PLATFORM: Block = registerBlock("crimson_platform", PlatformBlock(BlockVariant.CRIMSON))
+    val WARPED_PLATFORM: Block = registerBlock("warped_platform", PlatformBlock(BlockVariant.WARPED))
     val STONE_PLATFORM: Block = registerBlock("stone_platform", PlatformBlock(BlockVariant.STONE))
     val COBBLESTONE_PLATFORM: Block = registerBlock("cobblestone_platform", PlatformBlock(BlockVariant.COBBLESTONE))
     val SANDSTONE_PLATFORM: Block = registerBlock("sandstone_platform", PlatformBlock(BlockVariant.SANDSTONE))
@@ -112,6 +126,8 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val JUNGLE_STEP: Block = registerBlock("jungle_step", StepBlock(BlockVariant.JUNGLE))
     val ACACIA_STEP: Block = registerBlock("acacia_step", StepBlock(BlockVariant.ACACIA))
     val DARK_OAK_STEP: Block = registerBlock("dark_oak_step", StepBlock(BlockVariant.DARK_OAK))
+    val CRIMSON_STEP: Block = registerBlock("crimson_step", StepBlock(BlockVariant.CRIMSON))
+    val WARPED_STEP: Block = registerBlock("warped_step", StepBlock(BlockVariant.WARPED))
     val STONE_STEP: Block = registerBlock("stone_step", StepBlock(BlockVariant.STONE))
     val COBBLESTONE_STEP: Block = registerBlock("cobblestone_step", StepBlock(BlockVariant.COBBLESTONE))
     val SANDSTONE_STEP: Block = registerBlock("sandstone_step", StepBlock(BlockVariant.SANDSTONE))
@@ -129,6 +145,8 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val JUNGLE_SHELF: ShelfBlock = registerBlock("jungle_shelf", ShelfBlock(BlockVariant.JUNGLE))
     val ACACIA_SHELF: ShelfBlock = registerBlock("acacia_shelf", ShelfBlock(BlockVariant.ACACIA))
     val DARK_OAK_SHELF: ShelfBlock = registerBlock("dark_oak_shelf", ShelfBlock(BlockVariant.DARK_OAK))
+    val CRIMSON_SHELF: ShelfBlock = registerBlock("crimson_shelf", ShelfBlock(BlockVariant.CRIMSON))
+    val WARPED_SHELF: ShelfBlock = registerBlock("warped_shelf", ShelfBlock(BlockVariant.WARPED))
     val IRON_SHELF: ShelfBlock = registerBlock("iron_shelf", ShelfBlock(BlockVariant.IRON))
 
     val BRICK_CHIMNEY: Block = registerBlock("brick_chimney", ChimneyBlock())
@@ -159,6 +177,8 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val JUNGLE_KITCHEN_SINK: Block = registerBlock("jungle_kitchen_sink", KitchenSinkBlock(BlockVariant.JUNGLE))
     val ACACIA_KITCHEN_SINK: Block = registerBlock("acacia_kitchen_sink", KitchenSinkBlock(BlockVariant.ACACIA))
     val DARK_OAK_KITCHEN_SINK: Block = registerBlock("dark_oak_kitchen_sink", KitchenSinkBlock(BlockVariant.DARK_OAK))
+    val CRIMSON_KITCHEN_SINK: Block = registerBlock("crimson_kitchen_sink", KitchenSinkBlock(BlockVariant.CRIMSON))
+    val WARPED_KITCHEN_SINK: Block = registerBlock("warped_kitchen_sink", KitchenSinkBlock(BlockVariant.WARPED))
 
     val OAK_COFFEE_TABLE: Block = registerBlock("oak_coffee_table", CoffeeTableBlock(BlockVariant.OAK))
     val SPRUCE_COFFEE_TABLE: Block = registerBlock("spruce_coffee_table", CoffeeTableBlock(BlockVariant.SPRUCE))
@@ -166,6 +186,8 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val JUNGLE_COFFEE_TABLE: Block = registerBlock("jungle_coffee_table", CoffeeTableBlock(BlockVariant.JUNGLE))
     val ACACIA_COFFEE_TABLE: Block = registerBlock("acacia_coffee_table", CoffeeTableBlock(BlockVariant.ACACIA))
     val DARK_OAK_COFFEE_TABLE: Block = registerBlock("dark_oak_coffee_table", CoffeeTableBlock(BlockVariant.DARK_OAK))
+    val CRIMSON_COFFEE_TABLE: Block = registerBlock("crimson_coffee_table", CoffeeTableBlock(BlockVariant.CRIMSON))
+    val WARPED_COFFEE_TABLE: Block = registerBlock("warped_coffee_table", CoffeeTableBlock(BlockVariant.WARPED))
 
     val TABLE_LAMPS: Map<DyeColor, Block> = DyeColor.values().associate {
         it to registerBlock(
@@ -292,7 +314,9 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
             BIRCH_COFFEE_TABLE,
             JUNGLE_COFFEE_TABLE,
             ACACIA_COFFEE_TABLE,
-            DARK_OAK_COFFEE_TABLE
+            DARK_OAK_COFFEE_TABLE,
+            CRIMSON_COFFEE_TABLE,
+            WARPED_COFFEE_TABLE
         )
 
         // BlockColorProviders
@@ -303,7 +327,9 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
             BIRCH_KITCHEN_SINK,
             JUNGLE_KITCHEN_SINK,
             ACACIA_KITCHEN_SINK,
-            DARK_OAK_KITCHEN_SINK
+            DARK_OAK_KITCHEN_SINK,
+            CRIMSON_KITCHEN_SINK,
+            WARPED_KITCHEN_SINK
         )
     }
 

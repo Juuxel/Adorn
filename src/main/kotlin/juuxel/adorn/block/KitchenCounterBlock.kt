@@ -12,10 +12,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.IWorld
 
-open class KitchenCounterBlock : BaseKitchenCounterBlock {
-    constructor() : super()
-    constructor(variant: BlockVariant) : super(FabricBlockSettings.copyOf(variant.createSettings()).sounds(SOUND_GROUP).build())
-
+open class KitchenCounterBlock(variant: BlockVariant) : BaseKitchenCounterBlock(
+    FabricBlockSettings.copyOf(variant.createSettings()).sounds(SOUND_GROUP).build()
+) {
     init {
         defaultState = defaultState.with(FRONT, FrontConnection.None)
     }

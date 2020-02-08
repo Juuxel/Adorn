@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:step",
+  "pattern": [
+    "S",
+    "#"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:crimson_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:crimson_step",
+    "count": 1
+  }
+}

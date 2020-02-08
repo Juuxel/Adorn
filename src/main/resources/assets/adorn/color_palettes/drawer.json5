@@ -5,6 +5,8 @@
   "adorn:jungle_drawer": "#B48462",
   "adorn:acacia_drawer": "#B66136",
   "adorn:dark_oak_drawer": { "bg": "#4D3117", "fg": "#BCBCBC" },
+  "adorn:crimson_drawer": { "bg": "#863E5A", "fg": "#BCBCBC" },
+  "adorn:warped_drawer": { "bg": "#3A8E8C", "fg": "#BCBCBC" },
 
   "adorn:terrestria_cypress_drawer": { "bg": "#A39885" },
   "adorn:terrestria_hemlock_drawer": { "bg": "#958262" },

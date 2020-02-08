@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:table",
+  "pattern": [
+    "SSS",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:crimson_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:crimson_table",
+    "count": 3
+  }
+}
