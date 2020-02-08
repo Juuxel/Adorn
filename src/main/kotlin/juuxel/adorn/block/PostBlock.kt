@@ -11,6 +11,7 @@ import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.EnumProperty
 import net.minecraft.state.property.Properties
+import net.minecraft.util.BlockRotation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
@@ -45,6 +46,17 @@ open class PostBlock(variant: BlockVariant) : Block(variant.createSettings()), B
             Direction.Axis.Z -> Z_SHAPE
             else -> throw IllegalStateException("Axis of $state is null??")
         }
+
+    override fun rotate(state: BlockState, rotation: BlockRotation): BlockState {
+        if (rotation == BlockRotation.COUNTERCLOCKWISE_90 || rotation == BlockRotation.CLOCKWISE_90) {
+            when (state[AXIS]) {
+                Direction.Axis.X -> return state.with(AXIS, Direction.Axis.Z)
+                Direction.Axis.Z -> return state.with(AXIS, Direction.Axis.X)
+            }
+        }
+
+        return state
+    }
 
     companion object {
         val AXIS: EnumProperty<Direction.Axis> = Properties.AXIS
