@@ -47,6 +47,7 @@ interface BlockVariant {
         val STONE_BRICK = variant("stone_brick") { Block.Settings.copy(Blocks.STONE_BRICKS) }
         val RED_SANDSTONE = variant("red_sandstone") { Block.Settings.copy(Blocks.RED_SANDSTONE) }
         val NETHER_BRICK = variant("nether_brick") { Block.Settings.copy(Blocks.NETHER_BRICKS) }
+        val BASALT = variant("basalt") { Block.Settings.copy(Blocks.BASALT) }
 
         inline fun variant(name: String, crossinline settings: () -> Block.Settings): BlockVariant =
             object : BlockVariant {

@@ -99,6 +99,7 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val STONE_BRICK_POST: Block = registerBlock("stone_brick_post", PostBlock(BlockVariant.STONE_BRICK))
     val RED_SANDSTONE_POST: Block = registerBlock("red_sandstone_post", PostBlock(BlockVariant.RED_SANDSTONE))
     val NETHER_BRICK_POST: Block = registerBlock("nether_brick_post", PostBlock(BlockVariant.NETHER_BRICK))
+    val BASALT_POST: Block = registerBlock("basalt_post", PostBlock(BlockVariant.BASALT))
 
     val OAK_PLATFORM: Block = registerBlock("oak_platform", PlatformBlock(BlockVariant.OAK))
     val SPRUCE_PLATFORM: Block = registerBlock("spruce_platform", PlatformBlock(BlockVariant.SPRUCE))
@@ -119,6 +120,7 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val RED_SANDSTONE_PLATFORM: Block =
         registerBlock("red_sandstone_platform", PlatformBlock(BlockVariant.RED_SANDSTONE))
     val NETHER_BRICK_PLATFORM: Block = registerBlock("nether_brick_platform", PlatformBlock(BlockVariant.NETHER_BRICK))
+    val BASALT_PLATFORM: Block = registerBlock("basalt_platform", PlatformBlock(BlockVariant.BASALT))
 
     val OAK_STEP: Block = registerBlock("oak_step", StepBlock(BlockVariant.OAK))
     val SPRUCE_STEP: Block = registerBlock("spruce_step", StepBlock(BlockVariant.SPRUCE))
@@ -138,6 +140,7 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val STONE_BRICK_STEP: Block = registerBlock("stone_brick_step", StepBlock(BlockVariant.STONE_BRICK))
     val RED_SANDSTONE_STEP: Block = registerBlock("red_sandstone_step", StepBlock(BlockVariant.RED_SANDSTONE))
     val NETHER_BRICK_STEP: Block = registerBlock("nether_brick_step", StepBlock(BlockVariant.NETHER_BRICK))
+    val BASALT_STEP: Block = registerBlock("basalt_step", StepBlock(BlockVariant.BASALT))
 
     val OAK_SHELF: ShelfBlock = registerBlock("oak_shelf", ShelfBlock(BlockVariant.OAK))
     val SPRUCE_SHELF: ShelfBlock = registerBlock("spruce_shelf", ShelfBlock(BlockVariant.SPRUCE))

@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "R",
+    "R",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:basalt"
+    },
+    "R": {
+      "item": "c:stone_rod"
+    }
+  },
+  "result": {
+    "item": "adorn:basalt_post",
+    "count": 4
+  }
+}
