@@ -1,0 +1,36 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:oak_coffee_table",
+    "adorn:spruce_coffee_table",
+    "adorn:birch_coffee_table",
+    "adorn:jungle_coffee_table",
+    "adorn:acacia_coffee_table",
+    "adorn:dark_oak_coffee_table",
+    "adorn:crimson_coffee_table",
+    "adorn:warped_coffee_table"
+  ],
+  "libcd": {
+    "entries": [
+      {
+        "when": [{ "libcd:mod_loaded": "traverse" }],
+        "values": [
+          "adorn:traverse_fir_coffee_table"
+        ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "terrestria" }],
+        "values": [
+          "adorn:terrestria_cypress_coffee_table",
+          "adorn:terrestria_hemlock_coffee_table",
+          "adorn:terrestria_japanese_maple_coffee_table",
+          "adorn:terrestria_rainbow_eucalyptus_coffee_table",
+          "adorn:terrestria_redwood_coffee_table",
+          "adorn:terrestria_rubber_coffee_table",
+          "adorn:terrestria_sakura_coffee_table",
+          "adorn:terrestria_willow_coffee_table"
+        ]
+      }
+    ]
+  }
+}
