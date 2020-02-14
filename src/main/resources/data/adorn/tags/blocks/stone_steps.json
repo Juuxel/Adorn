@@ -10,7 +10,8 @@
     "adorn:brick_step",
     "adorn:stone_brick_step",
     "adorn:red_sandstone_step",
-    "adorn:nether_brick_step"
+    "adorn:nether_brick_step",
+    "adorn:basalt_step"
   ],
   "libcd": {
     "entries": [{

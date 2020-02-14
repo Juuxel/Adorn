@@ -10,7 +10,8 @@
     "adorn:brick_platform",
     "adorn:stone_brick_platform",
     "adorn:red_sandstone_platform",
-    "adorn:nether_brick_platform"
+    "adorn:nether_brick_platform",
+    "adorn:basalt_platform"
   ],
   "libcd": {
     "entries": [{

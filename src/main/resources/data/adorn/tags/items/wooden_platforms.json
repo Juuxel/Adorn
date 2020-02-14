@@ -6,7 +6,9 @@
     "adorn:birch_platform",
     "adorn:jungle_platform",
     "adorn:acacia_platform",
-    "adorn:dark_oak_platform"
+    "adorn:dark_oak_platform",
+    "adorn:crimson_platform",
+    "adorn:warped_platform"
   ],
   "libcd": {
     "entries": [

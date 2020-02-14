@@ -6,7 +6,9 @@
     "adorn:birch_drawer",
     "adorn:jungle_drawer",
     "adorn:acacia_drawer",
-    "adorn:dark_oak_drawer"
+    "adorn:dark_oak_drawer",
+    "adorn:crimson_drawer",
+    "adorn:warped_drawer"
   ],
   "libcd": {
     "entries": [

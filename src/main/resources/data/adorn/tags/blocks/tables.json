@@ -6,7 +6,9 @@
     "adorn:birch_table",
     "adorn:jungle_table",
     "adorn:acacia_table",
-    "adorn:dark_oak_table"
+    "adorn:dark_oak_table",
+    "adorn:crimson_table",
+    "adorn:warped_table"
   ],
   "libcd": {
     "entries": [

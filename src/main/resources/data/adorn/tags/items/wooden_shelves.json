@@ -6,7 +6,9 @@
     "adorn:birch_shelf",
     "adorn:jungle_shelf",
     "adorn:acacia_shelf",
-    "adorn:dark_oak_shelf"
+    "adorn:dark_oak_shelf",
+    "adorn:crimson_shelf",
+    "adorn:warped_shelf"
   ],
   "libcd": {
     "entries": [

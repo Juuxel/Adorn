@@ -6,7 +6,9 @@
     "adorn:birch_chair",
     "adorn:jungle_chair",
     "adorn:acacia_chair",
-    "adorn:dark_oak_chair"
+    "adorn:dark_oak_chair",
+    "adorn:crimson_chair",
+    "adorn:warped_chair"
   ],
   "libcd": {
     "entries": [

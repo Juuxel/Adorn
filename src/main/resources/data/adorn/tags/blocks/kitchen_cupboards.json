@@ -6,7 +6,9 @@
     "adorn:birch_kitchen_cupboard",
     "adorn:jungle_kitchen_cupboard",
     "adorn:acacia_kitchen_cupboard",
-    "adorn:dark_oak_kitchen_cupboard"
+    "adorn:dark_oak_kitchen_cupboard",
+    "adorn:crimson_kitchen_cupboard",
+    "adorn:warped_kitchen_cupboard"
   ],
   "libcd": {
     "entries": [

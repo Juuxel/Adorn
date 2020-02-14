@@ -6,7 +6,9 @@
     "adorn:birch_kitchen_counter",
     "adorn:jungle_kitchen_counter",
     "adorn:acacia_kitchen_counter",
-    "adorn:dark_oak_kitchen_counter"
+    "adorn:dark_oak_kitchen_counter",
+    "adorn:crimson_kitchen_counter",
+    "adorn:warped_kitchen_counter"
   ],
   "libcd": {
     "entries": [

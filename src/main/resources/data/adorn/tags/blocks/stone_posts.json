@@ -10,7 +10,8 @@
     "adorn:brick_post",
     "adorn:stone_brick_post",
     "adorn:red_sandstone_post",
-    "adorn:nether_brick_post"
+    "adorn:nether_brick_post",
+    "adorn:basalt_post"
   ],
   "libcd": {
     "entries": [{

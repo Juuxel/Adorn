@@ -6,7 +6,9 @@
     "adorn:birch_post",
     "adorn:jungle_post",
     "adorn:acacia_post",
-    "adorn:dark_oak_post"
+    "adorn:dark_oak_post",
+    "adorn:crimson_post",
+    "adorn:warped_post"
   ],
   "libcd": {
     "entries": [
