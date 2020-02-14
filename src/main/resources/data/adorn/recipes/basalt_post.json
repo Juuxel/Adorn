@@ -11,7 +11,7 @@
       "item": "minecraft:basalt"
     },
     "R": {
-      "item": "c:stone_rod"
+      "tag": "c:stone_rod"
     }
   },
   "result": {
