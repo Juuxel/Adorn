@@ -71,11 +71,11 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
                 val canInsertPayment = be.storage.canInsert(trade.price)
 
                 if (trade.isEmpty()) {
-                    player.addChatMessage(TranslatableText("block.adorn.trading_station.empty_trade"), true)
+                    player.addMessage(TranslatableText("block.adorn.trading_station.empty_trade"), true)
                 } else if (!be.isStorageStocked()) {
-                    player.addChatMessage(TranslatableText("block.adorn.trading_station.storage_not_stocked"), true)
+                    player.addMessage(TranslatableText("block.adorn.trading_station.storage_not_stocked"), true)
                 } else if (!canInsertPayment) {
-                    player.addChatMessage(TranslatableText("block.adorn.trading_station.storage_full"), true)
+                    player.addMessage(TranslatableText("block.adorn.trading_station.storage_full"), true)
                 } else if (validPayment) {
                     handStack.decrement(trade.price.count)
                     player.giveItemStack(trade.selling.copy())

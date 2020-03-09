@@ -109,9 +109,9 @@ dependencies {
 
     if (heavyweight) {
         modRuntime("com.terraformersmc", "traverse", v("traverse")) { excludes() }
-        modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { excludes() }
+        // FIXME: modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { excludes() }
         modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); excludes() }
-        modRuntime("towelette:Towelette:" + v("towelette")) { excludes() }
+        // FIXME: modRuntime("towelette:Towelette:" + v("towelette")) { excludes() }
         modRuntime("statement:Statement:" + v("statement")) { excludes() }
         modRuntime("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
 //        modRuntime("extra-pieces:extrapieces:" + v("extra-pieces"))

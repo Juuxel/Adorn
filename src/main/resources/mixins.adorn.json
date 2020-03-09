@@ -10,7 +10,6 @@
     "fluidloggable.FluidUtilMixin",
     "BlockEntityMixin",
     "BubbleColumnBlockMixin",
-    "EntityMixin",
     "FenceGateBlockMixin",
     "LivingEntityMixin",
     "PaneBlockMixin",
@@ -18,8 +17,7 @@
     "WPanelMixin"
   ],
   "client": [
-    "client.LivingEntityMixin",
-    "client.ScreenAccessor"
+    "client.LivingEntityMixin"
   ],
 
   "injectors": {

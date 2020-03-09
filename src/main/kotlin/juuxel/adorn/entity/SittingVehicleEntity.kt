@@ -22,7 +22,7 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
         isInvulnerable = true
     }
 
-    private var seatPos = BlockPos(this)
+    private var seatPos = BlockPos(this.pos)
 
     fun setPos(pos: BlockPos, blockOffset: Double) {
         check(!world.isClient) {

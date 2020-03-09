@@ -2,10 +2,10 @@ package juuxel.adorn.gui.widget
 
 import io.github.cottonmc.cotton.gui.client.LibGuiClient
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
+import io.github.cottonmc.cotton.gui.client.TextHoverRendererScreen
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import io.github.cottonmc.cotton.gui.widget.WWidget
 import io.github.cottonmc.cotton.gui.widget.data.Alignment
-import juuxel.adorn.mixin.client.ScreenAccessor
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.loader.api.FabricLoader
@@ -65,8 +65,8 @@ class WText(
         }
 
         val text = getTextAt(mouseX, mouseY)
-        (MinecraftClient.getInstance().currentScreen as? ScreenAccessor)
-            ?.callRenderComponentHoverEffect(text, x + mouseX, y + mouseY)
+        (MinecraftClient.getInstance().currentScreen as? TextHoverRendererScreen)
+            ?.renderTextHover(text, x + mouseX, y + mouseY)
     }
 
     override fun onClick(x: Int, y: Int, button: Int) {
@@ -84,7 +84,7 @@ class WText(
                         }
                     }
                 } else {
-                    val result = MinecraftClient.getInstance().currentScreen?.handleComponentClicked(text) ?: false
+                    val result = MinecraftClient.getInstance().currentScreen?.handleTextClick(text) ?: false
                     if (result && clickEvent.action === ClickEvent.Action.RUN_COMMAND) {
                         MinecraftClient.getInstance().openScreen(null)
                     }
