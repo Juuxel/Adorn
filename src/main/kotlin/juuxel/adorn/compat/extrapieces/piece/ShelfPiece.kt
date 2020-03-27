@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.piece
 
-/*import com.shnupbups.extrapieces.blocks.PieceBlock
+import com.shnupbups.extrapieces.blocks.PieceBlock
 import com.shnupbups.extrapieces.core.PieceSet
 import com.shnupbups.extrapieces.core.PieceTypes
 import com.shnupbups.extrapieces.recipe.ShapedPieceRecipe
@@ -33,4 +33,4 @@ object ShelfPiece : SimpleRotatingPiece(Adorn.id("shelf")) {
             .addToKey('/', Items.STICK)
             .addToKey('/', AdornTags.STONE_ROD)
     )
-}*/
+}

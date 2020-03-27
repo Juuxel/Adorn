@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.piece
 
-/*import com.shnupbups.extrapieces.ExtraPieces
+import com.shnupbups.extrapieces.ExtraPieces
 import com.shnupbups.extrapieces.blocks.PieceBlock
 import com.swordglowsblue.artifice.api.ArtificeResourcePack
 import juuxel.adorn.compat.extrapieces.AdornPieces
@@ -29,4 +29,4 @@ abstract class SimpleRotatingPiece(id: Identifier) : AdornPiece(id) {
             }
         }
     }
-}*/
+}

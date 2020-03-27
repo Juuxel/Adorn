@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.block
 
-/*import com.shnupbups.extrapieces.core.PieceSet
+import com.shnupbups.extrapieces.core.PieceSet
 import juuxel.adorn.block.TableBlock
 import juuxel.adorn.compat.extrapieces.AdornPieces
 import juuxel.adorn.compat.extrapieces.toVariant
@@ -20,7 +20,8 @@ open class TablePieceBlock private constructor(private val set: PieceSet) : Tabl
 
     override fun getType() = AdornPieces.TABLE
 
-    override fun getRenderLayer() = base.renderLayer
+    // FIXME
+    //override fun getRenderLayer() = base.renderLayer
 
     override fun emitsRedstonePower(state: BlockState?) =
         base.defaultState.emitsRedstonePower()
@@ -45,4 +46,4 @@ open class TablePieceBlock private constructor(private val set: PieceSet) : Tabl
         operator fun invoke(set: PieceSet): TablePieceBlock =
             if (AdornPieces.isCarpetingEnabled(set)) Carpeted(set) else TablePieceBlock(set)
     }
-}*/
+}

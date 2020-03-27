@@ -34,6 +34,7 @@ if (file("private.gradle").exists()) {
 
 repositories {
     mavenCentral()
+    jcenter()
     if (localBuild) {
         mavenLocal()
     }
@@ -101,8 +102,8 @@ dependencies {
     modCompileOnly("towelette:Towelette:" + v("towelette")) { byeFabric() }
     modCompileOnly("statement:Statement:" + v("statement")) { byeFabric() }
     modCompileOnly("io.github.prospector:modmenu:" + v("modmenu")) { byeFabric() }
-//    modCompileOnly("extra-pieces:extrapieces:" + v("extra-pieces"))
-//    modCompileOnly("com.github.artificemc:artifice:" + v("artifice"))
+    modCompileOnly("extra-pieces:extrapieces:" + v("extra-pieces"))
+    modCompileOnly("com.lettuce.fudge:artifice:" + v("artifice"))
 
     if (heavyweight) {
         modRuntime("com.terraformersmc", "traverse", v("traverse")) { byeFabric() }
@@ -111,8 +112,8 @@ dependencies {
         modRuntime("towelette:Towelette:" + v("towelette")) { byeFabric() }
         modRuntime("statement:Statement:" + v("statement")) { byeFabric() }
         modRuntime("io.github.prospector:modmenu:" + v("modmenu")) { byeFabric() }
-//        modRuntime("extra-pieces:extrapieces:" + v("extra-pieces"))
-//        modRuntime("com.github.artificemc:artifice:" + v("artifice"))
+        modRuntime("extra-pieces:extrapieces:" + v("extra-pieces"))
+        modRuntime("com.lettuce.fudge:artifice:" + v("artifice"))
     }
 }
 

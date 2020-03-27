@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.block
 
-/*import com.shnupbups.extrapieces.core.PieceSet
+import com.shnupbups.extrapieces.core.PieceSet
 import juuxel.adorn.block.PostBlock
 import juuxel.adorn.compat.extrapieces.AdornPieces
 import juuxel.adorn.compat.extrapieces.toVariant
@@ -18,7 +18,8 @@ class PostPieceBlock(private val set: PieceSet) : PostBlock(set.toVariant()), Ad
 
     override fun getType() = AdornPieces.POST
 
-    override fun getRenderLayer() = base.renderLayer
+    // FIXME
+    //override fun getRenderLayer() = base.renderLayer
 
     override fun emitsRedstonePower(state: BlockState?) =
         base.defaultState.emitsRedstonePower()
@@ -34,4 +35,4 @@ class PostPieceBlock(private val set: PieceSet) : PostBlock(set.toVariant()), Ad
         super.randomDisplayTick(state, world, pos, random)
         base.randomDisplayTick(base.defaultState, world, pos, random)
     }
-}*/
+}

@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.piece
 
-/*import com.shnupbups.extrapieces.blocks.PieceBlock
+import com.shnupbups.extrapieces.blocks.PieceBlock
 import com.shnupbups.extrapieces.core.PieceType
 import juuxel.adorn.compat.extrapieces.item.AdornPieceBlockItem
 import net.minecraft.item.Item
@@ -16,4 +16,4 @@ abstract class AdornPiece(id: Identifier) : PieceType(id) {
     override fun getWoodmillingRecipe() =
         if (stonecuttingCount == 0) null
         else super.getWoodmillingRecipe()
-}*/
+}
