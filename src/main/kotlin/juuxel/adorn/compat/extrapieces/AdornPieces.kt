@@ -8,9 +8,18 @@ import com.shnupbups.extrapieces.core.PieceTypes
 import com.swordglowsblue.artifice.api.ArtificeResourcePack
 import juuxel.adorn.Adorn
 import juuxel.adorn.block.entity.BETypeProvider
-import juuxel.adorn.compat.extrapieces.piece.*
-import juuxel.adorn.config.AdornConfigManager
 import juuxel.adorn.block.entity.MutableBlockEntityType
+import juuxel.adorn.compat.extrapieces.piece.ChairPiece
+import juuxel.adorn.compat.extrapieces.piece.DrawerPiece
+import juuxel.adorn.compat.extrapieces.piece.KitchenCounterPiece
+import juuxel.adorn.compat.extrapieces.piece.KitchenCupboardPiece
+import juuxel.adorn.compat.extrapieces.piece.PlatformPiece
+import juuxel.adorn.compat.extrapieces.piece.PostPiece
+import juuxel.adorn.compat.extrapieces.piece.ShelfPiece
+import juuxel.adorn.compat.extrapieces.piece.SofaPiece
+import juuxel.adorn.compat.extrapieces.piece.StepPiece
+import juuxel.adorn.compat.extrapieces.piece.TablePiece
+import juuxel.adorn.config.AdornConfigManager
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback
 import net.minecraft.block.Block
 import net.minecraft.item.Items
@@ -71,7 +80,7 @@ object AdornPieces : EPInitializer {
     private fun register(vararg types: PieceType) {
         for (type in types) {
             PieceTypes.register(type)
-            //ModItemGroups.groups[type] = ItemGroup.DECORATIONS
+            // ModItemGroups.groups[type] = ItemGroup.DECORATIONS
         }
     }
 

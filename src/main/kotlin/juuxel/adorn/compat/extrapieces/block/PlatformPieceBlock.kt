@@ -1,6 +1,7 @@
 package juuxel.adorn.compat.extrapieces.block
 
 import com.shnupbups.extrapieces.core.PieceSet
+import java.util.Random
 import juuxel.adorn.block.PlatformBlock
 import juuxel.adorn.compat.extrapieces.AdornPieces
 import juuxel.adorn.compat.extrapieces.toVariant
@@ -11,7 +12,6 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
-import java.util.Random
 
 class PlatformPieceBlock(private val set: PieceSet) : PlatformBlock(set.toVariant()), AdornPieceBlock {
     override fun getSet() = set
@@ -19,7 +19,7 @@ class PlatformPieceBlock(private val set: PieceSet) : PlatformBlock(set.toVarian
     override fun getType() = AdornPieces.PLATFORM
 
     // FIXME
-    //override fun getRenderLayer() = base.renderLayer
+    // override fun getRenderLayer() = base.renderLayer
 
     override fun emitsRedstonePower(state: BlockState?) =
         base.defaultState.emitsRedstonePower()
