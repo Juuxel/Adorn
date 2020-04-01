@@ -5,12 +5,12 @@ import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
-import net.minecraft.entity.EntityContext
+import net.minecraft.block.ShapeContext
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
-import net.minecraft.util.BooleanBiFunction
+import net.minecraft.util.function.BooleanBiFunction
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
@@ -28,7 +28,7 @@ open class KitchenSinkBlock(variant: BlockVariant) : KitchenCounterBlock(variant
         builder.add(WATERLOGGED)
     }
 
-    override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, context: EntityContext) =
+    override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext) =
         SHAPES[state[FACING]]
 
     override fun hasComparatorOutput(state: BlockState) = true

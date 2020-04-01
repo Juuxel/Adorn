@@ -4,7 +4,7 @@ import juuxel.adorn.api.block.BlockVariant
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
-import net.minecraft.entity.EntityContext
+import net.minecraft.block.ShapeContext
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
@@ -30,10 +30,8 @@ open class CoffeeTableBlock(variant: BlockVariant) : Block(variant.createSetting
         if (state[Properties.WATERLOGGED]) Fluids.WATER.getStill(false)
         else super.getFluidState(state)
 
-    override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, ePos: EntityContext): VoxelShape =
+    override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape =
         SHAPE
-
-    override fun isSimpleFullBlock(state: BlockState?, view: BlockView?, pos: BlockPos?) = false
 
     companion object {
         val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED

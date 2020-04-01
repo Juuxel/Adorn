@@ -7,9 +7,9 @@ import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.Entity
+import net.minecraft.network.PacketByteBuf
 import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
-import net.minecraft.util.PacketByteBuf
 
 object AdornNetworking {
     val ENTITY_SPAWN = Adorn.id("entity_spawn")

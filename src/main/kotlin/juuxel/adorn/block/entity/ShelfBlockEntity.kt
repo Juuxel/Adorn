@@ -10,7 +10,7 @@ class ShelfBlockEntity : BaseInventoryBlockEntity(AdornBlockEntities.SHELF, 2), 
     // No menus for shelves
     override fun createContainer(syncId: Int, playerInv: PlayerInventory?) = null
 
-    override fun getInvMaxStackAmount() = 1
+    override fun getMaxCountPerStack() = 1
 
     override fun toClientTag(tag: CompoundTag) = tag.apply {
         Inventories.toTag(tag, items)

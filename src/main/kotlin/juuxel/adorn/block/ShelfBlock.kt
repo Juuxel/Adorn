@@ -7,13 +7,13 @@ import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
+import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
-import net.minecraft.container.Container
-import net.minecraft.entity.EntityContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
+import net.minecraft.screen.ScreenHandler
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
@@ -42,7 +42,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
         builder.add(FACING, WATERLOGGED)
     }
 
-    override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: EntityContext) =
+    override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext) =
         SHAPES[state[FACING]]
 
     // Based on WallTorchBlock.canPlaceAt
@@ -84,7 +84,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
     ): ActionResult {
         val be = world.getBlockEntity(pos) as? ShelfBlockEntity ?: return ActionResult.PASS
         val slot = getSlot(state, hitResult)
-        val existing = be.getInvStack(slot)
+        val existing = be.getStack(slot)
 
         if (existing.isEmpty) {
             val handStack = player.getStackInHand(hand)
@@ -92,7 +92,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
             if (!handStack.isEmpty) {
                 val stack = handStack.copy()
                 stack.count = 1
-                be.setInvStack(slot, stack)
+                be.setStack(slot, stack)
                 be.markDirty()
                 if (!world.isClient) {
                     be.sync()
@@ -106,7 +106,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
             if (!world.isClient) {
                 ItemScatterer.spawn(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), existing)
             }
-            be.setInvStack(slot, ItemStack.EMPTY)
+            be.setStack(slot, ItemStack.EMPTY)
             be.markDirty()
             if (!world.isClient) {
                 be.sync()
@@ -156,7 +156,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
 
             if (entity is BaseInventoryBlockEntity) {
                 ItemScatterer.spawn(world, pos, entity)
-                world.updateHorizontalAdjacent(pos, this)
+                world.updateComparators(pos, this)
             }
 
             super.onBlockRemoved(state1, world, pos, state2, b)
@@ -172,7 +172,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
     override fun hasComparatorOutput(state: BlockState) = true
 
     override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
-        Container.calculateComparatorOutput(world.getBlockEntity(pos))
+        ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos))
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING

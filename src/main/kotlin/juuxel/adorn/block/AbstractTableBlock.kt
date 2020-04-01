@@ -2,8 +2,8 @@ package juuxel.adorn.block
 
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
-import net.minecraft.entity.EntityContext
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
@@ -56,7 +56,7 @@ abstract class AbstractTableBlock(settings: Settings) : CarpetedBlock(settings),
         .with(SOUTH, canConnectTo(world.getBlockState(pos.offset(Direction.SOUTH)), Direction.SOUTH))
         .with(WEST, canConnectTo(world.getBlockState(pos.offset(Direction.WEST)), Direction.WEST))
 
-    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
+    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: ShapeContext?) =
         getShapeForKey(
             Bits.buildTableState(
                 state[NORTH], state[EAST], state[SOUTH], state[WEST],

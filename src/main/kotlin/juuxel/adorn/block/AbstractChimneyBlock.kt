@@ -4,7 +4,7 @@ import juuxel.adorn.lib.AdornTags
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Waterloggable
-import net.minecraft.entity.EntityContext
+import net.minecraft.block.ShapeContext
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
@@ -33,7 +33,7 @@ abstract class AbstractChimneyBlock(settings: Settings) : Block(settings), Water
         }?.updateConnections(context.world.getBlockState(context.blockPos.up()))
 
     private fun BlockState.updateConnections(neighborState: BlockState): BlockState = run {
-        with(CONNECTED, neighborState.matches(AdornTags.CHIMNEYS.block))
+        with(CONNECTED, neighborState.isIn(AdornTags.CHIMNEYS.block))
     }
 
     override fun getStateForNeighborUpdate(
@@ -45,7 +45,7 @@ abstract class AbstractChimneyBlock(settings: Settings) : Block(settings), Water
         if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
         else super.getFluidState(state)
 
-    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
+    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: ShapeContext?) =
         if (state[CONNECTED]) MIDDLE_SHAPE else TOP_SHAPE
 
     companion object {

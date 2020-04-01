@@ -7,7 +7,7 @@ import juuxel.adorn.gui.openFabricContainer
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
-import net.minecraft.entity.EntityContext
+import net.minecraft.block.ShapeContext
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
@@ -110,17 +110,17 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
 
             if (entity is TradingStationBlockEntity) {
                 ItemScatterer.spawn(world, pos, entity.storage)
-                world.updateHorizontalAdjacent(pos, this)
+                world.updateComparators(pos, this)
             }
 
             super.onBlockRemoved(state1, world, pos, state2, b)
         }
     }
 
-    override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: EntityContext) =
+    override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext) =
         OUTLINE_SHAPE
 
-    override fun getCollisionShape(state: BlockState, world: BlockView, pos: BlockPos, context: EntityContext) =
+    override fun getCollisionShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext) =
         COLLISION_SHAPE
 
     /**

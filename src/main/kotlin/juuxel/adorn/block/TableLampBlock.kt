@@ -5,8 +5,8 @@ import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Material
+import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
-import net.minecraft.entity.EntityContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.DyeItem
@@ -65,12 +65,8 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable {
         if (state[Properties.WATERLOGGED]) Fluids.WATER.getStill(false)
         else super.getFluidState(state)
 
-    override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, ePos: EntityContext) =
+    override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, ePos: ShapeContext) =
         SHAPE
-
-    @Suppress("deprecation")
-    override fun getLuminance(state: BlockState) =
-        if (state[LIT]) 15 else super.getLuminance(state)
 
     override fun hasComparatorOutput(state: BlockState) = true
 
@@ -86,11 +82,12 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable {
         val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
         val LIT: BooleanProperty = Properties.LIT
 
-        fun createBlockSettings(color: DyeColor): Block.Settings =
+        fun createBlockSettings(color: DyeColor): Settings =
             FabricBlockSettings.of(Material.REDSTONE_LAMP, color)
                 .hardness(0.3f)
                 .resistance(0.3f)
                 .sounds(BlockSoundGroup.WOOL)
                 .build()
+                .lightLevel { if (it[LIT]) 15 else 0 }
     }
 }

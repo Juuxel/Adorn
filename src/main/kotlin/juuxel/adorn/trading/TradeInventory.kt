@@ -4,12 +4,12 @@ import juuxel.adorn.util.InventoryComponent
 
 class TradeInventory(val trade: Trade) : InventoryComponent(2) {
     init {
-        setInvStack(0, trade.selling)
-        setInvStack(1, trade.price)
+        setStack(0, trade.selling)
+        setStack(1, trade.price)
 
         addListener {
-            trade.selling = getInvStack(0)
-            trade.price = getInvStack(1)
+            trade.selling = getStack(0)
+            trade.price = getStack(1)
             trade.callListeners()
         }
     }

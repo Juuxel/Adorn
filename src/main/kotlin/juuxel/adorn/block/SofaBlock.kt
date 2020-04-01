@@ -9,8 +9,8 @@ import juuxel.adorn.util.buildShapeRotations
 import juuxel.adorn.util.withBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
-import net.minecraft.entity.EntityContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.DyeItem
@@ -68,7 +68,7 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
                 val neighborPos = pos.offset(sleepingDirection)
                 world.setBlockState(neighborPos, world.getBlockState(neighborPos).with(OCCUPIED, true))
                 player.sleep(pos)
-                (world as? ServerWorld)?.updatePlayersSleeping()
+                (world as? ServerWorld)?.updateSleepingPlayers()
             }
             ActionResult.SUCCESS
         } else ActionResult.PASS
@@ -126,7 +126,7 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
             .with(FRONT_CONNECTION, frontConnection)
     }
 
-    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
+    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: ShapeContext?) =
         OUTLINE_SHAPE_MAP[Bits.buildSofaState(
             state[FACING],
             state[CONNECTED_LEFT],
@@ -134,7 +134,7 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
             state[FRONT_CONNECTION]
         )]
 
-    override fun getCollisionShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
+    override fun getCollisionShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: ShapeContext?) =
         COLLISION_SHAPE_MAP[Bits.buildSofaState(
             state[FACING],
             state[CONNECTED_LEFT],

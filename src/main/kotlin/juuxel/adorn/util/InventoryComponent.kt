@@ -1,19 +1,17 @@
 package juuxel.adorn.util
 
 import kotlin.math.min
-import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KProperty
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventories
 import net.minecraft.inventory.Inventory
-import net.minecraft.inventory.InventoryListener
+import net.minecraft.inventory.InventoryChangedListener
 import net.minecraft.inventory.SidedInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.util.DefaultedList
+import net.minecraft.util.collection.DefaultedList
 
 open class InventoryComponent(private val invSize: Int) : Inventory, NbtConvertible {
-    private val listeners: MutableList<InventoryListener> = ArrayList()
+    private val listeners: MutableList<InventoryChangedListener> = ArrayList()
     private val items: DefaultedList<ItemStack> = DefaultedList.ofSize(invSize, ItemStack.EMPTY)
     val sidedInventory: SidedInventory by lazy { SidedInventoryImpl(this) }
 
@@ -116,11 +114,6 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
         else 0
     }.sum()
 
-    fun slot(slot: Int) = object : ReadWriteProperty<Any?, ItemStack> {
-        override fun getValue(thisRef: Any?, property: KProperty<*>) = getInvStack(slot)
-        override fun setValue(thisRef: Any?, property: KProperty<*>, value: ItemStack) = setInvStack(slot, value)
-    }
-
     // -----
     // NBT
     // -----
@@ -137,51 +130,52 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
     // Inventory management/transfer
     // -------------------------------
 
-    override fun getInvStack(slot: Int) = items[slot]
+    override fun getStack(slot: Int) = items[slot]
 
     override fun clear() {
         items.clear()
         markDirty()
     }
 
-    override fun setInvStack(slot: Int, stack: ItemStack) {
+    override fun setStack(slot: Int, stack: ItemStack) {
         items[slot] = stack
     }
 
-    override fun removeInvStack(slot: Int) =
+    override fun removeStack(slot: Int) =
         Inventories.removeStack(items, slot)
 
-    override fun canPlayerUseInv(player: PlayerEntity?) = true
+    override fun canPlayerUse(player: PlayerEntity?) = true
 
-    override fun getInvSize() = invSize
+    override fun size() = invSize
 
-    override fun takeInvStack(slot: Int, count: Int) =
+    override fun removeStack(slot: Int, count: Int) =
         Inventories.splitStack(items, slot, count).also {
             if (!it.isEmpty) {
                 markDirty()
             }
         }
 
-    override fun isInvEmpty(): Boolean = isInvEmpty(items)
+    override fun isEmpty(): Boolean = hasContents(items)
 
     // -----------
     // Listeners
     // -----------
 
     override fun markDirty() {
-        listeners.forEach { it.onInvChange(this) }
+        listeners.forEach { it.onInventoryChanged(this) }
     }
 
-    fun addListener(listener: InventoryListener) {
+    fun addListener(listener: InventoryChangedListener) {
         listeners += listener
     }
 
     inline fun addListener(crossinline block: (Inventory) -> Unit) =
-        addListener(InventoryListener {
+        addListener(InventoryChangedListener {
             block(it)
         })
 
     companion object {
-        fun isInvEmpty(stacks: List<ItemStack>) = stacks.none { !it.isEmpty }
+        /** Checks if the list has non-empty item stacks. */
+        fun hasContents(stacks: List<ItemStack>) = stacks.none { !it.isEmpty }
     }
 }

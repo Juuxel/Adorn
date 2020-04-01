@@ -9,7 +9,7 @@ import net.minecraft.block.Blocks
 import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.enums.DoubleBlockHalf
-import net.minecraft.entity.EntityContext
+import net.minecraft.block.ShapeContext
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
@@ -102,7 +102,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
         )
     }
 
-    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
+    override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: ShapeContext?) =
         if (state[HALF] == DoubleBlockHalf.LOWER) {
             if (isCarpetingEnabled() && state[CARPET].isPresent) {
                 LOWER_SHAPES_WITH_CARPET[state[FACING]]
@@ -111,7 +111,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
             }
         } else UPPER_OUTLINE_SHAPES[state[FACING]]
 
-    override fun getCollisionShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: EntityContext?) =
+    override fun getCollisionShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: ShapeContext?) =
         if (state[HALF] == DoubleBlockHalf.LOWER) {
             if (isCarpetingEnabled() && state[CARPET].isPresent) {
                 LOWER_SHAPES_WITH_CARPET[state[FACING]]

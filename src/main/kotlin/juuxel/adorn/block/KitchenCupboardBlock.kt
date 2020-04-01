@@ -7,11 +7,11 @@ import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.gui.openFabricContainer
 import net.minecraft.block.BlockState
-import net.minecraft.container.Container
-import net.minecraft.container.NameableContainerFactory
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.screen.NamedScreenHandlerFactory
+import net.minecraft.screen.ScreenHandler
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
@@ -31,8 +31,8 @@ open class KitchenCupboardBlock(
         return ActionResult.SUCCESS
     }
 
-    override fun createContainerFactory(state: BlockState, world: World, pos: BlockPos) =
-        world.getBlockEntity(pos) as? NameableContainerFactory
+    override fun createScreenHandlerFactory(state: BlockState, world: World, pos: BlockPos) =
+        world.getBlockEntity(pos) as? NamedScreenHandlerFactory
 
     override fun onBlockRemoved(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
         if (state1.block != state2.block) {
@@ -40,7 +40,7 @@ open class KitchenCupboardBlock(
 
             if (entity is BaseInventoryBlockEntity) {
                 ItemScatterer.spawn(world, pos, getInventory(state1, world, pos))
-                world.updateHorizontalAdjacent(pos, this)
+                world.updateComparators(pos, this)
             }
 
             super.onBlockRemoved(state1, world, pos, state2, b)
@@ -56,5 +56,5 @@ open class KitchenCupboardBlock(
     override fun hasComparatorOutput(state: BlockState) = true
 
     override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
-        Container.calculateComparatorOutput(world.getBlockEntity(pos))
+        ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos))
 }

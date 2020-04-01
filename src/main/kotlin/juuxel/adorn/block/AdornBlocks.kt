@@ -17,6 +17,7 @@ import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegi
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.fabricmc.fabric.api.tools.FabricToolTags
+import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.CarpetBlock
@@ -205,11 +206,11 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val STONE_TORCH_WALL = registerBlockWithoutItem(
         "wall_stone_torch",
         StoneTorchBlock.Wall(
-            Block.Settings.copy(STONE_TORCH_GROUND).dropsLike(STONE_TORCH_GROUND)
+            AbstractBlock.Settings.copy(STONE_TORCH_GROUND).dropsLike(STONE_TORCH_GROUND)
         )
     )
 
-    val CRATE: Block = registerBlock("crate", Block(Block.Settings.copy(Blocks.OAK_PLANKS)))
+    val CRATE: Block = registerBlock("crate", Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)))
     val APPLE_CRATE: Block = registerCrate("apple_crate")
     val WHEAT_CRATE: Block = registerCrate("wheat_crate")
     val CARROT_CRATE: Block = registerCrate("carrot_crate")
@@ -230,7 +231,7 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
 
     val PICKET_FENCE: Block = registerBlock(
         "picket_fence",
-        PicketFenceBlock(Block.Settings.copy(Blocks.OAK_FENCE).nonOpaque())
+        PicketFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).nonOpaque())
     )
     val CHAIN_LINK_FENCE: Block = registerBlock(
         "chain_link_fence",
@@ -339,7 +340,7 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     private fun registerCrate(name: String): Block =
         registerBlock(
             name,
-            Block(Block.Settings.copy(CRATE)),
+            Block(AbstractBlock.Settings.copy(CRATE)),
             Item.Settings().group(ItemGroup.DECORATIONS).recipeRemainder(CRATE.asItem())
         )
 }

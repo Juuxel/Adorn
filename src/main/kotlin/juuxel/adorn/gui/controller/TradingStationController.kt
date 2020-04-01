@@ -15,8 +15,8 @@ import juuxel.adorn.util.color
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
-import net.minecraft.container.BlockContext
-import net.minecraft.container.SlotActionType
+import net.minecraft.screen.ScreenHandlerContext
+import net.minecraft.screen.slot.SlotActionType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
@@ -27,7 +27,7 @@ import org.apache.logging.log4j.LogManager
 class TradingStationController(
     syncId: Int,
     playerInv: PlayerInventory,
-    private val context: BlockContext,
+    private val context: ScreenHandlerContext,
     private val forOwner: Boolean
 ) : BaseAdornController(
     syncId,
@@ -106,7 +106,7 @@ class TradingStationController(
          * Gets the [juuxel.adorn.block.entity.TradingStationBlockEntity] at the [context]'s location.
          * If it's not present, creates an empty trading station using [TradingStation.createEmpty].
          */
-        private fun getTradingStation(context: BlockContext) =
+        private fun getTradingStation(context: ScreenHandlerContext) =
             getBlockEntity(context) as? TradingStation ?: run {
                 LOGGER.warn("[Adorn] Trading station not found, creating fake one")
                 TradingStation.createEmpty()
@@ -116,12 +116,12 @@ class TradingStationController(
          * Gets the [TradingStation.storage] of the trading station at the [context]'s location.
          * Uses [getTradingStation] for finding a trading station.
          */
-        private fun getStorage(context: BlockContext): Inventory = getTradingStation(context).storage
+        private fun getStorage(context: ScreenHandlerContext): Inventory = getTradingStation(context).storage
 
         /**
          * Gets the [TradingStation.trade] of the trading station at the [context]'s location.
          * Uses [getTradingStation] for finding a trading station.
          */
-        private fun getTrade(context: BlockContext): Trade = getTradingStation(context).trade
+        private fun getTrade(context: ScreenHandlerContext): Trade = getTradingStation(context).trade
     }
 }

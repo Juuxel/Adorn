@@ -9,12 +9,12 @@ import net.fabricmc.api.Environment
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.container.BlockContext
-import net.minecraft.container.PropertyDelegate
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.BasicInventory
 import net.minecraft.inventory.Inventory
+import net.minecraft.screen.PropertyDelegate
+import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import org.apache.logging.log4j.LogManager
@@ -22,7 +22,7 @@ import org.apache.logging.log4j.LogManager
 abstract class BaseAdornController(
     syncId: Int,
     playerInv: PlayerInventory,
-    context: BlockContext,
+    context: ScreenHandlerContext,
     blockInventory: Inventory,
     propertyDelegate: PropertyDelegate = getBlockPropertyDelegate(context)
 ) : CottonCraftingController(
@@ -40,17 +40,17 @@ abstract class BaseAdornController(
     companion object {
         private val LOGGER = LogManager.getLogger()
 
-        fun getBlock(context: BlockContext) =
+        fun getBlock(context: ScreenHandlerContext) =
             context.run<Block> { world: World, pos: BlockPos ->
                 world.getBlockState(pos).block
             }.orElse(Blocks.AIR)
 
-        fun getBlockEntity(context: BlockContext): BlockEntity? =
+        fun getBlockEntity(context: ScreenHandlerContext): BlockEntity? =
             context.run<BlockEntity?> { world: World, pos: BlockPos ->
                 world.getBlockEntity(pos)
             }.orElse(null)
 
-        fun getBlockInventoryOrCreate(context: BlockContext, fallbackSize: Int) =
+        fun getBlockInventoryOrCreate(context: ScreenHandlerContext, fallbackSize: Int) =
             getBlockInventory(context).let {
                 if (it is EmptyInventory)
                     when (fallbackSize) {

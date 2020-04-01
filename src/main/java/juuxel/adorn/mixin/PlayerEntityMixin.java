@@ -43,14 +43,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         // Allow sleeping on sofas at daytime
     }
 
-    @Inject(method = "sleep", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setPlayerSpawn(Lnet/minecraft/util/math/BlockPos;ZZ)V"), cancellable = true)
-    private void onWakeUpSetSpawn(BlockPos pos, CallbackInfo info) {
-        if (world.getBlockState(pos).getBlock() instanceof SofaBlock) {
-            super.sleep(pos);
-            info.cancel();
-        }
-    }
-
     @Inject(method = "isSleepingLongEnough", at = @At("RETURN"), cancellable = true)
     private void onIsSleepingLongEnough(CallbackInfoReturnable<Boolean> info) {
         // Allow sleeping on sofas at daytime and (depending on config)

@@ -6,10 +6,10 @@ import juuxel.adorn.gui.painter.Painters
 import juuxel.adorn.gui.widget.WColorableLabel
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.container.BlockContext
-import net.minecraft.container.PropertyDelegate
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
+import net.minecraft.screen.PropertyDelegate
+import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
@@ -17,7 +17,7 @@ import net.minecraft.util.registry.Registry
 open class SimpleInvController(
     syncId: Int,
     playerInv: PlayerInventory,
-    context: BlockContext,
+    context: ScreenHandlerContext,
     invWidth: Int,
     invHeight: Int,
     title: Text,

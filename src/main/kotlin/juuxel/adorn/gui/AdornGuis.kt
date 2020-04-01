@@ -8,9 +8,9 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry
-import net.minecraft.client.gui.screen.ingame.ContainerScreen
-import net.minecraft.container.Container
+import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.screen.ScreenHandler
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 
@@ -37,17 +37,17 @@ object AdornGuis {
     ) = ContainerProviderRegistry.INSTANCE.registerFactory(id) { syncId, _, player, buf ->
         val world = player.world
         val pos = buf.readBlockPos()
-        val provider = world.getBlockState(pos).createContainerFactory(world, pos)
+        val provider = world.getBlockState(pos).createScreenHandlerFactory(world, pos)
         provider?.createMenu(syncId, player.inventory, player)
     }
 
-    private inline fun <reified C : Container> registerScreen(
+    private inline fun <reified C : ScreenHandler> registerScreen(
         id: Identifier,
-        crossinline screenFn: (C, PlayerEntity) -> ContainerScreen<in C>
+        crossinline screenFn: (C, PlayerEntity) -> HandledScreen<in C>
     ) = ScreenProviderRegistry.INSTANCE.registerFactory(id) { syncId, _, player, buf ->
         val world = player.world
         val pos = buf.readBlockPos()
-        val provider = world.getBlockState(pos).createContainerFactory(world, pos)
+        val provider = world.getBlockState(pos).createScreenHandlerFactory(world, pos)
         provider?.let {
             screenFn(it.createMenu(syncId, player.inventory, player) as C, player)
         }

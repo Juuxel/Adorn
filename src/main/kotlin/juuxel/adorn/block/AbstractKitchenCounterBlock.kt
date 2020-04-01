@@ -5,7 +5,7 @@ import juuxel.adorn.util.buildShapeRotations
 import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.entity.EntityContext
+import net.minecraft.block.ShapeContext
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundEvents
@@ -32,7 +32,7 @@ abstract class AbstractKitchenCounterBlock(settings: Settings) : Block(settings)
     override fun getPlacementState(context: ItemPlacementContext) =
         super.getPlacementState(context)!!.with(FACING, context.playerFacing.opposite)
 
-    override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, context: EntityContext) =
+    override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext) =
         SHAPES[state[FACING]]
 
     override fun mirror(state: BlockState, mirror: BlockMirror) =

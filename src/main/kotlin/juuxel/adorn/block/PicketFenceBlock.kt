@@ -5,8 +5,8 @@ import juuxel.adorn.util.mergeIntoShapeMap
 import juuxel.adorn.util.mergeShapeMaps
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
-import net.minecraft.entity.EntityContext
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
@@ -75,7 +75,7 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
     }
 
     override fun getOutlineShape(
-        state: BlockState, view: BlockView, pos: BlockPos, ePos: EntityContext
+        state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext
     ): VoxelShape = when (state[SHAPE]) {
         Shape.Straight -> STRAIGHT_OUTLINE_SHAPES.getValue(state[FACING])
         Shape.ClockwiseCorner -> CORNER_OUTLINE_SHAPES.getValue(state[FACING])
@@ -83,7 +83,7 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
     }
 
     override fun getCollisionShape(
-        state: BlockState, view: BlockView, pos: BlockPos, ePos: EntityContext
+        state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext
     ): VoxelShape = when (state[SHAPE]) {
         Shape.Straight -> STRAIGHT_COLLISION_SHAPES.getValue(state[FACING])
         Shape.ClockwiseCorner -> CORNER_COLLISION_SHAPES.getValue(state[FACING])

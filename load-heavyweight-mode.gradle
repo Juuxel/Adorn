@@ -3,7 +3,7 @@ import groovy.json.JsonSlurper
 def file = file("local.json")
 
 if (!file.exists()) {
-    ext.heavyweight = true
+    ext.heavyweight = false
 } else {
     def slurper = new JsonSlurper()
     def parsed = slurper.parse(file)

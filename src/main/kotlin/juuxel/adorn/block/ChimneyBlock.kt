@@ -66,7 +66,8 @@ class ChimneyBlock : AbstractChimneyBlock(FabricBlockSettings.copy(Blocks.BRICKS
         }
     }
 
-    override fun getTickRate(world: WorldView?) = 15
+    // TODO: fix before stable
+    //override fun getTickRate(world: WorldView?) = 15
 
     companion object {
         val SMOKE_TYPE = EnumProperty.of("smoke_type", SmokeType::class.java)

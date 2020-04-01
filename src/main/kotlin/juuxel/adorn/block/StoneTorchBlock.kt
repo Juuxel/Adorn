@@ -26,7 +26,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
 
-class StoneTorchBlock : TorchBlock(settings, ParticleTypes.FLAME), Waterloggable, BlockWithDescription {
+class StoneTorchBlock : TorchBlock(createSettings(), ParticleTypes.FLAME), Waterloggable, BlockWithDescription {
     init {
         defaultState = defaultState.with(LIT, true)
             .with(WATERLOGGED, false)
@@ -43,10 +43,6 @@ class StoneTorchBlock : TorchBlock(settings, ParticleTypes.FLAME), Waterloggable
                 world.setBlockState(pos, world.getBlockState(pos).with(LIT, false), 3)
             }
         }
-
-    override fun getLuminance(state: BlockState): Int {
-        return if (state[LIT]) super.getLuminance(state) else 0
-    }
 
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult?
@@ -90,10 +86,6 @@ class StoneTorchBlock : TorchBlock(settings, ParticleTypes.FLAME), Waterloggable
                 }
             }
 
-        override fun getLuminance(state: BlockState): Int {
-            return if (state[LIT]) super.getLuminance(state) else 0
-        }
-
         override fun onUse(
             state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult?
         ): ActionResult = onUseImpl(state, world, pos, player, hand) {
@@ -123,10 +115,13 @@ class StoneTorchBlock : TorchBlock(settings, ParticleTypes.FLAME), Waterloggable
     companion object {
         val LIT = Properties.LIT
         val WATERLOGGED = Properties.WATERLOGGED
-        internal val settings = FabricBlockSettings.copy(Blocks.TORCH)
-            .lightLevel(15)
-            .sounds(BlockSoundGroup.STONE)
-            .build()
+
+        internal fun createSettings(): Settings =
+            FabricBlockSettings.copy(Blocks.TORCH)
+                .lightLevel(15)
+                .sounds(BlockSoundGroup.STONE)
+                .build()
+                .lightLevel { if (it[LIT]) 15 else 0 }
 
         private inline fun onUseImpl(
             state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand,

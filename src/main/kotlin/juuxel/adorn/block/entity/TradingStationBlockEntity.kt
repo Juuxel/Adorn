@@ -8,18 +8,19 @@ import juuxel.adorn.util.InventoryComponent
 import juuxel.adorn.util.getTextComponent
 import juuxel.adorn.util.putTextComponent
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
+import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.container.BlockContext
-import net.minecraft.container.NameableContainerFactory
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.screen.NamedScreenHandlerFactory
+import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 
-class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION), BlockEntityClientSerializable, NameableContainerFactory, TradingStation {
+class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION), BlockEntityClientSerializable, NamedScreenHandlerFactory, TradingStation {
     var owner: UUID? = null
     var ownerName: Text = LiteralText("???")
     override val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
@@ -47,15 +48,15 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
     fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
 
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity) =
-        TradingStationController(syncId, playerInv, BlockContext.create(world, pos), isOwner(player))
+        TradingStationController(syncId, playerInv, ScreenHandlerContext.create(world, pos), isOwner(player))
 
     override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)
 
     // NBT
 
-    override fun fromTag(tag: CompoundTag) {
-        super.fromTag(tag)
-        owner = tag.getUuid(NBT_TRADING_OWNER)
+    override fun fromTag(state: BlockState, tag: CompoundTag) {
+        super.fromTag(state, tag)
+        owner = tag.getUuidNew(NBT_TRADING_OWNER) // TODO: Backwards compatibility
         ownerName = tag.getTextComponent(NBT_TRADING_OWNER_NAME) ?: LiteralText("??")
         trade.fromTag(tag.getCompound(NBT_TRADE))
         storage.fromTag(tag.getCompound(NBT_STORAGE))
@@ -63,7 +64,7 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
 
     override fun toTag(tag: CompoundTag) = super.toTag(tag).apply {
         if (owner != null) {
-            tag.putUuid(NBT_TRADING_OWNER, owner)
+            tag.putUuidNew(NBT_TRADING_OWNER, owner)
         }
 
         tag.putTextComponent(NBT_TRADING_OWNER_NAME, ownerName)

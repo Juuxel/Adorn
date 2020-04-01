@@ -7,11 +7,11 @@ import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.gui.openFabricContainer
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.container.Container
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
+import net.minecraft.screen.ScreenHandler
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
@@ -37,7 +37,7 @@ open class DrawerBlock(
     override fun getPlacementState(context: ItemPlacementContext) =
         super.getPlacementState(context)!!.with(FACING, context.playerFacing.opposite)
 
-    override fun isSimpleFullBlock(state: BlockState?, view: BlockView?, pos: BlockPos?) = false
+    // TODO: override fun isSimpleFullBlock(state: BlockState?, view: BlockView?, pos: BlockPos?) = false
 
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
@@ -52,7 +52,7 @@ open class DrawerBlock(
 
             if (entity is BaseInventoryBlockEntity) {
                 ItemScatterer.spawn(world, pos, getInventory(state1, world, pos))
-                world.updateHorizontalAdjacent(pos, this)
+                world.updateComparators(pos, this)
             }
 
             super.onBlockRemoved(state1, world, pos, state2, b)
@@ -74,7 +74,7 @@ open class DrawerBlock(
     override fun hasComparatorOutput(state: BlockState) = true
 
     override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
-        Container.calculateComparatorOutput(world.getBlockEntity(pos))
+        ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos))
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING

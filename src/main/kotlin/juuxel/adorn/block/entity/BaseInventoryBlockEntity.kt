@@ -10,7 +10,7 @@ import net.minecraft.inventory.Inventories
 import net.minecraft.inventory.SidedInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.util.DefaultedList
+import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IWorld
 
@@ -30,13 +30,13 @@ abstract class BaseInventoryBlockEntity(
             Inventories.toTag(tag, items)
     }
 
-    override fun fromTag(tag: CompoundTag) {
-        super.fromTag(tag)
+    override fun fromTag(state: BlockState, tag: CompoundTag) {
+        super.fromTag(state, tag)
         if (!deserializeLootTable(tag))
             Inventories.fromTag(tag, items)
     }
 
-    override fun isInvEmpty() = InventoryComponent.isInvEmpty(items)
+    override fun isEmpty() = InventoryComponent.hasContents(items)
 
     override fun getInvStackList() = items
 
@@ -44,7 +44,7 @@ abstract class BaseInventoryBlockEntity(
         this.items = items
     }
 
-    override fun getInvSize() = invSize
+    override fun size() = invSize
 
     override fun getContainerName() = _containerName
 

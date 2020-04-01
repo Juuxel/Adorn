@@ -29,21 +29,19 @@ open class PrismarineChimneyBlock(settings: Settings) : AbstractChimneyBlock(set
         }
     }
 
-    override fun getTickRate(world: WorldView) = if (world.isClient) 3 else 20
-
     class WithColumn(val drag: Boolean, settings: Settings) : PrismarineChimneyBlock(settings) {
         override fun scheduledTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random) {
             BubbleColumnBlock.update(world, pos.up(), drag)
         }
 
         override fun onBlockAdded(state: BlockState, world: World, pos: BlockPos, oldState: BlockState, moved: Boolean) {
-            world.blockTickScheduler.schedule(pos, this, getTickRate(world))
+            world.blockTickScheduler.schedule(pos, this, 20)
         }
 
         override fun neighborUpdate(
             state: BlockState, world: World, pos: BlockPos, neighbor: Block, neighborPos: BlockPos, moved: Boolean
         ) {
-            world.blockTickScheduler.schedule(pos, this, getTickRate(world))
+            world.blockTickScheduler.schedule(pos, this, 20)
         }
 
         @Environment(EnvType.CLIENT)
