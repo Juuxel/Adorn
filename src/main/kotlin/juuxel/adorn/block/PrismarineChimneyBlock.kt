@@ -11,7 +11,6 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.tag.FluidTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import net.minecraft.world.WorldView
 
 open class PrismarineChimneyBlock(settings: Settings) : AbstractChimneyBlock(settings), BlockWithDescription {
     override val descriptionKey get() = AdornBlocks.PRISMARINE_CHIMNEY.translationKey + ".desc"

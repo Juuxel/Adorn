@@ -15,12 +15,12 @@ import juuxel.adorn.util.color
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
-import net.minecraft.screen.ScreenHandlerContext
-import net.minecraft.screen.slot.SlotActionType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
+import net.minecraft.screen.ScreenHandlerContext
+import net.minecraft.screen.slot.SlotActionType
 import net.minecraft.text.TranslatableText
 import org.apache.logging.log4j.LogManager
 

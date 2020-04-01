@@ -3,8 +3,8 @@ package juuxel.adorn.block
 import juuxel.adorn.lib.AdornTags
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.block.Waterloggable
 import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager

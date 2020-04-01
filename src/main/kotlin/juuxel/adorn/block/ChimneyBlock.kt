@@ -17,7 +17,6 @@ import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import net.minecraft.world.WorldView
 
 class ChimneyBlock : AbstractChimneyBlock(FabricBlockSettings.copy(Blocks.BRICKS).ticksRandomly().build().nonOpaque()),
     BlockWithDescription {
@@ -67,7 +66,7 @@ class ChimneyBlock : AbstractChimneyBlock(FabricBlockSettings.copy(Blocks.BRICKS
     }
 
     // TODO: fix before stable
-    //override fun getTickRate(world: WorldView?) = 15
+    // override fun getTickRate(world: WorldView?) = 15
 
     companion object {
         val SMOKE_TYPE = EnumProperty.of("smoke_type", SmokeType::class.java)
