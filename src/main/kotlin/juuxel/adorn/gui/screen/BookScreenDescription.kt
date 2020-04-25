@@ -15,7 +15,6 @@ import juuxel.adorn.gui.widget.PageContainer
 import juuxel.adorn.gui.widget.WBigLabel
 import juuxel.adorn.gui.widget.WBookText
 import juuxel.adorn.gui.widget.WCardPanel
-import juuxel.adorn.gui.widget.WCenteredLabel
 import juuxel.adorn.gui.widget.WPageTurnButton
 import juuxel.adorn.util.Colors
 import net.fabricmc.api.EnvType
@@ -59,7 +58,7 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription() {
         val item = WItem(page.icons.map { it.stackForRender })
         add(item, 0, 0)
         add(
-            WCenteredLabel(
+            WBookText(
                 page.title.method_27661().method_27694 { it.setBold(true) }
                 // TODO: centerVertically = true
             ),
