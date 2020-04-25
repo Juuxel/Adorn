@@ -18,6 +18,7 @@ import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.NoticeScreen
 import net.minecraft.client.gui.screen.Screen
+import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 
@@ -75,7 +76,7 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
                     { MinecraftClient.getInstance().openScreen(previous) },
                     TranslatableText("gui.adorn.config.restart_required.title"),
                     TranslatableText("gui.adorn.config.restart_required.message"),
-                    "gui.ok"
+                    TranslatableText("gui.ok")
                 )
             )
         } else {
@@ -98,16 +99,12 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
                 }
             }
 
-            override fun addInformation(information: MutableList<String>) {
-                information +=
-                    TranslatableText("gui.adorn.config.option.${property.name}.tooltip")
-                        .asFormattedString()
+            override fun addTooltip(tooltip: MutableList<Text>) {
+                tooltip += TranslatableText("gui.adorn.config.option.${property.name}.tooltip")
 
                 if (restartRequired) {
-                    information +=
-                        TranslatableText("gui.adorn.config.requires_restart")
-                            .formatted(Formatting.ITALIC, Formatting.GOLD)
-                            .asFormattedString()
+                    tooltip += TranslatableText("gui.adorn.config.requires_restart")
+                        .method_27695(Formatting.ITALIC, Formatting.GOLD)
                 }
             }
         }

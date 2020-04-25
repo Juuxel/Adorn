@@ -3,6 +3,7 @@ package juuxel.adorn.block.renderer
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.color
+import juuxel.adorn.util.getSquaredDistance
 import juuxel.adorn.util.toTextWithCount
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -14,6 +15,8 @@ import net.minecraft.client.render.model.json.ModelTransformation
 import net.minecraft.client.resource.language.I18n
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.client.util.math.Vector3f
+import net.minecraft.text.Text
+import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
@@ -50,34 +53,40 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
         }
 
         if (lookingAtBlock) {
-            val label1 = I18n.translate(OWNER_LABEL, be.ownerName.copy().formatted(Formatting.GOLD).asFormattedString())
+            val label1 = TranslatableText(OWNER_LABEL, be.ownerName.method_27661().method_27692(Formatting.GOLD))
             renderLabel(be, label1, 0.0, 0.9, 0.0, 12, matrices, vertexConsumerProvider, light)
             if (!be.trade.isEmpty()) {
-                val label2 = I18n.translate(SELLING_LABEL, be.trade.selling.toTextWithCount().asFormattedString())
-                val label3 = I18n.translate(PRICE_LABEL, be.trade.price.toTextWithCount().asFormattedString())
+                val label2 = TranslatableText(SELLING_LABEL, be.trade.selling.toTextWithCount())
+                val label3 = TranslatableText(PRICE_LABEL, be.trade.price.toTextWithCount())
                 renderLabel(be, label2, 0.0, 0.9 - 0.25, 0.0, 12, matrices, vertexConsumerProvider, light)
                 renderLabel(be, label3, 0.0, 0.9 - 0.5, 0.0, 12, matrices, vertexConsumerProvider, light)
             }
         }
     }
 
-    private fun renderLabel(be: TradingStationBlockEntity, name: String, x: Double, y: Double, z: Double, maxDistance: Int, matrix: MatrixStack, vcp: VertexConsumerProvider, light: Int) {
+    private fun renderLabel(
+        be: TradingStationBlockEntity, label: Text,
+        x: Double, y: Double, z: Double,
+        maxDistance: Int,
+        matrices: MatrixStack, vertexConsumers: VertexConsumerProvider, light: Int
+    ) {
         val camera = dispatcher.camera
+
         val dist = be.getSquaredDistance(camera.pos.x, camera.pos.y, camera.pos.z)
         if (dist < maxDistance * maxDistance) {
-            matrix.push()
-            matrix.translate(x + 0.5, y + 1.5, z + 0.5)
-            matrix.multiply(camera.rotation)
-            matrix.scale(-0.025f, -0.025f, +0.025f)
+            matrices.push()
+            matrices.translate(x + 0.5, y + 1.5, z + 0.5)
+            matrices.multiply(camera.rotation)
+            matrices.scale(-0.025f, -0.025f, +0.025f)
 
-            val matrixModel = matrix.peek().model
+            val matrixModel = matrices.peek().model
             val opacity = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25f)
             val backgroundColor = color(0x000000, opacity)
             val textRenderer = dispatcher.textRenderer
-            val textX = -textRenderer.getStringWidth(name) / 2f
-            textRenderer.draw(name, textX, 0f, Colors.WHITE, false, matrixModel, vcp, false, backgroundColor, light)
+            val textX = -textRenderer.method_27527().method_27488(label) / 2f
+            textRenderer.draw(label, textX, 0f, Colors.WHITE, false, matrixModel, vertexConsumers, false, backgroundColor, light)
 
-            matrix.pop()
+            matrices.pop()
         }
     }
 

@@ -18,7 +18,6 @@ class WColorableLabel(text: Text, private val paletteId: Identifier, private val
 
     @Environment(EnvType.CLIENT)
     override fun paintBackground(x: Int, y: Int, mouseX: Int, mouseY: Int) {
-        val translated = text.asFormattedString()
-        ScreenDrawing.drawString(translated, x, y, _color)
+        ScreenDrawing.drawString(text, x, y, _color)
     }
 }

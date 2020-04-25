@@ -2,6 +2,7 @@ package juuxel.adorn.gui.screen
 
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
+import io.github.cottonmc.cotton.gui.widget.WItem
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel
 import io.github.cottonmc.cotton.gui.widget.WWidget
@@ -12,10 +13,10 @@ import juuxel.adorn.book.Page
 import juuxel.adorn.gui.painter.Painters
 import juuxel.adorn.gui.widget.PageContainer
 import juuxel.adorn.gui.widget.WBigLabel
+import juuxel.adorn.gui.widget.WBookText
 import juuxel.adorn.gui.widget.WCardPanel
-import juuxel.adorn.gui.widget.WItem
+import juuxel.adorn.gui.widget.WCenteredLabel
 import juuxel.adorn.gui.widget.WPageTurnButton
-import juuxel.adorn.gui.widget.WText
 import juuxel.adorn.util.Colors
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -55,18 +56,16 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription() {
     }
 
     private fun createPageWidget(pages: PageContainer, page: Page): WWidget = WPlainPanel().apply {
-        val item = WItem(page.icons)
+        val item = WItem(page.icons.map { it.stackForRender })
         add(item, 0, 0)
         add(
-            WText(
-                page.title.styled { it.isBold = true },
-                WLabel.DEFAULT_TEXT_COLOR,
-                alignment = Alignment.CENTER,
-                centerVertically = true
+            WCenteredLabel(
+                page.title.method_27661().method_27694 { it.setBold(true) }
+                // TODO: centerVertically = true
             ),
             20, 0, 116 - 40, 20
         )
-        add(WText(page.text, pages = pages), 4, 24, 116 - 4, 145 - 24)
+        add(WBookText(page.text, pages = pages), 4, 24, 116 - 4, 145 - 24)
     }
 
     private class WCloseButton : WWidget() {

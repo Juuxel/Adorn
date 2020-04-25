@@ -4,6 +4,7 @@ import com.mojang.datafixers.Dynamic
 import com.mojang.datafixers.types.JsonOps
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.entity.BlockEntity
 import net.minecraft.datafixer.NbtOps
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
@@ -41,3 +42,15 @@ fun BlockState.withBlock(block: Block): BlockState =
         @Suppress("UNCHECKED_CAST") // Cast to Comparable<Any>
         acc.with(key as Property<Comparable<Any>>, value as Comparable<Any>)
     }
+
+/**
+ * Gets the squared distance of this block entity to ([x], [y], [z]).
+ *
+ * Used to be in vanilla but was removed.
+ */
+fun BlockEntity.getSquaredDistance(x: Double, y: Double, z: Double): Double {
+    val xd = pos.x + 0.5 - x
+    val yd = pos.y + 0.5 - y
+    val zd = pos.z + 0.5 - z
+    return xd * xd + yd * yd + zd * zd
+}
