@@ -9,6 +9,7 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.text.Text
 
 class WBigLabel(private val text: Text, private val color: Int, private val scale: Float = DEFAULT_SCALE) : WWidget() {
+    @Suppress("DEPRECATION")
     @Environment(EnvType.CLIENT)
     override fun paintBackground(x: Int, y: Int) {
         RenderSystem.pushMatrix()

@@ -113,6 +113,7 @@ class WCardPanel : WPanel(), PageContainer {
         }
     }
 
+    @Suppress("DEPRECATION")
     @Environment(EnvType.CLIENT)
     override fun paintForeground(x: Int, y: Int, mouseX: Int, mouseY: Int) {
         if (selectedCard < children.size) {
