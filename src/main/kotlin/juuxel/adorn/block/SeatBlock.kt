@@ -4,7 +4,7 @@ import com.google.common.base.Predicates
 import juuxel.adorn.entity.AdornEntities
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.entity.SpawnType
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
@@ -38,7 +38,7 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
         val occupied = actualState[OCCUPIED]
         return if (!occupied) {
             if (!world.isClient) {
-                val entity = AdornEntities.SITTING_VEHICLE.spawn(world, null, null, player, actualPos, SpawnType.TRIGGERED, false, false)
+                val entity = AdornEntities.SITTING_VEHICLE.spawn(world, null, null, player, actualPos, SpawnReason.TRIGGERED, false, false)
                 entity?.setPos(actualPos, sittingYOffset)
                 world.setBlockState(actualPos, actualState.with(OCCUPIED, true))
                 player.startRiding(entity, true)

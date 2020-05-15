@@ -15,7 +15,7 @@ class WBigLabel(private val text: Text, private val color: Int, private val scal
         RenderSystem.translatef((x + width / 2).toFloat(), (y + height / 2 - 3).toFloat(), 0f)
         RenderSystem.scalef(scale, scale, 1.0f)
         val font = MinecraftClient.getInstance().textRenderer
-        ScreenDrawing.drawString(text, -(font.method_27527().method_27488(text) / 2).toInt(), 0, color)
+        ScreenDrawing.drawString(text, -(font.getWidth(text) / 2), 0, color)
         RenderSystem.popMatrix()
     }
 

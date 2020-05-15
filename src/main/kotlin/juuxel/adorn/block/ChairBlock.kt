@@ -25,8 +25,8 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
-import net.minecraft.world.IWorld
 import net.minecraft.world.World
+import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
 open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()), Waterloggable {
@@ -76,7 +76,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
         // Check that the other block is the same and has the correct half, otherwise break
         if (otherState.block == this && otherState[HALF] != half) {
             world.setBlockState(otherPos, world.getFluidState(otherPos).blockState, 0b10_00_11)
-            world.playLevelEvent(player, 2001, otherPos, getRawIdFromState(otherState))
+            world.syncWorldEvent(player, 2001, otherPos, getRawIdFromState(otherState))
             if (!player.isCreative) {
                 dropStacks(state, world, pos, null, player, player.mainHandStack)
                 dropStacks(otherState, world, otherPos, null, player, player.mainHandStack)
@@ -122,7 +122,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
 
     override fun getStateForNeighborUpdate(
         state: BlockState, direction: Direction, neighborState: BlockState,
-        world: IWorld, pos: BlockPos, neighborPos: BlockPos
+        world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ): BlockState {
         val half = state[HALF]
         return if (

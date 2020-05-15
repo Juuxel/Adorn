@@ -11,7 +11,7 @@ import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
-import net.minecraft.world.IWorld
+import net.minecraft.world.WorldAccess
 
 class ChainLinkFenceBlock(settings: Settings) : PaneBlock(settings) {
     init {
@@ -35,7 +35,7 @@ class ChainLinkFenceBlock(settings: Settings) : PaneBlock(settings) {
 
     override fun getStateForNeighborUpdate(
         state: BlockState, facing: Direction, neighborState: BlockState,
-        world: IWorld, pos: BlockPos, neighborPos: BlockPos
+        world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ): BlockState {
         var result = super.getStateForNeighborUpdate(state, facing, neighborState, world, pos, neighborPos)
 

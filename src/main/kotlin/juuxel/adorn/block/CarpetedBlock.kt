@@ -15,7 +15,7 @@ import net.minecraft.state.property.EnumProperty
 import net.minecraft.util.DyeColor
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
-import net.minecraft.world.IWorld
+import net.minecraft.world.WorldAccess
 
 abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
     init {
@@ -50,7 +50,7 @@ abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
 
     override fun getStateForNeighborUpdate(
         state: BlockState, direction: Direction, neighborState: BlockState,
-        world: IWorld, pos: BlockPos, neighborPos: BlockPos
+        world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ): BlockState {
         if (isCarpetingEnabled()) {
             val carpet = state[CARPET]

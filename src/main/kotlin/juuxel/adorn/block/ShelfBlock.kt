@@ -25,8 +25,8 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.BlockView
-import net.minecraft.world.IWorld
 import net.minecraft.world.World
+import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
 open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createSettings()), Waterloggable, BlockWithDescription {
@@ -72,7 +72,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
         state: BlockState,
         side: Direction,
         neighborState: BlockState?,
-        world: IWorld,
+        world: WorldAccess,
         pos: BlockPos,
         neighborPos: BlockPos?
     ): BlockState =

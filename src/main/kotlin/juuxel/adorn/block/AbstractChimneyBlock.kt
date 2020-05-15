@@ -13,7 +13,7 @@ import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.BlockView
-import net.minecraft.world.IWorld
+import net.minecraft.world.WorldAccess
 
 abstract class AbstractChimneyBlock(settings: Settings) : Block(settings), Waterloggable {
     init {
@@ -38,7 +38,7 @@ abstract class AbstractChimneyBlock(settings: Settings) : Block(settings), Water
 
     override fun getStateForNeighborUpdate(
         state: BlockState, side: Direction, neighborState: BlockState,
-        world: IWorld, pos: BlockPos, neighborPos: BlockPos
+        world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ): BlockState = if (side == Direction.UP) state.updateConnections(neighborState) else state
 
     override fun getFluidState(state: BlockState) =

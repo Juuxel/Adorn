@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
-import net.minecraft.world.IWorld
+import net.minecraft.world.WorldAccess
 
 abstract class AbstractTableBlock(settings: Settings) : CarpetedBlock(settings), Waterloggable {
     protected abstract fun canConnectTo(state: BlockState, sideOfSelf: Direction): Boolean
@@ -38,7 +38,7 @@ abstract class AbstractTableBlock(settings: Settings) : CarpetedBlock(settings),
         state: BlockState,
         direction: Direction,
         neighborState: BlockState,
-        world: IWorld,
+        world: WorldAccess,
         pos: BlockPos,
         neighborPos: BlockPos
     ) = updateConnections(
@@ -49,7 +49,7 @@ abstract class AbstractTableBlock(settings: Settings) : CarpetedBlock(settings),
 
     private fun updateConnections(
         state: BlockState,
-        world: IWorld,
+        world: WorldAccess,
         pos: BlockPos
     ) = state.with(NORTH, canConnectTo(world.getBlockState(pos.offset(Direction.NORTH)), Direction.NORTH))
         .with(EAST, canConnectTo(world.getBlockState(pos.offset(Direction.EAST)), Direction.EAST))

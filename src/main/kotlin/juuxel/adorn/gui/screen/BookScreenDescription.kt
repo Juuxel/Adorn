@@ -59,7 +59,7 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription() {
         add(item, 0, 0)
         add(
             WBookText(
-                page.title.method_27661().method_27694 { it.setBold(true) }
+                page.title.copy().styled { it.withBold(true) }
                 // TODO: centerVertically = true
             ),
             20, 0, 116 - 40, 20

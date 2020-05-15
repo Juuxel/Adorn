@@ -42,7 +42,7 @@ class AdornBookItem(private val bookId: Identifier, settings: Settings) : Item(s
     override fun appendTooltip(stack: ItemStack, world: World?, texts: MutableList<Text>, context: TooltipContext) {
         super.appendTooltip(stack, world, texts, context)
         if (bookId in BookManager) {
-            texts.add(TranslatableText("book.byAuthor", BookManager[bookId].author).method_27692(Formatting.GRAY))
+            texts.add(TranslatableText("book.byAuthor", BookManager[bookId].author).formatted(Formatting.GRAY))
         }
     }
 

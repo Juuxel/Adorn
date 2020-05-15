@@ -23,8 +23,8 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
-import net.minecraft.world.IWorld
 import net.minecraft.world.World
+import net.minecraft.world.WorldAccess
 
 class StoneTorchBlock : TorchBlock(createSettings(), ParticleTypes.FLAME), Waterloggable, BlockWithDescription {
     init {
@@ -37,7 +37,7 @@ class StoneTorchBlock : TorchBlock(createSettings(), ParticleTypes.FLAME), Water
         builder.add(LIT, WATERLOGGED)
     }
 
-    override fun tryFillWithFluid(world: IWorld, pos: BlockPos, state: BlockState, fluidState: FluidState) =
+    override fun tryFillWithFluid(world: WorldAccess, pos: BlockPos, state: BlockState, fluidState: FluidState) =
         super.tryFillWithFluid(world, pos, state, fluidState).also {
             if (it) {
                 world.setBlockState(pos, world.getBlockState(pos).with(LIT, false), 3)
@@ -79,7 +79,7 @@ class StoneTorchBlock : TorchBlock(createSettings(), ParticleTypes.FLAME), Water
             builder.add(LIT, WATERLOGGED)
         }
 
-        override fun tryFillWithFluid(world: IWorld, pos: BlockPos, state: BlockState, fluidState: FluidState) =
+        override fun tryFillWithFluid(world: WorldAccess, pos: BlockPos, state: BlockState, fluidState: FluidState) =
             super.tryFillWithFluid(world, pos, state, fluidState).also {
                 if (it) {
                     world.setBlockState(pos, world.getBlockState(pos).with(LIT, false), 3)

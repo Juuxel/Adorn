@@ -52,7 +52,7 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
         }
 
         if (lookingAtBlock) {
-            val label1 = TranslatableText(OWNER_LABEL, be.ownerName.method_27661().method_27692(Formatting.GOLD))
+            val label1 = TranslatableText(OWNER_LABEL, be.ownerName.copy().formatted(Formatting.GOLD))
             renderLabel(be, label1, 0.0, 0.9, 0.0, 12, matrices, vertexConsumerProvider, light)
             if (!be.trade.isEmpty()) {
                 val label2 = TranslatableText(SELLING_LABEL, be.trade.selling.toTextWithCount())
@@ -82,7 +82,7 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
             val opacity = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25f)
             val backgroundColor = color(0x000000, opacity)
             val textRenderer = dispatcher.textRenderer
-            val textX = -textRenderer.method_27527().method_27488(label) / 2f
+            val textX = -textRenderer.getWidth(label) / 2f
             textRenderer.draw(label, textX, 0f, Colors.WHITE, false, matrixModel, vertexConsumers, false, backgroundColor, light)
 
             matrices.pop()

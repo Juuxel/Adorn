@@ -8,7 +8,7 @@ import net.minecraft.nbt.CompoundTag
 
 class ShelfBlockEntity : BaseInventoryBlockEntity(AdornBlockEntities.SHELF, 2), BlockEntityClientSerializable {
     // No menus for shelves
-    override fun createContainer(syncId: Int, playerInv: PlayerInventory?) = null
+    override fun createScreenHandler(syncId: Int, playerInv: PlayerInventory?) = null
 
     override fun getMaxCountPerStack() = 1
 

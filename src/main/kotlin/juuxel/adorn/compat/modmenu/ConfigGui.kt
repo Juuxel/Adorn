@@ -104,7 +104,7 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
 
                 if (restartRequired) {
                     tooltip += TranslatableText("gui.adorn.config.requires_restart")
-                        .method_27695(Formatting.ITALIC, Formatting.GOLD)
+                        .formatted(Formatting.ITALIC, Formatting.GOLD)
                 }
             }
         }

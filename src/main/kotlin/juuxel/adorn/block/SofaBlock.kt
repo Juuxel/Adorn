@@ -32,8 +32,8 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
-import net.minecraft.world.IWorld
 import net.minecraft.world.World
+import net.minecraft.world.WorldAccess
 
 open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), Waterloggable,
     SneakClickHandler {
@@ -96,14 +96,14 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
         state: BlockState,
         direction: Direction?,
         neighborState: BlockState?,
-        world: IWorld,
+        world: WorldAccess,
         pos: BlockPos,
         neighborPos: BlockPos?
     ): BlockState {
         return updateConnections(state, world, pos)
     }
 
-    private fun updateConnections(state: BlockState, world: IWorld, pos: BlockPos): BlockState {
+    private fun updateConnections(state: BlockState, world: WorldAccess, pos: BlockPos): BlockState {
         val direction = state.get(FACING)
         val leftState = world.getBlockState(pos.offset(direction.rotateYClockwise()))
         val rightState = world.getBlockState(pos.offset(direction.rotateYCounterclockwise()))

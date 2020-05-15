@@ -9,7 +9,7 @@ import net.minecraft.state.StateManager
 import net.minecraft.state.property.EnumProperty
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
-import net.minecraft.world.IWorld
+import net.minecraft.world.WorldAccess
 
 open class KitchenCounterBlock(variant: BlockVariant) : AbstractKitchenCounterBlock(variant) {
     init {
@@ -30,7 +30,7 @@ open class KitchenCounterBlock(variant: BlockVariant) : AbstractKitchenCounterBl
 
     override fun getStateForNeighborUpdate(
         state: BlockState, direction: Direction?, neighborState: BlockState?,
-        world: IWorld, pos: BlockPos, neighborPos: BlockPos?
+        world: WorldAccess, pos: BlockPos, neighborPos: BlockPos?
     ): BlockState {
         val facing = state[FACING]
         val frontState = world.getBlockState(pos.offset(facing))

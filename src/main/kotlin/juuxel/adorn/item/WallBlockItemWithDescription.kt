@@ -18,8 +18,8 @@ class WallBlockItemWithDescription(
     @Environment(EnvType.CLIENT)
     override fun appendTooltip(stack: ItemStack, world: World?, texts: MutableList<Text>, context: TooltipContext) {
         super.appendTooltip(stack, world, texts, context)
-        texts.add(TranslatableText("$translationKey.desc").method_27694 {
-            it.setItalic(true).setColor(Formatting.DARK_GRAY)
+        texts.add(TranslatableText("$translationKey.desc").styled {
+            it.withItalic(true).withColor(Formatting.DARK_GRAY)
         })
     }
 
