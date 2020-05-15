@@ -11,13 +11,12 @@ import juuxel.adorn.lib.AdornSounds
 import juuxel.adorn.lib.RegistryHelper
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.fabricmc.fabric.api.block.FabricBlockSettings
+import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
-import net.fabricmc.fabric.api.tools.FabricToolTags
-import net.minecraft.block.AbstractBlock
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.CarpetBlock
@@ -160,18 +159,18 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val COBBLESTONE_CHIMNEY: Block = registerBlock("cobblestone_chimney", ChimneyBlock())
     val PRISMARINE_CHIMNEY: Block = registerBlock(
         "prismarine_chimney",
-        PrismarineChimneyBlock(FabricBlockSettings.copy(Blocks.PRISMARINE).ticksRandomly().build())
+        PrismarineChimneyBlock(FabricBlockSettings.copyOf(Blocks.PRISMARINE).ticksRandomly())
     )
     val MAGMATIC_PRISMARINE_CHIMNEY: Block = registerBlock(
         "magmatic_prismarine_chimney",
         PrismarineChimneyBlock.WithColumn(
-            true, FabricBlockSettings.copy(Blocks.PRISMARINE).ticksRandomly().lightLevel(3).build()
+            true, FabricBlockSettings.copyOf(Blocks.PRISMARINE).ticksRandomly().lightLevel { 3 }
         )
     )
     val SOULFUL_PRISMARINE_CHIMNEY: Block = registerBlock(
         "soulful_prismarine_chimney",
         PrismarineChimneyBlock.WithColumn(
-            false, FabricBlockSettings.copy(Blocks.PRISMARINE).ticksRandomly().build()
+            false, FabricBlockSettings.copyOf(Blocks.PRISMARINE).ticksRandomly()
         )
     )
 
@@ -206,11 +205,11 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val STONE_TORCH_WALL = registerBlockWithoutItem(
         "wall_stone_torch",
         StoneTorchBlock.Wall(
-            AbstractBlock.Settings.copy(STONE_TORCH_GROUND).dropsLike(STONE_TORCH_GROUND)
+            FabricBlockSettings.copyOf(STONE_TORCH_GROUND).dropsLike(STONE_TORCH_GROUND)
         )
     )
 
-    val CRATE: Block = registerBlock("crate", Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)))
+    val CRATE: Block = registerBlock("crate", Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)))
     val APPLE_CRATE: Block = registerCrate("apple_crate")
     val WHEAT_CRATE: Block = registerCrate("wheat_crate")
     val CARROT_CRATE: Block = registerCrate("carrot_crate")
@@ -231,20 +230,19 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
 
     val PICKET_FENCE: Block = registerBlock(
         "picket_fence",
-        PicketFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).nonOpaque())
+        PicketFenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE).nonOpaque())
     )
     val CHAIN_LINK_FENCE: Block = registerBlock(
         "chain_link_fence",
         ChainLinkFenceBlock(
-            FabricBlockSettings.copy(Blocks.IRON_BARS)
+            FabricBlockSettings.copyOf(Blocks.IRON_BARS)
                 .sounds(AdornSounds.CHAIN_LINK_FENCE)
-                .build()
         )
     )
     val STONE_LADDER: Block = registerBlock(
         "stone_ladder",
         StoneLadderBlock(
-            FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).nonOpaque().build()
+            FabricBlockSettings.copyOf(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).nonOpaque()
         )
     )
 
@@ -340,7 +338,7 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     private fun registerCrate(name: String): Block =
         registerBlock(
             name,
-            Block(AbstractBlock.Settings.copy(CRATE)),
+            Block(FabricBlockSettings.copyOf(CRATE)),
             Item.Settings().group(ItemGroup.DECORATIONS).recipeRemainder(CRATE.asItem())
         )
 }

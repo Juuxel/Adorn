@@ -1,7 +1,8 @@
+@file:Suppress("DEPRECATION")
 package juuxel.adorn.block
 
+import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import java.util.Random
-import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -117,10 +118,8 @@ class StoneTorchBlock : TorchBlock(createSettings(), ParticleTypes.FLAME), Water
         val WATERLOGGED = Properties.WATERLOGGED
 
         internal fun createSettings(): Settings =
-            FabricBlockSettings.copy(Blocks.TORCH)
-                .lightLevel(15)
+            FabricBlockSettings.copyOf(Blocks.TORCH)
                 .sounds(BlockSoundGroup.STONE)
-                .build()
                 .lightLevel { if (it[LIT]) 15 else 0 }
 
         private inline fun onUseImpl(

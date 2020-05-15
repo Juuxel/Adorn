@@ -1,3 +1,4 @@
+@file:Suppress("DEPRECATION")
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant

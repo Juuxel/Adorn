@@ -1,7 +1,8 @@
+@file:Suppress("DEPRECATION")
 package juuxel.adorn.block
 
 import juuxel.adorn.util.withBlock
-import net.fabricmc.fabric.api.block.FabricBlockSettings
+import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Material
@@ -87,7 +88,6 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable {
                 .hardness(0.3f)
                 .resistance(0.3f)
                 .sounds(BlockSoundGroup.WOOL)
-                .build()
                 .lightLevel { if (it[LIT]) 15 else 0 }
     }
 }

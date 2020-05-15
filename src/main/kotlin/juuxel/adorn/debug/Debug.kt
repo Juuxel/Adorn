@@ -2,7 +2,7 @@ package juuxel.adorn.debug
 
 import com.mojang.brigadier.arguments.StringArgumentType
 import juuxel.adorn.config.AdornConfigManager
-import net.fabricmc.fabric.api.registry.CommandRegistry
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback
 import net.minecraft.server.command.CommandManager.argument
 import net.minecraft.server.command.CommandManager.literal
 import net.minecraft.text.LiteralText
@@ -18,7 +18,7 @@ object Debug {
     fun shouldLoad() = AdornConfigManager.CONFIG.debug
 
     fun init() {
-        CommandRegistry.INSTANCE.register(false) { dispatcher ->
+        CommandRegistrationCallback.EVENT.register(CommandRegistrationCallback { dispatcher, _ ->
             dispatcher.register(
                 literal("adorn").then(
                     literal("resource").then(
@@ -42,6 +42,6 @@ object Debug {
                     )
                 )
             )
-        }
+        })
     }
 }
