@@ -1,8 +1,8 @@
 package juuxel.adorn.item
 
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen
-import juuxel.adorn.gui.screen.BookScreenDescription
-import juuxel.adorn.resources.BookManager
+import juuxel.adorn.client.gui.screen.BookScreenDescription
+import juuxel.adorn.client.resources.BookManager
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient

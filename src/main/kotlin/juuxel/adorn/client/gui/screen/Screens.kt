@@ -1,4 +1,4 @@
-package juuxel.adorn.gui.screen
+package juuxel.adorn.client.gui.screen
 
 import io.github.cottonmc.cotton.gui.CottonCraftingController
 import io.github.cottonmc.cotton.gui.client.CottonInventoryScreen

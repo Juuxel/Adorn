@@ -1,9 +1,9 @@
-package juuxel.adorn.gui.painter
+package juuxel.adorn.client.gui.painter
 
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
-import juuxel.adorn.resources.ColorManager
+import juuxel.adorn.client.resources.ColorManager
 import juuxel.adorn.util.Colors
 import kotlin.math.max
 import net.fabricmc.api.EnvType

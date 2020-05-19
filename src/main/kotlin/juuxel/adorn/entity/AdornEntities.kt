@@ -1,6 +1,7 @@
 package juuxel.adorn.entity
 
 import juuxel.adorn.Adorn
+import juuxel.adorn.client.renderer.InvisibleEntityRenderer
 import juuxel.adorn.lib.RegistryHelper
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -23,6 +24,10 @@ object AdornEntities : RegistryHelper(Adorn.NAMESPACE) {
 
     @Environment(EnvType.CLIENT)
     fun initClient() {
-        EntityRendererRegistry.INSTANCE.register(SITTING_VEHICLE) { manager, _ -> InvisibleEntityRenderer(manager) }
+        EntityRendererRegistry.INSTANCE.register(SITTING_VEHICLE) { manager, _ ->
+            InvisibleEntityRenderer(
+                manager
+            )
+        }
     }
 }

@@ -1,9 +1,9 @@
 package juuxel.adorn.gui
 
 import juuxel.adorn.Adorn
-import juuxel.adorn.gui.screen.DrawerScreen
-import juuxel.adorn.gui.screen.KitchenCupboardScreen
-import juuxel.adorn.gui.screen.TradingStationScreen
+import juuxel.adorn.client.gui.screen.DrawerScreen
+import juuxel.adorn.client.gui.screen.KitchenCupboardScreen
+import juuxel.adorn.client.gui.screen.TradingStationScreen
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry

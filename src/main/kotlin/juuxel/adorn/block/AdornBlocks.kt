@@ -2,9 +2,9 @@ package juuxel.adorn.block
 
 import juuxel.adorn.Adorn
 import juuxel.adorn.api.block.BlockVariant
-import juuxel.adorn.block.renderer.ShelfRenderer
-import juuxel.adorn.block.renderer.TradingStationRenderer
 import juuxel.adorn.client.SinkColorProvider
+import juuxel.adorn.client.renderer.ShelfRenderer
+import juuxel.adorn.client.renderer.TradingStationRenderer
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
 import juuxel.adorn.lib.AdornSounds

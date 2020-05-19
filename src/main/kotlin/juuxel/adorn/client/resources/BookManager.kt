@@ -1,13 +1,17 @@
-package juuxel.adorn.resources
+package juuxel.adorn.client.resources
 
 import blue.endless.jankson.JsonObject
 import juuxel.adorn.Adorn
-import juuxel.adorn.book.Book
+import juuxel.adorn.client.book.Book
+import juuxel.adorn.resources.Json5DataLoader
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
 import net.minecraft.resource.ResourceManager
 import net.minecraft.util.Identifier
 import net.minecraft.util.profiler.Profiler
 
+@Environment(EnvType.CLIENT)
 object BookManager : Json5DataLoader(Adorn.id("book_manager"), "adorn_books", Book.jankson().build()), IdentifiableResourceReloadListener {
     private const val PREFIX_LENGTH = "adorn_books".length
     private const val SUFFIX_LENGTH = ".json5".length

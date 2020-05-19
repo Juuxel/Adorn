@@ -5,7 +5,7 @@ import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.block.entity.TradingStation
-import juuxel.adorn.gui.painter.Painters
+import juuxel.adorn.client.gui.painter.Painters
 import juuxel.adorn.gui.widget.WCenteredLabel
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.trading.TradeInventory
@@ -92,7 +92,7 @@ class TradingStationController(
     @Environment(EnvType.CLIENT)
     override fun addPainters() {
         super.addPainters()
-        rootPanel.setBackgroundPainter(BackgroundPainter.createColorful(color(0x359668)))
+        rootPanel.backgroundPainter = BackgroundPainter.createColorful(color(0x359668))
         slotWidgets.forEach { it.setBackgroundPainter(Painters.LIBGUI_STYLE_SLOT) }
     }
 

@@ -1,4 +1,4 @@
-package juuxel.adorn.block.renderer
+package juuxel.adorn.client.renderer
 
 import juuxel.adorn.block.ShelfBlock
 import juuxel.adorn.block.entity.ShelfBlockEntity

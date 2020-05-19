@@ -1,4 +1,4 @@
-package juuxel.adorn.book
+package juuxel.adorn.client.book
 
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment

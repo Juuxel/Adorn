@@ -2,7 +2,7 @@ package juuxel.adorn.gui.controller
 
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
-import juuxel.adorn.gui.painter.Painters
+import juuxel.adorn.client.gui.painter.Painters
 import juuxel.adorn.gui.widget.WColorableLabel
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -46,7 +46,7 @@ open class SimpleInvController(
     @Environment(EnvType.CLIENT)
     override fun addPainters() {
         super.addPainters()
-        rootPanel.setBackgroundPainter(Painters.palette(paletteId, blockId))
+        rootPanel.backgroundPainter = Painters.palette(paletteId, blockId)
         slot.setBackgroundPainter(Painters.LIBGUI_STYLE_SLOT)
     }
 }

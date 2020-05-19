@@ -1,4 +1,4 @@
-package juuxel.adorn.book
+package juuxel.adorn.client.book
 
 import blue.endless.jankson.Jankson
 import blue.endless.jankson.JsonElement

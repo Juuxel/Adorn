@@ -3,7 +3,7 @@ package juuxel.adorn.gui.controller
 import io.github.cottonmc.cotton.gui.CottonCraftingController
 import io.github.cottonmc.cotton.gui.EmptyInventory
 import io.github.cottonmc.cotton.gui.widget.WPlayerInvPanel
-import juuxel.adorn.gui.painter.Painters
+import juuxel.adorn.client.gui.painter.Painters
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.block.Block
@@ -34,7 +34,7 @@ abstract class BaseAdornController(
 
     @Environment(EnvType.CLIENT)
     override fun addPainters() {
-        playerInvPanel.setBackgroundPainter(Painters.LIBGUI_STYLE_SLOT)
+        playerInvPanel.backgroundPainter = Painters.LIBGUI_STYLE_SLOT
     }
 
     companion object {

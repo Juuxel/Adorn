@@ -1,4 +1,4 @@
-package juuxel.adorn.resources
+package juuxel.adorn.client.resources
 
 import blue.endless.jankson.Jankson
 import blue.endless.jankson.JsonElement
@@ -7,6 +7,8 @@ import blue.endless.jankson.JsonPrimitive
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.Adorn
 import juuxel.adorn.util.color
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
 import net.minecraft.resource.ResourceManager
 import net.minecraft.resource.SinglePreparationResourceReloadListener
@@ -14,6 +16,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.profiler.Profiler
 import org.apache.logging.log4j.LogManager
 
+@Environment(EnvType.CLIENT)
 object ColorManager : SinglePreparationResourceReloadListener<Map<Identifier, List<JsonObject>>>(), IdentifiableResourceReloadListener {
     private val LOGGER = LogManager.getLogger()
     private val JANKSON = Jankson.builder().build()
@@ -54,14 +57,16 @@ object ColorManager : SinglePreparationResourceReloadListener<Map<Identifier, Li
                         continue
                     }
 
-                    scheme[keyId] = ColorPair.fromJson(value)
+                    scheme[keyId] =
+                        ColorPair.fromJson(value)
                 }
             }
 
             // id without prefix (adorn_colors/) and suffix (.json)
             val newId =
                 Identifier(id.namespace, id.path.substring(PREFIX.length + 1, id.path.length - SUFFIX_LENGTH))
-            this.map[newId] = ColorPalette(scheme)
+            ColorManager.map[newId] =
+                ColorPalette(scheme)
         }
     }
 
@@ -94,11 +99,19 @@ object ColorManager : SinglePreparationResourceReloadListener<Map<Identifier, Li
                                 fg = parseHexColor(json["fg"].asString())
                             )
                         } else {
-                            ColorPair(bg = parseHexColor(json["bg"].asString()))
+                            ColorPair(
+                                bg = parseHexColor(
+                                    json["bg"].asString()
+                                )
+                            )
                         }
                     }
 
-                    is JsonPrimitive -> ColorPair(bg = parseHexColor(json.asString()))
+                    is JsonPrimitive -> ColorPair(
+                        bg = parseHexColor(
+                            json.asString()
+                        )
+                    )
 
                     else -> throw IllegalArgumentException("Invalid color value: $json")
                 }

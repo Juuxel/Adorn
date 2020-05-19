@@ -1,4 +1,4 @@
-package juuxel.adorn.gui.screen
+package juuxel.adorn.client.gui.screen
 
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
@@ -8,9 +8,9 @@ import io.github.cottonmc.cotton.gui.widget.WPlainPanel
 import io.github.cottonmc.cotton.gui.widget.WWidget
 import io.github.cottonmc.cotton.gui.widget.data.Alignment
 import juuxel.adorn.Adorn
-import juuxel.adorn.book.Book
-import juuxel.adorn.book.Page
-import juuxel.adorn.gui.painter.Painters
+import juuxel.adorn.client.book.Book
+import juuxel.adorn.client.book.Page
+import juuxel.adorn.client.gui.painter.Painters
 import juuxel.adorn.gui.widget.PageContainer
 import juuxel.adorn.gui.widget.WBigLabel
 import juuxel.adorn.gui.widget.WBookText
