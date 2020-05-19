@@ -7,25 +7,25 @@ import java.nio.file.Files
 import net.fabricmc.loader.api.FabricLoader
 import org.apache.logging.log4j.LogManager
 
-object AdornConfigManager {
+object ConfigManager {
     private val JANKSON = Jankson.builder().build()
-    private val DEFAULT = JANKSON.toJson(AdornConfig()) as JsonObject
+    private val DEFAULT = JANKSON.toJson(Config()) as JsonObject
     private val CONFIG_PATH = FabricLoader.getInstance().configDirectory.toPath().resolve("Adorn.json5")
     private val LOGGER = LogManager.getLogger()
 
     @get:JvmName("getConfig")
-    val CONFIG: AdornConfig by lazy {
+    val CONFIG: Config by lazy {
         if (Files.notExists(CONFIG_PATH)) {
-            save(AdornConfig())
+            save(Config())
         }
 
         try {
             val obj = JANKSON.load(Files.readAllLines(CONFIG_PATH).joinToString("\n"))
             val config = try {
-                JANKSON.fromJsonCarefully(obj, AdornConfig::class.java)
+                JANKSON.fromJsonCarefully(obj, Config::class.java)
             } catch (e: DeserializationException) {
                 // Try deserializing carelessly and throw the exception if it returns null
-                JANKSON.fromJson(obj, AdornConfig::class.java) ?: throw e
+                JANKSON.fromJson(obj, Config::class.java) ?: throw e
             }
 
             if (isMissingKeys(obj, DEFAULT)) {
@@ -46,7 +46,7 @@ object AdornConfigManager {
 
     fun save() = save(CONFIG)
 
-    private fun save(config: AdornConfig) {
+    private fun save(config: Config) {
         Files.write(CONFIG_PATH, JANKSON.toJson(config).toJson(true, true).lines())
     }
 

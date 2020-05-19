@@ -1,7 +1,7 @@
 package juuxel.adorn.debug
 
 import com.mojang.brigadier.arguments.StringArgumentType
-import juuxel.adorn.config.AdornConfigManager
+import juuxel.adorn.config.ConfigManager
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback
 import net.minecraft.server.command.CommandManager.argument
 import net.minecraft.server.command.CommandManager.literal
@@ -15,7 +15,7 @@ import net.minecraft.util.Identifier
  * - `/adorn resource`: a command to get display a resource from the resource manager as a string
  */
 object Debug {
-    fun shouldLoad() = AdornConfigManager.CONFIG.debug
+    fun shouldLoad() = ConfigManager.CONFIG.debug
 
     fun init() {
         CommandRegistrationCallback.EVENT.register(CommandRegistrationCallback { dispatcher, _ ->

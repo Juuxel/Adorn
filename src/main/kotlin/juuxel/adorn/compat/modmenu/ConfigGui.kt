@@ -9,7 +9,7 @@ import io.github.cottonmc.cotton.gui.widget.WPlainPanel
 import io.github.cottonmc.cotton.gui.widget.WToggleButton
 import io.github.cottonmc.cotton.gui.widget.WWidget
 import io.github.cottonmc.cotton.gui.widget.data.Alignment
-import juuxel.adorn.config.AdornConfigManager
+import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.gui.widget.WTabbedPanel
 import juuxel.adorn.util.Colors
 import kotlin.reflect.KMutableProperty
@@ -34,13 +34,14 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
         root.add(WLabel(TranslatableText("gui.adorn.config.title"), Colors.WHITE).setAlignment(Alignment.CENTER), 0, 0, 11 * 18, 18)
 
         val tabbed = WTabbedPanel()
-        val config = AdornConfigManager.CONFIG
+        val config = ConfigManager.CONFIG
 
         general = WGridPanel()
         with(general) {
             add(createConfigToggle(config::skipNightOnSofas), 0, 0)
             add(createConfigToggle(config::protectTradingStations), 0, 1)
             add(createConfigToggle(config::sittingOnTables, true), 0, 2)
+            add(createConfigToggle(config.client::showTradingStationTooltips), 0, 3)
 
             backgroundPainter = BackgroundPainter.VANILLA
             setSize(11 * 18, height)
@@ -92,7 +93,7 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
 
             override fun onToggle(on: Boolean) {
                 property.setter.call(on)
-                AdornConfigManager.save()
+                ConfigManager.save()
 
                 if (restartRequired) {
                     this@ConfigGui.restartRequired = true

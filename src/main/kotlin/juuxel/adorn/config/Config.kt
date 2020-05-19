@@ -2,7 +2,7 @@ package juuxel.adorn.config
 
 import blue.endless.jankson.Comment
 
-class AdornConfig {
+class Config {
     @Comment("If true, you can sit on tables.")
     @JvmField
     var sittingOnTables: Boolean = false
@@ -21,9 +21,17 @@ class AdornConfig {
     @JvmField
     var debug: Boolean = false
 
+    @field:Comment("Client-side settings")
+    var client: Client = Client()
+
     @Comment("Configuration for Adorn's Extra Pieces support.")
     @JvmField
     var extraPieces: EPConfig = EPConfig()
+
+    class Client {
+        @field:Comment("If true, floating tooltips are shown above trading stations.")
+        var showTradingStationTooltips: Boolean = true
+    }
 
     class EPConfig {
         @Comment("If true, Adorn's EP support is enabled. You can disable it by setting this property to false.")

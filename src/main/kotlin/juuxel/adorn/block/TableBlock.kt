@@ -3,7 +3,7 @@ package juuxel.adorn.block
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
 import juuxel.adorn.api.block.BlockVariant
-import juuxel.adorn.config.AdornConfigManager
+import juuxel.adorn.config.ConfigManager
 import net.minecraft.block.BlockState
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
@@ -12,7 +12,7 @@ import net.minecraft.util.shape.VoxelShapes
 open class TableBlock(variant: BlockVariant) : AbstractTableBlock(variant.createSettings()) {
     override val sittingYOffset = 0.6
 
-    override fun isSittingEnabled() = AdornConfigManager.CONFIG.sittingOnTables
+    override fun isSittingEnabled() = ConfigManager.CONFIG.sittingOnTables
 
     override fun canConnectTo(state: BlockState, sideOfSelf: Direction) =
         state.block is TableBlock

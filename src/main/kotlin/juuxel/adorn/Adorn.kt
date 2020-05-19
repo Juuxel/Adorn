@@ -3,7 +3,7 @@ package juuxel.adorn
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.compat.AdornCompat
-import juuxel.adorn.config.AdornConfigManager
+import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.debug.Debug
 import juuxel.adorn.entity.AdornEntities
 import juuxel.adorn.gui.AdornGuis
@@ -21,7 +21,7 @@ object Adorn : ModInitializer {
     const val NAMESPACE = "adorn"
 
     override fun onInitialize() {
-        AdornConfigManager.init()
+        ConfigManager.init()
         AdornSounds.init()
         AdornBlocks.init()
         AdornBlockEntities.init()
