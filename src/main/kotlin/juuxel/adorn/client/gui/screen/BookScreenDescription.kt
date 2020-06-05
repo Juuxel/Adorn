@@ -21,6 +21,7 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.sound.PositionedSoundInstance
+import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.TranslatableText
 
@@ -76,7 +77,7 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription() {
 
         override fun canResize() = false
 
-        override fun paintBackground(x: Int, y: Int, mouseX: Int, mouseY: Int) {
+        override fun paint(matrices: MatrixStack, x: Int, y: Int, mouseX: Int, mouseY: Int) {
             val texture = if (isWithinBounds(mouseX, mouseY)) ACTIVE_TEXTURE else INACTIVE_TEXTURE
             ScreenDrawing.texturedRect(x, y, 8, 8, texture, Colors.WHITE)
         }

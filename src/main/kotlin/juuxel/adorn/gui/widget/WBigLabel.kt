@@ -1,23 +1,22 @@
 package juuxel.adorn.gui.widget
 
-import com.mojang.blaze3d.systems.RenderSystem
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WWidget
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
 
 class WBigLabel(private val text: Text, private val color: Int, private val scale: Float = DEFAULT_SCALE) : WWidget() {
-    @Suppress("DEPRECATION")
     @Environment(EnvType.CLIENT)
-    override fun paintBackground(x: Int, y: Int) {
-        RenderSystem.pushMatrix()
-        RenderSystem.translatef((x + width / 2).toFloat(), (y + height / 2 - 3).toFloat(), 0f)
-        RenderSystem.scalef(scale, scale, 1.0f)
+    override fun paint(matrices: MatrixStack, x: Int, y: Int, mouseX: Int, mouseY: Int) {
+        matrices.push()
+        matrices.translate((x + width / 2).toDouble(), (y + height / 2 - 3).toDouble(), 0.0)
+        matrices.scale(scale, scale, 1.0f)
         val font = MinecraftClient.getInstance().textRenderer
-        ScreenDrawing.drawString(text, -(font.getWidth(text) / 2), 0, color)
-        RenderSystem.popMatrix()
+        ScreenDrawing.drawString(matrices, text, -(font.getWidth(text) / 2), 0, color)
+        matrices.pop()
     }
 
     override fun canResize() = true

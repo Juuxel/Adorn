@@ -1,7 +1,8 @@
 package juuxel.adorn.util
 
-import com.mojang.datafixers.Dynamic
-import com.mojang.datafixers.types.JsonOps
+import com.mojang.serialization.DataResult
+import com.mojang.serialization.Dynamic
+import com.mojang.serialization.JsonOps
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -12,6 +13,7 @@ import net.minecraft.state.property.Property
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 
+// TODO: Text codec?
 fun CompoundTag.putTextComponent(name: String, textComponent: Text) =
     put(
         name,
@@ -54,3 +56,5 @@ fun BlockEntity.getSquaredDistance(x: Double, y: Double, z: Double): Double {
     val zd = pos.z + 0.5 - z
     return xd * xd + yd * yd + zd * zd
 }
+
+fun <R> DataResult<R>.orElse(default: R): R = get().map({ it }, { default })

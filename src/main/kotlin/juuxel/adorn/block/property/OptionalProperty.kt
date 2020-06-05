@@ -1,14 +1,13 @@
 package juuxel.adorn.block.property
 
 import java.util.Optional
-import net.minecraft.state.property.AbstractProperty
 import net.minecraft.state.property.Property
 import net.minecraft.util.StringIdentifiable
 
 @Suppress("UNCHECKED_CAST")
 class OptionalProperty<T>(
     private val delegate: Property<T>
-) : AbstractProperty<OptionalProperty.Value<T>>(delegate.name, Value::class.java as Class<Value<T>>)
+) : Property<OptionalProperty.Value<T>>(delegate.name, Value::class.java as Class<Value<T>>)
     where T : Any, T : Comparable<T>, T : StringIdentifiable {
     val none: Value.None<T> = Value.None()
     private val values: Map<T?, Value<T>> = sequence {

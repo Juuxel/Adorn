@@ -6,6 +6,7 @@ import juuxel.adorn.client.resources.ColorManager
 import juuxel.adorn.util.color
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
+import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 
@@ -16,7 +17,7 @@ class WColorableLabel(text: Text, private val paletteId: Identifier, private val
     }
 
     @Environment(EnvType.CLIENT)
-    override fun paintBackground(x: Int, y: Int, mouseX: Int, mouseY: Int) {
-        ScreenDrawing.drawString(text, x, y, _color)
+    override fun paint(matrices: MatrixStack, x: Int, y: Int, mouseX: Int, mouseY: Int) {
+        ScreenDrawing.drawString(matrices, text, x, y, _color)
     }
 }

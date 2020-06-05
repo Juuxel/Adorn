@@ -8,6 +8,7 @@ import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.ingame.BookScreen
 import net.minecraft.client.sound.PositionedSoundInstance
+import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.sound.SoundEvents
 
 class WPageTurnButton(private val pages: PageContainer, private val direction: Direction) : WPlainPanel() {
@@ -17,7 +18,7 @@ class WPageTurnButton(private val pages: PageContainer, private val direction: D
     }
 
     @Environment(EnvType.CLIENT)
-    override fun paintBackground(x: Int, y: Int, mouseX: Int, mouseY: Int) {
+    override fun paint(matrices: MatrixStack, x: Int, y: Int, mouseX: Int, mouseY: Int) {
         val enabled = when (direction) {
             Direction.Previous -> pages.hasPreviousPage()
             Direction.Next -> pages.hasNextPage()

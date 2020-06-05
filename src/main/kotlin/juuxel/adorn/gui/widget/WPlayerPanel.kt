@@ -7,6 +7,7 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.ingame.InventoryScreen
+import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 
 class WPlayerPanel : WWidget() {
@@ -19,7 +20,7 @@ class WPlayerPanel : WWidget() {
     override fun setSize(x: Int, y: Int) {}
 
     @Environment(EnvType.CLIENT)
-    override fun paintBackground(x: Int, y: Int, mouseX: Int, mouseY: Int) {
+    override fun paint(matrices: MatrixStack, x: Int, y: Int, mouseX: Int, mouseY: Int) {
         val px = 1 / 256f
         ScreenDrawing.texturedRect(x, y, width, height, TEXTURE, 72 * px, 5 * px, 106 * px, 50 * px, Colors.WHITE)
         InventoryScreen.drawEntity(x + width / 2, y + height - 4, 20, -mouseX.toFloat(), -mouseY.toFloat(), MinecraftClient.getInstance().player)

@@ -63,7 +63,7 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
 
     override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult): ActionResult {
         val sleepingDirection = getSleepingDirection(world, pos)
-        return if (world.dimension.canPlayersSleep() && sleepingDirection != null && !state[OCCUPIED]) {
+        return if (world.dimension.isNatural && sleepingDirection != null && !state[OCCUPIED]) {
             if (!world.isClient) {
                 world.setBlockState(pos, state.with(OCCUPIED, true))
                 val neighborPos = pos.offset(sleepingDirection)

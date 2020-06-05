@@ -41,7 +41,7 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
 
     override fun getPlacementState(context: ItemPlacementContext) =
         super.getPlacementState(context)!!
-            .with(WATERLOGGED, context.world.getFluidState(context.blockPos) == Fluids.WATER)
+            .with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
 
     override fun getFluidState(state: BlockState) =
         if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
@@ -105,7 +105,7 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
         return ActionResult.PASS
     }
 
-    override fun onBlockRemoved(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
+    override fun onStateReplaced(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
         if (state1.block != state2.block) {
             val entity = world.getBlockEntity(pos)
 
@@ -114,7 +114,7 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
                 world.updateComparators(pos, this)
             }
 
-            super.onBlockRemoved(state1, world, pos, state2, b)
+            super.onStateReplaced(state1, world, pos, state2, b)
         }
     }
 

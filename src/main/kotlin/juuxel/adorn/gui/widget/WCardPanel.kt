@@ -5,6 +5,7 @@ import io.github.cottonmc.cotton.gui.widget.WWidget
 import kotlin.math.max
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
+import net.minecraft.client.util.math.MatrixStack
 
 // TODO: Handle events on empty card panels safely
 /**
@@ -104,21 +105,12 @@ class WCardPanel : WPanel(), PageContainer {
     // Painting
 
     @Environment(EnvType.CLIENT)
-    override fun paintBackground(x: Int, y: Int, mouseX: Int, mouseY: Int) {
+    override fun paint(matrices: MatrixStack, x: Int, y: Int, mouseX: Int, mouseY: Int) {
         backgroundPainter?.paintBackground(x, y, this)
 
         if (selectedCard < children.size) {
             val child = children[selectedCard]
-            child.paintBackground(x + child.x, y + child.y, mouseX, mouseY)
-        }
-    }
-
-    @Suppress("DEPRECATION")
-    @Environment(EnvType.CLIENT)
-    override fun paintForeground(x: Int, y: Int, mouseX: Int, mouseY: Int) {
-        if (selectedCard < children.size) {
-            val child = children[selectedCard]
-            child.paintForeground(x + child.x, y + child.y, mouseX, mouseY)
+            child.paint(matrices, x + child.x, y + child.y, mouseX, mouseY)
         }
     }
 

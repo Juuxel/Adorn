@@ -46,7 +46,7 @@ open class DrawerBlock(
         return ActionResult.SUCCESS
     }
 
-    override fun onBlockRemoved(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
+    override fun onStateReplaced(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
         if (state1.block != state2.block) {
             val entity = world.getBlockEntity(pos)
 
@@ -55,7 +55,7 @@ open class DrawerBlock(
                 world.updateComparators(pos, this)
             }
 
-            super.onBlockRemoved(state1, world, pos, state2, b)
+            super.onStateReplaced(state1, world, pos, state2, b)
         }
     }
 

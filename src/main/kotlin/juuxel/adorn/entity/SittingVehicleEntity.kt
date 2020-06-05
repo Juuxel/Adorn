@@ -1,8 +1,8 @@
 package juuxel.adorn.entity
 
-import com.mojang.datafixers.Dynamic
 import juuxel.adorn.block.SeatBlock
 import juuxel.adorn.lib.AdornNetworking
+import juuxel.adorn.util.orElse
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
 import net.fabricmc.fabric.api.server.PlayerStream
 import net.minecraft.datafixer.NbtOps
@@ -12,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket
 import net.minecraft.network.packet.s2c.play.EntityPositionS2CPacket
+import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
@@ -35,9 +36,9 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
         }
     }
 
-    override fun interact(player: PlayerEntity, hand: Hand): Boolean {
+    override fun interact(player: PlayerEntity, hand: Hand): ActionResult {
         player.startRiding(this)
-        return true
+        return ActionResult.SUCCESS
     }
 
     override fun removePassenger(entity: Entity?) {
@@ -69,10 +70,12 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
 
     override fun initDataTracker() {}
     override fun readCustomDataFromTag(tag: CompoundTag) {
-        seatPos = BlockPos.deserialize(Dynamic(NbtOps.INSTANCE, tag["SeatPos"]))
+        seatPos = BlockPos.field_25064.decode(NbtOps.INSTANCE, tag["SeatPos"]).map { it.first }.orElse(BlockPos.ORIGIN)
     }
 
     override fun writeCustomDataToTag(tag: CompoundTag) {
-        tag.put("SeatPos", seatPos.serialize(NbtOps.INSTANCE))
+        BlockPos.field_25064.encodeStart(NbtOps.INSTANCE, seatPos).map {
+            tag.put("SeatPos", it)
+        }
     }
 }

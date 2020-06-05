@@ -5,7 +5,7 @@ plugins {
     java
     kotlin("jvm") version "1.3.60"
     idea
-    id("fabric-loom") version "0.2.7-SNAPSHOT"
+    id("fabric-loom") version "0.4-SNAPSHOT"
     `maven-publish`
     id("org.jmailen.kotlinter") version "2.3.0"
 }
@@ -102,11 +102,13 @@ dependencies {
 //    modCompileOnly("com.github.artificemc:artifice:" + v("artifice"))
 
     if (heavyweight) {
-        modRuntime("com.terraformersmc", "traverse", v("traverse")) { excludes() }
-        modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { excludes() }
+        // FIXME: Biome mods
+//        modRuntime("com.terraformersmc", "traverse", v("traverse")) { excludes() }
+//        modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { excludes() }
         modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); excludes() }
-        modRuntime("towelette:Towelette:" + v("towelette")) { excludes() }
-        modRuntime("statement:Statement:" + v("statement")) { excludes() }
+        // FIXME: Towelette and Statement
+//        modRuntime("towelette:Towelette:" + v("towelette")) { excludes() }
+//        modRuntime("statement:Statement:" + v("statement")) { excludes() }
         modRuntime("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
 //        modRuntime("extra-pieces:extrapieces:" + v("extra-pieces"))
 //        modRuntime("com.github.artificemc:artifice:" + v("artifice"))

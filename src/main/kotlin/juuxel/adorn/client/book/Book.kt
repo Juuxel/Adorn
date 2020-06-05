@@ -2,8 +2,8 @@ package juuxel.adorn.client.book
 
 import blue.endless.jankson.Jankson
 import blue.endless.jankson.JsonElement
-import com.mojang.datafixers.Dynamic
-import com.mojang.datafixers.types.JsonOps
+import com.mojang.serialization.Dynamic
+import com.mojang.serialization.JsonOps
 import io.github.cottonmc.jankson.JanksonFactory
 import io.github.cottonmc.jankson.JanksonOps
 import juuxel.adorn.gui.widget.WBigLabel

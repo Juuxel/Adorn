@@ -55,7 +55,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
 
     // Based on WallTorchBlock.getPlacementState
     override fun getPlacementState(context: ItemPlacementContext): BlockState? {
-        val waterlogged = context.world.getFluidState(context.blockPos) == Fluids.WATER
+        val waterlogged = context.world.getFluidState(context.blockPos).fluid == Fluids.WATER
         context.placementDirections.asSequence()
             .filter { it.axis.isHorizontal }
             .map { it.opposite }
@@ -151,7 +151,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
         if (state[Properties.WATERLOGGED]) Fluids.WATER.getStill(false)
         else super.getFluidState(state)
 
-    override fun onBlockRemoved(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
+    override fun onStateReplaced(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
         if (state1.block != state2.block) {
             val entity = world.getBlockEntity(pos)
 
@@ -160,7 +160,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
                 world.updateComparators(pos, this)
             }
 
-            super.onBlockRemoved(state1, world, pos, state2, b)
+            super.onStateReplaced(state1, world, pos, state2, b)
         }
     }
 

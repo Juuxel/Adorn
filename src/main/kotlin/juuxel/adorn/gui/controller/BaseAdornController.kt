@@ -1,7 +1,7 @@
 package juuxel.adorn.gui.controller
 
-import io.github.cottonmc.cotton.gui.CottonCraftingController
 import io.github.cottonmc.cotton.gui.EmptyInventory
+import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.widget.WPlayerInvPanel
 import juuxel.adorn.client.gui.painter.Painters
 import net.fabricmc.api.EnvType
@@ -11,8 +11,8 @@ import net.minecraft.block.Blocks
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.inventory.BasicInventory
 import net.minecraft.inventory.Inventory
+import net.minecraft.inventory.SimpleInventory
 import net.minecraft.screen.PropertyDelegate
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.util.math.BlockPos
@@ -25,8 +25,8 @@ abstract class BaseAdornController(
     context: ScreenHandlerContext,
     blockInventory: Inventory,
     propertyDelegate: PropertyDelegate = getBlockPropertyDelegate(context)
-) : CottonCraftingController(
-    null, syncId, playerInv, blockInventory, propertyDelegate
+) : SyncedGuiDescription(
+    syncId, playerInv, blockInventory, propertyDelegate
 ) {
     protected val playerInvPanel: WPlayerInvPanel by lazy { createPlayerInventoryPanel() }
 
@@ -62,7 +62,7 @@ abstract class BaseAdornController(
                                     .map(BlockPos::toString)
                                     .orElse("missing position")
                             )
-                            BasicInventory(fallbackSize)
+                            SimpleInventory(fallbackSize)
                         }
                     } else it
             }

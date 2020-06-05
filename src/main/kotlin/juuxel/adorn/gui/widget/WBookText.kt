@@ -23,9 +23,9 @@ class WBookText : WText {
     @Environment(EnvType.CLIENT)
     override fun onClick(x: Int, y: Int, button: Int) {
         if (button == 0) {
-            val hovered = getTextAt(x, y)
+            val hovered = getTextStyleAt(x, y)
             if (hovered != null) {
-                val clickEvent = hovered.style.clickEvent
+                val clickEvent = hovered.clickEvent
                 if (clickEvent != null && clickEvent.action == ClickEvent.Action.CHANGE_PAGE) {
                     if (pages != null) {
                         val page = clickEvent.value.toIntOrNull() ?: return

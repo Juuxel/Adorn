@@ -1,6 +1,6 @@
 package juuxel.adorn.client.gui.screen
 
-import io.github.cottonmc.cotton.gui.CottonCraftingController
+import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.client.CottonInventoryScreen
 import juuxel.adorn.gui.controller.DrawerController
 import juuxel.adorn.gui.controller.KitchenCupboardController
@@ -10,10 +10,10 @@ import net.fabricmc.api.Environment
 import net.minecraft.entity.player.PlayerEntity
 
 @Environment(EnvType.CLIENT)
-open class AdornScreen<C : CottonCraftingController>(
-    controller: C,
+open class AdornScreen<T : SyncedGuiDescription>(
+    description: T,
     player: PlayerEntity
-) : CottonInventoryScreen<C>(controller, player)
+) : CottonInventoryScreen<T>(description, player)
 
 @Environment(EnvType.CLIENT)
 class DrawerScreen(

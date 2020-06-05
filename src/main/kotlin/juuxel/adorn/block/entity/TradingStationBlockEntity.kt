@@ -56,7 +56,7 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
 
     override fun fromTag(state: BlockState, tag: CompoundTag) {
         super.fromTag(state, tag)
-        owner = tag.getUuidNew(NBT_TRADING_OWNER) // TODO: Backwards compatibility
+        owner = tag.getUuid(NBT_TRADING_OWNER) // TODO: Backwards compatibility with 1.15
         ownerName = tag.getTextComponent(NBT_TRADING_OWNER_NAME) ?: LiteralText("??")
         trade.fromTag(tag.getCompound(NBT_TRADE))
         storage.fromTag(tag.getCompound(NBT_STORAGE))
@@ -64,7 +64,7 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
 
     override fun toTag(tag: CompoundTag) = super.toTag(tag).apply {
         if (owner != null) {
-            tag.putUuidNew(NBT_TRADING_OWNER, owner)
+            tag.putUuid(NBT_TRADING_OWNER, owner)
         }
 
         tag.putTextComponent(NBT_TRADING_OWNER_NAME, ownerName)
