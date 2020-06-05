@@ -16,20 +16,14 @@ base {
     archivesBaseName = "Adorn"
 }
 
-apply(from = "load-heavyweight-mode.gradle")
-
 val minecraft: String by ext
 val modVersion = ext["mod-version"] ?: error("Version was null")
 val localBuild = ext["local-build"].toString().toBoolean()
 version = "$modVersion+$minecraft" + if (localBuild) "-local" else ""
-val heavyweight = ext["heavyweight"].toString().toBoolean()
+val heavyweight = ext["heavyweight-run"].toString().toBoolean()
 
 if (localBuild) {
     println("Note: local build mode enabled in gradle.properties; all dependencies might not work!")
-}
-
-if (file("private.gradle").exists()) {
-    apply(from = "private.gradle")
 }
 
 repositories {
