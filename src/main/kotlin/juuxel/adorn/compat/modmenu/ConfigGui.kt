@@ -49,14 +49,12 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
 
         val advanced = WGridPanel()
         with(advanced) {
-            add(createConfigToggle(config::debug, true), 0, 0)
-
             backgroundPainter = BackgroundPainter.VANILLA
             setSize(11 * 18, height)
         }
 
         tabbed.addTab(TranslatableText("gui.adorn.config.category.general"), general)
-        tabbed.addTab(TranslatableText("gui.adorn.config.category.advanced"), advanced)
+        // tabbed.addTab(TranslatableText("gui.adorn.config.category.advanced"), advanced)
 
         root.add(tabbed, 0, 18 + 5)
         root.add(WButton(TranslatableText("gui.done")).apply {

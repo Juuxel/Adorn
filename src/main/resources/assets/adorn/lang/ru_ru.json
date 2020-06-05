@@ -365,8 +365,6 @@
   "gui.adorn.config.option.skipNightOnSofas.tooltip": "Позволяет пропустить ночь, когда вы спите на диване.",
   "gui.adorn.config.option.protectTradingStations": "Защита торговых станций",
   "gui.adorn.config.option.protectTradingStations.tooltip": "Предотвращает разрушение ваших торговых станций другими игроками.",
-  "gui.adorn.config.option.debug": "Функции отладки",
-  "gui.adorn.config.option.debug.tooltip": "Включает команды отладки (/adorn resource).",
   "gui.adorn.config.requires_restart": "Требуется перезапуск",
   "gui.adorn.config.restart_required.title": "Требуется перезапуск!",
   "gui.adorn.config.restart_required.message": "Один из измененных опций требует перезапуска Minecraft.",

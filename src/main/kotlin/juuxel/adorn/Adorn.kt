@@ -4,7 +4,6 @@ import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.compat.AdornCompat
 import juuxel.adorn.config.ConfigManager
-import juuxel.adorn.debug.Debug
 import juuxel.adorn.entity.AdornEntities
 import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.item.AdornItems
@@ -31,10 +30,6 @@ object Adorn : ModInitializer {
         AdornNetworking.init()
         AdornTags.init()
         AdornCompat.init()
-
-        if (Debug.shouldLoad()) {
-            Debug.init()
-        }
     }
 
     @Environment(EnvType.CLIENT)

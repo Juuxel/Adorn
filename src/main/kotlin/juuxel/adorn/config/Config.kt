@@ -17,10 +17,6 @@ class Config {
     // TODO: Should be a game rule
     var protectTradingStations: Boolean = true
 
-    @Comment("If true, enables debug features (currently: /adorn resource).")
-    @JvmField
-    var debug: Boolean = false
-
     @field:Comment("Client-side settings")
     var client: Client = Client()
 

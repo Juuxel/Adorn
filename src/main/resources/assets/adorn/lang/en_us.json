@@ -394,8 +394,6 @@
   "gui.adorn.config.option.skipNightOnSofas.tooltip": "Allows you to skip the night when you sleep on a sofa.",
   "gui.adorn.config.option.protectTradingStations": "Protect trading stations",
   "gui.adorn.config.option.protectTradingStations.tooltip": "Prevents other players from breaking your trading stations.",
-  "gui.adorn.config.option.debug": "Debugging features",
-  "gui.adorn.config.option.debug.tooltip": "Enables debugging commands (/adorn resource).",
   "gui.adorn.config.requires_restart": "Requires restart",
   "gui.adorn.config.restart_required.title": "Restart required!",
   "gui.adorn.config.restart_required.message": "One of your changed options requires Minecraft to be restarted.",
