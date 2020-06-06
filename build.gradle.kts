@@ -19,7 +19,7 @@ base {
 val minecraft: String by ext
 val modVersion = ext["mod-version"] ?: error("Version was null")
 val localBuild = ext["local-build"].toString().toBoolean()
-version = "$modVersion+$minecraft" + if (localBuild) "-local" else ""
+version = "$modVersion+$minecraft"
 val heavyweight = ext["heavyweight-run"].toString().toBoolean()
 
 if (localBuild) {
