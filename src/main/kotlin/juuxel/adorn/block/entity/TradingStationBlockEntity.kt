@@ -5,8 +5,8 @@ import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.gui.controller.TradingStationController
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.util.InventoryComponent
-import juuxel.adorn.util.getTextComponent
-import juuxel.adorn.util.putTextComponent
+import juuxel.adorn.util.getText
+import juuxel.adorn.util.putText
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.BlockState
@@ -16,7 +16,6 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.PacketByteBuf
-import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.LiteralText
@@ -64,7 +63,7 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
     override fun fromTag(state: BlockState, tag: CompoundTag) {
         super.fromTag(state, tag)
         owner = tag.getUuid(NBT_TRADING_OWNER) // TODO: Backwards compatibility with 1.15
-        ownerName = tag.getTextComponent(NBT_TRADING_OWNER_NAME) ?: LiteralText("??")
+        ownerName = tag.getText(NBT_TRADING_OWNER_NAME) ?: LiteralText("??")
         trade.fromTag(tag.getCompound(NBT_TRADE))
         storage.fromTag(tag.getCompound(NBT_STORAGE))
     }
@@ -74,7 +73,7 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
             tag.putUuid(NBT_TRADING_OWNER, owner)
         }
 
-        tag.putTextComponent(NBT_TRADING_OWNER_NAME, ownerName)
+        tag.putText(NBT_TRADING_OWNER_NAME, ownerName)
 
         tag.put(NBT_TRADE, trade.toTag(CompoundTag()))
         tag.put(NBT_STORAGE, storage.toTag(CompoundTag()))
@@ -83,13 +82,13 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
     // Client NBT
 
     override fun toClientTag(tag: CompoundTag) = tag.apply {
-        putTextComponent(NBT_TRADING_OWNER_NAME, ownerName)
+        putText(NBT_TRADING_OWNER_NAME, ownerName)
         put(NBT_TRADE, trade.toTag(CompoundTag()))
     }
 
     override fun fromClientTag(tag: CompoundTag) {
         trade.fromTag(tag.getCompound(NBT_TRADE))
-        ownerName = tag.getTextComponent(NBT_TRADING_OWNER_NAME) ?: return
+        ownerName = tag.getText(NBT_TRADING_OWNER_NAME) ?: return
     }
 
     companion object {

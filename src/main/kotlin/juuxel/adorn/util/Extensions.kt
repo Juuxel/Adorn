@@ -13,8 +13,7 @@ import net.minecraft.state.property.Property
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 
-// TODO: Text codec?
-fun CompoundTag.putTextComponent(name: String, textComponent: Text) =
+fun CompoundTag.putText(name: String, textComponent: Text) =
     put(
         name,
         Dynamic.convert(
@@ -24,7 +23,7 @@ fun CompoundTag.putTextComponent(name: String, textComponent: Text) =
         )
     )
 
-fun CompoundTag.getTextComponent(name: String): Text? {
+fun CompoundTag.getText(name: String): Text? {
     val tag = get(name) ?: return null
 
     return Text.Serializer.fromJson(

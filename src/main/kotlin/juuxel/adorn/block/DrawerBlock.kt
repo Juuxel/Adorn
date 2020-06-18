@@ -35,8 +35,6 @@ open class DrawerBlock(
     override fun getPlacementState(context: ItemPlacementContext) =
         super.getPlacementState(context)!!.with(FACING, context.playerFacing.opposite)
 
-    // TODO: override fun isSimpleFullBlock(state: BlockState?, view: BlockView?, pos: BlockPos?) = false
-
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): ActionResult {
