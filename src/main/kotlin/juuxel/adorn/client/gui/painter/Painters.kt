@@ -5,6 +5,7 @@ import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import juuxel.adorn.client.resources.ColorManager
 import juuxel.adorn.util.Colors
+import juuxel.adorn.util.color
 import kotlin.math.max
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -17,9 +18,9 @@ object Painters {
      * A background painter that paints LibGui-style slots.
      */
     val LIBGUI_STYLE_SLOT: BackgroundPainter = BackgroundPainter { left, top, panel ->
-        // TODO: Add focus frames
         for (x in 0 until panel.width step 18) {
             for (y in 0 until panel.height step 18) {
+                val index: Int = x / 18 + y / 18 * (panel.width / 18)
                 val lo = ScreenDrawing.colorAtOpacity(0x000000, 0.2f)
                 val bg = ScreenDrawing.colorAtOpacity(0x000000, 0.2f / 2.4f)
                 val hi = ScreenDrawing.colorAtOpacity(0xFFFFFF, 0.2f)
@@ -29,11 +30,27 @@ object Painters {
                         x + left - 3, y + top - 3, 24, 24,
                         lo, bg, hi
                     )
+                    if (panel.focusedSlot == index) {
+                        val sx = x + left - 3
+                        val sy = y + top - 3
+                        ScreenDrawing.coloredRect(sx, sy, 26, 1, color(0xFFFFA0))
+                        ScreenDrawing.coloredRect(sx, sy + 1, 1, 26 - 1, color(0xFFFFA0))
+                        ScreenDrawing.coloredRect(sx + 26 - 1, sy + 1, 1, 26 - 1, color(0xFFFFA0))
+                        ScreenDrawing.coloredRect(sx + 1, sy + 26 - 1, 26 - 1, 1, color(0xFFFFA0))
+                    }
                 } else {
                     ScreenDrawing.drawBeveledPanel(
                         x + left, y + top, 18, 18,
                         lo, bg, hi
                     )
+                    if (panel is WItemSlot && panel.focusedSlot == index) {
+                        val sx = x + left
+                        val sy = y + top
+                        ScreenDrawing.coloredRect(sx, sy, 18, 1, color(0xFFFFA0))
+                        ScreenDrawing.coloredRect(sx, sy + 1, 1, 18 - 1, color(0xFFFFA0))
+                        ScreenDrawing.coloredRect(sx + 18 - 1, sy + 1, 1, 18 - 1, color(0xFFFFA0))
+                        ScreenDrawing.coloredRect(sx + 1, sy + 18 - 1, 18 - 1, 1, color(0xFFFFA0))
+                    }
                 }
             }
         }
