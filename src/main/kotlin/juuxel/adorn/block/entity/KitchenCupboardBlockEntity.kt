@@ -7,5 +7,5 @@ import net.minecraft.screen.ScreenHandlerContext
 
 class KitchenCupboardBlockEntity : BaseInventoryBlockEntity(AdornBlockEntities.KITCHEN_CUPBOARD, 15) {
     override fun createScreenHandler(syncId: Int, playerInv: PlayerInventory) =
-        KitchenCupboardController(syncId, playerInv, ScreenHandlerContext.create(world, pos), displayName)
+        KitchenCupboardController(syncId, playerInv, ScreenHandlerContext.create(world, pos))
 }

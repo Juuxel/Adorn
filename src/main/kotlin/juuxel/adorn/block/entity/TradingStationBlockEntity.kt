@@ -8,19 +8,22 @@ import juuxel.adorn.util.InventoryComponent
 import juuxel.adorn.util.getTextComponent
 import juuxel.adorn.util.putTextComponent
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.PacketByteBuf
 import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandlerContext
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 
-class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION), BlockEntityClientSerializable, NamedScreenHandlerFactory, TradingStation {
+class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION), BlockEntityClientSerializable, ExtendedScreenHandlerFactory, TradingStation {
     var owner: UUID? = null
     var ownerName: Text = LiteralText("???")
     override val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
@@ -51,6 +54,10 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
         TradingStationController(syncId, playerInv, ScreenHandlerContext.create(world, pos), isOwner(player))
 
     override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)
+
+    override fun writeScreenOpeningData(player: ServerPlayerEntity, buf: PacketByteBuf) {
+        buf.writeBlockPos(pos)
+    }
 
     // NBT
 

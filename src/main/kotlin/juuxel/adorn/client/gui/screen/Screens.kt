@@ -8,27 +8,32 @@ import juuxel.adorn.gui.controller.TradingStationController
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.text.Text
 
 @Environment(EnvType.CLIENT)
 open class AdornScreen<T : SyncedGuiDescription>(
     description: T,
-    player: PlayerEntity
-) : CottonInventoryScreen<T>(description, player)
+    player: PlayerEntity,
+    title: Text
+) : CottonInventoryScreen<T>(description, player, title)
 
 @Environment(EnvType.CLIENT)
 class DrawerScreen(
     controller: DrawerController,
-    player: PlayerEntity
-) : AdornScreen<DrawerController>(controller, player)
+    player: PlayerEntity,
+    title: Text
+) : AdornScreen<DrawerController>(controller, player, title)
 
 @Environment(EnvType.CLIENT)
 class KitchenCupboardScreen(
     controller: KitchenCupboardController,
-    player: PlayerEntity
-) : AdornScreen<KitchenCupboardController>(controller, player)
+    player: PlayerEntity,
+    title: Text
+) : AdornScreen<KitchenCupboardController>(controller, player, title)
 
 @Environment(EnvType.CLIENT)
 class TradingStationScreen(
     controller: TradingStationController,
-    player: PlayerEntity
-) : AdornScreen<TradingStationController>(controller, player)
+    player: PlayerEntity,
+    title: Text
+) : AdornScreen<TradingStationController>(controller, player, title)

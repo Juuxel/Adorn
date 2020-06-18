@@ -6,23 +6,20 @@ import juuxel.adorn.client.gui.screen.KitchenCupboardScreen
 import juuxel.adorn.client.gui.screen.TradingStationScreen
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry
-import net.fabricmc.fabric.api.container.ContainerProviderRegistry
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.screen.ScreenHandler
-import net.minecraft.util.Identifier
-import net.minecraft.util.math.BlockPos
+import net.minecraft.screen.ScreenHandlerType
+import net.minecraft.text.Text
 
 object AdornGuis {
-    val DRAWER = Adorn.id("drawer")
-    val KITCHEN_CUPBOARD = Adorn.id("kitchen_cupboard")
-    val TRADING_STATION = Adorn.id("trading_station")
+    val DRAWER = register("drawer")
+    val KITCHEN_CUPBOARD = register("kitchen_cupboard")
+    val TRADING_STATION = register("trading_station")
 
     fun init() {
-        registerContainer(DRAWER)
-        registerContainer(KITCHEN_CUPBOARD)
-        registerContainer(TRADING_STATION)
     }
 
     @Environment(EnvType.CLIENT)
@@ -32,30 +29,20 @@ object AdornGuis {
         registerScreen(TRADING_STATION, ::TradingStationScreen)
     }
 
-    private fun registerContainer(
-        id: Identifier
-    ) = ContainerProviderRegistry.INSTANCE.registerFactory(id) { syncId, _, player, buf ->
-        val world = player.world
+    private fun register(
+        id: String
+    ): ScreenHandlerType<*> = ScreenHandlerRegistry.registerExtended(Adorn.id(id)) { syncId, inventory, buf ->
         val pos = buf.readBlockPos()
-        val provider = world.getBlockState(pos).createScreenHandlerFactory(world, pos)
-        provider?.createMenu(syncId, player.inventory, player)
+        val world = inventory.player.world
+
+        world.getBlockState(pos).createScreenHandlerFactory(world, pos)!!.createMenu(syncId, inventory, inventory.player)
     }
 
+    @Suppress("UNCHECKED_CAST")
     private inline fun <reified C : ScreenHandler> registerScreen(
-        id: Identifier,
-        crossinline screenFn: (C, PlayerEntity) -> HandledScreen<in C>
-    ) = ScreenProviderRegistry.INSTANCE.registerFactory(id) { syncId, _, player, buf ->
-        val world = player.world
-        val pos = buf.readBlockPos()
-        val provider = world.getBlockState(pos).createScreenHandlerFactory(world, pos)
-        provider?.let {
-            screenFn(it.createMenu(syncId, player.inventory, player) as C, player)
-        }
-    }
-}
-
-fun PlayerEntity.openFabricContainer(id: Identifier, pos: BlockPos) {
-    if (!world.isClient) {
-        ContainerProviderRegistry.INSTANCE.openContainer(id, this) { it.writeBlockPos(pos) }
+        type: ScreenHandlerType<*>,
+        crossinline screenFn: (C, PlayerEntity, Text) -> HandledScreen<C>
+    ) = ScreenRegistry.register(type as ScreenHandlerType<out C>) { menu, inventory, title ->
+        screenFn(menu as C, inventory.player, title)
     }
 }

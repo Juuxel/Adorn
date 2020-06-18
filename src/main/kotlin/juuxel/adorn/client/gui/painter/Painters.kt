@@ -17,6 +17,7 @@ object Painters {
      * A background painter that paints LibGui-style slots.
      */
     val LIBGUI_STYLE_SLOT: BackgroundPainter = BackgroundPainter { left, top, panel ->
+        // TODO: Add focus frames
         for (x in 0 until panel.width step 18) {
             for (y in 0 until panel.height step 18) {
                 val lo = ScreenDrawing.colorAtOpacity(0x000000, 0.2f)
@@ -25,12 +26,12 @@ object Painters {
 
                 if (panel is WItemSlot && panel.isBigSlot) {
                     ScreenDrawing.drawBeveledPanel(
-                        x + left - 4, y + top - 4, 24, 24,
+                        x + left - 3, y + top - 3, 24, 24,
                         lo, bg, hi
                     )
                 } else {
                     ScreenDrawing.drawBeveledPanel(
-                        x + left - 1, y + top - 1, 18, 18,
+                        x + left, y + top, 18, 18,
                         lo, bg, hi
                     )
                 }

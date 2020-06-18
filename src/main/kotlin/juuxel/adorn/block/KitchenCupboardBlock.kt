@@ -5,8 +5,6 @@ import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.entity.BETypeProvider
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
-import juuxel.adorn.gui.AdornGuis
-import juuxel.adorn.gui.openFabricContainer
 import net.minecraft.block.BlockState
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -28,7 +26,7 @@ open class KitchenCupboardBlock(
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): ActionResult {
-        player.openFabricContainer(AdornGuis.KITCHEN_CUPBOARD, pos)
+        player.openHandledScreen(state.createScreenHandlerFactory(world, pos))
         return ActionResult.SUCCESS
     }
 

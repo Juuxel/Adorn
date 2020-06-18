@@ -3,11 +3,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    kotlin("jvm") version "1.3.60"
+    kotlin("jvm") version "1.3.71"
     idea
     id("fabric-loom") version "0.4-SNAPSHOT"
     `maven-publish`
-    id("org.jmailen.kotlinter") version "2.3.0"
+    id("org.jmailen.kotlinter") version "2.4.0"
 }
 
 group = "io.github.juuxel"
@@ -95,8 +95,8 @@ dependencies {
     includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { isTransitive = false }
     includedMod("io.github.cottonmc:Jankson-Fabric:" + v("jankson")) { excludes() }
     includedMod("io.github.cottonmc", "LibCD", v("libcd")) { excludes(); exclude(module = "Jankson"); exclude(module = "nbt-crafting") }
-    modCompileOnly("towelette:Towelette:" + v("towelette")) { excludes() }
-    modCompileOnly("statement:Statement:" + v("statement")) { excludes() }
+//    modCompileOnly("towelette:Towelette:" + v("towelette")) { excludes() }
+//    modCompileOnly("statement:Statement:" + v("statement")) { excludes() }
     modCompileOnly("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
 //    modCompileOnly("extra-pieces:extrapieces:" + v("extra-pieces"))
 //    modCompileOnly("com.github.artificemc:artifice:" + v("artifice"))

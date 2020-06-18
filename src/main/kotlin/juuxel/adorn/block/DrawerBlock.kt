@@ -4,8 +4,6 @@ package juuxel.adorn.block
 import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.DrawerBlockEntity
-import juuxel.adorn.gui.AdornGuis
-import juuxel.adorn.gui.openFabricContainer
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.entity.LivingEntity
@@ -42,7 +40,7 @@ open class DrawerBlock(
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): ActionResult {
-        player.openFabricContainer(AdornGuis.DRAWER, pos)
+        player.openHandledScreen(state.createScreenHandlerFactory(world, pos))
         return ActionResult.SUCCESS
     }
 

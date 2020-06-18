@@ -6,7 +6,7 @@ import io.github.cottonmc.cotton.gui.widget.WItem
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel
 import io.github.cottonmc.cotton.gui.widget.WWidget
-import io.github.cottonmc.cotton.gui.widget.data.Alignment
+import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
 import juuxel.adorn.Adorn
 import juuxel.adorn.client.book.Book
 import juuxel.adorn.client.book.Page
@@ -50,8 +50,8 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription() {
     private fun createTitlePage(book: Book): WWidget {
         val result = WPlainPanel()
         result.add(WBigLabel(book.title, WLabel.DEFAULT_TEXT_COLOR, scale = book.titleScale), 0, 25, 116, 20)
-        result.add(WLabel(book.subtitle, WLabel.DEFAULT_TEXT_COLOR).setAlignment(Alignment.CENTER).disableDarkmode(), 0, 45, 116, 20)
-        result.add(WLabel(TranslatableText("book.byAuthor", book.author), WLabel.DEFAULT_TEXT_COLOR).setAlignment(Alignment.CENTER).disableDarkmode(), 0, 60, 116, 20)
+        result.add(WLabel(book.subtitle, WLabel.DEFAULT_TEXT_COLOR).setHorizontalAlignment(HorizontalAlignment.CENTER).disableDarkmode(), 0, 45, 116, 20)
+        result.add(WLabel(TranslatableText("book.byAuthor", book.author), WLabel.DEFAULT_TEXT_COLOR).setHorizontalAlignment(HorizontalAlignment.CENTER).disableDarkmode(), 0, 60, 116, 20)
         return result
     }
 

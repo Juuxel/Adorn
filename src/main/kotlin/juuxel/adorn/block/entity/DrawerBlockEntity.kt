@@ -7,5 +7,5 @@ import net.minecraft.screen.ScreenHandlerContext
 
 class DrawerBlockEntity : BaseInventoryBlockEntity(AdornBlockEntities.DRAWER, 15) {
     override fun createScreenHandler(syncId: Int, playerInv: PlayerInventory) =
-        DrawerController(syncId, playerInv, ScreenHandlerContext.create(world, pos), displayName)
+        DrawerController(syncId, playerInv, ScreenHandlerContext.create(world, pos))
 }

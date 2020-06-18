@@ -2,7 +2,7 @@ package juuxel.adorn.gui.widget
 
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel
-import io.github.cottonmc.cotton.gui.widget.data.Alignment
+import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
@@ -10,7 +10,7 @@ import net.minecraft.client.resource.language.I18n
 import net.minecraft.client.util.math.MatrixStack
 
 // TODO: why is this still here
-class WPageIndicator(private val pages: PageContainer, private val textColor: Int, private val alignment: Alignment) : WPlainPanel() {
+class WPageIndicator(private val pages: PageContainer, private val textColor: Int, private val alignment: HorizontalAlignment) : WPlainPanel() {
     @Environment(EnvType.CLIENT)
     override fun paint(matrices: MatrixStack, x: Int, y: Int, mouseX: Int, mouseY: Int) {
         super.paint(matrices, x, y, mouseX, mouseY)

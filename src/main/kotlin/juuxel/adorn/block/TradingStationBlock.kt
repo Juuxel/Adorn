@@ -3,8 +3,6 @@ package juuxel.adorn.block
 
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.config.ConfigManager
-import juuxel.adorn.gui.AdornGuis
-import juuxel.adorn.gui.openFabricContainer
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -84,7 +82,7 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
                     be.storage.tryInsert(trade.price)
                 }
             } else {
-                player.openFabricContainer(AdornGuis.TRADING_STATION, pos)
+                player.openHandledScreen(state.createScreenHandlerFactory(world, pos))
             }
         }
 
@@ -98,7 +96,7 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
 
         // Show customer GUI
         if (!be.isOwner(player)) {
-            player.openFabricContainer(AdornGuis.TRADING_STATION, pos)
+            player.openHandledScreen(state.createScreenHandlerFactory(world, pos))
             return ActionResult.SUCCESS
         }
 

@@ -15,18 +15,20 @@ import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.screen.PropertyDelegate
 import net.minecraft.screen.ScreenHandlerContext
+import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import org.apache.logging.log4j.LogManager
 
 abstract class BaseAdornController(
+    type: ScreenHandlerType<*>,
     syncId: Int,
     playerInv: PlayerInventory,
     context: ScreenHandlerContext,
     blockInventory: Inventory,
     propertyDelegate: PropertyDelegate = getBlockPropertyDelegate(context)
 ) : SyncedGuiDescription(
-    syncId, playerInv, blockInventory, propertyDelegate
+    type, syncId, playerInv, blockInventory, propertyDelegate
 ) {
     protected val playerInvPanel: WPlayerInvPanel by lazy { createPlayerInventoryPanel() }
 

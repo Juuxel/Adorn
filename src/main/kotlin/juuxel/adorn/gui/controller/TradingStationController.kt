@@ -6,6 +6,7 @@ import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import juuxel.adorn.block.entity.TradingStation
 import juuxel.adorn.client.gui.painter.Painters
+import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.gui.widget.WCenteredLabel
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.trading.TradeInventory
@@ -29,6 +30,7 @@ class TradingStationController(
     private val context: ScreenHandlerContext,
     private val forOwner: Boolean
 ) : BaseAdornController(
+    AdornGuis.TRADING_STATION,
     syncId,
     playerInv,
     context,
@@ -39,7 +41,7 @@ class TradingStationController(
 
     init {
         (rootPanel as WGridPanel).apply {
-            add(WLabel(TranslatableText(getBlock(context).translationKey), Colors.WHITE), 0, 0)
+            titleColor = Colors.WHITE
 
             val tradeInv = getTrade(context).createInventory()
 

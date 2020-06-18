@@ -8,7 +8,7 @@ import io.github.cottonmc.cotton.gui.widget.WLabel
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel
 import io.github.cottonmc.cotton.gui.widget.WToggleButton
 import io.github.cottonmc.cotton.gui.widget.WWidget
-import io.github.cottonmc.cotton.gui.widget.data.Alignment
+import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.gui.widget.WTabbedPanel
 import juuxel.adorn.util.Colors
@@ -18,7 +18,7 @@ import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.NoticeScreen
 import net.minecraft.client.gui.screen.Screen
-import net.minecraft.text.Text
+import net.minecraft.text.StringRenderable
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 
@@ -31,7 +31,7 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
         val root = WPlainPanel()
         setRootPanel(root)
 
-        root.add(WLabel(TranslatableText("gui.adorn.config.title"), Colors.WHITE).setAlignment(Alignment.CENTER), 0, 0, 11 * 18, 18)
+        root.add(WLabel(TranslatableText("gui.adorn.config.title"), Colors.WHITE).setHorizontalAlignment(HorizontalAlignment.CENTER), 0, 0, 11 * 18, 18)
 
         val tabbed = WTabbedPanel()
         val config = ConfigManager.CONFIG
@@ -98,7 +98,7 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
                 }
             }
 
-            override fun addTooltip(tooltip: MutableList<Text>) {
+            override fun addTooltip(tooltip: MutableList<StringRenderable>) {
                 tooltip += TranslatableText("gui.adorn.config.option.${property.name}.tooltip")
 
                 if (restartRequired) {
