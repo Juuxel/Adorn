@@ -26,8 +26,8 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
     override fun render(be: TradingStationBlockEntity, tickDelta: Float, matrices: MatrixStack, vertexConsumerProvider: VertexConsumerProvider, light: Int, overlay: Int) {
         val hitResult = dispatcher.crosshairTarget
         val lookingAtBlock = hitResult != null &&
-                hitResult.type == HitResult.Type.BLOCK &&
-                be.pos == (hitResult as BlockHitResult).blockPos
+            hitResult.type == HitResult.Type.BLOCK &&
+            be.pos == (hitResult as BlockHitResult).blockPos
 
         val trade = be.trade
         if (!trade.isEmpty()) {

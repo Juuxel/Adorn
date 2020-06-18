@@ -90,20 +90,22 @@ open class TableBlock(variant: BlockVariant) : AbstractTableBlock(variant.create
                 return parts.filterNotNull().reduce(VoxelShapes::union)
             }
 
-            SHAPES = Byte2ObjectOpenHashMap(run {
-                booleans.flatMap { north ->
-                    booleans.flatMap { east ->
-                        booleans.flatMap { south ->
-                            booleans.flatMap { west ->
-                                booleans.map { hasCarpet ->
-                                    Bits.buildTableState(north, east, south, west, hasCarpet) to
+            SHAPES = Byte2ObjectOpenHashMap(
+                run {
+                    booleans.flatMap { north ->
+                        booleans.flatMap { east ->
+                            booleans.flatMap { south ->
+                                booleans.flatMap { west ->
+                                    booleans.map { hasCarpet ->
+                                        Bits.buildTableState(north, east, south, west, hasCarpet) to
                                             makeShape(north, east, south, west, hasCarpet)
+                                    }
                                 }
                             }
                         }
-                    }
-                }.toMap()
-            })
+                    }.toMap()
+                }
+            )
         }
     }
 }

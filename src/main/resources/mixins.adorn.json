@@ -6,7 +6,6 @@
   "plugin": "juuxel.adorn.AdornMixinPlugin",
 
   "mixins": [
-    "fluidloggable.FluidloggableMixin",
     "fluidloggable.FluidUtilMixin",
     "BlockEntityMixin",
     "BubbleColumnBlockMixin",

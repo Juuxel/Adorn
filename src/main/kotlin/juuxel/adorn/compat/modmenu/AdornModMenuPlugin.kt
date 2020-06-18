@@ -2,11 +2,11 @@ package juuxel.adorn.compat.modmenu
 
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen
 import io.github.prospector.modmenu.api.ModMenuApi
-import java.util.function.Function
 import juuxel.adorn.Adorn
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.gui.screen.Screen
+import java.util.function.Function
 
 @Environment(EnvType.CLIENT)
 object AdornModMenuPlugin : ModMenuApi {

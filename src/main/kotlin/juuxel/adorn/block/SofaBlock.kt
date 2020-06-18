@@ -36,7 +36,9 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
-open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), Waterloggable,
+open class SofaBlock(variant: BlockVariant) :
+    SeatBlock(variant.createSettings()),
+    Waterloggable,
     SneakClickHandler {
     init {
         defaultState = defaultState
@@ -128,20 +130,24 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
     }
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: ShapeContext?) =
-        OUTLINE_SHAPE_MAP[Bits.buildSofaState(
-            state[FACING],
-            state[CONNECTED_LEFT],
-            state[CONNECTED_RIGHT],
-            state[FRONT_CONNECTION]
-        )]
+        OUTLINE_SHAPE_MAP[
+            Bits.buildSofaState(
+                state[FACING],
+                state[CONNECTED_LEFT],
+                state[CONNECTED_RIGHT],
+                state[FRONT_CONNECTION]
+            )
+        ]
 
     override fun getCollisionShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: ShapeContext?) =
-        COLLISION_SHAPE_MAP[Bits.buildSofaState(
-            state[FACING],
-            state[CONNECTED_LEFT],
-            state[CONNECTED_RIGHT],
-            state[FRONT_CONNECTION]
-        )]
+        COLLISION_SHAPE_MAP[
+            Bits.buildSofaState(
+                state[FACING],
+                state[CONNECTED_LEFT],
+                state[CONNECTED_RIGHT],
+                state[FRONT_CONNECTION]
+            )
+        ]
 
     override fun mirror(state: BlockState, mirror: BlockMirror) =
         state.rotate(mirror.getRotation(state[FACING]))

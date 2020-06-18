@@ -2,10 +2,10 @@ package juuxel.adorn.gui.widget
 
 import io.github.cottonmc.cotton.gui.widget.WPanel
 import io.github.cottonmc.cotton.gui.widget.WWidget
-import kotlin.math.max
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.util.math.MatrixStack
+import kotlin.math.max
 
 // TODO: Handle events on empty card panels safely
 /**

@@ -1,6 +1,5 @@
 package juuxel.adorn.util
 
-import kotlin.math.min
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventories
 import net.minecraft.inventory.Inventory
@@ -9,6 +8,7 @@ import net.minecraft.inventory.SidedInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.collection.DefaultedList
+import kotlin.math.min
 
 open class InventoryComponent(private val invSize: Int) : Inventory, NbtConvertible {
     private val listeners: MutableList<InventoryChangedListener> = ArrayList()
@@ -170,9 +170,11 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
     }
 
     inline fun addListener(crossinline block: (Inventory) -> Unit) =
-        addListener(InventoryChangedListener {
-            block(it)
-        })
+        addListener(
+            InventoryChangedListener {
+                block(it)
+            }
+        )
 
     companion object {
         /** Checks if the list has non-empty item stacks. */

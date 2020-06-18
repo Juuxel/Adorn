@@ -24,7 +24,8 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)),
+class TradingStationBlock :
+    VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)),
     SneakClickHandler {
     override val blockEntityType = AdornBlockEntities.TRADING_STATION
 
@@ -65,8 +66,8 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
                 val handStack = player.getStackInHand(hand)
                 val trade = be.trade
                 val validPayment = handStack.isItemEqual(trade.price) &&
-                        handStack.count >= trade.price.count &&
-                        handStack.tag == trade.price.tag
+                    handStack.count >= trade.price.count &&
+                    handStack.tag == trade.price.tag
                 val canInsertPayment = be.storage.canInsert(trade.price)
 
                 if (trade.isEmpty()) {
@@ -127,13 +128,13 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
      */
     override fun calcBlockBreakingDelta(state: BlockState, player: PlayerEntity, world: BlockView, pos: BlockPos) =
         if (ConfigManager.CONFIG.protectTradingStations)
-            (world.getBlockEntity(pos) as? TradingStationBlockEntity).let {
-                if (it != null && !it.isOwner(player)) {
-                    0f
-                } else {
-                    super.calcBlockBreakingDelta(state, player, world, pos)
-                }
+        (world.getBlockEntity(pos) as? TradingStationBlockEntity).let {
+            if (it != null && !it.isOwner(player)) {
+                0f
+            } else {
+                super.calcBlockBreakingDelta(state, player, world, pos)
             }
+        }
         else
             super.calcBlockBreakingDelta(state, player, world, pos)
 

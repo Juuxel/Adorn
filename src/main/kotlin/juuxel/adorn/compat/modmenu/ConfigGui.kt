@@ -12,7 +12,6 @@ import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.gui.widget.WTabbedPanel
 import juuxel.adorn.util.Colors
-import kotlin.reflect.KMutableProperty
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
@@ -21,6 +20,7 @@ import net.minecraft.client.gui.screen.Screen
 import net.minecraft.text.StringRenderable
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
+import kotlin.reflect.KMutableProperty
 
 @Environment(EnvType.CLIENT)
 class ConfigGui(previous: Screen) : LightweightGuiDescription() {
@@ -57,9 +57,12 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
         // tabbed.addTab(TranslatableText("gui.adorn.config.category.advanced"), advanced)
 
         root.add(tabbed, 0, 18 + 5)
-        root.add(WButton(TranslatableText("gui.done")).apply {
-            setOnClick { close(previous) }
-        }, 11 * 9 - 5 * 9, 6 * 18 + 9, 5 * 18, 18)
+        root.add(
+            WButton(TranslatableText("gui.done")).apply {
+                setOnClick { close(previous) }
+            },
+            11 * 9 - 5 * 9, 6 * 18 + 9, 5 * 18, 18
+        )
         root.validate(this)
     }
 

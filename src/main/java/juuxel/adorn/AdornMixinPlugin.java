@@ -17,7 +17,6 @@ public final class AdornMixinPlugin implements IMixinConfigPlugin {
     private static final Supplier<Boolean> TRUE = () -> true;
 
     private static final Map<String, Supplier<Boolean>> CONDITIONS = ImmutableMap.of(
-            "juuxel.adorn.mixin.fluidloggable.FluidloggableMixin", () -> FabricLoader.getInstance().isModLoaded("towelette"),
             "juuxel.adorn.mixin.fluidloggable.FluidUtilMixin", () -> FabricLoader.getInstance().isModLoaded("towelette")
     );
 

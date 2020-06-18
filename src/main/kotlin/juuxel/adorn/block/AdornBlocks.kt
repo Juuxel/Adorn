@@ -247,48 +247,52 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     )
 
     fun init() {
-        UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->
-            val state = world.getBlockState(hitResult.blockPos)
-            val block = state.block
-            // Check that:
-            // - the block is a sneak-click handler
-            // - the player is sneaking
-            // - the player isn't holding an item (for block item and bucket support)
-            if (block is SneakClickHandler && player.isSneaking && player.getStackInHand(hand).isEmpty) {
-                block.onSneakClick(state, world, hitResult.blockPos, player, hand, hitResult)
-            } else ActionResult.PASS
-        })
-
-        UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->
-            val pos = hitResult.blockPos.offset(hitResult.side)
-            val state = world.getBlockState(pos)
-            val block = state.block
-            val stack = player.getStackInHand(hand)
-            val item = stack.item
-            if (block is CarpetedBlock && block.canStateBeCarpeted(state) && item is BlockItem) {
-                val carpet = item.block
-                if (carpet is CarpetBlock) {
-                    world.setBlockState(
-                        pos,
-                        state.with(CarpetedBlock.CARPET, CarpetedBlock.CARPET.wrapOrNone(carpet.color))
-                    )
-                    val soundGroup = carpet.defaultState.soundGroup
-                    world.playSound(
-                        player,
-                        pos,
-                        soundGroup.placeSound,
-                        SoundCategory.BLOCKS,
-                        (soundGroup.volume + 1f) / 2f,
-                        soundGroup.pitch * 0.8f
-                    )
-                    if (!player.abilities.creativeMode) stack.decrement(1)
-                    player.swingHand(hand)
-                    ActionResult.SUCCESS
-                }
+        UseBlockCallback.EVENT.register(
+            UseBlockCallback { player, world, hand, hitResult ->
+                val state = world.getBlockState(hitResult.blockPos)
+                val block = state.block
+                // Check that:
+                // - the block is a sneak-click handler
+                // - the player is sneaking
+                // - the player isn't holding an item (for block item and bucket support)
+                if (block is SneakClickHandler && player.isSneaking && player.getStackInHand(hand).isEmpty) {
+                    block.onSneakClick(state, world, hitResult.blockPos, player, hand, hitResult)
+                } else ActionResult.PASS
             }
+        )
 
-            ActionResult.PASS
-        })
+        UseBlockCallback.EVENT.register(
+            UseBlockCallback { player, world, hand, hitResult ->
+                val pos = hitResult.blockPos.offset(hitResult.side)
+                val state = world.getBlockState(pos)
+                val block = state.block
+                val stack = player.getStackInHand(hand)
+                val item = stack.item
+                if (block is CarpetedBlock && block.canStateBeCarpeted(state) && item is BlockItem) {
+                    val carpet = item.block
+                    if (carpet is CarpetBlock) {
+                        world.setBlockState(
+                            pos,
+                            state.with(CarpetedBlock.CARPET, CarpetedBlock.CARPET.wrapOrNone(carpet.color))
+                        )
+                        val soundGroup = carpet.defaultState.soundGroup
+                        world.playSound(
+                            player,
+                            pos,
+                            soundGroup.placeSound,
+                            SoundCategory.BLOCKS,
+                            (soundGroup.volume + 1f) / 2f,
+                            soundGroup.pitch * 0.8f
+                        )
+                        if (!player.abilities.creativeMode) stack.decrement(1)
+                        player.swingHand(hand)
+                        ActionResult.SUCCESS
+                    }
+                }
+
+                ActionResult.PASS
+            }
+        )
     }
 
     @Environment(EnvType.CLIENT)

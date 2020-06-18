@@ -1,7 +1,6 @@
 @file:Suppress("DEPRECATION")
 package juuxel.adorn.block
 
-import java.util.Random
 import juuxel.adorn.block.property.OptionalProperty
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -17,6 +16,7 @@ import net.minecraft.util.DyeColor
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.WorldAccess
+import java.util.Random
 
 abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
     init {

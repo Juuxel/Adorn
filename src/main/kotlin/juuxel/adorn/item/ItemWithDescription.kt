@@ -15,9 +15,11 @@ open class ItemWithDescription(settings: Settings) : Item(settings) {
     @Environment(EnvType.CLIENT)
     override fun appendTooltip(stack: ItemStack, world: World?, texts: MutableList<Text>, context: TooltipContext) {
         super.appendTooltip(stack, world, texts, context)
-        texts.add(TranslatableText("$translationKey.desc").styled {
-            it.withItalic(true).withColor(Formatting.DARK_GRAY)
-        })
+        texts.add(
+            TranslatableText("$translationKey.desc").styled {
+                it.withItalic(true).withColor(Formatting.DARK_GRAY)
+            }
+        )
     }
 
     override fun isIn(group: ItemGroup?) = super.isIn(group) || group === AdornItems.GROUP

@@ -37,7 +37,10 @@ object AdornNetworking {
     }
 
     fun createEntitySpawnPacket(entity: Entity) =
-        CustomPayloadS2CPacket(ENTITY_SPAWN, PacketByteBuf(Unpooled.buffer()).apply {
-            EntitySpawnS2CPacket(entity).write(this)
-        })
+        CustomPayloadS2CPacket(
+            ENTITY_SPAWN,
+            PacketByteBuf(Unpooled.buffer()).apply {
+                EntitySpawnS2CPacket(entity).write(this)
+            }
+        )
 }

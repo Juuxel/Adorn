@@ -1,7 +1,6 @@
 @file:Suppress("DEPRECATION")
 package juuxel.adorn.block
 
-import java.util.Random
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.block.FabricBlockSettings
@@ -18,8 +17,10 @@ import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import java.util.Random
 
-class ChimneyBlock : AbstractChimneyBlock(FabricBlockSettings.copy(Blocks.BRICKS).ticksRandomly().build().nonOpaque()),
+class ChimneyBlock :
+    AbstractChimneyBlock(FabricBlockSettings.copy(Blocks.BRICKS).ticksRandomly().build().nonOpaque()),
     BlockWithDescription {
     override val descriptionKey = "block.adorn.chimney.desc"
 

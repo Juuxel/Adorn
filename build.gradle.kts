@@ -35,7 +35,7 @@ repositories {
     maven(url = "http://server.bbkr.space:8081/artifactory/libs-release") { name = "Cotton" }
     maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot") { name = "Cotton (snapshots)" }
     maven(url = "https://minecraft.curseforge.com/api/maven") { name = "CurseForge" }
-    // maven(url = "https://jitpack.io")
+    maven(url = "https://jitpack.io")
 }
 
 java {
@@ -95,8 +95,7 @@ dependencies {
     includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { isTransitive = false }
     includedMod("io.github.cottonmc:Jankson-Fabric:" + v("jankson")) { excludes() }
     includedMod("io.github.cottonmc", "LibCD", v("libcd")) { excludes(); exclude(module = "Jankson"); exclude(module = "nbt-crafting") }
-//    modCompileOnly("towelette:Towelette:" + v("towelette")) { excludes() }
-//    modCompileOnly("statement:Statement:" + v("statement")) { excludes() }
+    modCompileOnly("com.github.Virtuoel:Towelette:" + v("towelette")) { excludes() }
     modCompileOnly("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
 //    modCompileOnly("extra-pieces:extrapieces:" + v("extra-pieces"))
 //    modCompileOnly("com.github.artificemc:artifice:" + v("artifice"))
@@ -106,9 +105,7 @@ dependencies {
 //        modRuntime("com.terraformersmc", "traverse", v("traverse")) { excludes() }
 //        modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { excludes() }
         modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); excludes() }
-        // FIXME: Towelette and Statement
-//        modRuntime("towelette:Towelette:" + v("towelette")) { excludes() }
-//        modRuntime("statement:Statement:" + v("statement")) { excludes() }
+        modRuntime("com.github.Virtuoel:Towelette:" + v("towelette")) { excludes() }
         modRuntime("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
 //        modRuntime("extra-pieces:extrapieces:" + v("extra-pieces"))
 //        modRuntime("com.github.artificemc:artifice:" + v("artifice"))

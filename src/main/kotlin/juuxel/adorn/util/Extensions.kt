@@ -3,6 +3,7 @@ package juuxel.adorn.util
 import com.mojang.serialization.DataResult
 import com.mojang.serialization.Dynamic
 import com.mojang.serialization.JsonOps
+import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -12,6 +13,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.state.property.Property
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
+import net.minecraft.util.registry.Registry
 
 fun CompoundTag.putText(name: String, textComponent: Text) =
     put(
@@ -57,3 +59,14 @@ fun BlockEntity.getSquaredDistance(x: Double, y: Double, z: Double): Double {
 }
 
 fun <R> DataResult<R>.orElse(default: R): R = get().map({ it }, { default })
+
+inline fun <A> Registry<A>.visit(crossinline visitor: (A) -> Unit) {
+    this.forEach(visitor)
+
+    RegistryEntryAddedCallback.event(this)
+        .register(
+            RegistryEntryAddedCallback { rawId, id, entry ->
+                visitor(entry)
+            }
+        )
+}

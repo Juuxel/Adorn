@@ -1,7 +1,6 @@
 @file:Suppress("DEPRECATION")
 package juuxel.adorn.block
 
-import java.util.Random
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -26,6 +25,7 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
+import java.util.Random
 
 class StoneTorchBlock : TorchBlock(createSettings(), ParticleTypes.FLAME), Waterloggable, BlockWithDescription {
     init {

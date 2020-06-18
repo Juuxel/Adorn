@@ -1,6 +1,5 @@
 package juuxel.adorn.block.entity
 
-import java.util.UUID
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.gui.controller.TradingStationController
 import juuxel.adorn.trading.Trade
@@ -21,6 +20,7 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
+import java.util.UUID
 
 class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION), BlockEntityClientSerializable, ExtendedScreenHandlerFactory, TradingStation {
     var owner: UUID? = null

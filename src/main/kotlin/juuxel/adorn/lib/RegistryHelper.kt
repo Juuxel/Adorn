@@ -70,9 +70,11 @@ abstract class RegistryHelper(private val namespace: String) {
                     stack: ItemStack?, world: World?, texts: MutableList<Text>, context: TooltipContext?
                 ) {
                     super.appendTooltip(stack, world, texts, context)
-                    texts.add(TranslatableText(block.descriptionKey).styled {
-                        it.withItalic(true).withColor(Formatting.DARK_GRAY)
-                    })
+                    texts.add(
+                        TranslatableText(block.descriptionKey).styled {
+                            it.withItalic(true).withColor(Formatting.DARK_GRAY)
+                        }
+                    )
                 }
             }
         } else {
