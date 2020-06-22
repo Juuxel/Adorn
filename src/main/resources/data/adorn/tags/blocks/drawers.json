@@ -30,6 +30,12 @@
           "adorn:terrestria_sakura_drawer",
           "adorn:terrestria_willow_drawer"
         ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "woods_and_mires" }],
+        "values": [
+          "adorn:woods_and_mires/pine_drawer"
+        ]
       }
     ]
   }

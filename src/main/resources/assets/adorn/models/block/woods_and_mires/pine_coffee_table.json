@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:block/templates/coffee_table",
+  "textures": {
+    "planks": "woods_and_mires:block/pine_planks",
+    "leg": "woods_and_mires:block/pine_log",
+    "rim": "woods_and_mires:block/pine_log"
+  }
+}

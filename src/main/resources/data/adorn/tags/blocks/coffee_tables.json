@@ -30,6 +30,12 @@
           "adorn:terrestria_sakura_coffee_table",
           "adorn:terrestria_willow_coffee_table"
         ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "woods_and_mires" }],
+        "values": [
+          "adorn:woods_and_mires/pine_coffee_table"
+        ]
       }
     ]
   }

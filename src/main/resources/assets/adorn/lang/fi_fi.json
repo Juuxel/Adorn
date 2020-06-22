@@ -22,6 +22,7 @@
   "block.adorn.jungle_chair": "Viidakkopuutuoli",
   "block.adorn.acacia_chair": "Akaasiatuoli",
   "block.adorn.dark_oak_chair": "Tumma tammituoli",
+  "block.adorn.woods_and_mires/pine_chair": "Mäntytuoli",
 
   "block.adorn.oak_table": "Tammipöytä",
   "block.adorn.spruce_table": "Kuusipöytä",
@@ -29,6 +30,7 @@
   "block.adorn.jungle_table": "Viidakkopuupöytä",
   "block.adorn.acacia_table": "Akaasiapöytä",
   "block.adorn.dark_oak_table": "Tumma tammipöytä",
+  "block.adorn.woods_and_mires/pine_table": "Mäntypöytä",
 
   "block.adorn.oak_kitchen_counter": "Tammityötaso",
   "block.adorn.spruce_kitchen_counter": "Kuusityötaso",
@@ -36,6 +38,7 @@
   "block.adorn.jungle_kitchen_counter": "Viidakkopuutyötaso",
   "block.adorn.acacia_kitchen_counter": "Akaasiatyötaso",
   "block.adorn.dark_oak_kitchen_counter": "Tumma tammityötaso",
+  "block.adorn.woods_and_mires/pine_kitchen_counter": "Mäntytyötaso",
 
   "block.adorn.oak_kitchen_cupboard": "Tammikaappi",
   "block.adorn.spruce_kitchen_cupboard": "Kuusikaappi",
@@ -43,6 +46,15 @@
   "block.adorn.jungle_kitchen_cupboard": "Viidakkopuukaappi",
   "block.adorn.acacia_kitchen_cupboard": "Akaasiakaappi",
   "block.adorn.dark_oak_kitchen_cupboard": "Tumma tammikaappi",
+  "block.adorn.woods_and_mires/pine_kitchen_cupboard": "Mäntykaappi",
+
+  "block.adorn.oak_kitchen_sink": "Tammipesuallas",
+  "block.adorn.spruce_kitchen_sink": "Kuusipesuallas",
+  "block.adorn.birch_kitchen_sink": "Koivupesuallas",
+  "block.adorn.jungle_kitchen_sink": "Viidakkopuupesuallas",
+  "block.adorn.acacia_kitchen_sink": "Akaasiapesuallas",
+  "block.adorn.dark_oak_kitchen_sink": "Tumma tammipesuallas",
+  "block.adorn.woods_and_mires/pine_kitchen_sink": "Mäntypesuallas",
 
   "block.adorn.oak_drawer": "Tammilipasto",
   "block.adorn.spruce_drawer": "Kuusilipasto",
@@ -50,6 +62,7 @@
   "block.adorn.jungle_drawer": "Viidakkopuulipasto",
   "block.adorn.acacia_drawer": "Akaasialipasto",
   "block.adorn.dark_oak_drawer": "Tumma tammilipasto",
+  "block.adorn.woods_and_mires/pine_drawer": "Mäntylipasto",
 
   "block.adorn.trading_station": "Kauppapöytä",
   "block.adorn.trading_station.selling": "Myydään",
@@ -97,6 +110,7 @@
   "block.adorn.stone_brick_post": "Kivitiilipylväs",
   "block.adorn.red_sandstone_post": "Punainen hiekkakivipylväs",
   "block.adorn.nether_brick_post": "Nether-tiilipylväs",
+  "block.adorn.woods_and_mires/pine_post": "Mäntypylväs",
   "block.adorn.post.desc": "Vähän kuin aidan tolppa",
 
   "block.adorn.oak_platform": "Tammilava",
@@ -115,6 +129,7 @@
   "block.adorn.stone_brick_platform": "Kivitiililava",
   "block.adorn.red_sandstone_platform": "Punainen hiekkakivilava",
   "block.adorn.nether_brick_platform": "Nether-tiililava",
+  "block.adorn.woods_and_mires/pine_platform": "Mäntylava",
   "block.adorn.platform.desc": "Lava pylvään päällä",
 
   "block.adorn.oak_step": "Tammiaskelma",
@@ -133,6 +148,7 @@
   "block.adorn.stone_brick_step": "Kivitiiliaskelma",
   "block.adorn.red_sandstone_step": "Punainen hiekkakiviaskelma",
   "block.adorn.nether_brick_step": "Nether-tiiliaskelma",
+  "block.adorn.woods_and_mires/pine_step": "Mäntyaskelma",
   "block.adorn.step.desc": "Askelma pylvään päällä",
 
   "block.adorn.brick_chimney": "Tiilisavupiippu",
@@ -153,7 +169,16 @@
   "block.adorn.acacia_shelf": "Akaasiahylly",
   "block.adorn.dark_oak_shelf": "Tumma tammihylly",
   "block.adorn.iron_shelf": "Rautahylly",
+  "block.adorn.woods_and_mires/pine_shelf": "Mäntyhylly",
   "block.adorn.shelf.desc": "Kätevä paikka arkipäivän esineille",
+
+  "block.adorn.oak_coffee_table": "Tammisohvapöytä",
+  "block.adorn.spruce_coffee_table": "Kuusisohvapöytä",
+  "block.adorn.birch_coffee_table": "Koivusohvapöytä",
+  "block.adorn.jungle_coffee_table": "Viidakkopuusohvapöytä",
+  "block.adorn.acacia_coffee_table": "Akaasiasohvapöytä",
+  "block.adorn.dark_oak_coffee_table": "Tumma tammisohvapöytä",
+  "block.adorn.woods_and_mires/pine_coffee_table": "Mäntysohvapöytä",
 
   "item.adorn.stone_rod": "Kivisauva",
   "item.adorn.stone_rod.desc": "Työstämisen raaka-aine",

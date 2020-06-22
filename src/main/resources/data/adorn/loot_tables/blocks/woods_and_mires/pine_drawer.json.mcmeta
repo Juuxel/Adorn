@@ -1,0 +1,7 @@
+{
+  "when": [
+    {
+      "libcd:mod_loaded": "woods_and_mires"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:woods_and_mires/pine_drawer"
+    ]
+  },
+  "criteria": {
+    "has_key_item_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "woods_and_mires:pine_slab"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:woods_and_mires/pine_drawer"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_key_item_0",
+      "has_the_recipe"
+    ]
+  ]
+}

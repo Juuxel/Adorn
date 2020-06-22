@@ -30,6 +30,12 @@
           "adorn:terrestria_sakura_kitchen_sink",
           "adorn:terrestria_willow_kitchen_sink"
         ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "woods_and_mires" }],
+        "values": [
+          "adorn:woods_and_mires/pine_kitchen_sink"
+        ]
       }
     ]
   }
