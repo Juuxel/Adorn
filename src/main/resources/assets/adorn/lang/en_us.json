@@ -33,7 +33,7 @@
   "block.adorn.terrestria_rubber_chair": "Rubber Chair",
   "block.adorn.terrestria_sakura_chair": "Sakura Chair",
   "block.adorn.terrestria_willow_chair": "Willow Chair",
-  "block.adorn.woods_and_mires/pine_chair": "Pine Chair",
+  "block.adorn.woods_and_mires.pine_chair": "Pine Chair",
 
   "block.adorn.oak_table": "Oak Table",
   "block.adorn.spruce_table": "Spruce Table",
@@ -52,7 +52,7 @@
   "block.adorn.terrestria_rubber_table": "Rubber Table",
   "block.adorn.terrestria_sakura_table": "Sakura Table",
   "block.adorn.terrestria_willow_table": "Willow Table",
-  "block.adorn.woods_and_mires/pine_table": "Pine Table",
+  "block.adorn.woods_and_mires.pine_table": "Pine Table",
 
   "block.adorn.oak_kitchen_counter": "Oak Kitchen Counter",
   "block.adorn.spruce_kitchen_counter": "Spruce Kitchen Counter",
@@ -71,7 +71,7 @@
   "block.adorn.terrestria_rubber_kitchen_counter": "Rubber Kitchen Counter",
   "block.adorn.terrestria_sakura_kitchen_counter": "Sakura Kitchen Counter",
   "block.adorn.terrestria_willow_kitchen_counter": "Willow Kitchen Counter",
-  "block.adorn.woods_and_mires/pine_kitchen_counter": "Pine Kitchen Counter",
+  "block.adorn.woods_and_mires.pine_kitchen_counter": "Pine Kitchen Counter",
 
   "block.adorn.oak_kitchen_cupboard": "Oak Kitchen Cupboard",
   "block.adorn.spruce_kitchen_cupboard": "Spruce Kitchen Cupboard",
@@ -90,7 +90,7 @@
   "block.adorn.terrestria_rubber_kitchen_cupboard": "Rubber Kitchen Cupboard",
   "block.adorn.terrestria_sakura_kitchen_cupboard": "Sakura Kitchen Cupboard",
   "block.adorn.terrestria_willow_kitchen_cupboard": "Willow Kitchen Cupboard",
-  "block.adorn.woods_and_mires/pine_kitchen_cupboard": "Pine Kitchen Cupboard",
+  "block.adorn.woods_and_mires.pine_kitchen_cupboard": "Pine Kitchen Cupboard",
 
   "block.adorn.oak_kitchen_sink": "Oak Kitchen Sink",
   "block.adorn.spruce_kitchen_sink": "Spruce Kitchen Sink",
@@ -109,7 +109,7 @@
   "block.adorn.terrestria_rubber_kitchen_sink": "Rubber Kitchen Sink",
   "block.adorn.terrestria_sakura_kitchen_sink": "Sakura Kitchen Sink",
   "block.adorn.terrestria_willow_kitchen_sink": "Willow Kitchen Sink",
-  "block.adorn.woods_and_mires/pine_kitchen_sink": "Pine Kitchen Sink",
+  "block.adorn.woods_and_mires.pine_kitchen_sink": "Pine Kitchen Sink",
 
   "block.adorn.oak_drawer": "Oak Drawer",
   "block.adorn.spruce_drawer": "Spruce Drawer",
@@ -128,7 +128,7 @@
   "block.adorn.terrestria_rubber_drawer": "Rubber Drawer",
   "block.adorn.terrestria_sakura_drawer": "Sakura Drawer",
   "block.adorn.terrestria_willow_drawer": "Willow Drawer",
-  "block.adorn.woods_and_mires/pine_drawer": "Pine Drawer",
+  "block.adorn.woods_and_mires.pine_drawer": "Pine Drawer",
 
   "block.adorn.trading_station": "Trading Station",
   "block.adorn.trading_station.selling": "Selling",
@@ -190,7 +190,7 @@
   "block.adorn.terrestria_willow_post": "Willow Post",
   "block.adorn.terrestria_basalt_post": "Basalt Post",
   "block.adorn.terrestria_basalt_cobblestone_post": "Basalt Cobblestone Post",
-  "block.adorn.woods_and_mires/pine_post": "Pine Post",
+  "block.adorn.woods_and_mires.pine_post": "Pine Post",
   "block.adorn.post.desc": "A bit like a fence post",
 
   "block.adorn.oak_platform": "Oak Platform",
@@ -223,7 +223,7 @@
   "block.adorn.terrestria_willow_platform": "Willow Platform",
   "block.adorn.terrestria_basalt_platform": "Basalt Platform",
   "block.adorn.terrestria_basalt_cobblestone_platform": "Basalt Cobblestone Platform",
-  "block.adorn.woods_and_mires/pine_platform": "Pine Platform",
+  "block.adorn.woods_and_mires.pine_platform": "Pine Platform",
   "block.adorn.platform.desc": "A post with a platform on top",
 
   "block.adorn.oak_step": "Oak Step",
@@ -256,7 +256,7 @@
   "block.adorn.terrestria_willow_step": "Willow Step",
   "block.adorn.terrestria_basalt_step": "Basalt Step",
   "block.adorn.terrestria_basalt_cobblestone_step": "Basalt Cobblestone Step",
-  "block.adorn.woods_and_mires/pine_step": "Pine Step",
+  "block.adorn.woods_and_mires.pine_step": "Pine Step",
   "block.adorn.step.desc": "A small step with a post under it",
 
   "block.adorn.brick_chimney": "Brick Chimney",
@@ -289,7 +289,7 @@
   "block.adorn.terrestria_rubber_shelf": "Rubber Shelf",
   "block.adorn.terrestria_sakura_shelf": "Sakura Shelf",
   "block.adorn.terrestria_willow_shelf": "Willow Shelf",
-  "block.adorn.woods_and_mires/pine_shelf": "Pine Shelf",
+  "block.adorn.woods_and_mires.pine_shelf": "Pine Shelf",
   "block.adorn.shelf.desc": "A handy place for everyday items",
 
   "block.adorn.white_table_lamp": "White Table Lamp",
@@ -326,7 +326,7 @@
   "block.adorn.terrestria_rubber_coffee_table": "Rubber Coffee Table",
   "block.adorn.terrestria_sakura_coffee_table": "Sakura Coffee Table",
   "block.adorn.terrestria_willow_coffee_table": "Willow Coffee Table",
-  "block.adorn.woods_and_mires/pine_coffee_table": "Pine Coffee Table",
+  "block.adorn.woods_and_mires.pine_coffee_table": "Pine Coffee Table",
 
   "block.adorn.crate": "Crate",
   "block.adorn.wheat_crate": "Crate of Wheat",
