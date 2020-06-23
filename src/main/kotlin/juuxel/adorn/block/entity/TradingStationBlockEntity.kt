@@ -4,6 +4,8 @@ import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.gui.controller.TradingStationController
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.util.InventoryComponent
+import juuxel.adorn.util.containsOldUuid
+import juuxel.adorn.util.getOldUuid
 import juuxel.adorn.util.getText
 import juuxel.adorn.util.putText
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
@@ -62,7 +64,13 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
 
     override fun fromTag(state: BlockState, tag: CompoundTag) {
         super.fromTag(state, tag)
-        owner = tag.getUuid(NBT_TRADING_OWNER) // TODO: Backwards compatibility with 1.15
+
+        if (tag.containsUuid(NBT_TRADING_OWNER)) {
+            owner = tag.getUuid(NBT_TRADING_OWNER)
+        } else if (tag.containsOldUuid(NBT_TRADING_OWNER)) {
+            owner = tag.getOldUuid(NBT_TRADING_OWNER)
+        }
+
         ownerName = tag.getText(NBT_TRADING_OWNER_NAME) ?: LiteralText("??")
         trade.fromTag(tag.getCompound(NBT_TRADE))
         storage.fromTag(tag.getCompound(NBT_STORAGE))

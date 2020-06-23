@@ -17,7 +17,7 @@ open class PrismarineChimneyBlock(settings: Settings) : AbstractChimneyBlock(set
 
     @Environment(EnvType.CLIENT)
     override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
-        if (!state.fluidState.matches(FluidTags.WATER) || state[CONNECTED]) return
+        if (!state.fluidState.isIn(FluidTags.WATER) || state[CONNECTED]) return
 
         val x = pos.x + 0.5
         val y = pos.y + 0.9

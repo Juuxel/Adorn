@@ -14,6 +14,7 @@ import net.minecraft.state.property.Property
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.registry.Registry
+import java.util.UUID
 
 fun CompoundTag.putText(name: String, textComponent: Text) =
     put(
@@ -36,6 +37,12 @@ fun CompoundTag.getText(name: String): Text? {
         )
     )
 }
+
+fun CompoundTag.containsOldUuid(key: String): Boolean =
+    contains("${key}Most") && contains("${key}Least")
+
+fun CompoundTag.getOldUuid(key: String): UUID =
+    UUID(getLong("${key}Most"), getLong("${key}Least"))
 
 fun ItemStack.toTextWithCount(): Text =
     TranslatableText("text.adorn.item_stack_with_count", count, toHoverableText())
