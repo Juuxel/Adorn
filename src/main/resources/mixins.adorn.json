@@ -12,8 +12,7 @@
     "FenceGateBlockMixin",
     "LivingEntityMixin",
     "PaneBlockMixin",
-    "PlayerEntityMixin",
-    "WPanelMixin"
+    "PlayerEntityMixin"
   ],
   "client": [
     "client.LivingEntityMixin"
