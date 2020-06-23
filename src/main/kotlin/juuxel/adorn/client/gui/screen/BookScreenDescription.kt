@@ -7,6 +7,7 @@ import io.github.cottonmc.cotton.gui.widget.WLabel
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel
 import io.github.cottonmc.cotton.gui.widget.WWidget
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
+import io.github.cottonmc.cotton.gui.widget.data.VerticalAlignment
 import juuxel.adorn.Adorn
 import juuxel.adorn.client.book.Book
 import juuxel.adorn.client.book.Page
@@ -61,8 +62,7 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription() {
         add(
             WBookText(
                 page.title.copy().styled { it.withBold(true) }
-                // TODO: centerVertically = true
-            ),
+            ).setVerticalAlignment(VerticalAlignment.CENTER),
             20, 0, 116 - 40, 20
         )
         add(WBookText(page.text, pages = pages), 4, 24, 116 - 4, 145 - 24)
