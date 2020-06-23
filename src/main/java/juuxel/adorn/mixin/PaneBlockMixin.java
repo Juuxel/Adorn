@@ -10,10 +10,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PaneBlock.class)
-public class PaneBlockMixin {
+abstract class PaneBlockMixin {
     // Mojang, why is this final?
     @Inject(method = "connectsTo", at = @At("RETURN"), cancellable = true)
     private void onConnectsTo(BlockState state, boolean bl, CallbackInfoReturnable<Boolean> info) {
+        //noinspection ConstantConditions
         if ((Object) this instanceof ChainLinkFenceBlock && !info.getReturnValueZ()) {
             info.setReturnValue(state.getBlock() instanceof FenceGateBlock);
         }

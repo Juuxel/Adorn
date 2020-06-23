@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FenceGateBlock.class)
-public class FenceGateBlockMixin {
+abstract class FenceGateBlockMixin {
     @Inject(method = "isWall", at = @At("HEAD"), cancellable = true)
     private void onIsWall(BlockState state, CallbackInfoReturnable<Boolean> info) {
         if (state.getBlock() instanceof PicketFenceBlock) {

@@ -13,7 +13,7 @@ import virtuoel.towelette.api.Fluidloggable;
 import virtuoel.towelette.api.FluidProperties;
 
 @Mixin(FluidUtil.class)
-public class FluidUtilMixin {
+abstract class FluidUtilMixin {
     @Inject(method = "updateFluidFromState", at = @At("RETURN"), cancellable = true, remap = false)
     private static void onUpdateFluidFromState(BlockState state, FluidState fluidState, CallbackInfoReturnable<BlockState> info) {
         if (state.getBlock() instanceof Fluidloggable) {

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(BlockEntity.class)
-public class BlockEntityMixin {
+abstract class BlockEntityMixin {
     @Shadow
     @Final
     private static Logger LOGGER;
