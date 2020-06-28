@@ -101,6 +101,7 @@ dependencies {
     includedMod("io.github.cottonmc", "LibCD", v("libcd")) { excludes(); exclude(module = "Jankson"); exclude(module = "nbt-crafting") }
     modCompileOnly("com.github.Virtuoel:Towelette:" + v("towelette")) { excludes() }
     modCompileOnly("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
+    modRuntime("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
 //    modCompileOnly("extra-pieces:extrapieces:" + v("extra-pieces"))
 //    modCompileOnly("com.github.artificemc:artifice:" + v("artifice"))
 
@@ -110,7 +111,6 @@ dependencies {
 //        modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { excludes() }
         modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); excludes() }
         modRuntime("com.github.Virtuoel:Towelette:" + v("towelette")) { excludes() }
-        modRuntime("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
 //        modRuntime("extra-pieces:extrapieces:" + v("extra-pieces"))
 //        modRuntime("com.github.artificemc:artifice:" + v("artifice"))
     }
