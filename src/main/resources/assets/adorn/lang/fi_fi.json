@@ -233,6 +233,8 @@
   "gui.adorn.config.option.skipNightOnSofas.tooltip": "Sallii ohittaa yöt nukkumalla sohvalla.",
   "gui.adorn.config.option.protectTradingStations": "Suojele kauppapöytiä",
   "gui.adorn.config.option.protectTradingStations.tooltip": "Estää muita pelaajia hajottamasta kauppapöytiäsi.",
+  "gui.adorn.config.option.showTradingStationTooltips": "Näytä kauppapöytien tiedot",
+  "gui.adorn.config.option.showTradingStationTooltips.tooltip": "Näyttää tietoja kauppapöydistä, kun niitä katsotaan.",
   "gui.adorn.config.requires_restart": "Vaatii uudelleenkäynnistyksen",
   "gui.adorn.config.restart_required.title": "Tarvitaan uudelleenkäynnistys!",
   "gui.adorn.config.restart_required.message": "Joku muokkaamasi asetus vaatii Minecraftin käynnistämistä uudelleen."
