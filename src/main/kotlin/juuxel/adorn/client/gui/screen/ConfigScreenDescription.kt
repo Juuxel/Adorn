@@ -25,7 +25,6 @@ import kotlin.reflect.KMutableProperty
 @Environment(EnvType.CLIENT)
 class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
     internal var restartRequired: Boolean = false
-    private val general: WGridPanel
 
     init {
         val root = WPlainPanel()
@@ -33,10 +32,10 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
 
         root.add(WLabel(TranslatableText("gui.adorn.config.title"), Colors.WHITE).setHorizontalAlignment(HorizontalAlignment.CENTER), 0, 0, 11 * 18, 18)
 
-        val tabbed = WTabbedPanel()
+        // val tabbed = WTabbedPanel()
         val config = ConfigManager.CONFIG
 
-        general = WGridPanel()
+        val general = WGridPanel()
         with(general) {
             add(createConfigToggle(config::skipNightOnSofas), 0, 0)
             add(createConfigToggle(config::protectTradingStations), 0, 1)
@@ -53,22 +52,21 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
             setSize(11 * 18, height)
         }
 
-        tabbed.addTab(TranslatableText("gui.adorn.config.category.general"), general)
+        // tabbed.addTab(TranslatableText("gui.adorn.config.category.general"), general)
         // tabbed.addTab(TranslatableText("gui.adorn.config.category.advanced"), advanced)
 
-        root.add(tabbed, 0, 18 + 5)
+        root.add(general, 0, 18 + 5, general.width, general.height)
         root.add(
             WButton(TranslatableText("gui.done")).apply {
                 setOnClick { close(previous) }
             },
-            11 * 9 - 5 * 9, 7 * 18 + 9, 5 * 18, 18
+            11 * 9 - 5 * 9, 6 * 18, 5 * 18, 18
         )
         root.validate(this)
     }
 
     override fun addPainters() {
-        rootPanel?.backgroundPainter = null
-        general.backgroundPainter = BackgroundPainter.VANILLA
+        // Overridden to disable the default root panel painter
     }
 
     fun close(previous: Screen) {
