@@ -1,4 +1,4 @@
-package juuxel.adorn.compat.modmenu
+package juuxel.adorn.client.gui.screen
 
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
@@ -23,7 +23,7 @@ import net.minecraft.util.Formatting
 import kotlin.reflect.KMutableProperty
 
 @Environment(EnvType.CLIENT)
-class ConfigGui(previous: Screen) : LightweightGuiDescription() {
+class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
     internal var restartRequired: Boolean = false
     private val general: WGridPanel
 
@@ -61,7 +61,7 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
             WButton(TranslatableText("gui.done")).apply {
                 setOnClick { close(previous) }
             },
-            11 * 9 - 5 * 9, 6 * 18 + 9, 5 * 18, 18
+            11 * 9 - 5 * 9, 7 * 18 + 9, 5 * 18, 18
         )
         root.validate(this)
     }
@@ -97,7 +97,7 @@ class ConfigGui(previous: Screen) : LightweightGuiDescription() {
                 ConfigManager.save()
 
                 if (restartRequired) {
-                    this@ConfigGui.restartRequired = true
+                    this@ConfigScreenDescription.restartRequired = true
                 }
             }
 
