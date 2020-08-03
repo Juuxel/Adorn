@@ -20,6 +20,9 @@ class Config {
     @field:Comment("Client-side settings")
     var client: Client = Client()
 
+    @field:Comment("Mod compatibility toggles (enabled: true, disabled: false)")
+    var compat: MutableMap<String, Boolean> = HashMap()
+
     @Comment("Configuration for Adorn's Extra Pieces support.")
     @JvmField
     var extraPieces: EPConfig = EPConfig()

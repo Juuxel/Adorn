@@ -30,6 +30,7 @@ object Adorn : ModInitializer {
         AdornNetworking.init()
         AdornTags.init()
         AdornCompat.init()
+        ConfigManager.finalize()
     }
 
     @Environment(EnvType.CLIENT)

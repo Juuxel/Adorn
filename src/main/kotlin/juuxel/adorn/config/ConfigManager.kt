@@ -12,6 +12,8 @@ object ConfigManager {
     private val DEFAULT = JANKSON.toJson(Config()) as JsonObject
     private val CONFIG_PATH = FabricLoader.getInstance().configDirectory.toPath().resolve("Adorn.json5")
     private val LOGGER = LogManager.getLogger()
+    private var saveScheduled: Boolean = false
+    private var finalized: Boolean = false
 
     @get:JvmName("getConfig")
     val CONFIG: Config by lazy {
@@ -44,7 +46,20 @@ object ConfigManager {
         CONFIG
     }
 
-    fun save() = save(CONFIG)
+    fun save() {
+        if (finalized) {
+            save(CONFIG)
+        } else {
+            saveScheduled = true
+        }
+    }
+
+    fun finalize() {
+        finalized = true
+        if (saveScheduled) {
+            save()
+        }
+    }
 
     private fun save(config: Config) {
         Files.write(CONFIG_PATH, JANKSON.toJson(config).toJson(true, true).lines())
