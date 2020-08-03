@@ -27,7 +27,7 @@ interface BlockVariant {
 
     companion object {
         val WOOLS: Map<DyeColor, BlockVariant> = DyeColor.values().asSequence().associateWith {
-            variant(it.asString()) { AbstractBlock.Settings.copy(Blocks.WHITE_WOOL) }
+            variant(it.asString(), Blocks.WHITE_WOOL)
         }
 
         val IRON = variant("iron", Blocks.IRON_BARS)
@@ -71,7 +71,7 @@ interface BlockVariant {
         val MOSSY_COBBLESTONE = variant("mossy_cobblestone", Blocks.MOSSY_COBBLESTONE)
         val MOSSY_STONE_BRICK = variant("mossy_stone_brick", Blocks.MOSSY_STONE_BRICKS)
 
-        inline fun variant(name: String, base: Block): BlockVariant = variant(name) { FabricBlockSettings.copyOf(base) }
+        fun variant(name: String, base: Block): BlockVariant = variant(name) { FabricBlockSettings.copyOf(base) }
 
         inline fun variant(name: String, crossinline settings: () -> AbstractBlock.Settings): BlockVariant =
             object : BlockVariant {
