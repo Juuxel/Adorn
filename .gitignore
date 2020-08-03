@@ -58,5 +58,5 @@ gradle-app.setting
 *.hprof
 
 # Custom ignores
-local.json
+local.properties
 private.gradle

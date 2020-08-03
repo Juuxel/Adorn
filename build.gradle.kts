@@ -1,3 +1,4 @@
+import java.util.Properties
 import net.fabricmc.loom.task.RemapJarTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -20,7 +21,14 @@ val minecraft: String by ext
 val modVersion = ext["mod-version"] ?: error("Version was null")
 val localBuild = ext["local-build"].toString().toBoolean()
 version = "$modVersion+$minecraft"
-val heavyweight = ext["heavyweight-run"].toString().toBoolean()
+var heavyweight = false
+
+val localProperties = file("local.properties")
+if (localProperties.exists()) {
+    val props = Properties()
+    localProperties.reader().use(props::load)
+    heavyweight = props.getProperty("heavyweight")?.toBoolean() ?: false
+}
 
 if (localBuild) {
     println("Note: local build mode enabled in gradle.properties; all dependencies might not work!")
