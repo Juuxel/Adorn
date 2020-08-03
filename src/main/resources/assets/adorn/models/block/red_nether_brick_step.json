@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/step",
+  "textures": {
+    "texture": "minecraft:block/red_nether_bricks"
+  }
+}

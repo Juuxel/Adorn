@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "minecraft:end_stone_bricks"
+  },
+  "result": "adorn:end_stone_brick_step",
+  "count": 2
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:block/templates/step_with_sides",
+  "textures": {
+    "side": "minecraft:block/quartz_block_side",
+    "up": "minecraft:block/quartz_block_top",
+    "down": "minecraft:block/quartz_block_bottom"
+  }
+}

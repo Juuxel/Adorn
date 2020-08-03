@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "R",
+    "R",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:mossy_stone_bricks"
+    },
+    "R": {
+      "tag": "c:stone_rod"
+    }
+  },
+  "result": {
+    "item": "adorn:mossy_stone_brick_post",
+    "count": 4
+  }
+}

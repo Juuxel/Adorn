@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "R",
+    "R",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:purpur_block"
+    },
+    "R": {
+      "tag": "c:stone_rod"
+    }
+  },
+  "result": {
+    "item": "adorn:purpur_post",
+    "count": 4
+  }
+}

@@ -193,6 +193,12 @@ object AdornPlugin : Plugin {
             "post",
             keyItems = listOf(selfItem)
         ),
+        SuffixedStonecuttingRecipe(
+            "post.stonecutting_recipe",
+            POST,
+            "post",
+            2
+        ),
 
         WoodenPlatformBlockModel,
         StonePlatformBlockModel,
@@ -205,6 +211,12 @@ object AdornPlugin : Plugin {
             PLATFORM,
             "platform",
             keyItems = listOf(slabItem)
+        ),
+        SuffixedStonecuttingRecipe(
+            "platform.stonecutting_recipe",
+            PLATFORM,
+            "platform",
+            1
         ),
 
         WoodenStepBlockModel,
@@ -219,6 +231,12 @@ object AdornPlugin : Plugin {
             STEP,
             "step",
             keyItems = listOf(slabItem)
+        ),
+        SuffixedStonecuttingRecipe(
+            "step.stonecutting_recipe",
+            STEP,
+            "step",
+            2
         ),
 
         ShelfBlockModel,

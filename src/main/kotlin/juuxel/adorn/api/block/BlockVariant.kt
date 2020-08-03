@@ -1,6 +1,8 @@
 package juuxel.adorn.api.block
 
+import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.AbstractBlock
+import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.util.DyeColor
 
@@ -28,26 +30,48 @@ interface BlockVariant {
             variant(it.asString()) { AbstractBlock.Settings.copy(Blocks.WHITE_WOOL) }
         }
 
-        val IRON = variant("iron") { AbstractBlock.Settings.copy(Blocks.IRON_BARS) }
-        val OAK = variant("oak") { AbstractBlock.Settings.copy(Blocks.OAK_PLANKS) }
-        val SPRUCE = variant("spruce") { AbstractBlock.Settings.copy(Blocks.SPRUCE_PLANKS) }
-        val BIRCH = variant("birch") { AbstractBlock.Settings.copy(Blocks.BIRCH_PLANKS) }
-        val JUNGLE = variant("jungle") { AbstractBlock.Settings.copy(Blocks.JUNGLE_PLANKS) }
-        val ACACIA = variant("acacia") { AbstractBlock.Settings.copy(Blocks.ACACIA_PLANKS) }
-        val DARK_OAK = variant("dark_oak") { AbstractBlock.Settings.copy(Blocks.DARK_OAK_PLANKS) }
-        val CRIMSON = variant("crimson") { AbstractBlock.Settings.copy(Blocks.CRIMSON_PLANKS) }
-        val WARPED = variant("warped") { AbstractBlock.Settings.copy(Blocks.WARPED_PLANKS) }
-        val STONE = variant("stone") { AbstractBlock.Settings.copy(Blocks.STONE) }
-        val COBBLESTONE = variant("cobblestone") { AbstractBlock.Settings.copy(Blocks.COBBLESTONE) }
-        val SANDSTONE = variant("sandstone") { AbstractBlock.Settings.copy(Blocks.SANDSTONE) }
-        val DIORITE = variant("diorite") { AbstractBlock.Settings.copy(Blocks.DIORITE) }
-        val ANDESITE = variant("andesite") { AbstractBlock.Settings.copy(Blocks.ANDESITE) }
-        val GRANITE = variant("granite") { AbstractBlock.Settings.copy(Blocks.GRANITE) }
-        val BRICK = variant("brick") { AbstractBlock.Settings.copy(Blocks.BRICKS) }
-        val STONE_BRICK = variant("stone_brick") { AbstractBlock.Settings.copy(Blocks.STONE_BRICKS) }
-        val RED_SANDSTONE = variant("red_sandstone") { AbstractBlock.Settings.copy(Blocks.RED_SANDSTONE) }
-        val NETHER_BRICK = variant("nether_brick") { AbstractBlock.Settings.copy(Blocks.NETHER_BRICKS) }
-        val BASALT = variant("basalt") { AbstractBlock.Settings.copy(Blocks.BASALT) }
+        val IRON = variant("iron", Blocks.IRON_BARS)
+        val OAK = variant("oak", Blocks.OAK_PLANKS)
+        val SPRUCE = variant("spruce", Blocks.SPRUCE_PLANKS)
+        val BIRCH = variant("birch", Blocks.BIRCH_PLANKS)
+        val JUNGLE = variant("jungle", Blocks.JUNGLE_PLANKS)
+        val ACACIA = variant("acacia", Blocks.ACACIA_PLANKS)
+        val DARK_OAK = variant("dark_oak", Blocks.DARK_OAK_PLANKS)
+        val CRIMSON = variant("crimson", Blocks.CRIMSON_PLANKS)
+        val WARPED = variant("warped", Blocks.WARPED_PLANKS)
+        val STONE = variant("stone", Blocks.STONE)
+        val COBBLESTONE = variant("cobblestone", Blocks.COBBLESTONE)
+        val SANDSTONE = variant("sandstone", Blocks.SANDSTONE)
+        val DIORITE = variant("diorite", Blocks.DIORITE)
+        val ANDESITE = variant("andesite", Blocks.ANDESITE)
+        val GRANITE = variant("granite", Blocks.GRANITE)
+        val BRICK = variant("brick", Blocks.BRICKS)
+        val STONE_BRICK = variant("stone_brick", Blocks.STONE_BRICKS)
+        val RED_SANDSTONE = variant("red_sandstone", Blocks.RED_SANDSTONE)
+        val NETHER_BRICK = variant("nether_brick", Blocks.NETHER_BRICKS)
+        val BASALT = variant("basalt", Blocks.BASALT)
+        val BLACKSTONE = variant("blackstone", Blocks.BLACKSTONE)
+        val RED_NETHER_BRICK = variant("red_nether_brick", Blocks.RED_NETHER_BRICKS)
+        val PRISMARINE = variant("prismarine", Blocks.PRISMARINE)
+        val QUARTZ = variant("quartz", Blocks.QUARTZ_BLOCK)
+        val END_STONE_BRICK = variant("end_stone_brick", Blocks.END_STONE_BRICKS)
+        val PURPUR = variant("purpur", Blocks.PURPUR_BLOCK)
+        val POLISHED_BLACKSTONE = variant("blackstone", Blocks.POLISHED_BLACKSTONE)
+        val POLISHED_BLACKSTONE_BRICK = variant("red_nether_brick", Blocks.POLISHED_BLACKSTONE_BRICKS)
+        val POLISHED_DIORITE = variant("polished_diorite", Blocks.POLISHED_DIORITE)
+        val POLISHED_ANDESITE = variant("polished_andesite", Blocks.POLISHED_ANDESITE)
+        val POLISHED_GRANITE = variant("polished_granite", Blocks.POLISHED_GRANITE)
+        val PRISMARINE_BRICK = variant("prismarine_brick", Blocks.PRISMARINE_BRICKS)
+        val DARK_PRISMARINE = variant("dark_prismarine", Blocks.DARK_PRISMARINE)
+        val CUT_SANDSTONE = variant("cut_sandstone", Blocks.CUT_SANDSTONE)
+        val SMOOTH_SANDSTONE = variant("smooth_sandstone", Blocks.SMOOTH_SANDSTONE)
+        val CUT_RED_SANDSTONE = variant("cut_red_sandstone", Blocks.CUT_RED_SANDSTONE)
+        val SMOOTH_RED_SANDSTONE = variant("smooth_red_sandstone", Blocks.SMOOTH_RED_SANDSTONE)
+        val SMOOTH_STONE = variant("smooth_stone", Blocks.SMOOTH_STONE)
+        val MOSSY_COBBLESTONE = variant("mossy_cobblestone", Blocks.MOSSY_COBBLESTONE)
+        val MOSSY_STONE_BRICK = variant("mossy_stone_brick", Blocks.MOSSY_STONE_BRICKS)
+
+        inline fun variant(name: String, base: Block): BlockVariant = variant(name) { FabricBlockSettings.copyOf(base) }
 
         inline fun variant(name: String, crossinline settings: () -> AbstractBlock.Settings): BlockVariant =
             object : BlockVariant {

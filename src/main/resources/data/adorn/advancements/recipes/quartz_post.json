@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:quartz_post"
+    ]
+  },
+  "criteria": {
+    "has_key_item_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:quartz_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:quartz_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_key_item_0",
+      "has_the_recipe"
+    ]
+  ]
+}
