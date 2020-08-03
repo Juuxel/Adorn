@@ -15,9 +15,11 @@ open class AdornPieceBlockItem(pb: PieceBlock, settings: Settings) : PieceBlockI
         super.appendTooltip(stack, world, texts, context)
         val pb = pieceBlock
         if (pb is BlockWithDescription) {
-            texts.add(TranslatableText(pb.descriptionKey).styled {
-                it.withItalic(true).withColor(Formatting.DARK_GRAY)
-            })
+            texts.add(
+                TranslatableText(pb.descriptionKey).styled {
+                    it.withItalic(true).withColor(Formatting.DARK_GRAY)
+                }
+            )
         }
     }
 }

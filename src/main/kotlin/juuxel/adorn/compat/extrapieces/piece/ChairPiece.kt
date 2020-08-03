@@ -16,7 +16,6 @@ import juuxel.adorn.lib.AdornTags
 import net.minecraft.block.enums.DoubleBlockHalf
 import net.minecraft.item.Item
 import net.minecraft.item.Items
-import net.minecraft.tag.Tag
 import net.minecraft.util.math.Direction
 
 object ChairPiece : AdornPiece(Adorn.id("chair")) {

@@ -8,8 +8,17 @@ import com.shnupbups.extrapieces.core.PieceTypes
 import com.swordglowsblue.artifice.api.ArtificeResourcePack
 import juuxel.adorn.Adorn
 import juuxel.adorn.block.entity.BETypeProvider
-import juuxel.adorn.compat.extrapieces.piece.*
 import juuxel.adorn.block.entity.MutableBlockEntityType
+import juuxel.adorn.compat.extrapieces.piece.ChairPiece
+import juuxel.adorn.compat.extrapieces.piece.DrawerPiece
+import juuxel.adorn.compat.extrapieces.piece.KitchenCounterPiece
+import juuxel.adorn.compat.extrapieces.piece.KitchenCupboardPiece
+import juuxel.adorn.compat.extrapieces.piece.PlatformPiece
+import juuxel.adorn.compat.extrapieces.piece.PostPiece
+import juuxel.adorn.compat.extrapieces.piece.ShelfPiece
+import juuxel.adorn.compat.extrapieces.piece.SofaPiece
+import juuxel.adorn.compat.extrapieces.piece.StepPiece
+import juuxel.adorn.compat.extrapieces.piece.TablePiece
 import juuxel.adorn.config.ConfigManager
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback
 import net.minecraft.block.Block
@@ -55,11 +64,13 @@ object AdornPieces : EPInitializer {
         if (!ConfigManager.CONFIG.extraPieces.enabled) return
         register(DRAWER, TABLE, SHELF, POST, PLATFORM, STEP, CHAIR, SOFA, KITCHEN_COUNTER, KITCHEN_CUPBOARD)
 
-        RegistryEntryAddedCallback.event(Registry.BLOCK).register(RegistryEntryAddedCallback { _, _, block: Block ->
-            if (block is BETypeProvider) {
-                (block.blockEntityType as? MutableBlockEntityType<*>)?.addBlock(block)
+        RegistryEntryAddedCallback.event(Registry.BLOCK).register(
+            RegistryEntryAddedCallback { _, _, block: Block ->
+                if (block is BETypeProvider) {
+                    (block.blockEntityType as? MutableBlockEntityType<*>)?.addBlock(block)
+                }
             }
-        })
+        )
     }
 
     fun isCarpetingEnabled(set: PieceSet): Boolean =
@@ -71,7 +82,7 @@ object AdornPieces : EPInitializer {
     private fun register(vararg types: PieceType) {
         for (type in types) {
             PieceTypes.register(type)
-            //ModItemGroups.groups[type] = ItemGroup.DECORATIONS
+            // ModItemGroups.groups[type] = ItemGroup.DECORATIONS
         }
     }
 
