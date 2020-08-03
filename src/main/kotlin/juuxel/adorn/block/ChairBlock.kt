@@ -2,12 +2,14 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
+import juuxel.adorn.mixin.access.TallPlantBlockAccessor
 import juuxel.adorn.util.buildShapeRotations
 import juuxel.adorn.util.mergeIntoShapeMap
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.ShapeContext
+import net.minecraft.block.TallPlantBlock
 import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.enums.DoubleBlockHalf
@@ -63,32 +65,9 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
         }
     }
 
-    override fun afterBreak(
-        world: World?, player: PlayerEntity?, pos: BlockPos?, state: BlockState?, be: BlockEntity?, stack: ItemStack?
-    ) {
-        super.afterBreak(world, player, pos, Blocks.AIR.defaultState, be, stack)
-    }
-
     override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
-        val half = state[HALF]
-        val otherPos = if (half == DoubleBlockHalf.LOWER) pos.up() else pos.down()
-        val otherState = world.getBlockState(otherPos)
-
-        // Check that the other block is the same and has the correct half, otherwise break
-        if (otherState.block == this && otherState[HALF] != half) {
-            world.setBlockState(otherPos, world.getFluidState(otherPos).blockState, 0b10_00_11)
-            world.syncWorldEvent(player, 2001, otherPos, getRawIdFromState(otherState))
-            if (!player.isCreative) {
-                dropStacks(state, world, pos, null, player, player.mainHandStack)
-                dropStacks(otherState, world, otherPos, null, player, player.mainHandStack)
-            }
-
-            player.incrementStat(Stats.MINED.getOrCreateStat(this))
-        } else if (otherState.isAir && half == DoubleBlockHalf.LOWER) {
-            // Allow breaking and dropping old chairs
-            if (!player.isCreative) {
-                super.afterBreak(world, player, pos, state, null, player.mainHandStack)
-            }
+        if (!world.isClient && player.isCreative) {
+            TallPlantBlockAccessor.callOnBreakInCreative(world, pos, state, player)
         }
 
         super.onBreak(world, pos, state, player)

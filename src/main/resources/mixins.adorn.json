@@ -8,6 +8,7 @@
   "mixins": [
     "access.BlockTagsAccessor",
     "access.ItemTagsAccessor",
+    "access.TallPlantBlockAccessor",
     "fluidloggable.FluidUtilMixin",
     "BlockEntityMixin",
     "BubbleColumnBlockMixin",
