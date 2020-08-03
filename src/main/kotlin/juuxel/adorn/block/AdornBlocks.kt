@@ -306,7 +306,7 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
             FabricBlockSettings.copyOf(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).nonOpaque()
         )
     )
-    // @formatter:off
+    // @formatter:on
 
     fun init() {
         UseBlockCallback.EVENT.register(
