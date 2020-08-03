@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.piece
 
-/*import com.shnupbups.extrapieces.ExtraPieces
+import com.shnupbups.extrapieces.ExtraPieces
 import com.shnupbups.extrapieces.blocks.PieceBlock
 import com.shnupbups.extrapieces.core.PieceSet
 import com.shnupbups.extrapieces.core.PieceTypes
@@ -87,4 +87,4 @@ object KitchenCounterPiece : AdornPiece(Adorn.id("kitchen_counter")) {
             .addToKey('S', Items.POLISHED_ANDESITE_SLAB)
             .addToKey('#', PieceTypes.BASE)
     )
-}*/
+}

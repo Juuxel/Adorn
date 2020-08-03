@@ -14,6 +14,8 @@ import juuxel.adorn.block.StoneTorchBlock
 import juuxel.adorn.block.TableBlock
 import juuxel.adorn.block.TableLampBlock
 import juuxel.adorn.block.TradingStationBlock
+import juuxel.adorn.compat.extrapieces.AdornPieceMarker
+import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.util.visit
 import net.minecraft.block.Block
 import net.minecraft.util.registry.Registry
@@ -34,8 +36,9 @@ object AdornToweletteCompat {
             result
         }
 
+        val fluidlogEp = ConfigManager.CONFIG.extraPieces.toweletteSupport
         Registry.BLOCK.visit {
-            if (shouldFluidlog(it)) {
+            if (shouldFluidlog(it) && (it !is AdornPieceMarker || fluidlogEp)) {
                 StateRefresher.INSTANCE.addBlockProperty(it, FluidProperties.FLUID, Registry.FLUID.defaultId)
 
                 if (flowing) {

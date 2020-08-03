@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    kotlin("jvm") version "1.3.71"
+    kotlin("jvm") version "1.3.72"
     idea
     id("fabric-loom") version "0.4-SNAPSHOT"
     `maven-publish`
@@ -32,12 +32,18 @@ repositories {
         mavenLocal()
     }
 
-    maven(url = "http://server.bbkr.space:8081/artifactory/libs-release") { name = "Cotton" }
-    maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot") { name = "Cotton (snapshots)" }
-    maven(url = "https://minecraft.curseforge.com/api/maven") { name = "CurseForge" }
-    maven(url = "https://jitpack.io") {
+    maven {
+        name = "Cotton"
+        url = uri("http://server.bbkr.space:8081/artifactory/libs-release")
+    }
+
+    maven {
+        name = "Jitpack"
+        url = uri("https://jitpack.io")
+
         content {
             includeGroup("com.github.Virtuoel")
+            includeGroup("com.github.Shnupbups")
         }
     }
 }
@@ -102,8 +108,8 @@ dependencies {
     modCompileOnly("com.github.Virtuoel:Towelette:" + v("towelette")) { excludes() }
     modCompileOnly("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
     modRuntime("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
-//    modCompileOnly("extra-pieces:extrapieces:" + v("extra-pieces"))
-//    modCompileOnly("com.github.artificemc:artifice:" + v("artifice"))
+    // Not actually a dev jar, see https://github.com/Shnupbups/extra-pieces/issues/45
+    modCompileOnly("com.github.Shnupbups:extra-pieces:" + v("extra-pieces") + ":dev") { excludes() }
 
     if (heavyweight) {
         // FIXME: Biome mods
@@ -111,8 +117,7 @@ dependencies {
 //        modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { excludes() }
         modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); excludes() }
         modRuntime("com.github.Virtuoel:Towelette:" + v("towelette")) { excludes() }
-//        modRuntime("extra-pieces:extrapieces:" + v("extra-pieces"))
-//        modRuntime("com.github.artificemc:artifice:" + v("artifice"))
+        modRuntime("com.github.Shnupbups:extra-pieces:" + v("extra-pieces") + ":dev") { excludes() }
     }
 }
 

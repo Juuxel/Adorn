@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.piece
 
-/*import com.shnupbups.extrapieces.core.PieceSet
+import com.shnupbups.extrapieces.core.PieceSet
 import com.shnupbups.extrapieces.core.PieceTypes
 import com.shnupbups.extrapieces.recipe.ShapedPieceRecipe
 import juuxel.adorn.Adorn
@@ -19,4 +19,4 @@ object PostPiece : SimpleSidedPiece(Adorn.id("post"), Adorn.id("block/templates/
     )
 
     override fun getStonecuttingCount() = 2
-}*/
+}

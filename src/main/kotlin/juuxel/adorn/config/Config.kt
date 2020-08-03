@@ -37,6 +37,10 @@ class Config {
         @JvmField
         var enabled: Boolean = true
 
+        @Comment("If true, Adorn's Towelette support will be enabled for EP blocks. (warning: resource heavy)")
+        @JvmField
+        var toweletteSupport: Boolean = false
+
         @Comment("If true, enables carpeting for all Adorn chair and table piece blocks (warning: resource heavy).")
         @JvmField
         var carpetedEverything: Boolean = false

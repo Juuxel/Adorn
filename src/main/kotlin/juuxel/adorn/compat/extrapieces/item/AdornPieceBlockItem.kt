@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.item
 
-/*import com.shnupbups.extrapieces.blocks.PieceBlock
+import com.shnupbups.extrapieces.blocks.PieceBlock
 import com.shnupbups.extrapieces.blocks.PieceBlockItem
 import juuxel.adorn.block.BlockWithDescription
 import net.minecraft.client.item.TooltipContext
@@ -16,9 +16,8 @@ open class AdornPieceBlockItem(pb: PieceBlock, settings: Settings) : PieceBlockI
         val pb = pieceBlock
         if (pb is BlockWithDescription) {
             texts.add(TranslatableText(pb.descriptionKey).styled {
-                it.isItalic = true
-                it.color = Formatting.DARK_GRAY
+                it.withItalic(true).withColor(Formatting.DARK_GRAY)
             })
         }
     }
-}*/
+}

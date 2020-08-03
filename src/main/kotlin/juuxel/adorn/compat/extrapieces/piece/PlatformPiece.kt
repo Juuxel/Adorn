@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.piece
 
-/*import com.shnupbups.extrapieces.core.PieceSet
+import com.shnupbups.extrapieces.core.PieceSet
 import com.shnupbups.extrapieces.core.PieceTypes
 import com.shnupbups.extrapieces.recipe.ShapedPieceRecipe
 import juuxel.adorn.Adorn
@@ -15,4 +15,4 @@ object PlatformPiece : SimpleSidedPiece(Adorn.id("platform"), Adorn.id("block/te
             .addToKey('S', PieceTypes.SLAB)
             .addToKey('#', AdornPieces.POST)
     )
-}*/
+}

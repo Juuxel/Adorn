@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.block
 
-/*import com.shnupbups.extrapieces.core.PieceSet
+import com.shnupbups.extrapieces.core.PieceSet
 import juuxel.adorn.block.DrawerBlock
 import juuxel.adorn.compat.extrapieces.AdornPieces
 import juuxel.adorn.compat.extrapieces.toVariant
@@ -18,8 +18,6 @@ class DrawerPieceBlock(private val set: PieceSet) : DrawerBlock(set.toVariant())
 
     override fun getType() = AdornPieces.DRAWER
 
-    override fun getRenderLayer() = base.renderLayer
-
     override fun emitsRedstonePower(state: BlockState?) =
         base.defaultState.emitsRedstonePower()
 
@@ -34,4 +32,4 @@ class DrawerPieceBlock(private val set: PieceSet) : DrawerBlock(set.toVariant())
         super.randomDisplayTick(state, world, pos, random)
         base.randomDisplayTick(base.defaultState, world, pos, random)
     }
-}*/
+}

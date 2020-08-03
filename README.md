@@ -2,7 +2,7 @@
 
 # Adorn
 
-[![](https://img.shields.io/github/license/Juuxel/Adorn.svg)](LICENSE) [![](https://img.shields.io/github/release/Juuxel/Adorn.svg)](https://github.com/Juuxel/Adorn/releases) ![](https://img.shields.io/badge/minecraft-1.15-blueviolet.svg) [![](http://cf.way2muchnoise.eu/adorn.svg)](https://minecraft.curseforge.com/projects/adorn)
+[![](https://img.shields.io/github/license/Juuxel/Adorn.svg)](LICENSE) [![](https://img.shields.io/github/release/Juuxel/Adorn.svg)](https://github.com/Juuxel/Adorn/releases) ![](https://cf.way2muchnoise.eu/versions/minecraft_adorn_all.svg) [![](http://cf.way2muchnoise.eu/adorn.svg)](https://minecraft.curseforge.com/projects/adorn)
 
 *Decorate your home!* • [Downloads](https://github.com/Juuxel/Adorn/releases) • [CurseForge](https://minecraft.curseforge.com/projects/adorn)
 

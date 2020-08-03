@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.piece
 
-/*import com.shnupbups.extrapieces.blocks.PieceBlock
+import com.shnupbups.extrapieces.blocks.PieceBlock
 import com.swordglowsblue.artifice.api.ArtificeResourcePack
 import juuxel.adorn.compat.extrapieces.getRegistryId
 import net.minecraft.util.Identifier
@@ -15,4 +15,4 @@ abstract class SimpleSidedPiece(id: Identifier, private val modelTemplate: Ident
             it.texture("down", pb.set.bottomTexture)
         }
     }
-}*/
+}

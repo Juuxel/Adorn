@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces
 
-/*import com.shnupbups.extrapieces.api.EPInitializer
+import com.shnupbups.extrapieces.api.EPInitializer
 import com.shnupbups.extrapieces.core.PieceSet
 import com.shnupbups.extrapieces.core.PieceSets
 import com.shnupbups.extrapieces.core.PieceType
@@ -9,8 +9,8 @@ import com.swordglowsblue.artifice.api.ArtificeResourcePack
 import juuxel.adorn.Adorn
 import juuxel.adorn.block.entity.BETypeProvider
 import juuxel.adorn.compat.extrapieces.piece.*
-import juuxel.adorn.config.AdornConfigManager
 import juuxel.adorn.block.entity.MutableBlockEntityType
+import juuxel.adorn.config.ConfigManager
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback
 import net.minecraft.block.Block
 import net.minecraft.item.Items
@@ -34,7 +34,7 @@ object AdornPieces : EPInitializer {
     private val carpetedSets: MutableMap<PieceSet, Boolean> = HashMap()
 
     override fun addData(data: ArtificeResourcePack.ServerResourcePackBuilder) {
-        if (!AdornConfigManager.CONFIG.extraPieces.enabled) return
+        if (!ConfigManager.CONFIG.extraPieces.enabled) return
         PieceSets.registry.values.forEach { set ->
             if (set.hasPiece(KITCHEN_COUNTER) && set.hasPiece(KITCHEN_CUPBOARD)) {
                 val id = Registry.BLOCK.getId(set.getPiece(KITCHEN_CUPBOARD))
@@ -52,7 +52,7 @@ object AdornPieces : EPInitializer {
     }
 
     override fun onInitialize() {
-        if (!AdornConfigManager.CONFIG.extraPieces.enabled) return
+        if (!ConfigManager.CONFIG.extraPieces.enabled) return
         register(DRAWER, TABLE, SHELF, POST, PLATFORM, STEP, CHAIR, SOFA, KITCHEN_COUNTER, KITCHEN_CUPBOARD)
 
         RegistryEntryAddedCallback.event(Registry.BLOCK).register(RegistryEntryAddedCallback { _, _, block: Block ->
@@ -63,9 +63,9 @@ object AdornPieces : EPInitializer {
     }
 
     fun isCarpetingEnabled(set: PieceSet): Boolean =
-        AdornConfigManager.CONFIG.extraPieces.carpetedEverything ||
+        ConfigManager.CONFIG.extraPieces.carpetedEverything ||
             carpetedSets.getOrPut(set) {
-                set.originalName in AdornConfigManager.CONFIG.extraPieces.carpetedPieceSets
+                set.originalName in ConfigManager.CONFIG.extraPieces.carpetedPieceSets
             }
 
     private fun register(vararg types: PieceType) {
@@ -76,4 +76,4 @@ object AdornPieces : EPInitializer {
     }
 
     override fun toString() = "from Adorn is wondering why Extra Pieces is using toString()"
-}*/
+}

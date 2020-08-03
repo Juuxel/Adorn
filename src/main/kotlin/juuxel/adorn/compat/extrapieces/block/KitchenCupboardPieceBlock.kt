@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.block
 
-/*import com.shnupbups.extrapieces.core.PieceSet
+import com.shnupbups.extrapieces.core.PieceSet
 import juuxel.adorn.block.KitchenCupboardBlock
 import juuxel.adorn.compat.extrapieces.AdornPieces
 import juuxel.adorn.compat.extrapieces.toVariant
@@ -18,8 +18,6 @@ class KitchenCupboardPieceBlock(private val set: PieceSet) : KitchenCupboardBloc
 
     override fun getType() = AdornPieces.KITCHEN_CUPBOARD
 
-    override fun getRenderLayer() = base.renderLayer
-
     override fun emitsRedstonePower(state: BlockState?) =
         base.defaultState.emitsRedstonePower()
 
@@ -34,4 +32,4 @@ class KitchenCupboardPieceBlock(private val set: PieceSet) : KitchenCupboardBloc
         super.randomDisplayTick(state, world, pos, random)
         base.randomDisplayTick(base.defaultState, world, pos, random)
     }
-}*/
+}

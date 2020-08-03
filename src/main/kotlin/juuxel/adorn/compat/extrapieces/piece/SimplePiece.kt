@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.piece
 
-/*import com.shnupbups.extrapieces.blocks.PieceBlock
+import com.shnupbups.extrapieces.blocks.PieceBlock
 import com.swordglowsblue.artifice.api.ArtificeResourcePack
 import juuxel.adorn.compat.extrapieces.getRegistryId
 import net.minecraft.util.Identifier
@@ -13,4 +13,4 @@ abstract class SimplePiece(id: Identifier, private val modelTemplate: Identifier
             it.texture("texture", pb.set.mainTexture)
         }
     }
-}*/
+}

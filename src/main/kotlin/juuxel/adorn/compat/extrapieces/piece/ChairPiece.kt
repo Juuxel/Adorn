@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.piece
 
-/*import com.shnupbups.extrapieces.ExtraPieces
+import com.shnupbups.extrapieces.ExtraPieces
 import com.shnupbups.extrapieces.blocks.PieceBlock
 import com.shnupbups.extrapieces.core.PieceSet
 import com.shnupbups.extrapieces.core.PieceTypes
@@ -16,6 +16,7 @@ import juuxel.adorn.lib.AdornTags
 import net.minecraft.block.enums.DoubleBlockHalf
 import net.minecraft.item.Item
 import net.minecraft.item.Items
+import net.minecraft.tag.Tag
 import net.minecraft.util.math.Direction
 
 object ChairPiece : AdornPiece(Adorn.id("chair")) {
@@ -83,4 +84,4 @@ object ChairPiece : AdornPiece(Adorn.id("chair")) {
     )
 
     override fun getBlockItem(pb: PieceBlock) = ChairPieceBlockItem(pb, Item.Settings())
-}*/
+}

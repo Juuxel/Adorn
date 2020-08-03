@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.piece
 
-/*import com.shnupbups.extrapieces.ExtraPieces
+import com.shnupbups.extrapieces.ExtraPieces
 import com.shnupbups.extrapieces.blocks.PieceBlock
 import com.shnupbups.extrapieces.core.PieceSet
 import com.swordglowsblue.artifice.api.ArtificeResourcePack
@@ -110,4 +110,4 @@ object SofaPiece : AdornPiece(Adorn.id("sofa")) {
             it.texture("wool", pb.set.mainTexture)
         }
     }
-}*/
+}

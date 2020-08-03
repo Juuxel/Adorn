@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.block
 
-/*import com.shnupbups.extrapieces.core.PieceSet
+import com.shnupbups.extrapieces.core.PieceSet
 import juuxel.adorn.block.SofaBlock
 import juuxel.adorn.compat.extrapieces.AdornPieces
 import juuxel.adorn.compat.extrapieces.toVariant
@@ -18,8 +18,6 @@ class SofaPieceBlock(private val set: PieceSet) : SofaBlock(set.toVariant()), Ad
 
     override fun getType() = AdornPieces.SOFA
 
-    override fun getRenderLayer() = base.renderLayer
-
     override fun emitsRedstonePower(state: BlockState?) =
         base.defaultState.emitsRedstonePower()
 
@@ -34,4 +32,4 @@ class SofaPieceBlock(private val set: PieceSet) : SofaBlock(set.toVariant()), Ad
         super.randomDisplayTick(state, world, pos, random)
         base.randomDisplayTick(base.defaultState, world, pos, random)
     }
-}*/
+}

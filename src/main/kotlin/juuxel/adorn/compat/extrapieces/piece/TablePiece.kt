@@ -1,6 +1,6 @@
 package juuxel.adorn.compat.extrapieces.piece
 
-/*import com.shnupbups.extrapieces.ExtraPieces
+import com.shnupbups.extrapieces.ExtraPieces
 import com.shnupbups.extrapieces.blocks.PieceBlock
 import com.shnupbups.extrapieces.core.PieceSet
 import com.shnupbups.extrapieces.core.PieceTypes
@@ -149,4 +149,4 @@ object TablePiece : AdornPiece(Adorn.id("table")) {
     )
 
     override fun getBlockItem(pb: PieceBlock) = TablePieceBlockItem(pb, Item.Settings())
-}*/
+}
