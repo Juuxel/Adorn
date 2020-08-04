@@ -3,7 +3,9 @@ package juuxel.adorn.util
 import com.mojang.serialization.DataResult
 import com.mojang.serialization.Dynamic
 import com.mojang.serialization.JsonOps
+import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback
+import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -77,3 +79,26 @@ inline fun <A> Registry<A>.visit(crossinline visitor: (A) -> Unit) {
             }
         )
 }
+
+/**
+ * Creates a safe copy of this block's settings.
+ *
+ * The safe copy does not have lambdas that reference this block directly.
+ * Instead, the default state is used for the various lambdas.
+ */
+fun Block.copySettingsSafely(): AbstractBlock.Settings =
+    FabricBlockSettings.of(defaultState.material)
+        .lightLevel(defaultState.luminance)
+        .apply { getHardness(defaultState)?.let(this::hardness) }
+        .resistance(blastResistance)
+        .velocityMultiplier(velocityMultiplier)
+        .jumpVelocityMultiplier(jumpVelocityMultiplier)
+        .slipperiness(slipperiness)
+        .sounds(defaultState.soundGroup)
+
+private fun getHardness(state: BlockState): Float? =
+    try {
+        state.getHardness(null, null)
+    } catch (e: NullPointerException) {
+        null
+    }

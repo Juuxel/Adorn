@@ -3,7 +3,6 @@ package juuxel.adorn.block
 
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -20,7 +19,7 @@ import net.minecraft.world.World
 import java.util.Random
 
 class ChimneyBlock :
-    AbstractChimneyBlock(FabricBlockSettings.copy(Blocks.BRICKS).ticksRandomly().build().nonOpaque()),
+    AbstractChimneyBlock(Settings.copy(Blocks.BRICKS).ticksRandomly().nonOpaque()),
     BlockWithDescription {
     override val descriptionKey = "block.adorn.chimney.desc"
 

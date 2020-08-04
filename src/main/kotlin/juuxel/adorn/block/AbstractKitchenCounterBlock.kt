@@ -2,7 +2,6 @@ package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.util.buildShapeRotations
-import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
@@ -18,10 +17,7 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 
 abstract class AbstractKitchenCounterBlock(settings: Settings) : Block(settings) {
-    constructor(variant: BlockVariant) : this(
-        FabricBlockSettings.copyOf(variant.createSettings())
-            .sounds(SOUND_GROUP)
-    )
+    constructor(variant: BlockVariant) : this(variant.createSettings().sounds(SOUND_GROUP))
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
