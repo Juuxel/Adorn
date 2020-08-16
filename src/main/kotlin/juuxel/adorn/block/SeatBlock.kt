@@ -7,6 +7,7 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
@@ -38,7 +39,7 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
 
         val occupied = actualState[OCCUPIED]
         return if (!occupied) {
-            if (!world.isClient) {
+            if (world is ServerWorld) {
                 val entity = AdornEntities.SITTING_VEHICLE.spawn(world, null, null, player, actualPos, SpawnReason.TRIGGERED, false, false)
                 entity?.setPos(actualPos, sittingYOffset)
                 world.setBlockState(actualPos, actualState.with(OCCUPIED, true))
@@ -54,7 +55,7 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
     override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
         super.onBreak(world, pos, state, player)
         if (world.isClient || !isSittingEnabled()) return
-        world.getEntities(
+        world.getEntitiesByType(
             AdornEntities.SITTING_VEHICLE,
             Box(getActualSeatPos(world, state, pos)),
             Predicates.alwaysTrue()

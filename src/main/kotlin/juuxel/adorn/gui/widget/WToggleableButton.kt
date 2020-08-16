@@ -9,7 +9,6 @@ import net.minecraft.text.Text
  */
 class WToggleableButton(label: Text) : WButton(label) {
     private var group: Group? = null
-    private var onClick: Runnable? = null
 
     init {
         super.setOnClick {
@@ -27,10 +26,6 @@ class WToggleableButton(label: Text) : WButton(label) {
             this.isEnabled = false
 
         group.buttons += this
-    }
-
-    override fun setOnClick(r: Runnable): WButton = apply {
-        this.onClick = r
     }
 
     inline fun setOnClick(crossinline fn: () -> Unit) =

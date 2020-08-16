@@ -18,7 +18,7 @@ import net.minecraft.text.Text
 class WCenteredLabel(private val text: Text, private val color: Int = WLabel.DEFAULT_TEXT_COLOR) : WWidget() {
     @Environment(EnvType.CLIENT)
     override fun paint(matrices: MatrixStack, x: Int, y: Int, mouseX: Int, mouseY: Int) {
-        ScreenDrawing.drawString(matrices, text, HorizontalAlignment.CENTER, x, y + height / 2 - 3, width, color)
+        ScreenDrawing.drawString(matrices, text.asOrderedText(), HorizontalAlignment.CENTER, x, y + height / 2 - 3, width, color)
     }
 
     override fun canResize() = true

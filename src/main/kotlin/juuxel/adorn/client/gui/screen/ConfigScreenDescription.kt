@@ -2,6 +2,7 @@ package juuxel.adorn.client.gui.screen
 
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
+import io.github.cottonmc.cotton.gui.widget.TooltipBuilder
 import io.github.cottonmc.cotton.gui.widget.WButton
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WLabel
@@ -16,7 +17,6 @@ import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.NoticeScreen
 import net.minecraft.client.gui.screen.Screen
-import net.minecraft.text.StringRenderable
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import kotlin.reflect.KMutableProperty
@@ -29,7 +29,11 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
         val root = WPlainPanel()
         setRootPanel(root)
 
-        root.add(WLabel(TranslatableText("gui.adorn.config.title"), Colors.WHITE).setHorizontalAlignment(HorizontalAlignment.CENTER), 0, 0, 11 * 18, 18)
+        root.add(
+            WLabel(TranslatableText("gui.adorn.config.title"), Colors.WHITE).setHorizontalAlignment(
+                HorizontalAlignment.CENTER
+            ), 0, 0, 11 * 18, 18
+        )
 
         // val tabbed = WTabbedPanel()
         val config = ConfigManager.CONFIG
@@ -98,12 +102,14 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
                 }
             }
 
-            override fun addTooltip(tooltip: MutableList<StringRenderable>) {
-                tooltip += TranslatableText("gui.adorn.config.option.${property.name}.tooltip")
+            override fun addTooltip(tooltip: TooltipBuilder) {
+                tooltip.add(TranslatableText("gui.adorn.config.option.${property.name}.tooltip"))
 
                 if (restartRequired) {
-                    tooltip += TranslatableText("gui.adorn.config.requires_restart")
-                        .formatted(Formatting.ITALIC, Formatting.GOLD)
+                    tooltip.add(
+                        TranslatableText("gui.adorn.config.requires_restart")
+                            .formatted(Formatting.ITALIC, Formatting.GOLD)
+                    )
                 }
             }
         }

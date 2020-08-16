@@ -44,15 +44,15 @@
   "mixins": ["mixins.adorn.json"],
 
   "depends": {
-    "minecraft": ">=1.16-",
+    "minecraft": ">=1.16.2",
     "fabricloader": ">=0.8.8",
     "fabric-language-kotlin": "^1.3.71",
 
-    "fabric": ">=0.10.9",
+    "fabric": ">=0.18.0",
 
-    "libgui": "^2.0.0-beta.4",
+    "libgui": "^3.0.0-beta.1",
     "jankson": "^3.0.0",
-    "libcd": ["^2.0.0"]
+    "libcd": "^2.0.0"
   },
   "custom": {
     "extrapieces:piecepack": "data/adorn/adorn_vanilla_pieces.json"

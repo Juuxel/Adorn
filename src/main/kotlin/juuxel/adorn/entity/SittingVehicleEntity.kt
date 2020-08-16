@@ -5,11 +5,11 @@ import juuxel.adorn.lib.AdornNetworking
 import juuxel.adorn.util.orElse
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
 import net.fabricmc.fabric.api.server.PlayerStream
-import net.minecraft.datafixer.NbtOps
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.NbtOps
 import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket
 import net.minecraft.network.packet.s2c.play.EntityPositionS2CPacket
 import net.minecraft.util.ActionResult

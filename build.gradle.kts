@@ -52,6 +52,7 @@ repositories {
         content {
             includeGroup("com.github.Virtuoel")
             includeGroup("com.github.Shnupbups")
+            includeGroup("com.github.CottonMC")
         }
     }
 }
@@ -112,7 +113,7 @@ dependencies {
     // Other mods
     includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { isTransitive = false }
     includedMod("io.github.cottonmc:Jankson-Fabric:" + v("jankson")) { excludes() }
-    includedMod("io.github.cottonmc", "LibCD", v("libcd")) { excludes(); exclude(module = "Jankson"); exclude(module = "nbt-crafting") }
+    includedMod("com.github.CottonMC", "LibCD", v("libcd")) { excludes(); exclude(module = "Jankson"); exclude(module = "nbt-crafting") }
     modCompileOnly("com.github.Virtuoel:Towelette:" + v("towelette")) { excludes() }
     modCompileOnly("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
     modRuntime("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
