@@ -32,7 +32,8 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
         root.add(
             WLabel(TranslatableText("gui.adorn.config.title"), Colors.WHITE).setHorizontalAlignment(
                 HorizontalAlignment.CENTER
-            ), 0, 0, 11 * 18, 18
+            ),
+            0, 0, 11 * 18, 18
         )
 
         // val tabbed = WTabbedPanel()
