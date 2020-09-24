@@ -8,7 +8,7 @@ plugins {
     idea
     id("fabric-loom") version "0.4-SNAPSHOT"
     `maven-publish`
-    id("org.jmailen.kotlinter") version "2.4.0"
+    id("org.jmailen.kotlinter") version "3.2.0"
 }
 
 group = "io.github.juuxel"
