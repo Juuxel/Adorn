@@ -128,13 +128,13 @@ class TradingStationBlock :
      */
     override fun calcBlockBreakingDelta(state: BlockState, player: PlayerEntity, world: BlockView, pos: BlockPos) =
         if (ConfigManager.CONFIG.protectTradingStations)
-        (world.getBlockEntity(pos) as? TradingStationBlockEntity).let {
-            if (it != null && !it.isOwner(player)) {
-                0f
-            } else {
-                super.calcBlockBreakingDelta(state, player, world, pos)
+            (world.getBlockEntity(pos) as? TradingStationBlockEntity).let {
+                if (it != null && !it.isOwner(player)) {
+                    0f
+                } else {
+                    super.calcBlockBreakingDelta(state, player, world, pos)
+                }
             }
-        }
         else
             super.calcBlockBreakingDelta(state, player, world, pos)
 
