@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    kotlin("jvm") version "1.3.72"
+    kotlin("jvm") version "1.4.0"
     idea
     id("fabric-loom") version "0.4-SNAPSHOT"
     `maven-publish`
@@ -52,7 +52,6 @@ repositories {
         content {
             includeGroup("com.github.Virtuoel")
             includeGroup("com.github.Shnupbups")
-            includeGroup("com.github.CottonMC")
         }
     }
 }
@@ -113,7 +112,7 @@ dependencies {
     // Other mods
     includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { isTransitive = false }
     includedMod("io.github.cottonmc:Jankson-Fabric:" + v("jankson")) { excludes() }
-    includedMod("com.github.CottonMC", "LibCD", v("libcd")) { excludes(); exclude(module = "Jankson"); exclude(module = "nbt-crafting") }
+    includedMod("io.github.cottonmc", "LibCD", v("libcd")) { excludes(); exclude(module = "Jankson"); exclude(module = "nbt-crafting") }
     modCompileOnly("com.github.Virtuoel:Towelette:" + v("towelette")) { excludes() }
     modCompileOnly("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
     modRuntime("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }

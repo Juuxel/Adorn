@@ -50,9 +50,9 @@
 
     "fabric": ">=0.18.0",
 
-    "libgui": "^3.0.0-beta.1",
+    "libgui": "^3.0.0",
     "jankson": "^3.0.0",
-    "libcd": "^2.0.0"
+    "libcd": ["^2.0.0", "^3.0.0"]
   },
   "custom": {
     "extrapieces:piecepack": "data/adorn/adorn_vanilla_pieces.json"

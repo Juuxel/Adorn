@@ -70,11 +70,11 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
 
     override fun initDataTracker() {}
     override fun readCustomDataFromTag(tag: CompoundTag) {
-        seatPos = BlockPos.field_25064.decode(NbtOps.INSTANCE, tag["SeatPos"]).map { it.first }.orElse(BlockPos.ORIGIN)
+        seatPos = BlockPos.CODEC.decode(NbtOps.INSTANCE, tag["SeatPos"]).map { it.first }.orElse(BlockPos.ORIGIN)
     }
 
     override fun writeCustomDataToTag(tag: CompoundTag) {
-        BlockPos.field_25064.encodeStart(NbtOps.INSTANCE, seatPos).map {
+        BlockPos.CODEC.encodeStart(NbtOps.INSTANCE, seatPos).map {
             tag.put("SeatPos", it)
         }
     }
