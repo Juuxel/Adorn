@@ -14,8 +14,8 @@ import juuxel.adorn.client.book.Page
 import juuxel.adorn.client.gui.painter.Painters
 import juuxel.adorn.gui.widget.PageContainer
 import juuxel.adorn.gui.widget.WBigLabel
+import juuxel.adorn.gui.widget.WBookCardPanel
 import juuxel.adorn.gui.widget.WBookText
-import juuxel.adorn.gui.widget.WCardPanel
 import juuxel.adorn.gui.widget.WPageTurnButton
 import juuxel.adorn.util.Colors
 import net.fabricmc.api.EnvType
@@ -30,12 +30,12 @@ import net.minecraft.text.TranslatableText
 class BookScreenDescription(book: Book) : LightweightGuiDescription() {
     init {
         val root = WPlainPanel()
-        val pageCards = WCardPanel()
+        val pageCards = WBookCardPanel()
         val prev = WPageTurnButton(pageCards, WPageTurnButton.Direction.Previous)
         val next = WPageTurnButton(pageCards, WPageTurnButton.Direction.Next)
 
-        pageCards.addCard(createTitlePage(book))
-        for (topic in book.pages) pageCards.addCard(createPageWidget(pageCards, topic))
+        pageCards.add(createTitlePage(book))
+        for (topic in book.pages) pageCards.add(createPageWidget(pageCards, topic))
 
         root.add(prev, 49, 159, 23, 13)
         root.add(next, 116, 159, 23, 13)
@@ -44,6 +44,7 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription() {
         root.setSize(192, 192)
         root.backgroundPainter = Painters.BOOK
         rootPanel = root
+        root.validate(this)
     }
 
     override fun addPainters() {}

@@ -30,7 +30,11 @@ abstract class BaseAdornController(
 ) : SyncedGuiDescription(
     type, syncId, playerInv, blockInventory, propertyDelegate
 ) {
-    protected val playerInvPanel: WPlayerInvPanel by lazy { createPlayerInventoryPanel() }
+    protected val playerInvPanel: WPlayerInvPanel by lazy {
+        val label = WPlayerInvPanel.createInventoryLabel(playerInventory)
+        label.setColor(titleColor).disableDarkmode()
+        createPlayerInventoryPanel(label)
+    }
 
     override fun canUse(player: PlayerEntity?) = true
 
