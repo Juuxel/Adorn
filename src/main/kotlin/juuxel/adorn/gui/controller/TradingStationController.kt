@@ -3,10 +3,12 @@ package juuxel.adorn.gui.controller
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
+import io.github.cottonmc.cotton.gui.widget.WLabel
+import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
+import io.github.cottonmc.cotton.gui.widget.data.VerticalAlignment
 import juuxel.adorn.block.entity.TradingStation
 import juuxel.adorn.client.gui.painter.Painters
 import juuxel.adorn.gui.AdornGuis
-import juuxel.adorn.gui.widget.WCenteredLabel
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.trading.TradeInventory
 import juuxel.adorn.util.Colors
@@ -50,8 +52,16 @@ class TradingStationController(
             add(WItemSlot.of(tradeInv, 0).setModifiable(false).addToSlots(), 1, 2)
             add(WItemSlot.of(tradeInv, 1).setModifiable(false).addToSlots(), 1, 4)
 
-            add(WCenteredLabel(TranslatableText("block.adorn.trading_station.selling"), Colors.WHITE), 1, 1)
-            add(WCenteredLabel(TranslatableText("block.adorn.trading_station.price"), Colors.WHITE), 1, 3)
+            val sellingLabel = WLabel(TranslatableText("block.adorn.trading_station.selling"), Colors.WHITE)
+            val priceLabel = WLabel(TranslatableText("block.adorn.trading_station.price"), Colors.WHITE)
+
+            sellingLabel.horizontalAlignment = HorizontalAlignment.CENTER
+            sellingLabel.verticalAlignment = VerticalAlignment.CENTER
+            priceLabel.horizontalAlignment = HorizontalAlignment.CENTER
+            priceLabel.verticalAlignment = VerticalAlignment.CENTER
+
+            add(sellingLabel, 1, 1)
+            add(priceLabel, 1, 3)
 
             add(WItemSlot.of(blockInventory, 0, 4, 3).addToSlots(), 3, 2)
 
