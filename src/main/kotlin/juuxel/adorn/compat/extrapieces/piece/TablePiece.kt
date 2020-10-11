@@ -145,7 +145,7 @@ object TablePiece : AdornPiece(Adorn.id("table")) {
         ShapedPieceRecipe(this, 3, "---", "| |", "| |")
             .addToKey('-', PieceTypes.SLAB)
             .addToKey('|', Items.STICK)
-            .addToKey('|', AdornTags.STONE_ROD)
+            .addToKey('|', AdornTags.STONE_RODS)
     )
 
     override fun getBlockItem(pb: PieceBlock) = TablePieceBlockItem(pb, Item.Settings())

@@ -1,8 +1,7 @@
 package juuxel.adorn.lib
 
 import juuxel.adorn.Adorn
-import juuxel.adorn.mixin.access.BlockTagsAccessor
-import juuxel.adorn.mixin.access.ItemTagsAccessor
+import net.fabricmc.fabric.api.tag.TagRegistry
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.tag.Tag
@@ -29,20 +28,26 @@ object AdornTags {
     val WOODEN_SHELVES = blockAndItem(Adorn.id("wooden_shelves"))
     val CHIMNEYS = blockAndItem(Adorn.id("chimneys"))
 
-    val STONE_ROD = item(Identifier("c", "stone_rod"))
+    val STONE_RODS = item(Identifier("c", "stone_rods"))
 
     fun init() {}
 
     private fun block(id: Identifier): Tag.Identified<Block> =
-        BlockTagsAccessor.callRegister(id.toString())
+        TagRegistry.block(id).toIdentified(id)
 
     private fun item(id: Identifier): Tag.Identified<Item> =
-        ItemTagsAccessor.callRegister(id.toString())
+        TagRegistry.item(id).toIdentified(id)
 
     private fun blockAndItem(id: Identifier) = TagPair(
         block(id),
         item(id)
     )
+
+    private fun <T> Tag<T>.toIdentified(id: Identifier): Tag.Identified<T> =
+        if (this is Tag.Identified<T>) this
+        else object : Tag<T> by this, Tag.Identified<T> {
+            override fun getId() = id
+        }
 
     data class TagPair(val block: Tag.Identified<Block>, val item: Tag.Identified<Item>)
 }

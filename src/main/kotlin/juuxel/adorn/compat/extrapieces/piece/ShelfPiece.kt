@@ -31,6 +31,6 @@ object ShelfPiece : SimpleRotatingPiece(Adorn.id("shelf")) {
         ShapedPieceRecipe(this, 3, "SSS", "/ /")
             .addToKey('S', PieceTypes.SLAB)
             .addToKey('/', Items.STICK)
-            .addToKey('/', AdornTags.STONE_ROD)
+            .addToKey('/', AdornTags.STONE_RODS)
     )
 }

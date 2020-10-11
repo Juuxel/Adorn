@@ -15,7 +15,7 @@ object PostPiece : SimpleSidedPiece(Adorn.id("post"), Adorn.id("block/templates/
         ShapedPieceRecipe(this, 4, "#", "#", "-")
             .addToKey('-', PieceTypes.BASE)
             .addToKey('#', Items.STICK)
-            .addToKey('#', AdornTags.STONE_ROD)
+            .addToKey('#', AdornTags.STONE_RODS)
     )
 
     override fun getStonecuttingCount() = 2

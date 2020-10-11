@@ -79,7 +79,7 @@ object ChairPiece : AdornPiece(Adorn.id("chair")) {
         ShapedPieceRecipe(this, 2, " S", "SS", "##")
             .addToKey('S', PieceTypes.SLAB)
             .addToKey('#', Items.STICK)
-            .addToKey('#', AdornTags.STONE_ROD)
+            .addToKey('#', AdornTags.STONE_RODS)
     )
 
     override fun getBlockItem(pb: PieceBlock) = ChairPieceBlockItem(pb, Item.Settings())

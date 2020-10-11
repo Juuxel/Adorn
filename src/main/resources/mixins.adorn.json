@@ -6,8 +6,6 @@
   "plugin": "juuxel.adorn.AdornMixinPlugin",
 
   "mixins": [
-    "access.BlockTagsAccessor",
-    "access.ItemTagsAccessor",
     "access.TallPlantBlockAccessor",
     "fluidloggable.FluidUtilMixin",
     "BlockEntityMixin",

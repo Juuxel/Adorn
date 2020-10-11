@@ -15,6 +15,6 @@ object StepPiece : SimpleSidedPiece(Adorn.id("step"), Adorn.id("block/templates/
         ShapedPieceRecipe(this, 1, "S", "#")
             .addToKey('S', PieceTypes.SLAB)
             .addToKey('#', Items.STICK)
-            .addToKey('#', AdornTags.STONE_ROD)
+            .addToKey('#', AdornTags.STONE_RODS)
     )
 }
