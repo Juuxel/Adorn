@@ -30,6 +30,7 @@ open class SimpleInvController(
 
     init {
         (rootPanel as WGridPanel).apply {
+            darkTitleColor = titleColor
             slot = WItemSlot.of(blockInventory, 0, invWidth, invHeight)
             add(slot, (9 - invWidth) / 2, 1)
 

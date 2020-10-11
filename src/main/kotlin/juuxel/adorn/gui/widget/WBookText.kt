@@ -9,15 +9,9 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.text.ClickEvent
 import net.minecraft.text.Text
 
-class WBookText : WText {
-    val pages: PageContainer?
-
-    constructor(text: Text, pages: PageContainer? = null) : super(text) {
-        this.pages = pages
-    }
-
-    constructor(text: Text, color: Int, pages: PageContainer? = null) : super(text, color) {
-        this.pages = pages
+class WBookText(text: Text, val pages: PageContainer? = null) : WText(text) {
+    init {
+        disableDarkmode()
     }
 
     @Environment(EnvType.CLIENT)
