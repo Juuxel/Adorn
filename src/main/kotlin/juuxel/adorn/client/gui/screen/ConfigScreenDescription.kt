@@ -62,14 +62,14 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
             setSize(11 * 18, height)
         }
 
-         tabbed.add(general) {
-             it.icon(ItemIcon(ItemStack(AdornBlocks.OAK_TABLE)))
-             it.tooltip(TranslatableText("gui.adorn.config.category.general"))
-         }
-         tabbed.add(gameRules) {
-             it.icon(ItemIcon(ItemStack(Items.PAPER)))
-             it.tooltip(TranslatableText("gui.adorn.config.category.game_rules"))
-         }
+        tabbed.add(general) {
+            it.icon(ItemIcon(ItemStack(AdornBlocks.OAK_TABLE)))
+            it.tooltip(TranslatableText("gui.adorn.config.category.general"))
+        }
+        tabbed.add(gameRules) {
+            it.icon(ItemIcon(ItemStack(Items.PAPER)))
+            it.tooltip(TranslatableText("gui.adorn.config.category.game_rules"))
+        }
 
         root.add(tabbed, 0, 18 + 5, tabbed.width, tabbed.height)
         root.add(
