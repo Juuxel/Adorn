@@ -7,11 +7,6 @@ class Config {
     @JvmField
     var sittingOnTables: Boolean = false
 
-    @Comment("If true, sleeping on sofas can skip the night.")
-    @JvmField
-    // TODO: Should be a game rule
-    var skipNightOnSofas: Boolean = true
-
     @Comment("Protects trading stations from other players.")
     @JvmField
     // TODO: Should be a game rule
@@ -19,6 +14,9 @@ class Config {
 
     @field:Comment("Client-side settings")
     var client: Client = Client()
+
+    @field:Comment("Default values for game rules in new worlds")
+    var gameRuleDefaults: GameRuleDefaults = GameRuleDefaults()
 
     @field:Comment("Mod compatibility toggles (enabled: true, disabled: false)")
     var compat: MutableMap<String, Boolean> = HashMap()
@@ -48,5 +46,10 @@ class Config {
         @Comment("A list of piece sets that will have carpeting support.")
         @JvmField
         var carpetedPieceSets: List<String> = ArrayList() // ArrayList so that Jankson deserializes it properly
+    }
+
+    class GameRuleDefaults {
+        @field:Comment("If true, sleeping on sofas can skip the night.")
+        var skipNightOnSofas: Boolean = true
     }
 }

@@ -223,8 +223,10 @@
   "item.adorn.deprecated_item.desc.1": "Tämä esine on siirretty.",
   "item.adorn.deprecated_item.desc.2": "Sen voi korvata painamalla %s.",
 
+  "gamerule.adorn:skipNightOnSofas": "Skip nights by sleeping on sofas",
+
   "gui.adorn.config.category.general": "Yleiset",
-  "gui.adorn.config.category.advanced": "Edistyneet",
+  "gui.adorn.config.category.game_rules": "Pelisäännöt",
   "gui.adorn.config.option.enableOldStoneRods": "Käytä vanhoja kivisauvoja",
   "gui.adorn.config.option.enableOldStoneRods.tooltip": "Käytä vanhoja kivisauvoja yhteensopivuutta varten.",
   "gui.adorn.config.option.sittingOnTables": "Salli pöydillä istuminen",

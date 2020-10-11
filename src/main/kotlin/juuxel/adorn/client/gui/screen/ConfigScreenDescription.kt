@@ -7,9 +7,12 @@ import io.github.cottonmc.cotton.gui.widget.WButton
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel
+import io.github.cottonmc.cotton.gui.widget.WTabPanel
 import io.github.cottonmc.cotton.gui.widget.WToggleButton
 import io.github.cottonmc.cotton.gui.widget.WWidget
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
+import io.github.cottonmc.cotton.gui.widget.icon.ItemIcon
+import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.util.Colors
 import net.fabricmc.api.EnvType
@@ -17,6 +20,8 @@ import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.NoticeScreen
 import net.minecraft.client.gui.screen.Screen
+import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import kotlin.reflect.KMutableProperty
@@ -36,35 +41,42 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
             0, 0, 11 * 18, 18
         )
 
-        // val tabbed = WTabbedPanel()
+        val tabbed = WTabPanel()
         val config = ConfigManager.CONFIG
 
         val general = WGridPanel()
         with(general) {
-            add(createConfigToggle(config::skipNightOnSofas), 0, 0)
-            add(createConfigToggle(config::protectTradingStations), 0, 1)
-            add(createConfigToggle(config::sittingOnTables, true), 0, 2)
-            add(createConfigToggle(config.client::showTradingStationTooltips), 0, 3)
+            add(createConfigToggle(config::protectTradingStations), 0, 0)
+            add(createConfigToggle(config::sittingOnTables, true), 0, 1)
+            add(createConfigToggle(config.client::showTradingStationTooltips), 0, 2)
 
             backgroundPainter = BackgroundPainter.VANILLA
             setSize(11 * 18, height)
         }
 
-        val advanced = WGridPanel()
-        with(advanced) {
+        val gameRules = WGridPanel()
+        with(gameRules) {
+            add(createConfigToggle(config.gameRuleDefaults::skipNightOnSofas), 0, 0)
+
             backgroundPainter = BackgroundPainter.VANILLA
             setSize(11 * 18, height)
         }
 
-        // tabbed.addTab(TranslatableText("gui.adorn.config.category.general"), general)
-        // tabbed.addTab(TranslatableText("gui.adorn.config.category.advanced"), advanced)
+         tabbed.add(general) {
+             it.icon(ItemIcon(ItemStack(AdornBlocks.OAK_TABLE)))
+             it.tooltip(TranslatableText("gui.adorn.config.category.general"))
+         }
+         tabbed.add(gameRules) {
+             it.icon(ItemIcon(ItemStack(Items.PAPER)))
+             it.tooltip(TranslatableText("gui.adorn.config.category.game_rules"))
+         }
 
-        root.add(general, 0, 18 + 5, general.width, general.height)
+        root.add(tabbed, 0, 18 + 5, tabbed.width, tabbed.height)
         root.add(
             WButton(TranslatableText("gui.done")).apply {
                 setOnClick { close(previous) }
             },
-            11 * 9 - 5 * 9, 6 * 18, 5 * 18, 18
+            11 * 9 - 5 * 9, 7 * 18, 5 * 18, 18
         )
         root.validate(this)
     }
