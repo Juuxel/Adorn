@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "byg:soapstone_tile"
+  },
+  "result": "adorn:byg/soapstone_tile_post",
+  "count": 2
+}

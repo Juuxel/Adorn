@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:step",
+  "pattern": [
+    "S",
+    "#"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:rainbow_eucalyptus_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/rainbow_eucalyptus_step",
+    "count": 1
+  }
+}

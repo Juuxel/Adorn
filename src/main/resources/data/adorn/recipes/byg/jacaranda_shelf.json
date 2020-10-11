@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:shelf",
+  "pattern": [
+    "---",
+    "/ /"
+  ],
+  "key": {
+    "-": {
+      "item": "byg:jacaranda_slab"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/jacaranda_shelf",
+    "count": 3
+  }
+}

@@ -199,6 +199,13 @@ object AdornPlugin : Plugin {
             "post",
             2
         ),
+        SuffixedStonecuttingRecipe(
+            "post.wooden_stonecutting_recipe",
+            POST,
+            "post",
+            2,
+            "_planks"
+        ),
 
         WoodenPlatformBlockModel,
         StonePlatformBlockModel,
@@ -217,6 +224,13 @@ object AdornPlugin : Plugin {
             PLATFORM,
             "platform",
             1
+        ),
+        SuffixedStonecuttingRecipe(
+            "platform.wooden_stonecutting_recipe",
+            PLATFORM,
+            "platform",
+            2,
+            "_planks"
         ),
 
         WoodenStepBlockModel,
@@ -237,6 +251,13 @@ object AdornPlugin : Plugin {
             STEP,
             "step",
             2
+        ),
+        SuffixedStonecuttingRecipe(
+            "step.wooden_stonecutting_recipe",
+            STEP,
+            "step",
+            2,
+            "_planks"
         ),
 
         ShelfBlockModel,

@@ -36,6 +36,32 @@
         "values": [
           "adorn:woods_and_mires/pine_shelf"
         ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "byg" }],
+        "values": [
+          "adorn:byg/aspen_shelf",
+          "adorn:byg/baobab_shelf",
+          "adorn:byg/blue_enchanted_shelf",
+          "adorn:byg/cherry_shelf",
+          "adorn:byg/cika_shelf",
+          "adorn:byg/cypress_shelf",
+          "adorn:byg/ebony_shelf",
+          "adorn:byg/fir_shelf",
+          "adorn:byg/green_enchanted_shelf",
+          "adorn:byg/holly_shelf",
+          "adorn:byg/jacaranda_shelf",
+          "adorn:byg/mahogany_shelf",
+          "adorn:byg/mangrove_shelf",
+          "adorn:byg/maple_shelf",
+          "adorn:byg/pine_shelf",
+          "adorn:byg/rainbow_eucalyptus_shelf",
+          "adorn:byg/redwood_shelf",
+          "adorn:byg/skyris_shelf",
+          "adorn:byg/willow_shelf",
+          "adorn:byg/witch_hazel_shelf",
+          "adorn:byg/zelkova_shelf"
+        ]
       }
     ]
   }

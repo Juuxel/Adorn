@@ -36,6 +36,32 @@
         "values": [
           "adorn:woods_and_mires/pine_drawer"
         ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "byg" }],
+        "values": [
+          "adorn:byg/aspen_drawer",
+          "adorn:byg/baobab_drawer",
+          "adorn:byg/blue_enchanted_drawer",
+          "adorn:byg/cherry_drawer",
+          "adorn:byg/cika_drawer",
+          "adorn:byg/cypress_drawer",
+          "adorn:byg/ebony_drawer",
+          "adorn:byg/fir_drawer",
+          "adorn:byg/green_enchanted_drawer",
+          "adorn:byg/holly_drawer",
+          "adorn:byg/jacaranda_drawer",
+          "adorn:byg/mahogany_drawer",
+          "adorn:byg/mangrove_drawer",
+          "adorn:byg/maple_drawer",
+          "adorn:byg/pine_drawer",
+          "adorn:byg/rainbow_eucalyptus_drawer",
+          "adorn:byg/redwood_drawer",
+          "adorn:byg/skyris_drawer",
+          "adorn:byg/willow_drawer",
+          "adorn:byg/witch_hazel_drawer",
+          "adorn:byg/zelkova_drawer"
+        ]
       }
     ]
   }

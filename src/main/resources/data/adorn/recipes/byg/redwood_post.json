@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "S",
+    "S",
+    "P"
+  ],
+  "key": {
+    "P": {
+      "item": "byg:redwood_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/redwood_post",
+    "count": 4
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:shelf",
+  "pattern": [
+    "---",
+    "/ /"
+  ],
+  "key": {
+    "-": {
+      "item": "byg:aspen_slab"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/aspen_shelf",
+    "count": 3
+  }
+}

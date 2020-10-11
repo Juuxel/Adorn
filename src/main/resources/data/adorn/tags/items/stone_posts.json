@@ -14,12 +14,34 @@
     "adorn:basalt_post"
   ],
   "libcd": {
-    "entries": [{
-      "when": [{ "libcd:mod_loaded": "terrestria" }],
-      "values": [
-        "adorn:terrestria_basalt_post",
-        "adorn:terrestria_basalt_cobblestone_post"
-      ]
-    }]
+    "entries": [
+      {
+        "when": [{ "libcd:mod_loaded": "terrestria" }],
+        "values": [
+          "adorn:terrestria_basalt_post",
+          "adorn:terrestria_basalt_cobblestone_post"
+        ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "byg" }],
+        "values": [
+          "adorn:byg/dacite_cobblestone_post",
+          "adorn:byg/mossy_stone_post",
+          "adorn:byg/rocky_stone_post",
+          "adorn:byg/scoria_stone_post",
+          "adorn:byg/scoria_cobblestone_post",
+          "adorn:byg/scoria_stonebrick_post",
+          "adorn:byg/soapstone_post",
+          "adorn:byg/polished_soapstone_post",
+          "adorn:byg/soapstone_brick_post",
+          "adorn:byg/soapstone_tile_post",
+          "adorn:byg/red_rock_post",
+          "adorn:byg/red_rock_brick_post",
+          "adorn:byg/mossy_red_rock_brick_post",
+          "adorn:byg/cracked_red_rock_brick_post",
+          "adorn:byg/chiseled_red_rock_brick_post"
+        ]
+      }
+    ]
   }
 }

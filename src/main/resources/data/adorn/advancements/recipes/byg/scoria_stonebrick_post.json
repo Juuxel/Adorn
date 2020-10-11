@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:byg/scoria_stonebrick_post"
+    ]
+  },
+  "criteria": {
+    "has_key_item_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "byg:scoria_stonebrick"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:byg/scoria_stonebrick_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_key_item_0",
+      "has_the_recipe"
+    ]
+  ]
+}

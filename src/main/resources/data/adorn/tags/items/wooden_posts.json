@@ -30,6 +30,38 @@
           "adorn:terrestria_sakura_post",
           "adorn:terrestria_willow_post"
         ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "woods_and_mires" }],
+        "values": [
+          "adorn:woods_and_mires/pine_post"
+        ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "byg" }],
+        "values": [
+          "adorn:byg/aspen_post",
+          "adorn:byg/baobab_post",
+          "adorn:byg/blue_enchanted_post",
+          "adorn:byg/cherry_post",
+          "adorn:byg/cika_post",
+          "adorn:byg/cypress_post",
+          "adorn:byg/ebony_post",
+          "adorn:byg/fir_post",
+          "adorn:byg/green_enchanted_post",
+          "adorn:byg/holly_post",
+          "adorn:byg/jacaranda_post",
+          "adorn:byg/mahogany_post",
+          "adorn:byg/mangrove_post",
+          "adorn:byg/maple_post",
+          "adorn:byg/pine_post",
+          "adorn:byg/rainbow_eucalyptus_post",
+          "adorn:byg/redwood_post",
+          "adorn:byg/skyris_post",
+          "adorn:byg/willow_post",
+          "adorn:byg/witch_hazel_post",
+          "adorn:byg/zelkova_post"
+        ]
       }
     ]
   }

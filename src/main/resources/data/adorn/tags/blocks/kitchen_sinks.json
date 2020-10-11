@@ -36,6 +36,32 @@
         "values": [
           "adorn:woods_and_mires/pine_kitchen_sink"
         ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "byg" }],
+        "values": [
+          "adorn:byg/aspen_kitchen_sink",
+          "adorn:byg/baobab_kitchen_sink",
+          "adorn:byg/blue_enchanted_kitchen_sink",
+          "adorn:byg/cherry_kitchen_sink",
+          "adorn:byg/cika_kitchen_sink",
+          "adorn:byg/cypress_kitchen_sink",
+          "adorn:byg/ebony_kitchen_sink",
+          "adorn:byg/fir_kitchen_sink",
+          "adorn:byg/green_enchanted_kitchen_sink",
+          "adorn:byg/holly_kitchen_sink",
+          "adorn:byg/jacaranda_kitchen_sink",
+          "adorn:byg/mahogany_kitchen_sink",
+          "adorn:byg/mangrove_kitchen_sink",
+          "adorn:byg/maple_kitchen_sink",
+          "adorn:byg/pine_kitchen_sink",
+          "adorn:byg/rainbow_eucalyptus_kitchen_sink",
+          "adorn:byg/redwood_kitchen_sink",
+          "adorn:byg/skyris_kitchen_sink",
+          "adorn:byg/willow_kitchen_sink",
+          "adorn:byg/witch_hazel_kitchen_sink",
+          "adorn:byg/zelkova_kitchen_sink"
+        ]
       }
     ]
   }

@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/step",
+  "textures": {
+    "texture": "byg:blocks/cracked_red_rock_brick"
+  }
+}

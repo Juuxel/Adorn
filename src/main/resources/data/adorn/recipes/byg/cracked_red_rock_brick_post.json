@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "R",
+    "R",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:cracked_red_rock_brick"
+    },
+    "R": {
+      "tag": "c:stone_rods"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/cracked_red_rock_brick_post",
+    "count": 4
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/step",
+  "textures": {
+    "texture": "byg:blocks/green_enchanted_planks"
+  }
+}

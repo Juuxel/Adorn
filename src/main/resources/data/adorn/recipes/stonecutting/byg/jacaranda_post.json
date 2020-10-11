@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "byg:jacaranda_planks"
+  },
+  "result": "adorn:byg/jacaranda_post",
+  "count": 2
+}

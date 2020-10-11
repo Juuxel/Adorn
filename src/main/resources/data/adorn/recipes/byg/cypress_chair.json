@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:chair",
+  "pattern": [
+    " S",
+    "SS",
+    "##"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:cypress_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/cypress_chair",
+    "count": 2
+  }
+}

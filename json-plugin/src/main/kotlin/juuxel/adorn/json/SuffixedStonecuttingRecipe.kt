@@ -12,7 +12,8 @@ class SuffixedStonecuttingRecipe(
     id: String,
     info: GeneratorInfo,
     private val suffix: String,
-    private val count: Int
+    private val count: Int,
+    private val pathSuffix: String = ""
 ) : AbstractContentGenerator(id, "recipes/stonecutting", info, resourceRoot = ResourceRoot.Data) {
     @ExperimentalMapOutput
     override fun generate(id: Identifier) = listOf(
@@ -20,7 +21,7 @@ class SuffixedStonecuttingRecipe(
             mapOf(
                 "type" to "stonecutting",
                 "ingredient" to mapOf(
-                    "item" to Identifier.mc(id.path)
+                    "item" to Identifier.mc(id.path + pathSuffix)
                 ),
                 "result" to id.suffixPath("_$suffix"),
                 "count" to count

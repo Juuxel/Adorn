@@ -36,6 +36,32 @@
         "values": [
           "adorn:woods_and_mires/pine_table"
         ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "byg" }],
+        "values": [
+          "adorn:byg/aspen_table",
+          "adorn:byg/baobab_table",
+          "adorn:byg/blue_enchanted_table",
+          "adorn:byg/cherry_table",
+          "adorn:byg/cika_table",
+          "adorn:byg/cypress_table",
+          "adorn:byg/ebony_table",
+          "adorn:byg/fir_table",
+          "adorn:byg/green_enchanted_table",
+          "adorn:byg/holly_table",
+          "adorn:byg/jacaranda_table",
+          "adorn:byg/mahogany_table",
+          "adorn:byg/mangrove_table",
+          "adorn:byg/maple_table",
+          "adorn:byg/pine_table",
+          "adorn:byg/rainbow_eucalyptus_table",
+          "adorn:byg/redwood_table",
+          "adorn:byg/skyris_table",
+          "adorn:byg/willow_table",
+          "adorn:byg/witch_hazel_table",
+          "adorn:byg/zelkova_table"
+        ]
       }
     ]
   }

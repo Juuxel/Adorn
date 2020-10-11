@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:table",
+  "pattern": [
+    "SSS",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:willow_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/willow_table",
+    "count": 3
+  }
+}

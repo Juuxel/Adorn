@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "R",
+    "R",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:rocky_stone"
+    },
+    "R": {
+      "tag": "c:stone_rods"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/rocky_stone_post",
+    "count": 4
+  }
+}

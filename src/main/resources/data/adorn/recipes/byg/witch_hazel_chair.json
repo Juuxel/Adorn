@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:chair",
+  "pattern": [
+    " S",
+    "SS",
+    "##"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:witch_hazel_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/witch_hazel_chair",
+    "count": 2
+  }
+}

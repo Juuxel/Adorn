@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:table",
+  "pattern": [
+    "SSS",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:maple_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/maple_table",
+    "count": 3
+  }
+}

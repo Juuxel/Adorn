@@ -36,6 +36,32 @@
         "values": [
           "adorn:woods_and_mires/pine_kitchen_counter"
         ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "byg" }],
+        "values": [
+          "adorn:byg/aspen_kitchen_counter",
+          "adorn:byg/baobab_kitchen_counter",
+          "adorn:byg/blue_enchanted_kitchen_counter",
+          "adorn:byg/cherry_kitchen_counter",
+          "adorn:byg/cika_kitchen_counter",
+          "adorn:byg/cypress_kitchen_counter",
+          "adorn:byg/ebony_kitchen_counter",
+          "adorn:byg/fir_kitchen_counter",
+          "adorn:byg/green_enchanted_kitchen_counter",
+          "adorn:byg/holly_kitchen_counter",
+          "adorn:byg/jacaranda_kitchen_counter",
+          "adorn:byg/mahogany_kitchen_counter",
+          "adorn:byg/mangrove_kitchen_counter",
+          "adorn:byg/maple_kitchen_counter",
+          "adorn:byg/pine_kitchen_counter",
+          "adorn:byg/rainbow_eucalyptus_kitchen_counter",
+          "adorn:byg/redwood_kitchen_counter",
+          "adorn:byg/skyris_kitchen_counter",
+          "adorn:byg/willow_kitchen_counter",
+          "adorn:byg/witch_hazel_kitchen_counter",
+          "adorn:byg/zelkova_kitchen_counter"
+        ]
       }
     ]
   }

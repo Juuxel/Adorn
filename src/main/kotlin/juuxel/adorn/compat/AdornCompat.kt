@@ -13,6 +13,7 @@ object AdornCompat {
         ifModLoaded("terrestria") { AdornTerrestriaCompat.init() }
         ifModLoaded("towelette") { AdornToweletteCompat.init() }
         ifModLoaded("woods_and_mires") { AdornWamCompat.init() }
+        ifModLoaded("byg") { BygCompat.init() }
     }
 
     fun isCompatEnabled(mod: String): Boolean {

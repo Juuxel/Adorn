@@ -36,6 +36,32 @@
         "values": [
           "adorn:woods_and_mires/pine_kitchen_cupboard"
         ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "byg" }],
+        "values": [
+          "adorn:byg/aspen_kitchen_cupboard",
+          "adorn:byg/baobab_kitchen_cupboard",
+          "adorn:byg/blue_enchanted_kitchen_cupboard",
+          "adorn:byg/cherry_kitchen_cupboard",
+          "adorn:byg/cika_kitchen_cupboard",
+          "adorn:byg/cypress_kitchen_cupboard",
+          "adorn:byg/ebony_kitchen_cupboard",
+          "adorn:byg/fir_kitchen_cupboard",
+          "adorn:byg/green_enchanted_kitchen_cupboard",
+          "adorn:byg/holly_kitchen_cupboard",
+          "adorn:byg/jacaranda_kitchen_cupboard",
+          "adorn:byg/mahogany_kitchen_cupboard",
+          "adorn:byg/mangrove_kitchen_cupboard",
+          "adorn:byg/maple_kitchen_cupboard",
+          "adorn:byg/pine_kitchen_cupboard",
+          "adorn:byg/rainbow_eucalyptus_kitchen_cupboard",
+          "adorn:byg/redwood_kitchen_cupboard",
+          "adorn:byg/skyris_kitchen_cupboard",
+          "adorn:byg/willow_kitchen_cupboard",
+          "adorn:byg/witch_hazel_kitchen_cupboard",
+          "adorn:byg/zelkova_kitchen_cupboard"
+        ]
       }
     ]
   }

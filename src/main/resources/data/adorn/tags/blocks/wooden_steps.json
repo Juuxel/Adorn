@@ -36,6 +36,32 @@
         "values": [
           "adorn:woods_and_mires/pine_step"
         ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "byg" }],
+        "values": [
+          "adorn:byg/aspen_step",
+          "adorn:byg/baobab_step",
+          "adorn:byg/blue_enchanted_step",
+          "adorn:byg/cherry_step",
+          "adorn:byg/cika_step",
+          "adorn:byg/cypress_step",
+          "adorn:byg/ebony_step",
+          "adorn:byg/fir_step",
+          "adorn:byg/green_enchanted_step",
+          "adorn:byg/holly_step",
+          "adorn:byg/jacaranda_step",
+          "adorn:byg/mahogany_step",
+          "adorn:byg/mangrove_step",
+          "adorn:byg/maple_step",
+          "adorn:byg/pine_step",
+          "adorn:byg/rainbow_eucalyptus_step",
+          "adorn:byg/redwood_step",
+          "adorn:byg/skyris_step",
+          "adorn:byg/willow_step",
+          "adorn:byg/witch_hazel_step",
+          "adorn:byg/zelkova_step"
+        ]
       }
     ]
   }

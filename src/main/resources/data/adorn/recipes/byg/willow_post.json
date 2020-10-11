@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "S",
+    "S",
+    "P"
+  ],
+  "key": {
+    "P": {
+      "item": "byg:willow_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/willow_post",
+    "count": 4
+  }
+}

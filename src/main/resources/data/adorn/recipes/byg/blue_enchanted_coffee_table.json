@@ -1,0 +1,23 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:coffee_table",
+  "pattern": [
+    "S-S",
+    "# #"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:blue_enchanted_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "-": {
+      "tag": "c:glass_panes"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/blue_enchanted_coffee_table",
+    "count": 2
+  }
+}

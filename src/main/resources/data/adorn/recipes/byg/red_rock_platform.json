@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:red_rock_slab"
+    },
+    "P": {
+      "item": "adorn:byg/red_rock_post"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/red_rock_platform",
+    "count": 2
+  }
+}

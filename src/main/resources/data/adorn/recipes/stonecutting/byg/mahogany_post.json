@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "byg:mahogany_planks"
+  },
+  "result": "adorn:byg/mahogany_post",
+  "count": 2
+}

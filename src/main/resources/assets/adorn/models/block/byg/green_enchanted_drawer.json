@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/drawer",
+  "textures": {
+    "planks": "byg:blocks/green_enchanted_planks"
+  }
+}

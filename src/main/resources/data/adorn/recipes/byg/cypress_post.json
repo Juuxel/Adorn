@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "S",
+    "S",
+    "P"
+  ],
+  "key": {
+    "P": {
+      "item": "byg:cypress_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/cypress_post",
+    "count": 4
+  }
+}

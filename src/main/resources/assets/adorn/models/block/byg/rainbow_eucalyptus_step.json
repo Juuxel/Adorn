@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/step",
+  "textures": {
+    "texture": "byg:blocks/rainbow_eucalyptus_planks"
+  }
+}

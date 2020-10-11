@@ -36,6 +36,32 @@
         "values": [
           "adorn:woods_and_mires/pine_coffee_table"
         ]
+      },
+      {
+        "when": [{ "libcd:mod_loaded": "byg" }],
+        "values": [
+          "adorn:byg/aspen_coffee_table",
+          "adorn:byg/baobab_coffee_table",
+          "adorn:byg/blue_enchanted_coffee_table",
+          "adorn:byg/cherry_coffee_table",
+          "adorn:byg/cika_coffee_table",
+          "adorn:byg/cypress_coffee_table",
+          "adorn:byg/ebony_coffee_table",
+          "adorn:byg/fir_coffee_table",
+          "adorn:byg/green_enchanted_coffee_table",
+          "adorn:byg/holly_coffee_table",
+          "adorn:byg/jacaranda_coffee_table",
+          "adorn:byg/mahogany_coffee_table",
+          "adorn:byg/mangrove_coffee_table",
+          "adorn:byg/maple_coffee_table",
+          "adorn:byg/pine_coffee_table",
+          "adorn:byg/rainbow_eucalyptus_coffee_table",
+          "adorn:byg/redwood_coffee_table",
+          "adorn:byg/skyris_coffee_table",
+          "adorn:byg/willow_coffee_table",
+          "adorn:byg/witch_hazel_coffee_table",
+          "adorn:byg/zelkova_coffee_table"
+        ]
       }
     ]
   }
