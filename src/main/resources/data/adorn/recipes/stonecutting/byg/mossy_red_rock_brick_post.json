@@ -1,7 +1,7 @@
 {
   "type": "stonecutting",
   "ingredient": {
-    "item": "byg:mossy_red_rock_brick"
+    "item": "byg:mossy_red_rock_bricks"
   },
   "result": "adorn:byg/mossy_red_rock_brick_post",
   "count": 2

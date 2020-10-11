@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/platform",
   "textures": {
-    "texture": "byg:blocks/cracked_red_rock_brick"
+    "texture": "byg:blocks/cracked_red_rock_bricks"
   }
 }

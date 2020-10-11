@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "R",
+    "R",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:dacite"
+    },
+    "R": {
+      "tag": "c:stone_rods"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/dacite_post",
+    "count": 4
+  }
+}

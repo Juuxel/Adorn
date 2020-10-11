@@ -25,6 +25,8 @@
       {
         "when": [{ "libcd:mod_loaded": "byg" }],
         "values": [
+          "adorn:byg/dacite_platform",
+          "adorn:byg/dacite_brick_platform",
           "adorn:byg/dacite_cobblestone_platform",
           "adorn:byg/mossy_stone_platform",
           "adorn:byg/rocky_stone_platform",

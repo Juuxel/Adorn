@@ -1,7 +1,7 @@
 {
   "type": "stonecutting",
   "ingredient": {
-    "item": "byg:soapstone_brick"
+    "item": "byg:soapstone_bricks"
   },
   "result": "adorn:byg/soapstone_brick_step",
   "count": 2

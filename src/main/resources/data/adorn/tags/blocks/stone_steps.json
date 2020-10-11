@@ -25,6 +25,8 @@
       {
         "when": [{ "libcd:mod_loaded": "byg" }],
         "values": [
+          "adorn:byg/dacite_step",
+          "adorn:byg/dacite_brick_step",
           "adorn:byg/dacite_cobblestone_step",
           "adorn:byg/mossy_stone_step",
           "adorn:byg/rocky_stone_step",

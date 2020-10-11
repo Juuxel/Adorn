@@ -37,6 +37,8 @@ object BygCompat {
         }
 
         val stoneTypes = sequenceOf(
+            "dacite",
+            "dacite_brick",
             "dacite_cobblestone",
             "mossy_stone",
             "rocky_stone",
