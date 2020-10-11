@@ -1,10 +1,10 @@
-package juuxel.adorn.compat.terrestria
+package juuxel.adorn.compat
 
 import juuxel.adorn.Adorn
 import juuxel.adorn.api.block.AdornBlockBuilder
 import juuxel.adorn.api.block.BlockVariant
 
-object AdornTerrestriaCompat {
+object TerrestriaCompat {
     fun init() {
         val woodTypes = sequenceOf(
             "cypress", "hemlock", "japanese_maple", "rainbow_eucalyptus", "redwood",

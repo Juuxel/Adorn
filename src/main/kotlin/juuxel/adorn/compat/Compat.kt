@@ -1,19 +1,21 @@
 package juuxel.adorn.compat
 
-import juuxel.adorn.compat.terrestria.AdornTerrestriaCompat
-import juuxel.adorn.compat.towelette.AdornToweletteCompat
-import juuxel.adorn.compat.traverse.AdornTraverseCompat
-import juuxel.adorn.compat.woodsandmires.AdornWamCompat
 import juuxel.adorn.config.ConfigManager
 import net.fabricmc.loader.api.FabricLoader
 
-object AdornCompat {
+object Compat {
     fun init() {
-        ifModLoaded("traverse") { AdornTraverseCompat.init() }
-        ifModLoaded("terrestria") { AdornTerrestriaCompat.init() }
-        ifModLoaded("towelette") { AdornToweletteCompat.init() }
-        ifModLoaded("woods_and_mires") { AdornWamCompat.init() }
-        ifModLoaded("byg") { BygCompat.init() }
+        val mods = mapOf(
+            "byg" to BygCompat::init,
+            "terrestria" to TerrestriaCompat::init,
+            "towelette" to ToweletteCompat::init,
+            "traverse" to TraverseCompat::init,
+            "woods_and_mires" to WamCompat::init
+        )
+
+        for ((mod, fn) in mods) {
+            ifModLoaded(mod, fn)
+        }
     }
 
     fun isCompatEnabled(mod: String): Boolean {

@@ -1,13 +1,12 @@
-package juuxel.adorn.compat.traverse
+package juuxel.adorn.compat
 
 import juuxel.adorn.Adorn
 import juuxel.adorn.api.block.AdornBlockBuilder
 import juuxel.adorn.api.block.BlockVariant
 
-object AdornTraverseCompat {
+object WamCompat {
     fun init() {
-        val fir = BlockVariant.Wood("traverse_fir")
-        AdornBlockBuilder.create(fir)
+        AdornBlockBuilder.create(BlockVariant.Wood("woods_and_mires/pine"))
             .withEverything()
             .registerIn(Adorn.NAMESPACE)
     }

@@ -1,4 +1,4 @@
-package juuxel.adorn.compat.towelette
+package juuxel.adorn.compat
 
 import juuxel.adorn.block.ChairBlock
 import juuxel.adorn.block.ChimneyBlock
@@ -23,7 +23,7 @@ import virtuoel.statement.api.StateRefresher
 import virtuoel.towelette.api.FluidProperties
 import virtuoel.towelette.api.ToweletteConfig
 
-object AdornToweletteCompat {
+object ToweletteCompat {
     fun init() {
         val flowing = run {
             var result = false

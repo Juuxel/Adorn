@@ -2,7 +2,7 @@ package juuxel.adorn
 
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
-import juuxel.adorn.compat.AdornCompat
+import juuxel.adorn.compat.Compat
 import juuxel.adorn.config.AdornGameRules
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.entity.AdornEntities
@@ -31,7 +31,7 @@ object Adorn : ModInitializer {
         AdornNetworking.init()
         AdornTags.init()
         AdornGameRules.init()
-        AdornCompat.init()
+        Compat.init()
         ConfigManager.finalize()
     }
 
