@@ -16,7 +16,7 @@ object StoneStepRecipe : AbstractContentGenerator("step.stone.recipe", "recipes"
                 "pattern" to listOf("S", "#"),
                 "key" to mapOf(
                     "S" to mapOf("item" to "minecraft:${id.path}_slab"),
-                    "#" to mapOf("tag" to "c:stone_rod")
+                    "#" to mapOf("tag" to "c:stone_rods")
                 ),
                 "result" to mapOf(
                     "item" to id.suffixPath("_step"),
