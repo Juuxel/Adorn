@@ -6,7 +6,7 @@ plugins {
     java
     kotlin("jvm") version "1.4.0"
     idea
-    id("fabric-loom") version "0.4-SNAPSHOT"
+    id("fabric-loom") version "0.5-SNAPSHOT"
     `maven-publish`
     id("org.jmailen.kotlinter") version "3.2.0"
 }
