@@ -11,7 +11,6 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.NbtOps
 import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket
-import net.minecraft.network.packet.s2c.play.EntityPositionS2CPacket
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos

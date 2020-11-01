@@ -5,7 +5,6 @@ import com.google.common.base.Predicates
 import juuxel.adorn.entity.AdornEntities
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateManager
