@@ -31,9 +31,6 @@ class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, wor
         }
         updatePosition(pos.x + 0.5, pos.y + 0.25 + blockOffset, pos.z + 0.5)
         seatPos = pos
-        PlayerStream.watching(this).forEach {
-            ServerSidePacketRegistry.INSTANCE.sendToPlayer(it, EntityPositionS2CPacket(this))
-        }
     }
 
     override fun interact(player: PlayerEntity, hand: Hand): ActionResult {
