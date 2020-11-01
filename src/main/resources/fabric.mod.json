@@ -42,6 +42,7 @@
   },
 
   "mixins": ["mixins.adorn.json"],
+  "accessWidener": "adorn.accesswidener",
 
   "depends": {
     "minecraft": ">=1.16.3",

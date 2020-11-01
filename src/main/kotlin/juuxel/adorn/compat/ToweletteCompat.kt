@@ -10,7 +10,6 @@ import juuxel.adorn.block.PrismarineChimneyBlock
 import juuxel.adorn.block.ShelfBlock
 import juuxel.adorn.block.SofaBlock
 import juuxel.adorn.block.StepBlock
-import juuxel.adorn.block.StoneTorchBlock
 import juuxel.adorn.block.TableBlock
 import juuxel.adorn.block.TableLampBlock
 import juuxel.adorn.block.TradingStationBlock
@@ -60,8 +59,6 @@ object ToweletteCompat {
             block is ShelfBlock ||
             block is SofaBlock ||
             block is StepBlock ||
-            block is StoneTorchBlock ||
-            block is StoneTorchBlock.Wall ||
             block is TableBlock ||
             block is TableLampBlock ||
             block is TradingStationBlock

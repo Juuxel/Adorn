@@ -58,7 +58,7 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription() {
     }
 
     private fun createPageWidget(pages: PageContainer, page: Page): WWidget = WPlainPanel().apply {
-        val item = WItem(page.icons.map { it.stackForRender })
+        val item = WItem(page.icons.map { it.defaultStack })
         add(item, 0, 0)
         add(
             WBookText(

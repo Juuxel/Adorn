@@ -20,10 +20,14 @@ import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.CarpetBlock
+import net.minecraft.block.TorchBlock
+import net.minecraft.block.WallTorchBlock
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
+import net.minecraft.particle.ParticleTypes
+import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundCategory
 import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
@@ -262,11 +266,18 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
 
     val TRADING_STATION: TradingStationBlock = registerBlock("trading_station", TradingStationBlock())
 
-    val STONE_TORCH_GROUND = registerBlockWithoutItem("stone_torch", StoneTorchBlock())
-    val STONE_TORCH_WALL = registerBlockWithoutItem(
+    val STONE_TORCH_GROUND: Block = registerBlockWithoutItem(
+        "stone_torch",
+        TorchBlock(
+            FabricBlockSettings.copyOf(Blocks.TORCH).sounds(BlockSoundGroup.STONE),
+            ParticleTypes.FLAME
+        )
+    )
+    val STONE_TORCH_WALL: Block = registerBlockWithoutItem(
         "wall_stone_torch",
-        StoneTorchBlock.Wall(
-            FabricBlockSettings.copyOf(STONE_TORCH_GROUND).dropsLike(STONE_TORCH_GROUND)
+        WallTorchBlock(
+            FabricBlockSettings.copyOf(STONE_TORCH_GROUND).dropsLike(STONE_TORCH_GROUND),
+            ParticleTypes.FLAME
         )
     )
 

@@ -20,3 +20,6 @@ indent_size = 2
 ij_json_keep_blank_lines_in_code = 1
 ij_json_keep_line_breaks = true
 ij_json_spaces_within_braces = true
+
+[*.accesswidener]
+indent_style = tab

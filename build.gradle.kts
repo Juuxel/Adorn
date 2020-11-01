@@ -1,4 +1,3 @@
-import java.util.Properties
 import net.fabricmc.loom.task.RemapJarTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -18,31 +17,14 @@ base {
 }
 
 val minecraft: String by ext
-val modVersion = ext["mod-version"] ?: error("Version was null")
-val localBuild = ext["local-build"].toString().toBoolean()
-version = "$modVersion+$minecraft"
-var heavyweight = false
-
-val localProperties = file("local.properties")
-if (localProperties.exists()) {
-    val props = Properties()
-    localProperties.reader().use(props::load)
-    heavyweight = props.getProperty("heavyweight")?.toBoolean() ?: false
-}
-
-if (localBuild) {
-    println("Note: local build mode enabled in gradle.properties; all dependencies might not work!")
-}
+version = "${project.properties["mod-version"]}+$minecraft"
 
 repositories {
     mavenCentral()
-    if (localBuild) {
-        mavenLocal()
-    }
 
     maven {
         name = "Cotton"
-        url = uri("http://server.bbkr.space:8081/artifactory/libs-release")
+        url = uri("https://server.bbkr.space/artifactory/libs-release")
     }
 
     maven {
@@ -68,25 +50,20 @@ tasks.withType<KotlinCompile> {
 tasks.getByName<ProcessResources>("processResources") {
     inputs.property("version", project.version)
     filesMatching("fabric.mod.json") {
-        expand(
-            mutableMapOf(
-                "version" to project.version
-            )
-        )
+        expand("version" to project.version)
     }
 }
 
-minecraft {
+loom {
+    accessWidener = file("src/main/resources/adorn.accesswidener")
 }
 
-fun DependencyHandler.includedMod(str: String, block: ExternalModuleDependency.() -> Unit = {}) {
-    modImplementation(str, block)
-    include(str, block)
+fun DependencyHandler.includedMod(notation: String, block: ExternalModuleDependency.() -> Unit = {}) {
+    include(modImplementation(notation, block))
 }
 
 fun DependencyHandler.includedMod(group: String, name: String, version: String, block: ExternalModuleDependency.() -> Unit = {}) {
-    modImplementation(group, name, version, dependencyConfiguration = block)
-    include(group, name, version, dependencyConfiguration = block)
+    include(modImplementation(group, name, version, dependencyConfiguration = block))
 }
 
 dependencies {
@@ -118,15 +95,7 @@ dependencies {
     modRuntime("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
     // Not actually a dev jar, see https://github.com/Shnupbups/extra-pieces/issues/45
     modCompileOnly("com.github.Shnupbups:extra-pieces:" + v("extra-pieces") + ":dev") { excludes() }
-
-    if (heavyweight) {
-        // FIXME: Biome mods
-//        modRuntime("com.terraformersmc", "traverse", v("traverse")) { excludes() }
-//        modRuntime("com.terraformersmc", "terrestria", v("terrestria")) { excludes() }
-        modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); excludes() }
-        modRuntime("com.github.Virtuoel:Towelette:" + v("towelette")) { excludes() }
-        modRuntime("com.github.Shnupbups:extra-pieces:" + v("extra-pieces") + ":dev") { excludes() }
-    }
+    modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); excludes() }
 }
 
 tasks.withType<KotlinCompile> {
