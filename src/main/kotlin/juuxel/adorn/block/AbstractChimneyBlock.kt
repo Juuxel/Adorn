@@ -6,6 +6,7 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
@@ -48,6 +49,8 @@ abstract class AbstractChimneyBlock(settings: Settings) : Block(settings), Water
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: ShapeContext?) =
         if (state[CONNECTED]) MIDDLE_SHAPE else TOP_SHAPE
+
+    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
     companion object {
         val CONNECTED = BooleanProperty.of("connected")

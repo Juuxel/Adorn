@@ -12,6 +12,7 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.DyeItem
@@ -154,6 +155,8 @@ open class SofaBlock(variant: BlockVariant) :
 
     override fun rotate(state: BlockState, rotation: BlockRotation) =
         state.with(FACING, rotation.rotate(state[FACING]))
+
+    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING

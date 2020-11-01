@@ -12,6 +12,7 @@ import net.minecraft.block.TallPlantBlock
 import net.minecraft.block.Waterloggable
 import net.minecraft.block.enums.DoubleBlockHalf
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
@@ -130,6 +131,8 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
 
     override fun canStateBeCarpeted(state: BlockState) =
         super.canStateBeCarpeted(state) && state[HALF] == DoubleBlockHalf.LOWER
+
+    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING

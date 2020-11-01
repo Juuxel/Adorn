@@ -8,6 +8,7 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.Material
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.DyeItem
@@ -73,6 +74,8 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable {
 
     override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
         if (state[LIT]) 15 else 0
+
+    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
     companion object {
         private val SHAPE: VoxelShape = createCuboidShape(

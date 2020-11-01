@@ -5,12 +5,14 @@ import net.fabricmc.api.Environment
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.PaneBlock
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
 class ChainLinkFenceBlock(settings: Settings) : PaneBlock(settings) {
@@ -53,6 +55,8 @@ class ChainLinkFenceBlock(settings: Settings) : PaneBlock(settings) {
 
     private fun connectsVerticallyTo(state: BlockState) =
         state.block is ChainLinkFenceBlock
+
+    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
     companion object {
         val UP: BooleanProperty = Properties.UP

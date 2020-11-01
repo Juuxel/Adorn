@@ -10,6 +10,7 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
@@ -174,6 +175,8 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
 
     override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
         ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos))
+
+    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING

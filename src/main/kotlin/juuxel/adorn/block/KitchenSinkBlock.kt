@@ -6,6 +6,7 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.state.StateManager
@@ -40,6 +41,8 @@ open class KitchenSinkBlock(variant: BlockVariant) : KitchenCounterBlock(variant
     // This is needed so that Towelette's default impl of getFluidState doesn't return water here.
     override fun getFluidState(state: BlockState?): FluidState =
         Fluids.EMPTY.defaultState
+
+    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
     companion object {
         private val WATERLOGGED = Properties.WATERLOGGED
