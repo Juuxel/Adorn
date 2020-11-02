@@ -104,6 +104,9 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
+    fun sideCoversSmallSquare(state: BlockState): Boolean =
+        state[SHAPE] != Shape.Straight
+
     companion object {
         val SHAPE: EnumProperty<Shape> = EnumProperty.of("shape", Shape::class.java)
         val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
