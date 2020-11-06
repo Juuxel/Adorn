@@ -9,17 +9,17 @@ enum class FrontConnection(private val value: String) : StringIdentifiable {
     /**
      * No connection to the block in front.
      */
-    None("none"),
+    NONE("none"),
 
     /**
      * The block will be connected to the block in front on its left side (looking from the connecting block).
      */
-    Left("left"),
+    LEFT("left"),
 
     /**
      * The block will be connected to the block in front on its right side (looking from the connecting block).
      */
-    Right("right");
+    RIGHT("right");
 
     override fun asString() = value
 }

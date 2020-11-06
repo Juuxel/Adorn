@@ -43,7 +43,7 @@ open class SofaBlock(variant: BlockVariant) :
     SneakClickHandler {
     init {
         defaultState = defaultState
-            .with(FRONT_CONNECTION, FrontConnection.None)
+            .with(FRONT_CONNECTION, FrontConnection.NONE)
             .with(CONNECTED_LEFT, false)
             .with(CONNECTED_RIGHT, false)
             .with(WATERLOGGED, false)
@@ -113,15 +113,15 @@ open class SofaBlock(variant: BlockVariant) :
         val rightState = world.getBlockState(pos.offset(direction.rotateYCounterclockwise()))
         val frontState = world.getBlockState(pos.offset(direction))
 
-        val connectedLeft = leftState.block is SofaBlock && (leftState[FACING] == direction || (leftState[FACING] == direction.rotateYCounterclockwise() && leftState[FRONT_CONNECTION] != FrontConnection.None))
-        val connectedRight = rightState.block is SofaBlock && (rightState[FACING] == direction || (rightState[FACING] == direction.rotateYClockwise() && rightState[FRONT_CONNECTION] != FrontConnection.None))
+        val connectedLeft = leftState.block is SofaBlock && (leftState[FACING] == direction || (leftState[FACING] == direction.rotateYCounterclockwise() && leftState[FRONT_CONNECTION] != FrontConnection.NONE))
+        val connectedRight = rightState.block is SofaBlock && (rightState[FACING] == direction || (rightState[FACING] == direction.rotateYClockwise() && rightState[FRONT_CONNECTION] != FrontConnection.NONE))
         val connectedFront = frontState.block is SofaBlock
         val connectedFrontLeft = connectedFront && !connectedLeft && frontState[FACING] == direction.rotateYCounterclockwise()
         val connectedFrontRight = connectedFront && !connectedRight && frontState[FACING] == direction.rotateYClockwise()
         val frontConnection = when {
-            connectedFrontLeft -> FrontConnection.Left
-            connectedFrontRight -> FrontConnection.Right
-            else -> FrontConnection.None
+            connectedFrontLeft -> FrontConnection.LEFT
+            connectedFrontRight -> FrontConnection.RIGHT
+            else -> FrontConnection.NONE
         }
 
         return state
@@ -189,16 +189,16 @@ open class SofaBlock(variant: BlockVariant) :
                     val parts = ArrayList<VoxelShape?>()
                     parts += backs[facing]
 
-                    if (!left && front == FrontConnection.None) {
+                    if (!left && front == FrontConnection.NONE) {
                         parts += if (thin) thinLeftArms[facing] else leftArms[facing]
                     }
-                    if (!right && front == FrontConnection.None) {
+                    if (!right && front == FrontConnection.NONE) {
                         parts += if (thin) thinRightArms[facing] else rightArms[facing]
                     }
 
                     when (front) {
-                        FrontConnection.Left -> parts += leftCorners[facing]
-                        FrontConnection.Right -> parts += rightCorners[facing]
+                        FrontConnection.LEFT -> parts += leftCorners[facing]
+                        FrontConnection.RIGHT -> parts += rightCorners[facing]
                         else -> {}
                     }
 
@@ -224,11 +224,11 @@ open class SofaBlock(variant: BlockVariant) :
             val frontConnection = state[FRONT_CONNECTION]
             val facing = state[FACING]
 
-            if ((!connectedLeft && !connectedRight && frontConnection == FrontConnection.None) || (!ignoreNeighbors && state[OCCUPIED]))
+            if ((!connectedLeft && !connectedRight && frontConnection == FrontConnection.NONE) || (!ignoreNeighbors && state[OCCUPIED]))
                 return null
 
             val result = when {
-                frontConnection != FrontConnection.None -> facing
+                frontConnection != FrontConnection.NONE -> facing
                 connectedLeft -> facing.rotateYClockwise()
                 connectedRight -> facing.rotateYCounterclockwise()
                 else -> null

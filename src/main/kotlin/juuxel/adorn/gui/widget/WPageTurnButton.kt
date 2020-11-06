@@ -20,15 +20,15 @@ class WPageTurnButton(private val pages: PageContainer, private val direction: D
     @Environment(EnvType.CLIENT)
     override fun paint(matrices: MatrixStack, x: Int, y: Int, mouseX: Int, mouseY: Int) {
         val enabled = when (direction) {
-            Direction.Previous -> pages.hasPreviousPage()
-            Direction.Next -> pages.hasNextPage()
+            Direction.PREVIOUS -> pages.hasPreviousPage()
+            Direction.NEXT -> pages.hasNextPage()
         }
 
         if (!enabled) return
         val px = 1 / 256f
         val tx = if (isWithinBounds(mouseX, mouseY)) 23 else 0
         var ty = 192
-        if (direction == Direction.Previous) {
+        if (direction == Direction.PREVIOUS) {
             ty += 13
         }
 
@@ -37,8 +37,8 @@ class WPageTurnButton(private val pages: PageContainer, private val direction: D
 
     override fun onClick(x: Int, y: Int, button: Int) {
         val enabled = when (direction) {
-            Direction.Previous -> pages.hasPreviousPage()
-            Direction.Next -> pages.hasNextPage()
+            Direction.PREVIOUS -> pages.hasPreviousPage()
+            Direction.NEXT -> pages.hasNextPage()
         }
 
         if (enabled) {
@@ -47,13 +47,13 @@ class WPageTurnButton(private val pages: PageContainer, private val direction: D
             )
 
             when (direction) {
-                Direction.Previous -> pages.showPreviousPage()
-                Direction.Next -> pages.showNextPage()
+                Direction.PREVIOUS -> pages.showPreviousPage()
+                Direction.NEXT -> pages.showNextPage()
             }
         }
     }
 
     enum class Direction {
-        Previous, Next
+        PREVIOUS, NEXT
     }
 }

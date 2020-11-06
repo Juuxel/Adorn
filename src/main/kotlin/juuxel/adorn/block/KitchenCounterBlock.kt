@@ -13,7 +13,7 @@ import net.minecraft.world.WorldAccess
 
 open class KitchenCounterBlock(variant: BlockVariant) : AbstractKitchenCounterBlock(variant) {
     init {
-        defaultState = defaultState.with(FRONT, FrontConnection.None)
+        defaultState = defaultState.with(FRONT, FrontConnection.NONE)
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
@@ -37,11 +37,11 @@ open class KitchenCounterBlock(variant: BlockVariant) : AbstractKitchenCounterBl
         val frontConnection =
             if (frontState.block is AbstractKitchenCounterBlock) {
                 when (frontState[FACING]) {
-                    facing.rotateYClockwise() -> FrontConnection.Left
-                    facing.rotateYCounterclockwise() -> FrontConnection.Right
-                    else -> FrontConnection.None
+                    facing.rotateYClockwise() -> FrontConnection.LEFT
+                    facing.rotateYCounterclockwise() -> FrontConnection.RIGHT
+                    else -> FrontConnection.NONE
                 }
-            } else FrontConnection.None
+            } else FrontConnection.NONE
 
         return state.with(FRONT, frontConnection)
     }

@@ -31,8 +31,8 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription() {
     init {
         val root = WPlainPanel()
         val pageCards = WBookCardPanel()
-        val prev = WPageTurnButton(pageCards, WPageTurnButton.Direction.Previous)
-        val next = WPageTurnButton(pageCards, WPageTurnButton.Direction.Next)
+        val prev = WPageTurnButton(pageCards, WPageTurnButton.Direction.PREVIOUS)
+        val next = WPageTurnButton(pageCards, WPageTurnButton.Direction.NEXT)
 
         pageCards.add(createTitlePage(book))
         for (topic in book.pages) pageCards.add(createPageWidget(pageCards, topic))

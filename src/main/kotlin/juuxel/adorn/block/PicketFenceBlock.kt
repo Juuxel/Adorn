@@ -29,7 +29,7 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
     init {
         defaultState = defaultState
             .with(FACING, Direction.NORTH)
-            .with(SHAPE, Shape.Straight)
+            .with(SHAPE, Shape.STRAIGHT)
             .with(WATERLOGGED, false)
     }
 
@@ -41,7 +41,7 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
         return super.getPlacementState(ctx)?.let { state ->
             state.with(FACING, ctx.playerFacing.opposite)
-                .with(SHAPE, Shape.Straight)
+                .with(SHAPE, Shape.STRAIGHT)
                 .with(WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).fluid === Fluids.WATER)
                 .let {
                     val side = it[FACING].opposite
@@ -62,14 +62,14 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
             val neighborShape = if (neighborState.block is PicketFenceBlock) neighborState[SHAPE] else null
 
             var shape = when (neighborFacing) {
-                fenceFacing.rotateYClockwise() -> Shape.ClockwiseCorner
-                fenceFacing.rotateYCounterclockwise() -> Shape.CounterclockwiseCorner
-                else -> Shape.Straight
+                fenceFacing.rotateYClockwise() -> Shape.CLOCKWISE_CORNER
+                fenceFacing.rotateYCounterclockwise() -> Shape.COUNTERCLOCKWISE_CORNER
+                else -> Shape.STRAIGHT
             }
 
             // Prevent funny connections
-            if (neighborShape != shape && neighborShape != Shape.Straight)
-                shape = Shape.Straight
+            if (neighborShape != shape && neighborShape != Shape.STRAIGHT)
+                shape = Shape.STRAIGHT
 
             return state.with(SHAPE, shape)
         }
@@ -79,17 +79,17 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
     override fun getOutlineShape(
         state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext
     ): VoxelShape = when (state[SHAPE]) {
-        Shape.Straight -> STRAIGHT_OUTLINE_SHAPES.getValue(state[FACING])
-        Shape.ClockwiseCorner -> CORNER_OUTLINE_SHAPES.getValue(state[FACING])
-        Shape.CounterclockwiseCorner -> CORNER_OUTLINE_SHAPES.getValue(state[FACING].rotateYCounterclockwise())
+        Shape.STRAIGHT -> STRAIGHT_OUTLINE_SHAPES.getValue(state[FACING])
+        Shape.CLOCKWISE_CORNER -> CORNER_OUTLINE_SHAPES.getValue(state[FACING])
+        Shape.COUNTERCLOCKWISE_CORNER -> CORNER_OUTLINE_SHAPES.getValue(state[FACING].rotateYCounterclockwise())
     }
 
     override fun getCollisionShape(
         state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext
     ): VoxelShape = when (state[SHAPE]) {
-        Shape.Straight -> STRAIGHT_COLLISION_SHAPES.getValue(state[FACING])
-        Shape.ClockwiseCorner -> CORNER_COLLISION_SHAPES.getValue(state[FACING])
-        Shape.CounterclockwiseCorner -> CORNER_COLLISION_SHAPES.getValue(state[FACING].rotateYCounterclockwise())
+        Shape.STRAIGHT -> STRAIGHT_COLLISION_SHAPES.getValue(state[FACING])
+        Shape.CLOCKWISE_CORNER -> CORNER_COLLISION_SHAPES.getValue(state[FACING])
+        Shape.COUNTERCLOCKWISE_CORNER -> CORNER_COLLISION_SHAPES.getValue(state[FACING].rotateYCounterclockwise())
     }
 
     override fun getFluidState(state: BlockState) =
@@ -105,7 +105,7 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
     fun sideCoversSmallSquare(state: BlockState): Boolean =
-        state[SHAPE] != Shape.Straight
+        state[SHAPE] != Shape.STRAIGHT
 
     companion object {
         val SHAPE: EnumProperty<Shape> = EnumProperty.of("shape", Shape::class.java)
@@ -131,9 +131,9 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
     }
 
     enum class Shape(private val id: String) : StringIdentifiable {
-        Straight("straight"),
-        ClockwiseCorner("clockwise_corner"),
-        CounterclockwiseCorner("counterclockwise_corner"),
+        STRAIGHT("straight"),
+        CLOCKWISE_CORNER("clockwise_corner"),
+        COUNTERCLOCKWISE_CORNER("counterclockwise_corner"),
         ;
 
         override fun asString() = id
