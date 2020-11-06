@@ -74,7 +74,7 @@ inline fun <A> Registry<A>.visit(crossinline visitor: (A) -> Unit) {
 
     RegistryEntryAddedCallback.event(this)
         .register(
-            RegistryEntryAddedCallback { rawId, id, entry ->
+            RegistryEntryAddedCallback { _, _, entry ->
                 visitor(entry)
             }
         )
@@ -88,7 +88,7 @@ inline fun <A> Registry<A>.visit(crossinline visitor: (A) -> Unit) {
  */
 fun Block.copySettingsSafely(): AbstractBlock.Settings =
     FabricBlockSettings.of(defaultState.material)
-        .lightLevel(defaultState.luminance)
+        .luminance(defaultState.luminance)
         .apply { getHardness(defaultState)?.let(this::hardness) }
         .resistance(blastResistance)
         .velocityMultiplier(velocityMultiplier)

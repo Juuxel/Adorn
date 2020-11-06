@@ -229,7 +229,7 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val MAGMATIC_PRISMARINE_CHIMNEY: Block = registerBlock(
         "magmatic_prismarine_chimney",
         PrismarineChimneyBlock.WithColumn(
-            true, FabricBlockSettings.copyOf(Blocks.PRISMARINE).ticksRandomly().lightLevel { 3 }
+            true, FabricBlockSettings.copyOf(Blocks.PRISMARINE).ticksRandomly().luminance { 3 }
         )
     )
     val SOULFUL_PRISMARINE_CHIMNEY: Block = registerBlock(

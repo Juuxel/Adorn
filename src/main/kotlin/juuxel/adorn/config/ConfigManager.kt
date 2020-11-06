@@ -10,7 +10,7 @@ import java.nio.file.Files
 object ConfigManager {
     private val JANKSON = Jankson.builder().build()
     private val DEFAULT = JANKSON.toJson(Config()) as JsonObject
-    private val CONFIG_PATH = FabricLoader.getInstance().configDirectory.toPath().resolve("Adorn.json5")
+    private val CONFIG_PATH = FabricLoader.getInstance().configDir.resolve("Adorn.json5")
     private val LOGGER = LogManager.getLogger()
     private var saveScheduled: Boolean = false
     private var finalized: Boolean = false
