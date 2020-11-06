@@ -1,7 +1,7 @@
 {
   "parent": "adorn:item/templates/table",
   "textures": {
-    "planks": "byg:blocks/jacaranda_planks",
-    "log": "byg:blocks/jacaranda_log"
+    "planks": "byg:block/jacaranda_planks",
+    "log": "byg:block/jacaranda_log"
   }
 }

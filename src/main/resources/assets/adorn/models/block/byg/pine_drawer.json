@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/drawer",
   "textures": {
-    "planks": "byg:blocks/pine_planks"
+    "planks": "byg:block/pine_planks"
   }
 }

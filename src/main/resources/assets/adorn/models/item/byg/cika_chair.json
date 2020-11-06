@@ -1,6 +1,6 @@
 {
   "parent": "adorn:item/templates/chair",
   "textures": {
-    "planks": "byg:blocks/cika_planks"
+    "planks": "byg:block/cika_planks"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/step",
   "textures": {
-    "texture": "byg:blocks/soapstone_tile"
+    "texture": "byg:block/soapstone_tile"
   }
 }

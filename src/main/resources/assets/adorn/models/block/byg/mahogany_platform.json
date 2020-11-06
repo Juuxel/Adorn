@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/platform",
   "textures": {
-    "texture": "byg:blocks/mahogany_planks"
+    "texture": "byg:block/mahogany_planks"
   }
 }

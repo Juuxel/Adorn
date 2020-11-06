@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/platform",
   "textures": {
-    "texture": "byg:blocks/scoria_stonebrick"
+    "texture": "byg:block/scoria_stonebrick"
   }
 }

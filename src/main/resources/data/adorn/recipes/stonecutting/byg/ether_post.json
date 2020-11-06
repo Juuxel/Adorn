@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "byg:ether_planks"
+  },
+  "result": "adorn:byg/ether_post",
+  "count": 2
+}

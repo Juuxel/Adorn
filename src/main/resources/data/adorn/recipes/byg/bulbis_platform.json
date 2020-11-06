@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:bulbis_slab"
+    },
+    "P": {
+      "item": "adorn:byg/bulbis_post"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/bulbis_platform",
+    "count": 2
+  }
+}

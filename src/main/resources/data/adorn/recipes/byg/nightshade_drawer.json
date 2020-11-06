@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:drawer",
+  "pattern": [
+    "S",
+    "C",
+    "S"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "S": {
+      "item": "byg:nightshade_slab"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/nightshade_drawer",
+    "count": 2
+  }
+}

@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/shelf",
   "textures": {
-    "texture": "byg:blocks/ebony_planks"
+    "texture": "byg:block/ebony_planks"
   }
 }

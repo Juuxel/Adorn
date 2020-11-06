@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/table_leg",
   "textures": {
-    "log": "byg:blocks/aspen_log"
+    "log": "byg:block/aspen_log"
   }
 }

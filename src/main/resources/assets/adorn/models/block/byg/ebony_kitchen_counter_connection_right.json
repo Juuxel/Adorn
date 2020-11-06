@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/kitchen_counter_connection_right",
   "textures": {
-    "planks": "byg:blocks/ebony_planks"
+    "planks": "byg:block/ebony_planks"
   }
 }

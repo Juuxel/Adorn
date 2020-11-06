@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "byg:bulbis_planks"
+  },
+  "result": "adorn:byg/bulbis_post",
+  "count": 2
+}

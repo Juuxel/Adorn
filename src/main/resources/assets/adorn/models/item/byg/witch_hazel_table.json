@@ -1,7 +1,7 @@
 {
   "parent": "adorn:item/templates/table",
   "textures": {
-    "planks": "byg:blocks/witch_hazel_planks",
-    "log": "byg:blocks/witch_hazel_log"
+    "planks": "byg:block/witch_hazel_planks",
+    "log": "byg:block/witch_hazel_log"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "adorn:item/templates/chair",
   "textures": {
-    "planks": "byg:blocks/mangrove_planks"
+    "planks": "byg:block/mangrove_planks"
   }
 }

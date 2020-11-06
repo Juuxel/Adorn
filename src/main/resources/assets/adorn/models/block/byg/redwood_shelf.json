@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/shelf",
   "textures": {
-    "texture": "byg:blocks/redwood_planks"
+    "texture": "byg:block/redwood_planks"
   }
 }

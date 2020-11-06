@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/platform",
   "textures": {
-    "texture": "byg:blocks/mangrove_planks"
+    "texture": "byg:block/mangrove_planks"
   }
 }

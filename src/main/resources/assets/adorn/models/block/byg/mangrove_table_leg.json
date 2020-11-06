@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/table_leg",
   "textures": {
-    "log": "byg:blocks/mangrove_log"
+    "log": "byg:block/mangrove_log"
   }
 }

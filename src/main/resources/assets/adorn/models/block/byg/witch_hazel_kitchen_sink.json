@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/kitchen_sink",
   "textures": {
-    "planks": "byg:blocks/witch_hazel_planks"
+    "planks": "byg:block/witch_hazel_planks"
   }
 }

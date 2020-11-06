@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/table_leg",
   "textures": {
-    "log": "byg:blocks/redwood_log"
+    "log": "byg:block/redwood_log"
   }
 }

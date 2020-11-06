@@ -1,6 +1,6 @@
 {
   "parent": "adorn:item/templates/kitchen_cupboard",
   "textures": {
-    "planks": "byg:blocks/ebony_planks"
+    "planks": "byg:block/ebony_planks"
   }
 }

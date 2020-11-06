@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/step",
   "textures": {
-    "texture": "byg:blocks/dacite_cobblestone"
+    "texture": "byg:block/dacite_cobblestone"
   }
 }
