@@ -2,7 +2,7 @@
   "parent": "adorn:block/templates/coffee_table",
   "textures": {
     "planks": "byg:block/sythian_planks",
-    "leg": "byg:block/sythian_log",
-    "rim": "byg:block/sythian_log"
+    "leg": "byg:block/sythian_stem",
+    "rim": "byg:block/sythian_stem"
   }
 }

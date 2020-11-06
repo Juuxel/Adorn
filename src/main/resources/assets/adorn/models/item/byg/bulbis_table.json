@@ -2,6 +2,6 @@
   "parent": "adorn:item/templates/table",
   "textures": {
     "planks": "byg:block/bulbis_planks",
-    "log": "byg:block/bulbis_log"
+    "log": "byg:block/bulbis_stem"
   }
 }
