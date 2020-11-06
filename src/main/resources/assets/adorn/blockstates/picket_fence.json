@@ -1,16 +1,24 @@
 {
   "variants": {
     "facing=north,shape=straight": { "model": "adorn:block/picket_fence_straight" },
-    "facing=north,shape=clockwise_corner": { "model": "adorn:block/picket_fence_corner" },
-    "facing=north,shape=counterclockwise_corner": { "model": "adorn:block/picket_fence_corner", "y": 270 },
+    "facing=north,shape=clockwise_corner": { "model": "adorn:block/picket_fence_outer_corner" },
+    "facing=north,shape=counterclockwise_corner": { "model": "adorn:block/picket_fence_outer_corner", "y": 270 },
+    "facing=north,shape=clockwise_inner_corner": { "model": "adorn:block/picket_fence_inner_corner" },
+    "facing=north,shape=counterclockwise_inner_corner": { "model": "adorn:block/picket_fence_inner_corner", "y": 270 },
     "facing=east,shape=straight": { "model": "adorn:block/picket_fence_straight", "y": 90 },
-    "facing=east,shape=clockwise_corner": { "model": "adorn:block/picket_fence_corner", "y": 90 },
-    "facing=east,shape=counterclockwise_corner": { "model": "adorn:block/picket_fence_corner" },
+    "facing=east,shape=clockwise_corner": { "model": "adorn:block/picket_fence_outer_corner", "y": 90 },
+    "facing=east,shape=counterclockwise_corner": { "model": "adorn:block/picket_fence_outer_corner" },
+    "facing=east,shape=clockwise_inner_corner": { "model": "adorn:block/picket_fence_inner_corner", "y": 90 },
+    "facing=east,shape=counterclockwise_inner_corner": { "model": "adorn:block/picket_fence_inner_corner" },
     "facing=south,shape=straight": { "model": "adorn:block/picket_fence_straight", "y": 180 },
-    "facing=south,shape=clockwise_corner": { "model": "adorn:block/picket_fence_corner", "y": 180 },
-    "facing=south,shape=counterclockwise_corner": { "model": "adorn:block/picket_fence_corner", "y": 90 },
+    "facing=south,shape=clockwise_corner": { "model": "adorn:block/picket_fence_outer_corner", "y": 180 },
+    "facing=south,shape=counterclockwise_corner": { "model": "adorn:block/picket_fence_outer_corner", "y": 90 },
+    "facing=south,shape=clockwise_inner_corner": { "model": "adorn:block/picket_fence_inner_corner", "y": 180 },
+    "facing=south,shape=counterclockwise_inner_corner": { "model": "adorn:block/picket_fence_inner_corner", "y": 90 },
     "facing=west,shape=straight": { "model": "adorn:block/picket_fence_straight", "y": 270 },
-    "facing=west,shape=clockwise_corner": { "model": "adorn:block/picket_fence_corner", "y": 270 },
-    "facing=west,shape=counterclockwise_corner": { "model": "adorn:block/picket_fence_corner", "y": 180 }
+    "facing=west,shape=clockwise_corner": { "model": "adorn:block/picket_fence_outer_corner", "y": 270 },
+    "facing=west,shape=counterclockwise_corner": { "model": "adorn:block/picket_fence_outer_corner", "y": 180 },
+    "facing=west,shape=clockwise_inner_corner": { "model": "adorn:block/picket_fence_inner_corner", "y": 270 },
+    "facing=west,shape=counterclockwise_inner_corner": { "model": "adorn:block/picket_fence_inner_corner", "y": 180 }
   }
 }

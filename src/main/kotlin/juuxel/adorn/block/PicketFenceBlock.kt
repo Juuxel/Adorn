@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+
 package juuxel.adorn.block
 
 import juuxel.adorn.util.buildShapeRotationsFromNorth
@@ -38,58 +39,73 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
         builder.add(SHAPE, FACING, WATERLOGGED)
     }
 
-    override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
-        return super.getPlacementState(ctx)?.let { state ->
-            state.with(FACING, ctx.playerFacing.opposite)
-                .with(SHAPE, Shape.STRAIGHT)
-                .with(WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).fluid === Fluids.WATER)
-                .let {
-                    val side = it[FACING].opposite
-                    val pos = ctx.blockPos.offset(side)
-                    val world = ctx.world
-                    it.getStateForNeighborUpdate(side, world.getBlockState(pos), world, ctx.blockPos, pos)
-                }
-        }
+    override fun getPlacementState(ctx: ItemPlacementContext): BlockState {
+        return defaultState.with(FACING, ctx.playerFacing.opposite)
+            .with(WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).fluid === Fluids.WATER)
+            .let { updateShape(ctx.world, ctx.blockPos, it) }
     }
 
     override fun getStateForNeighborUpdate(
         state: BlockState, facing: Direction, neighborState: BlockState,
         world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ): BlockState {
+        if (facing.axis == state[FACING].axis) {
+            return updateShape(world, pos, state)
+        }
+
+        return state
+    }
+
+    private fun updateShape(world: WorldAccess, pos: BlockPos, state: BlockState): BlockState {
         val fenceFacing = state[FACING]
-        if (facing == fenceFacing.opposite) {
-            val neighborFacing = if (neighborState.block is PicketFenceBlock) neighborState[FACING] else null
-            val neighborShape = if (neighborState.block is PicketFenceBlock) neighborState[SHAPE] else null
+        for (side in arrayOf(fenceFacing.opposite, fenceFacing)) {
+            val inner = side == fenceFacing
+            val neighborState = world.getBlockState(pos.offset(side))
+            val neighborBlock = neighborState.block
+            val neighborFacing = if (neighborBlock is PicketFenceBlock) neighborState[FACING] else null
 
             var shape = when (neighborFacing) {
-                fenceFacing.rotateYClockwise() -> Shape.CLOCKWISE_CORNER
-                fenceFacing.rotateYCounterclockwise() -> Shape.COUNTERCLOCKWISE_CORNER
+                fenceFacing.rotateYClockwise() -> {
+                    if (inner) Shape.CLOCKWISE_INNER_CORNER
+                    else Shape.CLOCKWISE_CORNER
+                }
+                fenceFacing.rotateYCounterclockwise() -> {
+                    if (inner) Shape.COUNTERCLOCKWISE_INNER_CORNER
+                    else Shape.COUNTERCLOCKWISE_CORNER
+                }
                 else -> Shape.STRAIGHT
             }
 
             // Prevent funny connections
-            if (neighborShape != shape && neighborShape != Shape.STRAIGHT)
+            if (neighborBlock !is PicketFenceBlock || !neighborBlock.connectsTo(neighborState, side.opposite))
                 shape = Shape.STRAIGHT
 
-            return state.with(SHAPE, shape)
+            if (shape != Shape.STRAIGHT) {
+                return state.with(SHAPE, shape)
+            }
         }
-        return state
+
+        return state.with(SHAPE, Shape.STRAIGHT)
     }
 
     override fun getOutlineShape(
         state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext
-    ): VoxelShape = when (state[SHAPE]) {
+    ): VoxelShape = when (state[SHAPE]!!) {
         Shape.STRAIGHT -> STRAIGHT_OUTLINE_SHAPES.getValue(state[FACING])
         Shape.CLOCKWISE_CORNER -> CORNER_OUTLINE_SHAPES.getValue(state[FACING])
         Shape.COUNTERCLOCKWISE_CORNER -> CORNER_OUTLINE_SHAPES.getValue(state[FACING].rotateYCounterclockwise())
+        Shape.CLOCKWISE_INNER_CORNER -> CORNER_OUTLINE_SHAPES.getValue(state[FACING].opposite)
+        Shape.COUNTERCLOCKWISE_INNER_CORNER -> CORNER_OUTLINE_SHAPES.getValue(state[FACING].rotateYClockwise())
     }
 
     override fun getCollisionShape(
         state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext
-    ): VoxelShape = when (state[SHAPE]) {
+    ): VoxelShape = when (state[SHAPE]!!) {
         Shape.STRAIGHT -> STRAIGHT_COLLISION_SHAPES.getValue(state[FACING])
         Shape.CLOCKWISE_CORNER -> CORNER_COLLISION_SHAPES.getValue(state[FACING])
         Shape.COUNTERCLOCKWISE_CORNER -> CORNER_COLLISION_SHAPES.getValue(state[FACING].rotateYCounterclockwise())
+        Shape.CLOCKWISE_INNER_CORNER -> CORNER_COLLISION_SHAPES.getValue(state[FACING].opposite)
+        Shape.COUNTERCLOCKWISE_INNER_CORNER -> CORNER_COLLISION_SHAPES.getValue(state[FACING].rotateYClockwise())
     }
 
     override fun getFluidState(state: BlockState) =
@@ -106,6 +122,22 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
 
     fun sideCoversSmallSquare(state: BlockState): Boolean =
         state[SHAPE] != Shape.STRAIGHT
+
+    private fun connectsTo(state: BlockState, direction: Direction): Boolean {
+        if (!direction.axis.isHorizontal) {
+            return false
+        }
+
+        val facing = state[FACING]
+
+        return when (state[SHAPE]!!) {
+            Shape.STRAIGHT -> facing.axis != direction.axis
+            Shape.CLOCKWISE_CORNER -> direction == facing.rotateYCounterclockwise() || direction == facing.opposite
+            Shape.COUNTERCLOCKWISE_CORNER -> direction == facing.rotateYClockwise() || direction == facing.opposite
+            Shape.CLOCKWISE_INNER_CORNER -> direction == facing.rotateYClockwise() || direction == facing
+            Shape.COUNTERCLOCKWISE_INNER_CORNER -> direction == facing.rotateYCounterclockwise() || direction == facing
+        }
+    }
 
     companion object {
         val SHAPE: EnumProperty<Shape> = EnumProperty.of("shape", Shape::class.java)
@@ -134,6 +166,8 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
         STRAIGHT("straight"),
         CLOCKWISE_CORNER("clockwise_corner"),
         COUNTERCLOCKWISE_CORNER("counterclockwise_corner"),
+        CLOCKWISE_INNER_CORNER("clockwise_inner_corner"),
+        COUNTERCLOCKWISE_INNER_CORNER("counterclockwise_inner_corner"),
         ;
 
         override fun asString() = id
