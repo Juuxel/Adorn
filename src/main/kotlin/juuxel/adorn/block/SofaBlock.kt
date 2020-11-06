@@ -214,6 +214,7 @@ open class SofaBlock(variant: BlockVariant) :
         }
 
         @JvmOverloads
+        @JvmStatic
         fun getSleepingDirection(world: World, pos: BlockPos, ignoreNeighbors: Boolean = false): Direction? {
             val state = world.getBlockState(pos)
             if (state.block !is SofaBlock) return null
