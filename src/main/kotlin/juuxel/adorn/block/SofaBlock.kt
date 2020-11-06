@@ -180,7 +180,7 @@ open class SofaBlock(variant: BlockVariant) :
             val booleans = setOf(true, false)
 
             fun buildShapeMap(thin: Boolean): Byte2ObjectMap<VoxelShape> = Byte2ObjectOpenHashMap(
-                Sets.cartesianProduct(FACING.values.toSet(), booleans, booleans, FRONT_CONNECTION.values.toSet()).map {
+                Sets.cartesianProduct<Any>(FACING.values.toSet(), booleans, booleans, FRONT_CONNECTION.values.toSet()).map {
                     val facing = it[0] as Direction
                     val left = it[1] as Boolean
                     val right = it[2] as Boolean
