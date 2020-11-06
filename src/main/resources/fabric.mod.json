@@ -55,11 +55,13 @@
     "jankson": "^3.0.0",
     "libcd": ["^2.0.0", "^3.0.3"]
   },
-  "custom": {
-    "extrapieces:piecepack": "data/adorn/adorn_vanilla_pieces.json"
+  "conflicts": {
+    "byg": "<1.1"
   },
-
   "breaks": {
     "towelette": "<4.0.0"
+  },
+  "custom": {
+    "extrapieces:piecepack": "data/adorn/adorn_vanilla_pieces.json"
   }
 }
