@@ -52,16 +52,19 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
         }
     }
 
-    override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
-        super.onBreak(world, pos, state, player)
-        if (world.isClient || !isSittingEnabled()) return
-        world.getEntitiesByType(
-            AdornEntities.SEAT,
-            Box(getActualSeatPos(world, state, pos)),
-            Predicates.alwaysTrue()
-        ).forEach {
-            it.removeAllPassengers()
-            it.kill()
+    override fun onStateReplaced(state: BlockState, world: World, pos: BlockPos, newState: BlockState, moved: Boolean) {
+        super.onStateReplaced(state, world, pos, newState, moved)
+
+        if (state.block != newState.block) {
+            if (world.isClient || !isSittingEnabled()) return
+            world.getEntitiesByType(
+                AdornEntities.SEAT,
+                Box(getActualSeatPos(world, state, pos)),
+                Predicates.alwaysTrue()
+            ).forEach {
+                it.removeAllPassengers()
+                it.kill()
+            }
         }
     }
 

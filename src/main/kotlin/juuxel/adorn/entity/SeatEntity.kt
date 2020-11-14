@@ -47,7 +47,6 @@ class SeatEntity(type: EntityType<*>, world: World) : Entity(type, world) {
         if (!world.isClient) {
             PlayerStream.watching(this).forEach {
                 ServerSidePacketRegistry.INSTANCE.sendToPlayer(it, EntityPassengersSetS2CPacket(this))
-                // TODO: Fix removing passengers when breaking the block
             }
         }
         super.kill()
