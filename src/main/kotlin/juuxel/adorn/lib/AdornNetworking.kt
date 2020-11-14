@@ -27,10 +27,11 @@ object AdornNetworking {
                 val entity = packet.entityTypeId.create(world)!!
                 entity.entityId = packet.id
                 entity.uuid = packet.uuid
+                entity.updatePositionAndAngles(
+                    packet.x, packet.y, packet.z,
+                    packet.pitch * 360 / 256f, packet.yaw * 360 / 256f
+                )
                 entity.updateTrackedPosition(packet.x, packet.y, packet.z)
-                entity.pitch = packet.pitch * 360 / 256f
-                entity.yaw = packet.yaw * 360 / 256f
-
                 (context.player.world as? ClientWorld)?.addEntity(packet.id, entity)
             }
         }
