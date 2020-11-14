@@ -12,10 +12,10 @@ import net.minecraft.entity.SpawnGroup
 import net.minecraft.util.registry.Registry
 
 object AdornEntities : RegistryHelper(Adorn.NAMESPACE) {
-    val SITTING_VEHICLE = register(
+    val SEAT = register(
         Registry.ENTITY_TYPE,
-        "sitting_vehicle",
-        FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::SittingVehicleEntity)
+        "seat",
+        FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::SeatEntity)
             .dimensions(EntityDimensions.fixed(0f, 0f))
             .build()
     )
@@ -24,10 +24,8 @@ object AdornEntities : RegistryHelper(Adorn.NAMESPACE) {
 
     @Environment(EnvType.CLIENT)
     fun initClient() {
-        EntityRendererRegistry.INSTANCE.register(SITTING_VEHICLE) { manager, _ ->
-            InvisibleEntityRenderer(
-                manager
-            )
+        EntityRendererRegistry.INSTANCE.register(SEAT) { manager, _ ->
+            InvisibleEntityRenderer(manager)
         }
     }
 }

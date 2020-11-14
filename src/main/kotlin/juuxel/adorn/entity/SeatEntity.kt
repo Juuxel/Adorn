@@ -16,7 +16,7 @@ import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-class SittingVehicleEntity(type: EntityType<*>, world: World) : Entity(type, world) {
+class SeatEntity(type: EntityType<*>, world: World) : Entity(type, world) {
     init {
         noClip = true
         isInvulnerable = true

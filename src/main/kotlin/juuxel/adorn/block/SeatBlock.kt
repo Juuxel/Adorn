@@ -39,7 +39,7 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
         val occupied = actualState[OCCUPIED]
         return if (!occupied) {
             if (world is ServerWorld) {
-                val entity = AdornEntities.SITTING_VEHICLE.create(world)
+                val entity = AdornEntities.SEAT.create(world)
                 entity?.setPos(actualPos, sittingYOffset)
                 world.spawnEntity(entity)
                 world.setBlockState(actualPos, actualState.with(OCCUPIED, true))
@@ -56,7 +56,7 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
         super.onBreak(world, pos, state, player)
         if (world.isClient || !isSittingEnabled()) return
         world.getEntitiesByType(
-            AdornEntities.SITTING_VEHICLE,
+            AdornEntities.SEAT,
             Box(getActualSeatPos(world, state, pos)),
             Predicates.alwaysTrue()
         ).forEach {
