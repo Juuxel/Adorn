@@ -269,7 +269,7 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val STONE_TORCH_GROUND: Block = registerBlockWithoutItem(
         "stone_torch",
         TorchBlock(
-            FabricBlockSettings.copyOf(Blocks.TORCH).sounds(BlockSoundGroup.STONE),
+            FabricBlockSettings.copyOf(Blocks.TORCH).sounds(BlockSoundGroup.STONE).luminance(15),
             ParticleTypes.FLAME
         )
     )
