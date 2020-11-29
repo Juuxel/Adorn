@@ -46,5 +46,5 @@ class AdornBookItem(private val bookId: Identifier, settings: Settings) : Item(s
         }
     }
 
-    override fun isIn(group: ItemGroup?) = super.isIn(group) || group === AdornItems.GROUP
+    override fun isIn(group: ItemGroup?) = AdornItems.isIn(group, this)
 }

@@ -25,5 +25,5 @@ class WallBlockItemWithDescription(
         )
     }
 
-    override fun isIn(group: ItemGroup?) = super.isIn(group) || group === AdornItems.GROUP
+    override fun isIn(group: ItemGroup?) = AdornItems.isIn(group, this)
 }

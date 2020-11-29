@@ -826,6 +826,8 @@
   "gui.adorn.config.option.skipNightOnSofas.tooltip": "Allows you to skip the night when you sleep on a sofa.",
   "gui.adorn.config.option.protectTradingStations": "Protect trading stations",
   "gui.adorn.config.option.protectTradingStations.tooltip": "Prevents other players from breaking your trading stations.",
+  "gui.adorn.config.option.showItemsInStandardGroups": "Show items in standard item groups",
+  "gui.adorn.config.option.showItemsInStandardGroups.tooltip": "Shows Adorn items in standard vanilla item groups (tabs).",
   "gui.adorn.config.option.showTradingStationTooltips": "Show trading station tooltips",
   "gui.adorn.config.option.showTradingStationTooltips.tooltip": "Shows information about trading stations when you look at them.",
   "gui.adorn.config.requires_restart": "Requires restart",

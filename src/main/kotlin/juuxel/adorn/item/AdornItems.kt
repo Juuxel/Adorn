@@ -2,6 +2,7 @@ package juuxel.adorn.item
 
 import juuxel.adorn.Adorn
 import juuxel.adorn.block.AdornBlocks
+import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.lib.AdornTags
 import juuxel.adorn.lib.RegistryHelper
 import net.fabricmc.api.EnvType
@@ -56,5 +57,12 @@ object AdornItems : RegistryHelper(Adorn.NAMESPACE) {
 
     @Environment(EnvType.CLIENT)
     fun initClient() {
+    }
+
+    fun isIn(group: ItemGroup?, item: Item): Boolean = when (group) {
+        null -> false
+        GROUP, ItemGroup.SEARCH -> true
+        item.group -> ConfigManager.CONFIG.client.showItemsInStandardGroups
+        else -> false
     }
 }

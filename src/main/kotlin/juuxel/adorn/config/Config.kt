@@ -28,6 +28,9 @@ class Config {
     class Client {
         @field:Comment("If true, floating tooltips are shown above trading stations.")
         var showTradingStationTooltips: Boolean = true
+
+        @field:Comment("If true, Adorn items will also be shown in matching vanilla item tabs.")
+        var showItemsInStandardGroups: Boolean = true
     }
 
     class EPConfig {

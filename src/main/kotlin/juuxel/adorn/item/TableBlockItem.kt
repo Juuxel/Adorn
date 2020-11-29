@@ -20,5 +20,5 @@ class TableBlockItem(block: Block) : BlockItem(block, Settings().group(ItemGroup
         return super.useOnBlock(context)
     }
 
-    override fun isIn(group: ItemGroup?) = super.isIn(group) || group === AdornItems.GROUP
+    override fun isIn(group: ItemGroup?) = AdornItems.isIn(group, this)
 }

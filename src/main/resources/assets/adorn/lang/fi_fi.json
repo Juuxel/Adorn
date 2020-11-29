@@ -235,6 +235,8 @@
   "gui.adorn.config.option.skipNightOnSofas.tooltip": "Sallii ohittaa yöt nukkumalla sohvalla.",
   "gui.adorn.config.option.protectTradingStations": "Suojele kauppapöytiä",
   "gui.adorn.config.option.protectTradingStations.tooltip": "Estää muita pelaajia hajottamasta kauppapöytiäsi.",
+  "gui.adorn.config.option.showItemsInStandardGroups": "Näytä tavarat tavallisissa tavararyhmissä",
+  "gui.adorn.config.option.showItemsInStandardGroups.tooltip": "Näyttää Adornin tavarat tavallisissa tavararyhmissä (välilehdissä).",
   "gui.adorn.config.option.showTradingStationTooltips": "Näytä kauppapöytien tiedot",
   "gui.adorn.config.option.showTradingStationTooltips.tooltip": "Näyttää tietoja kauppapöydistä, kun niitä katsotaan.",
   "gui.adorn.config.requires_restart": "Vaatii uudelleenkäynnistyksen",

@@ -49,6 +49,7 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
             add(createConfigToggle(config::protectTradingStations), 0, 0)
             add(createConfigToggle(config::sittingOnTables, true), 0, 1)
             add(createConfigToggle(config.client::showTradingStationTooltips), 0, 2)
+            add(createConfigToggle(config.client::showItemsInStandardGroups), 0, 3)
 
             backgroundPainter = BackgroundPainter.VANILLA
             setSize(11 * 18, height)
@@ -76,7 +77,7 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
             WButton(TranslatableText("gui.done")).apply {
                 setOnClick { close(previous) }
             },
-            11 * 9 - 5 * 9, 7 * 18, 5 * 18, 18
+            11 * 9 - 5 * 9, 8 * 18, 5 * 18, 18
         )
         root.validate(this)
     }
