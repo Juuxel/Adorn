@@ -1,4 +1,3 @@
-import net.fabricmc.loom.task.RemapJarTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -11,13 +10,20 @@ plugins {
 }
 
 group = "io.github.juuxel"
+version = "${project.property("mod-version")}+${project.property("minecraft-version")}"
 
 base {
     archivesBaseName = "Adorn"
 }
 
-val minecraft: String by ext
-version = "${project.properties["mod-version"]}+$minecraft"
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+loom {
+    accessWidener = file("src/main/resources/adorn.accesswidener")
+}
 
 repositories {
     mavenCentral()
@@ -38,47 +44,22 @@ repositories {
     }
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
-}
-
-tasks.getByName<ProcessResources>("processResources") {
-    inputs.property("version", project.version)
-    filesMatching("fabric.mod.json") {
-        expand("version" to project.version)
-    }
-}
-
-loom {
-    accessWidener = file("src/main/resources/adorn.accesswidener")
-}
-
-fun DependencyHandler.includedMod(notation: String, block: ExternalModuleDependency.() -> Unit = {}) {
-    include(modImplementation(notation, block))
-}
-
-fun DependencyHandler.includedMod(group: String, name: String, version: String, block: ExternalModuleDependency.() -> Unit = {}) {
-    include(modImplementation(group, name, version, dependencyConfiguration = block))
-}
-
 dependencies {
+    fun DependencyHandler.includedMod(notation: String, block: ExternalModuleDependency.() -> Unit = {}) {
+        include(modImplementation(notation, block))
+    }
+
+    fun DependencyHandler.includedMod(group: String, name: String, version: String, block: ExternalModuleDependency.() -> Unit = {}) {
+        include(modImplementation(group, name, version, dependencyConfiguration = block))
+    }
+
     /**
      * Gets a version string with the [key].
      */
-    fun v(key: String) = project.properties[key].toString()
+    fun v(key: String) = project.property(key).toString()
 
-    fun ExternalModuleDependency.excludes() {
-        exclude(group = "net.fabricmc.fabric-api")
-        exclude(group = "curse.maven")
-    }
-
-    minecraft("com.mojang:minecraft:$minecraft")
-    mappings("net.fabricmc:yarn:" + v("minecraft") + '+' + v("mappings") + ":v2")
+    minecraft("com.mojang:minecraft:${v("minecraft-version")}")
+    mappings("net.fabricmc:yarn:" + v("minecraft-version") + '+' + v("mappings") + ":v2")
 
     // Fabric
     modImplementation("net.fabricmc:fabric-loader:" + v("fabric-loader"))
@@ -87,22 +68,30 @@ dependencies {
     compileOnly("net.fabricmc:fabric-language-kotlin:" + v("fabric-kotlin"))
 
     // Other mods
-    includedMod("io.github.cottonmc:LibGui:" + v("libgui")) { isTransitive = false }
-    includedMod("io.github.cottonmc:Jankson-Fabric:" + v("jankson")) { excludes() }
-    includedMod("io.github.cottonmc", "LibCD", v("libcd")) { excludes(); exclude(module = "Jankson"); exclude(module = "nbt-crafting") }
-    modCompileOnly("com.github.Virtuoel:Towelette:" + v("towelette")) { excludes() }
-    modCompileOnly("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
-    modRuntime("io.github.prospector:modmenu:" + v("modmenu")) { excludes() }
+    includedMod("io.github.cottonmc:LibGui:" + v("libgui"))
+    includedMod("io.github.cottonmc:Jankson-Fabric:" + v("jankson"))
+    includedMod("io.github.cottonmc", "LibCD", v("libcd"))
+    modCompileOnly("com.github.Virtuoel:Towelette:" + v("towelette"))
+    modCompileOnly("io.github.prospector:modmenu:" + v("modmenu"))
+    modRuntime("io.github.prospector:modmenu:" + v("modmenu"))
     // Not actually a dev jar, see https://github.com/Shnupbups/extra-pieces/issues/45
-    modCompileOnly("com.github.Shnupbups:extra-pieces:" + v("extra-pieces") + ":dev") { excludes() }
-    modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei")) { exclude(module = "jankson"); excludes() }
+    modCompileOnly("com.github.Shnupbups:extra-pieces:" + v("extra-pieces") + ":dev")
+    modRuntime("me.shedaniel", "RoughlyEnoughItems", v("rei"))
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.freeCompilerArgs += "-Xuse-experimental=kotlin.Experimental"
-}
+tasks {
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "1.8"
+    }
 
-val remapJar = tasks.getByName<RemapJarTask>("remapJar")
+    processResources {
+        inputs.property("version", project.version)
+
+        filesMatching("fabric.mod.json") {
+            expand("version" to project.version)
+        }
+    }
+}
 
 kotlinter {
     disabledRules = arrayOf("parameter-list-wrapping")
@@ -112,9 +101,6 @@ publishing {
     publications.create<MavenPublication>("maven") {
         artifactId = "adorn"
 
-        artifact(remapJar) {
-            classifier = null
-            builtBy(remapJar)
-        }
+        artifact(tasks.remapJar)
     }
 }
