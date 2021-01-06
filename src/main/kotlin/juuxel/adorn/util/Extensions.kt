@@ -1,8 +1,6 @@
 package juuxel.adorn.util
 
 import com.mojang.serialization.DataResult
-import com.mojang.serialization.Dynamic
-import com.mojang.serialization.JsonOps
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback
 import net.minecraft.block.AbstractBlock
@@ -10,41 +8,10 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.CompoundTag
-import net.minecraft.nbt.NbtOps
 import net.minecraft.state.property.Property
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.registry.Registry
-import java.util.UUID
-
-fun CompoundTag.putText(name: String, textComponent: Text) =
-    put(
-        name,
-        Dynamic.convert(
-            JsonOps.INSTANCE,
-            NbtOps.INSTANCE,
-            Text.Serializer.toJsonTree(textComponent)
-        )
-    )
-
-fun CompoundTag.getText(name: String): Text? {
-    val tag = get(name) ?: return null
-
-    return Text.Serializer.fromJson(
-        Dynamic.convert(
-            NbtOps.INSTANCE,
-            JsonOps.INSTANCE,
-            tag
-        )
-    )
-}
-
-fun CompoundTag.containsOldUuid(key: String): Boolean =
-    contains("${key}Most") && contains("${key}Least")
-
-fun CompoundTag.getOldUuid(key: String): UUID =
-    UUID(getLong("${key}Most"), getLong("${key}Least"))
 
 fun ItemStack.toTextWithCount(): Text =
     TranslatableText("text.adorn.item_stack_with_count", count, toHoverableText())

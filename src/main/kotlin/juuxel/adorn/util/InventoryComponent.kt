@@ -13,7 +13,7 @@ import kotlin.math.min
 open class InventoryComponent(private val invSize: Int) : Inventory, NbtConvertible {
     private val listeners: MutableList<InventoryChangedListener> = ArrayList()
     private val items: DefaultedList<ItemStack> = DefaultedList.ofSize(invSize, ItemStack.EMPTY)
-    val sidedInventory: SidedInventory by lazy { SidedInventoryImpl(this) }
+    val sidedInventory: SidedInventory by lazy { SimpleSidedInventory(this) }
 
     private constructor(items: DefaultedList<ItemStack>) : this(items.size) {
         for ((i, item) in items.withIndex()) {

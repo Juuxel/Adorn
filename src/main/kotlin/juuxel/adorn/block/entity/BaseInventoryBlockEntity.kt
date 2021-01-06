@@ -1,7 +1,7 @@
 package juuxel.adorn.block.entity
 
 import juuxel.adorn.util.InventoryComponent
-import juuxel.adorn.util.SidedInventoryImpl
+import juuxel.adorn.util.SimpleSidedInventory
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.BlockState
 import net.minecraft.block.InventoryProvider
@@ -26,7 +26,7 @@ abstract class BaseInventoryBlockEntity(
         ItemStack(cachedState.block).name
     }
     protected var items: DefaultedList<ItemStack> = DefaultedList.ofSize(invSize, ItemStack.EMPTY)
-    val sidedInventory: SidedInventory = @Suppress("LeakingThis") SidedInventoryImpl(this)
+    val sidedInventory: SidedInventory = @Suppress("LeakingThis") SimpleSidedInventory(this)
 
     override fun toTag(tag: CompoundTag) = super.toTag(tag).apply {
         if (!serializeLootTable(tag))
