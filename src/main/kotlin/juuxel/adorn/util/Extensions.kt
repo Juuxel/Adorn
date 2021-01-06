@@ -1,6 +1,5 @@
 package juuxel.adorn.util
 
-import com.mojang.serialization.DataResult
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback
 import net.minecraft.block.AbstractBlock
@@ -33,8 +32,6 @@ fun BlockEntity.getSquaredDistance(x: Double, y: Double, z: Double): Double {
     val zd = pos.z + 0.5 - z
     return xd * xd + yd * yd + zd * zd
 }
-
-fun <R> DataResult<R>.orElse(default: R): R = get().map({ it }, { default })
 
 inline fun <A> Registry<A>.visit(crossinline visitor: (A) -> Unit) {
     this.forEach(visitor)

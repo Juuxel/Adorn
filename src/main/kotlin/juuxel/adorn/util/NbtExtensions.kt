@@ -5,6 +5,7 @@ import com.mojang.serialization.JsonOps
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.NbtOps
 import net.minecraft.text.Text
+import net.minecraft.util.math.BlockPos
 import java.util.UUID
 
 fun CompoundTag.putText(name: String, textComponent: Text) =
@@ -34,3 +35,12 @@ fun CompoundTag.containsOldUuid(key: String): Boolean =
 
 fun CompoundTag.getOldUuid(key: String): UUID =
     UUID(getLong("${key}Most"), getLong("${key}Least"))
+
+fun CompoundTag.getBlockPos(key: String): BlockPos {
+    val (x, y, z) = getIntArray(key)
+    return BlockPos(x, y, z)
+}
+
+fun CompoundTag.putBlockPos(key: String, pos: BlockPos) {
+    putIntArray(key, intArrayOf(pos.x, pos.y, pos.z))
+}

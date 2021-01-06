@@ -2,14 +2,14 @@ package juuxel.adorn.entity
 
 import juuxel.adorn.block.SeatBlock
 import juuxel.adorn.lib.AdornNetworking
-import juuxel.adorn.util.orElse
+import juuxel.adorn.util.getBlockPos
+import juuxel.adorn.util.putBlockPos
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
 import net.fabricmc.fabric.api.server.PlayerStream
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.nbt.NbtOps
 import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
@@ -65,12 +65,10 @@ class SeatEntity(type: EntityType<*>, world: World) : Entity(type, world) {
 
     override fun initDataTracker() {}
     override fun readCustomDataFromTag(tag: CompoundTag) {
-        seatPos = BlockPos.CODEC.decode(NbtOps.INSTANCE, tag["SeatPos"]).map { it.first }.orElse(BlockPos.ORIGIN)
+        seatPos = tag.getBlockPos("SeatPos")
     }
 
     override fun writeCustomDataToTag(tag: CompoundTag) {
-        BlockPos.CODEC.encodeStart(NbtOps.INSTANCE, seatPos).map {
-            tag.put("SeatPos", it)
-        }
+        tag.putBlockPos("SeatPos", seatPos)
     }
 }
