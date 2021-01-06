@@ -12,8 +12,8 @@ import java.util.EnumMap
  * The coordinates are specified like in a model json or [createCuboidShape]:
  * { from: ([x0], [y0], [z0]), to: ([x1], [y1], [z1]) }
  */
-fun buildShapeRotations(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1: Int): Map<Direction, VoxelShape> = EnumMap(
-    mapOf(
+fun buildShapeRotations(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1: Int): MutableMap<Direction, VoxelShape> =
+    enumMapOf(
         Direction.EAST to createCuboidShape(
             x0.toDouble(), y0.toDouble(), z0.toDouble(),
             x1.toDouble(), y1.toDouble(), z1.toDouble()
@@ -34,7 +34,6 @@ fun buildShapeRotations(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1: Int): M
             z0.toDouble(), y1.toDouble(), 16.0 - x1
         )
     )
-)
 
 /**
  * Creates a map of horizontal cuboid VoxelShape rotations from the provided coordinates for **north**.
@@ -42,8 +41,8 @@ fun buildShapeRotations(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1: Int): M
  * The coordinates are specified like in a model json or [createCuboidShape]:
  * { from: ([x0], [y0], [z0]), to: ([x1], [y1], [z1]) }
  */
-fun buildShapeRotationsFromNorth(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1: Int): Map<Direction, VoxelShape> = EnumMap(
-    mapOf(
+fun buildShapeRotationsFromNorth(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1: Int): MutableMap<Direction, VoxelShape> =
+    enumMapOf(
         Direction.NORTH to createCuboidShape(
             x0.toDouble(), y0.toDouble(), z0.toDouble(),
             x1.toDouble(), y1.toDouble(), z1.toDouble()
@@ -64,7 +63,6 @@ fun buildShapeRotationsFromNorth(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1
             z0.toDouble(), y1.toDouble(), 16.0 - x1
         )
     )
-)
 
 /**
  * Merges the [shape maps][maps] together.
