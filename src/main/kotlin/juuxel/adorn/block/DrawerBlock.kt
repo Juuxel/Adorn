@@ -10,7 +10,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
-import net.minecraft.screen.ScreenHandler
+import net.minecraft.menu.Menu
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
@@ -38,7 +38,7 @@ open class DrawerBlock(
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): ActionResult {
-        player.openHandledScreen(state.createScreenHandlerFactory(world, pos))
+        player.openMenuScreen(state.createMenuFactory(world, pos))
         return ActionResult.SUCCESS
     }
 
@@ -70,7 +70,7 @@ open class DrawerBlock(
     override fun hasComparatorOutput(state: BlockState) = true
 
     override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
-        ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos))
+        Menu.calculateComparatorOutput(world.getBlockEntity(pos))
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING

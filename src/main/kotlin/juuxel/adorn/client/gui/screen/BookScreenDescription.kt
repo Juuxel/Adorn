@@ -12,11 +12,11 @@ import juuxel.adorn.Adorn
 import juuxel.adorn.client.book.Book
 import juuxel.adorn.client.book.Page
 import juuxel.adorn.client.gui.painter.Painters
-import juuxel.adorn.gui.widget.PageContainer
-import juuxel.adorn.gui.widget.WBigLabel
-import juuxel.adorn.gui.widget.WBookCardPanel
-import juuxel.adorn.gui.widget.WBookText
-import juuxel.adorn.gui.widget.WPageTurnButton
+import juuxel.adorn.menu.widget.PageContainer
+import juuxel.adorn.menu.widget.WBigLabel
+import juuxel.adorn.menu.widget.WBookCardPanel
+import juuxel.adorn.menu.widget.WBookText
+import juuxel.adorn.menu.widget.WPageTurnButton
 import juuxel.adorn.util.Colors
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment

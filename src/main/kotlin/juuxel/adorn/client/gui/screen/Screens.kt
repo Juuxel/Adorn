@@ -2,9 +2,9 @@ package juuxel.adorn.client.gui.screen
 
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.client.CottonInventoryScreen
-import juuxel.adorn.gui.controller.DrawerController
-import juuxel.adorn.gui.controller.KitchenCupboardController
-import juuxel.adorn.gui.controller.TradingStationController
+import juuxel.adorn.menu.DrawerMenu
+import juuxel.adorn.menu.KitchenCupboardMenu
+import juuxel.adorn.menu.TradingStationMenu
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.entity.player.PlayerEntity
@@ -19,21 +19,21 @@ open class AdornScreen<T : SyncedGuiDescription>(
 
 @Environment(EnvType.CLIENT)
 class DrawerScreen(
-    controller: DrawerController,
+    menu: DrawerMenu,
     player: PlayerEntity,
     title: Text
-) : AdornScreen<DrawerController>(controller, player, title)
+) : AdornScreen<DrawerMenu>(menu, player, title)
 
 @Environment(EnvType.CLIENT)
 class KitchenCupboardScreen(
-    controller: KitchenCupboardController,
+    menu: KitchenCupboardMenu,
     player: PlayerEntity,
     title: Text
-) : AdornScreen<KitchenCupboardController>(controller, player, title)
+) : AdornScreen<KitchenCupboardMenu>(menu, player, title)
 
 @Environment(EnvType.CLIENT)
 class TradingStationScreen(
-    controller: TradingStationController,
+    menu: TradingStationMenu,
     player: PlayerEntity,
     title: Text
-) : AdornScreen<TradingStationController>(controller, player, title)
+) : AdornScreen<TradingStationMenu>(menu, player, title)

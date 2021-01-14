@@ -5,6 +5,10 @@ pluginManagement {
             name = "Fabric"
         }
         gradlePluginPortal()
+        maven {
+            name = "JuuxelBintray"
+            url = uri("https://dl.bintray.com/juuxel/maven")
+        }
     }
 }
 

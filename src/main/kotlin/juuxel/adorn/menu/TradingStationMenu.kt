@@ -1,4 +1,4 @@
-package juuxel.adorn.gui.controller
+package juuxel.adorn.menu
 
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
@@ -8,7 +8,6 @@ import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
 import io.github.cottonmc.cotton.gui.widget.data.VerticalAlignment
 import juuxel.adorn.block.entity.TradingStation
 import juuxel.adorn.client.gui.painter.Painters
-import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.trading.TradeInventory
 import juuxel.adorn.util.Colors
@@ -20,18 +19,18 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
-import net.minecraft.screen.ScreenHandlerContext
-import net.minecraft.screen.slot.SlotActionType
+import net.minecraft.menu.MenuContext
+import net.minecraft.menu.slot.SlotActionType
 import net.minecraft.text.TranslatableText
 import org.apache.logging.log4j.LogManager
 
-class TradingStationController(
+class TradingStationMenu(
     syncId: Int,
     playerInv: PlayerInventory,
-    private val context: ScreenHandlerContext,
+    private val context: MenuContext,
     private val forOwner: Boolean
-) : BaseAdornController(
-    AdornGuis.TRADING_STATION,
+) : BaseMenu(
+    AdornMenus.TRADING_STATION,
     syncId,
     playerInv,
     context,
@@ -66,7 +65,7 @@ class TradingStationController(
             add(WItemSlot.of(blockInventory, 0, 4, 3).addToSlots(), 3, 2)
 
             add(playerInvPanel, 0, 6)
-            validate(this@TradingStationController)
+            validate(this@TradingStationMenu)
 
             slotWidgets = mutableSlots
         }
@@ -104,7 +103,7 @@ class TradingStationController(
     override fun addPainters() {
         super.addPainters()
         rootPanel.backgroundPainter = BackgroundPainter.createColorful(color(0x359668))
-        slotWidgets.forEach { it.setBackgroundPainter(Painters.LIBGUI_STYLE_SLOT) }
+        slotWidgets.forEach { it.backgroundPainter = Painters.LIBGUI_STYLE_SLOT }
     }
 
     override fun getTitleColor() = Colors.WHITE
@@ -116,9 +115,9 @@ class TradingStationController(
          * Gets the [juuxel.adorn.block.entity.TradingStationBlockEntity] at the [context]'s location.
          * If it's not present, creates an empty trading station using [TradingStation.createEmpty].
          */
-        private fun getTradingStation(context: ScreenHandlerContext) =
+        private fun getTradingStation(context: MenuContext) =
             getBlockEntity(context) as? TradingStation ?: run {
-                LOGGER.warn("[Adorn] Trading station not found, creating fake one")
+                LOGGER.warn("[Adorn] Trading station not found, creating fake one")
                 TradingStation.createEmpty()
             }
 
@@ -126,12 +125,12 @@ class TradingStationController(
          * Gets the [TradingStation.storage] of the trading station at the [context]'s location.
          * Uses [getTradingStation] for finding a trading station.
          */
-        private fun getStorage(context: ScreenHandlerContext): Inventory = getTradingStation(context).storage
+        private fun getStorage(context: MenuContext): Inventory = getTradingStation(context).storage
 
         /**
          * Gets the [TradingStation.trade] of the trading station at the [context]'s location.
          * Uses [getTradingStation] for finding a trading station.
          */
-        private fun getTrade(context: ScreenHandlerContext): Trade = getTradingStation(context).trade
+        private fun getTrade(context: MenuContext): Trade = getTradingStation(context).trade
     }
 }

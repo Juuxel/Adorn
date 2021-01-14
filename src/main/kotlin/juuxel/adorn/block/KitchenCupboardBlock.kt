@@ -9,8 +9,8 @@ import net.minecraft.block.BlockState
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.screen.NamedScreenHandlerFactory
-import net.minecraft.screen.ScreenHandler
+import net.minecraft.menu.Menu
+import net.minecraft.menu.NamedMenuFactory
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
@@ -26,12 +26,12 @@ open class KitchenCupboardBlock(
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): ActionResult {
-        player.openHandledScreen(state.createScreenHandlerFactory(world, pos))
+        player.openMenuScreen(state.createMenuFactory(world, pos))
         return ActionResult.SUCCESS
     }
 
-    override fun createScreenHandlerFactory(state: BlockState, world: World, pos: BlockPos) =
-        world.getBlockEntity(pos) as? NamedScreenHandlerFactory
+    override fun createMenuFactory(state: BlockState, world: World, pos: BlockPos) =
+        world.getBlockEntity(pos) as? NamedMenuFactory
 
     override fun onStateReplaced(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
         if (state1.block != state2.block) {
@@ -55,5 +55,5 @@ open class KitchenCupboardBlock(
     override fun hasComparatorOutput(state: BlockState) = true
 
     override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
-        ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos))
+        Menu.calculateComparatorOutput(world.getBlockEntity(pos))
 }

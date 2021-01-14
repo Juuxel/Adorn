@@ -1,4 +1,4 @@
-package juuxel.adorn.gui.widget
+package juuxel.adorn.menu.widget
 
 import io.github.cottonmc.cotton.gui.widget.WText
 import net.fabricmc.api.EnvType

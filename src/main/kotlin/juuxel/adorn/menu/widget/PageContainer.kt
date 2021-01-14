@@ -1,4 +1,4 @@
-package juuxel.adorn.gui.widget
+package juuxel.adorn.menu.widget
 
 interface PageContainer {
     var currentPage: Int // 0-indexed

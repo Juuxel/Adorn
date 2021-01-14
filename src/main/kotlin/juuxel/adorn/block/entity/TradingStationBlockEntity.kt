@@ -1,7 +1,7 @@
 package juuxel.adorn.block.entity
 
 import juuxel.adorn.block.AdornBlockEntities
-import juuxel.adorn.gui.controller.TradingStationController
+import juuxel.adorn.menu.TradingStationMenu
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.util.InventoryComponent
 import juuxel.adorn.util.containsOldUuid
@@ -15,9 +15,9 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
+import net.minecraft.menu.MenuContext
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.PacketByteBuf
-import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
@@ -52,7 +52,7 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
     fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
 
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity) =
-        TradingStationController(syncId, playerInv, ScreenHandlerContext.create(world, pos), isOwner(player))
+        TradingStationMenu(syncId, playerInv, MenuContext.create(world, pos), isOwner(player))
 
     override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)
 

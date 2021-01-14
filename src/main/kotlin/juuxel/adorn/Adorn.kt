@@ -6,11 +6,11 @@ import juuxel.adorn.compat.Compat
 import juuxel.adorn.config.AdornGameRules
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.entity.AdornEntities
-import juuxel.adorn.gui.AdornGuis
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.lib.AdornNetworking
 import juuxel.adorn.lib.AdornSounds
 import juuxel.adorn.lib.AdornTags
+import juuxel.adorn.menu.AdornMenus
 import juuxel.adorn.resources.AdornResources
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -27,7 +27,7 @@ object Adorn : ModInitializer {
         AdornBlockEntities.init()
         AdornItems.init()
         AdornEntities.init()
-        AdornGuis.init()
+        AdornMenus.init()
         AdornNetworking.init()
         AdornTags.init()
         AdornGameRules.init()
@@ -41,7 +41,7 @@ object Adorn : ModInitializer {
         AdornBlocks.initClient()
         AdornItems.initClient()
         AdornEntities.initClient()
-        AdornGuis.initClient()
+        AdornMenus.initClient()
         AdornNetworking.initClient()
         AdornResources.initClient()
     }

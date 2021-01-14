@@ -6,7 +6,7 @@ import com.mojang.serialization.Dynamic
 import com.mojang.serialization.JsonOps
 import io.github.cottonmc.jankson.JanksonFactory
 import io.github.cottonmc.jankson.JanksonOps
-import juuxel.adorn.gui.widget.WBigLabel
+import juuxel.adorn.menu.widget.WBigLabel
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.text.LiteralText

@@ -1,4 +1,4 @@
-package juuxel.adorn.gui.controller
+package juuxel.adorn.menu
 
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
@@ -8,23 +8,23 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
-import net.minecraft.screen.PropertyDelegate
-import net.minecraft.screen.ScreenHandlerContext
-import net.minecraft.screen.ScreenHandlerType
+import net.minecraft.menu.MenuContext
+import net.minecraft.menu.MenuType
+import net.minecraft.menu.PropertyDelegate
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
-open class SimpleInvController(
-    type: ScreenHandlerType<*>,
+open class SimpleMenu(
+    type: MenuType<*>,
     syncId: Int,
     playerInv: PlayerInventory,
-    context: ScreenHandlerContext,
+    context: MenuContext,
     invWidth: Int,
     invHeight: Int,
     private val paletteId: Identifier,
     blockInventory: Inventory = getBlockInventoryOrCreate(context, invWidth * invHeight),
     propertyDelegate: PropertyDelegate = getBlockPropertyDelegate(context)
-) : BaseAdornController(type, syncId, playerInv, context, blockInventory, propertyDelegate) {
+) : BaseMenu(type, syncId, playerInv, context, blockInventory, propertyDelegate) {
     private val slot: WItemSlot
     private val blockId: Identifier = Registry.BLOCK.getId(getBlock(context))
 
@@ -38,7 +38,7 @@ open class SimpleInvController(
                 add(playerInvPanel, 0, 2 + invHeight)
             }
 
-            validate(this@SimpleInvController)
+            validate(this@SimpleMenu)
         }
     }
 
@@ -46,7 +46,7 @@ open class SimpleInvController(
     override fun addPainters() {
         super.addPainters()
         rootPanel.backgroundPainter = Painters.palette(paletteId, blockId)
-        slot.setBackgroundPainter(Painters.LIBGUI_STYLE_SLOT)
+        slot.backgroundPainter = Painters.LIBGUI_STYLE_SLOT
         titleColor = ColorManager.getColors(paletteId)[blockId].fg
     }
 }

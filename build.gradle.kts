@@ -7,6 +7,7 @@ plugins {
     id("fabric-loom") version "0.5-SNAPSHOT"
     `maven-publish`
     id("org.jmailen.kotlinter") version "3.2.0"
+    id("io.github.juuxel.ripple") version "0.3.2"
 }
 
 group = "io.github.juuxel"
@@ -22,6 +23,8 @@ java {
 
     withSourcesJar()
 }
+
+ripple.processor("src/menu.ripple.json")
 
 loom {
     accessWidener = file("src/main/resources/adorn.accesswidener")
@@ -61,7 +64,7 @@ dependencies {
     fun v(key: String) = project.property(key).toString()
 
     minecraft("com.mojang:minecraft:${v("minecraft-version")}")
-    mappings("net.fabricmc:yarn:" + v("minecraft-version") + '+' + v("mappings") + ":v2")
+    mappings(ripple.processed("net.fabricmc:yarn:" + v("minecraft-version") + '+' + v("mappings") + ":v2", "adorn.1"))
 
     // Fabric
     modImplementation("net.fabricmc:fabric-loader:" + v("fabric-loader"))
