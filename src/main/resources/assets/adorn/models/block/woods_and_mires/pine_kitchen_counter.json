@@ -1,7 +1,0 @@
-{
-  "parent": "adorn:block/templates/kitchen_counter",
-  "textures": {
-    "stone": "minecraft:block/polished_granite",
-    "planks": "woods_and_mires:block/pine_planks"
-  }
-}

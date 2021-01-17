@@ -22,10 +22,10 @@ abstract class BubbleColumnBlockMixin {
         }
     }
 
-    @Inject(method = "calculateDrag", at = @At("RETURN"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(method = "calculateDrag", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/BlockView;getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/BlockState;"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
     private static void onCalculateDrag(BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> info, BlockState state) {
         Block block = state.getBlock();
-        if (info.getReturnValueZ() && block instanceof PrismarineChimneyBlock.WithColumn) {
+        if (block instanceof PrismarineChimneyBlock.WithColumn) {
             info.setReturnValue(((PrismarineChimneyBlock.WithColumn) block).getDrag());
         }
     }

@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": {
-    "item": "byg:redwood_planks"
-  },
-  "result": "adorn:byg/redwood_step",
-  "count": 2
-}

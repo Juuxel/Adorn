@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": {
-    "item": "byg:soapstone_bricks"
-  },
-  "result": "adorn:byg/soapstone_brick_platform",
-  "count": 1
-}

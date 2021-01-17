@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/post",
-  "textures": {
-    "texture": "terrestria:block/japanese_maple_planks"
-  }
-}

@@ -2,11 +2,11 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.block.entity.TradingStationBlockEntity
-import juuxel.adorn.config.ConfigManager
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.ShapeContext
+import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.player.PlayerEntity
@@ -25,11 +25,7 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-class TradingStationBlock :
-    VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)),
-    SneakClickHandler {
-    override val blockEntityType = AdornBlockEntities.TRADING_STATION
-
+class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)) {
     init {
         defaultState = defaultState.with(WATERLOGGED, false)
     }
@@ -91,20 +87,6 @@ class TradingStationBlock :
         return ActionResult.SUCCESS
     }
 
-    override fun onSneakClick(
-        state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult
-    ): ActionResult {
-        val be = world.getBlockEntity(pos) as? TradingStationBlockEntity ?: return ActionResult.PASS
-
-        // Show customer GUI
-        if (!be.isOwner(player)) {
-            player.openMenuScreen(state.createMenuFactory(world, pos))
-            return ActionResult.SUCCESS
-        }
-
-        return ActionResult.PASS
-    }
-
     override fun onStateReplaced(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
         if (state1.block != state2.block) {
             val entity = world.getBlockEntity(pos)
@@ -124,22 +106,25 @@ class TradingStationBlock :
     override fun getCollisionShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext) =
         COLLISION_SHAPE
 
-    /**
-     * Disables block breaking for non-owners.
-     */
-    override fun calcBlockBreakingDelta(state: BlockState, player: PlayerEntity, world: BlockView, pos: BlockPos) =
-        if (ConfigManager.CONFIG.protectTradingStations)
-            (world.getBlockEntity(pos) as? TradingStationBlockEntity).let {
-                if (it != null && !it.isOwner(player)) {
-                    0f
-                } else {
-                    super.calcBlockBreakingDelta(state, player, world, pos)
-                }
-            }
-        else
-            super.calcBlockBreakingDelta(state, player, world, pos)
+//    /**
+//     * Disables block breaking for non-owners.
+//     */
+//    override fun calcBlockBreakingDelta(state: BlockState, player: PlayerEntity, world: BlockView, pos: BlockPos) =
+//        if (ConfigManager.CONFIG.protectTradingStations)
+//            (world.getBlockEntity(pos) as? TradingStationBlockEntity).let {
+//                if (it != null && !it.isOwner(player)) {
+//                    0f
+//                } else {
+//                    super.calcBlockBreakingDelta(state, player, world, pos)
+//                }
+//            }
+//        else
+//            super.calcBlockBreakingDelta(state, player, world, pos)
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
+
+    override fun createBlockEntity(world: BlockView): BlockEntity =
+        TradingStationBlockEntity()
 
     companion object {
         val WATERLOGGED = Properties.WATERLOGGED

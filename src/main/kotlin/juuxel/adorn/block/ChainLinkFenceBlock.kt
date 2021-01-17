@@ -1,7 +1,5 @@
 package juuxel.adorn.block
 
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.PaneBlock
@@ -14,6 +12,8 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
+import net.minecraftforge.api.distmarker.Dist
+import net.minecraftforge.api.distmarker.OnlyIn
 
 class ChainLinkFenceBlock(settings: Settings) : PaneBlock(settings) {
     init {
@@ -50,7 +50,7 @@ class ChainLinkFenceBlock(settings: Settings) : PaneBlock(settings) {
         return result
     }
 
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     override fun isSideInvisible(state: BlockState, neighbor: BlockState, facing: Direction) = false
 
     private fun connectsVerticallyTo(state: BlockState) =

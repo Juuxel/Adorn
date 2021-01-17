@@ -1,7 +1,6 @@
 @file:Suppress("DEPRECATION")
 package juuxel.adorn.block
 
-import juuxel.adorn.lib.AdornTags
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
@@ -35,7 +34,7 @@ abstract class AbstractChimneyBlock(settings: Settings) : Block(settings), Water
         }?.updateConnections(context.world.getBlockState(context.blockPos.up()))
 
     private fun BlockState.updateConnections(neighborState: BlockState): BlockState = run {
-        with(CONNECTED, neighborState.isIn(AdornTags.CHIMNEYS.block))
+        with(CONNECTED, neighborState.block is AbstractChimneyBlock)
     }
 
     override fun getStateForNeighborUpdate(

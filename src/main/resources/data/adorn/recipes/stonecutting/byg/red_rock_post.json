@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": {
-    "item": "byg:red_rock"
-  },
-  "result": "adorn:byg/red_rock_post",
-  "count": 2
-}

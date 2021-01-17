@@ -1,112 +1,117 @@
 package juuxel.adorn.menu
 
-import io.github.cottonmc.cotton.gui.client.BackgroundPainter
-import io.github.cottonmc.cotton.gui.widget.WGridPanel
-import io.github.cottonmc.cotton.gui.widget.WItemSlot
-import io.github.cottonmc.cotton.gui.widget.WLabel
-import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
-import io.github.cottonmc.cotton.gui.widget.data.VerticalAlignment
+import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.block.entity.TradingStation
-import juuxel.adorn.client.gui.painter.Painters
-import juuxel.adorn.trading.Trade
-import juuxel.adorn.trading.TradeInventory
-import juuxel.adorn.util.Colors
-import juuxel.adorn.util.color
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
-import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
+import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
+import net.minecraft.menu.Menu
 import net.minecraft.menu.MenuContext
+import net.minecraft.menu.slot.Slot
 import net.minecraft.menu.slot.SlotActionType
-import net.minecraft.text.TranslatableText
+import net.minecraftforge.common.util.Constants
 import org.apache.logging.log4j.LogManager
+import java.util.function.BiFunction
 
 class TradingStationMenu(
     syncId: Int,
-    playerInv: PlayerInventory,
-    private val context: MenuContext,
-    private val forOwner: Boolean
-) : BaseMenu(
-    AdornMenus.TRADING_STATION,
-    syncId,
-    playerInv,
-    context,
-    getStorage(context),
-    getBlockPropertyDelegate(context)
-) {
-    private val slotWidgets: List<WItemSlot>
+    playerInventory: Inventory,
+    private val context: MenuContext = MenuContext.EMPTY
+) : Menu(AdornMenus.TRADING_STATION.get(), syncId) {
+    private val tradingStation: TradingStation
+    private val sellingSlot: Slot
+    private val priceSlot: Slot
 
     init {
-        (rootPanel as WGridPanel).apply {
-            titleColor = Colors.WHITE
+        val slot = 18
 
-            val tradeInv = getTrade(context).createInventory()
+        tradingStation = getTradingStation(context)
+        val tradeInventory = tradingStation.trade.createInventory()
+        val storage = tradingStation.storage
 
-            val mutableSlots = ArrayList<WItemSlot>()
-            fun WItemSlot.addToSlots() = apply { mutableSlots += this }
+        sellingSlot = addSlot(TradeSlot(tradeInventory, 0, 26, 36))
+        priceSlot = addSlot(TradeSlot(tradeInventory, 1, 26, 72))
 
-            add(WItemSlot.of(tradeInv, 0).setModifiable(false).addToSlots(), 1, 2)
-            add(WItemSlot.of(tradeInv, 1).setModifiable(false).addToSlots(), 1, 4)
-
-            val sellingLabel = WLabel(TranslatableText("block.adorn.trading_station.selling"), Colors.WHITE)
-            val priceLabel = WLabel(TranslatableText("block.adorn.trading_station.price"), Colors.WHITE)
-
-            sellingLabel.horizontalAlignment = HorizontalAlignment.CENTER
-            sellingLabel.verticalAlignment = VerticalAlignment.CENTER
-            priceLabel.horizontalAlignment = HorizontalAlignment.CENTER
-            priceLabel.verticalAlignment = VerticalAlignment.CENTER
-
-            add(sellingLabel, 1, 1)
-            add(priceLabel, 1, 3)
-
-            add(WItemSlot.of(blockInventory, 0, 4, 3).addToSlots(), 3, 2)
-
-            add(playerInvPanel, 0, 6)
-            validate(this@TradingStationMenu)
-
-            slotWidgets = mutableSlots
+        // Storage
+        for (y in 0..2) {
+            for (x in 0..3) {
+                addSlot(Slot(storage, x + y * 4, 62 + x * slot, 36 + y * slot))
+            }
         }
+
+        // Main player inventory
+        for (y in 0..2) {
+            for (x in 0..8) {
+                addSlot(Slot(playerInventory, y * 9 + x, 8 + x * slot, 104 + y * slot))
+            }
+        }
+
+        // Hotbar
+        for (x in 0..8) {
+            addSlot(Slot(playerInventory, 3 * 9 + x, 8 + x * slot, 162))
+        }
+    }
+
+    override fun canUse(player: PlayerEntity) =
+        canUse(context, player, AdornBlocks.TRADING_STATION.get())
+
+    override fun transferSlot(player: PlayerEntity, index: Int): ItemStack {
+        val offset = 2
+
+        // Ghost slots
+        if (index in 0 until offset) return ItemStack.EMPTY
+
+        var result = ItemStack.EMPTY
+        val slot = slots[index]
+
+        if (slot != null && slot.hasStack()) {
+            val containerSize = 12
+            val stack = slot.stack
+            result = stack.copy()
+
+            if (offset <= index && index < containerSize + offset) {
+                if (!insertItem(stack, containerSize + offset, slots.size, true)) {
+                    return ItemStack.EMPTY
+                }
+            } else if (!insertItem(stack, offset, containerSize + offset, false)) {
+                return ItemStack.EMPTY
+            }
+
+            if (stack.isEmpty) {
+                slot.stack = ItemStack.EMPTY
+            } else {
+                slot.markDirty()
+            }
+        }
+
+        return result
     }
 
     override fun onSlotClick(slotNumber: Int, button: Int, action: SlotActionType, player: PlayerEntity): ItemStack {
         val slot = slots.getOrNull(slotNumber)
         val cursorStack = player.inventory.cursorStack
 
-        return if (forOwner && slot?.inventory is TradeInventory) {
-            when (action) {
-                SlotActionType.PICKUP -> {
-                    slot.stack = cursorStack.copy()
-                    slot.markDirty()
+        if (action == SlotActionType.PICKUP && slot is TradeSlot) {
+            slot.stack = cursorStack.copy()
+            slot.markDirty()
 
-                    if (!world.isClient) {
-                        (getTradingStation(context) as? BlockEntityClientSerializable)?.sync() ?: run {
-                            val exception = Exception("Stack trace")
-                            exception.fillInStackTrace()
-                            LOGGER.warn("[Adorn] Could not sync empty trading station, report this!", exception)
-                        }
-                    }
-
-                    cursorStack
-                }
-
-                else -> cursorStack
+            if (tradingStation is BlockEntity) {
+                val state = tradingStation.cachedState
+                player.world.updateListeners(tradingStation.pos, state, state, Constants.BlockFlags.BLOCK_UPDATE)
             }
-        } else if (forOwner || (slot?.inventory is PlayerInventory && action != SlotActionType.QUICK_MOVE)) {
-            super.onSlotClick(slotNumber, button, action, player)
-        } else cursorStack
+
+            return cursorStack
+        }
+
+        return super.onSlotClick(slotNumber, button, action, player)
     }
 
-    @Environment(EnvType.CLIENT)
-    override fun addPainters() {
-        super.addPainters()
-        rootPanel.backgroundPainter = BackgroundPainter.createColorful(color(0x359668))
-        slotWidgets.forEach { it.backgroundPainter = Painters.LIBGUI_STYLE_SLOT }
+    private class TradeSlot(inventory: Inventory, index: Int, x: Int, y: Int) : Slot(inventory, index, x, y) {
+        override fun canTakeItems(player: PlayerEntity) = false
+        override fun canInsert(stack: ItemStack) = false
+        override fun takeStack(count: Int): ItemStack = ItemStack.EMPTY
     }
-
-    override fun getTitleColor() = Colors.WHITE
 
     companion object {
         private val LOGGER = LogManager.getLogger()
@@ -115,22 +120,11 @@ class TradingStationMenu(
          * Gets the [juuxel.adorn.block.entity.TradingStationBlockEntity] at the [context]'s location.
          * If it's not present, creates an empty trading station using [TradingStation.createEmpty].
          */
-        private fun getTradingStation(context: MenuContext) =
-            getBlockEntity(context) as? TradingStation ?: run {
-                LOGGER.warn("[Adorn] Trading station not found, creating fake one")
-                TradingStation.createEmpty()
-            }
-
-        /**
-         * Gets the [TradingStation.storage] of the trading station at the [context]'s location.
-         * Uses [getTradingStation] for finding a trading station.
-         */
-        private fun getStorage(context: MenuContext): Inventory = getTradingStation(context).storage
-
-        /**
-         * Gets the [TradingStation.trade] of the trading station at the [context]'s location.
-         * Uses [getTradingStation] for finding a trading station.
-         */
-        private fun getTrade(context: MenuContext): Trade = getTradingStation(context).trade
+        private fun getTradingStation(context: MenuContext): TradingStation =
+            context.run(BiFunction { world, pos -> world.getBlockEntity(pos) as TradingStation })
+                .orElseGet {
+                    LOGGER.warn("[Adorn] Trading station not found, creating fake one")
+                    TradingStation.createEmpty()
+                }
     }
 }

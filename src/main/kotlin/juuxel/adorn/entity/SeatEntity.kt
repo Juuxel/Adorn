@@ -1,20 +1,20 @@
 package juuxel.adorn.entity
 
 import juuxel.adorn.block.SeatBlock
-import juuxel.adorn.lib.AdornNetworking
 import juuxel.adorn.util.getBlockPos
 import juuxel.adorn.util.putBlockPos
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
-import net.fabricmc.fabric.api.server.PlayerStream
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.Packet
 import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraftforge.fml.network.NetworkHooks
+import net.minecraftforge.fml.network.PacketDistributor
 
 class SeatEntity(type: EntityType<*>, world: World) : Entity(type, world) {
     init {
@@ -45,9 +45,7 @@ class SeatEntity(type: EntityType<*>, world: World) : Entity(type, world) {
     override fun kill() {
         removeAllPassengers()
         if (!world.isClient) {
-            PlayerStream.watching(this).forEach {
-                ServerSidePacketRegistry.INSTANCE.sendToPlayer(it, EntityPassengersSetS2CPacket(this))
-            }
+            PacketDistributor.TRACKING_ENTITY.with { this }.send(EntityPassengersSetS2CPacket(this))
         }
         super.kill()
         val state = world.getBlockState(seatPos)
@@ -59,11 +57,10 @@ class SeatEntity(type: EntityType<*>, world: World) : Entity(type, world) {
     override fun canClimb() = false
     override fun collides() = false
     override fun getMountedHeightOffset() = 0.0
-    override fun createSpawnPacket() = AdornNetworking.createEntitySpawnPacket(this)
     override fun hasNoGravity() = true
     override fun isInvisible() = true
-
     override fun initDataTracker() {}
+
     override fun readCustomDataFromTag(tag: CompoundTag) {
         seatPos = tag.getBlockPos("SeatPos")
     }
@@ -71,4 +68,6 @@ class SeatEntity(type: EntityType<*>, world: World) : Entity(type, world) {
     override fun writeCustomDataToTag(tag: CompoundTag) {
         tag.putBlockPos("SeatPos", seatPos)
     }
+
+    override fun createSpawnPacket(): Packet<*> = NetworkHooks.getEntitySpawningPacket(this)
 }

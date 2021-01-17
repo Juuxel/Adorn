@@ -1,8 +1,0 @@
-{
-  "parent": "adorn:block/templates/coffee_table",
-  "textures": {
-    "planks": "byg:block/rainbow_eucalyptus_planks",
-    "leg": "byg:block/rainbow_eucalyptus_log",
-    "rim": "byg:block/rainbow_eucalyptus_log"
-  }
-}

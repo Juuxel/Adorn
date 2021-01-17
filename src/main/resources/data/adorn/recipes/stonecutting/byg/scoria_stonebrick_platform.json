@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": {
-    "item": "byg:scoria_stonebricks"
-  },
-  "result": "adorn:byg/scoria_stonebrick_platform",
-  "count": 1
-}

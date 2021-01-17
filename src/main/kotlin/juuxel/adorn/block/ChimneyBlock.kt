@@ -1,28 +1,29 @@
 @file:Suppress("DEPRECATION")
 package juuxel.adorn.block
 
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
+import juuxel.adorn.item.ItemWithDescription
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
+import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.ItemStack
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.EnumProperty
+import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
+import net.minecraft.world.BlockView
 import net.minecraft.world.World
+import net.minecraftforge.api.distmarker.Dist
+import net.minecraftforge.api.distmarker.OnlyIn
 import java.util.Random
 
-class ChimneyBlock :
-    AbstractChimneyBlock(Settings.copy(Blocks.BRICKS).ticksRandomly().nonOpaque()),
-    BlockWithDescription {
-    override val descriptionKey = "block.adorn.chimney.desc"
-
+class ChimneyBlock : AbstractChimneyBlock(Settings.copy(Blocks.BRICKS).ticksRandomly().nonOpaque()) {
     init {
         defaultState = defaultState.with(SMOKE_TYPE, SmokeType.CAMPFIRE)
     }
@@ -39,7 +40,7 @@ class ChimneyBlock :
         return ActionResult.SUCCESS
     }
 
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
         if (state[CONNECTED]) return
 
@@ -64,6 +65,13 @@ class ChimneyBlock :
                 )
             }
         }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    override fun appendTooltip(
+        stack: ItemStack, world: BlockView?, tooltip: MutableList<Text>, context: TooltipContext
+    ) {
+        tooltip += ItemWithDescription.createDescriptionText("block.adorn.chimney.desc")
     }
 
     companion object {

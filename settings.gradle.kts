@@ -6,6 +6,10 @@ pluginManagement {
         }
         gradlePluginPortal()
         maven {
+            name = "Forge"
+            url = uri("https://files.minecraftforge.net/maven")
+        }
+        maven {
             name = "JuuxelBintray"
             url = uri("https://dl.bintray.com/juuxel/maven")
         }

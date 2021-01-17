@@ -1,13 +1,10 @@
 package juuxel.adorn.client.renderer
 
 import juuxel.adorn.block.entity.TradingStationBlockEntity
-import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.color
 import juuxel.adorn.util.getSquaredDistance
 import juuxel.adorn.util.toTextWithCount
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher
@@ -20,8 +17,10 @@ import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
+import net.minecraftforge.api.distmarker.Dist
+import net.minecraftforge.api.distmarker.OnlyIn
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEntityRenderer<TradingStationBlockEntity>(dispatcher) {
     override fun render(be: TradingStationBlockEntity, tickDelta: Float, matrices: MatrixStack, vertexConsumerProvider: VertexConsumerProvider, light: Int, overlay: Int) {
         val hitResult = dispatcher.crosshairTarget
@@ -52,7 +51,7 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
             matrices.pop()
         }
 
-        if (lookingAtBlock && ConfigManager.CONFIG.client.showTradingStationTooltips) {
+        if (lookingAtBlock) {
             val label1 = TranslatableText(OWNER_LABEL, be.ownerName.copy().formatted(Formatting.GOLD))
             renderLabel(be, label1, 0.0, 0.9, 0.0, 12, matrices, vertexConsumerProvider, light)
             if (!be.trade.isEmpty()) {

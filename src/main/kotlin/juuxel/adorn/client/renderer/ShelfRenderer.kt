@@ -2,8 +2,6 @@ package juuxel.adorn.client.renderer
 
 import juuxel.adorn.block.ShelfBlock
 import juuxel.adorn.block.entity.ShelfBlockEntity
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher
@@ -12,8 +10,10 @@ import net.minecraft.client.render.model.json.ModelTransformation
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.client.util.math.Vector3f
 import net.minecraft.util.math.Direction
+import net.minecraftforge.api.distmarker.Dist
+import net.minecraftforge.api.distmarker.OnlyIn
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 class ShelfRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEntityRenderer<ShelfBlockEntity>(dispatcher) {
     override fun render(
         be: ShelfBlockEntity, tickDelta: Float,

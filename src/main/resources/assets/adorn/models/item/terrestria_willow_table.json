@@ -1,7 +1,0 @@
-{
-  "parent": "adorn:item/templates/table",
-  "textures": {
-    "planks": "terrestria:block/willow_planks",
-    "log": "terrestria:block/willow_log"
-  }
-}

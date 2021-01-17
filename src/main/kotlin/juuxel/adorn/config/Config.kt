@@ -1,58 +1,29 @@
 package juuxel.adorn.config
 
-import blue.endless.jankson.Comment
+import com.electronwill.nightconfig.core.file.CommentedFileConfig
+import com.electronwill.nightconfig.core.io.WritingMode
+import net.minecraftforge.common.ForgeConfigSpec
+import java.nio.file.Path
 
-class Config {
-    @Comment("If true, you can sit on tables.")
-    @JvmField
-    var sittingOnTables: Boolean = false
+object Config {
+    val SHOW_ITEMS_IN_STANDARD_GROUPS: ForgeConfigSpec.ConfigValue<Boolean>
 
-    @Comment("Protects trading stations from other players.")
-    @JvmField
-    // TODO: Should be a game rule
-    var protectTradingStations: Boolean = true
+    private val CONFIG: ForgeConfigSpec
 
-    @field:Comment("Client-side settings")
-    var client: Client = Client()
+    init {
+        val builder = ForgeConfigSpec.Builder()
+        SHOW_ITEMS_IN_STANDARD_GROUPS =
+            builder.comment("If true, Adorn items will also be shown in matching vanilla item tabs.")
+                .define("show-items-in-standard-groups", true)
 
-    @field:Comment("Default values for game rules in new worlds")
-    var gameRuleDefaults: GameRuleDefaults = GameRuleDefaults()
-
-    @field:Comment("Mod compatibility toggles (enabled: true, disabled: false)")
-    var compat: MutableMap<String, Boolean> = HashMap()
-
-    @Comment("Configuration for Adorn's Extra Pieces support.")
-    @JvmField
-    var extraPieces: EPConfig = EPConfig()
-
-    class Client {
-        @field:Comment("If true, floating tooltips are shown above trading stations.")
-        var showTradingStationTooltips: Boolean = true
-
-        @field:Comment("If true, Adorn items will also be shown in matching vanilla item tabs.")
-        var showItemsInStandardGroups: Boolean = true
+        CONFIG = builder.build()
     }
 
-    class EPConfig {
-        @Comment("If true, Adorn's EP support is enabled. You can disable it by setting this property to false.")
-        @JvmField
-        var enabled: Boolean = true
+    fun load(path: Path) {
+        val configData = CommentedFileConfig.builder(path)
+            .autosave()
+            .build()
 
-        @Comment("If true, Adorn's Towelette support will be enabled for EP blocks. (warning: resource heavy)")
-        @JvmField
-        var toweletteSupport: Boolean = false
-
-        @Comment("If true, enables carpeting for all Adorn chair and table piece blocks (warning: resource heavy).")
-        @JvmField
-        var carpetedEverything: Boolean = false
-
-        @Comment("A list of piece sets that will have carpeting support.")
-        @JvmField
-        var carpetedPieceSets: List<String> = ArrayList() // ArrayList so that Jankson deserializes it properly
-    }
-
-    class GameRuleDefaults {
-        @field:Comment("If true, sleeping on sofas can skip the night.")
-        var skipNightOnSofas: Boolean = true
+        CONFIG.setConfig(configData)
     }
 }

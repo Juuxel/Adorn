@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": {
-    "item": "byg:mangrove_planks"
-  },
-  "result": "adorn:byg/mangrove_post",
-  "count": 2
-}

@@ -1,7 +1,5 @@
 package juuxel.adorn.util
 
-import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
-import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -10,7 +8,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.state.property.Property
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
-import net.minecraft.util.registry.Registry
 
 fun ItemStack.toTextWithCount(): Text =
     TranslatableText("text.adorn.item_stack_with_count", count, toHoverableText())
@@ -33,17 +30,6 @@ fun BlockEntity.getSquaredDistance(x: Double, y: Double, z: Double): Double {
     return xd * xd + yd * yd + zd * zd
 }
 
-inline fun <A> Registry<A>.visit(crossinline visitor: (A) -> Unit) {
-    this.forEach(visitor)
-
-    RegistryEntryAddedCallback.event(this)
-        .register(
-            RegistryEntryAddedCallback { _, _, entry ->
-                visitor(entry)
-            }
-        )
-}
-
 /**
  * Creates a safe copy of this block's settings.
  *
@@ -51,18 +37,13 @@ inline fun <A> Registry<A>.visit(crossinline visitor: (A) -> Unit) {
  * Instead, the default state is used for the various lambdas.
  */
 fun Block.copySettingsSafely(): AbstractBlock.Settings =
-    FabricBlockSettings.of(defaultState.material)
-        .luminance(defaultState.luminance)
-        .apply { getHardness(defaultState)?.let(this::hardness) }
-        .resistance(blastResistance)
+    AbstractBlock.Settings.of(defaultState.material)
+        .luminance { defaultState.luminance }
+        .strength(getHardness(defaultState), blastResistance)
         .velocityMultiplier(velocityMultiplier)
         .jumpVelocityMultiplier(jumpVelocityMultiplier)
         .slipperiness(slipperiness)
         .sounds(defaultState.soundGroup)
 
-private fun getHardness(state: BlockState): Float? =
-    try {
-        state.getHardness(null, null)
-    } catch (e: NullPointerException) {
-        null
-    }
+private fun getHardness(state: BlockState): Float =
+    state.getHardness(null, null)

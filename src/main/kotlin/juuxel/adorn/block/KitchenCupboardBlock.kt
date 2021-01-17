@@ -2,7 +2,6 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
-import juuxel.adorn.block.entity.BETypeProvider
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import net.minecraft.block.BlockState
@@ -16,19 +15,23 @@ import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
+import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
 open class KitchenCupboardBlock(
     variant: BlockVariant
-) : AbstractKitchenCounterBlock(variant), BETypeProvider, BaseInventoryBlockEntity.InventoryProviderImpl {
-    override val blockEntityType = AdornBlockEntities.KITCHEN_CUPBOARD
-
+) : AbstractKitchenCounterBlock(variant), BaseInventoryBlockEntity.InventoryProviderImpl {
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): ActionResult {
         player.openMenuScreen(state.createMenuFactory(world, pos))
         return ActionResult.SUCCESS
     }
+
+    override fun hasTileEntity(state: BlockState) = true
+
+    override fun createTileEntity(state: BlockState, world: BlockView) =
+        KitchenCupboardBlockEntity()
 
     override fun createMenuFactory(state: BlockState, world: World, pos: BlockPos) =
         world.getBlockEntity(pos) as? NamedMenuFactory

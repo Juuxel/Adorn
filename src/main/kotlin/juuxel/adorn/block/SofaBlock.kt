@@ -12,6 +12,7 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
+import net.minecraft.entity.Entity
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
@@ -36,11 +37,9 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
+import net.minecraft.world.WorldView
 
-open class SofaBlock(variant: BlockVariant) :
-    SeatBlock(variant.createSettings()),
-    Waterloggable,
-    SneakClickHandler {
+open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), Waterloggable, SneakClickHandler {
     init {
         defaultState = defaultState
             .with(FRONT_CONNECTION, FrontConnection.NONE)
@@ -55,7 +54,7 @@ open class SofaBlock(variant: BlockVariant) :
         val stack = player.getStackInHand(hand)
         val item = stack.item
         if (item is DyeItem) {
-            world.setBlockState(pos, state.withBlock(AdornBlocks.SOFAS[item.color]!!))
+            world.setBlockState(pos, state.withBlock(AdornBlocks.SOFAS.getValue(item.color).get()))
             world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.8f)
             if (!player.abilities.creativeMode) stack.decrement(1)
             return ActionResult.SUCCESS
@@ -64,7 +63,7 @@ open class SofaBlock(variant: BlockVariant) :
         return super.onUse(state, world, pos, player, hand, hit)
     }
 
-    override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult): ActionResult {
+    override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand): ActionResult {
         val sleepingDirection = getSleepingDirection(world, pos)
         return if (world.dimension.isNatural && sleepingDirection != null && !state[OCCUPIED]) {
             if (!world.isClient) {
@@ -158,6 +157,11 @@ open class SofaBlock(variant: BlockVariant) :
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
+    override fun isBed(state: BlockState, world: BlockView, pos: BlockPos, player: Entity?) = true
+
+    override fun getBedDirection(state: BlockState, world: WorldView, pos: BlockPos) =
+        getSleepingDirection(world, pos)?.opposite
+
     companion object {
         val FACING = Properties.HORIZONTAL_FACING
         val CONNECTED_LEFT = BooleanProperty.of("connected_left")
@@ -213,9 +217,7 @@ open class SofaBlock(variant: BlockVariant) :
             COLLISION_SHAPE_MAP = buildShapeMap(thin = true)
         }
 
-        @JvmOverloads
-        @JvmStatic
-        fun getSleepingDirection(world: World, pos: BlockPos, ignoreNeighbors: Boolean = false): Direction? {
+        fun getSleepingDirection(world: BlockView, pos: BlockPos): Direction? {
             val state = world.getBlockState(pos)
             if (state.block !is SofaBlock) return null
 
@@ -224,27 +226,15 @@ open class SofaBlock(variant: BlockVariant) :
             val frontConnection = state[FRONT_CONNECTION]
             val facing = state[FACING]
 
-            if ((!connectedLeft && !connectedRight && frontConnection == FrontConnection.NONE) || (!ignoreNeighbors && state[OCCUPIED]))
+            if ((!connectedLeft && !connectedRight && frontConnection == FrontConnection.NONE))
                 return null
 
-            val result = when {
+            return when {
                 frontConnection != FrontConnection.NONE -> facing
                 connectedLeft -> facing.rotateYClockwise()
                 connectedRight -> facing.rotateYCounterclockwise()
                 else -> null
             }
-
-            if (result != null) {
-                if (ignoreNeighbors) {
-                    return result
-                }
-                val neighborState = world.getBlockState(pos.offset(result))
-                if (neighborState.block is SofaBlock && !neighborState[OCCUPIED]) {
-                    return result
-                }
-            }
-
-            return null
         }
     }
 }

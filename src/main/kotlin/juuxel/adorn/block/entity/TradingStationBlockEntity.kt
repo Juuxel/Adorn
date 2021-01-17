@@ -8,23 +8,24 @@ import juuxel.adorn.util.containsOldUuid
 import juuxel.adorn.util.getOldUuid
 import juuxel.adorn.util.getText
 import juuxel.adorn.util.putText
-import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.menu.MenuContext
+import net.minecraft.menu.NamedMenuFactory
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.PacketByteBuf
-import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.network.ClientConnection
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import java.util.UUID
 
-class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION), BlockEntityClientSerializable, ExtendedScreenHandlerFactory, TradingStation {
+class TradingStationBlockEntity : BlockEntity(
+    AdornBlockEntities.TRADING_STATION.get()
+), NamedMenuFactory, TradingStation {
     var owner: UUID? = null
     var ownerName: Text = LiteralText("???")
     override val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
@@ -52,13 +53,9 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
     fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
 
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity) =
-        TradingStationMenu(syncId, playerInv, MenuContext.create(world, pos), isOwner(player))
+        TradingStationMenu(syncId, playerInv, MenuContext.create(world, pos))
 
     override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)
-
-    override fun writeScreenOpeningData(player: ServerPlayerEntity, buf: PacketByteBuf) {
-        buf.writeBlockPos(pos)
-    }
 
     // NBT
 
@@ -89,12 +86,17 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
 
     // Client NBT
 
-    override fun toClientTag(tag: CompoundTag) = tag.apply {
-        putText(NBT_TRADING_OWNER_NAME, ownerName)
-        put(NBT_TRADE, trade.toTag(CompoundTag()))
+    override fun toInitialChunkDataTag() = toTag(CompoundTag())
+
+    override fun toUpdatePacket(): BlockEntityUpdateS2CPacket {
+        val tag = CompoundTag()
+        tag.putText(NBT_TRADING_OWNER_NAME, ownerName)
+        tag.put(NBT_TRADE, trade.toTag(CompoundTag()))
+        return BlockEntityUpdateS2CPacket(pos, -1, tag)
     }
 
-    override fun fromClientTag(tag: CompoundTag) {
+    override fun onDataPacket(net: ClientConnection, packet: BlockEntityUpdateS2CPacket) {
+        val tag = packet.compoundTag
         trade.fromTag(tag.getCompound(NBT_TRADE))
         ownerName = tag.getText(NBT_TRADING_OWNER_NAME) ?: return
     }

@@ -6,6 +6,7 @@ import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.DrawerBlockEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
@@ -20,13 +21,12 @@ import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
+import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
 open class DrawerBlock(
     variant: BlockVariant
 ) : VisibleBlockWithEntity(variant.createSettings().nonOpaque()), BaseInventoryBlockEntity.InventoryProviderImpl {
-    override val blockEntityType = AdornBlockEntities.DRAWER
-
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(FACING)
@@ -66,6 +66,8 @@ open class DrawerBlock(
             (world.getBlockEntity(pos) as? DrawerBlockEntity)?.customName = stack.name
         }
     }
+
+    override fun createBlockEntity(world: BlockView): BlockEntity = DrawerBlockEntity()
 
     override fun hasComparatorOutput(state: BlockState) = true
 

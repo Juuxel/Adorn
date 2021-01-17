@@ -1,22 +1,17 @@
 {
   "compatibilityLevel": "JAVA_8",
-  "minVersion": "0.7.11",
+  "minVersion": "0.8",
   "package": "juuxel.adorn.mixin",
   "required": true,
-  "plugin": "juuxel.adorn.AdornMixinPlugin",
 
   "mixins": [
-    "fluidloggable.FluidUtilMixin",
+    "access.BooleanRuleAccessor",
+    "access.TallPlantBlockAccessor",
     "BlockMixin",
-    "BlockEntityMixin",
     "BubbleColumnBlockMixin",
     "FenceGateBlockMixin",
-    "LivingEntityMixin",
     "PaneBlockMixin",
     "PlayerEntityMixin"
-  ],
-  "client": [
-    "client.LivingEntityMixin"
   ],
 
   "injectors": {

@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/kitchen_counter_connection_left",
-  "textures": {
-    "planks": "byg:block/pine_planks"
-  }
-}

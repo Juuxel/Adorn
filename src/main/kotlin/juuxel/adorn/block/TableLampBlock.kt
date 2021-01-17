@@ -4,7 +4,6 @@ package juuxel.adorn.block
 
 import juuxel.adorn.util.buildShapeRotationsFromNorth
 import juuxel.adorn.util.withBlock
-import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Material
@@ -52,7 +51,7 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable {
         val stack = player.getStackInHand(hand)
         val item = stack.item
         if (item is DyeItem) {
-            world.setBlockState(pos, state.withBlock(AdornBlocks.TABLE_LAMPS[item.color]!!))
+            world.setBlockState(pos, state.withBlock(AdornBlocks.TABLE_LAMPS.getValue(item.color).get()))
             world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.8f)
             if (!player.abilities.creativeMode) stack.decrement(1)
         } else {
@@ -105,10 +104,9 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable {
         val FACING: DirectionProperty = Properties.FACING
 
         fun createBlockSettings(color: DyeColor): Settings =
-            FabricBlockSettings.of(Material.REDSTONE_LAMP, color)
-                .hardness(0.3f)
-                .resistance(0.3f)
+            Settings.of(Material.REDSTONE_LAMP, color)
+                .strength(0.3f)
                 .sounds(BlockSoundGroup.WOOL)
-                .lightLevel { if (it[LIT]) 15 else 0 }
+                .luminance { if (it[LIT]) 15 else 0 }
     }
 }

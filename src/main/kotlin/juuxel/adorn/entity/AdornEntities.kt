@@ -2,30 +2,27 @@ package juuxel.adorn.entity
 
 import juuxel.adorn.Adorn
 import juuxel.adorn.client.renderer.InvisibleEntityRenderer
-import juuxel.adorn.lib.RegistryHelper
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
-import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry
-import net.minecraft.entity.EntityDimensions
+import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnGroup
-import net.minecraft.util.registry.Registry
+import net.minecraftforge.api.distmarker.Dist
+import net.minecraftforge.api.distmarker.OnlyIn
+import net.minecraftforge.fml.RegistryObject
+import net.minecraftforge.fml.client.registry.RenderingRegistry
+import net.minecraftforge.registries.DeferredRegister
+import net.minecraftforge.registries.ForgeRegistries
 
-object AdornEntities : RegistryHelper(Adorn.NAMESPACE) {
-    val SEAT = register(
-        Registry.ENTITY_TYPE,
-        "seat",
-        FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::SeatEntity)
-            .dimensions(EntityDimensions.fixed(0f, 0f))
-            .build()
-    )
+object AdornEntities {
+    val ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, Adorn.NAMESPACE)
 
-    fun init() {}
+    val SEAT: RegistryObject<EntityType<SeatEntity>> = ENTITIES.register("seat") {
+        EntityType.Builder.create(::SeatEntity, SpawnGroup.MISC)
+            .setDimensions(0f, 0f)
+            .disableSaving()
+            .build(null)
+    }
 
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     fun initClient() {
-        EntityRendererRegistry.INSTANCE.register(SEAT) { manager, _ ->
-            InvisibleEntityRenderer(manager)
-        }
+        RenderingRegistry.registerEntityRenderingHandler(SEAT.get(), ::InvisibleEntityRenderer)
     }
 }

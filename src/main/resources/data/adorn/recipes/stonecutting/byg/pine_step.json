@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": {
-    "item": "byg:pine_planks"
-  },
-  "result": "adorn:byg/pine_step",
-  "count": 2
-}

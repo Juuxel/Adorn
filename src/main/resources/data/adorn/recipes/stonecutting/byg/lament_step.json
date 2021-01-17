@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": {
-    "item": "byg:lament_planks"
-  },
-  "result": "adorn:byg/lament_step",
-  "count": 2
-}

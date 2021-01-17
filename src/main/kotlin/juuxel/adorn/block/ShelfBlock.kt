@@ -4,12 +4,15 @@ package juuxel.adorn.block
 import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.entity.BaseInventoryBlockEntity
 import juuxel.adorn.block.entity.ShelfBlockEntity
+import juuxel.adorn.item.ItemWithDescription
 import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
+import net.minecraft.block.entity.BlockEntity
+import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
@@ -18,6 +21,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.menu.Menu
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
+import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
@@ -30,11 +34,11 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
+import net.minecraftforge.api.distmarker.Dist
+import net.minecraftforge.api.distmarker.OnlyIn
+import net.minecraftforge.common.util.Constants
 
-open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createSettings()), Waterloggable, BlockWithDescription {
-    override val descriptionKey = "block.adorn.shelf.desc"
-    override val blockEntityType = AdornBlockEntities.SHELF
-
+open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createSettings()), Waterloggable {
     init {
         defaultState = defaultState.with(WATERLOGGED, false)
     }
@@ -96,9 +100,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
                 stack.count = 1
                 be.setStack(slot, stack)
                 be.markDirty()
-                if (!world.isClient) {
-                    be.sync()
-                }
+                world.updateListeners(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE)
 
                 if (!player.abilities.creativeMode) {
                     handStack.decrement(1)
@@ -110,9 +112,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
             }
             be.setStack(slot, ItemStack.EMPTY)
             be.markDirty()
-            if (!world.isClient) {
-                be.sync()
-            }
+            world.updateListeners(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE)
         }
 
         return ActionResult.SUCCESS
@@ -171,12 +171,22 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
     override fun rotate(state: BlockState, rotation: BlockRotation) =
         state.with(FACING, rotation.rotate(state[FACING]))
 
+    override fun createBlockEntity(world: BlockView): BlockEntity =
+        ShelfBlockEntity()
+
     override fun hasComparatorOutput(state: BlockState) = true
 
     override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
         Menu.calculateComparatorOutput(world.getBlockEntity(pos))
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
+
+    @OnlyIn(Dist.CLIENT)
+    override fun appendTooltip(
+        stack: ItemStack, world: BlockView?, tooltip: MutableList<Text>, context: TooltipContext
+    ) {
+        tooltip += ItemWithDescription.createDescriptionText("block.adorn.shelf.desc")
+    }
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING

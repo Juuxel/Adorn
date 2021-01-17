@@ -1,52 +1,75 @@
 package juuxel.adorn.menu
 
-import io.github.cottonmc.cotton.gui.widget.WGridPanel
-import io.github.cottonmc.cotton.gui.widget.WItemSlot
-import juuxel.adorn.client.gui.painter.Painters
-import juuxel.adorn.client.resources.ColorManager
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
-import net.minecraft.menu.MenuContext
+import net.minecraft.inventory.SimpleInventory
+import net.minecraft.item.ItemStack
+import net.minecraft.menu.Menu
 import net.minecraft.menu.MenuType
-import net.minecraft.menu.PropertyDelegate
-import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
+import net.minecraft.menu.slot.Slot
 
 open class SimpleMenu(
     type: MenuType<*>,
     syncId: Int,
-    playerInv: PlayerInventory,
-    context: MenuContext,
-    invWidth: Int,
-    invHeight: Int,
-    private val paletteId: Identifier,
-    blockInventory: Inventory = getBlockInventoryOrCreate(context, invWidth * invHeight),
-    propertyDelegate: PropertyDelegate = getBlockPropertyDelegate(context)
-) : BaseMenu(type, syncId, playerInv, context, blockInventory, propertyDelegate) {
-    private val slot: WItemSlot
-    private val blockId: Identifier = Registry.BLOCK.getId(getBlock(context))
-
+    private val dimensions: Pair<Int, Int>,
+    private val container: Inventory = SimpleInventory(dimensions.first * dimensions.second),
+    playerInventory: PlayerInventory
+) : Menu(type, syncId) {
     init {
-        (rootPanel as WGridPanel).apply {
-            darkTitleColor = titleColor
-            slot = WItemSlot.of(blockInventory, 0, invWidth, invHeight)
-            add(slot, (9 - invWidth) / 2, 1)
+        val (width, height) = dimensions
+        val offset = (9 - width) / 2
+        checkSize(container, width * height)
 
-            if (invHeight > 0) {
-                add(playerInvPanel, 0, 2 + invHeight)
+        val slot = 18
+
+        // Container
+        for (y in 0 until height) {
+            for (x in 0 until width) {
+                addSlot(Slot(container, y * width + x, 8 + (x + offset) * slot, 17 + y * slot))
             }
+        }
 
-            validate(this@SimpleMenu)
+        // Main player inventory
+        for (y in 0..2) {
+            for (x in 0..8) {
+                addSlot(Slot(playerInventory, y * 9 + x, 8 + x * slot, 84 + y * slot))
+            }
+        }
+
+        // Hotbar
+        for (x in 0..8) {
+            addSlot(Slot(playerInventory, 3 * 9 + x, 8 + x * slot, 142))
         }
     }
 
-    @Environment(EnvType.CLIENT)
-    override fun addPainters() {
-        super.addPainters()
-        rootPanel.backgroundPainter = Painters.palette(paletteId, blockId)
-        slot.backgroundPainter = Painters.LIBGUI_STYLE_SLOT
-        titleColor = ColorManager.getColors(paletteId)[blockId].fg
+    override fun canUse(player: PlayerEntity) =
+        container.canPlayerUse(player)
+
+    override fun transferSlot(player: PlayerEntity, index: Int): ItemStack {
+        var result = ItemStack.EMPTY
+        val slot = slots[index]
+
+        if (slot != null && slot.hasStack()) {
+            val containerSize = dimensions.first * dimensions.second
+            val stack = slot.stack
+            result = stack.copy()
+
+            if (index < containerSize) {
+                if (!insertItem(stack, containerSize, slots.size, true)) {
+                    return ItemStack.EMPTY
+                }
+            } else if (!insertItem(stack, 0, containerSize, false)) {
+                return ItemStack.EMPTY
+            }
+
+            if (stack.isEmpty) {
+                slot.stack = ItemStack.EMPTY
+            } else {
+                slot.markDirty()
+            }
+        }
+
+        return result
     }
 }

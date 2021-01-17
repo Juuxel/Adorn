@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/chair_upper",
-  "textures": {
-    "planks": "terrestria:block/rubber_planks"
-  }
-}

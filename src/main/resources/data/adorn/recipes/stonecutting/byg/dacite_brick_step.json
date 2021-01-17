@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": {
-    "item": "byg:dacite_bricks"
-  },
-  "result": "adorn:byg/dacite_brick_step",
-  "count": 2
-}
