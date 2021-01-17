@@ -23,9 +23,12 @@ import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import java.util.UUID
 
-class TradingStationBlockEntity : BlockEntity(
-    AdornBlockEntities.TRADING_STATION.get()
-), NamedMenuFactory, TradingStation {
+class TradingStationBlockEntity :
+    BlockEntity(
+        AdornBlockEntities.TRADING_STATION.get()
+    ),
+    NamedMenuFactory,
+    TradingStation {
     var owner: UUID? = null
     var ownerName: Text = LiteralText("???")
     override val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)

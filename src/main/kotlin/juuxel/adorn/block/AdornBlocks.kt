@@ -282,7 +282,7 @@ object AdornBlocks {
         )
     }
 
-    val CRATE: BlockDef = registerBlock("crate") {  Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)) }
+    val CRATE: BlockDef = registerBlock("crate") { Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)) }
     val APPLE_CRATE: BlockDef = registerCrate("apple_crate")
     val WHEAT_CRATE: BlockDef = registerCrate("wheat_crate")
     val CARROT_CRATE: BlockDef = registerCrate("carrot_crate")
@@ -453,7 +453,6 @@ object AdornBlocks {
 
     private fun makeItemForBlock(block: Block, itemSettings: Item.Settings): Item =
         BaseBlockItem(block, itemSettings)
-
 
     private fun registerCrate(name: String): BlockDef = registerBlock(
         name,
