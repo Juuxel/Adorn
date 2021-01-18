@@ -28,5 +28,5 @@ object AdornItemTags {
     fun init() {}
 
     private fun register(id: String): Tag.Identified<Item> =
-        ItemTags.register(Adorn.id(id).toString())
+        ItemTags.createOptional(Adorn.id(id))
 }
