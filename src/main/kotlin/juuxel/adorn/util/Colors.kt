@@ -11,4 +11,5 @@ fun color(rgb: Int, alpha: Float) = color(rgb, (alpha * 255f).toInt())
 object Colors {
     val BLACK = color(0x000000)
     val WHITE = color(0xFFFFFF)
+    val SCREEN_TEXT = color(0x404040)
 }
