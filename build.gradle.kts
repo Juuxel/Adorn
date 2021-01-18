@@ -4,7 +4,7 @@ plugins {
     java
     kotlin("jvm") version "1.4.20"
     id("io.github.juuxel.fabric-loom") version "0.6.7"
-    id("io.github.juuxel.ripple") version "0.3.5"
+    id("io.github.juuxel.ripple") version "0.3.6"
     `maven-publish`
     id("org.jmailen.kotlinter") version "3.2.0"
 }
