@@ -11,7 +11,7 @@
       "item": "minecraft:granite"
     },
     "R": {
-      "tag": "c:stone_rods"
+      "tag": "forge:rods/stone"
     }
   },
   "result": {

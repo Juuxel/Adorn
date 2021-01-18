@@ -10,7 +10,7 @@
       "item": "minecraft:nether_brick_slab"
     },
     "#": {
-      "tag": "c:stone_rods"
+      "tag": "forge:rods/stone"
     }
   },
   "result": {

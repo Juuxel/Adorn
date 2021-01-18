@@ -11,7 +11,7 @@
       "item": "minecraft:red_sandstone"
     },
     "R": {
-      "tag": "c:stone_rods"
+      "tag": "forge:rods/stone"
     }
   },
   "result": {

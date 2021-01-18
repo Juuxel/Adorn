@@ -18,7 +18,7 @@ object CoffeeTableRecipe : AbstractContentGenerator("coffee_table.recipe", "reci
                 "key" to mapOf(
                     "S" to mapOf("item" to "minecraft:${id.path}_slab"),
                     "#" to mapOf("item" to "minecraft:stick"),
-                    "-" to mapOf("tag" to "c:glass_panes")
+                    "-" to mapOf("tag" to "forge:glass_panes")
                 ),
                 "result" to mapOf(
                     "item" to id.suffixPath("_coffee_table"),

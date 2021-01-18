@@ -11,7 +11,7 @@
       "item": "minecraft:diorite"
     },
     "R": {
-      "tag": "c:stone_rods"
+      "tag": "forge:rods/stone"
     }
   },
   "result": {

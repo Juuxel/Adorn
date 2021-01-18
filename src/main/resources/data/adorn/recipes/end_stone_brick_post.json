@@ -11,7 +11,7 @@
       "item": "minecraft:end_stone_bricks"
     },
     "R": {
-      "tag": "c:stone_rods"
+      "tag": "forge:rods/stone"
     }
   },
   "result": {

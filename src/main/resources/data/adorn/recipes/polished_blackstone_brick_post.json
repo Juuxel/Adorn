@@ -11,7 +11,7 @@
       "item": "minecraft:polished_blackstone_bricks"
     },
     "R": {
-      "tag": "c:stone_rods"
+      "tag": "forge:rods/stone"
     }
   },
   "result": {

@@ -10,7 +10,7 @@
       "item": "minecraft:polished_andesite_slab"
     },
     "#": {
-      "tag": "c:stone_rods"
+      "tag": "forge:rods/stone"
     }
   },
   "result": {

@@ -10,7 +10,7 @@
       "item": "minecraft:blackstone_slab"
     },
     "#": {
-      "tag": "c:stone_rods"
+      "tag": "forge:rods/stone"
     }
   },
   "result": {
