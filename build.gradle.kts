@@ -4,7 +4,7 @@ plugins {
     java
     kotlin("jvm") version "1.4.0"
     idea
-    id("fabric-loom") version "0.5-SNAPSHOT"
+    id("fabric-loom") version "0.6-SNAPSHOT"
     `maven-publish`
     id("org.jmailen.kotlinter") version "3.2.0"
     id("io.github.juuxel.ripple") version "0.3.2"
@@ -32,6 +32,7 @@ loom {
 
 repositories {
     mavenCentral()
+    jcenter()
 
     maven {
         name = "Cotton"

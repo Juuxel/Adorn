@@ -1,14 +1,14 @@
 package juuxel.adorn.lib
 
-import io.netty.buffer.Unpooled
 import juuxel.adorn.Adorn
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.fabricmc.fabric.api.network.ClientSidePacketRegistry
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.Entity
-import net.minecraft.network.PacketByteBuf
-import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket
+import net.minecraft.network.Packet
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
 
 object AdornNetworking {
@@ -19,11 +19,11 @@ object AdornNetworking {
 
     @Environment(EnvType.CLIENT)
     fun initClient() {
-        ClientSidePacketRegistry.INSTANCE.register(ENTITY_SPAWN) { context, buf ->
+        ClientPlayNetworking.registerGlobalReceiver(ENTITY_SPAWN) { client, _, buf, _ ->
             val packet = EntitySpawnS2CPacket()
             packet.read(buf)
-            context.taskQueue.execute {
-                val world = context.player?.world ?: return@execute
+            client.execute {
+                val world = client.player?.world as? ClientWorld ?: return@execute
                 val entity = packet.entityTypeId.create(world)!!
                 entity.entityId = packet.id
                 entity.uuid = packet.uuid
@@ -32,15 +32,15 @@ object AdornNetworking {
                     packet.pitch * 360 / 256f, packet.yaw * 360 / 256f
                 )
                 entity.updateTrackedPosition(packet.x, packet.y, packet.z)
-                (context.player.world as? ClientWorld)?.addEntity(packet.id, entity)
+                world.addEntity(packet.id, entity)
             }
         }
     }
 
-    fun createEntitySpawnPacket(entity: Entity) =
-        CustomPayloadS2CPacket(
+    fun createEntitySpawnPacket(entity: Entity): Packet<*> =
+        ServerPlayNetworking.createS2CPacket(
             ENTITY_SPAWN,
-            PacketByteBuf(Unpooled.buffer()).apply {
+            PacketByteBufs.create().apply {
                 EntitySpawnS2CPacket(entity).write(this)
             }
         )

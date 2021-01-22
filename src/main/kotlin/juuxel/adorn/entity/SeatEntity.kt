@@ -4,8 +4,8 @@ import juuxel.adorn.block.SeatBlock
 import juuxel.adorn.lib.AdornNetworking
 import juuxel.adorn.util.getBlockPos
 import juuxel.adorn.util.putBlockPos
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
-import net.fabricmc.fabric.api.server.PlayerStream
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.player.PlayerEntity
@@ -45,8 +45,8 @@ class SeatEntity(type: EntityType<*>, world: World) : Entity(type, world) {
     override fun kill() {
         removeAllPassengers()
         if (!world.isClient) {
-            PlayerStream.watching(this).forEach {
-                ServerSidePacketRegistry.INSTANCE.sendToPlayer(it, EntityPassengersSetS2CPacket(this))
+            for (player in PlayerLookup.tracking(this)) {
+                ServerPlayNetworking.getSender(player).sendPacket(EntityPassengersSetS2CPacket(this))
             }
         }
         super.kill()
