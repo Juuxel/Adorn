@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "io.github.juuxel"
-version = "${project.property("mod-version")}+${project.property("minecraft-version")}"
+version = "${project.property("mod-version")}+${project.property("minecraft-version")}-forge"
 
 base {
     archivesBaseName = "Adorn"
