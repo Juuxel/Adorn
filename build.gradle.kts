@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     java
     kotlin("jvm") version "1.4.20"
-    id("io.github.juuxel.fabric-loom") version "0.6.9"
+    id("io.github.juuxel.fabric-loom") version "0.6.10"
     id("io.github.juuxel.ripple") version "0.3.6"
     `maven-publish`
     id("org.jmailen.kotlinter") version "3.2.0"
@@ -28,6 +28,7 @@ ripple.processor("src/menu.ripple.json")
 loom {
     mixinConfig = "mixins.adorn.json"
     useFabricMixin = true
+    platformNameInRunConfig = true
 }
 
 repositories {
