@@ -1,5 +1,5 @@
 ---
-name: Bug report
+name: Bug report (Forge)
 about: Create a report to help us improve
 title: ''
 labels: bug
@@ -7,11 +7,10 @@ assignees: ''
 
 ---
 
-### Versions of Minecraft, Fabric and Adorn
+### Versions of Minecraft, Forge and Adorn
 - Adorn: 
 - Minecraft: 
-- Fabric Loader: 
-- Fabric API: 
+- Forge: 
 
 ### Describe the bug
 A clear and concise description of what the bug is.
