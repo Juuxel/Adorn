@@ -5,9 +5,9 @@ plugins {
     kotlin("jvm") version "1.4.0"
     idea
     id("io.github.juuxel.fabric-loom") version "0.6.10"
+    id("io.github.juuxel.ripple") version "0.3.6"
     `maven-publish`
     id("org.jmailen.kotlinter") version "3.2.0"
-    id("io.github.juuxel.ripple") version "0.3.2"
 }
 
 group = "io.github.juuxel"
