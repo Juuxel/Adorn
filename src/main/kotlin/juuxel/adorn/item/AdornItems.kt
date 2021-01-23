@@ -14,7 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries
 object AdornItems {
     val ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Adorn.NAMESPACE)
 
-    val GROUP = object : ItemGroup(Adorn.id("items").toString()) {
+    val GROUP = object : ItemGroup("${Adorn.NAMESPACE}.items") {
         override fun createIcon() = ItemStack(AdornBlocks.SOFAS.getValue(DyeColor.LIME).get())
     }
 
