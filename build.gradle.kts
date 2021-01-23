@@ -59,7 +59,7 @@ tasks {
     processResources {
         inputs.property("version", project.version)
 
-        filesMatching("fabric.mod.json") {
+        filesMatching("META-INF/mods.toml") {
             expand("version" to project.version)
         }
     }
