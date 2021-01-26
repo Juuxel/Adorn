@@ -10,7 +10,8 @@ object Compat {
             "terrestria" to TerrestriaCompat::init,
             "towelette" to ToweletteCompat::init,
             "traverse" to TraverseCompat::init,
-            "woods_and_mires" to WamCompat::init
+            "woods_and_mires" to WamCompat::init,
+            "biomemakeover" to BiomeMakeoverCompat::init
         )
 
         for ((mod, fn) in mods) {

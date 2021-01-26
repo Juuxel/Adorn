@@ -8,7 +8,10 @@
     "adorn:acacia_kitchen_sink",
     "adorn:dark_oak_kitchen_sink",
     "adorn:crimson_kitchen_sink",
-    "adorn:warped_kitchen_sink"
+    "adorn:warped_kitchen_sink",
+    { "id": "adorn:biomemakeover/blighted_balsa_sink", "required": false },
+    { "id": "adorn:biomemakeover/swamp_cypress_sink", "required": false },
+    { "id": "adorn:biomemakeover/willow_sink", "required": false }
   ],
   "libcd": {
     "entries": [

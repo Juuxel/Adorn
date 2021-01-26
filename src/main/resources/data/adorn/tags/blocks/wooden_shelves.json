@@ -8,7 +8,10 @@
     "adorn:acacia_shelf",
     "adorn:dark_oak_shelf",
     "adorn:crimson_shelf",
-    "adorn:warped_shelf"
+    "adorn:warped_shelf",
+    { "id": "adorn:biomemakeover/blighted_balsa_shelf", "required": false },
+    { "id": "adorn:biomemakeover/swamp_cypress_shelf", "required": false },
+    { "id": "adorn:biomemakeover/willow_shelf", "required": false }
   ],
   "libcd": {
     "entries": [

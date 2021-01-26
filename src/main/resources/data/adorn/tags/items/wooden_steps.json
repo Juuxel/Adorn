@@ -8,7 +8,10 @@
     "adorn:acacia_step",
     "adorn:dark_oak_step",
     "adorn:crimson_step",
-    "adorn:warped_step"
+    "adorn:warped_step",
+    { "id": "adorn:biomemakeover/blighted_balsa_step", "required": false },
+    { "id": "adorn:biomemakeover/swamp_cypress_step", "required": false },
+    { "id": "adorn:biomemakeover/willow_step", "required": false }
   ],
   "libcd": {
     "entries": [

@@ -8,7 +8,10 @@
     "adorn:acacia_coffee_table",
     "adorn:dark_oak_coffee_table",
     "adorn:crimson_coffee_table",
-    "adorn:warped_coffee_table"
+    "adorn:warped_coffee_table",
+    { "id": "adorn:biomemakeover/blighted_balsa_coffee_table", "required": false },
+    { "id": "adorn:biomemakeover/swamp_cypress_coffee_table", "required": false },
+    { "id": "adorn:biomemakeover/willow_coffee_table", "required": false }
   ],
   "libcd": {
     "entries": [

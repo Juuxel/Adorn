@@ -8,7 +8,10 @@
     "adorn:acacia_post",
     "adorn:dark_oak_post",
     "adorn:crimson_post",
-    "adorn:warped_post"
+    "adorn:warped_post",
+    { "id": "adorn:biomemakeover/blighted_balsa_post", "required": false },
+    { "id": "adorn:biomemakeover/swamp_cypress_post", "required": false },
+    { "id": "adorn:biomemakeover/willow_post", "required": false }
   ],
   "libcd": {
     "entries": [

@@ -8,7 +8,10 @@
     "adorn:acacia_kitchen_counter",
     "adorn:dark_oak_kitchen_counter",
     "adorn:crimson_kitchen_counter",
-    "adorn:warped_kitchen_counter"
+    "adorn:warped_kitchen_counter",
+    { "id": "adorn:biomemakeover/blighted_balsa_kitchen_counter", "required": false },
+    { "id": "adorn:biomemakeover/swamp_cypress_kitchen_counter", "required": false },
+    { "id": "adorn:biomemakeover/willow_kitchen_counter", "required": false }
   ],
   "libcd": {
     "entries": [

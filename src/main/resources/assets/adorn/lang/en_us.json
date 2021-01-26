@@ -62,6 +62,9 @@
   "block.adorn.byg.willow_chair": "Willow Chair",
   "block.adorn.byg.witch_hazel_chair": "Witch Hazel Chair",
   "block.adorn.byg.zelkova_chair": "Zelkova Chair",
+  "block.adorn.biomemakeover.blighted_balsa_chair": "Blighted Balsa Chair",
+  "block.adorn.biomemakeover.swamp_cypress_chair": "Swamp Cypress Chair",
+  "block.adorn.biomemakeover.willow_chair": "Willow Chair",
 
   "block.adorn.oak_table": "Oak Table",
   "block.adorn.spruce_table": "Spruce Table",
@@ -109,6 +112,9 @@
   "block.adorn.byg.willow_table": "Willow Table",
   "block.adorn.byg.witch_hazel_table": "Witch Hazel Table",
   "block.adorn.byg.zelkova_table": "Zelkova Table",
+  "block.adorn.biomemakeover.blighted_balsa_table": "Blighted Balsa Table",
+  "block.adorn.biomemakeover.swamp_cypress_table": "Swamp Cypress Table",
+  "block.adorn.biomemakeover.willow_table": "Willow Table",
 
   "block.adorn.oak_kitchen_counter": "Oak Kitchen Counter",
   "block.adorn.spruce_kitchen_counter": "Spruce Kitchen Counter",
@@ -156,6 +162,9 @@
   "block.adorn.byg.willow_kitchen_counter": "Willow Kitchen Counter",
   "block.adorn.byg.witch_hazel_kitchen_counter": "Witch Hazel Kitchen Counter",
   "block.adorn.byg.zelkova_kitchen_counter": "Zelkova Kitchen Counter",
+  "block.adorn.biomemakeover.blighted_balsa_kitchen_counter": "Blighted Balsa Kitchen Counter",
+  "block.adorn.biomemakeover.swamp_cypress_kitchen_counter": "Swamp Cypress Kitchen Counter",
+  "block.adorn.biomemakeover.willow_kitchen_counter": "Willow Kitchen Counter",
 
   "block.adorn.oak_kitchen_cupboard": "Oak Kitchen Cupboard",
   "block.adorn.spruce_kitchen_cupboard": "Spruce Kitchen Cupboard",
@@ -203,6 +212,9 @@
   "block.adorn.byg.willow_kitchen_cupboard": "Willow Kitchen Cupboard",
   "block.adorn.byg.witch_hazel_kitchen_cupboard": "Witch Hazel Kitchen Cupboard",
   "block.adorn.byg.zelkova_kitchen_cupboard": "Zelkova Kitchen Cupboard",
+  "block.adorn.biomemakeover.blighted_balsa_kitchen_cupboard": "Blighted Balsa Kitchen Cupboard",
+  "block.adorn.biomemakeover.swamp_cypress_kitchen_cupboard": "Swamp Cypress Kitchen Cupboard",
+  "block.adorn.biomemakeover.willow_kitchen_cupboard": "Willow Kitchen Cupboard",
 
   "block.adorn.oak_kitchen_sink": "Oak Kitchen Sink",
   "block.adorn.spruce_kitchen_sink": "Spruce Kitchen Sink",
@@ -250,6 +262,9 @@
   "block.adorn.byg.willow_kitchen_sink": "Willow Kitchen Sink",
   "block.adorn.byg.witch_hazel_kitchen_sink": "Witch Hazel Kitchen Sink",
   "block.adorn.byg.zelkova_kitchen_sink": "Zelkova Kitchen Sink",
+  "block.adorn.biomemakeover.blighted_balsa_kitchen_sink": "Blighted Balsa Kitchen Sink",
+  "block.adorn.biomemakeover.swamp_cypress_kitchen_sink": "Swamp Cypress Kitchen Sink",
+  "block.adorn.biomemakeover.willow_kitchen_sink": "Willow Kitchen Sink",
 
   "block.adorn.oak_drawer": "Oak Drawer",
   "block.adorn.spruce_drawer": "Spruce Drawer",
@@ -297,6 +312,9 @@
   "block.adorn.byg.willow_drawer": "Willow Drawer",
   "block.adorn.byg.witch_hazel_drawer": "Witch Hazel Drawer",
   "block.adorn.byg.zelkova_drawer": "Zelkova Drawer",
+  "block.adorn.biomemakeover.blighted_balsa_drawer": "Blighted Balsa Drawer",
+  "block.adorn.biomemakeover.swamp_cypress_drawer": "Swamp Cypress Drawer",
+  "block.adorn.biomemakeover.willow_drawer": "Willow Drawer",
 
   "block.adorn.trading_station": "Trading Station",
   "block.adorn.trading_station.selling": "Selling",
@@ -424,6 +442,9 @@
   "block.adorn.byg.mossy_red_rock_brick_post": "Mossy Red Rock Brick Post",
   "block.adorn.byg.cracked_red_rock_brick_post": "Cracked Red Rock Brick Post",
   "block.adorn.byg.chiseled_red_rock_brick_post": "Chiseled Red Rock Brick Post",
+  "block.adorn.biomemakeover.blighted_balsa_post": "Blighted Balsa Post",
+  "block.adorn.biomemakeover.swamp_cypress_post": "Swamp Cypress Post",
+  "block.adorn.biomemakeover.willow_post": "Willow Post",
   "block.adorn.post.desc": "A bit like a fence post",
 
   "block.adorn.oak_platform": "Oak Platform",
@@ -522,6 +543,9 @@
   "block.adorn.byg.mossy_red_rock_brick_platform": "Mossy Red Rock Brick Platform",
   "block.adorn.byg.cracked_red_rock_brick_platform": "Cracked Red Rock Brick Platform",
   "block.adorn.byg.chiseled_red_rock_brick_platform": "Chiseled Red Rock Brick Platform",
+  "block.adorn.biomemakeover.blighted_balsa_platform": "Blighted Balsa Platform",
+  "block.adorn.biomemakeover.swamp_cypress_platform": "Swamp Cypress Platform",
+  "block.adorn.biomemakeover.willow_platform": "Willow Platform",
   "block.adorn.platform.desc": "A post with a platform on top",
 
   "block.adorn.oak_step": "Oak Step",
@@ -620,6 +644,9 @@
   "block.adorn.byg.mossy_red_rock_brick_step": "Mossy Red Rock Brick Step",
   "block.adorn.byg.cracked_red_rock_brick_step": "Cracked Red Rock Brick Step",
   "block.adorn.byg.chiseled_red_rock_brick_step": "Chiseled Red Rock Brick Step",
+  "block.adorn.biomemakeover.blighted_balsa_step": "Blighted Balsa Step",
+  "block.adorn.biomemakeover.swamp_cypress_step": "Swamp Cypress Step",
+  "block.adorn.biomemakeover.willow_step": "Willow Step",
   "block.adorn.step.desc": "A small step with a post under it",
 
   "block.adorn.brick_chimney": "Brick Chimney",
@@ -681,6 +708,9 @@
   "block.adorn.byg.willow_shelf": "Willow Shelf",
   "block.adorn.byg.witch_hazel_shelf": "Witch Hazel Shelf",
   "block.adorn.byg.zelkova_shelf": "Zelkova Shelf",
+  "block.adorn.biomemakeover.blighted_balsa_shelf": "Blighted Balsa Shelf",
+  "block.adorn.biomemakeover.swamp_cypress_shelf": "Swamp Cypress Shelf",
+  "block.adorn.biomemakeover.willow_shelf": "Willow Shelf",
   "block.adorn.shelf.desc": "A handy place for everyday items",
 
   "block.adorn.white_table_lamp": "White Table Lamp",
@@ -746,6 +776,9 @@
   "block.adorn.byg.willow_coffee_table": "Willow Coffee Table",
   "block.adorn.byg.witch_hazel_coffee_table": "Witch Hazel Coffee Table",
   "block.adorn.byg.zelkova_coffee_table": "Zelkova Coffee Table",
+  "block.adorn.biomemakeover.blighted_balsa_coffee_table": "Blighted Balsa Coffee Table",
+  "block.adorn.biomemakeover.swamp_cypress_coffee_table": "Swamp Cypress Coffee Table",
+  "block.adorn.biomemakeover.willow_coffee_table": "Willow Coffee Table",
 
   "block.adorn.crate": "Crate",
   "block.adorn.wheat_crate": "Crate of Wheat",

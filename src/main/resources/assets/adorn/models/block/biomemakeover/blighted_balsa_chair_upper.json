@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/chair_upper",
+  "textures": {
+    "planks": "biomemakeover:block/blighted_balsa_planks"
+  }
+}

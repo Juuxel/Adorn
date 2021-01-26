@@ -8,7 +8,10 @@
     "adorn:acacia_platform",
     "adorn:dark_oak_platform",
     "adorn:crimson_platform",
-    "adorn:warped_platform"
+    "adorn:warped_platform",
+    { "id": "adorn:biomemakeover/blighted_balsa_platform", "required": false },
+    { "id": "adorn:biomemakeover/swamp_cypress_platform", "required": false },
+    { "id": "adorn:biomemakeover/willow_platform", "required": false }
   ],
   "libcd": {
     "entries": [

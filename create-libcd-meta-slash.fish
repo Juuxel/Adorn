@@ -1,3 +1,5 @@
+. create-libcd-meta.fish
+
 function create-libcd-meta
     echo "Mod ID:" $argv[1]
     echo "Directory:" $argv[2]

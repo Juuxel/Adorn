@@ -1,0 +1,23 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:coffee_table",
+  "pattern": [
+    "S-S",
+    "# #"
+  ],
+  "key": {
+    "S": {
+      "item": "biomemakeover:swamp_cypress_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "-": {
+      "tag": "c:glass_panes"
+    }
+  },
+  "result": {
+    "item": "adorn:biomemakeover/swamp_cypress_coffee_table",
+    "count": 2
+  }
+}

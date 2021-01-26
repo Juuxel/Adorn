@@ -8,7 +8,10 @@
     "adorn:acacia_chair",
     "adorn:dark_oak_chair",
     "adorn:crimson_chair",
-    "adorn:warped_chair"
+    "adorn:warped_chair",
+    { "id": "adorn:biomemakeover/blighted_balsa_chair", "required": false },
+    { "id": "adorn:biomemakeover/swamp_cypress_chair", "required": false },
+    { "id": "adorn:biomemakeover/willow_chair", "required": false }
   ],
   "libcd": {
     "entries": [

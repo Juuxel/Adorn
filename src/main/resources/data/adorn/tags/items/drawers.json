@@ -8,7 +8,10 @@
     "adorn:acacia_drawer",
     "adorn:dark_oak_drawer",
     "adorn:crimson_drawer",
-    "adorn:warped_drawer"
+    "adorn:warped_drawer",
+    { "id": "adorn:biomemakeover/blighted_balsa_drawer", "required": false },
+    { "id": "adorn:biomemakeover/swamp_cypress_drawer", "required": false },
+    { "id": "adorn:biomemakeover/willow_drawer", "required": false }
   ],
   "libcd": {
     "entries": [

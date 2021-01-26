@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:drawer",
+  "pattern": [
+    "S",
+    "C",
+    "S"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "S": {
+      "item": "biomemakeover:swamp_cypress_slab"
+    }
+  },
+  "result": {
+    "item": "adorn:biomemakeover/swamp_cypress_drawer",
+    "count": 2
+  }
+}
