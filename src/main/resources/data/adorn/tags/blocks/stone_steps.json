@@ -11,39 +11,25 @@
     "adorn:stone_brick_step",
     "adorn:red_sandstone_step",
     "adorn:nether_brick_step",
-    "adorn:basalt_step"
-  ],
-  "libcd": {
-    "entries": [
-      {
-        "when": [{ "libcd:mod_loaded": "terrestria" }],
-        "values": [
-          "adorn:terrestria_basalt_step",
-          "adorn:terrestria_basalt_cobblestone_step"
-        ]
-      },
-      {
-        "when": [{ "libcd:mod_loaded": "byg" }],
-        "values": [
-          "adorn:byg/dacite_step",
-          "adorn:byg/dacite_brick_step",
-          "adorn:byg/dacite_cobblestone_step",
-          "adorn:byg/mossy_stone_step",
-          "adorn:byg/rocky_stone_step",
-          "adorn:byg/scoria_stone_step",
-          "adorn:byg/scoria_cobblestone_step",
-          "adorn:byg/scoria_stonebrick_step",
-          "adorn:byg/soapstone_step",
-          "adorn:byg/polished_soapstone_step",
-          "adorn:byg/soapstone_brick_step",
-          "adorn:byg/soapstone_tile_step",
-          "adorn:byg/red_rock_step",
-          "adorn:byg/red_rock_brick_step",
-          "adorn:byg/mossy_red_rock_brick_step",
-          "adorn:byg/cracked_red_rock_brick_step",
-          "adorn:byg/chiseled_red_rock_brick_step"
-        ]
-      }
-    ]
-  }
+    "adorn:basalt_step",
+    { "id": "adorn:terrestria_basalt_step", "required": false },
+    { "id": "adorn:terrestria_basalt_cobblestone_step", "required": false },
+    { "id": "adorn:byg/dacite_step", "required": false },
+    { "id": "adorn:byg/dacite_brick_step", "required": false },
+    { "id": "adorn:byg/dacite_cobblestone_step", "required": false },
+    { "id": "adorn:byg/mossy_stone_step", "required": false },
+    { "id": "adorn:byg/rocky_stone_step", "required": false },
+    { "id": "adorn:byg/scoria_stone_step", "required": false },
+    { "id": "adorn:byg/scoria_cobblestone_step", "required": false },
+    { "id": "adorn:byg/scoria_stonebrick_step", "required": false },
+    { "id": "adorn:byg/soapstone_step", "required": false },
+    { "id": "adorn:byg/polished_soapstone_step", "required": false },
+    { "id": "adorn:byg/soapstone_brick_step", "required": false },
+    { "id": "adorn:byg/soapstone_tile_step", "required": false },
+    { "id": "adorn:byg/red_rock_step", "required": false },
+    { "id": "adorn:byg/red_rock_brick_step", "required": false },
+    { "id": "adorn:byg/mossy_red_rock_brick_step", "required": false },
+    { "id": "adorn:byg/cracked_red_rock_brick_step", "required": false },
+    { "id": "adorn:byg/chiseled_red_rock_brick_step", "required": false }
+  ]
 }

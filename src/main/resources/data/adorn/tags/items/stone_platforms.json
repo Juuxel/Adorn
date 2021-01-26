@@ -11,39 +11,25 @@
     "adorn:stone_brick_platform",
     "adorn:red_sandstone_platform",
     "adorn:nether_brick_platform",
-    "adorn:basalt_platform"
-  ],
-  "libcd": {
-    "entries": [
-      {
-        "when": [{ "libcd:mod_loaded": "terrestria" }],
-        "values": [
-          "adorn:terrestria_basalt_platform",
-          "adorn:terrestria_basalt_cobblestone_platform"
-        ]
-      },
-      {
-        "when": [{ "libcd:mod_loaded": "byg" }],
-        "values": [
-          "adorn:byg/dacite_platform",
-          "adorn:byg/dacite_brick_platform",
-          "adorn:byg/dacite_cobblestone_platform",
-          "adorn:byg/mossy_stone_platform",
-          "adorn:byg/rocky_stone_platform",
-          "adorn:byg/scoria_stone_platform",
-          "adorn:byg/scoria_cobblestone_platform",
-          "adorn:byg/scoria_stonebrick_platform",
-          "adorn:byg/soapstone_platform",
-          "adorn:byg/polished_soapstone_platform",
-          "adorn:byg/soapstone_brick_platform",
-          "adorn:byg/soapstone_tile_platform",
-          "adorn:byg/red_rock_platform",
-          "adorn:byg/red_rock_brick_platform",
-          "adorn:byg/mossy_red_rock_brick_platform",
-          "adorn:byg/cracked_red_rock_brick_platform",
-          "adorn:byg/chiseled_red_rock_brick_platform"
-        ]
-      }
-    ]
-  }
+    "adorn:basalt_platform",
+    { "id": "adorn:terrestria_basalt_platform", "required": false },
+    { "id": "adorn:terrestria_basalt_cobblestone_platform", "required": false },
+    { "id": "adorn:byg/dacite_platform", "required": false },
+    { "id": "adorn:byg/dacite_brick_platform", "required": false },
+    { "id": "adorn:byg/dacite_cobblestone_platform", "required": false },
+    { "id": "adorn:byg/mossy_stone_platform", "required": false },
+    { "id": "adorn:byg/rocky_stone_platform", "required": false },
+    { "id": "adorn:byg/scoria_stone_platform", "required": false },
+    { "id": "adorn:byg/scoria_cobblestone_platform", "required": false },
+    { "id": "adorn:byg/scoria_stonebrick_platform", "required": false },
+    { "id": "adorn:byg/soapstone_platform", "required": false },
+    { "id": "adorn:byg/polished_soapstone_platform", "required": false },
+    { "id": "adorn:byg/soapstone_brick_platform", "required": false },
+    { "id": "adorn:byg/soapstone_tile_platform", "required": false },
+    { "id": "adorn:byg/red_rock_platform", "required": false },
+    { "id": "adorn:byg/red_rock_brick_platform", "required": false },
+    { "id": "adorn:byg/mossy_red_rock_brick_platform", "required": false },
+    { "id": "adorn:byg/cracked_red_rock_brick_platform", "required": false },
+    { "id": "adorn:byg/chiseled_red_rock_brick_platform", "required": false }
+  ]
 }

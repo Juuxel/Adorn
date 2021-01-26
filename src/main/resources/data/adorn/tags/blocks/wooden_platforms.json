@@ -9,70 +9,46 @@
     "adorn:dark_oak_platform",
     "adorn:crimson_platform",
     "adorn:warped_platform",
+    { "id": "adorn:traverse_fir_platform", "required": false },
+    { "id": "adorn:terrestria_cypress_platform", "required": false },
+    { "id": "adorn:terrestria_hemlock_platform", "required": false },
+    { "id": "adorn:terrestria_japanese_maple_platform", "required": false },
+    { "id": "adorn:terrestria_rainbow_eucalyptus_platform", "required": false },
+    { "id": "adorn:terrestria_redwood_platform", "required": false },
+    { "id": "adorn:terrestria_rubber_platform", "required": false },
+    { "id": "adorn:terrestria_sakura_platform", "required": false },
+    { "id": "adorn:terrestria_willow_platform", "required": false },
+    { "id": "adorn:woods_and_mires/pine_platform", "required": false },
+    { "id": "adorn:byg/aspen_platform", "required": false },
+    { "id": "adorn:byg/baobab_platform", "required": false },
+    { "id": "adorn:byg/blue_enchanted_platform", "required": false },
+    { "id": "adorn:byg/bulbis_platform", "required": false },
+    { "id": "adorn:byg/cherry_platform", "required": false },
+    { "id": "adorn:byg/cika_platform", "required": false },
+    { "id": "adorn:byg/cypress_platform", "required": false },
+    { "id": "adorn:byg/ebony_platform", "required": false },
+    { "id": "adorn:byg/embur_platform", "required": false },
+    { "id": "adorn:byg/ether_platform", "required": false },
+    { "id": "adorn:byg/fir_platform", "required": false },
+    { "id": "adorn:byg/green_enchanted_platform", "required": false },
+    { "id": "adorn:byg/holly_platform", "required": false },
+    { "id": "adorn:byg/jacaranda_platform", "required": false },
+    { "id": "adorn:byg/lament_platform", "required": false },
+    { "id": "adorn:byg/mahogany_platform", "required": false },
+    { "id": "adorn:byg/mangrove_platform", "required": false },
+    { "id": "adorn:byg/maple_platform", "required": false },
+    { "id": "adorn:byg/nightshade_platform", "required": false },
+    { "id": "adorn:byg/palm_platform", "required": false },
+    { "id": "adorn:byg/pine_platform", "required": false },
+    { "id": "adorn:byg/rainbow_eucalyptus_platform", "required": false },
+    { "id": "adorn:byg/redwood_platform", "required": false },
+    { "id": "adorn:byg/skyris_platform", "required": false },
+    { "id": "adorn:byg/sythian_platform", "required": false },
+    { "id": "adorn:byg/willow_platform", "required": false },
+    { "id": "adorn:byg/witch_hazel_platform", "required": false },
+    { "id": "adorn:byg/zelkova_platform", "required": false },
     { "id": "adorn:biomemakeover/blighted_balsa_platform", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_platform", "required": false },
     { "id": "adorn:biomemakeover/willow_platform", "required": false }
-  ],
-  "libcd": {
-    "entries": [
-      {
-        "when": [{ "libcd:mod_loaded": "traverse" }],
-        "values": [
-          "adorn:traverse_fir_platform"
-        ]
-      },
-      {
-        "when": [{ "libcd:mod_loaded": "terrestria" }],
-        "values": [
-          "adorn:terrestria_cypress_platform",
-          "adorn:terrestria_hemlock_platform",
-          "adorn:terrestria_japanese_maple_platform",
-          "adorn:terrestria_rainbow_eucalyptus_platform",
-          "adorn:terrestria_redwood_platform",
-          "adorn:terrestria_rubber_platform",
-          "adorn:terrestria_sakura_platform",
-          "adorn:terrestria_willow_platform"
-        ]
-      },
-      {
-        "when": [{ "libcd:mod_loaded": "woods_and_mires" }],
-        "values": [
-          "adorn:woods_and_mires/pine_platform"
-        ]
-      },
-      {
-        "when": [{ "libcd:mod_loaded": "byg" }],
-        "values": [
-          "adorn:byg/aspen_platform",
-          "adorn:byg/baobab_platform",
-          "adorn:byg/blue_enchanted_platform",
-          "adorn:byg/bulbis_platform",
-          "adorn:byg/cherry_platform",
-          "adorn:byg/cika_platform",
-          "adorn:byg/cypress_platform",
-          "adorn:byg/ebony_platform",
-          "adorn:byg/embur_platform",
-          "adorn:byg/ether_platform",
-          "adorn:byg/fir_platform",
-          "adorn:byg/green_enchanted_platform",
-          "adorn:byg/holly_platform",
-          "adorn:byg/jacaranda_platform",
-          "adorn:byg/lament_platform",
-          "adorn:byg/mahogany_platform",
-          "adorn:byg/mangrove_platform",
-          "adorn:byg/maple_platform",
-          "adorn:byg/nightshade_platform",
-          "adorn:byg/palm_platform",
-          "adorn:byg/pine_platform",
-          "adorn:byg/rainbow_eucalyptus_platform",
-          "adorn:byg/redwood_platform",
-          "adorn:byg/skyris_platform",
-          "adorn:byg/sythian_platform",
-          "adorn:byg/willow_platform",
-          "adorn:byg/witch_hazel_platform",
-          "adorn:byg/zelkova_platform"
-        ]
-      }
-    ]
-  }
+  ]
 }
