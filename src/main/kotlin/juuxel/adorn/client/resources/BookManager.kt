@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.profiler.Profiler
 
 @Environment(EnvType.CLIENT)
-object BookManager : Json5DataLoader(Adorn.id("book_manager"), "adorn_books", Book.jankson().build()), IdentifiableResourceReloadListener {
+object BookManager : Json5DataLoader(Adorn.id("book_manager"), "adorn/books", Book.jankson().build()), IdentifiableResourceReloadListener {
     private const val PREFIX_LENGTH = "adorn_books".length
     private const val SUFFIX_LENGTH = ".json5".length
     private var books: Map<Identifier, Book> = emptyMap()

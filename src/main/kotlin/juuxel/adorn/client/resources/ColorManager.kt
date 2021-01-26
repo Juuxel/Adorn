@@ -22,7 +22,7 @@ object ColorManager : SinglePreparationResourceReloadListener<Map<Identifier, Li
     private val JANKSON = Jankson.builder().build()
     private val ID = Adorn.id("color_manager")
     private val FALLBACK = Adorn.id("fallback")
-    private const val PREFIX = "color_palettes"
+    private const val PREFIX = "adorn/color_palettes"
     private const val SUFFIX_LENGTH = ".json5".length
     private val COLOR_REGEX = Regex("#(?:[0-9A-Fa-f]{2})?[0-9A-Fa-f]{6}")
     private val map: MutableMap<Identifier, ColorPalette> = HashMap()
