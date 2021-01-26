@@ -1,0 +1,26 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:step",
+	"pattern": [
+		"S",
+		"#"
+	],
+	"key": {
+		"S": {
+			"item": "byg:palm_slab"
+		},
+		"#": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "adorn:byg/palm_step",
+		"count": 1
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

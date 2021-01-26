@@ -1,0 +1,26 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:shelf",
+	"pattern": [
+		"---",
+		"/ /"
+	],
+	"key": {
+		"-": {
+			"item": "byg:cherry_slab"
+		},
+		"/": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "adorn:byg/cherry_shelf",
+		"count": 3
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

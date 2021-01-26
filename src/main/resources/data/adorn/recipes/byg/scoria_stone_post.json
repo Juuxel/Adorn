@@ -1,0 +1,27 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:post",
+	"pattern": [
+		"R",
+		"R",
+		"S"
+	],
+	"key": {
+		"S": {
+			"item": "byg:scoria_stone"
+		},
+		"R": {
+			"tag": "forge:rods/stone"
+		}
+	},
+	"result": {
+		"item": "adorn:byg/scoria_stone_post",
+		"count": 4
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

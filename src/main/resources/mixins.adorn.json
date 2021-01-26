@@ -10,6 +10,7 @@
     "BlockMixin",
     "BubbleColumnBlockMixin",
     "FenceGateBlockMixin",
+    "LootManagerMixin",
     "PaneBlockMixin",
     "PlayerEntityMixin"
   ],

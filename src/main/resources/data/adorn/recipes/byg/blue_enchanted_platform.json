@@ -1,0 +1,26 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:platform",
+	"pattern": [
+		"S",
+		"P"
+	],
+	"key": {
+		"S": {
+			"item": "byg:blue_enchanted_slab"
+		},
+		"P": {
+			"item": "adorn:byg/blue_enchanted_post"
+		}
+	},
+	"result": {
+		"item": "adorn:byg/blue_enchanted_platform",
+		"count": 2
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

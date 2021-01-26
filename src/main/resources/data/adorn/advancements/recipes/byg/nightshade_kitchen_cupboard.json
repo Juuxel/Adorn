@@ -1,0 +1,49 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards": {
+		"recipes": [
+			"adorn:byg/nightshade_kitchen_cupboard"
+		]
+	},
+	"criteria": {
+		"has_key_item_0": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "byg:nightshade_planks"
+					}
+				]
+			}
+		},
+		"has_key_item_1": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "adorn:byg/nightshade_kitchen_counter"
+					}
+				]
+			}
+		},
+		"has_the_recipe": {
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions": {
+				"recipe": "adorn:byg/nightshade_kitchen_cupboard"
+			}
+		}
+	},
+	"requirements": [
+		[
+			"has_key_item_0",
+			"has_key_item_1",
+			"has_the_recipe"
+		]
+	],
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

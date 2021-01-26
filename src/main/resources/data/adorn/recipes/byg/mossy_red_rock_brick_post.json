@@ -1,0 +1,27 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:post",
+	"pattern": [
+		"R",
+		"R",
+		"S"
+	],
+	"key": {
+		"S": {
+			"item": "byg:mossy_red_rock_bricks"
+		},
+		"R": {
+			"tag": "forge:rods/stone"
+		}
+	},
+	"result": {
+		"item": "adorn:byg/mossy_red_rock_brick_post",
+		"count": 4
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

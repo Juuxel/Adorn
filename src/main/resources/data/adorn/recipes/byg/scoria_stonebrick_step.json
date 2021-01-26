@@ -1,0 +1,26 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:step",
+	"pattern": [
+		"S",
+		"#"
+	],
+	"key": {
+		"S": {
+			"item": "byg:scoria_stonebrick_slab"
+		},
+		"#": {
+			"tag": "forge:rods/stone"
+		}
+	},
+	"result": {
+		"item": "adorn:byg/scoria_stonebrick_step",
+		"count": 1
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

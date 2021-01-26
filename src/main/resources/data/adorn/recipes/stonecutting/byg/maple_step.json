@@ -1,0 +1,14 @@
+{
+	"type": "stonecutting",
+	"ingredient": {
+		"item": "byg:maple_planks"
+	},
+	"result": "adorn:byg/maple_step",
+	"count": 2,
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

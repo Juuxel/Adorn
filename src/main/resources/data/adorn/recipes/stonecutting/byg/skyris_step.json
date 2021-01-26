@@ -1,0 +1,14 @@
+{
+	"type": "stonecutting",
+	"ingredient": {
+		"item": "byg:skyris_planks"
+	},
+	"result": "adorn:byg/skyris_step",
+	"count": 2,
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

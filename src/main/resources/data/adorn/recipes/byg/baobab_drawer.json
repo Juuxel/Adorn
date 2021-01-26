@@ -1,0 +1,27 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:drawer",
+	"pattern": [
+		"S",
+		"C",
+		"S"
+	],
+	"key": {
+		"C": {
+			"item": "minecraft:chest"
+		},
+		"S": {
+			"item": "byg:baobab_slab"
+		}
+	},
+	"result": {
+		"item": "adorn:byg/baobab_drawer",
+		"count": 2
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

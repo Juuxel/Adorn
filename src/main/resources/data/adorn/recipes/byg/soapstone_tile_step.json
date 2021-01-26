@@ -1,0 +1,26 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:step",
+	"pattern": [
+		"S",
+		"#"
+	],
+	"key": {
+		"S": {
+			"item": "byg:soapstone_tile_slab"
+		},
+		"#": {
+			"tag": "forge:rods/stone"
+		}
+	},
+	"result": {
+		"item": "adorn:byg/soapstone_tile_step",
+		"count": 1
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

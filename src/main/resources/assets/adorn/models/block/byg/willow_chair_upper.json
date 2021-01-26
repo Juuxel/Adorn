@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/chair_upper",
+  "textures": {
+    "planks": "byg:block/willow_planks"
+  }
+}

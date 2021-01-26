@@ -2,6 +2,7 @@ package juuxel.adorn
 
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
+import juuxel.adorn.compat.Compat
 import juuxel.adorn.config.AdornGameRules
 import juuxel.adorn.config.Config
 import juuxel.adorn.entity.AdornEntities
@@ -48,6 +49,8 @@ object Adorn {
                 MOD_BUS.addListener(this::initClient)
             }
         }
+
+        Compat.init(MOD_BUS)
     }
 
     private fun init(event: FMLCommonSetupEvent) {

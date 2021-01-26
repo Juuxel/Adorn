@@ -1,0 +1,38 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards": {
+		"recipes": [
+			"adorn:byg/redwood_step"
+		]
+	},
+	"criteria": {
+		"has_key_item_0": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "byg:redwood_slab"
+					}
+				]
+			}
+		},
+		"has_the_recipe": {
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions": {
+				"recipe": "adorn:byg/redwood_step"
+			}
+		}
+	},
+	"requirements": [
+		[
+			"has_key_item_0",
+			"has_the_recipe"
+		]
+	],
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

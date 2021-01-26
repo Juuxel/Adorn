@@ -8,68 +8,34 @@
     "adorn:acacia_table",
     "adorn:dark_oak_table",
     "adorn:crimson_table",
-    "adorn:warped_table"
-  ],
-  "libcd": {
-    "entries": [
-      {
-        "when": [{ "libcd:mod_loaded": "traverse" }],
-        "values": [
-          "adorn:traverse_fir_table"
-        ]
-      },
-      {
-        "when": [{ "libcd:mod_loaded": "terrestria" }],
-        "values": [
-          "adorn:terrestria_cypress_table",
-          "adorn:terrestria_hemlock_table",
-          "adorn:terrestria_japanese_maple_table",
-          "adorn:terrestria_rainbow_eucalyptus_table",
-          "adorn:terrestria_redwood_table",
-          "adorn:terrestria_rubber_table",
-          "adorn:terrestria_sakura_table",
-          "adorn:terrestria_willow_table"
-        ]
-      },
-      {
-        "when": [{ "libcd:mod_loaded": "woods_and_mires" }],
-        "values": [
-          "adorn:woods_and_mires/pine_table"
-        ]
-      },
-      {
-        "when": [{ "libcd:mod_loaded": "byg" }],
-        "values": [
-          "adorn:byg/aspen_table",
-          "adorn:byg/baobab_table",
-          "adorn:byg/blue_enchanted_table",
-          "adorn:byg/bulbis_table",
-          "adorn:byg/cherry_table",
-          "adorn:byg/cika_table",
-          "adorn:byg/cypress_table",
-          "adorn:byg/ebony_table",
-          "adorn:byg/embur_table",
-          "adorn:byg/ether_table",
-          "adorn:byg/fir_table",
-          "adorn:byg/green_enchanted_table",
-          "adorn:byg/holly_table",
-          "adorn:byg/jacaranda_table",
-          "adorn:byg/lament_table",
-          "adorn:byg/mahogany_table",
-          "adorn:byg/mangrove_table",
-          "adorn:byg/maple_table",
-          "adorn:byg/nightshade_table",
-          "adorn:byg/palm_table",
-          "adorn:byg/pine_table",
-          "adorn:byg/rainbow_eucalyptus_table",
-          "adorn:byg/redwood_table",
-          "adorn:byg/skyris_table",
-          "adorn:byg/sythian_table",
-          "adorn:byg/willow_table",
-          "adorn:byg/witch_hazel_table",
-          "adorn:byg/zelkova_table"
-        ]
-      }
-    ]
-  }
+    "adorn:warped_table",
+    { "id": "adorn:byg/aspen_table", "required": false },
+    { "id": "adorn:byg/baobab_table", "required": false },
+    { "id": "adorn:byg/blue_enchanted_table", "required": false },
+    { "id": "adorn:byg/bulbis_table", "required": false },
+    { "id": "adorn:byg/cherry_table", "required": false },
+    { "id": "adorn:byg/cika_table", "required": false },
+    { "id": "adorn:byg/cypress_table", "required": false },
+    { "id": "adorn:byg/ebony_table", "required": false },
+    { "id": "adorn:byg/embur_table", "required": false },
+    { "id": "adorn:byg/ether_table", "required": false },
+    { "id": "adorn:byg/fir_table", "required": false },
+    { "id": "adorn:byg/green_enchanted_table", "required": false },
+    { "id": "adorn:byg/holly_table", "required": false },
+    { "id": "adorn:byg/jacaranda_table", "required": false },
+    { "id": "adorn:byg/lament_table", "required": false },
+    { "id": "adorn:byg/mahogany_table", "required": false },
+    { "id": "adorn:byg/mangrove_table", "required": false },
+    { "id": "adorn:byg/maple_table", "required": false },
+    { "id": "adorn:byg/nightshade_table", "required": false },
+    { "id": "adorn:byg/palm_table", "required": false },
+    { "id": "adorn:byg/pine_table", "required": false },
+    { "id": "adorn:byg/rainbow_eucalyptus_table", "required": false },
+    { "id": "adorn:byg/redwood_table", "required": false },
+    { "id": "adorn:byg/skyris_table", "required": false },
+    { "id": "adorn:byg/sythian_table", "required": false },
+    { "id": "adorn:byg/willow_table", "required": false },
+    { "id": "adorn:byg/witch_hazel_table", "required": false },
+    { "id": "adorn:byg/zelkova_table", "required": false }
+  ]
 }

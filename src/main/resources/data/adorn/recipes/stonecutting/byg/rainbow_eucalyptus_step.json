@@ -1,0 +1,14 @@
+{
+	"type": "stonecutting",
+	"ingredient": {
+		"item": "byg:rainbow_eucalyptus_planks"
+	},
+	"result": "adorn:byg/rainbow_eucalyptus_step",
+	"count": 2,
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

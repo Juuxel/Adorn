@@ -1,0 +1,14 @@
+{
+	"type": "stonecutting",
+	"ingredient": {
+		"item": "byg:red_rock"
+	},
+	"result": "adorn:byg/red_rock_platform",
+	"count": 1,
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

@@ -451,7 +451,7 @@ object AdornBlocks {
     private inline fun registerBlockWithoutItem(name: String, crossinline block: () -> Block): BlockDef =
         BLOCKS.register(name) { block() }
 
-    private fun makeItemForBlock(block: Block, itemSettings: Item.Settings): Item =
+    fun makeItemForBlock(block: Block, itemSettings: Item.Settings): Item =
         BaseBlockItem(block, itemSettings)
 
     private fun registerCrate(name: String): BlockDef = registerBlock(

@@ -1,0 +1,14 @@
+{
+	"type": "stonecutting",
+	"ingredient": {
+		"item": "byg:witch_hazel_planks"
+	},
+	"result": "adorn:byg/witch_hazel_step",
+	"count": 2,
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

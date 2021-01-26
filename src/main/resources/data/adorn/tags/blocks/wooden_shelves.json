@@ -8,68 +8,34 @@
     "adorn:acacia_shelf",
     "adorn:dark_oak_shelf",
     "adorn:crimson_shelf",
-    "adorn:warped_shelf"
-  ],
-  "libcd": {
-    "entries": [
-      {
-        "when": [{ "libcd:mod_loaded": "traverse" }],
-        "values": [
-          "adorn:traverse_fir_shelf"
-        ]
-      },
-      {
-        "when": [{ "libcd:mod_loaded": "terrestria" }],
-        "values": [
-          "adorn:terrestria_cypress_shelf",
-          "adorn:terrestria_hemlock_shelf",
-          "adorn:terrestria_japanese_maple_shelf",
-          "adorn:terrestria_rainbow_eucalyptus_shelf",
-          "adorn:terrestria_redwood_shelf",
-          "adorn:terrestria_rubber_shelf",
-          "adorn:terrestria_sakura_shelf",
-          "adorn:terrestria_willow_shelf"
-        ]
-      },
-      {
-        "when": [{ "libcd:mod_loaded": "woods_and_mires" }],
-        "values": [
-          "adorn:woods_and_mires/pine_shelf"
-        ]
-      },
-      {
-        "when": [{ "libcd:mod_loaded": "byg" }],
-        "values": [
-          "adorn:byg/aspen_shelf",
-          "adorn:byg/baobab_shelf",
-          "adorn:byg/blue_enchanted_shelf",
-          "adorn:byg/bulbis_shelf",
-          "adorn:byg/cherry_shelf",
-          "adorn:byg/cika_shelf",
-          "adorn:byg/cypress_shelf",
-          "adorn:byg/ebony_shelf",
-          "adorn:byg/embur_shelf",
-          "adorn:byg/ether_shelf",
-          "adorn:byg/fir_shelf",
-          "adorn:byg/green_enchanted_shelf",
-          "adorn:byg/holly_shelf",
-          "adorn:byg/jacaranda_shelf",
-          "adorn:byg/lament_shelf",
-          "adorn:byg/mahogany_shelf",
-          "adorn:byg/mangrove_shelf",
-          "adorn:byg/maple_shelf",
-          "adorn:byg/nightshade_shelf",
-          "adorn:byg/palm_shelf",
-          "adorn:byg/pine_shelf",
-          "adorn:byg/rainbow_eucalyptus_shelf",
-          "adorn:byg/redwood_shelf",
-          "adorn:byg/skyris_shelf",
-          "adorn:byg/sythian_shelf",
-          "adorn:byg/willow_shelf",
-          "adorn:byg/witch_hazel_shelf",
-          "adorn:byg/zelkova_shelf"
-        ]
-      }
-    ]
-  }
+    "adorn:warped_shelf",
+    { "id": "adorn:byg/aspen_shelf", "required": false },
+    { "id": "adorn:byg/baobab_shelf", "required": false },
+    { "id": "adorn:byg/blue_enchanted_shelf", "required": false },
+    { "id": "adorn:byg/bulbis_shelf", "required": false },
+    { "id": "adorn:byg/cherry_shelf", "required": false },
+    { "id": "adorn:byg/cika_shelf", "required": false },
+    { "id": "adorn:byg/cypress_shelf", "required": false },
+    { "id": "adorn:byg/ebony_shelf", "required": false },
+    { "id": "adorn:byg/embur_shelf", "required": false },
+    { "id": "adorn:byg/ether_shelf", "required": false },
+    { "id": "adorn:byg/fir_shelf", "required": false },
+    { "id": "adorn:byg/green_enchanted_shelf", "required": false },
+    { "id": "adorn:byg/holly_shelf", "required": false },
+    { "id": "adorn:byg/jacaranda_shelf", "required": false },
+    { "id": "adorn:byg/lament_shelf", "required": false },
+    { "id": "adorn:byg/mahogany_shelf", "required": false },
+    { "id": "adorn:byg/mangrove_shelf", "required": false },
+    { "id": "adorn:byg/maple_shelf", "required": false },
+    { "id": "adorn:byg/nightshade_shelf", "required": false },
+    { "id": "adorn:byg/palm_shelf", "required": false },
+    { "id": "adorn:byg/pine_shelf", "required": false },
+    { "id": "adorn:byg/rainbow_eucalyptus_shelf", "required": false },
+    { "id": "adorn:byg/redwood_shelf", "required": false },
+    { "id": "adorn:byg/skyris_shelf", "required": false },
+    { "id": "adorn:byg/sythian_shelf", "required": false },
+    { "id": "adorn:byg/willow_shelf", "required": false },
+    { "id": "adorn:byg/witch_hazel_shelf", "required": false },
+    { "id": "adorn:byg/zelkova_shelf", "required": false }
+  ]
 }

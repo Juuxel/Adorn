@@ -1,0 +1,34 @@
+{
+	"pools": [
+		{
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "adorn:byg/lament_chair",
+					"conditions": [
+						{
+							"block": "adorn:byg/lament_chair",
+							"properties": {
+								"half": "lower"
+							},
+							"condition": "minecraft:block_state_property"
+						}
+					]
+				}
+			],
+			"conditions": [
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+		}
+	],
+	"type": "minecraft:block",
+	"adorn:conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

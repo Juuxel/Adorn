@@ -1,0 +1,25 @@
+{
+	"type": "crafting_shapeless",
+	"group": "adorn:kitchen_cupboard",
+	"ingredients": [
+		{
+			"item": "minecraft:chest"
+		},
+		{
+			"item": "adorn:byg/fir_kitchen_counter"
+		},
+		{
+			"item": "adorn:byg/fir_kitchen_counter"
+		}
+	],
+	"result": {
+		"item": "adorn:byg/fir_kitchen_cupboard",
+		"count": 2
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

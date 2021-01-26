@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=z": {
+      "model": "adorn:block/byg/green_enchanted_post",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "adorn:block/byg/green_enchanted_post",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "adorn:block/byg/green_enchanted_post"
+    }
+  }
+}
