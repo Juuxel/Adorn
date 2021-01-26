@@ -2,7 +2,7 @@
 name: Bug report (Forge)
 about: Create a report to help us improve
 title: ''
-labels: bug
+labels: bug, forge
 assignees: ''
 
 ---
