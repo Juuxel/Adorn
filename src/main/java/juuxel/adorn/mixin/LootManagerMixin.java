@@ -35,9 +35,7 @@ abstract class LootManagerMixin {
         }
 
         if (keysToRemove != null) {
-            for (Identifier key : keysToRemove) {
-                lootTableJsons.remove(key);
-            }
+            lootTableJsons.keySet().removeAll(keysToRemove);
         }
     }
 }
