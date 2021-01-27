@@ -12,9 +12,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * This mixin removes all loot tables whose "adorn:conditions" don't match the loading environment.
@@ -23,19 +22,13 @@ import java.util.Set;
 abstract class LootManagerMixin {
     @Inject(method = "apply", at = @At(value = "INVOKE", target = "Ljava/util/Map;forEach(Ljava/util/function/BiConsumer;)V"))
     private void adorn_onApply(Map<Identifier, JsonElement> lootTableJsons, ResourceManager resourceManager, Profiler profiler, CallbackInfo info) {
-        Set<Identifier> keysToRemove = null;
-
-        for (Map.Entry<Identifier, JsonElement> entry : lootTableJsons.entrySet()) {
-            JsonObject json = entry.getValue().getAsJsonObject();
+        Iterator<JsonElement> iter = lootTableJsons.values().iterator();
+        while (iter.hasNext()) {
+            JsonObject json = iter.next().getAsJsonObject();
 
             if (!CraftingHelper.processConditions(json, "adorn:conditions")) {
-                if (keysToRemove == null) keysToRemove = new HashSet<>();
-                keysToRemove.add(entry.getKey());
+                iter.remove();
             }
-        }
-
-        if (keysToRemove != null) {
-            lootTableJsons.keySet().removeAll(keysToRemove);
         }
     }
 }
