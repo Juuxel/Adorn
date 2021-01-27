@@ -9,6 +9,7 @@
     "adorn:dark_oak_chair",
     "adorn:crimson_chair",
     "adorn:warped_chair",
+    { "id": "adorn:traverse/fir_chair", "required": false },
     { "id": "adorn:byg/aspen_chair", "required": false },
     { "id": "adorn:byg/baobab_chair", "required": false },
     { "id": "adorn:byg/blue_enchanted_chair", "required": false },

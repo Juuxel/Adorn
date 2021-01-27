@@ -9,6 +9,7 @@
     "adorn:dark_oak_drawer",
     "adorn:crimson_drawer",
     "adorn:warped_drawer",
+    { "id": "adorn:traverse/fir_drawer", "required": false },
     { "id": "adorn:byg/aspen_drawer", "required": false },
     { "id": "adorn:byg/baobab_drawer", "required": false },
     { "id": "adorn:byg/blue_enchanted_drawer", "required": false },

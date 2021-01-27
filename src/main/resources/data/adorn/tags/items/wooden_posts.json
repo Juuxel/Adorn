@@ -9,6 +9,7 @@
     "adorn:dark_oak_post",
     "adorn:crimson_post",
     "adorn:warped_post",
+    { "id": "adorn:traverse/fir_post", "required": false },
     { "id": "adorn:byg/aspen_post", "required": false },
     { "id": "adorn:byg/baobab_post", "required": false },
     { "id": "adorn:byg/blue_enchanted_post", "required": false },

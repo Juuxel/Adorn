@@ -9,6 +9,7 @@
     "adorn:dark_oak_platform",
     "adorn:crimson_platform",
     "adorn:warped_platform",
+    { "id": "adorn:traverse/fir_platform", "required": false },
     { "id": "adorn:byg/aspen_platform", "required": false },
     { "id": "adorn:byg/baobab_platform", "required": false },
     { "id": "adorn:byg/blue_enchanted_platform", "required": false },

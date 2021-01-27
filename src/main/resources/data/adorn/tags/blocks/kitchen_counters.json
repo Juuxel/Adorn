@@ -9,6 +9,7 @@
     "adorn:dark_oak_kitchen_counter",
     "adorn:crimson_kitchen_counter",
     "adorn:warped_kitchen_counter",
+    { "id": "adorn:traverse/fir_kitchen_counter", "required": false },
     { "id": "adorn:byg/aspen_kitchen_counter", "required": false },
     { "id": "adorn:byg/baobab_kitchen_counter", "required": false },
     { "id": "adorn:byg/blue_enchanted_kitchen_counter", "required": false },

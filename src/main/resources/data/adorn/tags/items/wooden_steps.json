@@ -9,6 +9,7 @@
     "adorn:dark_oak_step",
     "adorn:crimson_step",
     "adorn:warped_step",
+    { "id": "adorn:traverse/fir_step", "required": false },
     { "id": "adorn:byg/aspen_step", "required": false },
     { "id": "adorn:byg/baobab_step", "required": false },
     { "id": "adorn:byg/blue_enchanted_step", "required": false },

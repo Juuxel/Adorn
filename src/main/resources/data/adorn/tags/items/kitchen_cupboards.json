@@ -9,6 +9,7 @@
     "adorn:dark_oak_kitchen_cupboard",
     "adorn:crimson_kitchen_cupboard",
     "adorn:warped_kitchen_cupboard",
+    { "id": "adorn:traverse/fir_kitchen_cupboard", "required": false },
     { "id": "adorn:byg/aspen_kitchen_cupboard", "required": false },
     { "id": "adorn:byg/baobab_kitchen_cupboard", "required": false },
     { "id": "adorn:byg/blue_enchanted_kitchen_cupboard", "required": false },

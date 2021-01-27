@@ -1,0 +1,14 @@
+{
+	"type": "stonecutting",
+	"ingredient": {
+		"item": "traverse:fir_planks"
+	},
+	"result": "adorn:traverse/fir_step",
+	"count": 2,
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "traverse"
+		}
+	]
+}

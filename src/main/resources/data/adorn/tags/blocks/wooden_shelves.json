@@ -9,6 +9,7 @@
     "adorn:dark_oak_shelf",
     "adorn:crimson_shelf",
     "adorn:warped_shelf",
+    { "id": "adorn:traverse/fir_shelf", "required": false },
     { "id": "adorn:byg/aspen_shelf", "required": false },
     { "id": "adorn:byg/baobab_shelf", "required": false },
     { "id": "adorn:byg/blue_enchanted_shelf", "required": false },

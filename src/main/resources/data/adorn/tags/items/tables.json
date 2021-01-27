@@ -9,6 +9,7 @@
     "adorn:dark_oak_table",
     "adorn:crimson_table",
     "adorn:warped_table",
+    { "id": "adorn:traverse/fir_table", "required": false },
     { "id": "adorn:byg/aspen_table", "required": false },
     { "id": "adorn:byg/baobab_table", "required": false },
     { "id": "adorn:byg/blue_enchanted_table", "required": false },

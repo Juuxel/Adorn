@@ -9,6 +9,7 @@
     "adorn:dark_oak_coffee_table",
     "adorn:crimson_coffee_table",
     "adorn:warped_coffee_table",
+    { "id": "adorn:traverse/fir_coffee_table", "required": false },
     { "id": "adorn:byg/aspen_coffee_table", "required": false },
     { "id": "adorn:byg/baobab_coffee_table", "required": false },
     { "id": "adorn:byg/blue_enchanted_coffee_table", "required": false },
