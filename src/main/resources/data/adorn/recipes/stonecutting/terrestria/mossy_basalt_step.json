@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "terrestria:mossy_basalt"
+  },
+  "result": "adorn:terrestria/mossy_basalt_step",
+  "count": 2
+}

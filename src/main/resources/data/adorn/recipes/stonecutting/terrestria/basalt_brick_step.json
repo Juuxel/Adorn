@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "terrestria:basalt_bricks"
+  },
+  "result": "adorn:terrestria/basalt_brick_step",
+  "count": 2
+}

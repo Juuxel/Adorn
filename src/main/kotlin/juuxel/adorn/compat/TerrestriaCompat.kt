@@ -11,9 +11,18 @@ object TerrestriaCompat {
             "rubber", "sakura", "willow"
         ).map { BlockVariant.Wood("terrestria_$it") }
 
-        val stoneTypes = sequenceOf(
+        val oldStoneTypes = sequenceOf(
             "basalt", "basalt_cobblestone"
         ).map { BlockVariant.Stone("terrestria_$it") }
+
+        val newStoneTypes = sequenceOf(
+            "smooth_basalt",
+            "basalt_brick",
+            "mossy_basalt",
+            "mossy_basalt_brick",
+        ).map { BlockVariant.Stone("terrestria/$it") }
+
+        val stoneTypes = oldStoneTypes + newStoneTypes
 
         for (wood in woodTypes) {
             AdornBlockBuilder.create(wood)
