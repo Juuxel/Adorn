@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:oak_bench",
+    "adorn:spruce_bench",
+    "adorn:birch_bench",
+    "adorn:jungle_bench",
+    "adorn:acacia_bench",
+    "adorn:dark_oak_bench",
+    "adorn:crimson_bench",
+    "adorn:warped_bench"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "#log"
+  },
+  "elements": [
+    {
+      "from": [2, 0, 2],
+      "to": [4, 2, 14],
+      "faces": {
+        "north": { "texture": "#end", "uv": [7, 7, 9, 9] },
+        "east": { "texture": "#log" },
+        "south": { "texture": "#end", "uv": [7, 7, 9, 9] },
+        "west": { "texture": "#log" },
+        "up": { "texture": "#log" },
+        "down": { "texture": "#log", "cullface": "down" }
+      }
+    },
+    {
+      "from": [2, 2, 4],
+      "to": [4, 8, 6],
+      "faces": {
+        "north": { "texture": "#log" },
+        "east": { "texture": "#log" },
+        "south": { "texture": "#log" },
+        "west": { "texture": "#log" }
+      }
+    },
+    {
+      "from": [2, 2, 10],
+      "to": [4, 8, 12],
+      "faces": {
+        "north": { "texture": "#log" },
+        "east": { "texture": "#log" },
+        "south": { "texture": "#log" },
+        "west": { "texture": "#log" }
+      }
+    }
+  ]
+}

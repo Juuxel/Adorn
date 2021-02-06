@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.state.property.Property
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
+import net.minecraft.util.math.Direction
 import net.minecraft.util.registry.Registry
 
 fun ItemStack.toTextWithCount(): Text =
@@ -33,6 +34,10 @@ fun BlockEntity.getSquaredDistance(x: Double, y: Double, z: Double): Double {
     return xd * xd + yd * yd + zd * zd
 }
 
+/**
+ * Registers a [visitor] for this registry that will be called for each
+ * entry currently in the registry, and all future entries.
+ */
 inline fun <A> Registry<A>.visit(crossinline visitor: (A) -> Unit) {
     this.forEach(visitor)
 
@@ -65,4 +70,26 @@ private fun getHardness(state: BlockState): Float? =
         state.getHardness(null, null)
     } catch (e: NullPointerException) {
         null
+    }
+
+fun Direction.Axis.turnHorizontally(): Direction.Axis =
+    when (this) {
+        Direction.Axis.X -> Direction.Axis.Z
+        Direction.Axis.Z -> Direction.Axis.X
+        Direction.Axis.Y -> Direction.Axis.Y
+    }
+
+fun Direction.Axis.getDirection(axisDirection: Direction.AxisDirection): Direction =
+    when (axisDirection) {
+        Direction.AxisDirection.POSITIVE -> when (this) {
+            Direction.Axis.X -> Direction.EAST
+            Direction.Axis.Y -> Direction.UP
+            Direction.Axis.Z -> Direction.SOUTH
+        }
+
+        Direction.AxisDirection.NEGATIVE -> when (this) {
+            Direction.Axis.X -> Direction.WEST
+            Direction.Axis.Y -> Direction.DOWN
+            Direction.Axis.Z -> Direction.NORTH
+        }
     }

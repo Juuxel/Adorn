@@ -257,6 +257,15 @@ object AdornBlocks : RegistryHelper(Adorn.NAMESPACE) {
     val CRIMSON_COFFEE_TABLE: Block = registerBlock("crimson_coffee_table", CoffeeTableBlock(BlockVariant.CRIMSON))
     val WARPED_COFFEE_TABLE: Block = registerBlock("warped_coffee_table", CoffeeTableBlock(BlockVariant.WARPED))
 
+    val OAK_BENCH: Block = registerBlock("oak_bench", BenchBlock(BlockVariant.OAK))
+    val SPRUCE_BENCH: Block = registerBlock("spruce_bench", BenchBlock(BlockVariant.SPRUCE))
+    val BIRCH_BENCH: Block = registerBlock("birch_bench", BenchBlock(BlockVariant.BIRCH))
+    val JUNGLE_BENCH: Block = registerBlock("jungle_bench", BenchBlock(BlockVariant.JUNGLE))
+    val ACACIA_BENCH: Block = registerBlock("acacia_bench", BenchBlock(BlockVariant.ACACIA))
+    val DARK_OAK_BENCH: Block = registerBlock("dark_oak_bench", BenchBlock(BlockVariant.DARK_OAK))
+    val CRIMSON_BENCH: Block = registerBlock("crimson_bench", BenchBlock(BlockVariant.CRIMSON))
+    val WARPED_BENCH: Block = registerBlock("warped_bench", BenchBlock(BlockVariant.WARPED))
+
     val TABLE_LAMPS: Map<DyeColor, Block> = DyeColor.values().associate {
         it to registerBlock(
             "${it.asString()}_table_lamp",

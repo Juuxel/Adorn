@@ -815,6 +815,15 @@
   "block.adorn.chain_link_fence": "Chain Link Fence",
   "block.adorn.stone_ladder": "Stone Ladder",
 
+  "block.adorn.oak_bench": "Oak Bench",
+  "block.adorn.spruce_bench": "Spruce Bench",
+  "block.adorn.birch_bench": "Birch Bench",
+  "block.adorn.jungle_bench": "Jungle Bench",
+  "block.adorn.acacia_bench": "Acacia Bench",
+  "block.adorn.dark_oak_bench": "Dark Oak Bench",
+  "block.adorn.crimson_bench": "Crimson Bench",
+  "block.adorn.warped_bench": "Warped Bench",
+
   "item.adorn.stone_rod": "Stone Rod",
   "item.adorn.stone_rod.desc": "Crafting ingredient",
 

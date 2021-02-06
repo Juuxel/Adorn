@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/templates/bench_leg",
+  "textures": {
+    "log": "minecraft:block/warped_stem",
+    "end": "minecraft:block/warped_stem_top"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "#planks"
+  },
+  "elements": [
+    {
+      "from": [0, 8, 1],
+      "to": [16, 10, 15],
+      "faces": {
+        "north": { "texture": "#planks" },
+        "east": { "texture": "#planks", "cullface": "east" },
+        "south": { "texture": "#planks" },
+        "west": { "texture": "#planks", "cullface": "west" },
+        "up": { "texture": "#planks" },
+        "down": { "texture": "#planks" }
+      }
+    }
+  ]
+}

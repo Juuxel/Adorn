@@ -2,9 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    kotlin("jvm") version "1.4.0"
-    idea
-    id("io.github.juuxel.fabric-loom") version "0.6.11"
+    kotlin("jvm") version "1.4.30"
+    id("fabric-loom") version "0.6-SNAPSHOT"
     id("io.github.juuxel.ripple") version "0.3.6"
     `maven-publish`
     id("org.jmailen.kotlinter") version "3.2.0"
@@ -28,7 +27,11 @@ ripple.processor("src/menu.ripple.json")
 
 loom {
     accessWidener = file("src/main/resources/adorn.accesswidener")
-    platformNameInRunConfig = true
+
+    runs.configureEach {
+        val capitalizedName = if (name.length <= 1) name else name[0].toUpperCase() + name.substring(1)
+        configName = "Fabric $capitalizedName"
+    }
 }
 
 repositories {

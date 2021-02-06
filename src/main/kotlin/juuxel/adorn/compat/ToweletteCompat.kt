@@ -1,5 +1,6 @@
 package juuxel.adorn.compat
 
+import juuxel.adorn.block.BenchBlock
 import juuxel.adorn.block.ChairBlock
 import juuxel.adorn.block.ChimneyBlock
 import juuxel.adorn.block.CoffeeTableBlock
@@ -49,7 +50,8 @@ object ToweletteCompat {
     }
 
     private fun shouldFluidlog(block: Block): Boolean =
-        block is ChairBlock ||
+        block is BenchBlock ||
+            block is ChairBlock ||
             block is ChimneyBlock ||
             block is CoffeeTableBlock ||
             block is PicketFenceBlock ||
