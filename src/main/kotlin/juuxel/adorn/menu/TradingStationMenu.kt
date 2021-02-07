@@ -19,15 +19,15 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
-import net.minecraft.menu.MenuContext
-import net.minecraft.menu.slot.SlotActionType
+import net.minecraft.screen.ScreenHandlerContext
+import net.minecraft.screen.slot.SlotActionType
 import net.minecraft.text.TranslatableText
 import org.apache.logging.log4j.LogManager
 
 class TradingStationMenu(
     syncId: Int,
     playerInv: PlayerInventory,
-    private val context: MenuContext,
+    private val context: ScreenHandlerContext,
     private val forOwner: Boolean
 ) : BaseMenu(
     AdornMenus.TRADING_STATION,
@@ -115,7 +115,7 @@ class TradingStationMenu(
          * Gets the [juuxel.adorn.block.entity.TradingStationBlockEntity] at the [context]'s location.
          * If it's not present, creates an empty trading station using [TradingStation.createEmpty].
          */
-        private fun getTradingStation(context: MenuContext) =
+        private fun getTradingStation(context: ScreenHandlerContext) =
             getBlockEntity(context) as? TradingStation ?: run {
                 LOGGER.warn("[Adorn] Trading station not found, creating fake one")
                 TradingStation.createEmpty()
@@ -125,12 +125,12 @@ class TradingStationMenu(
          * Gets the [TradingStation.storage] of the trading station at the [context]'s location.
          * Uses [getTradingStation] for finding a trading station.
          */
-        private fun getStorage(context: MenuContext): Inventory = getTradingStation(context).storage
+        private fun getStorage(context: ScreenHandlerContext): Inventory = getTradingStation(context).storage
 
         /**
          * Gets the [TradingStation.trade] of the trading station at the [context]'s location.
          * Uses [getTradingStation] for finding a trading station.
          */
-        private fun getTrade(context: MenuContext): Trade = getTradingStation(context).trade
+        private fun getTrade(context: ScreenHandlerContext): Trade = getTradingStation(context).trade
     }
 }

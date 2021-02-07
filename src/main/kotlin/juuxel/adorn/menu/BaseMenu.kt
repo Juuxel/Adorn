@@ -13,18 +13,18 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
-import net.minecraft.menu.MenuContext
-import net.minecraft.menu.MenuType
-import net.minecraft.menu.PropertyDelegate
+import net.minecraft.screen.PropertyDelegate
+import net.minecraft.screen.ScreenHandlerContext
+import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import org.apache.logging.log4j.LogManager
 
 abstract class BaseMenu(
-    type: MenuType<*>,
+    type: ScreenHandlerType<*>,
     syncId: Int,
     playerInv: PlayerInventory,
-    context: MenuContext,
+    context: ScreenHandlerContext,
     blockInventory: Inventory,
     propertyDelegate: PropertyDelegate = getBlockPropertyDelegate(context)
 ) : SyncedGuiDescription(
@@ -46,17 +46,17 @@ abstract class BaseMenu(
     companion object {
         private val LOGGER = LogManager.getLogger()
 
-        fun getBlock(context: MenuContext) =
+        fun getBlock(context: ScreenHandlerContext) =
             context.run<Block> { world: World, pos: BlockPos ->
                 world.getBlockState(pos).block
             }.orElse(Blocks.AIR)
 
-        fun getBlockEntity(context: MenuContext): BlockEntity? =
+        fun getBlockEntity(context: ScreenHandlerContext): BlockEntity? =
             context.run<BlockEntity?> { world: World, pos: BlockPos ->
                 world.getBlockEntity(pos)
             }.orElse(null)
 
-        fun getBlockInventoryOrCreate(context: MenuContext, fallbackSize: Int) =
+        fun getBlockInventoryOrCreate(context: ScreenHandlerContext, fallbackSize: Int) =
             getBlockInventory(context).let {
                 if (it is EmptyInventory)
                     when (fallbackSize) {

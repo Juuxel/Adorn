@@ -84,7 +84,7 @@ class TradingStationBlock :
                     be.storage.tryInsert(trade.price)
                 }
             } else {
-                player.openMenuScreen(state.createMenuFactory(world, pos))
+                player.openHandledScreen(state.createScreenHandlerFactory(world, pos))
             }
         }
 
@@ -98,7 +98,7 @@ class TradingStationBlock :
 
         // Show customer GUI
         if (!be.isOwner(player)) {
-            player.openMenuScreen(state.createMenuFactory(world, pos))
+            player.openHandledScreen(state.createScreenHandlerFactory(world, pos))
             return ActionResult.SUCCESS
         }
 

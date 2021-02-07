@@ -8,17 +8,17 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
-import net.minecraft.menu.MenuContext
-import net.minecraft.menu.MenuType
-import net.minecraft.menu.PropertyDelegate
+import net.minecraft.screen.PropertyDelegate
+import net.minecraft.screen.ScreenHandlerContext
+import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
 open class SimpleMenu(
-    type: MenuType<*>,
+    type: ScreenHandlerType<*>,
     syncId: Int,
     playerInv: PlayerInventory,
-    context: MenuContext,
+    context: ScreenHandlerContext,
     invWidth: Int,
     invHeight: Int,
     private val paletteId: Identifier,

@@ -15,7 +15,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
-import net.minecraft.menu.Menu
+import net.minecraft.screen.ScreenHandler
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
@@ -174,7 +174,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
     override fun hasComparatorOutput(state: BlockState) = true
 
     override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
-        Menu.calculateComparatorOutput(world.getBlockEntity(pos))
+        ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos))
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
