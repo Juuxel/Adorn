@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     java
     kotlin("jvm") version "1.4.30"
-    id("fabric-loom") version "0.6-SNAPSHOT"
+    id("fabric-loom") version "0.5-SNAPSHOT"
     id("io.github.juuxel.ripple") version "0.3.6"
     `maven-publish`
     id("org.jmailen.kotlinter") version "3.2.0"
@@ -28,10 +28,10 @@ ripple.processor("src/menu.ripple.json")
 loom {
     accessWidener = file("src/main/resources/adorn.accesswidener")
 
-    runs.configureEach {
-        val capitalizedName = if (name.length <= 1) name else name[0].toUpperCase() + name.substring(1)
-        configName = "Fabric $capitalizedName"
-    }
+//    runs.configureEach {
+//        val capitalizedName = if (name.length <= 1) name else name[0].toUpperCase() + name.substring(1)
+//        configName = "Fabric $capitalizedName"
+//    }
 }
 
 repositories {
@@ -75,7 +75,9 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:" + v("fabric-loader"))
     modImplementation("net.fabricmc.fabric-api:fabric-api:" + v("fabric-api"))
     modApi("net.fabricmc:fabric-language-kotlin:" + v("fabric-kotlin"))
-    compileOnly("net.fabricmc:fabric-language-kotlin:" + v("fabric-kotlin"))
+
+    // workaround for idea's bugs
+    implementation(kotlin("stdlib-jdk8"))
 
     // Other mods
     includedMod("io.github.cottonmc:LibGui:" + v("libgui"))

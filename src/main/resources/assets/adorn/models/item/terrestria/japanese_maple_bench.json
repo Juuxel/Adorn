@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "terrestria:block/japanese_maple_planks",
+    "log": "terrestria:block/japanese_maple_log",
+    "end": "terrestria:block/japanese_maple_log_top"
+  }
+}

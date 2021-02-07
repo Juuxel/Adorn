@@ -32,7 +32,10 @@ function create-1-14-wood-libcd-meta
 end
 
 function create-all-wood-libcd-meta
-    create-wood-libcd-meta $argv[1] $argv[2] $argv
-    create-1-6-libcd-meta $argv[1] $argv[2] $argv
-    create-1-14-libcd-meta $argv[1] $argv[2] $argv
+    create-wood-libcd-meta $argv
+    create-1-6-wood-libcd-meta $argv
+    create-1-14-wood-libcd-meta $argv
 end
+
+# Usage for all of the functions:
+# <function-name> <mod-id> <directory> <prefixes...>

@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "byg:block/rainbow_eucalyptus_planks",
+    "log": "byg:block/rainbow_eucalyptus_log",
+    "end": "byg:block/rainbow_eucalyptus_log_top"
+  }
+}

@@ -8,7 +8,7 @@ object BiomeMakeoverCompat {
     fun init() {
         val woodTypes = sequenceOf(
             "blighted_balsa",
-            "willow_log",
+            "willow",
             "swamp_cypress",
         ).map { BlockVariant.Wood("biomemakeover/$it") }
 

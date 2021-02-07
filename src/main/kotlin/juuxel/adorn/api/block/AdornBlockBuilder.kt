@@ -1,5 +1,6 @@
 package juuxel.adorn.api.block
 
+import juuxel.adorn.block.BenchBlock
 import juuxel.adorn.block.ChairBlock
 import juuxel.adorn.block.CoffeeTableBlock
 import juuxel.adorn.block.DrawerBlock
@@ -36,6 +37,7 @@ class AdornBlockBuilder private constructor(private val material: BlockVariant) 
     private var kitchenSink = false
     private var shelf = false
     private var coffeeTable = false
+    private var bench = false
 
     fun withPost() = apply {
         post = true
@@ -87,6 +89,10 @@ class AdornBlockBuilder private constructor(private val material: BlockVariant) 
         coffeeTable = true
     }
 
+    fun withBench() = apply {
+        bench = true
+    }
+
     fun withEverything() = apply {
         post = true
         platform = true
@@ -99,6 +105,7 @@ class AdornBlockBuilder private constructor(private val material: BlockVariant) 
         kitchenSink = true
         shelf = true
         coffeeTable = true
+        bench = true
     }
 
     fun registerIn(namespace: String): Unit = Registry(namespace).register()
@@ -123,6 +130,7 @@ class AdornBlockBuilder private constructor(private val material: BlockVariant) 
             if (kitchenSink) registerBlock("${name}_kitchen_sink", KitchenSinkBlock(material))
             if (shelf) registerBlock("${name}_shelf", ShelfBlock(material))
             if (coffeeTable) registerBlock("${name}_coffee_table", CoffeeTableBlock(material))
+            if (bench) registerBlock("${name}_bench", BenchBlock(material))
 
             if (FabricLoader.getInstance().environmentType == EnvType.CLIENT) {
                 registerClient()

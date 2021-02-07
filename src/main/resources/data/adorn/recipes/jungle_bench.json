@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "# #"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:jungle_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:jungle_chair",
+    "count": 2
+  }
+}

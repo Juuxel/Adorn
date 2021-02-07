@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "# #"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:cika_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/cika_chair",
+    "count": 2
+  }
+}

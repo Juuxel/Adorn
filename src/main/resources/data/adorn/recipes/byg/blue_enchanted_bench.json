@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "# #"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:blue_enchanted_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/blue_enchanted_chair",
+    "count": 2
+  }
+}

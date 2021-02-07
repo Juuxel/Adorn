@@ -6,10 +6,16 @@ import juuxel.adorn.api.block.BlockVariant
 
 object TerrestriaCompat {
     fun init() {
-        val woodTypes = sequenceOf(
+        val oldWoodTypes = sequenceOf(
             "cypress", "hemlock", "japanese_maple", "rainbow_eucalyptus", "redwood",
             "rubber", "sakura", "willow"
         ).map { BlockVariant.Wood("terrestria_$it") }
+
+        val newWoodTypes = sequenceOf(
+            "yucca_palm"
+        ).map { BlockVariant.Wood("terrestria/$it") }
+
+        val woodTypes = oldWoodTypes + newWoodTypes
 
         val oldStoneTypes = sequenceOf(
             "basalt", "basalt_cobblestone"

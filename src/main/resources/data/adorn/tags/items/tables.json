@@ -18,6 +18,7 @@
     { "id": "adorn:terrestria_rubber_table", "required": false },
     { "id": "adorn:terrestria_sakura_table", "required": false },
     { "id": "adorn:terrestria_willow_table", "required": false },
+    { "id": "adorn:terrestria/yucca_palm_table", "required": false },
     { "id": "adorn:woods_and_mires/pine_table", "required": false },
     { "id": "adorn:byg/aspen_table", "required": false },
     { "id": "adorn:byg/baobab_table", "required": false },

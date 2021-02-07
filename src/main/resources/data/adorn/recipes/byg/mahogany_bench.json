@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "# #"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:mahogany_slab"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/mahogany_chair",
+    "count": 2
+  }
+}

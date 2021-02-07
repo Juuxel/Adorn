@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "traverse:block/fir_planks",
+    "log": "traverse:block/fir_log",
+    "end": "traverse:block/fir_log_top"
+  }
+}

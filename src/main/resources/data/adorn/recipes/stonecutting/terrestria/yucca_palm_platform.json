@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "terrestria:yucca_palm_planks"
+  },
+  "result": "adorn:terrestria/yucca_palm_platform",
+  "count": 2
+}
