@@ -23,7 +23,7 @@ java {
 loom {
     accessWidener = file("src/main/resources/adorn.accesswidener")
 
-    runs.configureEach {
+    runConfigs.configureEach {
         val capitalizedName = if (name.length <= 1) name else name[0].toUpperCase() + name.substring(1)
         configName = "Fabric $capitalizedName"
     }
