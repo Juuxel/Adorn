@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:byg/witch_hazel_chair"
+      "adorn:byg/witch_hazel_bench"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:byg/witch_hazel_chair"
+        "recipe": "adorn:byg/witch_hazel_bench"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:woods_and_mires/pine_chair"
+      "adorn:woods_and_mires/pine_bench"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:woods_and_mires/pine_chair"
+        "recipe": "adorn:woods_and_mires/pine_bench"
       }
     }
   },

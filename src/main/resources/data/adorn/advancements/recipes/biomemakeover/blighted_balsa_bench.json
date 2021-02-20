@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:biomemakeover/blighted_balsa_chair"
+      "adorn:biomemakeover/blighted_balsa_bench"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:biomemakeover/blighted_balsa_chair"
+        "recipe": "adorn:biomemakeover/blighted_balsa_bench"
       }
     }
   },

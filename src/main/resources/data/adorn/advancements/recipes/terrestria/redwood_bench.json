@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:terrestria/redwood_chair"
+      "adorn:terrestria/redwood_bench"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:terrestria/redwood_chair"
+        "recipe": "adorn:terrestria/redwood_bench"
       }
     }
   },

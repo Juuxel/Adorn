@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:traverse/fir_chair"
+      "adorn:traverse/fir_bench"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:traverse/fir_chair"
+        "recipe": "adorn:traverse/fir_bench"
       }
     }
   },

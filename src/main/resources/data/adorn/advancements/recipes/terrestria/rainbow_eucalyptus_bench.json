@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:terrestria/rainbow_eucalyptus_chair"
+      "adorn:terrestria/rainbow_eucalyptus_bench"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:terrestria/rainbow_eucalyptus_chair"
+        "recipe": "adorn:terrestria/rainbow_eucalyptus_bench"
       }
     }
   },

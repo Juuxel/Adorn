@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:byg/zelkova_chair"
+      "adorn:byg/zelkova_bench"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:byg/zelkova_chair"
+        "recipe": "adorn:byg/zelkova_bench"
       }
     }
   },

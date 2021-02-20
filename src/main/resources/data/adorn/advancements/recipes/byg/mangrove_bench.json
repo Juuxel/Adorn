@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:byg/mangrove_chair"
+      "adorn:byg/mangrove_bench"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:byg/mangrove_chair"
+        "recipe": "adorn:byg/mangrove_bench"
       }
     }
   },

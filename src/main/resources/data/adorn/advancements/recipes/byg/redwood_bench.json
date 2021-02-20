@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:byg/redwood_chair"
+      "adorn:byg/redwood_bench"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:byg/redwood_chair"
+        "recipe": "adorn:byg/redwood_bench"
       }
     }
   },

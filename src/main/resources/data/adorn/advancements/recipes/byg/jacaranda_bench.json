@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:byg/jacaranda_chair"
+      "adorn:byg/jacaranda_bench"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:byg/jacaranda_chair"
+        "recipe": "adorn:byg/jacaranda_bench"
       }
     }
   },
