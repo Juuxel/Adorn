@@ -50,6 +50,8 @@
     { "id": "adorn:byg/zelkova_bench", "required": false },
     { "id": "adorn:biomemakeover/blighted_balsa_bench", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_bench", "required": false },
-    { "id": "adorn:biomemakeover/willow_bench", "required": false }
+    { "id": "adorn:biomemakeover/willow_bench", "required": false },
+    { "id": "adorn:cinderscapes/scorched_bench", "required": false },
+    { "id": "adorn:cinderscapes/umbral_bench", "required": false }
   ]
 }

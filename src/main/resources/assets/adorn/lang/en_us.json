@@ -66,6 +66,8 @@
   "block.adorn.biomemakeover.blighted_balsa_chair": "Blighted Balsa Chair",
   "block.adorn.biomemakeover.swamp_cypress_chair": "Swamp Cypress Chair",
   "block.adorn.biomemakeover.willow_chair": "Willow Chair",
+  "block.adorn.cinderscapes.scorched_chair": "Scorched Chair",
+  "block.adorn.cinderscapes.umbral_chair": "Umbral Chair",
 
   "block.adorn.oak_table": "Oak Table",
   "block.adorn.spruce_table": "Spruce Table",
@@ -117,6 +119,8 @@
   "block.adorn.biomemakeover.blighted_balsa_table": "Blighted Balsa Table",
   "block.adorn.biomemakeover.swamp_cypress_table": "Swamp Cypress Table",
   "block.adorn.biomemakeover.willow_table": "Willow Table",
+  "block.adorn.cinderscapes.scorched_table": "Scorched Table",
+  "block.adorn.cinderscapes.umbral_table": "Umbral Table",
 
   "block.adorn.oak_kitchen_counter": "Oak Kitchen Counter",
   "block.adorn.spruce_kitchen_counter": "Spruce Kitchen Counter",
@@ -168,6 +172,8 @@
   "block.adorn.biomemakeover.blighted_balsa_kitchen_counter": "Blighted Balsa Kitchen Counter",
   "block.adorn.biomemakeover.swamp_cypress_kitchen_counter": "Swamp Cypress Kitchen Counter",
   "block.adorn.biomemakeover.willow_kitchen_counter": "Willow Kitchen Counter",
+  "block.adorn.cinderscapes.scorched_kitchen_counter": "Scorched Kitchen Counter",
+  "block.adorn.cinderscapes.umbral_kitchen_counter": "Umbral Kitchen Counter",
 
   "block.adorn.oak_kitchen_cupboard": "Oak Kitchen Cupboard",
   "block.adorn.spruce_kitchen_cupboard": "Spruce Kitchen Cupboard",
@@ -219,6 +225,8 @@
   "block.adorn.biomemakeover.blighted_balsa_kitchen_cupboard": "Blighted Balsa Kitchen Cupboard",
   "block.adorn.biomemakeover.swamp_cypress_kitchen_cupboard": "Swamp Cypress Kitchen Cupboard",
   "block.adorn.biomemakeover.willow_kitchen_cupboard": "Willow Kitchen Cupboard",
+  "block.adorn.cinderscapes.scorched_kitchen_cupboard": "Scorched Kitchen Cupboard",
+  "block.adorn.cinderscapes.umbral_kitchen_cupboard": "Umbral Kitchen Cupboard",
 
   "block.adorn.oak_kitchen_sink": "Oak Kitchen Sink",
   "block.adorn.spruce_kitchen_sink": "Spruce Kitchen Sink",
@@ -270,6 +278,8 @@
   "block.adorn.biomemakeover.blighted_balsa_kitchen_sink": "Blighted Balsa Kitchen Sink",
   "block.adorn.biomemakeover.swamp_cypress_kitchen_sink": "Swamp Cypress Kitchen Sink",
   "block.adorn.biomemakeover.willow_kitchen_sink": "Willow Kitchen Sink",
+  "block.adorn.cinderscapes.scorched_kitchen_sink": "Scorched Kitchen Sink",
+  "block.adorn.cinderscapes.umbral_kitchen_sink": "Umbral Kitchen Sink",
 
   "block.adorn.oak_drawer": "Oak Drawer",
   "block.adorn.spruce_drawer": "Spruce Drawer",
@@ -321,6 +331,8 @@
   "block.adorn.biomemakeover.blighted_balsa_drawer": "Blighted Balsa Drawer",
   "block.adorn.biomemakeover.swamp_cypress_drawer": "Swamp Cypress Drawer",
   "block.adorn.biomemakeover.willow_drawer": "Willow Drawer",
+  "block.adorn.cinderscapes.scorched_drawer": "Scorched Drawer",
+  "block.adorn.cinderscapes.umbral_drawer": "Umbral Drawer",
 
   "block.adorn.trading_station": "Trading Station",
   "block.adorn.trading_station.selling": "Selling",
@@ -456,6 +468,8 @@
   "block.adorn.biomemakeover.blighted_balsa_post": "Blighted Balsa Post",
   "block.adorn.biomemakeover.swamp_cypress_post": "Swamp Cypress Post",
   "block.adorn.biomemakeover.willow_post": "Willow Post",
+  "block.adorn.cinderscapes.scorched_post": "Scorched Post",
+  "block.adorn.cinderscapes.umbral_post": "Umbral Post",
   "block.adorn.post.desc": "A bit like a fence post",
 
   "block.adorn.oak_platform": "Oak Platform",
@@ -562,6 +576,8 @@
   "block.adorn.biomemakeover.blighted_balsa_platform": "Blighted Balsa Platform",
   "block.adorn.biomemakeover.swamp_cypress_platform": "Swamp Cypress Platform",
   "block.adorn.biomemakeover.willow_platform": "Willow Platform",
+  "block.adorn.cinderscapes.scorched_platform": "Scorched Platform",
+  "block.adorn.cinderscapes.umbral_platform": "Umbral Platform",
   "block.adorn.platform.desc": "A post with a platform on top",
 
   "block.adorn.oak_step": "Oak Step",
@@ -668,6 +684,8 @@
   "block.adorn.biomemakeover.blighted_balsa_step": "Blighted Balsa Step",
   "block.adorn.biomemakeover.swamp_cypress_step": "Swamp Cypress Step",
   "block.adorn.biomemakeover.willow_step": "Willow Step",
+  "block.adorn.cinderscapes.scorched_step": "Scorched Step",
+  "block.adorn.cinderscapes.umbral_step": "Umbral Step",
   "block.adorn.step.desc": "A small step with a post under it",
 
   "block.adorn.brick_chimney": "Brick Chimney",
@@ -733,6 +751,8 @@
   "block.adorn.biomemakeover.blighted_balsa_shelf": "Blighted Balsa Shelf",
   "block.adorn.biomemakeover.swamp_cypress_shelf": "Swamp Cypress Shelf",
   "block.adorn.biomemakeover.willow_shelf": "Willow Shelf",
+  "block.adorn.cinderscapes.scorched_shelf": "Scorched Shelf",
+  "block.adorn.cinderscapes.umbral_shelf": "Umbral Shelf",
   "block.adorn.shelf.desc": "A handy place for everyday items",
 
   "block.adorn.white_table_lamp": "White Table Lamp",
@@ -802,6 +822,8 @@
   "block.adorn.biomemakeover.blighted_balsa_coffee_table": "Blighted Balsa Coffee Table",
   "block.adorn.biomemakeover.swamp_cypress_coffee_table": "Swamp Cypress Coffee Table",
   "block.adorn.biomemakeover.willow_coffee_table": "Willow Coffee Table",
+  "block.adorn.cinderscapes.scorched_coffee_table": "Scorched Coffee Table",
+  "block.adorn.cinderscapes.umbral_coffee_table": "Umbral Coffee Table",
 
   "block.adorn.crate": "Crate",
   "block.adorn.wheat_crate": "Crate of Wheat",
@@ -876,6 +898,8 @@
   "block.adorn.biomemakeover.blighted_balsa_bench": "Blighted Balsa Bench",
   "block.adorn.biomemakeover.swamp_cypress_bench": "Swamp Cypress Bench",
   "block.adorn.biomemakeover.willow_bench": "Willow Bench",
+  "block.adorn.cinderscapes.scorched_bench": "Scorched Bench",
+  "block.adorn.cinderscapes.umbral_bench": "Umbral Bench",
 
   "item.adorn.stone_rod": "Stone Rod",
   "item.adorn.stone_rod.desc": "Crafting ingredient",

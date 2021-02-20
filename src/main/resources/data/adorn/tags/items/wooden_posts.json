@@ -50,6 +50,8 @@
     { "id": "adorn:byg/zelkova_post", "required": false },
     { "id": "adorn:biomemakeover/blighted_balsa_post", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_post", "required": false },
-    { "id": "adorn:biomemakeover/willow_post", "required": false }
+    { "id": "adorn:biomemakeover/willow_post", "required": false },
+    { "id": "adorn:cinderscapes/scorched_post", "required": false },
+    { "id": "adorn:cinderscapes/umbral_post", "required": false }
   ]
 }

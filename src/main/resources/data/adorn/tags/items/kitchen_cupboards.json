@@ -50,6 +50,8 @@
     { "id": "adorn:byg/zelkova_kitchen_cupboard", "required": false },
     { "id": "adorn:biomemakeover/blighted_balsa_kitchen_cupboard", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_kitchen_cupboard", "required": false },
-    { "id": "adorn:biomemakeover/willow_kitchen_cupboard", "required": false }
+    { "id": "adorn:biomemakeover/willow_kitchen_cupboard", "required": false },
+    { "id": "adorn:cinderscapes/scorched_cupboard", "required": false },
+    { "id": "adorn:cinderscapes/umbral_cupboard", "required": false }
   ]
 }

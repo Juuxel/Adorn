@@ -50,6 +50,8 @@
     { "id": "adorn:byg/zelkova_chair", "required": false },
     { "id": "adorn:biomemakeover/blighted_balsa_chair", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_chair", "required": false },
-    { "id": "adorn:biomemakeover/willow_chair", "required": false }
+    { "id": "adorn:biomemakeover/willow_chair", "required": false },
+    { "id": "adorn:cinderscapes/scorched_chair", "required": false },
+    { "id": "adorn:cinderscapes/umbral_chair", "required": false }
   ]
 }

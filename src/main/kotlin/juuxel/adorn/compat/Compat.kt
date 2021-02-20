@@ -11,7 +11,8 @@ object Compat {
             "towelette" to ToweletteCompat::init,
             "traverse" to TraverseCompat::init,
             "woods_and_mires" to WamCompat::init,
-            "biomemakeover" to BiomeMakeoverCompat::init
+            "biomemakeover" to BiomeMakeoverCompat::init,
+            "cinderscapes" to CinderscapesCompat::init,
         )
 
         for ((mod, fn) in mods) {

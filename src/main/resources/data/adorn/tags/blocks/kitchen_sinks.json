@@ -50,6 +50,8 @@
     { "id": "adorn:byg/zelkova_kitchen_sink", "required": false },
     { "id": "adorn:biomemakeover/blighted_balsa_sink", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_sink", "required": false },
-    { "id": "adorn:biomemakeover/willow_sink", "required": false }
+    { "id": "adorn:biomemakeover/willow_sink", "required": false },
+    { "id": "adorn:cinderscapes/scorched_kitchen_sink", "required": false },
+    { "id": "adorn:cinderscapes/umbral_kitchen_sink", "required": false }
   ]
 }
