@@ -10,6 +10,16 @@
     "adorn:crimson_table",
     "adorn:warped_table",
     { "id": "adorn:traverse/fir_table", "required": false },
+    { "id": "adorn:terrestria_cypress_table", "required": false },
+    { "id": "adorn:terrestria_hemlock_table", "required": false },
+    { "id": "adorn:terrestria_japanese_maple_table", "required": false },
+    { "id": "adorn:terrestria_rainbow_eucalyptus_table", "required": false },
+    { "id": "adorn:terrestria_redwood_table", "required": false },
+    { "id": "adorn:terrestria_rubber_table", "required": false },
+    { "id": "adorn:terrestria_sakura_table", "required": false },
+    { "id": "adorn:terrestria_willow_table", "required": false },
+    { "id": "adorn:terrestria/yucca_palm_table", "required": false },
+    { "id": "adorn:woods_and_mires/pine_table", "required": false },
     { "id": "adorn:byg/aspen_table", "required": false },
     { "id": "adorn:byg/baobab_table", "required": false },
     { "id": "adorn:byg/blue_enchanted_table", "required": false },
@@ -37,6 +47,11 @@
     { "id": "adorn:byg/sythian_table", "required": false },
     { "id": "adorn:byg/willow_table", "required": false },
     { "id": "adorn:byg/witch_hazel_table", "required": false },
-    { "id": "adorn:byg/zelkova_table", "required": false }
+    { "id": "adorn:byg/zelkova_table", "required": false },
+    { "id": "adorn:biomemakeover/blighted_balsa_table", "required": false },
+    { "id": "adorn:biomemakeover/swamp_cypress_table", "required": false },
+    { "id": "adorn:biomemakeover/willow_table", "required": false },
+    { "id": "adorn:cinderscapes/scorched_table", "required": false },
+    { "id": "adorn:cinderscapes/umbral_table", "required": false }
   ]
 }

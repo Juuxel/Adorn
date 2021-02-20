@@ -3,8 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     java
     kotlin("jvm") version "1.4.20"
-    id("io.github.juuxel.fabric-loom") version "0.6.11"
-    id("io.github.juuxel.ripple") version "0.3.6"
+    id("forgified-fabric-loom") version "0.6.68"
     `maven-publish`
     id("org.jmailen.kotlinter") version "3.2.0"
 }
@@ -23,12 +22,14 @@ java {
     withSourcesJar()
 }
 
-ripple.processor("src/menu.ripple.json")
-
 loom {
-    mixinConfig = "mixins.adorn.json"
+    mixinConfig("mixins.adorn.json")
     useFabricMixin = true
-    platformNameInRunConfig = true
+
+    runConfigs.configureEach {
+        val capitalizedName = if (name.length <= 1) name else name[0].toUpperCase() + name.substring(1)
+        configName = "Forge $capitalizedName"
+    }
 }
 
 repositories {
@@ -45,7 +46,7 @@ dependencies {
     fun v(key: String) = project.property(key).toString()
 
     minecraft("com.mojang:minecraft:${v("minecraft-version")}")
-    mappings(ripple.processed("net.fabricmc:yarn:" + v("minecraft-version") + '+' + v("mappings") + ":v2", "adorn.1"))
+    mappings("net.fabricmc:yarn:" + v("minecraft-version") + '+' + v("mappings") + ":v2")
 
     // Forge
     forge("net.minecraftforge", "forge", v("forge"))

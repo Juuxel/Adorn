@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateManager
+import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
@@ -79,6 +80,6 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
     protected open fun isSittingEnabled() = true
 
     companion object {
-        @JvmField val OCCUPIED = Properties.OCCUPIED
+        @JvmField val OCCUPIED: BooleanProperty = Properties.OCCUPIED
     }
 }

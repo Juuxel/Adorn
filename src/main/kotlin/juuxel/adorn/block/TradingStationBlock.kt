@@ -80,7 +80,7 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
                     be.storage.tryInsert(trade.price)
                 }
             } else {
-                player.openMenuScreen(state.createMenuFactory(world, pos))
+                player.openHandledScreen(state.createScreenHandlerFactory(world, pos))
             }
         }
 

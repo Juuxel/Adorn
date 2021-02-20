@@ -13,11 +13,11 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.menu.MenuContext
-import net.minecraft.menu.NamedMenuFactory
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.ClientConnection
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
+import net.minecraft.screen.NamedScreenHandlerFactory
+import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
@@ -27,7 +27,7 @@ class TradingStationBlockEntity :
     BlockEntity(
         AdornBlockEntities.TRADING_STATION.get()
     ),
-    NamedMenuFactory,
+    NamedScreenHandlerFactory,
     TradingStation {
     var owner: UUID? = null
     var ownerName: Text = LiteralText("???")
@@ -56,7 +56,7 @@ class TradingStationBlockEntity :
     fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
 
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity) =
-        TradingStationMenu(syncId, playerInv, MenuContext.create(world, pos))
+        TradingStationMenu(syncId, playerInv, ScreenHandlerContext.create(world, pos))
 
     override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)
 

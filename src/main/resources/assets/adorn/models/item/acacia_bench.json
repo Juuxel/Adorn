@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "minecraft:block/acacia_planks",
+    "log": "minecraft:block/acacia_log",
+    "end": "minecraft:block/acacia_log_top"
+  }
+}

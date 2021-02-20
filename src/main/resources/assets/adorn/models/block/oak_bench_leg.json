@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/templates/bench_leg",
+  "textures": {
+    "log": "minecraft:block/oak_log",
+    "end": "minecraft:block/oak_log_top"
+  }
+}

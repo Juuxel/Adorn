@@ -1,6 +1,7 @@
 package juuxel.adorn.api.block
 
 import juuxel.adorn.block.AdornBlocks
+import juuxel.adorn.block.BenchBlock
 import juuxel.adorn.block.ChairBlock
 import juuxel.adorn.block.CoffeeTableBlock
 import juuxel.adorn.block.DrawerBlock
@@ -43,6 +44,7 @@ class AdornBlockBuilder private constructor(private val material: BlockVariant) 
     private var kitchenSink = false
     private var shelf = false
     private var coffeeTable = false
+    private var bench = false
 
     fun withPost() = apply {
         post = true
@@ -94,6 +96,10 @@ class AdornBlockBuilder private constructor(private val material: BlockVariant) 
         coffeeTable = true
     }
 
+    fun withBench() = apply {
+        bench = true
+    }
+
     fun withEverything() = apply {
         post = true
         platform = true
@@ -106,6 +112,7 @@ class AdornBlockBuilder private constructor(private val material: BlockVariant) 
         kitchenSink = true
         shelf = true
         coffeeTable = true
+        bench = true
     }
 
     fun register(modId: String, modBus: IEventBus) {
@@ -141,6 +148,7 @@ class AdornBlockBuilder private constructor(private val material: BlockVariant) 
         if (kitchenSink) register("kitchen_sink") { KitchenSinkBlock(material) }
         if (shelf) register("shelf") { ShelfBlock(material) }
         if (coffeeTable) register("coffee_table") { CoffeeTableBlock(material) }
+        if (bench) register("bench") { BenchBlock(material) }
 
         blocks.register(modBus)
         items.register(modBus)

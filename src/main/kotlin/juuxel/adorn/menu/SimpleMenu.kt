@@ -5,17 +5,17 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.menu.Menu
-import net.minecraft.menu.MenuType
-import net.minecraft.menu.slot.Slot
+import net.minecraft.screen.ScreenHandler
+import net.minecraft.screen.ScreenHandlerType
+import net.minecraft.screen.slot.Slot
 
 open class SimpleMenu(
-    type: MenuType<*>,
+    type: ScreenHandlerType<*>,
     syncId: Int,
     private val dimensions: Pair<Int, Int>,
     private val container: Inventory = SimpleInventory(dimensions.first * dimensions.second),
     playerInventory: PlayerInventory
-) : Menu(type, syncId) {
+) : ScreenHandler(type, syncId) {
     init {
         val (width, height) = dimensions
         val offset = (9 - width) / 2

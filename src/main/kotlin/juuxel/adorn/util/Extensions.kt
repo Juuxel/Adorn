@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.state.property.Property
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
+import net.minecraft.util.math.Direction
 
 fun ItemStack.toTextWithCount(): Text =
     TranslatableText("text.adorn.item_stack_with_count", count, toHoverableText())
@@ -47,3 +48,25 @@ fun Block.copySettingsSafely(): AbstractBlock.Settings =
 
 private fun getHardness(state: BlockState): Float =
     state.getHardness(null, null)
+
+fun Direction.Axis.turnHorizontally(): Direction.Axis =
+    when (this) {
+        Direction.Axis.X -> Direction.Axis.Z
+        Direction.Axis.Z -> Direction.Axis.X
+        Direction.Axis.Y -> Direction.Axis.Y
+    }
+
+fun Direction.Axis.getDirection(axisDirection: Direction.AxisDirection): Direction =
+    when (axisDirection) {
+        Direction.AxisDirection.POSITIVE -> when (this) {
+            Direction.Axis.X -> Direction.EAST
+            Direction.Axis.Y -> Direction.UP
+            Direction.Axis.Z -> Direction.SOUTH
+        }
+
+        Direction.AxisDirection.NEGATIVE -> when (this) {
+            Direction.Axis.X -> Direction.WEST
+            Direction.Axis.Y -> Direction.DOWN
+            Direction.Axis.Z -> Direction.NORTH
+        }
+    }

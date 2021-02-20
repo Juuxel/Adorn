@@ -9,7 +9,7 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 
 class ShelfBlockEntity : BaseInventoryBlockEntity(AdornBlockEntities.SHELF.get(), 2) {
     // No menus for shelves
-    override fun createMenu(syncId: Int, playerInv: PlayerInventory?) = null
+    override fun createScreenHandler(syncId: Int, playerInv: PlayerInventory?) = null
 
     override fun getMaxCountPerStack() = 1
 

@@ -24,3 +24,18 @@ function create-stone-libcd-meta
         create-libcd-meta $argv[1] $argv[2] $name platform post step
     end
 end
+
+function create-1-14-wood-libcd-meta
+    for name in $argv[3..-1]
+        create-libcd-meta $argv[1] $argv[2] $name bench
+    end
+end
+
+function create-all-wood-libcd-meta
+    create-wood-libcd-meta $argv
+    create-1-6-wood-libcd-meta $argv
+    create-1-14-wood-libcd-meta $argv
+end
+
+# Usage for all of the functions:
+# <function-name> <mod-id> <directory> <prefixes...>

@@ -261,6 +261,15 @@ object AdornBlocks {
     val CRIMSON_COFFEE_TABLE: BlockDef = registerBlock("crimson_coffee_table") { CoffeeTableBlock(BlockVariant.CRIMSON) }
     val WARPED_COFFEE_TABLE: BlockDef = registerBlock("warped_coffee_table") { CoffeeTableBlock(BlockVariant.WARPED) }
 
+    val OAK_BENCH: BlockDef = registerBlock("oak_bench") { BenchBlock(BlockVariant.OAK) }
+    val SPRUCE_BENCH: BlockDef = registerBlock("spruce_bench") { BenchBlock(BlockVariant.SPRUCE) }
+    val BIRCH_BENCH: BlockDef = registerBlock("birch_bench") { BenchBlock(BlockVariant.BIRCH) }
+    val JUNGLE_BENCH: BlockDef = registerBlock("jungle_bench") { BenchBlock(BlockVariant.JUNGLE) }
+    val ACACIA_BENCH: BlockDef = registerBlock("acacia_bench") { BenchBlock(BlockVariant.ACACIA) }
+    val DARK_OAK_BENCH: BlockDef = registerBlock("dark_oak_bench") { BenchBlock(BlockVariant.DARK_OAK) }
+    val CRIMSON_BENCH: BlockDef = registerBlock("crimson_bench") { BenchBlock(BlockVariant.CRIMSON) }
+    val WARPED_BENCH: BlockDef = registerBlock("warped_bench") { BenchBlock(BlockVariant.WARPED) }
+
     val TABLE_LAMPS: Map<DyeColor, BlockDef> = DyeColor.values().associate {
         it to registerBlock("${it.asString()}_table_lamp") {
             TableLampBlock(TableLampBlock.createBlockSettings(it))

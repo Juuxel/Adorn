@@ -6,10 +6,10 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
-import net.minecraft.menu.Menu
-import net.minecraft.menu.MenuContext
-import net.minecraft.menu.slot.Slot
-import net.minecraft.menu.slot.SlotActionType
+import net.minecraft.screen.ScreenHandler
+import net.minecraft.screen.ScreenHandlerContext
+import net.minecraft.screen.slot.Slot
+import net.minecraft.screen.slot.SlotActionType
 import net.minecraftforge.common.util.Constants
 import org.apache.logging.log4j.LogManager
 import java.util.function.BiFunction
@@ -17,8 +17,8 @@ import java.util.function.BiFunction
 class TradingStationMenu(
     syncId: Int,
     playerInventory: Inventory,
-    private val context: MenuContext = MenuContext.EMPTY
-) : Menu(AdornMenus.TRADING_STATION.get(), syncId) {
+    private val context: ScreenHandlerContext = ScreenHandlerContext.EMPTY
+) : ScreenHandler(AdornMenus.TRADING_STATION.get(), syncId) {
     private val tradingStation: TradingStation
     private val sellingSlot: Slot
     private val priceSlot: Slot
@@ -120,7 +120,7 @@ class TradingStationMenu(
          * Gets the [juuxel.adorn.block.entity.TradingStationBlockEntity] at the [context]'s location.
          * If it's not present, creates an empty trading station using [TradingStation.createEmpty].
          */
-        private fun getTradingStation(context: MenuContext): TradingStation =
+        private fun getTradingStation(context: ScreenHandlerContext): TradingStation =
             context.run(BiFunction { world, pos -> world.getBlockEntity(pos) as TradingStation })
                 .orElseGet {
                     LOGGER.warn("[Adorn] Trading station not found, creating fake one")

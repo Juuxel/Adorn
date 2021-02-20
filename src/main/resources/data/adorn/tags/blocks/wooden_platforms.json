@@ -10,6 +10,16 @@
     "adorn:crimson_platform",
     "adorn:warped_platform",
     { "id": "adorn:traverse/fir_platform", "required": false },
+    { "id": "adorn:terrestria_cypress_platform", "required": false },
+    { "id": "adorn:terrestria_hemlock_platform", "required": false },
+    { "id": "adorn:terrestria_japanese_maple_platform", "required": false },
+    { "id": "adorn:terrestria_rainbow_eucalyptus_platform", "required": false },
+    { "id": "adorn:terrestria_redwood_platform", "required": false },
+    { "id": "adorn:terrestria_rubber_platform", "required": false },
+    { "id": "adorn:terrestria_sakura_platform", "required": false },
+    { "id": "adorn:terrestria_willow_platform", "required": false },
+    { "id": "adorn:terrestria/yucca_palm_platform", "required": false },
+    { "id": "adorn:woods_and_mires/pine_platform", "required": false },
     { "id": "adorn:byg/aspen_platform", "required": false },
     { "id": "adorn:byg/baobab_platform", "required": false },
     { "id": "adorn:byg/blue_enchanted_platform", "required": false },
@@ -37,6 +47,11 @@
     { "id": "adorn:byg/sythian_platform", "required": false },
     { "id": "adorn:byg/willow_platform", "required": false },
     { "id": "adorn:byg/witch_hazel_platform", "required": false },
-    { "id": "adorn:byg/zelkova_platform", "required": false }
+    { "id": "adorn:byg/zelkova_platform", "required": false },
+    { "id": "adorn:biomemakeover/blighted_balsa_platform", "required": false },
+    { "id": "adorn:biomemakeover/swamp_cypress_platform", "required": false },
+    { "id": "adorn:biomemakeover/willow_platform", "required": false },
+    { "id": "adorn:cinderscapes/scorched_platform", "required": false },
+    { "id": "adorn:cinderscapes/umbral_platform", "required": false }
   ]
 }

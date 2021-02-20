@@ -10,6 +10,16 @@
     "adorn:crimson_kitchen_counter",
     "adorn:warped_kitchen_counter",
     { "id": "adorn:traverse/fir_kitchen_counter", "required": false },
+    { "id": "adorn:terrestria_cypress_kitchen_counter", "required": false },
+    { "id": "adorn:terrestria_hemlock_kitchen_counter", "required": false },
+    { "id": "adorn:terrestria_japanese_maple_kitchen_counter", "required": false },
+    { "id": "adorn:terrestria_rainbow_eucalyptus_kitchen_counter", "required": false },
+    { "id": "adorn:terrestria_redwood_kitchen_counter", "required": false },
+    { "id": "adorn:terrestria_rubber_kitchen_counter", "required": false },
+    { "id": "adorn:terrestria_sakura_kitchen_counter", "required": false },
+    { "id": "adorn:terrestria_willow_kitchen_counter", "required": false },
+    { "id": "adorn:terrestria/yucca_palm_kitchen_counter", "required": false },
+    { "id": "adorn:woods_and_mires/pine_kitchen_counter", "required": false },
     { "id": "adorn:byg/aspen_kitchen_counter", "required": false },
     { "id": "adorn:byg/baobab_kitchen_counter", "required": false },
     { "id": "adorn:byg/blue_enchanted_kitchen_counter", "required": false },
@@ -37,6 +47,11 @@
     { "id": "adorn:byg/sythian_kitchen_counter", "required": false },
     { "id": "adorn:byg/willow_kitchen_counter", "required": false },
     { "id": "adorn:byg/witch_hazel_kitchen_counter", "required": false },
-    { "id": "adorn:byg/zelkova_kitchen_counter", "required": false }
+    { "id": "adorn:byg/zelkova_kitchen_counter", "required": false },
+    { "id": "adorn:biomemakeover/blighted_balsa_kitchen_counter", "required": false },
+    { "id": "adorn:biomemakeover/swamp_cypress_kitchen_counter", "required": false },
+    { "id": "adorn:biomemakeover/willow_kitchen_counter", "required": false },
+    { "id": "adorn:cinderscapes/scorched_kitchen_counter", "required": false },
+    { "id": "adorn:cinderscapes/umbral_kitchen_counter", "required": false }
   ]
 }
