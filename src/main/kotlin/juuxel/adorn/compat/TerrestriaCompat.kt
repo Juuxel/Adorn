@@ -6,16 +6,46 @@ import juuxel.adorn.api.block.BlockVariant
 
 object TerrestriaCompat {
     fun init() {
-        val oldWoodTypes = sequenceOf(
+        // TODO: Get rid of this in 1.17
+        val oldWoodTypesOldBlocks = sequenceOf(
             "cypress", "hemlock", "japanese_maple", "rainbow_eucalyptus", "redwood",
             "rubber", "sakura", "willow"
         ).map { BlockVariant.Wood("terrestria_$it") }
+
+        for (wood in oldWoodTypesOldBlocks) {
+            AdornBlockBuilder.create(wood)
+                .withPost()
+                .withPlatform()
+                .withStep()
+                .withDrawer()
+                .withChair()
+                .withTable()
+                .withKitchenBlocks()
+                .withShelf()
+                .withCoffeeTable()
+                .registerIn(Adorn.NAMESPACE)
+        }
+
+        val oldWoodTypesNewBlocks = sequenceOf(
+            "cypress", "hemlock", "japanese_maple", "rainbow_eucalyptus", "redwood",
+            "rubber", "sakura", "willow"
+        ).map { BlockVariant.Wood("terrestria/$it") }
+
+        for (wood in oldWoodTypesNewBlocks) {
+            AdornBlockBuilder.create(wood)
+                .withBench()
+                .registerIn(Adorn.NAMESPACE)
+        }
 
         val newWoodTypes = sequenceOf(
             "yucca_palm"
         ).map { BlockVariant.Wood("terrestria/$it") }
 
-        val woodTypes = oldWoodTypes + newWoodTypes
+        for (wood in newWoodTypes) {
+            AdornBlockBuilder.create(wood)
+                .withEverything()
+                .registerIn(Adorn.NAMESPACE)
+        }
 
         val oldStoneTypes = sequenceOf(
             "basalt", "basalt_cobblestone"
@@ -29,12 +59,6 @@ object TerrestriaCompat {
         ).map { BlockVariant.Stone("terrestria/$it") }
 
         val stoneTypes = oldStoneTypes + newStoneTypes
-
-        for (wood in woodTypes) {
-            AdornBlockBuilder.create(wood)
-                .withEverything()
-                .registerIn(Adorn.NAMESPACE)
-        }
 
         for (stone in stoneTypes) {
             AdornBlockBuilder.create(stone)
