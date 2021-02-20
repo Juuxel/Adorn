@@ -52,6 +52,17 @@
     { "id": "adorn:biomemakeover/swamp_cypress_chair", "required": false },
     { "id": "adorn:biomemakeover/willow_chair", "required": false },
     { "id": "adorn:cinderscapes/scorched_chair", "required": false },
-    { "id": "adorn:cinderscapes/umbral_chair", "required": false }
+    { "id": "adorn:cinderscapes/umbral_chair", "required": false },
+    { "id": "adorn:biomesoplenty/fir_chair", "required": false },
+    { "id": "adorn:biomesoplenty/redwood_chair", "required": false },
+    { "id": "adorn:biomesoplenty/cherry_chair", "required": false },
+    { "id": "adorn:biomesoplenty/mahogany_chair", "required": false },
+    { "id": "adorn:biomesoplenty/jacaranda_chair", "required": false },
+    { "id": "adorn:biomesoplenty/palm_chair", "required": false },
+    { "id": "adorn:biomesoplenty/willow_chair", "required": false },
+    { "id": "adorn:biomesoplenty/dead_chair", "required": false },
+    { "id": "adorn:biomesoplenty/magic_chair", "required": false },
+    { "id": "adorn:biomesoplenty/umbran_chair", "required": false },
+    { "id": "adorn:biomesoplenty/hellbark_chair", "required": false }
   ]
 }

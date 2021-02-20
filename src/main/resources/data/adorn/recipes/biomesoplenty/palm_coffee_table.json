@@ -1,0 +1,29 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:coffee_table",
+	"pattern": [
+		"S-S",
+		"# #"
+	],
+	"key": {
+		"S": {
+			"item": "biomesoplenty:palm_slab"
+		},
+		"#": {
+			"item": "minecraft:stick"
+		},
+		"-": {
+			"tag": "forge:glass_panes"
+		}
+	},
+	"result": {
+		"item": "adorn:biomesoplenty/palm_coffee_table",
+		"count": 2
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "biomesoplenty"
+		}
+	]
+}

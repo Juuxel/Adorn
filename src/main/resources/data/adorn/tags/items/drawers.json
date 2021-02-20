@@ -52,6 +52,17 @@
     { "id": "adorn:biomemakeover/swamp_cypress_drawer", "required": false },
     { "id": "adorn:biomemakeover/willow_drawer", "required": false },
     { "id": "adorn:cinderscapes/scorched_drawer", "required": false },
-    { "id": "adorn:cinderscapes/umbral_drawer", "required": false }
+    { "id": "adorn:cinderscapes/umbral_drawer", "required": false },
+    { "id": "adorn:biomesoplenty/fir_drawer", "required": false },
+    { "id": "adorn:biomesoplenty/redwood_drawer", "required": false },
+    { "id": "adorn:biomesoplenty/cherry_drawer", "required": false },
+    { "id": "adorn:biomesoplenty/mahogany_drawer", "required": false },
+    { "id": "adorn:biomesoplenty/jacaranda_drawer", "required": false },
+    { "id": "adorn:biomesoplenty/palm_drawer", "required": false },
+    { "id": "adorn:biomesoplenty/willow_drawer", "required": false },
+    { "id": "adorn:biomesoplenty/dead_drawer", "required": false },
+    { "id": "adorn:biomesoplenty/magic_drawer", "required": false },
+    { "id": "adorn:biomesoplenty/umbran_drawer", "required": false },
+    { "id": "adorn:biomesoplenty/hellbark_drawer", "required": false }
   ]
 }

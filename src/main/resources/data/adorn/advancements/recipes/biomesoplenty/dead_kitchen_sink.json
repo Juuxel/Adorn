@@ -1,0 +1,38 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards": {
+		"recipes": [
+			"adorn:biomesoplenty/dead_kitchen_sink"
+		]
+	},
+	"criteria": {
+		"has_key_item_0": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "biomesoplenty:dead_planks"
+					}
+				]
+			}
+		},
+		"has_the_recipe": {
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions": {
+				"recipe": "adorn:biomesoplenty/dead_kitchen_sink"
+			}
+		}
+	},
+	"requirements": [
+		[
+			"has_key_item_0",
+			"has_the_recipe"
+		]
+	],
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "biomesoplenty"
+		}
+	]
+}

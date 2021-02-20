@@ -34,6 +34,10 @@
     { "id": "adorn:byg/red_rock_brick_post", "required": false },
     { "id": "adorn:byg/mossy_red_rock_brick_post", "required": false },
     { "id": "adorn:byg/cracked_red_rock_brick_post", "required": false },
-    { "id": "adorn:byg/chiseled_red_rock_brick_post", "required": false }
+    { "id": "adorn:byg/chiseled_red_rock_brick_post", "required": false },
+    { "id": "adorn:biomesoplenty/black_sandstone_post", "required": false },
+    { "id": "adorn:biomesoplenty/mud_brick_post", "required": false },
+    { "id": "adorn:biomesoplenty/orange_sandstone_post", "required": false },
+    { "id": "adorn:biomesoplenty/white_sandstone_post", "required": false }
   ]
 }

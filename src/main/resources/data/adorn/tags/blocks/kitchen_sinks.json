@@ -52,6 +52,17 @@
     { "id": "adorn:biomemakeover/swamp_cypress_sink", "required": false },
     { "id": "adorn:biomemakeover/willow_sink", "required": false },
     { "id": "adorn:cinderscapes/scorched_kitchen_sink", "required": false },
-    { "id": "adorn:cinderscapes/umbral_kitchen_sink", "required": false }
+    { "id": "adorn:cinderscapes/umbral_kitchen_sink", "required": false },
+    { "id": "adorn:biomesoplenty/fir_kitchen_sink", "required": false },
+    { "id": "adorn:biomesoplenty/redwood_kitchen_sink", "required": false },
+    { "id": "adorn:biomesoplenty/cherry_kitchen_sink", "required": false },
+    { "id": "adorn:biomesoplenty/mahogany_kitchen_sink", "required": false },
+    { "id": "adorn:biomesoplenty/jacaranda_kitchen_sink", "required": false },
+    { "id": "adorn:biomesoplenty/palm_kitchen_sink", "required": false },
+    { "id": "adorn:biomesoplenty/willow_kitchen_sink", "required": false },
+    { "id": "adorn:biomesoplenty/dead_kitchen_sink", "required": false },
+    { "id": "adorn:biomesoplenty/magic_kitchen_sink", "required": false },
+    { "id": "adorn:biomesoplenty/umbran_kitchen_sink", "required": false },
+    { "id": "adorn:biomesoplenty/hellbark_kitchen_sink", "required": false }
   ]
 }

@@ -1,0 +1,27 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:table",
+	"pattern": [
+		"SSS",
+		"# #",
+		"# #"
+	],
+	"key": {
+		"S": {
+			"item": "biomesoplenty:fir_slab"
+		},
+		"#": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "adorn:biomesoplenty/fir_table",
+		"count": 3
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "biomesoplenty"
+		}
+	]
+}

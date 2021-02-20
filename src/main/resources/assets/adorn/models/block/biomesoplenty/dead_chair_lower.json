@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/chair_lower",
+  "textures": {
+    "planks": "biomesoplenty:block/dead_planks"
+  }
+}

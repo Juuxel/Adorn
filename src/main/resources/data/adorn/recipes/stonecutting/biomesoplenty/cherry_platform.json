@@ -1,0 +1,14 @@
+{
+	"type": "stonecutting",
+	"ingredient": {
+		"item": "biomesoplenty:cherry_planks"
+	},
+	"result": "adorn:biomesoplenty/cherry_platform",
+	"count": 2,
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "biomesoplenty"
+		}
+	]
+}

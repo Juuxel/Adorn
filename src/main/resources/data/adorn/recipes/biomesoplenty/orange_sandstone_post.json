@@ -1,0 +1,27 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:post",
+	"pattern": [
+		"R",
+		"R",
+		"S"
+	],
+	"key": {
+		"S": {
+			"item": "biomesoplenty:orange_sandstone"
+		},
+		"R": {
+			"tag": "forge:rods/stone"
+		}
+	},
+	"result": {
+		"item": "adorn:biomesoplenty/orange_sandstone_post",
+		"count": 4
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "biomesoplenty"
+		}
+	]
+}

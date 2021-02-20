@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/templates/bench_leg",
+  "textures": {
+    "log": "biomesoplenty:block/magic_stem",
+    "end": "biomesoplenty:block/magic_stem_top"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "biomesoplenty:block/magic_planks",
+    "log": "biomesoplenty:block/magic_stem",
+    "end": "biomesoplenty:block/magic_stem_top"
+  }
+}

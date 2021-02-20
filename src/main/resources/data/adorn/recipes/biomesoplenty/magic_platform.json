@@ -1,0 +1,26 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:platform",
+	"pattern": [
+		"S",
+		"P"
+	],
+	"key": {
+		"S": {
+			"item": "biomesoplenty:magic_slab"
+		},
+		"P": {
+			"item": "adorn:biomesoplenty/magic_post"
+		}
+	},
+	"result": {
+		"item": "adorn:biomesoplenty/magic_platform",
+		"count": 2
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "biomesoplenty"
+		}
+	]
+}

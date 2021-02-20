@@ -1,0 +1,22 @@
+{
+	"type": "crafting_shapeless",
+	"group": "adorn:kitchen_sink",
+	"ingredients": [
+		{
+			"item": "adorn:biomesoplenty/mahogany_kitchen_counter"
+		},
+		{
+			"item": "minecraft:bucket"
+		}
+	],
+	"result": {
+		"item": "adorn:biomesoplenty/mahogany_kitchen_sink",
+		"count": 1
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "biomesoplenty"
+		}
+	]
+}

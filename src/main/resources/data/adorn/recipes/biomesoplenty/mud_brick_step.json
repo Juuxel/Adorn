@@ -1,0 +1,26 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:step",
+	"pattern": [
+		"S",
+		"#"
+	],
+	"key": {
+		"S": {
+			"item": "biomesoplenty:mud_brick_slab"
+		},
+		"#": {
+			"tag": "forge:rods/stone"
+		}
+	},
+	"result": {
+		"item": "adorn:biomesoplenty/mud_brick_step",
+		"count": 1
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "biomesoplenty"
+		}
+	]
+}

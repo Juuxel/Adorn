@@ -7,6 +7,7 @@ object Compat {
     fun init(modBus: IEventBus) {
         loadCompat("byg") { BygCompat.init(modBus) }
         loadCompat("traverse") { TraverseCompat.init(modBus) }
+        loadCompat("biomesoplenty") { BopCompat.init(modBus) }
     }
 
     private inline fun loadCompat(mod: String, compatInit: () -> Unit) {

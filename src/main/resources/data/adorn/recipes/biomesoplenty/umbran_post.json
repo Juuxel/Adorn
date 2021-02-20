@@ -1,0 +1,27 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:post",
+	"pattern": [
+		"S",
+		"S",
+		"P"
+	],
+	"key": {
+		"P": {
+			"item": "biomesoplenty:umbran_planks"
+		},
+		"S": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "adorn:biomesoplenty/umbran_post",
+		"count": 4
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "biomesoplenty"
+		}
+	]
+}

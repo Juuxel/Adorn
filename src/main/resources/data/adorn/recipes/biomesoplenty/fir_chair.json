@@ -1,0 +1,27 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:chair",
+	"pattern": [
+		" S",
+		"SS",
+		"##"
+	],
+	"key": {
+		"S": {
+			"item": "biomesoplenty:fir_slab"
+		},
+		"#": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "adorn:biomesoplenty/fir_chair",
+		"count": 2
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "biomesoplenty"
+		}
+	]
+}

@@ -1,0 +1,26 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:shelf",
+	"pattern": [
+		"---",
+		"/ /"
+	],
+	"key": {
+		"-": {
+			"item": "biomesoplenty:jacaranda_slab"
+		},
+		"/": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "adorn:biomesoplenty/jacaranda_shelf",
+		"count": 3
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "biomesoplenty"
+		}
+	]
+}

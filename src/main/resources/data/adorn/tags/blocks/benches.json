@@ -52,6 +52,17 @@
     { "id": "adorn:biomemakeover/swamp_cypress_bench", "required": false },
     { "id": "adorn:biomemakeover/willow_bench", "required": false },
     { "id": "adorn:cinderscapes/scorched_bench", "required": false },
-    { "id": "adorn:cinderscapes/umbral_bench", "required": false }
+    { "id": "adorn:cinderscapes/umbral_bench", "required": false },
+    { "id": "adorn:biomesoplenty/fir_bench", "required": false },
+    { "id": "adorn:biomesoplenty/redwood_bench", "required": false },
+    { "id": "adorn:biomesoplenty/cherry_bench", "required": false },
+    { "id": "adorn:biomesoplenty/mahogany_bench", "required": false },
+    { "id": "adorn:biomesoplenty/jacaranda_bench", "required": false },
+    { "id": "adorn:biomesoplenty/palm_bench", "required": false },
+    { "id": "adorn:biomesoplenty/willow_bench", "required": false },
+    { "id": "adorn:biomesoplenty/dead_bench", "required": false },
+    { "id": "adorn:biomesoplenty/magic_bench", "required": false },
+    { "id": "adorn:biomesoplenty/umbran_bench", "required": false },
+    { "id": "adorn:biomesoplenty/hellbark_bench", "required": false }
   ]
 }

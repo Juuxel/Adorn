@@ -52,6 +52,17 @@
     { "id": "adorn:biomemakeover/swamp_cypress_step", "required": false },
     { "id": "adorn:biomemakeover/willow_step", "required": false },
     { "id": "adorn:cinderscapes/scorched_step", "required": false },
-    { "id": "adorn:cinderscapes/umbral_step", "required": false }
+    { "id": "adorn:cinderscapes/umbral_step", "required": false },
+    { "id": "adorn:biomesoplenty/fir_step", "required": false },
+    { "id": "adorn:biomesoplenty/redwood_step", "required": false },
+    { "id": "adorn:biomesoplenty/cherry_step", "required": false },
+    { "id": "adorn:biomesoplenty/mahogany_step", "required": false },
+    { "id": "adorn:biomesoplenty/jacaranda_step", "required": false },
+    { "id": "adorn:biomesoplenty/palm_step", "required": false },
+    { "id": "adorn:biomesoplenty/willow_step", "required": false },
+    { "id": "adorn:biomesoplenty/dead_step", "required": false },
+    { "id": "adorn:biomesoplenty/magic_step", "required": false },
+    { "id": "adorn:biomesoplenty/umbran_step", "required": false },
+    { "id": "adorn:biomesoplenty/hellbark_step", "required": false }
   ]
 }

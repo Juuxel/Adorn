@@ -1,0 +1,26 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:bench",
+	"pattern": [
+		"SSS",
+		"# #"
+	],
+	"key": {
+		"S": {
+			"item": "biomesoplenty:fir_slab"
+		},
+		"#": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "adorn:biomesoplenty/fir_bench",
+		"count": 2
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "biomesoplenty"
+		}
+	]
+}

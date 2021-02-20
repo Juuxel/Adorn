@@ -1,0 +1,26 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:platform",
+	"pattern": [
+		"S",
+		"P"
+	],
+	"key": {
+		"S": {
+			"item": "biomesoplenty:umbran_slab"
+		},
+		"P": {
+			"item": "adorn:biomesoplenty/umbran_post"
+		}
+	},
+	"result": {
+		"item": "adorn:biomesoplenty/umbran_platform",
+		"count": 2
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "biomesoplenty"
+		}
+	]
+}

@@ -52,6 +52,17 @@
     { "id": "adorn:biomemakeover/swamp_cypress_table", "required": false },
     { "id": "adorn:biomemakeover/willow_table", "required": false },
     { "id": "adorn:cinderscapes/scorched_table", "required": false },
-    { "id": "adorn:cinderscapes/umbral_table", "required": false }
+    { "id": "adorn:cinderscapes/umbral_table", "required": false },
+    { "id": "adorn:biomesoplenty/fir_table", "required": false },
+    { "id": "adorn:biomesoplenty/redwood_table", "required": false },
+    { "id": "adorn:biomesoplenty/cherry_table", "required": false },
+    { "id": "adorn:biomesoplenty/mahogany_table", "required": false },
+    { "id": "adorn:biomesoplenty/jacaranda_table", "required": false },
+    { "id": "adorn:biomesoplenty/palm_table", "required": false },
+    { "id": "adorn:biomesoplenty/willow_table", "required": false },
+    { "id": "adorn:biomesoplenty/dead_table", "required": false },
+    { "id": "adorn:biomesoplenty/magic_table", "required": false },
+    { "id": "adorn:biomesoplenty/umbran_table", "required": false },
+    { "id": "adorn:biomesoplenty/hellbark_table", "required": false }
   ]
 }
