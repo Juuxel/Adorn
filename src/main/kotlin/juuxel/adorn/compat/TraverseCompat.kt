@@ -21,7 +21,7 @@ object TraverseCompat {
             .registerIn(Adorn.NAMESPACE)
 
         val newFir = BlockVariant.Wood("traverse/fir")
-        AdornBlockBuilder.create(oldFir)
+        AdornBlockBuilder.create(newFir)
             .withBench()
             .registerIn(Adorn.NAMESPACE)
     }
