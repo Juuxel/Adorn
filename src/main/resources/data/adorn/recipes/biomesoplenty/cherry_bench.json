@@ -10,7 +10,7 @@
 			"item": "biomesoplenty:cherry_slab"
 		},
 		"#": {
-			"item": "minecraft:stick"
+			"tag": "forge:rods/wooden"
 		}
 	},
 	"result": {

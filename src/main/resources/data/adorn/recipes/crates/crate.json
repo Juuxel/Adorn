@@ -7,7 +7,7 @@
   ],
   "key": {
     "p": { "tag": "minecraft:planks" },
-    "s": { "item": "minecraft:stick" }
+    "s": { "tag": "forge:rods/wooden" }
   },
   "result": {
     "item": "adorn:crate",

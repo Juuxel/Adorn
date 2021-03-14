@@ -10,7 +10,7 @@
       "item": "minecraft:crimson_slab"
     },
     "#": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     }
   },
   "result": {

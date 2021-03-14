@@ -10,7 +10,7 @@
 			"item": "byg:ether_slab"
 		},
 		"#": {
-			"item": "minecraft:stick"
+			"tag": "forge:rods/wooden"
 		},
 		"-": {
 			"tag": "forge:glass_panes"

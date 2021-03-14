@@ -10,7 +10,7 @@
 			"item": "biomesoplenty:redwood_slab"
 		},
 		"/": {
-			"item": "minecraft:stick"
+			"tag": "forge:rods/wooden"
 		}
 	},
 	"result": {

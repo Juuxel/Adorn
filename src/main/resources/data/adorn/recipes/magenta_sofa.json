@@ -8,7 +8,7 @@
   ],
   "key": {
     "S": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     },
     "W": {
       "item": "minecraft:magenta_wool"
