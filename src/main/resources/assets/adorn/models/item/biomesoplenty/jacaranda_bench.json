@@ -2,7 +2,7 @@
   "parent": "adorn:item/templates/bench",
   "textures": {
     "planks": "biomesoplenty:block/jacaranda_planks",
-    "log": "biomesoplenty:block/jacaranda_stem",
-    "end": "biomesoplenty:block/jacaranda_stem_top"
+    "log": "biomesoplenty:block/jacaranda_log",
+    "end": "biomesoplenty:block/jacaranda_log_top"
   }
 }

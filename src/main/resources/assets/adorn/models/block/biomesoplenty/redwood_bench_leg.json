@@ -1,7 +1,7 @@
 {
   "parent": "adorn:block/templates/bench_leg",
   "textures": {
-    "log": "biomesoplenty:block/redwood_stem",
-    "end": "biomesoplenty:block/redwood_stem_top"
+    "log": "biomesoplenty:block/redwood_log",
+    "end": "biomesoplenty:block/redwood_log_top"
   }
 }

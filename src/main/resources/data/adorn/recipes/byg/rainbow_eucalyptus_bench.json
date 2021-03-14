@@ -1,0 +1,26 @@
+{
+	"type": "crafting_shaped",
+	"group": "adorn:bench",
+	"pattern": [
+		"SSS",
+		"# #"
+	],
+	"key": {
+		"S": {
+			"item": "byg:rainbow_eucalyptus_slab"
+		},
+		"#": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "adorn:byg/rainbow_eucalyptus_bench",
+		"count": 2
+	},
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "byg"
+		}
+	]
+}

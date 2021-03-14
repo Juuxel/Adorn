@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "byg:block/sythian_planks",
+    "log": "byg:block/sythian_stem",
+    "end": "byg:block/sythian_stem_top"
+  }
+}

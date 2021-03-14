@@ -2,7 +2,7 @@
   "parent": "adorn:item/templates/bench",
   "textures": {
     "planks": "biomesoplenty:block/mahogany_planks",
-    "log": "biomesoplenty:block/mahogany_stem",
-    "end": "biomesoplenty:block/mahogany_stem_top"
+    "log": "biomesoplenty:block/mahogany_log",
+    "end": "biomesoplenty:block/mahogany_log_top"
   }
 }
