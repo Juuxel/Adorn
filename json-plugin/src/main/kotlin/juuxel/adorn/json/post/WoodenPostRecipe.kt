@@ -16,7 +16,7 @@ object WoodenPostRecipe : AbstractContentGenerator("post.wooden.recipe", "recipe
                 "pattern" to listOf("S", "S", "P"),
                 "key" to mapOf(
                     "P" to mapOf("item" to "minecraft:${id.path}_planks"),
-                    "S" to mapOf("item" to "minecraft:stick")
+                    "S" to mapOf("tag" to "forge:rods/wooden")
                 ),
                 "result" to mapOf(
                     "item" to id.suffixPath("_post"),

@@ -15,7 +15,7 @@ object SofaRecipe : AbstractContentGenerator("sofa.recipe", "recipes", AdornPlug
                 "group" to "adorn:sofa",
                 "pattern" to listOf(" W", "WW", "SS"),
                 "key" to mapOf(
-                    "S" to mapOf("item" to "minecraft:stick"),
+                    "S" to mapOf("tag" to "forge:rods/wooden"),
                     "W" to mapOf("item" to "minecraft:${id.path}_wool")
                 ),
                 "result" to mapOf(

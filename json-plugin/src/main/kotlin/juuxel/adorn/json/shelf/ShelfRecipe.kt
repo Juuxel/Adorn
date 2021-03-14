@@ -17,7 +17,7 @@ object ShelfRecipe : AbstractContentGenerator("shelf.recipe", "recipes",
                 "pattern" to listOf("---", "/ /"),
                 "key" to mapOf(
                     "-" to mapOf("item" to "minecraft:${id.path}_slab"),
-                    "/" to mapOf("item" to "minecraft:stick")
+                    "/" to mapOf("tag" to "forge:rods/wooden")
                 ),
                 "result" to mapOf(
                     "item" to id.suffixPath("_shelf"),

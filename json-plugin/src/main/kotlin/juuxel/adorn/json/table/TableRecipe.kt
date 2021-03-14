@@ -17,7 +17,7 @@ object TableRecipe : AbstractContentGenerator("table.recipe", "recipes",
                 "pattern" to listOf("SSS", "# #", "# #"),
                 "key" to mapOf(
                     "S" to mapOf("item" to "minecraft:${id.path}_slab"),
-                    "#" to mapOf("item" to "minecraft:stick")
+                    "#" to mapOf("tag" to "forge:rods/wooden")
                 ),
                 "result" to mapOf(
                     "item" to id.suffixPath("_table"),

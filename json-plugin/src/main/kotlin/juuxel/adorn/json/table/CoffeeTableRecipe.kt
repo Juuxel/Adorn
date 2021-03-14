@@ -17,7 +17,7 @@ object CoffeeTableRecipe : AbstractContentGenerator("coffee_table.recipe", "reci
                 "pattern" to listOf("S-S", "# #"),
                 "key" to mapOf(
                     "S" to mapOf("item" to "minecraft:${id.path}_slab"),
-                    "#" to mapOf("item" to "minecraft:stick"),
+                    "#" to mapOf("tag" to "forge:rods/wooden"),
                     "-" to mapOf("tag" to "forge:glass_panes")
                 ),
                 "result" to mapOf(
