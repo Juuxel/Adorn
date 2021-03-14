@@ -16,7 +16,7 @@
     { "id": "adorn:terrestria_basalt_cobblestone_post", "required": false },
     { "id": "adorn:terrestria/smooth_basalt_post", "required": false },
     { "id": "adorn:terrestria/basalt_brick_post", "required": false },
-    { "id": "adorn:terrestria/mossy_basalt_post", "required": false },
+    { "id": "adorn:terrestria/mossy_basalt_cobblestone_post", "required": false },
     { "id": "adorn:terrestria/mossy_basalt_brick_post", "required": false },
     { "id": "adorn:byg/dacite_post", "required": false },
     { "id": "adorn:byg/dacite_brick_post", "required": false },

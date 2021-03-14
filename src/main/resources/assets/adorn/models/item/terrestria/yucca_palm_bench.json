@@ -3,6 +3,6 @@
   "textures": {
     "planks": "terrestria:block/yucca_palm_planks",
     "log": "terrestria:block/yucca_palm_log",
-    "end": "terrestria:block/yucca_palm_log_top"
+    "end": "terrestria:block/yucca_palm_log"
   }
 }

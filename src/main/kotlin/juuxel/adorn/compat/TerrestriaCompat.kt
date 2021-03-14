@@ -54,7 +54,7 @@ object TerrestriaCompat {
         val newStoneTypes = sequenceOf(
             "smooth_basalt",
             "basalt_brick",
-            "mossy_basalt",
+            "mossy_basalt_cobblestone",
             "mossy_basalt_brick",
         ).map { BlockVariant.Stone("terrestria/$it") }
 

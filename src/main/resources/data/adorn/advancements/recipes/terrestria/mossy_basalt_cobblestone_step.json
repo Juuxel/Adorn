@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:terrestria/mossy_basalt_post"
+      "adorn:terrestria/mossy_basalt_cobblestone_step"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "terrestria:mossy_basalt"
+            "item": "terrestria:mossy_basalt_cobblestone_slab"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:terrestria/mossy_basalt_post"
+        "recipe": "adorn:terrestria/mossy_basalt_cobblestone_step"
       }
     }
   },

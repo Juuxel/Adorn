@@ -2,6 +2,6 @@
   "parent": "adorn:block/templates/bench_leg",
   "textures": {
     "log": "terrestria:block/yucca_palm_log",
-    "end": "terrestria:block/yucca_palm_log_top"
+    "end": "terrestria:block/yucca_palm_log"
   }
 }

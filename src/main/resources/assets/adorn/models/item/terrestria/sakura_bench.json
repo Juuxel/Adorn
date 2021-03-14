@@ -3,6 +3,6 @@
   "textures": {
     "planks": "terrestria:block/sakura_planks",
     "log": "terrestria:block/sakura_log",
-    "end": "terrestria:block/sakura_log_top"
+    "end": "terrestria:block/sakura_log"
   }
 }

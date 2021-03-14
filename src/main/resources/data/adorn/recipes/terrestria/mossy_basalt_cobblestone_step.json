@@ -7,14 +7,14 @@
   ],
   "key": {
     "S": {
-      "item": "terrestria:mossy_basalt_slab"
+      "item": "terrestria:mossy_basalt_cobblestone_slab"
     },
     "#": {
       "tag": "c:stone_rods"
     }
   },
   "result": {
-    "item": "adorn:terrestria/mossy_basalt_step",
+    "item": "adorn:terrestria/mossy_basalt_cobblestone_step",
     "count": 1
   }
 }

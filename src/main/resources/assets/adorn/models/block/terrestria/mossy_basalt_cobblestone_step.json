@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/step",
   "textures": {
-    "texture": "terrestria:block/mossy_basalt"
+    "texture": "terrestria:block/mossy_basalt_cobblestone"
   }
 }

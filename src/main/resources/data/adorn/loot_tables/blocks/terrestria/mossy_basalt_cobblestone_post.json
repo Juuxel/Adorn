@@ -5,7 +5,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:terrestria/mossy_basalt_step"
+          "name": "adorn:terrestria/mossy_basalt_cobblestone_post"
         }
       ],
       "conditions": [

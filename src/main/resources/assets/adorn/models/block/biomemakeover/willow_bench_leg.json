@@ -1,7 +1,7 @@
 {
   "parent": "adorn:block/templates/bench_leg",
   "textures": {
-    "log": "biomemakeover:block/willow",
-    "end": "biomemakeover:block/willow_top"
+    "log": "biomemakeover:block/willow_log",
+    "end": "biomemakeover:block/willow_log_top"
   }
 }
