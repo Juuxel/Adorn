@@ -17,6 +17,10 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 
 open class CoffeeTableBlock(variant: BlockVariant) : Block(variant.createSettings().nonOpaque()), Waterloggable {
+    init {
+        defaultState = defaultState.with(WATERLOGGED, false)
+    }
+
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(WATERLOGGED)

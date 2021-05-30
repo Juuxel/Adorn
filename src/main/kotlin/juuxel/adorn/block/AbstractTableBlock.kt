@@ -17,6 +17,10 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
 abstract class AbstractTableBlock(settings: Settings) : CarpetedBlock(settings), Waterloggable {
+    init {
+        defaultState = defaultState.with(WATERLOGGED, false)
+    }
+
     protected abstract fun canConnectTo(state: BlockState, sideOfSelf: Direction): Boolean
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
