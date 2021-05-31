@@ -32,12 +32,6 @@
         "value": "juuxel.adorn.compat.modmenu.AdornModMenuPlugin",
         "adapter": "kotlin"
       }
-    ],
-    "extrapieces": [
-      {
-        "value": "juuxel.adorn.compat.extrapieces.AdornPieces",
-        "adapter": "kotlin"
-      }
     ]
   },
 
@@ -60,8 +54,5 @@
   },
   "breaks": {
     "towelette": "<4.0.0"
-  },
-  "custom": {
-    "extrapieces:piecepack": "data/adorn/adorn_vanilla_pieces.json"
   }
 }

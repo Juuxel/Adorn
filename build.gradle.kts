@@ -41,7 +41,6 @@ repositories {
 
         content {
             includeGroup("com.github.Virtuoel")
-            includeGroup("com.github.Shnupbups")
         }
     }
 
@@ -72,10 +71,6 @@ dependencies {
     // Mod compat
     modCompileOnly("com.github.Virtuoel:Towelette:${project.property("towelette")}")
     modRuntime(modCompileOnly("com.terraformersmc:modmenu:${project.property("modmenu")}")!!)
-    // Not actually a dev jar, see https://github.com/Shnupbups/extra-pieces/issues/45
-    modCompileOnly("com.github.Shnupbups:extra-pieces:${project.property("extra-pieces")}:dev") {
-        exclude(module = "RoughlyEnoughItems")
-    }
 }
 
 tasks {
