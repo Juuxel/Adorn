@@ -1,0 +1,24 @@
+plugins {
+    kotlin("jvm")
+    id("architectury-plugin")
+    id("dev.architectury.loom")
+    id("org.jmailen.kotlinter")
+}
+
+kotlinter {
+    disabledRules = arrayOf("parameter-list-wrapping")
+}
+
+dependencies {
+    implementation(kotlin("stdlib-jdk8"))
+
+    minecraft("net.minecraft:minecraft:${rootProject.property("minecraft-version")}")
+    mappings("net.fabricmc:yarn:${rootProject.property("minecraft-version")}+${rootProject.property("mappings")}:v2")
+
+    // Just for @Environment and mixin deps :)
+    modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric-loader")}")
+}
+
+architectury {
+    common()
+}
