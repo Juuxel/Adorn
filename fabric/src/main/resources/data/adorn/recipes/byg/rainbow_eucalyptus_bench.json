@@ -3,14 +3,11 @@
   "group": "adorn:bench",
   "pattern": [
     "SSS",
-    "# #"
+    "S S"
   ],
   "key": {
     "S": {
       "item": "byg:rainbow_eucalyptus_slab"
-    },
-    "#": {
-      "item": "minecraft:stick"
     }
   },
   "result": {

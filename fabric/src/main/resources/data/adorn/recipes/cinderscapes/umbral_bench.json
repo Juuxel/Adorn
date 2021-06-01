@@ -3,14 +3,11 @@
   "group": "adorn:bench",
   "pattern": [
     "SSS",
-    "# #"
+    "S S"
   ],
   "key": {
     "S": {
       "item": "cinderscapes:umbral_slab"
-    },
-    "#": {
-      "item": "minecraft:stick"
     }
   },
   "result": {

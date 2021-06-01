@@ -3,14 +3,11 @@
   "group": "adorn:bench",
   "pattern": [
     "SSS",
-    "# #"
+    "S S"
   ],
   "key": {
     "S": {
       "item": "byg:green_enchanted_slab"
-    },
-    "#": {
-      "item": "minecraft:stick"
     }
   },
   "result": {
