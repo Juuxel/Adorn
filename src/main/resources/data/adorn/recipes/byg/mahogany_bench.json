@@ -3,14 +3,11 @@
 	"group": "adorn:bench",
 	"pattern": [
 		"SSS",
-		"# #"
+		"S S"
 	],
 	"key": {
 		"S": {
 			"item": "byg:mahogany_slab"
-		},
-		"#": {
-			"tag": "forge:rods/wooden"
 		}
 	},
 	"result": {
