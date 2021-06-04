@@ -37,7 +37,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
-open class SofaBlock(variant: BlockVariant) :
+class SofaBlock(variant: BlockVariant) :
     SeatBlock(variant.createSettings()),
     Waterloggable,
     SneakClickHandler {

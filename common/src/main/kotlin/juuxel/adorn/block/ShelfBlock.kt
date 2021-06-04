@@ -32,7 +32,7 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createSettings()), Waterloggable, BlockWithDescription {
+class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createSettings()), Waterloggable, BlockWithDescription {
     override val descriptionKey = "block.adorn.shelf.desc"
 
     init {

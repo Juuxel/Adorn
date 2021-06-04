@@ -19,7 +19,7 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-open class KitchenCupboardBlock(variant: BlockVariant) : AbstractKitchenCounterBlock(variant), BlockEntityProvider {
+class KitchenCupboardBlock(variant: BlockVariant) : AbstractKitchenCounterBlock(variant), BlockEntityProvider {
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): ActionResult {

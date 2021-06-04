@@ -19,7 +19,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 
-open class PostBlock(variant: BlockVariant) : Block(variant.createSettings()), BlockWithDescription, Waterloggable {
+class PostBlock(variant: BlockVariant) : Block(variant.createSettings()), BlockWithDescription, Waterloggable {
     override val descriptionKey = "block.adorn.post.desc"
 
     init {

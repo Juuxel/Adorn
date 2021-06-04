@@ -23,9 +23,7 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-open class DrawerBlock(
-    variant: BlockVariant
-) : VisibleBlockWithEntity(variant.createSettings().nonOpaque()) {
+class DrawerBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createSettings().nonOpaque()) {
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(FACING)

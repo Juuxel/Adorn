@@ -19,7 +19,7 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-open class KitchenSinkBlock(variant: BlockVariant) : KitchenCounterBlock(variant), Waterloggable {
+class KitchenSinkBlock(variant: BlockVariant) : KitchenCounterBlock(variant), Waterloggable {
     init {
         defaultState = defaultState.with(WATERLOGGED, false)
     }

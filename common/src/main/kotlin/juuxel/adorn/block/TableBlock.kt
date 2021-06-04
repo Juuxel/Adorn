@@ -8,7 +8,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 
-open class TableBlock(variant: BlockVariant) : AbstractTableBlock(variant.createSettings()) {
+class TableBlock(variant: BlockVariant) : AbstractTableBlock(variant.createSettings()) {
     override val sittingYOffset = 0.6
 
     override fun isSittingEnabled() = false

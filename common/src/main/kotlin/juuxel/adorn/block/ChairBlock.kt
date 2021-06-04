@@ -30,7 +30,7 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()), Waterloggable {
+class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()), Waterloggable {
     init {
         defaultState = defaultState.with(HALF, DoubleBlockHalf.LOWER)
             .with(WATERLOGGED, false)

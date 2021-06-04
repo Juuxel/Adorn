@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 
-open class CoffeeTableBlock(variant: BlockVariant) : Block(variant.createSettings().nonOpaque()), Waterloggable {
+class CoffeeTableBlock(variant: BlockVariant) : Block(variant.createSettings().nonOpaque()), Waterloggable {
     init {
         defaultState = defaultState.with(WATERLOGGED, false)
     }
