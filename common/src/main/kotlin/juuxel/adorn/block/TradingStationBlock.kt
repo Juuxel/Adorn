@@ -2,7 +2,6 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.block.entity.TradingStation
-import juuxel.adorn.platform.ConfigBridge
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -107,7 +106,6 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
             val entity = world.getBlockEntity(pos)
 
             if (entity is TradingStation) {
-                ItemScatterer.spawn(world, pos, entity.storage)
                 world.updateComparators(pos, this)
             }
 
@@ -120,21 +118,6 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
 
     override fun getCollisionShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext) =
         COLLISION_SHAPE
-
-    /**
-     * Disables block breaking for non-owners.
-     */
-    override fun calcBlockBreakingDelta(state: BlockState, player: PlayerEntity, world: BlockView, pos: BlockPos) =
-        if (ConfigBridge.get().protectTradingStations)
-            (world.getBlockEntity(pos) as? TradingStation).let {
-                if (it != null && !it.isOwner(player)) {
-                    0f
-                } else {
-                    super.calcBlockBreakingDelta(state, player, world, pos)
-                }
-            }
-        else
-            super.calcBlockBreakingDelta(state, player, world, pos)
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 

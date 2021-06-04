@@ -29,7 +29,7 @@ import kotlin.reflect.KMutableProperty
 
 @Environment(EnvType.CLIENT)
 class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
-    internal var restartRequired: Boolean = false
+    private var restartRequired: Boolean = false
 
     init {
         val root = WPlainPanel()
@@ -47,9 +47,8 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
 
         val general = WGridPanel().setInsets(Insets.ROOT_PANEL)
         with(general) {
-            add(createConfigToggle(config::protectTradingStations), 0, 0)
-            add(createConfigToggle(config.client::showTradingStationTooltips), 0, 1)
-            add(createConfigToggle(config.client::showItemsInStandardGroups), 0, 2)
+            add(createConfigToggle(config.client::showTradingStationTooltips), 0, 0)
+            add(createConfigToggle(config.client::showItemsInStandardGroups), 0, 1)
 
             backgroundPainter = BackgroundPainter.VANILLA
             setSize(12 * 18, height)

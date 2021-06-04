@@ -3,10 +3,6 @@ package juuxel.adorn.config
 import blue.endless.jankson.Comment
 
 class Config : CommonConfig {
-    @field:Comment("Protects trading stations from other players.")
-    // TODO: Should be a game rule
-    override var protectTradingStations: Boolean = true
-
     @field:Comment("Client-side settings")
     override var client: Client = Client()
 

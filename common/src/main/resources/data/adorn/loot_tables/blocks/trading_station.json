@@ -5,7 +5,35 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:trading_station"
+          "name": "adorn:trading_station",
+          "functions": [
+            {
+              "function": "minecraft:copy_nbt",
+              "source": "block_entity",
+              "ops": [
+                {
+                  "source": "TradingOwner",
+                  "target": "BlockEntityTag.TradingOwner",
+                  "op": "replace"
+                },
+                {
+                  "source": "TradingOwnerName",
+                  "target": "BlockEntityTag.TradingOwnerName",
+                  "op": "replace"
+                },
+                {
+                  "source": "Trade",
+                  "target": "BlockEntityTag.Trade",
+                  "op": "replace"
+                },
+                {
+                  "source": "Storage",
+                  "target": "BlockEntityTag.Storage",
+                  "op": "replace"
+                }
+              ]
+            }
+          ]
         }
       ],
       "conditions": [
