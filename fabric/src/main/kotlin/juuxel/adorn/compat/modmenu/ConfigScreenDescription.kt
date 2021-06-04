@@ -48,9 +48,8 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
         val general = WGridPanel().setInsets(Insets.ROOT_PANEL)
         with(general) {
             add(createConfigToggle(config::protectTradingStations), 0, 0)
-            add(createConfigToggle(config::sittingOnTables, true), 0, 1)
-            add(createConfigToggle(config.client::showTradingStationTooltips), 0, 2)
-            add(createConfigToggle(config.client::showItemsInStandardGroups), 0, 3)
+            add(createConfigToggle(config.client::showTradingStationTooltips), 0, 1)
+            add(createConfigToggle(config.client::showItemsInStandardGroups), 0, 2)
 
             backgroundPainter = BackgroundPainter.VANILLA
             setSize(12 * 18, height)

@@ -3,9 +3,6 @@ package juuxel.adorn.config
 import blue.endless.jankson.Comment
 
 class Config : CommonConfig {
-    @field:Comment("If true, you can sit on tables.")
-    override var sittingOnTables: Boolean = false
-
     @field:Comment("Protects trading stations from other players.")
     // TODO: Should be a game rule
     override var protectTradingStations: Boolean = true

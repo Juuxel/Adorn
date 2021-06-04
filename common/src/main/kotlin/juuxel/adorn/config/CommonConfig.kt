@@ -1,9 +1,6 @@
 package juuxel.adorn.config
 
 interface CommonConfig {
-    // TODO: no.
-    val sittingOnTables: Boolean
-
     // TODO: This one HAS TO GO.
     val protectTradingStations: Boolean
 

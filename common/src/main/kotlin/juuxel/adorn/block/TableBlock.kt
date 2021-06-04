@@ -12,7 +12,7 @@ import net.minecraft.util.shape.VoxelShapes
 open class TableBlock(variant: BlockVariant) : AbstractTableBlock(variant.createSettings()) {
     override val sittingYOffset = 0.6
 
-    override fun isSittingEnabled() = ConfigBridge.get().sittingOnTables
+    override fun isSittingEnabled() = false
 
     override fun canConnectTo(state: BlockState, sideOfSelf: Direction) =
         state.block is TableBlock
