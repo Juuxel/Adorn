@@ -826,30 +826,7 @@
   "gui.adorn.config.restart_required.title": "需要重新启动！",
   "gui.adorn.config.restart_required.message": "你改变了一个选项就需要重新启动Minecraft。",
 
-  "piece.adorn.drawer": "%s抽屉",
-  "piece.adorn.table": "%s桌子",
-  "piece.adorn.shelf": "%s搁板",
-  "piece.adorn.post": "%s柱子",
-  "piece.adorn.platform": "%s平台",
-  "piece.adorn.step": "%s柱台阶",
-  "piece.adorn.chair": "%s椅子",
-  "piece.adorn.sofa": "%s沙发",
-  "piece.adorn.kitchen_counter": "%s厨房柜台",
-  "piece.adorn.kitchen_cupboard": "%s厨房碗柜",
-  "piece.adorn.kitchen_sink": "%s厨房水槽",
-
   "itemGroup.adorn.items": "装饰",
-  "itemGroup.adorn.drawer": "Adorn+EP:抽屉",
-  "itemGroup.adorn.table": "Adorn+EP:桌子",
-  "itemGroup.adorn.shelf": "Adorn+EP:搁板",
-  "itemGroup.adorn.post": "Adorn+EP:柱子",
-  "itemGroup.adorn.platform": "Adorn+EP:平台",
-  "itemGroup.adorn.step": "Adorn+EP:柱台阶",
-  "itemGroup.adorn.chair": "Adorn+EP:椅子",
-  "itemGroup.adorn.sofa": "Adorn+EP:沙发",
-  "itemGroup.adorn.kitchen_counter": "Adorn+EP:厨房柜台",
-  "itemGroup.adorn.kitchen_cupboard": "Adorn+EP:厨房碗柜",
-  "itemGroup.adorn.kitchen_sink": "Adorn+EP:厨房水槽",
 
   "text.adorn.item_stack_with_count": "%sx %s"
 }

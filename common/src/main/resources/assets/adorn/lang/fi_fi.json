@@ -223,7 +223,7 @@
   "item.adorn.deprecated_item.desc.1": "Tämä esine on siirretty.",
   "item.adorn.deprecated_item.desc.2": "Sen voi korvata painamalla %s.",
 
-  "gamerule.adorn:skipNightOnSofas": "Skip nights by sleeping on sofas",
+  "gamerule.adorn:skipNightOnSofas": "Öiden ohitus nukkumalla sohvalla",
 
   "gui.adorn.config.category.general": "Yleiset",
   "gui.adorn.config.category.game_rules": "Pelisäännöt",

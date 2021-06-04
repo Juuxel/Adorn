@@ -465,30 +465,7 @@
   "gui.adorn.config.restart_required.title": "Требуется перезапуск!",
   "gui.adorn.config.restart_required.message": "Один из измененных опций требует перезапуска Minecraft.",
 
-  "piece.adorn.drawer": "Ящик %s",
-  "piece.adorn.table": "Стол %s",
-  "piece.adorn.shelf": "Полка %s",
-  "piece.adorn.post": "Пост %s",
-  "piece.adorn.platform": "Плтформа %s",
-  "piece.adorn.step": "Ступенька %s",
-  "piece.adorn.chair": "Стул %s",
-  "piece.adorn.sofa": "Диван %s",
-  "piece.adorn.kitchen_counter": "Столешница %s",
-  "piece.adorn.kitchen_cupboard": "Буфет %s",
-  "piece.adorn.kitchen_sink": "Раковина %s",
-
   "itemGroup.adorn.items": "Adorn",
-  "itemGroup.adorn.drawer": "Adorn+EP: Ящики",
-  "itemGroup.adorn.table": "Adorn+EP: Столы",
-  "itemGroup.adorn.shelf": "Adorn+EP: Полки",
-  "itemGroup.adorn.post": "Adorn+EP: Посты",
-  "itemGroup.adorn.platform": "Adorn+EP: Платформы",
-  "itemGroup.adorn.step": "Adorn+EP: Ступеньки",
-  "itemGroup.adorn.chair": "Adorn+EP: Стулья",
-  "itemGroup.adorn.sofa": "Adorn+EP: Диваны",
-  "itemGroup.adorn.kitchen_counter": "Adorn+EP: Столешницы",
-  "itemGroup.adorn.kitchen_cupboard": "Adorn+EP: Буфеты",
-  "itemGroup.adorn.kitchen_sink": "Adorn+EP: Раковины",
 
   "text.adorn.item_stack_with_count": "%s шт. %s"
 }

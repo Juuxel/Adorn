@@ -405,30 +405,7 @@
   "gui.adorn.config.restart_required.title": "Restart wymagany!",
   "gui.adorn.config.restart_required.message": "Jedna z twoich zmienionych opcji wymaga zrestartowania Minecrafta.",
 
-  "piece.adorn.drawer": "%s szuflada",
-  "piece.adorn.table": "%s stół",
-  "piece.adorn.shelf": "%s półka",
-  "piece.adorn.post": "%s słupek",
-  "piece.adorn.platform": "%s platforma",
-  "piece.adorn.step": "%s stopień",
-  "piece.adorn.chair": "%s krzesło",
-  "piece.adorn.sofa": "%s sofa",
-  "piece.adorn.kitchen_counter": "%s blat kuchenny",
-  "piece.adorn.kitchen_cupboard": "%s kredens kuchenny",
-  "piece.adorn.kitchen_sink": "%s zlew kuchenny",
-
   "itemGroup.adorn.items": "Adorn",
-  "itemGroup.adorn.drawer": "Adorn+EP: Szuflady",
-  "itemGroup.adorn.table": "Adorn+EP: Stoły",
-  "itemGroup.adorn.shelf": "Adorn+EP: Półki",
-  "itemGroup.adorn.post": "Adorn+EP: Słupki",
-  "itemGroup.adorn.platform": "Adorn+EP: Platformy",
-  "itemGroup.adorn.step": "Adorn+EP: Stopnie",
-  "itemGroup.adorn.chair": "Adorn+EP: Krzesła",
-  "itemGroup.adorn.sofa": "Adorn+EP: Sofy",
-  "itemGroup.adorn.kitchen_counter": "Adorn+EP: Blaty kuchenne",
-  "itemGroup.adorn.kitchen_cupboard": "Adorn+EP: Kredensy kuchenne",
-  "itemGroup.adorn.kitchen_sink": "Adorn+EP: Zlewy kuchenne",
 
   "text.adorn.item_stack_with_count": "%sx %s"
 }

@@ -959,30 +959,7 @@
   "gui.adorn.config.restart_required.title": "Restart required!",
   "gui.adorn.config.restart_required.message": "One of your changed options requires Minecraft to be restarted.",
 
-  "piece.adorn.drawer": "%s Drawer",
-  "piece.adorn.table": "%s Table",
-  "piece.adorn.shelf": "%s Shelf",
-  "piece.adorn.post": "%s Post",
-  "piece.adorn.platform": "%s Platform",
-  "piece.adorn.step": "%s Step",
-  "piece.adorn.chair": "%s Chair",
-  "piece.adorn.sofa": "%s Sofa",
-  "piece.adorn.kitchen_counter": "%s Kitchen Counter",
-  "piece.adorn.kitchen_cupboard": "%s Kitchen Cupboard",
-  "piece.adorn.kitchen_sink": "%s Kitchen Sink",
-
   "itemGroup.adorn.items": "Adorn",
-  "itemGroup.adorn.drawer": "Adorn+EP: Drawers",
-  "itemGroup.adorn.table": "Adorn+EP: Tables",
-  "itemGroup.adorn.shelf": "Adorn+EP: Shelves",
-  "itemGroup.adorn.post": "Adorn+EP: Posts",
-  "itemGroup.adorn.platform": "Adorn+EP: Platforms",
-  "itemGroup.adorn.step": "Adorn+EP: Steps",
-  "itemGroup.adorn.chair": "Adorn+EP: Chairs",
-  "itemGroup.adorn.sofa": "Adorn+EP: Sofas",
-  "itemGroup.adorn.kitchen_counter": "Adorn+EP: Kitchen Counters",
-  "itemGroup.adorn.kitchen_cupboard": "Adorn+EP: Kitchen Cupboards",
-  "itemGroup.adorn.kitchen_sink": "Adorn+EP: Kitchen Sinks",
 
   "text.adorn.item_stack_with_count": "%sx %s"
 }
