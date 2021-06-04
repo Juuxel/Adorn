@@ -7,18 +7,22 @@ import juuxel.adorn.block.ShelfBlock
 import juuxel.adorn.block.TradingStationBlock
 import juuxel.adorn.block.entity.BlockEntityDescriptor
 import juuxel.adorn.block.entity.DrawerBlockEntity
+import juuxel.adorn.block.entity.DrawerBlockEntityFabric
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
+import juuxel.adorn.block.entity.KitchenCupboardBlockEntityFabric
 import juuxel.adorn.block.entity.ShelfBlockEntity
+import juuxel.adorn.block.entity.ShelfBlockEntityFabric
 import juuxel.adorn.block.entity.TradingStationBlockEntity
+import juuxel.adorn.block.entity.TradingStationBlockEntityFabric
 
-fun shelf(): BlockEntityDescriptor<*> =
-    BlockEntityDescriptor<ShelfBlock>(::ShelfBlockEntity)
+fun shelf(): BlockEntityDescriptor<ShelfBlock, ShelfBlockEntity> =
+    BlockEntityDescriptor(::ShelfBlockEntityFabric)
 
-fun drawer(): BlockEntityDescriptor<*> =
-    BlockEntityDescriptor<DrawerBlock>(::DrawerBlockEntity)
+fun drawer(): BlockEntityDescriptor<DrawerBlock, DrawerBlockEntity> =
+    BlockEntityDescriptor(::DrawerBlockEntityFabric)
 
-fun kitchenCupboard(): BlockEntityDescriptor<*> =
-    BlockEntityDescriptor<KitchenCupboardBlock>(::KitchenCupboardBlockEntity)
+fun kitchenCupboard(): BlockEntityDescriptor<KitchenCupboardBlock, KitchenCupboardBlockEntity> =
+    BlockEntityDescriptor(::KitchenCupboardBlockEntityFabric)
 
-fun tradingStation(): BlockEntityDescriptor<*> =
-    BlockEntityDescriptor<TradingStationBlock>(::TradingStationBlockEntity)
+fun tradingStation(): BlockEntityDescriptor<TradingStationBlock, TradingStationBlockEntity> =
+    BlockEntityDescriptor(::TradingStationBlockEntityFabric)

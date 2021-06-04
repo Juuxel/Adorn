@@ -14,10 +14,7 @@ import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegi
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.DyedCarpetBlock
-import net.minecraft.block.entity.BlockEntity
-import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.client.render.RenderLayer
-import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.item.BlockItem
 import net.minecraft.sound.SoundCategory
 import net.minecraft.util.ActionResult
@@ -72,18 +69,11 @@ object AdornBlocksFabric {
         )
     }
 
-    @Suppress("UNCHECKED_CAST")
-    @Environment(EnvType.CLIENT)
-    private fun registerBer(type: BlockEntityType<*>, factory: () -> BlockEntityRenderer<*>) =
-        BlockEntityRendererRegistry.INSTANCE.register(type as BlockEntityType<BlockEntity>) {
-            factory() as BlockEntityRenderer<BlockEntity>
-        }
-
     @Environment(EnvType.CLIENT)
     fun initClient() {
         // BlockEntityRenderers
-        registerBer(AdornBlockEntities.TRADING_STATION, ::TradingStationRenderer)
-        registerBer(AdornBlockEntities.SHELF, ::ShelfRenderer)
+        BlockEntityRendererRegistry.INSTANCE.register(AdornBlockEntities.TRADING_STATION, ::TradingStationRenderer)
+        BlockEntityRendererRegistry.INSTANCE.register(AdornBlockEntities.SHELF, ::ShelfRenderer)
 
         // RenderLayers
         BlockRenderLayerMap.INSTANCE.putBlocks(

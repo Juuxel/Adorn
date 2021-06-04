@@ -1,6 +1,6 @@
 package juuxel.adorn.client.renderer
 
-import juuxel.adorn.block.entity.TradingStation
+import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.platform.ConfigBridge
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.color
@@ -12,6 +12,7 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.model.json.ModelTransformation
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
@@ -22,11 +23,15 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.Vec3f
 
 @Environment(EnvType.CLIENT)
-class TradingStationRenderer : BlockEntityRenderer<BlockEntity> {
-    override fun render(be: BlockEntity, tickDelta: Float, matrices: MatrixStack, vertexConsumerProvider: VertexConsumerProvider, light: Int, overlay: Int) {
-        be as TradingStation
+class TradingStationRenderer(context: BlockEntityRendererFactory.Context) : BlockEntityRenderer<TradingStationBlockEntity> {
+    private val dispatcher = context.renderDispatcher
+    private val textRenderer = context.textRenderer
 
-        val hitResult = MinecraftClient.getInstance().crosshairTarget
+    override fun render(
+        be: TradingStationBlockEntity, tickDelta: Float,
+        matrices: MatrixStack, vertexConsumers: VertexConsumerProvider, light: Int, overlay: Int
+    ) {
+        val hitResult = dispatcher.crosshairTarget
         val lookingAtBlock = hitResult != null &&
             hitResult.type == HitResult.Type.BLOCK &&
             be.pos == (hitResult as BlockHitResult).blockPos
@@ -42,7 +47,7 @@ class TradingStationRenderer : BlockEntityRenderer<BlockEntity> {
             matrices.scale(0.6f, 0.6f, 0.6f)
             matrices.translate(0.0, 0.3, 0.0)
             val itemRenderer = MinecraftClient.getInstance().itemRenderer
-            itemRenderer.renderItem(trade.selling, ModelTransformation.Mode.FIXED, light, overlay, matrices, vertexConsumerProvider, 0)
+            itemRenderer.renderItem(trade.selling, ModelTransformation.Mode.FIXED, light, overlay, matrices, vertexConsumers, 0)
             matrices.pop()
 
             /*if (lookingAtBlock) {
@@ -56,12 +61,12 @@ class TradingStationRenderer : BlockEntityRenderer<BlockEntity> {
 
         if (lookingAtBlock && ConfigBridge.get().client.showTradingStationTooltips) {
             val label1 = TranslatableText(OWNER_LABEL, be.ownerName.copy().formatted(Formatting.GOLD))
-            renderLabel(be, label1, 0.0, 0.9, 0.0, 12, matrices, vertexConsumerProvider, light)
+            renderLabel(be, label1, 0.0, 0.9, 0.0, 12, matrices, vertexConsumers, light)
             if (!be.trade.isEmpty()) {
                 val label2 = TranslatableText(SELLING_LABEL, be.trade.selling.toTextWithCount())
                 val label3 = TranslatableText(PRICE_LABEL, be.trade.price.toTextWithCount())
-                renderLabel(be, label2, 0.0, 0.9 - 0.25, 0.0, 12, matrices, vertexConsumerProvider, light)
-                renderLabel(be, label3, 0.0, 0.9 - 0.5, 0.0, 12, matrices, vertexConsumerProvider, light)
+                renderLabel(be, label2, 0.0, 0.9 - 0.25, 0.0, 12, matrices, vertexConsumers, light)
+                renderLabel(be, label3, 0.0, 0.9 - 0.5, 0.0, 12, matrices, vertexConsumers, light)
             }
         }
     }
@@ -72,7 +77,7 @@ class TradingStationRenderer : BlockEntityRenderer<BlockEntity> {
         maxDistance: Int,
         matrices: MatrixStack, vertexConsumers: VertexConsumerProvider, light: Int
     ) {
-        val camera = MinecraftClient.getInstance().gameRenderer.camera
+        val camera = dispatcher.camera
 
         val dist = be.getSquaredDistance(camera.pos.x, camera.pos.y, camera.pos.z)
         if (dist < maxDistance * maxDistance) {
@@ -84,7 +89,6 @@ class TradingStationRenderer : BlockEntityRenderer<BlockEntity> {
             val matrixModel = matrices.peek().model
             val opacity = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25f)
             val backgroundColor = color(0x000000, opacity)
-            val textRenderer = MinecraftClient.getInstance().textRenderer
             val textX = -textRenderer.getWidth(label) / 2f
             textRenderer.draw(label, textX, 0f, Colors.WHITE, false, matrixModel, vertexConsumers, false, backgroundColor, light)
 

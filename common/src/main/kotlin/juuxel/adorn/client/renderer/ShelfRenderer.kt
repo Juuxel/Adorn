@@ -1,26 +1,25 @@
 package juuxel.adorn.client.renderer
 
 import juuxel.adorn.block.ShelfBlock
+import juuxel.adorn.block.entity.ShelfBlockEntity
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.block.entity.BlockEntity
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.model.json.ModelTransformation
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.inventory.Inventory
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3f
 
 @Environment(EnvType.CLIENT)
-class ShelfRenderer : BlockEntityRenderer<BlockEntity> {
+class ShelfRenderer(context: BlockEntityRendererFactory.Context) : BlockEntityRenderer<ShelfBlockEntity> {
     override fun render(
-        be: BlockEntity, tickDelta: Float,
-        matrices: MatrixStack, vertexConsumerProvider: VertexConsumerProvider, light: Int, overlay: Int
+        be: ShelfBlockEntity, tickDelta: Float,
+        matrices: MatrixStack, vertexConsumers: VertexConsumerProvider, light: Int, overlay: Int
     ) {
         // TODO: Do the seeds here need extra attention
-        be as Inventory
 
         val facing = be.cachedState[ShelfBlock.FACING]
 
@@ -56,7 +55,7 @@ class ShelfRenderer : BlockEntityRenderer<BlockEntity> {
             light,
             overlay,
             matrices,
-            vertexConsumerProvider,
+            vertexConsumers,
             0 // seed
         )
         matrices.pop()
@@ -71,7 +70,7 @@ class ShelfRenderer : BlockEntityRenderer<BlockEntity> {
             light,
             overlay,
             matrices,
-            vertexConsumerProvider,
+            vertexConsumers,
             0 // seed
         )
         matrices.pop()

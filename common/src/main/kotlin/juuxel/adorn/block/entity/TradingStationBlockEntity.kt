@@ -8,8 +8,6 @@ import juuxel.adorn.util.containsOldUuid
 import juuxel.adorn.util.getOldUuid
 import juuxel.adorn.util.getText
 import juuxel.adorn.util.putText
-import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -25,12 +23,9 @@ import net.minecraft.text.TranslatableText
 import net.minecraft.util.math.BlockPos
 import java.util.UUID
 
-class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
-    BlockEntity(AdornBlockEntities.TRADING_STATION, pos, state),
-    BlockEntityClientSerializable,
-    ExtendedScreenHandlerFactory,
-    TradingStation {
-    override var owner: UUID? = null
+abstract class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
+    BlockEntity(AdornBlockEntities.TRADING_STATION, pos, state), ExtendedMenuFactory, TradingStation {
+    var owner: UUID? = null
     override var ownerName: Text = LiteralText("???")
     override val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
     override val storage: InventoryComponent = InventoryComponent(12)
@@ -45,16 +40,16 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
         }
     }
 
-    override fun setOwner(player: PlayerEntity) {
+    fun setOwner(player: PlayerEntity) {
         owner = player.gameProfile.id
         ownerName = LiteralText(player.gameProfile.name)
         markDirty()
     }
 
-    override fun isStorageStocked(): Boolean =
+    fun isStorageStocked(): Boolean =
         storage.getAmountWithNbt(trade.selling) >= trade.selling.count
 
-    override fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
+    fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
 
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity) =
         MenuBridge.createTradingStationMenu(syncId, playerInv, ScreenHandlerContext.create(world, pos), isOwner(player))
@@ -90,18 +85,6 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
 
         nbt.put(NBT_TRADE, trade.writeNbt(NbtCompound()))
         nbt.put(NBT_STORAGE, storage.writeNbt(NbtCompound()))
-    }
-
-    // Client NBT
-
-    override fun toClientTag(tag: NbtCompound) = tag.apply {
-        putText(NBT_TRADING_OWNER_NAME, ownerName)
-        put(NBT_TRADE, trade.writeNbt(NbtCompound()))
-    }
-
-    override fun fromClientTag(tag: NbtCompound) {
-        trade.readNbt(tag.getCompound(NBT_TRADE))
-        ownerName = tag.getText(NBT_TRADING_OWNER_NAME) ?: return
     }
 
     companion object {

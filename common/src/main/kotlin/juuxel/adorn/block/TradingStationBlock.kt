@@ -1,7 +1,7 @@
 @file:Suppress("DEPRECATION")
 package juuxel.adorn.block
 
-import juuxel.adorn.block.entity.TradingStation
+import juuxel.adorn.block.entity.TradingStationBlockEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -44,7 +44,7 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
 
     override fun onPlaced(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack?) {
         if (entity is PlayerEntity) {
-            val be = world.getBlockEntity(pos) as? TradingStation ?: return
+            val be = world.getBlockEntity(pos) as? TradingStationBlockEntity ?: return
             be.setOwner(entity)
         }
     }
@@ -53,7 +53,7 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult?
     ): ActionResult {
         val be = world.getBlockEntity(pos)
-        if (be is TradingStation) {
+        if (be is TradingStationBlockEntity) {
             if (!world.isClient && be.owner == null) {
                 be.setOwner(player)
             }
@@ -89,7 +89,7 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
     override fun onSneakClick(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult
     ): ActionResult {
-        val be = world.getBlockEntity(pos) as? TradingStation ?: return ActionResult.PASS
+        val be = world.getBlockEntity(pos) as? TradingStationBlockEntity ?: return ActionResult.PASS
 
         // Show customer GUI
         if (!be.isOwner(player)) {
@@ -104,7 +104,7 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
         if (state1.block != state2.block) {
             val entity = world.getBlockEntity(pos)
 
-            if (entity is TradingStation) {
+            if (entity is TradingStationBlockEntity) {
                 world.updateComparators(pos, this)
             }
 

@@ -1,7 +1,6 @@
 package juuxel.adorn.block.entity
 
 import juuxel.adorn.util.InventoryComponent
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.block.entity.LootableContainerBlockEntity
@@ -19,7 +18,7 @@ abstract class BaseInventoryBlockEntity(
     pos: BlockPos,
     state: BlockState,
     private val invSize: Int
-) : LootableContainerBlockEntity(type, pos, state), ExtendedScreenHandlerFactory {
+) : LootableContainerBlockEntity(type, pos, state), ExtendedMenuFactory {
     protected var items: DefaultedList<ItemStack> = DefaultedList.ofSize(invSize, ItemStack.EMPTY)
 
     override fun writeNbt(nbt: NbtCompound) = super.writeNbt(nbt).apply {
