@@ -10,5 +10,5 @@ import net.minecraft.util.math.BlockPos
 abstract class DrawerBlockEntity(pos: BlockPos, state: BlockState) :
     BaseInventoryBlockEntity(AdornBlockEntities.DRAWER, pos, state, 15) {
     override fun createScreenHandler(syncId: Int, playerInv: PlayerInventory) =
-        PlatformBridges.menus.createDrawerMenu(syncId, playerInv, ScreenHandlerContext.create(world, pos))
+        PlatformBridges.menus.drawer(syncId, playerInv, ScreenHandlerContext.create(world, pos))
 }

@@ -9,15 +9,13 @@ import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
 
 object MenuBridgeImpl : MenuBridge {
-    override fun createDrawerMenu(
-        syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext
-    ): ScreenHandler = DrawerMenu(syncId, playerInventory, context)
+    override fun drawer(syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext): ScreenHandler =
+        DrawerMenu(syncId, playerInventory, context)
 
-    override fun createKitchenCupboardMenu(
-        syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext
-    ): ScreenHandler = KitchenCupboardMenu(syncId, playerInventory, context)
+    override fun kitchenCupboard(syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext) =
+        KitchenCupboardMenu(syncId, playerInventory, context)
 
-    override fun createTradingStationMenu(
+    override fun tradingStation(
         syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext, owner: Boolean
     ): ScreenHandler = TradingStationMenu(syncId, playerInventory, context, owner)
 }

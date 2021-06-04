@@ -52,7 +52,7 @@ abstract class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
     fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
 
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity) =
-        PlatformBridges.menus.createTradingStationMenu(
+        PlatformBridges.menus.tradingStation(
             syncId, playerInv, ScreenHandlerContext.create(world, pos), isOwner(player)
         )
 

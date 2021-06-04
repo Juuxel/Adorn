@@ -5,7 +5,7 @@ import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
 
 interface MenuBridge {
-    fun createDrawerMenu(syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext): ScreenHandler
-    fun createKitchenCupboardMenu(syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext): ScreenHandler
-    fun createTradingStationMenu(syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext, owner: Boolean): ScreenHandler
+    fun drawer(syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext): ScreenHandler
+    fun kitchenCupboard(syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext): ScreenHandler
+    fun tradingStation(syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext, owner: Boolean): ScreenHandler
 }
