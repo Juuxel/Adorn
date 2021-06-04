@@ -1,7 +1,7 @@
 package juuxel.adorn.block.entity
 
 import juuxel.adorn.block.AdornBlockEntities
-import juuxel.adorn.platform.MenuBridge
+import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.util.InventoryComponent
 import juuxel.adorn.util.containsOldUuid
@@ -52,7 +52,9 @@ abstract class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
     fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
 
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity) =
-        MenuBridge.createTradingStationMenu(syncId, playerInv, ScreenHandlerContext.create(world, pos), isOwner(player))
+        PlatformBridges.menus.createTradingStationMenu(
+            syncId, playerInv, ScreenHandlerContext.create(world, pos), isOwner(player)
+        )
 
     override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)
 

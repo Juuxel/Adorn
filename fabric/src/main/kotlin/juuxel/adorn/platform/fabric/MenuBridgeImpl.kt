@@ -3,27 +3,21 @@ package juuxel.adorn.platform.fabric
 import juuxel.adorn.menu.DrawerMenu
 import juuxel.adorn.menu.KitchenCupboardMenu
 import juuxel.adorn.menu.TradingStationMenu
+import juuxel.adorn.platform.MenuBridge
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
 
-object MenuBridgeImpl {
-    @JvmStatic
-    fun createDrawerMenu(syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext): ScreenHandler {
-        return DrawerMenu(syncId, playerInventory, context)
-    }
-
-    @JvmStatic
-    fun createKitchenCupboardMenu(
+object MenuBridgeImpl : MenuBridge {
+    override fun createDrawerMenu(
         syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext
-    ): ScreenHandler {
-        return KitchenCupboardMenu(syncId, playerInventory, context)
-    }
+    ): ScreenHandler = DrawerMenu(syncId, playerInventory, context)
 
-    @JvmStatic
-    fun createTradingStationMenu(
+    override fun createKitchenCupboardMenu(
+        syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext
+    ): ScreenHandler = KitchenCupboardMenu(syncId, playerInventory, context)
+
+    override fun createTradingStationMenu(
         syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext, owner: Boolean
-    ): ScreenHandler {
-        return TradingStationMenu(syncId, playerInventory, context, owner)
-    }
+    ): ScreenHandler = TradingStationMenu(syncId, playerInventory, context, owner)
 }

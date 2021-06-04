@@ -1,7 +1,7 @@
 package juuxel.adorn.lib
 
 import juuxel.adorn.AdornCommon
-import juuxel.adorn.platform.TagBridge
+import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.tag.Tag
@@ -33,10 +33,10 @@ object AdornTags {
     fun init() {}
 
     private fun block(id: Identifier): Tag.Identified<Block> =
-        TagBridge.block(id).toIdentified(id)
+        PlatformBridges.tags.block(id).toIdentified(id)
 
     private fun item(id: Identifier): Tag.Identified<Item> =
-        TagBridge.item(id).toIdentified(id)
+        PlatformBridges.tags.item(id).toIdentified(id)
 
     private fun blockAndItem(id: Identifier) = TagPair(
         block(id),

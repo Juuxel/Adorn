@@ -1,16 +1,14 @@
 package juuxel.adorn.item
 
 import juuxel.adorn.block.AdornBlocks
-import juuxel.adorn.platform.ConfigBridge
-import juuxel.adorn.platform.ItemBridge
+import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
-import juuxel.adorn.platform.itemRegistrar
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 
 object AdornItems {
-    val ITEMS: Registrar<Item> = itemRegistrar()
-    val GROUP = ItemBridge.createAdornItemGroup()
+    val ITEMS: Registrar<Item> = PlatformBridges.registrarFactory.item()
+    val GROUP = PlatformBridges.items.createAdornItemGroup()
 
     val STONE_ROD by ITEMS.register("stone_rod") { ItemWithDescription(Item.Settings().group(ItemGroup.MISC)) }
 
@@ -22,8 +20,8 @@ object AdornItems {
         )
     }
 
-    val GUIDE_BOOK by ITEMS.registerOptional("guide_book", ItemBridge::createGuideBook)
-    val TRADERS_MANUAL by ITEMS.registerOptional("traders_manual", ItemBridge::createTradersManual)
+    val GUIDE_BOOK by ITEMS.registerOptional("guide_book", PlatformBridges.items::createGuideBook)
+    val TRADERS_MANUAL by ITEMS.registerOptional("traders_manual", PlatformBridges.items::createTradersManual)
 
     fun init() {
     }
@@ -31,7 +29,7 @@ object AdornItems {
     fun isIn(group: ItemGroup?, item: Item): Boolean = when (group) {
         null -> false
         GROUP, ItemGroup.SEARCH -> true
-        item.group -> ConfigBridge.get().client.showItemsInStandardGroups
+        item.group -> PlatformBridges.config.client.showItemsInStandardGroups
         else -> false
     }
 }

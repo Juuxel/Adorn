@@ -2,7 +2,7 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
-import juuxel.adorn.platform.BlockBridge
+import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.buildShapeRotations
 import juuxel.adorn.util.mergeIntoShapeMap
 import net.minecraft.block.Block
@@ -65,7 +65,7 @@ open class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSetti
 
     override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
         if (!world.isClient && player.isCreative) {
-            BlockBridge.onTallBlockBrokenInCreative(world, pos, state, player)
+            PlatformBridges.blocks.onTallBlockBrokenInCreative(world, pos, state, player)
         }
 
         super.onBreak(world, pos, state, player)

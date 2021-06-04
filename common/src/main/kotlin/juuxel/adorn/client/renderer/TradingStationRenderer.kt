@@ -1,7 +1,7 @@
 package juuxel.adorn.client.renderer
 
 import juuxel.adorn.block.entity.TradingStationBlockEntity
-import juuxel.adorn.platform.ConfigBridge
+import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.color
 import juuxel.adorn.util.getSquaredDistance
@@ -59,7 +59,7 @@ class TradingStationRenderer(context: BlockEntityRendererFactory.Context) : Bloc
             matrices.pop()
         }
 
-        if (lookingAtBlock && ConfigBridge.get().client.showTradingStationTooltips) {
+        if (lookingAtBlock && PlatformBridges.config.client.showTradingStationTooltips) {
             val label1 = TranslatableText(OWNER_LABEL, be.ownerName.copy().formatted(Formatting.GOLD))
             renderLabel(be, label1, 0.0, 0.9, 0.0, 12, matrices, vertexConsumers, light)
             if (!be.trade.isEmpty()) {

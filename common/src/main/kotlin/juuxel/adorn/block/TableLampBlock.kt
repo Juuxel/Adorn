@@ -2,7 +2,7 @@
 
 package juuxel.adorn.block
 
-import juuxel.adorn.platform.BlockBridge
+import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.buildShapeRotationsFromNorth
 import juuxel.adorn.util.withBlock
 import net.minecraft.block.Block
@@ -102,6 +102,6 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable {
         val LIT: BooleanProperty = Properties.LIT
         val FACING: DirectionProperty = Properties.FACING
 
-        fun createBlockSettings(color: DyeColor): Settings = BlockBridge.createTableLampSettings(color)
+        fun createBlockSettings(color: DyeColor): Settings = PlatformBridges.blocks.createTableLampSettings(color)
     }
 }

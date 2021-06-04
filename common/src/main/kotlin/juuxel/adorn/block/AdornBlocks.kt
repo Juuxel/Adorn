@@ -5,9 +5,7 @@ import juuxel.adorn.item.BaseBlockItem
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
 import juuxel.adorn.lib.Registered
-import juuxel.adorn.platform.BlockBridge
-import juuxel.adorn.platform.blockRegistrar
-import juuxel.adorn.platform.itemRegistrar
+import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.associateLazily
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
@@ -27,8 +25,8 @@ import net.minecraft.world.World
 
 @Suppress("UNUSED", "MemberVisibilityCanBePrivate")
 object AdornBlocks {
-    val BLOCKS = blockRegistrar()
-    val ITEMS = itemRegistrar()
+    val BLOCKS = PlatformBridges.registrarFactory.block()
+    val ITEMS = PlatformBridges.registrarFactory.item()
 
     val SOFAS: Map<DyeColor, SofaBlock> by DyeColor.values().associateLazily {
         // This is one place where the BlockVariant mapping is kept.
@@ -267,16 +265,16 @@ object AdornBlocks {
     val TRADING_STATION: Block by registerBlock("trading_station") { TradingStationBlock() }
 
     val STONE_TORCH_GROUND: Block by registerBlockWithoutItem("stone_torch") {
-        object : TorchBlock(BlockBridge.createGroundStoneTorchSettings(), ParticleTypes.FLAME) {}
+        object : TorchBlock(PlatformBridges.blocks.createGroundStoneTorchSettings(), ParticleTypes.FLAME) {}
     }
     val STONE_TORCH_WALL: Block by registerBlockWithoutItem("wall_stone_torch") {
         object : WallTorchBlock(
-            BlockBridge.createWallStoneTorchSettings { STONE_TORCH_GROUND },
+            PlatformBridges.blocks.createWallStoneTorchSettings { STONE_TORCH_GROUND },
             ParticleTypes.FLAME
         ) {}
     }
 
-    val CRATE: Block by registerBlock("crate") { Block(BlockBridge.copySettingsSafely(Blocks.OAK_PLANKS)) }
+    val CRATE: Block by registerBlock("crate") { Block(PlatformBridges.blocks.copySettingsSafely(Blocks.OAK_PLANKS)) }
     val APPLE_CRATE: Block by registerCrate("apple_crate")
     val WHEAT_CRATE: Block by registerCrate("wheat_crate")
     val CARROT_CRATE: Block by registerCrate("carrot_crate")
@@ -299,10 +297,10 @@ object AdornBlocks {
         PicketFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).nonOpaque())
     }
     val CHAIN_LINK_FENCE: Block by registerBlock("chain_link_fence") {
-        ChainLinkFenceBlock(BlockBridge.createChainLinkFenceSettings())
+        ChainLinkFenceBlock(PlatformBridges.blocks.createChainLinkFenceSettings())
     }
     val STONE_LADDER: Block by registerBlock("stone_ladder") {
-        StoneLadderBlock(BlockBridge.createStoneLadderSettings())
+        StoneLadderBlock(PlatformBridges.blocks.createStoneLadderSettings())
     }
     // @formatter:on
 
@@ -360,6 +358,6 @@ object AdornBlocks {
 
     private fun registerCrate(name: String): Registered<Block> =
         registerBlock(name, Item.Settings().group(ItemGroup.DECORATIONS).recipeRemainder(CRATE.asItem())) {
-            Block(BlockBridge.copySettingsSafely(CRATE))
+            Block(PlatformBridges.blocks.copySettingsSafely(CRATE))
         }
 }

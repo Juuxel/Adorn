@@ -2,7 +2,7 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
-import juuxel.adorn.platform.NetworkBridge
+import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -99,7 +99,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
                 be.setStack(slot, stack)
                 be.markDirty()
                 if (!world.isClient) {
-                    NetworkBridge.syncBlockEntity(be)
+                    PlatformBridges.network.syncBlockEntity(be)
                 }
 
                 if (!player.abilities.creativeMode) {
@@ -113,7 +113,7 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
             be.setStack(slot, ItemStack.EMPTY)
             be.markDirty()
             if (!world.isClient) {
-                NetworkBridge.syncBlockEntity(be)
+                PlatformBridges.network.syncBlockEntity(be)
             }
         }
 

@@ -1,7 +1,7 @@
 package juuxel.adorn.entity
 
 import juuxel.adorn.block.SeatBlock
-import juuxel.adorn.platform.NetworkBridge
+import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.getBlockPos
 import juuxel.adorn.util.putBlockPos
 import net.minecraft.entity.Entity
@@ -43,7 +43,7 @@ class SeatEntity(type: EntityType<*>, world: World) : Entity(type, world) {
     override fun kill() {
         removeAllPassengers()
         if (!world.isClient) {
-            NetworkBridge.sendToTracking(this, EntityPassengersSetS2CPacket(this))
+            PlatformBridges.network.sendToTracking(this, EntityPassengersSetS2CPacket(this))
         }
         super.kill()
         val state = world.getBlockState(seatPos)
@@ -54,7 +54,7 @@ class SeatEntity(type: EntityType<*>, world: World) : Entity(type, world) {
 
     override fun collides() = false
     override fun getMountedHeightOffset() = 0.0
-    override fun createSpawnPacket() = NetworkBridge.createEntitySpawnPacket(this)
+    override fun createSpawnPacket() = PlatformBridges.network.createEntitySpawnPacket(this)
     override fun hasNoGravity() = true
     override fun isInvisible() = true
 
