@@ -51,9 +51,10 @@ open class PostBlock(variant: BlockVariant) : Block(variant.createSettings()), B
 
     override fun rotate(state: BlockState, rotation: BlockRotation): BlockState {
         if (rotation == BlockRotation.COUNTERCLOCKWISE_90 || rotation == BlockRotation.CLOCKWISE_90) {
-            when (state[AXIS]) {
-                Direction.Axis.X -> return state.with(AXIS, Direction.Axis.Z)
-                Direction.Axis.Z -> return state.with(AXIS, Direction.Axis.X)
+            return when (state[AXIS]) {
+                Direction.Axis.X -> state.with(AXIS, Direction.Axis.Z)
+                Direction.Axis.Z -> state.with(AXIS, Direction.Axis.X)
+                else -> state
             }
         }
 
