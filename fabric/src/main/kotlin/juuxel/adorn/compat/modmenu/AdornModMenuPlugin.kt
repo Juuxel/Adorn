@@ -1,18 +1,15 @@
 package juuxel.adorn.compat.modmenu
 
+import com.terraformersmc.modmenu.api.ConfigScreenFactory
+import com.terraformersmc.modmenu.api.ModMenuApi
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen
-import io.github.prospector.modmenu.api.ModMenuApi
-import juuxel.adorn.AdornCommon
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.gui.screen.Screen
-import java.util.function.Function
 
 @Environment(EnvType.CLIENT)
 object AdornModMenuPlugin : ModMenuApi {
-    override fun getModId() = AdornCommon.NAMESPACE
-
-    override fun getConfigScreenFactory(): Function<Screen, Screen> = Function { previous ->
+    override fun getModConfigScreenFactory(): ConfigScreenFactory<Screen> = ConfigScreenFactory { previous ->
         val description = ConfigScreenDescription(previous)
         object : CottonClientScreen(description) {
             override fun onClose() {

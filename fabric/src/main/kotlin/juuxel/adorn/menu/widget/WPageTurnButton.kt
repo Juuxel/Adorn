@@ -2,6 +2,7 @@ package juuxel.adorn.menu.widget
 
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel
+import io.github.cottonmc.cotton.gui.widget.data.InputResult
 import juuxel.adorn.util.Colors
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -32,10 +33,10 @@ class WPageTurnButton(private val pages: PageContainer, private val direction: D
             ty += 13
         }
 
-        ScreenDrawing.texturedRect(x, y + height / 2 - 7, 23, 13, BookScreen.BOOK_TEXTURE, tx * px, ty * px, (tx + 23) * px, (ty + 13) * px, Colors.WHITE)
+        ScreenDrawing.texturedRect(matrices, x, y + height / 2 - 7, 23, 13, BookScreen.BOOK_TEXTURE, tx * px, ty * px, (tx + 23) * px, (ty + 13) * px, Colors.WHITE)
     }
 
-    override fun onClick(x: Int, y: Int, button: Int) {
+    override fun onClick(x: Int, y: Int, button: Int): InputResult {
         val enabled = when (direction) {
             Direction.PREVIOUS -> pages.hasPreviousPage()
             Direction.NEXT -> pages.hasNextPage()
@@ -51,6 +52,8 @@ class WPageTurnButton(private val pages: PageContainer, private val direction: D
                 Direction.NEXT -> pages.showNextPage()
             }
         }
+
+        return InputResult.of(enabled)
     }
 
     enum class Direction {

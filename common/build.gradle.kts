@@ -5,8 +5,8 @@ plugins {
     id("org.jmailen.kotlinter")
 }
 
-kotlinter {
-    disabledRules = arrayOf("parameter-list-wrapping")
+architectury {
+    common(false)
 }
 
 dependencies {
@@ -19,6 +19,6 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric-loader")}")
 }
 
-architectury {
-    common()
+kotlinter {
+    disabledRules = arrayOf("parameter-list-wrapping")
 }

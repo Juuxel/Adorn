@@ -6,7 +6,6 @@ import io.github.cottonmc.cotton.gui.widget.WPlayerInvPanel
 import juuxel.adorn.client.gui.painter.Painters
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -47,12 +46,12 @@ abstract class BaseMenu(
         private val LOGGER = LogManager.getLogger()
 
         fun getBlock(context: ScreenHandlerContext) =
-            context.run<Block> { world: World, pos: BlockPos ->
+            context.get { world: World, pos: BlockPos ->
                 world.getBlockState(pos).block
             }.orElse(Blocks.AIR)
 
         fun getBlockEntity(context: ScreenHandlerContext): BlockEntity? =
-            context.run<BlockEntity?> { world: World, pos: BlockPos ->
+            context.get { world: World, pos: BlockPos ->
                 world.getBlockEntity(pos)
             }.orElse(null)
 
@@ -64,7 +63,7 @@ abstract class BaseMenu(
                         else -> {
                             LOGGER.warn(
                                 "[Adorn] No block inventory found at {}",
-                                context.run<BlockPos> { _, pos -> pos }
+                                context.get { _, pos -> pos }
                                     .map(BlockPos::toString)
                                     .orElse("missing position")
                             )

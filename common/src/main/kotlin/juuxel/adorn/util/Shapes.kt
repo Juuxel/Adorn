@@ -30,8 +30,8 @@ fun buildShapeRotations(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1: Int): M
         ),
 
         Direction.NORTH to createCuboidShape(
-            z1.toDouble(), y0.toDouble(), 16.0 - x0,
-            z0.toDouble(), y1.toDouble(), 16.0 - x1
+            z0.toDouble(), y0.toDouble(), 16.0 - x1,
+            z1.toDouble(), y1.toDouble(), 16.0 - x0
         )
     )
 
@@ -59,8 +59,8 @@ fun buildShapeRotationsFromNorth(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1
         ),
 
         Direction.WEST to createCuboidShape(
-            z1.toDouble(), y0.toDouble(), 16.0 - x0,
-            z0.toDouble(), y1.toDouble(), 16.0 - x1
+            z0.toDouble(), y0.toDouble(), 16.0 - x1,
+            z1.toDouble(), y1.toDouble(), 16.0 - x0
         )
     )
 

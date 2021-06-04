@@ -138,8 +138,8 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
-    override fun createBlockEntity(world: BlockView): BlockEntity? =
-        AdornBlockEntities.TRADING_STATION.instantiate()
+    override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? =
+        AdornBlockEntities.TRADING_STATION.instantiate(pos, state)
 
     companion object {
         val WATERLOGGED = Properties.WATERLOGGED

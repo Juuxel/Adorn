@@ -13,11 +13,10 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
-import net.minecraft.block.CarpetBlock
+import net.minecraft.block.DyedCarpetBlock
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.client.render.RenderLayer
-import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.item.BlockItem
 import net.minecraft.sound.SoundCategory
@@ -48,10 +47,10 @@ object AdornBlocksFabric {
                 val item = stack.item
                 if (block is CarpetedBlock && block.canStateBeCarpeted(state) && item is BlockItem) {
                     val carpet = item.block
-                    if (carpet is CarpetBlock) {
+                    if (carpet is DyedCarpetBlock) {
                         world.setBlockState(
                             pos,
-                            state.with(CarpetedBlock.CARPET, CarpetedBlock.CARPET.wrapOrNone(carpet.color))
+                            state.with(CarpetedBlock.CARPET, CarpetedBlock.CARPET.wrapOrNone(carpet.dyeColor))
                         )
                         val soundGroup = carpet.defaultState.soundGroup
                         world.playSound(
@@ -75,9 +74,9 @@ object AdornBlocksFabric {
 
     @Suppress("UNCHECKED_CAST")
     @Environment(EnvType.CLIENT)
-    private fun registerBer(type: BlockEntityType<*>, factory: (BlockEntityRenderDispatcher) -> BlockEntityRenderer<*>) =
+    private fun registerBer(type: BlockEntityType<*>, factory: () -> BlockEntityRenderer<*>) =
         BlockEntityRendererRegistry.INSTANCE.register(type as BlockEntityType<BlockEntity>) {
-            factory(it) as BlockEntityRenderer<BlockEntity>
+            factory() as BlockEntityRenderer<BlockEntity>
         }
 
     @Environment(EnvType.CLIENT)

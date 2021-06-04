@@ -21,7 +21,6 @@ import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
-import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
 open class DrawerBlock(
@@ -72,8 +71,8 @@ open class DrawerBlock(
     override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
         ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos))
 
-    override fun createBlockEntity(world: BlockView): BlockEntity? =
-        AdornBlockEntities.DRAWER.instantiate()
+    override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? =
+        AdornBlockEntities.DRAWER.instantiate(pos, state)
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING

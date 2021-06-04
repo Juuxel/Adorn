@@ -4,16 +4,14 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventories
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.InventoryChangedListener
-import net.minecraft.inventory.SidedInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.collection.DefaultedList
 import kotlin.math.min
 
 open class InventoryComponent(private val invSize: Int) : Inventory, NbtConvertible {
     private val listeners: MutableList<InventoryChangedListener> = ArrayList()
     private val items: DefaultedList<ItemStack> = DefaultedList.ofSize(invSize, ItemStack.EMPTY)
-    val sidedInventory: SidedInventory by lazy { SimpleSidedInventory(this) }
 
     private constructor(items: DefaultedList<ItemStack>) : this(items.size) {
         for ((i, item) in items.withIndex()) {
@@ -118,12 +116,12 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
     // NBT
     // -----
 
-    override fun toTag(tag: CompoundTag): CompoundTag = tag.apply {
-        Inventories.toTag(tag, items)
+    override fun writeNbt(nbt: NbtCompound): NbtCompound = nbt.apply {
+        Inventories.writeNbt(nbt, items)
     }
 
-    override fun fromTag(tag: CompoundTag) {
-        Inventories.fromTag(tag, items)
+    override fun readNbt(nbt: NbtCompound) {
+        Inventories.readNbt(nbt, items)
     }
 
     // -------------------------------

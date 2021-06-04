@@ -18,7 +18,6 @@ import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
-import net.minecraft.item.ItemStack
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.slot.SlotActionType
 import net.minecraft.text.TranslatableText
@@ -71,11 +70,10 @@ class TradingStationMenu(
         }
     }
 
-    override fun onSlotClick(slotNumber: Int, button: Int, action: SlotActionType, player: PlayerEntity): ItemStack {
+    override fun onSlotClick(slotNumber: Int, button: Int, action: SlotActionType, player: PlayerEntity) {
         val slot = slots.getOrNull(slotNumber)
-        val cursorStack = player.inventory.cursorStack
 
-        return if (forOwner && slot?.inventory is TradeInventory) {
+        if (forOwner && slot?.inventory is TradeInventory) {
             when (action) {
                 SlotActionType.PICKUP -> {
                     slot.stack = cursorStack.copy()
@@ -96,7 +94,7 @@ class TradingStationMenu(
             }
         } else if (forOwner || (slot?.inventory is PlayerInventory && action != SlotActionType.QUICK_MOVE)) {
             super.onSlotClick(slotNumber, button, action, player)
-        } else cursorStack
+        }
     }
 
     @Environment(EnvType.CLIENT)

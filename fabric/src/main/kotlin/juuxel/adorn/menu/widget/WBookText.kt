@@ -1,6 +1,7 @@
 package juuxel.adorn.menu.widget
 
 import io.github.cottonmc.cotton.gui.widget.WText
+import io.github.cottonmc.cotton.gui.widget.data.InputResult
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
@@ -15,14 +16,14 @@ class WBookText(text: Text, val pages: PageContainer? = null) : WText(text) {
     }
 
     @Environment(EnvType.CLIENT)
-    override fun onClick(x: Int, y: Int, button: Int) {
+    override fun onClick(x: Int, y: Int, button: Int): InputResult {
         if (button == 0) {
             val hovered = getTextStyleAt(x, y)
             if (hovered != null) {
                 val clickEvent = hovered.clickEvent
                 if (clickEvent != null && clickEvent.action == ClickEvent.Action.CHANGE_PAGE) {
                     if (pages != null) {
-                        val page = clickEvent.value.toIntOrNull() ?: return
+                        val page = clickEvent.value.toIntOrNull() ?: return InputResult.IGNORED
                         val pageIndex = page - 1
                         if (pageIndex >= 0 && pageIndex < pages.pageCount) {
                             pages.currentPage = pageIndex
@@ -32,9 +33,11 @@ class WBookText(text: Text, val pages: PageContainer? = null) : WText(text) {
                         }
                     }
                 } else {
-                    super.onClick(x, y, button)
+                    return super.onClick(x, y, button)
                 }
             }
         }
+
+        return InputResult.IGNORED
     }
 }

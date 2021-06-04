@@ -15,7 +15,8 @@ abstract class BlockEntityMixin {
     @Final
     private static Logger LOGGER;
 
-    @ModifyVariable(method = "createFromTag", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/nbt/CompoundTag;getString(Ljava/lang/String;)Ljava/lang/String;"))
+    // TODO: This will go in 2.0
+    @ModifyVariable(method = "createFromNbt", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/nbt/NbtCompound;getString(Ljava/lang/String;)Ljava/lang/String;"))
     private static String upgradeAdornBlockEntities(String id) {
         if (id.startsWith("adorn:")) {
             String newId = BlockEntityUpdates.get(id);

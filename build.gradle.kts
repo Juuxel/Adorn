@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    kotlin("jvm") version "1.4.30" apply false
+    kotlin("jvm") version "1.5.10" apply false
 
     id("architectury-plugin") version "3.2-SNAPSHOT"
     id("dev.architectury.loom") version "0.8.0-SNAPSHOT" apply false
@@ -24,8 +24,8 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
 
     java {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_16
+        targetCompatibility = JavaVersion.VERSION_16
     }
 
     group = rootProject.group
@@ -35,11 +35,11 @@ subprojects {
     tasks {
         withType<JavaCompile> {
             options.encoding = "UTF-8"
-            options.release.set(8)
+            options.release.set(16)
         }
 
         withType<KotlinCompile> {
-            kotlinOptions.jvmTarget = "1.8"
+            kotlinOptions.jvmTarget = "15"
         }
     }
 }

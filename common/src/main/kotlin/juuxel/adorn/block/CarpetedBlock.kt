@@ -5,7 +5,7 @@ import juuxel.adorn.block.property.OptionalProperty
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
-import net.minecraft.block.CarpetBlock
+import net.minecraft.block.DyedCarpetBlock
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.loot.context.LootContext
@@ -99,7 +99,7 @@ abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
 
         private fun getCarpetColor(context: ItemPlacementContext): DyeColor? =
             when (val block = context.world.getBlockState(context.blockPos).block) {
-                is CarpetBlock -> block.color
+                is DyedCarpetBlock -> block.dyeColor
                 else -> null
             }
     }

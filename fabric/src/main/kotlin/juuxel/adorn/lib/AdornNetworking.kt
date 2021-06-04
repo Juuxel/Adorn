@@ -20,12 +20,11 @@ object AdornNetworking {
     @Environment(EnvType.CLIENT)
     fun initClient() {
         ClientPlayNetworking.registerGlobalReceiver(ENTITY_SPAWN) { client, _, buf, _ ->
-            val packet = EntitySpawnS2CPacket()
-            packet.read(buf)
+            val packet = EntitySpawnS2CPacket(buf)
             client.execute {
                 val world = client.player?.world as? ClientWorld ?: return@execute
                 val entity = packet.entityTypeId.create(world)!!
-                entity.entityId = packet.id
+                entity.setEntityId(packet.id)
                 entity.uuid = packet.uuid
                 entity.updatePositionAndAngles(
                     packet.x, packet.y, packet.z,

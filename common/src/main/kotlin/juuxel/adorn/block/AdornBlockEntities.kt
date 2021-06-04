@@ -15,7 +15,7 @@ object AdornBlockEntities {
     val KITCHEN_CUPBOARD: BlockEntityType<BlockEntity> by register("kitchen_cupboard", BlockEntityBridge.kitchenCupboard())
     val TRADING_STATION: BlockEntityType<BlockEntity> by register("trading_station", BlockEntityBridge.tradingStation())
 
-    private fun <T : BlockEntity> register(name: String, descriptor: BlockEntityDescriptor<out T>) =
+    private fun register(name: String, descriptor: BlockEntityDescriptor<*>) =
         BLOCK_ENTITIES.register(name) { AdornBlockEntityType(descriptor.factory) { descriptor.type.isInstance(it) } }
 
     fun init() {}

@@ -3,9 +3,9 @@ package juuxel.adorn.mixin;
 import juuxel.adorn.block.PrismarineChimneyBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.BubbleColumnBlock;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,11 +22,11 @@ abstract class BubbleColumnBlockMixin {
         }
     }
 
-    @Inject(method = "calculateDrag", at = @At("RETURN"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
-    private static void onCalculateDrag(BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> info, BlockState state) {
+    @Inject(method = "getBubbleState", at = @At("RETURN"), cancellable = true)
+    private static void onGetBubbleState(BlockState state, CallbackInfoReturnable<BlockState> info) {
         Block block = state.getBlock();
-        if (info.getReturnValueZ() && block instanceof PrismarineChimneyBlock.WithColumn) {
-            info.setReturnValue(((PrismarineChimneyBlock.WithColumn) block).getDrag());
+        if (block instanceof PrismarineChimneyBlock.WithColumn chimney) {
+            info.setReturnValue(Blocks.BUBBLE_COLUMN.getDefaultState().with(BubbleColumnBlock.DRAG, chimney.getDrag()));
         }
     }
 }

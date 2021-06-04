@@ -15,9 +15,9 @@ import kotlin.math.max
 @Environment(EnvType.CLIENT)
 object Painters {
     /**
-     * A background painter that paints LibGui-style slots.
+     * A background painter that paints legacy LibGui-style slots.
      */
-    val LIBGUI_STYLE_SLOT: BackgroundPainter = BackgroundPainter { left, top, panel ->
+    val LIBGUI_STYLE_SLOT: BackgroundPainter = BackgroundPainter { matrices, left, top, panel ->
         for (x in 0 until panel.width step 18) {
             for (y in 0 until panel.height step 18) {
                 val index: Int = x / 18 + y / 18 * (panel.width / 18)
@@ -27,29 +27,31 @@ object Painters {
 
                 if (panel is WItemSlot && panel.isBigSlot) {
                     ScreenDrawing.drawBeveledPanel(
+                        matrices,
                         x + left - 3, y + top - 3, 24, 24,
                         lo, bg, hi
                     )
                     if (panel.focusedSlot == index) {
                         val sx = x + left - 3
                         val sy = y + top - 3
-                        ScreenDrawing.coloredRect(sx, sy, 26, 1, color(0xFFFFA0))
-                        ScreenDrawing.coloredRect(sx, sy + 1, 1, 26 - 1, color(0xFFFFA0))
-                        ScreenDrawing.coloredRect(sx + 26 - 1, sy + 1, 1, 26 - 1, color(0xFFFFA0))
-                        ScreenDrawing.coloredRect(sx + 1, sy + 26 - 1, 26 - 1, 1, color(0xFFFFA0))
+                        ScreenDrawing.coloredRect(matrices, sx, sy, 26, 1, color(0xFFFFA0))
+                        ScreenDrawing.coloredRect(matrices, sx, sy + 1, 1, 26 - 1, color(0xFFFFA0))
+                        ScreenDrawing.coloredRect(matrices, sx + 26 - 1, sy + 1, 1, 26 - 1, color(0xFFFFA0))
+                        ScreenDrawing.coloredRect(matrices, sx + 1, sy + 26 - 1, 26 - 1, 1, color(0xFFFFA0))
                     }
                 } else {
                     ScreenDrawing.drawBeveledPanel(
+                        matrices,
                         x + left, y + top, 18, 18,
                         lo, bg, hi
                     )
                     if (panel is WItemSlot && panel.focusedSlot == index) {
                         val sx = x + left
                         val sy = y + top
-                        ScreenDrawing.coloredRect(sx, sy, 18, 1, color(0xFFFFA0))
-                        ScreenDrawing.coloredRect(sx, sy + 1, 1, 18 - 1, color(0xFFFFA0))
-                        ScreenDrawing.coloredRect(sx + 18 - 1, sy + 1, 1, 18 - 1, color(0xFFFFA0))
-                        ScreenDrawing.coloredRect(sx + 1, sy + 18 - 1, 18 - 1, 1, color(0xFFFFA0))
+                        ScreenDrawing.coloredRect(matrices, sx, sy, 18, 1, color(0xFFFFA0))
+                        ScreenDrawing.coloredRect(matrices, sx, sy + 1, 1, 18 - 1, color(0xFFFFA0))
+                        ScreenDrawing.coloredRect(matrices, sx + 18 - 1, sy + 1, 1, 18 - 1, color(0xFFFFA0))
+                        ScreenDrawing.coloredRect(matrices, sx + 1, sy + 18 - 1, 18 - 1, 1, color(0xFFFFA0))
                     }
                 }
             }
@@ -59,9 +61,10 @@ object Painters {
     /**
      * A painter that paints book backgrounds.
      */
-    val BOOK: BackgroundPainter = BackgroundPainter { x, y, widget ->
+    val BOOK: BackgroundPainter = BackgroundPainter { matrices, x, y, widget ->
         val px = 1 / 256f
         ScreenDrawing.texturedRect(
+            matrices,
             x + (max(widget.width, 192) - 192) / 2, y + 2,
             192, 192,
             BookScreen.BOOK_TEXTURE,

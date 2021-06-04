@@ -11,23 +11,22 @@ import net.fabricmc.api.Environment
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.VertexConsumerProvider
-import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.client.render.model.json.ModelTransformation
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.client.util.math.Vector3f
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.Vec3f
 
 @Environment(EnvType.CLIENT)
-class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEntityRenderer<BlockEntity>(dispatcher) {
+class TradingStationRenderer : BlockEntityRenderer<BlockEntity> {
     override fun render(be: BlockEntity, tickDelta: Float, matrices: MatrixStack, vertexConsumerProvider: VertexConsumerProvider, light: Int, overlay: Int) {
         be as TradingStation
 
-        val hitResult = dispatcher.crosshairTarget
+        val hitResult = MinecraftClient.getInstance().crosshairTarget
         val lookingAtBlock = hitResult != null &&
             hitResult.type == HitResult.Type.BLOCK &&
             be.pos == (hitResult as BlockHitResult).blockPos
@@ -39,11 +38,11 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
             val playerAge = MinecraftClient.getInstance().player!!.age
 
             matrices.push()
-            matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion((playerAge + tickDelta) * SELLING_ROTATION_MULTIPLIER))
+            matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion((playerAge + tickDelta) * SELLING_ROTATION_MULTIPLIER))
             matrices.scale(0.6f, 0.6f, 0.6f)
             matrices.translate(0.0, 0.3, 0.0)
             val itemRenderer = MinecraftClient.getInstance().itemRenderer
-            itemRenderer.renderItem(trade.selling, ModelTransformation.Mode.FIXED, light, overlay, matrices, vertexConsumerProvider)
+            itemRenderer.renderItem(trade.selling, ModelTransformation.Mode.FIXED, light, overlay, matrices, vertexConsumerProvider, 0)
             matrices.pop()
 
             /*if (lookingAtBlock) {
@@ -73,7 +72,7 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
         maxDistance: Int,
         matrices: MatrixStack, vertexConsumers: VertexConsumerProvider, light: Int
     ) {
-        val camera = dispatcher.camera
+        val camera = MinecraftClient.getInstance().gameRenderer.camera
 
         val dist = be.getSquaredDistance(camera.pos.x, camera.pos.y, camera.pos.z)
         if (dist < maxDistance * maxDistance) {
@@ -85,7 +84,7 @@ class TradingStationRenderer(dispatcher: BlockEntityRenderDispatcher) : BlockEnt
             val matrixModel = matrices.peek().model
             val opacity = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25f)
             val backgroundColor = color(0x000000, opacity)
-            val textRenderer = dispatcher.textRenderer
+            val textRenderer = MinecraftClient.getInstance().textRenderer
             val textX = -textRenderer.getWidth(label) / 2f
             textRenderer.draw(label, textX, 0f, Colors.WHITE, false, matrixModel, vertexConsumers, false, backgroundColor, light)
 

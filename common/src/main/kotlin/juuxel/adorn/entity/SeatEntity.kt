@@ -7,7 +7,7 @@ import juuxel.adorn.util.putBlockPos
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
@@ -52,7 +52,6 @@ class SeatEntity(type: EntityType<*>, world: World) : Entity(type, world) {
         }
     }
 
-    override fun canClimb() = false
     override fun collides() = false
     override fun getMountedHeightOffset() = 0.0
     override fun createSpawnPacket() = NetworkBridge.createEntitySpawnPacket(this)
@@ -60,11 +59,12 @@ class SeatEntity(type: EntityType<*>, world: World) : Entity(type, world) {
     override fun isInvisible() = true
 
     override fun initDataTracker() {}
-    override fun readCustomDataFromTag(tag: CompoundTag) {
+
+    override fun readCustomDataFromNbt(tag: NbtCompound) {
         seatPos = tag.getBlockPos("SeatPos")
     }
 
-    override fun writeCustomDataToTag(tag: CompoundTag) {
+    override fun writeCustomDataToNbt(tag: NbtCompound) {
         tag.putBlockPos("SeatPos", seatPos)
     }
 }

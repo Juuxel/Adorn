@@ -15,16 +15,20 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
+import net.minecraft.util.math.BlockPos
 import java.util.UUID
 
-class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION), BlockEntityClientSerializable, ExtendedScreenHandlerFactory,
+class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
+    BlockEntity(AdornBlockEntities.TRADING_STATION, pos, state),
+    BlockEntityClientSerializable,
+    ExtendedScreenHandlerFactory,
     TradingStation {
     override var owner: UUID? = null
     override var ownerName: Text = LiteralText("???")
@@ -63,40 +67,40 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
 
     // NBT
 
-    override fun fromTag(state: BlockState, tag: CompoundTag) {
-        super.fromTag(state, tag)
+    override fun readNbt(nbt: NbtCompound) {
+        super.readNbt(nbt)
 
-        if (tag.containsUuid(NBT_TRADING_OWNER)) {
-            owner = tag.getUuid(NBT_TRADING_OWNER)
-        } else if (tag.containsOldUuid(NBT_TRADING_OWNER)) {
-            owner = tag.getOldUuid(NBT_TRADING_OWNER)
+        if (nbt.containsUuid(NBT_TRADING_OWNER)) {
+            owner = nbt.getUuid(NBT_TRADING_OWNER)
+        } else if (nbt.containsOldUuid(NBT_TRADING_OWNER)) {
+            owner = nbt.getOldUuid(NBT_TRADING_OWNER)
         }
 
-        ownerName = tag.getText(NBT_TRADING_OWNER_NAME) ?: LiteralText("??")
-        trade.fromTag(tag.getCompound(NBT_TRADE))
-        storage.fromTag(tag.getCompound(NBT_STORAGE))
+        ownerName = nbt.getText(NBT_TRADING_OWNER_NAME) ?: LiteralText("??")
+        trade.readNbt(nbt.getCompound(NBT_TRADE))
+        storage.readNbt(nbt.getCompound(NBT_STORAGE))
     }
 
-    override fun toTag(tag: CompoundTag) = super.toTag(tag).apply {
+    override fun writeNbt(nbt: NbtCompound) = super.writeNbt(nbt).apply {
         if (owner != null) {
-            tag.putUuid(NBT_TRADING_OWNER, owner)
+            nbt.putUuid(NBT_TRADING_OWNER, owner)
         }
 
-        tag.putText(NBT_TRADING_OWNER_NAME, ownerName)
+        nbt.putText(NBT_TRADING_OWNER_NAME, ownerName)
 
-        tag.put(NBT_TRADE, trade.toTag(CompoundTag()))
-        tag.put(NBT_STORAGE, storage.toTag(CompoundTag()))
+        nbt.put(NBT_TRADE, trade.writeNbt(NbtCompound()))
+        nbt.put(NBT_STORAGE, storage.writeNbt(NbtCompound()))
     }
 
     // Client NBT
 
-    override fun toClientTag(tag: CompoundTag) = tag.apply {
+    override fun toClientTag(tag: NbtCompound) = tag.apply {
         putText(NBT_TRADING_OWNER_NAME, ownerName)
-        put(NBT_TRADE, trade.toTag(CompoundTag()))
+        put(NBT_TRADE, trade.writeNbt(NbtCompound()))
     }
 
-    override fun fromClientTag(tag: CompoundTag) {
-        trade.fromTag(tag.getCompound(NBT_TRADE))
+    override fun fromClientTag(tag: NbtCompound) {
+        trade.readNbt(tag.getCompound(NBT_TRADE))
         ownerName = tag.getText(NBT_TRADING_OWNER_NAME) ?: return
     }
 

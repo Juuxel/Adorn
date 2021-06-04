@@ -11,6 +11,7 @@ import io.github.cottonmc.cotton.gui.widget.WTabPanel
 import io.github.cottonmc.cotton.gui.widget.WToggleButton
 import io.github.cottonmc.cotton.gui.widget.WWidget
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
+import io.github.cottonmc.cotton.gui.widget.data.Insets
 import io.github.cottonmc.cotton.gui.widget.icon.ItemIcon
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.config.ConfigManager
@@ -38,13 +39,13 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
             WLabel(TranslatableText("gui.adorn.config.title"), Colors.WHITE).setHorizontalAlignment(
                 HorizontalAlignment.CENTER
             ),
-            0, 0, 11 * 18, 18
+            0, 0, 12 * 18, 18
         )
 
         val tabbed = WTabPanel()
         val config = ConfigManager.CONFIG
 
-        val general = WGridPanel()
+        val general = WGridPanel().setInsets(Insets.ROOT_PANEL)
         with(general) {
             add(createConfigToggle(config::protectTradingStations), 0, 0)
             add(createConfigToggle(config::sittingOnTables, true), 0, 1)
@@ -52,15 +53,15 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
             add(createConfigToggle(config.client::showItemsInStandardGroups), 0, 3)
 
             backgroundPainter = BackgroundPainter.VANILLA
-            setSize(11 * 18, height)
+            setSize(12 * 18, height)
         }
 
-        val gameRules = WGridPanel()
+        val gameRules = WGridPanel().setInsets(Insets.ROOT_PANEL)
         with(gameRules) {
             add(createConfigToggle(config.gameRuleDefaults::skipNightOnSofas), 0, 0)
 
             backgroundPainter = BackgroundPainter.VANILLA
-            setSize(11 * 18, height)
+            setSize(12 * 18, height)
         }
 
         tabbed.add(general) {
@@ -77,7 +78,7 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
             WButton(TranslatableText("gui.done")).apply {
                 setOnClick { close(previous) }
             },
-            11 * 9 - 5 * 9, 8 * 18, 5 * 18, 18
+            12 * 9 - 5 * 9, 8 * 18, 5 * 18, 18
         )
         root.validate(this)
     }

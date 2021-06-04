@@ -180,8 +180,8 @@ open class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.cr
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
-    override fun createBlockEntity(world: BlockView): BlockEntity? =
-        AdornBlockEntities.SHELF.instantiate()
+    override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? =
+        AdornBlockEntities.SHELF.instantiate(pos, state)
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING

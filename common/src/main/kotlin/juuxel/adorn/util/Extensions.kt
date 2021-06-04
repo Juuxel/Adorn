@@ -9,7 +9,6 @@ import net.minecraft.state.property.Property
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.math.Direction
-import net.minecraft.util.registry.Registry
 
 fun ItemStack.toTextWithCount(): Text =
     TranslatableText("text.adorn.item_stack_with_count", count, toHoverableText())

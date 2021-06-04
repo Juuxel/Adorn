@@ -7,6 +7,7 @@ import io.github.cottonmc.cotton.gui.widget.WLabel
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel
 import io.github.cottonmc.cotton.gui.widget.WWidget
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
+import io.github.cottonmc.cotton.gui.widget.data.InputResult
 import io.github.cottonmc.cotton.gui.widget.data.VerticalAlignment
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.client.book.Book
@@ -80,17 +81,20 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription() {
 
         override fun paint(matrices: MatrixStack, x: Int, y: Int, mouseX: Int, mouseY: Int) {
             val texture = if (isWithinBounds(mouseX, mouseY)) ACTIVE_TEXTURE else INACTIVE_TEXTURE
-            ScreenDrawing.texturedRect(x, y, 8, 8, texture, Colors.WHITE)
+            ScreenDrawing.texturedRect(matrices, x, y, 8, 8, texture, Colors.WHITE)
         }
 
-        override fun onClick(x: Int, y: Int, button: Int) {
+        override fun onClick(x: Int, y: Int, button: Int): InputResult {
             if (isWithinBounds(x, y)) {
                 val client = MinecraftClient.getInstance()
                 client.soundManager.play(
                     PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1.0f)
                 )
                 client.openScreen(null)
+                return InputResult.PROCESSED
             }
+
+            return InputResult.IGNORED
         }
 
         companion object {

@@ -30,7 +30,7 @@ open class PrismarineChimneyBlock(settings: Settings) : AbstractChimneyBlock(set
 
     class WithColumn(val drag: Boolean, settings: Settings) : PrismarineChimneyBlock(settings) {
         override fun scheduledTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random) {
-            BubbleColumnBlock.update(world, pos.up(), drag)
+            BubbleColumnBlock.update(world, pos.up(), state)
         }
 
         override fun onBlockAdded(state: BlockState, world: World, pos: BlockPos, oldState: BlockState, moved: Boolean) {
