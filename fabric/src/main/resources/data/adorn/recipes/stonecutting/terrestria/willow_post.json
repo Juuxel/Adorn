@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "terrestria:willow_planks"
   },
-  "result": "adorn:terrestria_willow_post",
+  "result": "adorn:terrestria/willow_post",
   "count": 2
 }

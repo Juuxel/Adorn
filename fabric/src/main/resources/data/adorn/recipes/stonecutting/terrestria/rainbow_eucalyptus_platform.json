@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "terrestria:rainbow_eucalyptus_planks"
   },
-  "result": "adorn:terrestria_rainbow_eucalyptus_platform",
-  "count": 2
+  "result": "adorn:terrestria/rainbow_eucalyptus_platform",
+  "count": 1
 }

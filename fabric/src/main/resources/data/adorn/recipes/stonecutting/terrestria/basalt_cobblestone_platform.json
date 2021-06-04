@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "terrestria:basalt_cobblestone"
   },
-  "result": "adorn:terrestria_basalt_cobblestone_platform",
+  "result": "adorn:terrestria/basalt_cobblestone_platform",
   "count": 1
 }

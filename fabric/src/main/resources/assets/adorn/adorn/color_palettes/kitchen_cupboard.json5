@@ -8,16 +8,16 @@
   "adorn:crimson_kitchen_cupboard": { "bg": "#863E5A", "fg": "#BCBCBC" },
   "adorn:warped_kitchen_cupboard": { "bg": "#3A8E8C", "fg": "#BCBCBC" },
 
-  "adorn:terrestria_cypress_kitchen_cupboard": { "bg": "#A39885" },
-  "adorn:terrestria_hemlock_kitchen_cupboard": { "bg": "#958262" },
-  "adorn:terrestria_japanese_maple_kitchen_cupboard": { "bg": "#9D6360" },
-  "adorn:terrestria_rainbow_eucalyptus_kitchen_cupboard": { "bg": "#2B579E", "fg": "#BCBCBC" },
-  "adorn:terrestria_redwood_kitchen_cupboard": { "bg": "#703C2A", "fg": "#BCBCBC" },
-  "adorn:terrestria_rubber_kitchen_cupboard": { "bg": "#9B8964" },
-  "adorn:terrestria_sakura_kitchen_cupboard": { "bg": "#472E2C", "fg": "#BCBCBC" },
-  "adorn:terrestria_willow_kitchen_cupboard": { "bg": "#6D5931", "fg": "#BCBCBC" },
+  "adorn:terrestria/cypress_kitchen_cupboard": { "bg": "#A39885" },
+  "adorn:terrestria/hemlock_kitchen_cupboard": { "bg": "#958262" },
+  "adorn:terrestria/japanese_maple_kitchen_cupboard": { "bg": "#9D6360" },
+  "adorn:terrestria/rainbow_eucalyptus_kitchen_cupboard": { "bg": "#2B579E", "fg": "#BCBCBC" },
+  "adorn:terrestria/redwood_kitchen_cupboard": { "bg": "#703C2A", "fg": "#BCBCBC" },
+  "adorn:terrestria/rubber_kitchen_cupboard": { "bg": "#9B8964" },
+  "adorn:terrestria/sakura_kitchen_cupboard": { "bg": "#472E2C", "fg": "#BCBCBC" },
+  "adorn:terrestria/willow_kitchen_cupboard": { "bg": "#6D5931", "fg": "#BCBCBC" },
 
-  "adorn:traverse_fir_kitchen_cupboard": { "bg": "#8E5E3D" },
+  "adorn:traverse/fir_kitchen_cupboard": { "bg": "#8E5E3D" },
 
   // The default color is the oak color
   "adorn:default": "#BE9A60"

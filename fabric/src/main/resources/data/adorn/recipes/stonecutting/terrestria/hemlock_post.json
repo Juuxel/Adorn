@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "terrestria:hemlock_planks"
   },
-  "result": "adorn:terrestria_hemlock_post",
+  "result": "adorn:terrestria/hemlock_post",
   "count": 2
 }

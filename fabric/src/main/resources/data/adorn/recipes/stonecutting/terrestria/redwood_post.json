@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "terrestria:redwood_planks"
   },
-  "result": "adorn:terrestria_redwood_post",
+  "result": "adorn:terrestria/redwood_post",
   "count": 2
 }

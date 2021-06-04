@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "terrestria:sakura_slab"
+    },
+    "P": {
+      "item": "adorn:terrestria/sakura_post"
+    }
+  },
+  "result": {
+    "item": "adorn:terrestria/sakura_platform",
+    "count": 2
+  }
+}

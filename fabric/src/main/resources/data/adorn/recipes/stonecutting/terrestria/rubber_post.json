@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "terrestria:rubber_planks"
   },
-  "result": "adorn:terrestria_rubber_post",
+  "result": "adorn:terrestria/rubber_post",
   "count": 2
 }

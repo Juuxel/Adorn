@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "traverse:fir_planks"
   },
-  "result": "adorn:traverse_fir_platform",
-  "count": 2
+  "result": "adorn:traverse/fir_platform",
+  "count": 1
 }

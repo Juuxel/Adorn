@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "terrestria:basalt"
   },
-  "result": "adorn:terrestria_basalt_platform",
+  "result": "adorn:terrestria/basalt_platform",
   "count": 1
 }

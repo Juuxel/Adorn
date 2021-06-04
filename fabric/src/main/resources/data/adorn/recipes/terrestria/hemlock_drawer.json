@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:drawer",
+  "pattern": [
+    "S",
+    "C",
+    "S"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "S": {
+      "item": "terrestria:hemlock_slab"
+    }
+  },
+  "result": {
+    "item": "adorn:terrestria/hemlock_drawer",
+    "count": 2
+  }
+}

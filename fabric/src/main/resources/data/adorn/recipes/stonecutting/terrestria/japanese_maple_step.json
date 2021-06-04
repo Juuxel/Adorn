@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "terrestria:japanese_maple_planks"
   },
-  "result": "adorn:terrestria_japanese_maple_step",
+  "result": "adorn:terrestria/japanese_maple_step",
   "count": 2
 }

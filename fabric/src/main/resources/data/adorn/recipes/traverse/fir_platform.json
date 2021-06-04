@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "traverse:fir_slab"
+    },
+    "P": {
+      "item": "adorn:traverse/fir_post"
+    }
+  },
+  "result": {
+    "item": "adorn:traverse/fir_platform",
+    "count": 2
+  }
+}

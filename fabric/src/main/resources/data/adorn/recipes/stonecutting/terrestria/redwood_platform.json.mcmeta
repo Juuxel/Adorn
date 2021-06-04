@@ -1,7 +1,5 @@
 {
-  "when": [
-    {
-      "libcd:mod_loaded": "terrestria"
-    }
-  ]
+  "when": [{
+    "libcd:mod_loaded": "terrestria"
+  }]
 }

@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "terrestria:cypress_planks"
   },
-  "result": "adorn:terrestria_cypress_post",
+  "result": "adorn:terrestria/cypress_post",
   "count": 2
 }

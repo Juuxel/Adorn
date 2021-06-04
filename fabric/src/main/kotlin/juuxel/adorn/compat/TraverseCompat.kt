@@ -6,23 +6,9 @@ import juuxel.adorn.api.block.BlockVariant
 
 object TraverseCompat {
     fun init() {
-        // TODO: Get rid of this in 1.17
-        val oldFir = BlockVariant.Wood("traverse_fir")
-        AdornBlockBuilder.create(oldFir)
-            .withPost()
-            .withPlatform()
-            .withStep()
-            .withDrawer()
-            .withChair()
-            .withTable()
-            .withKitchenBlocks()
-            .withShelf()
-            .withCoffeeTable()
-            .registerIn(AdornCommon.NAMESPACE)
-
-        val newFir = BlockVariant.Wood("traverse/fir")
-        AdornBlockBuilder.create(newFir)
-            .withBench()
+        val fir = BlockVariant.Wood("traverse/fir")
+        AdornBlockBuilder.create(fir)
+            .withEverything()
             .registerIn(AdornCommon.NAMESPACE)
     }
 }

@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "terrestria:basalt"
   },
-  "result": "adorn:terrestria_basalt_step",
+  "result": "adorn:terrestria/basalt_step",
   "count": 2
 }
