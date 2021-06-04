@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.text.Text
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.BlockPos
 
@@ -19,11 +20,6 @@ abstract class BaseInventoryBlockEntity(
     state: BlockState,
     private val invSize: Int
 ) : LootableContainerBlockEntity(type, pos, state), ExtendedScreenHandlerFactory {
-    private val _containerName by lazy {
-        // For EP names
-        // TODO: Re-evaluate now that EP is gone :crab:
-        ItemStack(cachedState.block).name
-    }
     protected var items: DefaultedList<ItemStack> = DefaultedList.ofSize(invSize, ItemStack.EMPTY)
 
     override fun writeNbt(nbt: NbtCompound) = super.writeNbt(nbt).apply {
@@ -47,7 +43,7 @@ abstract class BaseInventoryBlockEntity(
 
     override fun size() = invSize
 
-    override fun getContainerName() = _containerName
+    override fun getContainerName(): Text = cachedState.block.name
 
     override fun writeScreenOpeningData(player: ServerPlayerEntity, buf: PacketByteBuf) {
         buf.writeBlockPos(pos)

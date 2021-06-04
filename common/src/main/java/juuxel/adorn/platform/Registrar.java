@@ -55,7 +55,6 @@ public interface Registrar<T> {
         return PlatformCore.expected();
     }
 
-    // TODO: Is this needed?
     @ExpectPlatform
     @NotNull
     static Registrar<ScreenHandlerType<?>> menu() {
