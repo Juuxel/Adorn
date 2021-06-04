@@ -6,7 +6,8 @@ import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
 import juuxel.adorn.lib.Registered
 import juuxel.adorn.platform.BlockBridge
-import juuxel.adorn.platform.Registrar
+import juuxel.adorn.platform.blockRegistrar
+import juuxel.adorn.platform.itemRegistrar
 import juuxel.adorn.util.associateLazily
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
@@ -26,8 +27,8 @@ import net.minecraft.world.World
 
 @Suppress("UNUSED", "MemberVisibilityCanBePrivate")
 object AdornBlocks {
-    val BLOCKS = Registrar.block()
-    val ITEMS = Registrar.item()
+    val BLOCKS = blockRegistrar()
+    val ITEMS = itemRegistrar()
 
     val SOFAS: Map<DyeColor, SofaBlock> by DyeColor.values().associateLazily {
         // This is one place where the BlockVariant mapping is kept.

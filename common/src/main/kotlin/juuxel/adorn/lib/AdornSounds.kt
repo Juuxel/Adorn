@@ -2,11 +2,12 @@ package juuxel.adorn.lib
 
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.platform.Registrar
+import juuxel.adorn.platform.soundEventRegistrar
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundEvent
 
 object AdornSounds {
-    val SOUNDS: Registrar<SoundEvent> = Registrar.soundEvent()
+    val SOUNDS: Registrar<SoundEvent> = soundEventRegistrar()
 
     val BLOCK_CHAIN_LINK_FENCE_BREAK = register("block.adorn.chain_link_fence.break")
     val BLOCK_CHAIN_LINK_FENCE_STEP = register("block.adorn.chain_link_fence.step")

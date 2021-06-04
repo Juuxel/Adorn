@@ -1,62 +1,48 @@
-package juuxel.adorn.platform;
+package juuxel.adorn.platform
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
-import kotlin.jvm.functions.Function0;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.DyeColor;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
+import dev.architectury.injectables.annotations.ExpectPlatform
+import net.minecraft.block.AbstractBlock
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.util.DyeColor
+import net.minecraft.util.math.BlockPos
+import net.minecraft.world.World
 
-public final class BlockBridge {
+object BlockBridge {
     /**
      * Creates a safe copy of this block's settings.
      *
-     * <p>The safe copy does not have lambdas that reference this block directly.
+     * The safe copy does not have lambdas that reference this block directly.
      * Instead, the default state is used for the various lambdas.
      */
+    @JvmStatic
     @ExpectPlatform
-    @NotNull
-    public static AbstractBlock.Settings copySettingsSafely(Block source) {
-        return PlatformCore.expected();
-    }
+    fun copySettingsSafely(source: Block): AbstractBlock.Settings = expected
 
     // AW on Fabric, accessor on Forge
+    @JvmStatic
     @ExpectPlatform
-    public static void onTallBlockBrokenInCreative(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        PlatformCore.expected();
-    }
+    fun onTallBlockBrokenInCreative(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity): Unit =
+        expected
 
+    @JvmStatic
     @ExpectPlatform
-    @NotNull
-    public static AbstractBlock.Settings createTableLampSettings(DyeColor color) {
-        return PlatformCore.expected();
-    }
+    fun createTableLampSettings(color: DyeColor?): AbstractBlock.Settings = expected
 
+    @JvmStatic
     @ExpectPlatform
-    @NotNull
-    public static AbstractBlock.Settings createGroundStoneTorchSettings() {
-        return PlatformCore.expected();
-    }
+    fun createGroundStoneTorchSettings(): AbstractBlock.Settings = expected
 
+    @JvmStatic
     @ExpectPlatform
-    @NotNull
-    public static AbstractBlock.Settings createWallStoneTorchSettings(Function0<Block> groundStoneTorch) {
-        return PlatformCore.expected();
-    }
+    fun createWallStoneTorchSettings(groundStoneTorch: () -> Block): AbstractBlock.Settings = expected
 
+    @JvmStatic
     @ExpectPlatform
-    @NotNull
-    public static AbstractBlock.Settings createChainLinkFenceSettings() {
-        return PlatformCore.expected();
-    }
+    fun createChainLinkFenceSettings(): AbstractBlock.Settings = expected
 
+    @JvmStatic
     @ExpectPlatform
-    @NotNull
-    public static AbstractBlock.Settings createStoneLadderSettings() {
-        return PlatformCore.expected();
-    }
+    fun createStoneLadderSettings(): AbstractBlock.Settings = expected
 }

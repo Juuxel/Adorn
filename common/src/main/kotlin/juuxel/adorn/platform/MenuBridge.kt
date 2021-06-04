@@ -1,27 +1,26 @@
-package juuxel.adorn.platform;
+package juuxel.adorn.platform
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerContext;
-import org.jetbrains.annotations.NotNull;
+import dev.architectury.injectables.annotations.ExpectPlatform
+import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.screen.ScreenHandler
+import net.minecraft.screen.ScreenHandlerContext
 
-public final class MenuBridge {
+object MenuBridge {
+    @JvmStatic
     @ExpectPlatform
-    @NotNull
-    public static ScreenHandler createDrawerMenu(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
-        return PlatformCore.expected();
-    }
+    fun createDrawerMenu(
+        syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext
+    ): ScreenHandler = expected
 
+    @JvmStatic
     @ExpectPlatform
-    @NotNull
-    public static ScreenHandler createKitchenCupboardMenu(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
-        return PlatformCore.expected();
-    }
+    fun createKitchenCupboardMenu(
+        syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext
+    ): ScreenHandler = expected
 
+    @JvmStatic
     @ExpectPlatform
-    @NotNull
-    public static ScreenHandler createTradingStationMenu(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context, boolean owner) {
-        return PlatformCore.expected();
-    }
+    fun createTradingStationMenu(
+        syncId: Int, playerInventory: PlayerInventory, context: ScreenHandlerContext, owner: Boolean
+    ): ScreenHandler = expected
 }

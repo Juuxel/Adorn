@@ -4,11 +4,12 @@ import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.platform.ConfigBridge
 import juuxel.adorn.platform.ItemBridge
 import juuxel.adorn.platform.Registrar
+import juuxel.adorn.platform.itemRegistrar
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 
 object AdornItems {
-    val ITEMS: Registrar<Item> = Registrar.item()
+    val ITEMS: Registrar<Item> = itemRegistrar()
     val GROUP = ItemBridge.createAdornItemGroup()
 
     val STONE_ROD by ITEMS.register("stone_rod") { ItemWithDescription(Item.Settings().group(ItemGroup.MISC)) }

@@ -7,12 +7,12 @@ import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.block.entity.ShelfBlockEntity
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.platform.BlockEntityBridge
-import juuxel.adorn.platform.Registrar
+import juuxel.adorn.platform.blockEntityRegistrar
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
 
 object AdornBlockEntities {
-    val BLOCK_ENTITIES = Registrar.blockEntity()
+    val BLOCK_ENTITIES = blockEntityRegistrar()
 
     val SHELF: BlockEntityType<ShelfBlockEntity> by register("shelf", BlockEntityBridge.shelf())
     val DRAWER: BlockEntityType<DrawerBlockEntity> by register("drawer", BlockEntityBridge.drawer())

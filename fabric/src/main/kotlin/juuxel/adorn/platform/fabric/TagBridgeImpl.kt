@@ -1,20 +1,19 @@
-package juuxel.adorn.platform.fabric;
+package juuxel.adorn.platform.fabric
 
-import net.fabricmc.fabric.api.tag.TagRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.tag.Tag;
-import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.NotNull;
+import net.fabricmc.fabric.api.tag.TagRegistry
+import net.minecraft.block.Block
+import net.minecraft.item.Item
+import net.minecraft.tag.Tag
+import net.minecraft.util.Identifier
 
-public final class TagBridgeImpl {
-    @NotNull
-    public static Tag<Block> block(Identifier id) {
-        return TagRegistry.block(id);
+object TagBridgeImpl {
+    @JvmStatic
+    fun block(id: Identifier): Tag<Block> {
+        return TagRegistry.block(id)
     }
 
-    @NotNull
-    public static Tag<Item> item(Identifier id) {
-        return TagRegistry.item(id);
+    @JvmStatic
+    fun item(id: Identifier): Tag<Item> {
+        return TagRegistry.item(id)
     }
 }
