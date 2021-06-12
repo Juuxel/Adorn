@@ -24,7 +24,7 @@ object AdornNetworking {
             client.execute {
                 val world = client.player?.world as? ClientWorld ?: return@execute
                 val entity = packet.entityTypeId.create(world)!!
-                entity.setEntityId(packet.id)
+                entity.id = packet.id
                 entity.uuid = packet.uuid
                 entity.updatePositionAndAngles(
                     packet.x, packet.y, packet.z,
