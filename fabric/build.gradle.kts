@@ -24,10 +24,6 @@ sourceSets {
     }
 }
 
-loom {
-    accessWidener = accessWidenerFile
-}
-
 repositories {
     maven {
         name = "Cotton"
