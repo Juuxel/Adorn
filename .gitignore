@@ -64,3 +64,6 @@ gradle-app.setting
 # Custom ignores
 local.properties
 private.gradle
+
+# Generated sources
+**/src/generated/

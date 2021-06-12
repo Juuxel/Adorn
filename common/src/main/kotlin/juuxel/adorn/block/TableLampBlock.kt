@@ -2,11 +2,11 @@
 
 package juuxel.adorn.block
 
-import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.buildShapeRotationsFromNorth
 import juuxel.adorn.util.withBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.Material
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.ai.pathing.NavigationType
@@ -15,6 +15,7 @@ import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.DyeItem
 import net.minecraft.item.ItemPlacementContext
+import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.state.StateManager
@@ -102,6 +103,11 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable {
         val LIT: BooleanProperty = Properties.LIT
         val FACING: DirectionProperty = Properties.FACING
 
-        fun createBlockSettings(color: DyeColor): Settings = PlatformBridges.blocks.createTableLampSettings(color)
+        fun createBlockSettings(color: DyeColor): Settings =
+            Settings.of(Material.REDSTONE_LAMP, color)
+                .hardness(0.3f)
+                .resistance(0.3f)
+                .sounds(BlockSoundGroup.WOOL)
+                .luminance { if (it[LIT]) 15 else 0 }
     }
 }

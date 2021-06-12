@@ -3,12 +3,12 @@ package juuxel.adorn
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.compat.Compat
-import juuxel.adorn.config.AdornGameRules
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.entity.AdornEntities
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.lib.AdornBlocksFabric
 import juuxel.adorn.lib.AdornEntitiesFabric
+import juuxel.adorn.lib.AdornGameRules
 import juuxel.adorn.lib.AdornItemsFabric
 import juuxel.adorn.lib.AdornNetworking
 import juuxel.adorn.lib.AdornSounds

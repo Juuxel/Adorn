@@ -13,8 +13,19 @@ architectury {
     fabric()
 }
 
+val generatedResources = file("src/generated/resources")
+val accessWidenerFile = project(":common").file("src/main/resources/adorn.accesswidener")
+
+sourceSets {
+    main {
+        resources {
+            srcDir(generatedResources)
+        }
+    }
+}
+
 loom {
-    accessWidener = file("src/main/resources/adorn.accesswidener")
+    accessWidener = accessWidenerFile
 }
 
 repositories {
@@ -66,6 +77,12 @@ dependencies {
 }
 
 tasks {
+    // The AW file is needed in :fabric project resources when the game is run.
+    val copyAccessWidener by registering(Copy::class) {
+        from(accessWidenerFile)
+        into(generatedResources)
+    }
+
     shadowJar {
         archiveClassifier.set("dev-shadow")
         configurations = listOf(shadowCommon)
@@ -78,6 +95,7 @@ tasks {
     }
 
     processResources {
+        dependsOn(copyAccessWidener)
         inputs.property("version", project.version)
 
         filesMatching("fabric.mod.json") {

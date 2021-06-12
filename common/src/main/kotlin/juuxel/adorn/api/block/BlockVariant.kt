@@ -1,6 +1,6 @@
 package juuxel.adorn.api.block
 
-import juuxel.adorn.platform.PlatformBridges
+import juuxel.adorn.util.copySettingsSafely
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
@@ -18,11 +18,11 @@ interface BlockVariant {
     fun createSettings(): AbstractBlock.Settings
 
     data class Wood(override val name: String) : BlockVariant {
-        override fun createSettings() = PlatformBridges.blocks.copySettingsSafely(Blocks.OAK_PLANKS)
+        override fun createSettings() = Blocks.OAK_PLANKS.copySettingsSafely()
     }
 
     data class Stone(override val name: String) : BlockVariant {
-        override fun createSettings() = PlatformBridges.blocks.copySettingsSafely(Blocks.COBBLESTONE)
+        override fun createSettings() = Blocks.COBBLESTONE.copySettingsSafely()
     }
 
     companion object {
@@ -71,9 +71,7 @@ interface BlockVariant {
         val MOSSY_COBBLESTONE = variant("mossy_cobblestone", Blocks.MOSSY_COBBLESTONE)
         val MOSSY_STONE_BRICK = variant("mossy_stone_brick", Blocks.MOSSY_STONE_BRICKS)
 
-        fun variant(name: String, base: Block): BlockVariant = variant(name) {
-            PlatformBridges.blocks.copySettingsSafely(base)
-        }
+        fun variant(name: String, base: Block): BlockVariant = variant(name) { base.copySettingsSafely() }
 
         inline fun variant(name: String, crossinline settings: () -> AbstractBlock.Settings): BlockVariant =
             object : BlockVariant {

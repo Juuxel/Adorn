@@ -1,6 +1,7 @@
 package juuxel.adorn.util
 
 import juuxel.adorn.lib.Registered
+import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -30,6 +31,29 @@ fun BlockEntity.getSquaredDistance(x: Double, y: Double, z: Double): Double {
     val zd = pos.z + 0.5 - z
     return xd * xd + yd * yd + zd * zd
 }
+
+/**
+ * Creates a safe copy of this block's settings.
+ *
+ * The safe copy does not have lambdas that reference this block directly.
+ * Instead, the default state is used for the various lambdas.
+ */
+fun Block.copySettingsSafely(): AbstractBlock.Settings =
+    AbstractBlock.Settings.of(defaultState.material)
+        .luminance { defaultState.luminance }
+        .apply { getHardness(defaultState)?.let(this::hardness) }
+        .resistance(blastResistance)
+        .velocityMultiplier(velocityMultiplier)
+        .jumpVelocityMultiplier(jumpVelocityMultiplier)
+        .slipperiness(slipperiness)
+        .sounds(defaultState.soundGroup)
+
+private fun getHardness(state: BlockState): Float? =
+    try {
+        state.getHardness(null, null)
+    } catch (e: NullPointerException) {
+        null
+    }
 
 fun Direction.Axis.turnHorizontally(): Direction.Axis =
     when (this) {

@@ -10,6 +10,7 @@ import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.Properties
+import net.minecraft.tag.BlockTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.BlockView
@@ -57,6 +58,9 @@ class ChainLinkFenceBlock(settings: Settings) : PaneBlock(settings) {
         state.block is ChainLinkFenceBlock
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
+
+    override fun connectsTo(state: BlockState, sideSolidFullSquare: Boolean): Boolean =
+        super.connectsTo(state, sideSolidFullSquare) || state.isIn(BlockTags.FENCE_GATES)
 
     companion object {
         val UP: BooleanProperty = Properties.UP

@@ -9,6 +9,10 @@ architectury {
     common(false)
 }
 
+loom {
+    accessWidener = file("src/main/resources/adorn.accesswidener")
+}
+
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
 

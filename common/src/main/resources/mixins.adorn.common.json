@@ -8,7 +8,6 @@
     "BlockMixin",
     "BubbleColumnBlockMixin",
     "FenceGateBlockMixin",
-    "PaneBlockMixin",
     "PlayerEntityMixin"
   ],
   "client": [

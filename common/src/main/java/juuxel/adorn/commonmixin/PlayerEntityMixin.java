@@ -1,7 +1,7 @@
 package juuxel.adorn.commonmixin;
 
 import juuxel.adorn.block.SofaBlock;
-import juuxel.adorn.platform.PlatformBridges;
+import juuxel.adorn.lib.AdornGameRules;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -31,7 +31,7 @@ abstract class PlayerEntityMixin extends LivingEntity {
                 .orElse(Blocks.AIR);
         if (!(sleepingBlock instanceof SofaBlock)) {
             player.wakeUp(sleepTimeSomething, updatePlayersSleeping);
-        } else if (world.getGameRules().getBoolean(PlatformBridges.get().getGameRules().getSkipNightOnSofas())) {
+        } else if (world.getGameRules().getBoolean(AdornGameRules.SKIP_NIGHT_ON_SOFAS)) {
             // Decrease the timer during daylight. If the player *has* slept before (= at night), they will wake up.
             if (--sleepTimer > 0) {
                 player.wakeUp(sleepTimeSomething, updatePlayersSleeping);
@@ -43,7 +43,7 @@ abstract class PlayerEntityMixin extends LivingEntity {
     private void onIsSleepingLongEnough(CallbackInfoReturnable<Boolean> info) {
         // Allow sleeping on sofas at daytime and (depending on config)
         // prevent skipping the night on sofas
-        boolean skipNight = world.getGameRules().getBoolean(PlatformBridges.get().getGameRules().getSkipNightOnSofas());
+        boolean skipNight = world.getGameRules().getBoolean(AdornGameRules.SKIP_NIGHT_ON_SOFAS);
         if (info.getReturnValueZ() && (!skipNight || world.isDay()) &&
                 getSleepingPosition().map(pos -> world.getBlockState(pos).getBlock() instanceof SofaBlock).orElse(false)) {
             info.setReturnValue(false);

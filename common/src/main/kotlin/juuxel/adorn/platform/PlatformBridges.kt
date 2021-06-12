@@ -12,7 +12,6 @@ interface PlatformBridges {
     val blockEntities: BlockEntityDescriptors
     val config: CommonConfig
     val entities: EntityBridge
-    val gameRules: GameRuleBridge
     val items: ItemBridge
     val menus: MenuBridge
     val network: NetworkBridge
@@ -24,15 +23,10 @@ interface PlatformBridges {
         inline val blockEntities get() = get().blockEntities
         inline val config get() = get().config
         inline val entities get() = get().entities
-        inline val gameRules get() = get().gameRules
         inline val items get() = get().items
         inline val menus get() = get().menus
         inline val network get() = get().network
         inline val registrarFactory get() = get().registrarFactory
         inline val tags get() = get().tags
-
-        @JvmStatic
-        @JvmName("get")
-        fun getOnJava() = get()
     }
 }
