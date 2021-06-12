@@ -26,3 +26,12 @@ dependencies {
 kotlinter {
     disabledRules = arrayOf("parameter-list-wrapping")
 }
+
+// PLEASE REMOVE AFTEREVALUATE FROM LOOM
+afterEvaluate {
+    tasks {
+        remapJar {
+            remapAccessWidener.set(false)
+        }
+    }
+}
