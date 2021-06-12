@@ -41,5 +41,9 @@ subprojects {
         withType<KotlinCompile> {
             kotlinOptions.jvmTarget = "15"
         }
+
+        jar {
+            from(rootProject.file("LICENSE"))
+        }
     }
 }
