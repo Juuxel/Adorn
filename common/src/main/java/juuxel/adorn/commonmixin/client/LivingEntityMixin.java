@@ -1,4 +1,4 @@
-package juuxel.adorn.mixin.client;
+package juuxel.adorn.commonmixin.client;
 
 import juuxel.adorn.block.SofaBlock;
 import net.minecraft.entity.Entity;

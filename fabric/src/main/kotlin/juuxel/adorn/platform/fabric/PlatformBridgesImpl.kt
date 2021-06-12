@@ -1,7 +1,9 @@
 @file:JvmName("PlatformBridgesKtImpl")
 package juuxel.adorn.platform.fabric
 
+import juuxel.adorn.config.AdornGameRules
 import juuxel.adorn.config.ConfigManager
+import juuxel.adorn.platform.GameRuleBridge
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import juuxel.adorn.platform.RegistrarFactory
@@ -19,6 +21,9 @@ fun PlatformBridges.Companion.get(): PlatformBridges =
         override val blockEntities = BlockEntityDescriptorsImpl
         override val config = ConfigManager.CONFIG
         override val entities = EntityBridgeImpl
+        override val gameRules = object : GameRuleBridge {
+            override val skipNightOnSofas = AdornGameRules.SKIP_NIGHT_ON_SOFAS
+        }
         override val items = ItemBridgeImpl
         override val menus = MenuBridgeImpl
         override val network = NetworkBridgeImpl

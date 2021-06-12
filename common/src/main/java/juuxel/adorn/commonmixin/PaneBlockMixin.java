@@ -1,4 +1,4 @@
-package juuxel.adorn.mixin;
+package juuxel.adorn.commonmixin;
 
 import juuxel.adorn.block.ChainLinkFenceBlock;
 import net.minecraft.block.BlockState;
