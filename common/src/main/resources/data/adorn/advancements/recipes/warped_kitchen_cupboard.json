@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:warped_planks"
+            "items": ["minecraft:warped_planks"]
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:warped_kitchen_counter"
+            "items": ["adorn:warped_kitchen_counter"]
           }
         ]
       }
