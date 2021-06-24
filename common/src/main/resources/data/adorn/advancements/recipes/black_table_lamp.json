@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:black_carpet"
+            "items": ["minecraft:black_carpet"]
           }
         ]
       }
