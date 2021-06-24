@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:birch_slab"
+            "items": ["minecraft:birch_slab"]
           }
         ]
       }
