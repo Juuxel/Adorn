@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:diorite_slab"
+            "items": ["minecraft:diorite_slab"]
           }
         ]
       }
