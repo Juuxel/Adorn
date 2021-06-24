@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:nether_bricks"
+            "items": ["minecraft:nether_bricks"]
           }
         ]
       }
