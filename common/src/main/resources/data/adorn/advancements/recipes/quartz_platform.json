@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:quartz_slab"]
+            "item": "minecraft:quartz_slab"
           }
         ]
       }

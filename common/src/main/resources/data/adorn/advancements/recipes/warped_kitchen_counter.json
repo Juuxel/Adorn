@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:warped_planks"]
+            "item": "minecraft:warped_planks"
           }
         ]
       }

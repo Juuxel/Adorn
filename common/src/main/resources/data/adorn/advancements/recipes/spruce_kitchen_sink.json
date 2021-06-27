@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:spruce_planks"]
+            "item": "minecraft:spruce_planks"
           }
         ]
       }

@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:jungle_slab"]
+            "item": "minecraft:jungle_slab"
           }
         ]
       }

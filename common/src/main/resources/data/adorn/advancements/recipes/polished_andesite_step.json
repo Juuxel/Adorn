@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:polished_andesite_slab"]
+            "item": "minecraft:polished_andesite_slab"
           }
         ]
       }

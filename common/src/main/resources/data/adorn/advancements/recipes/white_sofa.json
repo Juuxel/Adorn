@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:white_wool"]
+            "item": "minecraft:white_wool"
           }
         ]
       }
