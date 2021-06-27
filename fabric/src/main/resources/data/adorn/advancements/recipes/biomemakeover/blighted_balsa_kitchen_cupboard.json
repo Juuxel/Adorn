@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "biomemakeover:blighted_balsa_planks"
+            "items": ["biomemakeover:blighted_balsa_planks"]
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:biomemakeover/blighted_balsa_kitchen_counter"
+            "items": ["adorn:biomemakeover/blighted_balsa_kitchen_counter"]
           }
         ]
       }

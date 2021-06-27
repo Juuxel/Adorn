@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "biomemakeover:willow_planks"
+            "items": ["biomemakeover:willow_planks"]
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:biomemakeover/willow_kitchen_counter"
+            "items": ["adorn:biomemakeover/willow_kitchen_counter"]
           }
         ]
       }

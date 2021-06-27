@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "biomemakeover:swamp_cypress_planks"
+            "items": ["biomemakeover:swamp_cypress_planks"]
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:biomemakeover/swamp_cypress_kitchen_counter"
+            "items": ["adorn:biomemakeover/swamp_cypress_kitchen_counter"]
           }
         ]
       }

@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:baobab_slab"
+            "items": ["byg:baobab_slab"]
           }
         ]
       }

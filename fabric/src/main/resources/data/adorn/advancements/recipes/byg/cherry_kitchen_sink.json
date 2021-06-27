@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:cherry_planks"
+            "items": ["byg:cherry_planks"]
           }
         ]
       }

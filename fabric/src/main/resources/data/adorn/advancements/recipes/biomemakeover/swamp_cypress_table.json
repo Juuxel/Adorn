@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "biomemakeover:swamp_cypress_slab"
+            "items": ["biomemakeover:swamp_cypress_slab"]
           }
         ]
       }
