@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:smooth_red_sandstone_slab"
+            "items": ["minecraft:smooth_red_sandstone_slab"]
           }
         ]
       }

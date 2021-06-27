@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:oak_planks"
+            "items": ["minecraft:oak_planks"]
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:oak_kitchen_counter"
+            "items": ["adorn:oak_kitchen_counter"]
           }
         ]
       }

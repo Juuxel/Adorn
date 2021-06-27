@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:jungle_planks"
+            "items": ["minecraft:jungle_planks"]
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:jungle_kitchen_counter"
+            "items": ["adorn:jungle_kitchen_counter"]
           }
         ]
       }
