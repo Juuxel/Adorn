@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:holly_slab"
+            "items": ["byg:holly_slab"]
           }
         ]
       }
