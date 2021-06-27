@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:cika_slab"
+            "items": ["byg:cika_slab"]
           }
         ]
       }

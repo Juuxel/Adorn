@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:dacite_bricks"
+            "items": ["byg:dacite_bricks"]
           }
         ]
       }

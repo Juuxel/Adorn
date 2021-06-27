@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:ether_slab"
+            "items": ["byg:ether_slab"]
           }
         ]
       }

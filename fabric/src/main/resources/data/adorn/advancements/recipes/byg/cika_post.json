@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:cika_planks"
+            "items": ["byg:cika_planks"]
           }
         ]
       }

@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:dacite_cobblestone_slab"
+            "items": ["byg:dacite_cobblestone_slab"]
           }
         ]
       }

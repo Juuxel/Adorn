@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:fir_slab"
+            "items": ["byg:fir_slab"]
           }
         ]
       }
