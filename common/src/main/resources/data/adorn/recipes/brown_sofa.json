@@ -11,7 +11,7 @@
       "item": "minecraft:stick"
     },
     "W": {
-      "items": ["minecraft:brown_wool"]
+      "item": "minecraft:brown_wool"
     }
   },
   "result": {
