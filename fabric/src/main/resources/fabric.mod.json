@@ -53,6 +53,15 @@
     "byg": "<1.1"
   },
   "breaks": {
-    "towelette": "<4.0.0"
+    "towelette": "<4.0.0",
+    "dashloader": "<2.0-"
+  },
+
+  "custom": {
+    "dashloader:customobject": [
+      "juuxel.adorn.compat.dashloader.DashOptionalProperty",
+      "juuxel.adorn.compat.dashloader.DashOptionalSomeValue",
+      "juuxel.adorn.compat.dashloader.DashOptionalNoneValue"
+    ]
   }
 }

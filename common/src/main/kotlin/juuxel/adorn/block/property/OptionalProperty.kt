@@ -1,14 +1,15 @@
 package juuxel.adorn.block.property
 
+import net.minecraft.state.property.EnumProperty
 import net.minecraft.state.property.Property
 import net.minecraft.util.StringIdentifiable
 import java.util.Optional
 
 @Suppress("UNCHECKED_CAST")
 class OptionalProperty<T>(
-    private val delegate: Property<T>
+    val delegate: EnumProperty<T>
 ) : Property<OptionalProperty.Value<T>>(delegate.name, Value::class.java as Class<Value<T>>)
-    where T : Any, T : Comparable<T>, T : StringIdentifiable {
+    where T : Enum<T>, T : StringIdentifiable {
     val none: Value.None<T> = Value.None()
     private val values: Map<T?, Value<T>> = sequence {
         for (value in delegate.values) {
@@ -36,11 +37,13 @@ class OptionalProperty<T>(
     fun wrap(value: T): Value<T>? = values[value]
     fun wrapOrNone(value: T): Value<T> = values[value] ?: none
 
-    sealed class Value<T : Comparable<T>> : Comparable<Value<T>> {
+    sealed class Value<T> : Comparable<Value<T>>
+        where T : Enum<T>, T : StringIdentifiable {
         abstract val isPresent: Boolean
         abstract val value: T?
 
-        data class Some<T : Comparable<T>>(override val value: T) : Value<T>() {
+        data class Some<T>(override val value: T) : Value<T>()
+            where T : Enum<T>, T : StringIdentifiable {
             override val isPresent = true
 
             override fun compareTo(other: Value<T>) = when (other) {
@@ -49,7 +52,8 @@ class OptionalProperty<T>(
             }
         }
 
-        class None<T : Comparable<T>> : Value<T>() {
+        class None<T> : Value<T>()
+            where T : Enum<T>, T : StringIdentifiable {
             override val isPresent = false
             override val value: T? = null
 
