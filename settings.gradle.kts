@@ -12,6 +12,10 @@ pluginManagement {
             name = "Forge"
             url = uri("https://maven.minecraftforge.net/")
         }
+        maven {
+            name = "Cotton"
+            url = uri("https://server.bbkr.space/artifactory/libs-release/")
+        }
         gradlePluginPortal()
     }
 }

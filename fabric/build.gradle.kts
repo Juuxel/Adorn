@@ -2,6 +2,7 @@ plugins {
     kotlin("jvm")
     id("dev.architectury.loom")
     id("architectury-plugin")
+    id("io.github.juuxel.loom-quiltflower")
     id("org.jmailen.kotlinter")
     id ("com.github.johnrengelman.shadow")
 }
