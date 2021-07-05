@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:maple_planks"
+            "items": [
+              "byg:maple_planks"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:byg/maple_kitchen_counter"
+            "items": [
+              "adorn:byg/maple_kitchen_counter"
+            ]
           }
         ]
       }

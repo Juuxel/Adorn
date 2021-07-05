@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:scoria_stone"
+            "items": [
+              "byg:scoria_stone"
+            ]
           }
         ]
       }

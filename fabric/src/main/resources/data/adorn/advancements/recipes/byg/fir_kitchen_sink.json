@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:fir_planks"
+            "items": [
+              "byg:fir_planks"
+            ]
           }
         ]
       }

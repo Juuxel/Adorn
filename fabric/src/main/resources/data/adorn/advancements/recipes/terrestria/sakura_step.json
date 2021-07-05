@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "terrestria:sakura_slab"
+            "items": [
+              "terrestria:sakura_slab"
+            ]
           }
         ]
       }

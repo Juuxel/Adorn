@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:polished_soapstone_slab"
+            "items": [
+              "byg:polished_soapstone_slab"
+            ]
           }
         ]
       }

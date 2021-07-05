@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:maple_slab"
+            "items": [
+              "byg:maple_slab"
+            ]
           }
         ]
       }

@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "biomemakeover:willow_slab"
+            "items": [
+              "biomemakeover:willow_slab"
+            ]
           }
         ]
       }

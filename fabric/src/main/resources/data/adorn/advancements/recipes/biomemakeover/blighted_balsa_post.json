@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "biomemakeover:blighted_balsa_planks"
+            "items": [
+              "biomemakeover:blighted_balsa_planks"
+            ]
           }
         ]
       }

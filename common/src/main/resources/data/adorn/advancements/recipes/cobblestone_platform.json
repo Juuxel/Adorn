@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:cobblestone_slab"
+            "items": [
+              "minecraft:cobblestone_slab"
+            ]
           }
         ]
       }

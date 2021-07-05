@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:rocky_stone"
+            "items": [
+              "byg:rocky_stone"
+            ]
           }
         ]
       }

@@ -26,7 +26,7 @@ class RecipeAdvancementGenerator(
                             "trigger" to "minecraft:inventory_changed",
                             "conditions" to mapOf(
                                 "items" to listOf(
-                                    mapOf("item" to itemFn(id))
+                                    mapOf("items" to listOf(itemFn(id)))
                                 )
                             )
                         )

@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "terrestria:hemlock_slab"
+            "items": [
+              "terrestria:hemlock_slab"
+            ]
           }
         ]
       }

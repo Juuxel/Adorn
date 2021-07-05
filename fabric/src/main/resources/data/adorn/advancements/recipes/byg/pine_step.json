@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:pine_slab"
+            "items": [
+              "byg:pine_slab"
+            ]
           }
         ]
       }

@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:mangrove_slab"
+            "items": [
+              "byg:mangrove_slab"
+            ]
           }
         ]
       }

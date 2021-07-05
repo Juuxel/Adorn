@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "terrestria:hemlock_planks"
+            "items": [
+              "terrestria:hemlock_planks"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:terrestria/hemlock_kitchen_counter"
+            "items": [
+              "adorn:terrestria/hemlock_kitchen_counter"
+            ]
           }
         ]
       }

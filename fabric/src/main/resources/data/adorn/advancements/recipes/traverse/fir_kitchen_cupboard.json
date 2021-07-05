@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "traverse:fir_planks"
+            "items": [
+              "traverse:fir_planks"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:traverse/fir_kitchen_counter"
+            "items": [
+              "adorn:traverse/fir_kitchen_counter"
+            ]
           }
         ]
       }

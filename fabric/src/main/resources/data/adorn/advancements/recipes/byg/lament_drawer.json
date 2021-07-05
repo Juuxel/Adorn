@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:lament_slab"
+            "items": [
+              "byg:lament_slab"
+            ]
           }
         ]
       }

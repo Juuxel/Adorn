@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:cracked_red_rock_brick_slab"
+            "items": [
+              "byg:cracked_red_rock_brick_slab"
+            ]
           }
         ]
       }

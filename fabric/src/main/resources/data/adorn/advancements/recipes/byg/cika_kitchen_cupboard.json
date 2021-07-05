@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:cika_planks"
+            "items": [
+              "byg:cika_planks"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:byg/cika_kitchen_counter"
+            "items": [
+              "adorn:byg/cika_kitchen_counter"
+            ]
           }
         ]
       }

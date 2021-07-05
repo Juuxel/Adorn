@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:purpur_slab"
+            "items": [
+              "minecraft:purpur_slab"
+            ]
           }
         ]
       }

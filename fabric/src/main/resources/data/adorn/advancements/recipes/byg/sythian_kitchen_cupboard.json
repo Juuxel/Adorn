@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:sythian_planks"
+            "items": [
+              "byg:sythian_planks"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:byg/sythian_kitchen_counter"
+            "items": [
+              "adorn:byg/sythian_kitchen_counter"
+            ]
           }
         ]
       }

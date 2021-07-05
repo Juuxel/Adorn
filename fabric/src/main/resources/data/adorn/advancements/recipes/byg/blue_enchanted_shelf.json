@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:blue_enchanted_slab"
+            "items": [
+              "byg:blue_enchanted_slab"
+            ]
           }
         ]
       }

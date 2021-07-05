@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:acacia_planks"
+            "items": [
+              "minecraft:acacia_planks"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:acacia_kitchen_counter"
+            "items": [
+              "adorn:acacia_kitchen_counter"
+            ]
           }
         ]
       }

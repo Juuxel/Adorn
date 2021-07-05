@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:ebony_planks"
+            "items": [
+              "byg:ebony_planks"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:byg/ebony_kitchen_counter"
+            "items": [
+              "adorn:byg/ebony_kitchen_counter"
+            ]
           }
         ]
       }

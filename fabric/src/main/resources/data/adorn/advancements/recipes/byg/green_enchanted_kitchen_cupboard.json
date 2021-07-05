@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:green_enchanted_planks"
+            "items": [
+              "byg:green_enchanted_planks"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:byg/green_enchanted_kitchen_counter"
+            "items": [
+              "adorn:byg/green_enchanted_kitchen_counter"
+            ]
           }
         ]
       }

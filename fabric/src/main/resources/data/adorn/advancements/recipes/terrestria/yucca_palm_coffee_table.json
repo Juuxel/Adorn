@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "terrestria:yucca_palm_slab"
+            "items": [
+              "terrestria:yucca_palm_slab"
+            ]
           }
         ]
       }

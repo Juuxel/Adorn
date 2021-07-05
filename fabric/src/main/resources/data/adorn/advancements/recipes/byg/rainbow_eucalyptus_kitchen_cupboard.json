@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "byg:rainbow_eucalyptus_planks"
+            "items": [
+              "byg:rainbow_eucalyptus_planks"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:byg/rainbow_eucalyptus_kitchen_counter"
+            "items": [
+              "adorn:byg/rainbow_eucalyptus_kitchen_counter"
+            ]
           }
         ]
       }
