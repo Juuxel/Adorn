@@ -45,8 +45,8 @@ repositories {
     }
 
     maven {
-        name = "TerraformersMC"
-        url = uri("https://maven.terraformersmc.com/releases")
+        name = "QuiltMC"
+        url = uri("https://maven.quiltmc.org/repository/release/")
 
         content {
             includeGroup("com.terraformersmc")
