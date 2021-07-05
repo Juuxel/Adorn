@@ -15,7 +15,6 @@ import net.minecraft.util.registry.Registry
 
 fun PlatformBridges.Companion.get(): PlatformBridges =
     object : PlatformBridges {
-        override val blocks = BlockBridgeImpl
         override val blockEntities = BlockEntityDescriptorsImpl
         override val config = ConfigManager.CONFIG
         override val entities = EntityBridgeImpl

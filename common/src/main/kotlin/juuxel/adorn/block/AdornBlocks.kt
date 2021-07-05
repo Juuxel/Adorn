@@ -311,7 +311,10 @@ object AdornBlocks {
         )
     }
     val STONE_LADDER: Block by registerBlock("stone_ladder") {
-        StoneLadderBlock(PlatformBridges.blocks.createStoneLadderSettings())
+        StoneLadderBlock(
+            AbstractBlock.Settings.copy(Blocks.STONE)
+                .nonOpaque()
+        )
     }
     // @formatter:on
 
