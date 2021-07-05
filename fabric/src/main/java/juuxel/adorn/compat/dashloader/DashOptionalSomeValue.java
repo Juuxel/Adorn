@@ -34,7 +34,7 @@ public class DashOptionalSomeValue implements DashPropertyValue {
             Enum<?> e = Enum.valueOf(c, name);
             return new OptionalProperty.Value.Some(e);
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Who's the CrashLoader now?", e);
         }
     }
 }
