@@ -54,7 +54,7 @@
   },
   "breaks": {
     "towelette": "<4.0.0",
-    "dashloader": "<2.0-"
+    "dashloader": "<2.0-pre2"
   },
 
   "custom": {
