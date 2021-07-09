@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    java
+    base
     kotlin("jvm") version "1.5.10" apply false
 
     id("architectury-plugin") version "3.2-SNAPSHOT"
@@ -20,11 +20,25 @@ group = "io.github.juuxel"
 version = "${project.property("mod-version")}+${project.property("minecraft-version")}"
 base.archivesBaseName = "Adorn"
 
+tasks {
+    val collectJars by registering(Copy::class) {
+        val tasks = subprojects.map { it.tasks.named("remapJar") }
+        dependsOn(tasks)
+
+        from(tasks)
+        into(buildDir.resolve("libs"))
+    }
+
+    assemble {
+        dependsOn(collectJars)
+    }
+}
+
 subprojects {
     apply(plugin = "java")
     apply(plugin = "org.jetbrains.kotlin.jvm")
 
-    java {
+    extensions.configure<JavaPluginExtension> {
         sourceCompatibility = JavaVersion.VERSION_16
         targetCompatibility = JavaVersion.VERSION_16
     }
@@ -43,8 +57,9 @@ subprojects {
             kotlinOptions.jvmTarget = "15"
         }
 
-        jar {
+        "jar"(Jar::class) {
             from(rootProject.file("LICENSE"))
+            archiveClassifier.set("dev-slim")
         }
     }
 }

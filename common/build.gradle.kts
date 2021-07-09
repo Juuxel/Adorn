@@ -28,6 +28,12 @@ kotlinter {
     disabledRules = arrayOf("parameter-list-wrapping")
 }
 
+tasks {
+    remapJar {
+        archiveClassifier.set("common")
+    }
+}
+
 // PLEASE REMOVE AFTEREVALUATE FROM LOOM
 afterEvaluate {
     tasks {
