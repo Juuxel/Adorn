@@ -45,9 +45,18 @@ repositories {
         }
     }
 
+    /*maven {
+        name = "TerraformersMC"
+        url = uri("https://maven.terraformersmc.com/releases")
+
+        content {
+            includeGroup("com.terraformersmc")
+        }
+    }*/
+
     maven {
-        name = "QuiltMC"
-        url = uri("https://maven.quiltmc.org/repository/release/")
+        name = "TerraformersMC archive"
+        url = uri("https://raw.githubusercontent.com/TerraformersMC/Archive/main/releases/")
 
         content {
             includeGroup("com.terraformersmc")
