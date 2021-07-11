@@ -26,14 +26,14 @@ abstract class BaseMenu(
     context: ScreenHandlerContext,
     blockInventory: Inventory,
     propertyDelegate: PropertyDelegate = getBlockPropertyDelegate(context)
-) : SyncedGuiDescription(
-    type, syncId, playerInv, blockInventory, propertyDelegate
-) {
+) : SyncedGuiDescription(type, syncId, playerInv, blockInventory, propertyDelegate), ContainerBlockMenu {
     protected val playerInvPanel: WPlayerInvPanel by lazy {
         val label = WPlayerInvPanel.createInventoryLabel(playerInventory)
         label.setColor(titleColor).disableDarkmode()
         createPlayerInventoryPanel(label)
     }
+
+    override val inventory: Inventory get() = blockInventory
 
     override fun canUse(player: PlayerEntity?) = true
 

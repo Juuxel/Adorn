@@ -2,6 +2,7 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
+import juuxel.adorn.block.entity.SimpleContainerBlockEntity
 import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -12,12 +13,14 @@ import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandler
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import java.util.Random
 
 class KitchenCupboardBlock(variant: BlockVariant) : AbstractKitchenCounterBlock(variant), BlockEntityProvider {
     override fun onUse(
@@ -56,4 +59,11 @@ class KitchenCupboardBlock(variant: BlockVariant) : AbstractKitchenCounterBlock(
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? =
         AdornBlockEntities.KITCHEN_CUPBOARD.instantiate(pos, state)
+
+    override fun scheduledTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random) {
+        val entity = world.getBlockEntity(pos)
+        if (entity is SimpleContainerBlockEntity) {
+            entity.onScheduledTick()
+        }
+    }
 }

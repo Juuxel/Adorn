@@ -2,6 +2,7 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
+import juuxel.adorn.block.entity.SimpleContainerBlockEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -12,6 +13,7 @@ import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.ScreenHandler
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
@@ -22,6 +24,7 @@ import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import java.util.Random
 
 class DrawerBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createSettings().nonOpaque()) {
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
@@ -71,6 +74,13 @@ class DrawerBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.create
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? =
         AdornBlockEntities.DRAWER.instantiate(pos, state)
+
+    override fun scheduledTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random) {
+        val entity = world.getBlockEntity(pos)
+        if (entity is SimpleContainerBlockEntity) {
+            entity.onScheduledTick()
+        }
+    }
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING

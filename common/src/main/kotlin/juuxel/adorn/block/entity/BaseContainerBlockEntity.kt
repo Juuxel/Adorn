@@ -7,29 +7,29 @@ import net.minecraft.block.entity.LootableContainerBlockEntity
 import net.minecraft.inventory.Inventories
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.network.PacketByteBuf
-import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.BlockPos
 
-abstract class BaseInventoryBlockEntity(
-    type: BlockEntityType<*>,
-    pos: BlockPos,
-    state: BlockState,
-    private val invSize: Int
-) : LootableContainerBlockEntity(type, pos, state), ExtendedMenuFactory {
-    protected var items: DefaultedList<ItemStack> = DefaultedList.ofSize(invSize, ItemStack.EMPTY)
+/**
+ * A container block entity that might not have a menu.
+ * This class handles the serialisation and the container logic.
+ */
+abstract class BaseContainerBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: BlockState, size: Int) :
+    LootableContainerBlockEntity(type, pos, state) {
+    protected var items: DefaultedList<ItemStack> = DefaultedList.ofSize(size, ItemStack.EMPTY)
 
     override fun writeNbt(nbt: NbtCompound) = super.writeNbt(nbt).apply {
-        if (!serializeLootTable(nbt))
+        if (!serializeLootTable(nbt)) {
             Inventories.writeNbt(nbt, items)
+        }
     }
 
     override fun readNbt(nbt: NbtCompound) {
         super.readNbt(nbt)
-        if (!deserializeLootTable(nbt))
+        if (!deserializeLootTable(nbt)) {
             Inventories.readNbt(nbt, items)
+        }
     }
 
     override fun isEmpty() = InventoryComponent.hasContents(items)
@@ -40,11 +40,7 @@ abstract class BaseInventoryBlockEntity(
         this.items = items
     }
 
-    override fun size() = invSize
+    override fun size() = items.size
 
     override fun getContainerName(): Text = cachedState.block.name
-
-    override fun writeScreenOpeningData(player: ServerPlayerEntity, buf: PacketByteBuf) {
-        buf.writeBlockPos(pos)
-    }
 }
