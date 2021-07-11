@@ -11,6 +11,7 @@ object AdornTags {
     val CHAIRS = blockAndItem(AdornCommon.id("chairs"))
     val TABLES = blockAndItem(AdornCommon.id("tables"))
     val DRAWERS = blockAndItem(AdornCommon.id("drawers"))
+    val BENCHES = blockAndItem(AdornCommon.id("benches"))
     val KITCHEN_COUNTERS = blockAndItem(AdornCommon.id("kitchen_counters"))
     val KITCHEN_CUPBOARDS = blockAndItem(AdornCommon.id("kitchen_cupboards"))
     val KITCHEN_BLOCKS = blockAndItem(AdornCommon.id("kitchen_blocks"))

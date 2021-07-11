@@ -8,6 +8,7 @@ object AdornItemsFabric {
             add(AdornTags.CHAIRS.item, 300)
             add(AdornTags.DRAWERS.item, 300)
             add(AdornTags.TABLES.item, 300)
+            add(AdornTags.BENCHES.item, 300)
             add(AdornTags.WOODEN_POSTS.item, 300)
             add(AdornTags.WOODEN_PLATFORMS.item, 300)
             add(AdornTags.WOODEN_STEPS.item, 300)
