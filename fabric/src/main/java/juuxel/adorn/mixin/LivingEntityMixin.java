@@ -32,7 +32,7 @@ abstract class LivingEntityMixin extends Entity {
     }
 
     // Lambda: Optional.ifPresent in wakeUp()
-    @Inject(method = "method_18404", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/World;getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/BlockState;", ordinal = 0), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
+    @Inject(method = "method_18404", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/World;getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/BlockState;", ordinal = 0), locals = LocalCapture.CAPTURE_FAILHARD)
     private void onWakeUp(BlockPos pos, CallbackInfo info, BlockState state) {
         if (state.getBlock() instanceof SofaBlock) {
             world.setBlockState(pos, state.with(SeatBlock.OCCUPIED, false));
