@@ -1,6 +1,9 @@
 package juuxel.adorn.lib
 
+import io.github.cottonmc.cotton.gui.client.CottonClientScreen
 import juuxel.adorn.AdornCommon
+import juuxel.adorn.client.gui.screen.BookScreenDescription
+import juuxel.adorn.client.resources.BookManager
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
@@ -8,11 +11,15 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.Entity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.network.Packet
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
+import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.util.Identifier
 
 object AdornNetworking {
     val ENTITY_SPAWN = AdornCommon.id("entity_spawn")
+    val OPEN_BOOK = AdornCommon.id("open_book")
 
     fun init() {
     }
@@ -34,6 +41,13 @@ object AdornNetworking {
                 world.addEntity(packet.id, entity)
             }
         }
+
+        ClientPlayNetworking.registerGlobalReceiver(OPEN_BOOK) { client, _, buf, _ ->
+            val bookId = buf.readIdentifier()
+            client.execute {
+                client.setScreen(CottonClientScreen(BookScreenDescription(BookManager[bookId])))
+            }
+        }
     }
 
     fun createEntitySpawnPacket(entity: Entity): Packet<*> =
@@ -43,4 +57,12 @@ object AdornNetworking {
                 EntitySpawnS2CPacket(entity).write(this)
             }
         )
+
+    fun sendOpenBookPacket(player: PlayerEntity, bookId: Identifier) {
+        if (player is ServerPlayerEntity) {
+            val buf = PacketByteBufs.create()
+            buf.writeIdentifier(bookId)
+            ServerPlayNetworking.send(player, OPEN_BOOK, buf)
+        }
+    }
 }

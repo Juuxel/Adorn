@@ -1,11 +1,9 @@
 package juuxel.adorn.item
 
-import io.github.cottonmc.cotton.gui.client.CottonClientScreen
-import juuxel.adorn.client.gui.screen.BookScreenDescription
 import juuxel.adorn.client.resources.BookManager
+import juuxel.adorn.lib.AdornNetworking
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.client.MinecraftClient
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
@@ -23,12 +21,8 @@ import net.minecraft.world.World
 
 class AdornBookItem(private val bookId: Identifier, settings: Settings) : Item(settings) {
     override fun use(world: World, player: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
-        if (world.isClient) {
-            MinecraftClient.getInstance().setScreen(
-                CottonClientScreen(
-                    BookScreenDescription(BookManager[bookId])
-                )
-            )
+        if (!world.isClient) {
+            AdornNetworking.sendOpenBookPacket(player, bookId)
         }
         player.incrementStat(Stats.USED.getOrCreateStat(this))
 
