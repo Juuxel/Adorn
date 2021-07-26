@@ -49,7 +49,7 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
         var remainingAmount = stack.count
 
         for (invStack in items) {
-            if (invStack.isItemEqual(stack) && invStack.tag == stack.tag) {
+            if (invStack.isItemEqual(stack) && invStack.nbt == stack.nbt) {
                 val invStackAmount = invStack.count
                 invStack.decrement(min(invStackAmount, remainingAmount))
                 remainingAmount -= invStackAmount
@@ -67,7 +67,7 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
         var remainingAmount = stack.count
 
         for (invStack in items) {
-            if (invStack.isItemEqual(stack) && invStack.count < invStack.maxCount && stack.tag == invStack.tag) {
+            if (invStack.isItemEqual(stack) && invStack.count < invStack.maxCount && stack.nbt == invStack.nbt) {
                 val insertionAmount = min(invStack.maxCount - invStack.count, remainingAmount)
                 remainingAmount -= insertionAmount
                 if (remainingAmount <= 0) return true
@@ -88,7 +88,7 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
         var remainingAmount = stack.count
 
         for ((slot, invStack) in items.withIndex()) {
-            if (invStack.isItemEqual(stack) && invStack.count < invStack.maxCount && invStack.tag == stack.tag) {
+            if (invStack.isItemEqual(stack) && invStack.count < invStack.maxCount && invStack.nbt == stack.nbt) {
                 val insertionAmount = min(invStack.maxCount - invStack.count, remainingAmount)
                 remainingAmount -= insertionAmount
                 invStack.increment(insertionAmount)
@@ -106,11 +106,11 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
      * Gets the count of items with the same item and NBT as the [stack].
      * Ignores the stack's count.
      */
-    fun getAmountWithNbt(stack: ItemStack): Int = items.map {
-        if (stack.item == it.item && stack.tag == it.tag)
+    fun getAmountWithNbt(stack: ItemStack): Int = items.sumOf {
+        if (stack.item == it.item && stack.nbt == it.nbt)
             it.count
         else 0
-    }.sum()
+    }
 
     // -----
     // NBT
@@ -153,7 +153,7 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
             }
         }
 
-    override fun isEmpty(): Boolean = hasContents(items)
+    override fun isEmpty(): Boolean = items.all { it.isEmpty }
 
     // -----------
     // Listeners
@@ -173,9 +173,4 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
                 block(it)
             }
         )
-
-    companion object {
-        /** Checks if the list has non-empty item stacks. */
-        fun hasContents(stacks: List<ItemStack>) = stacks.none { !it.isEmpty }
-    }
 }

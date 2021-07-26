@@ -63,7 +63,7 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
                 val trade = be.trade
                 val validPayment = handStack.isItemEqual(trade.price) &&
                     handStack.count >= trade.price.count &&
-                    handStack.tag == trade.price.tag
+                    handStack.nbt == trade.price.nbt
                 val canInsertPayment = be.storage.canInsert(trade.price)
 
                 if (trade.isEmpty()) {

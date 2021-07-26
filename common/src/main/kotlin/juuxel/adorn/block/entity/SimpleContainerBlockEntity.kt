@@ -3,7 +3,7 @@ package juuxel.adorn.block.entity
 import juuxel.adorn.menu.ContainerBlockMenu
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntityType
-import net.minecraft.block.entity.ChestStateManager
+import net.minecraft.block.entity.ViewerCountManager
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.server.network.ServerPlayerEntity
@@ -17,10 +17,10 @@ import net.minecraft.world.World
 abstract class SimpleContainerBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: BlockState, size: Int) :
     BaseContainerBlockEntity(type, pos, state, size),
     ExtendedMenuFactory {
-    private val stateManager: ChestStateManager = object : ChestStateManager() {
-        override fun onChestOpened(world: World, pos: BlockPos, state: BlockState) {}
-        override fun onChestClosed(world: World, pos: BlockPos, state: BlockState) {}
-        override fun onInteracted(
+    private val viewerCountManager: ViewerCountManager = object : ViewerCountManager() {
+        override fun onContainerOpen(world: World, pos: BlockPos, state: BlockState) {}
+        override fun onContainerClose(world: World, pos: BlockPos, state: BlockState) {}
+        override fun onViewerCountUpdate(
             world: World, pos: BlockPos, state: BlockState,
             oldViewerCount: Int, newViewerCount: Int
         ) {}
@@ -32,16 +32,16 @@ abstract class SimpleContainerBlockEntity(type: BlockEntityType<*>, pos: BlockPo
     }
 
     override fun onOpen(player: PlayerEntity) {
-        stateManager.openChest(player, world, pos, cachedState)
+        viewerCountManager.openContainer(player, world, pos, cachedState)
     }
 
     override fun onClose(player: PlayerEntity) {
-        stateManager.closeChest(player, world, pos, cachedState)
+        viewerCountManager.closeContainer(player, world, pos, cachedState)
     }
 
     fun onScheduledTick() {
         if (!removed) {
-            stateManager.updateViewerCount(world, pos, cachedState)
+            viewerCountManager.updateViewerCount(world, pos, cachedState)
         }
     }
 

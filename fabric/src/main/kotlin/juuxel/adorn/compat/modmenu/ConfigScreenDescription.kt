@@ -87,16 +87,16 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
 
     fun close(previous: Screen) {
         if (restartRequired) {
-            MinecraftClient.getInstance().openScreen(
+            MinecraftClient.getInstance().setScreen(
                 NoticeScreen(
-                    { MinecraftClient.getInstance().openScreen(previous) },
+                    { MinecraftClient.getInstance().setScreen(previous) },
                     TranslatableText("gui.adorn.config.restart_required.title"),
                     TranslatableText("gui.adorn.config.restart_required.message"),
                     TranslatableText("gui.ok")
                 )
             )
         } else {
-            MinecraftClient.getInstance().openScreen(previous)
+            MinecraftClient.getInstance().setScreen(previous)
         }
     }
 

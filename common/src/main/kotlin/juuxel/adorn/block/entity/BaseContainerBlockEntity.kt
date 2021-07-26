@@ -1,6 +1,5 @@
 package juuxel.adorn.block.entity
 
-import juuxel.adorn.util.InventoryComponent
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.block.entity.LootableContainerBlockEntity
@@ -31,8 +30,6 @@ abstract class BaseContainerBlockEntity(type: BlockEntityType<*>, pos: BlockPos,
             Inventories.readNbt(nbt, items)
         }
     }
-
-    override fun isEmpty() = InventoryComponent.hasContents(items)
 
     override fun getInvStackList() = items
 

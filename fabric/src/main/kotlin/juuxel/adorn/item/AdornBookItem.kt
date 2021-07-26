@@ -24,7 +24,7 @@ import net.minecraft.world.World
 class AdornBookItem(private val bookId: Identifier, settings: Settings) : Item(settings) {
     override fun use(world: World, player: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         if (world.isClient) {
-            MinecraftClient.getInstance().openScreen(
+            MinecraftClient.getInstance().setScreen(
                 CottonClientScreen(
                     BookScreenDescription(BookManager[bookId])
                 )

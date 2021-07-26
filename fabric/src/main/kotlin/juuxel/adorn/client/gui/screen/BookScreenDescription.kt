@@ -90,7 +90,7 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription() {
                 client.soundManager.play(
                     PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1.0f)
                 )
-                client.openScreen(null)
+                client.setScreen(null)
                 return InputResult.PROCESSED
             }
 
