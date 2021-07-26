@@ -17,7 +17,7 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:stone_torch"
+            "items": ["adorn:stone_torch"]
           }
         ]
       }

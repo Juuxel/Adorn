@@ -17,7 +17,7 @@
       "conditions": {
         "items": [
           {
-            "item": "adorn:trading_station"
+            "items": ["adorn:trading_station"]
           }
         ]
       }
