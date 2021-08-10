@@ -7,7 +7,7 @@ plugins {
 }
 
 architectury {
-    common(false)
+    common()
 }
 
 loom {

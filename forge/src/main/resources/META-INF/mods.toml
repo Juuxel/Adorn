@@ -1,0 +1,17 @@
+modLoader = "kotlinforforge"
+loaderVersion = "[1,)"
+license = "MIT"
+issueTrackerURL = "https://github.com/Juuxel/Adorn/issues"
+
+[[mods]]
+modId = "adorn"
+version = "${version}"
+displayName = "Adorn"
+description = "Decorate your home!"
+authors = "Juuz"
+logoFile = "icon.png"
+
+[[dependencies.adorn]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.17.1,1.18)"

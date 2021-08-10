@@ -4,7 +4,7 @@ plugins {
     id("architectury-plugin")
     id("io.github.juuxel.loom-quiltflower")
     id("org.jmailen.kotlinter")
-    id ("com.github.johnrengelman.shadow")
+    id("com.github.johnrengelman.shadow")
 }
 
 val shadowCommon by configurations.creating
