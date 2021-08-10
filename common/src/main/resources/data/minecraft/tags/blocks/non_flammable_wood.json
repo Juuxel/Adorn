@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:crimson_chair",
+    "adorn:warped_chair",
+    "adorn:crimson_drawer",
+    "adorn:warped_drawer",
+    "adorn:crimson_table",
+    "adorn:warped_table",
+    "adorn:crimson_bench",
+    "adorn:warped_bench",
+    "adorn:crimson_post",
+    "adorn:warped_post",
+    "adorn:crimson_platform",
+    "adorn:warped_platform",
+    "adorn:crimson_step",
+    "adorn:warped_step",
+    "adorn:crimson_shelf",
+    "adorn:warped_shelf"
+  ]
+}

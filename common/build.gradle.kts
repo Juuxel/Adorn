@@ -11,8 +11,7 @@ architectury {
 }
 
 loom {
-    // kotlin integration tests in loom when?
-    setAccessWidener(file("src/main/resources/adorn.accesswidener"))
+    accessWidener = file("src/main/resources/adorn.accesswidener")
 }
 
 dependencies {

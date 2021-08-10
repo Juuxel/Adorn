@@ -19,15 +19,7 @@ val accessWidenerFile = project(":common").file("src/main/resources/adorn.access
 
 loom {
     // FIXME: This is only needed for remapping the AW itself.
-    // kotlin integration tests in loom when?
-    setAccessWidener(accessWidenerFile)
-
-    // :gloom:
-    mixin {
-        add(sourceSets.main.get()) {
-            include("mixins.*.json")
-        }
-    }
+    accessWidener = accessWidenerFile
 }
 
 sourceSets {
