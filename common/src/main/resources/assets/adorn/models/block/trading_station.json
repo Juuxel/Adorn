@@ -10,8 +10,8 @@
   "elements": [
     {
       "__comment": "Top",
-      "from": [0, 14, 0],
-      "to": [16, 16, 16],
+      "from": [0.01, 13.99, 0.01],
+      "to": [15.99, 15.99, 15.99],
       "faces": {
         "up": { "texture": "#top", "cullface": "up" },
         "down": { "texture": "#top" },
