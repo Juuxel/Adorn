@@ -8,10 +8,10 @@
     "BlockMixin",
     "BubbleColumnBlockMixin",
     "FenceGateBlockMixin",
+    "LivingEntityMixin",
     "PlayerEntityMixin"
   ],
   "client": [
-    "client.LivingEntityMixin"
   ],
 
   "injectors": {
