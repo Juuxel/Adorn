@@ -4,6 +4,7 @@ import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.block.CarpetedBlock
 import juuxel.adorn.block.SneakClickHandler
+import juuxel.adorn.block.SofaBlock
 import juuxel.adorn.client.SinkColorProvider
 import juuxel.adorn.client.renderer.ShelfRenderer
 import juuxel.adorn.client.renderer.TradingStationRenderer
@@ -12,6 +13,7 @@ import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
+import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.DyedCarpetBlock
 import net.minecraft.client.render.RenderLayer
@@ -67,6 +69,37 @@ object AdornBlocksFabric {
                 ActionResult.PASS
             }
         )
+
+        EntitySleepEvents.ALLOW_BED.register(EntitySleepEvents.AllowBed { _, _, state, _ ->
+            if (state.block is SofaBlock) ActionResult.SUCCESS
+            else ActionResult.PASS
+        })
+
+        EntitySleepEvents.ALLOW_SETTING_SPAWN.register(EntitySleepEvents.AllowSettingSpawn { player, sleepingPos ->
+            player.world.getBlockState(sleepingPos).block !is SofaBlock
+        })
+
+        EntitySleepEvents.ALLOW_SLEEP_TIME.register(EntitySleepEvents.AllowSleepTime { player, sleepingPos, _ ->
+            if (player.world.isDay && player.world.getBlockState(sleepingPos).block is SofaBlock) ActionResult.SUCCESS
+            else ActionResult.PASS
+        })
+
+        EntitySleepEvents.MODIFY_SLEEPING_DIRECTION.register(EntitySleepEvents.ModifySleepingDirection { entity, sleepingPos, sleepingDirection ->
+            if (entity.world.getBlockState(sleepingPos).block is SofaBlock)
+                SofaBlock.getSleepingDirection(entity.world, sleepingPos, ignoreNeighbors = true)
+            else sleepingDirection
+        })
+
+        EntitySleepEvents.ALLOW_RESETTING_TIME.register(EntitySleepEvents.AllowResettingTime { player ->
+            val pos = player.sleepingPosition.orElse(null) ?: return@AllowResettingTime true
+
+            if (player.world.getBlockState(pos).block is SofaBlock) {
+                if (player.world.isDay) false
+                else player.world.gameRules.getBoolean(AdornGameRules.SKIP_NIGHT_ON_SOFAS)
+            } else {
+                true
+            }
+        })
     }
 
     @Environment(EnvType.CLIENT)

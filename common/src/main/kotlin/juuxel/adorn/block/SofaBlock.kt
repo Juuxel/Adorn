@@ -6,6 +6,7 @@ import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
 import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.property.FrontConnection
+import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.buildShapeRotations
 import juuxel.adorn.util.withBlock
 import net.minecraft.block.Block
@@ -67,12 +68,15 @@ class SofaBlock(variant: BlockVariant) :
     override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult): ActionResult {
         val sleepingDirection = getSleepingDirection(world, pos)
         return if (world.dimension.isNatural && sleepingDirection != null && !state[OCCUPIED]) {
-            if (!world.isClient) {
-                world.setBlockState(pos, state.with(OCCUPIED, true))
-                val neighborPos = pos.offset(sleepingDirection)
-                world.setBlockState(neighborPos, world.getBlockState(neighborPos).with(OCCUPIED, true))
-                player.sleep(pos)
-                (world as? ServerWorld)?.updateSleepingPlayers()
+            if (world is ServerWorld) {
+                with(PlatformBridges.entities) {
+                    player.trySleep(pos) {
+                        world.setBlockState(pos, state.with(OCCUPIED, true))
+                        val neighborPos = pos.offset(sleepingDirection)
+                        world.setBlockState(neighborPos, world.getBlockState(neighborPos).with(OCCUPIED, true))
+                        world.updateSleepingPlayers()
+                    }
+                }
             }
             ActionResult.SUCCESS
         } else ActionResult.PASS

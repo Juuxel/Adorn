@@ -8,13 +8,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+import java.util.Optional;
+
 @Mixin(LivingEntity.class)
 abstract class LivingEntityMixin extends Entity {
+    @Shadow
+    public abstract Optional<BlockPos> getSleepingPosition();
+
     private LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
@@ -27,6 +33,13 @@ abstract class LivingEntityMixin extends Entity {
             if (direction != null) {
                 info.setReturnValue(direction.getOpposite());
             }
+        }
+    }
+
+    @Inject(method = "isSleepingInBed", at = @At("RETURN"), cancellable = true)
+    private void onIsSleepingInBed(CallbackInfoReturnable<Boolean> info) {
+        if (!info.getReturnValueZ() && getSleepingPosition().map(pos -> world.getBlockState(pos).getBlock() instanceof SofaBlock).orElse(false)) {
+            info.setReturnValue(true);
         }
     }
 }

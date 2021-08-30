@@ -30,7 +30,15 @@ sourceSets {
     }
 }
 
+tasks.register("resolveCompileClasspath") {
+    doLast {
+        configurations.compileClasspath.get().resolve().forEach { println(it) }
+    }
+}
+
 repositories {
+    mavenLocal()
+
     maven {
         name = "Cotton"
         url = uri("https://server.bbkr.space/artifactory/libs-release")
@@ -89,6 +97,9 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric-loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric-api")}")
     modApi("net.fabricmc:fabric-language-kotlin:${rootProject.property("fabric-kotlin")}")
+    modImplementation("net.fabricmc.fabric-api:fabric-entity-events-v1:1.2.0-pre.01+7b3c279f18") {
+        isForce = true
+    }
 
     include(modImplementation("io.github.cottonmc:LibGui:${rootProject.property("libgui")}")!!)
     include(modImplementation("io.github.cottonmc:Jankson-Fabric:${rootProject.property("jankson")}")!!)
