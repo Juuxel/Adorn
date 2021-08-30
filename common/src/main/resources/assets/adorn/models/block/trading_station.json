@@ -13,12 +13,7 @@
       "from": [0, 14, 0],
       "to": [16, 16, 16],
       "faces": {
-        "up": { "texture": "#top", "cullface": "up" },
-        "down": { "texture": "#top" },
-        "east": { "texture": "#top", "cullface": "east" },
-        "west": { "texture": "#top", "cullface": "west" },
-        "north": { "texture": "#top", "cullface": "north" },
-        "south": { "texture": "#top", "cullface": "south" }
+        "down": { "texture": "#top" }
       }
     },
     {
@@ -71,8 +66,8 @@
     },
     {
       "__comment": "Cloth",
-      "from": [-0.01, 11.01, -0.01],
-      "to": [16.01, 16.01, 16.01],
+      "from": [0, 11, 0],
+      "to": [16, 16, 16],
       "faces": {
         "up": { "texture": "#cloth_top", "cullface": "up" },
         "east": { "texture": "#cloth_side", "cullface": "east" },
