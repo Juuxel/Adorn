@@ -10,8 +10,8 @@
   "elements": [
     {
       "__comment": "Top",
-      "from": [0, 14, 0],
-      "to": [16, 16, 16],
+      "from": [0.02, 14, 0.02],
+      "to": [15.98, 15.98, 15.98],
       "faces": {
         "up": { "texture": "#top", "cullface": "up" },
         "down": { "texture": "#top" },
@@ -71,8 +71,8 @@
     },
     {
       "__comment": "Cloth",
-      "from": [-0.01, 11.01, -0.01],
-      "to": [16.01, 16.01, 16.01],
+      "from": [0, 11, 0],
+      "to": [16, 16, 16],
       "faces": {
         "up": { "texture": "#cloth_top", "cullface": "up" },
         "east": { "texture": "#cloth_side", "cullface": "east" },
