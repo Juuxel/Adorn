@@ -1,16 +1,17 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.30"
-    id("fabric-loom") version "0.6-SNAPSHOT"
-    id("org.jmailen.kotlinter") version "3.2.0"
+    kotlin("jvm") version "1.5.30"
+    id("fabric-loom") version "0.9-SNAPSHOT"
+    id("io.github.juuxel.loom-quiltflower") version "1.3.0"
+    id("org.jmailen.kotlinter") version "3.6.0"
 }
 
 group = "io.github.juuxel"
 version = "${project.property("mod-version")}+${project.property("minecraft-version")}"
 
 base {
-    archivesBaseName = "Adorn"
+    archivesName.set("Adorn")
 }
 
 java {
@@ -21,7 +22,7 @@ java {
 }
 
 loom {
-    accessWidener = file("src/main/resources/adorn.accesswidener")
+    accessWidenerPath.set(file("src/main/resources/adorn.accesswidener"))
 
     runConfigs.configureEach {
         val capitalizedName = if (name.length <= 1) name else name[0].toUpperCase() + name.substring(1)
