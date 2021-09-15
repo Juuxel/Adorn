@@ -40,6 +40,11 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
         }
     }
 
+    // Mimics LootableContainerBlockEntity.canPlayerUse
+    fun canPlayerUse(player: PlayerEntity): Boolean =
+        world!!.getBlockEntity(pos) === this &&
+            player.squaredDistanceTo(pos.x + 0.5, pos.y + 0.5, pos.z + 0.5) <= 64.0
+
     fun setOwner(player: PlayerEntity) {
         owner = player.gameProfile.id
         ownerName = LiteralText(player.gameProfile.name)
