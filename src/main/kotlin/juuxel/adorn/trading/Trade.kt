@@ -2,21 +2,21 @@ package juuxel.adorn.trading
 
 import juuxel.adorn.util.NbtConvertible
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.NbtCompound
 
 data class Trade(var selling: ItemStack, var price: ItemStack) : NbtConvertible {
     private val listeners: MutableList<TradeListener> = ArrayList()
 
     fun isEmpty() = selling.isEmpty || price.isEmpty
 
-    override fun fromTag(tag: CompoundTag) {
-        selling = ItemStack.fromTag(tag.getCompound("Selling"))
-        price = ItemStack.fromTag(tag.getCompound("Price"))
+    override fun fromTag(tag: NbtCompound) {
+        selling = ItemStack.fromNbt(tag.getCompound("Selling"))
+        price = ItemStack.fromNbt(tag.getCompound("Price"))
     }
 
-    override fun toTag(tag: CompoundTag) = tag.apply {
-        put("Selling", selling.toTag(CompoundTag()))
-        put("Price", price.toTag(CompoundTag()))
+    override fun toTag(tag: NbtCompound) = tag.apply {
+        put("Selling", selling.writeNbt(NbtCompound()))
+        put("Price", price.writeNbt(NbtCompound()))
     }
 
     fun addListener(listener: TradeListener) {

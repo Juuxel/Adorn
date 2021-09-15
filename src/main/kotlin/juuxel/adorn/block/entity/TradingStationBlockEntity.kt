@@ -15,7 +15,7 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.server.network.ServerPlayerEntity
@@ -62,7 +62,7 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
 
     // NBT
 
-    override fun fromTag(state: BlockState, tag: CompoundTag) {
+    override fun fromTag(state: BlockState, tag: NbtCompound) {
         super.fromTag(state, tag)
 
         if (tag.containsUuid(NBT_TRADING_OWNER)) {
@@ -76,25 +76,25 @@ class TradingStationBlockEntity : BlockEntity(AdornBlockEntities.TRADING_STATION
         storage.fromTag(tag.getCompound(NBT_STORAGE))
     }
 
-    override fun toTag(tag: CompoundTag) = super.toTag(tag).apply {
+    override fun writeNbt(tag: NbtCompound) = super.writeNbt(tag).apply {
         if (owner != null) {
             tag.putUuid(NBT_TRADING_OWNER, owner)
         }
 
         tag.putText(NBT_TRADING_OWNER_NAME, ownerName)
 
-        tag.put(NBT_TRADE, trade.toTag(CompoundTag()))
-        tag.put(NBT_STORAGE, storage.toTag(CompoundTag()))
+        tag.put(NBT_TRADE, trade.toTag(NbtCompound()))
+        tag.put(NBT_STORAGE, storage.toTag(NbtCompound()))
     }
 
     // Client NBT
 
-    override fun toClientTag(tag: CompoundTag) = tag.apply {
+    override fun toClientTag(tag: NbtCompound) = tag.apply {
         putText(NBT_TRADING_OWNER_NAME, ownerName)
-        put(NBT_TRADE, trade.toTag(CompoundTag()))
+        put(NBT_TRADE, trade.toTag(NbtCompound()))
     }
 
-    override fun fromClientTag(tag: CompoundTag) {
+    override fun fromClientTag(tag: NbtCompound) {
         trade.fromTag(tag.getCompound(NBT_TRADE))
         ownerName = tag.getText(NBT_TRADING_OWNER_NAME) ?: return
     }

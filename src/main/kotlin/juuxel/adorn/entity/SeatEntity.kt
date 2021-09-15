@@ -9,7 +9,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
@@ -64,11 +64,11 @@ class SeatEntity(type: EntityType<*>, world: World) : Entity(type, world) {
     override fun isInvisible() = true
 
     override fun initDataTracker() {}
-    override fun readCustomDataFromTag(tag: CompoundTag) {
+    override fun readCustomDataFromNbt(tag: NbtCompound) {
         seatPos = tag.getBlockPos("SeatPos")
     }
 
-    override fun writeCustomDataToTag(tag: CompoundTag) {
+    override fun writeCustomDataToNbt(tag: NbtCompound) {
         tag.putBlockPos("SeatPos", seatPos)
     }
 }

@@ -47,12 +47,12 @@ abstract class BaseMenu(
         private val LOGGER = LogManager.getLogger()
 
         fun getBlock(context: ScreenHandlerContext) =
-            context.run<Block> { world: World, pos: BlockPos ->
+            context.get { world: World, pos: BlockPos ->
                 world.getBlockState(pos).block
             }.orElse(Blocks.AIR)
 
         fun getBlockEntity(context: ScreenHandlerContext): BlockEntity? =
-            context.run<BlockEntity?> { world: World, pos: BlockPos ->
+            context.get { world: World, pos: BlockPos ->
                 world.getBlockEntity(pos)
             }.orElse(null)
 
@@ -64,7 +64,7 @@ abstract class BaseMenu(
                         else -> {
                             LOGGER.warn(
                                 "[Adorn] No block inventory found at {}",
-                                context.run<BlockPos> { _, pos -> pos }
+                                context.get { _, pos -> pos }
                                     .map(BlockPos::toString)
                                     .orElse("missing position")
                             )

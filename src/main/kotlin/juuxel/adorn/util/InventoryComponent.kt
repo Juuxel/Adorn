@@ -6,7 +6,7 @@ import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.InventoryChangedListener
 import net.minecraft.inventory.SidedInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.collection.DefaultedList
 import kotlin.math.min
 
@@ -118,12 +118,12 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
     // NBT
     // -----
 
-    override fun toTag(tag: CompoundTag): CompoundTag = tag.apply {
-        Inventories.toTag(tag, items)
+    override fun toTag(tag: NbtCompound): NbtCompound = tag.apply {
+        Inventories.writeNbt(tag, items)
     }
 
-    override fun fromTag(tag: CompoundTag) {
-        Inventories.fromTag(tag, items)
+    override fun fromTag(tag: NbtCompound) {
+        Inventories.readNbt(tag, items)
     }
 
     // -------------------------------

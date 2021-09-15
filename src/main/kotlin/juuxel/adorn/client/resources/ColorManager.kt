@@ -11,13 +11,13 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
 import net.minecraft.resource.ResourceManager
-import net.minecraft.resource.SinglePreparationResourceReloadListener
+import net.minecraft.resource.SinglePreparationResourceReloader
 import net.minecraft.util.Identifier
 import net.minecraft.util.profiler.Profiler
 import org.apache.logging.log4j.LogManager
 
 @Environment(EnvType.CLIENT)
-object ColorManager : SinglePreparationResourceReloadListener<Map<Identifier, List<JsonObject>>>(), IdentifiableResourceReloadListener {
+object ColorManager : SinglePreparationResourceReloader<Map<Identifier, List<JsonObject>>>(), IdentifiableResourceReloadListener {
     private val LOGGER = LogManager.getLogger()
     private val JANKSON = Jankson.builder().build()
     private val ID = Adorn.id("color_manager")

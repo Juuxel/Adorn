@@ -4,7 +4,7 @@ import juuxel.adorn.block.AdornBlockEntities
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventories
-import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.NbtCompound
 
 class ShelfBlockEntity : BaseInventoryBlockEntity(AdornBlockEntities.SHELF, 2), BlockEntityClientSerializable {
     // No menus for shelves
@@ -12,11 +12,11 @@ class ShelfBlockEntity : BaseInventoryBlockEntity(AdornBlockEntities.SHELF, 2), 
 
     override fun getMaxCountPerStack() = 1
 
-    override fun toClientTag(tag: CompoundTag) = tag.apply {
-        Inventories.toTag(tag, items)
+    override fun toClientTag(tag: NbtCompound) = tag.apply {
+        Inventories.writeNbt(tag, items)
     }
 
-    override fun fromClientTag(tag: CompoundTag) {
-        Inventories.fromTag(tag, items)
+    override fun fromClientTag(tag: NbtCompound) {
+        Inventories.readNbt(tag, items)
     }
 }

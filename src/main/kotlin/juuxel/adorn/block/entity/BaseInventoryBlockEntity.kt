@@ -10,7 +10,7 @@ import net.minecraft.block.entity.LootableContainerBlockEntity
 import net.minecraft.inventory.Inventories
 import net.minecraft.inventory.SidedInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.collection.DefaultedList
@@ -28,15 +28,15 @@ abstract class BaseInventoryBlockEntity(
     protected var items: DefaultedList<ItemStack> = DefaultedList.ofSize(invSize, ItemStack.EMPTY)
     val sidedInventory: SidedInventory = @Suppress("LeakingThis") SimpleSidedInventory(this)
 
-    override fun toTag(tag: CompoundTag) = super.toTag(tag).apply {
+    override fun writeNbt(tag: NbtCompound) = super.writeNbt(tag).apply {
         if (!serializeLootTable(tag))
-            Inventories.toTag(tag, items)
+            Inventories.writeNbt(tag, items)
     }
 
-    override fun fromTag(state: BlockState, tag: CompoundTag) {
+    override fun fromTag(state: BlockState, tag: NbtCompound) {
         super.fromTag(state, tag)
         if (!deserializeLootTable(tag))
-            Inventories.fromTag(tag, items)
+            Inventories.readNbt(tag, items)
     }
 
     override fun isEmpty() = InventoryComponent.hasContents(items)
