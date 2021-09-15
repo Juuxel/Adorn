@@ -73,8 +73,7 @@ class TradingStationMenu(
     }
 
     override fun canUse(entity: PlayerEntity): Boolean =
-        (context.get { world, pos -> world.getBlockEntity(pos) }
-            .orElse(null) as? TradingStationBlockEntity)
+        (context.get { world, pos -> world.getBlockEntity(pos) }.orElse(null) as? TradingStationBlockEntity)
             ?.canPlayerUse(entity) ?: false
 
     override fun onSlotClick(slotNumber: Int, button: Int, action: SlotActionType, player: PlayerEntity): ItemStack {

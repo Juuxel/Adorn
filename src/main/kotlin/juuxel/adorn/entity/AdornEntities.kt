@@ -5,8 +5,8 @@ import juuxel.adorn.client.renderer.InvisibleEntityRenderer
 import juuxel.adorn.lib.RegistryHelper
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry
+import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.SpawnGroup
 import net.minecraft.util.registry.Registry
