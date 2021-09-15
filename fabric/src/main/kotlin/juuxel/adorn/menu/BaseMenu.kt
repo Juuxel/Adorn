@@ -8,7 +8,6 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.block.Blocks
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
@@ -34,8 +33,6 @@ abstract class BaseMenu(
     }
 
     override val inventory: Inventory get() = blockInventory
-
-    override fun canUse(player: PlayerEntity?) = true
 
     @Environment(EnvType.CLIENT)
     override fun addPainters() {

@@ -6,6 +6,7 @@ import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
 import io.github.cottonmc.cotton.gui.widget.data.VerticalAlignment
+import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.entity.TradingStation
 import juuxel.adorn.client.gui.painter.Painters
 import juuxel.adorn.trading.Trade
@@ -69,6 +70,12 @@ class TradingStationMenu(
             slotWidgets = mutableSlots
         }
     }
+
+    override fun canUse(entity: PlayerEntity): Boolean =
+        context.get { world, pos -> world.getBlockEntity(pos, AdornBlockEntities.TRADING_STATION) }
+            .orElse(null)
+            ?.orElse(null) // nested optionals!
+            ?.canPlayerUse(entity) ?: false
 
     override fun onSlotClick(slotNumber: Int, button: Int, action: SlotActionType, player: PlayerEntity) {
         val slot = slots.getOrNull(slotNumber)
