@@ -10,9 +10,7 @@ jobs:
     strategy:
       matrix:
         java: [
-          1.8, # Target
-          11,  # Current LTS
-          15   # Latest
+          16
         ]
     runs-on: ubuntu-latest
     steps:
