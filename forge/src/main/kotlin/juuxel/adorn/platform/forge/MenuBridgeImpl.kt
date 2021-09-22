@@ -1,9 +1,9 @@
 package juuxel.adorn.platform.forge
 
-import juuxel.adorn.menu.DrawerMenu
-import juuxel.adorn.menu.KitchenCupboardMenu
-import juuxel.adorn.menu.TradingStationMenu
 import juuxel.adorn.platform.MenuBridge
+import juuxel.adorn.platform.forge.menu.DrawerMenu
+import juuxel.adorn.platform.forge.menu.KitchenCupboardMenu
+import juuxel.adorn.platform.forge.menu.TradingStationMenu
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext

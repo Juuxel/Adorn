@@ -2,7 +2,6 @@
 package juuxel.adorn.platform.forge
 
 import juuxel.adorn.config.CommonConfig
-import juuxel.adorn.platform.MenuBridge
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import juuxel.adorn.platform.RegistrarFactory

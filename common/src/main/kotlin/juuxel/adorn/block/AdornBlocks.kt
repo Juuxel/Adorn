@@ -28,7 +28,9 @@ import net.minecraft.world.World
 
 @Suppress("UNUSED", "MemberVisibilityCanBePrivate")
 object AdornBlocks {
+    @JvmField
     val BLOCKS = PlatformBridges.registrarFactory.block()
+    @JvmField
     val ITEMS = PlatformBridges.registrarFactory.item()
 
     val SOFAS: Map<DyeColor, SofaBlock> by DyeColor.values().associateLazily {
@@ -327,13 +329,15 @@ object AdornBlocks {
     private fun <T : Block> registerBlock(
         name: String, itemGroup: ItemGroup = ItemGroup.DECORATIONS, block: () -> T
     ): Registered<T> =
-        registerBlock(name, Item.Settings().group(itemGroup), block)
+        registerBlock(name, itemSettings = { Item.Settings().group(itemGroup) }, block)
 
     /**
      * Registers a [block] with the [name] and the [itemSettings].
      */
-    private fun <T : Block> registerBlock(name: String, itemSettings: Item.Settings, block: () -> T): Registered<T> =
-        registerBlock(name, { makeItemForBlock(it, itemSettings) }, block)
+    private inline fun <T : Block> registerBlock(
+        name: String, crossinline itemSettings: () -> Item.Settings, noinline block: () -> T
+    ): Registered<T> =
+        registerBlock(name, itemProvider = { makeItemForBlock(it, itemSettings()) }, block)
 
     /**
      * Registers a [block] with the [name] and an item created by the [itemProvider].
@@ -371,7 +375,9 @@ object AdornBlocks {
         }
 
     private fun registerCrate(name: String): Registered<Block> =
-        registerBlock(name, Item.Settings().group(ItemGroup.DECORATIONS).recipeRemainder(CRATE.asItem())) {
-            Block(CRATE.copySettingsSafely())
-        }
+        registerBlock(
+            name,
+            itemSettings = { Item.Settings().group(ItemGroup.DECORATIONS).recipeRemainder(CRATE.asItem()) },
+            block = { Block(CRATE.copySettingsSafely()) }
+        )
 }

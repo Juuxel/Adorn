@@ -1,11 +1,11 @@
-modLoader = "kotlinforforge"
-loaderVersion = "[1,)"
+modLoader = "javafml"
+loaderVersion = "[37,]"
 license = "MIT"
 issueTrackerURL = "https://github.com/Juuxel/Adorn/issues"
 
 [[mods]]
 modId = "adorn"
-version = "${version}"
+version = "2.1.5"
 displayName = "Adorn"
 description = "Decorate your home!"
 authors = "Juuz"

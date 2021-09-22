@@ -1,7 +1,7 @@
-package juuxel.adorn.client.gui.screen
+package juuxel.adorn.platform.forge.client.gui.screen
 
 import juuxel.adorn.AdornCommon
-import juuxel.adorn.menu.TradingStationMenu
+import juuxel.adorn.platform.forge.menu.TradingStationMenu
 import juuxel.adorn.util.Colors
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory

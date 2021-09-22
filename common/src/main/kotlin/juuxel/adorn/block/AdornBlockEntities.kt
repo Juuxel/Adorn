@@ -11,6 +11,7 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
 
 object AdornBlockEntities {
+    @JvmField
     val BLOCK_ENTITIES = PlatformBridges.registrarFactory.blockEntity()
 
     val SHELF: BlockEntityType<ShelfBlockEntity> by register("shelf", PlatformBridges.blockEntities.shelf())

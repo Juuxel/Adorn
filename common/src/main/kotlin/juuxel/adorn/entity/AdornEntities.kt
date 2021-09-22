@@ -5,6 +5,7 @@ import juuxel.adorn.platform.Registrar
 import net.minecraft.entity.EntityType
 
 object AdornEntities {
+    @JvmField
     val ENTITIES: Registrar<EntityType<*>> = PlatformBridges.registrarFactory.entity()
 
     val SEAT: EntityType<SeatEntity> by ENTITIES.register("seat", PlatformBridges.entities::createSeatType)

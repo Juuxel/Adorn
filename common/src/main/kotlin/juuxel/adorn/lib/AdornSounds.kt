@@ -7,6 +7,7 @@ import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundEvent
 
 object AdornSounds {
+    @JvmField
     val SOUNDS: Registrar<SoundEvent> = PlatformBridges.registrarFactory.soundEvent()
 
     val BLOCK_CHAIN_LINK_FENCE_BREAK = register("block.adorn.chain_link_fence.break")

@@ -1,4 +1,4 @@
-package juuxel.adorn.client.gui.screen
+package juuxel.adorn.platform.forge.client.gui.screen
 
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.util.math.MatrixStack

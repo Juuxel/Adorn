@@ -7,6 +7,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 
 object AdornItems {
+    @JvmField
     val ITEMS: Registrar<Item> = PlatformBridges.registrarFactory.item()
     val GROUP = PlatformBridges.items.createAdornItemGroup()
 

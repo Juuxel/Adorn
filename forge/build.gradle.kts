@@ -15,6 +15,8 @@ architectury {
 }
 
 loom {
+    accessWidenerPath.set(project(":common").file("src/main/resources/adorn.accesswidener"))
+
     forge {
         convertAccessWideners.set(true)
         extraAccessWideners.add("adorn.accesswidener")
@@ -34,7 +36,7 @@ dependencies {
     mappings("net.fabricmc:yarn:${rootProject.property("minecraft-version")}+${rootProject.property("mappings")}:v2")
     forge("net.minecraftforge:forge:${rootProject.property("minecraft-version")}-${rootProject.property("forge-version")}")
 
-    implementation("thedarkcolour:kotlinforforge:${rootProject.property("kotlin-for-forge")}")
+    implementation(forgeDependencies(kotlin("stdlib-jdk8"))!!)
 
     implementation(project(":common", configuration = "dev")) {
         isTransitive = false
@@ -45,6 +47,10 @@ dependencies {
     shadowCommon(project(path = ":common", configuration = "transformProductionFabric")) {
         isTransitive = false
     }
+}
+
+kotlinter {
+    disabledRules = arrayOf("parameter-list-wrapping")
 }
 
 tasks {

@@ -12,6 +12,7 @@ object AdornGameRules {
     @JvmField
     val SKIP_NIGHT_ON_SOFAS: Key<BooleanRule> = register("skipNightOnSofas", Category.PLAYER, BooleanRule.create(true))
 
+    @JvmStatic
     fun init() {
     }
 

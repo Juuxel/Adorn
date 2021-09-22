@@ -1,4 +1,4 @@
-package juuxel.adorn.menu
+package juuxel.adorn.platform.forge.menu
 
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory

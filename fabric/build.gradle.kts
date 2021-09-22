@@ -18,8 +18,8 @@ val generatedResources = file("src/generated/resources")
 val accessWidenerFile = project(":common").file("src/main/resources/adorn.accesswidener")
 
 loom {
-    // FIXME: This is only needed for remapping the AW itself.
-    accessWidener = accessWidenerFile
+    // Technically useless, BUT this is also needed at dev runtime of course
+    accessWidenerPath.set(accessWidenerFile)
 }
 
 sourceSets {

@@ -31,6 +31,7 @@ object AdornTags {
 
     val STONE_RODS = item(Identifier("c", "stone_rods"))
 
+    @JvmStatic
     fun init() {}
 
     private fun block(id: Identifier): Tag.Identified<Block> =

@@ -16,7 +16,7 @@ architectury {
 }
 
 loom {
-    accessWidener = file("src/main/resources/adorn.accesswidener")
+    accessWidenerPath.set(file("src/main/resources/adorn.accesswidener"))
 }
 
 dependencies {

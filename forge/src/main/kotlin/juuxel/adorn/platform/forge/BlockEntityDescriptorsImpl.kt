@@ -8,10 +8,10 @@ import juuxel.adorn.block.entity.BlockEntityDescriptor
 import juuxel.adorn.block.entity.DrawerBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.block.entity.ShelfBlockEntity
-import juuxel.adorn.block.entity.ShelfBlockEntityForge
 import juuxel.adorn.block.entity.TradingStationBlockEntity
-import juuxel.adorn.block.entity.TradingStationBlockEntityForge
 import juuxel.adorn.platform.BlockEntityDescriptors
+import juuxel.adorn.platform.forge.block.entity.ShelfBlockEntityForge
+import juuxel.adorn.platform.forge.block.entity.TradingStationBlockEntityForge
 
 object BlockEntityDescriptorsImpl : BlockEntityDescriptors {
     override fun shelf(): BlockEntityDescriptor<ShelfBlock, ShelfBlockEntity> =

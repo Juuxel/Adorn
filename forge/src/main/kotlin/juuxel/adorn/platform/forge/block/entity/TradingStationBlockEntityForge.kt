@@ -1,23 +1,27 @@
-package juuxel.adorn.block.entity
+package juuxel.adorn.platform.forge.block.entity
 
+import juuxel.adorn.block.entity.TradingStationBlockEntity
+import juuxel.adorn.util.getText
+import juuxel.adorn.util.putText
 import net.minecraft.block.BlockState
-import net.minecraft.inventory.Inventories
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.ClientConnection
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.util.math.BlockPos
 
-class ShelfBlockEntityForge(pos: BlockPos, state: BlockState) : ShelfBlockEntity(pos, state) {
+class TradingStationBlockEntityForge(pos: BlockPos, state: BlockState) : TradingStationBlockEntity(pos, state) {
     override fun toInitialChunkDataNbt(): NbtCompound = writeNbt(NbtCompound())
 
     override fun toUpdatePacket(): BlockEntityUpdateS2CPacket {
         val nbt = NbtCompound()
-        Inventories.writeNbt(nbt, items)
+        nbt.putText(NBT_TRADING_OWNER_NAME, ownerName)
+        nbt.put(NBT_TRADE, trade.writeNbt(NbtCompound()))
         return BlockEntityUpdateS2CPacket(pos, -1, nbt)
     }
 
     override fun onDataPacket(net: ClientConnection, packet: BlockEntityUpdateS2CPacket) {
-        val nbt = packet.nbt
-        Inventories.readNbt(nbt, items)
+        val tag = packet.nbt
+        trade.readNbt(tag.getCompound(NBT_TRADE))
+        ownerName = tag.getText(NBT_TRADING_OWNER_NAME) ?: return
     }
 }
