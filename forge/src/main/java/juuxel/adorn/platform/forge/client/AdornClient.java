@@ -9,13 +9,13 @@ public class AdornClient {
     public static void init() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        // TODO: MOD_BUS.addListener(AdornBlocks::registerColorProviders)
         modBus.addListener(AdornClient::setup);
+        modBus.addListener(AdornRenderers.INSTANCE::registerColorProviders);
         modBus.addListener(AdornRenderers.INSTANCE::registerRenderers);
     }
 
     private static void setup(FMLClientSetupEvent event) {
-        // TODO: AdornBlocks.initClient()
+        AdornRenderers.INSTANCE.registerRenderLayers();
         AdornMenus.initClient();
     }
 }
