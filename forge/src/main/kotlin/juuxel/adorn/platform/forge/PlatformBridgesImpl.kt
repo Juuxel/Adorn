@@ -3,9 +3,7 @@ package juuxel.adorn.platform.forge
 
 import juuxel.adorn.config.CommonConfig
 import juuxel.adorn.platform.BlockEntityDescriptors
-import juuxel.adorn.platform.EntityBridge
 import juuxel.adorn.platform.MenuBridge
-import juuxel.adorn.platform.NetworkBridge
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import juuxel.adorn.platform.RegistrarFactory
@@ -23,13 +21,11 @@ fun PlatformBridges.Companion.get(): PlatformBridges =
             get() = TODO("Not yet implemented")
         override val config: CommonConfig
             get() = TODO("Not yet implemented")
-        override val entities: EntityBridge
-            get() = TODO("Not yet implemented")
+        override val entities = EntityBridgeImpl
         override val items = ItemBridgeImpl
         override val menus: MenuBridge
             get() = TODO("Not yet implemented")
-        override val network: NetworkBridge
-            get() = TODO("Not yet implemented")
+        override val network = NetworkBridgeImpl
         override val registrarFactory: RegistrarFactory = object : RegistrarFactory {
             override fun block(): Registrar<Block> = RegistrarImpl(ForgeRegistries.BLOCKS)
             override fun item(): Registrar<Item> = RegistrarImpl(ForgeRegistries.ITEMS)
