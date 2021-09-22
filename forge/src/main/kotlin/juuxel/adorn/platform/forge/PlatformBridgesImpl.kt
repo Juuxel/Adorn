@@ -17,8 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries
 fun PlatformBridges.Companion.get(): PlatformBridges =
     object : PlatformBridges {
         override val blockEntities = BlockEntityDescriptorsImpl
-        override val config: CommonConfig
-            get() = TODO("Not yet implemented")
+        override val config = CommonConfig.Default
         override val entities = EntityBridgeImpl
         override val items = ItemBridgeImpl
         override val menus: MenuBridge
