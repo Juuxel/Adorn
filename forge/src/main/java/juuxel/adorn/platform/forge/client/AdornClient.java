@@ -11,11 +11,11 @@ public class AdornClient {
 
         // TODO: MOD_BUS.addListener(AdornBlocks::registerColorProviders)
         modBus.addListener(AdornClient::setup);
+        modBus.addListener(AdornRenderers.INSTANCE::registerRenderers);
     }
 
     private static void setup(FMLClientSetupEvent event) {
         // TODO: AdornBlocks.initClient()
-        // TODO: AdornEntities.initClient()
         AdornMenus.initClient();
     }
 }
