@@ -44,7 +44,7 @@ dependencies {
     "developmentForge"(project(":common", configuration = "dev")) {
         isTransitive = false
     }
-    shadowCommon(project(path = ":common", configuration = "transformProductionFabric")) {
+    shadowCommon(project(path = ":common", configuration = "transformProductionForge")) {
         isTransitive = false
     }
 }
