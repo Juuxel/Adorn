@@ -14,6 +14,14 @@ architectury {
     forge()
 }
 
+loom {
+    forge {
+        convertAccessWideners.set(true)
+        extraAccessWideners.add("adorn.accesswidener")
+        mixinConfigs("mixins.adorn.common.json")
+    }
+}
+
 repositories {
     maven {
         name = "kotlinforforge"
@@ -28,10 +36,10 @@ dependencies {
 
     implementation("thedarkcolour:kotlinforforge:${rootProject.property("kotlin-for-forge")}")
 
-    implementation(project(":common")) {
+    implementation(project(":common", configuration = "dev")) {
         isTransitive = false
     }
-    "developmentForge"(project(":common")) {
+    "developmentForge"(project(":common", configuration = "dev")) {
         isTransitive = false
     }
     shadowCommon(project(path = ":common", configuration = "transformProductionFabric")) {

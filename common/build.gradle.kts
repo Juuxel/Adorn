@@ -6,6 +6,11 @@ plugins {
     id("org.jmailen.kotlinter")
 }
 
+val dev by configurations.creating {
+    isCanBeResolved = false
+    isCanBeConsumed = true
+}
+
 architectury {
     common()
 }
@@ -42,3 +47,5 @@ afterEvaluate {
         }
     }
 }
+
+artifacts.add("dev", tasks.jar)

@@ -76,10 +76,10 @@ dependencies {
     minecraft("net.minecraft:minecraft:${rootProject.property("minecraft-version")}")
     mappings("net.fabricmc:yarn:${rootProject.property("minecraft-version")}+${rootProject.property("mappings")}:v2")
 
-    implementation(project(":common")) {
+    implementation(project(":common", configuration = "dev")) {
         isTransitive = false
     }
-    "developmentFabric"(project(":common")) {
+    "developmentFabric"(project(":common", configuration = "dev")) {
         isTransitive = false
     }
     shadowCommon(project(path = ":common", configuration = "transformProductionFabric")) {

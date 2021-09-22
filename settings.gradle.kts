@@ -22,4 +22,4 @@ pluginManagement {
 
 rootProject.name = "adorn"
 
-include("common", "fabric")
+include("common", "fabric", "forge")
