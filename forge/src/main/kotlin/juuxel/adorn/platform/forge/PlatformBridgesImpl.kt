@@ -2,7 +2,6 @@
 package juuxel.adorn.platform.forge
 
 import juuxel.adorn.config.CommonConfig
-import juuxel.adorn.platform.BlockEntityDescriptors
 import juuxel.adorn.platform.MenuBridge
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
@@ -17,8 +16,7 @@ import net.minecraftforge.registries.ForgeRegistries
 
 fun PlatformBridges.Companion.get(): PlatformBridges =
     object : PlatformBridges {
-        override val blockEntities: BlockEntityDescriptors
-            get() = TODO("Not yet implemented")
+        override val blockEntities = BlockEntityDescriptorsImpl
         override val config: CommonConfig
             get() = TODO("Not yet implemented")
         override val entities = EntityBridgeImpl
