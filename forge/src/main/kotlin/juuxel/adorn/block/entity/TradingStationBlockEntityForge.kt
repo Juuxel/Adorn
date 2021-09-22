@@ -18,8 +18,7 @@ class TradingStationBlockEntityForge(pos: BlockPos, state: BlockState) : Trading
         return BlockEntityUpdateS2CPacket(pos, -1, nbt)
     }
 
-    // overrides IForgeBlockEntity.onDataPacket
-    fun onDataPacket(net: ClientConnection, packet: BlockEntityUpdateS2CPacket) {
+    override fun onDataPacket(net: ClientConnection, packet: BlockEntityUpdateS2CPacket) {
         val tag = packet.nbt
         trade.readNbt(tag.getCompound(NBT_TRADE))
         ownerName = tag.getText(NBT_TRADING_OWNER_NAME) ?: return

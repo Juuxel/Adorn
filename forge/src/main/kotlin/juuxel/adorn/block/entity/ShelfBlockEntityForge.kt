@@ -16,9 +16,7 @@ class ShelfBlockEntityForge(pos: BlockPos, state: BlockState) : ShelfBlockEntity
         return BlockEntityUpdateS2CPacket(pos, -1, nbt)
     }
 
-    // overrides IForgeBlockEntity.onDataPacket
-    @Suppress("unused")
-    fun onDataPacket(net: ClientConnection, packet: BlockEntityUpdateS2CPacket) {
+    override fun onDataPacket(net: ClientConnection, packet: BlockEntityUpdateS2CPacket) {
         val nbt = packet.nbt
         Inventories.readNbt(nbt, items)
     }

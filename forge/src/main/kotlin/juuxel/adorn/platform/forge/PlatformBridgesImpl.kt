@@ -20,8 +20,7 @@ fun PlatformBridges.Companion.get(): PlatformBridges =
         override val config = CommonConfig.Default
         override val entities = EntityBridgeImpl
         override val items = ItemBridgeImpl
-        override val menus: MenuBridge
-            get() = TODO("Not yet implemented")
+        override val menus = MenuBridgeImpl
         override val network = NetworkBridgeImpl
         override val registrarFactory: RegistrarFactory = object : RegistrarFactory {
             override fun block(): Registrar<Block> = RegistrarImpl(ForgeRegistries.BLOCKS)

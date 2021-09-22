@@ -15,6 +15,7 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.PacketByteBuf
+import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.LiteralText
@@ -40,7 +41,7 @@ abstract class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
         }
     }
 
-    // TODO: This also needs to be used on Forge
+    // TODO: switch Fabric to use Forge's solution
     // Mimics LootableContainerBlockEntity.canPlayerUse
     fun canPlayerUse(player: PlayerEntity): Boolean =
         world!!.getBlockEntity(pos) === this &&
@@ -57,10 +58,16 @@ abstract class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
 
     fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
 
-    override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity) =
+    override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity): ScreenHandler? =
         PlatformBridges.menus.tradingStation(
             syncId, playerInv, ScreenHandlerContext.create(world, pos), isOwner(player)
         )
+
+    // this is the srg name of createMenu, but for some reason it doesn't properly exist
+    // so we "remap" manually - consider this a bridge
+    @Suppress("unused", "FunctionName")
+    fun m_7208_(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity): ScreenHandler? =
+        createMenu(syncId, playerInv, player)
 
     override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)
 
