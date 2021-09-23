@@ -64,4 +64,12 @@ tasks {
         archiveClassifier.set("forge")
         input.set(shadowJar.flatMap { it.archiveFile })
     }
+
+    processResources {
+        inputs.property("version", project.version)
+
+        filesMatching("META-INF/mods.toml") {
+            expand("version" to project.version)
+        }
+    }
 }

@@ -5,7 +5,7 @@ issueTrackerURL = "https://github.com/Juuxel/Adorn/issues"
 
 [[mods]]
 modId = "adorn"
-version = "2.1.5"
+version = "${version}"
 displayName = "Adorn"
 description = "Decorate your home!"
 authors = "Juuz"
