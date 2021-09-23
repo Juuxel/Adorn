@@ -8,7 +8,7 @@
   ],
   "key": {
     "C": {
-      "item": "minecraft:chest"
+      "tag": "c:wooden_chests"
     },
     "S": {
       "item": "woods_and_mires:pine_slab"
