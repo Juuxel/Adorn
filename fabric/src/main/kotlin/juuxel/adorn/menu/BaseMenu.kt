@@ -7,7 +7,6 @@ import juuxel.adorn.client.gui.painter.Painters
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.block.Blocks
-import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
