@@ -1,5 +1,6 @@
 package juuxel.adorn.platform.forge.client.gui.screen
 
+import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.platform.forge.menu.TradingStationMenu
 import juuxel.adorn.util.Colors
@@ -19,7 +20,8 @@ class TradingStationScreen(
     }
 
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
-        client!!.textureManager.bindTexture(BACKGROUND_TEXTURE)
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
+        RenderSystem.setShaderTexture(0, BACKGROUND_TEXTURE)
         drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight)
     }
 
