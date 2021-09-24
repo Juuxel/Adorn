@@ -63,12 +63,6 @@ abstract class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
             syncId, playerInv, ScreenHandlerContext.create(world, pos), isOwner(player)
         )
 
-    // this is the srg name of createMenu, but for some reason it doesn't properly exist
-    // so we "remap" manually - consider this a bridge
-    @Suppress("unused", "FunctionName")
-    fun m_7208_(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity): ScreenHandler? =
-        createMenu(syncId, playerInv, player)
-
     override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)
 
     override fun writeScreenOpeningData(player: ServerPlayerEntity, buf: PacketByteBuf) {

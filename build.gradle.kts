@@ -5,7 +5,7 @@ plugins {
     kotlin("jvm") version "1.5.10" apply false
 
     id("architectury-plugin") version "3.4-SNAPSHOT"
-    id("dev.architectury.loom") version "0.10.0.174" apply false
+    id("dev.architectury.loom") version "0.10.0.176" apply false
     id("io.github.juuxel.loom-quiltflower") version "1.3.0" apply false
 
     id("org.jmailen.kotlinter") version "3.2.0" apply false
