@@ -11,7 +11,7 @@
       "item": "woods_and_mires:pine_planks"
     },
     "S": {
-      "item": "minecraft:stick"
+      "tag": "c:wooden_rods"
     }
   },
   "result": {

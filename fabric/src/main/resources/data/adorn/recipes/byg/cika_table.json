@@ -11,7 +11,7 @@
       "item": "byg:cika_slab"
     },
     "#": {
-      "item": "minecraft:stick"
+      "tag": "c:wooden_rods"
     }
   },
   "result": {

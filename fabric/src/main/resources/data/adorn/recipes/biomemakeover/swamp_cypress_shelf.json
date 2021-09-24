@@ -10,7 +10,7 @@
       "item": "biomemakeover:swamp_cypress_slab"
     },
     "/": {
-      "item": "minecraft:stick"
+      "tag": "c:wooden_rods"
     }
   },
   "result": {

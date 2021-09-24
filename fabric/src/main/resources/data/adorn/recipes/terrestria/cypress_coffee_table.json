@@ -10,7 +10,7 @@
       "item": "terrestria:cypress_slab"
     },
     "#": {
-      "item": "minecraft:stick"
+      "tag": "c:wooden_rods"
     },
     "-": {
       "tag": "c:glass_panes"

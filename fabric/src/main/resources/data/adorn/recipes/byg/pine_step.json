@@ -10,7 +10,7 @@
       "item": "byg:pine_slab"
     },
     "#": {
-      "item": "minecraft:stick"
+      "tag": "c:wooden_rods"
     }
   },
   "result": {

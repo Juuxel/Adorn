@@ -11,7 +11,7 @@
       "item": "biomemakeover:swamp_cypress_planks"
     },
     "S": {
-      "item": "minecraft:stick"
+      "tag": "c:wooden_rods"
     }
   },
   "result": {

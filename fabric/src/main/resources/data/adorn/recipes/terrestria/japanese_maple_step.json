@@ -10,7 +10,7 @@
       "item": "terrestria:japanese_maple_slab"
     },
     "#": {
-      "item": "minecraft:stick"
+      "tag": "c:wooden_rods"
     }
   },
   "result": {

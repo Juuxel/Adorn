@@ -11,7 +11,7 @@
       "item": "biomemakeover:blighted_balsa_planks"
     },
     "S": {
-      "item": "minecraft:stick"
+      "tag": "c:wooden_rods"
     }
   },
   "result": {

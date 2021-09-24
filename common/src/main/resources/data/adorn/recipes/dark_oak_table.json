@@ -11,7 +11,7 @@
       "item": "minecraft:dark_oak_slab"
     },
     "#": {
-      "item": "minecraft:stick"
+      "tag": "c:wooden_rods"
     }
   },
   "result": {

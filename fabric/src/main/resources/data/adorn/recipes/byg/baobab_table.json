@@ -11,7 +11,7 @@
       "item": "byg:baobab_slab"
     },
     "#": {
-      "item": "minecraft:stick"
+      "tag": "c:wooden_rods"
     }
   },
   "result": {
