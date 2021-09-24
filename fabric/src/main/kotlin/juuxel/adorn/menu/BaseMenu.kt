@@ -47,11 +47,6 @@ abstract class BaseMenu(
                 world.getBlockState(pos).block
             }.orElse(Blocks.AIR)
 
-        fun getBlockEntity(context: ScreenHandlerContext): BlockEntity? =
-            context.get { world: World, pos: BlockPos ->
-                world.getBlockEntity(pos)
-            }.orElse(null)
-
         fun getBlockInventoryOrCreate(context: ScreenHandlerContext, fallbackSize: Int) =
             getBlockInventory(context).let {
                 if (it is EmptyInventory)

@@ -2,6 +2,7 @@ package juuxel.adorn.platform.forge.menu
 
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.block.entity.TradingStation
+import juuxel.adorn.util.getBlockEntity
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventory
@@ -11,7 +12,6 @@ import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.slot.Slot
 import net.minecraft.screen.slot.SlotActionType
 import net.minecraftforge.common.util.Constants
-import org.apache.logging.log4j.LogManager
 
 class TradingStationMenu(
     syncId: Int,
@@ -112,17 +112,13 @@ class TradingStationMenu(
     }
 
     companion object {
-        private val LOGGER = LogManager.getLogger()
-
         /**
          * Gets the [juuxel.adorn.block.entity.TradingStationBlockEntity] at the [context]'s location.
          * If it's not present, creates an empty trading station using [TradingStation.createEmpty].
          */
         private fun getTradingStation(context: ScreenHandlerContext): TradingStation =
-            context.get { world, pos -> world.getBlockEntity(pos) as TradingStation }
-                .orElseGet {
-                    LOGGER.warn("[Adorn] Trading station not found, creating fake one")
-                    TradingStation.createEmpty()
-                }
+            context.getBlockEntity() as? TradingStation ?: run {
+                TradingStation.createEmpty()
+            }
     }
 }

@@ -13,6 +13,7 @@ import juuxel.adorn.trading.Trade
 import juuxel.adorn.trading.TradeInventory
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.color
+import juuxel.adorn.util.getBlockEntity
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
@@ -121,7 +122,7 @@ class TradingStationMenu(
          * If it's not present, creates an empty trading station using [TradingStation.createEmpty].
          */
         private fun getTradingStation(context: ScreenHandlerContext) =
-            getBlockEntity(context) as? TradingStation ?: run {
+            context.getBlockEntity() as? TradingStation ?: run {
                 LOGGER.warn("[Adorn] Trading station not found, creating fake one")
                 TradingStation.createEmpty()
             }

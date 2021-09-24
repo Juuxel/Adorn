@@ -6,10 +6,13 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.state.property.Property
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
+import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import net.minecraft.world.World
 
 fun ItemStack.toTextWithCount(): Text =
     TranslatableText("text.adorn.item_stack_with_count", count, toHoverableText())
@@ -82,3 +85,10 @@ fun <K, V> Array<K>.associateLazily(mapper: (K) -> Registered<V>): Registered<Ma
     val map = lazy { pairs.associate { (key, value) -> key to value.invoke() } }
     return Registered(map::value)
 }
+
+/**
+ * Gets the block entity located at this context's position.
+ */
+fun ScreenHandlerContext.getBlockEntity(): BlockEntity? =
+    get { world: World, pos: BlockPos -> world.getBlockEntity(pos) }
+        .orElse(null)
