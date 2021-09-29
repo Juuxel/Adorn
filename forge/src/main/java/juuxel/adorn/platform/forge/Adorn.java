@@ -82,7 +82,7 @@ public class Adorn {
         if (event.getItemStack().getItem() instanceof BlockItem blockItem) {
             if (blockItem.getBlock() instanceof DyedCarpetBlock carpet) {
                 var world = event.getWorld();
-                var pos = event.getPos();
+                var pos = event.getPos().offset(event.getFace());
                 var state = world.getBlockState(pos);
 
                 if (state.getBlock() instanceof CarpetedBlock carpeted && carpeted.canStateBeCarpeted(state)) {
