@@ -15,38 +15,23 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.util.registry.Registry
 
 fun PlatformBridges.Companion.get(): PlatformBridges =
-    object : PlatformBridges {
-        override val blockEntities = BlockEntityDescriptorsImpl
-        override val blockFactory = BlockFactory
-        override val config = ConfigManager.CONFIG
-        override val entities = EntityBridgeImpl
-        override val items = ItemBridgeImpl
-        override val menus = MenuBridgeImpl
-        override val network = NetworkBridgeImpl
-        override val registrarFactory: RegistrarFactory = object : RegistrarFactory {
-            override fun block(): Registrar<Block> {
-                return RegistrarImpl(Registry.BLOCK)
-            }
+    PlatformBridgesImpl
 
-            override fun item(): Registrar<Item> {
-                return RegistrarImpl(Registry.ITEM)
-            }
-
-            override fun blockEntity(): Registrar<BlockEntityType<*>> {
-                return RegistrarImpl(Registry.BLOCK_ENTITY_TYPE)
-            }
-
-            override fun entity(): Registrar<EntityType<*>> {
-                return RegistrarImpl(Registry.ENTITY_TYPE)
-            }
-
-            override fun menu(): Registrar<ScreenHandlerType<*>> {
-                return RegistrarImpl(Registry.SCREEN_HANDLER)
-            }
-
-            override fun soundEvent(): Registrar<SoundEvent> {
-                return RegistrarImpl(Registry.SOUND_EVENT)
-            }
-        }
-        override val tags = TagBridgeImpl
+private object PlatformBridgesImpl : PlatformBridges {
+    override val blockEntities = BlockEntityDescriptorsImpl
+    override val blockFactory = BlockFactory
+    override val config = ConfigManager.CONFIG
+    override val entities = EntityBridgeImpl
+    override val items = ItemBridgeImpl
+    override val menus = MenuBridgeImpl
+    override val network = NetworkBridgeImpl
+    override val registrarFactory: RegistrarFactory = object : RegistrarFactory {
+        override fun block(): Registrar<Block> = RegistrarImpl(Registry.BLOCK)
+        override fun item(): Registrar<Item> = RegistrarImpl(Registry.ITEM)
+        override fun blockEntity(): Registrar<BlockEntityType<*>> = RegistrarImpl(Registry.BLOCK_ENTITY_TYPE)
+        override fun entity(): Registrar<EntityType<*>> = RegistrarImpl(Registry.ENTITY_TYPE)
+        override fun menu(): Registrar<ScreenHandlerType<*>> = RegistrarImpl(Registry.SCREEN_HANDLER)
+        override fun soundEvent(): Registrar<SoundEvent> = RegistrarImpl(Registry.SOUND_EVENT)
     }
+    override val tags = TagBridgeImpl
+}
