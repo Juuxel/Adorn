@@ -3,6 +3,7 @@ package juuxel.adorn.platform.forge;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.block.AdornBlockEntities;
 import juuxel.adorn.block.AdornBlocks;
+import juuxel.adorn.block.SneakClickHandler;
 import juuxel.adorn.entity.AdornEntities;
 import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.item.FuelData;
@@ -15,8 +16,10 @@ import juuxel.adorn.platform.forge.menu.AdornMenus;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.util.ActionResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -40,8 +43,8 @@ public class Adorn {
         modBus.addListener(this::init);
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+        forgeBus.addListener(this::handleSneakClicks);
         /* TODO:
-        FORGE_BUS.addListener(AdornBlocks::handleSneakClicks)
         FORGE_BUS.addListener(AdornBlocks::handleCarpetedBlocks)
         */
         forgeBus.addListener(this::onFuelBurnTime);
@@ -70,6 +73,24 @@ public class Adorn {
             if (type.isInstance(item) || (item instanceof BlockItem blockItem && type.isInstance(blockItem.getBlock()))) {
                 event.setBurnTime(fuelData.burnTime());
                 break;
+            }
+        }
+    }
+
+    private void handleSneakClicks(PlayerInteractEvent.RightClickBlock event) {
+        var player = event.getPlayer();
+        var state = event.getWorld().getBlockState(event.getPos());
+
+        // Check that:
+        // - the block is a sneak-click handler
+        // - the player is sneaking
+        // - the player isn't holding an item (for block item and bucket support)
+        if (state.getBlock() instanceof SneakClickHandler clickHandler && player.isSneaking() && player.getStackInHand(event.getHand()).isEmpty()) {
+            var result = clickHandler.onSneakClick(state, event.getWorld(), event.getPos(), player, event.getHand(), event.getHitVec());
+
+            if (result != ActionResult.PASS) {
+                event.setCancellationResult(result);
+                event.setCanceled(true);
             }
         }
     }
