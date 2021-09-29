@@ -37,10 +37,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
-class SofaBlock(variant: BlockVariant) :
-    SeatBlock(variant.createSettings()),
-    Waterloggable,
-    SneakClickHandler {
+open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), Waterloggable, SneakClickHandler {
     init {
         defaultState = defaultState
             .with(FRONT_CONNECTION, FrontConnection.NONE)
@@ -215,7 +212,7 @@ class SofaBlock(variant: BlockVariant) :
 
         @JvmOverloads
         @JvmStatic
-        fun getSleepingDirection(world: World, pos: BlockPos, ignoreNeighbors: Boolean = false): Direction? {
+        fun getSleepingDirection(world: BlockView, pos: BlockPos, ignoreNeighbors: Boolean = false): Direction? {
             val state = world.getBlockState(pos)
             if (state.block !is SofaBlock) return null
 

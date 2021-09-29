@@ -16,6 +16,7 @@ import net.minecraftforge.registries.ForgeRegistries
 fun PlatformBridges.Companion.get(): PlatformBridges =
     object : PlatformBridges {
         override val blockEntities = BlockEntityDescriptorsImpl
+        override val blockFactory = BlockFactoryImpl
         override val config = CommonConfig.Default
         override val entities = EntityBridgeImpl
         override val items = ItemBridgeImpl

@@ -36,7 +36,7 @@ object AdornBlocks {
     val SOFAS: Map<DyeColor, SofaBlock> by DyeColor.values().associateLazily {
         // This is one place where the BlockVariant mapping is kept.
         // I will not write out sixteen sofa registrations.
-        registerBlock(it.asString() + "_sofa") { SofaBlock(BlockVariant.wool(it)) }
+        registerBlock(it.asString() + "_sofa") { PlatformBridges.blockFactory.createSofa(BlockVariant.wool(it)) }
     }
 
     // @formatter:off
