@@ -1,8 +1,8 @@
 package juuxel.adorn.lib
 
+import juuxel.adorn.CommonEventHandlers
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
-import juuxel.adorn.block.CarpetedBlock
 import juuxel.adorn.block.SneakClickHandler
 import juuxel.adorn.client.SinkColorProvider
 import juuxel.adorn.client.renderer.ShelfRenderer
@@ -13,10 +13,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
-import net.minecraft.block.DyedCarpetBlock
 import net.minecraft.client.render.RenderLayer
-import net.minecraft.item.BlockItem
-import net.minecraft.sound.SoundCategory
 import net.minecraft.util.ActionResult
 
 object AdornBlocksFabric {
@@ -35,38 +32,7 @@ object AdornBlocksFabric {
             }
         )
 
-        UseBlockCallback.EVENT.register(
-            UseBlockCallback { player, world, hand, hitResult ->
-                val pos = hitResult.blockPos.offset(hitResult.side)
-                val state = world.getBlockState(pos)
-                val block = state.block
-                val stack = player.getStackInHand(hand)
-                val item = stack.item
-                if (block is CarpetedBlock && block.canStateBeCarpeted(state) && item is BlockItem) {
-                    val carpet = item.block
-                    if (carpet is DyedCarpetBlock) {
-                        world.setBlockState(
-                            pos,
-                            state.with(CarpetedBlock.CARPET, CarpetedBlock.CARPET.wrapOrNone(carpet.dyeColor))
-                        )
-                        val soundGroup = carpet.defaultState.soundGroup
-                        world.playSound(
-                            player,
-                            pos,
-                            soundGroup.placeSound,
-                            SoundCategory.BLOCKS,
-                            (soundGroup.volume + 1f) / 2f,
-                            soundGroup.pitch * 0.8f
-                        )
-                        if (!player.abilities.creativeMode) stack.decrement(1)
-                        player.swingHand(hand)
-                        ActionResult.SUCCESS
-                    }
-                }
-
-                ActionResult.PASS
-            }
-        )
+        UseBlockCallback.EVENT.register(CommonEventHandlers::handleCarpets)
     }
 
     @Environment(EnvType.CLIENT)
