@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("io.github.juuxel.gronkify") version "1.0.1"
+    id("io.github.juuxel.gronkify") version "1.1.0"
     base
     kotlin("jvm") version "1.5.10" apply false
 
