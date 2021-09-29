@@ -13,6 +13,7 @@ import juuxel.adorn.lib.AdornItemsFabric
 import juuxel.adorn.lib.AdornNetworking
 import juuxel.adorn.lib.AdornSounds
 import juuxel.adorn.lib.AdornTags
+import juuxel.adorn.lib.SofaSleeping
 import juuxel.adorn.menu.AdornMenus
 import juuxel.adorn.resources.AdornResources
 import net.fabricmc.api.EnvType
@@ -33,6 +34,7 @@ object Adorn : ModInitializer {
         AdornNetworking.init()
         AdornTags.init()
         AdornGameRules.init()
+        SofaSleeping.init()
         Compat.init()
         ConfigManager.finalize()
     }

@@ -23,14 +23,7 @@ abstract class LivingEntityMixin extends Entity {
         super(entityType_1, world_1);
     }
 
-    // Lambda: Optional.map in isSleepingInBed()
-    @Inject(method = "method_18405", at = @At("RETURN"), cancellable = true)
-    private void onIsSleepingInBed(BlockPos pos, CallbackInfoReturnable<Boolean> info) {
-        if (!info.getReturnValueZ() && world.getBlockState(pos).getBlock() instanceof SofaBlock) {
-            info.setReturnValue(true);
-        }
-    }
-
+    // TODO: This needs to be an event handler too.
     // Lambda: Optional.ifPresent in wakeUp()
     @Inject(method = "method_18404", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/World;getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/BlockState;", ordinal = 0), locals = LocalCapture.CAPTURE_FAILHARD)
     private void onWakeUp(BlockPos pos, CallbackInfo info, BlockState state) {

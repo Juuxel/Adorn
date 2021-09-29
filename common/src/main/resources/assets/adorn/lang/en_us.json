@@ -15,6 +15,7 @@
   "block.adorn.purple_sofa": "Purple Sofa",
   "block.adorn.magenta_sofa": "Magenta Sofa",
   "block.adorn.pink_sofa": "Pink Sofa",
+  "block.adorn.sofa.occupied": "This sofa is occupied",
 
   "block.adorn.oak_chair": "Oak Chair",
   "block.adorn.spruce_chair": "Spruce Chair",

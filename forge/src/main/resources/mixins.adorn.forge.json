@@ -1,16 +1,11 @@
 {
   "compatibilityLevel": "JAVA_16",
   "minVersion": "0.8",
-  "package": "juuxel.adorn.commonmixin",
+  "package": "juuxel.adorn.platform.forge.mixin",
   "required": true,
 
   "mixins": [
-    "BlockMixin",
-    "BubbleColumnBlockMixin",
-    "FenceGateBlockMixin",
     "PlayerEntityMixin"
-  ],
-  "client": [
   ],
 
   "injectors": {

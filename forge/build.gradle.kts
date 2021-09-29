@@ -20,7 +20,7 @@ loom {
     forge {
         convertAccessWideners.set(true)
         extraAccessWideners.add("adorn.accesswidener")
-        mixinConfigs("mixins.adorn.common.json")
+        mixinConfigs("mixins.adorn.common.json", "mixins.adorn.forge.json")
     }
 }
 

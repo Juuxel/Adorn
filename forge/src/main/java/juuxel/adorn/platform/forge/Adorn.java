@@ -5,6 +5,7 @@ import juuxel.adorn.CommonEventHandlers;
 import juuxel.adorn.block.AdornBlockEntities;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.block.SneakClickHandler;
+import juuxel.adorn.block.SofaBlock;
 import juuxel.adorn.entity.AdornEntities;
 import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.item.FuelData;
@@ -18,10 +19,14 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.SleepingTimeCheckEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -47,6 +52,7 @@ public class Adorn {
         forgeBus.addListener(this::handleCarpetedBlocks);
         forgeBus.addListener(this::handleSneakClicks);
         forgeBus.addListener(this::onFuelBurnTime);
+        forgeBus.addListener(this::handleSofaSleepTime);
 
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> AdornClient::init);
 
@@ -100,6 +106,16 @@ public class Adorn {
                 event.setCancellationResult(result);
                 event.setCanceled(true);
             }
+        }
+    }
+
+    private void handleSofaSleepTime(SleepingTimeCheckEvent event) {
+        BlockPos sleepingPos = event.getSleepingLocation().orElse(null);
+        if (sleepingPos == null) return;
+        World world = event.getPlayer().world;
+
+        if (world.isDay() && world.getBlockState(sleepingPos).getBlock() instanceof SofaBlock) {
+            event.setResult(Event.Result.ALLOW);
         }
     }
 }

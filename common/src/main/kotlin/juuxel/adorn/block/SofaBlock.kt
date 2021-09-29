@@ -8,6 +8,7 @@ import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.property.FrontConnection
 import juuxel.adorn.util.buildShapeRotations
 import juuxel.adorn.util.withBlock
+import net.minecraft.block.BedBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
@@ -17,13 +18,13 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.DyeItem
 import net.minecraft.item.ItemPlacementContext
-import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.EnumProperty
 import net.minecraft.state.property.Properties
+import net.minecraft.text.TranslatableText
 import net.minecraft.util.ActionResult
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
@@ -63,13 +64,24 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
 
     override fun onSneakClick(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult): ActionResult {
         val sleepingDirection = getSleepingDirection(world, pos)
-        return if (world.dimension.isNatural && sleepingDirection != null && !state[OCCUPIED]) {
+
+        if (state[OCCUPIED]) {
+            player.sendMessage(TranslatableText("block.adorn.sofa.occupied"), true)
+            return ActionResult.SUCCESS
+        }
+
+        return if (BedBlock.isOverworld(world) && sleepingDirection != null) {
             if (!world.isClient) {
-                world.setBlockState(pos, state.with(OCCUPIED, true))
-                val neighborPos = pos.offset(sleepingDirection)
-                world.setBlockState(neighborPos, world.getBlockState(neighborPos).with(OCCUPIED, true))
-                player.sleep(pos)
-                (world as? ServerWorld)?.updateSleepingPlayers()
+                player.trySleep(pos).ifLeft {
+                    it.toText()?.let { message ->
+                        player.sendMessage(message, true)
+                    }
+                }.ifRight {
+                    // TODO: This needs to go (needs a Fabric API PR)
+                    world.setBlockState(pos, state.with(OCCUPIED, true))
+                    val neighborPos = pos.offset(sleepingDirection)
+                    world.setBlockState(neighborPos, world.getBlockState(neighborPos).with(OCCUPIED, true))
+                }
             }
             ActionResult.SUCCESS
         } else ActionResult.PASS

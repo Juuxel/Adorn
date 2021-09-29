@@ -11,9 +11,7 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
 abstract class PlayerEntityMixin extends LivingEntity {
@@ -24,6 +22,7 @@ abstract class PlayerEntityMixin extends LivingEntity {
         super(entityType_1, world_1);
     }
 
+    // TODO: Is this *really* needed?
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;wakeUp(ZZ)V", ordinal = 0))
     private void redirectWakeUp(PlayerEntity player, boolean sleepTimeSomething, boolean updatePlayersSleeping) {
         Block sleepingBlock = player.getSleepingPosition()
@@ -36,17 +35,6 @@ abstract class PlayerEntityMixin extends LivingEntity {
             if (--sleepTimer > 0) {
                 player.wakeUp(sleepTimeSomething, updatePlayersSleeping);
             }
-        }
-    }
-
-    @Inject(method = "isSleepingLongEnough", at = @At("RETURN"), cancellable = true)
-    private void onIsSleepingLongEnough(CallbackInfoReturnable<Boolean> info) {
-        // Allow sleeping on sofas at daytime and (depending on config)
-        // prevent skipping the night on sofas
-        boolean skipNight = world.getGameRules().getBoolean(AdornGameRules.SKIP_NIGHT_ON_SOFAS);
-        if (info.getReturnValueZ() && (!skipNight || world.isDay()) &&
-                getSleepingPosition().map(pos -> world.getBlockState(pos).getBlock() instanceof SofaBlock).orElse(false)) {
-            info.setReturnValue(false);
         }
     }
 }
