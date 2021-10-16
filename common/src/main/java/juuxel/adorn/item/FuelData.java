@@ -13,6 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 
 public record FuelData(@Nullable Class<? extends ItemConvertible> itemOrBlockType, Tag<Item> tag, int burnTime) {
+    // TODO: Crates should burn
     public static final Set<FuelData> FUEL_DATA = Set.of(
         // Wooden (300)
         new FuelData(ChairBlock.class, AdornTags.CHAIRS.getItem(), 300),
