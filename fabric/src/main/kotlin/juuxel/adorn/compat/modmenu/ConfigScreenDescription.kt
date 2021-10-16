@@ -14,7 +14,7 @@ import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment
 import io.github.cottonmc.cotton.gui.widget.data.Insets
 import io.github.cottonmc.cotton.gui.widget.icon.ItemIcon
 import juuxel.adorn.block.AdornBlocks
-import juuxel.adorn.config.ConfigManager
+import juuxel.adorn.platform.fabric.ConfigManagerImpl
 import juuxel.adorn.util.Colors
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -43,7 +43,7 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
         )
 
         val tabbed = WTabPanel()
-        val config = ConfigManager.CONFIG
+        val config = ConfigManagerImpl.config
 
         val general = WGridPanel().setInsets(Insets.ROOT_PANEL)
         with(general) {
@@ -108,7 +108,7 @@ class ConfigScreenDescription(previous: Screen) : LightweightGuiDescription() {
 
             override fun onToggle(on: Boolean) {
                 property.setter.call(on)
-                ConfigManager.save()
+                ConfigManagerImpl.save()
 
                 if (restartRequired) {
                     this@ConfigScreenDescription.restartRequired = true

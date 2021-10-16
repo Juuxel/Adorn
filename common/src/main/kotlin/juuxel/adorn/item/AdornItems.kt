@@ -30,7 +30,7 @@ object AdornItems {
     fun isIn(group: ItemGroup?, item: Item): Boolean = when (group) {
         null -> false
         GROUP, ItemGroup.SEARCH -> true
-        item.group -> PlatformBridges.config.client.showItemsInStandardGroups
+        item.group -> PlatformBridges.configManager.config.client.showItemsInStandardGroups
         else -> false
     }
 }

@@ -12,6 +12,7 @@ import juuxel.adorn.item.FuelData;
 import juuxel.adorn.lib.AdornGameRules;
 import juuxel.adorn.lib.AdornSounds;
 import juuxel.adorn.lib.AdornTags;
+import juuxel.adorn.platform.PlatformBridges;
 import juuxel.adorn.platform.Registrar;
 import juuxel.adorn.platform.forge.client.AdornClient;
 import juuxel.adorn.platform.forge.menu.AdornMenus;
@@ -36,7 +37,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(AdornCommon.NAMESPACE)
 public class Adorn {
     public Adorn() {
-        // TODO: Config.load(FMLPaths.CONFIGDIR.get().resolve("Adorn.toml"))
+        PlatformBridges.Companion.getConfigManager().init();
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         register(AdornSounds.SOUNDS, modBus);

@@ -3,26 +3,24 @@ package juuxel.adorn.config
 import blue.endless.jankson.Jankson
 import blue.endless.jankson.JsonObject
 import blue.endless.jankson.api.DeserializationException
-import net.fabricmc.loader.api.FabricLoader
 import org.apache.logging.log4j.LogManager
 import java.nio.file.Files
+import java.nio.file.Path
 
-object ConfigManager {
-    private val JANKSON = Jankson.builder().build()
-    private val DEFAULT = JANKSON.toJson(Config()) as JsonObject
-    private val CONFIG_PATH = FabricLoader.getInstance().configDir.resolve("Adorn.json5")
-    private val LOGGER = LogManager.getLogger()
+abstract class ConfigManager {
+    protected abstract val configDirectory: Path
+    private val configPath: Path by lazy { configDirectory.resolve("Adorn.sjon5") }
     private var saveScheduled: Boolean = false
     private var finalized: Boolean = false
 
     @get:JvmName("getConfig")
-    val CONFIG: Config by lazy {
-        if (Files.notExists(CONFIG_PATH)) {
+    val config: Config by lazy {
+        if (Files.notExists(configPath)) {
             save(Config())
         }
 
         try {
-            val obj = JANKSON.load(Files.readAllLines(CONFIG_PATH).joinToString("\n"))
+            val obj = JANKSON.load(Files.readAllLines(configPath).joinToString("\n"))
             val config = try {
                 JANKSON.fromJsonCarefully(obj, Config::class.java)
             } catch (e: DeserializationException) {
@@ -43,12 +41,12 @@ object ConfigManager {
 
     fun init() {
         // Initialize the config
-        CONFIG
+        config
     }
 
     fun save() {
         if (finalized) {
-            save(CONFIG)
+            save(config)
         } else {
             saveScheduled = true
         }
@@ -62,7 +60,7 @@ object ConfigManager {
     }
 
     private fun save(config: Config) {
-        Files.write(CONFIG_PATH, JANKSON.toJson(config).toJson(true, true).lines())
+        Files.write(configPath, JANKSON.toJson(config).toJson(true, true).lines())
     }
 
     private fun isMissingKeys(config: JsonObject, defaults: JsonObject): Boolean {
@@ -75,5 +73,11 @@ object ConfigManager {
         }
 
         return false
+    }
+
+    companion object {
+        private val JANKSON = Jankson.builder().build()
+        private val DEFAULT = JANKSON.toJson(Config()) as JsonObject
+        private val LOGGER = LogManager.getLogger()
     }
 }

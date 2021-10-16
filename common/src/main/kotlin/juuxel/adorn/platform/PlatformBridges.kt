@@ -1,7 +1,7 @@
 package juuxel.adorn.platform
 
 import dev.architectury.injectables.annotations.ExpectPlatform
-import juuxel.adorn.config.CommonConfig
+import juuxel.adorn.config.ConfigManager
 
 @ExpectPlatform
 fun PlatformBridges.Companion.get(): PlatformBridges =
@@ -10,7 +10,7 @@ fun PlatformBridges.Companion.get(): PlatformBridges =
 interface PlatformBridges {
     val blockEntities: BlockEntityDescriptors
     val blockFactory: BlockFactory
-    val config: CommonConfig
+    val configManager: ConfigManager
     val entities: EntityBridge
     val items: ItemBridge
     val menus: MenuBridge
@@ -21,7 +21,7 @@ interface PlatformBridges {
     companion object {
         inline val blockEntities get() = get().blockEntities
         inline val blockFactory get() = get().blockFactory
-        inline val config get() = get().config
+        inline val configManager get() = get().configManager
         inline val entities get() = get().entities
         inline val items get() = get().items
         inline val menus get() = get().menus

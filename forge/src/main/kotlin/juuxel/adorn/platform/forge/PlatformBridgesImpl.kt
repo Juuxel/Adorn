@@ -1,7 +1,6 @@
 @file:JvmName("PlatformBridgesKtImpl")
 package juuxel.adorn.platform.forge
 
-import juuxel.adorn.config.CommonConfig
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import juuxel.adorn.platform.RegistrarFactory
@@ -19,7 +18,7 @@ fun PlatformBridges.Companion.get(): PlatformBridges =
 private object PlatformBridgesImpl : PlatformBridges {
     override val blockEntities = BlockEntityDescriptorsImpl
     override val blockFactory = BlockFactoryImpl
-    override val config = CommonConfig.Default
+    override val configManager = ConfigManagerImpl
     override val entities = EntityBridgeImpl
     override val items = ItemBridgeImpl
     override val menus = MenuBridgeImpl
