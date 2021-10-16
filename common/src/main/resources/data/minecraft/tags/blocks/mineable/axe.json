@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "#adorn:chairs",
+    "#adorn:tables",
+    "#adorn:kitchen_blocks",
+    "#adorn:drawers",
+    "#adorn:wooden_posts",
+    "#adorn:wooden_platforms",
+    "#adorn:wooden_steps",
+    "#adorn:wooden_shelves",
+    "#adorn:coffee_tables",
+    "#adorn:benches",
+    "#adorn:crates",
+    "#adorn:sofas",
+    "adorn:picket_fence",
+    "adorn:trading_station"
+  ]
+}

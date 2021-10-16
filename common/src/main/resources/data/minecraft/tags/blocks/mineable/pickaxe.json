@@ -1,7 +1,13 @@
 {
   "replace": false,
   "values": [
+    "#adorn:chimneys",
+    "#adorn:stone_platforms",
+    "#adorn:stone_posts",
+    "#adorn:stone_steps",
+    "#adorn:table_lamps",
     "adorn:chain_link_fence",
+    "adorn:iron_shelf",
     "adorn:stone_ladder"
   ]
 }
