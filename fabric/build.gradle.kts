@@ -91,7 +91,6 @@ dependencies {
     modApi("net.fabricmc:fabric-language-kotlin:${rootProject.property("fabric-kotlin")}")
 
     include(modImplementation("io.github.cottonmc:LibGui:${rootProject.property("libgui")}")!!)
-    include(modImplementation("io.github.cottonmc:Jankson-Fabric:${rootProject.property("jankson")}")!!)
     include(modImplementation("io.github.cottonmc:LibCD:${rootProject.property("libcd")}")!!)
 
     // Mod compat

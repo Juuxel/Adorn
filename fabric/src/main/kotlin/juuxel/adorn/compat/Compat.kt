@@ -1,6 +1,6 @@
 package juuxel.adorn.compat
 
-import juuxel.adorn.config.ConfigManager
+import juuxel.adorn.platform.fabric.ConfigManagerImpl
 import net.fabricmc.loader.api.FabricLoader
 
 object Compat {
@@ -21,11 +21,11 @@ object Compat {
     }
 
     fun isCompatEnabled(mod: String): Boolean {
-        val compatMap = ConfigManager.CONFIG.compat
+        val compatMap = ConfigManagerImpl.config.compat
 
         if (mod !in compatMap) {
             compatMap[mod] = true
-            ConfigManager.save()
+            ConfigManagerImpl.save()
             return true
         }
 
