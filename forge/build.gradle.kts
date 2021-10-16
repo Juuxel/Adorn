@@ -9,6 +9,21 @@ plugins {
 
 val shadowCommon by configurations.creating
 
+val kotlinStdlib by configurations.creating {
+    isCanBeResolved = true
+    isCanBeConsumed = false
+}
+
+configurations {
+    implementation {
+        extendsFrom(kotlinStdlib)
+    }
+
+    forgeDependencies {
+        extendsFrom(kotlinStdlib)
+    }
+}
+
 architectury {
     platformSetupLoomIde()
     forge()
@@ -36,7 +51,7 @@ dependencies {
     mappings("net.fabricmc:yarn:${rootProject.property("minecraft-version")}+${rootProject.property("mappings")}:v2")
     forge("net.minecraftforge:forge:${rootProject.property("minecraft-version")}-${rootProject.property("forge-version")}")
 
-    implementation(forgeDependencies(kotlin("stdlib-jdk8"))!!)
+    kotlinStdlib(kotlin("stdlib-jdk8"))
 
     implementation(project(":common", configuration = "dev")) {
         isTransitive = false
@@ -56,7 +71,7 @@ kotlinter {
 tasks {
     shadowJar {
         archiveClassifier.set("dev-shadow")
-        configurations = listOf(shadowCommon)
+        configurations = listOf(shadowCommon, kotlinStdlib)
     }
 
     remapJar {
