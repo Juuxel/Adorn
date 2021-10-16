@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.event.entity.player.SleepingTimeCheckEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -54,6 +55,7 @@ public class Adorn {
         forgeBus.addListener(this::handleSneakClicks);
         forgeBus.addListener(this::onFuelBurnTime);
         forgeBus.addListener(this::handleSofaSleepTime);
+        forgeBus.addListener(this::preventSofaSpawns);
 
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> AdornClient::init);
 
@@ -117,6 +119,16 @@ public class Adorn {
 
         if (world.isDay() && world.getBlockState(sleepingPos).getBlock() instanceof SofaBlock) {
             event.setResult(Event.Result.ALLOW);
+        }
+    }
+
+    private void preventSofaSpawns(PlayerSetSpawnEvent event) {
+        BlockPos pos = event.getNewSpawn();
+
+        if (pos != null) {
+            if (!event.isForced() && event.getPlayer().world.getBlockState(pos).getBlock() instanceof SofaBlock) {
+                event.setCanceled(true);
+            }
         }
     }
 }
