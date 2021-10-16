@@ -9,7 +9,7 @@ import java.nio.file.Path
 
 abstract class ConfigManager {
     protected abstract val configDirectory: Path
-    private val configPath: Path by lazy { configDirectory.resolve("Adorn.sjon5") }
+    private val configPath: Path by lazy { configDirectory.resolve("Adorn.json5") }
     private var saveScheduled: Boolean = false
     private var finalized: Boolean = false
 
@@ -29,7 +29,7 @@ abstract class ConfigManager {
             }
 
             if (isMissingKeys(obj, DEFAULT)) {
-                LOGGER.info("[Adorn] Upgrading config...")
+                LOGGER.info("[Adorn] Upgrading config...")
                 save(config)
             }
 
