@@ -45,18 +45,9 @@ repositories {
         }
     }
 
-    /*maven {
+    maven {
         name = "TerraformersMC"
         url = uri("https://maven.terraformersmc.com/releases")
-
-        content {
-            includeGroup("com.terraformersmc")
-        }
-    }*/
-
-    maven {
-        name = "TerraformersMC archive"
-        url = uri("https://raw.githubusercontent.com/TerraformersMC/Archive/main/releases/")
 
         content {
             includeGroup("com.terraformersmc")
