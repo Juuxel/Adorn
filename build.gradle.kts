@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     base
-    kotlin("jvm") version "1.5.10" apply false
+    kotlin("jvm") version "1.5.31" apply false
 
     id("architectury-plugin") version "3.4-SNAPSHOT"
     id("dev.architectury.loom") version "0.10.0.180" apply false
@@ -54,7 +54,7 @@ subprojects {
         }
 
         withType<KotlinCompile> {
-            kotlinOptions.jvmTarget = "15"
+            kotlinOptions.jvmTarget = "16"
         }
 
         "jar"(Jar::class) {

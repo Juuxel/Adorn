@@ -1,6 +1,5 @@
 package juuxel.adorn.platform.forge;
 
-import juuxel.adorn.AdornCommon;
 import juuxel.adorn.CommonEventHandlers;
 import juuxel.adorn.block.AdornBlockEntities;
 import juuxel.adorn.block.AdornBlocks;
@@ -12,9 +11,7 @@ import juuxel.adorn.item.FuelData;
 import juuxel.adorn.lib.AdornGameRules;
 import juuxel.adorn.lib.AdornSounds;
 import juuxel.adorn.lib.AdornTags;
-import juuxel.adorn.platform.PlatformBridges;
 import juuxel.adorn.platform.Registrar;
-import juuxel.adorn.platform.forge.client.AdornClient;
 import juuxel.adorn.platform.forge.menu.AdornMenus;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -22,25 +19,19 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.event.entity.player.SleepingTimeCheckEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod(AdornCommon.NAMESPACE)
-public class Adorn {
-    public Adorn() {
-        PlatformBridges.Companion.getConfigManager().init();
-
-        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+// If you're wondering *why* these are implemented in Java,
+// you can thank Forge for not initially having lang adapters on 1.17.
+// This was the mod class.
+final class EventsImplementedInJava {
+    void register(IEventBus modBus, IEventBus forgeBus) {
         register(AdornSounds.SOUNDS, modBus);
         register(AdornBlocks.BLOCKS, modBus);
         register(AdornBlocks.ITEMS, modBus);
@@ -50,16 +41,11 @@ public class Adorn {
         register(AdornBlockEntities.BLOCK_ENTITIES, modBus);
         modBus.addListener(this::init);
 
-        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         forgeBus.addListener(this::handleCarpetedBlocks);
         forgeBus.addListener(this::handleSneakClicks);
         forgeBus.addListener(this::onFuelBurnTime);
         forgeBus.addListener(this::handleSofaSleepTime);
         forgeBus.addListener(this::preventSofaSpawns);
-
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> AdornClient::init);
-
-        // TODO: Compat.init(MOD_BUS)
     }
 
     private void init(FMLCommonSetupEvent event) {

@@ -9,18 +9,18 @@ plugins {
 
 val shadowCommon by configurations.creating
 
-val kotlinStdlib by configurations.creating {
+val kotlinForForge by configurations.creating {
     isCanBeResolved = true
     isCanBeConsumed = false
 }
 
 configurations {
     implementation {
-        extendsFrom(kotlinStdlib)
+        extendsFrom(kotlinForForge)
     }
 
     forgeDependencies {
-        extendsFrom(kotlinStdlib)
+        extendsFrom(kotlinForForge)
     }
 }
 
@@ -51,7 +51,9 @@ dependencies {
     mappings("net.fabricmc:yarn:${rootProject.property("minecraft-version")}+${rootProject.property("mappings")}:v2")
     forge("net.minecraftforge:forge:${rootProject.property("minecraft-version")}-${rootProject.property("forge-version")}")
 
-    kotlinStdlib(kotlin("stdlib-jdk8"))
+    kotlinForForge("thedarkcolour:kotlinforforge:${rootProject.property("kotlin-for-forge")}") {
+        isTransitive = false // thank forge for automatic modules; kotlin-stdlib can't end up as a second, transitive dep
+    }
 
     implementation(project(":common", configuration = "dev")) {
         isTransitive = false
@@ -71,7 +73,7 @@ kotlinter {
 tasks {
     shadowJar {
         archiveClassifier.set("dev-shadow")
-        configurations = listOf(shadowCommon, kotlinStdlib)
+        configurations = listOf(shadowCommon)
     }
 
     remapJar {
