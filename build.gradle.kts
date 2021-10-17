@@ -92,7 +92,15 @@ subprojects {
         "remapJar"(RemapJarTask::class) {
             dependsOn("shadowJar")
             input.set(named<ShadowJar>("shadowJar").flatMap { it.archiveFile })
-            archiveClassifier.set(project.name)
+        }
+    }
+
+    // PLEASE REMOVE AFTEREVALUATE FROM LOOM
+    afterEvaluate {
+        tasks {
+            "remapJar"(RemapJarTask::class) {
+                archiveClassifier.set(project.name)
+            }
         }
     }
 }
