@@ -1,14 +1,3 @@
-plugins {
-    kotlin("jvm")
-    id("dev.architectury.loom")
-    id("architectury-plugin")
-    id("io.github.juuxel.loom-quiltflower")
-    id("org.jmailen.kotlinter")
-    id("com.github.johnrengelman.shadow")
-}
-
-val shadowCommon by configurations.creating
-
 architectury {
     platformSetupLoomIde()
     forge()
@@ -32,10 +21,7 @@ repositories {
 }
 
 dependencies {
-    minecraft("net.minecraft:minecraft:${rootProject.property("minecraft-version")}")
-    mappings("net.fabricmc:yarn:${rootProject.property("minecraft-version")}+${rootProject.property("mappings")}:v2")
     forge("net.minecraftforge:forge:${rootProject.property("minecraft-version")}-${rootProject.property("forge-version")}")
-
     implementation("thedarkcolour:kotlinforforge:${rootProject.property("kotlin-for-forge")}")
 
     implementation(project(":common", configuration = "dev")) {
@@ -44,27 +30,12 @@ dependencies {
     "developmentForge"(project(":common", configuration = "dev")) {
         isTransitive = false
     }
-    shadowCommon(project(path = ":common", configuration = "transformProductionForge")) {
+    bundle(project(path = ":common", configuration = "transformProductionForge")) {
         isTransitive = false
     }
 }
 
-kotlinter {
-    disabledRules = arrayOf("parameter-list-wrapping")
-}
-
 tasks {
-    shadowJar {
-        archiveClassifier.set("dev-shadow")
-        configurations = listOf(shadowCommon)
-    }
-
-    remapJar {
-        dependsOn(shadowJar)
-        archiveClassifier.set("forge")
-        input.set(shadowJar.flatMap { it.archiveFile })
-    }
-
     processResources {
         inputs.property("version", project.version)
 

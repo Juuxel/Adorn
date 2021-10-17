@@ -1,4 +1,7 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import net.fabricmc.loom.task.RemapJarTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jmailen.gradle.kotlinter.KotlinterExtension
 
 plugins {
     base
@@ -37,6 +40,11 @@ tasks {
 subprojects {
     apply(plugin = "java")
     apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "dev.architectury.loom")
+    apply(plugin = "architectury-plugin")
+    apply(plugin = "io.github.juuxel.loom-quiltflower")
+    apply(plugin = "org.jmailen.kotlinter")
+    apply(plugin = "com.github.johnrengelman.shadow")
 
     extensions.configure<JavaPluginExtension> {
         sourceCompatibility = JavaVersion.VERSION_16
@@ -46,6 +54,20 @@ subprojects {
     group = rootProject.group
     version = rootProject.version
     base.archivesBaseName = rootProject.base.archivesBaseName
+
+    val bundle by configurations.creating {
+        isCanBeConsumed = false
+        isCanBeResolved = true
+    }
+
+    dependencies {
+        "minecraft"("net.minecraft:minecraft:${rootProject.property("minecraft-version")}")
+        "mappings"("net.fabricmc:yarn:${rootProject.property("minecraft-version")}+${rootProject.property("mappings")}:v2")
+    }
+
+    extensions.configure<KotlinterExtension> {
+        disabledRules = arrayOf("parameter-list-wrapping")
+    }
 
     tasks {
         withType<JavaCompile> {
@@ -60,6 +82,17 @@ subprojects {
         "jar"(Jar::class) {
             from(rootProject.file("LICENSE"))
             archiveClassifier.set("dev-slim")
+        }
+
+        "shadowJar"(ShadowJar::class) {
+            archiveClassifier.set("dev-shadow")
+            configurations = listOf(bundle)
+        }
+
+        "remapJar"(RemapJarTask::class) {
+            dependsOn("shadowJar")
+            input.set(named<ShadowJar>("shadowJar").flatMap { it.archiveFile })
+            archiveClassifier.set(project.name)
         }
     }
 }
