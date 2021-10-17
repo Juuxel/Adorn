@@ -9,21 +9,6 @@ plugins {
 
 val shadowCommon by configurations.creating
 
-val kotlinForForge by configurations.creating {
-    isCanBeResolved = true
-    isCanBeConsumed = false
-}
-
-configurations {
-    implementation {
-        extendsFrom(kotlinForForge)
-    }
-
-    forgeDependencies {
-        extendsFrom(kotlinForForge)
-    }
-}
-
 architectury {
     platformSetupLoomIde()
     forge()
@@ -51,9 +36,7 @@ dependencies {
     mappings("net.fabricmc:yarn:${rootProject.property("minecraft-version")}+${rootProject.property("mappings")}:v2")
     forge("net.minecraftforge:forge:${rootProject.property("minecraft-version")}-${rootProject.property("forge-version")}")
 
-    kotlinForForge("thedarkcolour:kotlinforforge:${rootProject.property("kotlin-for-forge")}") {
-        isTransitive = false // thank forge for automatic modules; kotlin-stdlib can't end up as a second, transitive dep
-    }
+    implementation("thedarkcolour:kotlinforforge:${rootProject.property("kotlin-for-forge")}")
 
     implementation(project(":common", configuration = "dev")) {
         isTransitive = false
