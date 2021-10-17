@@ -76,11 +76,6 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
                     it.toText()?.let { message ->
                         player.sendMessage(message, true)
                     }
-                }.ifRight {
-                    // TODO: This needs to go (needs a Fabric API PR)
-                    world.setBlockState(pos, state.with(OCCUPIED, true))
-                    val neighborPos = pos.offset(sleepingDirection)
-                    world.setBlockState(neighborPos, world.getBlockState(neighborPos).with(OCCUPIED, true))
                 }
             }
             ActionResult.SUCCESS

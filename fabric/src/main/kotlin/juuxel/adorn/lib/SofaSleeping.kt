@@ -1,7 +1,9 @@
 package juuxel.adorn.lib
 
+import juuxel.adorn.block.SeatBlock
 import juuxel.adorn.block.SofaBlock
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents
+import net.minecraft.block.BedBlock
 import net.minecraft.util.ActionResult
 
 object SofaSleeping {
@@ -34,6 +36,27 @@ object SofaSleeping {
                 else player.world.gameRules.getBoolean(AdornGameRules.SKIP_NIGHT_ON_SOFAS)
             } else {
                 true // go on
+            }
+        }
+
+        EntitySleepEvents.SET_BED_OCCUPATION_STATE.register { entity, pos, state, occupied ->
+            val world = entity.world
+
+            if (state.block is SofaBlock) {
+                world.setBlockState(pos, state.with(SeatBlock.OCCUPIED, true))
+                val neighborPos = pos.offset(SofaBlock.getSleepingDirection(world, pos, ignoreNeighbors = true))
+                world.setBlockState(neighborPos, world.getBlockState(neighborPos).with(SeatBlock.OCCUPIED, true))
+                true
+            } else {
+                false // go on
+            }
+        }
+
+        EntitySleepEvents.MODIFY_WAKE_UP_POSITION.register { entity, sleepingPos, state, wakeUpPos ->
+            if (state.block is SofaBlock) {
+                BedBlock.findWakeUpPosition(entity.type, entity.world, sleepingPos, entity.yaw).orElse(null)
+            } else {
+                wakeUpPos
             }
         }
     }

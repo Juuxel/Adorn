@@ -6,8 +6,7 @@
   "plugin": "juuxel.adorn.AdornMixinPlugin",
 
   "mixins": [
-    "fluidloggable.FluidUtilMixin",
-    "LivingEntityMixin"
+    "fluidloggable.FluidUtilMixin"
   ],
 
   "injectors": {
