@@ -22,7 +22,6 @@ object AdornMenus {
     val KITCHEN_CUPBOARD by MENUS.register("kitchen_cupboard") { ScreenHandlerType(::KitchenCupboardMenu) }
     val TRADING_STATION by MENUS.register("trading_station") { ScreenHandlerType(::TradingStationMenu) }
 
-    @JvmStatic
     @OnlyIn(Dist.CLIENT)
     fun initClient() {
         registerScreen(DRAWER, ::DrawerScreen)
