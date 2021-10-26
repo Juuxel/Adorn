@@ -8,8 +8,8 @@ plugins {
     kotlin("jvm") version "1.5.31" apply false
 
     id("architectury-plugin") version "3.4-SNAPSHOT"
-    id("dev.architectury.loom") version "0.10.0.180" apply false
-    id("io.github.juuxel.loom-quiltflower") version "1.3.0" apply false
+    id("dev.architectury.loom") version "0.10.0.186" apply false
+    id("io.github.juuxel.loom-quiltflower-mini") version "1.0.0" apply false
 
     id("org.jmailen.kotlinter") version "3.2.0" apply false
     id("com.github.johnrengelman.shadow") version "7.0.0" apply false
@@ -42,7 +42,7 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "dev.architectury.loom")
     apply(plugin = "architectury-plugin")
-    apply(plugin = "io.github.juuxel.loom-quiltflower")
+    apply(plugin = "io.github.juuxel.loom-quiltflower-mini")
     apply(plugin = "org.jmailen.kotlinter")
     apply(plugin = "com.github.johnrengelman.shadow")
 
