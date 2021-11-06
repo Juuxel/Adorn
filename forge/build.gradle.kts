@@ -35,6 +35,7 @@ dependencies {
     }
 
     bundle("blue.endless:jankson:${rootProject.property("jankson")}")
+    forgeDependencies("blue.endless:jankson:${rootProject.property("jankson")}")
 }
 
 tasks {
