@@ -7,12 +7,9 @@ import juuxel.adorn.platform.MenuBridge
 import juuxel.adorn.platform.forge.menu.DrawerMenu
 import juuxel.adorn.platform.forge.menu.KitchenCupboardMenu
 import juuxel.adorn.platform.forge.menu.TradingStationMenu
-import juuxel.adorn.util.getBlockEntity
 import juuxel.adorn.util.menuContextOf
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.inventory.Inventory
 import net.minecraft.screen.ScreenHandler
-import net.minecraft.screen.ScreenHandlerContext
 
 object MenuBridgeImpl : MenuBridge {
     override fun drawer(syncId: Int, playerInventory: PlayerInventory, blockEntity: DrawerBlockEntity) =
