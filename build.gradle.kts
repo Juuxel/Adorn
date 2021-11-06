@@ -8,7 +8,7 @@ plugins {
     kotlin("jvm") version "1.5.31" apply false
 
     id("architectury-plugin") version "3.4-SNAPSHOT"
-    id("dev.architectury.loom") version "0.10.0.186" apply false
+    id("dev.architectury.loom") version "0.10.0.191" apply false
     id("io.github.juuxel.loom-quiltflower-mini") version "1.0.0" apply false
 
     id("org.jmailen.kotlinter") version "3.2.0" apply false
@@ -44,7 +44,6 @@ subprojects {
     apply(plugin = "architectury-plugin")
     apply(plugin = "io.github.juuxel.loom-quiltflower-mini")
     apply(plugin = "org.jmailen.kotlinter")
-    apply(plugin = "com.github.johnrengelman.shadow")
 
     extensions.configure<JavaPluginExtension> {
         sourceCompatibility = JavaVersion.VERSION_16
@@ -54,11 +53,6 @@ subprojects {
     group = rootProject.group
     version = rootProject.version
     base.archivesBaseName = rootProject.base.archivesBaseName
-
-    val bundle by configurations.creating {
-        isCanBeConsumed = false
-        isCanBeResolved = true
-    }
 
     dependencies {
         "minecraft"("net.minecraft:minecraft:${rootProject.property("minecraft-version")}")
@@ -81,17 +75,6 @@ subprojects {
 
         "jar"(Jar::class) {
             from(rootProject.file("LICENSE"))
-            archiveClassifier.set("dev-slim")
-        }
-
-        "shadowJar"(ShadowJar::class) {
-            archiveClassifier.set("dev-shadow")
-            configurations = listOf(bundle)
-        }
-
-        "remapJar"(RemapJarTask::class) {
-            dependsOn("shadowJar")
-            input.set(named<ShadowJar>("shadowJar").flatMap { it.archiveFile })
         }
     }
 
@@ -100,6 +83,33 @@ subprojects {
         tasks {
             "remapJar"(RemapJarTask::class) {
                 archiveClassifier.set(project.name)
+            }
+        }
+    }
+}
+
+subprojects {
+    if (path != ":common") {
+        apply(plugin = "com.github.johnrengelman.shadow")
+
+        val bundle by configurations.creating {
+            isCanBeConsumed = false
+            isCanBeResolved = true
+        }
+
+        tasks {
+            "jar"(Jar::class) {
+                archiveClassifier.set("dev-slim")
+            }
+
+            "shadowJar"(ShadowJar::class) {
+                archiveClassifier.set("dev-shadow")
+                configurations = listOf(bundle)
+            }
+
+            "remapJar"(RemapJarTask::class) {
+                dependsOn("shadowJar")
+                input.set(named<ShadowJar>("shadowJar").flatMap { it.archiveFile })
             }
         }
     }

@@ -24,18 +24,24 @@ dependencies {
     forge("net.minecraftforge:forge:${rootProject.property("minecraft-version")}-${rootProject.property("forge-version")}")
     implementation("thedarkcolour:kotlinforforge:${rootProject.property("kotlin-for-forge")}")
 
-    implementation(project(":common", configuration = "dev")) {
+    implementation(project(":common", configuration = "namedElements")) {
         isTransitive = false
     }
-    "developmentForge"(project(":common", configuration = "dev")) {
+    "developmentForge"(project(":common", configuration = "namedElements")) {
         isTransitive = false
     }
     bundle(project(path = ":common", configuration = "transformProductionForge")) {
         isTransitive = false
     }
+
+    bundle("blue.endless:jankson:${rootProject.property("jankson")}")
 }
 
 tasks {
+    shadowJar {
+        relocate("blue.endless.jankson", "juuxel.adorn.relocated.jankson")
+    }
+
     processResources {
         inputs.property("version", project.version)
 

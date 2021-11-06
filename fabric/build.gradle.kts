@@ -53,10 +53,10 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":common", configuration = "dev")) {
+    implementation(project(":common", configuration = "namedElements")) {
         isTransitive = false
     }
-    "developmentFabric"(project(":common", configuration = "dev")) {
+    "developmentFabric"(project(":common", configuration = "namedElements")) {
         isTransitive = false
     }
     bundle(project(path = ":common", configuration = "transformProductionFabric")) {
@@ -67,6 +67,7 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric-api")}")
     modApi("net.fabricmc:fabric-language-kotlin:${rootProject.property("fabric-kotlin")}")
 
+    bundle("blue.endless:jankson:${rootProject.property("jankson")}")
     include(modImplementation("io.github.cottonmc:LibGui:${rootProject.property("libgui")}")!!)
     include(modImplementation("io.github.cottonmc:LibCD:${rootProject.property("libcd")}")!!)
 
@@ -91,5 +92,9 @@ tasks {
         filesMatching("fabric.mod.json") {
             expand("version" to project.version)
         }
+    }
+
+    shadowJar {
+        relocate("blue.endless.jankson", "juuxel.adorn.relocated.jankson")
     }
 }
