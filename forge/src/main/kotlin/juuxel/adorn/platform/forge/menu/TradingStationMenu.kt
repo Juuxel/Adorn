@@ -42,13 +42,13 @@ class TradingStationMenu(
         // Main player inventory
         for (y in 0..2) {
             for (x in 0..8) {
-                addSlot(Slot(playerInventory, y * 9 + x, 8 + x * slot, 104 + y * slot))
+                addSlot(Slot(playerInventory, x + y * 9 + 9, 8 + x * slot, 104 + y * slot))
             }
         }
 
         // Hotbar
         for (x in 0..8) {
-            addSlot(Slot(playerInventory, 3 * 9 + x, 8 + x * slot, 162))
+            addSlot(Slot(playerInventory, x, 8 + x * slot, 162))
         }
     }
 

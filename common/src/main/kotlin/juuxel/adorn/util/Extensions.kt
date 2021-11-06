@@ -92,3 +92,10 @@ fun <K, V> Array<K>.associateLazily(mapper: (K) -> Registered<V>): Registered<Ma
 fun ScreenHandlerContext.getBlockEntity(): BlockEntity? =
     get { world: World, pos: BlockPos -> world.getBlockEntity(pos) }
         .orElse(null)
+
+/**
+ * Creates a menu context in the world and at the position of the [blockEntity].
+ * In a way, the inverse operation to [getBlockEntity].
+ */
+fun menuContextOf(blockEntity: BlockEntity): ScreenHandlerContext =
+    ScreenHandlerContext.create(blockEntity.world, blockEntity.pos)
