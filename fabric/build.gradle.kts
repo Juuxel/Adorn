@@ -67,7 +67,7 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric-api")}")
     modApi("net.fabricmc:fabric-language-kotlin:${rootProject.property("fabric-kotlin")}")
 
-    bundle("blue.endless:jankson:${rootProject.property("jankson")}")
+    include(modImplementation("io.github.cottonmc:Jankson-Fabric:${rootProject.property("jankson-fabric")}")!!)
     include(modImplementation("io.github.cottonmc:LibGui:${rootProject.property("libgui")}")!!)
     include(modImplementation("io.github.cottonmc:LibCD:${rootProject.property("libcd")}")!!)
 
@@ -92,9 +92,5 @@ tasks {
         filesMatching("fabric.mod.json") {
             expand("version" to project.version)
         }
-    }
-
-    shadowJar {
-        relocate("blue.endless.jankson", "juuxel.adorn.relocated.jankson")
     }
 }
