@@ -960,6 +960,17 @@
   "gui.adorn.config.restart_required.title": "Restart required!",
   "gui.adorn.config.restart_required.message": "One of your changed options requires Minecraft to be restarted.",
 
+  "stat.adorn.dye_sofa": "Sofas Dyed",
+  "stat.adorn.dye_table_lamp": "Table Lamps Dyed",
+  "stat.adorn.interact_with_shelf": "Interactions with Shelf",
+  "stat.adorn.interact_with_table_lamp": "Interactions with Table Lamp",
+  "stat.adorn.interact_with_trading_station": "Interactions with Trading Station",
+  "stat.adorn.open_drawer": "Drawers Opened",
+  "stat.adorn.open_kitchen_cupboard": "Kitchen Cupboards Opened",
+  "stat.adorn.sit_on_bench": "Times Sat on a Bench",
+  "stat.adorn.sit_on_chair": "Times Sat on a Chair",
+  "stat.adorn.sit_on_sofa": "Times Sat on a Sofa",
+
   "itemGroup.adorn.items": "Adorn",
 
   "text.adorn.item_stack_with_count": "%sx %s"

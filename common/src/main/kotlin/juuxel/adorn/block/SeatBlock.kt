@@ -12,6 +12,7 @@ import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
@@ -24,6 +25,7 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
     }
 
     open val sittingYOffset: Double = 0.0
+    abstract val sittingStat: Identifier?
 
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hit: BlockHitResult
@@ -45,6 +47,7 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
                 world.spawnEntity(entity)
                 world.setBlockState(actualPos, actualState.with(OCCUPIED, true))
                 player.startRiding(entity, true)
+                sittingStat?.let { player.incrementStat(it) }
                 ActionResult.SUCCESS
             }
             ActionResult.SUCCESS

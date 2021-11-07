@@ -2,6 +2,7 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.block.entity.TradingStationBlockEntity
+import juuxel.adorn.lib.AdornStats
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -77,9 +78,14 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
                     player.giveItemStack(trade.selling.copy())
                     be.storage.tryExtract(trade.selling)
                     be.storage.tryInsert(trade.price)
+                    player.incrementStat(AdornStats.INTERACT_WITH_TRADING_STATION)
                 }
             } else {
                 player.openHandledScreen(state.createScreenHandlerFactory(world, pos))
+
+                if (!world.isClient) {
+                    player.incrementStat(AdornStats.INTERACT_WITH_TRADING_STATION)
+                }
             }
         }
 
@@ -94,6 +100,11 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
         // Show customer GUI
         if (!be.isOwner(player)) {
             player.openHandledScreen(state.createScreenHandlerFactory(world, pos))
+
+            if (!world.isClient) {
+                player.incrementStat(AdornStats.INTERACT_WITH_TRADING_STATION)
+            }
+
             return ActionResult.SUCCESS
         }
 

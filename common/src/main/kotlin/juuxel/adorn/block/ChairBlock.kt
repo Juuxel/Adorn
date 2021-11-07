@@ -2,6 +2,7 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
+import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.util.buildShapeRotations
 import juuxel.adorn.util.mergeIntoShapeMap
 import net.minecraft.block.Block
@@ -31,6 +32,8 @@ import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
 class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()), Waterloggable {
+    override val sittingStat = AdornStats.SIT_ON_CHAIR
+
     init {
         defaultState = defaultState.with(HALF, DoubleBlockHalf.LOWER)
             .with(WATERLOGGED, false)

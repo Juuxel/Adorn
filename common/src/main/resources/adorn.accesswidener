@@ -9,3 +9,7 @@ accessible method net/minecraft/block/WallTorchBlock <init> (Lnet/minecraft/bloc
 # Game rules
 accessible method net/minecraft/world/GameRules register (Ljava/lang/String;Lnet/minecraft/world/GameRules$Category;Lnet/minecraft/world/GameRules$Type;)Lnet/minecraft/world/GameRules$Key;
 accessible method net/minecraft/world/GameRules$BooleanRule create (Z)Lnet/minecraft/world/GameRules$Type;
+
+# Stats
+## Yeah, I know this method isn't technically needed but it's really useful :^)
+accessible method net/minecraft/stat/Stats register (Ljava/lang/String;Lnet/minecraft/stat/StatFormatter;)Lnet/minecraft/util/Identifier;

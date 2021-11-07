@@ -3,6 +3,7 @@ package juuxel.adorn.block
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectArrayMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import juuxel.adorn.api.block.BlockVariant
+import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.util.buildShapeRotationsFromNorth
 import juuxel.adorn.util.getDirection
 import juuxel.adorn.util.turnHorizontally
@@ -26,6 +27,8 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
 class BenchBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), Waterloggable {
+    override val sittingStat = AdornStats.SIT_ON_BENCH
+
     init {
         defaultState = defaultState
             .with(AXIS, Direction.Axis.Z)

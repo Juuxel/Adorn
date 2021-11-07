@@ -2,6 +2,7 @@
 
 package juuxel.adorn.block
 
+import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.util.buildShapeRotationsFromNorth
 import juuxel.adorn.util.withBlock
 import net.minecraft.block.Block
@@ -54,11 +55,13 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable {
             world.setBlockState(pos, state.withBlock(AdornBlocks.TABLE_LAMPS[item.color]!!))
             world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.8f)
             if (!player.abilities.creativeMode) stack.decrement(1)
+            if (!world.isClient) player.incrementStat(AdornStats.DYE_TABLE_LAMP)
         } else {
             val wasLit = state[LIT]
             world.setBlockState(pos, state.with(LIT, !wasLit))
             val pitch = if (wasLit) 0.5f else 0.6f
             world.playSound(player, pos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 0.3f, pitch)
+            if (!world.isClient) player.incrementStat(AdornStats.INTERACT_WITH_TABLE_LAMP)
         }
         return ActionResult.SUCCESS
     }

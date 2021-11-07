@@ -11,6 +11,7 @@ import juuxel.adorn.lib.AdornGameRules
 import juuxel.adorn.lib.AdornItemsFabric
 import juuxel.adorn.lib.AdornNetworking
 import juuxel.adorn.lib.AdornSounds
+import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.lib.AdornTags
 import juuxel.adorn.lib.SofaSleeping
 import juuxel.adorn.menu.AdornMenus
@@ -34,6 +35,7 @@ object Adorn : ModInitializer {
         AdornNetworking.init()
         AdornTags.init()
         AdornGameRules.init()
+        AdornStats.init()
         SofaSleeping.init()
         Compat.init()
         ConfigManagerImpl.finalize()

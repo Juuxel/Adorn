@@ -4,12 +4,14 @@ import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
 import juuxel.adorn.api.block.BlockVariant
 import net.minecraft.block.BlockState
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 
 class TableBlock(variant: BlockVariant) : AbstractTableBlock(variant.createSettings()) {
     override val sittingYOffset = 0.6
+    override val sittingStat: Identifier? = null
 
     override fun isSittingEnabled() = false
 

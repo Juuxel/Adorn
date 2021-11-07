@@ -6,6 +6,7 @@ import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
 import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.property.FrontConnection
+import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.util.buildShapeRotations
 import juuxel.adorn.util.withBlock
 import net.minecraft.block.BedBlock
@@ -39,6 +40,8 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
 open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), Waterloggable, SneakClickHandler {
+    override val sittingStat = AdornStats.SIT_ON_SOFA
+
     init {
         defaultState = defaultState
             .with(FRONT_CONNECTION, FrontConnection.NONE)
@@ -56,6 +59,7 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
             world.setBlockState(pos, state.withBlock(AdornBlocks.SOFAS[item.color]!!))
             world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.8f)
             if (!player.abilities.creativeMode) stack.decrement(1)
+            if (!world.isClient) player.incrementStat(AdornStats.DYE_SOFA)
             return ActionResult.SUCCESS
         }
 

@@ -2,6 +2,7 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
+import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
@@ -100,6 +101,7 @@ class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createS
                 be.markDirty()
                 if (!world.isClient) {
                     PlatformBridges.network.syncBlockEntity(be)
+                    player.incrementStat(AdornStats.INTERACT_WITH_SHELF)
                 }
 
                 if (!player.abilities.creativeMode) {
@@ -114,6 +116,7 @@ class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createS
             be.markDirty()
             if (!world.isClient) {
                 PlatformBridges.network.syncBlockEntity(be)
+                player.incrementStat(AdornStats.INTERACT_WITH_SHELF)
             }
         }
 
