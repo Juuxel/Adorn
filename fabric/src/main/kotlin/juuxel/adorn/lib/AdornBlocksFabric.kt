@@ -10,7 +10,7 @@ import juuxel.adorn.client.renderer.TradingStationRenderer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
-import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.client.render.RenderLayer
@@ -38,8 +38,8 @@ object AdornBlocksFabric {
     @Environment(EnvType.CLIENT)
     fun initClient() {
         // BlockEntityRenderers
-        BlockEntityRendererRegistry.INSTANCE.register(AdornBlockEntities.TRADING_STATION, ::TradingStationRenderer)
-        BlockEntityRendererRegistry.INSTANCE.register(AdornBlockEntities.SHELF, ::ShelfRenderer)
+        BlockEntityRendererRegistry.register(AdornBlockEntities.TRADING_STATION, ::TradingStationRenderer)
+        BlockEntityRendererRegistry.register(AdornBlockEntities.SHELF, ::ShelfRenderer)
 
         // RenderLayers
         BlockRenderLayerMap.INSTANCE.putBlocks(
