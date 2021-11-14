@@ -1,5 +1,6 @@
 package juuxel.adorn.platform.forge.menu
 
+import juuxel.adorn.menu.ContainerBlockMenu
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
@@ -13,20 +14,20 @@ open class SimpleMenu(
     type: ScreenHandlerType<*>,
     syncId: Int,
     private val dimensions: Pair<Int, Int>,
-    private val container: Inventory = SimpleInventory(dimensions.first * dimensions.second),
+    override val inventory: Inventory = SimpleInventory(dimensions.first * dimensions.second),
     playerInventory: PlayerInventory
-) : ScreenHandler(type, syncId) {
+) : ScreenHandler(type, syncId), ContainerBlockMenu {
     init {
         val (width, height) = dimensions
         val offset = (9 - width) / 2
-        checkSize(container, width * height)
+        checkSize(inventory, width * height)
 
         val slot = 18
 
         // Container
         for (y in 0 until height) {
             for (x in 0 until width) {
-                addSlot(Slot(container, y * width + x, 8 + (x + offset) * slot, 17 + y * slot))
+                addSlot(Slot(inventory, y * width + x, 8 + (x + offset) * slot, 17 + y * slot))
             }
         }
 
@@ -44,7 +45,7 @@ open class SimpleMenu(
     }
 
     override fun canUse(player: PlayerEntity) =
-        container.canPlayerUse(player)
+        inventory.canPlayerUse(player)
 
     override fun transferSlot(player: PlayerEntity, index: Int): ItemStack {
         var result = ItemStack.EMPTY
