@@ -9,7 +9,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         java: [
-          16 # Target
+          17 # Target
         ]
     runs-on: ${{ matrix.os }}
     steps:
