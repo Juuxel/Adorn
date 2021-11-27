@@ -5,11 +5,11 @@ import org.jmailen.gradle.kotlinter.KotlinterExtension
 
 plugins {
     base
-    kotlin("jvm") version "1.5.31" apply false
+    kotlin("jvm") version "1.6.0" apply false
 
     id("architectury-plugin") version "3.4-SNAPSHOT"
     id("dev.architectury.loom") version "0.10.0.194" apply false
-    id("io.github.juuxel.loom-quiltflower-mini") version "1.0.0" apply false
+    id("io.github.juuxel.loom-quiltflower-mini") version "1.1.0" apply false
 
     id("org.jmailen.kotlinter") version "3.2.0" apply false
     id("com.github.johnrengelman.shadow") version "7.0.0" apply false
@@ -21,7 +21,7 @@ architectury {
 
 group = "io.github.juuxel"
 version = "${project.property("mod-version")}+${project.property("minecraft-version")}"
-base.archivesBaseName = "Adorn"
+base.archivesName.set("Adorn")
 
 tasks {
     val collectJars by registering(Copy::class) {
@@ -52,7 +52,7 @@ subprojects {
 
     group = rootProject.group
     version = rootProject.version
-    base.archivesBaseName = rootProject.base.archivesBaseName
+    base.archivesName.set(rootProject.base.archivesName)
 
     dependencies {
         "minecraft"("net.minecraft:minecraft:${rootProject.property("minecraft-version")}")
@@ -70,7 +70,7 @@ subprojects {
         }
 
         withType<KotlinCompile> {
-            kotlinOptions.jvmTarget = "16"
+            kotlinOptions.jvmTarget = "17"
         }
 
         "jar"(Jar::class) {
