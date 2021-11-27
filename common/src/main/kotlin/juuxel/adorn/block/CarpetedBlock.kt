@@ -56,7 +56,7 @@ abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
         if (isCarpetingEnabled()) {
             val carpet = state[CARPET]
             if (carpet.isPresent && !COLORS_TO_BLOCKS[carpet.value]!!.defaultState.canPlaceAt(world, pos))
-                world.blockTickScheduler.schedule(pos, this, 1)
+                world.createAndScheduleBlockTick(pos, this, 1)
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)

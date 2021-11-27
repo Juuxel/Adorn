@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.ScreenHandlerContext
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.property.Property
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
@@ -99,3 +100,16 @@ fun ScreenHandlerContext.getBlockEntity(): BlockEntity? =
  */
 fun menuContextOf(blockEntity: BlockEntity): ScreenHandlerContext =
     ScreenHandlerContext.create(blockEntity.world, blockEntity.pos)
+
+/**
+ * Syncs this block entity to the client. If not running on the server, crashes.
+ */
+fun BlockEntity.syncToClient() {
+    val world = this.world
+
+    if (world is ServerWorld) {
+        world.chunkManager.markForUpdate(pos)
+    } else {
+        throw IllegalStateException("[Adorn] Can't sync server->client from the server. What on earth am I doing?")
+    }
+}

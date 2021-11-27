@@ -74,10 +74,10 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
             return ActionResult.SUCCESS
         }
 
-        return if (BedBlock.isOverworld(world) && sleepingDirection != null) {
+        return if (BedBlock.isBedWorking(world) && sleepingDirection != null) {
             if (!world.isClient) {
                 player.trySleep(pos).ifLeft {
-                    it.toText()?.let { message ->
+                    it.message?.let { message ->
                         player.sendMessage(message, true)
                     }
                 }

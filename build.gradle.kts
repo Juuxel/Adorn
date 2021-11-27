@@ -8,7 +8,7 @@ plugins {
     kotlin("jvm") version "1.5.31" apply false
 
     id("architectury-plugin") version "3.4-SNAPSHOT"
-    id("dev.architectury.loom") version "0.10.0.191" apply false
+    id("dev.architectury.loom") version "0.10.0.194" apply false
     id("io.github.juuxel.loom-quiltflower-mini") version "1.0.0" apply false
 
     id("org.jmailen.kotlinter") version "3.2.0" apply false
@@ -46,8 +46,8 @@ subprojects {
     apply(plugin = "org.jmailen.kotlinter")
 
     extensions.configure<JavaPluginExtension> {
-        sourceCompatibility = JavaVersion.VERSION_16
-        targetCompatibility = JavaVersion.VERSION_16
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     group = rootProject.group
@@ -66,7 +66,7 @@ subprojects {
     tasks {
         withType<JavaCompile> {
             options.encoding = "UTF-8"
-            options.release.set(16)
+            options.release.set(17)
         }
 
         withType<KotlinCompile> {

@@ -14,9 +14,10 @@ import juuxel.adorn.trading.TradeInventory
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.color
 import juuxel.adorn.util.getBlockEntity
+import juuxel.adorn.util.syncToClient
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
+import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
@@ -85,7 +86,7 @@ class TradingStationMenu(
                     slot.markDirty()
 
                     if (!world.isClient) {
-                        (getTradingStation(context) as? BlockEntityClientSerializable)?.sync() ?: run {
+                        (getTradingStation(context) as? BlockEntity)?.syncToClient() ?: run {
                             val exception = Exception("Stack trace")
                             exception.fillInStackTrace()
                             LOGGER.warn("[Adorn] Could not sync empty trading station, report this!", exception)

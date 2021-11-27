@@ -1,7 +1,7 @@
 import dev.architectury.plugin.TransformingTask
 
 architectury {
-    common()
+    common(forgeEnabled = false)
 }
 
 loom {

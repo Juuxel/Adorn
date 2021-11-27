@@ -86,11 +86,11 @@ class TradingStationRenderer(context: BlockEntityRendererFactory.Context) : Bloc
             matrices.multiply(camera.rotation)
             matrices.scale(-0.025f, -0.025f, +0.025f)
 
-            val matrixModel = matrices.peek().model
+            val positionMatrix = matrices.peek().positionMatrix
             val opacity = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25f)
             val backgroundColor = color(0x000000, opacity)
             val textX = -textRenderer.getWidth(label) / 2f
-            textRenderer.draw(label, textX, 0f, Colors.WHITE, false, matrixModel, vertexConsumers, false, backgroundColor, light)
+            textRenderer.draw(label, textX, 0f, Colors.WHITE, false, positionMatrix, vertexConsumers, false, backgroundColor, light)
 
             matrices.pop()
         }

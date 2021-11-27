@@ -34,13 +34,13 @@ open class PrismarineChimneyBlock(settings: Settings) : AbstractChimneyBlock(set
         }
 
         override fun onBlockAdded(state: BlockState, world: World, pos: BlockPos, oldState: BlockState, moved: Boolean) {
-            world.blockTickScheduler.schedule(pos, this, 20)
+            world.createAndScheduleBlockTick(pos, this, 20)
         }
 
         override fun neighborUpdate(
             state: BlockState, world: World, pos: BlockPos, neighbor: Block, neighborPos: BlockPos, moved: Boolean
         ) {
-            world.blockTickScheduler.schedule(pos, this, 20)
+            world.createAndScheduleBlockTick(pos, this, 20)
         }
 
         @Environment(EnvType.CLIENT)

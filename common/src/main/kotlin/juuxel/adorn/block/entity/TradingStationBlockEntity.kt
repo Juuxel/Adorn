@@ -14,7 +14,10 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.network.Packet
 import net.minecraft.network.PacketByteBuf
+import net.minecraft.network.listener.ClientPlayPacketListener
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.LiteralText
@@ -88,6 +91,11 @@ abstract class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
         nbt.put(NBT_TRADE, trade.writeNbt(NbtCompound()))
         nbt.put(NBT_STORAGE, storage.writeNbt(NbtCompound()))
     }
+
+    override fun toUpdatePacket(): Packet<ClientPlayPacketListener> =
+        BlockEntityUpdateS2CPacket.create(this)
+
+    override fun toInitialChunkDataNbt(): NbtCompound = createNbt()
 
     companion object {
         const val NBT_TRADING_OWNER = "TradingOwner"
