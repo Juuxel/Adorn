@@ -14,4 +14,4 @@ logoFile = "icon.png"
 [[dependencies.adorn]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.18.1,)"
+versionRange = "[1.18.1,1.19)"
