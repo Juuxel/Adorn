@@ -42,11 +42,7 @@ abstract class AbstractTableBlock(settings: Settings) : CarpetedBlock(settings),
 
     override fun getStateForNeighborUpdate(
         state: BlockState, direction: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
-    ) = updateConnections(
-        super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos),
-        world,
-        pos
-    )
+    ) = updateConnections(super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos), world, pos)
 
     private fun updateConnections(state: BlockState, world: WorldAccess, pos: BlockPos) =
         state.with(NORTH, canConnectTo(world.getBlockState(pos.offset(Direction.NORTH)), Direction.NORTH))
