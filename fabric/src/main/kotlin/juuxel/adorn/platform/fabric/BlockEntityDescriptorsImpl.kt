@@ -10,14 +10,13 @@ import juuxel.adorn.block.entity.DrawerBlockEntityFabric
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntityFabric
 import juuxel.adorn.block.entity.ShelfBlockEntity
-import juuxel.adorn.block.entity.ShelfBlockEntityFabric
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.block.entity.TradingStationBlockEntityFabric
 import juuxel.adorn.platform.BlockEntityDescriptors
 
 object BlockEntityDescriptorsImpl : BlockEntityDescriptors {
     override fun shelf(): BlockEntityDescriptor<ShelfBlock, ShelfBlockEntity> =
-        BlockEntityDescriptor(::ShelfBlockEntityFabric)
+        BlockEntityDescriptor(::ShelfBlockEntity)
 
     override fun drawer(): BlockEntityDescriptor<DrawerBlock, DrawerBlockEntity> =
         BlockEntityDescriptor(::DrawerBlockEntityFabric)
