@@ -1,5 +1,3 @@
-import dev.architectury.plugin.TransformingTask
-
 architectury {
     common()
 }

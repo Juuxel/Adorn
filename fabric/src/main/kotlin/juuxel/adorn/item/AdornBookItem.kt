@@ -2,8 +2,6 @@ package juuxel.adorn.item
 
 import juuxel.adorn.client.resources.BookManager
 import juuxel.adorn.lib.AdornNetworking
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
@@ -32,7 +30,6 @@ class AdornBookItem(private val bookId: Identifier, settings: Settings) : Item(s
 //    @Environment(EnvType.CLIENT)
 //    override fun hasEnchantmentGlint(stack: ItemStack) = true
 
-    @Environment(EnvType.CLIENT)
     override fun appendTooltip(stack: ItemStack, world: World?, texts: MutableList<Text>, context: TooltipContext) {
         super.appendTooltip(stack, world, texts, context)
         if (bookId in BookManager) {

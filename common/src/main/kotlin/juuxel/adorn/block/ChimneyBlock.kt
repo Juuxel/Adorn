@@ -1,8 +1,6 @@
 @file:Suppress("DEPRECATION")
 package juuxel.adorn.block
 
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -37,7 +35,6 @@ class ChimneyBlock : AbstractChimneyBlock(Settings.copy(Blocks.BRICKS).ticksRand
         return ActionResult.SUCCESS
     }
 
-    @Environment(EnvType.CLIENT)
     override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
         if (state[CONNECTED]) return
 

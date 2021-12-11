@@ -1,7 +1,5 @@
 package juuxel.adorn.block
 
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.BubbleColumnBlock
@@ -15,7 +13,6 @@ import java.util.Random
 open class PrismarineChimneyBlock(settings: Settings) : AbstractChimneyBlock(settings), BlockWithDescription {
     override val descriptionKey get() = AdornBlocks.PRISMARINE_CHIMNEY.translationKey + ".desc"
 
-    @Environment(EnvType.CLIENT)
     override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
         if (!state.fluidState.isIn(FluidTags.WATER) || state[CONNECTED]) return
 
@@ -43,7 +40,6 @@ open class PrismarineChimneyBlock(settings: Settings) : AbstractChimneyBlock(set
             world.createAndScheduleBlockTick(pos, this, 20)
         }
 
-        @Environment(EnvType.CLIENT)
         override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
             if (!drag) {
                 super.randomDisplayTick(state, world, pos, random)
