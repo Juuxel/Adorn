@@ -1,5 +1,5 @@
 modLoader = "kotlinforforge"
-loaderVersion = "[2,)"
+loaderVersion = "[3,)"
 license = "MIT"
 issueTrackerURL = "https://github.com/Juuxel/Adorn/issues"
 
@@ -14,4 +14,4 @@ logoFile = "icon.png"
 [[dependencies.adorn]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.17.1,1.18)"
+versionRange = "[1.18.1,)"

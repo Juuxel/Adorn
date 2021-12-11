@@ -22,7 +22,11 @@ repositories {
 
 dependencies {
     forge("net.minecraftforge:forge:${rootProject.property("minecraft-version")}-${rootProject.property("forge-version")}")
+
+    // Add Kotlin (see https://github.com/thedarkcolour/KotlinForForge/blob/70385f5/thedarkcolour/kotlinforforge/gradle/kff-3.0.0.gradle)
     implementation("thedarkcolour:kotlinforforge:${rootProject.property("kotlin-for-forge")}")
+    forgeDependencies(kotlin("stdlib-jdk8"))
+    forgeDependencies(kotlin("reflect"))
 
     implementation(project(":common", configuration = "namedElements")) {
         isTransitive = false

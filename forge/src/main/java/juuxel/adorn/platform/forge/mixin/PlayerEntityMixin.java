@@ -17,8 +17,8 @@ abstract class PlayerEntityMixin extends LivingEntity {
         super(type, world);
     }
 
-    @Inject(method = "isSleepingLongEnough", at = @At("RETURN"), cancellable = true)
-    private void onIsSleepingLongEnough(CallbackInfoReturnable<Boolean> info) {
+    @Inject(method = "canResetTimeBySleeping", at = @At("RETURN"), cancellable = true)
+    private void onCanResetTimeBySleeping(CallbackInfoReturnable<Boolean> info) {
         // Allow sleeping on sofas at daytime and (depending on config)
         // prevent skipping the night on sofas
         boolean skipNight = world.getGameRules().getBoolean(AdornGameRules.SKIP_NIGHT_ON_SOFAS);

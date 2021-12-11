@@ -3,6 +3,7 @@ package juuxel.adorn.platform.forge.menu
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.block.entity.TradingStation
 import juuxel.adorn.util.getBlockEntity
+import net.minecraft.block.Block
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventory
@@ -11,7 +12,6 @@ import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.slot.Slot
 import net.minecraft.screen.slot.SlotActionType
-import net.minecraftforge.common.util.Constants
 
 class TradingStationMenu(
     syncId: Int,
@@ -96,7 +96,7 @@ class TradingStationMenu(
 
             if (tradingStation is BlockEntity) {
                 val state = tradingStation.cachedState
-                player.world.updateListeners(tradingStation.pos, state, state, Constants.BlockFlags.BLOCK_UPDATE)
+                player.world.updateListeners(tradingStation.pos, state, state, Block.NOTIFY_LISTENERS)
             }
 
             return

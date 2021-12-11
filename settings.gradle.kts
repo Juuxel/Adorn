@@ -25,5 +25,5 @@ rootProject.name = "adorn"
 include(
     "common",
     "fabric",
-    // "forge"
+    "forge",
 )

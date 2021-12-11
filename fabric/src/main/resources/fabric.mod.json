@@ -39,14 +39,14 @@
   "accessWidener": "adorn.accesswidener",
 
   "depends": {
-    "minecraft": "~1.18-rc.3",
-    "fabricloader": ">=0.12.5",
+    "minecraft": "~1.18.1",
+    "fabricloader": ">=0.12.11",
     "fabric-language-kotlin": "^1.7.0",
 
-    "fabric": ">=0.43.1",
+    "fabric": ">=0.44.0",
 
     "jankson": "^4.0.0",
-    "libgui": "^5.0.0-beta.2",
+    "libgui": "^5.1.0",
     "libcd": "^3.0.3"
   },
   "conflicts": {
