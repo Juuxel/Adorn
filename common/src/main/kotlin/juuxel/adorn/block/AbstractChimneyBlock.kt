@@ -39,8 +39,7 @@ abstract class AbstractChimneyBlock(settings: Settings) : Block(settings), Water
     }
 
     override fun getStateForNeighborUpdate(
-        state: BlockState, side: Direction, neighborState: BlockState,
-        world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
+        state: BlockState, side: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ): BlockState = if (side == Direction.UP) state.updateConnections(neighborState) else state
 
     override fun getFluidState(state: BlockState) =

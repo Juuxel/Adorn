@@ -121,8 +121,10 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
         val rightState = world.getBlockState(pos.offset(direction.rotateYCounterclockwise()))
         val frontState = world.getBlockState(pos.offset(direction))
 
+        /* ktlint-disable max-line-length */
         val connectedLeft = leftState.block is SofaBlock && (leftState[FACING] == direction || (leftState[FACING] == direction.rotateYCounterclockwise() && leftState[FRONT_CONNECTION] != FrontConnection.NONE))
         val connectedRight = rightState.block is SofaBlock && (rightState[FACING] == direction || (rightState[FACING] == direction.rotateYClockwise() && rightState[FRONT_CONNECTION] != FrontConnection.NONE))
+        /* ktlint-enable max-line-length */
         val connectedFront = frontState.block is SofaBlock
         val connectedFrontLeft = connectedFront && !connectedLeft && frontState[FACING] == direction.rotateYCounterclockwise()
         val connectedFrontRight = connectedFront && !connectedRight && frontState[FACING] == direction.rotateYClockwise()

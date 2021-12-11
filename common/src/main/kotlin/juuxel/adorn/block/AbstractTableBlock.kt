@@ -41,26 +41,18 @@ abstract class AbstractTableBlock(settings: Settings) : CarpetedBlock(settings),
         else super.getFluidState(state)
 
     override fun getStateForNeighborUpdate(
-        state: BlockState,
-        direction: Direction,
-        neighborState: BlockState,
-        world: WorldAccess,
-        pos: BlockPos,
-        neighborPos: BlockPos
+        state: BlockState, direction: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ) = updateConnections(
         super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos),
         world,
         pos
     )
 
-    private fun updateConnections(
-        state: BlockState,
-        world: WorldAccess,
-        pos: BlockPos
-    ) = state.with(NORTH, canConnectTo(world.getBlockState(pos.offset(Direction.NORTH)), Direction.NORTH))
-        .with(EAST, canConnectTo(world.getBlockState(pos.offset(Direction.EAST)), Direction.EAST))
-        .with(SOUTH, canConnectTo(world.getBlockState(pos.offset(Direction.SOUTH)), Direction.SOUTH))
-        .with(WEST, canConnectTo(world.getBlockState(pos.offset(Direction.WEST)), Direction.WEST))
+    private fun updateConnections(state: BlockState, world: WorldAccess, pos: BlockPos) =
+        state.with(NORTH, canConnectTo(world.getBlockState(pos.offset(Direction.NORTH)), Direction.NORTH))
+            .with(EAST, canConnectTo(world.getBlockState(pos.offset(Direction.EAST)), Direction.EAST))
+            .with(SOUTH, canConnectTo(world.getBlockState(pos.offset(Direction.SOUTH)), Direction.SOUTH))
+            .with(WEST, canConnectTo(world.getBlockState(pos.offset(Direction.WEST)), Direction.WEST))
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: ShapeContext?) =
         getShapeForKey(

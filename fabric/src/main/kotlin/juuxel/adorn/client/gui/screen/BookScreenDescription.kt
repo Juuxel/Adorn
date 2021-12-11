@@ -54,7 +54,12 @@ class BookScreenDescription(book: Book) : LightweightGuiDescription() {
         val result = WPlainPanel()
         result.add(WBigLabel(book.title, WLabel.DEFAULT_TEXT_COLOR, scale = book.titleScale), 0, 25, 116, 20)
         result.add(WLabel(book.subtitle, WLabel.DEFAULT_TEXT_COLOR).setHorizontalAlignment(HorizontalAlignment.CENTER).disableDarkmode(), 0, 45, 116, 20)
-        result.add(WLabel(TranslatableText("book.byAuthor", book.author), WLabel.DEFAULT_TEXT_COLOR).setHorizontalAlignment(HorizontalAlignment.CENTER).disableDarkmode(), 0, 60, 116, 20)
+        result.add(
+            WLabel(TranslatableText("book.byAuthor", book.author), WLabel.DEFAULT_TEXT_COLOR)
+                .setHorizontalAlignment(HorizontalAlignment.CENTER)
+                .disableDarkmode(),
+            0, 60, 116, 20
+        )
         return result
     }
 

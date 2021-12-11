@@ -9,8 +9,7 @@ import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.util.math.BlockPos
 
-class ShelfBlockEntity(pos: BlockPos, state: BlockState) :
-    BaseContainerBlockEntity(AdornBlockEntities.SHELF, pos, state, 2) {
+class ShelfBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlockEntity(AdornBlockEntities.SHELF, pos, state, 2) {
     // No menus for shelves
     override fun createScreenHandler(syncId: Int, playerInv: PlayerInventory?) = null
 

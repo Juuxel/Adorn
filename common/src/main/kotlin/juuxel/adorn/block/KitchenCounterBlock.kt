@@ -29,8 +29,7 @@ open class KitchenCounterBlock(variant: BlockVariant) : AbstractKitchenCounterBl
     }
 
     override fun getStateForNeighborUpdate(
-        state: BlockState, direction: Direction?, neighborState: BlockState?,
-        world: WorldAccess, pos: BlockPos, neighborPos: BlockPos?
+        state: BlockState, direction: Direction?, neighborState: BlockState?, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos?
     ): BlockState {
         val facing = state[FACING]
         val frontState = world.getBlockState(pos.offset(facing))

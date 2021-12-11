@@ -40,6 +40,7 @@ object AdornBlocks {
     }
 
     // @formatter:off
+    /* ktlint-disable max-line-length */
     val OAK_CHAIR: Block by registerBlock("oak_chair", ::ChairBlockItem) { ChairBlock(BlockVariant.OAK) }
     val SPRUCE_CHAIR: Block by registerBlock("spruce_chair", ::ChairBlockItem) { ChairBlock(BlockVariant.SPRUCE) }
     val BIRCH_CHAIR: Block by registerBlock("birch_chair", ::ChairBlockItem) { ChairBlock(BlockVariant.BIRCH) }
@@ -318,6 +319,7 @@ object AdornBlocks {
                 .nonOpaque()
         )
     }
+    /* ktlint-enable max-line-length */
     // @formatter:on
 
     fun init() {

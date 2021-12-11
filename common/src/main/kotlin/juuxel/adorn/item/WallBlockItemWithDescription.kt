@@ -12,9 +12,7 @@ import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-class WallBlockItemWithDescription(
-    ground: Block, wall: Block, settings: Settings
-) : WallStandingBlockItem(ground, wall, settings) {
+class WallBlockItemWithDescription(ground: Block, wall: Block, settings: Settings) : WallStandingBlockItem(ground, wall, settings) {
     @Environment(EnvType.CLIENT)
     override fun appendTooltip(stack: ItemStack, world: World?, texts: MutableList<Text>, context: TooltipContext) {
         super.appendTooltip(stack, world, texts, context)

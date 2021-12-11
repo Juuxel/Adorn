@@ -102,8 +102,7 @@ class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()
         } else VoxelShapes.empty() // Let the bottom one handle the collision
 
     override fun getStateForNeighborUpdate(
-        state: BlockState, direction: Direction, neighborState: BlockState,
-        world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
+        state: BlockState, direction: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ): BlockState {
         val half = state[HALF]
         return if (

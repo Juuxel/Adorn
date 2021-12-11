@@ -37,8 +37,7 @@ class ChainLinkFenceBlock(settings: Settings) : PaneBlock(settings) {
     }
 
     override fun getStateForNeighborUpdate(
-        state: BlockState, facing: Direction, neighborState: BlockState,
-        world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
+        state: BlockState, facing: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ): BlockState {
         var result = super.getStateForNeighborUpdate(state, facing, neighborState, world, pos, neighborPos)
 

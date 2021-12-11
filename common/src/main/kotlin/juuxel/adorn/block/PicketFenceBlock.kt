@@ -88,9 +88,7 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
         return state.with(SHAPE, Shape.STRAIGHT)
     }
 
-    override fun getOutlineShape(
-        state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext
-    ): VoxelShape = when (state[SHAPE]!!) {
+    override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape = when (state[SHAPE]!!) {
         Shape.STRAIGHT -> STRAIGHT_OUTLINE_SHAPES.getValue(state[FACING])
         Shape.CLOCKWISE_CORNER -> CORNER_OUTLINE_SHAPES.getValue(state[FACING])
         Shape.COUNTERCLOCKWISE_CORNER -> CORNER_OUTLINE_SHAPES.getValue(state[FACING].rotateYCounterclockwise())
@@ -98,15 +96,14 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
         Shape.COUNTERCLOCKWISE_INNER_CORNER -> CORNER_OUTLINE_SHAPES.getValue(state[FACING].rotateYClockwise())
     }
 
-    override fun getCollisionShape(
-        state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext
-    ): VoxelShape = when (state[SHAPE]!!) {
-        Shape.STRAIGHT -> STRAIGHT_COLLISION_SHAPES.getValue(state[FACING])
-        Shape.CLOCKWISE_CORNER -> CORNER_COLLISION_SHAPES.getValue(state[FACING])
-        Shape.COUNTERCLOCKWISE_CORNER -> CORNER_COLLISION_SHAPES.getValue(state[FACING].rotateYCounterclockwise())
-        Shape.CLOCKWISE_INNER_CORNER -> CORNER_COLLISION_SHAPES.getValue(state[FACING].opposite)
-        Shape.COUNTERCLOCKWISE_INNER_CORNER -> CORNER_COLLISION_SHAPES.getValue(state[FACING].rotateYClockwise())
-    }
+    override fun getCollisionShape(state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape =
+        when (state[SHAPE]!!) {
+            Shape.STRAIGHT -> STRAIGHT_COLLISION_SHAPES.getValue(state[FACING])
+            Shape.CLOCKWISE_CORNER -> CORNER_COLLISION_SHAPES.getValue(state[FACING])
+            Shape.COUNTERCLOCKWISE_CORNER -> CORNER_COLLISION_SHAPES.getValue(state[FACING].rotateYCounterclockwise())
+            Shape.CLOCKWISE_INNER_CORNER -> CORNER_COLLISION_SHAPES.getValue(state[FACING].opposite)
+            Shape.COUNTERCLOCKWISE_INNER_CORNER -> CORNER_COLLISION_SHAPES.getValue(state[FACING].rotateYClockwise())
+        }
 
     override fun getFluidState(state: BlockState) =
         if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
