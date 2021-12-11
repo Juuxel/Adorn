@@ -10,9 +10,11 @@ import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.block.entity.ShelfBlockEntity
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 
-interface BlockEntityDescriptors {
-    fun shelf(): BlockEntityDescriptor<ShelfBlock, ShelfBlockEntity>
-    fun drawer(): BlockEntityDescriptor<DrawerBlock, DrawerBlockEntity>
-    fun kitchenCupboard(): BlockEntityDescriptor<KitchenCupboardBlock, KitchenCupboardBlockEntity>
-    fun tradingStation(): BlockEntityDescriptor<TradingStationBlock, TradingStationBlockEntity>
+abstract class BlockEntityDescriptors {
+    val shelf: BlockEntityDescriptor<ShelfBlock, ShelfBlockEntity> =
+        BlockEntityDescriptor(::ShelfBlockEntity)
+
+    abstract val drawer: BlockEntityDescriptor<DrawerBlock, DrawerBlockEntity>
+    abstract val kitchenCupboard: BlockEntityDescriptor<KitchenCupboardBlock, KitchenCupboardBlockEntity>
+    abstract val tradingStation: BlockEntityDescriptor<TradingStationBlock, TradingStationBlockEntity>
 }

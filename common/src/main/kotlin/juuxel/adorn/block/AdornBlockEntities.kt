@@ -14,10 +14,10 @@ object AdornBlockEntities {
     @JvmField
     val BLOCK_ENTITIES = PlatformBridges.registrarFactory.blockEntity()
 
-    val SHELF: BlockEntityType<ShelfBlockEntity> by register("shelf", PlatformBridges.blockEntities.shelf())
-    val DRAWER: BlockEntityType<DrawerBlockEntity> by register("drawer", PlatformBridges.blockEntities.drawer())
-    val KITCHEN_CUPBOARD: BlockEntityType<KitchenCupboardBlockEntity> by register("kitchen_cupboard", PlatformBridges.blockEntities.kitchenCupboard())
-    val TRADING_STATION: BlockEntityType<TradingStationBlockEntity> by register("trading_station", PlatformBridges.blockEntities.tradingStation())
+    val SHELF: BlockEntityType<ShelfBlockEntity> by register("shelf", PlatformBridges.blockEntities.shelf)
+    val DRAWER: BlockEntityType<DrawerBlockEntity> by register("drawer", PlatformBridges.blockEntities.drawer)
+    val KITCHEN_CUPBOARD: BlockEntityType<KitchenCupboardBlockEntity> by register("kitchen_cupboard", PlatformBridges.blockEntities.kitchenCupboard)
+    val TRADING_STATION: BlockEntityType<TradingStationBlockEntity> by register("trading_station", PlatformBridges.blockEntities.tradingStation)
 
     private fun <E : BlockEntity> register(name: String, descriptor: BlockEntityDescriptor<*, E>) =
         BLOCK_ENTITIES.register(name) { AdornBlockEntityType(descriptor.factory) { descriptor.type.isInstance(it) } }
