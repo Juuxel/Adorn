@@ -25,8 +25,8 @@ dependencies {
 
     // Add Kotlin (see https://github.com/thedarkcolour/KotlinForForge/blob/70385f5/thedarkcolour/kotlinforforge/gradle/kff-3.0.0.gradle)
     implementation("thedarkcolour:kotlinforforge:${rootProject.property("kotlin-for-forge")}")
-    forgeDependencies(kotlin("stdlib-jdk8"))
-    forgeDependencies(kotlin("reflect"))
+    forgeRuntimeLibrary(kotlin("stdlib-jdk8"))
+    forgeRuntimeLibrary(kotlin("reflect"))
 
     implementation(project(":common", configuration = "namedElements")) {
         isTransitive = false
@@ -39,7 +39,7 @@ dependencies {
     }
 
     bundle("blue.endless:jankson:${rootProject.property("jankson")}")
-    forgeDependencies("blue.endless:jankson:${rootProject.property("jankson")}")
+    forgeRuntimeLibrary("blue.endless:jankson:${rootProject.property("jankson")}")
 }
 
 tasks {
