@@ -1,6 +1,7 @@
 @file:JvmName("PlatformBridgesKtImpl")
 package juuxel.adorn.platform.forge
 
+import juuxel.adorn.platform.KitchenSinkEjection
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import juuxel.adorn.platform.RegistrarFactory
@@ -21,6 +22,7 @@ private object PlatformBridgesImpl : PlatformBridges {
     override val configManager = ConfigManagerImpl
     override val entities = EntityBridgeImpl
     override val items = ItemBridgeImpl
+    override val kitchenSinkEjection = KitchenSinkEjectionImpl
     override val menus = MenuBridgeImpl
     override val network = NetworkBridgeImpl
     override val registrarFactory: RegistrarFactory = object : RegistrarFactory {

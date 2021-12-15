@@ -7,12 +7,14 @@ import juuxel.adorn.block.SneakClickHandler
 import juuxel.adorn.client.SinkColorProvider
 import juuxel.adorn.client.renderer.ShelfRenderer
 import juuxel.adorn.client.renderer.TradingStationRenderer
+import juuxel.adorn.transfer.InfiniteWaterStorage
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.util.ActionResult
 
@@ -33,6 +35,18 @@ object AdornBlocksFabric {
         )
 
         UseBlockCallback.EVENT.register(CommonEventHandlers::handleCarpets)
+
+        FluidStorage.SIDED.registerForBlocks(
+            { _, _, _, _, _ -> InfiniteWaterStorage },
+            AdornBlocks.OAK_KITCHEN_SINK,
+            AdornBlocks.SPRUCE_KITCHEN_SINK,
+            AdornBlocks.BIRCH_KITCHEN_SINK,
+            AdornBlocks.JUNGLE_KITCHEN_SINK,
+            AdornBlocks.ACACIA_KITCHEN_SINK,
+            AdornBlocks.DARK_OAK_KITCHEN_SINK,
+            AdornBlocks.CRIMSON_KITCHEN_SINK,
+            AdornBlocks.WARPED_KITCHEN_SINK
+        )
     }
 
     @Environment(EnvType.CLIENT)
