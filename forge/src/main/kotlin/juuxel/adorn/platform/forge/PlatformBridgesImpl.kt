@@ -1,7 +1,6 @@
 @file:JvmName("PlatformBridgesKtImpl")
 package juuxel.adorn.platform.forge
 
-import juuxel.adorn.platform.KitchenSinkEjection
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import juuxel.adorn.platform.RegistrarFactory

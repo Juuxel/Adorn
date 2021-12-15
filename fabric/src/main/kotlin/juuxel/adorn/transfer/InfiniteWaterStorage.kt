@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.transfer.v1.storage.StorageView
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext
 import net.minecraft.fluid.Fluids
 
-object InfiniteWaterStorage: Storage<FluidVariant> {
+object InfiniteWaterStorage : Storage<FluidVariant> {
 
     private val water = FluidVariant.of(Fluids.WATER)
     private val list = listOf(InfiniteWaterStorageView)
