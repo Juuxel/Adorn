@@ -4,18 +4,19 @@ import juuxel.adorn.menu.ContainerBlockMenu
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
-import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.ScreenHandler
+import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.screen.slot.Slot
 
-open class SimpleMenu(
+abstract class SimpleMenu(
     type: ScreenHandlerType<*>,
     syncId: Int,
     private val dimensions: Pair<Int, Int>,
-    override val inventory: Inventory = SimpleInventory(dimensions.first * dimensions.second),
-    playerInventory: PlayerInventory
+    override val inventory: Inventory,
+    playerInventory: PlayerInventory,
+    val context: ScreenHandlerContext
 ) : ScreenHandler(type, syncId), ContainerBlockMenu {
     init {
         val (width, height) = dimensions

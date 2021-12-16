@@ -18,8 +18,8 @@ object AdornMenus {
     @JvmField
     val MENUS: Registrar<ScreenHandlerType<*>> = PlatformBridges.registrarFactory.menu()
 
-    val DRAWER by MENUS.register("drawer") { ScreenHandlerType(::DrawerMenu) }
-    val KITCHEN_CUPBOARD by MENUS.register("kitchen_cupboard") { ScreenHandlerType(::KitchenCupboardMenu) }
+    val DRAWER by MENUS.register("drawer") { ScreenHandlerType(DrawerMenu.FACTORY) }
+    val KITCHEN_CUPBOARD by MENUS.register("kitchen_cupboard") { ScreenHandlerType(KitchenCupboardMenu.FACTORY) }
     val TRADING_STATION by MENUS.register("trading_station") { ScreenHandlerType(::TradingStationMenu) }
 
     @OnlyIn(Dist.CLIENT)

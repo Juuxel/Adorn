@@ -4,6 +4,7 @@ import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import juuxel.adorn.client.gui.painter.Painters
 import juuxel.adorn.client.resources.ColorManagerFabric
+import juuxel.adorn.util.getBlock
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.entity.player.PlayerInventory
@@ -26,7 +27,7 @@ open class SimpleMenu(
     propertyDelegate: PropertyDelegate = getBlockPropertyDelegate(context)
 ) : BaseMenu(type, syncId, playerInv, context, blockInventory, propertyDelegate) {
     private val slot: WItemSlot
-    private val blockId: Identifier = Registry.BLOCK.getId(getBlock(context))
+    private val blockId: Identifier = Registry.BLOCK.getId(context.getBlock())
 
     init {
         (rootPanel as WGridPanel).apply {

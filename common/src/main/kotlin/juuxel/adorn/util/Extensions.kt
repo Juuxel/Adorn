@@ -4,6 +4,7 @@ import juuxel.adorn.lib.Registered
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.ScreenHandlerContext
@@ -93,6 +94,13 @@ fun <K, V> Array<K>.associateLazily(mapper: (K) -> Registered<V>): Registered<Ma
 fun ScreenHandlerContext.getBlockEntity(): BlockEntity? =
     get { world: World, pos: BlockPos -> world.getBlockEntity(pos) }
         .orElse(null)
+
+/**
+ * Gets the block located at this context's position.
+ */
+fun ScreenHandlerContext.getBlock() =
+    get { world, pos -> world.getBlockState(pos).block }
+        .orElse(Blocks.AIR)
 
 /**
  * Creates a menu context in the world and at the position of the [blockEntity].

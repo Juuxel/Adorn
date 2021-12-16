@@ -41,11 +41,6 @@ abstract class BaseMenu(
     companion object {
         private val LOGGER = LogManager.getLogger()
 
-        fun getBlock(context: ScreenHandlerContext) =
-            context.get { world: World, pos: BlockPos ->
-                world.getBlockState(pos).block
-            }.orElse(Blocks.AIR)
-
         fun getBlockInventoryOrCreate(context: ScreenHandlerContext, fallbackSize: Int) =
             getBlockInventory(context).let {
                 if (it is EmptyInventory)

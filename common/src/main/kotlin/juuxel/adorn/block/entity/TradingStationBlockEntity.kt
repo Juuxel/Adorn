@@ -15,11 +15,10 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.Packet
-import net.minecraft.network.PacketByteBuf
 import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
+import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandler
-import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
@@ -27,7 +26,7 @@ import net.minecraft.util.math.BlockPos
 import java.util.UUID
 
 open class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
-    BlockEntity(AdornBlockEntities.TRADING_STATION, pos, state), ExtendedMenuFactory, TradingStation {
+    BlockEntity(AdornBlockEntities.TRADING_STATION, pos, state), NamedScreenHandlerFactory, TradingStation {
     var owner: UUID? = null
     override var ownerName: Text = LiteralText("???")
     override val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
@@ -60,10 +59,6 @@ open class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
         )
 
     override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)
-
-    override fun writeScreenOpeningData(player: ServerPlayerEntity, buf: PacketByteBuf) {
-        buf.writeBlockPos(pos)
-    }
 
     // NBT
 

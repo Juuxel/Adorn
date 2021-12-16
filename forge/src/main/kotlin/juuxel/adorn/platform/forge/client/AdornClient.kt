@@ -12,11 +12,11 @@ object AdornClient {
         MOD_BUS.addListener(this::setup)
         MOD_BUS.addListener(AdornRenderers::registerColorProviders)
         MOD_BUS.addListener(AdornRenderers::registerRenderers)
+        (MinecraftClient.getInstance().resourceManager as ReloadableResourceManager).registerReloader(PlatformBridges.resources.colorManager)
     }
 
     private fun setup(event: FMLClientSetupEvent) {
         AdornRenderers.registerRenderLayers()
         AdornMenus.initClient()
-        (MinecraftClient.getInstance().resourceManager as ReloadableResourceManager).registerReloader(PlatformBridges.resources.colorManager)
     }
 }
