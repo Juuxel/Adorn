@@ -43,9 +43,9 @@ object SofaSleeping {
             val world = entity.world
 
             if (state.block is SofaBlock) {
-                world.setBlockState(pos, state.with(SeatBlock.OCCUPIED, true))
+                world.setBlockState(pos, state.with(SeatBlock.OCCUPIED, occupied))
                 val neighborPos = pos.offset(SofaBlock.getSleepingDirection(world, pos, ignoreNeighbors = true))
-                world.setBlockState(neighborPos, world.getBlockState(neighborPos).with(SeatBlock.OCCUPIED, true))
+                world.setBlockState(neighborPos, world.getBlockState(neighborPos).with(SeatBlock.OCCUPIED, occupied))
                 true
             } else {
                 false // go on
