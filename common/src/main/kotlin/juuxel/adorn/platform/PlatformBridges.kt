@@ -16,6 +16,7 @@ interface PlatformBridges {
     val menus: MenuBridge
     val network: NetworkBridge
     val registrarFactory: RegistrarFactory
+    val resources: ResourceBridge
     val tags: TagBridge
 
     companion object {
@@ -27,6 +28,7 @@ interface PlatformBridges {
         inline val menus get() = get().menus
         inline val network get() = get().network
         inline val registrarFactory get() = get().registrarFactory
+        inline val resources get() = get().resources
         inline val tags get() = get().tags
     }
 }

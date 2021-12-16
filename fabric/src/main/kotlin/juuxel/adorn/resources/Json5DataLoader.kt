@@ -8,6 +8,7 @@ import net.minecraft.resource.SinglePreparationResourceReloader
 import net.minecraft.util.Identifier
 import net.minecraft.util.profiler.Profiler
 
+@Deprecated("Use JsonDataLoader instead")
 abstract class Json5DataLoader(
     private val id: Identifier, private val directory: String, protected val jankson: Jankson = Jankson.builder().build()
 ) : SinglePreparationResourceReloader<Map<Identifier, JsonObject>>(), IdentifiableResourceReloadListener {

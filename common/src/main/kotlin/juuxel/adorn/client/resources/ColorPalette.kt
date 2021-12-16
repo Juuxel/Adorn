@@ -2,11 +2,8 @@ package juuxel.adorn.client.resources
 
 import com.google.common.collect.ImmutableMap
 import juuxel.adorn.AdornCommon
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
 import net.minecraft.util.Identifier
 
-@Environment(EnvType.CLIENT)
 class ColorPalette(map: Map<Identifier, ColorManager.ColorPair>) {
     private val map = ImmutableMap.copyOf(map)
 

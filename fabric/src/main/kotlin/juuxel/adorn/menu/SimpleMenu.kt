@@ -3,7 +3,7 @@ package juuxel.adorn.menu
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
 import juuxel.adorn.client.gui.painter.Painters
-import juuxel.adorn.client.resources.ColorManager
+import juuxel.adorn.client.resources.ColorManagerFabric
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.entity.player.PlayerInventory
@@ -47,6 +47,6 @@ open class SimpleMenu(
         super.addPainters()
         rootPanel.backgroundPainter = Painters.palette(paletteId, blockId)
         slot.backgroundPainter = Painters.LIBGUI_STYLE_SLOT
-        titleColor = ColorManager.getColors(paletteId)[blockId].fg
+        titleColor = ColorManagerFabric.getColors(paletteId)[blockId].fg
     }
 }

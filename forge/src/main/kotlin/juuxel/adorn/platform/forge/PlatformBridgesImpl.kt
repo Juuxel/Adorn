@@ -31,5 +31,6 @@ private object PlatformBridgesImpl : PlatformBridges {
         override fun menu(): Registrar<ScreenHandlerType<*>> = RegistrarImpl(ForgeRegistries.CONTAINERS)
         override fun soundEvent(): Registrar<SoundEvent> = RegistrarImpl(ForgeRegistries.SOUND_EVENTS)
     }
+    override val resources = ResourceBridgeImpl
     override val tags = TagBridgeImpl
 }

@@ -1,6 +1,9 @@
 package juuxel.adorn.platform.forge.client
 
+import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.forge.menu.AdornMenus
+import net.minecraft.client.MinecraftClient
+import net.minecraft.resource.ReloadableResourceManager
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 
@@ -14,5 +17,6 @@ object AdornClient {
     private fun setup(event: FMLClientSetupEvent) {
         AdornRenderers.registerRenderLayers()
         AdornMenus.initClient()
+        (MinecraftClient.getInstance().resourceManager as ReloadableResourceManager).registerReloader(PlatformBridges.resources.colorManager)
     }
 }
