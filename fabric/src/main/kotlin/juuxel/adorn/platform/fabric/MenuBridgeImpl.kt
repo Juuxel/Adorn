@@ -1,13 +1,8 @@
 package juuxel.adorn.platform.fabric
 
 import juuxel.adorn.AdornCommon
-import juuxel.adorn.block.entity.DrawerBlockEntity
-import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.lib.Registered
-import juuxel.adorn.menu.DrawerMenu
-import juuxel.adorn.menu.KitchenCupboardMenu
 import juuxel.adorn.platform.MenuBridge
-import juuxel.adorn.util.menuContextOf
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry
 import net.minecraft.entity.player.PlayerEntity
@@ -22,12 +17,6 @@ import org.apache.logging.log4j.LogManager
 
 object MenuBridgeImpl : MenuBridge {
     private val LOGGER = LogManager.getLogger()
-
-    override fun drawer(syncId: Int, playerInventory: PlayerInventory, blockEntity: DrawerBlockEntity): ScreenHandler =
-        DrawerMenu(syncId, playerInventory, menuContextOf(blockEntity))
-
-    override fun kitchenCupboard(syncId: Int, playerInventory: PlayerInventory, blockEntity: KitchenCupboardBlockEntity) =
-        KitchenCupboardMenu(syncId, playerInventory, menuContextOf(blockEntity))
 
     override fun open(player: PlayerEntity, factory: NamedScreenHandlerFactory?, pos: BlockPos) {
         if (factory == null) {

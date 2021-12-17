@@ -13,7 +13,6 @@ import juuxel.adorn.lib.AdornSounds;
 import juuxel.adorn.lib.AdornTags;
 import juuxel.adorn.menu.AdornMenus;
 import juuxel.adorn.platform.Registrar;
-import juuxel.adorn.platform.forge.menu.AdornMenusForge;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -39,7 +38,6 @@ final class EventsImplementedInJava {
         register(AdornItems.ITEMS, modBus);
         AdornMenus.INSTANCE.init();
         register(MenuBridgeImpl.MENUS, modBus);
-        register(AdornMenusForge.MENUS, modBus);
         register(AdornEntities.ENTITIES, modBus);
         register(AdornBlockEntities.BLOCK_ENTITIES, modBus);
         modBus.addListener(this::init);

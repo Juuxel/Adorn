@@ -3,13 +3,11 @@ package juuxel.adorn.client.gui.painter
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.WItemSlot
-import juuxel.adorn.client.resources.ColorManagerFabric
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.color
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.gui.screen.ingame.BookScreen
-import net.minecraft.util.Identifier
 import kotlin.math.max
 
 @Environment(EnvType.CLIENT)
@@ -72,7 +70,4 @@ object Painters {
             Colors.WHITE
         )
     }
-
-    fun palette(palette: Identifier, key: Identifier): BackgroundPainter =
-        PaletteBackgroundPainter(ColorManagerFabric.getColors(palette), key)
 }

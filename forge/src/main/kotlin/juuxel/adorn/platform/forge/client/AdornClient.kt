@@ -1,9 +1,10 @@
 package juuxel.adorn.platform.forge.client
 
+import juuxel.adorn.client.gui.screen.DrawerScreen
+import juuxel.adorn.client.gui.screen.KitchenCupboardScreen
 import juuxel.adorn.client.gui.screen.TradingStationScreen
 import juuxel.adorn.menu.AdornMenus
 import juuxel.adorn.platform.PlatformBridges
-import juuxel.adorn.platform.forge.menu.AdornMenusForge
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.ingame.HandledScreens
 import net.minecraft.resource.ReloadableResourceManager
@@ -20,11 +21,12 @@ object AdornClient {
 
     private fun setup(event: FMLClientSetupEvent) {
         AdornRenderers.registerRenderLayers()
-        AdornMenusForge.initClient()
         registerScreens()
     }
 
     private fun registerScreens() {
+        HandledScreens.register(AdornMenus.DRAWER, ::DrawerScreen)
+        HandledScreens.register(AdornMenus.KITCHEN_CUPBOARD, ::KitchenCupboardScreen)
         HandledScreens.register(AdornMenus.TRADING_STATION, ::TradingStationScreen)
     }
 }

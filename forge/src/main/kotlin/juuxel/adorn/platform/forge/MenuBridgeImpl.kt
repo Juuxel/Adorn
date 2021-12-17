@@ -1,12 +1,7 @@
 package juuxel.adorn.platform.forge
 
-import juuxel.adorn.block.entity.DrawerBlockEntity
-import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.lib.Registered
 import juuxel.adorn.platform.MenuBridge
-import juuxel.adorn.platform.forge.menu.DrawerMenu
-import juuxel.adorn.platform.forge.menu.KitchenCupboardMenu
-import juuxel.adorn.util.menuContextOf
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.network.PacketByteBuf
@@ -24,12 +19,6 @@ object MenuBridgeImpl : MenuBridge {
     private val LOGGER = LogManager.getLogger()
     @JvmField
     val MENUS = RegistrarImpl(ForgeRegistries.CONTAINERS)
-
-    override fun drawer(syncId: Int, playerInventory: PlayerInventory, blockEntity: DrawerBlockEntity) =
-        DrawerMenu(syncId, playerInventory, blockEntity, menuContextOf(blockEntity))
-
-    override fun kitchenCupboard(syncId: Int, playerInventory: PlayerInventory, blockEntity: KitchenCupboardBlockEntity) =
-        KitchenCupboardMenu(syncId, playerInventory, blockEntity, menuContextOf(blockEntity))
 
     override fun open(player: PlayerEntity, factory: NamedScreenHandlerFactory?, pos: BlockPos) {
         if (factory == null) {

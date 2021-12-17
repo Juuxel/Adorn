@@ -1,6 +1,5 @@
-package juuxel.adorn.platform.forge.menu
+package juuxel.adorn.menu
 
-import juuxel.adorn.menu.ContainerBlockMenu
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
@@ -16,7 +15,7 @@ abstract class SimpleMenu(
     private val dimensions: Pair<Int, Int>,
     override val inventory: Inventory,
     playerInventory: PlayerInventory,
-    val context: ScreenHandlerContext
+    override val context: ScreenHandlerContext
 ) : ScreenHandler(type, syncId), ContainerBlockMenu {
     init {
         val (width, height) = dimensions

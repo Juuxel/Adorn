@@ -33,7 +33,6 @@ object Adorn : ModInitializer {
         AdornItemsFabric.init()
         AdornEntities.init()
         AdornMenus.init()
-        AdornMenusFabric.init()
         AdornNetworking.init()
         AdornTags.init()
         AdornGameRules.init()
