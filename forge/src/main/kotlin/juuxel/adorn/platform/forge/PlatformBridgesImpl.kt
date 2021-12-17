@@ -16,7 +16,6 @@ fun PlatformBridges.Companion.get(): PlatformBridges =
     PlatformBridgesImpl
 
 private object PlatformBridgesImpl : PlatformBridges {
-    override val blockEntities = BlockEntityDescriptorsImpl
     override val blockFactory = BlockFactoryImpl
     override val configManager = ConfigManagerImpl
     override val entities = EntityBridgeImpl

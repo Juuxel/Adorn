@@ -25,7 +25,7 @@ import net.minecraft.text.TranslatableText
 import net.minecraft.util.math.BlockPos
 import java.util.UUID
 
-open class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
+class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
     BlockEntity(AdornBlockEntities.TRADING_STATION, pos, state), NamedScreenHandlerFactory, TradingStation {
     var owner: UUID? = null
     override var ownerName: Text = LiteralText("???")
