@@ -12,7 +12,7 @@ class DrawerMenu(
     playerInventory: PlayerInventory,
     container: Inventory,
     context: ScreenHandlerContext
-) : SimpleMenu(AdornMenus.DRAWER, syncId, DIMENSIONS, container, playerInventory, context) {
+) : SimpleMenu(AdornMenusForge.DRAWER, syncId, DIMENSIONS, container, playerInventory, context) {
     companion object {
         private val DIMENSIONS = 5 to 3
         val FACTORY: IContainerFactory<DrawerMenu> = IContainerFactory(this::load)

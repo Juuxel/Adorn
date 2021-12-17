@@ -4,7 +4,6 @@ import io.github.cottonmc.cotton.gui.SyncedGuiDescription
 import io.github.cottonmc.cotton.gui.client.CottonInventoryScreen
 import juuxel.adorn.menu.DrawerMenu
 import juuxel.adorn.menu.KitchenCupboardMenu
-import juuxel.adorn.menu.TradingStationMenu
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.entity.player.PlayerEntity
@@ -30,10 +29,3 @@ class KitchenCupboardScreen(
     player: PlayerEntity,
     title: Text
 ) : AdornScreen<KitchenCupboardMenu>(menu, player, title)
-
-@Environment(EnvType.CLIENT)
-class TradingStationScreen(
-    menu: TradingStationMenu,
-    player: PlayerEntity,
-    title: Text
-) : AdornScreen<TradingStationMenu>(menu, player, title)

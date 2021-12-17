@@ -1,12 +1,13 @@
 package juuxel.adorn.block.entity
 
 import juuxel.adorn.block.AdornBlockEntities
-import juuxel.adorn.platform.PlatformBridges
+import juuxel.adorn.menu.TradingStationMenu
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.util.InventoryComponent
 import juuxel.adorn.util.containsOldUuid
 import juuxel.adorn.util.getOldUuid
 import juuxel.adorn.util.getText
+import juuxel.adorn.util.menuContextOf
 import juuxel.adorn.util.putText
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -54,7 +55,7 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
     fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
 
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity): ScreenHandler? =
-        PlatformBridges.menus.tradingStation(syncId, playerInv, this)
+        TradingStationMenu(syncId, playerInv, menuContextOf(this))
 
     override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)
 

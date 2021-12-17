@@ -14,10 +14,9 @@ import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.text.Text
 
-object AdornMenus {
+object AdornMenusFabric {
     val DRAWER = register("drawer")
     val KITCHEN_CUPBOARD = register("kitchen_cupboard")
-    val TRADING_STATION = register("trading_station")
 
     fun init() {
     }
@@ -26,7 +25,7 @@ object AdornMenus {
     fun initClient() {
         registerScreen(DRAWER, ::DrawerScreen)
         registerScreen(KITCHEN_CUPBOARD, ::KitchenCupboardScreen)
-        registerScreen(TRADING_STATION, ::TradingStationScreen)
+        ScreenRegistry.register(AdornMenus.TRADING_STATION, ::TradingStationScreen)
     }
 
     private fun register(

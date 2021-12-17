@@ -1,4 +1,4 @@
-package juuxel.adorn.platform.forge.menu
+package juuxel.adorn.menu
 
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.block.entity.TradingStation

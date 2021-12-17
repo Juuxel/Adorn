@@ -2,17 +2,18 @@ package juuxel.adorn.platform
 
 import juuxel.adorn.block.entity.DrawerBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
-import juuxel.adorn.block.entity.TradingStationBlockEntity
+import juuxel.adorn.lib.Registered
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.network.PacketByteBuf
 import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandler
+import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.util.math.BlockPos
 
 interface MenuBridge {
     fun drawer(syncId: Int, playerInventory: PlayerInventory, blockEntity: DrawerBlockEntity): ScreenHandler
     fun kitchenCupboard(syncId: Int, playerInventory: PlayerInventory, blockEntity: KitchenCupboardBlockEntity): ScreenHandler
-    fun tradingStation(syncId: Int, playerInventory: PlayerInventory, blockEntity: TradingStationBlockEntity): ScreenHandler?
 
     // This is only needed because Forge wants to be special and have a custom opening method.
     /**
@@ -23,4 +24,7 @@ interface MenuBridge {
      * @param factory the menu factory
      */
     fun open(player: PlayerEntity, factory: NamedScreenHandlerFactory?, pos: BlockPos)
+
+    fun <M : ScreenHandler> register(id: String, factory: (syncId: Int, inventory: PlayerInventory) -> M): Registered<ScreenHandlerType<M>>
+    fun <M : ScreenHandler> register(id: String, factory: (syncId: Int, inventory: PlayerInventory, buf: PacketByteBuf) -> M): Registered<ScreenHandlerType<M>>
 }

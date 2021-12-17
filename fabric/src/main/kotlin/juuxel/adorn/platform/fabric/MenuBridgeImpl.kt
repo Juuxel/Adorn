@@ -1,19 +1,21 @@
 package juuxel.adorn.platform.fabric
 
+import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.entity.DrawerBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
-import juuxel.adorn.block.entity.TradingStationBlockEntity
+import juuxel.adorn.lib.Registered
 import juuxel.adorn.menu.DrawerMenu
 import juuxel.adorn.menu.KitchenCupboardMenu
-import juuxel.adorn.menu.TradingStationMenu
 import juuxel.adorn.platform.MenuBridge
 import juuxel.adorn.util.menuContextOf
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandler
+import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.math.BlockPos
 import org.apache.logging.log4j.LogManager
@@ -26,10 +28,6 @@ object MenuBridgeImpl : MenuBridge {
 
     override fun kitchenCupboard(syncId: Int, playerInventory: PlayerInventory, blockEntity: KitchenCupboardBlockEntity) =
         KitchenCupboardMenu(syncId, playerInventory, menuContextOf(blockEntity))
-
-    override fun tradingStation(
-        syncId: Int, playerInventory: PlayerInventory, blockEntity: TradingStationBlockEntity
-    ): ScreenHandler = TradingStationMenu(syncId, playerInventory, menuContextOf(blockEntity), true)
 
     override fun open(player: PlayerEntity, factory: NamedScreenHandlerFactory?, pos: BlockPos) {
         if (factory == null) {
@@ -48,5 +46,15 @@ object MenuBridgeImpl : MenuBridge {
                 }
             )
         }
+    }
+
+    override fun <M : ScreenHandler> register(id: String, factory: (syncId: Int, inventory: PlayerInventory) -> M): Registered<ScreenHandlerType<M>> {
+        val type = ScreenHandlerRegistry.registerSimple(AdornCommon.id(id), factory)
+        return Registered { type }
+    }
+
+    override fun <M : ScreenHandler> register(id: String, factory: (Int, PlayerInventory, PacketByteBuf) -> M): Registered<ScreenHandlerType<M>> {
+        val type = ScreenHandlerRegistry.registerExtended(AdornCommon.id(id), factory)
+        return Registered { type }
     }
 }

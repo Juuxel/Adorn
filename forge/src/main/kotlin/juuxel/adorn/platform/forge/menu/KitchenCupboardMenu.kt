@@ -12,7 +12,7 @@ class KitchenCupboardMenu(
     playerInventory: PlayerInventory,
     container: Inventory = SimpleInventory(5 * 3),
     context: ScreenHandlerContext
-) : SimpleMenu(AdornMenus.KITCHEN_CUPBOARD, syncId, 5 to 3, container, playerInventory, context) {
+) : SimpleMenu(AdornMenusForge.KITCHEN_CUPBOARD, syncId, 5 to 3, container, playerInventory, context) {
     companion object {
         private val DIMENSIONS = 5 to 3
         val FACTORY: IContainerFactory<KitchenCupboardMenu> = IContainerFactory(this::load)
