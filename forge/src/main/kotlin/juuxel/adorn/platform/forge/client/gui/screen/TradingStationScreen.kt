@@ -26,9 +26,10 @@ class TradingStationScreen(
     }
 
     override fun drawForeground(matrices: MatrixStack, mouseX: Int, mouseY: Int) {
-        super.drawForeground(matrices, mouseX, mouseY)
-        textRenderer.draw(matrices, SELLING_LABEL, 26f + 9f - textRenderer.getWidth(SELLING_LABEL) / 2, 25f, Colors.SCREEN_TEXT)
-        textRenderer.draw(matrices, PRICE_LABEL, 26f + 9f - textRenderer.getWidth(PRICE_LABEL) / 2, 61f, Colors.SCREEN_TEXT)
+        textRenderer.draw(matrices, title, titleX.toFloat(), titleY.toFloat(), Colors.WHITE)
+        textRenderer.draw(matrices, playerInventoryTitle, playerInventoryTitleX.toFloat(), playerInventoryTitleY.toFloat(), Colors.WHITE)
+        textRenderer.draw(matrices, SELLING_LABEL, 26f + 9f - textRenderer.getWidth(SELLING_LABEL) / 2, 25f, Colors.WHITE)
+        textRenderer.draw(matrices, PRICE_LABEL, 26f + 9f - textRenderer.getWidth(PRICE_LABEL) / 2, 61f, Colors.WHITE)
     }
 
     companion object {

@@ -6,7 +6,6 @@ import io.github.cottonmc.cotton.gui.widget.WPlayerInvPanel
 import juuxel.adorn.client.gui.painter.Painters
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.block.Blocks
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
@@ -14,7 +13,6 @@ import net.minecraft.screen.PropertyDelegate
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.util.math.BlockPos
-import net.minecraft.world.World
 import org.apache.logging.log4j.LogManager
 
 abstract class BaseMenu(
