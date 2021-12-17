@@ -26,7 +26,7 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)), SneakClickHandler {
+class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)) {
     init {
         defaultState = defaultState.with(WATERLOGGED, false)
     }
@@ -91,25 +91,6 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
         }
 
         return ActionResult.SUCCESS
-    }
-
-    override fun onSneakClick(
-        state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult
-    ): ActionResult {
-        val be = world.getBlockEntity(pos) as? TradingStationBlockEntity ?: return ActionResult.PASS
-
-        // Show customer GUI
-        if (!be.isOwner(player)) {
-            PlatformBridges.menus.open(player, state.createScreenHandlerFactory(world, pos), pos)
-
-            if (!world.isClient) {
-                player.incrementStat(AdornStats.INTERACT_WITH_TRADING_STATION)
-            }
-
-            return ActionResult.SUCCESS
-        }
-
-        return ActionResult.PASS
     }
 
     override fun onStateReplaced(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {

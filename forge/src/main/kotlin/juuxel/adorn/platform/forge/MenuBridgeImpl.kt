@@ -27,9 +27,8 @@ object MenuBridgeImpl : MenuBridge {
         KitchenCupboardMenu(syncId, playerInventory, blockEntity, menuContextOf(blockEntity))
 
     override fun tradingStation(
-        syncId: Int, playerInventory: PlayerInventory, blockEntity: TradingStationBlockEntity, owner: Boolean
+        syncId: Int, playerInventory: PlayerInventory, blockEntity: TradingStationBlockEntity
     ): ScreenHandler? {
-        if (!owner) return null // this is something we only support on fabric
         return TradingStationMenu(syncId, playerInventory, menuContextOf(blockEntity))
     }
 

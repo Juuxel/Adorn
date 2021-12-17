@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos
 interface MenuBridge {
     fun drawer(syncId: Int, playerInventory: PlayerInventory, blockEntity: DrawerBlockEntity): ScreenHandler
     fun kitchenCupboard(syncId: Int, playerInventory: PlayerInventory, blockEntity: KitchenCupboardBlockEntity): ScreenHandler
-    fun tradingStation(syncId: Int, playerInventory: PlayerInventory, blockEntity: TradingStationBlockEntity, owner: Boolean): ScreenHandler?
+    fun tradingStation(syncId: Int, playerInventory: PlayerInventory, blockEntity: TradingStationBlockEntity): ScreenHandler?
 
     // This is only needed because Forge wants to be special and have a custom opening method.
     /**

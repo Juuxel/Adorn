@@ -28,8 +28,8 @@ object MenuBridgeImpl : MenuBridge {
         KitchenCupboardMenu(syncId, playerInventory, menuContextOf(blockEntity))
 
     override fun tradingStation(
-        syncId: Int, playerInventory: PlayerInventory, blockEntity: TradingStationBlockEntity, owner: Boolean
-    ): ScreenHandler = TradingStationMenu(syncId, playerInventory, menuContextOf(blockEntity), owner)
+        syncId: Int, playerInventory: PlayerInventory, blockEntity: TradingStationBlockEntity
+    ): ScreenHandler = TradingStationMenu(syncId, playerInventory, menuContextOf(blockEntity), true)
 
     override fun open(player: PlayerEntity, factory: NamedScreenHandlerFactory?, pos: BlockPos) {
         if (factory == null) {

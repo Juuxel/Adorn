@@ -54,9 +54,7 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
     fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
 
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity): ScreenHandler? =
-        PlatformBridges.menus.tradingStation(
-            syncId, playerInv, this, isOwner(player)
-        )
+        PlatformBridges.menus.tradingStation(syncId, playerInv, this)
 
     override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)
 
