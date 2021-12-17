@@ -4,6 +4,7 @@ package juuxel.adorn.block
 import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.entity.SimpleContainerBlockEntity
 import juuxel.adorn.lib.AdornStats
+import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -27,7 +28,7 @@ class KitchenCupboardBlock(variant: BlockVariant) : AbstractKitchenCounterBlock(
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): ActionResult {
-        player.openHandledScreen(state.createScreenHandlerFactory(world, pos))
+        PlatformBridges.menus.open(player, state.createScreenHandlerFactory(world, pos), pos)
 
         if (!world.isClient) {
             player.incrementStat(AdornStats.OPEN_KITCHEN_CUPBOARD)

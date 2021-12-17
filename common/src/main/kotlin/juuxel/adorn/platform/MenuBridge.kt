@@ -14,5 +14,13 @@ interface MenuBridge {
     fun kitchenCupboard(syncId: Int, playerInventory: PlayerInventory, blockEntity: KitchenCupboardBlockEntity): ScreenHandler
     fun tradingStation(syncId: Int, playerInventory: PlayerInventory, blockEntity: TradingStationBlockEntity, owner: Boolean): ScreenHandler?
 
+    // This is only needed because Forge wants to be special and have a custom opening method.
+    /**
+     * Opens a menu with a [pos] with the opening NBT sent to the client.
+     * Does nothing on the client.
+     *
+     * @param player  the player opening the menu
+     * @param factory the menu factory
+     */
     fun open(player: PlayerEntity, factory: NamedScreenHandlerFactory?, pos: BlockPos)
 }
