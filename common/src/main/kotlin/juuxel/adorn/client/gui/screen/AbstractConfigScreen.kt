@@ -29,16 +29,18 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
     }
 
     override fun onClose() {
-        if (restartRequired) {
-            NoticeScreen(
-                { client!!.setScreen(parent) },
-                TranslatableText("gui.adorn.config.restart_required.title"),
-                TranslatableText("gui.adorn.config.restart_required.message"),
-                TranslatableText("gui.ok")
-            )
-        } else {
-            client!!.setScreen(parent)
-        }
+        client!!.setScreen(
+            if (restartRequired) {
+                NoticeScreen(
+                    { client!!.setScreen(parent) },
+                    TranslatableText("gui.adorn.config.restart_required.title"),
+                    TranslatableText("gui.adorn.config.restart_required.message"),
+                    TranslatableText("gui.ok")
+                )
+            } else {
+                parent
+            }
+        )
     }
 
     private fun wrapTooltipLines(text: Text) =
