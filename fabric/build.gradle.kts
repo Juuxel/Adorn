@@ -73,7 +73,7 @@ dependencies {
 
     // Mod compat
     modCompileOnly("com.github.Virtuoel:Towelette:${rootProject.property("towelette")}")
-    modCompileOnly("com.terraformersmc:modmenu:${rootProject.property("modmenu")}")
+    modLocalRuntime(modCompileOnly("com.terraformersmc:modmenu:${rootProject.property("modmenu")}")!!)
     modCompileOnly("net.oskarstrom:DashLoader:${rootProject.property("dashloader")}")
     runtimeOnly("org.yaml:snakeyaml:1.27") // TODO: for dashloader, remove when pom is fixed
 }

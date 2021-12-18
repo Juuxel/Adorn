@@ -8,6 +8,7 @@ loom {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+    implementation(kotlin("reflect"))
     implementation("blue.endless:jankson:${rootProject.property("jankson")}")
 
     // Just for @Environment and mixin deps :)
