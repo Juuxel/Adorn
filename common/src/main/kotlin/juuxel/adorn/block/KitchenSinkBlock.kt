@@ -3,11 +3,9 @@ package juuxel.adorn.block
 import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
-import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
-import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -21,7 +19,7 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-class KitchenSinkBlock(variant: BlockVariant) : KitchenCounterBlock(variant), BlockEntityProvider, Waterloggable {
+open class KitchenSinkBlock(variant: BlockVariant) : KitchenCounterBlock(variant), Waterloggable {
     init {
         defaultState = defaultState.with(WATERLOGGED, false)
     }
@@ -66,7 +64,4 @@ class KitchenSinkBlock(variant: BlockVariant) : KitchenCounterBlock(variant), Bl
             }
         }
     }
-
-    override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? =
-        AdornBlockEntities.KITCHEN_SINK.instantiate(pos, state)
 }

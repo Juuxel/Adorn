@@ -8,9 +8,9 @@ import juuxel.adorn.block.entity.BlockEntityDescriptor
 import juuxel.adorn.block.entity.DrawerBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.block.entity.KitchenSinkBlockEntity
-import juuxel.adorn.block.entity.KitchenSinkBlockEntityForge
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.platform.BlockEntityDescriptors
+import juuxel.adorn.platform.forge.block.entity.KitchenSinkBlockEntityForge
 
 object BlockEntityDescriptorsImpl : BlockEntityDescriptors() {
     override val drawer: BlockEntityDescriptor<DrawerBlock, DrawerBlockEntity> =

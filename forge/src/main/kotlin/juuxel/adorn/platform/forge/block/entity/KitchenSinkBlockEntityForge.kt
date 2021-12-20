@@ -1,5 +1,6 @@
-package juuxel.adorn.block.entity
+package juuxel.adorn.platform.forge.block.entity
 
+import juuxel.adorn.block.entity.KitchenSinkBlockEntity
 import net.minecraft.block.BlockState
 import net.minecraft.fluid.Fluids
 import net.minecraft.util.math.BlockPos

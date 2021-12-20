@@ -235,14 +235,14 @@ object AdornBlocks {
         )
     }
 
-    val OAK_KITCHEN_SINK: Block by registerBlock("oak_kitchen_sink") { KitchenSinkBlock(BlockVariant.OAK) }
-    val SPRUCE_KITCHEN_SINK: Block by registerBlock("spruce_kitchen_sink") { KitchenSinkBlock(BlockVariant.SPRUCE) }
-    val BIRCH_KITCHEN_SINK: Block by registerBlock("birch_kitchen_sink") { KitchenSinkBlock(BlockVariant.BIRCH) }
-    val JUNGLE_KITCHEN_SINK: Block by registerBlock("jungle_kitchen_sink") { KitchenSinkBlock(BlockVariant.JUNGLE) }
-    val ACACIA_KITCHEN_SINK: Block by registerBlock("acacia_kitchen_sink") { KitchenSinkBlock(BlockVariant.ACACIA) }
-    val DARK_OAK_KITCHEN_SINK: Block by registerBlock("dark_oak_kitchen_sink") { KitchenSinkBlock(BlockVariant.DARK_OAK) }
-    val CRIMSON_KITCHEN_SINK: Block by registerBlock("crimson_kitchen_sink") { KitchenSinkBlock(BlockVariant.CRIMSON) }
-    val WARPED_KITCHEN_SINK: Block by registerBlock("warped_kitchen_sink") { KitchenSinkBlock(BlockVariant.WARPED) }
+    val OAK_KITCHEN_SINK: Block by registerBlock("oak_kitchen_sink") { PlatformBridges.blockFactory.createSink(BlockVariant.OAK) }
+    val SPRUCE_KITCHEN_SINK: Block by registerBlock("spruce_kitchen_sink") { PlatformBridges.blockFactory.createSink(BlockVariant.SPRUCE) }
+    val BIRCH_KITCHEN_SINK: Block by registerBlock("birch_kitchen_sink") { PlatformBridges.blockFactory.createSink(BlockVariant.BIRCH) }
+    val JUNGLE_KITCHEN_SINK: Block by registerBlock("jungle_kitchen_sink") { PlatformBridges.blockFactory.createSink(BlockVariant.JUNGLE) }
+    val ACACIA_KITCHEN_SINK: Block by registerBlock("acacia_kitchen_sink") { PlatformBridges.blockFactory.createSink(BlockVariant.ACACIA) }
+    val DARK_OAK_KITCHEN_SINK: Block by registerBlock("dark_oak_kitchen_sink") { PlatformBridges.blockFactory.createSink(BlockVariant.DARK_OAK) }
+    val CRIMSON_KITCHEN_SINK: Block by registerBlock("crimson_kitchen_sink") { PlatformBridges.blockFactory.createSink(BlockVariant.CRIMSON) }
+    val WARPED_KITCHEN_SINK: Block by registerBlock("warped_kitchen_sink") { PlatformBridges.blockFactory.createSink(BlockVariant.WARPED) }
 
     val OAK_COFFEE_TABLE: Block by registerBlock("oak_coffee_table") { CoffeeTableBlock(BlockVariant.OAK) }
     val SPRUCE_COFFEE_TABLE: Block by registerBlock("spruce_coffee_table") { CoffeeTableBlock(BlockVariant.SPRUCE) }
