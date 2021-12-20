@@ -13,7 +13,6 @@ interface PlatformBridges {
     val configManager: ConfigManager
     val entities: EntityBridge
     val items: ItemBridge
-    val kitchenSinkEjection: KitchenSinkEjection
     val menus: MenuBridge
     val network: NetworkBridge
     val registrarFactory: RegistrarFactory
@@ -25,7 +24,6 @@ interface PlatformBridges {
         inline val configManager get() = get().configManager
         inline val entities get() = get().entities
         inline val items get() = get().items
-        inline val kitchenSinkEjection get() = get().kitchenSinkEjection
         inline val menus get() = get().menus
         inline val network get() = get().network
         inline val registrarFactory get() = get().registrarFactory

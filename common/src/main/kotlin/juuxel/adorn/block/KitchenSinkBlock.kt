@@ -1,7 +1,6 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
-import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockEntityProvider
@@ -9,8 +8,6 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.block.entity.BlockEntityTicker
-import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -72,13 +69,4 @@ class KitchenSinkBlock(variant: BlockVariant) : KitchenCounterBlock(variant), Bl
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? =
         AdornBlockEntities.KITCHEN_SINK.instantiate(pos, state)
-
-    override fun <T : BlockEntity?> getTicker(world: World, state: BlockState, type: BlockEntityType<T>): BlockEntityTicker<T>? =
-        if (!world.isClient && type == AdornBlockEntities.KITCHEN_SINK) {
-            BlockEntityTicker<T> { w, pos, _, _ ->
-                PlatformBridges.kitchenSinkEjection.eject(w, pos)
-            }
-        } else {
-            null
-        }
 }
