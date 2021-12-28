@@ -1,13 +1,7 @@
 {
   "replace": false,
   "values": [
-    "adorn:brick_chimney",
-    "adorn:stone_brick_chimney",
-    "adorn:nether_brick_chimney",
-    "adorn:red_nether_brick_chimney",
-    "adorn:cobblestone_chimney",
-    "adorn:prismarine_chimney",
-    "adorn:soulful_prismarine_chimney",
-    "adorn:magmatic_prismarine_chimney"
+    "#adorn:regular_chimneys",
+    "#adorn:prismarine_chimneys"
   ]
 }
