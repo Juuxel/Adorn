@@ -1,6 +1,6 @@
 package juuxel.adorn.resources
 
-import juuxel.adorn.client.resources.BookManager
+import juuxel.adorn.client.resources.BookManagerFabric
 import juuxel.adorn.client.resources.ColorManagerFabric
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -12,7 +12,7 @@ object AdornResources {
     fun initClient() {
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).apply {
             registerReloadListener(ColorManagerFabric)
-            registerReloadListener(BookManager)
+            registerReloadListener(BookManagerFabric)
         }
     }
 }

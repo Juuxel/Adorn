@@ -19,7 +19,9 @@ object AdornClient {
         MOD_BUS.addListener(this::setup)
         MOD_BUS.addListener(AdornRenderers::registerColorProviders)
         MOD_BUS.addListener(AdornRenderers::registerRenderers)
-        (MinecraftClient.getInstance().resourceManager as ReloadableResourceManager).registerReloader(PlatformBridges.resources.colorManager)
+        val resourceManager = MinecraftClient.getInstance().resourceManager as ReloadableResourceManager
+        resourceManager.registerReloader(PlatformBridges.resources.bookManager)
+        resourceManager.registerReloader(PlatformBridges.resources.colorManager)
         ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory::class.java) {
             ConfigGuiHandler.ConfigGuiFactory { _, parent -> MainConfigScreen(parent) }
         }

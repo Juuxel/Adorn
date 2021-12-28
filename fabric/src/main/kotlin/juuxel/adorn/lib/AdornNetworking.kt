@@ -1,9 +1,9 @@
 package juuxel.adorn.lib
 
-import io.github.cottonmc.cotton.gui.client.CottonClientScreen
 import juuxel.adorn.AdornCommon
-import juuxel.adorn.client.gui.screen.BookScreenDescription
-import juuxel.adorn.client.resources.BookManager
+import juuxel.adorn.client.gui.screen.GuideBookScreen
+import juuxel.adorn.client.resources.BookManagerFabric
+import juuxel.adorn.platform.PlatformBridges
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
@@ -45,7 +45,7 @@ object AdornNetworking {
         ClientPlayNetworking.registerGlobalReceiver(OPEN_BOOK) { client, _, buf, _ ->
             val bookId = buf.readIdentifier()
             client.execute {
-                client.setScreen(CottonClientScreen(BookScreenDescription(BookManager[bookId])))
+                client.setScreen(GuideBookScreen(BookManagerFabric[bookId]))
             }
         }
     }

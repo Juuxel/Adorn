@@ -46,7 +46,6 @@
     "fabric": ">=0.44.0",
 
     "jankson": "^4.0.0",
-    "libgui": "^5.1.0",
     "libcd": "^3.0.3"
   },
   "conflicts": {

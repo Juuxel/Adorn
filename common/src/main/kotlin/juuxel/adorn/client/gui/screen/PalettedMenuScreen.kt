@@ -5,6 +5,7 @@ import juuxel.adorn.menu.ContainerBlockMenu
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.getBlock
+import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.screen.ScreenHandler
@@ -23,6 +24,7 @@ abstract class PalettedMenuScreen<M>(menu: M, playerInventory: PlayerInventory, 
 
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
         val bg = getPalette().bg
+        RenderSystem.setShader(GameRenderer::getPositionTexShader)
         RenderSystem.setShaderColor(Colors.redOf(bg), Colors.greenOf(bg), Colors.blueOf(bg), 1.0f)
         RenderSystem.setShaderTexture(0, backgroundTexture)
         drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight)
