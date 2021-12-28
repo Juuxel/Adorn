@@ -3,7 +3,6 @@ package juuxel.adorn.lib
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.client.gui.screen.GuideBookScreen
 import juuxel.adorn.client.resources.BookManagerFabric
-import juuxel.adorn.platform.PlatformBridges
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking

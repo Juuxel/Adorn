@@ -101,7 +101,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         private val CLOSE_BOOK_INACTIVE_TEXTURE = AdornCommon.id("textures/gui/close_book_inactive.png")
     }
 
-    private inner class TitlePage(private val x: Int, private val y: Int, private val book: Book): Element, Drawable {
+    private inner class TitlePage(private val x: Int, private val y: Int, private val book: Book) : Element, Drawable {
         private val byAuthor = TranslatableText("book.byAuthor", book.author)
 
         override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
@@ -118,7 +118,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         }
     }
 
-    private inner class BookPage(private val x: Int, private val y: Int, private val page: Page): Element, Drawable, TickingElement {
+    private inner class BookPage(private val x: Int, private val y: Int, private val page: Page) : Element, Drawable, TickingElement {
         private val wrappedTitleLines = textRenderer.wrapLines(page.title.copy().styled { it.withBold(true) }, PAGE_TITLE_WIDTH)
         private val wrappedBodyLines = textRenderer.wrapLines(page.text, PAGE_WIDTH - PAGE_TEXT_X)
 
