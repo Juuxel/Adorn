@@ -1,7 +1,6 @@
 package juuxel.adorn.item
 
-import juuxel.adorn.client.resources.BookManagerFabric
-import juuxel.adorn.lib.AdornNetworking
+import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
@@ -20,20 +19,18 @@ import net.minecraft.world.World
 class AdornBookItem(private val bookId: Identifier, settings: Settings) : Item(settings) {
     override fun use(world: World, player: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         if (!world.isClient) {
-            AdornNetworking.sendOpenBookPacket(player, bookId)
+            PlatformBridges.network.sendOpenBookPacket(player, bookId)
         }
         player.incrementStat(Stats.USED.getOrCreateStat(this))
 
         return TypedActionResult(ActionResult.SUCCESS, player.getStackInHand(hand))
     }
 
-//    @Environment(EnvType.CLIENT)
-//    override fun hasEnchantmentGlint(stack: ItemStack) = true
-
     override fun appendTooltip(stack: ItemStack, world: World?, texts: MutableList<Text>, context: TooltipContext) {
         super.appendTooltip(stack, world, texts, context)
-        if (bookId in BookManagerFabric) {
-            texts.add(TranslatableText("book.byAuthor", BookManagerFabric[bookId].author).formatted(Formatting.GRAY))
+        val bookManager = PlatformBridges.resources.bookManager
+        if (bookId in bookManager) {
+            texts.add(TranslatableText("book.byAuthor", bookManager[bookId].author).formatted(Formatting.GRAY))
         }
     }
 

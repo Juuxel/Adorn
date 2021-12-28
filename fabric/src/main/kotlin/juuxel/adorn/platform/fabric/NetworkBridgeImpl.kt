@@ -5,7 +5,9 @@ import juuxel.adorn.platform.NetworkBridge
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.entity.Entity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.network.Packet
+import net.minecraft.util.Identifier
 
 object NetworkBridgeImpl : NetworkBridge {
     override fun sendToTracking(entity: Entity, packet: Packet<*>) {
@@ -15,4 +17,7 @@ object NetworkBridgeImpl : NetworkBridge {
     }
 
     override fun createEntitySpawnPacket(entity: Entity) = AdornNetworking.createEntitySpawnPacket(entity)
+
+    override fun sendOpenBookPacket(player: PlayerEntity, bookId: Identifier) =
+        AdornNetworking.sendOpenBookPacket(player, bookId)
 }
