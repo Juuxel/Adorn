@@ -2,22 +2,6 @@
   "replace": false,
   "values": [
     "adorn:crate",
-    "adorn:apple_crate",
-    "adorn:wheat_crate",
-    "adorn:carrot_crate",
-    "adorn:potato_crate",
-    "adorn:melon_crate",
-    "adorn:wheat_seed_crate",
-    "adorn:melon_seed_crate",
-    "adorn:pumpkin_seed_crate",
-    "adorn:beetroot_crate",
-    "adorn:beetroot_seed_crate",
-    "adorn:sweet_berry_crate",
-    "adorn:cocoa_bean_crate",
-    "adorn:nether_wart_crate",
-    "adorn:sugar_cane_crate",
-    "adorn:egg_crate",
-    "adorn:honeycomb_crate",
-    "adorn:lil_tater_crate"
+    "#adorn:filled_crates"
   ]
 }
