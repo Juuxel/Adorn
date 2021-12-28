@@ -3,6 +3,7 @@ package juuxel.adorn
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.compat.Compat
+import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.entity.AdornEntities
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.lib.AdornBlocksFabric
@@ -38,6 +39,7 @@ object Adorn : ModInitializer {
         AdornGameRules.init()
         AdornStats.init()
         SofaSleeping.init()
+        AdornCriteria.init()
         Compat.init()
         ConfigManagerImpl.finalize()
     }

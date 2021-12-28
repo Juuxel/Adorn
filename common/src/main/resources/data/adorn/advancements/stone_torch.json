@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:stone_torch"
+    },
+    "title": {
+      "translate": "advancements.adorn.stone_torch.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.stone_torch.description"
+    }
+  },
+  "parent": "adorn:root",
+  "criteria": {
+    "has_stone_torch": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["adorn:stone_torch"]
+          }
+        ]
+      }
+    }
+  }
+}

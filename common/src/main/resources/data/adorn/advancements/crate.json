@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:lil_tater_crate"
+    },
+    "title": {
+      "translate": "advancements.adorn.crate.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.crate.description"
+    }
+  },
+  "parent": "adorn:shelf",
+  "criteria": {
+    "has_crate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:filled_crates"
+          }
+        ]
+      }
+    }
+  }
+}

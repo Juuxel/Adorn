@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:birch_shelf"
+    },
+    "title": {
+      "translate": "advancements.adorn.shelf.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.shelf.description"
+    }
+  },
+  "parent": "adorn:drawer",
+  "criteria": {
+    "has_shelf": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:shelves"
+          }
+        ]
+      }
+    }
+  }
+}

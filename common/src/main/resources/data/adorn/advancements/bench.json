@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:birch_bench"
+    },
+    "title": {
+      "translate": "advancements.adorn.bench.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.bench.description"
+    }
+  },
+  "parent": "adorn:chair",
+  "criteria": {
+    "has_bench": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:benches"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:birch_chair"
+    },
+    "title": {
+      "translate": "advancements.adorn.chair.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.chair.description"
+    }
+  },
+  "parent": "adorn:root",
+  "criteria": {
+    "sit_on_chair": {
+      "trigger": "adorn:sit_on_block",
+      "conditions": {
+        "block": {
+          "tag": "adorn:chairs"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:birch_table"
+    },
+    "title": {
+      "translate": "advancements.adorn.table.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.table.description"
+    }
+  },
+  "parent": "adorn:root",
+  "criteria": {
+    "has_table": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "tag": "adorn:tables" }
+        ]
+      }
+    }
+  }
+}

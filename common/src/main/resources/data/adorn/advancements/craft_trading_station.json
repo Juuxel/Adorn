@@ -1,16 +1,16 @@
 {
   "display": {
     "icon": {
-      "item": "adorn:trading_station"
+      "item": "minecraft:emerald"
     },
     "title": {
-      "translate": "advancements.adorn.trading_station.title"
+      "translate": "advancements.adorn.craft_trading_station.title"
     },
     "description": {
-      "translate": "advancements.adorn.trading_station.description"
+      "translate": "advancements.adorn.craft_trading_station.description"
     }
   },
-  "parent": "adorn:sofa",
+  "parent": "adorn:buy_from_trading_station",
   "criteria": {
     "has_trading_station": {
       "trigger": "minecraft:inventory_changed",
@@ -22,8 +22,5 @@
         ]
       }
     }
-  },
-  "rewards": {
-    "loot": ["adorn:rewards/traders_manual"]
   }
 }

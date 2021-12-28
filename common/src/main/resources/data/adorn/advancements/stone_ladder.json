@@ -1,22 +1,24 @@
 {
   "display": {
     "icon": {
-      "item": "adorn:brick_chimney"
+      "item": "adorn:stone_ladder"
     },
     "title": {
-      "translate": "advancements.adorn.chimney.title"
+      "translate": "advancements.adorn.stone_ladder.title"
     },
     "description": {
-      "translate": "advancements.adorn.chimney.description"
+      "translate": "advancements.adorn.stone_ladder.description"
     }
   },
   "parent": "adorn:stone_torch",
   "criteria": {
-    "has_chimney": {
+    "has_stone_ladder": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
-          { "tag": "adorn:chimneys" }
+          {
+            "items": ["adorn:stone_ladder"]
+          }
         ]
       }
     }

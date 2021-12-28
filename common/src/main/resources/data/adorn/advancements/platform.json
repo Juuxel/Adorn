@@ -1,23 +1,23 @@
 {
   "display": {
     "icon": {
-      "item": "adorn:stone_torch"
+      "item": "adorn:cobblestone_platform"
     },
     "title": {
-      "translate": "advancements.adorn.stone_torch.title"
+      "translate": "advancements.adorn.platform.title"
     },
     "description": {
-      "translate": "advancements.adorn.stone_torch.description"
+      "translate": "advancements.adorn.platform.description"
     }
   },
-  "parent": "adorn:root",
+  "parent": "adorn:post",
   "criteria": {
-    "has_chimney": {
+    "has_platform": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["adorn:stone_torch"]
+            "tag": "adorn:platforms"
           }
         ]
       }

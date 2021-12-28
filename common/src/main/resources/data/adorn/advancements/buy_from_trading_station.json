@@ -1,0 +1,22 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:trading_station"
+    },
+    "title": {
+      "translate": "advancements.adorn.buy_from_trading_station.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.buy_from_trading_station.description"
+    }
+  },
+  "parent": "adorn:root",
+  "criteria": {
+    "bought_item": {
+      "trigger": "adorn:bought_from_trading_station"
+    }
+  },
+  "rewards": {
+    "loot": ["adorn:rewards/traders_manual"]
+  }
+}

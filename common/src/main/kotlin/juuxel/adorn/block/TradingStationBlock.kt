@@ -2,6 +2,7 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.block.entity.TradingStationBlockEntity
+import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.lib.AdornStats
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -14,6 +15,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.text.TranslatableText
@@ -75,10 +77,15 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
                     player.sendMessage(TranslatableText("block.adorn.trading_station.storage_full"), true)
                 } else if (validPayment) {
                     handStack.decrement(trade.price.count)
-                    player.giveItemStack(trade.selling.copy())
+                    val soldItem = trade.selling.copy()
+                    player.giveItemStack(soldItem)
                     be.storage.tryExtract(trade.selling)
                     be.storage.tryInsert(trade.price)
                     player.incrementStat(AdornStats.INTERACT_WITH_TRADING_STATION)
+
+                    if (player is ServerPlayerEntity) {
+                        AdornCriteria.BOUGHT_FROM_TRADING_STATION.trigger(player, soldItem)
+                    }
                 }
             } else {
                 player.openHandledScreen(state.createScreenHandlerFactory(world, pos))

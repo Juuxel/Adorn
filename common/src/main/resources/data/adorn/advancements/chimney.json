@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:brick_chimney"
+    },
+    "title": {
+      "translate": "advancements.adorn.chimney.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.chimney.description"
+    }
+  },
+  "parent": "adorn:root",
+  "criteria": {
+    "has_chimney": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "tag": "adorn:regular_chimneys" }
+        ]
+      }
+    }
+  }
+}

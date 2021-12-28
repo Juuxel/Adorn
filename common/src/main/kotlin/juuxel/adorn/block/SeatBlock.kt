@@ -2,10 +2,12 @@
 package juuxel.adorn.block
 
 import com.google.common.base.Predicates
+import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.entity.AdornEntities
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
@@ -48,6 +50,11 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
                 world.setBlockState(actualPos, actualState.with(OCCUPIED, true))
                 player.startRiding(entity, true)
                 sittingStat?.let { player.incrementStat(it) }
+
+                if (player is ServerPlayerEntity) {
+                    AdornCriteria.SIT_ON_BLOCK.trigger(player, pos)
+                }
+
                 ActionResult.SUCCESS
             }
             ActionResult.SUCCESS

@@ -9,6 +9,7 @@ fun PlatformBridges.Companion.get(): PlatformBridges =
 
 interface PlatformBridges {
     val blockFactory: BlockFactory
+    val criteria: CriterionBridge
     val configManager: ConfigManager
     val entities: EntityBridge
     val items: ItemBridge
@@ -20,6 +21,7 @@ interface PlatformBridges {
 
     companion object {
         inline val blockFactory get() = get().blockFactory
+        inline val criteria get() = get().criteria
         inline val configManager get() = get().configManager
         inline val entities get() = get().entities
         inline val items get() = get().items

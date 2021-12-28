@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:birch_kitchen_sink"
+    },
+    "title": {
+      "translate": "advancements.adorn.kitchen_sink.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.kitchen_sink.description"
+    }
+  },
+  "parent": "adorn:kitchen_cupboard",
+  "criteria": {
+    "has_kitchen_sink": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:kitchen_sinks"
+          }
+        ]
+      }
+    }
+  }
+}

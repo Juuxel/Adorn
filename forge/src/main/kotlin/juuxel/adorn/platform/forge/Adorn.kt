@@ -1,6 +1,7 @@
 package juuxel.adorn.platform.forge
 
 import juuxel.adorn.AdornCommon
+import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.forge.client.AdornClient
@@ -21,6 +22,7 @@ object Adorn {
         EventsImplementedInJava().register(MOD_BUS, FORGE_BUS)
         DistExecutor.safeRunWhenOn(Dist.CLIENT) { SafeRunnable(AdornClient::init) }
         AdornNetworking.init()
+        AdornCriteria.init()
         // TODO: Compat.init(MOD_BUS)
     }
 

@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:prismarine_chimney"
+    },
+    "title": {
+      "translate": "advancements.adorn.prismarine_chimney.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.prismarine_chimney.description"
+    }
+  },
+  "parent": "adorn:chimney",
+  "criteria": {
+    "has_prismarine_chimney": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "tag": "adorn:prismarine_chimneys" }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:birch_coffee_table"
+    },
+    "title": {
+      "translate": "advancements.adorn.coffee_table.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.coffee_table.description"
+    }
+  },
+  "parent": "adorn:table",
+  "criteria": {
+    "has_coffee_table": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "tag": "adorn:coffee_tables" }
+        ]
+      }
+    }
+  }
+}

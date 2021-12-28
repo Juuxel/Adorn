@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:chain_link_fence"
+    },
+    "title": {
+      "translate": "advancements.adorn.chain_link_fence.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.chain_link_fence.description"
+    }
+  },
+  "parent": "adorn:picket_fence",
+  "criteria": {
+    "has_chain_link_fence": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["adorn:chain_link_fence"]
+          }
+        ]
+      }
+    }
+  }
+}

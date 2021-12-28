@@ -1,23 +1,23 @@
 {
   "display": {
     "icon": {
-      "item": "adorn:birch_chair"
+      "item": "adorn:cobblestone_post"
     },
     "title": {
-      "translate": "advancements.adorn.chair.title"
+      "translate": "advancements.adorn.post.title"
     },
     "description": {
-      "translate": "advancements.adorn.chair.description"
+      "translate": "advancements.adorn.post.description"
     }
   },
   "parent": "adorn:root",
   "criteria": {
-    "has_chair": {
+    "has_post": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "adorn:chairs"
+            "tag": "adorn:posts"
           }
         ]
       }

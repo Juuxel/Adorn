@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:red_table_lamp"
+    },
+    "title": {
+      "translate": "advancements.adorn.table_lamp.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.table_lamp.description"
+    }
+  },
+  "parent": "adorn:stone_torch",
+  "criteria": {
+    "has_table_lamp": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "tag": "adorn:table_lamps" }
+        ]
+      }
+    }
+  }
+}

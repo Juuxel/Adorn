@@ -1,0 +1,227 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:guide_book"
+    },
+    "title": {
+      "translate": "advancements.adorn.everything.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.everything.description"
+    },
+    "frame": "challenge"
+  },
+  "parent": "adorn:root",
+  "criteria": {
+    "has_bench": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:benches"
+          }
+        ]
+      }
+    },
+    "has_chain_link_fence": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["adorn:chain_link_fence"]
+          }
+        ]
+      }
+    },
+    "has_chair": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:chairs"
+          }
+        ]
+      }
+    },
+    "has_chimney": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "tag": "adorn:regular_chimneys" }
+        ]
+      }
+    },
+    "has_crate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:crates"
+          }
+        ]
+      }
+    },
+    "has_coffee_table": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "tag": "adorn:coffee_tables" }
+        ]
+      }
+    },
+    "has_drawer": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:drawers"
+          }
+        ]
+      }
+    },
+    "has_kitchen_counter": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:kitchen_counters"
+          }
+        ]
+      }
+    },
+    "has_kitchen_cupboard": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:kitchen_cupboards"
+          }
+        ]
+      }
+    },
+    "has_kitchen_sink": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:kitchen_sinks"
+          }
+        ]
+      }
+    },
+    "has_picket_fence": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["adorn:picket_fence"]
+          }
+        ]
+      }
+    },
+    "has_platform": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:platforms"
+          }
+        ]
+      }
+    },
+    "has_post": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:posts"
+          }
+        ]
+      }
+    },
+    "has_prismarine_chimney": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "tag": "adorn:prismarine_chimneys" }
+        ]
+      }
+    },
+    "has_shelf": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:shelves"
+          }
+        ]
+      }
+    },
+    "has_sofa": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:sofas"
+          }
+        ]
+      }
+    },
+    "has_step": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "adorn:steps"
+          }
+        ]
+      }
+    },
+    "has_stone_ladder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["adorn:stone_ladder"]
+          }
+        ]
+      }
+    },
+    "has_stone_torch": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["adorn:stone_torch"]
+          }
+        ]
+      }
+    },
+    "has_table": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "tag": "adorn:tables" }
+        ]
+      }
+    },
+    "has_table_lamp": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "tag": "adorn:table_lamps" }
+        ]
+      }
+    },
+    "has_trading_station": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["adorn:trading_station"]
+          }
+        ]
+      }
+    }
+  }
+}
