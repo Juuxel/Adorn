@@ -18,6 +18,7 @@ datagen {
     wood("minecraft:acacia")
     wood("minecraft:crimson", fungus = true)
     wood("minecraft:warped", fungus = true)
+    woolMaterials.set(true)
 }
 
 dependencies {

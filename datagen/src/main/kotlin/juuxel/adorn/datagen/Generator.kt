@@ -17,7 +17,7 @@ internal class Generator<in M : Material>(
     val substitutionConfig: TemplateMaterialConfig
 ) {
     companion object {
-        val COMMON_GENERATORS: List<Generator<Material>> = listOf()
+        val COMMON_GENERATORS: List<Generator<BuildingMaterial>> = listOf()
         val WOOD_GENERATORS: List<Generator<WoodMaterial>> = COMMON_GENERATORS + listOf(
             blockState("bench"),
             blockModel("bench_leg"),
@@ -28,6 +28,18 @@ internal class Generator<in M : Material>(
             recipeAdvancement("bench"),
         )
         val STONE_GENERATORS: List<Generator<StoneMaterial>> = COMMON_GENERATORS + listOf()
+        val WOOL_GENERATORS: List<Generator<WoolMaterial>> = listOf(
+            blockState("sofa"),
+            blockModel("sofa_arm_left"),
+            blockModel("sofa_arm_right"),
+            blockModel("sofa_center"),
+            blockModel("sofa_corner_left"),
+            blockModel("sofa_corner_right"),
+            itemModel("sofa"),
+            blockLootTable("sofa"),
+            recipe("sofa"),
+            recipeAdvancement("sofa"),
+        )
 
         private fun blockState(type: String, substitutionConfig: TemplateMaterialConfig = EMPTY_SUBSTITUTION): Generator<Material> =
             Generator(

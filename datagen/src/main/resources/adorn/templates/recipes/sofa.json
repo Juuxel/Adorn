@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:sofa",
+  "pattern": [
+    " W",
+    "WW",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "tag": "<stick>"
+    },
+    "W": {
+      "item": "<wool>"
+    }
+  },
+  "result": {
+    "item": "adorn:<id.path>_sofa",
+    "count": 3
+  }
+}

@@ -21,8 +21,6 @@ private class TemplateBuilder : TemplateDsl {
             if (material.isModded()) "${material.prefix.namespace}/"
             else ""
 
-        "planks" with material.planks
-        "slab" with material.slab
         "stick" with material.stick
         with(material) { appendTemplates() }
     }

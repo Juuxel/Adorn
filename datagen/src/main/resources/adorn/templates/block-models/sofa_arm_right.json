@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/sofa_arm_right",
+  "textures": {
+    "wool": "minecraft:block/<id.path>_wool"
+  }
+}

@@ -11,9 +11,11 @@ abstract class DatagenExtension {
     abstract val woodMaterials: SetProperty<WoodMaterial>
     abstract val stoneMaterials: SetProperty<StoneMaterial>
     abstract val conditionType: Property<ConditionType>
+    abstract val woolMaterials: Property<Boolean>
 
     init {
         conditionType.convention(ConditionType.NONE)
+        woolMaterials.convention(false)
     }
 
     fun wood(id: String, fungus: Boolean = false) {

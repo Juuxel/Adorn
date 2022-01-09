@@ -5,6 +5,7 @@ import juuxel.adorn.datagen.Generator
 import juuxel.adorn.datagen.Material
 import juuxel.adorn.datagen.StoneMaterial
 import juuxel.adorn.datagen.WoodMaterial
+import juuxel.adorn.datagen.WoolMaterial
 import juuxel.adorn.datagen.buildTemplateApplier
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
@@ -23,6 +24,9 @@ abstract class GenerateData : DefaultTask() {
 
     @get:Internal
     abstract val stoneMaterials: SetProperty<StoneMaterial>
+
+    @get:Internal
+    abstract val woolMaterials: SetProperty<WoolMaterial>
 
     @get:Input
     abstract val conditionType: Property<ConditionType>
@@ -44,6 +48,7 @@ abstract class GenerateData : DefaultTask() {
         val cache = TemplateCache()
         generate(outputPath, Generator.STONE_GENERATORS, stoneMaterials.get(), cache)
         generate(outputPath, Generator.WOOD_GENERATORS, woodMaterials.get(), cache)
+        generate(outputPath, Generator.WOOL_GENERATORS, woolMaterials.get(), cache)
     }
 
     private fun <M : Material> generate(outputPath: Path, gens: List<Generator<M>>, mats: Set<M>, templateCache: TemplateCache) {
