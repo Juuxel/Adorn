@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=up": { "model": "adorn:block/<id.path>_table_lamp" },
+    "facing=down": { "model": "adorn:block/<id.path>_table_lamp", "x": 180 },
+    "facing=north": { "model": "adorn:block/<id.path>_table_lamp", "x": 90 },
+    "facing=east": { "model": "adorn:block/<id.path>_table_lamp", "x": 90, "y": 90 },
+    "facing=south": { "model": "adorn:block/<id.path>_table_lamp", "x": 90, "y": 180 },
+    "facing=west": { "model": "adorn:block/<id.path>_table_lamp", "x": 90, "y": 270 }
+  }
+}
