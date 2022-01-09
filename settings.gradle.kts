@@ -22,6 +22,8 @@ pluginManagement {
 
 rootProject.name = "adorn"
 
+includeBuild("datagen")
+
 include(
     "common",
     "fabric",

@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "<slab>"
+    }
+  },
+  "result": {
+    "item": "adorn:<mod-prefix><id.path>_bench",
+    "count": 2
+  }
+}

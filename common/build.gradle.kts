@@ -1,9 +1,23 @@
+plugins {
+    id("adorn-datagen")
+}
+
 architectury {
     common()
 }
 
 loom {
     accessWidenerPath.set(file("src/main/resources/adorn.accesswidener"))
+}
+
+datagen {
+    wood("minecraft:oak")
+    wood("minecraft:spruce")
+    wood("minecraft:birch")
+    wood("minecraft:jungle")
+    wood("minecraft:acacia")
+    wood("minecraft:crimson", fungus = true)
+    wood("minecraft:warped", fungus = true)
 }
 
 dependencies {
