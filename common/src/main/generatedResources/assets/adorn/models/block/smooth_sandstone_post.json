@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/post",
   "textures": {
-    "texture": "minecraft:block/smooth_sandstone"
+    "texture": "minecraft:block/sandstone_top"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/platform",
   "textures": {
-    "texture": "minecraft:block/smooth_red_sandstone"
+    "texture": "minecraft:block/red_sandstone_top"
   }
 }

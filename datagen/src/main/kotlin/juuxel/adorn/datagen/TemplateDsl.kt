@@ -40,6 +40,23 @@ private class TemplateBuilder : TemplateDsl {
     override fun putAll(properties: Map<String, String>) =
         substitutions.putAll(properties)
 
-    fun build(): Map<String, String> =
-        substitutions
+    private fun resolve(key: String): String {
+        var current: String = substitutions[key]!!
+
+        while ('<' in current) {
+            current = TemplateApplier.apply(current, substitutions)
+        }
+
+        return current
+    }
+
+    fun build(): Map<String, String> {
+        val result = HashMap<String, String>()
+
+        for (key in substitutions.keys) {
+            result[key] = resolve(key)
+        }
+
+        return result
+    }
 }

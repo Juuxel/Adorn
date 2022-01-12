@@ -96,8 +96,16 @@ datagen {
             "bottom-texture" with "minecraft:block/sandstone_bottom"
         }
     }
-    stone("minecraft:smooth_red_sandstone")
-    stone("minecraft:smooth_sandstone")
+    stone("minecraft:smooth_red_sandstone") {
+        properties {
+            "main-texture" with "minecraft:block/red_sandstone_top"
+        }
+    }
+    stone("minecraft:smooth_sandstone") {
+        properties {
+            "main-texture" with "minecraft:block/sandstone_top"
+        }
+    }
     stone("minecraft:smooth_stone")
     stone("minecraft:stone_brick", brick = true)
     stone("minecraft:stone")

@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/post",
   "textures": {
-    "texture": "<planks.namespace>:block/<planks.path>"
+    "texture": "<main-texture>"
   }
 }

@@ -97,15 +97,13 @@ abstract class GenerateData : DefaultTask() {
             for (mat in mats) {
                 if (exclusions.get()[mat.id]?.contains(gen.id) == true) continue
 
-                val applier = TemplateApplier(
-                    buildSubstitutions {
-                        init(mat)
-                        gen.substitutionConfig(this, mat)
-                        extraProperties.get()[mat.id]?.let { putAll(it) }
-                    }
-                )
-                val output = applier.apply(templateText)
-                val filePathStr = applier.apply(gen.outputPathTemplate)
+                val mainSubstitutions = buildSubstitutions {
+                    init(mat)
+                    gen.substitutionConfig(this, mat)
+                    extraProperties.get()[mat.id]?.let { putAll(it) }
+                }
+                val output = TemplateApplier.apply(templateText, mainSubstitutions)
+                val filePathStr = TemplateApplier.apply(gen.outputPathTemplate, mainSubstitutions)
                 val filePath = outputPath.resolve(filePathStr)
                 Files.createDirectories(filePath.parent)
                 Files.writeString(filePath, output)
@@ -114,14 +112,12 @@ abstract class GenerateData : DefaultTask() {
                     val condType = conditionType.get()
                     if (condType.separateFilePathTemplate != null) {
                         val conditionTemplate = templateCache.load(condType.separateFileTemplatePath!!)
-                        val conditionApplier = TemplateApplier(
-                            buildSubstitutions {
-                                "mod-id" with mat.id.namespace
-                                "file-path" with filePathStr
-                            }
-                        )
-                        val conditionText = conditionApplier.apply(conditionTemplate)
-                        val conditionPathStr = conditionApplier.apply(condType.separateFilePathTemplate)
+                        val conditionSubstitutions = buildSubstitutions {
+                            "mod-id" with mat.id.namespace
+                            "file-path" with filePathStr
+                        }
+                        val conditionText = TemplateApplier.apply(conditionTemplate, conditionSubstitutions)
+                        val conditionPathStr = TemplateApplier.apply(condType.separateFilePathTemplate, conditionSubstitutions)
                         val conditionPath = outputPath.resolve(conditionPathStr)
                         Files.createDirectories(conditionPath.parent)
                         Files.writeString(conditionPath, conditionText)

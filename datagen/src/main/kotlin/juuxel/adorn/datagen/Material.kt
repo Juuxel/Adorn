@@ -31,6 +31,7 @@ class WoodMaterial(override val id: Id, private val fungus: Boolean) : BuildingM
         else id.suffixed("log")
 
     override fun TemplateDsl.appendTemplates() {
+        "main-texture" with "<planks.namespace>:block/<planks.path>"
         "planks" with planks
         "slab" with slab
         "log" with log
@@ -45,6 +46,7 @@ class StoneMaterial(override val id: Id, private val bricks: Boolean, val hasSid
     override val stick = Material.STONE_ROD
 
     override fun TemplateDsl.appendTemplates() {
+        "main-texture" with "<planks.namespace>:block/<planks.path>"
         "planks" with planks
         "slab" with slab
     }
