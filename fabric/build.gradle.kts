@@ -1,3 +1,7 @@
+plugins {
+    id("adorn-datagen")
+}
+
 architectury {
     platformSetupLoomIde()
     fabric()
@@ -9,6 +13,11 @@ val accessWidenerFile = project(":common").file("src/main/resources/adorn.access
 loom {
     // Technically useless, BUT this is also needed at dev runtime of course
     accessWidenerPath.set(accessWidenerFile)
+}
+
+datagen {
+    libcdConditions()
+    wood("woods_and_mires:pine")
 }
 
 sourceSets {

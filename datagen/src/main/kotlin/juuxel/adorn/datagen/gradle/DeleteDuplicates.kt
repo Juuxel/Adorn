@@ -19,7 +19,7 @@ abstract class DeleteDuplicates : DefaultTask() {
         val generatedRoot = generated.get().asFile.toPath()
 
         Files.walk(generatedRoot).use { stream ->
-            stream.filter { it.fileName.toString().endsWith(".json") }
+            stream.filter(Files::isRegularFile)
                 .forEach { Files.deleteIfExists(main.get().asFile.toPath().resolve(generatedRoot.relativize(it))) }
         }
     }
