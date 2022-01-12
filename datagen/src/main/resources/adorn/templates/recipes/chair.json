@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:chair",
+  "pattern": [
+    " S",
+    "SS",
+    "##"
+  ],
+  "key": {
+    "S": {
+      "item": "<slab>"
+    },
+    "#": {
+      "tag": "<stick>"
+    }
+  },
+  "result": {
+    "item": "adorn:<mod-prefix><id.path>_chair",
+    "count": 2
+  }
+}

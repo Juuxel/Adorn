@@ -1,14 +1,15 @@
 {
+  "type": "minecraft:block",
   "pools": [
     {
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:warped_chair",
+          "name": "adorn:acacia_chair",
           "conditions": [
             {
-              "block": "adorn:warped_chair",
+              "block": "adorn:acacia_chair",
               "properties": {
                 "half": "lower"
               },
@@ -23,6 +24,5 @@
         }
       ]
     }
-  ],
-  "type": "minecraft:block"
+  ]
 }

@@ -19,6 +19,7 @@ internal class Generator<in M : Material>(
     companion object {
         val COMMON_GENERATORS: List<Generator<BuildingMaterial>> = listOf()
         val WOOD_GENERATORS: List<Generator<WoodMaterial>> = COMMON_GENERATORS + listOf(
+            // Benches
             blockState("bench"),
             blockModel("bench_leg"),
             blockModel("bench_top"),
@@ -26,6 +27,15 @@ internal class Generator<in M : Material>(
             blockLootTable("bench"),
             recipe("bench"),
             recipeAdvancement("bench"),
+
+            // Chairs
+            blockState("chair"),
+            blockModel("chair_lower"),
+            blockModel("chair_upper"),
+            itemModel("chair"),
+            blockLootTable("chair"),
+            recipe("chair"),
+            recipeAdvancement("chair"),
         )
         val STONE_GENERATORS: List<Generator<StoneMaterial>> = COMMON_GENERATORS + listOf()
         val WOOL_GENERATORS: List<Generator<WoolMaterial>> = listOf(

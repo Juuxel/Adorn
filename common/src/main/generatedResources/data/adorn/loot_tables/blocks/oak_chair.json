@@ -1,14 +1,15 @@
 {
+  "type": "minecraft:block",
   "pools": [
     {
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:crimson_chair",
+          "name": "adorn:oak_chair",
           "conditions": [
             {
-              "block": "adorn:crimson_chair",
+              "block": "adorn:oak_chair",
               "properties": {
                 "half": "lower"
               },
@@ -23,6 +24,5 @@
         }
       ]
     }
-  ],
-  "type": "minecraft:block"
+  ]
 }
