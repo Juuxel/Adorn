@@ -2,15 +2,15 @@
   "type": "crafting_shaped",
   "group": "adorn:post",
   "pattern": [
-    "R",
-    "R",
-    "S"
+    "/",
+    "/",
+    "#"
   ],
   "key": {
-    "S": {
+    "#": {
       "item": "minecraft:polished_blackstone_bricks"
     },
-    "R": {
+    "/": {
       "tag": "c:stone_rods"
     }
   },

@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:polished_blackstone_brick_platform"
+      "adorn:polished_blackstone_brick_post"
     ]
   },
   "criteria": {
-    "has_key_item_0": {
+    "has_polished_blackstone_bricks": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:polished_blackstone_brick_slab"
+              "minecraft:polished_blackstone_bricks"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:polished_blackstone_brick_platform"
+        "recipe": "adorn:polished_blackstone_brick_post"
       }
     }
   },
   "requirements": [
     [
-      "has_key_item_0",
+      "has_polished_blackstone_bricks",
       "has_the_recipe"
     ]
   ]

@@ -64,6 +64,7 @@ datagen {
     stone("minecraft:nether_brick", brick = true)
     stone("minecraft:polished_andesite")
     stone("minecraft:polished_blackstone")
+    stone("minecraft:polished_blackstone_brick", brick = true)
     stone("minecraft:polished_diorite")
     stone("minecraft:polished_granite")
     stone("minecraft:prismarine")
