@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "terrestria:mossy_basalt_cobblestone"
+    },
+    "/": {
+      "tag": "c:stone_rods"
+    }
+  },
+  "result": {
+    "item": "adorn:terrestria/mossy_basalt_cobblestone_post",
+    "count": 4
+  }
+}

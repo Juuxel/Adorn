@@ -40,6 +40,12 @@ datagen {
         exclude("block_models/bench_leg")
         exclude("item_models/bench")
     }
+    stone("terrestria:basalt")
+    stone("terrestria:basalt_brick", brick = true)
+    stone("terrestria:basalt_cobblestone")
+    stone("terrestria:mossy_basalt_brick", brick = true)
+    stone("terrestria:mossy_basalt_cobblestone")
+    stone("terrestria:smooth_basalt")
     wood("woods_and_mires:pine") {
         exclude("block_models/kitchen_counter")
         exclude("block_models/kitchen_sink")
