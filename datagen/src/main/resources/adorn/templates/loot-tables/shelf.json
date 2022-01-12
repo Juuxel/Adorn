@@ -1,4 +1,4 @@
-<loot-table-condition>{
+{
   "type": "minecraft:block",
   "pools": [
     {
