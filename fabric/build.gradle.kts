@@ -17,6 +17,8 @@ loom {
 
 datagen {
     libcdConditions()
+    wood("cinderscapes:scorched", fungus = true)
+    wood("cinderscapes:umbral", fungus = true)
     wood("woods_and_mires:pine") {
         exclude("block_models/kitchen_counter")
         exclude("block_models/kitchen_sink")
