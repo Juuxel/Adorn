@@ -17,6 +17,9 @@ loom {
 
 datagen {
     libcdConditions()
+    wood("biomemakeover:blighted_balsa")
+    wood("biomemakeover:swamp_cypress")
+    wood("biomemakeover:willow")
     wood("cinderscapes:scorched", fungus = true)
     wood("cinderscapes:umbral", fungus = true)
     wood("woods_and_mires:pine") {
