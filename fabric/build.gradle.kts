@@ -17,7 +17,12 @@ loom {
 
 datagen {
     libcdConditions()
-    wood("woods_and_mires:pine")
+    wood("woods_and_mires:pine") {
+        exclude("block_models/kitchen_counter")
+        exclude("block_models/kitchen_sink")
+        exclude("item_models/kitchen_cupboard")
+        exclude("recipes/kitchen_counter")
+    }
 }
 
 sourceSets {

@@ -54,6 +54,32 @@ internal class Generator<in M : Material>(
             recipe("drawer"),
             recipeAdvancement("drawer"),
 
+            // Kitchen counters
+            blockState("kitchen_counter"),
+            blockModel("kitchen_counter"),
+            blockModel("kitchen_counter_connection_left"),
+            blockModel("kitchen_counter_connection_right"),
+            itemModel("kitchen_counter"),
+            blockLootTable("kitchen_counter"),
+            recipe("kitchen_counter"),
+            recipeAdvancement("kitchen_counter"),
+
+            // Kitchen cupboard
+            blockState("kitchen_cupboard"),
+            blockModel("kitchen_cupboard_door"),
+            itemModel("kitchen_cupboard"),
+            blockLootTable("kitchen_cupboard"),
+            recipe("kitchen_cupboard"),
+            recipeAdvancement("kitchen_cupboard"),
+
+            // Kitchen sinks
+            blockState("kitchen_sink"),
+            blockModel("kitchen_sink"),
+            itemModel("kitchen_sink"),
+            blockLootTable("kitchen_sink"),
+            recipe("kitchen_sink"),
+            recipeAdvancement("kitchen_sink"),
+
             // Shelves
             blockState("shelf"),
             blockModel("shelf"),
