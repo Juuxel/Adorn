@@ -16,5 +16,5 @@
   "result": {
     "item": "adorn:<mod-prefix><id.path>_platform",
     "count": 2
-  }
+  }<recipe-condition>
 }

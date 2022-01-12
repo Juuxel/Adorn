@@ -15,5 +15,5 @@
   "result": {
     "item": "adorn:<mod-prefix><id.path>_kitchen_cupboard",
     "count": 2
-  }
+  }<recipe-condition>
 }

@@ -13,5 +13,5 @@
   "result": {
     "item": "adorn:<mod-prefix><id.path>_bench",
     "count": 2
-  }
+  }<recipe-condition>
 }

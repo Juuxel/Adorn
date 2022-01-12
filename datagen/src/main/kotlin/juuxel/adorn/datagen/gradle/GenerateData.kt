@@ -97,7 +97,17 @@ abstract class GenerateData : DefaultTask() {
             for (mat in mats) {
                 if (exclusions.get()[mat.id]?.contains(gen.id) == true) continue
 
+                val condType = conditionType.get()
                 val mainSubstitutions = buildSubstitutions {
+                    "advancement-condition" with "<load-condition>"
+                    "loot-table-condition" with "<load-condition>"
+                    "recipe-condition" with "<load-condition>"
+                    "load-condition" with ""
+
+                    for ((type, path) in condType.conditionsInFileTemplatePathsByType) {
+                        "$type-condition" with templateCache.load(path)
+                    }
+
                     init(mat)
                     gen.substitutionConfig(this, mat)
                     extraProperties.get()[mat.id]?.let { putAll(it) }
@@ -109,7 +119,6 @@ abstract class GenerateData : DefaultTask() {
                 Files.writeString(filePath, output)
 
                 if (gen.requiresCondition && mat.isModded()) {
-                    val condType = conditionType.get()
                     if (condType.separateFilePathTemplate != null) {
                         val conditionTemplate = templateCache.load(condType.separateFileTemplatePath!!)
                         val conditionSubstitutions = buildSubstitutions {

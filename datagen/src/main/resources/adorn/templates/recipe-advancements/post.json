@@ -30,5 +30,5 @@
       "has_<planks.path>",
       "has_the_recipe"
     ]
-  ]
+  ]<advancement-condition>
 }

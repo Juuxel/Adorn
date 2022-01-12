@@ -36,6 +36,10 @@ abstract class DatagenExtension {
         conditionType.set(ConditionType.LIBCD)
     }
 
+    fun fabricConditions() {
+        conditionType.set(ConditionType.FABRIC)
+    }
+
     interface MaterialDsl {
         fun exclude(generator: String)
         fun replace(block: TemplateDsl.() -> Unit)

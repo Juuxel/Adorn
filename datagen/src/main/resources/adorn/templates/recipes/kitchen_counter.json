@@ -16,5 +16,5 @@
   "result": {
     "item": "adorn:<mod-prefix><id.path>_kitchen_counter",
     "count": 3
-  }
+  }<recipe-condition>
 }

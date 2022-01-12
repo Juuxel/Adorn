@@ -16,5 +16,5 @@
   "result": {
     "item": "adorn:<mod-prefix><id.path>_shelf",
     "count": 3
-  }
+  }<recipe-condition>
 }

@@ -17,5 +17,5 @@
   "result": {
     "item": "adorn:<mod-prefix><id.path>_post",
     "count": 4
-  }
+  }<recipe-condition>
 }

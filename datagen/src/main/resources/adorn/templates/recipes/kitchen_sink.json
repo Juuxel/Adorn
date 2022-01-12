@@ -12,5 +12,5 @@
   "result": {
     "item": "adorn:<mod-prefix><id.path>_kitchen_sink",
     "count": 1
-  }
+  }<recipe-condition>
 }
