@@ -22,6 +22,7 @@ datagen {
     wood("minecraft:acacia") {
         exclude("block_models/coffee_table")
     }
+    wood("minecraft:dark_oak")
     wood("minecraft:crimson", fungus = true)
     wood("minecraft:warped", fungus = true)
     stone("minecraft:basalt", hasSidedTexture = true) {

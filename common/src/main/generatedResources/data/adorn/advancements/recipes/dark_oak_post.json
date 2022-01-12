@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:dark_oak_chair"
+      "adorn:dark_oak_post"
     ]
   },
   "criteria": {
-    "has_key_item_0": {
+    "has_dark_oak_planks": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:dark_oak_slab"
+              "minecraft:dark_oak_planks"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:dark_oak_chair"
+        "recipe": "adorn:dark_oak_post"
       }
     }
   },
   "requirements": [
     [
-      "has_key_item_0",
+      "has_dark_oak_planks",
       "has_the_recipe"
     ]
   ]

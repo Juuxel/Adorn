@@ -2,15 +2,15 @@
   "type": "crafting_shaped",
   "group": "adorn:post",
   "pattern": [
-    "S",
-    "S",
-    "P"
+    "/",
+    "/",
+    "#"
   ],
   "key": {
-    "P": {
+    "#": {
       "item": "minecraft:dark_oak_planks"
     },
-    "S": {
+    "/": {
       "tag": "c:wooden_rods"
     }
   },
