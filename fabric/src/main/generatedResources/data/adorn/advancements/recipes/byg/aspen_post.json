@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:byg/aspen_post"
+    ]
+  },
+  "criteria": {
+    "has_aspen_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "byg:aspen_planks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:byg/aspen_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_aspen_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

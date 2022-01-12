@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:byg/blue_enchanted_post"
+    ]
+  },
+  "criteria": {
+    "has_blue_enchanted_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "byg:blue_enchanted_planks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:byg/blue_enchanted_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_blue_enchanted_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

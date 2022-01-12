@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:byg/willow_post"
+    ]
+  },
+  "criteria": {
+    "has_willow_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "byg:willow_planks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:byg/willow_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_willow_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

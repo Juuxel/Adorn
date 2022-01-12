@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:byg/pine_post"
+    ]
+  },
+  "criteria": {
+    "has_pine_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "byg:pine_planks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:byg/pine_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pine_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

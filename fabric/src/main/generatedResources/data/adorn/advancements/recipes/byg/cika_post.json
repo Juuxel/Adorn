@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:byg/cika_post"
+    ]
+  },
+  "criteria": {
+    "has_cika_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "byg:cika_planks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:byg/cika_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cika_planks",
+      "has_the_recipe"
+    ]
+  ]
+}
