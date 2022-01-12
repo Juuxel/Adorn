@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "adorn:block/<mod-prefix><id.path>_drawer"
+    },
+    "facing=south": {
+      "model": "adorn:block/<mod-prefix><id.path>_drawer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "adorn:block/<mod-prefix><id.path>_drawer",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "adorn:block/<mod-prefix><id.path>_drawer",
+      "y": 180
+    }
+  }
+}

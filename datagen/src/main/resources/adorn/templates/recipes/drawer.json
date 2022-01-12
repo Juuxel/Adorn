@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:drawer",
+  "pattern": [
+    "S",
+    "C",
+    "S"
+  ],
+  "key": {
+    "C": {
+      "tag": "c:wooden_chests"
+    },
+    "S": {
+      "item": "<slab>"
+    }
+  },
+  "result": {
+    "item": "adorn:<mod-prefix><id.path>_drawer",
+    "count": 2
+  }
+}

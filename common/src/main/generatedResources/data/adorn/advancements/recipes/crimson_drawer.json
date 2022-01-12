@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:warped_drawer"
+      "adorn:crimson_drawer"
     ]
   },
   "criteria": {
-    "has_key_item_0": {
+    "has_slab": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:warped_slab"
+              "minecraft:crimson_slab"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:warped_drawer"
+        "recipe": "adorn:crimson_drawer"
       }
     }
   },
   "requirements": [
     [
-      "has_key_item_0",
+      "has_slab",
       "has_the_recipe"
     ]
   ]

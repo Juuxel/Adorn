@@ -38,13 +38,21 @@ internal class Generator<in M : Material>(
             recipe("chair"),
             recipeAdvancement("chair"),
 
-            // Coffee table
+            // Coffee tables
             blockState("coffee_table"),
             blockModel("coffee_table"),
             itemModel("coffee_table"),
             blockLootTable("coffee_table"),
             recipe("coffee_table"),
             recipeAdvancement("coffee_table"),
+
+            // Drawers
+            blockState("drawer"),
+            blockModel("drawer"),
+            itemModel("drawer"),
+            blockLootTable("drawer"),
+            recipe("drawer"),
+            recipeAdvancement("drawer"),
         )
         val STONE_GENERATORS: List<Generator<StoneMaterial>> = COMMON_GENERATORS + listOf()
         val WOOL_GENERATORS: List<Generator<WoolMaterial>> = listOf(

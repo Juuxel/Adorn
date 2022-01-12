@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:crimson_drawer"
+      "adorn:acacia_drawer"
     ]
   },
   "criteria": {
-    "has_key_item_0": {
+    "has_slab": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:crimson_slab"
+              "minecraft:acacia_slab"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:crimson_drawer"
+        "recipe": "adorn:acacia_drawer"
       }
     }
   },
   "requirements": [
     [
-      "has_key_item_0",
+      "has_slab",
       "has_the_recipe"
     ]
   ]

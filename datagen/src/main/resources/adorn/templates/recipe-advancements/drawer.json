@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:birch_drawer"
+      "adorn:<mod-prefix><id.path>_drawer"
     ]
   },
   "criteria": {
-    "has_key_item_0": {
+    "has_slab": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:birch_slab"
+              "<slab>"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:birch_drawer"
+        "recipe": "adorn:<mod-prefix><id.path>_drawer"
       }
     }
   },
   "requirements": [
     [
-      "has_key_item_0",
+      "has_slab",
       "has_the_recipe"
     ]
   ]

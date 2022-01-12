@@ -1,11 +1,12 @@
 {
+  "type": "minecraft:block",
   "pools": [
     {
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:woods_and_mires/pine_drawer",
+          "name": "adorn:oak_drawer",
           "functions": [
             {
               "function": "minecraft:copy_name",
@@ -20,6 +21,5 @@
         }
       ]
     }
-  ],
-  "type": "minecraft:block"
+  ]
 }
