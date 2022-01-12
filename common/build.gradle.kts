@@ -24,7 +24,19 @@ datagen {
     }
     wood("minecraft:crimson", fungus = true)
     wood("minecraft:warped", fungus = true)
-    woolMaterials.set(true)
+    stone("minecraft:basalt", hasSidedTexture = true) {
+        exclude("recipes/platform")
+        exclude("recipe_advancements/platform")
+        exclude("recipes/step")
+        exclude("recipe_advancements/step")
+
+        properties {
+            "side-texture" with "minecraft:block/basalt_side"
+            "top-texture" with "minecraft:block/basalt_top"
+            "bottom-texture" with "minecraft:block/basalt_top"
+        }
+    }
+    colorMaterials.set(true)
 }
 
 dependencies {

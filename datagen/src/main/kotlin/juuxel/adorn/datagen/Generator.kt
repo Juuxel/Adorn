@@ -2,7 +2,7 @@ package juuxel.adorn.datagen
 
 private typealias TemplateMaterialConfig = TemplateDsl.(Material) -> Unit
 
-private val BASIC_SUBSTITUTION: TemplateMaterialConfig = { "id" with it.prefix }
+private val BASIC_SUBSTITUTION: TemplateMaterialConfig = { "id" with it.id }
 private val EMPTY_SUBSTITUTION: TemplateMaterialConfig = {}
 
 private operator fun TemplateMaterialConfig.plus(other: TemplateMaterialConfig): TemplateMaterialConfig = {
@@ -18,8 +18,36 @@ internal class Generator<in M : Material>(
     val substitutionConfig: TemplateMaterialConfig
 ) {
     companion object {
-        val COMMON_GENERATORS: List<Generator<BuildingMaterial>> = listOf()
-        val WOOD_GENERATORS: List<Generator<WoodMaterial>> = COMMON_GENERATORS + listOf(
+        val COMMON_GENERATORS: List<Generator<BuildingMaterial>> = listOf(
+            // Platforms
+            blockState("platform"),
+            itemModel("platform"),
+            blockLootTable("platform"),
+            recipe("platform"),
+            recipeAdvancement("platform"),
+
+            // Posts
+            blockState("post"),
+            itemModel("post"),
+            blockLootTable("post"),
+            recipe("post"),
+            recipeAdvancement("post"),
+
+            // Steps
+            blockState("step"),
+            itemModel("step"),
+            blockLootTable("step"),
+            recipe("step"),
+            recipeAdvancement("step"),
+            // TODO: Stonecutting recipes for these
+        )
+        val UNSIDED_COMMON_GENERATORS: List<Generator<BuildingMaterial>> = listOf(
+            // Block models with sided variants
+            blockModel("platform"),
+            blockModel("post"),
+            blockModel("step"),
+        )
+        val WOOD_GENERATORS: List<Generator<WoodMaterial>> = COMMON_GENERATORS + UNSIDED_COMMON_GENERATORS + listOf(
             // Benches
             blockState("bench"),
             blockModel("bench_leg"),
@@ -98,7 +126,14 @@ internal class Generator<in M : Material>(
             recipeAdvancement("table"),
         )
         val STONE_GENERATORS: List<Generator<StoneMaterial>> = COMMON_GENERATORS + listOf()
-        val WOOL_GENERATORS: List<Generator<WoolMaterial>> = listOf(
+        val UNSIDED_STONE_GENERATORS: List<Generator<StoneMaterial>> = UNSIDED_COMMON_GENERATORS + listOf()
+        val SIDED_STONE_GENERATORS: List<Generator<StoneMaterial>> = listOf(
+            // Block models with sided variants
+            blockModel("platform", templateName = "platform_with_sides"),
+            blockModel("post", templateName = "post_with_sides"),
+            blockModel("step", templateName = "step_with_sides"),
+        )
+        val WOOL_GENERATORS: List<Generator<ColorMaterial>> = listOf(
             // Sofas
             blockState("sofa"),
             blockModel("sofa_arm_left"),
@@ -128,11 +163,11 @@ internal class Generator<in M : Material>(
                 substitutionConfig = BASIC_SUBSTITUTION + substitutionConfig
             )
 
-        private fun blockModel(type: String, substitutionConfig: TemplateMaterialConfig = EMPTY_SUBSTITUTION): Generator<Material> =
+        private fun blockModel(type: String, templateName: String = type, substitutionConfig: TemplateMaterialConfig = EMPTY_SUBSTITUTION): Generator<Material> =
             Generator(
                 "block_models/$type",
                 "assets/adorn/models/block/<mod-prefix><id.path>_$type.json",
-                "block-models/$type.json",
+                "block-models/$templateName.json",
                 substitutionConfig = BASIC_SUBSTITUTION + substitutionConfig
             )
 

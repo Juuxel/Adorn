@@ -5,8 +5,10 @@ import juuxel.adorn.datagen.Generator
 import juuxel.adorn.datagen.Material
 import juuxel.adorn.datagen.StoneMaterial
 import juuxel.adorn.datagen.WoodMaterial
-import juuxel.adorn.datagen.WoolMaterial
-import juuxel.adorn.datagen.buildTemplateApplier
+import juuxel.adorn.datagen.ColorMaterial
+import juuxel.adorn.datagen.Id
+import juuxel.adorn.datagen.TemplateApplier
+import juuxel.adorn.datagen.buildSubstitutions
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.MapProperty
@@ -27,21 +29,50 @@ abstract class GenerateData : DefaultTask() {
     abstract val stoneMaterials: SetProperty<StoneMaterial>
 
     @get:Internal
-    abstract val woolMaterials: SetProperty<WoolMaterial>
+    abstract val colorMaterials: SetProperty<ColorMaterial>
+
+    @get:Input
+    abstract val allMaterials: SetProperty<Id>
 
     @get:Input
     abstract val conditionType: Property<ConditionType>
 
-    @get:Internal
-    abstract val exclusions: MapProperty<Material, Set<String>>
+    @get:Input
+    abstract val exclusions: MapProperty<Id, Set<String>>
+
+    @get:Input
+    abstract val extraProperties: MapProperty<Id, Map<String, String>>
 
     @get:OutputDirectory
     abstract val output: DirectoryProperty
 
+    init {
+        allMaterials.convention(
+            woodMaterials.flatMap { woods ->
+                stoneMaterials.flatMap { stones ->
+                    colorMaterials.map { colors ->
+                        HashSet<Id>().apply {
+                            for (wood in woods) {
+                                add(wood.id)
+                            }
+
+                            for (stone in stones) {
+                                add(stone.id)
+                            }
+
+                            for (color in colors) {
+                                add(color.id)
+                            }
+                        }
+                    }
+                }
+            }
+        )
+    }
+
     @TaskAction
     fun generate() {
         val outputPath = output.get().asFile.toPath()
-        val exclusions = exclusions.get()
 
         if (Files.exists(outputPath)) {
             // See https://stackoverflow.com/a/35989142
@@ -51,22 +82,28 @@ abstract class GenerateData : DefaultTask() {
         }
 
         val cache = TemplateCache()
-        generate(outputPath, Generator.STONE_GENERATORS, stoneMaterials.get(), cache, exclusions)
-        generate(outputPath, Generator.WOOD_GENERATORS, woodMaterials.get(), cache, exclusions)
-        generate(outputPath, Generator.WOOL_GENERATORS, woolMaterials.get(), cache, exclusions)
+        val stoneMaterials = stoneMaterials.get()
+        generate(outputPath, Generator.STONE_GENERATORS, stoneMaterials, cache)
+        generate(outputPath, Generator.SIDED_STONE_GENERATORS, stoneMaterials.filter { it.hasSidedTexture }, cache)
+        generate(outputPath, Generator.UNSIDED_STONE_GENERATORS, stoneMaterials.filter { !it.hasSidedTexture }, cache)
+        generate(outputPath, Generator.WOOD_GENERATORS, woodMaterials.get(), cache)
+        generate(outputPath, Generator.WOOL_GENERATORS, colorMaterials.get(), cache)
     }
 
-    private fun <M : Material> generate(outputPath: Path, gens: List<Generator<M>>, mats: Set<M>, templateCache: TemplateCache, exclusions: Map<Material, Set<String>>) {
+    private fun <M : Material> generate(outputPath: Path, gens: List<Generator<M>>, mats: Iterable<M>, templateCache: TemplateCache) {
         for (gen in gens) {
             val templateText = templateCache.load(gen.templatePath)
 
             for (mat in mats) {
-                if (exclusions[mat]?.contains(gen.id) == true) continue
+                if (exclusions.get()[mat.id]?.contains(gen.id) == true) continue
 
-                val applier = buildTemplateApplier {
-                    init(mat)
-                    gen.substitutionConfig(this, mat)
-                }
+                val applier = TemplateApplier(
+                    buildSubstitutions {
+                        init(mat)
+                        gen.substitutionConfig(this, mat)
+                        extraProperties.get()[mat.id]?.let { putAll(it) }
+                    }
+                )
                 val output = applier.apply(templateText)
                 val filePathStr = applier.apply(gen.outputPathTemplate)
                 val filePath = outputPath.resolve(filePathStr)
@@ -77,10 +114,12 @@ abstract class GenerateData : DefaultTask() {
                     val condType = conditionType.get()
                     if (condType.separateFilePathTemplate != null) {
                         val conditionTemplate = templateCache.load(condType.separateFileTemplatePath!!)
-                        val conditionApplier = buildTemplateApplier {
-                            "mod-id" with mat.prefix.namespace
-                            "file-path" with filePathStr
-                        }
+                        val conditionApplier = TemplateApplier(
+                            buildSubstitutions {
+                                "mod-id" with mat.id.namespace
+                                "file-path" with filePathStr
+                            }
+                        )
                         val conditionText = conditionApplier.apply(conditionTemplate)
                         val conditionPathStr = conditionApplier.apply(condType.separateFilePathTemplate)
                         val conditionPath = outputPath.resolve(conditionPathStr)

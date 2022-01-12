@@ -1,11 +1,12 @@
 package juuxel.adorn.datagen
 
 interface Material {
-    val prefix: Id
+    /** A unique ID for this material. */
+    val id: Id
     val stick: Id
 
     fun isModded(): Boolean =
-        prefix.namespace != "minecraft"
+        id.namespace != "minecraft"
 
     fun TemplateDsl.appendTemplates()
 
@@ -20,15 +21,14 @@ interface BuildingMaterial : Material {
     val slab: Id
 }
 
-class WoodMaterial(private val baseId: Id, private val fungus: Boolean = false) : BuildingMaterial {
-    override val slab = baseId.suffixed("slab")
-    override val planks = baseId.suffixed("planks")
-    override val prefix = baseId
+class WoodMaterial(override val id: Id, private val fungus: Boolean) : BuildingMaterial {
+    override val slab = id.suffixed("slab")
+    override val planks = id.suffixed("planks")
     override val stick = Material.STICK
 
     val log =
-        if (fungus) baseId.suffixed("stem")
-        else baseId.suffixed("log")
+        if (fungus) id.suffixed("stem")
+        else id.suffixed("log")
 
     override fun TemplateDsl.appendTemplates() {
         "planks" with planks
@@ -37,12 +37,11 @@ class WoodMaterial(private val baseId: Id, private val fungus: Boolean = false) 
     }
 }
 
-class StoneMaterial(private val baseId: Id, private val bricks: Boolean = false) : BuildingMaterial {
-    override val slab = baseId.suffixed("slab")
+class StoneMaterial(override val id: Id, private val bricks: Boolean, val hasSidedTexture: Boolean) : BuildingMaterial {
+    override val slab = id.suffixed("slab")
     override val planks =
-        if (bricks) baseId.rawSuffixed("s") // brick => bricks
-        else baseId
-    override val prefix = baseId
+        if (bricks) id.rawSuffixed("s") // brick => bricks
+        else id
     override val stick = Material.STONE_ROD
 
     override fun TemplateDsl.appendTemplates() {
@@ -51,7 +50,7 @@ class StoneMaterial(private val baseId: Id, private val bricks: Boolean = false)
     }
 }
 
-enum class WoolMaterial(private val id: String) : Material {
+enum class ColorMaterial(private val color: String) : Material {
     WHITE("white"),
     ORANGE("orange"),
     MAGENTA("magenta"),
@@ -69,9 +68,9 @@ enum class WoolMaterial(private val id: String) : Material {
     RED("red"),
     BLACK("black");
 
-    override val prefix = Id("minecraft", id)
+    override val id = Id("minecraft", color)
     override val stick = Material.STICK
-    val wool = prefix.suffixed("wool")
+    val wool = id.suffixed("wool")
 
     override fun TemplateDsl.appendTemplates() {
         "wool" with wool

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:warped_post"
+    ]
+  },
+  "criteria": {
+    "has_warped_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:warped_planks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:warped_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_warped_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,4 +1,4 @@
-import juuxel.adorn.datagen.WoolMaterial
+import juuxel.adorn.datagen.ColorMaterial
 import juuxel.adorn.datagen.gradle.DatagenExtension
 import juuxel.adorn.datagen.gradle.DeleteDuplicates
 import juuxel.adorn.datagen.gradle.GenerateData
@@ -13,10 +13,11 @@ val generatedResources = layout.projectDirectory.dir("src/main/generatedResource
 val generateData by tasks.registering(GenerateData::class) {
     woodMaterials.convention(extension.woodMaterials)
     stoneMaterials.convention(extension.stoneMaterials)
-    woolMaterials.convention(extension.woolMaterials.map { if (it) WoolMaterial.values().toList() else emptyList() })
+    colorMaterials.convention(extension.colorMaterials.map { if (it) ColorMaterial.values().toList() else emptyList() })
     output.convention(generatedResources)
     conditionType.convention(extension.conditionType)
     exclusions.convention(extension.exclusions)
+    extraProperties.convention(extension.extraProperties)
 }
 
 val deleteDuplicateResources by tasks.registering(DeleteDuplicates::class) {

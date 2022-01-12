@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "<slab>"
+    },
+    "P": {
+      "item": "adorn:<mod-prefix><id.path>_post"
+    }
+  },
+  "result": {
+    "item": "adorn:<mod-prefix><id.path>_platform",
+    "count": 2
+  }
+}

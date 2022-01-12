@@ -1,6 +1,8 @@
 package juuxel.adorn.datagen
 
-data class Id(val namespace: String, val path: String) {
+import java.io.Serializable
+
+data class Id(val namespace: String, val path: String) : Serializable {
     fun rawSuffixed(suffix: String): Id = Id(namespace, "$path$suffix")
     fun suffixed(suffix: String): Id = rawSuffixed("_$suffix")
 

@@ -4,9 +4,10 @@ interface TemplateDsl {
     fun init(material: Material)
     infix fun String.with(other: String)
     infix fun String.with(id: Id)
+    fun putAll(properties: Map<String, String>)
 }
 
-internal fun buildTemplateApplier(block: TemplateDsl.() -> Unit): TemplateApplier =
+internal fun buildSubstitutions(block: TemplateDsl.() -> Unit): Map<String, String> =
     TemplateBuilder().apply(block).build()
 
 private class TemplateBuilder : TemplateDsl {
@@ -14,11 +15,11 @@ private class TemplateBuilder : TemplateDsl {
 
     override fun init(material: Material) {
         substitutions["mod-id"] =
-            if (material.isModded()) "${material.prefix.namespace}"
+            if (material.isModded()) material.id.namespace
             else ""
 
         substitutions["mod-prefix"] =
-            if (material.isModded()) "${material.prefix.namespace}/"
+            if (material.isModded()) "${material.id.namespace}/"
             else ""
 
         "stick" with material.stick
@@ -35,6 +36,9 @@ private class TemplateBuilder : TemplateDsl {
         substitutions["$this.path"] = id.path
     }
 
-    fun build(): TemplateApplier =
-        TemplateApplier(substitutions)
+    override fun putAll(properties: Map<String, String>) =
+        substitutions.putAll(properties)
+
+    fun build(): Map<String, String> =
+        substitutions
 }

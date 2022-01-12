@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "<planks>"
+    },
+    "/": {
+      "tag": "<stick>"
+    }
+  },
+  "result": {
+    "item": "adorn:<mod-prefix><id.path>_post",
+    "count": 4
+  }
+}

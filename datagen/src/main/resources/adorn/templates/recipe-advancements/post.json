@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:<mod-prefix><id.path>_post"
+    ]
+  },
+  "criteria": {
+    "has_<planks.path>": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "<planks>"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:<mod-prefix><id.path>_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_<planks.path>",
+      "has_the_recipe"
+    ]
+  ]
+}

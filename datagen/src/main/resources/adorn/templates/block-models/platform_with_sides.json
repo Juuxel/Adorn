@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:block/templates/platform_with_sides",
+  "textures": {
+    "side": "<side-texture>",
+    "up": "<top-texture>",
+    "down": "<bottom-texture>"
+  }
+}
