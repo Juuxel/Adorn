@@ -1,11 +1,12 @@
 {
+  "type": "minecraft:block",
   "pools": [
     {
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:woods_and_mires/pine_table"
+          "name": "adorn:<mod-prefix><id.path>_table"
         }
       ],
       "conditions": [
@@ -14,6 +15,5 @@
         }
       ]
     }
-  ],
-  "type": "minecraft:block"
+  ]
 }

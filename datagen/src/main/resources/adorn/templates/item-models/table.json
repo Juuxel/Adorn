@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:item/templates/table",
+  "textures": {
+    "planks": "<planks.namespace>:block/<planks.path>",
+    "log": "<log.namespace>:block/<log.path>"
+  }
+}

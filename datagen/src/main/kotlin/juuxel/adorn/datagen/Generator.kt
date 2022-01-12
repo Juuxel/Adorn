@@ -53,6 +53,15 @@ internal class Generator<in M : Material>(
             blockLootTable("drawer"),
             recipe("drawer"),
             recipeAdvancement("drawer"),
+
+            // Table
+            blockState("table"),
+            blockModel("table"),
+            blockModel("table_leg"),
+            itemModel("table"),
+            blockLootTable("table"),
+            recipe("table"),
+            recipeAdvancement("table"),
         )
         val STONE_GENERATORS: List<Generator<StoneMaterial>> = COMMON_GENERATORS + listOf()
         val WOOL_GENERATORS: List<Generator<WoolMaterial>> = listOf(

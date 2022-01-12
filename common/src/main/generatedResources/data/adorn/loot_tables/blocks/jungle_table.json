@@ -1,11 +1,12 @@
 {
+  "type": "minecraft:block",
   "pools": [
     {
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:warped_table"
+          "name": "adorn:jungle_table"
         }
       ],
       "conditions": [
@@ -14,6 +15,5 @@
         }
       ]
     }
-  ],
-  "type": "minecraft:block"
+  ]
 }

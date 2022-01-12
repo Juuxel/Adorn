@@ -1,11 +1,12 @@
 {
+  "type": "minecraft:block",
   "pools": [
     {
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:jungle_table"
+          "name": "adorn:oak_table"
         }
       ],
       "conditions": [
@@ -14,6 +15,5 @@
         }
       ]
     }
-  ],
-  "type": "minecraft:block"
+  ]
 }
