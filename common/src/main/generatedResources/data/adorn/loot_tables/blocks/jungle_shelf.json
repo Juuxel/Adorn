@@ -1,11 +1,12 @@
 {
+  "type": "minecraft:block",
   "pools": [
     {
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:woods_and_mires/pine_shelf"
+          "name": "adorn:jungle_shelf"
         }
       ],
       "conditions": [
@@ -14,6 +15,5 @@
         }
       ]
     }
-  ],
-  "type": "minecraft:block"
+  ]
 }

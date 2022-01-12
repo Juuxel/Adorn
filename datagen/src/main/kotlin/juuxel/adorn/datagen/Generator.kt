@@ -54,6 +54,14 @@ internal class Generator<in M : Material>(
             recipe("drawer"),
             recipeAdvancement("drawer"),
 
+            // Shelves
+            blockState("shelf"),
+            blockModel("shelf"),
+            itemModel("shelf"),
+            blockLootTable("shelf"),
+            recipe("shelf"),
+            recipeAdvancement("shelf"),
+
             // Table
             blockState("table"),
             blockModel("table"),

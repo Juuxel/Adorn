@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:shelf",
+  "pattern": [
+    "---",
+    "/ /"
+  ],
+  "key": {
+    "-": {
+      "item": "<slab>"
+    },
+    "/": {
+      "tag": "<stick>"
+    }
+  },
+  "result": {
+    "item": "adorn:<mod-prefix><id.path>_shelf",
+    "count": 3
+  }
+}

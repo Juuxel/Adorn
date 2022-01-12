@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:woods_and_mires/pine_shelf"
+      "adorn:jungle_shelf"
     ]
   },
   "criteria": {
-    "has_key_item_0": {
+    "has_slab": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "woods_and_mires:pine_slab"
+              "minecraft:jungle_slab"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:woods_and_mires/pine_shelf"
+        "recipe": "adorn:jungle_shelf"
       }
     }
   },
   "requirements": [
     [
-      "has_key_item_0",
+      "has_slab",
       "has_the_recipe"
     ]
   ]

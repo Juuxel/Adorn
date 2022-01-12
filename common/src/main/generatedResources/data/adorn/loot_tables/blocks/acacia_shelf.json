@@ -1,11 +1,12 @@
 {
+  "type": "minecraft:block",
   "pools": [
     {
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "adorn:spruce_shelf"
+          "name": "adorn:acacia_shelf"
         }
       ],
       "conditions": [
@@ -14,6 +15,5 @@
         }
       ]
     }
-  ],
-  "type": "minecraft:block"
+  ]
 }
