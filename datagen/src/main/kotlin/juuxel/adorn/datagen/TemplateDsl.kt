@@ -4,6 +4,7 @@ interface TemplateDsl {
     fun init(material: Material)
     infix fun String.with(other: String)
     infix fun String.with(id: Id)
+    infix fun String.withId(id: String) = with(Id.parse(id))
     fun putAll(properties: Map<String, String>)
 }
 

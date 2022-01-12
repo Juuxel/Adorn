@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:polished_granite_slab"
+    },
+    "P": {
+      "item": "adorn:polished_granite_post"
+    }
+  },
+  "result": {
+    "item": "adorn:polished_granite_platform",
+    "count": 2
+  }
+}

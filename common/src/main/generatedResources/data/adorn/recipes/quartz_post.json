@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:quartz_block"
+    },
+    "/": {
+      "tag": "c:stone_rods"
+    }
+  },
+  "result": {
+    "item": "adorn:quartz_post",
+    "count": 4
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:cut_sandstone_slab"
+    },
+    "P": {
+      "item": "adorn:cut_sandstone_post"
+    }
+  },
+  "result": {
+    "item": "adorn:cut_sandstone_platform",
+    "count": 2
+  }
+}

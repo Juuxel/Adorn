@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:smooth_sandstone"
+    },
+    "/": {
+      "tag": "c:stone_rods"
+    }
+  },
+  "result": {
+    "item": "adorn:smooth_sandstone_post",
+    "count": 4
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=z": {
+      "model": "adorn:block/dark_prismarine_post",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "adorn:block/dark_prismarine_post",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "adorn:block/dark_prismarine_post"
+    }
+  }
+}

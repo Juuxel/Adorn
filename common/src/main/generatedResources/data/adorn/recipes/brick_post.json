@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bricks"
+    },
+    "/": {
+      "tag": "c:stone_rods"
+    }
+  },
+  "result": {
+    "item": "adorn:brick_post",
+    "count": 4
+  }
+}

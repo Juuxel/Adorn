@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:smooth_sandstone_post"
+    ]
+  },
+  "criteria": {
+    "has_smooth_sandstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:smooth_sandstone"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:smooth_sandstone_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_smooth_sandstone",
+      "has_the_recipe"
+    ]
+  ]
+}
