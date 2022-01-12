@@ -2,11 +2,11 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:traverse/fir_bench"
+      "adorn:traverse/fir_drawer"
     ]
   },
   "criteria": {
-    "has_key_item_0": {
+    "has_slab": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:traverse/fir_bench"
+        "recipe": "adorn:traverse/fir_drawer"
       }
     }
   },
   "requirements": [
     [
-      "has_key_item_0",
+      "has_slab",
       "has_the_recipe"
     ]
   ]

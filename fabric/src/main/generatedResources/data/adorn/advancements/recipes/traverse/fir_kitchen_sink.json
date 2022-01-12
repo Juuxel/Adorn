@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "adorn:traverse/fir_platform"
+      "adorn:traverse/fir_kitchen_sink"
     ]
   },
   "criteria": {
-    "has_key_item_0": {
+    "has_planks": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "traverse:fir_slab"
+              "traverse:fir_planks"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "adorn:traverse/fir_platform"
+        "recipe": "adorn:traverse/fir_kitchen_sink"
       }
     }
   },
   "requirements": [
     [
-      "has_key_item_0",
+      "has_planks",
       "has_the_recipe"
     ]
   ]

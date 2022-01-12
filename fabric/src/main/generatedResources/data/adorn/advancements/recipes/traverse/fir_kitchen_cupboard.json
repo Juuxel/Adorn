@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_key_item_0": {
+    "has_planks": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -18,7 +18,7 @@
         ]
       }
     },
-    "has_key_item_1": {
+    "has_kitchen_counter": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -39,8 +39,8 @@
   },
   "requirements": [
     [
-      "has_key_item_0",
-      "has_key_item_1",
+      "has_planks",
+      "has_kitchen_counter",
       "has_the_recipe"
     ]
   ]
