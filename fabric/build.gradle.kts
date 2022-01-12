@@ -22,6 +22,24 @@ datagen {
     wood("biomemakeover:willow")
     wood("cinderscapes:scorched", fungus = true)
     wood("cinderscapes:umbral", fungus = true)
+    wood("terrestria:cypress")
+    wood("terrestria:hemlock")
+    wood("terrestria:japanese_maple")
+    wood("terrestria:rainbow_eucalyptus")
+    wood("terrestria:redwood")
+    wood("terrestria:rubber")
+    wood("terrestria:sakura") {
+        exclude("block_models/bench_leg")
+        exclude("block_models/coffee_table")
+        exclude("block_models/table_leg")
+        exclude("item_models/bench")
+        exclude("item_models/table")
+    }
+    wood("terrestria:willow")
+    wood("terrestria:yucca_palm") {
+        exclude("block_models/bench_leg")
+        exclude("item_models/bench")
+    }
     wood("woods_and_mires:pine") {
         exclude("block_models/kitchen_counter")
         exclude("block_models/kitchen_sink")

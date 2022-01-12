@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:terrestria/redwood_kitchen_cupboard"
+    ]
+  },
+  "criteria": {
+    "has_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "terrestria:redwood_planks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_kitchen_counter": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "adorn:terrestria/redwood_kitchen_counter"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:terrestria/redwood_kitchen_cupboard"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_planks",
+      "has_kitchen_counter",
+      "has_the_recipe"
+    ]
+  ]
+}
