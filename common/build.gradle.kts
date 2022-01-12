@@ -13,9 +13,15 @@ loom {
 datagen {
     wood("minecraft:oak")
     wood("minecraft:spruce")
-    wood("minecraft:birch")
-    wood("minecraft:jungle")
-    wood("minecraft:acacia")
+    wood("minecraft:birch") {
+        exclude("block_models/coffee_table")
+    }
+    wood("minecraft:jungle") {
+        exclude("block_models/coffee_table")
+    }
+    wood("minecraft:acacia") {
+        exclude("block_models/coffee_table")
+    }
     wood("minecraft:crimson", fungus = true)
     wood("minecraft:warped", fungus = true)
     woolMaterials.set(true)

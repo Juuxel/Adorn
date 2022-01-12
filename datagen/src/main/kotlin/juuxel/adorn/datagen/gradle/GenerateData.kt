@@ -9,6 +9,7 @@ import juuxel.adorn.datagen.WoolMaterial
 import juuxel.adorn.datagen.buildTemplateApplier
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.provider.MapProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.SetProperty
 import org.gradle.api.tasks.Input
@@ -31,12 +32,16 @@ abstract class GenerateData : DefaultTask() {
     @get:Input
     abstract val conditionType: Property<ConditionType>
 
+    @get:Internal
+    abstract val exclusions: MapProperty<Material, Set<String>>
+
     @get:OutputDirectory
     abstract val output: DirectoryProperty
 
     @TaskAction
     fun generate() {
         val outputPath = output.get().asFile.toPath()
+        val exclusions = exclusions.get()
 
         if (Files.exists(outputPath)) {
             // See https://stackoverflow.com/a/35989142
@@ -46,16 +51,18 @@ abstract class GenerateData : DefaultTask() {
         }
 
         val cache = TemplateCache()
-        generate(outputPath, Generator.STONE_GENERATORS, stoneMaterials.get(), cache)
-        generate(outputPath, Generator.WOOD_GENERATORS, woodMaterials.get(), cache)
-        generate(outputPath, Generator.WOOL_GENERATORS, woolMaterials.get(), cache)
+        generate(outputPath, Generator.STONE_GENERATORS, stoneMaterials.get(), cache, exclusions)
+        generate(outputPath, Generator.WOOD_GENERATORS, woodMaterials.get(), cache, exclusions)
+        generate(outputPath, Generator.WOOL_GENERATORS, woolMaterials.get(), cache, exclusions)
     }
 
-    private fun <M : Material> generate(outputPath: Path, gens: List<Generator<M>>, mats: Set<M>, templateCache: TemplateCache) {
+    private fun <M : Material> generate(outputPath: Path, gens: List<Generator<M>>, mats: Set<M>, templateCache: TemplateCache, exclusions: Map<Material, Set<String>>) {
         for (gen in gens) {
             val templateText = templateCache.load(gen.templatePath)
 
             for (mat in mats) {
+                if (exclusions[mat]?.contains(gen.id) == true) continue
+
                 val applier = buildTemplateApplier {
                     init(mat)
                     gen.substitutionConfig(this, mat)

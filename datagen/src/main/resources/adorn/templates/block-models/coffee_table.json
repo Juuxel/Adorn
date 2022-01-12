@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:block/templates/coffee_table",
+  "textures": {
+    "planks": "<planks.namespace>:block/<planks.path>",
+    "leg": "<log.namespace>:block/<log.path>",
+    "rim": "<log.namespace>:block/<log.path>"
+  }
+}

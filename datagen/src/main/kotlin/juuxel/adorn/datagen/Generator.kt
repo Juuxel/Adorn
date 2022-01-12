@@ -11,6 +11,7 @@ private operator fun TemplateMaterialConfig.plus(other: TemplateMaterialConfig):
 }
 
 internal class Generator<in M : Material>(
+    val id: String,
     val outputPathTemplate: String,
     val templatePath: String,
     val requiresCondition: Boolean = false,
@@ -36,6 +37,14 @@ internal class Generator<in M : Material>(
             blockLootTable("chair"),
             recipe("chair"),
             recipeAdvancement("chair"),
+
+            // Coffee table
+            blockState("coffee_table"),
+            blockModel("coffee_table"),
+            itemModel("coffee_table"),
+            blockLootTable("coffee_table"),
+            recipe("coffee_table"),
+            recipeAdvancement("coffee_table"),
         )
         val STONE_GENERATORS: List<Generator<StoneMaterial>> = COMMON_GENERATORS + listOf()
         val WOOL_GENERATORS: List<Generator<WoolMaterial>> = listOf(
@@ -62,6 +71,7 @@ internal class Generator<in M : Material>(
 
         private fun blockState(type: String, substitutionConfig: TemplateMaterialConfig = EMPTY_SUBSTITUTION): Generator<Material> =
             Generator(
+                "block_states/$type",
                 "assets/adorn/blockstates/<mod-prefix><id.path>_$type.json",
                 "block-states/$type.json",
                 substitutionConfig = BASIC_SUBSTITUTION + substitutionConfig
@@ -69,6 +79,7 @@ internal class Generator<in M : Material>(
 
         private fun blockModel(type: String, substitutionConfig: TemplateMaterialConfig = EMPTY_SUBSTITUTION): Generator<Material> =
             Generator(
+                "block_models/$type",
                 "assets/adorn/models/block/<mod-prefix><id.path>_$type.json",
                 "block-models/$type.json",
                 substitutionConfig = BASIC_SUBSTITUTION + substitutionConfig
@@ -76,6 +87,7 @@ internal class Generator<in M : Material>(
 
         private fun itemModel(type: String, substitutionConfig: TemplateMaterialConfig = EMPTY_SUBSTITUTION): Generator<Material> =
             Generator(
+                "item_models/$type",
                 "assets/adorn/models/item/<mod-prefix><id.path>_$type.json",
                 "item-models/$type.json",
                 substitutionConfig = BASIC_SUBSTITUTION + substitutionConfig
@@ -83,6 +95,7 @@ internal class Generator<in M : Material>(
 
         private fun blockLootTable(type: String, substitutionConfig: TemplateMaterialConfig = EMPTY_SUBSTITUTION): Generator<Material> =
             Generator(
+                "loot_tables/$type",
                 "data/adorn/loot_tables/blocks/<mod-prefix><id.path>_$type.json",
                 "loot-tables/$type.json",
                 substitutionConfig = BASIC_SUBSTITUTION + substitutionConfig,
@@ -91,6 +104,7 @@ internal class Generator<in M : Material>(
 
         private fun recipe(type: String, substitutionConfig: TemplateMaterialConfig = EMPTY_SUBSTITUTION): Generator<Material> =
             Generator(
+                "recipes/$type",
                 "data/adorn/recipes/<mod-prefix><id.path>_$type.json",
                 "recipes/$type.json",
                 substitutionConfig = BASIC_SUBSTITUTION + substitutionConfig,
@@ -99,6 +113,7 @@ internal class Generator<in M : Material>(
 
         private fun recipeAdvancement(type: String, substitutionConfig: TemplateMaterialConfig = EMPTY_SUBSTITUTION): Generator<Material> =
             Generator(
+                "recipe_advancements/$type",
                 "data/adorn/advancements/recipes/<mod-prefix><id.path>_$type.json",
                 "recipe-advancements/$type.json",
                 substitutionConfig = BASIC_SUBSTITUTION + substitutionConfig,
