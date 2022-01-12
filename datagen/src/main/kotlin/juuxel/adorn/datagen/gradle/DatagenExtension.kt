@@ -38,7 +38,7 @@ abstract class DatagenExtension {
 
     interface MaterialDsl {
         fun exclude(generator: String)
-        fun properties(block: TemplateDsl.() -> Unit)
+        fun replace(block: TemplateDsl.() -> Unit)
     }
 
     private inner class MaterialDslImpl(private val material: Material) : MaterialDsl {
@@ -46,7 +46,7 @@ abstract class DatagenExtension {
             exclusions.getOrPut(material.id, ::LinkedHashSet).add(generator)
         }
 
-        override fun properties(block: TemplateDsl.() -> Unit) {
+        override fun replace(block: TemplateDsl.() -> Unit) {
             extraProperties.put(material.id, buildSubstitutions(block))
         }
     }

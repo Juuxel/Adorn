@@ -32,7 +32,7 @@ datagen {
         exclude("recipes/step")
         exclude("recipe_advancements/step")
 
-        properties {
+        replace {
             "side-texture" with "minecraft:block/basalt_side"
             "top-texture" with "minecraft:block/basalt_top"
             "bottom-texture" with "minecraft:block/basalt_top"
@@ -42,14 +42,14 @@ datagen {
     stone("minecraft:brick", brick = true)
     stone("minecraft:cobblestone")
     stone("minecraft:cut_red_sandstone", hasSidedTexture = true) {
-        properties {
+        replace {
             "side-texture" with "minecraft:block/cut_red_sandstone"
             "top-texture" with "minecraft:block/red_sandstone_top"
             "bottom-texture" with "minecraft:block/red_sandstone_bottom"
         }
     }
     stone("minecraft:cut_sandstone", hasSidedTexture = true) {
-        properties {
+        replace {
             "side-texture" with "minecraft:block/cut_sandstone"
             "top-texture" with "minecraft:block/sandstone_top"
             "bottom-texture" with "minecraft:block/sandstone_bottom"
@@ -70,12 +70,12 @@ datagen {
     stone("minecraft:prismarine")
     stone("minecraft:prismarine_brick", brick = true)
     stone("minecraft:purpur") {
-        properties {
+        replace {
             "planks" withId "minecraft:purpur_block"
         }
     }
     stone("minecraft:quartz", hasSidedTexture = true) {
-        properties {
+        replace {
             "planks" withId "minecraft:quartz_block"
             "side-texture" with "minecraft:block/quartz_block_side"
             "top-texture" with "minecraft:block/quartz_block_top"
@@ -84,26 +84,26 @@ datagen {
     }
     stone("minecraft:red_nether_brick", brick = true)
     stone("minecraft:red_sandstone", hasSidedTexture = true) {
-        properties {
+        replace {
             "side-texture" with "minecraft:block/red_sandstone"
             "top-texture" with "minecraft:block/red_sandstone_top"
             "bottom-texture" with "minecraft:block/red_sandstone_bottom"
         }
     }
     stone("minecraft:sandstone", hasSidedTexture = true) {
-        properties {
+        replace {
             "side-texture" with "minecraft:block/sandstone"
             "top-texture" with "minecraft:block/sandstone_top"
             "bottom-texture" with "minecraft:block/sandstone_bottom"
         }
     }
     stone("minecraft:smooth_red_sandstone") {
-        properties {
+        replace {
             "main-texture" with "minecraft:block/red_sandstone_top"
         }
     }
     stone("minecraft:smooth_sandstone") {
-        properties {
+        replace {
             "main-texture" with "minecraft:block/sandstone_top"
         }
     }
