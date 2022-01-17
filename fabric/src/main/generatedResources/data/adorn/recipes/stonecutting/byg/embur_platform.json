@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "byg:embur_planks"
+  },
+  "result": "adorn:byg/embur_platform",
+  "count": 1
+}

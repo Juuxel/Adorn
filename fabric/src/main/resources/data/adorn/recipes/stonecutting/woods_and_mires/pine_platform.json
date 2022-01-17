@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": {
-    "item": "woods_and_mires:pine_planks"
-  },
-  "result": "adorn:woods_and_mires/pine_platform",
-  "count": 2
-}

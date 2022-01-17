@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "cinderscapes:umbral_planks"
+  },
+  "result": "adorn:cinderscapes/umbral_platform",
+  "count": 1
+}

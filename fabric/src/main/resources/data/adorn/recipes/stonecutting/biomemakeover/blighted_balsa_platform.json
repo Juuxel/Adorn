@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": {
-    "item": "biomemakeover:blighted_balsa_planks"
-  },
-  "result": "adorn:biomemakeover/blighted_balsa_platform",
-  "count": 2
-}

@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "byg:cypress_planks"
+  },
+  "result": "adorn:byg/cypress_platform",
+  "count": 1
+}
