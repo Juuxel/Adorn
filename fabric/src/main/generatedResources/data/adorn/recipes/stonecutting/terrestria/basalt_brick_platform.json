@@ -4,5 +4,10 @@
     "item": "terrestria:basalt_bricks"
   },
   "result": "adorn:terrestria/basalt_brick_platform",
-  "count": 1
+  "count": 1,
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["terrestria"]
+  }]
+
 }

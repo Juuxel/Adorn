@@ -15,5 +15,10 @@
   "result": {
     "item": "adorn:byg/embur_kitchen_cupboard",
     "count": 2
-  }
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
 }

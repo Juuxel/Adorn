@@ -12,5 +12,9 @@
   },
   "result": {
     "item": "adorn:lil_tater_crate"
-  }
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["ltr"]
+  }]
 }

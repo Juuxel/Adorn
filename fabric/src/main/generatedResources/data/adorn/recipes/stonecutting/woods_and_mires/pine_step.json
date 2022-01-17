@@ -4,5 +4,10 @@
     "item": "woods_and_mires:pine_planks"
   },
   "result": "adorn:woods_and_mires/pine_step",
-  "count": 2
+  "count": 2,
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["woods_and_mires"]
+  }]
+
 }

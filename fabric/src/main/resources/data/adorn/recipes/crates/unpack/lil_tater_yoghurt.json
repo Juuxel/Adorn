@@ -7,5 +7,9 @@
   "result": {
     "item": "ltr:lil_tater",
     "count": 8
-  }
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["ltr"]
+  }]
 }

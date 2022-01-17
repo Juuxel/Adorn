@@ -12,5 +12,10 @@
   "result": {
     "item": "adorn:cinderscapes/scorched_kitchen_sink",
     "count": 1
-  }
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["cinderscapes"]
+  }]
+
 }

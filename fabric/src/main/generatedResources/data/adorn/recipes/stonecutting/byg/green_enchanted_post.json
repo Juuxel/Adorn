@@ -4,5 +4,10 @@
     "item": "byg:green_enchanted_planks"
   },
   "result": "adorn:byg/green_enchanted_post",
-  "count": 2
+  "count": 2,
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
 }

@@ -6,7 +6,6 @@ enum class ConditionType(
     val conditionsInFileTemplatePathsByType: Map<String, String> = emptyMap()
 ) {
     NONE,
-    LIBCD(separateFilePathTemplate = "<file-path>.mcmeta", separateFileTemplatePath = "libcd-conditions.mcmeta"),
     FABRIC(conditionsInFileTemplatePathsByType = mapOf("load" to "fabric-conditions.json")),
     FORGE(conditionsInFileTemplatePathsByType = mapOf("load" to "forge-conditions.json", "loot-table" to "forge-loot-conditions.json")),
 }

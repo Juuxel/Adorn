@@ -4,5 +4,10 @@
     "item": "byg:red_rock_bricks"
   },
   "result": "adorn:byg/red_rock_brick_platform",
-  "count": 1
+  "count": 1,
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
 }

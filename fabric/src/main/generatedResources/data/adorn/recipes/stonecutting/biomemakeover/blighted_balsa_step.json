@@ -4,5 +4,10 @@
     "item": "biomemakeover:blighted_balsa_planks"
   },
   "result": "adorn:biomemakeover/blighted_balsa_step",
-  "count": 2
+  "count": 2,
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["biomemakeover"]
+  }]
+
 }

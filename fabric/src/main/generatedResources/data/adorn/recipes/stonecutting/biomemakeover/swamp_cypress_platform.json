@@ -4,5 +4,10 @@
     "item": "biomemakeover:swamp_cypress_planks"
   },
   "result": "adorn:biomemakeover/swamp_cypress_platform",
-  "count": 1
+  "count": 1,
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["biomemakeover"]
+  }]
+
 }

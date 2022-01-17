@@ -1,7 +1,0 @@
-{
-  "when": [
-    {
-      "libcd:mod_loaded": "<mod-id>"
-    }
-  ]
-}

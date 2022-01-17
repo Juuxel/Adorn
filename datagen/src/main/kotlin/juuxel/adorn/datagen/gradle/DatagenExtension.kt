@@ -32,10 +32,6 @@ abstract class DatagenExtension {
         stoneMaterials.add(StoneMaterial(Id.parse(id), brick, hasSidedTexture).also { config(MaterialDslImpl(it)) })
     }
 
-    fun libcdConditions() {
-        conditionType.set(ConditionType.LIBCD)
-    }
-
     fun fabricConditions() {
         conditionType.set(ConditionType.FABRIC)
     }

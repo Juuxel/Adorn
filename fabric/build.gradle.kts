@@ -16,7 +16,7 @@ loom {
 }
 
 datagen {
-    libcdConditions()
+    fabricConditions()
     wood("biomemakeover:blighted_balsa")
     wood("biomemakeover:swamp_cypress")
     wood("biomemakeover:willow")
@@ -177,7 +177,6 @@ dependencies {
     modApi("net.fabricmc:fabric-language-kotlin:${rootProject.property("fabric-kotlin")}")
 
     include(modImplementation("io.github.cottonmc:Jankson-Fabric:${rootProject.property("jankson-fabric")}")!!)
-    include(modImplementation("io.github.cottonmc:LibCD:${rootProject.property("libcd")}")!!)
 
     // Mod compat
     modCompileOnly("com.github.Virtuoel:Towelette:${rootProject.property("towelette")}")
