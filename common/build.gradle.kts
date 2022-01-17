@@ -45,14 +45,14 @@ datagen {
         replace {
             "side-texture" with "minecraft:block/cut_red_sandstone"
             "top-texture" with "minecraft:block/red_sandstone_top"
-            "bottom-texture" with "minecraft:block/red_sandstone_bottom"
+            "bottom-texture" with "minecraft:block/red_sandstone_top"
         }
     }
     stone("minecraft:cut_sandstone", hasSidedTexture = true) {
         replace {
             "side-texture" with "minecraft:block/cut_sandstone"
             "top-texture" with "minecraft:block/sandstone_top"
-            "bottom-texture" with "minecraft:block/sandstone_bottom"
+            "bottom-texture" with "minecraft:block/sandstone_top"
         }
     }
     stone("minecraft:dark_prismarine")

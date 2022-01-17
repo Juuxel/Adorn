@@ -3,6 +3,6 @@
   "textures": {
     "side": "minecraft:block/cut_sandstone",
     "up": "minecraft:block/sandstone_top",
-    "down": "minecraft:block/sandstone_bottom"
+    "down": "minecraft:block/sandstone_top"
   }
 }
