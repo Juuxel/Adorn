@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:shelf",
+  "pattern": [
+    "---",
+    "/ /"
+  ],
+  "key": {
+    "-": {
+      "item": "biomesoplenty:fir_slab"
+    },
+    "/": {
+      "tag": "c:wooden_rods"
+    }
+  },
+  "result": {
+    "item": "adorn:biomesoplenty/fir_shelf",
+    "count": 3
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
+}

@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "biomesoplenty:cherry_slab"
+    },
+    "P": {
+      "item": "adorn:biomesoplenty/cherry_post"
+    }
+  },
+  "result": {
+    "item": "adorn:biomesoplenty/cherry_platform",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
+}

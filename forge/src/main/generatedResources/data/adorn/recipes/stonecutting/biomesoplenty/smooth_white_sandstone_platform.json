@@ -1,0 +1,15 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "biomesoplenty:smooth_white_sandstone"
+  },
+  "result": "adorn:biomesoplenty/smooth_white_sandstone_platform",
+  "count": 1,
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
+}

@@ -1,0 +1,15 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "biomesoplenty:fir_planks"
+  },
+  "result": "adorn:biomesoplenty/fir_platform",
+  "count": 1,
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
+}

@@ -19,6 +19,75 @@ loom {
 
 datagen {
     forgeConditions()
+    wood("biomesoplenty:cherry")
+    wood("biomesoplenty:dead")
+    wood("biomesoplenty:fir")
+    wood("biomesoplenty:hellbark")
+    wood("biomesoplenty:jacaranda")
+    wood("biomesoplenty:magic")
+    wood("biomesoplenty:mahogany")
+    wood("biomesoplenty:palm")
+    wood("biomesoplenty:redwood")
+    wood("biomesoplenty:umbran")
+    wood("biomesoplenty:willow")
+    stone("biomesoplenty:black_sandstone", hasSidedTexture = true) {
+        replace {
+            "side-texture" with "biomesoplenty:block/black_sandstone"
+            "top-texture" with "biomesoplenty:block/black_sandstone_top"
+            "bottom-texture" with "biomesoplenty:block/black_sandstone_bottom"
+        }
+    }
+    stone("biomesoplenty:cut_black_sandstone", hasSidedTexture = true) {
+        replace {
+            "side-texture" with "biomesoplenty:block/cut_black_sandstone"
+            "top-texture" with "biomesoplenty:block/black_sandstone_top"
+            "bottom-texture" with "biomesoplenty:block/black_sandstone_top"
+        }
+    }
+    stone("biomesoplenty:cut_orange_sandstone", hasSidedTexture = true) {
+        replace {
+            "side-texture" with "biomesoplenty:block/cut_orange_sandstone"
+            "top-texture" with "biomesoplenty:block/orange_sandstone_top"
+            "bottom-texture" with "biomesoplenty:block/orange_sandstone_top"
+        }
+    }
+    stone("biomesoplenty:cut_white_sandstone", hasSidedTexture = true) {
+        replace {
+            "side-texture" with "biomesoplenty:block/cut_white_sandstone"
+            "top-texture" with "biomesoplenty:block/white_sandstone_top"
+            "bottom-texture" with "biomesoplenty:block/white_sandstone_top"
+        }
+    }
+    stone("biomesoplenty:mud_brick", brick = true)
+    stone("biomesoplenty:orange_sandstone", hasSidedTexture = true) {
+        replace {
+            "side-texture" with "biomesoplenty:block/orange_sandstone"
+            "top-texture" with "biomesoplenty:block/orange_sandstone_top"
+            "bottom-texture" with "biomesoplenty:block/orange_sandstone_bottom"
+        }
+    }
+    stone("biomesoplenty:smooth_black_sandstone") {
+        replace {
+            "main-texture" with "biomesoplenty:block/black_sandstone_top"
+        }
+    }
+    stone("biomesoplenty:smooth_orange_sandstone") {
+        replace {
+            "main-texture" with "biomesoplenty:block/orange_sandstone_top"
+        }
+    }
+    stone("biomesoplenty:smooth_white_sandstone") {
+        replace {
+            "main-texture" with "biomesoplenty:block/white_sandstone_top"
+        }
+    }
+    stone("biomesoplenty:white_sandstone", hasSidedTexture = true) {
+        replace {
+            "side-texture" with "biomesoplenty:block/white_sandstone"
+            "top-texture" with "biomesoplenty:block/white_sandstone_top"
+            "bottom-texture" with "biomesoplenty:block/white_sandstone_bottom"
+        }
+    }
     wood("byg:aspen")
     wood("byg:baobab")
     wood("byg:blue_enchanted")

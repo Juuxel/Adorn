@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/table_leg",
+  "textures": {
+    "log": "biomesoplenty:block/umbran_log"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:table",
+  "pattern": [
+    "SSS",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "S": {
+      "item": "biomesoplenty:umbran_slab"
+    },
+    "#": {
+      "tag": "c:wooden_rods"
+    }
+  },
+  "result": {
+    "item": "adorn:biomesoplenty/umbran_table",
+    "count": 3
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:block/templates/step_with_sides",
+  "textures": {
+    "side": "biomesoplenty:block/cut_white_sandstone",
+    "up": "biomesoplenty:block/white_sandstone_top",
+    "down": "biomesoplenty:block/white_sandstone_top"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/bench_top",
+  "textures": {
+    "planks": "biomesoplenty:block/mahogany_planks"
+  }
+}

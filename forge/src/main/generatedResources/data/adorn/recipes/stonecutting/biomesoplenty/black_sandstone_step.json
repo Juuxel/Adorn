@@ -1,0 +1,15 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "biomesoplenty:black_sandstone"
+  },
+  "result": "adorn:biomesoplenty/black_sandstone_step",
+  "count": 2,
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
+}

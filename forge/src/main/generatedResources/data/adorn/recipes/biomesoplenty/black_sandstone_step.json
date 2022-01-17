@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:step",
+  "pattern": [
+    "S",
+    "#"
+  ],
+  "key": {
+    "S": {
+      "item": "biomesoplenty:black_sandstone_slab"
+    },
+    "#": {
+      "tag": "c:stone_rods"
+    }
+  },
+  "result": {
+    "item": "adorn:biomesoplenty/black_sandstone_step",
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
+}

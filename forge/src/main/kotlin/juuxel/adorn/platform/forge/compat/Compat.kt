@@ -9,6 +9,7 @@ import net.minecraftforge.fml.ModList
 object Compat {
     fun init(modBus: IEventBus) {
         val mods = mapOf(
+            "biomesoplenty" to { CompatBlocks.addVariants(BiomesOPlentyCompat) },
             "byg" to { CompatBlocks.addVariants(BygCompat) },
         )
 

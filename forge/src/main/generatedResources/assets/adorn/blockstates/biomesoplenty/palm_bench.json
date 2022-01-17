@@ -1,0 +1,28 @@
+{
+  "multipart": [
+    {
+      "when": { "axis": "x" },
+      "apply": { "model": "adorn:block/biomesoplenty/palm_bench_top" }
+    },
+    {
+      "when": { "axis": "z" },
+      "apply": { "model": "adorn:block/biomesoplenty/palm_bench_top", "y": 90 }
+    },
+    {
+      "when": { "axis": "x", "connected_n": false },
+      "apply": { "model": "adorn:block/biomesoplenty/palm_bench_leg" }
+    },
+    {
+      "when": { "axis": "x", "connected_p": false },
+      "apply": { "model": "adorn:block/biomesoplenty/palm_bench_leg", "y": 180 }
+    },
+    {
+      "when": { "axis": "z", "connected_n": false },
+      "apply": { "model": "adorn:block/biomesoplenty/palm_bench_leg", "y": 90 }
+    },
+    {
+      "when": { "axis": "z", "connected_p": false },
+      "apply": { "model": "adorn:block/biomesoplenty/palm_bench_leg", "y": 270 }
+    }
+  ]
+}
