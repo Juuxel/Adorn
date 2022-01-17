@@ -3,19 +3,27 @@
   "values": [
     "adorn:crimson_chair",
     "adorn:warped_chair",
+    { "id": "adorn:biomesoplenty/hellbark_chair", "required": false },
     "adorn:crimson_drawer",
     "adorn:warped_drawer",
+    { "id": "adorn:biomesoplenty/hellbark_drawer", "required": false },
     "adorn:crimson_table",
     "adorn:warped_table",
+    { "id": "adorn:biomesoplenty/hellbark_table", "required": false },
     "adorn:crimson_bench",
     "adorn:warped_bench",
+    { "id": "adorn:biomesoplenty/hellbark_bench", "required": false },
     "adorn:crimson_post",
     "adorn:warped_post",
+    { "id": "adorn:biomesoplenty/hellbark_post", "required": false },
     "adorn:crimson_platform",
     "adorn:warped_platform",
+    { "id": "adorn:biomesoplenty/hellbark_platform", "required": false },
     "adorn:crimson_step",
     "adorn:warped_step",
+    { "id": "adorn:biomesoplenty/hellbark_step", "required": false },
     "adorn:crimson_shelf",
-    "adorn:warped_shelf"
+    "adorn:warped_shelf",
+    { "id": "adorn:biomesoplenty/hellbark_shelf", "required": false }
   ]
 }
