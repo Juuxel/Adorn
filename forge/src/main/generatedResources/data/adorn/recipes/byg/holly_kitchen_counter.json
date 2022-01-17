@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:kitchen_counter",
+  "pattern": [
+    "SS",
+    "PP"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:polished_andesite_slab"
+    },
+    "P": {
+      "item": "byg:holly_planks"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/holly_kitchen_counter",
+    "count": 3
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
+}

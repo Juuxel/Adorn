@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "byg:block/ebony_planks",
+    "log": "byg:block/ebony_log",
+    "end": "byg:block/ebony_log_top"
+  }
+}

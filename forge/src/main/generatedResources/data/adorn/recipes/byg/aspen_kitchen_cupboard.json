@@ -1,0 +1,26 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:kitchen_cupboard",
+  "ingredients": [
+    {
+      "tag": "c:wooden_chests"
+    },
+    {
+      "item": "adorn:byg/aspen_kitchen_counter"
+    },
+    {
+      "item": "adorn:byg/aspen_kitchen_counter"
+    }
+  ],
+  "result": {
+    "item": "adorn:byg/aspen_kitchen_cupboard",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
+}

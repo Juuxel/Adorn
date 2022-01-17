@@ -8,7 +8,9 @@ import net.minecraftforge.fml.ModList
 
 object Compat {
     fun init(modBus: IEventBus) {
-        val mods = mapOf<String, () -> Unit>()
+        val mods = mapOf(
+            "byg" to { CompatBlocks.addVariants(BygCompat) },
+        )
 
         for ((mod, fn) in mods) {
             ifModLoaded(mod, fn)

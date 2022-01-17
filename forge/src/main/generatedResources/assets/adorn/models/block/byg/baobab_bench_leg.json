@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/templates/bench_leg",
+  "textures": {
+    "log": "byg:block/baobab_log",
+    "end": "byg:block/baobab_log_top"
+  }
+}

@@ -40,6 +40,10 @@ abstract class DatagenExtension {
         conditionType.set(ConditionType.FABRIC)
     }
 
+    fun forgeConditions() {
+        conditionType.set(ConditionType.FORGE)
+    }
+
     interface MaterialDsl {
         fun exclude(generator: String)
         fun replace(block: TemplateDsl.() -> Unit)

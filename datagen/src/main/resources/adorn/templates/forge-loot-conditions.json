@@ -1,0 +1,7 @@
+,
+  "adorn:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "<mod-id>"
+    }
+  ]

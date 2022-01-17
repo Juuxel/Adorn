@@ -42,7 +42,6 @@ internal class Generator<in M : Material>(
             recipe("step"),
             stonecuttingRecipe("step"),
             recipeAdvancement("step"),
-            // TODO: Stonecutting recipes for these
         )
         val UNSIDED_COMMON_GENERATORS: List<Generator<BuildingMaterial>> = listOf(
             // Block models with sided variants

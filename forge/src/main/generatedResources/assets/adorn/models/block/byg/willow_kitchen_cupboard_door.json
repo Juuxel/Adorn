@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/kitchen_cupboard_door",
+  "textures": {
+    "planks": "byg:block/willow_planks"
+  }
+}

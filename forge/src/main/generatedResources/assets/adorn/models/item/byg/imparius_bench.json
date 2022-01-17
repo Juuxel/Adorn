@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "byg:block/imparius_planks",
+    "log": "byg:block/imparius_stem",
+    "end": "byg:block/imparius_stem_top"
+  }
+}
