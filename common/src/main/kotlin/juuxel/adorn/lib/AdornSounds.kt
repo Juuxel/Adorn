@@ -19,16 +19,16 @@ object AdornSounds {
     val CHAIN_LINK_FENCE: BlockSoundGroup = LazyBlockSoundGroup(
         1.0F,
         1.5F,
-        BLOCK_CHAIN_LINK_FENCE_BREAK,
-        BLOCK_CHAIN_LINK_FENCE_STEP,
-        BLOCK_CHAIN_LINK_FENCE_PLACE,
-        BLOCK_CHAIN_LINK_FENCE_HIT,
-        BLOCK_CHAIN_LINK_FENCE_FALL
+        BLOCK_CHAIN_LINK_FENCE_BREAK::get,
+        BLOCK_CHAIN_LINK_FENCE_STEP::get,
+        BLOCK_CHAIN_LINK_FENCE_PLACE::get,
+        BLOCK_CHAIN_LINK_FENCE_HIT::get,
+        BLOCK_CHAIN_LINK_FENCE_FALL::get
     )
 
     fun init() {}
 
-    private fun register(name: String): () -> SoundEvent =
+    private fun register(name: String): Registered<SoundEvent> =
         SOUNDS.register(name) { SoundEvent(AdornCommon.id(name)) }
 
     private class LazyBlockSoundGroup(

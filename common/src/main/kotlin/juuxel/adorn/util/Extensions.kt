@@ -84,7 +84,7 @@ fun Direction.Axis.getDirection(axisDirection: Direction.AxisDirection): Directi
 
 fun <K, V> Array<K>.associateLazily(mapper: (K) -> Registered<V>): Registered<Map<K, V>> {
     val pairs = map { it to mapper(it) }
-    val map = lazy { pairs.associate { (key, value) -> key to value.invoke() } }
+    val map = lazy { pairs.associate { (key, value) -> key to value.get() } }
     return Registered(map::value)
 }
 

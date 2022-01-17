@@ -348,7 +348,7 @@ object AdornBlocks {
         name: String, crossinline itemProvider: (T) -> Item, noinline block: () -> T
     ): Registered<T> {
         val registered = BLOCKS.register(name, block)
-        ITEMS.register(name) { itemProvider(registered()) }
+        ITEMS.register(name) { itemProvider(registered.get()) }
         return registered
     }
 
