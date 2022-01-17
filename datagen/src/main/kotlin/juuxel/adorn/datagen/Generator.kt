@@ -24,6 +24,7 @@ internal class Generator<in M : Material>(
             itemModel("platform"),
             blockLootTable("platform"),
             recipe("platform"),
+            stonecuttingRecipe("platform"),
             recipeAdvancement("platform"),
 
             // Posts
@@ -31,6 +32,7 @@ internal class Generator<in M : Material>(
             itemModel("post"),
             blockLootTable("post"),
             recipe("post"),
+            stonecuttingRecipe("post"),
             recipeAdvancement("post"),
 
             // Steps
@@ -38,6 +40,7 @@ internal class Generator<in M : Material>(
             itemModel("step"),
             blockLootTable("step"),
             recipe("step"),
+            stonecuttingRecipe("step"),
             recipeAdvancement("step"),
             // TODO: Stonecutting recipes for these
         )
@@ -193,6 +196,15 @@ internal class Generator<in M : Material>(
                 "recipes/$type",
                 "data/adorn/recipes/<mod-prefix><id.path>_$type.json",
                 "recipes/$type.json",
+                substitutionConfig = BASIC_SUBSTITUTION + substitutionConfig,
+                requiresCondition = true
+            )
+
+        private fun stonecuttingRecipe(type: String, substitutionConfig: TemplateMaterialConfig = EMPTY_SUBSTITUTION): Generator<Material> =
+            Generator(
+                "recipes/$type",
+                "data/adorn/recipes/stonecutting/<mod-prefix><id.path>_$type.json",
+                "recipes/stonecutting/$type.json",
                 substitutionConfig = BASIC_SUBSTITUTION + substitutionConfig,
                 requiresCondition = true
             )

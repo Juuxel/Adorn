@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": {
-    "item": "minecraft:cut_sandstone"
-  },
-  "result": "adorn:cut_sandstone_platform",
-  "count": 1
-}

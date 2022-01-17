@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "minecraft:dark_prismarine"
+  },
+  "result": "adorn:dark_prismarine_step",
+  "count": 2
+}

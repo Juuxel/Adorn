@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "<planks>"
+  },
+  "result": "adorn:<mod-prefix><id.path>_step",
+  "count": 2<recipe-condition>
+}

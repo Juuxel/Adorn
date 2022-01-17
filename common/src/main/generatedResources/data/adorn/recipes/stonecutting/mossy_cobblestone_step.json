@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "minecraft:mossy_cobblestone"
+  },
+  "result": "adorn:mossy_cobblestone_step",
+  "count": 2
+}
