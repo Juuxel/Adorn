@@ -33,8 +33,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 final class EventsImplementedInJava {
     void register(IEventBus modBus, IEventBus forgeBus) {
         register(AdornSounds.SOUNDS, modBus);
-        register(AdornBlocks.BLOCKS, modBus);
-        register(AdornBlocks.ITEMS, modBus);
+        register(AdornBlocks.INSTANCE.getBlocks(), modBus);
+        register(AdornBlocks.INSTANCE.getItems(), modBus);
         register(AdornItems.ITEMS, modBus);
         AdornMenus.INSTANCE.init();
         register(MenuBridgeImpl.MENUS, modBus);

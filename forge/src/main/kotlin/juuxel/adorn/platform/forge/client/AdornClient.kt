@@ -27,6 +27,7 @@ object AdornClient {
         ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory::class.java) {
             ConfigGuiHandler.ConfigGuiFactory { _, parent -> MainConfigScreen(parent) }
         }
+        ClientCompatInit.init(MOD_BUS)
     }
 
     private fun setup(event: FMLClientSetupEvent) {

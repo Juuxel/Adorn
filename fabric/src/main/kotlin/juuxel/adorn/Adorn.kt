@@ -2,6 +2,7 @@ package juuxel.adorn
 
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
+import juuxel.adorn.client.ClientCompatInit
 import juuxel.adorn.compat.Compat
 import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.entity.AdornEntities
@@ -52,5 +53,6 @@ object Adorn : ModInitializer {
         AdornMenusFabric.initClient()
         AdornNetworking.initClient()
         AdornResources.initClient()
+        ClientCompatInit.init()
     }
 }

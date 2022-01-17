@@ -6,18 +6,20 @@ import net.fabricmc.loader.api.FabricLoader
 object Compat {
     fun init() {
         val mods = mapOf(
-            "byg" to BygCompat::init,
-            "terrestria" to TerrestriaCompat::init,
+            "byg" to { CompatBlocks.addVariants(BygCompat) },
+            "terrestria" to { CompatBlocks.addVariants(TerrestriaCompat) },
             "towelette" to ToweletteCompat::init,
-            "traverse" to TraverseCompat::init,
-            "woods_and_mires" to WamCompat::init,
-            "biomemakeover" to BiomeMakeoverCompat::init,
-            "cinderscapes" to CinderscapesCompat::init,
+            "traverse" to { CompatBlocks.addVariants(TraverseCompat) },
+            "woods_and_mires" to { CompatBlocks.addVariants(WamCompat) },
+            "biomemakeover" to { CompatBlocks.addVariants(BiomeMakeoverCompat) },
+            "cinderscapes" to { CompatBlocks.addVariants(CinderscapesCompat) },
         )
 
         for ((mod, fn) in mods) {
             ifModLoaded(mod, fn)
         }
+
+        CompatBlocks.register()
     }
 
     fun isCompatEnabled(mod: String): Boolean {

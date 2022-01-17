@@ -5,6 +5,7 @@ import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.forge.client.AdornClient
+import juuxel.adorn.platform.forge.compat.Compat
 import juuxel.adorn.platform.forge.networking.AdornNetworking
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.fml.DistExecutor
@@ -20,10 +21,10 @@ object Adorn {
         PlatformBridges.configManager.init()
         MOD_BUS.addListener(this::init)
         EventsImplementedInJava().register(MOD_BUS, FORGE_BUS)
-        DistExecutor.safeRunWhenOn(Dist.CLIENT) { SafeRunnable(AdornClient::init) }
         AdornNetworking.init()
         AdornCriteria.init()
-        // TODO: Compat.init(MOD_BUS)
+        Compat.init(MOD_BUS)
+        DistExecutor.safeRunWhenOn(Dist.CLIENT) { SafeRunnable(AdornClient::init) }
     }
 
     private fun init(event: FMLCommonSetupEvent) {

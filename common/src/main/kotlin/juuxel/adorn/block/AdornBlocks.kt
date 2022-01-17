@@ -1,11 +1,11 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
-import juuxel.adorn.item.BaseBlockItem
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
 import juuxel.adorn.lib.AdornSounds
 import juuxel.adorn.lib.Registered
+import juuxel.adorn.lib.RegistryHelper
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.associateLazily
 import juuxel.adorn.util.copySettingsSafely
@@ -14,25 +14,14 @@ import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.TorchBlock
 import net.minecraft.block.WallTorchBlock
-import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
-import net.minecraft.item.ItemStack
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.sound.BlockSoundGroup
-import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.DyeColor
-import net.minecraft.util.Formatting
-import net.minecraft.world.World
 
 @Suppress("UNUSED", "MemberVisibilityCanBePrivate")
-object AdornBlocks {
-    @JvmField
-    val BLOCKS = PlatformBridges.registrarFactory.block()
-    @JvmField
-    val ITEMS = PlatformBridges.registrarFactory.item()
-
+object AdornBlocks : RegistryHelper() {
     val SOFAS: Map<DyeColor, SofaBlock> by DyeColor.values().associateLazily {
         // This is one place where the BlockVariant mapping is kept.
         // I will not write out sixteen sofa registrations.
@@ -324,57 +313,6 @@ object AdornBlocks {
 
     fun init() {
     }
-
-    /**
-     * Registers a [block] with the [name] and an item in the [itemGroup].
-     */
-    private fun <T : Block> registerBlock(
-        name: String, itemGroup: ItemGroup = ItemGroup.DECORATIONS, block: () -> T
-    ): Registered<T> =
-        registerBlock(name, itemSettings = { Item.Settings().group(itemGroup) }, block)
-
-    /**
-     * Registers a [block] with the [name] and the [itemSettings].
-     */
-    private inline fun <T : Block> registerBlock(
-        name: String, crossinline itemSettings: () -> Item.Settings, noinline block: () -> T
-    ): Registered<T> =
-        registerBlock(name, itemProvider = { makeItemForBlock(it, itemSettings()) }, block)
-
-    /**
-     * Registers a [block] with the [name] and an item created by the [itemProvider].
-     */
-    private inline fun <T : Block> registerBlock(
-        name: String, crossinline itemProvider: (T) -> Item, noinline block: () -> T
-    ): Registered<T> {
-        val registered = BLOCKS.register(name, block)
-        ITEMS.register(name) { itemProvider(registered.get()) }
-        return registered
-    }
-
-    /**
-     * Registers a [block] with the [name] and without an item.
-     */
-    private fun <T : Block> registerBlockWithoutItem(name: String, block: () -> T): Registered<T> =
-        BLOCKS.register(name, block)
-
-    private fun makeItemForBlock(block: Block, itemSettings: Item.Settings): Item =
-        if (block is BlockWithDescription) {
-            object : BaseBlockItem(block, itemSettings) {
-                override fun appendTooltip(
-                    stack: ItemStack?, world: World?, texts: MutableList<Text>, context: TooltipContext?
-                ) {
-                    super.appendTooltip(stack, world, texts, context)
-                    texts.add(
-                        TranslatableText(block.descriptionKey).styled {
-                            it.withItalic(true).withColor(Formatting.DARK_GRAY)
-                        }
-                    )
-                }
-            }
-        } else {
-            BaseBlockItem(block, itemSettings)
-        }
 
     private fun registerCrate(name: String): Registered<Block> =
         registerBlock(
