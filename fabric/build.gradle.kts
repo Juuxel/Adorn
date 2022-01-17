@@ -28,7 +28,11 @@ datagen {
     wood("byg:cika")
     wood("byg:cypress")
     wood("byg:ebony")
-    wood("byg:embur")
+    wood("byg:embur") {
+        replace {
+            "log" withId "byg:embur_pedu"
+        }
+    }
     wood("byg:ether")
     wood("byg:fir")
     wood("byg:green_enchanted")
@@ -48,6 +52,39 @@ datagen {
     wood("byg:willow")
     wood("byg:witch_hazel")
     wood("byg:zelkova")
+    // TODO: Imparius
+    stone("byg:dacite")
+    stone("byg:dacite_brick", brick = true)
+    stone("byg:dacite_cobblestone")
+    stone("byg:mossy_stone")
+    stone("byg:rocky_stone")
+    stone("byg:scoria_stone", hasSidedTexture = true) {
+        replace {
+            "top-texture" with "byg:block/scoria_stone_top"
+            "bottom-texture" with "byg:block/scoria_stone_top"
+            "side-texture" with "byg:block/scoria_stone"
+        }
+    }
+    stone("byg:scoria_cobblestone")
+    stone("byg:scoria_stonebrick", brick = true) {
+        replace {
+            "main-texture" with "byg:block/scoria_stone_bricks"
+        }
+    }
+    stone("byg:soapstone")
+    stone("byg:polished_soapstone") {
+        replace {
+            "main-texture" with "byg:block/soapstone_polished"
+        }
+    }
+    stone("byg:soapstone_brick", brick = true)
+    stone("byg:soapstone_tile")
+    stone("byg:red_rock")
+    stone("byg:red_rock_brick", brick = true)
+    stone("byg:mossy_red_rock_brick", brick = true)
+    stone("byg:cracked_red_rock_brick", brick = true)
+    stone("byg:chiseled_red_rock_brick", brick = true)
+    // TODO: Stones declared in #walls
     wood("cinderscapes:scorched", fungus = true)
     wood("cinderscapes:umbral", fungus = true)
     wood("terrestria:cypress")

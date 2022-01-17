@@ -10,7 +10,10 @@ data class Id(val namespace: String, val path: String) : Serializable {
 
     companion object {
         fun parse(id: String): Id {
-            val (ns, path) = id.split(":")
+            require(':' in id) { "Id '$id' does not contain colon (:)!" }
+            val parts = id.split(":")
+            require(parts.size == 2) { "Id '$id' must consist of exactly two parts! Found: ${parts.size}" }
+            val (ns, path) = parts
             return Id(ns, path)
         }
     }

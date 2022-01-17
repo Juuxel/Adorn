@@ -32,7 +32,7 @@ abstract class GenerateData : DefaultTask() {
     abstract val colorMaterials: SetProperty<ColorMaterial>
 
     @get:Input
-    abstract val allMaterials: SetProperty<Id>
+    abstract val allMaterials: SetProperty<String>
 
     @get:Input
     abstract val conditionType: Property<ConditionType>
@@ -51,17 +51,17 @@ abstract class GenerateData : DefaultTask() {
             woodMaterials.flatMap { woods ->
                 stoneMaterials.flatMap { stones ->
                     colorMaterials.map { colors ->
-                        HashSet<Id>().apply {
+                        HashSet<String>().apply {
                             for (wood in woods) {
-                                add(wood.id)
+                                add(wood.snowflake)
                             }
 
                             for (stone in stones) {
-                                add(stone.id)
+                                add(stone.snowflake)
                             }
 
                             for (color in colors) {
-                                add(color.id)
+                                add(color.snowflake)
                             }
                         }
                     }

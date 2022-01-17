@@ -4,6 +4,11 @@ interface Material {
     /** A unique ID for this material. */
     val id: Id
     val stick: Id
+    /**
+     * A unique snowflake string containing all data for this material.
+     * Used for up-to-date checks in [GenerateData][juuxel.adorn.datagen.gradle.GenerateData].
+     */
+    val snowflake: String
 
     fun isModded(): Boolean =
         id.namespace != "minecraft"
@@ -30,6 +35,8 @@ class WoodMaterial(override val id: Id, private val fungus: Boolean) : BuildingM
         if (fungus) id.suffixed("stem")
         else id.suffixed("log")
 
+    override val snowflake = "wood/$id/fungus=$fungus"
+
     override fun TemplateDsl.appendTemplates() {
         "main-texture" with "<planks.namespace>:block/<planks.path>"
         "planks" with planks
@@ -44,6 +51,7 @@ class StoneMaterial(override val id: Id, private val bricks: Boolean, val hasSid
         if (bricks) id.rawSuffixed("s") // brick => bricks
         else id
     override val stick = Material.STONE_ROD
+    override val snowflake = "stone/$id/bricks=$bricks/hasSidedTexture=$hasSidedTexture"
 
     override fun TemplateDsl.appendTemplates() {
         "main-texture" with "<planks.namespace>:block/<planks.path>"
@@ -73,6 +81,7 @@ enum class ColorMaterial(private val color: String) : Material {
     override val id = Id("minecraft", color)
     override val stick = Material.STICK
     val wool = id.suffixed("wool")
+    override val snowflake = "wool/$id"
 
     override fun TemplateDsl.appendTemplates() {
         "wool" with wool
