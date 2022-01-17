@@ -59,6 +59,15 @@ object AdornBlocks {
     val CRIMSON_TABLE: Block by registerBlock("crimson_table", ::TableBlockItem) { TableBlock(BlockVariant.CRIMSON) }
     val WARPED_TABLE: Block by registerBlock("warped_table", ::TableBlockItem) { TableBlock(BlockVariant.WARPED) }
 
+    val OAK_DRAWER: Block by registerBlock("oak_drawer") { DrawerBlock(BlockVariant.OAK) }
+    val SPRUCE_DRAWER: Block by registerBlock("spruce_drawer") { DrawerBlock(BlockVariant.SPRUCE) }
+    val BIRCH_DRAWER: Block by registerBlock("birch_drawer") { DrawerBlock(BlockVariant.BIRCH) }
+    val JUNGLE_DRAWER: Block by registerBlock("jungle_drawer") { DrawerBlock(BlockVariant.JUNGLE) }
+    val ACACIA_DRAWER: Block by registerBlock("acacia_drawer") { DrawerBlock(BlockVariant.ACACIA) }
+    val DARK_OAK_DRAWER: Block by registerBlock("dark_oak_drawer") { DrawerBlock(BlockVariant.DARK_OAK) }
+    val CRIMSON_DRAWER: Block by registerBlock("crimson_drawer") { DrawerBlock(BlockVariant.CRIMSON) }
+    val WARPED_DRAWER: Block by registerBlock("warped_drawer") { DrawerBlock(BlockVariant.WARPED) }
+
     val OAK_KITCHEN_COUNTER: Block by registerBlock("oak_kitchen_counter") { KitchenCounterBlock(BlockVariant.OAK) }
     val SPRUCE_KITCHEN_COUNTER: Block by registerBlock("spruce_kitchen_counter") { KitchenCounterBlock(BlockVariant.SPRUCE) }
     val BIRCH_KITCHEN_COUNTER: Block by registerBlock("birch_kitchen_counter") { KitchenCounterBlock(BlockVariant.BIRCH) }
@@ -77,14 +86,14 @@ object AdornBlocks {
     val CRIMSON_KITCHEN_CUPBOARD: Block by registerBlock("crimson_kitchen_cupboard") { KitchenCupboardBlock(BlockVariant.CRIMSON) }
     val WARPED_KITCHEN_CUPBOARD: Block by registerBlock("warped_kitchen_cupboard") { KitchenCupboardBlock(BlockVariant.WARPED) }
 
-    val OAK_DRAWER: Block by registerBlock("oak_drawer") { DrawerBlock(BlockVariant.OAK) }
-    val SPRUCE_DRAWER: Block by registerBlock("spruce_drawer") { DrawerBlock(BlockVariant.SPRUCE) }
-    val BIRCH_DRAWER: Block by registerBlock("birch_drawer") { DrawerBlock(BlockVariant.BIRCH) }
-    val JUNGLE_DRAWER: Block by registerBlock("jungle_drawer") { DrawerBlock(BlockVariant.JUNGLE) }
-    val ACACIA_DRAWER: Block by registerBlock("acacia_drawer") { DrawerBlock(BlockVariant.ACACIA) }
-    val DARK_OAK_DRAWER: Block by registerBlock("dark_oak_drawer") { DrawerBlock(BlockVariant.DARK_OAK) }
-    val CRIMSON_DRAWER: Block by registerBlock("crimson_drawer") { DrawerBlock(BlockVariant.CRIMSON) }
-    val WARPED_DRAWER: Block by registerBlock("warped_drawer") { DrawerBlock(BlockVariant.WARPED) }
+    val OAK_KITCHEN_SINK: Block by registerBlock("oak_kitchen_sink") { KitchenSinkBlock(BlockVariant.OAK) }
+    val SPRUCE_KITCHEN_SINK: Block by registerBlock("spruce_kitchen_sink") { KitchenSinkBlock(BlockVariant.SPRUCE) }
+    val BIRCH_KITCHEN_SINK: Block by registerBlock("birch_kitchen_sink") { KitchenSinkBlock(BlockVariant.BIRCH) }
+    val JUNGLE_KITCHEN_SINK: Block by registerBlock("jungle_kitchen_sink") { KitchenSinkBlock(BlockVariant.JUNGLE) }
+    val ACACIA_KITCHEN_SINK: Block by registerBlock("acacia_kitchen_sink") { KitchenSinkBlock(BlockVariant.ACACIA) }
+    val DARK_OAK_KITCHEN_SINK: Block by registerBlock("dark_oak_kitchen_sink") { KitchenSinkBlock(BlockVariant.DARK_OAK) }
+    val CRIMSON_KITCHEN_SINK: Block by registerBlock("crimson_kitchen_sink") { KitchenSinkBlock(BlockVariant.CRIMSON) }
+    val WARPED_KITCHEN_SINK: Block by registerBlock("warped_kitchen_sink") { KitchenSinkBlock(BlockVariant.WARPED) }
 
     val OAK_POST: Block by registerBlock("oak_post") { PostBlock(BlockVariant.OAK) }
     val SPRUCE_POST: Block by registerBlock("spruce_post") { PostBlock(BlockVariant.SPRUCE) }
@@ -234,15 +243,6 @@ object AdornBlocks {
             false, AbstractBlock.Settings.copy(Blocks.PRISMARINE).ticksRandomly()
         )
     }
-
-    val OAK_KITCHEN_SINK: Block by registerBlock("oak_kitchen_sink") { KitchenSinkBlock(BlockVariant.OAK) }
-    val SPRUCE_KITCHEN_SINK: Block by registerBlock("spruce_kitchen_sink") { KitchenSinkBlock(BlockVariant.SPRUCE) }
-    val BIRCH_KITCHEN_SINK: Block by registerBlock("birch_kitchen_sink") { KitchenSinkBlock(BlockVariant.BIRCH) }
-    val JUNGLE_KITCHEN_SINK: Block by registerBlock("jungle_kitchen_sink") { KitchenSinkBlock(BlockVariant.JUNGLE) }
-    val ACACIA_KITCHEN_SINK: Block by registerBlock("acacia_kitchen_sink") { KitchenSinkBlock(BlockVariant.ACACIA) }
-    val DARK_OAK_KITCHEN_SINK: Block by registerBlock("dark_oak_kitchen_sink") { KitchenSinkBlock(BlockVariant.DARK_OAK) }
-    val CRIMSON_KITCHEN_SINK: Block by registerBlock("crimson_kitchen_sink") { KitchenSinkBlock(BlockVariant.CRIMSON) }
-    val WARPED_KITCHEN_SINK: Block by registerBlock("warped_kitchen_sink") { KitchenSinkBlock(BlockVariant.WARPED) }
 
     val OAK_COFFEE_TABLE: Block by registerBlock("oak_coffee_table") { CoffeeTableBlock(BlockVariant.OAK) }
     val SPRUCE_COFFEE_TABLE: Block by registerBlock("spruce_coffee_table") { CoffeeTableBlock(BlockVariant.SPRUCE) }
