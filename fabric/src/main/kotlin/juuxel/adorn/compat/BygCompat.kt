@@ -20,6 +20,7 @@ object BygCompat {
             "fir",
             "green_enchanted",
             "holly",
+            "imparius",
             "jacaranda",
             "lament",
             "mahogany",

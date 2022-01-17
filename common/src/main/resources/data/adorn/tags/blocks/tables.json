@@ -33,6 +33,7 @@
     { "id": "adorn:byg/fir_table", "required": false },
     { "id": "adorn:byg/green_enchanted_table", "required": false },
     { "id": "adorn:byg/holly_table", "required": false },
+    { "id": "adorn:byg/imparius_table", "required": false },
     { "id": "adorn:byg/jacaranda_table", "required": false },
     { "id": "adorn:byg/lament_table", "required": false },
     { "id": "adorn:byg/mahogany_table", "required": false },

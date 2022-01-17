@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "byg:imparius_planks"
+  },
+  "result": "adorn:byg/imparius_step",
+  "count": 2
+}

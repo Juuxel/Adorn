@@ -37,6 +37,7 @@ datagen {
     wood("byg:fir")
     wood("byg:green_enchanted")
     wood("byg:holly")
+    wood("byg:imparius", fungus = true)
     wood("byg:jacaranda")
     wood("byg:lament")
     wood("byg:mahogany")
@@ -52,7 +53,6 @@ datagen {
     wood("byg:willow")
     wood("byg:witch_hazel")
     wood("byg:zelkova")
-    // TODO: Imparius
     stone("byg:dacite")
     stone("byg:dacite_brick", brick = true)
     stone("byg:dacite_cobblestone")
