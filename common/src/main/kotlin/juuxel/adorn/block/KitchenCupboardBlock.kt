@@ -2,6 +2,7 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
+import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.block.entity.SimpleContainerBlockEntity
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.platform.PlatformBridges
@@ -13,7 +14,6 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
-import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.ActionResult
@@ -28,17 +28,16 @@ class KitchenCupboardBlock(variant: BlockVariant) : AbstractKitchenCounterBlock(
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): ActionResult {
-        PlatformBridges.menus.open(player, state.createScreenHandlerFactory(world, pos), pos)
+        if (world.isClient) return ActionResult.SUCCESS
 
-        if (!world.isClient) {
+        val blockEntity = world.getBlockEntity(pos)
+        if (blockEntity is KitchenCupboardBlockEntity) {
+            PlatformBridges.menus.open(player, blockEntity, pos)
             player.incrementStat(AdornStats.OPEN_KITCHEN_CUPBOARD)
         }
 
-        return ActionResult.SUCCESS
+        return ActionResult.CONSUME
     }
-
-    override fun createScreenHandlerFactory(state: BlockState, world: World, pos: BlockPos) =
-        world.getBlockEntity(pos) as? NamedScreenHandlerFactory
 
     override fun onStateReplaced(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
         if (state1.block != state2.block) {

@@ -2,6 +2,7 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
+import juuxel.adorn.block.entity.DrawerBlockEntity
 import juuxel.adorn.block.entity.SimpleContainerBlockEntity
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.platform.PlatformBridges
@@ -40,13 +41,15 @@ class DrawerBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.create
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): ActionResult {
-        PlatformBridges.menus.open(player, state.createScreenHandlerFactory(world, pos), pos)
+        if (world.isClient) return ActionResult.SUCCESS
 
-        if (!world.isClient) {
+        val blockEntity = world.getBlockEntity(pos)
+        if (blockEntity is DrawerBlockEntity) {
+            PlatformBridges.menus.open(player, blockEntity, pos)
             player.incrementStat(AdornStats.OPEN_DRAWER)
         }
 
-        return ActionResult.SUCCESS
+        return ActionResult.CONSUME
     }
 
     override fun onStateReplaced(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
