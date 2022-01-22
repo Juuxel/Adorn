@@ -55,13 +55,15 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult?
     ): ActionResult {
+        if (world.isClient) return ActionResult.SUCCESS
+
         val be = world.getBlockEntity(pos)
         if (be is TradingStationBlockEntity) {
-            if (!world.isClient && be.owner == null) {
+            if (be.owner == null) {
                 be.setOwner(player)
             }
 
-            if (!world.isClient && !be.isOwner(player)) {
+            if (!be.isOwner(player)) {
                 val handStack = player.getStackInHand(hand)
                 val trade = be.trade
                 val validPayment = handStack.isItemEqual(trade.price) &&
@@ -88,15 +90,12 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
                     }
                 }
             } else {
-                player.openHandledScreen(state.createScreenHandlerFactory(world, pos))
-
-                if (!world.isClient) {
-                    player.incrementStat(AdornStats.INTERACT_WITH_TRADING_STATION)
-                }
+                player.openHandledScreen(be)
+                player.incrementStat(AdornStats.INTERACT_WITH_TRADING_STATION)
             }
         }
 
-        return ActionResult.SUCCESS
+        return ActionResult.CONSUME
     }
 
     override fun onStateReplaced(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
