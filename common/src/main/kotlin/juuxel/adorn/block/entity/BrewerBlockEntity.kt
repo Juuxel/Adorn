@@ -61,16 +61,24 @@ open class BrewerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBl
         }
     }
 
-    // TODO: Capabilities?????
+    override fun isValid(slot: Int, stack: ItemStack): Boolean =
+        slot != INPUT_SLOT || (stack.isOf(AdornItems.MUG) && getStack(slot).isEmpty)
+
     override fun canInsert(slot: Int, stack: ItemStack, side: Direction?) =
-        side != Direction.DOWN && (side != Direction.UP || stack.isOf(AdornItems.MUG))
+        side != Direction.DOWN && isValid(slot, stack)
 
     override fun canExtract(slot: Int, stack: ItemStack, side: Direction) =
         side == Direction.DOWN
 
     fun calculateComparatorOutput(): Int {
+        // If brewing has finished
+        val mugStack = getStack(INPUT_SLOT)
+        if (!mugStack.isEmpty && !mugStack.isOf(AdornItems.MUG)) {
+            return 15
+        }
+
         val progressFraction = progress.toFloat() / MAX_PROGRESS
-        val level = progressFraction * 15
+        val level = progressFraction * 14
         return MathHelper.ceil(level)
     }
 
