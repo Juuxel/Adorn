@@ -1,0 +1,9 @@
+{
+  "type": "adorn:brewing",
+  "first_ingredient": {
+    "tag": "c:sweet_berries"
+  },
+  "result": {
+    "item": "adorn:sweet_berry_juice"
+  }
+}

@@ -89,36 +89,34 @@ open class BrewerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBl
                 world.setBlockState(pos, state.with(BrewerBlock.HAS_MUG, hasMug))
             }
 
-            if (!brewer.getStack(LEFT_INGREDIENT_SLOT).isEmpty && !brewer.getStack(RIGHT_INGREDIENT_SLOT).isEmpty) {
-                val recipe: BrewingRecipe? = world.recipeManager.getFirstMatch(AdornRecipes.BREWING_TYPE, brewer, world).orElse(null)
+            val recipe: BrewingRecipe? = world.recipeManager.getFirstMatch(AdornRecipes.BREWING_TYPE, brewer, world).orElse(null)
 
-                fun decrementIngredient(slot: Int) {
-                    val stack = brewer.getStack(slot)
-                    val remainder = stack.item.recipeRemainder
-                    stack.decrement(1)
+            fun decrementIngredient(slot: Int) {
+                val stack = brewer.getStack(slot)
+                val remainder = stack.item.recipeRemainder
+                stack.decrement(1)
 
-                    if (remainder != null) {
-                        if (stack.isEmpty) {
-                            brewer.setStack(slot, ItemStack(remainder))
-                        } else {
-                            ItemScatterer.spawn(world, pos.x + 0.5, pos.y + 0.5, pos.z + 0.5, ItemStack(remainder))
-                        }
+                if (remainder != null) {
+                    if (stack.isEmpty) {
+                        brewer.setStack(slot, ItemStack(remainder))
+                    } else {
+                        ItemScatterer.spawn(world, pos.x + 0.5, pos.y + 0.5, pos.z + 0.5, ItemStack(remainder))
                     }
                 }
+            }
 
-                if (recipe != null && brewer.getStack(INPUT_SLOT).isOf(AdornItems.MUG)) {
-                    if (brewer.progress++ >= MAX_PROGRESS) {
-                        decrementIngredient(LEFT_INGREDIENT_SLOT)
-                        decrementIngredient(RIGHT_INGREDIENT_SLOT)
-                        brewer.setStack(INPUT_SLOT, recipe.output.copy())
-                    }
+            if (recipe != null && brewer.getStack(INPUT_SLOT).isOf(AdornItems.MUG)) {
+                if (brewer.progress++ >= MAX_PROGRESS) {
+                    decrementIngredient(LEFT_INGREDIENT_SLOT)
+                    decrementIngredient(RIGHT_INGREDIENT_SLOT)
+                    brewer.setStack(INPUT_SLOT, recipe.output.copy())
+                }
 
+                dirty = true
+            } else {
+                if (brewer.progress != 0) {
+                    brewer.progress = 0
                     dirty = true
-                } else {
-                    if (brewer.progress != 0) {
-                        brewer.progress = 0
-                        dirty = true
-                    }
                 }
             }
 

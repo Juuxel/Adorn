@@ -13,12 +13,15 @@ object AdornItems {
     @JvmField
     val ITEMS: Registrar<Item> = PlatformBridges.registrarFactory.item()
     val GROUP = PlatformBridges.items.createAdornItemGroup()
-    private val HOT_CHOCOLATE_FOOD_COMPONENT = FoodComponent.Builder().hunger(2).saturationModifier(0.1F).alwaysEdible().build()
+    private val DRINK_FOOD_COMPONENT = FoodComponent.Builder().hunger(2).saturationModifier(0.1F).alwaysEdible().build()
 
     val STONE_ROD by ITEMS.register("stone_rod") { ItemWithDescription(Item.Settings().group(ItemGroup.MISC)) }
-    val MUG by ITEMS.register("mug") { Item(Item.Settings().group(ItemGroup.FOOD)) }
+    val MUG by ITEMS.register("mug") { SimpleAdornItem(Item.Settings().group(ItemGroup.FOOD)) }
     val HOT_CHOCOLATE by ITEMS.register("hot_chocolate") {
-        HotChocolateItem(Item.Settings().group(ItemGroup.FOOD).food(HOT_CHOCOLATE_FOOD_COMPONENT).maxCount(1))
+        DrinkInMugItem(Item.Settings().group(ItemGroup.FOOD).food(DRINK_FOOD_COMPONENT).maxCount(1))
+    }
+    val SWEET_BERRY_JUICE by ITEMS.register("sweet_berry_juice") {
+        DrinkInMugItem(Item.Settings().group(ItemGroup.FOOD).food(DRINK_FOOD_COMPONENT).maxCount(1))
     }
 
     val STONE_TORCH by ITEMS.register("stone_torch") {
