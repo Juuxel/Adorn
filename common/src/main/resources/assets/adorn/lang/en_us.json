@@ -1181,5 +1181,7 @@
 
   "itemGroup.adorn.items": "Adorn",
 
-  "text.adorn.item_stack_with_count": "%sx %s"
+  "text.adorn.item_stack_with_count": "%sx %s",
+
+  "category.adorn.brewer": "Brewer"
 }
