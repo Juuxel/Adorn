@@ -1,0 +1,48 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "front": "adorn:block/brewer_front",
+    "back": "adorn:block/brewer_back",
+    "side": "adorn:block/brewer_side",
+    "bottom": "adorn:block/brewer_bottom_top",
+    "top": "adorn:block/brewer_bottom_top",
+    "grating": "adorn:block/brewer_grating",
+    "particle": "adorn:block/brewer_back"
+  },
+  "elements": [
+    {
+      "from": [4, 0, 2],
+      "to": [12, 2, 12],
+      "faces": {
+        "north": { "texture": "#front", "uv": [4, 14, 12, 16] },
+        "east": { "texture": "#side", "uv": [2, 14, 12, 16] },
+        "south": { "texture": "#back", "uv": [4, 14, 12, 16] },
+        "west": { "texture": "#side", "uv": [2, 14, 12, 16] },
+        "up": { "texture": "#grating", "uv": [4, 2, 12, 12] },
+        "down": { "texture": "#bottom", "cullface": "down", "uv": [4, 2, 12, 12] }
+      }
+    },
+    {
+      "from": [4, 2, 8],
+      "to": [12, 8, 12],
+      "faces": {
+        "north": { "texture": "#front", "uv": [4, 8, 12, 14] },
+        "east": { "texture": "#side", "uv": [8, 8, 12, 14] },
+        "south": { "texture": "#back", "uv": [4, 8, 12, 14] },
+        "west": { "texture": "#side", "uv": [8, 8, 12, 14] }
+      }
+    },
+    {
+      "from": [4, 8, 2],
+      "to": [12, 14, 12],
+      "faces": {
+        "north": { "texture": "#front", "uv": [4, 3, 12, 8] },
+        "east": { "texture": "#side", "uv": [2, 3, 12, 8] },
+        "south": { "texture": "#back", "uv": [4, 3, 12, 8] },
+        "west": { "texture": "#side", "uv": [2, 3, 12, 8] },
+        "up": { "texture": "#top", "uv": [4, 2, 12, 12] },
+        "down": { "texture": "#bottom", "uv": [4, 2, 12, 12] }
+      }
+    }
+  ]
+}

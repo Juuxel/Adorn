@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "II",
+    "MI",
+    "II"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "M": {
+      "item": "adorn:mug"
+    }
+  },
+  "result": {
+    "item": "adorn:brewer",
+    "count": 1
+  }
+}

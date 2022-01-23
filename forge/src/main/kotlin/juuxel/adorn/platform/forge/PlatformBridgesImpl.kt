@@ -8,6 +8,7 @@ import net.minecraft.block.Block
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
+import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.sound.SoundEvent
 import net.minecraftforge.registries.ForgeRegistries
@@ -16,6 +17,7 @@ fun PlatformBridges.Companion.get(): PlatformBridges =
     PlatformBridgesImpl
 
 private object PlatformBridgesImpl : PlatformBridges {
+    override val blockEntities = BlockEntityBridgeForge
     override val blockFactory = BlockFactoryImpl
     override val criteria = CriterionBridgeImpl
     override val configManager = ConfigManagerImpl
@@ -30,6 +32,7 @@ private object PlatformBridgesImpl : PlatformBridges {
         override fun entity(): Registrar<EntityType<*>> = RegistrarImpl(ForgeRegistries.ENTITIES)
         override fun menu(): Registrar<ScreenHandlerType<*>> = RegistrarImpl(ForgeRegistries.CONTAINERS)
         override fun soundEvent(): Registrar<SoundEvent> = RegistrarImpl(ForgeRegistries.SOUND_EVENTS)
+        override fun recipeSerializer(): Registrar<RecipeSerializer<*>> = RegistrarImpl(ForgeRegistries.RECIPE_SERIALIZERS)
     }
     override val resources = ResourceBridgeImpl
     override val tags = TagBridgeImpl

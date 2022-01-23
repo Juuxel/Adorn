@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:brewer"
+    ]
+  },
+  "criteria": {
+    "has_mug": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "adorn:mug"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:brewer"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mug",
+      "has_the_recipe"
+    ]
+  ]
+}

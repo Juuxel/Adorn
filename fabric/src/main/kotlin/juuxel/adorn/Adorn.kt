@@ -19,6 +19,7 @@ import juuxel.adorn.lib.SofaSleeping
 import juuxel.adorn.menu.AdornMenus
 import juuxel.adorn.menu.AdornMenusFabric
 import juuxel.adorn.platform.fabric.ConfigManagerImpl
+import juuxel.adorn.recipe.AdornRecipes
 import juuxel.adorn.resources.AdornResources
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -41,6 +42,7 @@ object Adorn : ModInitializer {
         AdornStats.init()
         SofaSleeping.init()
         AdornCriteria.init()
+        AdornRecipes.init()
         Compat.init()
         ConfigManagerImpl.finalize()
     }

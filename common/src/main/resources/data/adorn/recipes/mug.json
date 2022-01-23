@@ -1,0 +1,10 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:glass_bottle" },
+    { "tag": "c:bricks" }
+  ],
+  "result": {
+    "item": "adorn:mug"
+  }
+}

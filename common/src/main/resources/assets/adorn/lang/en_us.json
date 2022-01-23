@@ -1043,6 +1043,7 @@
   "block.adorn.picket_fence": "Picket Fence",
   "block.adorn.chain_link_fence": "Chain Link Fence",
   "block.adorn.stone_ladder": "Stone Ladder",
+  "block.adorn.brewer": "Brewer",
 
   "block.adorn.oak_bench": "Oak Bench",
   "block.adorn.spruce_bench": "Spruce Bench",
@@ -1113,6 +1114,8 @@
 
   "item.adorn.stone_rod": "Stone Rod",
   "item.adorn.stone_rod.desc": "Crafting ingredient",
+  "item.adorn.mug": "Mug",
+  "item.adorn.hot_chocolate": "Hot Chocolate",
 
   "item.adorn.guide_book": "Decorating Your Home",
   "guide.adorn.topic.building_blocks.title": "Building blocks",
@@ -1149,10 +1152,6 @@
   "item.adorn.traders_manual.buying.text": "You can buy items from trading stations by using the station with the payment item.",
   "item.adorn.traders_manual.selling.title": "Selling",
   "item.adorn.traders_manual.selling.text": "Setting up your own trading stations is very simple! Just place down a trading station and open it. On the left side, you can set the product and the payment. The inventory on the right side will have the products and the payments.",
-
-  "item.adorn.deprecated_item.name": "%s - Deprecated",
-  "item.adorn.deprecated_item.desc.1": "This item has been moved.",
-  "item.adorn.deprecated_item.desc.2": "You can replace it by pressing %s.",
 
   "gamerule.adorn:skipNightOnSofas": "Skip nights by sleeping on sofas",
 

@@ -1,0 +1,12 @@
+{
+  "type": "adorn:brewing",
+  "first_ingredient": {
+    "item": "minecraft:cocoa_beans"
+  },
+  "second_ingredient": {
+    "item": "minecraft:milk_bucket"
+  },
+  "result": {
+    "item": "adorn:hot_chocolate"
+  }
+}

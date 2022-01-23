@@ -8,6 +8,7 @@ fun PlatformBridges.Companion.get(): PlatformBridges =
     throw AssertionError("Untransformed ExpectPlatform")
 
 interface PlatformBridges {
+    val blockEntities: BlockEntityBridge
     val blockFactory: BlockFactory
     val criteria: CriterionBridge
     val configManager: ConfigManager
@@ -20,6 +21,7 @@ interface PlatformBridges {
     val tags: TagBridge
 
     companion object {
+        inline val blockEntities get() = get().blockEntities
         inline val blockFactory get() = get().blockFactory
         inline val criteria get() = get().criteria
         inline val configManager get() = get().configManager

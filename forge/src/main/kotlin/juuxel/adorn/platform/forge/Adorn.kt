@@ -7,6 +7,7 @@ import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.forge.client.AdornClient
 import juuxel.adorn.platform.forge.compat.Compat
 import juuxel.adorn.platform.forge.networking.AdornNetworking
+import juuxel.adorn.recipe.AdornRecipes
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.fml.DistExecutor
 import net.minecraftforge.fml.DistExecutor.SafeRunnable
@@ -21,6 +22,7 @@ object Adorn {
         PlatformBridges.configManager.init()
         MOD_BUS.addListener(this::init)
         EventsImplementedInJava().register(MOD_BUS, FORGE_BUS)
+        AdornRecipes.init()
         AdornNetworking.init()
         AdornCriteria.init()
         Compat.init(MOD_BUS)
@@ -29,5 +31,6 @@ object Adorn {
 
     private fun init(event: FMLCommonSetupEvent) {
         AdornStats.init()
+        PlatformBridges.configManager.finalize()
     }
 }

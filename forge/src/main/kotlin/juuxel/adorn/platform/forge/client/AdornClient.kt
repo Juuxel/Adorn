@@ -1,5 +1,6 @@
 package juuxel.adorn.platform.forge.client
 
+import juuxel.adorn.client.gui.screen.BrewerScreen
 import juuxel.adorn.client.gui.screen.DrawerScreen
 import juuxel.adorn.client.gui.screen.GuideBookScreen
 import juuxel.adorn.client.gui.screen.KitchenCupboardScreen
@@ -39,6 +40,7 @@ object AdornClient {
         HandledScreens.register(AdornMenus.DRAWER, ::DrawerScreen)
         HandledScreens.register(AdornMenus.KITCHEN_CUPBOARD, ::KitchenCupboardScreen)
         HandledScreens.register(AdornMenus.TRADING_STATION, ::TradingStationScreen)
+        HandledScreens.register(AdornMenus.BREWER, ::BrewerScreen)
     }
 
     fun openBookScreen(bookId: Identifier) {

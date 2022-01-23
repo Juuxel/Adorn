@@ -4,6 +4,7 @@ import net.minecraft.block.Block
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
+import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.sound.SoundEvent
 
@@ -14,4 +15,5 @@ interface RegistrarFactory {
     fun entity(): Registrar<EntityType<*>>
     fun menu(): Registrar<ScreenHandlerType<*>>
     fun soundEvent(): Registrar<SoundEvent>
+    fun recipeSerializer(): Registrar<RecipeSerializer<*>>
 }

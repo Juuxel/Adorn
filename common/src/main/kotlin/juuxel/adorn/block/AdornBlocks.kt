@@ -12,6 +12,7 @@ import juuxel.adorn.util.copySettingsSafely
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
+import net.minecraft.block.Material
 import net.minecraft.block.TorchBlock
 import net.minecraft.block.WallTorchBlock
 import net.minecraft.item.Item
@@ -308,6 +309,7 @@ object AdornBlocks : RegistryHelper() {
                 .nonOpaque()
         )
     }
+    val BREWER: Block by registerBlock("brewer") { BrewerBlock(AbstractBlock.Settings.of(Material.METAL).strength(0.5F)) }
     /* ktlint-enable max-line-length */
     // @formatter:on
 
