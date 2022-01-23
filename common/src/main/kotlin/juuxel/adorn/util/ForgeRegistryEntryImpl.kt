@@ -3,12 +3,16 @@ package juuxel.adorn.util
 import net.minecraft.util.Identifier
 
 @Suppress("UNUSED")
-abstract class ForgeRegistryEntryImpl(val registryType: Class<*>) {
-    var registryName: Identifier? = null
-        private set
+abstract class ForgeRegistryEntryImpl<V>(private val registryType: Class<V>) {
+    private var registryName: Identifier? = null
 
-    fun setRegistryName(registryName: Identifier?): Any {
+    fun getRegistryName(): Identifier? = registryName
+
+    fun setRegistryName(registryName: Identifier?): V {
         this.registryName = registryName
-        return this
+        @Suppress("UNCHECKED_CAST")
+        return this as V
     }
+
+    fun getRegistryType(): Class<V> = registryType
 }

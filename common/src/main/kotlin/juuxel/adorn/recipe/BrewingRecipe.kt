@@ -37,7 +37,7 @@ class BrewingRecipe(
     override fun getSerializer(): RecipeSerializer<*> = AdornRecipes.BREWING_SERIALIZER
     override fun getType(): RecipeType<*> = AdornRecipes.BREWING_TYPE
 
-    class Serializer : ForgeRegistryEntryImpl(RecipeSerializer::class.java), RecipeSerializer<BrewingRecipe> {
+    class Serializer : ForgeRegistryEntryImpl<RecipeSerializer<*>>(RecipeSerializer::class.java), RecipeSerializer<BrewingRecipe> {
         override fun read(id: Identifier, json: JsonObject): BrewingRecipe {
             val first = Ingredient.fromJson(json["first_ingredient"])
             val secondJson = json["second_ingredient"]
