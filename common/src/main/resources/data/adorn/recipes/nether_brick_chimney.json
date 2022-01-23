@@ -10,7 +10,7 @@
       "item": "minecraft:flint_and_steel"
     },
     "B": {
-      "item": "minecraft:nether_brick"
+      "tag": "c:nether_bricks"
     }
   },
   "result": {

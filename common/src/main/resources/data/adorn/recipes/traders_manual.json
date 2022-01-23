@@ -2,8 +2,8 @@
   "type": "crafting_shapeless",
   "ingredients": [
     { "item": "minecraft:book" },
-    [{ "item": "minecraft:emerald" }, { "item": "minecraft:gold_ingot" }],
-    [{ "item": "minecraft:emerald" }, { "item": "minecraft:gold_ingot" }]
+    [{ "tag": "c:emeralds" }, { "tag": "c:gold_ingots" }],
+    [{ "tag": "c:emeralds" }, { "tag": "c:gold_ingots" }]
   ],
   "result": {
     "item": "adorn:traders_manual"

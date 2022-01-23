@@ -2,8 +2,8 @@
   "type": "crafting_shapeless",
   "ingredients": [
     { "tag": "adorn:tables" },
-    { "item": "minecraft:emerald" },
-    { "item": "minecraft:emerald" }
+    { "tag": "c:emeralds" },
+    { "tag": "c:emeralds" }
   ],
   "result": {
     "item": "adorn:trading_station",

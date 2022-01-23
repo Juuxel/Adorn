@@ -6,14 +6,12 @@
     ]
   },
   "criteria": {
-    "has_key_item_0": {
+    "has_emerald": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:emerald"
-            ]
+            "tag": "c:emeralds"
           }
         ]
       }
@@ -27,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_key_item_0",
+      "has_emerald",
       "has_the_recipe"
     ]
   ]
