@@ -109,7 +109,7 @@ open class BrewerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBl
                 if (brewer.progress++ >= MAX_PROGRESS) {
                     decrementIngredient(LEFT_INGREDIENT_SLOT)
                     decrementIngredient(RIGHT_INGREDIENT_SLOT)
-                    brewer.setStack(INPUT_SLOT, recipe.output.copy())
+                    brewer.setStack(INPUT_SLOT, recipe.craft(brewer))
                 }
 
                 dirty = true
