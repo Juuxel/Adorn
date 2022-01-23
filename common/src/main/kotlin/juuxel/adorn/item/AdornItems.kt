@@ -15,8 +15,9 @@ object AdornItems {
     @JvmField
     val ITEMS: Registrar<Item> = PlatformBridges.registrarFactory.item()
     val GROUP = PlatformBridges.items.createAdornItemGroup()
-    private val DRINK_FOOD_COMPONENT_BUILDER = FoodComponent.Builder().hunger(2).saturationModifier(0.1F).alwaysEdible()
-    private val DRINK_FOOD_COMPONENT = DRINK_FOOD_COMPONENT_BUILDER.build()
+    private val DRINK_FOOD_COMPONENT = drinkFoodComponentBuilder().build()
+
+    private fun drinkFoodComponentBuilder() = FoodComponent.Builder().hunger(2).saturationModifier(0.1F).alwaysEdible()
 
     val STONE_ROD by ITEMS.register("stone_rod") { ItemWithDescription(Item.Settings().group(ItemGroup.MISC)) }
     val MUG by ITEMS.register("mug") { SimpleAdornItem(Item.Settings().group(ItemGroup.FOOD)) }
@@ -30,7 +31,7 @@ object AdornItems {
         DrinkInMugItem(
             Item.Settings()
                 .group(ItemGroup.FOOD)
-                .food(DRINK_FOOD_COMPONENT_BUILDER.statusEffect(StatusEffectInstance(StatusEffects.GLOWING, 400), 1.0f).build())
+                .food(drinkFoodComponentBuilder().statusEffect(StatusEffectInstance(StatusEffects.GLOWING, 400), 1.0f).build())
                 .maxCount(1)
         )
     }
