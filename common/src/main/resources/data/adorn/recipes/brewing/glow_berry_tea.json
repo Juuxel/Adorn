@@ -1,0 +1,9 @@
+{
+  "type": "adorn:brewing",
+  "first_ingredient": {
+    "tag": "c:glow_berries"
+  },
+  "result": {
+    "item": "adorn:glow_berry_tea"
+  }
+}
