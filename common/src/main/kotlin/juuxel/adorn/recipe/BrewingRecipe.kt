@@ -29,7 +29,7 @@ class BrewingRecipe(
             (matches(RIGHT_INGREDIENT_SLOT, firstIngredient) && matches(LEFT_INGREDIENT_SLOT, secondIngredient))
     }
 
-    override fun craft(inventory: Inventory): ItemStack  = result.copy()
+    override fun craft(inventory: Inventory): ItemStack = result.copy()
     override fun fits(width: Int, height: Int): Boolean = true
     override fun getOutput(): ItemStack = result
     override fun getId(): Identifier = id
@@ -39,7 +39,8 @@ class BrewingRecipe(
     class Serializer : RecipeSerializer<BrewingRecipe> {
         override fun read(id: Identifier, json: JsonObject): BrewingRecipe {
             val first = Ingredient.fromJson(json["first_ingredient"])
-            val second = Ingredient.fromJson(json["second_ingredient"])
+            val secondJson = json["second_ingredient"]
+            val second = if (secondJson != null) Ingredient.fromJson(secondJson) else Ingredient.empty()
             val result = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "result"))
             return BrewingRecipe(id, first, second, result)
         }
