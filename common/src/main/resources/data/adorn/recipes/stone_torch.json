@@ -10,10 +10,10 @@
     },
     "C": [
       {
-        "item": "minecraft:coal"
+        "tag": "c:coal"
       },
       {
-        "item": "minecraft:charcoal"
+        "tag": "c:charcoal"
       }
     ]
   },

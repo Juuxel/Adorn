@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:coal",
+    { "id": "modern_industrialization:lignite_coal", "required": false }
+  ]
+}

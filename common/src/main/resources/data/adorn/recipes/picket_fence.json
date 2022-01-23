@@ -9,7 +9,7 @@
       "tag": "c:wooden_rods"
     },
     "o": [
-      { "item": "minecraft:white_dye" },
+      { "tag": "c:white_dyes" },
       { "item": "minecraft:bone_meal" }
     ]
   },
