@@ -56,7 +56,7 @@ class BrewerMenu(
                 if (!insertItem(stack, 3, slots.size, true)) {
                     return ItemStack.EMPTY
                 }
-            } else if (!insertItem(stack, BrewerBlockEntity.LEFT_INGREDIENT_SLOT, BrewerBlockEntity.RIGHT_INGREDIENT_SLOT + 1, false)) {
+            } else if (!insertItem(stack, 0, BrewerBlockEntity.RIGHT_INGREDIENT_SLOT + 1, false)) {
                 return ItemStack.EMPTY
             }
 
