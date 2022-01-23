@@ -7,10 +7,14 @@ import net.minecraft.util.math.Direction
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
 import net.minecraftforge.items.CapabilityItemHandler
+import net.minecraftforge.items.IItemHandlerModifiable
 import net.minecraftforge.items.wrapper.SidedInvWrapper
 
 class BrewerBlockEntityForge(pos: BlockPos, state: BlockState) : BrewerBlockEntity(pos, state) {
-    private var itemHandlers = SidedInvWrapper.create(this, *Direction.values().sortedArrayWith(compareBy { it.id }))
+    private var itemHandlers = createItemHandlers()
+
+    private fun createItemHandlers(): Array<LazyOptional<IItemHandlerModifiable>> =
+        SidedInvWrapper.create(this, *Direction.values().sortedArrayWith(compareBy { it.id }))
 
     override fun <T> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
         if (!removed && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
@@ -30,6 +34,6 @@ class BrewerBlockEntityForge(pos: BlockPos, state: BlockState) : BrewerBlockEnti
 
     override fun reviveCaps() {
         super.reviveCaps()
-        itemHandlers = SidedInvWrapper.create(this, *Direction.values())
+        itemHandlers = createItemHandlers()
     }
 }
