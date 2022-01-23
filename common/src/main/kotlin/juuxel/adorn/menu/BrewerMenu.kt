@@ -10,6 +10,7 @@ import net.minecraft.screen.ArrayPropertyDelegate
 import net.minecraft.screen.PropertyDelegate
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.slot.Slot
+import kotlin.math.min
 
 class BrewerMenu(
     syncId: Int,
@@ -56,8 +57,16 @@ class BrewerMenu(
                 if (!insertItem(stack, 3, slots.size, true)) {
                     return ItemStack.EMPTY
                 }
-            } else if (!insertItem(stack, 0, BrewerBlockEntity.RIGHT_INGREDIENT_SLOT + 1, false)) {
-                return ItemStack.EMPTY
+            } else {
+                val mugSlot = slots[BrewerBlockEntity.INPUT_SLOT]
+
+                if (!mugSlot.hasStack() && mugSlot.canInsert(stack)) {
+                    mugSlot.stack = stack.split(min(mugSlot.getMaxItemCount(stack), stack.count))
+                }
+
+                if (!stack.isEmpty && !insertItem(stack, BrewerBlockEntity.LEFT_INGREDIENT_SLOT, BrewerBlockEntity.RIGHT_INGREDIENT_SLOT + 1, false)) {
+                    return ItemStack.EMPTY
+                }
             }
 
             if (stack.isEmpty) {
