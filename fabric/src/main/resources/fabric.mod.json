@@ -32,6 +32,10 @@
         "value": "juuxel.adorn.compat.modmenu.AdornModMenuPlugin",
         "adapter": "kotlin"
       }
+    ],
+    "rei": [
+      "juuxel.adorn.compat.rei.client.AdornReiClient",
+      "juuxel.adorn.compat.rei.AdornReiServer"
     ]
   },
 

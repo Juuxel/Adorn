@@ -25,6 +25,6 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
     }
 
     companion object {
-        private val TEXTURE = AdornCommon.id("textures/gui/brewer.png")
+        val TEXTURE = AdornCommon.id("textures/gui/brewer.png")
     }
 }

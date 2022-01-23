@@ -3,6 +3,7 @@ package juuxel.adorn.recipe
 import com.google.gson.JsonObject
 import juuxel.adorn.block.entity.BrewerBlockEntity.Companion.LEFT_INGREDIENT_SLOT
 import juuxel.adorn.block.entity.BrewerBlockEntity.Companion.RIGHT_INGREDIENT_SLOT
+import juuxel.adorn.util.ForgeRegistryEntryImpl
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
@@ -17,9 +18,9 @@ import net.minecraft.world.World
 
 class BrewingRecipe(
     private val id: Identifier,
-    private val firstIngredient: Ingredient,
-    private val secondIngredient: Ingredient,
-    private val result: ItemStack
+    val firstIngredient: Ingredient,
+    val secondIngredient: Ingredient,
+    val result: ItemStack
 ) : Recipe<Inventory> {
     override fun matches(inventory: Inventory, world: World): Boolean {
         fun matches(index: Int, ingredient: Ingredient) =
@@ -36,7 +37,7 @@ class BrewingRecipe(
     override fun getSerializer(): RecipeSerializer<*> = AdornRecipes.BREWING_SERIALIZER
     override fun getType(): RecipeType<*> = AdornRecipes.BREWING_TYPE
 
-    class Serializer : RecipeSerializer<BrewingRecipe> {
+    class Serializer : ForgeRegistryEntryImpl(RecipeSerializer::class.java), RecipeSerializer<BrewingRecipe> {
         override fun read(id: Identifier, json: JsonObject): BrewingRecipe {
             val first = Ingredient.fromJson(json["first_ingredient"])
             val secondJson = json["second_ingredient"]

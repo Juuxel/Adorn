@@ -183,6 +183,7 @@ dependencies {
     modLocalRuntime(modCompileOnly("com.terraformersmc:modmenu:${rootProject.property("modmenu")}")!!)
     modCompileOnly("net.oskarstrom:DashLoader:${rootProject.property("dashloader")}")
     runtimeOnly("org.yaml:snakeyaml:1.27") // TODO: for dashloader, remove when pom is fixed
+    modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.property("rei")}")
 }
 
 tasks {

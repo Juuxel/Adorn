@@ -182,6 +182,8 @@ dependencies {
 
     bundle("blue.endless:jankson:${rootProject.property("jankson")}")
     forgeRuntimeLibrary("blue.endless:jankson:${rootProject.property("jankson")}")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-forge:${rootProject.property("rei")}")
+    modLocalRuntime("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.property("rei")}")
 }
 
 tasks {

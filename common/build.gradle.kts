@@ -120,6 +120,8 @@ dependencies {
 
     // Just for @Environment and mixin deps :)
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric-loader")}")
+
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:${rootProject.property("rei")}")
 }
 
 // PLEASE REMOVE AFTEREVALUATE FROM LOOM
