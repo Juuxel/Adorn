@@ -309,7 +309,7 @@ object AdornBlocks : RegistryHelper() {
                 .nonOpaque()
         )
     }
-    val BREWER: Block by registerBlock("brewer") { BrewerBlock(AbstractBlock.Settings.of(Material.METAL).strength(0.5F)) }
+    val BREWER: Block by registerBlock("brewer") { BrewerBlock(AbstractBlock.Settings.of(Material.METAL).strength(0.8F)) }
     /* ktlint-enable max-line-length */
     // @formatter:on
 
