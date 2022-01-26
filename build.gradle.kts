@@ -8,8 +8,8 @@ plugins {
     kotlin("jvm") version "1.6.0" apply false
 
     id("architectury-plugin") version "3.4-SNAPSHOT"
-    id("dev.architectury.loom") version "0.10.0.210" apply false
-    id("io.github.juuxel.loom-quiltflower-mini") version "1.2.1" apply false
+    id("dev.architectury.loom") version "0.11.0-SNAPSHOT" apply false
+    id("io.github.juuxel.loom-quiltflower") version "1.6.0" apply false
 
     id("org.jmailen.kotlinter") version "3.2.0" apply false
     id("com.github.johnrengelman.shadow") version "7.0.0" apply false
@@ -25,7 +25,7 @@ base.archivesName.set("Adorn")
 
 tasks {
     val collectJars by registering(Copy::class) {
-        val tasks = subprojects.map { it.tasks.named("remapJar") }
+        val tasks = subprojects.filter { it.path != ":common" }.map { it.tasks.named("remapJar") }
         dependsOn(tasks)
 
         from(tasks)
@@ -42,7 +42,7 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "dev.architectury.loom")
     apply(plugin = "architectury-plugin")
-    apply(plugin = "io.github.juuxel.loom-quiltflower-mini")
+    apply(plugin = "io.github.juuxel.loom-quiltflower")
     apply(plugin = "org.jmailen.kotlinter")
 
     extensions.configure<JavaPluginExtension> {
@@ -77,15 +77,6 @@ subprojects {
             from(rootProject.file("LICENSE"))
         }
     }
-
-    // PLEASE REMOVE AFTEREVALUATE FROM LOOM
-    afterEvaluate {
-        tasks {
-            "remapJar"(RemapJarTask::class) {
-                archiveClassifier.set(project.name)
-            }
-        }
-    }
 }
 
 subprojects {
@@ -109,7 +100,8 @@ subprojects {
 
             "remapJar"(RemapJarTask::class) {
                 dependsOn("shadowJar")
-                input.set(named<ShadowJar>("shadowJar").flatMap { it.archiveFile })
+                inputFile.set(named<ShadowJar>("shadowJar").flatMap { it.archiveFile })
+                archiveClassifier.set(project.name)
             }
         }
     }

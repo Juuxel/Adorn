@@ -123,12 +123,3 @@ dependencies {
 
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:${rootProject.property("rei")}")
 }
-
-// PLEASE REMOVE AFTEREVALUATE FROM LOOM
-afterEvaluate {
-    tasks {
-        remapJar {
-            remapAccessWidener.set(false)
-        }
-    }
-}
