@@ -110,7 +110,11 @@ class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createS
             }
         } else {
             if (!world.isClient) {
-                ItemScatterer.spawn(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), existing)
+                if (player.getStackInHand(hand).isEmpty) {
+                    player.setStackInHand(hand, existing)
+                } else {
+                    ItemScatterer.spawn(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), existing)
+                }
             }
             be.setStack(slot, ItemStack.EMPTY)
             be.markDirty()
@@ -120,7 +124,7 @@ class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createS
             }
         }
 
-        return ActionResult.SUCCESS
+        return ActionResult.success(world.isClient)
     }
 
     /**
