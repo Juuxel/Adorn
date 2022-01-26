@@ -130,11 +130,6 @@ sourceSets {
 
 repositories {
     maven {
-        name = "Cotton"
-        url = uri("https://server.bbkr.space/artifactory/libs-release")
-    }
-
-    maven {
         name = "Jitpack"
         url = uri("https://jitpack.io")
 
@@ -176,7 +171,7 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric-api")}")
     modApi("net.fabricmc:fabric-language-kotlin:${rootProject.property("fabric-kotlin")}")
 
-    include(modImplementation("io.github.cottonmc:Jankson-Fabric:${rootProject.property("jankson-fabric")}")!!)
+    bundle(implementation("blue.endless:jankson:${rootProject.property("jankson")}")!!)
 
     // Mod compat
     modCompileOnly("com.github.Virtuoel:Towelette:${rootProject.property("towelette")}")
@@ -191,6 +186,10 @@ tasks {
     val copyAccessWidener by registering(Copy::class) {
         from(accessWidenerFile)
         into(generatedResources)
+    }
+
+    shadowJar {
+        relocate("blue.endless.jankson", "juuxel.adorn.relocated.jankson")
     }
 
     processResources {
