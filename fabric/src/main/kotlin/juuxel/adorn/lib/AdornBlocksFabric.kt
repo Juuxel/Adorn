@@ -1,7 +1,6 @@
 package juuxel.adorn.lib
 
 import juuxel.adorn.CommonEventHandlers
-import juuxel.adorn.CommonEventHandlersInJava
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.block.SneakClickHandler
@@ -13,7 +12,6 @@ import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
-import net.fabricmc.fabric.api.event.player.AttackBlockCallback
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.util.ActionResult
@@ -34,15 +32,7 @@ object AdornBlocksFabric {
             }
         )
 
-        UseBlockCallback.EVENT.register(CommonEventHandlersInJava::handleCarpets)
-
-        AttackBlockCallback.EVENT.register { player, _, _, pos, _ ->
-            if (CommonEventHandlers.shouldCancelBlockBreak(player, pos)) {
-                ActionResult.SUCCESS
-            } else {
-                ActionResult.PASS
-            }
-        }
+        UseBlockCallback.EVENT.register(CommonEventHandlers::handleCarpets)
     }
 
     @Environment(EnvType.CLIENT)

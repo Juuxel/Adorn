@@ -1,6 +1,6 @@
 package juuxel.adorn.platform.forge;
 
-import juuxel.adorn.CommonEventHandlersInJava;
+import juuxel.adorn.CommonEventHandlers;
 import juuxel.adorn.block.AdornBlockEntities;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.block.SneakClickHandler;
@@ -73,7 +73,7 @@ final class EventsImplementedInJava {
     }
 
     private void handleCarpetedBlocks(PlayerInteractEvent.RightClickBlock event) {
-        ActionResult result = CommonEventHandlersInJava.handleCarpets(event.getPlayer(), event.getWorld(), event.getHand(), event.getHitVec());
+        ActionResult result = CommonEventHandlers.handleCarpets(event.getPlayer(), event.getWorld(), event.getHand(), event.getHitVec());
 
         if (result != ActionResult.PASS) {
             event.setCancellationResult(result);

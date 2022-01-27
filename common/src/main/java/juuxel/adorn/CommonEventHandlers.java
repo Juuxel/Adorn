@@ -10,8 +10,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.world.World;
 
-// TODO: Kotlin
-public final class CommonEventHandlersInJava {
+public final class CommonEventHandlers {
     public static ActionResult handleCarpets(PlayerEntity player, World world, Hand hand, BlockHitResult hit) {
         var stack = player.getStackInHand(hand);
 
