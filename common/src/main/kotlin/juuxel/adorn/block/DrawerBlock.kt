@@ -15,7 +15,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
-import net.minecraft.screen.ScreenHandler
+import net.minecraft.menu.Menu
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
@@ -80,7 +80,7 @@ class DrawerBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.create
     override fun hasComparatorOutput(state: BlockState) = true
 
     override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
-        ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos))
+        Menu.calculateComparatorOutput(world.getBlockEntity(pos))
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? =
         AdornBlockEntities.DRAWER.instantiate(pos, state)

@@ -9,6 +9,6 @@ import net.minecraft.util.math.BlockPos
 
 class DrawerBlockEntity(pos: BlockPos, state: BlockState) :
     SimpleContainerBlockEntity(AdornBlockEntities.DRAWER, pos, state, 15) {
-    override fun createScreenHandler(syncId: Int, playerInv: PlayerInventory) =
+    override fun createMenu(syncId: Int, playerInv: PlayerInventory) =
         DrawerMenu(syncId, playerInv, this, menuContextOf(this))
 }

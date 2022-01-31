@@ -42,7 +42,7 @@ class BrewerBlock(settings: Settings) : VisibleBlockWithEntity(settings) {
 
         val blockEntity = world.getBlockEntity(pos)
         if (blockEntity is BrewerBlockEntity) {
-            player.openHandledScreen(blockEntity)
+            player.openMenu(blockEntity)
             // TODO: Stat for opening brewers
         }
 

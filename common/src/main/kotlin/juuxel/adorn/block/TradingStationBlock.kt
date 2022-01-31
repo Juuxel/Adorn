@@ -90,7 +90,7 @@ class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING
                     }
                 }
             } else {
-                player.openHandledScreen(be)
+                player.openMenu(be)
                 player.incrementStat(AdornStats.INTERACT_WITH_TRADING_STATION)
             }
         }

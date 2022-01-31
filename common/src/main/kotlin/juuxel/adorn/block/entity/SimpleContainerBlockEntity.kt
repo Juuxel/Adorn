@@ -23,7 +23,7 @@ abstract class SimpleContainerBlockEntity(type: BlockEntityType<*>, pos: BlockPo
         ) {}
 
         override fun isPlayerViewing(player: PlayerEntity): Boolean {
-            val menu = player.currentScreenHandler
+            val menu = player.menu
             return menu is ContainerBlockMenu && menu.inventory === this@SimpleContainerBlockEntity
         }
     }

@@ -9,7 +9,7 @@ import juuxel.adorn.client.gui.screen.TradingStationScreen
 import juuxel.adorn.menu.AdornMenus
 import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.client.MinecraftClient
-import net.minecraft.client.gui.screen.ingame.HandledScreens
+import net.minecraft.client.gui.screen.ingame.MenuScreens
 import net.minecraft.resource.ReloadableResourceManager
 import net.minecraft.util.Identifier
 import net.minecraftforge.client.ConfigGuiHandler
@@ -37,10 +37,10 @@ object AdornClient {
     }
 
     private fun registerScreens() {
-        HandledScreens.register(AdornMenus.DRAWER, ::DrawerScreen)
-        HandledScreens.register(AdornMenus.KITCHEN_CUPBOARD, ::KitchenCupboardScreen)
-        HandledScreens.register(AdornMenus.TRADING_STATION, ::TradingStationScreen)
-        HandledScreens.register(AdornMenus.BREWER, ::BrewerScreen)
+        MenuScreens.register(AdornMenus.DRAWER, ::DrawerScreen)
+        MenuScreens.register(AdornMenus.KITCHEN_CUPBOARD, ::KitchenCupboardScreen)
+        MenuScreens.register(AdornMenus.TRADING_STATION, ::TradingStationScreen)
+        MenuScreens.register(AdornMenus.BREWER, ::BrewerScreen)
     }
 
     fun openBookScreen(bookId: Identifier) {

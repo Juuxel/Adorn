@@ -9,6 +9,6 @@ import net.minecraft.util.math.BlockPos
 
 class KitchenCupboardBlockEntity(pos: BlockPos, state: BlockState) :
     SimpleContainerBlockEntity(AdornBlockEntities.KITCHEN_CUPBOARD, pos, state, 15) {
-    override fun createScreenHandler(syncId: Int, playerInv: PlayerInventory) =
+    override fun createMenu(syncId: Int, playerInv: PlayerInventory) =
         KitchenCupboardMenu(syncId, playerInv, this, menuContextOf(this))
 }

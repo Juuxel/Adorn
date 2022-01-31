@@ -8,8 +8,8 @@ import net.minecraft.block.Block
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
+import net.minecraft.menu.MenuType
 import net.minecraft.recipe.RecipeSerializer
-import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.sound.SoundEvent
 import net.minecraftforge.registries.ForgeRegistries
 
@@ -30,7 +30,7 @@ private object PlatformBridgesImpl : PlatformBridges {
         override fun item(): Registrar<Item> = RegistrarImpl(ForgeRegistries.ITEMS)
         override fun blockEntity(): Registrar<BlockEntityType<*>> = RegistrarImpl(ForgeRegistries.BLOCK_ENTITIES)
         override fun entity(): Registrar<EntityType<*>> = RegistrarImpl(ForgeRegistries.ENTITIES)
-        override fun menu(): Registrar<ScreenHandlerType<*>> = RegistrarImpl(ForgeRegistries.CONTAINERS)
+        override fun menu(): Registrar<MenuType<*>> = RegistrarImpl(ForgeRegistries.CONTAINERS)
         override fun soundEvent(): Registrar<SoundEvent> = RegistrarImpl(ForgeRegistries.SOUND_EVENTS)
         override fun recipeSerializer(): Registrar<RecipeSerializer<*>> = RegistrarImpl(ForgeRegistries.RECIPE_SERIALIZERS)
     }

@@ -8,16 +8,16 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
-import net.minecraft.screen.ScreenHandler
-import net.minecraft.screen.ScreenHandlerContext
-import net.minecraft.screen.slot.Slot
-import net.minecraft.screen.slot.SlotActionType
+import net.minecraft.menu.Menu
+import net.minecraft.menu.MenuContext
+import net.minecraft.menu.Slot
+import net.minecraft.menu.SlotActionType
 
 class TradingStationMenu(
     syncId: Int,
     playerInventory: Inventory,
-    private val context: ScreenHandlerContext = ScreenHandlerContext.EMPTY
-) : ScreenHandler(AdornMenus.TRADING_STATION, syncId) {
+    private val context: MenuContext = MenuContext.EMPTY
+) : Menu(AdornMenus.TRADING_STATION, syncId) {
     private val tradingStation: TradingStation
     private val sellingSlot: Slot
     private val priceSlot: Slot
@@ -116,7 +116,7 @@ class TradingStationMenu(
          * Gets the [juuxel.adorn.block.entity.TradingStationBlockEntity] at the [context]'s location.
          * If it's not present, creates an empty trading station using [TradingStation.createEmpty].
          */
-        private fun getTradingStation(context: ScreenHandlerContext): TradingStation =
+        private fun getTradingStation(context: MenuContext): TradingStation =
             context.getBlockEntity() as? TradingStation ?: run {
                 TradingStation.createEmpty()
             }

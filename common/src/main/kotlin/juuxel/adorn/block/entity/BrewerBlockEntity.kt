@@ -10,9 +10,9 @@ import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.SidedInventory
 import net.minecraft.item.ItemStack
+import net.minecraft.menu.Menu
+import net.minecraft.menu.property.PropertyDelegate
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.screen.PropertyDelegate
-import net.minecraft.screen.ScreenHandler
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
@@ -37,7 +37,7 @@ open class BrewerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBl
         override fun size(): Int = 1
     }
 
-    override fun createScreenHandler(syncId: Int, playerInventory: PlayerInventory): ScreenHandler =
+    override fun createMenu(syncId: Int, playerInventory: PlayerInventory): Menu =
         BrewerMenu(syncId, playerInventory, this, propertyDelegate)
 
     override fun writeNbt(nbt: NbtCompound) {

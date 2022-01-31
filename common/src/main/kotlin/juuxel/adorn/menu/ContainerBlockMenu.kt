@@ -1,9 +1,9 @@
 package juuxel.adorn.menu
 
 import net.minecraft.inventory.Inventory
-import net.minecraft.screen.ScreenHandlerContext
+import net.minecraft.menu.MenuContext
 
 interface ContainerBlockMenu {
     val inventory: Inventory
-    val context: ScreenHandlerContext
+    val context: MenuContext
 }

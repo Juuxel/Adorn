@@ -14,7 +14,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
-import net.minecraft.screen.ScreenHandler
+import net.minecraft.menu.Menu
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
@@ -61,7 +61,7 @@ class KitchenCupboardBlock(variant: BlockVariant) : AbstractKitchenCounterBlock(
     override fun hasComparatorOutput(state: BlockState) = true
 
     override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
-        ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos))
+        Menu.calculateComparatorOutput(world.getBlockEntity(pos))
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? =
         AdornBlockEntities.KITCHEN_CUPBOARD.instantiate(pos, state)

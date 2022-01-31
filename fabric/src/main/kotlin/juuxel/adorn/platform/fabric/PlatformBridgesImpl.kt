@@ -9,8 +9,8 @@ import net.minecraft.block.Block
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
+import net.minecraft.menu.MenuType
 import net.minecraft.recipe.RecipeSerializer
-import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.sound.SoundEvent
 import net.minecraft.util.registry.Registry
 
@@ -31,7 +31,7 @@ private object PlatformBridgesImpl : PlatformBridges {
         override fun item(): Registrar<Item> = RegistrarImpl(Registry.ITEM)
         override fun blockEntity(): Registrar<BlockEntityType<*>> = RegistrarImpl(Registry.BLOCK_ENTITY_TYPE)
         override fun entity(): Registrar<EntityType<*>> = RegistrarImpl(Registry.ENTITY_TYPE)
-        override fun menu(): Registrar<ScreenHandlerType<*>> = RegistrarImpl(Registry.SCREEN_HANDLER)
+        override fun menu(): Registrar<MenuType<*>> = RegistrarImpl(Registry.MENU)
         override fun soundEvent(): Registrar<SoundEvent> = RegistrarImpl(Registry.SOUND_EVENT)
         override fun recipeSerializer(): Registrar<RecipeSerializer<*>> = RegistrarImpl(Registry.RECIPE_SERIALIZER)
     }

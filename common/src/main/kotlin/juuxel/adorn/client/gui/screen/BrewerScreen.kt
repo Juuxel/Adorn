@@ -17,7 +17,7 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
         RenderSystem.setShaderTexture(0, TEXTURE)
         drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight)
 
-        val progress = handler.progress
+        val progress = menu.progress
         if (progress > 0) {
             val progressFract = progress.toFloat() / BrewerBlockEntity.MAX_PROGRESS.toFloat()
             drawTexture(matrices, x + 84, y + 24, 176, 0, 8, MathHelper.ceil(progressFract * 25))

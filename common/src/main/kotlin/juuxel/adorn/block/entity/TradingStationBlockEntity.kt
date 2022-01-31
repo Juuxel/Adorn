@@ -14,12 +14,12 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
+import net.minecraft.menu.Menu
+import net.minecraft.menu.NamedMenuFactory
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.Packet
 import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
-import net.minecraft.screen.NamedScreenHandlerFactory
-import net.minecraft.screen.ScreenHandler
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
@@ -27,7 +27,7 @@ import net.minecraft.util.math.BlockPos
 import java.util.UUID
 
 class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
-    BlockEntity(AdornBlockEntities.TRADING_STATION, pos, state), NamedScreenHandlerFactory, TradingStation {
+    BlockEntity(AdornBlockEntities.TRADING_STATION, pos, state), NamedMenuFactory, TradingStation {
     var owner: UUID? = null
     override var ownerName: Text = LiteralText("???")
     override val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
@@ -54,7 +54,7 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
 
     fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
 
-    override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity): ScreenHandler? =
+    override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity): Menu =
         TradingStationMenu(syncId, playerInv, menuContextOf(this))
 
     override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)

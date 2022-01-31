@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos
 
 class ShelfBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlockEntity(AdornBlockEntities.SHELF, pos, state, 2) {
     // No menus for shelves
-    override fun createScreenHandler(syncId: Int, playerInv: PlayerInventory?) = null
+    override fun createMenu(syncId: Int, playerInv: PlayerInventory?) = null
 
     override fun getMaxCountPerStack() = 1
 

@@ -6,10 +6,10 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.screen.ArrayPropertyDelegate
-import net.minecraft.screen.PropertyDelegate
-import net.minecraft.screen.ScreenHandler
-import net.minecraft.screen.slot.Slot
+import net.minecraft.menu.Menu
+import net.minecraft.menu.Slot
+import net.minecraft.menu.property.ArrayPropertyDelegate
+import net.minecraft.menu.property.PropertyDelegate
 import kotlin.math.min
 
 class BrewerMenu(
@@ -17,7 +17,7 @@ class BrewerMenu(
     playerInventory: Inventory,
     private val container: Inventory = SimpleInventory(3),
     private val propertyDelegate: PropertyDelegate = ArrayPropertyDelegate(1)
-) : ScreenHandler(AdornMenus.BREWER, syncId) {
+) : Menu(AdornMenus.BREWER, syncId) {
     val progress: Int get() = propertyDelegate[0]
 
     init {

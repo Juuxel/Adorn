@@ -8,7 +8,7 @@ plugins {
     kotlin("jvm") version "1.6.0" apply false
 
     id("architectury-plugin") version "3.4-SNAPSHOT"
-    id("dev.architectury.loom") version "0.11.0.+" apply false
+    id("dev.architectury.loom") version "0.11.0.234" apply false
     id("io.github.juuxel.loom-quiltflower") version "1.6.0" apply false
 
     id("org.jmailen.kotlinter") version "3.2.0" apply false
@@ -54,9 +54,37 @@ subprojects {
     version = rootProject.version
     base.archivesName.set(rootProject.base.archivesName)
 
+    repositories {
+        exclusiveContent {
+            forRepository {
+                ivy {
+                    url = uri("https://github.com/Juuxel/Menu/archive/refs/tags")
+                    patternLayout {
+                        artifact("[revision].zip")
+                    }
+                    metadataSources {
+                        artifact()
+                    }
+                }
+            }
+
+            filter {
+                includeModule("io.github.juuxel", "menu")
+            }
+        }
+    }
+
     dependencies {
         "minecraft"("net.minecraft:minecraft:${rootProject.property("minecraft-version")}")
-        "mappings"("net.fabricmc:yarn:${rootProject.property("minecraft-version")}+${rootProject.property("mappings")}:v2")
+        val loom = project.extensions.getByName<net.fabricmc.loom.api.LoomGradleExtensionAPI>("loom")
+        "mappings"(loom.layered {
+            mappings("net.fabricmc:yarn:${rootProject.property("minecraft-version")}+${rootProject.property("yarn-mappings")}:v2")
+            val menuVersion = rootProject.property("menu-mappings").toString()
+            mappings("io.github.juuxel:menu:$menuVersion") {
+                enigmaMappings()
+                mappingPath("Menu-${menuVersion.replace('+', '-')}/mappings")
+            }
+        })
     }
 
     extensions.configure<KotlinterExtension> {

@@ -4,19 +4,19 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
-import net.minecraft.screen.ScreenHandler
-import net.minecraft.screen.ScreenHandlerContext
-import net.minecraft.screen.ScreenHandlerType
-import net.minecraft.screen.slot.Slot
+import net.minecraft.menu.Menu
+import net.minecraft.menu.MenuContext
+import net.minecraft.menu.MenuType
+import net.minecraft.menu.Slot
 
 abstract class SimpleMenu(
-    type: ScreenHandlerType<*>,
+    type: MenuType<*>,
     syncId: Int,
     private val dimensions: Pair<Int, Int>,
     override val inventory: Inventory,
     playerInventory: PlayerInventory,
-    override val context: ScreenHandlerContext
-) : ScreenHandler(type, syncId), ContainerBlockMenu {
+    override val context: MenuContext
+) : Menu(type, syncId), ContainerBlockMenu {
     init {
         val (width, height) = dimensions
         val offset = (9 - width) / 2

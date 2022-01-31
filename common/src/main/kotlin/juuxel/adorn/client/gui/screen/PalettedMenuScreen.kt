@@ -8,14 +8,14 @@ import juuxel.adorn.util.getBlock
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.screen.ScreenHandler
+import net.minecraft.menu.Menu
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
 abstract class PalettedMenuScreen<M>(menu: M, playerInventory: PlayerInventory, title: Text) :
     AdornMenuScreen<M>(menu, playerInventory, title)
-    where M : ScreenHandler, M : ContainerBlockMenu {
+    where M : Menu, M : ContainerBlockMenu {
     protected abstract val backgroundTexture: Identifier
     protected abstract val paletteId: Identifier
     private val blockId = Registry.BLOCK.getId(menu.context.getBlock())
