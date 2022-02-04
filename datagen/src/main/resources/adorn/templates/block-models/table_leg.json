@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/table_leg",
   "textures": {
-    "log": "<log.namespace>:block/<log.path>"
+    "log": "<log_side>"
   }
 }

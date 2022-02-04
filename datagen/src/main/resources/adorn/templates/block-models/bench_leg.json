@@ -1,7 +1,7 @@
 {
   "parent": "adorn:block/templates/bench_leg",
   "textures": {
-    "log": "<log.namespace>:block/<log.path>",
-    "end": "<log.namespace>:block/<log.path>_top"
+    "log": "<log_side>",
+    "end": "<log_end>"
   }
 }

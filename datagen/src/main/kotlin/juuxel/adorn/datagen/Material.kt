@@ -42,6 +42,8 @@ class WoodMaterial(override val id: Id, private val fungus: Boolean, val nonFlam
         "planks" with planks
         "slab" with slab
         "log" with log
+        "log_side" with "<log.namespace>:block/<log.path>"
+        "log_end" with "<log.namespace>:block/<log.path>_top"
     }
 }
 

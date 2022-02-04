@@ -1,0 +1,14 @@
+<data_generators condition_type="fabric">
+    <wood id="promenade:cherry_oak">
+        <replace key="log_side" with="promenade:block/cherry_oak_log/side"/>
+        <replace key="log_end" with="promenade:block/cherry_oak_log/top"/>
+    </wood>
+    <wood id="promenade:dark_amaranth" fungus="true" non_flammable="true">
+        <replace key="log_side" with="promenade:block/dark_amaranth_stem/side"/>
+        <replace key="log_end" with="promenade:block/dark_amaranth_stem/top"/>
+    </wood>
+    <wood id="promenade:palm">
+        <replace key="log_side" with="promenade:block/palm_log/side"/>
+        <replace key="log_end" with="promenade:block/palm_log/top"/>
+    </wood>
+</data_generators>

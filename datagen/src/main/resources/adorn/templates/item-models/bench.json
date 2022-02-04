@@ -2,7 +2,7 @@
   "parent": "adorn:item/templates/bench",
   "textures": {
     "planks": "<planks.namespace>:block/<planks.path>",
-    "log": "<log.namespace>:block/<log.path>",
-    "end": "<log.namespace>:block/<log.path>_top"
+    "log": "<log_side>",
+    "end": "<log_end>"
   }
 }

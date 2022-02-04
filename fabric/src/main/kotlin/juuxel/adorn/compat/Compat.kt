@@ -13,6 +13,7 @@ object Compat {
             "woods_and_mires" to { CompatBlocks.addVariants(WamCompat) },
             "biomemakeover" to { CompatBlocks.addVariants(BiomeMakeoverCompat) },
             "cinderscapes" to { CompatBlocks.addVariants(CinderscapesCompat) },
+            "promenade" to { CompatBlocks.addVariants(PromenadeCompat) },
         )
 
         for ((mod, fn) in mods) {

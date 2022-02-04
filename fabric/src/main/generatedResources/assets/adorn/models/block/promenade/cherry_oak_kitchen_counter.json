@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/kitchen_counter",
+  "textures": {
+    "planks": "promenade:block/cherry_oak_planks"
+  }
+}

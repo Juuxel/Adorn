@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/post",
+  "textures": {
+    "texture": "promenade:block/dark_amaranth_planks"
+  }
+}
