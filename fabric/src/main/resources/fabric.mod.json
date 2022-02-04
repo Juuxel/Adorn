@@ -47,9 +47,7 @@
     "fabricloader": ">=0.12.11",
     "fabric-language-kotlin": "^1.7.0",
 
-    "fabric": ">=0.46.1",
-
-    "jankson": "^4.0.0"
+    "fabric": ">=0.46.1"
   },
   "conflicts": {
     "byg": "<1.1"
