@@ -8,20 +8,24 @@ plugins {
 
 val generatedResources = layout.projectDirectory.dir("src/main/generatedResources")
 
-val generateData by tasks.registering(GenerateData::class) {
+val generateMainData by tasks.registering(GenerateData::class) {
     configs.from(fileTree("src/data").filter { it.extension == "xml" })
     output.convention(generatedResources)
 }
 
 val generateTags by tasks.registering(GenerateTags::class) {
-    dependsOn(generateData)
+    dependsOn(generateMainData)
     output.convention(generatedResources)
+}
+
+val generateData by tasks.registering {
+    dependsOn(generateMainData, generateTags)
 }
 
 val deleteDuplicateResources by tasks.registering(DeleteDuplicates::class) {
     generated.convention(generatedResources)
     main.convention(layout.dir(sourceSets.main.map { it.resources.srcDirs.first() }))
-    mustRunAfter(generateData)
+    mustRunAfter(generateMainData, generateTags, generateData)
 }
 
 sourceSets {
