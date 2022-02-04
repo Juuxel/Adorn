@@ -6,7 +6,7 @@ import juuxel.adorn.datagen.Material
 class TagGenerator(private val entries: TagEntryProvider) {
     fun generate(materials: List<Material>): String {
         val entries = entries.getEntries(materials)
-        val values: List<String> = entries.map { (_, entry) ->
+        val values: List<String> = entries.map { entry ->
             if (entry.isModded) {
                 "{ \"id\": \"${entry.id}\", \"required\": false }"
             } else {

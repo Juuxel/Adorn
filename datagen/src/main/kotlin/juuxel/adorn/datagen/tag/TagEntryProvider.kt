@@ -4,30 +4,27 @@ import juuxel.adorn.datagen.Id
 import juuxel.adorn.datagen.Material
 
 interface TagEntryProvider {
-    fun getEntries(materials: Collection<Material>): Map<Material, Entry>
+    fun getEntries(materials: Collection<Material>): List<Entry>
 
-    data class Entry(val id: Id, val isModded: Boolean)
+    data class Entry(val material: Material, val id: Id, val isModded: Boolean)
 
     class Simple(private val blockType: String) : TagEntryProvider {
-        override fun getEntries(materials: Collection<Material>): Map<Material, Entry> =
-            materials.associateWith {
+        override fun getEntries(materials: Collection<Material>): List<Entry> =
+            materials.map {
                 val id = if (!it.isModded()) it.id.copy(namespace = "adorn") else it.id
-                Entry(id.suffixed(blockType), it.isModded())
+                Entry(it, id.suffixed(blockType), it.isModded())
             }
     }
 
     class Filtered(private val parent: TagEntryProvider, private val filter: (Material) -> Boolean) : TagEntryProvider {
-        override fun getEntries(materials: Collection<Material>): Map<Material, Entry> =
-            parent.getEntries(materials).filterKeys(filter)
+        override fun getEntries(materials: Collection<Material>): List<Entry> =
+            parent.getEntries(materials).filter { filter(it.material) }
     }
 
     class Multi(private val parents: List<TagEntryProvider>) : TagEntryProvider {
         constructor(vararg parents: TagEntryProvider) : this(parents.toList())
 
-        override fun getEntries(materials: Collection<Material>): Map<Material, Entry> {
-            val result = mutableMapOf<Material, Entry>()
-            for (parent in parents) result += parent.getEntries(materials)
-            return result
-        }
+        override fun getEntries(materials: Collection<Material>): List<Entry> =
+            parents.flatMap { it.getEntries(materials) }
     }
 }
