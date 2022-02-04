@@ -1,0 +1,59 @@
+<data_generators condition_type="forge">
+    <wood id="byg:aspen"/>
+    <wood id="byg:baobab"/>
+    <wood id="byg:blue_enchanted"/>
+    <wood id="byg:bulbis" fungus="true"/>
+    <wood id="byg:cherry"/>
+    <wood id="byg:cika"/>
+    <wood id="byg:cypress"/>
+    <wood id="byg:ebony"/>
+    <wood id="byg:embur">
+        <replace key="log" with="byg:embur_pedu" id="true"/>
+    </wood>
+    <wood id="byg:ether"/>
+    <wood id="byg:fir"/>
+    <wood id="byg:green_enchanted"/>
+    <wood id="byg:holly"/>
+    <wood id="byg:imparius" fungus="true"/>
+    <wood id="byg:jacaranda"/>
+    <wood id="byg:lament"/>
+    <wood id="byg:mahogany"/>
+    <wood id="byg:mangrove"/>
+    <wood id="byg:maple"/>
+    <wood id="byg:nightshade"/>
+    <wood id="byg:palm"/>
+    <wood id="byg:pine"/>
+    <wood id="byg:rainbow_eucalyptus"/>
+    <wood id="byg:redwood"/>
+    <wood id="byg:skyris"/>
+    <wood id="byg:sythian" fungus="true"/>
+    <wood id="byg:willow"/>
+    <wood id="byg:witch_hazel"/>
+    <wood id="byg:zelkova"/>
+    <stone id="byg:dacite"/>
+    <stone id="byg:dacite_brick" bricks="true"/>
+    <stone id="byg:dacite_cobblestone"/>
+    <stone id="byg:mossy_stone"/>
+    <stone id="byg:rocky_stone"/>
+    <stone id="byg:scoria_stone" sided_texture="true">
+        <replace key="top-texture" with="byg:block/scoria_stone_top"/>
+        <replace key="bottom-texture" with="byg:block/scoria_stone_top"/>
+        <replace key="side-texture" with="byg:block/scoria_stone"/>
+    </stone>
+    <stone id="byg:scoria_cobblestone"/>
+    <stone id="byg:scoria_stonebrick" bricks="true">
+        <replace key="main-texture" with="byg:block/scoria_stone_bricks"/>
+    </stone>
+    <stone id="byg:soapstone"/>
+    <stone id="byg:polished_soapstone">
+        <replace key="main-texture" with="byg:block/soapstone_polished"/>
+    </stone>
+    <stone id="byg:soapstone_brick" bricks="true"/>
+    <stone id="byg:soapstone_tile"/>
+    <stone id="byg:red_rock"/>
+    <stone id="byg:red_rock_brick" bricks="true"/>
+    <stone id="byg:mossy_red_rock_brick" bricks="true"/>
+    <stone id="byg:cracked_red_rock_brick" bricks="true"/>
+    <stone id="byg:chiseled_red_rock_brick" bricks="true"/>
+    <!-- TODO: other stones declared in #walls -->
+</data_generators>

@@ -1,5 +1,5 @@
 plugins {
-    id("adorn-datagen")
+    id("adorn-data-generator")
 }
 
 architectury {
@@ -13,111 +13,6 @@ val accessWidenerFile = project(":common").file("src/main/resources/adorn.access
 loom {
     // Technically useless, BUT this is also needed at dev runtime of course
     accessWidenerPath.set(accessWidenerFile)
-}
-
-datagen {
-    fabricConditions()
-    wood("biomemakeover:blighted_balsa")
-    wood("biomemakeover:swamp_cypress")
-    wood("biomemakeover:willow")
-    wood("byg:aspen")
-    wood("byg:baobab")
-    wood("byg:blue_enchanted")
-    wood("byg:bulbis", fungus = true)
-    wood("byg:cherry")
-    wood("byg:cika")
-    wood("byg:cypress")
-    wood("byg:ebony")
-    wood("byg:embur") {
-        replace {
-            "log" withId "byg:embur_pedu"
-        }
-    }
-    wood("byg:ether")
-    wood("byg:fir")
-    wood("byg:green_enchanted")
-    wood("byg:holly")
-    wood("byg:imparius", fungus = true)
-    wood("byg:jacaranda")
-    wood("byg:lament")
-    wood("byg:mahogany")
-    wood("byg:mangrove")
-    wood("byg:maple")
-    wood("byg:nightshade")
-    wood("byg:palm")
-    wood("byg:pine")
-    wood("byg:rainbow_eucalyptus")
-    wood("byg:redwood")
-    wood("byg:skyris")
-    wood("byg:sythian", fungus = true)
-    wood("byg:willow")
-    wood("byg:witch_hazel")
-    wood("byg:zelkova")
-    stone("byg:dacite")
-    stone("byg:dacite_brick", brick = true)
-    stone("byg:dacite_cobblestone")
-    stone("byg:mossy_stone")
-    stone("byg:rocky_stone")
-    stone("byg:scoria_stone", hasSidedTexture = true) {
-        replace {
-            "top-texture" with "byg:block/scoria_stone_top"
-            "bottom-texture" with "byg:block/scoria_stone_top"
-            "side-texture" with "byg:block/scoria_stone"
-        }
-    }
-    stone("byg:scoria_cobblestone")
-    stone("byg:scoria_stonebrick", brick = true) {
-        replace {
-            "main-texture" with "byg:block/scoria_stone_bricks"
-        }
-    }
-    stone("byg:soapstone")
-    stone("byg:polished_soapstone") {
-        replace {
-            "main-texture" with "byg:block/soapstone_polished"
-        }
-    }
-    stone("byg:soapstone_brick", brick = true)
-    stone("byg:soapstone_tile")
-    stone("byg:red_rock")
-    stone("byg:red_rock_brick", brick = true)
-    stone("byg:mossy_red_rock_brick", brick = true)
-    stone("byg:cracked_red_rock_brick", brick = true)
-    stone("byg:chiseled_red_rock_brick", brick = true)
-    // TODO: Stones declared in #walls
-    wood("cinderscapes:scorched", fungus = true)
-    wood("cinderscapes:umbral", fungus = true)
-    wood("terrestria:cypress")
-    wood("terrestria:hemlock")
-    wood("terrestria:japanese_maple")
-    wood("terrestria:rainbow_eucalyptus")
-    wood("terrestria:redwood")
-    wood("terrestria:rubber")
-    wood("terrestria:sakura") {
-        exclude("block_models/bench_leg")
-        exclude("block_models/coffee_table")
-        exclude("block_models/table_leg")
-        exclude("item_models/bench")
-        exclude("item_models/table")
-    }
-    wood("terrestria:willow")
-    wood("terrestria:yucca_palm") {
-        exclude("block_models/bench_leg")
-        exclude("item_models/bench")
-    }
-    stone("terrestria:basalt")
-    stone("terrestria:basalt_brick", brick = true)
-    stone("terrestria:basalt_cobblestone")
-    stone("terrestria:mossy_basalt_brick", brick = true)
-    stone("terrestria:mossy_basalt_cobblestone")
-    stone("terrestria:smooth_basalt")
-    wood("traverse:fir")
-    wood("woods_and_mires:pine") {
-        exclude("block_models/kitchen_counter")
-        exclude("block_models/kitchen_sink")
-        exclude("item_models/kitchen_cupboard")
-        exclude("recipes/kitchen_counter")
-    }
 }
 
 sourceSets {

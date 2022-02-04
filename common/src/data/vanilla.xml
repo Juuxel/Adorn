@@ -1,0 +1,83 @@
+<data_generators wool="true">
+    <wood id="minecraft:oak"/>
+    <wood id="minecraft:spruce"/>
+    <wood id="minecraft:birch">
+        <exclude generator="block_models/coffee_table"/>
+    </wood>
+    <wood id="minecraft:jungle">
+        <exclude generator="block_models/coffee_table"/>
+    </wood>
+    <wood id="minecraft:acacia">
+        <exclude generator="block_models/coffee_table"/>
+    </wood>
+    <wood id="minecraft:dark_oak"/>
+    <wood id="minecraft:crimson" fungus="true"/>
+    <wood id="minecraft:warped" fungus="true"/>
+    <stone id="minecraft:andesite"/>
+    <stone id="minecraft:basalt" sided_texture="true">
+        <exclude generator="recipes/platform"/>
+        <exclude generator="recipe_advancements/platform"/>
+        <exclude generator="recipes/step"/>
+        <exclude generator="recipe_advancements/step"/>
+
+        <replace key="side-texture" with="minecraft:block/basalt_side"/>
+        <replace key="top-texture" with="minecraft:block/basalt_top"/>
+        <replace key="bottom-texture" with="minecraft:block/basalt_top"/>
+    </stone>
+    <stone id="minecraft:blackstone"/>
+    <stone id="minecraft:brick" bricks="true"/>
+    <stone id="minecraft:cobblestone"/>
+    <stone id="minecraft:cut_red_sandstone" sided_texture="true">
+        <replace key="side-texture" with="minecraft:block/cut_red_sandstone"/>
+        <replace key="top-texture" with="minecraft:block/red_sandstone_top"/>
+        <replace key="bottom-texture" with="minecraft:block/red_sandstone_top"/>
+    </stone>
+    <stone id="minecraft:cut_sandstone" sided_texture="true">
+        <replace key="side-texture" with="minecraft:block/cut_sandstone"/>
+        <replace key="top-texture" with="minecraft:block/sandstone_top"/>
+        <replace key="bottom-texture" with="minecraft:block/sandstone_top"/>
+    </stone>
+    <stone id="minecraft:dark_prismarine"/>
+    <stone id="minecraft:diorite"/>
+    <stone id="minecraft:end_stone_brick" bricks = "true"/>
+    <stone id="minecraft:granite"/>
+    <stone id="minecraft:mossy_cobblestone"/>
+    <stone id="minecraft:mossy_stone_brick" bricks = "true"/>
+    <stone id="minecraft:nether_brick" bricks = "true"/>
+    <stone id="minecraft:polished_andesite"/>
+    <stone id="minecraft:polished_blackstone"/>
+    <stone id="minecraft:polished_blackstone_brick" bricks = "true"/>
+    <stone id="minecraft:polished_diorite"/>
+    <stone id="minecraft:polished_granite"/>
+    <stone id="minecraft:prismarine"/>
+    <stone id="minecraft:prismarine_brick" bricks = "true"/>
+    <stone id="minecraft:purpur">
+        <replace key="planks" with="minecraft:purpur_block" id="true"/>
+    </stone>
+    <stone id="minecraft:quartz" sided_texture="true">
+        <replace key="planks" with="minecraft:quartz_block" id="true"/>
+        <replace key="side-texture" with="minecraft:block/quartz_block_side"/>
+        <replace key="top-texture" with="minecraft:block/quartz_block_top"/>
+        <replace key="bottom-texture" with="minecraft:block/quartz_block_bottom"/>
+    </stone>
+    <stone id="minecraft:red_nether_brick" bricks="true"/>
+    <stone id="minecraft:red_sandstone" sided_texture="true">
+        <replace key="side-texture" with="minecraft:block/red_sandstone"/>
+        <replace key="top-texture" with="minecraft:block/red_sandstone_top"/>
+        <replace key="bottom-texture" with="minecraft:block/red_sandstone_bottom"/>
+    </stone>
+    <stone id="minecraft:sandstone" sided_texture="true">
+        <replace key="side-texture" with="minecraft:block/sandstone"/>
+        <replace key="top-texture" with="minecraft:block/sandstone_top"/>
+        <replace key="bottom-texture" with="minecraft:block/sandstone_bottom"/>
+    </stone>
+    <stone id="minecraft:smooth_red_sandstone">
+        <replace key="main-texture" with="minecraft:block/red_sandstone_top"/>
+    </stone>
+    <stone id="minecraft:smooth_sandstone">
+        <replace key="main-texture" with="minecraft:block/sandstone_top"/>
+    </stone>
+    <stone id="minecraft:smooth_stone"/>
+    <stone id="minecraft:stone_brick" bricks="true"/>
+    <stone id="minecraft:stone"/>
+</data_generators>

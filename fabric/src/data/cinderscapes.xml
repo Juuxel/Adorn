@@ -1,0 +1,4 @@
+<data_generators condition_type="fabric">
+    <wood id="cinderscapes:scorched" fungus="true"/>
+    <wood id="cinderscapes:umbral" fungus="true"/>
+</data_generators>

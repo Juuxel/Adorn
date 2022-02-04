@@ -1,0 +1,26 @@
+<data_generators condition_type="fabric">
+    <wood id="terrestria:cypress"/>
+    <wood id="terrestria:hemlock"/>
+    <wood id="terrestria:japanese_maple"/>
+    <wood id="terrestria:rainbow_eucalyptus"/>
+    <wood id="terrestria:redwood"/>
+    <wood id="terrestria:rubber"/>
+    <wood id="terrestria:sakura">
+        <exclude generator="block_models/bench_leg"/>
+        <exclude generator="block_models/coffee_table"/>
+        <exclude generator="block_models/table_leg"/>
+        <exclude generator="item_models/bench"/>
+        <exclude generator="item_models/table"/>
+    </wood>
+    <wood id="terrestria:willow"/>
+    <wood id="terrestria:yucca_palm">
+        <exclude generator="block_models/bench_leg"/>
+        <exclude generator="item_models/bench"/>
+    </wood>
+    <stone id="terrestria:basalt"/>
+    <stone id="terrestria:basalt_brick" bricks="true"/>
+    <stone id="terrestria:basalt_cobblestone"/>
+    <stone id="terrestria:mossy_basalt_brick" bricks="true"/>
+    <stone id="terrestria:mossy_basalt_cobblestone"/>
+    <stone id="terrestria:smooth_basalt"/>
+</data_generators>
