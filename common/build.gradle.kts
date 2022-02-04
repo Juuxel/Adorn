@@ -20,3 +20,11 @@ dependencies {
 
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:${rootProject.property("rei")}")
 }
+
+tasks {
+    generateTags {
+        rootProject.subprojects {
+            configs.from(fileTree("src/data"))
+        }
+    }
+}

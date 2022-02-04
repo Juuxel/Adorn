@@ -26,10 +26,11 @@ interface BuildingMaterial : Material {
     val slab: Id
 }
 
-class WoodMaterial(override val id: Id, private val fungus: Boolean) : BuildingMaterial {
+class WoodMaterial(override val id: Id, private val fungus: Boolean, private val nonFlammable: Boolean? = null) : BuildingMaterial {
     override val slab = id.suffixed("slab")
     override val planks = id.suffixed("planks")
     override val stick = Material.STICK
+    val flammable: Boolean get() = !(nonFlammable ?: fungus)
 
     val log =
         if (fungus) id.suffixed("stem")
