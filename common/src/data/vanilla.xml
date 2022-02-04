@@ -11,8 +11,8 @@
         <exclude generator="block_models/coffee_table"/>
     </wood>
     <wood id="minecraft:dark_oak"/>
-    <wood id="minecraft:crimson" fungus="true"/>
-    <wood id="minecraft:warped" fungus="true"/>
+    <wood id="minecraft:crimson" fungus="true" non_flammable="true"/>
+    <wood id="minecraft:warped" fungus="true" non_flammable="true"/>
     <stone id="minecraft:andesite"/>
     <stone id="minecraft:basalt" sided_texture="true">
         <exclude generator="recipes/platform"/>

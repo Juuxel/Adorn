@@ -3,10 +3,8 @@
   "values": [
     "adorn:crimson_step",
     "adorn:warped_step",
-    { "id": "byg:bulbis_step", "required": false },
-    { "id": "byg:imparius_step", "required": false },
-    { "id": "byg:sythian_step", "required": false },
     { "id": "cinderscapes:scorched_step", "required": false },
-    { "id": "cinderscapes:umbral_step", "required": false }
+    { "id": "cinderscapes:umbral_step", "required": false },
+    { "id": "biomesoplenty:hellbark_step", "required": false }
   ]
 }

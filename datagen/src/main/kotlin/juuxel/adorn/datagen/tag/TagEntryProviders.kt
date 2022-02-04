@@ -37,7 +37,7 @@ object TagEntryProviders {
             WOODEN_SHELVES,
             WOODEN_STEPS,
         ),
-        filter = { it is WoodMaterial && !it.flammable }
+        filter = { it is WoodMaterial && it.nonFlammable }
     )
 
     private fun wood(blockType: String): TagEntryProvider =

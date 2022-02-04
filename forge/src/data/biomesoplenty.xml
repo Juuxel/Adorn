@@ -2,7 +2,7 @@
     <wood id="biomesoplenty:cherry"/>
     <wood id="biomesoplenty:dead"/>
     <wood id="biomesoplenty:fir"/>
-    <wood id="biomesoplenty:hellbark"/>
+    <wood id="biomesoplenty:hellbark" non_flammable="true"/>
     <wood id="biomesoplenty:jacaranda"/>
     <wood id="biomesoplenty:magic"/>
     <wood id="biomesoplenty:mahogany"/>

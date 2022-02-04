@@ -45,7 +45,8 @@ object GeneratorConfigLoader {
         val id = Id.parse(element.getAttribute(Attributes.ID))
         // toBoolean is luckily false by default (so also for empty strings)
         val fungus = element.getAttribute(Attributes.FUNGUS).toBoolean()
-        return readMaterialEntry(element, WoodMaterial(id, fungus))
+        val nonFlammable = element.getAttribute(Attributes.NON_FLAMMABLE).toBoolean()
+        return readMaterialEntry(element, WoodMaterial(id, fungus = fungus, nonFlammable = nonFlammable))
     }
 
     private fun readStone(element: Element): GeneratorConfig.MaterialEntry<StoneMaterial> {
@@ -80,6 +81,7 @@ object GeneratorConfigLoader {
         const val WOOL = "wool"
         const val ID = "id"
         const val FUNGUS = "fungus"
+        const val NON_FLAMMABLE = "non_flammable"
         const val BRICKS = "bricks"
         const val SIDED_TEXTURE = "sided_texture"
         const val GENERATOR = "generator"
