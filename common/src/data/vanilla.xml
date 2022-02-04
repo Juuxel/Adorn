@@ -39,18 +39,18 @@
     </stone>
     <stone id="minecraft:dark_prismarine"/>
     <stone id="minecraft:diorite"/>
-    <stone id="minecraft:end_stone_brick" bricks = "true"/>
+    <stone id="minecraft:end_stone_brick" bricks="true"/>
     <stone id="minecraft:granite"/>
     <stone id="minecraft:mossy_cobblestone"/>
-    <stone id="minecraft:mossy_stone_brick" bricks = "true"/>
-    <stone id="minecraft:nether_brick" bricks = "true"/>
+    <stone id="minecraft:mossy_stone_brick" bricks="true"/>
+    <stone id="minecraft:nether_brick" bricks="true"/>
     <stone id="minecraft:polished_andesite"/>
     <stone id="minecraft:polished_blackstone"/>
-    <stone id="minecraft:polished_blackstone_brick" bricks = "true"/>
+    <stone id="minecraft:polished_blackstone_brick" bricks="true"/>
     <stone id="minecraft:polished_diorite"/>
     <stone id="minecraft:polished_granite"/>
     <stone id="minecraft:prismarine"/>
-    <stone id="minecraft:prismarine_brick" bricks = "true"/>
+    <stone id="minecraft:prismarine_brick" bricks="true"/>
     <stone id="minecraft:purpur">
         <replace key="planks" with="minecraft:purpur_block" id="true"/>
     </stone>
