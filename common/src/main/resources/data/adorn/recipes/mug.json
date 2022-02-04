@@ -1,10 +1,16 @@
 {
-  "type": "crafting_shapeless",
-  "ingredients": [
-    { "item": "minecraft:glass_bottle" },
-    { "tag": "c:bricks" }
+  "type": "crafting_shaped",
+  "pattern": [
+    "Q Q",
+    " Q "
   ],
+  "key": {
+    "Q": {
+      "tag": "c:quartz"
+    }
+  },
   "result": {
-    "item": "adorn:mug"
+    "item": "adorn:mug",
+    "count": 3
   }
 }
