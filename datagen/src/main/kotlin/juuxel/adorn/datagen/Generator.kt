@@ -201,7 +201,7 @@ internal class Generator<in M : Material>(
 
         private fun stonecuttingRecipe(type: String, substitutionConfig: TemplateMaterialConfig = EMPTY_SUBSTITUTION): Generator<Material> =
             Generator(
-                "recipes/$type",
+                "recipes/$type/stonecutting",
                 "data/adorn/recipes/stonecutting/<mod-prefix><id.path>_$type.json",
                 "recipes/stonecutting/$type.json",
                 substitutionConfig = BASIC_SUBSTITUTION + substitutionConfig,
