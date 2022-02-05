@@ -8,14 +8,9 @@
     "R": {
       "tag": "c:stone_rods"
     },
-    "C": [
-      {
-        "tag": "c:coal"
-      },
-      {
-        "tag": "c:charcoal"
-      }
-    ]
+    "C": {
+      "tag": "minecraft:coals"
+    }
   },
   "result": {
     "item": "adorn:stone_torch",
