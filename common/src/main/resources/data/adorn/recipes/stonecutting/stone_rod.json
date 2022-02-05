@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "tag": "c:stone"
+  },
+  "result": "adorn:stone_rod",
+  "count": 2
+}
