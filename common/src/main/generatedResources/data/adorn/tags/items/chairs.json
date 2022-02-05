@@ -59,6 +59,8 @@
     { "id": "adorn:terrestria/yucca_palm_chair", "required": false },
     { "id": "adorn:traverse/fir_chair", "required": false },
     { "id": "adorn:woods_and_mires/pine_chair", "required": false },
+    { "id": "adorn:azalea/azalea_chair", "required": false },
+    { "id": "adorn:azalea/flowering_azalea_chair", "required": false },
     { "id": "adorn:biomesoplenty/cherry_chair", "required": false },
     { "id": "adorn:biomesoplenty/dead_chair", "required": false },
     { "id": "adorn:biomesoplenty/fir_chair", "required": false },

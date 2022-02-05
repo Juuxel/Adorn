@@ -86,6 +86,8 @@
   "block.adorn.promenade.palm_chair": "Palm Chair",
   "block.adorn.techreborn.rubber_chair": "Rubber Chair",
   "block.adorn.blockus.white_oak_chair": "White Oak Chair",
+  "block.adorn.azalea.azalea_chair": "Azalea Chair",
+  "block.adorn.azalea.flowering_azalea_chair": "Flowering Azalea Chair",
 
   "block.adorn.oak_table": "Oak Table",
   "block.adorn.spruce_table": "Spruce Table",
@@ -156,6 +158,8 @@
   "block.adorn.promenade.palm_table": "Palm Table",
   "block.adorn.techreborn.rubber_table": "Rubber Table",
   "block.adorn.blockus.white_oak_table": "White Oak Table",
+  "block.adorn.azalea.azalea_table": "Azalea Table",
+  "block.adorn.azalea.flowering_azalea_table": "Flowering Azalea Table",
 
   "block.adorn.oak_kitchen_counter": "Oak Kitchen Counter",
   "block.adorn.spruce_kitchen_counter": "Spruce Kitchen Counter",
@@ -226,6 +230,8 @@
   "block.adorn.promenade.palm_kitchen_counter": "Palm Kitchen Counter",
   "block.adorn.techreborn.rubber_kitchen_counter": "Rubber Kitchen Counter",
   "block.adorn.blockus.white_oak_kitchen_counter": "White Oak Kitchen Counter",
+  "block.adorn.azalea.azalea_kitchen_counter": "Azalea Kitchen Counter",
+  "block.adorn.azalea.flowering_azalea_kitchen_counter": "Flowering Azalea Kitchen Counter",
 
   "block.adorn.oak_kitchen_cupboard": "Oak Kitchen Cupboard",
   "block.adorn.spruce_kitchen_cupboard": "Spruce Kitchen Cupboard",
@@ -296,6 +302,8 @@
   "block.adorn.promenade.palm_kitchen_cupboard": "Palm Kitchen Cupboard",
   "block.adorn.techreborn.rubber_kitchen_cupboard": "Rubber Kitchen Cupboard",
   "block.adorn.blockus.white_oak_kitchen_cupboard": "White Oak Kitchen Cupboard",
+  "block.adorn.azalea.azalea_kitchen_cupboard": "Azalea Kitchen Cupboard",
+  "block.adorn.azalea.flowering_azalea_kitchen_cupboard": "Flowering Azalea Kitchen Cupboard",
 
   "block.adorn.oak_kitchen_sink": "Oak Kitchen Sink",
   "block.adorn.spruce_kitchen_sink": "Spruce Kitchen Sink",
@@ -366,6 +374,8 @@
   "block.adorn.promenade.palm_kitchen_sink": "Palm Kitchen Sink",
   "block.adorn.techreborn.rubber_kitchen_sink": "Rubber Kitchen Sink",
   "block.adorn.blockus.white_oak_kitchen_sink": "White Oak Kitchen Sink",
+  "block.adorn.azalea.azalea_kitchen_sink": "Azalea Kitchen Sink",
+  "block.adorn.azalea.flowering_azalea_kitchen_sink": "Flowering Azalea Kitchen Sink",
 
   "block.adorn.oak_drawer": "Oak Drawer",
   "block.adorn.spruce_drawer": "Spruce Drawer",
@@ -436,6 +446,8 @@
   "block.adorn.promenade.palm_drawer": "Palm Drawer",
   "block.adorn.techreborn.rubber_drawer": "Rubber Drawer",
   "block.adorn.blockus.white_oak_drawer": "White Oak Drawer",
+  "block.adorn.azalea.azalea_drawer": "Azalea Drawer",
+  "block.adorn.azalea.flowering_azalea_drawer": "Flowering Azalea Drawer",
 
   "block.adorn.trading_station": "Trading Station",
   "block.adorn.trading_station.selling": "Selling",
@@ -638,6 +650,8 @@
   "block.adorn.promenade.palm_post": "Palm Post",
   "block.adorn.techreborn.rubber_post": "Rubber Post",
   "block.adorn.blockus.white_oak_post": "White Oak Post",
+  "block.adorn.azalea.azalea_post": "Azalea Post",
+  "block.adorn.azalea.flowering_azalea_post": "Flowering Azalea Post",
   "block.adorn.post.desc": "A bit like a fence post",
 
   "block.adorn.oak_platform": "Oak Platform",
@@ -778,6 +792,8 @@
   "block.adorn.promenade.palm_platform": "Palm Platform",
   "block.adorn.techreborn.rubber_platform": "Rubber Platform",
   "block.adorn.blockus.white_oak_platform": "White Oak Platform",
+  "block.adorn.azalea.azalea_platform": "Azalea Platform",
+  "block.adorn.azalea.flowering_azalea_platform": "Flowering Azalea Platform",
   "block.adorn.platform.desc": "A post with a platform on top",
 
   "block.adorn.oak_step": "Oak Step",
@@ -918,6 +934,8 @@
   "block.adorn.promenade.palm_step": "Palm Step",
   "block.adorn.techreborn.rubber_step": "Rubber Step",
   "block.adorn.blockus.white_oak_step": "White Oak Step",
+  "block.adorn.azalea.azalea_step": "Azalea Step",
+  "block.adorn.azalea.flowering_azalea_step": "Flowering Azalea Step",
   "block.adorn.step.desc": "A small step with a post under it",
 
   "block.adorn.brick_chimney": "Brick Chimney",
@@ -1002,6 +1020,8 @@
   "block.adorn.promenade.palm_shelf": "Palm Shelf",
   "block.adorn.techreborn.rubber_shelf": "Rubber Shelf",
   "block.adorn.blockus.white_oak_shelf": "White Oak Shelf",
+  "block.adorn.azalea.azalea_shelf": "Azalea Shelf",
+  "block.adorn.azalea.flowering_azalea_shelf": "Flowering Azalea Shelf",
   "block.adorn.shelf.desc": "A handy place for everyday items",
 
   "block.adorn.white_table_lamp": "White Table Lamp",
@@ -1090,6 +1110,8 @@
   "block.adorn.promenade.palm_coffee_table": "Palm Coffee Table",
   "block.adorn.techreborn.rubber_coffee_table": "Rubber Coffee Table",
   "block.adorn.blockus.white_oak_coffee_table": "White Oak Coffee Table",
+  "block.adorn.azalea.azalea_coffee_table": "Azalea Coffee Table",
+  "block.adorn.azalea.flowering_azalea_coffee_table": "Flowering Azalea Coffee Table",
 
   "block.adorn.crate": "Crate",
   "block.adorn.wheat_crate": "Crate of Wheat",
@@ -1184,6 +1206,8 @@
   "block.adorn.promenade.palm_bench": "Palm Bench",
   "block.adorn.techreborn.rubber_bench": "Rubber Bench",
   "block.adorn.blockus.white_oak_bench": "White Oak Bench",
+  "block.adorn.azalea.azalea_bench": "Azalea Bench",
+  "block.adorn.azalea.flowering_azalea_bench": "Flowering Azalea Bench",
 
   "entity.adorn.seat": "Seat",
 

@@ -59,6 +59,8 @@
     { "id": "adorn:terrestria/yucca_palm_coffee_table", "required": false },
     { "id": "adorn:traverse/fir_coffee_table", "required": false },
     { "id": "adorn:woods_and_mires/pine_coffee_table", "required": false },
+    { "id": "adorn:azalea/azalea_coffee_table", "required": false },
+    { "id": "adorn:azalea/flowering_azalea_coffee_table", "required": false },
     { "id": "adorn:biomesoplenty/cherry_coffee_table", "required": false },
     { "id": "adorn:biomesoplenty/dead_coffee_table", "required": false },
     { "id": "adorn:biomesoplenty/fir_coffee_table", "required": false },

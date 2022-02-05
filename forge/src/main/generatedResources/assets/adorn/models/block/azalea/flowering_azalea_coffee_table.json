@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:block/templates/coffee_table",
+  "textures": {
+    "planks": "azalea:block/flowering_azalea_planks",
+    "leg": "azalea:block/flowering_azalea_log",
+    "rim": "azalea:block/flowering_azalea_log"
+  }
+}

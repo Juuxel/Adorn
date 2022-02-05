@@ -59,6 +59,8 @@
     { "id": "adorn:terrestria/yucca_palm_drawer", "required": false },
     { "id": "adorn:traverse/fir_drawer", "required": false },
     { "id": "adorn:woods_and_mires/pine_drawer", "required": false },
+    { "id": "adorn:azalea/azalea_drawer", "required": false },
+    { "id": "adorn:azalea/flowering_azalea_drawer", "required": false },
     { "id": "adorn:biomesoplenty/cherry_drawer", "required": false },
     { "id": "adorn:biomesoplenty/dead_drawer", "required": false },
     { "id": "adorn:biomesoplenty/fir_drawer", "required": false },

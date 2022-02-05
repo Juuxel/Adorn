@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:item/templates/chair",
+  "textures": {
+    "planks": "azalea:block/flowering_azalea_planks"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/post",
+  "textures": {
+    "texture": "azalea:block/flowering_azalea_planks"
+  }
+}

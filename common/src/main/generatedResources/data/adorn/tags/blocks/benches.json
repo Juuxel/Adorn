@@ -59,6 +59,8 @@
     { "id": "adorn:terrestria/yucca_palm_bench", "required": false },
     { "id": "adorn:traverse/fir_bench", "required": false },
     { "id": "adorn:woods_and_mires/pine_bench", "required": false },
+    { "id": "adorn:azalea/azalea_bench", "required": false },
+    { "id": "adorn:azalea/flowering_azalea_bench", "required": false },
     { "id": "adorn:biomesoplenty/cherry_bench", "required": false },
     { "id": "adorn:biomesoplenty/dead_bench", "required": false },
     { "id": "adorn:biomesoplenty/fir_bench", "required": false },

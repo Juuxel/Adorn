@@ -59,6 +59,8 @@
     { "id": "adorn:terrestria/yucca_palm_kitchen_cupboard", "required": false },
     { "id": "adorn:traverse/fir_kitchen_cupboard", "required": false },
     { "id": "adorn:woods_and_mires/pine_kitchen_cupboard", "required": false },
+    { "id": "adorn:azalea/azalea_kitchen_cupboard", "required": false },
+    { "id": "adorn:azalea/flowering_azalea_kitchen_cupboard", "required": false },
     { "id": "adorn:biomesoplenty/cherry_kitchen_cupboard", "required": false },
     { "id": "adorn:biomesoplenty/dead_kitchen_cupboard", "required": false },
     { "id": "adorn:biomesoplenty/fir_kitchen_cupboard", "required": false },
