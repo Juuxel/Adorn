@@ -12,6 +12,7 @@
     { "id": "adorn:biomemakeover/blighted_balsa_shelf", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_shelf", "required": false },
     { "id": "adorn:biomemakeover/willow_shelf", "required": false },
+    { "id": "adorn:blockus/white_oak_shelf", "required": false },
     { "id": "adorn:byg/aspen_shelf", "required": false },
     { "id": "adorn:byg/baobab_shelf", "required": false },
     { "id": "adorn:byg/blue_enchanted_shelf", "required": false },

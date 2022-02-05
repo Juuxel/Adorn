@@ -12,6 +12,7 @@
     { "id": "adorn:biomemakeover/blighted_balsa_kitchen_counter", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_kitchen_counter", "required": false },
     { "id": "adorn:biomemakeover/willow_kitchen_counter", "required": false },
+    { "id": "adorn:blockus/white_oak_kitchen_counter", "required": false },
     { "id": "adorn:byg/aspen_kitchen_counter", "required": false },
     { "id": "adorn:byg/baobab_kitchen_counter", "required": false },
     { "id": "adorn:byg/blue_enchanted_kitchen_counter", "required": false },

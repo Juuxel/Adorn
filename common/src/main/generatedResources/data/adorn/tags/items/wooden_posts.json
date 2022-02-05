@@ -12,6 +12,7 @@
     { "id": "adorn:biomemakeover/blighted_balsa_post", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_post", "required": false },
     { "id": "adorn:biomemakeover/willow_post", "required": false },
+    { "id": "adorn:blockus/white_oak_post", "required": false },
     { "id": "adorn:byg/aspen_post", "required": false },
     { "id": "adorn:byg/baobab_post", "required": false },
     { "id": "adorn:byg/blue_enchanted_post", "required": false },

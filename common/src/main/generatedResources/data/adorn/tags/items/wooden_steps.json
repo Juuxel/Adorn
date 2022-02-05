@@ -12,6 +12,7 @@
     { "id": "adorn:biomemakeover/blighted_balsa_step", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_step", "required": false },
     { "id": "adorn:biomemakeover/willow_step", "required": false },
+    { "id": "adorn:blockus/white_oak_step", "required": false },
     { "id": "adorn:byg/aspen_step", "required": false },
     { "id": "adorn:byg/baobab_step", "required": false },
     { "id": "adorn:byg/blue_enchanted_step", "required": false },

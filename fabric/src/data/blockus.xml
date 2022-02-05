@@ -1,0 +1,69 @@
+<data_generators condition_type="fabric">
+    <wood id="blockus:white_oak"/>
+    <stone id="blockus:andesite_brick" bricks="true"/>
+    <stone id="blockus:black_stone_brick" bricks="true"/>
+    <stone id="blockus:blaze_brick" bricks="true"/>
+    <stone id="blockus:blue_stone_brick" bricks="true"/>
+    <stone id="blockus:bluestone_brick" bricks="true"/>
+    <stone id="blockus:bluestone_tile" bricks="true"/>
+    <stone id="blockus:bluestone"/>
+    <stone id="blockus:brown_stone_brick" bricks="true"/>
+    <stone id="blockus:charred_brick" bricks="true"/>
+    <stone id="blockus:charred_nether_brick" bricks="true"/>
+    <stone id="blockus:crimson_warty_blackstone_brick" bricks="true"/>
+    <stone id="blockus:cyan_stone_brick" bricks="true"/>
+    <stone id="blockus:diorite_brick" bricks="true"/>
+    <stone id="blockus:dripstone_brick" bricks="true"/>
+    <stone id="blockus:gray_stone_brick" bricks="true"/>
+    <stone id="blockus:green_stone_brick" bricks="true"/>
+    <stone id="blockus:honeycomb_brick" bricks="true"/>
+    <stone id="blockus:ice_brick" bricks="true"/>
+    <stone id="blockus:large_brick" bricks="true"/>
+    <stone id="blockus:lava_brick" bricks="true"/>
+    <stone id="blockus:lava_polished_blackstone"/>
+    <stone id="blockus:light_blue_stone_brick" bricks="true"/>
+    <stone id="blockus:lime_stone_brick" bricks="true"/>
+    <stone id="blockus:limestone_brick" bricks="true"/>
+    <stone id="blockus:limestone_tile" bricks="true"/>
+    <stone id="blockus:limestone"/>
+    <stone id="blockus:magenta_stone_brick" bricks="true"/>
+    <stone id="blockus:magma_brick" bricks="true"/>
+    <stone id="blockus:marble_brick" bricks="true"/>
+    <stone id="blockus:marble_tile" bricks="true"/>
+    <stone id="blockus:marble"/>
+    <stone id="blockus:mossy_deepslate_brick" bricks="true"/>
+    <stone id="blockus:netherrack_brick" bricks="true"/>
+    <stone id="blockus:obsidian_brick" bricks="true"/>
+    <stone id="blockus:orange_stone_brick" bricks="true"/>
+    <stone id="blockus:phantom_purpur_brick" bricks="true"/>
+    <stone id="blockus:pink_stone_brick" bricks="true"/>
+    <stone id="blockus:polished_basalt_brick" bricks="true"/>
+    <stone id="blockus:purple_stone_brick" bricks="true"/>
+    <stone id="blockus:purpur_brick" bricks="true"/>
+    <stone id="blockus:quartz_tile" bricks="true"/>
+    <stone id="blockus:red_sandstone_brick" bricks="true"/>
+    <stone id="blockus:red_stone_brick" bricks="true"/>
+    <stone id="blockus:sandstone_brick" bricks="true"/>
+    <stone id="blockus:sandy_brick" bricks="true"/>
+    <stone id="blockus:small_bluestone_brick" bricks="true"/>
+    <stone id="blockus:small_end_stone_brick" bricks="true"/>
+    <stone id="blockus:small_limestone_brick" bricks="true"/>
+    <stone id="blockus:small_magma_brick" bricks="true"/>
+    <stone id="blockus:small_marble_brick" bricks="true"/>
+    <stone id="blockus:small_obsidian_brick" bricks="true"/>
+    <stone id="blockus:small_phantom_purpur_brick" bricks="true"/>
+    <stone id="blockus:small_purpur_brick" bricks="true"/>
+    <stone id="blockus:small_red_sandstone_brick" bricks="true"/>
+    <stone id="blockus:small_sandstone_brick" bricks="true"/>
+    <stone id="blockus:small_soul_sandstone_brick" bricks="true"/>
+    <stone id="blockus:snow_brick" bricks="true"/>
+    <stone id="blockus:soaked_brick" bricks="true"/>
+    <stone id="blockus:soul_sandstone_brick" bricks="true"/>
+    <stone id="blockus:soul_sandstone"/>
+    <stone id="blockus:teal_nether_brick" bricks="true"/>
+    <stone id="blockus:tuff_brick" bricks="true"/>
+    <stone id="blockus:water_brick" bricks="true"/>
+    <stone id="blockus:warped_warty_blackstone_brick" bricks="true"/>
+    <stone id="blockus:white_stone_brick" bricks="true"/>
+    <stone id="blockus:yellow_stone_brick" bricks="true"/>
+</data_generators>

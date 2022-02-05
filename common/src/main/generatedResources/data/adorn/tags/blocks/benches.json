@@ -12,6 +12,7 @@
     { "id": "adorn:biomemakeover/blighted_balsa_bench", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_bench", "required": false },
     { "id": "adorn:biomemakeover/willow_bench", "required": false },
+    { "id": "adorn:blockus/white_oak_bench", "required": false },
     { "id": "adorn:byg/aspen_bench", "required": false },
     { "id": "adorn:byg/baobab_bench", "required": false },
     { "id": "adorn:byg/blue_enchanted_bench", "required": false },

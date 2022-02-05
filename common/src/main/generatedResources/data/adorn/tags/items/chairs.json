@@ -12,6 +12,7 @@
     { "id": "adorn:biomemakeover/blighted_balsa_chair", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_chair", "required": false },
     { "id": "adorn:biomemakeover/willow_chair", "required": false },
+    { "id": "adorn:blockus/white_oak_chair", "required": false },
     { "id": "adorn:byg/aspen_chair", "required": false },
     { "id": "adorn:byg/baobab_chair", "required": false },
     { "id": "adorn:byg/blue_enchanted_chair", "required": false },

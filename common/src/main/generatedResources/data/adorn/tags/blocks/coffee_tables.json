@@ -12,6 +12,7 @@
     { "id": "adorn:biomemakeover/blighted_balsa_coffee_table", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_coffee_table", "required": false },
     { "id": "adorn:biomemakeover/willow_coffee_table", "required": false },
+    { "id": "adorn:blockus/white_oak_coffee_table", "required": false },
     { "id": "adorn:byg/aspen_coffee_table", "required": false },
     { "id": "adorn:byg/baobab_coffee_table", "required": false },
     { "id": "adorn:byg/blue_enchanted_coffee_table", "required": false },
