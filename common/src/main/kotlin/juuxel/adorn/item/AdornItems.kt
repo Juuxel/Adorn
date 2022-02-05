@@ -35,6 +35,9 @@ object AdornItems {
                 .maxCount(1)
         )
     }
+    val NETHER_WART_COFFEE by ITEMS.register("nether_wart_coffee") {
+        DrinkInMugItem(Item.Settings().group(ItemGroup.FOOD).food(DRINK_FOOD_COMPONENT).maxCount(1))
+    }
 
     val STONE_TORCH by ITEMS.register("stone_torch") {
         WallBlockItemWithDescription(

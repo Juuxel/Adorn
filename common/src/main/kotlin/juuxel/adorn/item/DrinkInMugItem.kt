@@ -7,7 +7,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.util.UseAction
 import net.minecraft.world.World
 
-class DrinkInMugItem(settings: Settings) : SimpleAdornItem(settings) {
+open class DrinkInMugItem(settings: Settings) : SimpleAdornItem(settings) {
     override fun finishUsing(stack: ItemStack, world: World, user: LivingEntity): ItemStack {
         val result = super.finishUsing(stack, world, user)
         return if (user is PlayerEntity && user.abilities.creativeMode) result else ItemStack(AdornItems.MUG)

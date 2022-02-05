@@ -2,6 +2,7 @@ package juuxel.adorn.lib
 
 import juuxel.adorn.block.BlockWithDescription
 import juuxel.adorn.item.BaseBlockItem
+import juuxel.adorn.item.ItemWithDescription
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import net.minecraft.block.Block
@@ -10,11 +11,9 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
-import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-abstract class RegistryHelper() {
+abstract class RegistryHelper {
     val blocks: Registrar<Block> = PlatformBridges.registrarFactory.block()
     val items: Registrar<Item> = PlatformBridges.registrarFactory.item()
 
@@ -58,11 +57,7 @@ abstract class RegistryHelper() {
                     stack: ItemStack?, world: World?, texts: MutableList<Text>, context: TooltipContext?
                 ) {
                     super.appendTooltip(stack, world, texts, context)
-                    texts.add(
-                        TranslatableText(block.descriptionKey).styled {
-                            it.withItalic(true).withColor(Formatting.DARK_GRAY)
-                        }
-                    )
+                    texts.add(ItemWithDescription.createDescriptionText(block.descriptionKey))
                 }
             }
         } else {
