@@ -124,6 +124,11 @@ object AdornBlocks : RegistryHelper() {
     val SMOOTH_STONE_POST: Block by registerBlock("smooth_stone_post") { PostBlock(BlockVariant.SMOOTH_STONE) }
     val MOSSY_COBBLESTONE_POST: Block by registerBlock("mossy_cobblestone_post") { PostBlock(BlockVariant.MOSSY_COBBLESTONE) }
     val MOSSY_STONE_BRICK_POST: Block by registerBlock("mossy_stone_brick_post") { PostBlock(BlockVariant.MOSSY_STONE_BRICK) }
+    val DEEPSLATE_POST: Block by registerBlock("deepslate_post") { PostBlock(BlockVariant.DEEPSLATE) }
+    val COBBLED_DEEPSLATE_POST: Block by registerBlock("cobbled_deepslate_post") { PostBlock(BlockVariant.COBBLED_DEEPSLATE) }
+    val POLISHED_DEEPSLATE_POST: Block by registerBlock("polished_deepslate_post") { PostBlock(BlockVariant.POLISHED_DEEPSLATE) }
+    val DEEPSLATE_BRICK_POST: Block by registerBlock("deepslate_brick_post") { PostBlock(BlockVariant.DEEPSLATE_BRICK) }
+    val DEEPSLATE_TILE_POST: Block by registerBlock("deepslate_tile_post") { PostBlock(BlockVariant.DEEPSLATE_TILE) }
 
     val OAK_PLATFORM: Block by registerBlock("oak_platform") { PlatformBlock(BlockVariant.OAK) }
     val SPRUCE_PLATFORM: Block by registerBlock("spruce_platform") { PlatformBlock(BlockVariant.SPRUCE) }
@@ -164,6 +169,11 @@ object AdornBlocks : RegistryHelper() {
     val SMOOTH_STONE_PLATFORM: Block by registerBlock("smooth_stone_platform") { PlatformBlock(BlockVariant.SMOOTH_STONE) }
     val MOSSY_COBBLESTONE_PLATFORM: Block by registerBlock("mossy_cobblestone_platform") { PlatformBlock(BlockVariant.MOSSY_COBBLESTONE) }
     val MOSSY_STONE_BRICK_PLATFORM: Block by registerBlock("mossy_stone_brick_platform") { PlatformBlock(BlockVariant.MOSSY_STONE_BRICK) }
+    val DEEPSLATE_PLATFORM: Block by registerBlock("deepslate_platform") { PlatformBlock(BlockVariant.DEEPSLATE) }
+    val COBBLED_DEEPSLATE_PLATFORM: Block by registerBlock("cobbled_deepslate_platform") { PlatformBlock(BlockVariant.COBBLED_DEEPSLATE) }
+    val POLISHED_DEEPSLATE_PLATFORM: Block by registerBlock("polished_deepslate_platform") { PlatformBlock(BlockVariant.POLISHED_DEEPSLATE) }
+    val DEEPSLATE_BRICK_PLATFORM: Block by registerBlock("deepslate_brick_platform") { PlatformBlock(BlockVariant.DEEPSLATE_BRICK) }
+    val DEEPSLATE_TILE_PLATFORM: Block by registerBlock("deepslate_tile_platform") { PlatformBlock(BlockVariant.DEEPSLATE_TILE) }
 
     val OAK_STEP: Block by registerBlock("oak_step") { StepBlock(BlockVariant.OAK) }
     val SPRUCE_STEP: Block by registerBlock("spruce_step") { StepBlock(BlockVariant.SPRUCE) }
@@ -204,6 +214,11 @@ object AdornBlocks : RegistryHelper() {
     val SMOOTH_STONE_STEP: Block by registerBlock("smooth_stone_step") { StepBlock(BlockVariant.SMOOTH_STONE) }
     val MOSSY_COBBLESTONE_STEP: Block by registerBlock("mossy_cobblestone_step") { StepBlock(BlockVariant.MOSSY_COBBLESTONE) }
     val MOSSY_STONE_BRICK_STEP: Block by registerBlock("mossy_stone_brick_step") { StepBlock(BlockVariant.MOSSY_STONE_BRICK) }
+    val DEEPSLATE_STEP: Block by registerBlock("deepslate_step") { StepBlock(BlockVariant.DEEPSLATE) }
+    val COBBLED_DEEPSLATE_STEP: Block by registerBlock("cobbled_deepslate_step") { StepBlock(BlockVariant.COBBLED_DEEPSLATE) }
+    val POLISHED_DEEPSLATE_STEP: Block by registerBlock("polished_deepslate_step") { StepBlock(BlockVariant.POLISHED_DEEPSLATE) }
+    val DEEPSLATE_BRICK_STEP: Block by registerBlock("deepslate_brick_step") { StepBlock(BlockVariant.DEEPSLATE_BRICK) }
+    val DEEPSLATE_TILE_STEP: Block by registerBlock("deepslate_tile_step") { StepBlock(BlockVariant.DEEPSLATE_TILE) }
 
     val OAK_SHELF: Block by registerBlock("oak_shelf") { ShelfBlock(BlockVariant.OAK) }
     val SPRUCE_SHELF: Block by registerBlock("spruce_shelf") { ShelfBlock(BlockVariant.SPRUCE) }

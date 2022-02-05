@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "adorn:block/cobbled_deepslate_step"
+    }
+  }
+}

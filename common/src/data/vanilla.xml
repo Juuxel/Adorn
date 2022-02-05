@@ -26,6 +26,7 @@
     </stone>
     <stone id="minecraft:blackstone"/>
     <stone id="minecraft:brick" bricks="true"/>
+    <stone id="minecraft:cobbled_deepslate"/>
     <stone id="minecraft:cobblestone"/>
     <stone id="minecraft:cut_red_sandstone" sided_texture="true">
         <replace key="side-texture" with="minecraft:block/cut_red_sandstone"/>
@@ -38,6 +39,14 @@
         <replace key="bottom-texture" with="minecraft:block/sandstone_top"/>
     </stone>
     <stone id="minecraft:dark_prismarine"/>
+    <stone id="minecraft:deepslate">
+        <exclude generator="recipes/platform"/>
+        <exclude generator="recipe_advancements/platform"/>
+        <exclude generator="recipes/step"/>
+        <exclude generator="recipe_advancements/step"/>
+    </stone>
+    <stone id="minecraft:deepslate_brick" bricks="true"/>
+    <stone id="minecraft:deepslate_tile" bricks="true"/>
     <stone id="minecraft:diorite"/>
     <stone id="minecraft:end_stone_brick" bricks="true"/>
     <stone id="minecraft:granite"/>
@@ -47,6 +56,7 @@
     <stone id="minecraft:polished_andesite"/>
     <stone id="minecraft:polished_blackstone"/>
     <stone id="minecraft:polished_blackstone_brick" bricks="true"/>
+    <stone id="minecraft:polished_deepslate"/>
     <stone id="minecraft:polished_diorite"/>
     <stone id="minecraft:polished_granite"/>
     <stone id="minecraft:prismarine"/>

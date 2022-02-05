@@ -70,6 +70,11 @@ interface BlockVariant {
         val SMOOTH_STONE = variant("smooth_stone", Blocks.SMOOTH_STONE)
         val MOSSY_COBBLESTONE = variant("mossy_cobblestone", Blocks.MOSSY_COBBLESTONE)
         val MOSSY_STONE_BRICK = variant("mossy_stone_brick", Blocks.MOSSY_STONE_BRICKS)
+        val DEEPSLATE = variant("deepslate", Blocks.DEEPSLATE)
+        val COBBLED_DEEPSLATE = variant("cobbled_deepslate", Blocks.COBBLED_DEEPSLATE)
+        val POLISHED_DEEPSLATE = variant("polished_deepslate", Blocks.POLISHED_DEEPSLATE)
+        val DEEPSLATE_BRICK = variant("deepslate_brick", Blocks.DEEPSLATE_BRICKS)
+        val DEEPSLATE_TILE = variant("deepslate_tile", Blocks.DEEPSLATE_TILES)
 
         fun variant(name: String, base: Block): BlockVariant = variant(name) { base.copySettingsSafely() }
 

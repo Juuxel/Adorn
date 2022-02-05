@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:deepslate_tile_slab"
+    },
+    "P": {
+      "item": "adorn:deepslate_tile_post"
+    }
+  },
+  "result": {
+    "item": "adorn:deepslate_tile_platform",
+    "count": 2
+  }
+}
