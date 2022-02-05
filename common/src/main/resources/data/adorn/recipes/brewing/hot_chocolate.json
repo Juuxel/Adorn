@@ -1,7 +1,7 @@
 {
   "type": "adorn:brewing",
   "first_ingredient": {
-    "item": "minecraft:cocoa_beans"
+    "tag": "c:cocoa_beans"
   },
   "second_ingredient": {
     "item": "minecraft:milk_bucket"
