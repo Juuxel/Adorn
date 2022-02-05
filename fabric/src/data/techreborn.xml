@@ -1,0 +1,6 @@
+<data_generators condition_type="fabric">
+    <wood id="techreborn:rubber">
+        <replace key="slab" with="techreborn:rubber_plank_slab" id="true"/>
+        <replace key="log_side" with="techreborn:block/rubber_log_side"/>
+    </wood>
+</data_generators>

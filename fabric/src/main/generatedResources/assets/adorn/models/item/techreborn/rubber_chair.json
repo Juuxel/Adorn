@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:item/templates/chair",
+  "textures": {
+    "planks": "techreborn:block/rubber_planks"
+  }
+}

@@ -46,6 +46,7 @@
     { "id": "promenade:cherry_oak_coffee_table", "required": false },
     { "id": "promenade:dark_amaranth_coffee_table", "required": false },
     { "id": "promenade:palm_coffee_table", "required": false },
+    { "id": "techreborn:rubber_coffee_table", "required": false },
     { "id": "terrestria:cypress_coffee_table", "required": false },
     { "id": "terrestria:hemlock_coffee_table", "required": false },
     { "id": "terrestria:japanese_maple_coffee_table", "required": false },

@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "techreborn:rubber_plank_slab"
+    },
+    "P": {
+      "item": "adorn:techreborn/rubber_post"
+    }
+  },
+  "result": {
+    "item": "adorn:techreborn/rubber_platform",
+    "count": 2
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["techreborn"]
+  }]
+
+}

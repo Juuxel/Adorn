@@ -46,6 +46,7 @@
     { "id": "promenade:cherry_oak_kitchen_sink", "required": false },
     { "id": "promenade:dark_amaranth_kitchen_sink", "required": false },
     { "id": "promenade:palm_kitchen_sink", "required": false },
+    { "id": "techreborn:rubber_kitchen_sink", "required": false },
     { "id": "terrestria:cypress_kitchen_sink", "required": false },
     { "id": "terrestria:hemlock_kitchen_sink", "required": false },
     { "id": "terrestria:japanese_maple_kitchen_sink", "required": false },

@@ -84,6 +84,7 @@
   "block.adorn.promenade.cherry_oak_chair": "Cherry Oak Chair",
   "block.adorn.promenade.dark_amaranth_chair": "Dark Amaranth Chair",
   "block.adorn.promenade.palm_chair": "Palm Chair",
+  "block.adorn.techreborn.rubber_chair": "Rubber Chair",
 
   "block.adorn.oak_table": "Oak Table",
   "block.adorn.spruce_table": "Spruce Table",
@@ -152,6 +153,7 @@
   "block.adorn.promenade.cherry_oak_table": "Cherry Oak Table",
   "block.adorn.promenade.dark_amaranth_table": "Dark Amaranth Table",
   "block.adorn.promenade.palm_table": "Palm Table",
+  "block.adorn.techreborn.rubber_table": "Rubber Table",
 
   "block.adorn.oak_kitchen_counter": "Oak Kitchen Counter",
   "block.adorn.spruce_kitchen_counter": "Spruce Kitchen Counter",
@@ -220,6 +222,7 @@
   "block.adorn.promenade.cherry_oak_kitchen_counter": "Cherry Oak Kitchen Counter",
   "block.adorn.promenade.dark_amaranth_kitchen_counter": "Dark Amaranth Kitchen Counter",
   "block.adorn.promenade.palm_kitchen_counter": "Palm Kitchen Counter",
+  "block.adorn.techreborn.rubber_kitchen_counter": "Rubber Kitchen Counter",
 
   "block.adorn.oak_kitchen_cupboard": "Oak Kitchen Cupboard",
   "block.adorn.spruce_kitchen_cupboard": "Spruce Kitchen Cupboard",
@@ -288,6 +291,7 @@
   "block.adorn.promenade.cherry_oak_kitchen_cupboard": "Cherry Oak Kitchen Cupboard",
   "block.adorn.promenade.dark_amaranth_kitchen_cupboard": "Dark Amaranth Kitchen Cupboard",
   "block.adorn.promenade.palm_kitchen_cupboard": "Palm Kitchen Cupboard",
+  "block.adorn.techreborn.rubber_kitchen_cupboard": "Rubber Kitchen Cupboard",
 
   "block.adorn.oak_kitchen_sink": "Oak Kitchen Sink",
   "block.adorn.spruce_kitchen_sink": "Spruce Kitchen Sink",
@@ -355,7 +359,8 @@
   "block.adorn.cinderscapes.umbral_kitchen_sink": "Umbral Kitchen Sink",
   "block.adorn.promenade.cherry_oak_kitchen_sink": "Cherry Oak Kitchen Sink",
   "block.adorn.promenade.dark_amaranth_kitchen_sink": "Dark Amaranth Kitchen Sink",
-  "block.adorn.promenade.palmkitchen__sink": "Palm Kitchen Sink",
+  "block.adorn.promenade.palm_kitchen_sink": "Palm Kitchen Sink",
+  "block.adorn.techreborn.rubber_kitchen_sink": "Rubber Kitchen Sink",
 
   "block.adorn.oak_drawer": "Oak Drawer",
   "block.adorn.spruce_drawer": "Spruce Drawer",
@@ -424,6 +429,7 @@
   "block.adorn.promenade.cherry_oak_drawer": "Cherry Oak Drawer",
   "block.adorn.promenade.dark_amaranth_drawer": "Dark Amaranth Drawer",
   "block.adorn.promenade.palm_drawer": "Palm Drawer",
+  "block.adorn.techreborn.rubber_drawer": "Rubber Drawer",
 
   "block.adorn.trading_station": "Trading Station",
   "block.adorn.trading_station.selling": "Selling",
@@ -619,6 +625,7 @@
   "block.adorn.promenade.cherry_oak_post": "Cherry Oak Post",
   "block.adorn.promenade.dark_amaranth_post": "Dark Amaranth Post",
   "block.adorn.promenade.palm_post": "Palm Post",
+  "block.adorn.techreborn.rubber_post": "Rubber Post",
   "block.adorn.post.desc": "A bit like a fence post",
 
   "block.adorn.oak_platform": "Oak Platform",
@@ -752,6 +759,7 @@
   "block.adorn.promenade.cherry_oak_platform": "Cherry Oak Platform",
   "block.adorn.promenade.dark_amaranth_platform": "Dark Amaranth Platform",
   "block.adorn.promenade.palm_platform": "Palm Platform",
+  "block.adorn.techreborn.rubber_platform": "Rubber Platform",
   "block.adorn.platform.desc": "A post with a platform on top",
 
   "block.adorn.oak_step": "Oak Step",
@@ -885,6 +893,7 @@
   "block.adorn.promenade.cherry_oak_step": "Cherry Oak Step",
   "block.adorn.promenade.dark_amaranth_step": "Dark Amaranth Step",
   "block.adorn.promenade.palm_step": "Palm Step",
+  "block.adorn.techreborn.rubber_step": "Rubber Step",
   "block.adorn.step.desc": "A small step with a post under it",
 
   "block.adorn.brick_chimney": "Brick Chimney",
@@ -967,6 +976,7 @@
   "block.adorn.promenade.cherry_oak_shelf": "Cherry Oak Shelf",
   "block.adorn.promenade.dark_amaranth_shelf": "Dark Amaranth Shelf",
   "block.adorn.promenade.palm_shelf": "Palm Shelf",
+  "block.adorn.techreborn.rubber_shelf": "Rubber Shelf",
   "block.adorn.shelf.desc": "A handy place for everyday items",
 
   "block.adorn.white_table_lamp": "White Table Lamp",
@@ -1053,6 +1063,7 @@
   "block.adorn.promenade.cherry_oak_coffee_table": "Cherry Oak Coffee Table",
   "block.adorn.promenade.dark_amaranth_coffee_table": "Dark Amaranth Coffee Table",
   "block.adorn.promenade.palm_coffee_table": "Palm Coffee Table",
+  "block.adorn.techreborn.rubber_coffee_table": "Rubber Coffee Table",
 
   "block.adorn.crate": "Crate",
   "block.adorn.wheat_crate": "Crate of Wheat",
@@ -1145,6 +1156,7 @@
   "block.adorn.promenade.cherry_oak_bench": "Cherry Oak Bench",
   "block.adorn.promenade.dark_amaranth_bench": "Dark Amaranth Bench",
   "block.adorn.promenade.palm_bench": "Palm Bench",
+  "block.adorn.techreborn.rubber_bench": "Rubber Bench",
 
   "entity.adorn.seat": "Seat",
 

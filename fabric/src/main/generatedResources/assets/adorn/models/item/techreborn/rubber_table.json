@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:item/templates/table",
+  "textures": {
+    "planks": "techreborn:block/rubber_planks",
+    "log": "techreborn:block/rubber_log_side"
+  }
+}

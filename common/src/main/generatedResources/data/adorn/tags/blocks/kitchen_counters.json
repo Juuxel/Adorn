@@ -46,6 +46,7 @@
     { "id": "promenade:cherry_oak_kitchen_counter", "required": false },
     { "id": "promenade:dark_amaranth_kitchen_counter", "required": false },
     { "id": "promenade:palm_kitchen_counter", "required": false },
+    { "id": "techreborn:rubber_kitchen_counter", "required": false },
     { "id": "terrestria:cypress_kitchen_counter", "required": false },
     { "id": "terrestria:hemlock_kitchen_counter", "required": false },
     { "id": "terrestria:japanese_maple_kitchen_counter", "required": false },

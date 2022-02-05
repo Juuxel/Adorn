@@ -46,6 +46,7 @@
     { "id": "promenade:cherry_oak_post", "required": false },
     { "id": "promenade:dark_amaranth_post", "required": false },
     { "id": "promenade:palm_post", "required": false },
+    { "id": "techreborn:rubber_post", "required": false },
     { "id": "terrestria:cypress_post", "required": false },
     { "id": "terrestria:hemlock_post", "required": false },
     { "id": "terrestria:japanese_maple_post", "required": false },

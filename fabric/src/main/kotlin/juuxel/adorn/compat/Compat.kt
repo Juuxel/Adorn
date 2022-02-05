@@ -14,6 +14,7 @@ object Compat {
             "biomemakeover" to { CompatBlocks.addVariants(BiomeMakeoverCompat) },
             "cinderscapes" to { CompatBlocks.addVariants(CinderscapesCompat) },
             "promenade" to { CompatBlocks.addVariants(PromenadeCompat) },
+            "techreborn" to { CompatBlocks.addVariants(TechRebornCompat) }
         )
 
         for ((mod, fn) in mods) {

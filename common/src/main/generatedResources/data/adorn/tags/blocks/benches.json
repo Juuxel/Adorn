@@ -46,6 +46,7 @@
     { "id": "promenade:cherry_oak_bench", "required": false },
     { "id": "promenade:dark_amaranth_bench", "required": false },
     { "id": "promenade:palm_bench", "required": false },
+    { "id": "techreborn:rubber_bench", "required": false },
     { "id": "terrestria:cypress_bench", "required": false },
     { "id": "terrestria:hemlock_bench", "required": false },
     { "id": "terrestria:japanese_maple_bench", "required": false },
