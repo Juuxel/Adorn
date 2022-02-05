@@ -2,6 +2,10 @@
   "replace": false,
   "values": [
     "minecraft:stone",
-    "minecraft:deepslate"
+    "minecraft:andesite",
+    "minecraft:diorite",
+    "minecraft:granite",
+    "minecraft:deepslate",
+    "minecraft:tuff"
   ]
 }
