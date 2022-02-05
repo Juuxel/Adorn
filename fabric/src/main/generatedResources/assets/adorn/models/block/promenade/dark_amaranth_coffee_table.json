@@ -1,8 +1,0 @@
-{
-  "parent": "adorn:block/templates/coffee_table",
-  "textures": {
-    "planks": "promenade:block/dark_amaranth_planks",
-    "leg": "promenade:block/dark_amaranth_stem/side",
-    "rim": "promenade:block/dark_amaranth_stem/side"
-  }
-}

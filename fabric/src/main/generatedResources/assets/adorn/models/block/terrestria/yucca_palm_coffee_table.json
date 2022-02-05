@@ -1,8 +1,0 @@
-{
-  "parent": "adorn:block/templates/coffee_table",
-  "textures": {
-    "planks": "terrestria:block/yucca_palm_planks",
-    "leg": "terrestria:block/yucca_palm_log",
-    "rim": "terrestria:block/yucca_palm_log"
-  }
-}

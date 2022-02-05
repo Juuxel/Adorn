@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/drawer",
-  "textures": {
-    "planks": "promenade:block/cherry_oak_planks"
-  }
-}

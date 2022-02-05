@@ -1,7 +1,0 @@
-{
-  "parent": "adorn:item/templates/table",
-  "textures": {
-    "planks": "traverse:block/fir_planks",
-    "log": "traverse:block/fir_log"
-  }
-}

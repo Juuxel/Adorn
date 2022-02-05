@@ -1,7 +1,0 @@
-{
-  "parent": "adorn:item/templates/table",
-  "textures": {
-    "planks": "biomemakeover:block/swamp_cypress_planks",
-    "log": "biomemakeover:block/swamp_cypress_log"
-  }
-}

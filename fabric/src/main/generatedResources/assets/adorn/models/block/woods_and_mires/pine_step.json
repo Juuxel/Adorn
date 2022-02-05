@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/step",
-  "textures": {
-    "texture": "woods_and_mires:block/pine_planks"
-  }
-}

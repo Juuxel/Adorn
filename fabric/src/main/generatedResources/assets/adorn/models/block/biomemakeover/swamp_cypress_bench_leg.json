@@ -1,7 +1,0 @@
-{
-  "parent": "adorn:block/templates/bench_leg",
-  "textures": {
-    "log": "biomemakeover:block/swamp_cypress_log",
-    "end": "biomemakeover:block/swamp_cypress_log_top"
-  }
-}

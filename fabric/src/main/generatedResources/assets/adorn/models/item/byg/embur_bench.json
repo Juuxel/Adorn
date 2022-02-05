@@ -1,8 +1,0 @@
-{
-  "parent": "adorn:item/templates/bench",
-  "textures": {
-    "planks": "byg:block/embur_planks",
-    "log": "byg:block/embur_pedu",
-    "end": "byg:block/embur_pedu_top"
-  }
-}

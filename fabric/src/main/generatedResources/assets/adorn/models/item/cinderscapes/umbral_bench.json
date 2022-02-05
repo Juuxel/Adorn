@@ -1,8 +1,0 @@
-{
-  "parent": "adorn:item/templates/bench",
-  "textures": {
-    "planks": "cinderscapes:block/umbral_planks",
-    "log": "cinderscapes:block/umbral_stem",
-    "end": "cinderscapes:block/umbral_stem_top"
-  }
-}

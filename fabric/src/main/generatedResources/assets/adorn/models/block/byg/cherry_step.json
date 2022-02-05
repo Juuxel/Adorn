@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/step",
-  "textures": {
-    "texture": "byg:block/cherry_planks"
-  }
-}

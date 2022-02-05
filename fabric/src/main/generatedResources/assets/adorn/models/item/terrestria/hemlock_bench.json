@@ -1,8 +1,0 @@
-{
-  "parent": "adorn:item/templates/bench",
-  "textures": {
-    "planks": "terrestria:block/hemlock_planks",
-    "log": "terrestria:block/hemlock_log",
-    "end": "terrestria:block/hemlock_log_top"
-  }
-}

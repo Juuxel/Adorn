@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/step",
-  "textures": {
-    "texture": "techreborn:block/rubber_planks"
-  }
-}

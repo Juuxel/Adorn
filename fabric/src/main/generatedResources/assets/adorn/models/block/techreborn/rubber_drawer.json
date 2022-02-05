@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/drawer",
-  "textures": {
-    "planks": "techreborn:block/rubber_planks"
-  }
-}

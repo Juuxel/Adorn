@@ -1,8 +1,0 @@
-{
-  "parent": "adorn:block/templates/platform_with_sides",
-  "textures": {
-    "side": "byg:block/scoria_stone",
-    "up": "byg:block/scoria_stone_top",
-    "down": "byg:block/scoria_stone_top"
-  }
-}

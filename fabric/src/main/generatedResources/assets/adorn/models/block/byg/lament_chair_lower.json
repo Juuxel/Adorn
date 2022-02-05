@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/chair_lower",
-  "textures": {
-    "planks": "byg:block/lament_planks"
-  }
-}

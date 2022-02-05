@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/platform",
-  "textures": {
-    "texture": "biomemakeover:block/willow_planks"
-  }
-}

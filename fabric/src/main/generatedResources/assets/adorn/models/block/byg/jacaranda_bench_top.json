@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/bench_top",
-  "textures": {
-    "planks": "byg:block/jacaranda_planks"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "adorn:item/templates/bench",
-  "textures": {
-    "planks": "terrestria:block/rubber_planks",
-    "log": "terrestria:block/rubber_log",
-    "end": "terrestria:block/rubber_log_top"
-  }
-}

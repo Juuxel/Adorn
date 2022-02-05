@@ -1,8 +1,0 @@
-{
-  "parent": "adorn:block/templates/coffee_table",
-  "textures": {
-    "planks": "cinderscapes:block/scorched_planks",
-    "leg": "cinderscapes:block/scorched_stem",
-    "rim": "cinderscapes:block/scorched_stem"
-  }
-}

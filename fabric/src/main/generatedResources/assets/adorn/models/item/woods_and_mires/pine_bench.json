@@ -1,8 +1,0 @@
-{
-  "parent": "adorn:item/templates/bench",
-  "textures": {
-    "planks": "woods_and_mires:block/pine_planks",
-    "log": "woods_and_mires:block/pine_log",
-    "end": "woods_and_mires:block/pine_log_top"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/post",
-  "textures": {
-    "texture": "traverse:block/fir_planks"
-  }
-}

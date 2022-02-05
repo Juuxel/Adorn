@@ -1,8 +1,0 @@
-{
-  "parent": "adorn:item/templates/bench",
-  "textures": {
-    "planks": "promenade:block/dark_amaranth_planks",
-    "log": "promenade:block/dark_amaranth_stem/side",
-    "end": "promenade:block/dark_amaranth_stem/top"
-  }
-}
