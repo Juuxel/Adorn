@@ -23,6 +23,16 @@
         ]
       }
     },
+    "has_brewer": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["adorn:brewer"]
+          }
+        ]
+      }
+    },
     "has_chain_link_fence": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {

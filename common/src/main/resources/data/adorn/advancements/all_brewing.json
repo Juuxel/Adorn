@@ -1,0 +1,57 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:brewer"
+    },
+    "title": {
+      "translate": "advancements.adorn.all_brewing.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.all_brewing.description"
+    },
+    "frame": "goal"
+  },
+  "parent": "adorn:nether_wart_coffee",
+  "criteria": {
+    "has_glow_berry_tea": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["adorn:glow_berry_tea"]
+          }
+        ]
+      }
+    },
+    "has_hot_chocolate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["adorn:hot_chocolate"]
+          }
+        ]
+      }
+    },
+    "has_nether_wart_coffee": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["adorn:nether_wart_coffee"]
+          }
+        ]
+      }
+    },
+    "has_sweet_berry_juice": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["adorn:sweet_berry_juice"]
+          }
+        ]
+      }
+    }
+  }
+}

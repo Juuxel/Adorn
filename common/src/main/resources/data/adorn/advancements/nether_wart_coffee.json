@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "adorn:nether_wart_coffee"
+    },
+    "title": {
+      "translate": "advancements.adorn.nether_wart_coffee.title"
+    },
+    "description": {
+      "translate": "advancements.adorn.nether_wart_coffee.description"
+    }
+  },
+  "parent": "adorn:root",
+  "criteria": {
+    "has_nether_wart_coffee": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["adorn:nether_wart_coffee"]
+          }
+        ]
+      }
+    }
+  }
+}
