@@ -11,7 +11,10 @@ interface TagEntryProvider {
     class Simple(private val blockType: String) : TagEntryProvider {
         override fun getEntries(materials: Collection<Material>): List<Entry> =
             materials.map {
-                val id = if (!it.isModded()) it.id.copy(namespace = "adorn") else it.id
+                val id = Id(
+                    "adorn",
+                    if (it.isModded()) "${it.id.namespace}/${it.id.path}" else it.id.path
+                )
                 Entry(it, id.suffixed(blockType), it.isModded())
             }
     }
