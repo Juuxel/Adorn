@@ -15,3 +15,8 @@ logoFile = "icon.png"
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.18.1,1.19)"
+
+[[dependencies.adorn]]
+modId = "forge"
+mandatory = true
+versionRange="[39.0.66,)"
