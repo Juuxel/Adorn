@@ -4,7 +4,7 @@
     "tag": "c:cocoa_beans"
   },
   "second_ingredient": {
-    "item": "minecraft:milk_bucket"
+    "tag": "c:milks"
   },
   "result": {
     "item": "adorn:hot_chocolate"
