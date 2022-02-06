@@ -17,7 +17,7 @@ object AdornItems {
     val GROUP = PlatformBridges.items.createAdornItemGroup()
     private val DRINK_FOOD_COMPONENT = drinkFoodComponentBuilder().build()
 
-    private fun drinkFoodComponentBuilder() = FoodComponent.Builder().hunger(2).saturationModifier(0.1F).alwaysEdible()
+    private fun drinkFoodComponentBuilder() = FoodComponent.Builder().hunger(4).saturationModifier(0.3F).alwaysEdible()
 
     val STONE_ROD by ITEMS.register("stone_rod") { ItemWithDescription(Item.Settings().group(ItemGroup.MISC)) }
     val MUG by ITEMS.register("mug") { SimpleAdornItem(Item.Settings().group(ItemGroup.FOOD)) }
