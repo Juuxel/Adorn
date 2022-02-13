@@ -32,16 +32,6 @@
     },
     {
       "apply": {
-        "model": "adorn:block/kitchen_sink_water",
-        "y": 270
-      },
-      "when": {
-        "facing": "north",
-        "waterlogged": "true"
-      }
-    },
-    {
-      "apply": {
         "model": "adorn:block/crimson_kitchen_sink",
         "uvlock": true
       },
@@ -65,15 +55,6 @@
       "when": {
         "facing": "east",
         "front": "right"
-      }
-    },
-    {
-      "apply": {
-        "model": "adorn:block/kitchen_sink_water"
-      },
-      "when": {
-        "facing": "east",
-        "waterlogged": "true"
       }
     },
     {
@@ -108,16 +89,6 @@
     },
     {
       "apply": {
-        "model": "adorn:block/kitchen_sink_water",
-        "y": 90
-      },
-      "when": {
-        "facing": "south",
-        "waterlogged": "true"
-      }
-    },
-    {
-      "apply": {
         "model": "adorn:block/crimson_kitchen_sink",
         "y": 180,
         "uvlock": true
@@ -144,16 +115,6 @@
       "when": {
         "facing": "west",
         "front": "right"
-      }
-    },
-    {
-      "apply": {
-        "model": "adorn:block/kitchen_sink_water",
-        "y": 180
-      },
-      "when": {
-        "facing": "west",
-        "waterlogged": "true"
       }
     }
   ]

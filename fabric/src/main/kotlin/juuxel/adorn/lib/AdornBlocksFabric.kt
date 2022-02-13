@@ -4,7 +4,9 @@ import juuxel.adorn.CommonEventHandlers
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.block.SneakClickHandler
+import juuxel.adorn.block.entity.KitchenSinkBlockEntityFabric
 import juuxel.adorn.client.SinkColorProvider
+import juuxel.adorn.client.renderer.KitchenSinkRendererFabric
 import juuxel.adorn.client.renderer.ShelfRenderer
 import juuxel.adorn.client.renderer.TradingStationRenderer
 import net.fabricmc.api.EnvType
@@ -13,6 +15,9 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage
+import net.minecraft.block.entity.BlockEntity
+import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.util.ActionResult
 
@@ -33,13 +38,29 @@ object AdornBlocksFabric {
         )
 
         UseBlockCallback.EVENT.register(CommonEventHandlers::handleCarpets)
+        FluidStorage.SIDED.registerForBlocks(
+            KitchenSinkBlockEntityFabric.FLUID_STORAGE_PROVIDER,
+            AdornBlocks.OAK_KITCHEN_SINK,
+            AdornBlocks.SPRUCE_KITCHEN_SINK,
+            AdornBlocks.BIRCH_KITCHEN_SINK,
+            AdornBlocks.JUNGLE_KITCHEN_SINK,
+            AdornBlocks.ACACIA_KITCHEN_SINK,
+            AdornBlocks.DARK_OAK_KITCHEN_SINK,
+            AdornBlocks.CRIMSON_KITCHEN_SINK,
+            AdornBlocks.WARPED_KITCHEN_SINK,
+        )
     }
 
     @Environment(EnvType.CLIENT)
     fun initClient() {
+        @Suppress("UNCHECKED_CAST")
+        fun <T : BlockEntity> BlockEntityType<*>.forceType(): BlockEntityType<T> =
+            this as BlockEntityType<T>
+
         // BlockEntityRenderers
         BlockEntityRendererRegistry.register(AdornBlockEntities.TRADING_STATION, ::TradingStationRenderer)
         BlockEntityRendererRegistry.register(AdornBlockEntities.SHELF, ::ShelfRenderer)
+        BlockEntityRendererRegistry.register(AdornBlockEntities.KITCHEN_SINK.forceType(), ::KitchenSinkRendererFabric)
 
         // RenderLayers
         BlockRenderLayerMap.INSTANCE.putBlocks(

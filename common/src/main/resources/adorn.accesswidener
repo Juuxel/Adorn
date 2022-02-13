@@ -13,3 +13,6 @@ accessible method net/minecraft/world/GameRules$BooleanRule create (Z)Lnet/minec
 # Stats
 ## Yeah, I know this method isn't technically needed but it's really useful :^)
 accessible method net/minecraft/stat/Stats register (Ljava/lang/String;Lnet/minecraft/stat/StatFormatter;)Lnet/minecraft/util/Identifier;
+
+# Fluids
+accessible method net/minecraft/fluid/FlowableFluid isInfinite ()Z

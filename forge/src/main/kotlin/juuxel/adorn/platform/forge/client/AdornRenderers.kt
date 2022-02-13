@@ -7,6 +7,9 @@ import juuxel.adorn.client.renderer.InvisibleEntityRenderer
 import juuxel.adorn.client.renderer.ShelfRenderer
 import juuxel.adorn.client.renderer.TradingStationRenderer
 import juuxel.adorn.entity.AdornEntities
+import juuxel.adorn.platform.forge.block.entity.KitchenSinkBlockEntityForge
+import juuxel.adorn.platform.forge.client.renderer.KitchenSinkRendererForge
+import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.RenderLayers
 import net.minecraftforge.client.event.ColorHandlerEvent
@@ -17,6 +20,8 @@ object AdornRenderers {
         event.registerEntityRenderer(AdornEntities.SEAT, ::InvisibleEntityRenderer)
         event.registerBlockEntityRenderer(AdornBlockEntities.TRADING_STATION, ::TradingStationRenderer)
         event.registerBlockEntityRenderer(AdornBlockEntities.SHELF, ::ShelfRenderer)
+        @Suppress("UNCHECKED_CAST")
+        event.registerBlockEntityRenderer(AdornBlockEntities.KITCHEN_SINK as BlockEntityType<KitchenSinkBlockEntityForge>, ::KitchenSinkRendererForge)
     }
 
     fun registerRenderLayers() {

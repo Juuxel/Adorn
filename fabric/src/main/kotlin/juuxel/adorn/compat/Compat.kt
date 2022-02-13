@@ -1,6 +1,8 @@
 package juuxel.adorn.compat
 
+import juuxel.adorn.block.entity.KitchenSinkBlockEntityFabric
 import juuxel.adorn.platform.fabric.ConfigManagerImpl
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage
 import net.fabricmc.loader.api.FabricLoader
 
 object Compat {
@@ -23,6 +25,13 @@ object Compat {
         }
 
         CompatBlocks.register()
+        registerCompatTransfer()
+    }
+
+    private fun registerCompatTransfer() {
+        for (kitchenSink in CompatBlocks.get(BlockKind.KITCHEN_SINK)) {
+            FluidStorage.SIDED.registerForBlocks(KitchenSinkBlockEntityFabric.FLUID_STORAGE_PROVIDER, kitchenSink.get())
+        }
     }
 
     fun isCompatEnabled(mod: String): Boolean {
