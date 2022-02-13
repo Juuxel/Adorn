@@ -3,6 +3,7 @@ package juuxel.adorn.platform.forge.block.entity
 import juuxel.adorn.block.entity.KitchenSinkBlockEntity
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
@@ -14,6 +15,7 @@ import net.minecraft.tag.FluidTags
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import net.minecraft.util.math.MathHelper
 import net.minecraft.world.event.GameEvent
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
@@ -43,21 +45,34 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
     private val tankHolder = LazyOptional.of { tank }
 
     override fun interactWithItem(stack: ItemStack, player: PlayerEntity, hand: Hand): Boolean {
+        val w = world!!
+
         if (tank.space > 0) {
-            val result = FluidUtil.tryEmptyContainer(stack, tank, tank.space, player, true)
+            // The player in the tryEmpty/FillContainer calls is only used for sound.
+            val result = FluidUtil.tryEmptyContainer(stack, tank, tank.space, null, true)
 
             if (result.isSuccess) {
-                world!!.emitGameEvent(GameEvent.FLUID_PLACE, pos)
+                if (!w.isClient) {
+                    w.emitGameEvent(GameEvent.FLUID_PLACE, pos)
+                    player.playSound(getEmptySound(tank.fluid.fluid, stack).event, SoundCategory.BLOCKS, 1f, 1f)
+                }
+
                 setStackOrInsert(player, hand, result.result)
                 markDirtyAndSync()
                 return true
             }
         }
 
-        val result = FluidUtil.tryFillContainer(stack, tank, tank.fluidAmount, player, true)
+        // Store before filling the item from the tank
+        val tankFluid = tank.fluid.fluid
+        val result = FluidUtil.tryFillContainer(stack, tank, tank.fluidAmount, null, true)
 
         if (result.isSuccess) {
-            world!!.emitGameEvent(GameEvent.FLUID_PICKUP, pos)
+            if (!w.isClient) {
+                w.emitGameEvent(GameEvent.FLUID_PICKUP, pos)
+                player.playSound(getFillSound(tankFluid, stack).event, SoundCategory.BLOCKS, 1f, 1f)
+            }
+
             setStackOrInsert(player, hand, result.result)
             markDirtyAndSync()
             return true
@@ -71,7 +86,7 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
                 PotionUtil.setPotion(bottle, Potions.WATER)
                 setStackOrInsert(player, hand, bottle)
                 if (!world!!.isClient) {
-                    player.playSound(getFillSound(Fluids.WATER, stack), SoundCategory.BLOCKS, 1f, 1f)
+                    player.playSound(getFillSound(Fluids.WATER, stack).event, SoundCategory.BLOCKS, 1f, 1f)
                 }
                 return true
             }
@@ -85,7 +100,7 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
                 setStackOrInsert(player, hand, ItemStack(Items.GLASS_BOTTLE))
                 markDirtyAndSync()
                 if (!world!!.isClient) {
-                    player.playSound(getEmptySound(Fluids.WATER, stack), SoundCategory.BLOCKS, 1f, 1f)
+                    player.playSound(getEmptySound(Fluids.WATER, stack).event, SoundCategory.BLOCKS, 1f, 1f)
                 }
                 return true
             }
@@ -113,6 +128,12 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
         return true
     }
 
+    override fun getFillSound(fluid: Fluid, stack: ItemStack): FluidItemSound =
+        super.getFillSound(fluid, stack).orElse(fluid.attributes.fillSound)
+
+    override fun getEmptySound(fluid: Fluid, stack: ItemStack): FluidItemSound =
+        super.getEmptySound(fluid, stack).orElse(fluid.attributes.emptySound)
+
     override fun readNbt(nbt: NbtCompound) {
         super.readNbt(nbt)
         tank.readFromNBT(nbt)
@@ -130,6 +151,10 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
 
         return super.getCapability(cap, side)
     }
+
+    override fun calculateComparatorOutput(): Int =
+        if (tank.isEmpty) 0
+        else 1 + MathHelper.floor(14 * tank.fluidAmount.toFloat() / tank.capacity.toFloat())
 
     companion object {
         // Bottles are 250 l in Adorn *on Forge*.

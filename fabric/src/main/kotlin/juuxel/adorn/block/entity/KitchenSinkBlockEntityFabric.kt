@@ -12,7 +12,6 @@ import net.fabricmc.fabric.api.transfer.v1.storage.Storage
 import net.fabricmc.fabric.api.transfer.v1.storage.StoragePreconditions
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
@@ -23,6 +22,7 @@ import net.minecraft.tag.FluidTags
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import net.minecraft.util.math.MathHelper
 import net.minecraft.world.event.GameEvent
 import kotlin.math.min
 
@@ -56,33 +56,29 @@ class KitchenSinkBlockEntityFabric(pos: BlockPos, state: BlockState) : KitchenSi
         val hasSpace = storage.amount < storage.capacity
 
         if (hasSpace) {
-            Transaction.openOuter().use { t ->
-                val moved = StorageUtil.move(itemStorage, storage, Predicates.alwaysTrue(), Long.MAX_VALUE, t)
-
-                if (moved > 0) {
-                    if (!w.isClient) {
-                        t.commit()
-                        player.playSound(getEmptySound(storage.variant.fluid, stack), SoundCategory.BLOCKS, 1f, 1f)
-                        w.emitGameEvent(GameEvent.FLUID_PLACE, pos)
-                    }
-
-                    return true
-                }
-            }
-        }
-
-        Transaction.openOuter().use { t ->
-            val moved = StorageUtil.move(storage, itemStorage, Predicates.alwaysTrue(), Long.MAX_VALUE, t)
+            val moved = StorageUtil.move(itemStorage, storage, Predicates.alwaysTrue(), Long.MAX_VALUE, null)
 
             if (moved > 0) {
                 if (!w.isClient) {
-                    t.commit()
-                    player.playSound(getFillSound(storage.variant.fluid, stack), SoundCategory.BLOCKS, 1f, 1f)
-                    w.emitGameEvent(GameEvent.FLUID_PICKUP, pos)
+                    player.playSound(getEmptySound(storage.variant.fluid, stack).event, SoundCategory.BLOCKS, 1f, 1f)
+                    w.emitGameEvent(GameEvent.FLUID_PLACE, pos)
                 }
 
+                markDirtyAndSync()
                 return true
             }
+        }
+
+        val moved = StorageUtil.move(storage, itemStorage, Predicates.alwaysTrue(), Long.MAX_VALUE, null)
+
+        if (moved > 0) {
+            if (!w.isClient) {
+                player.playSound(getFillSound(storage.variant.fluid, stack).event, SoundCategory.BLOCKS, 1f, 1f)
+                w.emitGameEvent(GameEvent.FLUID_PICKUP, pos)
+            }
+
+            markDirtyAndSync()
+            return true
         }
 
         return false
@@ -106,6 +102,10 @@ class KitchenSinkBlockEntityFabric(pos: BlockPos, state: BlockState) : KitchenSi
         nbt.put(NBT_FLUID, storage.variant.toNbt())
         nbt.putLong(NBT_VOLUME, storage.amount)
     }
+
+    override fun calculateComparatorOutput(): Int =
+        if (storage.amount == 0L) 0
+        else 1 + MathHelper.floor(14 * storage.amount.toDouble() / storage.capacity.toDouble())
 
     companion object {
         val FLUID_STORAGE_PROVIDER: BlockApiLookup.BlockApiProvider<Storage<FluidVariant>, Direction> =

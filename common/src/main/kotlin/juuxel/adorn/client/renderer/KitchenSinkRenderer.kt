@@ -4,7 +4,6 @@ import juuxel.adorn.block.AbstractKitchenCounterBlock
 import juuxel.adorn.block.entity.KitchenSinkBlockEntity
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.block.entity.BlockEntity
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider

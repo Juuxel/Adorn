@@ -5,7 +5,6 @@ import juuxel.adorn.block.entity.KitchenSinkBlockEntity
 import juuxel.adorn.block.entity.KitchenSinkBlockEntityFabric
 import juuxel.adorn.platform.BlockEntityBridge
 import net.minecraft.block.BlockState
-import net.minecraft.block.entity.BlockEntity
 import net.minecraft.util.math.BlockPos
 
 object BlockEntityBridgeFabric : BlockEntityBridge {

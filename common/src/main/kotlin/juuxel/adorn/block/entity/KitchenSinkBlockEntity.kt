@@ -33,29 +33,31 @@ abstract class KitchenSinkBlockEntity(pos: BlockPos, state: BlockState) : BlockE
      */
     abstract fun clearFluidsWithSponge(): Boolean
 
-    protected fun getFillSound(fluid: Fluid, stack: ItemStack): SoundEvent {
+    protected open fun getFillSound(fluid: Fluid, stack: ItemStack): FluidItemSound {
         if (stack.isOf(Items.GLASS_BOTTLE)) {
-            return SoundEvents.ITEM_BOTTLE_FILL
+            return FluidItemSound(SoundEvents.ITEM_BOTTLE_FILL, true)
         }
 
-        return fluid.bucketFillSound.orElse(SoundEvents.ITEM_BUCKET_FILL)
+        return FluidItemSound(fluid.bucketFillSound.orElse(SoundEvents.ITEM_BUCKET_FILL), false)
     }
 
-    protected fun getEmptySound(fluid: Fluid, stack: ItemStack): SoundEvent {
+    protected open fun getEmptySound(fluid: Fluid, stack: ItemStack): FluidItemSound {
         if (stack.isOf(Items.POTION) && PotionUtil.getPotion(stack) == Potions.WATER) {
-            return SoundEvents.ITEM_BOTTLE_EMPTY
+            return FluidItemSound(SoundEvents.ITEM_BOTTLE_EMPTY, true)
         }
 
         // Only used on Fabric, so it's fine that we hardcode.
         // See https://github.com/FabricMC/fabric/issues/1999
-        return if (fluid.isIn(FluidTags.LAVA)) SoundEvents.ITEM_BUCKET_EMPTY_LAVA else SoundEvents.ITEM_BUCKET_EMPTY
+        return FluidItemSound(if (fluid.isIn(FluidTags.LAVA)) SoundEvents.ITEM_BUCKET_EMPTY_LAVA else SoundEvents.ITEM_BUCKET_EMPTY, false)
     }
 
     protected fun markDirtyAndSync() {
-        if (world!!.isClient) return
-
         markDirty()
-        world!!.updateListeners(pos, cachedState, cachedState, 3)
+
+        val w = world!!
+        if (!w.isClient) {
+            w.updateListeners(pos, cachedState, cachedState, 3)
+        }
     }
 
     override fun toUpdatePacket(): Packet<ClientPlayPacketListener> =
@@ -63,8 +65,23 @@ abstract class KitchenSinkBlockEntity(pos: BlockPos, state: BlockState) : BlockE
 
     override fun toInitialChunkDataNbt(): NbtCompound = createNbt()
 
+    /** Calculates the comparator output based on tank contents. */
+    abstract fun calculateComparatorOutput(): Int
+
     companion object {
         fun isInfinite(fluid: Fluid): Boolean =
             fluid is FlowableFluid && fluid.isInfinite
+    }
+
+    /**
+     * A sound event containing coupled with whether it's preferred.
+     * Used for a cursed priority system for fill/empty sounds:
+     * bottle sounds are preferred by default, then Forge's fluid sounds and finally vanilla sounds.
+     */
+    data class FluidItemSound(val event: SoundEvent, val preferred: Boolean) {
+        fun orElse(fallback: SoundEvent?): FluidItemSound {
+            if (preferred) return this
+            return if (fallback != null) FluidItemSound(fallback, true) else this
+        }
     }
 }

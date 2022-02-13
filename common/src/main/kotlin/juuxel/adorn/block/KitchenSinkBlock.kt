@@ -52,8 +52,9 @@ class KitchenSinkBlock(variant: BlockVariant) : KitchenCounterBlock(variant), Bl
 
     override fun hasComparatorOutput(state: BlockState) = true
 
-    override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos) =
-        0 // TODO
+    override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos): Int =
+        world.getBlockEntity(pos, AdornBlockEntities.KITCHEN_SINK).orElse(null)
+            ?.calculateComparatorOutput() ?: 0
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
