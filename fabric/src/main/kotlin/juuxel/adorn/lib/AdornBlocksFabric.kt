@@ -4,6 +4,7 @@ import juuxel.adorn.CommonEventHandlers
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.block.SneakClickHandler
+import juuxel.adorn.block.entity.BrewerBlockEntityFabric
 import juuxel.adorn.block.entity.KitchenSinkBlockEntityFabric
 import juuxel.adorn.client.SinkColorProvider
 import juuxel.adorn.client.renderer.KitchenSinkRendererFabric
@@ -48,6 +49,10 @@ object AdornBlocksFabric {
             AdornBlocks.DARK_OAK_KITCHEN_SINK,
             AdornBlocks.CRIMSON_KITCHEN_SINK,
             AdornBlocks.WARPED_KITCHEN_SINK,
+        )
+        FluidStorage.SIDED.registerForBlockEntity(
+            { brewer, _ -> (brewer as BrewerBlockEntityFabric).fluidStorage },
+            AdornBlockEntities.BREWER
         )
     }
 

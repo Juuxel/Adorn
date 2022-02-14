@@ -13,6 +13,7 @@ interface PlatformBridges {
     val criteria: CriterionBridge
     val configManager: ConfigManager
     val entities: EntityBridge
+    val fluidRendering: FluidRenderingBridge
     val items: ItemBridge
     val menus: MenuBridge
     val network: NetworkBridge

@@ -1,7 +1,9 @@
 package juuxel.adorn.platform.forge
 
+import juuxel.adorn.menu.FluidVolume
 import juuxel.adorn.platform.NetworkBridge
 import juuxel.adorn.platform.forge.networking.AdornNetworking
+import juuxel.adorn.platform.forge.networking.BrewerFluidSyncS2CMessage
 import juuxel.adorn.platform.forge.networking.OpenBookS2CMessage
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
@@ -21,6 +23,12 @@ object NetworkBridgeImpl : NetworkBridge {
     override fun sendOpenBookPacket(player: PlayerEntity, bookId: Identifier) {
         if (player is ServerPlayerEntity) {
             AdornNetworking.CHANNEL.send(PacketDistributor.PLAYER.with { player }, OpenBookS2CMessage(bookId))
+        }
+    }
+
+    override fun sendBrewerFluidSync(player: PlayerEntity, syncId: Int, fluid: FluidVolume) {
+        if (player is ServerPlayerEntity) {
+            AdornNetworking.CHANNEL.send(PacketDistributor.PLAYER.with { player }, BrewerFluidSyncS2CMessage(syncId, fluid))
         }
     }
 }

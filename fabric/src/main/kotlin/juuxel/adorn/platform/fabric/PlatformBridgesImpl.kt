@@ -2,6 +2,7 @@
 package juuxel.adorn.platform.fabric
 
 import juuxel.adorn.platform.BlockFactory
+import juuxel.adorn.platform.FluidRenderingBridge
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import juuxel.adorn.platform.RegistrarFactory
@@ -23,6 +24,7 @@ private object PlatformBridgesImpl : PlatformBridges {
     override val criteria = CriterionBridgeImpl
     override val configManager = ConfigManagerImpl
     override val entities = EntityBridgeImpl
+    override val fluidRendering = FluidRenderingBridgeFabric
     override val items = ItemBridgeImpl
     override val menus = MenuBridgeImpl
     override val network = NetworkBridgeImpl

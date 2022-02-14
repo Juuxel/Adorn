@@ -4,6 +4,7 @@ package juuxel.adorn.platform.forge
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import juuxel.adorn.platform.RegistrarFactory
+import juuxel.adorn.platform.forge.client.FluidRenderingBridgeForge
 import net.minecraft.block.Block
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityType
@@ -22,6 +23,7 @@ private object PlatformBridgesImpl : PlatformBridges {
     override val criteria = CriterionBridgeImpl
     override val configManager = ConfigManagerImpl
     override val entities = EntityBridgeImpl
+    override val fluidRendering = FluidRenderingBridgeForge
     override val items = ItemBridgeImpl
     override val menus = MenuBridgeImpl
     override val network = NetworkBridgeImpl

@@ -1,6 +1,8 @@
 package juuxel.adorn.platform.fabric
 
+import juuxel.adorn.block.entity.BrewerBlockEntity
 import juuxel.adorn.lib.AdornNetworking
+import juuxel.adorn.menu.FluidVolume
 import juuxel.adorn.platform.NetworkBridge
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
@@ -20,4 +22,8 @@ object NetworkBridgeImpl : NetworkBridge {
 
     override fun sendOpenBookPacket(player: PlayerEntity, bookId: Identifier) =
         AdornNetworking.sendOpenBookPacket(player, bookId)
+
+    override fun sendBrewerFluidSync(player: PlayerEntity, syncId: Int, fluid: FluidVolume) {
+        AdornNetworking.sendBrewerFluidSync(player, syncId, fluid)
+    }
 }

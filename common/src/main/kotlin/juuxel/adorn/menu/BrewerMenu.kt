@@ -2,7 +2,9 @@ package juuxel.adorn.menu
 
 import juuxel.adorn.block.entity.BrewerBlockEntity
 import juuxel.adorn.item.AdornItems
+import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
@@ -14,19 +16,26 @@ import kotlin.math.min
 
 class BrewerMenu(
     syncId: Int,
-    playerInventory: Inventory,
-    private val container: Inventory = SimpleInventory(3),
-    private val propertyDelegate: PropertyDelegate = ArrayPropertyDelegate(1)
+    playerInventory: PlayerInventory,
+    private val container: Inventory,
+    private val propertyDelegate: PropertyDelegate,
+    var fluid: FluidVolume
 ) : Menu(AdornMenus.BREWER, syncId) {
     val progress: Int get() = propertyDelegate[0]
+    private val player: PlayerEntity = playerInventory.player
+    private var lastFluid = FluidVolume.empty()
+
+    constructor(syncId: Int, playerInventory: PlayerInventory) :
+        this(syncId, playerInventory, SimpleInventory(BrewerBlockEntity.CONTAINER_SIZE), ArrayPropertyDelegate(1), FluidVolume.empty())
 
     init {
-        checkSize(container, 3)
+        checkSize(container, BrewerBlockEntity.CONTAINER_SIZE)
         checkDataCount(propertyDelegate, 1)
 
         addSlot(MainSlot(container, BrewerBlockEntity.INPUT_SLOT, 80, 56))
         addSlot(Slot(container, BrewerBlockEntity.LEFT_INGREDIENT_SLOT, 50, 17))
         addSlot(Slot(container, BrewerBlockEntity.RIGHT_INGREDIENT_SLOT, 110, 17))
+        addSlot(FluidContainerSlot(container, BrewerBlockEntity.FLUID_CONTAINER_SLOT, 123, 60))
 
         // Main player inventory
         for (y in 0..2) {
@@ -53,7 +62,7 @@ class BrewerMenu(
             val stack = slot.stack
             result = stack.copy()
 
-            if (index <= BrewerBlockEntity.RIGHT_INGREDIENT_SLOT) {
+            if (index <= BrewerBlockEntity.FLUID_CONTAINER_SLOT) {
                 if (!insertItem(stack, 3, slots.size, true)) {
                     return ItemStack.EMPTY
                 }
@@ -64,7 +73,7 @@ class BrewerMenu(
                     mugSlot.stack = stack.split(min(mugSlot.getMaxItemCount(stack), stack.count))
                 }
 
-                if (!stack.isEmpty && !insertItem(stack, BrewerBlockEntity.LEFT_INGREDIENT_SLOT, BrewerBlockEntity.RIGHT_INGREDIENT_SLOT + 1, false)) {
+                if (!stack.isEmpty && !insertItem(stack, BrewerBlockEntity.LEFT_INGREDIENT_SLOT, BrewerBlockEntity.FLUID_CONTAINER_SLOT + 1, false)) {
                     return ItemStack.EMPTY
                 }
             }
@@ -79,10 +88,23 @@ class BrewerMenu(
         return result
     }
 
+    override fun sendContentUpdates() {
+        super.sendContentUpdates()
+
+        if (!FluidVolume.areEqual(fluid, lastFluid)) {
+            lastFluid = fluid.copy()
+            PlatformBridges.network.sendBrewerFluidSync(player, syncId, fluid)
+        }
+    }
+
     private class MainSlot(inventory: Inventory, index: Int, x: Int, y: Int) : Slot(inventory, index, x, y) {
         override fun getMaxItemCount(): Int = 1
 
         override fun canInsert(stack: ItemStack): Boolean =
             stack.isOf(AdornItems.MUG)
+    }
+
+    private class FluidContainerSlot(inventory: Inventory, index: Int, x: Int, y: Int) : Slot(inventory, index, x, y) {
+        override fun getMaxItemCount(): Int = 1
     }
 }

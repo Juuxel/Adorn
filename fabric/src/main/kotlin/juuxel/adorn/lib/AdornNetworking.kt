@@ -1,8 +1,10 @@
 package juuxel.adorn.lib
 
 import juuxel.adorn.AdornCommon
+import juuxel.adorn.client.gui.screen.BrewerScreen
 import juuxel.adorn.client.gui.screen.GuideBookScreen
 import juuxel.adorn.client.resources.BookManagerFabric
+import juuxel.adorn.menu.FluidVolume
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
@@ -19,6 +21,7 @@ import net.minecraft.util.Identifier
 object AdornNetworking {
     val ENTITY_SPAWN = AdornCommon.id("entity_spawn")
     val OPEN_BOOK = AdornCommon.id("open_book")
+    val BREWER_FLUID_SYNC = AdornCommon.id("brewer_fluid_sync")
 
     fun init() {
     }
@@ -47,6 +50,15 @@ object AdornNetworking {
                 client.setScreen(GuideBookScreen(BookManagerFabric[bookId]))
             }
         }
+
+        ClientPlayNetworking.registerGlobalReceiver(BREWER_FLUID_SYNC) { client, _, buf, _ ->
+            val syncId = buf.readUnsignedByte().toInt()
+            val volume = FluidVolume.load(buf)
+
+            client.execute {
+                BrewerScreen.setFluidFromPacket(client, syncId, volume)
+            }
+        }
     }
 
     fun createEntitySpawnPacket(entity: Entity): Packet<*> =
@@ -62,6 +74,15 @@ object AdornNetworking {
             val buf = PacketByteBufs.create()
             buf.writeIdentifier(bookId)
             ServerPlayNetworking.send(player, OPEN_BOOK, buf)
+        }
+    }
+
+    fun sendBrewerFluidSync(player: PlayerEntity, syncId: Int, fluid: FluidVolume) {
+        if (player is ServerPlayerEntity) {
+            val buf = PacketByteBufs.create()
+            buf.writeByte(syncId)
+            fluid.write(buf)
+            ServerPlayNetworking.send(player, BREWER_FLUID_SYNC, buf)
         }
     }
 }

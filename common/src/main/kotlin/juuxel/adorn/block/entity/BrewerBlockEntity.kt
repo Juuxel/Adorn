@@ -4,6 +4,7 @@ import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.BrewerBlock
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.menu.BrewerMenu
+import juuxel.adorn.menu.FluidVolume
 import juuxel.adorn.recipe.AdornRecipes
 import juuxel.adorn.recipe.BrewingRecipe
 import net.minecraft.block.BlockState
@@ -19,7 +20,9 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
-open class BrewerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlockEntity(AdornBlockEntities.BREWER, pos, state, 3), SidedInventory {
+abstract class BrewerBlockEntity(pos: BlockPos, state: BlockState) :
+    BaseContainerBlockEntity(AdornBlockEntities.BREWER, pos, state, CONTAINER_SIZE),
+    SidedInventory {
     private var progress: Int = 0
     private val propertyDelegate = object : PropertyDelegate {
         override fun get(index: Int): Int = when (index) {
@@ -36,9 +39,10 @@ open class BrewerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBl
 
         override fun size(): Int = 1
     }
+    protected abstract val fluidReference: FluidVolume
 
     override fun createMenu(syncId: Int, playerInventory: PlayerInventory): Menu =
-        BrewerMenu(syncId, playerInventory, this, propertyDelegate)
+        BrewerMenu(syncId, playerInventory, this, propertyDelegate, fluidReference)
 
     override fun writeNbt(nbt: NbtCompound) {
         super.writeNbt(nbt)
@@ -56,19 +60,24 @@ open class BrewerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBl
         return when (side) {
             facing.rotateYClockwise() -> intArrayOf(LEFT_INGREDIENT_SLOT)
             facing.rotateYCounterclockwise() -> intArrayOf(RIGHT_INGREDIENT_SLOT)
-            Direction.UP, Direction.DOWN -> intArrayOf(INPUT_SLOT)
+            facing.opposite -> intArrayOf(FLUID_CONTAINER_SLOT)
+            Direction.UP -> intArrayOf(INPUT_SLOT)
+            Direction.DOWN -> intArrayOf(INPUT_SLOT, FLUID_CONTAINER_SLOT)
             else -> intArrayOf()
         }
     }
 
-    override fun isValid(slot: Int, stack: ItemStack): Boolean =
-        slot != INPUT_SLOT || (stack.isOf(AdornItems.MUG) && getStack(slot).isEmpty)
+    override fun isValid(slot: Int, stack: ItemStack): Boolean {
+        if (slot == INPUT_SLOT && !(stack.isOf(AdornItems.MUG) && getStack(slot).isEmpty)) return false
+        if (slot == FLUID_CONTAINER_SLOT && !getStack(slot).isEmpty) return false
+        return true
+    }
 
     override fun canInsert(slot: Int, stack: ItemStack, side: Direction?) =
         side != Direction.DOWN && isValid(slot, stack)
 
     override fun canExtract(slot: Int, stack: ItemStack, side: Direction) =
-        side == Direction.DOWN
+        side == Direction.DOWN && (slot != FLUID_CONTAINER_SLOT || canExtractFluidContainer())
 
     fun calculateComparatorOutput(): Int {
         // If brewing has finished
@@ -82,14 +91,21 @@ open class BrewerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBl
         return MathHelper.ceil(level)
     }
 
+    protected abstract fun canExtractFluidContainer(): Boolean
+    protected abstract fun tryExtractFluidContainer()
+
     companion object {
         private const val NBT_PROGRESS = "Progress"
+        const val CONTAINER_SIZE = 4
         const val INPUT_SLOT = 0
         const val LEFT_INGREDIENT_SLOT = 1
         const val RIGHT_INGREDIENT_SLOT = 2
+        const val FLUID_CONTAINER_SLOT = 3
         const val MAX_PROGRESS = 200
 
         fun tick(world: World, pos: BlockPos, state: BlockState, brewer: BrewerBlockEntity) {
+            brewer.tryExtractFluidContainer()
+
             var dirty = false
             val hasMug = !brewer.getStack(INPUT_SLOT).isEmpty
 
