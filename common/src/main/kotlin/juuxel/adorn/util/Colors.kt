@@ -16,4 +16,5 @@ object Colors {
     fun redOf(argb: Int): Float = ((argb shr 16) and 0xFF) / 255f
     fun greenOf(argb: Int): Float = ((argb shr 8) and 0xFF) / 255f
     fun blueOf(argb: Int): Float = (argb and 0xFF) / 255f
+    fun alphaOf(argb: Int): Float = ((argb shr 24) and 0xFF) / 255f
 }

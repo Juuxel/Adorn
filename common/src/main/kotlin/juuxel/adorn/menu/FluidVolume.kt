@@ -51,5 +51,8 @@ abstract class FluidVolume {
             empty().apply { read(buf) }
     }
 
-    private data class Simple(override var fluid: Fluid, override var amount: Long, override var nbt: NbtCompound?) : FluidVolume()
+    private data class Simple(override var fluid: Fluid, override var amount: Long, override var nbt: NbtCompound?) : FluidVolume() {
+        override fun toString() =
+            "FluidVolume.Simple(fluid=${Registry.FLUID.getId(fluid)}, amount=$amount, nbt=$nbt)"
+    }
 }
