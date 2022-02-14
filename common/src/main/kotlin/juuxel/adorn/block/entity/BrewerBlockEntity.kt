@@ -2,11 +2,13 @@ package juuxel.adorn.block.entity
 
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.BrewerBlock
+import juuxel.adorn.fluid.FluidReference
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.menu.BrewerMenu
-import juuxel.adorn.menu.FluidVolume
 import juuxel.adorn.recipe.AdornRecipes
-import juuxel.adorn.recipe.BrewingRecipe
+import juuxel.adorn.recipe.BrewerInventory
+import juuxel.adorn.recipe.FluidBrewingRecipe
+import juuxel.adorn.recipe.IBrewingRecipe
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.SidedInventory
@@ -22,7 +24,8 @@ import net.minecraft.world.World
 
 abstract class BrewerBlockEntity(pos: BlockPos, state: BlockState) :
     BaseContainerBlockEntity(AdornBlockEntities.BREWER, pos, state, CONTAINER_SIZE),
-    SidedInventory {
+    SidedInventory,
+    BrewerInventory {
     private var progress: Int = 0
     private val propertyDelegate = object : PropertyDelegate {
         override fun get(index: Int): Int = when (index) {
@@ -39,7 +42,6 @@ abstract class BrewerBlockEntity(pos: BlockPos, state: BlockState) :
 
         override fun size(): Int = 1
     }
-    protected abstract val fluidReference: FluidVolume
 
     override fun createMenu(syncId: Int, playerInventory: PlayerInventory): Menu =
         BrewerMenu(syncId, playerInventory, this, propertyDelegate, fluidReference)
@@ -113,7 +115,7 @@ abstract class BrewerBlockEntity(pos: BlockPos, state: BlockState) :
                 world.setBlockState(pos, state.with(BrewerBlock.HAS_MUG, hasMug))
             }
 
-            val recipe: BrewingRecipe? = world.recipeManager.getFirstMatch(AdornRecipes.BREWING_TYPE, brewer, world).orElse(null)
+            val recipe: IBrewingRecipe? = world.recipeManager.getFirstMatch(AdornRecipes.BREWING_TYPE, brewer, world).orElse(null)
 
             fun decrementIngredient(slot: Int) {
                 val stack = brewer.getStack(slot)
@@ -134,6 +136,10 @@ abstract class BrewerBlockEntity(pos: BlockPos, state: BlockState) :
                     decrementIngredient(LEFT_INGREDIENT_SLOT)
                     decrementIngredient(RIGHT_INGREDIENT_SLOT)
                     brewer.setStack(INPUT_SLOT, recipe.craft(brewer))
+
+                    if (recipe is FluidBrewingRecipe) {
+                        brewer.fluidReference.amount -= FluidReference.convertToPlatform(recipe.fluid.amount)
+                    }
                 }
 
                 dirty = true

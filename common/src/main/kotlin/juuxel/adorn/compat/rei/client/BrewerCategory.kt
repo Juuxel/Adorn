@@ -1,10 +1,13 @@
 package juuxel.adorn.compat.rei.client
 
 import com.mojang.blaze3d.systems.RenderSystem
+import dev.architectury.fluid.FluidStack
+import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.client.gui.screen.BrewerScreen
 import juuxel.adorn.compat.rei.AdornReiServer
 import juuxel.adorn.compat.rei.BrewerDisplay
+import juuxel.adorn.fluid.FluidVolume
 import me.shedaniel.math.Point
 import me.shedaniel.math.Rectangle
 import me.shedaniel.rei.api.client.gui.Renderer
@@ -27,8 +30,9 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
         add(Widgets.createRecipeBase(bounds))
         add(
             Widgets.createDrawableWidget { helper, matrices, mouseX, mouseY, delta ->
-                RenderSystem.setShaderTexture(0, BrewerScreen.TEXTURE)
-                helper.drawTexture(matrices, topLeft.x, topLeft.y, 49, 16, 78, 61)
+                RenderSystem.setShaderTexture(0, TEXTURE)
+                RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
+                helper.drawTexture(matrices, topLeft.x, topLeft.y, 49, 16, 105, 61)
                 val progressFraction = (System.currentTimeMillis() % 4000) / 4000.0
                 val height = (progressFraction * 25).roundToInt()
                 helper.drawTexture(matrices, topLeft.x + 35, topLeft.y + 8, 176, 0, 8, height)
@@ -52,11 +56,34 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
                 .markOutput()
                 .entry(display.result)
         )
+        add(
+            BrewerFluidWidget(
+                topLeft.x + 88, topLeft.y + 1,
+                display.fluid.cast<FluidStack>().map {
+                    val stack = it.value
+                    FluidVolume(stack.fluid, stack.amount, stack.tag)
+                }
+            )
+        )
         // Empty mug, must have background since it's not in the screen texture
         add(
             Widgets.createSlot(Point(topLeft.x + 4, topLeft.y + 39))
                 .markInput()
                 .entries(display.input)
         )
+        // Fluid scale
+        add(
+            Widgets.createDrawableWidget { helper, matrices, mouseX, mouseY, delta ->
+                RenderSystem.setShaderTexture(0, TEXTURE)
+                RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
+                helper.zOffset++
+                helper.drawTexture(matrices, topLeft.x + 88, topLeft.y + 5, 176, 25, 16, 51)
+                helper.zOffset--
+            }
+        )
+    }
+
+    companion object {
+        private val TEXTURE = AdornCommon.id("textures/gui/brewer_rei.png")
     }
 }

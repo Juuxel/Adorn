@@ -1,7 +1,7 @@
 package juuxel.adorn.platform.forge.block.entity
 
 import juuxel.adorn.block.entity.BrewerBlockEntity
-import juuxel.adorn.menu.FluidVolume
+import juuxel.adorn.fluid.FluidReference
 import net.minecraft.block.BlockState
 import net.minecraft.fluid.Fluid
 import net.minecraft.nbt.NbtCompound
@@ -25,7 +25,7 @@ class BrewerBlockEntityForge(pos: BlockPos, state: BlockState) : BrewerBlockEnti
             markDirty()
         }
     }
-    override val fluidReference = object : FluidVolume() {
+    override val fluidReference = object : FluidReference() {
         override var fluid: Fluid
             get() = tank.fluid.fluid
             set(value) {

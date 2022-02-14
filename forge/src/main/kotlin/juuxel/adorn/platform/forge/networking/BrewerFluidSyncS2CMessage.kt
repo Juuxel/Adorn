@@ -1,6 +1,6 @@
 package juuxel.adorn.platform.forge.networking
 
-import juuxel.adorn.menu.FluidVolume
+import juuxel.adorn.fluid.FluidVolume
 import net.minecraft.network.PacketByteBuf
 
 data class BrewerFluidSyncS2CMessage(val syncId: Int, val fluid: FluidVolume) {

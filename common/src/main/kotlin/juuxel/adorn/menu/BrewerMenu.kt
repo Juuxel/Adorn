@@ -1,6 +1,8 @@
 package juuxel.adorn.menu
 
 import juuxel.adorn.block.entity.BrewerBlockEntity
+import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.fluid.FluidVolume
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.entity.player.PlayerEntity
@@ -19,11 +21,11 @@ class BrewerMenu(
     playerInventory: PlayerInventory,
     private val container: Inventory,
     private val propertyDelegate: PropertyDelegate,
-    var fluid: FluidVolume
+    var fluid: FluidReference
 ) : Menu(AdornMenus.BREWER, syncId) {
     val progress: Int get() = propertyDelegate[0]
     private val player: PlayerEntity = playerInventory.player
-    private var lastFluid = FluidVolume.empty()
+    private var lastFluid: FluidVolume = FluidVolume.empty()
 
     constructor(syncId: Int, playerInventory: PlayerInventory) :
         this(syncId, playerInventory, SimpleInventory(BrewerBlockEntity.CONTAINER_SIZE), ArrayPropertyDelegate(1), FluidVolume.empty())
@@ -91,7 +93,7 @@ class BrewerMenu(
     override fun sendContentUpdates() {
         super.sendContentUpdates()
 
-        if (!FluidVolume.areEqual(fluid, lastFluid)) {
+        if (!FluidReference.areContentsEqual(fluid, lastFluid)) {
             lastFluid = fluid.copy()
             PlatformBridges.network.sendBrewerFluidSync(player, syncId, fluid)
         }

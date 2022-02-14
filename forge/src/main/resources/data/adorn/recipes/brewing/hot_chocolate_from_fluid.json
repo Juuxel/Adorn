@@ -1,0 +1,13 @@
+{
+  "type": "adorn:brewing_from_fluid",
+  "first_ingredient": {
+    "tag": "c:cocoa_beans"
+  },
+  "fluid": {
+    "fluid": "minecraft:milk",
+    "amount": 250
+  },
+  "result": {
+    "item": "adorn:hot_chocolate"
+  }
+}

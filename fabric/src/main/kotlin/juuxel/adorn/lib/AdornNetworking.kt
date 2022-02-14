@@ -4,7 +4,8 @@ import juuxel.adorn.AdornCommon
 import juuxel.adorn.client.gui.screen.BrewerScreen
 import juuxel.adorn.client.gui.screen.GuideBookScreen
 import juuxel.adorn.client.resources.BookManagerFabric
-import juuxel.adorn.menu.FluidVolume
+import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.fluid.FluidVolume
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
@@ -77,7 +78,7 @@ object AdornNetworking {
         }
     }
 
-    fun sendBrewerFluidSync(player: PlayerEntity, syncId: Int, fluid: FluidVolume) {
+    fun sendBrewerFluidSync(player: PlayerEntity, syncId: Int, fluid: FluidReference) {
         if (player is ServerPlayerEntity) {
             val buf = PacketByteBufs.create()
             buf.writeByte(syncId)

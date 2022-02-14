@@ -1,6 +1,6 @@
 package juuxel.adorn.platform.forge
 
-import juuxel.adorn.menu.FluidVolume
+import juuxel.adorn.fluid.FluidReference
 import juuxel.adorn.platform.NetworkBridge
 import juuxel.adorn.platform.forge.networking.AdornNetworking
 import juuxel.adorn.platform.forge.networking.BrewerFluidSyncS2CMessage
@@ -26,9 +26,9 @@ object NetworkBridgeImpl : NetworkBridge {
         }
     }
 
-    override fun sendBrewerFluidSync(player: PlayerEntity, syncId: Int, fluid: FluidVolume) {
+    override fun sendBrewerFluidSync(player: PlayerEntity, syncId: Int, fluid: FluidReference) {
         if (player is ServerPlayerEntity) {
-            AdornNetworking.CHANNEL.send(PacketDistributor.PLAYER.with { player }, BrewerFluidSyncS2CMessage(syncId, fluid))
+            AdornNetworking.CHANNEL.send(PacketDistributor.PLAYER.with { player }, BrewerFluidSyncS2CMessage(syncId, fluid.copy()))
         }
     }
 }

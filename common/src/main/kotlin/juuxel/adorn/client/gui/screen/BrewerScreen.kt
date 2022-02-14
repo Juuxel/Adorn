@@ -3,12 +3,14 @@ package juuxel.adorn.client.gui.screen
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.entity.BrewerBlockEntity
+import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.fluid.FluidVolume
 import juuxel.adorn.menu.BrewerMenu
-import juuxel.adorn.menu.FluidVolume
 import juuxel.adorn.platform.FluidRenderingBridge
 import juuxel.adorn.util.color
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.ingame.MenuProvider
+import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.render.BufferRenderer
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.render.Tessellator
@@ -38,14 +40,29 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
             val progressFract = progress.toFloat() / BrewerBlockEntity.MAX_PROGRESS.toFloat()
             drawTexture(matrices, x + 84, y + 24, 176, 0, 8, MathHelper.ceil(progressFract * 25))
         }
-
-        // TODO: fluid tooltips (here or in foreground?)
     }
+
+    override fun drawMouseoverTooltip(matrices: MatrixStack, x: Int, y: Int) {
+        super.drawMouseoverTooltip(matrices, x, y)
+        val x2 = x - this.x
+        val y2 = y - this.y
+        if (x2 in 145 until (145 + 16) && y2 in 17 until (17 + FLUID_AREA_HEIGHT)) {
+            renderTooltip(matrices, getFluidTooltip(menu.fluid), x, y)
+        }
+    }
+
+    private fun getFluidTooltip(fluid: FluidReference): List<Text> =
+        FluidRenderingBridge.get().getTooltip(
+            fluid,
+            if (client!!.options.advancedItemTooltips) TooltipContext.Default.ADVANCED
+            else TooltipContext.Default.NORMAL,
+            maxAmountInLitres = 4000
+        )
 
     companion object {
         private val LOGGER = LogManager.getLogger()
         val TEXTURE = AdornCommon.id("textures/gui/brewer.png")
-        private const val FLUID_AREA_HEIGHT: Int = 59
+        const val FLUID_AREA_HEIGHT: Int = 59
 
         fun setFluidFromPacket(client: MinecraftClient, syncId: Int, fluid: FluidVolume) {
             val screen = client.currentScreen
@@ -57,7 +74,14 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
             }
         }
 
-        private fun drawSprite(matrices: MatrixStack, x: Int, y: Float, width: Float, height: Float, u0: Float, v0: Float, u1: Float, v1: Float, sprite: Sprite, color: Int) {
+        private fun drawSprite(
+            matrices: MatrixStack,
+            x: Int, y: Float,
+            width: Float, height: Float,
+            u0: Float, v0: Float,
+            u1: Float, v1: Float,
+            sprite: Sprite, color: Int
+        ) {
             RenderSystem.enableBlend()
             RenderSystem.setShader(GameRenderer::getPositionColorTexShader)
             RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
@@ -78,7 +102,7 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
             RenderSystem.disableBlend()
         }
 
-        private fun drawFluid(matrices: MatrixStack, x: Int, y: Int, fluid: FluidVolume) {
+        fun drawFluid(matrices: MatrixStack, x: Int, y: Int, fluid: FluidReference) {
             if (fluid.isEmpty) return
 
             val bridge = FluidRenderingBridge.get()
@@ -96,7 +120,7 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
                 else FLUID_AREA_HEIGHT - fluidY - areaHeight
 
             for (i in 0 until MathHelper.floor(height / 16)) {
-                drawSprite(matrices,  x, y + transformY(16f), 16f, 16f, 0f, 0f, 1f, 1f, sprite, color)
+                drawSprite(matrices, x, y + transformY(16f), 16f, 16f, 0f, 0f, 1f, 1f, sprite, color)
                 fluidY += 16
             }
 

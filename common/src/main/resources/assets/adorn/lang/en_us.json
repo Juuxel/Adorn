@@ -1272,6 +1272,8 @@
   "gui.adorn.config.requires_restart": "Requires restart",
   "gui.adorn.config.restart_required.title": "Restart required!",
   "gui.adorn.config.restart_required.message": "One of your changed options requires Minecraft to be restarted.",
+  "gui.adorn.litres": "%s L",
+  "gui.adorn.litres_fraction": "%s / %s L",
 
   "stat.adorn.dye_sofa": "Sofas Dyed",
   "stat.adorn.dye_table_lamp": "Table Lamps Dyed",

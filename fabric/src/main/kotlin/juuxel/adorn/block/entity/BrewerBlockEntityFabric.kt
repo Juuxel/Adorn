@@ -1,7 +1,7 @@
 package juuxel.adorn.block.entity
 
 import com.google.common.base.Predicates
-import juuxel.adorn.menu.FluidVolume
+import juuxel.adorn.fluid.FluidVolume
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage

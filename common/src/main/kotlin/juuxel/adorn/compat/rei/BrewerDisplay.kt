@@ -1,7 +1,9 @@
 package juuxel.adorn.compat.rei
 
+import juuxel.adorn.fluid.FluidReference
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.recipe.BrewingRecipe
+import juuxel.adorn.recipe.FluidBrewingRecipe
 import me.shedaniel.rei.api.common.category.CategoryIdentifier
 import me.shedaniel.rei.api.common.display.Display
 import me.shedaniel.rei.api.common.display.DisplaySerializer
@@ -16,17 +18,27 @@ class BrewerDisplay(
     val input: EntryIngredient,
     val first: EntryIngredient,
     val second: EntryIngredient,
+    val fluid: EntryIngredient,
     val result: EntryStack<*>
 ) : Display {
     constructor(recipe: BrewingRecipe) : this(
         EntryIngredients.of(AdornItems.MUG),
-        EntryIngredients.ofIngredient(recipe.firstIngredient),
-        EntryIngredients.ofIngredient(recipe.secondIngredient),
-        EntryStacks.of(recipe.result)
+        first = EntryIngredients.ofIngredient(recipe.firstIngredient),
+        second = EntryIngredients.ofIngredient(recipe.secondIngredient),
+        fluid = EntryIngredient.empty(),
+        result = EntryStacks.of(recipe.result)
+    )
+
+    constructor(recipe: FluidBrewingRecipe) : this(
+        EntryIngredients.of(AdornItems.MUG),
+        first = EntryIngredients.ofIngredient(recipe.firstIngredient),
+        second = EntryIngredient.empty(),
+        fluid = EntryIngredients.of(recipe.fluid.fluid, FluidReference.convertToPlatform(recipe.fluid.amount)),
+        result = EntryStacks.of(recipe.result)
     )
 
     override fun getInputEntries(): List<EntryIngredient> =
-        listOf(input, first, second)
+        listOf(input, first, second, fluid)
 
     override fun getOutputEntries(): List<EntryIngredient> =
         listOf(EntryIngredient.of(result))
@@ -39,6 +51,7 @@ class BrewerDisplay(
             put("Input", display.input.save())
             put("FirstIngredient", display.first.save())
             put("SecondIngredient", display.second.save())
+            put("Fluid", display.fluid.save())
             put("Result", display.result.save())
         }
 
@@ -46,8 +59,9 @@ class BrewerDisplay(
             val input = EntryIngredient.read(tag.getList("Input", NbtElement.COMPOUND_TYPE.toInt()))
             val first = EntryIngredient.read(tag.getList("FirstIngredient", NbtElement.COMPOUND_TYPE.toInt()))
             val second = EntryIngredient.read(tag.getList("SecondIngredient", NbtElement.COMPOUND_TYPE.toInt()))
+            val fluid = EntryIngredient.read(tag.getList("Fluid", NbtElement.COMPOUND_TYPE.toInt()))
             val result = EntryStack.read(tag.getCompound("Result"))
-            return BrewerDisplay(input, first, second, result)
+            return BrewerDisplay(input, first, second, fluid, result)
         }
     }
 }
