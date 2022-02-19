@@ -59,6 +59,7 @@
     { "id": "adorn:terrestria/yucca_palm_step", "required": false },
     { "id": "adorn:traverse/fir_step", "required": false },
     { "id": "adorn:woods_and_mires/pine_step", "required": false },
+    { "id": "adorn:architects_palette/twisted_step", "required": false },
     { "id": "adorn:azalea/azalea_step", "required": false },
     { "id": "adorn:azalea/flowering_azalea_step", "required": false },
     { "id": "adorn:biomesoplenty/cherry_step", "required": false },

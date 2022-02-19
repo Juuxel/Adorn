@@ -59,6 +59,7 @@
     { "id": "adorn:terrestria/yucca_palm_platform", "required": false },
     { "id": "adorn:traverse/fir_platform", "required": false },
     { "id": "adorn:woods_and_mires/pine_platform", "required": false },
+    { "id": "adorn:architects_palette/twisted_platform", "required": false },
     { "id": "adorn:azalea/azalea_platform", "required": false },
     { "id": "adorn:azalea/flowering_azalea_platform", "required": false },
     { "id": "adorn:biomesoplenty/cherry_platform", "required": false },

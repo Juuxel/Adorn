@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:kitchen_counter",
+  "pattern": [
+    "SS",
+    "PP"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:polished_andesite_slab"
+    },
+    "P": {
+      "item": "architects_palette:twisted_planks"
+    }
+  },
+  "result": {
+    "item": "adorn:architects_palette/twisted_kitchen_counter",
+    "count": 3
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "architects_palette"
+    }
+  ]
+
+}
