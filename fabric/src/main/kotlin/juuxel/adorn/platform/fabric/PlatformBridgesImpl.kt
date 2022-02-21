@@ -2,7 +2,6 @@
 package juuxel.adorn.platform.fabric
 
 import juuxel.adorn.platform.BlockFactory
-import juuxel.adorn.platform.FluidRenderingBridge
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import juuxel.adorn.platform.RegistrarFactory

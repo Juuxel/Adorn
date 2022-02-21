@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem
 import dev.architectury.fluid.FluidStack
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.AdornBlocks
-import juuxel.adorn.client.gui.screen.BrewerScreen
 import juuxel.adorn.compat.rei.AdornReiServer
 import juuxel.adorn.compat.rei.BrewerDisplay
 import juuxel.adorn.fluid.FluidVolume
