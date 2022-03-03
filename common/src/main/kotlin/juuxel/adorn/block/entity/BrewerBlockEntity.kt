@@ -2,7 +2,6 @@ package juuxel.adorn.block.entity
 
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.BrewerBlock
-import juuxel.adorn.fluid.FluidReference
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.menu.BrewerMenu
 import juuxel.adorn.recipe.AdornRecipes
@@ -104,6 +103,7 @@ abstract class BrewerBlockEntity(pos: BlockPos, state: BlockState) :
         const val RIGHT_INGREDIENT_SLOT = 2
         const val FLUID_CONTAINER_SLOT = 3
         const val MAX_PROGRESS = 200
+        const val FLUID_CAPACITY_IN_BUCKETS = 2
 
         fun tick(world: World, pos: BlockPos, state: BlockState, brewer: BrewerBlockEntity) {
             brewer.tryExtractFluidContainer()
@@ -138,7 +138,7 @@ abstract class BrewerBlockEntity(pos: BlockPos, state: BlockState) :
                     brewer.setStack(INPUT_SLOT, recipe.craft(brewer))
 
                     if (recipe is FluidBrewingRecipe) {
-                        brewer.fluidReference.amount -= FluidReference.convertToPlatform(recipe.fluid.amount)
+                        brewer.fluidReference.decrement(recipe.fluid.amount, recipe.fluid.unit)
                     }
                 }
 

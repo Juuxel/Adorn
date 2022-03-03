@@ -2,6 +2,7 @@ package juuxel.adorn.platform.forge.block.entity
 
 import juuxel.adorn.block.entity.BrewerBlockEntity
 import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.fluid.FluidUnit
 import net.minecraft.block.BlockState
 import net.minecraft.fluid.Fluid
 import net.minecraft.nbt.NbtCompound
@@ -20,7 +21,7 @@ import net.minecraftforge.items.wrapper.SidedInvWrapper
 
 class BrewerBlockEntityForge(pos: BlockPos, state: BlockState) : BrewerBlockEntity(pos, state) {
     private var itemHandlers = createItemHandlers()
-    val tank = object : FluidTank(4 * FluidAttributes.BUCKET_VOLUME) {
+    val tank = object : FluidTank(FLUID_CAPACITY_IN_BUCKETS * FluidAttributes.BUCKET_VOLUME) {
         override fun onContentsChanged() {
             markDirty()
         }
@@ -43,6 +44,8 @@ class BrewerBlockEntityForge(pos: BlockPos, state: BlockState) : BrewerBlockEnti
             set(value) {
                 tank.fluid.tag = value
             }
+
+        override val unit = FluidUnit.LITRE
     }
     private val tankHolder = LazyOptional.of { tank }
 

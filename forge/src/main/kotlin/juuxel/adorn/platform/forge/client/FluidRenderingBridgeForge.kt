@@ -15,14 +15,11 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.BlockRenderView
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
-import net.minecraftforge.fluids.FluidAttributes
 import net.minecraftforge.fluids.FluidStack
 
 object FluidRenderingBridgeForge : FluidRenderingBridge {
     private fun stackOf(volume: FluidReference): FluidStack =
         FluidStack(volume.fluid, volume.amount.toInt(), volume.nbt)
-
-    override val bucketVolume = FluidAttributes.BUCKET_VOLUME.toLong()
 
     @OnlyIn(Dist.CLIENT)
     override fun getStillSprite(volume: FluidReference): Sprite? {

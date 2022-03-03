@@ -23,6 +23,7 @@ private object PlatformBridgesImpl : PlatformBridges {
     override val criteria = CriterionBridgeImpl
     override val configManager = ConfigManagerImpl
     override val entities = EntityBridgeImpl
+    override val fluids = FluidBridgeForge
     override val fluidRendering = FluidRenderingBridgeForge
     override val items = ItemBridgeImpl
     override val menus = MenuBridgeImpl

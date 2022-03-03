@@ -5,6 +5,7 @@ import com.mojang.serialization.JsonOps
 import juuxel.adorn.block.entity.BrewerBlockEntity.Companion.LEFT_INGREDIENT_SLOT
 import juuxel.adorn.block.entity.BrewerBlockEntity.Companion.RIGHT_INGREDIENT_SLOT
 import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.fluid.FluidUnit
 import juuxel.adorn.fluid.FluidVolume
 import juuxel.adorn.util.ForgeRegistryEntryImpl
 import net.minecraft.item.ItemStack
@@ -28,7 +29,7 @@ class FluidBrewingRecipe(
 
         return (matches(LEFT_INGREDIENT_SLOT, firstIngredient) || matches(RIGHT_INGREDIENT_SLOT, firstIngredient)) &&
             FluidReference.areFluidsEqual(inventory.fluidReference, fluid) &&
-            FluidReference.convertToLitres(inventory.fluidReference.amount) >= fluid.amount
+            FluidUnit.compareVolumes(inventory.fluidReference, fluid) >= 0
     }
 
     override fun craft(inventory: BrewerInventory): ItemStack = result.copy()
@@ -41,7 +42,7 @@ class FluidBrewingRecipe(
         override fun read(id: Identifier, json: JsonObject): FluidBrewingRecipe {
             val first = Ingredient.fromJson(json["first_ingredient"])
             val fluidJson = json["fluid"]
-            val fluid = FluidVolume.NO_NBT_CODEC.decode(JsonOps.INSTANCE, fluidJson)
+            val fluid = FluidVolume.CODEC.decode(JsonOps.INSTANCE, fluidJson)
                 .getOrThrow(false) { throw RuntimeException("Could not read fluid brewing recipe $id: $it") }
                 .first
             val result = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "result"))

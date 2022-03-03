@@ -112,7 +112,7 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
             }
 
             val color = color(bridge.getColor(fluid))
-            val height = FLUID_AREA_HEIGHT * (fluid.amount / (4 * bridge.bucketVolume).toFloat())
+            val height = FLUID_AREA_HEIGHT * (fluid.amount / (BrewerBlockEntity.FLUID_CAPACITY_IN_BUCKETS * fluid.unit.bucketVolume).toFloat())
             var fluidY = 0
 
             fun transformY(areaHeight: Float): Float =

@@ -11,8 +11,6 @@ import net.minecraft.world.BlockRenderView
 
 // TODO: NO NO NO, ENVIRONMENT SHOULD NOT BE HERE!!!
 interface FluidRenderingBridge {
-    val bucketVolume: Long
-
     @Environment(EnvType.CLIENT)
     fun getStillSprite(volume: FluidReference): Sprite?
 

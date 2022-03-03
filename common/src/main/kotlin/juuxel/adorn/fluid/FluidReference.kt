@@ -1,6 +1,5 @@
 package juuxel.adorn.fluid
 
-import juuxel.adorn.platform.FluidRenderingBridge
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.Fluids
 import net.minecraft.nbt.NbtCompound
@@ -11,15 +10,12 @@ abstract class FluidReference {
     abstract var fluid: Fluid
     abstract var amount: Long
     abstract var nbt: NbtCompound?
+    abstract val unit: FluidUnit
     val isEmpty: Boolean get() = fluid == Fluids.EMPTY || amount == 0L
-    /** The amount in litres if [amount] is in platform units. */
-    var amountInLitres: Long
-        get() = amount * 1000 / FluidRenderingBridge.get().bucketVolume
-        set(value) {
-            amount = value * FluidRenderingBridge.get().bucketVolume / 1000
-        }
 
     fun write(buf: PacketByteBuf) {
+        buf.writeEnumConstant(unit)
+
         if (isEmpty) {
             buf.writeBoolean(false)
         } else {
@@ -30,7 +26,7 @@ abstract class FluidReference {
         }
     }
 
-    fun read(buf: PacketByteBuf) {
+    fun readWithoutUnit(buf: PacketByteBuf) {
         if (buf.readBoolean()) {
             fluid = Registry.FLUID[buf.readVarInt()]
             amount = buf.readVarLong()
@@ -42,7 +38,14 @@ abstract class FluidReference {
         }
     }
 
-    fun copy(): FluidVolume = FluidVolume(fluid, amount, nbt)
+    fun copy(): FluidVolume = FluidVolume(fluid, amount, nbt, unit)
+
+    fun increment(amount: Long, unit: FluidUnit) {
+        this.amount += FluidUnit.convert(amount, this.unit, unit)
+    }
+
+    fun decrement(amount: Long, unit: FluidUnit) =
+        increment(-amount, unit)
 
     companion object {
         fun areFluidsEqual(a: FluidReference, b: FluidReference): Boolean {
@@ -54,13 +57,5 @@ abstract class FluidReference {
             if (a.isEmpty) return b.isEmpty
             return areFluidsEqual(a, b) && a.amount == b.amount
         }
-
-        // Potentially lossy.
-        fun convertToPlatform(amount: Long): Long =
-            amount * FluidRenderingBridge.get().bucketVolume / 1000
-
-        // Potentially lossy.
-        fun convertToLitres(amount: Long): Long =
-            amount * 1000 / FluidRenderingBridge.get().bucketVolume
     }
 }

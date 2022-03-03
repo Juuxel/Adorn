@@ -1,11 +1,10 @@
 {
-  "type": "adorn:brewing_from_fluid",
+  "type": "adorn:brewing",
   "first_ingredient": {
     "tag": "c:nether_wart_crops"
   },
-  "fluid": {
-    "fluid": "minecraft:water",
-    "amount": 250
+  "second_ingredient": {
+    "item": "minecraft:water_bucket"
   },
   "result": {
     "item": "adorn:nether_wart_coffee"

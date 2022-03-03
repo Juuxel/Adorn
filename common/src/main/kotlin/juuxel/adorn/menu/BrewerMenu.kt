@@ -2,6 +2,7 @@ package juuxel.adorn.menu
 
 import juuxel.adorn.block.entity.BrewerBlockEntity
 import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.fluid.FluidUnit
 import juuxel.adorn.fluid.FluidVolume
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.platform.PlatformBridges
@@ -25,10 +26,10 @@ class BrewerMenu(
 ) : Menu(AdornMenus.BREWER, syncId) {
     val progress: Int get() = propertyDelegate[0]
     private val player: PlayerEntity = playerInventory.player
-    private var lastFluid: FluidVolume = FluidVolume.empty()
+    private var lastFluid: FluidVolume? = null
 
     constructor(syncId: Int, playerInventory: PlayerInventory) :
-        this(syncId, playerInventory, SimpleInventory(BrewerBlockEntity.CONTAINER_SIZE), ArrayPropertyDelegate(1), FluidVolume.empty())
+        this(syncId, playerInventory, SimpleInventory(BrewerBlockEntity.CONTAINER_SIZE), ArrayPropertyDelegate(1), FluidVolume.empty(FluidUnit.LITRE))
 
     init {
         checkSize(container, BrewerBlockEntity.CONTAINER_SIZE)
@@ -93,7 +94,8 @@ class BrewerMenu(
     override fun sendContentUpdates() {
         super.sendContentUpdates()
 
-        if (!FluidReference.areContentsEqual(fluid, lastFluid)) {
+        val last = lastFluid
+        if (last == null || !FluidReference.areContentsEqual(fluid, last)) {
             lastFluid = fluid.copy()
             PlatformBridges.network.sendBrewerFluidSync(player, syncId, fluid)
         }

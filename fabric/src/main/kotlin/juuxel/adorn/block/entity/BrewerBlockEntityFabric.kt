@@ -1,7 +1,8 @@
 package juuxel.adorn.block.entity
 
 import com.google.common.base.Predicates
-import juuxel.adorn.fluid.FluidVolume
+import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.fluid.FluidUnit
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage
@@ -19,7 +20,7 @@ import net.minecraft.util.math.BlockPos
 class BrewerBlockEntityFabric(pos: BlockPos, state: BlockState) : BrewerBlockEntity(pos, state) {
     val fluidStorage = object : SingleVariantStorage<FluidVariant>() {
         override fun getCapacity(variant: FluidVariant): Long =
-            4 * FluidConstants.BUCKET
+            FLUID_CAPACITY_IN_BUCKETS * FluidConstants.BUCKET
 
         override fun getBlankVariant(): FluidVariant =
             FluidVariant.blank()
@@ -29,7 +30,7 @@ class BrewerBlockEntityFabric(pos: BlockPos, state: BlockState) : BrewerBlockEnt
         }
     }
 
-    override val fluidReference = object : FluidVolume() {
+    override val fluidReference = object : FluidReference() {
         override var fluid: Fluid
             get() = fluidStorage.variant.fluid
             set(value) {
@@ -47,6 +48,8 @@ class BrewerBlockEntityFabric(pos: BlockPos, state: BlockState) : BrewerBlockEnt
             set(value) {
                 fluidStorage.variant = FluidVariant.of(fluidStorage.variant.fluid, value)
             }
+
+        override val unit = FluidUnit.DROPLET
     }
 
     override fun canExtractFluidContainer() =

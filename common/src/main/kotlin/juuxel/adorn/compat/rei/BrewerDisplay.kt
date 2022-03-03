@@ -1,7 +1,8 @@
 package juuxel.adorn.compat.rei
 
-import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.fluid.FluidUnit
 import juuxel.adorn.item.AdornItems
+import juuxel.adorn.platform.FluidBridge
 import juuxel.adorn.recipe.BrewingRecipe
 import juuxel.adorn.recipe.FluidBrewingRecipe
 import me.shedaniel.rei.api.common.category.CategoryIdentifier
@@ -33,7 +34,7 @@ class BrewerDisplay(
         EntryIngredients.of(AdornItems.MUG),
         first = EntryIngredients.ofIngredient(recipe.firstIngredient),
         second = EntryIngredient.empty(),
-        fluid = EntryIngredients.of(recipe.fluid.fluid, FluidReference.convertToPlatform(recipe.fluid.amount)),
+        fluid = EntryIngredients.of(recipe.fluid.fluid, FluidUnit.convert(recipe.fluid.amount, recipe.fluid.unit, FluidBridge.get().fluidUnit)),
         result = EntryStacks.of(recipe.result)
     )
 

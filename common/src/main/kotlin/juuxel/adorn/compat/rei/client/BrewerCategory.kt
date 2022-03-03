@@ -7,6 +7,7 @@ import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.compat.rei.AdornReiServer
 import juuxel.adorn.compat.rei.BrewerDisplay
 import juuxel.adorn.fluid.FluidVolume
+import juuxel.adorn.platform.FluidBridge
 import me.shedaniel.math.Point
 import me.shedaniel.math.Rectangle
 import me.shedaniel.rei.api.client.gui.Renderer
@@ -60,7 +61,7 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
                 topLeft.x + 88, topLeft.y + 1,
                 display.fluid.cast<FluidStack>().map {
                     val stack = it.value
-                    FluidVolume(stack.fluid, stack.amount, stack.tag)
+                    FluidVolume(stack.fluid, stack.amount, stack.tag, FluidBridge.get().fluidUnit)
                 }
             )
         )

@@ -19,8 +19,6 @@ object FluidRenderingBridgeFabric : FluidRenderingBridge {
     private fun variantOf(volume: FluidReference): FluidVariant =
         FluidVariant.of(volume.fluid, volume.nbt)
 
-    override val bucketVolume = FluidConstants.BUCKET
-
     @Environment(EnvType.CLIENT)
     override fun getStillSprite(volume: FluidReference): Sprite? =
         FluidVariantRendering.getSprite(variantOf(volume))
