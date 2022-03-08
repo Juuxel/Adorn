@@ -3,7 +3,7 @@ package juuxel.adorn.compat.rei
 import juuxel.adorn.fluid.FluidUnit
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.platform.FluidBridge
-import juuxel.adorn.recipe.BrewingRecipe
+import juuxel.adorn.recipe.ItemBrewingRecipe
 import juuxel.adorn.recipe.FluidBrewingRecipe
 import me.shedaniel.rei.api.common.category.CategoryIdentifier
 import me.shedaniel.rei.api.common.display.Display
@@ -22,7 +22,7 @@ class BrewerDisplay(
     val fluid: EntryIngredient,
     val result: EntryStack<*>
 ) : Display {
-    constructor(recipe: BrewingRecipe) : this(
+    constructor(recipe: ItemBrewingRecipe) : this(
         EntryIngredients.of(AdornItems.MUG),
         first = EntryIngredients.ofIngredient(recipe.firstIngredient),
         second = EntryIngredients.ofIngredient(recipe.secondIngredient),

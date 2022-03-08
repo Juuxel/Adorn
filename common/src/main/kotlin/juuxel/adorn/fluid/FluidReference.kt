@@ -6,6 +6,11 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.registry.Registry
 
+/**
+ * A mutable reference to a fluid volume.
+ * This can be a [FluidVolume] or a block entity's
+ * internal fluid volume.
+ */
 abstract class FluidReference {
     abstract var fluid: Fluid
     abstract var amount: Long
@@ -26,7 +31,7 @@ abstract class FluidReference {
         }
     }
 
-    fun readWithoutUnit(buf: PacketByteBuf) {
+    protected fun readWithoutUnit(buf: PacketByteBuf) {
         if (buf.readBoolean()) {
             fluid = Registry.FLUID[buf.readVarInt()]
             amount = buf.readVarLong()

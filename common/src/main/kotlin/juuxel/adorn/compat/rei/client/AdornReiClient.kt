@@ -4,7 +4,7 @@ import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.compat.rei.AdornReiServer
 import juuxel.adorn.compat.rei.BrewerDisplay
 import juuxel.adorn.recipe.AdornRecipes
-import juuxel.adorn.recipe.BrewingRecipe
+import juuxel.adorn.recipe.ItemBrewingRecipe
 import juuxel.adorn.recipe.FluidBrewingRecipe
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry
@@ -19,7 +19,7 @@ open class AdornReiClient : REIClientPlugin {
     }
 
     override fun registerDisplays(registry: DisplayRegistry) {
-        registry.registerRecipeFiller(BrewingRecipe::class.java, AdornRecipes.BREWING_TYPE, ::BrewerDisplay)
+        registry.registerRecipeFiller(ItemBrewingRecipe::class.java, AdornRecipes.BREWING_TYPE, ::BrewerDisplay)
         registry.registerRecipeFiller(FluidBrewingRecipe::class.java, AdornRecipes.BREWING_TYPE, ::BrewerDisplay)
     }
 }

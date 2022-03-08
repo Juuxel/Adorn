@@ -7,7 +7,7 @@ import juuxel.adorn.menu.BrewerMenu
 import juuxel.adorn.recipe.AdornRecipes
 import juuxel.adorn.recipe.BrewerInventory
 import juuxel.adorn.recipe.FluidBrewingRecipe
-import juuxel.adorn.recipe.IBrewingRecipe
+import juuxel.adorn.recipe.BrewingRecipe
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.SidedInventory
@@ -115,7 +115,7 @@ abstract class BrewerBlockEntity(pos: BlockPos, state: BlockState) :
                 world.setBlockState(pos, state.with(BrewerBlock.HAS_MUG, hasMug))
             }
 
-            val recipe: IBrewingRecipe? = world.recipeManager.getFirstMatch(AdornRecipes.BREWING_TYPE, brewer, world).orElse(null)
+            val recipe: BrewingRecipe? = world.recipeManager.getFirstMatch(AdornRecipes.BREWING_TYPE, brewer, world).orElse(null)
 
             fun decrementIngredient(slot: Int) {
                 val stack = brewer.getStack(slot)
