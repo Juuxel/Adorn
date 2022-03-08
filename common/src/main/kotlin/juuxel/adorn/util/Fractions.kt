@@ -40,20 +40,9 @@ object Fractions {
         val result = IntArray(str.length)
 
         for ((i, char) in str.withIndex()) {
-            result[i] = when (char) {
-                // TODO: replace with subtraction
-                '0' -> 0
-                '1' -> 1
-                '2' -> 2
-                '3' -> 3
-                '4' -> 4
-                '5' -> 5
-                '6' -> 6
-                '7' -> 7
-                '8' -> 8
-                '9' -> 9
-                else -> error("Unknown digit character: $char")
-            }
+            result[i] =
+                if (char in '0'..'9') char - '0'
+                else error("Unknown digit character: $char")
         }
 
         return result

@@ -1,6 +1,7 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.block.entity.BrewerBlockEntity
+import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.util.buildShapeRotationsFromNorth
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -43,7 +44,7 @@ class BrewerBlock(settings: Settings) : VisibleBlockWithEntity(settings) {
         val blockEntity = world.getBlockEntity(pos)
         if (blockEntity is BrewerBlockEntity) {
             player.openMenu(blockEntity)
-            // TODO: Stat for opening brewers
+            player.incrementStat(AdornStats.OPEN_BREWER)
         }
 
         return ActionResult.CONSUME

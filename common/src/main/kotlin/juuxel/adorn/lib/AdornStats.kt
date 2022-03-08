@@ -6,6 +6,7 @@ import net.minecraft.stat.Stats
 import net.minecraft.util.Identifier
 
 object AdornStats {
+    val OPEN_BREWER: Identifier = register("open_brewer", StatFormatter.DEFAULT)
     val OPEN_DRAWER: Identifier = register("open_drawer", StatFormatter.DEFAULT)
     val OPEN_KITCHEN_CUPBOARD: Identifier = register("open_kitchen_cupboard", StatFormatter.DEFAULT)
     val INTERACT_WITH_SHELF: Identifier = register("interact_with_shelf", StatFormatter.DEFAULT)
