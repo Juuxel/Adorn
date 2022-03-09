@@ -3,8 +3,8 @@ package juuxel.adorn.compat.rei
 import juuxel.adorn.fluid.FluidUnit
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.platform.FluidBridge
-import juuxel.adorn.recipe.ItemBrewingRecipe
 import juuxel.adorn.recipe.FluidBrewingRecipe
+import juuxel.adorn.recipe.ItemBrewingRecipe
 import me.shedaniel.rei.api.common.category.CategoryIdentifier
 import me.shedaniel.rei.api.common.display.Display
 import me.shedaniel.rei.api.common.display.DisplaySerializer

@@ -6,8 +6,8 @@ import juuxel.adorn.item.AdornItems
 import juuxel.adorn.menu.BrewerMenu
 import juuxel.adorn.recipe.AdornRecipes
 import juuxel.adorn.recipe.BrewerInventory
-import juuxel.adorn.recipe.FluidBrewingRecipe
 import juuxel.adorn.recipe.BrewingRecipe
+import juuxel.adorn.recipe.FluidBrewingRecipe
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.SidedInventory

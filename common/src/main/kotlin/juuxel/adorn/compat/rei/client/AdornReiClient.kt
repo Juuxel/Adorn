@@ -4,8 +4,8 @@ import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.compat.rei.AdornReiServer
 import juuxel.adorn.compat.rei.BrewerDisplay
 import juuxel.adorn.recipe.AdornRecipes
-import juuxel.adorn.recipe.ItemBrewingRecipe
 import juuxel.adorn.recipe.FluidBrewingRecipe
+import juuxel.adorn.recipe.ItemBrewingRecipe
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry
