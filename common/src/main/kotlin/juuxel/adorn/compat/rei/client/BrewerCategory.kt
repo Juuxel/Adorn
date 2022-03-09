@@ -1,13 +1,11 @@
 package juuxel.adorn.compat.rei.client
 
 import com.mojang.blaze3d.systems.RenderSystem
-import dev.architectury.fluid.FluidStack
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.AdornBlocks
+import juuxel.adorn.client.gui.screen.BrewerScreen
 import juuxel.adorn.compat.rei.AdornReiServer
 import juuxel.adorn.compat.rei.BrewerDisplay
-import juuxel.adorn.fluid.FluidVolume
-import juuxel.adorn.platform.FluidBridge
 import me.shedaniel.math.Point
 import me.shedaniel.math.Rectangle
 import me.shedaniel.rei.api.client.gui.Renderer
@@ -57,13 +55,10 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
                 .entry(display.result)
         )
         add(
-            BrewerFluidWidget(
-                topLeft.x + 88, topLeft.y + 1,
-                display.fluid.cast<FluidStack>().map {
-                    val stack = it.value
-                    FluidVolume(stack.fluid, stack.amount, stack.tag, FluidBridge.get().fluidUnit)
-                }
-            )
+            Widgets.createSlot(Rectangle(topLeft.x + 87, topLeft.y, 18, BrewerScreen.FLUID_AREA_HEIGHT + 2))
+                .disableBackground()
+                .markInput()
+                .entries(display.fluid)
         )
         // Empty mug, must have background since it's not in the screen texture
         add(
@@ -71,7 +66,7 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
                 .markInput()
                 .entries(display.input)
         )
-        // Fluid scale
+        // Fluid scale for empty fluid slots
         add(
             Widgets.createDrawableWidget { helper, matrices, mouseX, mouseY, delta ->
                 RenderSystem.setShaderTexture(0, TEXTURE)
