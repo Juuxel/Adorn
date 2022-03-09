@@ -1,0 +1,15 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "architects_palette:myonite_bricks"
+  },
+  "result": "adorn:architects_palette/myonite_brick_post",
+  "count": 2,
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "architects_palette"
+    }
+  ]
+
+}

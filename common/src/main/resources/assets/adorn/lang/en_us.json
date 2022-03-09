@@ -88,6 +88,7 @@
   "block.adorn.blockus.white_oak_chair": "White Oak Chair",
   "block.adorn.azalea.azalea_chair": "Azalea Chair",
   "block.adorn.azalea.flowering_azalea_chair": "Flowering Azalea Chair",
+  "block.adorn.architects_palette.twisted_chair": "Twisted Chair",
 
   "block.adorn.oak_table": "Oak Table",
   "block.adorn.spruce_table": "Spruce Table",
@@ -160,6 +161,7 @@
   "block.adorn.blockus.white_oak_table": "White Oak Table",
   "block.adorn.azalea.azalea_table": "Azalea Table",
   "block.adorn.azalea.flowering_azalea_table": "Flowering Azalea Table",
+  "block.adorn.architects_palette.twisted_table": "Twisted Table",
 
   "block.adorn.oak_kitchen_counter": "Oak Kitchen Counter",
   "block.adorn.spruce_kitchen_counter": "Spruce Kitchen Counter",
@@ -232,6 +234,7 @@
   "block.adorn.blockus.white_oak_kitchen_counter": "White Oak Kitchen Counter",
   "block.adorn.azalea.azalea_kitchen_counter": "Azalea Kitchen Counter",
   "block.adorn.azalea.flowering_azalea_kitchen_counter": "Flowering Azalea Kitchen Counter",
+  "block.adorn.architects_palette.twisted_kitchen_counter": "Twisted Kitchen Counter",
 
   "block.adorn.oak_kitchen_cupboard": "Oak Kitchen Cupboard",
   "block.adorn.spruce_kitchen_cupboard": "Spruce Kitchen Cupboard",
@@ -304,6 +307,7 @@
   "block.adorn.blockus.white_oak_kitchen_cupboard": "White Oak Kitchen Cupboard",
   "block.adorn.azalea.azalea_kitchen_cupboard": "Azalea Kitchen Cupboard",
   "block.adorn.azalea.flowering_azalea_kitchen_cupboard": "Flowering Azalea Kitchen Cupboard",
+  "block.adorn.architects_palette.twisted_kitchen_cupboard": "Twisted Kitchen Cupboard",
 
   "block.adorn.oak_kitchen_sink": "Oak Kitchen Sink",
   "block.adorn.spruce_kitchen_sink": "Spruce Kitchen Sink",
@@ -376,6 +380,7 @@
   "block.adorn.blockus.white_oak_kitchen_sink": "White Oak Kitchen Sink",
   "block.adorn.azalea.azalea_kitchen_sink": "Azalea Kitchen Sink",
   "block.adorn.azalea.flowering_azalea_kitchen_sink": "Flowering Azalea Kitchen Sink",
+  "block.adorn.architects_palette.twisted_kitchen_sink": "Twisted Kitchen Sink",
 
   "block.adorn.oak_drawer": "Oak Drawer",
   "block.adorn.spruce_drawer": "Spruce Drawer",
@@ -448,6 +453,7 @@
   "block.adorn.blockus.white_oak_drawer": "White Oak Drawer",
   "block.adorn.azalea.azalea_drawer": "Azalea Drawer",
   "block.adorn.azalea.flowering_azalea_drawer": "Flowering Azalea Drawer",
+  "block.adorn.architects_palette.twisted_drawer": "Twisted Drawer",
 
   "block.adorn.trading_station": "Trading Station",
   "block.adorn.trading_station.selling": "Selling",
@@ -656,6 +662,10 @@
   "block.adorn.blockus.white_oak_post": "White Oak Post",
   "block.adorn.azalea.azalea_post": "Azalea Post",
   "block.adorn.azalea.flowering_azalea_post": "Flowering Azalea Post",
+  "block.adorn.architects_palette.twisted_post": "Twisted Post",
+  "block.adorn.architects_palette.myonite_post": "Myonite Post",
+  "block.adorn.architects_palette.myonite_brick_post": "Myonite Brick Post",
+  "block.adorn.architects_palette.mushy_myonite_brick_post": "Mushy Myonite Brick Post",
   "block.adorn.post.desc": "A bit like a fence post",
 
   "block.adorn.oak_platform": "Oak Platform",
@@ -798,6 +808,10 @@
   "block.adorn.blockus.white_oak_platform": "White Oak Platform",
   "block.adorn.azalea.azalea_platform": "Azalea Platform",
   "block.adorn.azalea.flowering_azalea_platform": "Flowering Azalea Platform",
+  "block.adorn.architects_palette.twisted_platform": "Twisted Platform",
+  "block.adorn.architects_palette.myonite_platform": "Myonite Platform",
+  "block.adorn.architects_palette.myonite_brick_platform": "Myonite Brick Platform",
+  "block.adorn.architects_palette.mushy_myonite_brick_platform": "Mushy Myonite Brick Platform",
   "block.adorn.platform.desc": "A post with a platform on top",
 
   "block.adorn.oak_step": "Oak Step",
@@ -940,6 +954,10 @@
   "block.adorn.blockus.white_oak_step": "White Oak Step",
   "block.adorn.azalea.azalea_step": "Azalea Step",
   "block.adorn.azalea.flowering_azalea_step": "Flowering Azalea Step",
+  "block.adorn.architects_palette.twisted_step": "Twisted Step",
+  "block.adorn.architects_palette.myonite_step": "Myonite Step",
+  "block.adorn.architects_palette.myonite_brick_step": "Myonite Brick Step",
+  "block.adorn.architects_palette.mushy_myonite_brick_step": "Mushy Myonite Brick Step",
   "block.adorn.step.desc": "A small step with a post under it",
 
   "block.adorn.brick_chimney": "Brick Chimney",
@@ -1026,6 +1044,7 @@
   "block.adorn.blockus.white_oak_shelf": "White Oak Shelf",
   "block.adorn.azalea.azalea_shelf": "Azalea Shelf",
   "block.adorn.azalea.flowering_azalea_shelf": "Flowering Azalea Shelf",
+  "block.adorn.architects_palette.twisted_shelf": "Twisted Shelf",
   "block.adorn.shelf.desc": "A handy place for everyday items",
 
   "block.adorn.white_table_lamp": "White Table Lamp",
@@ -1116,6 +1135,7 @@
   "block.adorn.blockus.white_oak_coffee_table": "White Oak Coffee Table",
   "block.adorn.azalea.azalea_coffee_table": "Azalea Coffee Table",
   "block.adorn.azalea.flowering_azalea_coffee_table": "Flowering Azalea Coffee Table",
+  "block.adorn.architects_palette.twisted_coffee_table": "Twisted Coffee Table",
 
   "block.adorn.crate": "Crate",
   "block.adorn.wheat_crate": "Crate of Wheat",
@@ -1212,6 +1232,7 @@
   "block.adorn.blockus.white_oak_bench": "White Oak Bench",
   "block.adorn.azalea.azalea_bench": "Azalea Bench",
   "block.adorn.azalea.flowering_azalea_bench": "Flowering Azalea Bench",
+  "block.adorn.architects_palette.twisted_bench": "Twisted Bench",
 
   "entity.adorn.seat": "Seat",
 

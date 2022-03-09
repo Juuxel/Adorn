@@ -59,6 +59,7 @@
     { "id": "adorn:terrestria/yucca_palm_kitchen_sink", "required": false },
     { "id": "adorn:traverse/fir_kitchen_sink", "required": false },
     { "id": "adorn:woods_and_mires/pine_kitchen_sink", "required": false },
+    { "id": "adorn:architects_palette/twisted_kitchen_sink", "required": false },
     { "id": "adorn:azalea/azalea_kitchen_sink", "required": false },
     { "id": "adorn:azalea/flowering_azalea_kitchen_sink", "required": false },
     { "id": "adorn:biomesoplenty/cherry_kitchen_sink", "required": false },

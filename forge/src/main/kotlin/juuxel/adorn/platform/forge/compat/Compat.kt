@@ -12,6 +12,7 @@ object Compat {
             "biomesoplenty" to { CompatBlocks.addVariants(BiomesOPlentyCompat) },
             "byg" to { CompatBlocks.addVariants(BygCompat) },
             "azalea" to { CompatBlocks.addVariants(BetterAzaleaCompat) },
+            "architects_palette" to { CompatBlocks.addVariants(ArchitectsPaletteCompat) },
         )
 
         for ((mod, fn) in mods) {

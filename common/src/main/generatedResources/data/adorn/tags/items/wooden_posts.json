@@ -59,6 +59,7 @@
     { "id": "adorn:terrestria/yucca_palm_post", "required": false },
     { "id": "adorn:traverse/fir_post", "required": false },
     { "id": "adorn:woods_and_mires/pine_post", "required": false },
+    { "id": "adorn:architects_palette/twisted_post", "required": false },
     { "id": "adorn:azalea/azalea_post", "required": false },
     { "id": "adorn:azalea/flowering_azalea_post", "required": false },
     { "id": "adorn:biomesoplenty/cherry_post", "required": false },
