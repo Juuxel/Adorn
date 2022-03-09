@@ -38,5 +38,4 @@ private object PlatformBridgesImpl : PlatformBridges {
         override fun recipeSerializer(): Registrar<RecipeSerializer<*>> = RegistrarImpl(Registry.RECIPE_SERIALIZER)
     }
     override val resources = ResourceBridgeImpl
-    override val tags = TagBridgeImpl
 }

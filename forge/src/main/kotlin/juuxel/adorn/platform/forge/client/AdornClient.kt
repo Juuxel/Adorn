@@ -10,7 +10,7 @@ import juuxel.adorn.menu.AdornMenus
 import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.ingame.MenuScreens
-import net.minecraft.resource.ReloadableResourceManager
+import net.minecraft.resource.ReloadableResourceManagerImpl
 import net.minecraft.util.Identifier
 import net.minecraftforge.client.ConfigGuiHandler
 import net.minecraftforge.fml.ModLoadingContext
@@ -22,7 +22,7 @@ object AdornClient {
         MOD_BUS.addListener(this::setup)
         MOD_BUS.addListener(AdornRenderers::registerColorProviders)
         MOD_BUS.addListener(AdornRenderers::registerRenderers)
-        val resourceManager = MinecraftClient.getInstance().resourceManager as ReloadableResourceManager
+        val resourceManager = MinecraftClient.getInstance().resourceManager as ReloadableResourceManagerImpl
         resourceManager.registerReloader(PlatformBridges.resources.bookManager)
         resourceManager.registerReloader(PlatformBridges.resources.colorManager)
         ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory::class.java) {

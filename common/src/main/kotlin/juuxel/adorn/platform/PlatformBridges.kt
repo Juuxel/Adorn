@@ -20,7 +20,6 @@ interface PlatformBridges {
     val network: NetworkBridge
     val registrarFactory: RegistrarFactory
     val resources: ResourceBridge
-    val tags: TagBridge
 
     companion object {
         inline val blockEntities get() = get().blockEntities
@@ -33,6 +32,5 @@ interface PlatformBridges {
         inline val network get() = get().network
         inline val registrarFactory get() = get().registrarFactory
         inline val resources get() = get().resources
-        inline val tags get() = get().tags
     }
 }

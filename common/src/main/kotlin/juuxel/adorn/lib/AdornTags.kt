@@ -1,11 +1,11 @@
 package juuxel.adorn.lib
 
 import juuxel.adorn.AdornCommon
-import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.block.Block
 import net.minecraft.item.Item
-import net.minecraft.tag.Tag
+import net.minecraft.tag.TagKey
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 
 object AdornTags {
     @JvmField val CHAIRS = blockAndItem(AdornCommon.id("chairs"))
@@ -32,22 +32,16 @@ object AdornTags {
     @JvmStatic
     fun init() {}
 
-    private fun block(id: Identifier): Tag.Identified<Block> =
-        PlatformBridges.tags.block(id).toIdentified(id)
+    private fun block(id: Identifier): TagKey<Block> =
+        TagKey.of(Registry.BLOCK_KEY, id)
 
-    private fun item(id: Identifier): Tag.Identified<Item> =
-        PlatformBridges.tags.item(id).toIdentified(id)
+    private fun item(id: Identifier): TagKey<Item> =
+        TagKey.of(Registry.ITEM_KEY, id)
 
     private fun blockAndItem(id: Identifier) = TagPair(
         block(id),
         item(id)
     )
 
-    private fun <T> Tag<T>.toIdentified(id: Identifier): Tag.Identified<T> =
-        if (this is Tag.Identified<T>) this
-        else object : Tag<T> by this, Tag.Identified<T> {
-            override fun getId() = id
-        }
-
-    data class TagPair(val block: Tag.Identified<Block>, val item: Tag.Identified<Item>)
+    data class TagPair(val block: TagKey<Block>, val item: TagKey<Item>)
 }

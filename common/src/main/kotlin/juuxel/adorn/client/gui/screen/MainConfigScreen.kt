@@ -17,7 +17,7 @@ class MainConfigScreen(private val parent: Screen) : AbstractConfigScreen(Transl
                 client!!.setScreen(GameRuleDefaultsScreen(this))
             }
         )
-        addDrawableChild(ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.DONE) { onClose() })
+        addDrawableChild(ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.DONE) { close() })
     }
 
     companion object {

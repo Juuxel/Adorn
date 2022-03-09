@@ -40,7 +40,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
             flipBook.add(BookPage(pageX, pageY, page))
         }
 
-        addDrawableChild(CloseButton(x + 142, y + 14) { onClose() })
+        addDrawableChild(CloseButton(x + 142, y + 14) { close() })
         previousPageButton = addDrawableChild(PageTurnWidget(x + 49, y + 159, false, { flipBook.showPreviousPage() }, true))
         nextPageButton = addDrawableChild(PageTurnWidget(x + 116, y + 159, true, { flipBook.showNextPage() }, true))
         updatePageTurnButtons()

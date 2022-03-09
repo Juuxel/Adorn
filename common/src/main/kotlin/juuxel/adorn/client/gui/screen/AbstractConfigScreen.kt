@@ -28,7 +28,7 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
         }
     }
 
-    override fun onClose() {
+    override fun close() {
         client!!.setScreen(
             if (restartRequired) {
                 NoticeScreen(

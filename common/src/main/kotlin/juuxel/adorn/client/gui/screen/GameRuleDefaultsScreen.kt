@@ -11,7 +11,7 @@ class GameRuleDefaultsScreen(parent: Screen) : AbstractConfigScreen(Translatable
         val config = PlatformBridges.configManager.config
         val x = (width - BUTTON_WIDTH) / 2
         addDrawableChild(createConfigToggle(x, 40, BUTTON_WIDTH, config.gameRuleDefaults::skipNightOnSofas))
-        addDrawableChild(ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.BACK) { onClose() })
+        addDrawableChild(ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.BACK) { close() })
     }
 
     companion object {

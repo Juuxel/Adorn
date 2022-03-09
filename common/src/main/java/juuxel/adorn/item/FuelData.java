@@ -7,12 +7,12 @@ import juuxel.adorn.block.TableBlock;
 import juuxel.adorn.lib.AdornTags;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
-public record FuelData(@Nullable Class<? extends ItemConvertible> itemOrBlockType, Tag<Item> tag, int burnTime) {
+public record FuelData(@Nullable Class<? extends ItemConvertible> itemOrBlockType, TagKey<Item> tag, int burnTime) {
     // TODO: Crates should burn
     public static final Set<FuelData> FUEL_DATA = Set.of(
         // Wooden (300)
