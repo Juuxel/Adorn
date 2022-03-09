@@ -56,7 +56,7 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
             fluid,
             if (client!!.options.advancedItemTooltips) TooltipContext.Default.ADVANCED
             else TooltipContext.Default.NORMAL,
-            maxAmountInLitres = 4000
+            maxAmountInLitres = BrewerBlockEntity.FLUID_CAPACITY_IN_BUCKETS * 1000
         )
 
     companion object {
