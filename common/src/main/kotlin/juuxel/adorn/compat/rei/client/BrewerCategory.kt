@@ -17,6 +17,7 @@ import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import kotlin.math.roundToInt
 
+// TODO: Dark mode, see REIRuntime
 class BrewerCategory : DisplayCategory<BrewerDisplay> {
     override fun getIcon(): Renderer = EntryStacks.of(AdornBlocks.BREWER)
     override fun getTitle(): Text = TranslatableText("category.adorn.brewer")
