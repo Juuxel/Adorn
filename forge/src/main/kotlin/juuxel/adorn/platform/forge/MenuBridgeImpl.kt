@@ -2,6 +2,7 @@ package juuxel.adorn.platform.forge
 
 import juuxel.adorn.lib.Registered
 import juuxel.adorn.platform.MenuBridge
+import juuxel.adorn.platform.forge.registrar.ForgeRegistryRegistrar
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.menu.Menu
@@ -18,7 +19,7 @@ import org.apache.logging.log4j.LogManager
 object MenuBridgeImpl : MenuBridge {
     private val LOGGER = LogManager.getLogger()
     @JvmField
-    val MENUS = RegistrarImpl(ForgeRegistries.CONTAINERS)
+    val MENUS = ForgeRegistryRegistrar(ForgeRegistries.CONTAINERS)
 
     override fun open(player: PlayerEntity, factory: NamedMenuFactory?, pos: BlockPos) {
         if (factory == null) {

@@ -13,6 +13,7 @@ import juuxel.adorn.lib.AdornSounds;
 import juuxel.adorn.lib.AdornTags;
 import juuxel.adorn.menu.AdornMenus;
 import juuxel.adorn.platform.Registrar;
+import juuxel.adorn.platform.forge.registrar.ForgeRegistrar;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -55,7 +56,7 @@ final class EventsImplementedInJava {
     }
 
     private void register(Registrar<?> registrar, IEventBus modBus) {
-        ((RegistrarImpl<?>) registrar).getRegister().register(modBus);
+        ((ForgeRegistrar<?>) registrar).hook(modBus);
     }
 
     private void onFuelBurnTime(FurnaceFuelBurnTimeEvent event) {

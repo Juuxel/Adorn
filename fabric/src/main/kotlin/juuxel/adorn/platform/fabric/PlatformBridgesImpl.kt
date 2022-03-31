@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
 import net.minecraft.menu.MenuType
 import net.minecraft.recipe.RecipeSerializer
+import net.minecraft.recipe.RecipeType
 import net.minecraft.sound.SoundEvent
 import net.minecraft.util.registry.Registry
 
@@ -36,6 +37,7 @@ private object PlatformBridgesImpl : PlatformBridges {
         override fun menu(): Registrar<MenuType<*>> = RegistrarImpl(Registry.MENU)
         override fun soundEvent(): Registrar<SoundEvent> = RegistrarImpl(Registry.SOUND_EVENT)
         override fun recipeSerializer(): Registrar<RecipeSerializer<*>> = RegistrarImpl(Registry.RECIPE_SERIALIZER)
+        override fun recipeType(): Registrar<RecipeType<*>> = RegistrarImpl(Registry.RECIPE_TYPE)
     }
     override val resources = ResourceBridgeImpl
 }

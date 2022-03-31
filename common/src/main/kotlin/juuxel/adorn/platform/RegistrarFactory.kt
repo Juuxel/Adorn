@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
 import net.minecraft.menu.MenuType
 import net.minecraft.recipe.RecipeSerializer
+import net.minecraft.recipe.RecipeType
 import net.minecraft.sound.SoundEvent
 
 interface RegistrarFactory {
@@ -16,4 +17,5 @@ interface RegistrarFactory {
     fun menu(): Registrar<MenuType<*>>
     fun soundEvent(): Registrar<SoundEvent>
     fun recipeSerializer(): Registrar<RecipeSerializer<*>>
+    fun recipeType(): Registrar<RecipeType<*>>
 }

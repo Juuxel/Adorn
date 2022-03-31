@@ -2,7 +2,7 @@ package juuxel.adorn.platform.forge.compat
 
 import juuxel.adorn.compat.CompatBlocks
 import juuxel.adorn.platform.forge.ConfigManagerImpl
-import juuxel.adorn.platform.forge.RegistrarImpl
+import juuxel.adorn.platform.forge.registrar.ForgeRegistrar
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.fml.ModList
 
@@ -20,8 +20,8 @@ object Compat {
         }
 
         CompatBlocks.register()
-        (CompatBlocks.blocks as RegistrarImpl<*>).register.register(modBus)
-        (CompatBlocks.items as RegistrarImpl<*>).register.register(modBus)
+        (CompatBlocks.blocks as ForgeRegistrar<*>).hook(modBus)
+        (CompatBlocks.items as ForgeRegistrar<*>).hook(modBus)
     }
 
     fun isCompatEnabled(mod: String): Boolean {
