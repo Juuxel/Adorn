@@ -70,4 +70,10 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
                 this.restartRequired = true
             }
         }
+
+    companion object {
+        const val BUTTON_HEIGHT = 20
+        const val BUTTON_GAP = 4
+        const val BUTTON_SPACING = BUTTON_HEIGHT + BUTTON_GAP
+    }
 }
