@@ -1,6 +1,7 @@
 package juuxel.adorn.block.entity
 
 import juuxel.adorn.block.AdornBlockEntities
+import juuxel.adorn.lib.AdornGameRules
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -19,6 +20,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.tag.FluidTags
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
+import net.minecraft.world.World
 
 abstract class KitchenSinkBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(AdornBlockEntities.KITCHEN_SINK, pos, state) {
     /**
@@ -69,8 +71,11 @@ abstract class KitchenSinkBlockEntity(pos: BlockPos, state: BlockState) : BlockE
     abstract fun calculateComparatorOutput(): Int
 
     companion object {
-        fun isInfinite(fluid: Fluid): Boolean =
+        private fun isInfinite(fluid: Fluid): Boolean =
             fluid is FlowableFluid && fluid.isInfinite
+
+        fun supportsInfiniteExtraction(world: World, fluid: Fluid): Boolean =
+            isInfinite(fluid) && world.gameRules.getBoolean(AdornGameRules.INFINITE_KITCHEN_SINKS)
     }
 
     /**

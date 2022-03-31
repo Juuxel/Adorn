@@ -1281,11 +1281,14 @@
   "item.adorn.traders_manual.selling.text": "Setting up your own trading stations is very simple! Just place down a trading station and open it. On the left side, you can set the product and the payment. The inventory on the right side will have the products and the payments.",
 
   "gamerule.adorn:skipNightOnSofas": "Skip nights by sleeping on sofas",
+  "gamerule.adorn:infiniteKitchenSinks": "Kitchen sinks are infinite sources",
 
   "gui.adorn.config.title": "Adorn",
   "gui.adorn.config.game_rule_defaults": "Game rule defaults...",
   "gui.adorn.config.option.skipNightOnSofas": "Skip nights by sleeping on sofas",
   "gui.adorn.config.option.skipNightOnSofas.tooltip": "Allows you to skip the night when you sleep on a sofa.",
+  "gui.adorn.config.option.infiniteKitchenSinks": "Kitchen sinks are infinite sources",
+  "gui.adorn.config.option.infiniteKitchenSinks.tooltip": "Makes kitchen sinks infinite sources for infinite fluids like water.",
   "gui.adorn.config.option.showItemsInStandardGroups": "Items in standard tabs",
   "gui.adorn.config.option.showItemsInStandardGroups.tooltip": "Shows Adorn items in standard vanilla creative inventory tabs.",
   "gui.adorn.config.option.showTradingStationTooltips": "Trading station tooltips",

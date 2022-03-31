@@ -30,7 +30,7 @@ import kotlin.math.min
 class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSinkBlockEntity(pos, state) {
     val tank: FluidTank = object : FluidTank(FluidAttributes.BUCKET_VOLUME) {
         override fun drain(maxDrain: Int, action: IFluidHandler.FluidAction?): FluidStack {
-            return if (isInfinite(fluid.fluid)) {
+            return if (supportsInfiniteExtraction(world!!, fluid.fluid)) {
                 FluidStack(fluid, min(fluidAmount, maxDrain))
             } else {
                 super.drain(maxDrain, action)

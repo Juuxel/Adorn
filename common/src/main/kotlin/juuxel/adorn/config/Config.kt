@@ -23,5 +23,8 @@ class Config {
     class GameRuleDefaults {
         @field:Comment("If true, sleeping on sofas can skip the night.")
         var skipNightOnSofas: Boolean = true
+
+        @field:Comment("If true, kitchen sinks are infinite sources for infinite fluids.")
+        var infiniteKitchenSinks: Boolean = true
     }
 }

@@ -32,7 +32,7 @@ class KitchenSinkBlockEntityFabric(pos: BlockPos, state: BlockState) : KitchenSi
             StoragePreconditions.notBlankNotNegative(extractedVariant, maxAmount)
 
             // Support for infinite extraction
-            return if (amount > 0 && isInfinite(variant.fluid) && extractedVariant == variant) {
+            return if (amount > 0 && supportsInfiniteExtraction(world!!, variant.fluid) && extractedVariant == variant) {
                 return min(amount, maxAmount)
             } else {
                 super.extract(extractedVariant, maxAmount, transaction)
