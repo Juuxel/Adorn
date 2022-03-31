@@ -16,7 +16,7 @@ object TagEntryProviders {
     val STONE_PLATFORMS = stone("platform")
     val STONE_POSTS = stone("post")
     val STONE_STEPS = stone("step")
-    val TABLES = wood("kitchen_sink")
+    val TABLES = wood("table")
     val TABLE_LAMPS = wool("table_lamp")
     val WOODEN_PLATFORMS = wood("platform")
     val WOODEN_POSTS = wood("post")
