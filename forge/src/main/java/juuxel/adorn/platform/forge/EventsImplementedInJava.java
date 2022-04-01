@@ -37,8 +37,7 @@ final class EventsImplementedInJava {
         register(AdornBlocks.INSTANCE.getBlocks(), modBus);
         register(AdornBlocks.INSTANCE.getItems(), modBus);
         register(AdornItems.ITEMS, modBus);
-        AdornMenus.INSTANCE.init();
-        register(MenuBridgeImpl.MENUS, modBus);
+        register(AdornMenus.INSTANCE.getMENUS(), modBus);
         register(AdornEntities.ENTITIES, modBus);
         register(AdornBlockEntities.BLOCK_ENTITIES, modBus);
         modBus.addListener(this::init);
