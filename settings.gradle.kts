@@ -27,5 +27,5 @@ includeBuild("datagen")
 include(
     "common",
     "fabric",
-    "forge",
+    //"forge",
 )

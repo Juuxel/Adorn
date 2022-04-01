@@ -43,7 +43,7 @@
   "accessWidener": "adorn.accesswidener",
 
   "depends": {
-    "minecraft": "~1.18.2",
+    "minecraft": "=1.19-22.w.13.oneBlockAtATime",
     "fabricloader": ">=0.13.3",
     "fabric-language-kotlin": "^1.7.0",
 
