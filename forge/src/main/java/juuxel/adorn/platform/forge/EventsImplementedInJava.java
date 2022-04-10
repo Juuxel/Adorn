@@ -13,9 +13,6 @@ import juuxel.adorn.lib.AdornSounds;
 import juuxel.adorn.lib.AdornTags;
 import juuxel.adorn.platform.Registrar;
 import juuxel.adorn.platform.forge.registrar.ForgeRegistrar;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -57,13 +54,8 @@ final class EventsImplementedInJava {
     }
 
     private void onFuelBurnTime(FurnaceFuelBurnTimeEvent event) {
-        Item item = event.getItemStack().getItem();
-
         for (FuelData fuelData : FuelData.FUEL_DATA) {
-            Class<? extends ItemConvertible> type = fuelData.itemOrBlockType();
-            if (type == null) continue;
-
-            if (type.isInstance(item) || (item instanceof BlockItem blockItem && type.isInstance(blockItem.getBlock()))) {
+            if (event.getItemStack().isIn(fuelData.tag())) {
                 event.setBurnTime(fuelData.burnTime());
                 break;
             }
