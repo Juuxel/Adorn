@@ -1,10 +1,8 @@
 package juuxel.adorn.platform.fabric
 
-import juuxel.adorn.AdornCommon
-import juuxel.adorn.lib.Registered
 import juuxel.adorn.platform.MenuBridge
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
-import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.menu.Menu
@@ -37,13 +35,6 @@ object MenuBridgeImpl : MenuBridge {
         }
     }
 
-    override fun <M : Menu> register(id: String, factory: (syncId: Int, inventory: PlayerInventory) -> M): Registered<MenuType<M>> {
-        val type = ScreenHandlerRegistry.registerSimple(AdornCommon.id(id), factory)
-        return Registered { type }
-    }
-
-    override fun <M : Menu> register(id: String, factory: (Int, PlayerInventory, PacketByteBuf) -> M): Registered<MenuType<M>> {
-        val type = ScreenHandlerRegistry.registerExtended(AdornCommon.id(id), factory)
-        return Registered { type }
-    }
+    override fun <M : Menu> createType(factory: (syncId: Int, inventory: PlayerInventory, buf: PacketByteBuf) -> M): MenuType<M> =
+        ExtendedScreenHandlerType(factory)
 }

@@ -11,7 +11,6 @@ import juuxel.adorn.item.FuelData;
 import juuxel.adorn.lib.AdornGameRules;
 import juuxel.adorn.lib.AdornSounds;
 import juuxel.adorn.lib.AdornTags;
-import juuxel.adorn.menu.AdornMenus;
 import juuxel.adorn.platform.Registrar;
 import juuxel.adorn.platform.forge.registrar.ForgeRegistrar;
 import net.minecraft.item.BlockItem;
@@ -37,8 +36,6 @@ final class EventsImplementedInJava {
         register(AdornBlocks.INSTANCE.getBlocks(), modBus);
         register(AdornBlocks.INSTANCE.getItems(), modBus);
         register(AdornItems.ITEMS, modBus);
-        AdornMenus.INSTANCE.init();
-        register(MenuBridgeImpl.MENUS, modBus);
         register(AdornEntities.ENTITIES, modBus);
         register(AdornBlockEntities.BLOCK_ENTITIES, modBus);
         modBus.addListener(this::init);

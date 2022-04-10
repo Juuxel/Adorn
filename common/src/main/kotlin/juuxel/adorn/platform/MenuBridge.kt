@@ -1,6 +1,5 @@
 package juuxel.adorn.platform
 
-import juuxel.adorn.lib.Registered
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.menu.Menu
@@ -20,6 +19,5 @@ interface MenuBridge {
      */
     fun open(player: PlayerEntity, factory: NamedMenuFactory?, pos: BlockPos)
 
-    fun <M : Menu> register(id: String, factory: (syncId: Int, inventory: PlayerInventory) -> M): Registered<MenuType<M>>
-    fun <M : Menu> register(id: String, factory: (syncId: Int, inventory: PlayerInventory, buf: PacketByteBuf) -> M): Registered<MenuType<M>>
+    fun <M : Menu> createType(factory: (syncId: Int, inventory: PlayerInventory, buf: PacketByteBuf) -> M): MenuType<M>
 }

@@ -3,6 +3,7 @@ package juuxel.adorn.platform.forge
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.lib.AdornStats
+import juuxel.adorn.menu.AdornMenus
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import juuxel.adorn.platform.forge.client.AdornClient
@@ -27,6 +28,7 @@ object Adorn {
         MOD_BUS.addListener(this::init)
         EventsImplementedInJava().register(MOD_BUS, FORGE_BUS)
         AdornRecipes.init()
+        AdornMenus.MENUS.registerToBus(MOD_BUS)
         AdornRecipes.RECIPE_SERIALIZERS.registerToBus(MOD_BUS)
         AdornRecipes.RECIPE_TYPES.registerToBus(MOD_BUS)
         AdornNetworking.init()

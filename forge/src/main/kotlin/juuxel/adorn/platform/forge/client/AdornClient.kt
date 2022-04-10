@@ -1,15 +1,10 @@
 package juuxel.adorn.platform.forge.client
 
-import juuxel.adorn.client.gui.screen.BrewerScreen
-import juuxel.adorn.client.gui.screen.DrawerScreen
+import juuxel.adorn.client.gui.screen.AdornMenuScreens
 import juuxel.adorn.client.gui.screen.GuideBookScreen
-import juuxel.adorn.client.gui.screen.KitchenCupboardScreen
 import juuxel.adorn.client.gui.screen.MainConfigScreen
-import juuxel.adorn.client.gui.screen.TradingStationScreen
-import juuxel.adorn.menu.AdornMenus
 import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.client.MinecraftClient
-import net.minecraft.client.gui.screen.ingame.MenuScreens
 import net.minecraft.resource.ReloadableResourceManagerImpl
 import net.minecraft.util.Identifier
 import net.minecraftforge.client.ConfigGuiHandler
@@ -33,14 +28,7 @@ object AdornClient {
 
     private fun setup(event: FMLClientSetupEvent) {
         AdornRenderers.registerRenderLayers()
-        registerScreens()
-    }
-
-    private fun registerScreens() {
-        MenuScreens.register(AdornMenus.DRAWER, ::DrawerScreen)
-        MenuScreens.register(AdornMenus.KITCHEN_CUPBOARD, ::KitchenCupboardScreen)
-        MenuScreens.register(AdornMenus.TRADING_STATION, ::TradingStationScreen)
-        MenuScreens.register(AdornMenus.BREWER, ::BrewerScreen)
+        AdornMenuScreens.register()
     }
 
     fun openBookScreen(bookId: Identifier) {
