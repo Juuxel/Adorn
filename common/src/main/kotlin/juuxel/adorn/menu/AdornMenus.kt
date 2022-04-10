@@ -7,7 +7,7 @@ import net.minecraft.menu.MenuType
 import net.minecraft.network.PacketByteBuf
 
 object AdornMenus {
-    @JvmField val MENUS = PlatformBridges.registrarFactory.menu()
+    val MENUS = PlatformBridges.registrarFactory.menu()
     val DRAWER: MenuType<DrawerMenu> by MENUS.register("drawer") { createType(DrawerMenu::load) }
     val KITCHEN_CUPBOARD: MenuType<KitchenCupboardMenu> by MENUS.register("kitchen_cupboard") { createType(KitchenCupboardMenu::load) }
     val TRADING_STATION: MenuType<TradingStationMenu> by MENUS.register("trading_station") { MenuType(::TradingStationMenu) }
