@@ -6,7 +6,10 @@ import net.fabricmc.fabric.api.registry.FuelRegistry
 object AdornItemsFabric {
     fun init() {
         for (fuelData in FuelData.FUEL_DATA) {
-            FuelRegistry.INSTANCE.add(fuelData.tag, fuelData.burnTime)
+            when (fuelData) {
+                is FuelData.ForItem -> FuelRegistry.INSTANCE.add(fuelData.item, fuelData.burnTime)
+                is FuelData.ForTag -> FuelRegistry.INSTANCE.add(fuelData.tag, fuelData.burnTime)
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import juuxel.adorn.platform.forge.client.AdornClient
 import juuxel.adorn.platform.forge.compat.Compat
+import juuxel.adorn.platform.forge.event.ItemEvents
 import juuxel.adorn.platform.forge.networking.AdornNetworking
 import juuxel.adorn.platform.forge.registrar.ForgeRegistrar
 import juuxel.adorn.recipe.AdornRecipes
@@ -33,6 +34,7 @@ object Adorn {
         AdornRecipes.RECIPE_TYPES.registerToBus(MOD_BUS)
         AdornNetworking.init()
         AdornCriteria.init()
+        ItemEvents.register(FORGE_BUS)
         Compat.init(MOD_BUS)
         ForgeMod.enableMilkFluid()
         DistExecutor.safeRunWhenOn(Dist.CLIENT) { SafeRunnable(AdornClient::init) }

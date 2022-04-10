@@ -7,7 +7,6 @@ import juuxel.adorn.block.SneakClickHandler;
 import juuxel.adorn.block.SofaBlock;
 import juuxel.adorn.entity.AdornEntities;
 import juuxel.adorn.item.AdornItems;
-import juuxel.adorn.item.FuelData;
 import juuxel.adorn.lib.AdornGameRules;
 import juuxel.adorn.lib.AdornSounds;
 import juuxel.adorn.lib.AdornTags;
@@ -19,7 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.event.entity.player.SleepingTimeCheckEvent;
-import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -39,7 +37,6 @@ final class EventsImplementedInJava {
 
         forgeBus.addListener(this::handleCarpetedBlocks);
         forgeBus.addListener(this::handleSneakClicks);
-        forgeBus.addListener(this::onFuelBurnTime);
         forgeBus.addListener(this::handleSofaSleepTime);
         forgeBus.addListener(this::preventSofaSpawns);
     }
@@ -51,15 +48,6 @@ final class EventsImplementedInJava {
 
     private void register(Registrar<?> registrar, IEventBus modBus) {
         ((ForgeRegistrar<?>) registrar).hook(modBus);
-    }
-
-    private void onFuelBurnTime(FurnaceFuelBurnTimeEvent event) {
-        for (FuelData fuelData : FuelData.FUEL_DATA) {
-            if (event.getItemStack().isIn(fuelData.tag())) {
-                event.setBurnTime(fuelData.burnTime());
-                break;
-            }
-        }
     }
 
     private void handleCarpetedBlocks(PlayerInteractEvent.RightClickBlock event) {
