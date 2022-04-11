@@ -11,11 +11,10 @@ import net.minecraft.util.registry.Registry
  * This can be a [FluidVolume] or a block entity's
  * internal fluid volume.
  */
-abstract class FluidReference {
+abstract class FluidReference : HasFluidAmount {
     abstract var fluid: Fluid
-    abstract var amount: Long
+    abstract override var amount: Long
     abstract var nbt: NbtCompound?
-    abstract val unit: FluidUnit
     val isEmpty: Boolean get() = fluid == Fluids.EMPTY || amount == 0L
 
     fun write(buf: PacketByteBuf) {
@@ -52,13 +51,16 @@ abstract class FluidReference {
     fun decrement(amount: Long, unit: FluidUnit) =
         increment(-amount, unit)
 
+    fun matches(ingredient: FluidIngredient): Boolean =
+        ingredient.fluid.matches(fluid) && FluidUnit.compareVolumes(this, ingredient) >= 0 && nbt == ingredient.nbt
+
     companion object {
         fun areFluidsEqual(a: FluidReference, b: FluidReference): Boolean {
             if (a.isEmpty) return b.isEmpty
             return a.fluid == b.fluid && a.nbt == b.nbt
         }
 
-        fun areContentsEqual(a: FluidReference, b: FluidReference): Boolean {
+        fun areFluidsAndAmountsEqual(a: FluidReference, b: FluidReference): Boolean {
             if (a.isEmpty) return b.isEmpty
             return areFluidsEqual(a, b) && FluidUnit.compareVolumes(a, b) == 0
         }

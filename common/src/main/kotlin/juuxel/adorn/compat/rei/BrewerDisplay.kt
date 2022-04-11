@@ -1,5 +1,7 @@
 package juuxel.adorn.compat.rei
 
+import dev.architectury.fluid.FluidStack
+import juuxel.adorn.fluid.FluidIngredient
 import juuxel.adorn.fluid.FluidUnit
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.platform.FluidBridge
@@ -34,7 +36,7 @@ class BrewerDisplay(
         EntryIngredients.of(AdornItems.MUG),
         first = EntryIngredients.ofIngredient(recipe.firstIngredient),
         second = EntryIngredient.empty(),
-        fluid = EntryIngredients.of(recipe.fluid.fluid, FluidUnit.convert(recipe.fluid.amount, recipe.fluid.unit, FluidBridge.get().fluidUnit)),
+        fluid = entryIngredientOf(recipe.fluid),
         result = EntryStacks.of(recipe.result)
     )
 
@@ -46,6 +48,16 @@ class BrewerDisplay(
 
     override fun getCategoryIdentifier(): CategoryIdentifier<*> =
         AdornReiServer.BREWER
+
+    companion object {
+        private fun entryIngredientOf(fluidIngredient: FluidIngredient): EntryIngredient {
+            val amount = FluidUnit.convert(fluidIngredient.amount, fluidIngredient.unit, FluidBridge.get().fluidUnit)
+            val stacks = fluidIngredient.fluid.fluids.map {
+                EntryStacks.of(FluidStack.create(it, amount, fluidIngredient.nbt))
+            }
+            return EntryIngredient.of(stacks)
+        }
+    }
 
     object Serializer : DisplaySerializer<BrewerDisplay> {
         override fun save(tag: NbtCompound, display: BrewerDisplay): NbtCompound = tag.apply {

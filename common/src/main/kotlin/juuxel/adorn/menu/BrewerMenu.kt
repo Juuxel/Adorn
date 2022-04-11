@@ -95,7 +95,7 @@ class BrewerMenu(
         super.sendContentUpdates()
 
         val last = lastFluid
-        if (last == null || !FluidReference.areContentsEqual(fluid, last)) {
+        if (last == null || !FluidReference.areFluidsAndAmountsEqual(fluid, last)) {
             lastFluid = fluid.copy()
             PlatformBridges.network.sendBrewerFluidSync(player, syncId, fluid)
         }

@@ -42,7 +42,7 @@ enum class FluidUnit(private val id: String, val bucketVolume: Long) {
         /**
          * Compares the amounts of two [FluidReference]s.
          */
-        fun compareVolumes(volume1: FluidReference, volume2: FluidReference): Int =
+        fun compareVolumes(volume1: HasFluidAmount, volume2: HasFluidAmount): Int =
             compareVolumes(volume1.amount, volume1.unit, volume2.amount, volume2.unit)
     }
 }

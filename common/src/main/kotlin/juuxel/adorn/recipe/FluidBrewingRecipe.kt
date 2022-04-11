@@ -4,9 +4,7 @@ import com.google.gson.JsonObject
 import com.mojang.serialization.JsonOps
 import juuxel.adorn.block.entity.BrewerBlockEntity.Companion.LEFT_INGREDIENT_SLOT
 import juuxel.adorn.block.entity.BrewerBlockEntity.Companion.RIGHT_INGREDIENT_SLOT
-import juuxel.adorn.fluid.FluidReference
-import juuxel.adorn.fluid.FluidUnit
-import juuxel.adorn.fluid.FluidVolume
+import juuxel.adorn.fluid.FluidIngredient
 import juuxel.adorn.util.ForgeRegistryEntryImpl
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
@@ -20,7 +18,7 @@ import net.minecraft.world.World
 class FluidBrewingRecipe(
     private val id: Identifier,
     val firstIngredient: Ingredient,
-    val fluid: FluidVolume,
+    val fluid: FluidIngredient,
     val result: ItemStack
 ) : BrewingRecipe {
     override fun matches(inventory: BrewerInventory, world: World): Boolean {
@@ -28,8 +26,7 @@ class FluidBrewingRecipe(
             ingredient.test(inventory.getStack(index))
 
         return (matches(LEFT_INGREDIENT_SLOT, firstIngredient) || matches(RIGHT_INGREDIENT_SLOT, firstIngredient)) &&
-            FluidReference.areFluidsEqual(inventory.fluidReference, fluid) &&
-            FluidUnit.compareVolumes(inventory.fluidReference, fluid) >= 0
+            inventory.fluidReference.matches(fluid)
     }
 
     override fun craft(inventory: BrewerInventory): ItemStack = result.copy()
@@ -42,7 +39,7 @@ class FluidBrewingRecipe(
         override fun read(id: Identifier, json: JsonObject): FluidBrewingRecipe {
             val first = Ingredient.fromJson(json["first_ingredient"])
             val fluidJson = json["fluid"]
-            val fluid = FluidVolume.CODEC.decode(JsonOps.INSTANCE, fluidJson)
+            val fluid = FluidIngredient.CODEC.decode(JsonOps.INSTANCE, fluidJson)
                 .getOrThrow(false) { throw RuntimeException("Could not read fluid brewing recipe $id: $it") }
                 .first
             val result = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "result"))
@@ -51,7 +48,7 @@ class FluidBrewingRecipe(
 
         override fun read(id: Identifier, buf: PacketByteBuf): FluidBrewingRecipe {
             val first = Ingredient.fromPacket(buf)
-            val fluid = FluidVolume.load(buf)
+            val fluid = FluidIngredient.load(buf)
             val output = buf.readItemStack()
             return FluidBrewingRecipe(id, first, fluid, output)
         }
