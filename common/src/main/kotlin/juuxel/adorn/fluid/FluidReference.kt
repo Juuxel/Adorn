@@ -60,7 +60,7 @@ abstract class FluidReference {
 
         fun areContentsEqual(a: FluidReference, b: FluidReference): Boolean {
             if (a.isEmpty) return b.isEmpty
-            return areFluidsEqual(a, b) && a.amount == b.amount
+            return areFluidsEqual(a, b) && FluidUnit.compareVolumes(a, b) == 0
         }
     }
 }
