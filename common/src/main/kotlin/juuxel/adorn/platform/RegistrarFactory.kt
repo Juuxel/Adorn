@@ -3,6 +3,7 @@ package juuxel.adorn.platform
 import net.minecraft.block.Block
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityType
+import net.minecraft.fluid.Fluid
 import net.minecraft.item.Item
 import net.minecraft.menu.MenuType
 import net.minecraft.recipe.RecipeSerializer
@@ -18,4 +19,5 @@ interface RegistrarFactory {
     fun soundEvent(): Registrar<SoundEvent>
     fun recipeSerializer(): Registrar<RecipeSerializer<*>>
     fun recipeType(): Registrar<RecipeType<*>>
+    fun fluid(): Registrar<Fluid>
 }

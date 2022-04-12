@@ -1,20 +1,25 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
+import juuxel.adorn.fluid.AdornFluids
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
 import juuxel.adorn.lib.AdornSounds
 import juuxel.adorn.lib.Registered
 import juuxel.adorn.lib.RegistryHelper
+import juuxel.adorn.platform.FluidBridge
 import juuxel.adorn.platform.PlatformBridges
+import juuxel.adorn.platform.get
 import juuxel.adorn.util.associateLazily
 import juuxel.adorn.util.copySettingsSafely
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
+import net.minecraft.block.FluidBlock
 import net.minecraft.block.Material
 import net.minecraft.block.TorchBlock
 import net.minecraft.block.WallTorchBlock
+import net.minecraft.fluid.FlowableFluid
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.particle.ParticleTypes
@@ -325,6 +330,7 @@ object AdornBlocks : RegistryHelper() {
         )
     }
     val BREWER: Block by registerBlock("brewer") { BrewerBlock(AbstractBlock.Settings.of(Material.METAL).strength(0.8F)) }
+    val SWEET_BERRY_JUICE: Block by registerBlockWithoutItem("sweet_berry_juice") { createFluidBlock { AdornFluids.SWEET_BERRY_JUICE } }
     /* ktlint-enable max-line-length */
     // @formatter:on
 
@@ -337,4 +343,10 @@ object AdornBlocks : RegistryHelper() {
             itemSettings = { Item.Settings().group(ItemGroup.DECORATIONS).recipeRemainder(CRATE.asItem()) },
             block = { Block(CRATE.copySettingsSafely()) }
         )
+
+    private fun createFluidBlock(settings: AbstractBlock.Settings.() -> Unit = {}, fluid: () -> FlowableFluid): Block =
+        FluidBridge.get().createFluidBlock(fluid, fluidBlockSettings().apply(settings))
+
+    private fun fluidBlockSettings(): AbstractBlock.Settings =
+        AbstractBlock.Settings.of(Material.WATER).noCollision().strength(100f)
 }

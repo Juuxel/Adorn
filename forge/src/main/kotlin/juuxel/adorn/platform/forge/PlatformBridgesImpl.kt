@@ -10,6 +10,7 @@ import juuxel.adorn.platform.forge.registrar.WelcomeToHell
 import net.minecraft.block.Block
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityType
+import net.minecraft.fluid.Fluid
 import net.minecraft.item.Item
 import net.minecraft.menu.MenuType
 import net.minecraft.recipe.RecipeSerializer
@@ -41,6 +42,7 @@ private object PlatformBridgesImpl : PlatformBridges {
         override fun soundEvent(): Registrar<SoundEvent> = ForgeRegistryRegistrar(ForgeRegistries.SOUND_EVENTS)
         override fun recipeSerializer(): Registrar<RecipeSerializer<*>> = ForgeRegistryRegistrar(ForgeRegistries.RECIPE_SERIALIZERS)
         override fun recipeType(): Registrar<RecipeType<*>> = WelcomeToHell(Registry.RECIPE_TYPE)
+        override fun fluid(): Registrar<Fluid> = ForgeRegistryRegistrar(ForgeRegistries.FLUIDS)
     }
     override val resources = ResourceBridgeImpl
 }

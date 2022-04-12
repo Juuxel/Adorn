@@ -8,6 +8,7 @@ import juuxel.adorn.platform.RegistrarFactory
 import net.minecraft.block.Block
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityType
+import net.minecraft.fluid.Fluid
 import net.minecraft.item.Item
 import net.minecraft.menu.MenuType
 import net.minecraft.recipe.RecipeSerializer
@@ -38,6 +39,7 @@ private object PlatformBridgesImpl : PlatformBridges {
         override fun soundEvent(): Registrar<SoundEvent> = RegistrarImpl(Registry.SOUND_EVENT)
         override fun recipeSerializer(): Registrar<RecipeSerializer<*>> = RegistrarImpl(Registry.RECIPE_SERIALIZER)
         override fun recipeType(): Registrar<RecipeType<*>> = RegistrarImpl(Registry.RECIPE_TYPE)
+        override fun fluid(): Registrar<Fluid> = RegistrarImpl(Registry.FLUID)
     }
     override val resources = ResourceBridgeImpl
 }

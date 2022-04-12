@@ -3,10 +3,12 @@ package juuxel.adorn
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.client.ClientCompatInit
+import juuxel.adorn.client.FluidRendering
 import juuxel.adorn.client.gui.screen.AdornMenuScreens
 import juuxel.adorn.compat.Compat
 import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.entity.AdornEntities
+import juuxel.adorn.fluid.AdornFluids
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.lib.AdornBlocksFabric
 import juuxel.adorn.lib.AdornEntitiesFabric
@@ -43,6 +45,7 @@ object Adorn : ModInitializer {
         SofaSleeping.init()
         AdornCriteria.init()
         AdornRecipes.init()
+        AdornFluids.init()
         Compat.init()
         ConfigManagerImpl.finalize()
     }
@@ -55,6 +58,7 @@ object Adorn : ModInitializer {
         AdornMenuScreens.register()
         AdornNetworking.initClient()
         AdornResources.initClient()
+        FluidRendering.init()
         ClientCompatInit.init()
     }
 }

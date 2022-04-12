@@ -2,6 +2,8 @@ package juuxel.adorn.item
 
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.AdornBlocks
+import juuxel.adorn.fluid.AdornFluids
+import juuxel.adorn.platform.FluidBridge
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import net.minecraft.entity.effect.StatusEffectInstance
@@ -37,6 +39,10 @@ object AdornItems {
     }
     val NETHER_WART_COFFEE by ITEMS.register("nether_wart_coffee") {
         DrinkInMugItem(Item.Settings().group(ItemGroup.FOOD).food(DRINK_FOOD_COMPONENT).maxCount(1))
+    }
+
+    val SWEET_BERRY_JUICE_BUCKET by ITEMS.register("sweet_berry_juice_bucket") {
+        FluidBridge.get().createBucket({ AdornFluids.SWEET_BERRY_JUICE }, Item.Settings().maxCount(1).group(ItemGroup.MISC))
     }
 
     val STONE_TORCH by ITEMS.register("stone_torch") {
