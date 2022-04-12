@@ -17,11 +17,13 @@ import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.client.util.NarratorManager
 import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.ClickEvent
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Style
 import net.minecraft.text.TranslatableText
+import net.minecraft.util.registry.Registry
 
 class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
     private lateinit var flipBook: FlipBook
@@ -122,6 +124,16 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         private val wrappedTitleLines = textRenderer.wrapLines(page.title.copy().styled { it.withBold(true) }, PAGE_TITLE_WIDTH)
         private val wrappedBodyLines = textRenderer.wrapLines(page.text, PAGE_WIDTH - PAGE_TEXT_X)
 
+        private val icons: List<ItemStack> = buildList {
+            for (icon in page.icons) {
+                when (icon) {
+                    is Page.Icon.ItemIcon -> add(icon.item.defaultStack)
+                    is Page.Icon.TagIcon -> for (item in Registry.ITEM.getOrCreateEntryList(icon.tag)) {
+                        add(item.value().defaultStack)
+                    }
+                }
+            }
+        }
         private var icon = 0
         private var iconTicks = 0
 
@@ -140,7 +152,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         }
 
         override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
-            itemRenderer.renderGuiItemIcon(page.icons[icon].defaultStack, x, y)
+            itemRenderer.renderGuiItemIcon(icons[icon], x, y)
 
             val titleY = (y + 10 - textRenderer.fontHeight * wrappedTitleLines.size / 2).toFloat()
 
@@ -171,7 +183,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         override fun tick() {
             if (iconTicks++ >= ICON_DURATION) {
                 iconTicks = 0
-                icon = (icon + 1) % page.icons.size
+                icon = (icon + 1) % icons.size
             }
         }
     }

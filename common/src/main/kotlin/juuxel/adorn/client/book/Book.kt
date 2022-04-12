@@ -3,11 +3,8 @@ package juuxel.adorn.client.book
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
-import net.minecraft.item.Item
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
-import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 
 data class Book(
     val title: Text,
@@ -19,7 +16,7 @@ data class Book(
     companion object {
         val GSON = GsonBuilder()
             .registerTypeHierarchyAdapter(Text::class.java, JsonDeserializer { json, _, _ -> Text.Serializer.fromJson(json) ?: MISSINGNO })
-            .registerTypeAdapter(Item::class.java, JsonDeserializer { json, _, _ -> Registry.ITEM.get(Identifier(json.asString)) })
+            .registerTypeAdapter(Page.Icon::class.java, JsonDeserializer { json, _, _ -> Page.Icon.fromJson(json) })
             .create()
 
         private val MISSINGNO: Text = LiteralText("missingno")

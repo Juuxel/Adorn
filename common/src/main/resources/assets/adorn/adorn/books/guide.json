@@ -88,12 +88,12 @@
       ]
     },
     {
-      "icons": ["adorn:oak_table"],
+      "icons": ["#adorn:tables"],
       "title": { "translate": "guide.adorn.topic.table.title" },
       "text": { "translate": "guide.adorn.topic.table.text" }
     },
     {
-      "icons": ["adorn:oak_chair"],
+      "icons": ["#adorn:chairs"],
       "title": { "translate": "guide.adorn.topic.chair.title" },
       "text": { "translate": "guide.adorn.topic.chair.text" }
     },
@@ -124,17 +124,17 @@
       ]
     },
     {
-      "icons": ["adorn:cobblestone_post"],
+      "icons": ["#adorn:posts"],
       "title": { "translate": "guide.adorn.topic.post.title" },
       "text": { "translate": "guide.adorn.topic.post.text" }
     },
     {
-      "icons": ["adorn:cobblestone_platform"],
+      "icons": ["#adorn:platforms"],
       "title": { "translate": "guide.adorn.topic.platform.title" },
       "text": { "translate": "guide.adorn.topic.platform.text" }
     },
     {
-      "icons": ["adorn:cobblestone_step"],
+      "icons": ["#adorn:steps"],
       "title": { "translate": "guide.adorn.topic.step.title" },
       "text": { "translate": "guide.adorn.topic.step.text" }
     },
@@ -144,12 +144,12 @@
       "text": { "translate": "guide.adorn.topic.kitchen.text" }
     },
     {
-      "icons": ["adorn:oak_kitchen_sink"],
+      "icons": ["#adorn:kitchen_sinks"],
       "title": { "translate": "guide.adorn.topic.kitchen_sink.title" },
       "text": { "translate": "guide.adorn.topic.kitchen_sink.text" }
     },
     {
-      "icons": ["adorn:red_sofa"],
+      "icons": ["#adorn:sofas"],
       "title": { "translate": "guide.adorn.topic.sofa.title" },
       "text": { "translate": "guide.adorn.topic.sofa.text" }
     },
@@ -159,22 +159,22 @@
       "text": { "translate": "guide.adorn.topic.trading_station.text" }
     },
     {
-      "icons": ["adorn:oak_shelf"],
+      "icons": ["#adorn:shelves"],
       "title": { "translate": "guide.adorn.topic.shelf.title" },
       "text": { "translate": "guide.adorn.topic.shelf.text" }
     },
     {
-      "icons": ["adorn:oak_drawer"],
+      "icons": ["#adorn:drawers"],
       "title": { "translate": "guide.adorn.topic.drawer.title" },
       "text": { "translate": "guide.adorn.topic.drawer.text" }
     },
     {
-      "icons": ["adorn:brick_chimney"],
+      "icons": ["#adorn:regular_chimneys"],
       "title": { "translate": "guide.adorn.topic.chimney.title" },
       "text": { "translate": "guide.adorn.topic.chimney.text" }
     },
     {
-      "icons": ["adorn:prismarine_chimney", "adorn:magmatic_prismarine_chimney", "adorn:soulful_prismarine_chimney"],
+      "icons": ["#adorn:prismarine_chimneys"],
       "title": { "translate": "guide.adorn.topic.prismarine_chimney.title" },
       "text": { "translate": "guide.adorn.topic.prismarine_chimney.text" }
     }
