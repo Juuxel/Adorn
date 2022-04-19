@@ -8,6 +8,7 @@ import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariantAttributes
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.texture.Sprite
 import net.minecraft.text.Text
@@ -29,7 +30,7 @@ object FluidRenderingBridgeFabric : FluidRenderingBridge {
 
     @Environment(EnvType.CLIENT)
     override fun fillsFromTop(volume: FluidReference): Boolean =
-        FluidVariantRendering.fillsFromTop(variantOf(volume))
+        FluidVariantAttributes.isLighterThanAir(variantOf(volume))
 
     @Environment(EnvType.CLIENT)
     override fun getTooltip(volume: FluidReference, context: TooltipContext, maxAmountInLitres: Int?): List<Text> {
