@@ -1,8 +1,8 @@
 package juuxel.adorn.client.renderer
 
 import juuxel.adorn.block.entity.KitchenSinkBlockEntityFabric
+import juuxel.adorn.fluid.FluidUnit
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.texture.MissingSprite
@@ -29,7 +29,7 @@ class KitchenSinkRendererFabric(context: BlockEntityRendererFactory.Context) :
         FluidVariantRendering.getColor(entity.storage.variant, entity.world, entity.pos)
 
     override fun getFluidLevel(entity: KitchenSinkBlockEntityFabric): Double =
-        entity.storage.amount * (1000.0 / FluidConstants.BLOCK)
+        FluidUnit.convertAsDouble(entity.storage.amount.toDouble(), from = FluidUnit.DROPLET, to = FluidUnit.LITRE)
 
     override fun isEmpty(entity: KitchenSinkBlockEntityFabric): Boolean =
         entity.storage.amount == 0L

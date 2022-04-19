@@ -28,6 +28,15 @@ enum class FluidUnit(private val id: String, val bucketVolume: Long) {
         }
 
         /**
+         * Converts a volume between two fluid units.
+         * This variant is meant to be used for rendering.
+         */
+        fun convertAsDouble(volume: Double, from: FluidUnit, to: FluidUnit): Double {
+            if (from == to) return volume
+            return volume * to.bucketVolume.toDouble() / from.bucketVolume.toDouble()
+        }
+
+        /**
          * Compares two fluid volumes with specified units.
          */
         fun compareVolumes(volume1: Long, unit1: FluidUnit, volume2: Long, unit2: FluidUnit): Int =
