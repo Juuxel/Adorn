@@ -22,3 +22,6 @@ accessible class net/minecraft/menu/MenuType$Factory
 accessible method net/minecraft/menu/MenuType <init> (Lnet/minecraft/menu/MenuType$Factory;)V
 accessible class net/minecraft/client/gui/screen/ingame/MenuScreens$Provider
 accessible method net/minecraft/client/gui/screen/ingame/MenuScreens register (Lnet/minecraft/menu/MenuType;Lnet/minecraft/client/gui/screen/ingame/MenuScreens$Provider;)V
+
+# Criteria
+accessible method net/minecraft/advancement/criterion/Criteria register (Lnet/minecraft/advancement/criterion/Criterion;)Lnet/minecraft/advancement/criterion/Criterion;

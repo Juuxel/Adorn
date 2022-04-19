@@ -1,7 +1,6 @@
 package juuxel.adorn.criterion
 
-import juuxel.adorn.platform.PlatformBridges
-import net.minecraft.advancement.criterion.Criterion
+import net.minecraft.advancement.criterion.Criteria.register
 
 object AdornCriteria {
     val SIT_ON_BLOCK: SitOnBlockCriterion = register(SitOnBlockCriterion())
@@ -9,7 +8,4 @@ object AdornCriteria {
 
     fun init() {
     }
-
-    private fun <T : Criterion<*>> register(criterion: T): T =
-        PlatformBridges.criteria.register(criterion)
 }
