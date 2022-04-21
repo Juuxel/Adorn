@@ -5,7 +5,7 @@ plugins {
 architectury {
     // Create the IDE launch configurations for this subproject.
     platformSetupLoomIde()
-    // Set up Architectury for Fabric.
+    // Set up Architectury for Forge.
     forge()
 }
 
