@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     java
     kotlin("jvm") version "1.4.20"
-    id("dev.architectury.loom") version "0.7.2-SNAPSHOT"
+    id("dev.architectury.loom") version "0.11.0-SNAPSHOT"
     `maven-publish`
     id("org.jmailen.kotlinter") version "3.2.0"
 }
@@ -12,7 +12,7 @@ group = "io.github.juuxel"
 version = "${project.property("mod-version")}+${project.property("minecraft-version")}-forge"
 
 base {
-    archivesBaseName = "Adorn"
+    archivesName.set("Adorn")
 }
 
 java {
@@ -23,8 +23,9 @@ java {
 }
 
 loom {
-    mixinConfig("mixins.adorn.json")
-    useFabricMixin = true
+    forge {
+        mixinConfig("mixins.adorn.json")
+    }
 
     runConfigs.configureEach {
         val capitalizedName = if (name.length <= 1) name else name[0].toUpperCase() + name.substring(1)
@@ -69,12 +70,4 @@ tasks {
 
 kotlinter {
     disabledRules = arrayOf("parameter-list-wrapping")
-}
-
-publishing {
-    publications.create<MavenPublication>("maven") {
-        artifactId = "adorn"
-
-        artifact(tasks.remapJar)
-    }
 }
