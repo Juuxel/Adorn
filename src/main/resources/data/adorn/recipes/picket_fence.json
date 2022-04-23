@@ -9,7 +9,7 @@
       "tag": "forge:rods/wooden"
     },
     "o": [
-      { "item": "minecraft:white_dye" },
+      { "tag": "forge:dyes/white" },
       { "item": "minecraft:bone_meal" }
     ]
   },
