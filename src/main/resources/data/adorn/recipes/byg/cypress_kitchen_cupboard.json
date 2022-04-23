@@ -3,7 +3,7 @@
 	"group": "adorn:kitchen_cupboard",
 	"ingredients": [
 		{
-			"item": "minecraft:chest"
+			"tag": "forge:chests/wooden"
 		},
 		{
 			"item": "adorn:byg/cypress_kitchen_counter"

@@ -8,7 +8,7 @@
   ],
   "key": {
     "C": {
-      "item": "minecraft:chest"
+      "tag": "forge:chests/wooden"
     },
     "S": {
       "item": "minecraft:dark_oak_slab"
