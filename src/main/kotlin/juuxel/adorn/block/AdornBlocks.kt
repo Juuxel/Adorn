@@ -351,7 +351,7 @@ object AdornBlocks {
     fun handleCarpetedBlocks(event: PlayerInteractEvent.RightClickBlock) {
         val world = event.world
         val pos = event.pos.offset(event.face)
-        val state = world.getBlockState(event.pos)
+        val state = world.getBlockState(pos)
         val block = state.block
         val player = event.player
         val hand = event.hand
