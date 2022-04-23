@@ -12,7 +12,8 @@
     "FenceGateBlockMixin",
     "LootManagerMixin",
     "PaneBlockMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "RequiredTagListTagWrapperMixin"
   ],
 
   "injectors": {

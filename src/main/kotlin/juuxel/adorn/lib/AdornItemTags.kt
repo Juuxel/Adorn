@@ -9,21 +9,12 @@ object AdornItemTags {
     val CHAIRS = register("chairs")
     val TABLES = register("tables")
     val DRAWERS = register("drawers")
+    val BENCHES = register("benches")
     val SOFAS = register("sofas")
     val WOODEN_POSTS = register("wooden_posts")
     val WOODEN_PLATFORMS = register("wooden_platforms")
     val WOODEN_STEPS = register("wooden_steps")
     val WOODEN_SHELVES = register("wooden_shelves")
-
-    val BURN_TIMES: Map<Tag<Item>, Int> = mapOf(
-        CHAIRS to 300,
-        DRAWERS to 300,
-        WOODEN_POSTS to 300,
-        WOODEN_PLATFORMS to 300,
-        WOODEN_STEPS to 300,
-        WOODEN_SHELVES to 300,
-        SOFAS to 150,
-    )
 
     fun init() {}
 
