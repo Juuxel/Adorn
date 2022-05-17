@@ -16,7 +16,7 @@ plugins {
     kotlin("jvm") version "1.6.0" apply false
 
     id("architectury-plugin") version "3.4.135"
-    id("dev.architectury.loom") version "0.12.0.264" apply false
+    id("dev.architectury.loom") version "0.12.0.265" apply false
     id("io.github.juuxel.loom-quiltflower") version "1.7.2" apply false
 
     id("org.jmailen.kotlinter") version "3.2.0" apply false
