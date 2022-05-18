@@ -62,7 +62,7 @@ class BrewerBlock(settings: Settings) : VisibleBlockWithEntity(settings) {
     }
 
     override fun onStateReplaced(state: BlockState, world: World, pos: BlockPos, newState: BlockState, moved: Boolean) {
-        if (state.block != newState.block) {
+        if (!state.isOf(newState.block)) {
             val entity = world.getBlockEntity(pos)
 
             if (entity is Inventory) {

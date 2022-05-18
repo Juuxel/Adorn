@@ -99,8 +99,8 @@ class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings)
         return ActionResult.CONSUME
     }
 
-    override fun onStateReplaced(state1: BlockState, world: World, pos: BlockPos, state2: BlockState, b: Boolean) {
-        if (state1.block != state2.block) {
+    override fun onStateReplaced(state: BlockState, world: World, pos: BlockPos, newState: BlockState, moved: Boolean) {
+        if (!state.isOf(newState.block)) {
             val entity = world.getBlockEntity(pos)
 
             if (entity is TradingStationBlockEntity) {
@@ -111,7 +111,7 @@ class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings)
                 world.updateComparators(pos, this)
             }
 
-            super.onStateReplaced(state1, world, pos, state2, b)
+            super.onStateReplaced(state, world, pos, newState, moved)
         }
     }
 

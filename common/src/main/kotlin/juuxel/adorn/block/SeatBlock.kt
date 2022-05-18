@@ -66,7 +66,7 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
     override fun onStateReplaced(state: BlockState, world: World, pos: BlockPos, newState: BlockState, moved: Boolean) {
         super.onStateReplaced(state, world, pos, newState, moved)
 
-        if (state.block != newState.block) {
+        if (!state.isOf(newState.block)) {
             if (world.isClient || !isSittingEnabled()) return
             world.getEntitiesByType(
                 AdornEntities.SEAT,
