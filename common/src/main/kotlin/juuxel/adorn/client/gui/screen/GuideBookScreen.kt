@@ -101,10 +101,12 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         private const val PAGE_WIDTH = 116
         // Height of page so that it has the same distance to top and bottom margins
         // when it is placed at the location of the page widget.
-        private const val PAGE_HEIGHT = 152
+        private const val PAGE_HEIGHT = 164 - 2 * 6
         private const val PAGE_TITLE_WIDTH = PAGE_WIDTH - 2 * PAGE_TITLE_X
         private const val PAGE_TEXT_X = 4
         private const val PAGE_TEXT_Y = 24
+        // Height of page footer including the 6px offset from PAGE_HEIGHT
+        private const val PAGE_FOOTER_HEIGHT = 10
         private const val ICON_DURATION = 25
         private val CLOSE_BOOK_ACTIVE_TEXTURE = AdornCommon.id("textures/gui/close_book_active.png")
         private val CLOSE_BOOK_INACTIVE_TEXTURE = AdornCommon.id("textures/gui/close_book_inactive.png")
@@ -184,17 +186,20 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
             val imageY = when (image.verticalAlignment) {
                 Image.VerticalAlignment.TOP -> y + PAGE_TEXT_Y
                 Image.VerticalAlignment.CENTER -> y + (PAGE_HEIGHT - image.height) / 2
-                Image.VerticalAlignment.BOTTOM -> y + PAGE_HEIGHT - image.height
+                Image.VerticalAlignment.BOTTOM -> y + PAGE_HEIGHT - image.height - PAGE_FOOTER_HEIGHT
             }
 
+            RenderSystem.enableBlend()
             RenderSystem.setShader(GameRenderer::getPositionTexShader)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             RenderSystem.setShaderTexture(0, image.location)
             drawTexture(matrices, imageX, imageY, 0f, 0f, image.width, image.height, image.width, image.height)
+            RenderSystem.disableBlend()
 
             for (hoverArea in image.hoverAreas) {
                 if (hoverArea.contains(mouseX - imageX, mouseY - imageY)) {
-                    renderTooltip(matrices, hoverArea.tooltip, mouseX, mouseY)
+                    val wrappedTooltip = client!!.textRenderer.wrapLines(hoverArea.tooltip, PAGE_WIDTH)
+                    renderOrderedTooltip(matrices, wrappedTooltip, mouseX, mouseY)
                     break
                 }
             }

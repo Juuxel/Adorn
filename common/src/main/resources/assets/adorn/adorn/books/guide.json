@@ -84,6 +84,13 @@
           "underlined": true,
           "clickEvent": { "action": "change_page", "value": "16" },
           "hoverEvent": { "action": "show_text", "value": { "translate": "guide.adorn.contents.jump_to_page", "with": ["16"], "italic": true } }
+        },
+        "\n",
+        {
+          "translate": "guide.adorn.topic.brewer.title",
+          "underlined": true,
+          "clickEvent": { "action": "change_page", "value": "17" },
+          "hoverEvent": { "action": "show_text", "value": { "translate": "guide.adorn.contents.jump_to_page", "with": ["17"], "italic": true } }
         }
       ]
     },
@@ -177,6 +184,44 @@
       "icons": ["#adorn:prismarine_chimneys"],
       "title": { "translate": "guide.adorn.topic.prismarine_chimney.title" },
       "text": { "translate": "guide.adorn.topic.prismarine_chimney.text" }
+    },
+    {
+      "icons": ["adorn:brewer"],
+      "title": { "translate": "guide.adorn.topic.brewer.title" },
+      "text": { "translate": "guide.adorn.topic.brewer.text" },
+      "image": {
+        "location": "adorn:textures/gui/brewer_guide.png",
+        "width": 113,
+        "height": 61,
+        "verticalAlignment": "bottom",
+        "hoverAreas": [
+          {
+            "x": 1, "y": 1,
+            "width": 16, "height": 16,
+            "tooltip": {"translate": "guide.adorn.topic.brewer.input_slot" }
+          },
+          {
+            "x": 61, "y": 1,
+            "width": 16, "height": 16,
+            "tooltip": {"translate": "guide.adorn.topic.brewer.input_slot" }
+          },
+          {
+            "x": 27, "y": 36,
+            "width": 24, "height": 24,
+            "tooltip": {"translate": "guide.adorn.topic.brewer.mug_slot" }
+          },
+          {
+            "x": 74, "y": 44,
+            "width": 16, "height": 16,
+            "tooltip": {"translate": "guide.adorn.topic.brewer.tank_slot" }
+          },
+          {
+            "x": 96, "y": 1,
+            "width": 16, "height": 59,
+            "tooltip": {"translate": "guide.adorn.topic.brewer.tank" }
+          }
+        ]
+      }
     }
   ]
 }
