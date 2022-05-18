@@ -20,7 +20,7 @@ object AdornItems {
     private fun drinkFoodComponentBuilder() = FoodComponent.Builder().hunger(4).saturationModifier(0.3F).alwaysEdible()
 
     val STONE_ROD by ITEMS.register("stone_rod") { ItemWithDescription(Item.Settings().group(ItemGroup.MISC)) }
-    val MUG by ITEMS.register("mug") { SimpleAdornItem(Item.Settings().group(ItemGroup.FOOD)) }
+    val MUG by ITEMS.register("mug") { SimpleAdornItem(Item.Settings().group(ItemGroup.FOOD).maxCount(16)) }
     val HOT_CHOCOLATE by ITEMS.register("hot_chocolate") {
         DrinkInMugItem(Item.Settings().group(ItemGroup.FOOD).food(DRINK_FOOD_COMPONENT).maxCount(1))
     }
