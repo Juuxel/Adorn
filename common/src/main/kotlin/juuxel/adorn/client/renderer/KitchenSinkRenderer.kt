@@ -78,8 +78,8 @@ abstract class KitchenSinkRenderer<T : KitchenSinkBlockEntity>(context: BlockEnt
         private const val Y_END = 15 * PX
         private const val LITRES_PER_BLOCK: Double = 1000.0
         // Wave period in ms
-        private const val WAVE_PERIOD: Float = 8000f
-        private const val WAVE_HEIGHT: Float = 1.5f * PX
+        private const val WAVE_PERIOD: Float = 12_000f
+        private const val WAVE_HEIGHT: Float = PX
         private const val MS_PER_TICK: Float = 50f
 
         private fun getRotation(facing: Direction): Float =
