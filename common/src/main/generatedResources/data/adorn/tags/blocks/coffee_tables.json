@@ -60,8 +60,6 @@
     { "id": "adorn:traverse/fir_coffee_table", "required": false },
     { "id": "adorn:woods_and_mires/pine_coffee_table", "required": false },
     { "id": "adorn:architects_palette/twisted_coffee_table", "required": false },
-    { "id": "adorn:azalea/azalea_coffee_table", "required": false },
-    { "id": "adorn:azalea/flowering_azalea_coffee_table", "required": false },
     { "id": "adorn:biomesoplenty/cherry_coffee_table", "required": false },
     { "id": "adorn:biomesoplenty/dead_coffee_table", "required": false },
     { "id": "adorn:biomesoplenty/fir_coffee_table", "required": false },
@@ -72,6 +70,10 @@
     { "id": "adorn:biomesoplenty/palm_coffee_table", "required": false },
     { "id": "adorn:biomesoplenty/redwood_coffee_table", "required": false },
     { "id": "adorn:biomesoplenty/umbran_coffee_table", "required": false },
-    { "id": "adorn:biomesoplenty/willow_coffee_table", "required": false }
+    { "id": "adorn:biomesoplenty/willow_coffee_table", "required": false },
+    { "id": "adorn:ecologics/azalea_coffee_table", "required": false },
+    { "id": "adorn:ecologics/flowering_azalea_coffee_table", "required": false },
+    { "id": "adorn:ecologics/coconut_coffee_table", "required": false },
+    { "id": "adorn:ecologics/walnut_coffee_table", "required": false }
   ]
 }

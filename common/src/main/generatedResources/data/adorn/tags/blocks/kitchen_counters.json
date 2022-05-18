@@ -60,8 +60,6 @@
     { "id": "adorn:traverse/fir_kitchen_counter", "required": false },
     { "id": "adorn:woods_and_mires/pine_kitchen_counter", "required": false },
     { "id": "adorn:architects_palette/twisted_kitchen_counter", "required": false },
-    { "id": "adorn:azalea/azalea_kitchen_counter", "required": false },
-    { "id": "adorn:azalea/flowering_azalea_kitchen_counter", "required": false },
     { "id": "adorn:biomesoplenty/cherry_kitchen_counter", "required": false },
     { "id": "adorn:biomesoplenty/dead_kitchen_counter", "required": false },
     { "id": "adorn:biomesoplenty/fir_kitchen_counter", "required": false },
@@ -72,6 +70,10 @@
     { "id": "adorn:biomesoplenty/palm_kitchen_counter", "required": false },
     { "id": "adorn:biomesoplenty/redwood_kitchen_counter", "required": false },
     { "id": "adorn:biomesoplenty/umbran_kitchen_counter", "required": false },
-    { "id": "adorn:biomesoplenty/willow_kitchen_counter", "required": false }
+    { "id": "adorn:biomesoplenty/willow_kitchen_counter", "required": false },
+    { "id": "adorn:ecologics/azalea_kitchen_counter", "required": false },
+    { "id": "adorn:ecologics/flowering_azalea_kitchen_counter", "required": false },
+    { "id": "adorn:ecologics/coconut_kitchen_counter", "required": false },
+    { "id": "adorn:ecologics/walnut_kitchen_counter", "required": false }
   ]
 }

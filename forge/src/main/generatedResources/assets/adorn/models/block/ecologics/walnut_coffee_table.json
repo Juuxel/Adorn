@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:block/templates/coffee_table",
+  "textures": {
+    "planks": "ecologics:block/walnut_planks",
+    "leg": "ecologics:block/walnut_log",
+    "rim": "ecologics:block/walnut_log"
+  }
+}

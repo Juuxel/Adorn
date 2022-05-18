@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/shelf",
-  "textures": {
-    "texture": "azalea:block/flowering_azalea_planks"
-  }
-}

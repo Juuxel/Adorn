@@ -60,8 +60,6 @@
     { "id": "adorn:traverse/fir_drawer", "required": false },
     { "id": "adorn:woods_and_mires/pine_drawer", "required": false },
     { "id": "adorn:architects_palette/twisted_drawer", "required": false },
-    { "id": "adorn:azalea/azalea_drawer", "required": false },
-    { "id": "adorn:azalea/flowering_azalea_drawer", "required": false },
     { "id": "adorn:biomesoplenty/cherry_drawer", "required": false },
     { "id": "adorn:biomesoplenty/dead_drawer", "required": false },
     { "id": "adorn:biomesoplenty/fir_drawer", "required": false },
@@ -72,6 +70,10 @@
     { "id": "adorn:biomesoplenty/palm_drawer", "required": false },
     { "id": "adorn:biomesoplenty/redwood_drawer", "required": false },
     { "id": "adorn:biomesoplenty/umbran_drawer", "required": false },
-    { "id": "adorn:biomesoplenty/willow_drawer", "required": false }
+    { "id": "adorn:biomesoplenty/willow_drawer", "required": false },
+    { "id": "adorn:ecologics/azalea_drawer", "required": false },
+    { "id": "adorn:ecologics/flowering_azalea_drawer", "required": false },
+    { "id": "adorn:ecologics/coconut_drawer", "required": false },
+    { "id": "adorn:ecologics/walnut_drawer", "required": false }
   ]
 }

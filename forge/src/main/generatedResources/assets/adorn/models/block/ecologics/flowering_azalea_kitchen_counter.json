@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/kitchen_counter",
+  "textures": {
+    "planks": "ecologics:block/flowering_azalea_planks"
+  }
+}

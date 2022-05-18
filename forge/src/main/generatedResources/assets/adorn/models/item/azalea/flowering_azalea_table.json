@@ -1,7 +1,0 @@
-{
-  "parent": "adorn:item/templates/table",
-  "textures": {
-    "planks": "azalea:block/flowering_azalea_planks",
-    "log": "azalea:block/flowering_azalea_log"
-  }
-}

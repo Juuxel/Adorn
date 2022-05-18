@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:item/templates/table",
+  "textures": {
+    "planks": "ecologics:block/flowering_azalea_planks",
+    "log": "ecologics:block/flowering_azalea_log"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:item/templates/table",
+  "textures": {
+    "planks": "ecologics:block/coconut_planks",
+    "log": "ecologics:block/coconut_log"
+  }
+}

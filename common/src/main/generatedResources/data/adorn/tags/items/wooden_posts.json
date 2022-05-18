@@ -60,8 +60,6 @@
     { "id": "adorn:traverse/fir_post", "required": false },
     { "id": "adorn:woods_and_mires/pine_post", "required": false },
     { "id": "adorn:architects_palette/twisted_post", "required": false },
-    { "id": "adorn:azalea/azalea_post", "required": false },
-    { "id": "adorn:azalea/flowering_azalea_post", "required": false },
     { "id": "adorn:biomesoplenty/cherry_post", "required": false },
     { "id": "adorn:biomesoplenty/dead_post", "required": false },
     { "id": "adorn:biomesoplenty/fir_post", "required": false },
@@ -72,6 +70,10 @@
     { "id": "adorn:biomesoplenty/palm_post", "required": false },
     { "id": "adorn:biomesoplenty/redwood_post", "required": false },
     { "id": "adorn:biomesoplenty/umbran_post", "required": false },
-    { "id": "adorn:biomesoplenty/willow_post", "required": false }
+    { "id": "adorn:biomesoplenty/willow_post", "required": false },
+    { "id": "adorn:ecologics/azalea_post", "required": false },
+    { "id": "adorn:ecologics/flowering_azalea_post", "required": false },
+    { "id": "adorn:ecologics/coconut_post", "required": false },
+    { "id": "adorn:ecologics/walnut_post", "required": false }
   ]
 }

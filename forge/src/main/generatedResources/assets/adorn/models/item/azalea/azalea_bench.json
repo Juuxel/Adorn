@@ -1,8 +1,0 @@
-{
-  "parent": "adorn:item/templates/bench",
-  "textures": {
-    "planks": "azalea:block/azalea_planks",
-    "log": "azalea:block/azalea_log",
-    "end": "azalea:block/azalea_log_top"
-  }
-}

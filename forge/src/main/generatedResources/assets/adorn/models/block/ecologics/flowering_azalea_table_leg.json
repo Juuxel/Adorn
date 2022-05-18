@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/table_leg",
+  "textures": {
+    "log": "ecologics:block/flowering_azalea_log"
+  }
+}

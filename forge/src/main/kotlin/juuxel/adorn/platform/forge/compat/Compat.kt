@@ -11,7 +11,7 @@ object Compat {
         val mods = mapOf(
             "biomesoplenty" to { CompatBlocks.addVariants(BiomesOPlentyCompat) },
             "byg" to { CompatBlocks.addVariants(BygCompat) },
-            "azalea" to { CompatBlocks.addVariants(BetterAzaleaCompat) },
+            "ecologics" to { CompatBlocks.addVariants(EcologicsCompat) },
             "architects_palette" to { CompatBlocks.addVariants(ArchitectsPaletteCompat) },
         )
 

@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/templates/bench_leg",
+  "textures": {
+    "log": "ecologics:block/walnut_log",
+    "end": "ecologics:block/walnut_log_top"
+  }
+}
