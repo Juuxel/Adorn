@@ -36,15 +36,18 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         val pageX = x + 35
         val pageY = y + 14
 
+        addDrawableChild(CloseButton(x + 142, y + 14) { close() })
+        previousPageButton = addDrawableChild(PageTurnWidget(x + 49, y + 159, false, { flipBook.showPreviousPage() }, true))
+        nextPageButton = addDrawableChild(PageTurnWidget(x + 116, y + 159, true, { flipBook.showNextPage() }, true))
+
+        // The flip book has to be added last so that
+        // its mouse hover tooltip renders on top of all widgets.
         flipBook = addDrawableChild(FlipBook(this::updatePageTurnButtons))
         flipBook.add(TitlePage(pageX, pageY, book))
         for (page in book.pages) {
             flipBook.add(BookPage(pageX, pageY, page))
         }
 
-        addDrawableChild(CloseButton(x + 142, y + 14) { close() })
-        previousPageButton = addDrawableChild(PageTurnWidget(x + 49, y + 159, false, { flipBook.showPreviousPage() }, true))
-        nextPageButton = addDrawableChild(PageTurnWidget(x + 116, y + 159, true, { flipBook.showNextPage() }, true))
         updatePageTurnButtons()
     }
 
