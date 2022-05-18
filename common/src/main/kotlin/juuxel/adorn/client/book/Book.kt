@@ -1,9 +1,8 @@
 package juuxel.adorn.client.book
 
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonDeserializer
-import com.google.gson.JsonElement
-import net.minecraft.text.LiteralText
+import com.mojang.serialization.Codec
+import com.mojang.serialization.codecs.RecordCodecBuilder
+import juuxel.adorn.util.MoreCodecs
 import net.minecraft.text.Text
 
 data class Book(
@@ -14,14 +13,14 @@ data class Book(
     val titleScale: Float
 ) {
     companion object {
-        val GSON = GsonBuilder()
-            .registerTypeHierarchyAdapter(Text::class.java, JsonDeserializer { json, _, _ -> Text.Serializer.fromJson(json) ?: MISSINGNO })
-            .registerTypeAdapter(Page.Icon::class.java, JsonDeserializer { json, _, _ -> Page.Icon.fromJson(json) })
-            .create()
-
-        private val MISSINGNO: Text = LiteralText("missingno")
-
-        fun fromJson(json: JsonElement): Book =
-            GSON.fromJson(json, Book::class.java)
+        val CODEC: Codec<Book> = RecordCodecBuilder.create { instance ->
+            instance.group(
+                MoreCodecs.TEXT.fieldOf("title").forGetter { it.title },
+                MoreCodecs.TEXT.fieldOf("subtitle").forGetter { it.subtitle },
+                MoreCodecs.TEXT.fieldOf("author").forGetter { it.author },
+                Page.CODEC.listOf().fieldOf("pages").forGetter { it.pages },
+                Codec.FLOAT.fieldOf("titleScale").forGetter { it.titleScale }
+            ).apply(instance, ::Book)
+        }
     }
 }

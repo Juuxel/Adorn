@@ -3,6 +3,7 @@ package juuxel.adorn.client.gui.screen
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.client.book.Book
+import juuxel.adorn.client.book.Image
 import juuxel.adorn.client.book.Page
 import juuxel.adorn.client.gui.widget.FlipBook
 import juuxel.adorn.client.gui.widget.TickingElement
@@ -98,6 +99,9 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         private const val BOOK_SIZE = 192
         private const val PAGE_TITLE_X = 20
         private const val PAGE_WIDTH = 116
+        // Height of page so that it has the same distance to top and bottom margins
+        // when it is placed at the location of the page widget.
+        private const val PAGE_HEIGHT = 152
         private const val PAGE_TITLE_WIDTH = PAGE_WIDTH - 2 * PAGE_TITLE_X
         private const val PAGE_TEXT_X = 4
         private const val PAGE_TEXT_Y = 24
@@ -167,8 +171,33 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
                 textRenderer.draw(matrices, line, (x + PAGE_TEXT_X).toFloat(), (y + PAGE_TEXT_Y + i * textRenderer.fontHeight).toFloat(), Colors.SCREEN_TEXT)
             }
 
+            if (page.image != null) {
+                renderImage(matrices, page.image, mouseX, mouseY)
+            }
+
             val hoveredStyle = getTextStyleAt(mouseX, mouseY)
             renderTextHoverEffect(matrices, hoveredStyle, mouseX, mouseY)
+        }
+
+        private fun renderImage(matrices: MatrixStack, image: Image, mouseX: Int, mouseY: Int) {
+            val imageX = x + (PAGE_WIDTH - image.width) / 2
+            val imageY = when (image.verticalAlignment) {
+                Image.VerticalAlignment.TOP -> y + PAGE_TEXT_Y
+                Image.VerticalAlignment.CENTER -> y + (PAGE_HEIGHT - image.height) / 2
+                Image.VerticalAlignment.BOTTOM -> y + PAGE_HEIGHT - image.height
+            }
+
+            RenderSystem.setShader(GameRenderer::getPositionTexShader)
+            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
+            RenderSystem.setShaderTexture(0, image.location)
+            drawTexture(matrices, imageX, imageY, 0f, 0f, image.width, image.height, image.width, image.height)
+
+            for (hoverArea in image.hoverAreas) {
+                if (hoverArea.contains(mouseX - imageX, mouseY - imageY)) {
+                    renderTooltip(matrices, hoverArea.tooltip, mouseX, mouseY)
+                    break
+                }
+            }
         }
 
         override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
