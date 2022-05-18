@@ -3,6 +3,7 @@ package juuxel.adorn.block
 import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
+import juuxel.adorn.item.TradingStationItem
 import juuxel.adorn.lib.AdornSounds
 import juuxel.adorn.lib.Registered
 import juuxel.adorn.lib.RegistryHelper
@@ -273,7 +274,11 @@ object AdornBlocks : RegistryHelper() {
         }
     }
 
-    val TRADING_STATION: Block by registerBlock("trading_station") { TradingStationBlock() }
+    val TRADING_STATION: Block by registerBlock(
+        "trading_station",
+        itemProvider = { TradingStationItem(it, Item.Settings().group(ItemGroup.DECORATIONS)) },
+        block = { TradingStationBlock() }
+    )
 
     val STONE_TORCH_GROUND: Block by registerBlockWithoutItem("stone_torch") {
         TorchBlock(

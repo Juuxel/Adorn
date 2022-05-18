@@ -35,7 +35,7 @@ class TradingStationMenu(
         // Storage
         for (y in 0..2) {
             for (x in 0..3) {
-                addSlot(Slot(storage, x + y * 4, 62 + x * slot, 36 + y * slot))
+                addSlot(StorageSlot(storage, x + y * 4, 62 + x * slot, 36 + y * slot))
             }
         }
 
@@ -91,12 +91,14 @@ class TradingStationMenu(
         val slot = slots.getOrNull(slotNumber)
 
         if (action == SlotActionType.PICKUP && slot is TradeSlot) {
-            slot.stack = cursorStack.copy()
-            slot.markDirty()
+            if (isValidItem(cursorStack)) {
+                slot.stack = cursorStack.copy()
+                slot.markDirty()
 
-            if (tradingStation is BlockEntity) {
-                val state = tradingStation.cachedState
-                player.world.updateListeners(tradingStation.pos, state, state, Block.NOTIFY_LISTENERS)
+                if (tradingStation is BlockEntity) {
+                    val state = tradingStation.cachedState
+                    player.world.updateListeners(tradingStation.pos, state, state, Block.NOTIFY_LISTENERS)
+                }
             }
 
             return
@@ -111,6 +113,10 @@ class TradingStationMenu(
         override fun takeStack(count: Int): ItemStack = ItemStack.EMPTY
     }
 
+    private class StorageSlot(inventory: Inventory, index: Int, x: Int, y: Int) : Slot(inventory, index, x, y) {
+        override fun canInsert(stack: ItemStack): Boolean = isValidItem(stack)
+    }
+
     companion object {
         /**
          * Gets the [juuxel.adorn.block.entity.TradingStationBlockEntity] at the [context]'s location.
@@ -120,5 +126,8 @@ class TradingStationMenu(
             context.getBlockEntity() as? TradingStation ?: run {
                 TradingStation.createEmpty()
             }
+
+        private fun isValidItem(stack: ItemStack): Boolean =
+            stack.item.canBeNested()
     }
 }
