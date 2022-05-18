@@ -1,6 +1,5 @@
 package juuxel.adorn.client.book
 
-import com.google.gson.JsonElement
 import com.mojang.datafixers.util.Pair
 import com.mojang.serialization.Codec
 import com.mojang.serialization.DataResult
