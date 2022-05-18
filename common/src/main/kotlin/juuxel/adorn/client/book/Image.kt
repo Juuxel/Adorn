@@ -37,7 +37,7 @@ data class Image(
 
     data class HoverArea(val position: Vec2i, val size: Vec2i, val tooltip: Text) {
         fun contains(x: Int, y: Int): Boolean =
-            x in position.x..(position.x + size.y) && y in position.y..(position.y + size.y)
+            x in position.x..(position.x + size.x) && y in position.y..(position.y + size.y)
 
         companion object {
             val CODEC: Codec<HoverArea> = RecordCodecBuilder.create { instance ->
