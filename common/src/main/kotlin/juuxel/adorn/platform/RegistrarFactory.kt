@@ -4,6 +4,7 @@ import net.minecraft.block.Block
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
+import net.minecraft.loot.condition.LootConditionType
 import net.minecraft.menu.MenuType
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.RecipeType
@@ -18,4 +19,5 @@ interface RegistrarFactory {
     fun soundEvent(): Registrar<SoundEvent>
     fun recipeSerializer(): Registrar<RecipeSerializer<*>>
     fun recipeType(): Registrar<RecipeType<*>>
+    fun lootConditionType(): Registrar<LootConditionType>
 }

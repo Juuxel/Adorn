@@ -26,5 +26,8 @@ class Config {
 
         @field:Comment("If true, kitchen sinks are infinite sources for infinite fluids.")
         var infiniteKitchenSinks: Boolean = true
+
+        @field:Comment("If true, broken trading stations drop a locked version with their contents inside.")
+        var dropLockedTradingStations: Boolean = true
     }
 }

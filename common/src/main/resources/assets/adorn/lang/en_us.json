@@ -1308,6 +1308,7 @@
 
   "gamerule.adorn:skipNightOnSofas": "Skip nights by sleeping on sofas",
   "gamerule.adorn:infiniteKitchenSinks": "Kitchen sinks are infinite sources",
+  "gamerule.adorn:dropLockedTradingStations": "Drop locked trading stations",
 
   "gui.adorn.config.title": "Adorn",
   "gui.adorn.config.game_rule_defaults": "Game rule defaults...",
@@ -1315,6 +1316,8 @@
   "gui.adorn.config.option.skipNightOnSofas.tooltip": "Allows you to skip the night when you sleep on a sofa.",
   "gui.adorn.config.option.infiniteKitchenSinks": "Kitchen sinks are infinite sources",
   "gui.adorn.config.option.infiniteKitchenSinks.tooltip": "Makes kitchen sinks infinite sources for infinite fluids like water.",
+  "gui.adorn.config.option.dropLockedTradingStations": "Drop locked trading stations",
+  "gui.adorn.config.option.dropLockedTradingStations.tooltip": "Broken trading stations drop a locked version with their contents inside.",
   "gui.adorn.config.option.showItemsInStandardGroups": "Items in standard tabs",
   "gui.adorn.config.option.showItemsInStandardGroups.tooltip": "Shows Adorn items in standard vanilla creative inventory tabs.",
   "gui.adorn.config.option.showTradingStationTooltips": "Trading station tooltips",

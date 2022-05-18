@@ -3,6 +3,7 @@ package juuxel.adorn.block
 
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.criterion.AdornCriteria
+import juuxel.adorn.lib.AdornGameRules
 import juuxel.adorn.lib.AdornStats
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -20,6 +21,7 @@ import net.minecraft.state.property.Properties
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
+import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.shape.VoxelShapes
@@ -102,6 +104,10 @@ class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings)
             val entity = world.getBlockEntity(pos)
 
             if (entity is TradingStationBlockEntity) {
+                if (!world.gameRules.getBoolean(AdornGameRules.DROP_LOCKED_TRADING_STATIONS)) {
+                    ItemScatterer.spawn(world, pos, entity.storage)
+                }
+
                 world.updateComparators(pos, this)
             }
 

@@ -3,6 +3,7 @@ package juuxel.adorn.platform.forge
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.lib.AdornStats
+import juuxel.adorn.loot.AdornLootConditionTypes
 import juuxel.adorn.menu.AdornMenus
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
@@ -32,6 +33,7 @@ object Adorn {
         AdornMenus.MENUS.registerToBus(MOD_BUS)
         AdornRecipes.RECIPE_SERIALIZERS.registerToBus(MOD_BUS)
         AdornRecipes.RECIPE_TYPES.registerToBus(MOD_BUS)
+        AdornLootConditionTypes.LOOT_CONDITION_TYPES.registerToBus(MOD_BUS)
         AdornNetworking.init()
         AdornCriteria.init()
         ItemEvents.register(FORGE_BUS)

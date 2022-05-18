@@ -9,6 +9,7 @@ import net.minecraft.block.Block
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
+import net.minecraft.loot.condition.LootConditionType
 import net.minecraft.menu.MenuType
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.RecipeType
@@ -37,6 +38,7 @@ private object PlatformBridgesImpl : PlatformBridges {
         override fun soundEvent(): Registrar<SoundEvent> = RegistrarImpl(Registry.SOUND_EVENT)
         override fun recipeSerializer(): Registrar<RecipeSerializer<*>> = RegistrarImpl(Registry.RECIPE_SERIALIZER)
         override fun recipeType(): Registrar<RecipeType<*>> = RegistrarImpl(Registry.RECIPE_TYPE)
+        override fun lootConditionType(): Registrar<LootConditionType> = RegistrarImpl(Registry.LOOT_CONDITION_TYPE)
     }
     override val resources = ResourceBridgeImpl
 }

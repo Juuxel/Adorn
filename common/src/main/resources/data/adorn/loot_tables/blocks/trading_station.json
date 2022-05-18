@@ -31,6 +31,12 @@
                   "target": "BlockEntityTag.Storage",
                   "op": "replace"
                 }
+              ],
+              "conditions": [
+                {
+                  "condition": "adorn:game_rule",
+                  "game_rule": "adorn:dropLockedTradingStations"
+                }
               ]
             }
           ]
