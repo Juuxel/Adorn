@@ -39,8 +39,9 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
-open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), Waterloggable, SneakClickHandler {
+open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), Waterloggable, SneakClickHandler, BlockWithDescription {
     override val sittingStat = AdornStats.SIT_ON_SOFA
+    override val descriptionKey = "block.adorn.sofa.description"
 
     init {
         defaultState = defaultState

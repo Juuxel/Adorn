@@ -16,7 +16,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 
-class CoffeeTableBlock(variant: BlockVariant) : Block(variant.createSettings().nonOpaque()), Waterloggable {
+class CoffeeTableBlock(variant: BlockVariant) : Block(variant.createSettings().nonOpaque()), Waterloggable, BlockWithDescription {
+    override val descriptionKey = "block.adorn.coffee_table.description"
+
     init {
         defaultState = defaultState.with(WATERLOGGED, false)
     }

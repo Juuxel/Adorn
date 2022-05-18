@@ -14,7 +14,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
-class ChainLinkFenceBlock(settings: Settings) : PaneBlock(settings) {
+class ChainLinkFenceBlock(settings: Settings) : PaneBlock(settings), BlockWithDescription {
     init {
         defaultState = defaultState.with(UP, false).with(DOWN, false)
     }

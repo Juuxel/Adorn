@@ -31,8 +31,9 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()), Waterloggable {
+class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()), Waterloggable, BlockWithDescription {
     override val sittingStat = AdornStats.SIT_ON_CHAIR
+    override val descriptionKey = "block.adorn.chair.description"
 
     init {
         defaultState = defaultState.with(HALF, DoubleBlockHalf.LOWER)

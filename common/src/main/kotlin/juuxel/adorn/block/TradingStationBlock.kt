@@ -28,7 +28,7 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings) {
+class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings), BlockWithDescription {
     init {
         defaultState = defaultState.with(WATERLOGGED, false)
     }

@@ -15,6 +15,7 @@
   "block.adorn.purple_sofa": "Purple Sofa",
   "block.adorn.magenta_sofa": "Magenta Sofa",
   "block.adorn.pink_sofa": "Pink Sofa",
+  "block.adorn.sofa.description": "The perfect place to sit down and relax",
   "block.adorn.sofa.occupied": "This sofa is occupied",
 
   "block.adorn.oak_chair": "Oak Chair",
@@ -91,6 +92,7 @@
   "block.adorn.ecologics.coconut_chair": "Coconut Chair",
   "block.adorn.ecologics.walnut_chair": "Walnut Chair",
   "block.adorn.architects_palette.twisted_chair": "Twisted Chair",
+  "block.adorn.chair.description": "Quick seating",
 
   "block.adorn.oak_table": "Oak Table",
   "block.adorn.spruce_table": "Spruce Table",
@@ -468,6 +470,7 @@
   "block.adorn.architects_palette.twisted_drawer": "Twisted Drawer",
 
   "block.adorn.trading_station": "Trading Station",
+  "block.adorn.trading_station.description": "A compact marketplace",
   "block.adorn.trading_station.selling": "Selling",
   "block.adorn.trading_station.price": "Price",
   "block.adorn.trading_station.label.owner": "%s's Trading Station",
@@ -983,7 +986,7 @@
   "block.adorn.nether_brick_chimney": "Nether Brick Chimney",
   "block.adorn.red_nether_brick_chimney": "Red Nether Brick Chimney",
   "block.adorn.cobblestone_chimney": "Cobblestone Chimney",
-  "block.adorn.chimney.description": "Decoration block",
+  "block.adorn.chimney.description": "From which little clouds rise",
 
   "block.adorn.prismarine_chimney": "Prismarine Chimney",
   "block.adorn.prismarine_chimney.description": "Bubbles underwater",
@@ -1083,6 +1086,7 @@
   "block.adorn.purple_table_lamp": "Purple Table Lamp",
   "block.adorn.magenta_table_lamp": "Magenta Table Lamp",
   "block.adorn.pink_table_lamp": "Pink Table Lamp",
+  "block.adorn.table_lamp.description": "Lights up the room",
 
   "block.adorn.oak_coffee_table": "Oak Coffee Table",
   "block.adorn.spruce_coffee_table": "Spruce Coffee Table",
@@ -1158,6 +1162,7 @@
   "block.adorn.ecologics.coconut_coffee_table": "Coconut Coffee Table",
   "block.adorn.ecologics.walnut_coffee_table": "Walnut Coffee Table",
   "block.adorn.architects_palette.twisted_coffee_table": "Twisted Coffee Table",
+  "block.adorn.coffee_table.description": "A smaller table for smaller needs",
 
   "block.adorn.crate": "Crate",
   "block.adorn.wheat_crate": "Crate of Wheat",
@@ -1180,6 +1185,7 @@
 
   "block.adorn.picket_fence": "Picket Fence",
   "block.adorn.chain_link_fence": "Chain Link Fence",
+  "block.adorn.chain_link_fence.description": "Keep out!",
   "block.adorn.stone_ladder": "Stone Ladder",
   "block.adorn.brewer": "Brewer",
 

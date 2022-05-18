@@ -33,7 +33,9 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-class TableLampBlock(settings: Settings) : Block(settings), Waterloggable {
+class TableLampBlock(settings: Settings) : Block(settings), Waterloggable, BlockWithDescription {
+    override val descriptionKey = "block.adorn.table_lamp.description"
+
     init {
         defaultState = defaultState
             .with(LIT, true)
