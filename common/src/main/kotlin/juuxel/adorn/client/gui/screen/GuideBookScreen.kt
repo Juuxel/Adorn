@@ -182,18 +182,18 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         }
 
         private fun renderImage(matrices: MatrixStack, image: Image, mouseX: Int, mouseY: Int) {
-            val imageX = x + (PAGE_WIDTH - image.width) / 2
+            val imageX = x + (PAGE_WIDTH - image.size.x) / 2
             val imageY = when (image.verticalAlignment) {
                 Image.VerticalAlignment.TOP -> y + PAGE_TEXT_Y
-                Image.VerticalAlignment.CENTER -> y + (PAGE_HEIGHT - image.height) / 2
-                Image.VerticalAlignment.BOTTOM -> y + PAGE_HEIGHT - image.height - PAGE_FOOTER_HEIGHT
+                Image.VerticalAlignment.CENTER -> y + (PAGE_HEIGHT - image.size.y) / 2
+                Image.VerticalAlignment.BOTTOM -> y + PAGE_HEIGHT - image.size.y - PAGE_FOOTER_HEIGHT
             }
 
             RenderSystem.enableBlend()
             RenderSystem.setShader(GameRenderer::getPositionTexShader)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             RenderSystem.setShaderTexture(0, image.location)
-            drawTexture(matrices, imageX, imageY, 0f, 0f, image.width, image.height, image.width, image.height)
+            drawTexture(matrices, imageX, imageY, 0f, 0f, image.size.x, image.size.y, image.size.x, image.size.y)
             RenderSystem.disableBlend()
 
             for (hoverArea in image.hoverAreas) {

@@ -191,33 +191,32 @@
       "text": { "translate": "guide.adorn.topic.brewer.text" },
       "image": {
         "location": "adorn:textures/gui/brewer_guide.png",
-        "width": 113,
-        "height": 61,
+        "size": [113, 61],
         "verticalAlignment": "bottom",
         "hoverAreas": [
           {
-            "x": 1, "y": 1,
-            "width": 16, "height": 16,
+            "position": [1, 1],
+            "size": [16, 16],
             "tooltip": {"translate": "guide.adorn.topic.brewer.input_slot" }
           },
           {
-            "x": 61, "y": 1,
-            "width": 16, "height": 16,
+            "position": [61, 1],
+            "size": [16, 16],
             "tooltip": {"translate": "guide.adorn.topic.brewer.input_slot" }
           },
           {
-            "x": 27, "y": 36,
-            "width": 24, "height": 24,
+            "position": [27, 36],
+            "size": [24, 24],
             "tooltip": {"translate": "guide.adorn.topic.brewer.mug_slot" }
           },
           {
-            "x": 74, "y": 44,
-            "width": 16, "height": 16,
+            "position": [74, 44],
+            "size": [16, 16],
             "tooltip": {"translate": "guide.adorn.topic.brewer.tank_slot" }
           },
           {
-            "x": 96, "y": 1,
-            "width": 16, "height": 59,
+            "position": [96, 1],
+            "size": [16, 59],
             "tooltip": {"translate": "guide.adorn.topic.brewer.tank" }
           }
         ]

@@ -3,13 +3,13 @@ package juuxel.adorn.client.book
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import juuxel.adorn.util.MoreCodecs
+import juuxel.adorn.util.Vec2i
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 
 data class Image(
     val location: Identifier,
-    val width: Int,
-    val height: Int,
+    val size: Vec2i,
     val verticalAlignment: VerticalAlignment,
     val hoverAreas: List<HoverArea>
 ) {
@@ -17,8 +17,7 @@ data class Image(
         val CODEC: Codec<Image> = RecordCodecBuilder.create { instance ->
             instance.group(
                 Identifier.CODEC.fieldOf("location").forGetter { it.location },
-                Codec.INT.fieldOf("width").forGetter { it.width },
-                Codec.INT.fieldOf("height").forGetter { it.height },
+                Vec2i.CODEC.fieldOf("size").forGetter { it.size },
                 VerticalAlignment.CODEC.optionalFieldOf("verticalAlignment", VerticalAlignment.CENTER).forGetter { it.verticalAlignment },
                 HoverArea.CODEC.listOf().optionalFieldOf("hoverAreas", emptyList()).forGetter { it.hoverAreas }
             ).apply(instance, ::Image)
@@ -36,17 +35,15 @@ data class Image(
         }
     }
 
-    data class HoverArea(val x: Int, val y: Int, val width: Int, val height: Int, val tooltip: Text) {
+    data class HoverArea(val position: Vec2i, val size: Vec2i, val tooltip: Text) {
         fun contains(x: Int, y: Int): Boolean =
-            x in this.x..(this.x + width) && y in this.y..(this.y + height)
+            x in position.x..(position.x + size.y) && y in position.y..(position.y + size.y)
 
         companion object {
             val CODEC: Codec<HoverArea> = RecordCodecBuilder.create { instance ->
                 instance.group(
-                    Codec.INT.fieldOf("x").forGetter { it.x },
-                    Codec.INT.fieldOf("y").forGetter { it.y },
-                    Codec.INT.fieldOf("width").forGetter { it.width },
-                    Codec.INT.fieldOf("height").forGetter { it.height },
+                    Vec2i.CODEC.fieldOf("position").forGetter { it.position },
+                    Vec2i.CODEC.fieldOf("size").forGetter { it.size },
                     MoreCodecs.TEXT.fieldOf("tooltip").forGetter { it.tooltip }
                 ).apply(instance, ::HoverArea)
             }
