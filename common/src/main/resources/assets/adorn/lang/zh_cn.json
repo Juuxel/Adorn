@@ -814,14 +814,13 @@
   "item.adorn.deprecated_item.desc.2": "你可以按 %s 来替换它。",
   
   "gamerule.adorn:skipNightOnSofas": "在沙发上睡觉来跳过夜晚",
+  "gamerule.adorn:skipNightOnSofas.description": "你可以在沙发上过夜。",
 
   "gui.adorn.config.title": "装饰",
   "gui.adorn.config.category.general": "通用",
   "gui.adorn.config.category.advanced": "高级",
-  "gui.adorn.config.option.skipNightOnSofas": "在沙发上过夜",
-  "gui.adorn.config.option.skipNightOnSofas.tooltip": "你可以在沙发上过夜。",
   "gui.adorn.config.option.showTradingStationTooltips": "显示交易站工具提示",
-  "gui.adorn.config.option.showTradingStationTooltips.tooltip": "当你查看交易站时，会显示有关它们的信息。",
+  "gui.adorn.config.option.showTradingStationTooltips.description": "当你查看交易站时，会显示有关它们的信息。",
   "gui.adorn.config.requires_restart": "需要重新启动！",
   "gui.adorn.config.restart_required.title": "需要重新启动！",
   "gui.adorn.config.restart_required.message": "你改变了一个选项就需要重新启动Minecraft。",

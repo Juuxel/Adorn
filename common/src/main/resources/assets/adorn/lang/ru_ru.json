@@ -454,13 +454,14 @@
   "item.adorn.deprecated_item.desc.1": "Этот предмет был перемещён.",
   "item.adorn.deprecated_item.desc.2": "Вы можете заменить его, нажав %s.",
 
+  "gamerule.adorn:skipNightOnSofas": "Пропускать ночи, спя на диване",
+  "gamerule.adorn:skipNightOnSofas.description": "Позволяет пропустить ночь, когда вы спите на диване.",
+
   "gui.adorn.config.title": "Adorn",
   "gui.adorn.config.category.general": "Общее",
   "gui.adorn.config.category.advanced": "Дополнительно",
-  "gui.adorn.config.option.skipNightOnSofas": "Пропускать ночи, спя на диване",
-  "gui.adorn.config.option.skipNightOnSofas.tooltip": "Позволяет пропустить ночь, когда вы спите на диване.",
   "gui.adorn.config.option.showTradingStationTooltips": "Показать всплывающие подсказки торговых станций",
-  "gui.adorn.config.option.showTradingStationTooltips.tooltip": "Показывает информацию о торговых станциях, когда вы на них смотрите.",
+  "gui.adorn.config.option.showTradingStationTooltips.description": "Показывает информацию о торговых станциях, когда вы на них смотрите.",
   "gui.adorn.config.requires_restart": "Требуется перезапуск",
   "gui.adorn.config.restart_required.title": "Требуется перезапуск!",
   "gui.adorn.config.restart_required.message": "Один из измененных опций требует перезапуска Minecraft.",

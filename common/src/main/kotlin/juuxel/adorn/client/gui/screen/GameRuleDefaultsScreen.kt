@@ -16,6 +16,9 @@ class GameRuleDefaultsScreen(parent: Screen) : AbstractConfigScreen(Translatable
         addDrawableChild(ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.BACK) { close() })
     }
 
+    override fun getOptionTranslationKey(name: String): String =
+        "gamerule.adorn:$name"
+
     companion object {
         private const val BUTTON_WIDTH = 250
     }

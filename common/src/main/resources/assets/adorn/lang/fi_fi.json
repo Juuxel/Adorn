@@ -257,14 +257,13 @@
   "item.adorn.deprecated_item.desc.2": "Sen voi korvata painamalla %s.",
 
   "gamerule.adorn:skipNightOnSofas": "Öiden ohitus nukkumalla sohvalla",
+  "gamerule.adorn:skipNightOnSofas.description": "Sallii ohittaa yöt nukkumalla sohvalla.",
 
   "gui.adorn.config.game_rule_defaults": "Pelisääntöjen oletukset...",
-  "gui.adorn.config.option.skipNightOnSofas": "Ohita yöt nukkumalla sohvalla",
-  "gui.adorn.config.option.skipNightOnSofas.tooltip": "Sallii ohittaa yöt nukkumalla sohvalla.",
   "gui.adorn.config.option.showItemsInStandardGroups": "Tavarat tavallisissa välilehdissä",
-  "gui.adorn.config.option.showItemsInStandardGroups.tooltip": "Näyttää Adornin tavarat tavallisissa luovan tilan välilehdissä.",
+  "gui.adorn.config.option.showItemsInStandardGroups.description": "Näyttää Adornin tavarat tavallisissa luovan tilan välilehdissä.",
   "gui.adorn.config.option.showTradingStationTooltips": "Kauppapöytien tiedot",
-  "gui.adorn.config.option.showTradingStationTooltips.tooltip": "Näyttää tietoja kauppapöydistä, kun niitä katsotaan.",
+  "gui.adorn.config.option.showTradingStationTooltips.description": "Näyttää tietoja kauppapöydistä, kun niitä katsotaan.",
   "gui.adorn.config.requires_restart": "Vaatii uudelleenkäynnistyksen",
   "gui.adorn.config.restart_required.title": "Tarvitaan uudelleenkäynnistys!",
   "gui.adorn.config.restart_required.message": "Joku muokkaamasi asetus vaatii Minecraftin käynnistämistä uudelleen."

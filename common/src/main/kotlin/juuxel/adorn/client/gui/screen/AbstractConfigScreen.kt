@@ -51,7 +51,7 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
     ): CyclingButtonWidget<Boolean> = CyclingButtonWidget.onOffBuilder(property.getter.call())
         .tooltip {
             buildList {
-                addAll(wrapTooltipLines(TranslatableText("gui.adorn.config.option.${property.name}.tooltip")))
+                addAll(wrapTooltipLines(TranslatableText(getTooltipTranslationKey(property.name))))
 
                 if (restartRequired) {
                     addAll(
@@ -62,7 +62,7 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
                 }
             }
         }
-        .build(x, y, width, 20, TranslatableText("gui.adorn.config.option.${property.name}")) { _, value ->
+        .build(x, y, width, 20, TranslatableText(getOptionTranslationKey(property.name))) { _, value ->
             property.setter.call(value)
             PlatformBridges.configManager.save()
 
@@ -70,6 +70,12 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
                 this.restartRequired = true
             }
         }
+
+    protected open fun getOptionTranslationKey(name: String): String =
+        "gui.adorn.config.option.$name"
+
+    private fun getTooltipTranslationKey(name: String): String =
+        "${getOptionTranslationKey(name)}.description"
 
     companion object {
         const val BUTTON_HEIGHT = 20
