@@ -8,6 +8,7 @@ import juuxel.adorn.fluid.FluidVolume
 import juuxel.adorn.menu.BrewerMenu
 import juuxel.adorn.platform.FluidRenderingBridge
 import juuxel.adorn.util.color
+import juuxel.adorn.util.logger
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.ingame.MenuProvider
 import net.minecraft.client.item.TooltipContext
@@ -21,7 +22,6 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
 import net.minecraft.util.math.MathHelper
-import org.apache.logging.log4j.LogManager
 
 class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Text) : AdornMenuScreen<BrewerMenu>(menu, playerInventory, title) {
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
@@ -60,7 +60,7 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
         )
 
     companion object {
-        private val LOGGER = LogManager.getLogger()
+        private val LOGGER = logger()
         val TEXTURE = AdornCommon.id("textures/gui/brewer.png")
         const val FLUID_AREA_HEIGHT: Int = 59
 

@@ -7,11 +7,11 @@ import blue.endless.jankson.JsonPrimitive
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.color
+import juuxel.adorn.util.logger
 import net.minecraft.resource.ResourceManager
 import net.minecraft.resource.SinglePreparationResourceReloader
 import net.minecraft.util.Identifier
 import net.minecraft.util.profiler.Profiler
-import org.apache.logging.log4j.LogManager
 
 open class ColorManager : SinglePreparationResourceReloader<Map<Identifier, List<JsonObject>>>() {
     private val jankson = Jankson.builder().build()
@@ -55,7 +55,7 @@ open class ColorManager : SinglePreparationResourceReloader<Map<Identifier, List
         map[id] ?: map[FALLBACK] ?: throw IllegalStateException("Could not find fallback palette!")
 
     companion object {
-        private val LOGGER = LogManager.getLogger()
+        private val LOGGER = logger()
         private val FALLBACK = AdornCommon.id("fallback")
         private const val PREFIX = "adorn/color_palettes"
         private const val SUFFIX_LENGTH = ".json5".length

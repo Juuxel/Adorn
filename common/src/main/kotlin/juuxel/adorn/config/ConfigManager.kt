@@ -3,7 +3,7 @@ package juuxel.adorn.config
 import blue.endless.jankson.Jankson
 import blue.endless.jankson.JsonObject
 import blue.endless.jankson.api.DeserializationException
-import org.apache.logging.log4j.LogManager
+import juuxel.adorn.util.logger
 import java.nio.file.Files
 import java.nio.file.Path
 
@@ -78,6 +78,6 @@ abstract class ConfigManager {
     companion object {
         private val JANKSON = Jankson.builder().build()
         private val DEFAULT = JANKSON.toJson(Config()) as JsonObject
-        private val LOGGER = LogManager.getLogger()
+        private val LOGGER = logger()
     }
 }

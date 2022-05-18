@@ -1,6 +1,7 @@
 package juuxel.adorn.platform.forge
 
 import juuxel.adorn.platform.MenuBridge
+import juuxel.adorn.util.logger
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.menu.Menu
@@ -11,10 +12,9 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.math.BlockPos
 import net.minecraftforge.common.extensions.IForgeMenuType
 import net.minecraftforge.network.NetworkHooks
-import org.apache.logging.log4j.LogManager
 
 object MenuBridgeImpl : MenuBridge {
-    private val LOGGER = LogManager.getLogger()
+    private val LOGGER = logger()
 
     override fun open(player: PlayerEntity, factory: NamedMenuFactory?, pos: BlockPos) {
         if (factory == null) {

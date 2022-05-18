@@ -2,13 +2,13 @@ package juuxel.adorn.client.renderer
 
 import juuxel.adorn.block.entity.KitchenSinkBlockEntityFabric
 import juuxel.adorn.fluid.FluidUnit
+import juuxel.adorn.util.logger
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.texture.MissingSprite
 import net.minecraft.client.texture.Sprite
 import net.minecraft.client.texture.SpriteAtlasTexture
-import org.slf4j.LoggerFactory
 
 class KitchenSinkRendererFabric(context: BlockEntityRendererFactory.Context) :
     KitchenSinkRenderer<KitchenSinkBlockEntityFabric>(context) {
@@ -35,6 +35,6 @@ class KitchenSinkRendererFabric(context: BlockEntityRendererFactory.Context) :
         entity.storage.amount == 0L
 
     companion object {
-        private val LOGGER = LoggerFactory.getLogger(KitchenSinkRendererFabric::class.java)
+        private val LOGGER = logger()
     }
 }

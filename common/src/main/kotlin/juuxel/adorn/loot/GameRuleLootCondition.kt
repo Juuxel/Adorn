@@ -3,6 +3,7 @@ package juuxel.adorn.loot
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonObject
 import com.google.gson.JsonSerializationContext
+import juuxel.adorn.util.logger
 import net.minecraft.loot.condition.LootCondition
 import net.minecraft.loot.condition.LootConditionType
 import net.minecraft.loot.context.LootContext
@@ -10,8 +11,6 @@ import net.minecraft.util.JsonHelper
 import net.minecraft.util.JsonSerializer
 import net.minecraft.world.GameRules
 import net.minecraft.world.GameRules.BooleanRule
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 class GameRuleLootCondition(private val gameRule: String) : LootCondition {
     private val key: GameRules.Key<*> = GameRules.Key(gameRule, GameRules.Category.MISC)
@@ -35,7 +34,7 @@ class GameRuleLootCondition(private val gameRule: String) : LootCondition {
         AdornLootConditionTypes.GAME_RULE
 
     companion object {
-        private val LOGGER: Logger = LoggerFactory.getLogger(GameRuleLootCondition::class.java)
+        private val LOGGER = logger()
     }
 
     object Serializer : JsonSerializer<GameRuleLootCondition> {

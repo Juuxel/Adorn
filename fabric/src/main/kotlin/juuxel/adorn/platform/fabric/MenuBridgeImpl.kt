@@ -1,6 +1,7 @@
 package juuxel.adorn.platform.fabric
 
 import juuxel.adorn.platform.MenuBridge
+import juuxel.adorn.util.logger
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType
 import net.minecraft.entity.player.PlayerEntity
@@ -11,10 +12,9 @@ import net.minecraft.menu.NamedMenuFactory
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.math.BlockPos
-import org.apache.logging.log4j.LogManager
 
 object MenuBridgeImpl : MenuBridge {
-    private val LOGGER = LogManager.getLogger()
+    private val LOGGER = logger()
 
     override fun open(player: PlayerEntity, factory: NamedMenuFactory?, pos: BlockPos) {
         if (factory == null) {
