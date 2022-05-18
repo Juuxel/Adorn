@@ -15,6 +15,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.DirectionProperty
@@ -29,10 +30,11 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
+import java.util.Random
 
 class BrewerBlock(settings: Settings) : VisibleBlockWithEntity(settings) {
     init {
-        defaultState = defaultState.with(HAS_MUG, false)
+        defaultState = defaultState.with(HAS_MUG, false).with(ACTIVE, false)
     }
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState =
@@ -85,7 +87,7 @@ class BrewerBlock(settings: Settings) : VisibleBlockWithEntity(settings) {
         state.rotate(mirror.getRotation(state[FACING]))
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
-        builder.add(FACING, HAS_MUG)
+        builder.add(FACING, HAS_MUG, ACTIVE)
     }
 
     override fun hasComparatorOutput(state: BlockState): Boolean = true
@@ -93,9 +95,22 @@ class BrewerBlock(settings: Settings) : VisibleBlockWithEntity(settings) {
     override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos): Int =
         (world.getBlockEntity(pos) as? BrewerBlockEntity)?.calculateComparatorOutput() ?: 0
 
+    override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
+        if (state[ACTIVE] && random.nextInt(3) == 0) {
+            val facing = state[FACING]
+            val x = pos.x + 0.5 + random.nextDouble() * RANDOM_CLOUD_OFFSET + facing.offsetX * FACING_CLOUD_OFFSET
+            val y = pos.y + 0.37 + random.nextDouble() * RANDOM_CLOUD_OFFSET
+            val z = pos.z + 0.5 + random.nextDouble() * RANDOM_CLOUD_OFFSET + facing.offsetZ * FACING_CLOUD_OFFSET
+            world.addParticle(ParticleTypes.CLOUD, x, y, z, 0.0, 0.0, 0.0)
+        }
+    }
+
     companion object {
         val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
         val HAS_MUG: BooleanProperty = BooleanProperty.of("has_mug")
+        val ACTIVE: BooleanProperty = BooleanProperty.of("active")
         private val SHAPES = buildShapeRotationsFromNorth(4, 0, 2, 12, 14, 12)
+        private const val RANDOM_CLOUD_OFFSET = 0.0625
+        private const val FACING_CLOUD_OFFSET = 0.2
     }
 }

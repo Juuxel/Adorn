@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/brewer",
+  "textures": {
+    "front": "adorn:block/brewer_front_active"
+  }
+}

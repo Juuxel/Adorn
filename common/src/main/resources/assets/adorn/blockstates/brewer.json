@@ -1,20 +1,36 @@
 {
   "multipart": [
     {
-      "when": { "facing": "north" },
+      "when": { "facing": "north", "active": false },
       "apply": { "model": "adorn:block/brewer" }
     },
     {
-      "when": { "facing": "east" },
+      "when": { "facing": "east", "active": false },
       "apply": { "model": "adorn:block/brewer", "y": 90 }
     },
     {
-      "when": { "facing": "south" },
+      "when": { "facing": "south", "active": false },
       "apply": { "model": "adorn:block/brewer", "y": 180 }
     },
     {
-      "when": { "facing": "west" },
+      "when": { "facing": "west", "active": false },
       "apply": { "model": "adorn:block/brewer", "y": 270 }
+    },
+    {
+      "when": { "facing": "north", "active": true },
+      "apply": { "model": "adorn:block/brewer_active" }
+    },
+    {
+      "when": { "facing": "east", "active": true },
+      "apply": { "model": "adorn:block/brewer_active", "y": 90 }
+    },
+    {
+      "when": { "facing": "south", "active": true },
+      "apply": { "model": "adorn:block/brewer_active", "y": 180 }
+    },
+    {
+      "when": { "facing": "west", "active": true },
+      "apply": { "model": "adorn:block/brewer_active", "y": 270 }
     },
     {
       "when": { "facing": "north", "has_mug": "true" },

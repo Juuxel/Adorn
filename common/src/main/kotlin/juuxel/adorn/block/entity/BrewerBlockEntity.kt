@@ -95,6 +95,8 @@ abstract class BrewerBlockEntity(pos: BlockPos, state: BlockState) :
     protected abstract fun canExtractFluidContainer(): Boolean
     protected abstract fun tryExtractFluidContainer()
 
+    private fun isActive(): Boolean = progress != 0
+
     companion object {
         private const val NBT_PROGRESS = "Progress"
         const val CONTAINER_SIZE = 4
@@ -106,6 +108,7 @@ abstract class BrewerBlockEntity(pos: BlockPos, state: BlockState) :
         const val FLUID_CAPACITY_IN_BUCKETS = 2
 
         fun tick(world: World, pos: BlockPos, state: BlockState, brewer: BrewerBlockEntity) {
+            val originallyActive = brewer.isActive()
             brewer.tryExtractFluidContainer()
 
             var dirty = false
@@ -148,6 +151,13 @@ abstract class BrewerBlockEntity(pos: BlockPos, state: BlockState) :
                     brewer.progress = 0
                     dirty = true
                 }
+            }
+
+            val activeNow = brewer.isActive()
+            if (originallyActive != activeNow) {
+                dirty = true
+                val newState = state.with(BrewerBlock.ACTIVE, activeNow)
+                world.setBlockState(pos, newState)
             }
 
             if (dirty) {
