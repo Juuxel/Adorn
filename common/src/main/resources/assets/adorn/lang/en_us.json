@@ -532,7 +532,7 @@
   "advancements.adorn.everything.description": "Craft every decoration block from Adorn.",
 
   "block.adorn.stone_torch": "Stone Torch",
-  "block.adorn.stone_torch.desc": "Brighter than a wooden torch",
+  "block.adorn.stone_torch.description": "Brighter than a wooden torch",
 
   "block.adorn.oak_post": "Oak Post",
   "block.adorn.spruce_post": "Spruce Post",
@@ -680,7 +680,7 @@
   "block.adorn.architects_palette.myonite_post": "Myonite Post",
   "block.adorn.architects_palette.myonite_brick_post": "Myonite Brick Post",
   "block.adorn.architects_palette.mushy_myonite_brick_post": "Mushy Myonite Brick Post",
-  "block.adorn.post.desc": "A bit like a fence post",
+  "block.adorn.post.description": "A bit like a fence post",
 
   "block.adorn.oak_platform": "Oak Platform",
   "block.adorn.spruce_platform": "Spruce Platform",
@@ -828,7 +828,7 @@
   "block.adorn.architects_palette.myonite_platform": "Myonite Platform",
   "block.adorn.architects_palette.myonite_brick_platform": "Myonite Brick Platform",
   "block.adorn.architects_palette.mushy_myonite_brick_platform": "Mushy Myonite Brick Platform",
-  "block.adorn.platform.desc": "A post with a platform on top",
+  "block.adorn.platform.description": "A post with a platform on top",
 
   "block.adorn.oak_step": "Oak Step",
   "block.adorn.spruce_step": "Spruce Step",
@@ -976,17 +976,17 @@
   "block.adorn.architects_palette.myonite_step": "Myonite Step",
   "block.adorn.architects_palette.myonite_brick_step": "Myonite Brick Step",
   "block.adorn.architects_palette.mushy_myonite_brick_step": "Mushy Myonite Brick Step",
-  "block.adorn.step.desc": "A small step with a post under it",
+  "block.adorn.step.description": "A small step with a post under it",
 
   "block.adorn.brick_chimney": "Brick Chimney",
   "block.adorn.stone_brick_chimney": "Stone Brick Chimney",
   "block.adorn.nether_brick_chimney": "Nether Brick Chimney",
   "block.adorn.red_nether_brick_chimney": "Red Nether Brick Chimney",
   "block.adorn.cobblestone_chimney": "Cobblestone Chimney",
-  "block.adorn.chimney.desc": "Decoration block",
+  "block.adorn.chimney.description": "Decoration block",
 
   "block.adorn.prismarine_chimney": "Prismarine Chimney",
-  "block.adorn.prismarine_chimney.desc": "Bubbles underwater",
+  "block.adorn.prismarine_chimney.description": "Bubbles underwater",
   "block.adorn.magmatic_prismarine_chimney": "Magmatic Prismarine Chimney",
   "block.adorn.soulful_prismarine_chimney": "Soulful Prismarine Chimney",
 
@@ -1065,7 +1065,7 @@
   "block.adorn.ecologics.coconut_shelf": "Coconut Shelf",
   "block.adorn.ecologics.walnut_shelf": "Walnut Shelf",
   "block.adorn.architects_palette.twisted_shelf": "Twisted Shelf",
-  "block.adorn.shelf.desc": "A handy place for everyday items",
+  "block.adorn.shelf.description": "A handy place for everyday items",
 
   "block.adorn.white_table_lamp": "White Table Lamp",
   "block.adorn.light_gray_table_lamp": "Light Gray Table Lamp",
@@ -1261,7 +1261,7 @@
   "entity.adorn.seat": "Seat",
 
   "item.adorn.stone_rod": "Stone Rod",
-  "item.adorn.stone_rod.desc": "Crafting ingredient",
+  "item.adorn.stone_rod.description": "Crafting ingredient",
   "item.adorn.mug": "Mug",
   "item.adorn.hot_chocolate": "Hot Chocolate",
   "item.adorn.sweet_berry_juice": "Sweet Berry Juice",

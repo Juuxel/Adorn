@@ -10,7 +10,7 @@ import net.minecraft.world.World
 open class ItemWithDescription(settings: Settings) : SimpleAdornItem(settings) {
     override fun appendTooltip(stack: ItemStack, world: World?, texts: MutableList<Text>, context: TooltipContext) {
         super.appendTooltip(stack, world, texts, context)
-        texts.add(createDescriptionText("$translationKey.desc"))
+        texts.add(createDescriptionText("$translationKey.description"))
     }
 
     companion object {

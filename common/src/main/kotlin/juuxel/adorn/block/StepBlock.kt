@@ -17,7 +17,7 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 
 class StepBlock(variant: BlockVariant) : Block(variant.createSettings()), BlockWithDescription, Waterloggable {
-    override val descriptionKey = "block.adorn.step.desc"
+    override val descriptionKey = "block.adorn.step.description"
 
     init {
         defaultState = defaultState.with(Properties.WATERLOGGED, false)

@@ -79,7 +79,7 @@
   "advancements.adorn.stone_torch.description": "Baue eine Steinfackel.",
 
   "block.adorn.stone_torch": "Stein Fackel",
-  "block.adorn.stone_torch.desc": "Heller als eine Holzfackel",
+  "block.adorn.stone_torch.description": "Heller als eine Holzfackel",
 
   "block.adorn.oak_post": "Eichen Pfahl",
   "block.adorn.spruce_post": "Fichten Pfahl",
@@ -93,7 +93,7 @@
   "block.adorn.andesite_post": "Andesit Pfahl",
   "block.adorn.diorite_post": "Diorit Pfahl",
   "block.adorn.granite_post": "Granit Pfahl",
-  "block.adorn.post.desc": "Ein bisschen wie ein Zaunpfahl",
+  "block.adorn.post.description": "Ein bisschen wie ein Zaunpfahl",
 
   "block.adorn.oak_platform": "Eichen Plattform",
   "block.adorn.spruce_platform": "Fichten Plattform",
@@ -107,7 +107,7 @@
   "block.adorn.andesite_platform": "Andesit Plattform",
   "block.adorn.diorite_platform": "Diorit Plattform",
   "block.adorn.granite_platform": "Granit Plattform",
-  "block.adorn.platform.desc": "Ein Pfosten mit einer Plattform an der Spitze",
+  "block.adorn.platform.description": "Ein Pfosten mit einer Plattform an der Spitze",
 
   "block.adorn.oak_step": "Eichen Stufe",
   "block.adorn.spruce_step": "Fichten Stufe",
@@ -121,10 +121,10 @@
   "block.adorn.andesite_step": "Andesit Stufe",
   "block.adorn.diorite_step": "Diorit Stufe",
   "block.adorn.granite_step": "Granit Stufe",
-  "block.adorn.step.desc": "Eine kleine Stufe mit einem Pfosten darunter",
+  "block.adorn.step.description": "Eine kleine Stufe mit einem Pfosten darunter",
 
   "block.adorn.prismarine_chimney": "Prismarin Schornstein",
 
   "item.adorn.stone_rod": "Steinstange",
-  "item.adorn.stone_rod.desc": "Handwerkliche Zutat"
+  "item.adorn.stone_rod.description": "Handwerkliche Zutat"
 }

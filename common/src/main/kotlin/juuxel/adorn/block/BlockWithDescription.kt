@@ -7,5 +7,5 @@ import net.minecraft.block.Block
  * when registered using [juuxel.adorn.lib.RegistryHelper.registerBlock].
  */
 interface BlockWithDescription {
-    val descriptionKey: String get() = (this as Block).translationKey + ".desc"
+    val descriptionKey: String get() = (this as Block).translationKey + ".description"
 }

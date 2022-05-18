@@ -16,7 +16,7 @@ import net.minecraft.world.World
 import java.util.Random
 
 class ChimneyBlock(settings: Settings) : AbstractChimneyBlock(settings), BlockWithDescription {
-    override val descriptionKey = "block.adorn.chimney.desc"
+    override val descriptionKey = "block.adorn.chimney.description"
 
     init {
         defaultState = defaultState.with(SMOKE_TYPE, SmokeType.CAMPFIRE)

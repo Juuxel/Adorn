@@ -17,7 +17,7 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 
 class PlatformBlock(variant: BlockVariant) : Block(variant.createSettings()), BlockWithDescription, Waterloggable {
-    override val descriptionKey = "block.adorn.platform.desc"
+    override val descriptionKey = "block.adorn.platform.description"
 
     init {
         defaultState = defaultState.with(Properties.WATERLOGGED, false)

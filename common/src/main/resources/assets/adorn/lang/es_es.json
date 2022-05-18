@@ -428,7 +428,7 @@
   "advancements.adorn.stone_torch.description": "Craftea una antorcha de piedra.",
 
   "block.adorn.stone_torch": "Antorcha de piedra",
-  "block.adorn.stone_torch.desc": "Más brillante que una antorcha de madera.",
+  "block.adorn.stone_torch.description": "Más brillante que una antorcha de madera.",
 
   "block.adorn.oak_post": "Poste de roble",
   "block.adorn.spruce_post": "Poste de abeto",
@@ -551,7 +551,7 @@
   "block.adorn.biomesoplenty.mud_brick_post": "Poste de ladrillos de barro",
   "block.adorn.biomesoplenty.orange_sandstone_post": "Poste de arenisca naranja",
   "block.adorn.biomesoplenty.white_sandstone_post": "Poste de arenisca blanca",
-  "block.adorn.post.desc": "Un poco como un poste de la cerca",
+  "block.adorn.post.description": "Un poco como un poste de la cerca",
 
   "block.adorn.oak_platform": "Plataforma de roble",
   "block.adorn.spruce_platform": "Plataforma de abeto",
@@ -674,7 +674,7 @@
   "block.adorn.biomesoplenty.mud_brick_platform": "Plataforma de ladrillos de barro",
   "block.adorn.biomesoplenty.orange_sandstone_platform": "Plataforma de arenisca naranja",
   "block.adorn.biomesoplenty.white_sandstone_platform": "Plataforma de arenisca blanca",
-  "block.adorn.platform.desc": "Un poste con una plataforma en la parte superior",
+  "block.adorn.platform.description": "Un poste con una plataforma en la parte superior",
 
   "block.adorn.oak_step": "Base de roble",
   "block.adorn.spruce_step": "Base de abeto",
@@ -797,17 +797,17 @@
   "block.adorn.biomesoplenty.mud_brick_step": "Base de ladrillos de barro",
   "block.adorn.biomesoplenty.orange_sandstone_step": "Base de arenisca naranja",
   "block.adorn.biomesoplenty.white_sandstone_step": "Base de arenisca blanca",
-  "block.adorn.step.desc": "Base con un poste debajo",
+  "block.adorn.step.description": "Base con un poste debajo",
 
   "block.adorn.brick_chimney": "Chimenea de ladrillos",
   "block.adorn.stone_brick_chimney": "Chimenea de ladrillos de piedra",
   "block.adorn.nether_brick_chimney": "Chimenea de ladrillos del Nether",
   "block.adorn.red_nether_brick_chimney": "Chimenea de ladrillos del Nether rojos",
   "block.adorn.cobblestone_chimney": "Chimenea de roca",
-  "block.adorn.chimney.desc": "Bloque decorativo",
+  "block.adorn.chimney.description": "Bloque decorativo",
 
   "block.adorn.prismarine_chimney": "Chimenea de prismarina",
-  "block.adorn.prismarine_chimney.desc": "Burbujas bajo el agua",
+  "block.adorn.prismarine_chimney.description": "Burbujas bajo el agua",
   "block.adorn.magmatic_prismarine_chimney": "Chimenea de prismarina con magma",
   "block.adorn.soulful_prismarine_chimney": "Chimenea de prismarina con arena de almas",
 
@@ -875,7 +875,7 @@
   "block.adorn.biomesoplenty.magic_shelf": "Estante mágico",
   "block.adorn.biomesoplenty.umbran_shelf": "Estante smbrío",
   "block.adorn.biomesoplenty.hellbark_shelf": "Estante de corteza infernal",
-  "block.adorn.shelf.desc": "Un lugar práctico para los artículos de uso diario",
+  "block.adorn.shelf.description": "Un lugar práctico para los artículos de uso diario",
 
   "block.adorn.white_table_lamp": "Velador blanco",
   "block.adorn.light_gray_table_lamp": "Velador gris claro",
@@ -1046,7 +1046,7 @@
   "block.adorn.biomesoplenty.hellbark_bench": "Banqueta de corteza infernal",
 
   "item.adorn.stone_rod": "Palo de piedra",
-  "item.adorn.stone_rod.desc": "Ingrediente de elaboración",
+  "item.adorn.stone_rod.description": "Ingrediente de elaboración",
 
   "item.adorn.guide_book": "Decorando tu hogar",
   "guide.adorn.topic.building_blocks.title": "Bloques de construcción",

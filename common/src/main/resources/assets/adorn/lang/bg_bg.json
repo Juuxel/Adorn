@@ -52,7 +52,7 @@
   "block.adorn.dark_oak_drawer": "Чекмедже от черен дъб",
 
   "block.adorn.stone_torch": "Каменна факла",
-  "block.adorn.stone_torch.desc": "По-светла от дървена факла",
+  "block.adorn.stone_torch.description": "По-светла от дървена факла",
 
   "block.adorn.oak_post": "Дъбов стълб",
   "block.adorn.spruce_post": "Смърчов стълб",
@@ -66,7 +66,7 @@
   "block.adorn.andesite_post": "Andesite стълб",
   "block.adorn.diorite_post": "Diorite стълб",
   "block.adorn.granite_post": "Гранитен стълб",
-  "block.adorn.post.desc": "Подобно на стълб на ограда",
+  "block.adorn.post.description": "Подобно на стълб на ограда",
 
   "block.adorn.oak_platform": "Дъбова платформа",
   "block.adorn.spruce_platform": "Смърчова платформа",
@@ -80,7 +80,7 @@
   "block.adorn.andesite_platform": "Платформа от андезит",
   "block.adorn.diorite_platform": "Платформа от диорит",
   "block.adorn.granite_platform": "Платформа от гранит",
-  "block.adorn.platform.desc": "Стълб с платформа отгоре",
+  "block.adorn.platform.description": "Стълб с платформа отгоре",
 
   "block.adorn.oak_step": "Дъбово стъпало",
   "block.adorn.spruce_step": "Смърчово стъпало",
@@ -94,12 +94,12 @@
   "block.adorn.andesite_step": "Стъпало от андезит",
   "block.adorn.diorite_step": "Стъпало от диорит",
   "block.adorn.granite_step": "Стъпало от гранит",
-  "block.adorn.step.desc": "Малко стъпало със стълб под него",
+  "block.adorn.step.description": "Малко стъпало със стълб под него",
 
-  "block.adorn.chimney.desc": "Декоративно блокче",
+  "block.adorn.chimney.description": "Декоративно блокче",
   "block.adorn.prismarine_chimney": "Призмаринов комин",
-  "block.adorn.prismarine_chimney.desc": "Прави балончета под вода",
+  "block.adorn.prismarine_chimney.description": "Прави балончета под вода",
 
   "item.adorn.stone_rod": "Каменна пръчка",
-  "item.adorn.stone_rod.desc": "Съставка за изработване"
+  "item.adorn.stone_rod.description": "Съставка за изработване"
 }

@@ -158,7 +158,7 @@
   "advancements.adorn.stone_torch.description": "Stwórz kamienną pochodnię.",
 
   "block.adorn.stone_torch": "Kamienna pochodnia",
-  "block.adorn.stone_torch.desc": "Jaśniejsza niż drewniana pochodnia",
+  "block.adorn.stone_torch.description": "Jaśniejsza niż drewniana pochodnia",
 
   "block.adorn.oak_post": "Dębowy słupek",
   "block.adorn.spruce_post": "Świerkowy słupek",
@@ -191,7 +191,7 @@
   "block.adorn.terrestria.basalt_post": "Bazaltowy słupek",
   "block.adorn.terrestria.basalt_cobblestone_post": "Bazaltowy brukowy słupek",
   "block.adorn.woods_and_mires.pine_post": "Sosnowy słupek",
-  "block.adorn.post.desc": "Trochę jak słupek ogrodzeniowy",
+  "block.adorn.post.description": "Trochę jak słupek ogrodzeniowy",
 
   "block.adorn.oak_platform": "Dębowa platforma",
   "block.adorn.spruce_platform": "Świerkowa platforma",
@@ -224,7 +224,7 @@
   "block.adorn.terrestria.basalt_platform": "Bazaltowa platforma",
   "block.adorn.terrestria.basalt_cobblestone_platform": "Bazaltowa brukowa platforma",
   "block.adorn.woods_and_mires.pine_platform": "Sosnowa platforma",
-  "block.adorn.platform.desc": "Słupek z platformą na górze",
+  "block.adorn.platform.description": "Słupek z platformą na górze",
 
   "block.adorn.oak_step": "Dębowy stopień",
   "block.adorn.spruce_step": "Świerkowy stopień",
@@ -257,17 +257,17 @@
   "block.adorn.terrestria.basalt_step": "Bazaltowy stopień",
   "block.adorn.terrestria.basalt_cobblestone_step": "Bazaltowy brukowy stopień",
   "block.adorn.woods_and_mires.pine_step": "Sosnowy stopień",
-  "block.adorn.step.desc": "Mały stopień ze słupkiem pod spodem",
+  "block.adorn.step.description": "Mały stopień ze słupkiem pod spodem",
 
   "block.adorn.brick_chimney": "Ceglany komin",
   "block.adorn.stone_brick_chimney": "Kamienny ceglany komin",
   "block.adorn.nether_brick_chimney": "Netherowy ceglany komin",
   "block.adorn.red_nether_brick_chimney": "Czerwony netherowy ceglany komin",
   "block.adorn.cobblestone_chimney": "Brukowy komin",
-  "block.adorn.chimney.desc": "Blok dekoracyjny",
+  "block.adorn.chimney.description": "Blok dekoracyjny",
 
   "block.adorn.prismarine_chimney": "Pryzmarynowy komin",
-  "block.adorn.prismarine_chimney.desc": "Bąbelki pod wodą",
+  "block.adorn.prismarine_chimney.description": "Bąbelki pod wodą",
   "block.adorn.magmatic_prismarine_chimney": "Magmatyczny pryzmarynowy komin",
   "block.adorn.soulful_prismarine_chimney": "Pełen dusz pryzmarynowy komin",
 
@@ -290,7 +290,7 @@
   "block.adorn.terrestria.sakura_shelf": "Sakurowa półka",
   "block.adorn.terrestria.willow_shelf": "Wierzbowa półka",
   "block.adorn.woods_and_mires.pine_shelf": "Sosnowa półka",
-  "block.adorn.shelf.desc": "Przydatne miejsce dla codziennych rzeczy",
+  "block.adorn.shelf.description": "Przydatne miejsce dla codziennych rzeczy",
 
   "block.adorn.white_table_lamp": "Biała lampa stołowa",
   "block.adorn.light_gray_table_lamp": "Jasnoszara lampa stołowa",
@@ -352,7 +352,7 @@
   "block.adorn.stone_ladder": "Kamienna drabina",
 
   "item.adorn.stone_rod": "Kamienny patyk",
-  "item.adorn.stone_rod.desc": "Składnik rzemieślniczy",
+  "item.adorn.stone_rod.description": "Składnik rzemieślniczy",
 
   "item.adorn.guide_book": "Dekorowanie twojego domu",
   "guide.adorn.topic.building_blocks.title": "Bloki budownicze",

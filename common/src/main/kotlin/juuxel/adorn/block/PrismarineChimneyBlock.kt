@@ -11,7 +11,7 @@ import net.minecraft.world.World
 import java.util.Random
 
 open class PrismarineChimneyBlock(settings: Settings) : AbstractChimneyBlock(settings), BlockWithDescription {
-    override val descriptionKey get() = AdornBlocks.PRISMARINE_CHIMNEY.translationKey + ".desc"
+    override val descriptionKey get() = AdornBlocks.PRISMARINE_CHIMNEY.translationKey + ".description"
 
     override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
         if (!state.fluidState.isIn(FluidTags.WATER) || state[CONNECTED]) return

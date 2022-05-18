@@ -34,7 +34,7 @@ import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
 class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createSettings()), Waterloggable, BlockWithDescription {
-    override val descriptionKey = "block.adorn.shelf.desc"
+    override val descriptionKey = "block.adorn.shelf.description"
 
     init {
         defaultState = defaultState.with(WATERLOGGED, false)

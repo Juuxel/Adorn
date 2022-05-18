@@ -20,7 +20,7 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 
 class PostBlock(variant: BlockVariant) : Block(variant.createSettings()), BlockWithDescription, Waterloggable {
-    override val descriptionKey = "block.adorn.post.desc"
+    override val descriptionKey = "block.adorn.post.description"
 
     init {
         defaultState = defaultState.with(AXIS, Direction.Axis.Y).with(WATERLOGGED, false)

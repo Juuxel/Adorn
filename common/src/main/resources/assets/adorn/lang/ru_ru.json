@@ -158,7 +158,7 @@
   "advancements.adorn.stone_torch.description": "Постройте каменный факел.",
 
   "block.adorn.stone_torch": "Каменный факел",
-  "block.adorn.stone_torch.desc": "Ярче деревянного факела",
+  "block.adorn.stone_torch.description": "Ярче деревянного факела",
 
   "block.adorn.oak_post": "Дубовый пост",
   "block.adorn.spruce_post": "Еловый пост",
@@ -211,7 +211,7 @@
   "block.adorn.terrestria.basalt_post": "Базальтовый пост",
   "block.adorn.terrestria.basalt_cobblestone_post": "Пост из базальтового булыжника",
   "block.adorn.woods_and_mires.pine_post": "Пост из сосны",
-  "block.adorn.post.desc": "Немного похоже на столб забора",
+  "block.adorn.post.description": "Немного похоже на столб забора",
 
   "block.adorn.oak_platform": "Дубовая платформа",
   "block.adorn.spruce_platform": "Еловая платформа",
@@ -264,7 +264,7 @@
   "block.adorn.terrestria.basalt_platform": "Базальтовая платформа",
   "block.adorn.terrestria.basalt_cobblestone_platform": "Платформа из базальтового булыжника",
   "block.adorn.woods_and_mires.pine_platform": "Платформа из сосны",
-  "block.adorn.platform.desc": "Столб с платформой сверху",
+  "block.adorn.platform.description": "Столб с платформой сверху",
 
   "block.adorn.oak_step": "Дубовая ступенька",
   "block.adorn.spruce_step": "Еловая ступенька",
@@ -317,17 +317,17 @@
   "block.adorn.terrestria.basalt_step": "Базальтовая ступенька",
   "block.adorn.terrestria.basalt_cobblestone_step": "Ступенька из базальтового булыжника",
   "block.adorn.woods_and_mires.pine_step": "Ступенька из сосны",
-  "block.adorn.step.desc": "Маленькая ступенька со столбом под ней",
+  "block.adorn.step.description": "Маленькая ступенька со столбом под ней",
 
   "block.adorn.brick_chimney": "Дымоход из кирпича",
   "block.adorn.stone_brick_chimney": "Дымоход из каменного кирпича",
   "block.adorn.nether_brick_chimney": "Дымоход из адского кирпича",
   "block.adorn.red_nether_brick_chimney": "Дымоход из красного адского кирпича",
   "block.adorn.cobblestone_chimney": "Дымоход из булыжника",
-  "block.adorn.chimney.desc": "Декоративный блок",
+  "block.adorn.chimney.description": "Декоративный блок",
 
   "block.adorn.prismarine_chimney": "Дымоход из призмарина",
-  "block.adorn.prismarine_chimney.desc": "Пузырьки под водой",
+  "block.adorn.prismarine_chimney.description": "Пузырьки под водой",
   "block.adorn.magmatic_prismarine_chimney": "Дымоход из магмо-призмарина",
   "block.adorn.soulful_prismarine_chimney": "Дымоход из душе-призмарина",
 
@@ -350,7 +350,7 @@
   "block.adorn.terrestria.sakura_shelf": "Полка из сакуры",
   "block.adorn.terrestria.willow_shelf": "Полка из ивы",
   "block.adorn.woods_and_mires.pine_shelf": "Полка из сосны",
-  "block.adorn.shelf.desc": "Удобное место для красивых предметов",
+  "block.adorn.shelf.description": "Удобное место для красивых предметов",
 
   "block.adorn.white_table_lamp": "Настольная лампа [Белая]",
   "block.adorn.light_gray_table_lamp": "Настольная лампа [Светло-серая]",
@@ -412,7 +412,7 @@
   "block.adorn.stone_ladder": "Каменная лестница",
 
   "item.adorn.stone_rod": "Каменный стержень",
-  "item.adorn.stone_rod.desc": "Ингредиент для крафта",
+  "item.adorn.stone_rod.description": "Ингредиент для крафта",
 
   "item.adorn.guide_book": "Украшение вашего дома",
   "guide.adorn.topic.building_blocks.title": "Строительные блоки",
