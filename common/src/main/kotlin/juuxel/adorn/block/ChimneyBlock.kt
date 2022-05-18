@@ -3,7 +3,6 @@ package juuxel.adorn.block
 
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.state.StateManager
@@ -16,7 +15,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.Random
 
-class ChimneyBlock : AbstractChimneyBlock(Settings.copy(Blocks.BRICKS).ticksRandomly().nonOpaque()), BlockWithDescription {
+class ChimneyBlock(settings: Settings) : AbstractChimneyBlock(settings), BlockWithDescription {
     override val descriptionKey = "block.adorn.chimney.desc"
 
     init {

@@ -13,6 +13,7 @@ import juuxel.adorn.util.copySettingsSafely
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
+import net.minecraft.block.MapColor
 import net.minecraft.block.Material
 import net.minecraft.block.TorchBlock
 import net.minecraft.block.WallTorchBlock
@@ -231,23 +232,29 @@ object AdornBlocks : RegistryHelper() {
     val WARPED_SHELF: Block by registerBlock("warped_shelf") { ShelfBlock(BlockVariant.WARPED) }
     val IRON_SHELF: Block by registerBlock("iron_shelf") { ShelfBlock(BlockVariant.IRON) }
 
-    val BRICK_CHIMNEY: Block by registerBlock("brick_chimney") { ChimneyBlock() }
-    val STONE_BRICK_CHIMNEY: Block by registerBlock("stone_brick_chimney") { ChimneyBlock() }
-    val NETHER_BRICK_CHIMNEY: Block by registerBlock("nether_brick_chimney") { ChimneyBlock() }
-    val RED_NETHER_BRICK_CHIMNEY: Block by registerBlock("red_nether_brick_chimney") { ChimneyBlock() }
-    val COBBLESTONE_CHIMNEY: Block by registerBlock("cobblestone_chimney") { ChimneyBlock() }
+    val BRICK_CHIMNEY: Block by registerBlock("brick_chimney") {
+        ChimneyBlock(AbstractChimneyBlock.createBlockSettings(MapColor.RED))
+    }
+    val STONE_BRICK_CHIMNEY: Block by registerBlock("stone_brick_chimney") {
+        ChimneyBlock(AbstractChimneyBlock.createBlockSettings(MapColor.STONE_GRAY))
+    }
+    val NETHER_BRICK_CHIMNEY: Block by registerBlock("nether_brick_chimney") {
+        ChimneyBlock(AbstractChimneyBlock.createBlockSettings(MapColor.DARK_RED))
+    }
+    val RED_NETHER_BRICK_CHIMNEY: Block by registerBlock("red_nether_brick_chimney") {
+        ChimneyBlock(AbstractChimneyBlock.createBlockSettings(MapColor.DARK_RED))
+    }
+    val COBBLESTONE_CHIMNEY: Block by registerBlock("cobblestone_chimney") {
+        ChimneyBlock(AbstractChimneyBlock.createBlockSettings(MapColor.STONE_GRAY))
+    }
     val PRISMARINE_CHIMNEY: Block by registerBlock("prismarine_chimney") {
-        PrismarineChimneyBlock(AbstractBlock.Settings.copy(Blocks.PRISMARINE).ticksRandomly())
+        PrismarineChimneyBlock(AbstractChimneyBlock.createBlockSettings(MapColor.CYAN, hardness = 1.5f))
     }
     val MAGMATIC_PRISMARINE_CHIMNEY: Block by registerBlock("magmatic_prismarine_chimney") {
-        PrismarineChimneyBlock.WithColumn(
-            true, AbstractBlock.Settings.copy(Blocks.PRISMARINE).ticksRandomly().luminance { 3 }
-        )
+        PrismarineChimneyBlock.WithColumn(true, AbstractChimneyBlock.createBlockSettings(MapColor.CYAN, hardness = 1.5f).luminance { 3 })
     }
     val SOULFUL_PRISMARINE_CHIMNEY: Block by registerBlock("soulful_prismarine_chimney") {
-        PrismarineChimneyBlock.WithColumn(
-            false, AbstractBlock.Settings.copy(Blocks.PRISMARINE).ticksRandomly()
-        )
+        PrismarineChimneyBlock.WithColumn(false, AbstractChimneyBlock.createBlockSettings(MapColor.CYAN, hardness = 1.5f))
     }
 
     val OAK_COFFEE_TABLE: Block by registerBlock("oak_coffee_table") { CoffeeTableBlock(BlockVariant.OAK) }
@@ -277,7 +284,7 @@ object AdornBlocks : RegistryHelper() {
     val TRADING_STATION: Block by registerBlock(
         "trading_station",
         itemProvider = { TradingStationItem(it, Item.Settings().group(ItemGroup.DECORATIONS)) },
-        block = { TradingStationBlock() }
+        block = { TradingStationBlock(AbstractBlock.Settings.of(Material.WOOD).strength(2.5f).sounds(BlockSoundGroup.WOOD)) }
     )
 
     val STONE_TORCH_GROUND: Block by registerBlockWithoutItem("stone_torch") {

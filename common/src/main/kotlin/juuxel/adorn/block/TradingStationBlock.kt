@@ -6,7 +6,6 @@ import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.lib.AdornStats
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.LivingEntity
@@ -27,7 +26,7 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-class TradingStationBlock : VisibleBlockWithEntity(Settings.copy(Blocks.CRAFTING_TABLE)) {
+class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings) {
     init {
         defaultState = defaultState.with(WATERLOGGED, false)
     }
