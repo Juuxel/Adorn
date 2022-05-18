@@ -9,6 +9,7 @@ import juuxel.adorn.client.gui.widget.FlipBook
 import juuxel.adorn.client.gui.widget.TickingElement
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.color
+import juuxel.adorn.util.interleave
 import net.minecraft.client.gui.Drawable
 import net.minecraft.client.gui.Element
 import net.minecraft.client.gui.screen.Screen
@@ -25,7 +26,6 @@ import net.minecraft.text.ClickEvent
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Style
 import net.minecraft.text.TranslatableText
-import net.minecraft.util.registry.Registry
 
 class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
     private lateinit var flipBook: FlipBook
@@ -135,16 +135,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         private val wrappedTitleLines = textRenderer.wrapLines(page.title.copy().styled { it.withBold(true) }, PAGE_TITLE_WIDTH)
         private val wrappedBodyLines = textRenderer.wrapLines(page.text, PAGE_WIDTH - PAGE_TEXT_X)
 
-        private val icons: List<ItemStack> = buildList {
-            for (icon in page.icons) {
-                when (icon) {
-                    is Page.Icon.ItemIcon -> add(icon.item.defaultStack)
-                    is Page.Icon.TagIcon -> for (item in Registry.ITEM.getOrCreateEntryList(icon.tag)) {
-                        add(item.value().defaultStack)
-                    }
-                }
-            }
-        }
+        private val icons: List<ItemStack> = interleave(page.icons.map { it.createStacks() })
         private var icon = 0
         private var iconTicks = 0
 

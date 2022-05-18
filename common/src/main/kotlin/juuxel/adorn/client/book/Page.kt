@@ -7,6 +7,7 @@ import com.mojang.serialization.DynamicOps
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import juuxel.adorn.util.MoreCodecs
 import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.tag.TagKey
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
@@ -36,8 +37,17 @@ data class Page(
     }
 
     sealed class Icon {
-        data class ItemIcon(val item: Item) : Icon()
-        data class TagIcon(val tag: TagKey<Item>) : Icon()
+        abstract fun createStacks(): List<ItemStack>
+
+        data class ItemIcon(val item: Item) : Icon() {
+            override fun createStacks(): List<ItemStack> =
+                listOf(item.defaultStack)
+        }
+
+        data class TagIcon(val tag: TagKey<Item>) : Icon() {
+            override fun createStacks(): List<ItemStack> =
+                Registry.ITEM.getOrCreateEntryList(tag).map { it.value().defaultStack }
+        }
 
         companion object {
             val CODEC: Codec<Icon> = object : Codec<Icon> {
