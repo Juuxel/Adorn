@@ -10,6 +10,10 @@ import net.minecraft.client.util.math.MatrixStack
 class FlipBook(private val pageUpdateListener: () -> Unit) : Element, Drawable, Selectable, PageContainer, TickingElement {
     private val pages = ArrayList<Element>()
     override var currentPage = 0
+        set(value) {
+            field = value
+            pageUpdateListener()
+        }
     override val pageCount get() = pages.size
 
     private fun page() = pages[currentPage]
@@ -21,14 +25,12 @@ class FlipBook(private val pageUpdateListener: () -> Unit) : Element, Drawable, 
     override fun showPreviousPage() {
         if (hasPreviousPage()) {
             currentPage--
-            pageUpdateListener()
         }
     }
 
     override fun showNextPage() {
         if (hasNextPage()) {
             currentPage++
-            pageUpdateListener()
         }
     }
 
