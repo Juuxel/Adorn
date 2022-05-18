@@ -8,6 +8,7 @@ import juuxel.adorn.client.book.Page
 import juuxel.adorn.client.gui.widget.FlipBook
 import juuxel.adorn.client.gui.widget.TickingElement
 import juuxel.adorn.util.Colors
+import juuxel.adorn.util.color
 import net.minecraft.client.gui.Drawable
 import net.minecraft.client.gui.Element
 import net.minecraft.client.gui.screen.Screen
@@ -110,6 +111,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         private const val ICON_DURATION = 25
         private val CLOSE_BOOK_ACTIVE_TEXTURE = AdornCommon.id("textures/gui/close_book_active.png")
         private val CLOSE_BOOK_INACTIVE_TEXTURE = AdornCommon.id("textures/gui/close_book_inactive.png")
+        private val HOVER_AREA_HIGHLIGHT_COLOR = color(0xFFFFFF, alpha = 0x80)
     }
 
     private inner class TitlePage(private val x: Int, private val y: Int, private val book: Book) : Element, Drawable {
@@ -198,6 +200,10 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
 
             for (hoverArea in image.hoverAreas) {
                 if (hoverArea.contains(mouseX - imageX, mouseY - imageY)) {
+                    val hX = imageX + hoverArea.position.x
+                    val hY = imageY + hoverArea.position.y
+                    fill(matrices, hX, hY, hX + hoverArea.size.x, hY + hoverArea.size.y, HOVER_AREA_HIGHLIGHT_COLOR)
+
                     val wrappedTooltip = client!!.textRenderer.wrapLines(hoverArea.tooltip, PAGE_WIDTH)
                     renderOrderedTooltip(matrices, wrappedTooltip, mouseX, mouseY)
                     break
