@@ -1,17 +1,11 @@
 package juuxel.adorn.lib
 
-import juuxel.adorn.block.BlockWithDescription
 import juuxel.adorn.item.BaseBlockItem
-import juuxel.adorn.item.ItemWithDescription
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import net.minecraft.block.Block
-import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
-import net.minecraft.item.ItemStack
-import net.minecraft.text.Text
-import net.minecraft.world.World
 
 abstract class RegistryHelper {
     val blocks: Registrar<Block> = PlatformBridges.registrarFactory.block()
@@ -51,18 +45,7 @@ abstract class RegistryHelper {
         blocks.register(name, block)
 
     protected fun makeItemForBlock(block: Block, itemSettings: Item.Settings): Item =
-        if (block is BlockWithDescription) {
-            object : BaseBlockItem(block, itemSettings) {
-                override fun appendTooltip(
-                    stack: ItemStack?, world: World?, texts: MutableList<Text>, context: TooltipContext?
-                ) {
-                    super.appendTooltip(stack, world, texts, context)
-                    texts.add(ItemWithDescription.createDescriptionText(block.descriptionKey))
-                }
-            }
-        } else {
-            BaseBlockItem(block, itemSettings)
-        }
+        BaseBlockItem(block, itemSettings)
 
     // -----------------------------------------
     // Functions for registering other content
