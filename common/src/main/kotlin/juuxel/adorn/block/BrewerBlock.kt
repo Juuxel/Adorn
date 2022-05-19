@@ -3,6 +3,7 @@ package juuxel.adorn.block
 import juuxel.adorn.block.entity.BrewerBlockEntity
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.util.buildShapeRotationsFromNorth
+import juuxel.adorn.util.mergeShapeMaps
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
@@ -109,7 +110,11 @@ class BrewerBlock(settings: Settings) : VisibleBlockWithEntity(settings), BlockW
         val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
         val HAS_MUG: BooleanProperty = BooleanProperty.of("has_mug")
         val ACTIVE: BooleanProperty = BooleanProperty.of("active")
-        private val SHAPES = buildShapeRotationsFromNorth(4, 0, 2, 12, 14, 12)
+        private val SHAPES = mergeShapeMaps(
+            buildShapeRotationsFromNorth(4, 0, 2, 12, 2, 12),
+            buildShapeRotationsFromNorth(4, 2, 8, 12, 8, 12),
+            buildShapeRotationsFromNorth(4, 8, 2, 12, 14, 12),
+        )
         private const val RANDOM_CLOUD_OFFSET = 0.0625
         private const val FACING_CLOUD_OFFSET = 0.2
     }
