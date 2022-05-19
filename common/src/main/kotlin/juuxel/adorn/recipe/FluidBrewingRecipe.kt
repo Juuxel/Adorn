@@ -18,6 +18,7 @@ import net.minecraft.world.World
 class FluidBrewingRecipe(
     private val id: Identifier,
     val firstIngredient: Ingredient,
+    val secondIngredient: Ingredient,
     val fluid: FluidIngredient,
     val result: ItemStack
 ) : BrewingRecipe {
@@ -25,7 +26,8 @@ class FluidBrewingRecipe(
         fun matches(index: Int, ingredient: Ingredient) =
             ingredient.test(inventory.getStack(index))
 
-        return (matches(LEFT_INGREDIENT_SLOT, firstIngredient) || matches(RIGHT_INGREDIENT_SLOT, firstIngredient)) &&
+        return (matches(LEFT_INGREDIENT_SLOT, firstIngredient) && matches(RIGHT_INGREDIENT_SLOT, secondIngredient) ||
+            matches(RIGHT_INGREDIENT_SLOT, firstIngredient) && matches(LEFT_INGREDIENT_SLOT, firstIngredient)) &&
             inventory.fluidReference.matches(fluid)
     }
 
@@ -38,23 +40,27 @@ class FluidBrewingRecipe(
     class Serializer : ForgeRegistryEntryImpl<RecipeSerializer<*>>(RecipeSerializer::class.java), RecipeSerializer<FluidBrewingRecipe> {
         override fun read(id: Identifier, json: JsonObject): FluidBrewingRecipe {
             val first = Ingredient.fromJson(json["first_ingredient"])
+            val secondJson = json["second_ingredient"]
+            val second = if (secondJson != null) Ingredient.fromJson(secondJson) else Ingredient.empty()
             val fluidJson = json["fluid"]
             val fluid = FluidIngredient.CODEC.decode(JsonOps.INSTANCE, fluidJson)
                 .getOrThrow(false) { throw RuntimeException("Could not read fluid brewing recipe $id: $it") }
                 .first
             val result = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "result"))
-            return FluidBrewingRecipe(id, first, fluid, result)
+            return FluidBrewingRecipe(id, first, second, fluid, result)
         }
 
         override fun read(id: Identifier, buf: PacketByteBuf): FluidBrewingRecipe {
             val first = Ingredient.fromPacket(buf)
+            val second = Ingredient.fromPacket(buf)
             val fluid = FluidIngredient.load(buf)
             val output = buf.readItemStack()
-            return FluidBrewingRecipe(id, first, fluid, output)
+            return FluidBrewingRecipe(id, first, second, fluid, output)
         }
 
         override fun write(buf: PacketByteBuf, recipe: FluidBrewingRecipe) {
             recipe.firstIngredient.write(buf)
+            recipe.secondIngredient.write(buf)
             recipe.fluid.write(buf)
             buf.writeItemStack(recipe.result)
         }
