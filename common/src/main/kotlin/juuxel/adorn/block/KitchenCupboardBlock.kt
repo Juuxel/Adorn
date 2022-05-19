@@ -24,7 +24,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.Random
 
-class KitchenCupboardBlock(variant: BlockVariant) : AbstractKitchenCounterBlock(variant), BlockEntityProvider {
+class KitchenCupboardBlock(variant: BlockVariant) : AbstractKitchenCounterBlock(variant), BlockEntityProvider, BlockWithDescription {
+    override val descriptionKey = "block.adorn.kitchen_cupboard.description"
+
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?
     ): ActionResult {

@@ -11,7 +11,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.WorldAccess
 
-open class KitchenCounterBlock(variant: BlockVariant) : AbstractKitchenCounterBlock(variant) {
+open class KitchenCounterBlock(variant: BlockVariant) : AbstractKitchenCounterBlock(variant), BlockWithDescription {
+    override val descriptionKey = "block.adorn.kitchen_counter.description"
+
     init {
         defaultState = defaultState.with(FRONT, FrontConnection.NONE)
     }

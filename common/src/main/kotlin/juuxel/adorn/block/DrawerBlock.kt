@@ -29,7 +29,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.Random
 
-class DrawerBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createSettings().nonOpaque()) {
+class DrawerBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createSettings().nonOpaque()), BlockWithDescription {
+    override val descriptionKey = "block.adorn.drawer.description"
+
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
         builder.add(FACING)

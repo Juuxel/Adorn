@@ -15,7 +15,7 @@
   "block.adorn.purple_sofa": "Purple Sofa",
   "block.adorn.magenta_sofa": "Magenta Sofa",
   "block.adorn.pink_sofa": "Pink Sofa",
-  "block.adorn.sofa.description": "The perfect place to sit down and relax",
+  "block.adorn.sofa.description": "The perfect place to relax",
   "block.adorn.sofa.occupied": "This sofa is occupied",
 
   "block.adorn.oak_chair": "Oak Chair",
@@ -168,6 +168,7 @@
   "block.adorn.ecologics.coconut_table": "Coconut Table",
   "block.adorn.ecologics.walnut_table": "Walnut Table",
   "block.adorn.architects_palette.twisted_table": "Twisted Table",
+  "block.adorn.table.description": "Versatile and all-purpose",
 
   "block.adorn.oak_kitchen_counter": "Oak Kitchen Counter",
   "block.adorn.spruce_kitchen_counter": "Spruce Kitchen Counter",
@@ -243,6 +244,7 @@
   "block.adorn.ecologics.coconut_kitchen_counter": "Coconut Kitchen Counter",
   "block.adorn.ecologics.walnut_kitchen_counter": "Walnut Kitchen Counter",
   "block.adorn.architects_palette.twisted_kitchen_counter": "Twisted Kitchen Counter",
+  "block.adorn.kitchen_counter.description": "For all your kitchen needs",
 
   "block.adorn.oak_kitchen_cupboard": "Oak Kitchen Cupboard",
   "block.adorn.spruce_kitchen_cupboard": "Spruce Kitchen Cupboard",
@@ -318,6 +320,7 @@
   "block.adorn.ecologics.coconut_kitchen_cupboard": "Coconut Kitchen Cupboard",
   "block.adorn.ecologics.walnut_kitchen_cupboard": "Walnut Kitchen Cupboard",
   "block.adorn.architects_palette.twisted_kitchen_cupboard": "Twisted Kitchen Cupboard",
+  "block.adorn.kitchen_cupboard.description": "Storage for a chef",
 
   "block.adorn.oak_kitchen_sink": "Oak Kitchen Sink",
   "block.adorn.spruce_kitchen_sink": "Spruce Kitchen Sink",
@@ -393,6 +396,7 @@
   "block.adorn.ecologics.coconut_kitchen_sink": "Coconut Kitchen Sink",
   "block.adorn.ecologics.walnut_kitchen_sink": "Walnut Kitchen Sink",
   "block.adorn.architects_palette.twisted_kitchen_sink": "Twisted Kitchen Sink",
+  "block.adorn.kitchen_sink.description": "Fill me up with water!",
 
   "block.adorn.oak_drawer": "Oak Drawer",
   "block.adorn.spruce_drawer": "Spruce Drawer",
@@ -468,9 +472,10 @@
   "block.adorn.ecologics.coconut_drawer": "Coconut Drawer",
   "block.adorn.ecologics.walnut_drawer": "Walnut Drawer",
   "block.adorn.architects_palette.twisted_drawer": "Twisted Drawer",
+  "block.adorn.drawer.description": "Push-and-pull storage",
 
   "block.adorn.trading_station": "Trading Station",
-  "block.adorn.trading_station.description": "A compact marketplace",
+  "block.adorn.trading_station.description": "Compact marketplace",
   "block.adorn.trading_station.selling": "Selling",
   "block.adorn.trading_station.price": "Price",
   "block.adorn.trading_station.label.owner": "%s's Trading Station",
@@ -1184,10 +1189,13 @@
   "block.adorn.egg_crate": "Crate of Eggs",
 
   "block.adorn.picket_fence": "Picket Fence",
+  "block.adorn.picket_fence.description": "Frames your backyard",
   "block.adorn.chain_link_fence": "Chain Link Fence",
   "block.adorn.chain_link_fence.description": "Keep out!",
   "block.adorn.stone_ladder": "Stone Ladder",
+  "block.adorn.stone_ladder.description": "A miner's stepping stones",
   "block.adorn.brewer": "Brewer",
+  "block.adorn.brewer.description": "More advanced than a kettle!",
 
   "block.adorn.oak_bench": "Oak Bench",
   "block.adorn.spruce_bench": "Spruce Bench",
@@ -1263,16 +1271,22 @@
   "block.adorn.ecologics.coconut_bench": "Coconut Bench",
   "block.adorn.ecologics.walnut_bench": "Walnut Bench",
   "block.adorn.architects_palette.twisted_bench": "Twisted Bench",
+  "block.adorn.bench.description": "Outdoorsy!",
 
   "entity.adorn.seat": "Seat",
 
   "item.adorn.stone_rod": "Stone Rod",
   "item.adorn.stone_rod.description": "Crafting ingredient",
   "item.adorn.mug": "Mug",
+  "item.adorn.mug.description": "Holds your drinks",
   "item.adorn.hot_chocolate": "Hot Chocolate",
+  "item.adorn.hot_chocolate.description": "Warm and delicious",
   "item.adorn.sweet_berry_juice": "Sweet Berry Juice",
+  "item.adorn.sweet_berry_juice.description": "Tastes like the forest",
   "item.adorn.glow_berry_tea": "Glow Berry Tea",
+  "item.adorn.glow_berry_tea.description": "Bright beverage",
   "item.adorn.nether_wart_coffee": "Nether Wart Coffee",
+  "item.adorn.nether_wart_coffee.description": "Blacker than a moonless night\u2026",
 
   "item.adorn.guide_book": "Decorating Your Home",
   "guide.adorn.topic.brewer.title": "Brewers",

@@ -26,8 +26,9 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
-class BenchBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), Waterloggable {
+class BenchBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), Waterloggable, BlockWithDescription {
     override val sittingStat = AdornStats.SIT_ON_BENCH
+    override val descriptionKey = "block.adorn.bench.description"
 
     init {
         defaultState = defaultState

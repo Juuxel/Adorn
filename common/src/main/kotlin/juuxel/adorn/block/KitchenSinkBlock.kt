@@ -21,7 +21,9 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-class KitchenSinkBlock(variant: BlockVariant) : KitchenCounterBlock(variant), BlockEntityProvider {
+class KitchenSinkBlock(variant: BlockVariant) : KitchenCounterBlock(variant), BlockEntityProvider, BlockWithDescription {
+    override val descriptionKey = "block.adorn.kitchen_sink.description"
+
     override fun onUse(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hit: BlockHitResult): ActionResult {
         val entity = world.getBlockEntity(pos, AdornBlockEntities.KITCHEN_SINK).orElse(null) ?: return ActionResult.PASS
         val stack = player.getStackInHand(hand)

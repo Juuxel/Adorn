@@ -26,7 +26,7 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
-class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable {
+class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable, BlockWithDescription {
     init {
         defaultState = defaultState
             .with(FACING, Direction.NORTH)

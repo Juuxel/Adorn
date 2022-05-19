@@ -32,7 +32,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import java.util.Random
 
-class BrewerBlock(settings: Settings) : VisibleBlockWithEntity(settings) {
+class BrewerBlock(settings: Settings) : VisibleBlockWithEntity(settings), BlockWithDescription {
     init {
         defaultState = defaultState.with(HAS_MUG, false).with(ACTIVE, false)
     }
