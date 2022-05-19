@@ -26,9 +26,9 @@ class FluidBrewingRecipe(
         fun matches(index: Int, ingredient: Ingredient) =
             ingredient.test(inventory.getStack(index))
 
-        return (matches(LEFT_INGREDIENT_SLOT, firstIngredient) && matches(RIGHT_INGREDIENT_SLOT, secondIngredient) ||
-            matches(RIGHT_INGREDIENT_SLOT, firstIngredient) && matches(LEFT_INGREDIENT_SLOT, firstIngredient)) &&
-            inventory.fluidReference.matches(fluid)
+        val itemsMatch = (matches(LEFT_INGREDIENT_SLOT, firstIngredient) && matches(RIGHT_INGREDIENT_SLOT, secondIngredient)) ||
+            (matches(RIGHT_INGREDIENT_SLOT, firstIngredient) && matches(LEFT_INGREDIENT_SLOT, firstIngredient))
+        return itemsMatch && inventory.fluidReference.matches(fluid)
     }
 
     override fun craft(inventory: BrewerInventory): ItemStack = result.copy()
