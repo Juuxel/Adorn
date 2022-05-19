@@ -8,16 +8,18 @@ import juuxel.adorn.compat.rei.AdornReiServer
 import juuxel.adorn.compat.rei.BrewerDisplay
 import me.shedaniel.math.Point
 import me.shedaniel.math.Rectangle
+import me.shedaniel.rei.api.client.REIRuntime
 import me.shedaniel.rei.api.client.gui.Renderer
 import me.shedaniel.rei.api.client.gui.widgets.Widget
 import me.shedaniel.rei.api.client.gui.widgets.Widgets
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory
 import me.shedaniel.rei.api.common.util.EntryStacks
+import net.minecraft.client.render.GameRenderer
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
+import net.minecraft.util.Identifier
 import kotlin.math.roundToInt
 
-// TODO: Dark mode, see REIRuntime
 class BrewerCategory : DisplayCategory<BrewerDisplay> {
     override fun getIcon(): Renderer = EntryStacks.of(AdornBlocks.BREWER)
     override fun getTitle(): Text = TranslatableText("category.adorn.brewer")
@@ -29,8 +31,9 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
         add(Widgets.createRecipeBase(bounds))
         add(
             Widgets.createDrawableWidget { helper, matrices, mouseX, mouseY, delta ->
-                RenderSystem.setShaderTexture(0, TEXTURE)
+                RenderSystem.setShaderTexture(0, currentTexture())
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
+                RenderSystem.setShader(GameRenderer::getPositionTexShader)
                 helper.drawTexture(matrices, topLeft.x, topLeft.y, 49, 16, 105, 61)
                 val progressFraction = (System.currentTimeMillis() % 4000) / 4000.0
                 val height = (progressFraction * 25).roundToInt()
@@ -70,16 +73,23 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
         // Fluid scale for empty fluid slots
         add(
             Widgets.createDrawableWidget { helper, matrices, mouseX, mouseY, delta ->
-                RenderSystem.setShaderTexture(0, TEXTURE)
+                RenderSystem.setShaderTexture(0, currentTexture())
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-                helper.zOffset++
+                RenderSystem.setShader(GameRenderer::getPositionTexShader)
+                helper.zOffset += FLUID_SCALE_Z_OFFSET
                 helper.drawTexture(matrices, topLeft.x + 88, topLeft.y + 5, 176, 25, 16, 51)
-                helper.zOffset--
+                helper.zOffset -= FLUID_SCALE_Z_OFFSET
             }
         )
     }
 
     companion object {
-        private val TEXTURE = AdornCommon.id("textures/gui/brewer_rei.png")
+        private const val FLUID_SCALE_Z_OFFSET = 100
+        private val LIGHT_TEXTURE = AdornCommon.id("textures/gui/brewer_rei_light.png")
+        private val DARK_TEXTURE = AdornCommon.id("textures/gui/brewer_rei_dark.png")
+
+        private fun currentTexture(): Identifier =
+            if (REIRuntime.getInstance().isDarkThemeEnabled) DARK_TEXTURE
+            else LIGHT_TEXTURE
     }
 }
