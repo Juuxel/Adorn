@@ -38,6 +38,7 @@ object AdornRenderers {
                 AdornBlocks.JUNGLE_COFFEE_TABLE,
                 AdornBlocks.ACACIA_COFFEE_TABLE,
                 AdornBlocks.DARK_OAK_COFFEE_TABLE,
+                AdornBlocks.MANGROVE_COFFEE_TABLE,
                 AdornBlocks.CRIMSON_COFFEE_TABLE,
                 AdornBlocks.WARPED_COFFEE_TABLE,
             )

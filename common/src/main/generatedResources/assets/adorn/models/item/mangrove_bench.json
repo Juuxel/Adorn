@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "minecraft:block/mangrove_planks",
+    "log": "minecraft:block/mangrove_log",
+    "end": "minecraft:block/mangrove_log_top"
+  }
+}

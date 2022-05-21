@@ -7,6 +7,7 @@
     "adorn:jungle_bench",
     "adorn:acacia_bench",
     "adorn:dark_oak_bench",
+    "adorn:mangrove_bench",
     "adorn:crimson_bench",
     "adorn:warped_bench",
     { "id": "adorn:biomemakeover/blighted_balsa_bench", "required": false },
@@ -58,22 +59,6 @@
     { "id": "adorn:terrestria/willow_bench", "required": false },
     { "id": "adorn:terrestria/yucca_palm_bench", "required": false },
     { "id": "adorn:traverse/fir_bench", "required": false },
-    { "id": "adorn:woods_and_mires/pine_bench", "required": false },
-    { "id": "adorn:architects_palette/twisted_bench", "required": false },
-    { "id": "adorn:biomesoplenty/cherry_bench", "required": false },
-    { "id": "adorn:biomesoplenty/dead_bench", "required": false },
-    { "id": "adorn:biomesoplenty/fir_bench", "required": false },
-    { "id": "adorn:biomesoplenty/hellbark_bench", "required": false },
-    { "id": "adorn:biomesoplenty/jacaranda_bench", "required": false },
-    { "id": "adorn:biomesoplenty/magic_bench", "required": false },
-    { "id": "adorn:biomesoplenty/mahogany_bench", "required": false },
-    { "id": "adorn:biomesoplenty/palm_bench", "required": false },
-    { "id": "adorn:biomesoplenty/redwood_bench", "required": false },
-    { "id": "adorn:biomesoplenty/umbran_bench", "required": false },
-    { "id": "adorn:biomesoplenty/willow_bench", "required": false },
-    { "id": "adorn:ecologics/azalea_bench", "required": false },
-    { "id": "adorn:ecologics/flowering_azalea_bench", "required": false },
-    { "id": "adorn:ecologics/coconut_bench", "required": false },
-    { "id": "adorn:ecologics/walnut_bench", "required": false }
+    { "id": "adorn:woods_and_mires/pine_bench", "required": false }
   ]
 }

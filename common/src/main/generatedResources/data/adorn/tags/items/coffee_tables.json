@@ -7,6 +7,7 @@
     "adorn:jungle_coffee_table",
     "adorn:acacia_coffee_table",
     "adorn:dark_oak_coffee_table",
+    "adorn:mangrove_coffee_table",
     "adorn:crimson_coffee_table",
     "adorn:warped_coffee_table",
     { "id": "adorn:biomemakeover/blighted_balsa_coffee_table", "required": false },
@@ -58,22 +59,6 @@
     { "id": "adorn:terrestria/willow_coffee_table", "required": false },
     { "id": "adorn:terrestria/yucca_palm_coffee_table", "required": false },
     { "id": "adorn:traverse/fir_coffee_table", "required": false },
-    { "id": "adorn:woods_and_mires/pine_coffee_table", "required": false },
-    { "id": "adorn:architects_palette/twisted_coffee_table", "required": false },
-    { "id": "adorn:biomesoplenty/cherry_coffee_table", "required": false },
-    { "id": "adorn:biomesoplenty/dead_coffee_table", "required": false },
-    { "id": "adorn:biomesoplenty/fir_coffee_table", "required": false },
-    { "id": "adorn:biomesoplenty/hellbark_coffee_table", "required": false },
-    { "id": "adorn:biomesoplenty/jacaranda_coffee_table", "required": false },
-    { "id": "adorn:biomesoplenty/magic_coffee_table", "required": false },
-    { "id": "adorn:biomesoplenty/mahogany_coffee_table", "required": false },
-    { "id": "adorn:biomesoplenty/palm_coffee_table", "required": false },
-    { "id": "adorn:biomesoplenty/redwood_coffee_table", "required": false },
-    { "id": "adorn:biomesoplenty/umbran_coffee_table", "required": false },
-    { "id": "adorn:biomesoplenty/willow_coffee_table", "required": false },
-    { "id": "adorn:ecologics/azalea_coffee_table", "required": false },
-    { "id": "adorn:ecologics/flowering_azalea_coffee_table", "required": false },
-    { "id": "adorn:ecologics/coconut_coffee_table", "required": false },
-    { "id": "adorn:ecologics/walnut_coffee_table", "required": false }
+    { "id": "adorn:woods_and_mires/pine_coffee_table", "required": false }
   ]
 }

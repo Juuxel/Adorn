@@ -11,6 +11,7 @@
         <exclude generator="block_models/coffee_table"/>
     </wood>
     <wood id="minecraft:dark_oak"/>
+    <wood id="minecraft:mangrove"/>
     <wood id="minecraft:crimson" fungus="true" non_flammable="true"/>
     <wood id="minecraft:warped" fungus="true" non_flammable="true"/>
     <stone id="minecraft:andesite"/>

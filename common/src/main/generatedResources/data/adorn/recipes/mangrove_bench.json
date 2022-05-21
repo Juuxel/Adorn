@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:mangrove_slab"
+    }
+  },
+  "result": {
+    "item": "adorn:mangrove_bench",
+    "count": 2
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:mangrove_slab"
+    },
+    "P": {
+      "item": "adorn:mangrove_post"
+    }
+  },
+  "result": {
+    "item": "adorn:mangrove_platform",
+    "count": 2
+  }
+}

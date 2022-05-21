@@ -7,6 +7,7 @@
     "adorn:jungle_shelf",
     "adorn:acacia_shelf",
     "adorn:dark_oak_shelf",
+    "adorn:mangrove_shelf",
     "adorn:crimson_shelf",
     "adorn:warped_shelf",
     { "id": "adorn:biomemakeover/blighted_balsa_shelf", "required": false },
@@ -58,22 +59,6 @@
     { "id": "adorn:terrestria/willow_shelf", "required": false },
     { "id": "adorn:terrestria/yucca_palm_shelf", "required": false },
     { "id": "adorn:traverse/fir_shelf", "required": false },
-    { "id": "adorn:woods_and_mires/pine_shelf", "required": false },
-    { "id": "adorn:architects_palette/twisted_shelf", "required": false },
-    { "id": "adorn:biomesoplenty/cherry_shelf", "required": false },
-    { "id": "adorn:biomesoplenty/dead_shelf", "required": false },
-    { "id": "adorn:biomesoplenty/fir_shelf", "required": false },
-    { "id": "adorn:biomesoplenty/hellbark_shelf", "required": false },
-    { "id": "adorn:biomesoplenty/jacaranda_shelf", "required": false },
-    { "id": "adorn:biomesoplenty/magic_shelf", "required": false },
-    { "id": "adorn:biomesoplenty/mahogany_shelf", "required": false },
-    { "id": "adorn:biomesoplenty/palm_shelf", "required": false },
-    { "id": "adorn:biomesoplenty/redwood_shelf", "required": false },
-    { "id": "adorn:biomesoplenty/umbran_shelf", "required": false },
-    { "id": "adorn:biomesoplenty/willow_shelf", "required": false },
-    { "id": "adorn:ecologics/azalea_shelf", "required": false },
-    { "id": "adorn:ecologics/flowering_azalea_shelf", "required": false },
-    { "id": "adorn:ecologics/coconut_shelf", "required": false },
-    { "id": "adorn:ecologics/walnut_shelf", "required": false }
+    { "id": "adorn:woods_and_mires/pine_shelf", "required": false }
   ]
 }

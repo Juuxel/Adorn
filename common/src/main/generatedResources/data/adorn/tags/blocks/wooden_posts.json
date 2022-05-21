@@ -7,6 +7,7 @@
     "adorn:jungle_post",
     "adorn:acacia_post",
     "adorn:dark_oak_post",
+    "adorn:mangrove_post",
     "adorn:crimson_post",
     "adorn:warped_post",
     { "id": "adorn:biomemakeover/blighted_balsa_post", "required": false },
@@ -58,22 +59,6 @@
     { "id": "adorn:terrestria/willow_post", "required": false },
     { "id": "adorn:terrestria/yucca_palm_post", "required": false },
     { "id": "adorn:traverse/fir_post", "required": false },
-    { "id": "adorn:woods_and_mires/pine_post", "required": false },
-    { "id": "adorn:architects_palette/twisted_post", "required": false },
-    { "id": "adorn:biomesoplenty/cherry_post", "required": false },
-    { "id": "adorn:biomesoplenty/dead_post", "required": false },
-    { "id": "adorn:biomesoplenty/fir_post", "required": false },
-    { "id": "adorn:biomesoplenty/hellbark_post", "required": false },
-    { "id": "adorn:biomesoplenty/jacaranda_post", "required": false },
-    { "id": "adorn:biomesoplenty/magic_post", "required": false },
-    { "id": "adorn:biomesoplenty/mahogany_post", "required": false },
-    { "id": "adorn:biomesoplenty/palm_post", "required": false },
-    { "id": "adorn:biomesoplenty/redwood_post", "required": false },
-    { "id": "adorn:biomesoplenty/umbran_post", "required": false },
-    { "id": "adorn:biomesoplenty/willow_post", "required": false },
-    { "id": "adorn:ecologics/azalea_post", "required": false },
-    { "id": "adorn:ecologics/flowering_azalea_post", "required": false },
-    { "id": "adorn:ecologics/coconut_post", "required": false },
-    { "id": "adorn:ecologics/walnut_post", "required": false }
+    { "id": "adorn:woods_and_mires/pine_post", "required": false }
   ]
 }

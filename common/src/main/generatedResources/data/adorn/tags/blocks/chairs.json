@@ -7,6 +7,7 @@
     "adorn:jungle_chair",
     "adorn:acacia_chair",
     "adorn:dark_oak_chair",
+    "adorn:mangrove_chair",
     "adorn:crimson_chair",
     "adorn:warped_chair",
     { "id": "adorn:biomemakeover/blighted_balsa_chair", "required": false },
@@ -58,22 +59,6 @@
     { "id": "adorn:terrestria/willow_chair", "required": false },
     { "id": "adorn:terrestria/yucca_palm_chair", "required": false },
     { "id": "adorn:traverse/fir_chair", "required": false },
-    { "id": "adorn:woods_and_mires/pine_chair", "required": false },
-    { "id": "adorn:architects_palette/twisted_chair", "required": false },
-    { "id": "adorn:biomesoplenty/cherry_chair", "required": false },
-    { "id": "adorn:biomesoplenty/dead_chair", "required": false },
-    { "id": "adorn:biomesoplenty/fir_chair", "required": false },
-    { "id": "adorn:biomesoplenty/hellbark_chair", "required": false },
-    { "id": "adorn:biomesoplenty/jacaranda_chair", "required": false },
-    { "id": "adorn:biomesoplenty/magic_chair", "required": false },
-    { "id": "adorn:biomesoplenty/mahogany_chair", "required": false },
-    { "id": "adorn:biomesoplenty/palm_chair", "required": false },
-    { "id": "adorn:biomesoplenty/redwood_chair", "required": false },
-    { "id": "adorn:biomesoplenty/umbran_chair", "required": false },
-    { "id": "adorn:biomesoplenty/willow_chair", "required": false },
-    { "id": "adorn:ecologics/azalea_chair", "required": false },
-    { "id": "adorn:ecologics/flowering_azalea_chair", "required": false },
-    { "id": "adorn:ecologics/coconut_chair", "required": false },
-    { "id": "adorn:ecologics/walnut_chair", "required": false }
+    { "id": "adorn:woods_and_mires/pine_chair", "required": false }
   ]
 }

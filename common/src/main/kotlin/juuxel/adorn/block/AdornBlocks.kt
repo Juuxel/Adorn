@@ -39,6 +39,7 @@ object AdornBlocks : RegistryHelper() {
     val JUNGLE_CHAIR: Block by registerBlock("jungle_chair", ::ChairBlockItem) { ChairBlock(BlockVariant.JUNGLE) }
     val ACACIA_CHAIR: Block by registerBlock("acacia_chair", ::ChairBlockItem) { ChairBlock(BlockVariant.ACACIA) }
     val DARK_OAK_CHAIR: Block by registerBlock("dark_oak_chair", ::ChairBlockItem) { ChairBlock(BlockVariant.DARK_OAK) }
+    val MANGROVE_CHAIR: Block by registerBlock("mangrove_chair", ::ChairBlockItem) { ChairBlock(BlockVariant.MANGROVE) }
     val CRIMSON_CHAIR: Block by registerBlock("crimson_chair", ::ChairBlockItem) { ChairBlock(BlockVariant.CRIMSON) }
     val WARPED_CHAIR: Block by registerBlock("warped_chair", ::ChairBlockItem) { ChairBlock(BlockVariant.WARPED) }
 
@@ -48,6 +49,7 @@ object AdornBlocks : RegistryHelper() {
     val JUNGLE_TABLE: Block by registerBlock("jungle_table", ::TableBlockItem) { TableBlock(BlockVariant.JUNGLE) }
     val ACACIA_TABLE: Block by registerBlock("acacia_table", ::TableBlockItem) { TableBlock(BlockVariant.ACACIA) }
     val DARK_OAK_TABLE: Block by registerBlock("dark_oak_table", ::TableBlockItem) { TableBlock(BlockVariant.DARK_OAK) }
+    val MANGROVE_TABLE: Block by registerBlock("mangrove_table", ::TableBlockItem) { TableBlock(BlockVariant.MANGROVE) }
     val CRIMSON_TABLE: Block by registerBlock("crimson_table", ::TableBlockItem) { TableBlock(BlockVariant.CRIMSON) }
     val WARPED_TABLE: Block by registerBlock("warped_table", ::TableBlockItem) { TableBlock(BlockVariant.WARPED) }
 
@@ -57,6 +59,7 @@ object AdornBlocks : RegistryHelper() {
     val JUNGLE_DRAWER: Block by registerBlock("jungle_drawer") { DrawerBlock(BlockVariant.JUNGLE) }
     val ACACIA_DRAWER: Block by registerBlock("acacia_drawer") { DrawerBlock(BlockVariant.ACACIA) }
     val DARK_OAK_DRAWER: Block by registerBlock("dark_oak_drawer") { DrawerBlock(BlockVariant.DARK_OAK) }
+    val MANGROVE_DRAWER: Block by registerBlock("mangrove_drawer") { DrawerBlock(BlockVariant.MANGROVE) }
     val CRIMSON_DRAWER: Block by registerBlock("crimson_drawer") { DrawerBlock(BlockVariant.CRIMSON) }
     val WARPED_DRAWER: Block by registerBlock("warped_drawer") { DrawerBlock(BlockVariant.WARPED) }
 
@@ -66,6 +69,7 @@ object AdornBlocks : RegistryHelper() {
     val JUNGLE_KITCHEN_COUNTER: Block by registerBlock("jungle_kitchen_counter") { KitchenCounterBlock(BlockVariant.JUNGLE) }
     val ACACIA_KITCHEN_COUNTER: Block by registerBlock("acacia_kitchen_counter") { KitchenCounterBlock(BlockVariant.ACACIA) }
     val DARK_OAK_KITCHEN_COUNTER: Block by registerBlock("dark_oak_kitchen_counter") { KitchenCounterBlock(BlockVariant.DARK_OAK) }
+    val MANGROVE_KITCHEN_COUNTER: Block by registerBlock("mangrove_kitchen_counter") { KitchenCounterBlock(BlockVariant.MANGROVE) }
     val CRIMSON_KITCHEN_COUNTER: Block by registerBlock("crimson_kitchen_counter") { KitchenCounterBlock(BlockVariant.CRIMSON) }
     val WARPED_KITCHEN_COUNTER: Block by registerBlock("warped_kitchen_counter") { KitchenCounterBlock(BlockVariant.WARPED) }
 
@@ -75,6 +79,7 @@ object AdornBlocks : RegistryHelper() {
     val JUNGLE_KITCHEN_CUPBOARD: Block by registerBlock("jungle_kitchen_cupboard") { KitchenCupboardBlock(BlockVariant.JUNGLE) }
     val ACACIA_KITCHEN_CUPBOARD: Block by registerBlock("acacia_kitchen_cupboard") { KitchenCupboardBlock(BlockVariant.ACACIA) }
     val DARK_OAK_KITCHEN_CUPBOARD: Block by registerBlock("dark_oak_kitchen_cupboard") { KitchenCupboardBlock(BlockVariant.DARK_OAK) }
+    val MANGROVE_KITCHEN_CUPBOARD: Block by registerBlock("mangrove_kitchen_cupboard") { KitchenCupboardBlock(BlockVariant.MANGROVE) }
     val CRIMSON_KITCHEN_CUPBOARD: Block by registerBlock("crimson_kitchen_cupboard") { KitchenCupboardBlock(BlockVariant.CRIMSON) }
     val WARPED_KITCHEN_CUPBOARD: Block by registerBlock("warped_kitchen_cupboard") { KitchenCupboardBlock(BlockVariant.WARPED) }
 
@@ -84,6 +89,7 @@ object AdornBlocks : RegistryHelper() {
     val JUNGLE_KITCHEN_SINK: Block by registerBlock("jungle_kitchen_sink") { KitchenSinkBlock(BlockVariant.JUNGLE) }
     val ACACIA_KITCHEN_SINK: Block by registerBlock("acacia_kitchen_sink") { KitchenSinkBlock(BlockVariant.ACACIA) }
     val DARK_OAK_KITCHEN_SINK: Block by registerBlock("dark_oak_kitchen_sink") { KitchenSinkBlock(BlockVariant.DARK_OAK) }
+    val MANGROVE_KITCHEN_SINK: Block by registerBlock("mangrove_kitchen_sink") { KitchenSinkBlock(BlockVariant.MANGROVE) }
     val CRIMSON_KITCHEN_SINK: Block by registerBlock("crimson_kitchen_sink") { KitchenSinkBlock(BlockVariant.CRIMSON) }
     val WARPED_KITCHEN_SINK: Block by registerBlock("warped_kitchen_sink") { KitchenSinkBlock(BlockVariant.WARPED) }
 
@@ -93,6 +99,7 @@ object AdornBlocks : RegistryHelper() {
     val JUNGLE_POST: Block by registerBlock("jungle_post") { PostBlock(BlockVariant.JUNGLE) }
     val ACACIA_POST: Block by registerBlock("acacia_post") { PostBlock(BlockVariant.ACACIA) }
     val DARK_OAK_POST: Block by registerBlock("dark_oak_post") { PostBlock(BlockVariant.DARK_OAK) }
+    val MANGROVE_POST: Block by registerBlock("mangrove_post") { PostBlock(BlockVariant.MANGROVE) }
     val CRIMSON_POST: Block by registerBlock("crimson_post") { PostBlock(BlockVariant.CRIMSON) }
     val WARPED_POST: Block by registerBlock("warped_post") { PostBlock(BlockVariant.WARPED) }
     val STONE_POST: Block by registerBlock("stone_post") { PostBlock(BlockVariant.STONE) }
@@ -138,6 +145,7 @@ object AdornBlocks : RegistryHelper() {
     val JUNGLE_PLATFORM: Block by registerBlock("jungle_platform") { PlatformBlock(BlockVariant.JUNGLE) }
     val ACACIA_PLATFORM: Block by registerBlock("acacia_platform") { PlatformBlock(BlockVariant.ACACIA) }
     val DARK_OAK_PLATFORM: Block by registerBlock("dark_oak_platform") { PlatformBlock(BlockVariant.DARK_OAK) }
+    val MANGROVE_PLATFORM: Block by registerBlock("mangrove_platform") { PlatformBlock(BlockVariant.MANGROVE) }
     val CRIMSON_PLATFORM: Block by registerBlock("crimson_platform") { PlatformBlock(BlockVariant.CRIMSON) }
     val WARPED_PLATFORM: Block by registerBlock("warped_platform") { PlatformBlock(BlockVariant.WARPED) }
     val STONE_PLATFORM: Block by registerBlock("stone_platform") { PlatformBlock(BlockVariant.STONE) }
@@ -183,6 +191,7 @@ object AdornBlocks : RegistryHelper() {
     val JUNGLE_STEP: Block by registerBlock("jungle_step") { StepBlock(BlockVariant.JUNGLE) }
     val ACACIA_STEP: Block by registerBlock("acacia_step") { StepBlock(BlockVariant.ACACIA) }
     val DARK_OAK_STEP: Block by registerBlock("dark_oak_step") { StepBlock(BlockVariant.DARK_OAK) }
+    val MANGROVE_STEP: Block by registerBlock("mangrove_step") { StepBlock(BlockVariant.MANGROVE) }
     val CRIMSON_STEP: Block by registerBlock("crimson_step") { StepBlock(BlockVariant.CRIMSON) }
     val WARPED_STEP: Block by registerBlock("warped_step") { StepBlock(BlockVariant.WARPED) }
     val STONE_STEP: Block by registerBlock("stone_step") { StepBlock(BlockVariant.STONE) }
@@ -228,6 +237,7 @@ object AdornBlocks : RegistryHelper() {
     val JUNGLE_SHELF: Block by registerBlock("jungle_shelf") { ShelfBlock(BlockVariant.JUNGLE) }
     val ACACIA_SHELF: Block by registerBlock("acacia_shelf") { ShelfBlock(BlockVariant.ACACIA) }
     val DARK_OAK_SHELF: Block by registerBlock("dark_oak_shelf") { ShelfBlock(BlockVariant.DARK_OAK) }
+    val MANGROVE_SHELF: Block by registerBlock("mangrove_shelf") { ShelfBlock(BlockVariant.MANGROVE) }
     val CRIMSON_SHELF: Block by registerBlock("crimson_shelf") { ShelfBlock(BlockVariant.CRIMSON) }
     val WARPED_SHELF: Block by registerBlock("warped_shelf") { ShelfBlock(BlockVariant.WARPED) }
     val IRON_SHELF: Block by registerBlock("iron_shelf") { ShelfBlock(BlockVariant.IRON) }
@@ -263,6 +273,7 @@ object AdornBlocks : RegistryHelper() {
     val JUNGLE_COFFEE_TABLE: Block by registerBlock("jungle_coffee_table") { CoffeeTableBlock(BlockVariant.JUNGLE) }
     val ACACIA_COFFEE_TABLE: Block by registerBlock("acacia_coffee_table") { CoffeeTableBlock(BlockVariant.ACACIA) }
     val DARK_OAK_COFFEE_TABLE: Block by registerBlock("dark_oak_coffee_table") { CoffeeTableBlock(BlockVariant.DARK_OAK) }
+    val MANGROVE_COFFEE_TABLE: Block by registerBlock("mangrove_coffee_table") { CoffeeTableBlock(BlockVariant.MANGROVE) }
     val CRIMSON_COFFEE_TABLE: Block by registerBlock("crimson_coffee_table") { CoffeeTableBlock(BlockVariant.CRIMSON) }
     val WARPED_COFFEE_TABLE: Block by registerBlock("warped_coffee_table") { CoffeeTableBlock(BlockVariant.WARPED) }
 
@@ -272,6 +283,7 @@ object AdornBlocks : RegistryHelper() {
     val JUNGLE_BENCH: Block by registerBlock("jungle_bench") { BenchBlock(BlockVariant.JUNGLE) }
     val ACACIA_BENCH: Block by registerBlock("acacia_bench") { BenchBlock(BlockVariant.ACACIA) }
     val DARK_OAK_BENCH: Block by registerBlock("dark_oak_bench") { BenchBlock(BlockVariant.DARK_OAK) }
+    val MANGROVE_BENCH: Block by registerBlock("mangrove_bench") { BenchBlock(BlockVariant.MANGROVE) }
     val CRIMSON_BENCH: Block by registerBlock("crimson_bench") { BenchBlock(BlockVariant.CRIMSON) }
     val WARPED_BENCH: Block by registerBlock("warped_bench") { BenchBlock(BlockVariant.WARPED) }
 

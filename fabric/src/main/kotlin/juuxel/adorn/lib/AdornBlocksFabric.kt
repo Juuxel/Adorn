@@ -45,6 +45,7 @@ object AdornBlocksFabric {
             AdornBlocks.JUNGLE_KITCHEN_SINK,
             AdornBlocks.ACACIA_KITCHEN_SINK,
             AdornBlocks.DARK_OAK_KITCHEN_SINK,
+            AdornBlocks.MANGROVE_KITCHEN_SINK,
             AdornBlocks.CRIMSON_KITCHEN_SINK,
             AdornBlocks.WARPED_KITCHEN_SINK,
         )
@@ -83,6 +84,7 @@ object AdornBlocksFabric {
             AdornBlocks.JUNGLE_COFFEE_TABLE,
             AdornBlocks.ACACIA_COFFEE_TABLE,
             AdornBlocks.DARK_OAK_COFFEE_TABLE,
+            AdornBlocks.MANGROVE_COFFEE_TABLE,
             AdornBlocks.CRIMSON_COFFEE_TABLE,
             AdornBlocks.WARPED_COFFEE_TABLE
         )

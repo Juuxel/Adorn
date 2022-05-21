@@ -7,6 +7,7 @@
     "adorn:jungle_drawer",
     "adorn:acacia_drawer",
     "adorn:dark_oak_drawer",
+    "adorn:mangrove_drawer",
     "adorn:crimson_drawer",
     "adorn:warped_drawer",
     { "id": "adorn:biomemakeover/blighted_balsa_drawer", "required": false },
@@ -58,22 +59,6 @@
     { "id": "adorn:terrestria/willow_drawer", "required": false },
     { "id": "adorn:terrestria/yucca_palm_drawer", "required": false },
     { "id": "adorn:traverse/fir_drawer", "required": false },
-    { "id": "adorn:woods_and_mires/pine_drawer", "required": false },
-    { "id": "adorn:architects_palette/twisted_drawer", "required": false },
-    { "id": "adorn:biomesoplenty/cherry_drawer", "required": false },
-    { "id": "adorn:biomesoplenty/dead_drawer", "required": false },
-    { "id": "adorn:biomesoplenty/fir_drawer", "required": false },
-    { "id": "adorn:biomesoplenty/hellbark_drawer", "required": false },
-    { "id": "adorn:biomesoplenty/jacaranda_drawer", "required": false },
-    { "id": "adorn:biomesoplenty/magic_drawer", "required": false },
-    { "id": "adorn:biomesoplenty/mahogany_drawer", "required": false },
-    { "id": "adorn:biomesoplenty/palm_drawer", "required": false },
-    { "id": "adorn:biomesoplenty/redwood_drawer", "required": false },
-    { "id": "adorn:biomesoplenty/umbran_drawer", "required": false },
-    { "id": "adorn:biomesoplenty/willow_drawer", "required": false },
-    { "id": "adorn:ecologics/azalea_drawer", "required": false },
-    { "id": "adorn:ecologics/flowering_azalea_drawer", "required": false },
-    { "id": "adorn:ecologics/coconut_drawer", "required": false },
-    { "id": "adorn:ecologics/walnut_drawer", "required": false }
+    { "id": "adorn:woods_and_mires/pine_drawer", "required": false }
   ]
 }
