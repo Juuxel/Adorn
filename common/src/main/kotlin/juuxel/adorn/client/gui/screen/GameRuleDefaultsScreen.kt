@@ -2,11 +2,11 @@ package juuxel.adorn.client.gui.screen
 
 import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.client.gui.screen.Screen
-import net.minecraft.client.gui.screen.ScreenTexts
 import net.minecraft.client.gui.widget.ButtonWidget
-import net.minecraft.text.TranslatableText
+import net.minecraft.screen.ScreenTexts
+import net.minecraft.text.Text
 
-class GameRuleDefaultsScreen(parent: Screen) : AbstractConfigScreen(TranslatableText("gui.adorn.config.game_rule_defaults"), parent) {
+class GameRuleDefaultsScreen(parent: Screen) : AbstractConfigScreen(Text.translatable("gui.adorn.config.game_rule_defaults"), parent) {
     override fun init() {
         val config = PlatformBridges.configManager.config
         val x = (width - BUTTON_WIDTH) / 2

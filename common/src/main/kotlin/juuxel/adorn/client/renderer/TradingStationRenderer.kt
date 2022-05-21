@@ -16,7 +16,6 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.model.json.ModelTransformation
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
@@ -60,11 +59,11 @@ class TradingStationRenderer(context: BlockEntityRendererFactory.Context) : Bloc
         }
 
         if (lookingAtBlock && PlatformBridges.configManager.config.client.showTradingStationTooltips) {
-            val label1 = TranslatableText(OWNER_LABEL, be.ownerName.copy().formatted(Formatting.GOLD))
+            val label1 = Text.translatable(OWNER_LABEL, be.ownerName.copy().formatted(Formatting.GOLD))
             renderLabel(be, label1, 0.0, 0.9, 0.0, 12, matrices, vertexConsumers, light)
             if (!be.trade.isEmpty()) {
-                val label2 = TranslatableText(SELLING_LABEL, be.trade.selling.toTextWithCount())
-                val label3 = TranslatableText(PRICE_LABEL, be.trade.price.toTextWithCount())
+                val label2 = Text.translatable(SELLING_LABEL, be.trade.selling.toTextWithCount())
+                val label3 = Text.translatable(PRICE_LABEL, be.trade.price.toTextWithCount())
                 renderLabel(be, label2, 0.0, 0.9 - 0.25, 0.0, 12, matrices, vertexConsumers, light)
                 renderLabel(be, label3, 0.0, 0.9 - 0.5, 0.0, 12, matrices, vertexConsumers, light)
             }

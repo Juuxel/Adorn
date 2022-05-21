@@ -61,7 +61,7 @@ class KitchenSinkBlockEntityFabric(pos: BlockPos, state: BlockState) : KitchenSi
             if (moved > 0) {
                 if (!w.isClient) {
                     player.playSound(getEmptySound(storage.variant.fluid, stack).event, SoundCategory.BLOCKS, 1f, 1f)
-                    w.emitGameEvent(GameEvent.FLUID_PLACE, pos)
+                    w.emitGameEvent(player, GameEvent.FLUID_PLACE, pos)
                 }
 
                 markDirtyAndSync()
@@ -74,7 +74,7 @@ class KitchenSinkBlockEntityFabric(pos: BlockPos, state: BlockState) : KitchenSi
         if (moved > 0) {
             if (!w.isClient) {
                 player.playSound(getFillSound(storage.variant.fluid, stack).event, SoundCategory.BLOCKS, 1f, 1f)
-                w.emitGameEvent(GameEvent.FLUID_PICKUP, pos)
+                w.emitGameEvent(player, GameEvent.FLUID_PICKUP, pos)
             }
 
             markDirtyAndSync()

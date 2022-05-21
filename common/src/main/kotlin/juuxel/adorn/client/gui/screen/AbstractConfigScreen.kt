@@ -8,7 +8,6 @@ import net.minecraft.client.gui.widget.CyclingButtonWidget
 import net.minecraft.client.util.OrderableTooltip
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import kotlin.reflect.KMutableProperty
 
@@ -33,9 +32,9 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
             if (restartRequired) {
                 NoticeScreen(
                     { client!!.setScreen(parent) },
-                    TranslatableText("gui.adorn.config.restart_required.title"),
-                    TranslatableText("gui.adorn.config.restart_required.message"),
-                    TranslatableText("gui.ok")
+                    Text.translatable("gui.adorn.config.restart_required.title"),
+                    Text.translatable("gui.adorn.config.restart_required.message"),
+                    Text.translatable("gui.ok")
                 )
             } else {
                 parent
@@ -51,18 +50,18 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
     ): CyclingButtonWidget<Boolean> = CyclingButtonWidget.onOffBuilder(property.getter.call())
         .tooltip {
             buildList {
-                addAll(wrapTooltipLines(TranslatableText(getTooltipTranslationKey(property.name))))
+                addAll(wrapTooltipLines(Text.translatable(getTooltipTranslationKey(property.name))))
 
                 if (restartRequired) {
                     addAll(
                         wrapTooltipLines(
-                            TranslatableText("gui.adorn.config.requires_restart").formatted(Formatting.ITALIC, Formatting.GOLD)
+                            Text.translatable("gui.adorn.config.requires_restart").formatted(Formatting.ITALIC, Formatting.GOLD)
                         )
                     )
                 }
             }
         }
-        .build(x, y, width, 20, TranslatableText(getOptionTranslationKey(property.name))) { _, value ->
+        .build(x, y, width, 20, Text.translatable(getOptionTranslationKey(property.name))) { _, value ->
             property.setter.call(value)
             PlatformBridges.configManager.save()
 

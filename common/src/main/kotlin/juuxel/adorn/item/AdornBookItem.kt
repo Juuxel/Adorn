@@ -8,7 +8,6 @@ import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.stat.Stats
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
@@ -30,7 +29,7 @@ class AdornBookItem(private val bookId: Identifier, settings: Settings) : Item(s
         super.appendTooltip(stack, world, texts, context)
         val bookManager = PlatformBridges.resources.bookManager
         if (bookId in bookManager) {
-            texts.add(TranslatableText("book.byAuthor", bookManager[bookId].author).formatted(Formatting.GRAY))
+            texts.add(Text.translatable("book.byAuthor", bookManager[bookId].author).formatted(Formatting.GRAY))
         }
     }
 

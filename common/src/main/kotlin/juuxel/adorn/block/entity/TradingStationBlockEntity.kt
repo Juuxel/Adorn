@@ -20,16 +20,14 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.Packet
 import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.math.BlockPos
 import java.util.UUID
 
 class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
     BlockEntity(AdornBlockEntities.TRADING_STATION, pos, state), NamedMenuFactory, TradingStation {
     var owner: UUID? = null
-    override var ownerName: Text = LiteralText("???")
+    override var ownerName: Text = UNKNOWN_OWNER
     override val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
     override val storage: InventoryComponent = InventoryComponent(12)
 
@@ -45,7 +43,7 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
 
     fun setOwner(player: PlayerEntity) {
         owner = player.gameProfile.id
-        ownerName = LiteralText(player.gameProfile.name)
+        ownerName = Text.literal(player.gameProfile.name)
         markDirty()
     }
 
@@ -57,7 +55,7 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
     override fun createMenu(syncId: Int, playerInv: PlayerInventory, player: PlayerEntity): Menu =
         TradingStationMenu(syncId, playerInv, menuContextOf(this))
 
-    override fun getDisplayName() = TranslatableText(cachedState.block.translationKey)
+    override fun getDisplayName() = Text.translatable(cachedState.block.translationKey)
 
     // NBT
 
@@ -70,7 +68,7 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
             owner = nbt.getOldUuid(NBT_TRADING_OWNER)
         }
 
-        ownerName = nbt.getText(NBT_TRADING_OWNER_NAME) ?: LiteralText("??")
+        ownerName = nbt.getText(NBT_TRADING_OWNER_NAME) ?: UNKNOWN_OWNER
         trade.readNbt(nbt.getCompound(NBT_TRADE))
         storage.readNbt(nbt.getCompound(NBT_STORAGE))
     }
@@ -96,5 +94,6 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
         const val NBT_TRADING_OWNER_NAME = "TradingOwnerName"
         const val NBT_TRADE = "Trade"
         const val NBT_STORAGE = "Storage"
+        private val UNKNOWN_OWNER: Text = Text.literal("???")
     }
 }

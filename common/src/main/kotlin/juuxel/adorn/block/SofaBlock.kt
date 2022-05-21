@@ -25,7 +25,7 @@ import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.EnumProperty
 import net.minecraft.state.property.Properties
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
@@ -71,7 +71,7 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
         val sleepingDirection = getSleepingDirection(world, pos)
 
         if (state[OCCUPIED]) {
-            player.sendMessage(TranslatableText("block.adorn.sofa.occupied"), true)
+            player.sendMessage(Text.translatable("block.adorn.sofa.occupied"), true)
             return ActionResult.SUCCESS
         }
 

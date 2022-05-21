@@ -43,11 +43,11 @@
   "accessWidener": "adorn.accesswidener",
 
   "depends": {
-    "minecraft": "~1.18.2",
-    "fabricloader": ">=0.13.3",
+    "minecraft": "~1.19-beta.1",
+    "fabricloader": ">=0.14.6",
     "fabric-language-kotlin": "^1.7.0",
 
-    "fabric": ">=0.50.0"
+    "fabric": ">=0.53.0"
   },
   "conflicts": {
     "byg": "<1.1"

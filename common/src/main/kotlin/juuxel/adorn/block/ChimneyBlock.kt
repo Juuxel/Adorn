@@ -12,8 +12,8 @@ import net.minecraft.util.Hand
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
-import java.util.Random
 
 class ChimneyBlock(settings: Settings) : AbstractChimneyBlock(settings), BlockWithDescription {
     override val descriptionKey = "block.adorn.chimney.description"

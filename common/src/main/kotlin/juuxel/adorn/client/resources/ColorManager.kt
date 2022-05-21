@@ -18,9 +18,9 @@ open class ColorManager : SinglePreparationResourceReloader<Map<Identifier, List
     private val map: MutableMap<Identifier, ColorPalette> = HashMap()
 
     override fun prepare(manager: ResourceManager, profiler: Profiler): Map<Identifier, List<JsonObject>> {
-        val ids = manager.findResources(PREFIX) { it.endsWith(".json5") }
-        return ids.associateWith { id ->
-            manager.getAllResources(id).map { resource ->
+        val ids = manager.findAllResources(PREFIX) { it.path.endsWith(".json5") }
+        return ids.mapValues { (_, resources) ->
+            resources.map { resource ->
                 resource.inputStream.use { input ->
                     jankson.load(input)
                 }

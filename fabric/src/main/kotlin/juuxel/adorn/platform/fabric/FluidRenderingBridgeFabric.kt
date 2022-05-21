@@ -12,7 +12,6 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariantAttributes
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.texture.Sprite
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.BlockRenderView
 
@@ -39,7 +38,7 @@ object FluidRenderingBridgeFabric : FluidRenderingBridge {
         if (maxAmountInLitres != null) {
             result.add(
                 1,
-                TranslatableText(
+                Text.translatable(
                     "gui.adorn.litres_fraction",
                     Fractions.toString(volume.amount, FluidConstants.BUCKET / 1000),
                     maxAmountInLitres
@@ -48,7 +47,7 @@ object FluidRenderingBridgeFabric : FluidRenderingBridge {
         } else {
             result.add(
                 1,
-                TranslatableText(
+                Text.translatable(
                     "gui.adorn.litres",
                     Fractions.toString(volume.amount, FluidConstants.BUCKET / 1000)
                 )

@@ -9,7 +9,6 @@ import juuxel.adorn.util.MoreCodecs
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.tag.TagKey
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
@@ -30,7 +29,7 @@ data class Page(
             instance.group(
                 Icon.CODEC.listOf().fieldOf("icons").forGetter { it.icons },
                 MoreCodecs.TEXT.fieldOf("title").forGetter { it.title },
-                MoreCodecs.TEXT.optionalFieldOf("text", LiteralText.EMPTY).forGetter { it.text },
+                MoreCodecs.TEXT.optionalFieldOf("text", Text.empty()).forGetter { it.text },
                 Image.CODEC.optionalFieldOf("image").forGetter { Optional.ofNullable(it.image) }
             ).apply(instance, ::Page)
         }

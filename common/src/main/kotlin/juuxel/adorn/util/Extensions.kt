@@ -11,13 +11,12 @@ import net.minecraft.menu.MenuContext
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.property.Property
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
 fun ItemStack.toTextWithCount(): Text =
-    TranslatableText("text.adorn.item_stack_with_count", count, toHoverableText())
+    Text.translatable("text.adorn.item_stack_with_count", count, toHoverableText())
 
 fun BlockState.withBlock(block: Block): BlockState =
     entries.entries.fold(block.defaultState) { acc, (key, value) ->

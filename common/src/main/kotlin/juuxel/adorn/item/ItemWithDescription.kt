@@ -3,7 +3,6 @@ package juuxel.adorn.item
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
@@ -15,7 +14,7 @@ open class ItemWithDescription(settings: Settings) : SimpleAdornItem(settings) {
 
     companion object {
         fun createDescriptionText(translationKey: String): Text =
-            TranslatableText(translationKey).styled {
+            Text.translatable(translationKey).styled {
                 it.withItalic(true).withColor(Formatting.DARK_GRAY)
             }
     }

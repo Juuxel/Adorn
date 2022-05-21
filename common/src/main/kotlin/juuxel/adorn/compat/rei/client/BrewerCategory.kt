@@ -16,13 +16,12 @@ import me.shedaniel.rei.api.client.registry.display.DisplayCategory
 import me.shedaniel.rei.api.common.util.EntryStacks
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Identifier
 import kotlin.math.roundToInt
 
 class BrewerCategory : DisplayCategory<BrewerDisplay> {
     override fun getIcon(): Renderer = EntryStacks.of(AdornBlocks.BREWER)
-    override fun getTitle(): Text = TranslatableText("category.adorn.brewer")
+    override fun getTitle(): Text = Text.translatable("category.adorn.brewer")
     override fun getCategoryIdentifier() = AdornReiServer.BREWER
     override fun getDisplayHeight(): Int = 72
 

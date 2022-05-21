@@ -23,9 +23,8 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.ClickEvent
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Style
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.Text
 
 class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
     private lateinit var flipBook: FlipBook
@@ -115,7 +114,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
     }
 
     private inner class TitlePage(private val x: Int, private val y: Int, private val book: Book) : Element, Drawable {
-        private val byAuthor = TranslatableText("book.byAuthor", book.author)
+        private val byAuthor = Text.translatable("book.byAuthor", book.author)
 
         override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
             val cx = x + PAGE_WIDTH / 2
@@ -222,7 +221,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         }
     }
 
-    private class CloseButton(x: Int, y: Int, pressAction: PressAction) : ButtonWidget(x, y, 8, 8, LiteralText.EMPTY, pressAction) {
+    private class CloseButton(x: Int, y: Int, pressAction: PressAction) : ButtonWidget(x, y, 8, 8, Text.empty(), pressAction) {
         override fun renderButton(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)

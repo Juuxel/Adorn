@@ -8,7 +8,6 @@ import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 
 class TradingStationScreen(
     menu: TradingStationMenu,
@@ -36,7 +35,7 @@ class TradingStationScreen(
 
     companion object {
         private val BACKGROUND_TEXTURE = AdornCommon.id("textures/gui/trading_station.png")
-        private val SELLING_LABEL: Text = TranslatableText("block.adorn.trading_station.selling")
-        private val PRICE_LABEL: Text = TranslatableText("block.adorn.trading_station.price")
+        private val SELLING_LABEL: Text = Text.translatable("block.adorn.trading_station.selling")
+        private val PRICE_LABEL: Text = Text.translatable("block.adorn.trading_station.price")
     }
 }

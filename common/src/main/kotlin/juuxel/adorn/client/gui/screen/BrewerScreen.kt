@@ -97,8 +97,7 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
             buffer.vertex(positionMatrix, x + width, y + height, 0f).color(color).texture(au1, av1).next()
             buffer.vertex(positionMatrix, x + width, y, 0f).color(color).texture(au1, av0).next()
             buffer.vertex(positionMatrix, x.toFloat(), y, 0f).color(color).texture(au0, av0).next()
-            buffer.end()
-            BufferRenderer.draw(buffer)
+            BufferRenderer.drawWithShader(buffer.end())
             RenderSystem.disableBlend()
         }
 

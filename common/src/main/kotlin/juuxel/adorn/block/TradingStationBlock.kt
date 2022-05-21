@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
@@ -73,11 +73,11 @@ class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings)
                 val canInsertPayment = be.storage.canInsert(trade.price)
 
                 if (trade.isEmpty()) {
-                    player.sendMessage(TranslatableText("block.adorn.trading_station.empty_trade"), true)
+                    player.sendMessage(Text.translatable("block.adorn.trading_station.empty_trade"), true)
                 } else if (!be.isStorageStocked()) {
-                    player.sendMessage(TranslatableText("block.adorn.trading_station.storage_not_stocked"), true)
+                    player.sendMessage(Text.translatable("block.adorn.trading_station.storage_not_stocked"), true)
                 } else if (!canInsertPayment) {
-                    player.sendMessage(TranslatableText("block.adorn.trading_station.storage_full"), true)
+                    player.sendMessage(Text.translatable("block.adorn.trading_station.storage_full"), true)
                 } else if (validPayment) {
                     handStack.decrement(trade.price.count)
                     val soldItem = trade.selling.copy()
