@@ -15,7 +15,6 @@ import thedarkcolour.kotlinforforge.forge.MOD_BUS
 object AdornClient {
     fun init() {
         MOD_BUS.addListener(this::setup)
-        MOD_BUS.addListener(AdornRenderers::registerColorProviders)
         MOD_BUS.addListener(AdornRenderers::registerRenderers)
         val resourceManager = MinecraftClient.getInstance().resourceManager as ReloadableResourceManagerImpl
         resourceManager.registerReloader(PlatformBridges.resources.bookManager)
