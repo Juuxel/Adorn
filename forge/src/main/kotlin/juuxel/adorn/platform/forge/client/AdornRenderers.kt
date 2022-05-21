@@ -2,7 +2,6 @@ package juuxel.adorn.platform.forge.client
 
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
-import juuxel.adorn.client.SinkColorProvider
 import juuxel.adorn.client.renderer.InvisibleEntityRenderer
 import juuxel.adorn.client.renderer.ShelfRenderer
 import juuxel.adorn.client.renderer.TradingStationRenderer
@@ -12,7 +11,6 @@ import juuxel.adorn.platform.forge.client.renderer.KitchenSinkRendererForge
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.RenderLayers
-import net.minecraftforge.client.event.ColorHandlerEvent
 import net.minecraftforge.client.event.EntityRenderersEvent
 
 object AdornRenderers {
@@ -50,19 +48,5 @@ object AdornRenderers {
                 RenderLayers.setRenderLayer(block, layer)
             }
         }
-    }
-
-    fun registerColorProviders(event: ColorHandlerEvent.Block) {
-        event.blockColors.registerColorProvider(
-            SinkColorProvider,
-            AdornBlocks.OAK_KITCHEN_SINK,
-            AdornBlocks.SPRUCE_KITCHEN_SINK,
-            AdornBlocks.BIRCH_KITCHEN_SINK,
-            AdornBlocks.JUNGLE_KITCHEN_SINK,
-            AdornBlocks.ACACIA_KITCHEN_SINK,
-            AdornBlocks.DARK_OAK_KITCHEN_SINK,
-            AdornBlocks.CRIMSON_KITCHEN_SINK,
-            AdornBlocks.WARPED_KITCHEN_SINK,
-        )
     }
 }
