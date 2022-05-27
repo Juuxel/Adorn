@@ -80,6 +80,9 @@ dependencies {
 
     // Add client dependency on the common project's client classes and resources.
     "clientImplementation"(project(":common", configuration = "clientOutputs"))
+    // Bundle client classes in the final jar. Since we need the shadow plugin,
+    // Loom doesn't automatically handle it for us.
+    bundle(sourceSets.getByName("client").output)
 
     // Standard Fabric mod setup.
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric-loader")}")
