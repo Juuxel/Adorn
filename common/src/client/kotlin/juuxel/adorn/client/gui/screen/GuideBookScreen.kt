@@ -2,11 +2,11 @@ package juuxel.adorn.client.gui.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
+import juuxel.adorn.client.gui.widget.FlipBook
+import juuxel.adorn.client.gui.widget.TickingElement
 import juuxel.adorn.item.book.Book
 import juuxel.adorn.item.book.Image
 import juuxel.adorn.item.book.Page
-import juuxel.adorn.client.gui.widget.FlipBook
-import juuxel.adorn.client.gui.widget.TickingElement
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.color
 import juuxel.adorn.util.interleave

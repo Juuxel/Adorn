@@ -2,9 +2,9 @@ package juuxel.adorn.client.lib
 
 import juuxel.adorn.client.gui.screen.BrewerScreen
 import juuxel.adorn.client.gui.screen.GuideBookScreen
-import juuxel.adorn.resources.BookManagerFabric
 import juuxel.adorn.fluid.FluidVolume
 import juuxel.adorn.lib.AdornNetworking
+import juuxel.adorn.resources.BookManagerFabric
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
