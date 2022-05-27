@@ -9,7 +9,6 @@ interface PlatformBridges {
     val configManager: ConfigManager
     val entities: EntityBridge
     val fluids: FluidBridge
-    val fluidRendering: FluidRenderingBridge
     val items: ItemBridge
     val menus: MenuBridge
     val network: NetworkBridge

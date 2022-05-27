@@ -1,7 +1,6 @@
-package juuxel.adorn.platform.fabric
+package juuxel.adorn.client
 
 import juuxel.adorn.fluid.FluidReference
-import juuxel.adorn.platform.FluidRenderingBridge
 import juuxel.adorn.util.Fractions
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
