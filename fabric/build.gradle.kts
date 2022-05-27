@@ -2,13 +2,6 @@ plugins {
     id("adorn-data-generator")
 }
 
-architectury {
-    // Create the IDE launch configurations for this subproject.
-    platformSetupLoomIde()
-    // Set up Architectury for Fabric.
-    fabric()
-}
-
 // The files below are for using the access widener for the common project.
 // We need to copy the file from common resources to fabric resource
 // for Fabric Loader to find it and not crash.
@@ -19,9 +12,15 @@ val generatedResources = file("src/generated/resources")
 val accessWidenerFile = project(":common").file("src/main/resources/adorn.accesswidener")
 
 loom {
+    splitEnvironmentSourceSets()
+
     // Make the Fabric project use the common access widener.
     // Technically useless, BUT this file is also needed at dev runtime of course
     accessWidenerPath.set(accessWidenerFile)
+
+    mods.getByName("main") {
+        sourceSet(sourceSets.getByName("client"))
+    }
 }
 
 sourceSets {
@@ -70,22 +69,20 @@ repositories {
 }
 
 dependencies {
-    // Depend on the common project. The "namedElements" configuration contains the non-remapped
+    // Depend on the common outputs the common project.
+    implementation(project(":common", configuration = "commonOutputs"))
+    // Bundle the common project in the mod. The "namedElements" configuration contains the non-remapped
     // classes and resources of the project.
     // It follows Gradle's own convention of xyzElements for "outgoing" configurations like apiElements.
-    implementation(project(":common", configuration = "namedElements")) {
+    bundle(project(path = ":common", configuration = "namedElements")) {
         isTransitive = false
     }
-    // Used at dev runtime by the Architectury Transformer to automatically read changes in the common jar
-    // and apply them.
-    "developmentFabric"(project(":common", configuration = "namedElements")) {
-        isTransitive = false
-    }
-    // Bundle the transformed version of the common project in the mod.
-    // The transformed version replaces all @ExpectPlatform calls to call the Fabric versions.
-    bundle(project(path = ":common", configuration = "transformProductionFabric")) {
-        isTransitive = false
-    }
+
+    // Add client dependency on the common project's client classes and resources.
+    "clientImplementation"(project(":common", configuration = "clientOutputs"))
+    // Bundle client classes in the final jar. Since we need the shadow plugin,
+    // Loom doesn't automatically handle it for us.
+    bundle(sourceSets.getByName("client").output)
 
     // Standard Fabric mod setup.
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric-loader")}")

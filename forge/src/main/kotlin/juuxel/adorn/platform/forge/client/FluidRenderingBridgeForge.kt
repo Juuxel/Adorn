@@ -1,7 +1,7 @@
 package juuxel.adorn.platform.forge.client
 
+import juuxel.adorn.client.FluidRenderingBridge
 import juuxel.adorn.fluid.FluidReference
-import juuxel.adorn.platform.FluidRenderingBridge
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.texture.Sprite

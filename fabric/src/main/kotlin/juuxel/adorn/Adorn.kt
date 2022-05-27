@@ -2,14 +2,11 @@ package juuxel.adorn
 
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
-import juuxel.adorn.client.ClientCompatInit
-import juuxel.adorn.client.gui.screen.AdornMenuScreens
 import juuxel.adorn.compat.Compat
 import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.entity.AdornEntities
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.lib.AdornBlocksFabric
-import juuxel.adorn.lib.AdornEntitiesFabric
 import juuxel.adorn.lib.AdornGameRules
 import juuxel.adorn.lib.AdornItemsFabric
 import juuxel.adorn.lib.AdornNetworking
@@ -21,9 +18,6 @@ import juuxel.adorn.loot.AdornLootConditionTypes
 import juuxel.adorn.menu.AdornMenus
 import juuxel.adorn.platform.fabric.ConfigManagerImpl
 import juuxel.adorn.recipe.AdornRecipes
-import juuxel.adorn.resources.AdornResources
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
 import net.fabricmc.api.ModInitializer
 
 object Adorn : ModInitializer {
@@ -47,16 +41,5 @@ object Adorn : ModInitializer {
         AdornLootConditionTypes.init()
         Compat.init()
         ConfigManagerImpl.finalize()
-    }
-
-    @Environment(EnvType.CLIENT)
-    @Suppress("UNUSED")
-    fun initClient() {
-        AdornBlocksFabric.initClient()
-        AdornEntitiesFabric.initClient()
-        AdornMenuScreens.register()
-        AdornNetworking.initClient()
-        AdornResources.initClient()
-        ClientCompatInit.init()
     }
 }
