@@ -3,10 +3,10 @@ package juuxel.adorn.client.gui.screen
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.entity.BrewerBlockEntity
+import juuxel.adorn.client.FluidRenderingBridge
 import juuxel.adorn.fluid.FluidReference
 import juuxel.adorn.fluid.FluidVolume
 import juuxel.adorn.menu.BrewerMenu
-import juuxel.adorn.platform.FluidRenderingBridge
 import juuxel.adorn.util.color
 import juuxel.adorn.util.logger
 import net.minecraft.client.MinecraftClient
