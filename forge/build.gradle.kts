@@ -39,13 +39,12 @@ dependencies {
     forgeRuntimeLibrary(kotlin("stdlib-jdk8", version = "1.6.0"))
     forgeRuntimeLibrary(kotlin("reflect", version = "1.6.0"))
 
-    // Depend on the common project. The "namedElements" configuration contains the non-remapped
+    // Depend on the common and client classes of the common project.
+    implementation(project(":common", configuration = "commonOutputs"))
+    implementation(project(":common", configuration = "clientOutputs"))
+    // Bundle the common project in the mod. The "namedElements" configuration contains the non-remapped
     // classes and resources of the project.
     // It follows Gradle's own convention of xyzElements for "outgoing" configurations like apiElements.
-    implementation(project(":common", configuration = "namedElements")) {
-        isTransitive = false
-    }
-    // Bundle the common project in the mod.
     bundle(project(path = ":common", configuration = "namedElements")) {
         isTransitive = false
     }

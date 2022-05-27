@@ -2,6 +2,15 @@ plugins {
     id("adorn-data-generator")
 }
 
+val commonOutputs = configurations.create("commonOutputs") {
+    isCanBeConsumed = true
+    isCanBeResolved = false
+}
+val clientOutputs = configurations.create("clientOutputs") {
+    isCanBeConsumed = true
+    isCanBeResolved = false
+}
+
 loom {
     splitEnvironmentSourceSets()
     accessWidenerPath.set(file("src/main/resources/adorn.accesswidener"))
@@ -18,6 +27,9 @@ dependencies {
 
     // Add a mod dependency on REI's API for compat code.
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:${rootProject.property("rei")}")
+
+    commonOutputs(sourceSets.getByName("main").output)
+    clientOutputs(sourceSets.getByName("client").output)
 }
 
 tasks {

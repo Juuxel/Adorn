@@ -69,19 +69,17 @@ repositories {
 }
 
 dependencies {
-    // Depend on the common project. The "namedElements" configuration contains the non-remapped
+    // Depend on the common outputs the common project.
+    implementation(project(":common", configuration = "commonOutputs"))
+    // Bundle the common project in the mod. The "namedElements" configuration contains the non-remapped
     // classes and resources of the project.
     // It follows Gradle's own convention of xyzElements for "outgoing" configurations like apiElements.
-    implementation(project(":common", configuration = "namedElements")) {
-        isTransitive = false
-    }
-    // Bundle the common project in the mod.
     bundle(project(path = ":common", configuration = "namedElements")) {
         isTransitive = false
     }
 
     // Add client dependency on the common project's client classes and resources.
-    "clientImplementation"(project.project(":common").sourceSets.getByName("client").output)
+    "clientImplementation"(project(":common", configuration = "clientOutputs"))
 
     // Standard Fabric mod setup.
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric-loader")}")
