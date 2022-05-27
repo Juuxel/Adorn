@@ -12,9 +12,15 @@ val generatedResources = file("src/generated/resources")
 val accessWidenerFile = project(":common").file("src/main/resources/adorn.accesswidener")
 
 loom {
+    splitEnvironmentSourceSets()
+
     // Make the Fabric project use the common access widener.
     // Technically useless, BUT this file is also needed at dev runtime of course
     accessWidenerPath.set(accessWidenerFile)
+
+    mods.getByName("main") {
+        sourceSet(sourceSets.getByName("client"))
+    }
 }
 
 sourceSets {

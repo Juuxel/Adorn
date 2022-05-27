@@ -1,4 +1,4 @@
-package juuxel.adorn.client.resources
+package juuxel.adorn.resources
 
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.client.book.BookManager

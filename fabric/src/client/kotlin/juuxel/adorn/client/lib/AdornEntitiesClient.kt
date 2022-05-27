@@ -1,14 +1,11 @@
-package juuxel.adorn.lib
+package juuxel.adorn.client.lib
 
 import juuxel.adorn.client.renderer.InvisibleEntityRenderer
 import juuxel.adorn.entity.AdornEntities
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 
-object AdornEntitiesFabric {
-    @Environment(EnvType.CLIENT)
-    fun initClient() {
+object AdornEntitiesClient {
+    fun init() {
         EntityRendererRegistry.register(AdornEntities.SEAT, ::InvisibleEntityRenderer)
     }
 }

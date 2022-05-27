@@ -1,4 +1,4 @@
-package juuxel.adorn.compat.modmenu
+package juuxel.adorn.client.compat.modmenu
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory
 import com.terraformersmc.modmenu.api.ModMenuApi
