@@ -2,6 +2,9 @@ plugins {
     id("adorn-data-generator")
 }
 
+// Create commonOutputs and clientOutputs configurations
+// to contain the outputs from the respective source sets (main, client).
+// These are depended on in the other subprojects.
 val commonOutputs = configurations.create("commonOutputs") {
     isCanBeConsumed = true
     isCanBeResolved = false
@@ -28,6 +31,7 @@ dependencies {
     // Add a mod dependency on REI's API for compat code.
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:${rootProject.property("rei")}")
 
+    // Add the source set outputs to the outgoing configurations.
     commonOutputs(sourceSets.getByName("main").output)
     clientOutputs(sourceSets.getByName("client").output)
 }

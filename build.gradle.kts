@@ -73,6 +73,7 @@ subprojects {
     // Set up the custom "repository" for my Menu mappings.
     // (A mapping layer that replaces Yarn's "screen handler" with Mojang's own "menu". It's a long story.)
     repositories {
+        // The maven needed by REI.
         maven("https://maven.shedaniel.me")
 
         // The exclusiveContent makes sure it's only used for io.github.juuxel:menu,
