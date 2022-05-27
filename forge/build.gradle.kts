@@ -2,13 +2,6 @@ plugins {
     id("adorn-data-generator")
 }
 
-architectury {
-    // Create the IDE launch configurations for this subproject.
-    platformSetupLoomIde()
-    // Set up Architectury for Forge.
-    forge()
-}
-
 loom {
     // Make the Forge project use the common access widener.
     accessWidenerPath.set(project(":common").file("src/main/resources/adorn.accesswidener"))
@@ -52,14 +45,9 @@ dependencies {
     implementation(project(":common", configuration = "namedElements")) {
         isTransitive = false
     }
-    // Used at dev runtime by the Architectury Transformer to automatically read changes in the common jar
-    // and apply them.
-    "developmentForge"(project(":common", configuration = "namedElements")) {
-        isTransitive = false
-    }
     // Bundle the transformed version of the common project in the mod.
     // The transformed version replaces all @ExpectPlatform calls to call the Forge versions.
-    bundle(project(path = ":common", configuration = "transformProductionForge")) {
+    bundle(project(path = ":common", configuration = "namedElements")) {
         isTransitive = false
     }
 

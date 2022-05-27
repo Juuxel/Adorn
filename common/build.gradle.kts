@@ -2,12 +2,6 @@ plugins {
     id("adorn-data-generator")
 }
 
-architectury {
-    // Set up Architectury for the common project.
-    // This sets up the transformations (@ExpectPlatform etc.) we need for production environments.
-    common()
-}
-
 loom {
     accessWidenerPath.set(file("src/main/resources/adorn.accesswidener"))
 }

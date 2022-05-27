@@ -2,13 +2,6 @@ plugins {
     id("adorn-data-generator")
 }
 
-architectury {
-    // Create the IDE launch configurations for this subproject.
-    platformSetupLoomIde()
-    // Set up Architectury for Fabric.
-    fabric()
-}
-
 // The files below are for using the access widener for the common project.
 // We need to copy the file from common resources to fabric resource
 // for Fabric Loader to find it and not crash.
@@ -76,14 +69,9 @@ dependencies {
     implementation(project(":common", configuration = "namedElements")) {
         isTransitive = false
     }
-    // Used at dev runtime by the Architectury Transformer to automatically read changes in the common jar
-    // and apply them.
-    "developmentFabric"(project(":common", configuration = "namedElements")) {
-        isTransitive = false
-    }
     // Bundle the transformed version of the common project in the mod.
     // The transformed version replaces all @ExpectPlatform calls to call the Fabric versions.
-    bundle(project(path = ":common", configuration = "transformProductionFabric")) {
+    bundle(project(path = ":common", configuration = "namedElements")) {
         isTransitive = false
     }
 
