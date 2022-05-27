@@ -159,16 +159,27 @@ subprojects {
             isCanBeResolved = true
         }
 
+        // Configure the loom extension.
+        // It's not available with a type-safe accessor "loom { ... }" here
+        // because it's not applied to the root project.
         extensions.configure<LoomGradleExtensionAPI> {
+            // Generate each IDE config for platforms.
+            // Otherwise, nothing would generate.
             runConfigs.configureEach {
                 isIdeConfigGenerated = true
             }
 
+            // Since there's no type-safe accessor for the SourceSetContainer,
+            // we define a simple utility method to get it.
             fun Project.sourceSets(): SourceSetContainer =
                 this.extensions.getByName<SourceSetContainer>("sourceSets")
 
-            mods.register("main") {
+            // Register the source sets making up the runtime mod.
+            mods.register("main") { // The name matches the default mod on Forge.
+                // "main" source set from this project
                 sourceSet(sourceSets().getByName("main"))
+
+                // All needed source sets from the common project.
                 sourceSet(project(":common").sourceSets().getByName("main"))
             }
         }

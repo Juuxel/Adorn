@@ -45,8 +45,7 @@ dependencies {
     implementation(project(":common", configuration = "namedElements")) {
         isTransitive = false
     }
-    // Bundle the transformed version of the common project in the mod.
-    // The transformed version replaces all @ExpectPlatform calls to call the Forge versions.
+    // Bundle the common project in the mod.
     bundle(project(path = ":common", configuration = "namedElements")) {
         isTransitive = false
     }
