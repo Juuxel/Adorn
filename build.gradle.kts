@@ -181,6 +181,7 @@ subprojects {
 
                 // All needed source sets from the common project.
                 sourceSet(project(":common").sourceSets().getByName("main"))
+                sourceSet(project(":common").sourceSets().getByName("client"))
             }
         }
 

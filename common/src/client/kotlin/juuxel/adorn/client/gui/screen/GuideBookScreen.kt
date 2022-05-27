@@ -2,9 +2,9 @@ package juuxel.adorn.client.gui.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
-import juuxel.adorn.client.book.Book
-import juuxel.adorn.client.book.Image
-import juuxel.adorn.client.book.Page
+import juuxel.adorn.item.book.Book
+import juuxel.adorn.item.book.Image
+import juuxel.adorn.item.book.Page
 import juuxel.adorn.client.gui.widget.FlipBook
 import juuxel.adorn.client.gui.widget.TickingElement
 import juuxel.adorn.util.Colors
@@ -167,7 +167,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
             }
 
             if (page.image != null) {
-                renderImage(matrices, page.image, mouseX, mouseY)
+                renderImage(matrices, page.image!!, mouseX, mouseY)
             }
 
             val hoveredStyle = getTextStyleAt(mouseX, mouseY)

@@ -80,6 +80,9 @@ dependencies {
         isTransitive = false
     }
 
+    // Add client dependency on the common project's client classes and resources.
+    "clientImplementation"(project.project(":common").sourceSets.getByName("client").output)
+
     // Standard Fabric mod setup.
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric-loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric-api")}")

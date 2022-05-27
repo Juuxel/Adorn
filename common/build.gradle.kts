@@ -3,6 +3,7 @@ plugins {
 }
 
 loom {
+    splitEnvironmentSourceSets()
     accessWidenerPath.set(file("src/main/resources/adorn.accesswidener"))
 }
 

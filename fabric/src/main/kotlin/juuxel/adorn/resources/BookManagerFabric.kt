@@ -1,7 +1,7 @@
 package juuxel.adorn.resources
 
 import juuxel.adorn.AdornCommon
-import juuxel.adorn.client.book.BookManager
+import juuxel.adorn.item.book.BookManager
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
 import net.minecraft.util.Identifier
 

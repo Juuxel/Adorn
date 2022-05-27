@@ -1,4 +1,4 @@
-package juuxel.adorn.client.book
+package juuxel.adorn.item.book
 
 import com.google.gson.Gson
 import com.google.gson.JsonElement

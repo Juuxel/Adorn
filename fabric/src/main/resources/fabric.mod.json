@@ -33,9 +33,11 @@
         "adapter": "kotlin"
       }
     ],
-    "rei": [
-      "juuxel.adorn.compat.rei.client.AdornReiClient",
+    "rei_common": [
       "juuxel.adorn.compat.rei.AdornReiServer"
+    ],
+    "rei_client": [
+      "juuxel.adorn.client.compat.rei.AdornReiClient"
     ]
   },
 
@@ -54,7 +56,8 @@
   },
   "breaks": {
     "towelette": "<4.0.0",
-    "dashloader": "<2.0-pre2"
+    "dashloader": "<2.0-pre2",
+    "roughlyenoughitems": "<8.2"
   },
 
   "custom": {

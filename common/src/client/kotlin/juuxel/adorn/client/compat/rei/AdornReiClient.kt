@@ -1,4 +1,4 @@
-package juuxel.adorn.compat.rei.client
+package juuxel.adorn.client.compat.rei
 
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.compat.rei.AdornReiServer

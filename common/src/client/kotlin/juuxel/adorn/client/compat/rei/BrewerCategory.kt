@@ -1,4 +1,4 @@
-package juuxel.adorn.compat.rei.client
+package juuxel.adorn.client.compat.rei
 
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
