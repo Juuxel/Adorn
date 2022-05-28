@@ -3,6 +3,7 @@
   "minVersion": "0.8",
   "package": "juuxel.adorn.commonmixin",
   "required": true,
+  "refmap": "adorn-refmap.json",
 
   "mixins": [
     "BlockMixin",

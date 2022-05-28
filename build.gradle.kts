@@ -184,6 +184,10 @@ subprojects {
                 sourceSet(project(":common").sourceSets().getByName("main"))
                 sourceSet(project(":common").sourceSets().getByName("client"))
             }
+
+            mixin {
+                defaultRefmapName.set("adorn-refmap.json")
+            }
         }
 
         tasks {
