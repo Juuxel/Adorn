@@ -5,10 +5,11 @@ import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundEvent
+import net.minecraft.util.registry.Registry
 
 object AdornSounds {
     @JvmField
-    val SOUNDS: Registrar<SoundEvent> = PlatformBridges.registrarFactory.soundEvent()
+    val SOUNDS: Registrar<SoundEvent> = PlatformBridges.registrarFactory.create(Registry.SOUND_EVENT_KEY)
 
     val BLOCK_CHAIN_LINK_FENCE_BREAK = register("block.adorn.chain_link_fence.break")
     val BLOCK_CHAIN_LINK_FENCE_STEP = register("block.adorn.chain_link_fence.step")
