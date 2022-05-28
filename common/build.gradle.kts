@@ -14,6 +14,14 @@ val clientOutputs = configurations.create("clientOutputs") {
     isCanBeResolved = false
 }
 
+// Create a source set for mixins, which will be compiled in the platform projects.
+val mixinSources = sourceSets.create("mixin") {
+    compileClasspath = project.files(
+        sourceSets.main.get().compileClasspath,
+        sourceSets.main.get().output,
+    )
+}
+
 loom {
     splitEnvironmentSourceSets()
     accessWidenerPath.set(file("src/main/resources/adorn.accesswidener"))

@@ -108,6 +108,10 @@ tasks {
         into(generatedResources)
     }
 
+    compileJava {
+        source(project(":common").sourceSets.getByName("mixin").allJava)
+    }
+
     shadowJar {
         relocate("blue.endless.jankson", "juuxel.adorn.relocated.jankson")
     }
@@ -120,6 +124,8 @@ tasks {
         // Mark that this task depends on the project version,
         // and should reset when the project version changes.
         inputs.property("version", project.version)
+
+        from(project(":common").sourceSets.getByName("mixin").resources)
 
         // Replace the $version template in fabric.mod.json with the project version.
         filesMatching("fabric.mod.json") {
