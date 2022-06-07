@@ -1,9 +1,17 @@
 package juuxel.adorn.lib
 
 import juuxel.adorn.AdornCommon
+import juuxel.adorn.client.gui.screen.BrewerScreen
+import juuxel.adorn.client.gui.screen.GuideBookScreen
+import juuxel.adorn.client.resources.BookManagerFabric
 import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.fluid.FluidVolume
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
+import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.network.Packet
@@ -17,6 +25,41 @@ object AdornNetworking {
     val BREWER_FLUID_SYNC = AdornCommon.id("brewer_fluid_sync")
 
     fun init() {
+    }
+
+    @Environment(EnvType.CLIENT)
+    fun initClient() {
+        ClientPlayNetworking.registerGlobalReceiver(ENTITY_SPAWN) { client, _, buf, _ ->
+            val packet = EntitySpawnS2CPacket(buf)
+            client.execute {
+                val world = client.player?.world as? ClientWorld ?: return@execute
+                val entity = packet.entityTypeId.create(world)!!
+                entity.id = packet.id
+                entity.uuid = packet.uuid
+                entity.updatePositionAndAngles(
+                    packet.x, packet.y, packet.z,
+                    packet.pitch * 360 / 256f, packet.yaw * 360 / 256f
+                )
+                entity.updateTrackedPosition(packet.x, packet.y, packet.z)
+                world.addEntity(packet.id, entity)
+            }
+        }
+
+        ClientPlayNetworking.registerGlobalReceiver(OPEN_BOOK) { client, _, buf, _ ->
+            val bookId = buf.readIdentifier()
+            client.execute {
+                client.setScreen(GuideBookScreen(BookManagerFabric[bookId]))
+            }
+        }
+
+        ClientPlayNetworking.registerGlobalReceiver(BREWER_FLUID_SYNC) { client, _, buf, _ ->
+            val syncId = buf.readUnsignedByte().toInt()
+            val volume = FluidVolume.load(buf)
+
+            client.execute {
+                BrewerScreen.setFluidFromPacket(client, syncId, volume)
+            }
+        }
     }
 
     fun createEntitySpawnPacket(entity: Entity): Packet<*> =

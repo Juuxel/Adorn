@@ -1,4 +1,4 @@
-package juuxel.adorn.resources
+package juuxel.adorn.client.resources
 
 import blue.endless.jankson.Jankson
 import blue.endless.jankson.JsonElement

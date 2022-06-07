@@ -1,12 +1,15 @@
-package juuxel.adorn.client.lib
+package juuxel.adorn.resources
 
-import juuxel.adorn.resources.BookManagerFabric
-import juuxel.adorn.resources.ColorManagerFabric
+import juuxel.adorn.client.resources.BookManagerFabric
+import juuxel.adorn.client.resources.ColorManagerFabric
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper
 import net.minecraft.resource.ResourceType
 
 object AdornResources {
-    fun init() {
+    @Environment(EnvType.CLIENT)
+    fun initClient() {
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).apply {
             registerReloadListener(ColorManagerFabric)
             registerReloadListener(BookManagerFabric)

@@ -5,9 +5,10 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.menu.Menu
 import net.minecraft.menu.MenuType
 import net.minecraft.network.PacketByteBuf
+import net.minecraft.util.registry.Registry
 
 object AdornMenus {
-    val MENUS = PlatformBridges.registrarFactory.menu()
+    val MENUS = PlatformBridges.registrarFactory.create(Registry.MENU_KEY)
     val DRAWER: MenuType<DrawerMenu> by MENUS.register("drawer") { createType(DrawerMenu::load) }
     val KITCHEN_CUPBOARD: MenuType<KitchenCupboardMenu> by MENUS.register("kitchen_cupboard") { createType(KitchenCupboardMenu::load) }
     val TRADING_STATION: MenuType<TradingStationMenu> by MENUS.register("trading_station") { MenuType(::TradingStationMenu) }

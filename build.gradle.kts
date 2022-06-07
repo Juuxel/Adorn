@@ -15,11 +15,17 @@ plugins {
     // Note that of all these plugins, only the Architectury plugin needs to be applied.
     kotlin("jvm") version "1.6.0" apply false
 
-    id("dev.architectury.loom") version "0.12.0.279" apply false
+    id("architectury-plugin") version "3.4.135"
+    id("dev.architectury.loom") version "0.12.0.265" apply false
     id("io.github.juuxel.loom-quiltflower") version "1.7.2" apply false
 
     id("org.jmailen.kotlinter") version "3.2.0" apply false
     id("com.github.johnrengelman.shadow") version "7.0.0" apply false
+}
+
+// Set the Minecraft version for Architectury.
+architectury {
+    minecraft = project.property("minecraft-version").toString()
 }
 
 // Set up basic Maven artifact metadata, including the project version
@@ -56,6 +62,7 @@ subprojects {
     apply(plugin = "java")
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "dev.architectury.loom")
+    apply(plugin = "architectury-plugin")
     apply(plugin = "io.github.juuxel.loom-quiltflower")
     apply(plugin = "org.jmailen.kotlinter")
 
@@ -63,6 +70,12 @@ subprojects {
     extensions.configure<JavaPluginExtension> {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    architectury {
+        // Disable Architectury's injectables like @ExpectPlatform
+        // since we don't use them.
+        injectInjectables = false
     }
 
     // Copy the artifact metadata from the root project.
@@ -73,9 +86,6 @@ subprojects {
     // Set up the custom "repository" for my Menu mappings.
     // (A mapping layer that replaces Yarn's "screen handler" with Mojang's own "menu". It's a long story.)
     repositories {
-        // The maven needed by REI.
-        maven("https://maven.shedaniel.me")
-
         // The exclusiveContent makes sure it's only used for io.github.juuxel:menu,
         // and only this repo is used for that module.
         exclusiveContent {
@@ -158,32 +168,6 @@ subprojects {
             // See https://docs.gradle.org/current/userguide/declaring_dependencies.html#sec:resolvable-consumable-configs.
             isCanBeConsumed = false
             isCanBeResolved = true
-        }
-
-        // Configure the loom extension.
-        // It's not available with a type-safe accessor "loom { ... }" here
-        // because it's not applied to the root project.
-        extensions.configure<LoomGradleExtensionAPI> {
-            // Generate each IDE config for platforms.
-            // Otherwise, nothing would generate.
-            runConfigs.configureEach {
-                isIdeConfigGenerated = true
-            }
-
-            // Since there's no type-safe accessor for the SourceSetContainer,
-            // we define a simple utility method to get it.
-            fun Project.sourceSets(): SourceSetContainer =
-                this.extensions.getByName<SourceSetContainer>("sourceSets")
-
-            // Register the source sets making up the runtime mod.
-            mods.register("main") { // The name matches the default mod on Forge.
-                // "main" source set from this project
-                sourceSet(sourceSets().getByName("main"))
-
-                // All needed source sets from the common project.
-                sourceSet(project(":common").sourceSets().getByName("main"))
-                sourceSet(project(":common").sourceSets().getByName("client"))
-            }
         }
 
         tasks {

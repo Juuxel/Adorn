@@ -1,4 +1,4 @@
-package juuxel.adorn.item.book
+package juuxel.adorn.client.book
 
 import com.mojang.datafixers.util.Pair
 import com.mojang.serialization.Codec

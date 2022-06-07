@@ -1,23 +1,8 @@
 package juuxel.adorn.platform
 
-import net.minecraft.block.Block
-import net.minecraft.block.entity.BlockEntityType
-import net.minecraft.entity.EntityType
-import net.minecraft.item.Item
-import net.minecraft.loot.condition.LootConditionType
-import net.minecraft.menu.MenuType
-import net.minecraft.recipe.RecipeSerializer
-import net.minecraft.recipe.RecipeType
-import net.minecraft.sound.SoundEvent
+import net.minecraft.util.registry.Registry
+import net.minecraft.util.registry.RegistryKey
 
 interface RegistrarFactory {
-    fun block(): Registrar<Block>
-    fun item(): Registrar<Item>
-    fun blockEntity(): Registrar<BlockEntityType<*>>
-    fun entity(): Registrar<EntityType<*>>
-    fun menu(): Registrar<MenuType<*>>
-    fun soundEvent(): Registrar<SoundEvent>
-    fun recipeSerializer(): Registrar<RecipeSerializer<*>>
-    fun recipeType(): Registrar<RecipeType<*>>
-    fun lootConditionType(): Registrar<LootConditionType>
+    fun <T> create(registryKey: RegistryKey<Registry<T>>): Registrar<T>
 }

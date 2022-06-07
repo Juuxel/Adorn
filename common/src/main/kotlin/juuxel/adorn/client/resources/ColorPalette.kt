@@ -1,4 +1,4 @@
-package juuxel.adorn.resources
+package juuxel.adorn.client.resources
 
 import com.google.common.collect.ImmutableMap
 import juuxel.adorn.AdornCommon

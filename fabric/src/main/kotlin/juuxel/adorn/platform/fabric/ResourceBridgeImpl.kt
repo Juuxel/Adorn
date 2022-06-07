@@ -1,8 +1,8 @@
 package juuxel.adorn.platform.fabric
 
+import juuxel.adorn.client.resources.BookManagerFabric
+import juuxel.adorn.client.resources.ColorManagerFabric
 import juuxel.adorn.platform.ResourceBridge
-import juuxel.adorn.resources.BookManagerFabric
-import juuxel.adorn.resources.ColorManagerFabric
 
 object ResourceBridgeImpl : ResourceBridge {
     override val bookManager = BookManagerFabric
