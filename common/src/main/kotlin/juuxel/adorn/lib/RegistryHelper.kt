@@ -6,11 +6,10 @@ import juuxel.adorn.platform.Registrar
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
-import net.minecraft.util.registry.Registry
 
 abstract class RegistryHelper {
-    val blocks: Registrar<Block> = PlatformBridges.registrarFactory.create(Registry.BLOCK_KEY)
-    val items: Registrar<Item> = PlatformBridges.registrarFactory.create(Registry.ITEM_KEY)
+    val blocks: Registrar<Block> = PlatformBridges.registrarFactory.block()
+    val items: Registrar<Item> = PlatformBridges.registrarFactory.item()
 
     // ----------------------------------
     // Functions for registering blocks

@@ -10,11 +10,10 @@ import net.minecraft.item.FoodComponent
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.util.Rarity
-import net.minecraft.util.registry.Registry
 
 object AdornItems {
     @JvmField
-    val ITEMS: Registrar<Item> = PlatformBridges.registrarFactory.create(Registry.ITEM_KEY)
+    val ITEMS: Registrar<Item> = PlatformBridges.registrarFactory.item()
     val GROUP = PlatformBridges.items.createAdornItemGroup()
     private val DRINK_FOOD_COMPONENT = drinkFoodComponentBuilder().build()
 

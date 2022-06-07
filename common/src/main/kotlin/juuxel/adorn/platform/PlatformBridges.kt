@@ -1,7 +1,11 @@
 package juuxel.adorn.platform
 
+import dev.architectury.injectables.annotations.ExpectPlatform
 import juuxel.adorn.config.ConfigManager
-import java.util.ServiceLoader
+
+@ExpectPlatform
+fun PlatformBridges.Companion.get(): PlatformBridges =
+    throw AssertionError("Untransformed ExpectPlatform")
 
 interface PlatformBridges {
     val blockEntities: BlockEntityBridge
@@ -9,6 +13,7 @@ interface PlatformBridges {
     val configManager: ConfigManager
     val entities: EntityBridge
     val fluids: FluidBridge
+    val fluidRendering: FluidRenderingBridge
     val items: ItemBridge
     val menus: MenuBridge
     val network: NetworkBridge
@@ -16,13 +21,6 @@ interface PlatformBridges {
     val resources: ResourceBridge
 
     companion object {
-        private val instance: PlatformBridges by lazy {
-            val serviceLoader = ServiceLoader.load(PlatformBridges::class.java)
-            serviceLoader.findFirst().orElseThrow { RuntimeException("Could not find Adorn platform implementation!") }
-        }
-
-        fun get() = instance
-
         inline val blockEntities get() = get().blockEntities
         inline val blockFactory get() = get().blockFactory
         inline val configManager get() = get().configManager

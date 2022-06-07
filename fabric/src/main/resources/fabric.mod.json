@@ -23,21 +23,19 @@
     ],
     "client": [
       {
-        "value": "juuxel.adorn.client.AdornClientInit",
+        "value": "juuxel.adorn.Adorn::initClient",
         "adapter": "kotlin"
       }
     ],
     "modmenu": [
       {
-        "value": "juuxel.adorn.client.compat.modmenu.AdornModMenuPlugin",
+        "value": "juuxel.adorn.compat.modmenu.AdornModMenuPlugin",
         "adapter": "kotlin"
       }
     ],
-    "rei_common": [
+    "rei": [
+      "juuxel.adorn.compat.rei.client.AdornReiClient",
       "juuxel.adorn.compat.rei.AdornReiServer"
-    ],
-    "rei_client": [
-      "juuxel.adorn.client.compat.rei.AdornReiClient"
     ]
   },
 
@@ -56,8 +54,7 @@
   },
   "breaks": {
     "towelette": "<4.0.0",
-    "dashloader": "<2.0-pre2",
-    "roughlyenoughitems": "<8.2"
+    "dashloader": "<2.0-pre2"
   },
 
   "custom": {
