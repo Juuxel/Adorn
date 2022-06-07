@@ -101,6 +101,7 @@ dependencies {
     modCompileOnly("net.oskarstrom:DashLoader:${rootProject.property("dashloader")}")
     runtimeOnly("org.yaml:snakeyaml:1.27") // TODO: for dashloader, remove when pom is fixed
     modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.property("rei")}")
+    modLocalRuntime("dev.architectury:architectury-fabric:${rootProject.property("architectury-api")}")
 }
 
 tasks {
