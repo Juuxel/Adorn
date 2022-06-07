@@ -5,7 +5,10 @@ plugins {
 architectury {
     // Set up Architectury for the common project.
     // This sets up the transformations (@ExpectPlatform etc.) we need for production environments.
-    common()
+    common(
+        "fabric",
+        // "forge",
+    )
 }
 
 loom {
