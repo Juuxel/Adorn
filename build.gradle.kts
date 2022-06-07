@@ -72,6 +72,12 @@ subprojects {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    architectury {
+        // Disable Architectury's injectables like @ExpectPlatform
+        // since we don't use them.
+        injectInjectables = false
+    }
+
     // Copy the artifact metadata from the root project.
     group = rootProject.group
     version = rootProject.version
