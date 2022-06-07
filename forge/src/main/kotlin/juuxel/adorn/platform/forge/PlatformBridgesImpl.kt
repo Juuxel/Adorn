@@ -1,4 +1,3 @@
-@file:JvmName("PlatformBridgesKtImpl")
 package juuxel.adorn.platform.forge
 
 import juuxel.adorn.platform.PlatformBridges
@@ -18,10 +17,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.util.registry.Registry
 import net.minecraftforge.registries.ForgeRegistries
 
-fun PlatformBridges.Companion.get(): PlatformBridges =
-    PlatformBridgesImpl
-
-private object PlatformBridgesImpl : PlatformBridges {
+class PlatformBridgesImpl : PlatformBridges {
     override val blockEntities = BlockEntityBridgeForge
     override val blockFactory = BlockFactoryImpl
     override val configManager = ConfigManagerImpl
