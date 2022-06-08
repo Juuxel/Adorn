@@ -55,6 +55,15 @@ object AdornItems {
     val TRADERS_MANUAL by ITEMS.register("traders_manual") {
         AdornBookItem(AdornCommon.id("traders_manual"), Item.Settings().group(ItemGroup.MISC))
     }
+    /*val TRADING_STATION_STORAGE_UPGRADE: Item by ITEMS.register("trading_station_storage_upgrade") {
+        TradingStationUpgradeItem(Item.Settings().group(ItemGroup.MISC), TradingStationUpgradeItem.Type.STORAGE)
+    }*/
+    val TRADING_STATION_IO_UPGRADE: Item by ITEMS.register("trading_station_io_upgrade") {
+        TradingStationUpgradeItem(Item.Settings().group(ItemGroup.MISC), TradingStationUpgradeItem.Type.IO)
+    }
+    val TRADING_STATION_LINK_UPGRADE: Item by ITEMS.register("trading_station_link_upgrade") {
+        TradingStationUpgradeItem(Item.Settings().group(ItemGroup.MISC), TradingStationUpgradeItem.Type.LINK)
+    }
 
     fun init() {
     }

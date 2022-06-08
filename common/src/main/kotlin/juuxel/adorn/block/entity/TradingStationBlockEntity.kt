@@ -32,6 +32,7 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
     override var ownerName: Text = LiteralText("???")
     override val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
     override val storage: InventoryComponent = InventoryComponent(12)
+    override val upgradeStorage: InventoryComponent = InventoryComponent(2)
 
     init {
         trade.addListener {
@@ -39,6 +40,10 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
         }
 
         storage.addListener {
+            markDirty()
+        }
+
+        upgradeStorage.addListener {
             markDirty()
         }
     }
@@ -73,6 +78,7 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
         ownerName = nbt.getText(NBT_TRADING_OWNER_NAME) ?: LiteralText("??")
         trade.readNbt(nbt.getCompound(NBT_TRADE))
         storage.readNbt(nbt.getCompound(NBT_STORAGE))
+        upgradeStorage.readNbt(nbt.getCompound(NBT_UPGRADES))
     }
 
     override fun writeNbt(nbt: NbtCompound) = super.writeNbt(nbt).apply {
@@ -84,6 +90,7 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
 
         nbt.put(NBT_TRADE, trade.writeNbt(NbtCompound()))
         nbt.put(NBT_STORAGE, storage.writeNbt(NbtCompound()))
+        nbt.put(NBT_UPGRADES, upgradeStorage.writeNbt(NbtCompound()))
     }
 
     override fun toUpdatePacket(): Packet<ClientPlayPacketListener> =
@@ -96,5 +103,6 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
         const val NBT_TRADING_OWNER_NAME = "TradingOwnerName"
         const val NBT_TRADE = "Trade"
         const val NBT_STORAGE = "Storage"
+        const val NBT_UPGRADES = "Upgrades"
     }
 }

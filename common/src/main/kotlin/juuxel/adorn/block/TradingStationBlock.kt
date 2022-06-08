@@ -106,6 +106,7 @@ class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings)
             if (entity is TradingStationBlockEntity) {
                 if (!world.gameRules.getBoolean(AdornGameRules.DROP_LOCKED_TRADING_STATIONS)) {
                     ItemScatterer.spawn(world, pos, entity.storage)
+                    ItemScatterer.spawn(world, pos, entity.upgradeStorage)
                 }
 
                 world.updateComparators(pos, this)

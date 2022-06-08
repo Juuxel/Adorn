@@ -166,11 +166,4 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
     fun addListener(listener: InventoryChangedListener) {
         listeners += listener
     }
-
-    inline fun addListener(crossinline block: (Inventory) -> Unit) =
-        addListener(
-            InventoryChangedListener {
-                block(it)
-            }
-        )
 }

@@ -30,6 +30,11 @@
                   "source": "Storage",
                   "target": "BlockEntityTag.Storage",
                   "op": "replace"
+                },
+                {
+                  "source": "Upgrades",
+                  "target": "BlockEntityTag.Upgrades",
+                  "op": "replace"
                 }
               ],
               "conditions": [

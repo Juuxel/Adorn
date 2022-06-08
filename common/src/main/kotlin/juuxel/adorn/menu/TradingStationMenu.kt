@@ -2,6 +2,7 @@ package juuxel.adorn.menu
 
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.block.entity.TradingStation
+import juuxel.adorn.item.TradingStationUpgradeItem
 import juuxel.adorn.util.getBlockEntity
 import net.minecraft.block.Block
 import net.minecraft.block.entity.BlockEntity
@@ -21,6 +22,12 @@ class TradingStationMenu(
     private val tradingStation: TradingStation
     private val sellingSlot: Slot
     private val priceSlot: Slot
+    /*
+    private val storageUpgradeStorageA: InventoryComponent
+    private val storageUpgradeStorageB: InventoryComponent
+    private val storageUpgradeSlotsA: SlotGroup
+    private val storageUpgradeSlotsB: SlotGroup
+    */
 
     init {
         val slot = 18
@@ -50,6 +57,53 @@ class TradingStationMenu(
         for (x in 0..8) {
             addSlot(Slot(playerInventory, x, 8 + x * slot, 162))
         }
+
+        // Upgrades
+        for (y in 0 until UPGRADE_COUNT) {
+            addSlot(UpgradeSlot(tradingStation.upgradeStorage, y, 152, 54 + y * slot))
+        }
+
+        /*
+        // Storages within storage upgrades
+        storageUpgradeStorageA = ItemStackInventory.ofInventoryStack(tradingStation.upgradeStorage, slot = 0, size = 9)
+        storageUpgradeStorageB = ItemStackInventory.ofInventoryStack(tradingStation.upgradeStorage, slot = 1, size = 9)
+        storageUpgradeSlotsA = SlotGroup(storageUpgradeStorageA, width = 3, height = 3, slotFactory = ::StorageSlot)
+        storageUpgradeSlotsB = SlotGroup(storageUpgradeStorageB, width = 3, height = 3, slotFactory = ::StorageSlot)
+        setupForStorageUpgrades(0, storageUpgradeSlotsA)
+        setupForStorageUpgrades(1, storageUpgradeSlotsB)
+        */
+    }
+
+    private fun setupForStorageUpgrades(index: Int, slotGroup: SlotGroup) {
+        slotGroup.addTo(this)
+        tradingStation.upgradeStorage.addListener {
+            val item = it.getStack(index).item
+            val visible = item is TradingStationUpgradeItem && item.type == TradingStationUpgradeItem.Type.STORAGE
+
+            if (visible) {
+                slotGroup.show()
+                slotGroup.move(186, 7 + getUpgradePanelY(index))
+            } else {
+                slotGroup.hide()
+            }
+        }
+    }
+
+    fun getUpgradePanelY(slot: Int): Int {
+        if (slot == 0) {
+            return 0
+        }
+
+        var y = 0
+
+        for (i in 0 until slot) {
+            val item = tradingStation.upgradeStorage.getStack(i).item
+            if (item is TradingStationUpgradeItem) {
+                y += item.type.panelHeight
+            }
+        }
+
+        return y
     }
 
     override fun canUse(player: PlayerEntity) =
@@ -113,11 +167,38 @@ class TradingStationMenu(
         override fun takeStack(count: Int): ItemStack = ItemStack.EMPTY
     }
 
-    private class StorageSlot(inventory: Inventory, index: Int, x: Int, y: Int) : Slot(inventory, index, x, y) {
+    private class StorageSlot(inventory: Inventory, index: Int, x: Int, y: Int) : ToggleableSlot(inventory, index, x, y) {
         override fun canInsert(stack: ItemStack): Boolean = isValidItem(stack)
     }
 
+    private class UpgradeSlot(inventory: Inventory, index: Int, x: Int, y: Int) : Slot(inventory, index, x, y) {
+        override fun canInsert(stack: ItemStack): Boolean {
+            val item = stack.item
+
+            if (item is TradingStationUpgradeItem) {
+                val type = item.type
+
+                for (slot in 0 until inventory.size()) {
+                    if (slot == index) continue
+
+                    val otherItem = inventory.getStack(slot).item
+                    if (otherItem is TradingStationUpgradeItem && !TradingStationUpgradeItem.Type.canCombine(type, otherItem.type)) {
+                        return false
+                    }
+                }
+
+                return true
+            }
+
+            return false
+        }
+
+        override fun getMaxItemCount(): Int = 1
+    }
+
     companion object {
+        const val UPGRADE_COUNT = 2
+
         /**
          * Gets the [juuxel.adorn.block.entity.TradingStationBlockEntity] at the [context]'s location.
          * If it's not present, creates an empty trading station using [TradingStation.createEmpty].
