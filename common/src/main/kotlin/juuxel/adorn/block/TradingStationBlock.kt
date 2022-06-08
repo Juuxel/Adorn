@@ -70,13 +70,12 @@ class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings)
                 val validPayment = handStack.isItemEqual(trade.price) &&
                     handStack.count >= trade.price.count &&
                     handStack.nbt == trade.price.nbt
-                val canInsertPayment = be.storage.canInsert(trade.price)
 
                 if (trade.isEmpty()) {
                     player.sendMessage(TranslatableText("block.adorn.trading_station.empty_trade"), true)
                 } else if (!be.isStorageStocked()) {
                     player.sendMessage(TranslatableText("block.adorn.trading_station.storage_not_stocked"), true)
-                } else if (!canInsertPayment) {
+                } else if (!be.canInsertPayment()) {
                     player.sendMessage(TranslatableText("block.adorn.trading_station.storage_full"), true)
                 } else if (validPayment) {
                     handStack.decrement(trade.price.count)

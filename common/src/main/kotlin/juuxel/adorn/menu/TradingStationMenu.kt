@@ -36,13 +36,13 @@ class TradingStationMenu(
         val tradeInventory = tradingStation.trade.createInventory()
         val storage = tradingStation.storage
 
-        sellingSlot = addSlot(TradeSlot(tradeInventory, 0, 26, 36))
-        priceSlot = addSlot(TradeSlot(tradeInventory, 1, 26, 72))
+        sellingSlot = addSlot(TradeSlot(tradeInventory, 0, 17, 36))
+        priceSlot = addSlot(TradeSlot(tradeInventory, 1, 17, 72))
 
         // Storage
         for (y in 0..2) {
             for (x in 0..3) {
-                addSlot(StorageSlot(storage, x + y * 4, 62 + x * slot, 36 + y * slot))
+                addSlot(StorageSlot(storage, x + y * 4, 53 + x * slot, 36 + y * slot))
             }
         }
 
@@ -60,7 +60,7 @@ class TradingStationMenu(
 
         // Upgrades
         for (y in 0 until UPGRADE_COUNT) {
-            addSlot(UpgradeSlot(tradingStation.upgradeStorage, y, 152, 54 + y * slot))
+            addSlot(UpgradeSlot(tradingStation.upgradeStorage, y, 143, 36 + y * slot))
         }
 
         /*

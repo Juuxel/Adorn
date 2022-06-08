@@ -64,6 +64,12 @@ object AdornItems {
     val TRADING_STATION_LINK_UPGRADE: Item by ITEMS.register("trading_station_link_upgrade") {
         TradingStationUpgradeItem(Item.Settings().group(ItemGroup.MISC), TradingStationUpgradeItem.Type.LINK)
     }
+    val TRADING_STATION_VOID_UPGRADE: Item by ITEMS.register("trading_station_void_upgrade") {
+        TradingStationUpgradeItem(Item.Settings().group(ItemGroup.MISC), TradingStationUpgradeItem.Type.VOID)
+    }
+    val TRADING_STATION_INFINITE_STOCK_UPGRADE: Item by ITEMS.register("trading_station_infinite_stock_upgrade") {
+        TradingStationUpgradeItem(Item.Settings().group(ItemGroup.MISC), TradingStationUpgradeItem.Type.INFINITE_STOCK)
+    }
 
     fun init() {
     }

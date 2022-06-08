@@ -51,14 +51,16 @@ class TradingStationScreen(
     override fun drawForeground(matrices: MatrixStack, mouseX: Int, mouseY: Int) {
         textRenderer.draw(matrices, title, titleX.toFloat(), titleY.toFloat(), Colors.WHITE)
         textRenderer.draw(matrices, playerInventoryTitle, playerInventoryTitleX.toFloat(), playerInventoryTitleY.toFloat(), Colors.WHITE)
-        textRenderer.draw(matrices, SELLING_LABEL, 26f + 9f - textRenderer.getWidth(SELLING_LABEL) / 2, 25f, Colors.WHITE)
-        textRenderer.draw(matrices, PRICE_LABEL, 26f + 9f - textRenderer.getWidth(PRICE_LABEL) / 2, 61f, Colors.WHITE)
+        textRenderer.draw(matrices, SELLING_LABEL, 17f + 8f - textRenderer.getWidth(SELLING_LABEL) / 2, 25f, Colors.WHITE)
+        textRenderer.draw(matrices, PRICE_LABEL, 17f + 8f - textRenderer.getWidth(PRICE_LABEL) / 2, 61f, Colors.WHITE)
+        textRenderer.draw(matrices, UPGRADES_LABEL, 143f + 8f - textRenderer.getWidth(UPGRADES_LABEL) / 2, 25f, Colors.WHITE)
     }
 
     companion object {
         private val BACKGROUND_TEXTURE = AdornCommon.id("textures/gui/trading_station.png")
         private val SELLING_LABEL: Text = TranslatableText("block.adorn.trading_station.selling")
         private val PRICE_LABEL: Text = TranslatableText("block.adorn.trading_station.price")
+        private val UPGRADES_LABEL: Text = TranslatableText("block.adorn.trading_station.upgrades")
         private const val SIDE_PANEL_WIDTH: Int = 2 * 7 + 3 * 9
     }
 }

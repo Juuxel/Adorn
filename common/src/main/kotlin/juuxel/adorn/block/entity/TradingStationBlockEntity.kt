@@ -1,6 +1,7 @@
 package juuxel.adorn.block.entity
 
 import juuxel.adorn.block.AdornBlockEntities
+import juuxel.adorn.item.TradingStationUpgradeItem
 import juuxel.adorn.menu.TradingStationMenu
 import juuxel.adorn.trading.Trade
 import juuxel.adorn.util.InventoryComponent
@@ -48,6 +49,9 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
         }
     }
 
+    fun hasUpgrade(type: TradingStationUpgradeItem.Type): Boolean =
+        upgradeStorage.containsAny(setOf(TradingStationUpgradeItem.BY_TYPE[type]))
+
     fun setOwner(player: PlayerEntity) {
         owner = player.gameProfile.id
         ownerName = LiteralText(player.gameProfile.name)
@@ -55,7 +59,10 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
     }
 
     fun isStorageStocked(): Boolean =
-        storage.getAmountWithNbt(trade.selling) >= trade.selling.count
+        hasUpgrade(TradingStationUpgradeItem.Type.INFINITE_STOCK) || storage.getAmountWithNbt(trade.selling) >= trade.selling.count
+
+    fun canInsertPayment(): Boolean =
+        hasUpgrade(TradingStationUpgradeItem.Type.VOID) || storage.canInsert(trade.price)
 
     fun isOwner(player: PlayerEntity) = player.gameProfile.id == owner
 

@@ -478,6 +478,7 @@
   "block.adorn.trading_station.description": "Compact marketplace",
   "block.adorn.trading_station.selling": "Selling",
   "block.adorn.trading_station.price": "Price",
+  "block.adorn.trading_station.upgrades": "Upgrades",
   "block.adorn.trading_station.label.owner": "%s's Trading Station",
   "block.adorn.trading_station.label.selling": "Selling %s",
   "block.adorn.trading_station.label.price": "for %s",
@@ -1295,6 +1296,8 @@
   "item.adorn.trading_station_link_upgrade.description": "Links a trading station to neighboring containers",
   "item.adorn.trading_station_void_upgrade": "Trading Station Upgrade: Void",
   "item.adorn.trading_station_void_upgrade.description": "Voids overflowing trading station items",
+  "item.adorn.trading_station_infinite_stock_upgrade": "Trading Station Upgrade: Infinite Stock",
+  "item.adorn.trading_station_infinite_stock_upgrade.description": "Gives infinite items in trading stations",
 
   "item.adorn.guide_book": "Decorating Your Home",
   "guide.adorn.topic.brewer.title": "Brewers",
