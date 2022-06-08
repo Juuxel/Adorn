@@ -5,11 +5,18 @@ import juuxel.adorn.AdornCommon
 import juuxel.adorn.item.TradingStationUpgradeItem
 import juuxel.adorn.menu.TradingStationMenu
 import juuxel.adorn.util.Colors
+import net.minecraft.client.gui.AbstractParentElement
+import net.minecraft.client.gui.Drawable
+import net.minecraft.client.gui.Element
+import net.minecraft.client.gui.ParentElement
+import net.minecraft.client.gui.Selectable
+import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
+import kotlin.properties.Delegates
 
 class TradingStationScreen(
     menu: TradingStationMenu,
@@ -63,4 +70,33 @@ class TradingStationScreen(
         private val UPGRADES_LABEL: Text = TranslatableText("block.adorn.trading_station.upgrades")
         private const val SIDE_PANEL_WIDTH: Int = 2 * 7 + 3 * 9
     }
+
+    private open inner class SidePanel(x: Int, y: Int) : AbstractParentElement(), Drawable, Selectable {
+        var x: Int by Delegates.observable(x) { _, _, x -> refreshPosition(x, y) }
+        var y: Int by Delegates.observable(y) { _, _, y -> refreshPosition(x, y) }
+
+        override fun children(): List<Element> = listOf()
+
+        protected open fun refreshPosition(x: Int, y: Int) {}
+
+        override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+            TODO("Not yet implemented")
+        }
+
+        override fun appendNarrations(builder: NarrationMessageBuilder?) {
+            TODO("Not yet implemented")
+        }
+
+        override fun getType(): Selectable.SelectionType {
+            TODO("Not yet implemented")
+        }
+    }
+
+    private inner class IoSidePanel(x: Int, y: Int) : SidePanel(x, y) {
+        override fun children(): List<Element> {
+            return super.children()
+        }
+    }
+
+    private inner class IoButton(var x: Int, var y: Int)
 }

@@ -19,7 +19,7 @@ class TradingStationMenu(
     playerInventory: Inventory,
     private val context: MenuContext = MenuContext.EMPTY
 ) : Menu(AdornMenus.TRADING_STATION, syncId) {
-    private val tradingStation: TradingStation
+    val tradingStation: TradingStation
     private val sellingSlot: Slot
     private val priceSlot: Slot
     /*

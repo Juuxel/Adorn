@@ -3,6 +3,7 @@ package juuxel.adorn.block
 
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.criterion.AdornCriteria
+import juuxel.adorn.item.TradingStationUpgradeItem
 import juuxel.adorn.lib.AdornGameRules
 import juuxel.adorn.lib.AdornStats
 import net.minecraft.block.Block
@@ -81,7 +82,11 @@ class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings)
                     handStack.decrement(trade.price.count)
                     val soldItem = trade.selling.copy()
                     player.giveItemStack(soldItem)
-                    be.storage.tryExtract(trade.selling)
+
+                    if (!be.hasUpgrade(TradingStationUpgradeItem.Type.INFINITE_STOCK)) {
+                        be.storage.tryExtract(trade.selling)
+                    }
+
                     be.storage.tryInsert(trade.price)
                     player.incrementStat(AdornStats.INTERACT_WITH_TRADING_STATION)
 
