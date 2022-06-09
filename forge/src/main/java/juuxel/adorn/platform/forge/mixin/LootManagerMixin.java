@@ -7,6 +7,7 @@ import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.profiler.Profiler;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.crafting.conditions.ICondition;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -26,7 +27,9 @@ abstract class LootManagerMixin {
         while (iter.hasNext()) {
             JsonObject json = iter.next().getAsJsonObject();
 
-            if (!CraftingHelper.processConditions(json, "adorn:conditions")) {
+            // Let's just use IContext.EMPTY here since we don't need the tag conditions.
+            // Mixing into DataPackContents is too much work ;)
+            if (!CraftingHelper.processConditions(json, "adorn:conditions", ICondition.IContext.EMPTY)) {
                 iter.remove();
             }
         }

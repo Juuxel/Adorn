@@ -53,7 +53,7 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
 
             if (result.isSuccess) {
                 if (!w.isClient) {
-                    w.emitGameEvent(GameEvent.FLUID_PLACE, pos)
+                    w.emitGameEvent(player, GameEvent.FLUID_PLACE, pos)
                     player.playSound(getEmptySound(tank.fluid.fluid, stack).event, SoundCategory.BLOCKS, 1f, 1f)
                 }
 
@@ -69,7 +69,7 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
 
         if (result.isSuccess) {
             if (!w.isClient) {
-                w.emitGameEvent(GameEvent.FLUID_PICKUP, pos)
+                w.emitGameEvent(player, GameEvent.FLUID_PICKUP, pos)
                 player.playSound(getFillSound(tankFluid, stack).event, SoundCategory.BLOCKS, 1f, 1f)
             }
 

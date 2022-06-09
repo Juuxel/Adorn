@@ -7,15 +7,14 @@ import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.texture.Sprite
 import net.minecraft.client.texture.SpriteAtlasTexture
 import net.minecraft.fluid.Fluid
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.BlockRenderView
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
 import net.minecraftforge.fluids.FluidStack
+import net.minecraftforge.registries.ForgeRegistries
 
 object FluidRenderingBridgeForge : FluidRenderingBridge {
     private fun stackOf(volume: FluidReference): FluidStack =
@@ -45,17 +44,17 @@ object FluidRenderingBridgeForge : FluidRenderingBridge {
         val fluid: Fluid = volume.fluid
         val stack = stackOf(volume)
         val name = stack.displayName
-        add(LiteralText("").append(name).formatted(fluid.attributes.getRarity(stack).formatting))
+        add(Text.empty().append(name).formatted(fluid.attributes.getRarity(stack).formatting))
 
         if (maxAmountInLitres != null) {
-            add(TranslatableText("gui.adorn.litres_fraction", volume.amount, maxAmountInLitres))
+            add(Text.translatable("gui.adorn.litres_fraction", volume.amount, maxAmountInLitres))
         } else {
-            add(TranslatableText("gui.adorn.litres", volume.amount))
+            add(Text.translatable("gui.adorn.litres", volume.amount))
         }
 
         // Append ID if advanced
         if (context.isAdvanced) {
-            add(LiteralText(fluid.registryName.toString()).formatted(Formatting.DARK_GRAY))
+            add(Text.literal(ForgeRegistries.FLUIDS.getKey(fluid).toString()).formatted(Formatting.DARK_GRAY))
         }
     }
 }
