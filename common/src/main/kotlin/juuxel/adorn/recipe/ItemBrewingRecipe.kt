@@ -3,7 +3,6 @@ package juuxel.adorn.recipe
 import com.google.gson.JsonObject
 import juuxel.adorn.block.entity.BrewerBlockEntity.Companion.LEFT_INGREDIENT_SLOT
 import juuxel.adorn.block.entity.BrewerBlockEntity.Companion.RIGHT_INGREDIENT_SLOT
-import juuxel.adorn.util.ForgeRegistryEntryImpl
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.Ingredient
@@ -33,7 +32,7 @@ class ItemBrewingRecipe(
     override fun getId(): Identifier = id
     override fun getSerializer(): RecipeSerializer<*> = AdornRecipes.BREWING_SERIALIZER
 
-    class Serializer : ForgeRegistryEntryImpl<RecipeSerializer<*>>(RecipeSerializer::class.java), RecipeSerializer<ItemBrewingRecipe> {
+    class Serializer : RecipeSerializer<ItemBrewingRecipe> {
         override fun read(id: Identifier, json: JsonObject): ItemBrewingRecipe {
             val first = Ingredient.fromJson(json["first_ingredient"])
             val secondJson = json["second_ingredient"]

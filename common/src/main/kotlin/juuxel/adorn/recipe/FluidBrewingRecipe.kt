@@ -5,7 +5,6 @@ import com.mojang.serialization.JsonOps
 import juuxel.adorn.block.entity.BrewerBlockEntity.Companion.LEFT_INGREDIENT_SLOT
 import juuxel.adorn.block.entity.BrewerBlockEntity.Companion.RIGHT_INGREDIENT_SLOT
 import juuxel.adorn.fluid.FluidIngredient
-import juuxel.adorn.util.ForgeRegistryEntryImpl
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.Ingredient
@@ -37,7 +36,7 @@ class FluidBrewingRecipe(
     override fun getId(): Identifier = id
     override fun getSerializer(): RecipeSerializer<*> = AdornRecipes.BREWING_FROM_FLUID_SERIALIZER
 
-    class Serializer : ForgeRegistryEntryImpl<RecipeSerializer<*>>(RecipeSerializer::class.java), RecipeSerializer<FluidBrewingRecipe> {
+    class Serializer : RecipeSerializer<FluidBrewingRecipe> {
         override fun read(id: Identifier, json: JsonObject): FluidBrewingRecipe {
             val first = Ingredient.fromJson(json["first_ingredient"])
             val secondJson = json["second_ingredient"]
