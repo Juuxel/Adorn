@@ -1,7 +1,7 @@
 {
   "parent": "adorn:item/templates/table",
   "textures": {
-    "planks": "byg:block/blue_enchanted_planks",
-    "log": "byg:block/blue_enchanted_log"
+    "planks": "byg:block/blue_enchanted/planks",
+    "log": "byg:block/blue_enchanted/log"
   }
 }

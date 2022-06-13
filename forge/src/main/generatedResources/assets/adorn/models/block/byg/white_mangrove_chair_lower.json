@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/chair_lower",
+  "textures": {
+    "planks": "byg:block/white_mangrove/planks"
+  }
+}

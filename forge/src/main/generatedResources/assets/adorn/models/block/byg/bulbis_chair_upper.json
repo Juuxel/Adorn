@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/chair_upper",
   "textures": {
-    "planks": "byg:block/bulbis_planks"
+    "planks": "byg:block/bulbis/planks"
   }
 }

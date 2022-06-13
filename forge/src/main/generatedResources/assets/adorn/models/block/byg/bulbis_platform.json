@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/platform",
   "textures": {
-    "texture": "byg:block/bulbis_planks"
+    "texture": "byg:block/bulbis/planks"
   }
 }

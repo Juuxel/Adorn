@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/bench_top",
   "textures": {
-    "planks": "byg:block/baobab_planks"
+    "planks": "byg:block/baobab/planks"
   }
 }

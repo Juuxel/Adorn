@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/platform",
   "textures": {
-    "texture": "byg:block/rainbow_eucalyptus_planks"
+    "texture": "byg:block/rainbow_eucalyptus/planks"
   }
 }

@@ -1,24 +1,32 @@
-<data_generators condition_type="fabric">
+<data_generators condition_type="forge">
+    <replace key="wood_texture_separator" with="/"/>
     <wood id="byg:aspen"/>
     <wood id="byg:baobab"/>
     <wood id="byg:blue_enchanted"/>
-    <wood id="byg:bulbis" fungus="true"/>
+    <wood id="byg:bulbis" fungus="true">
+        <replace key="log_side" with="byg:block/bulbis/log"/>
+        <replace key="log_end" with="byg:block/bulbis/log_top"/>
+    </wood>
     <wood id="byg:cherry"/>
     <wood id="byg:cika"/>
     <wood id="byg:cypress"/>
     <wood id="byg:ebony"/>
     <wood id="byg:embur">
         <replace key="log" with="byg:embur_pedu" id="true"/>
+        <replace key="log_side" with="byg:block/embur/log"/>
+        <replace key="log_end" with="byg:block/embur/log_top"/>
     </wood>
     <wood id="byg:ether"/>
     <wood id="byg:fir"/>
     <wood id="byg:green_enchanted"/>
     <wood id="byg:holly"/>
-    <wood id="byg:imparius" fungus="true"/>
+    <wood id="byg:imparius" fungus="true">
+        <replace key="log_side" with="byg:block/imparius/log"/>
+        <replace key="log_end" with="byg:block/imparius/log_top"/>
+    </wood>
     <wood id="byg:jacaranda"/>
     <wood id="byg:lament"/>
     <wood id="byg:mahogany"/>
-    <wood id="byg:mangrove"/>
     <wood id="byg:maple"/>
     <wood id="byg:nightshade"/>
     <wood id="byg:palm"/>
@@ -26,7 +34,11 @@
     <wood id="byg:rainbow_eucalyptus"/>
     <wood id="byg:redwood"/>
     <wood id="byg:skyris"/>
-    <wood id="byg:sythian" fungus="true"/>
+    <wood id="byg:sythian" fungus="true">
+        <replace key="log_side" with="byg:block/sythian/log"/>
+        <replace key="log_end" with="byg:block/sythian/log_top"/>
+    </wood>
+    <wood id="byg:white_mangrove"/>
     <wood id="byg:willow"/>
     <wood id="byg:witch_hazel"/>
     <wood id="byg:zelkova"/>

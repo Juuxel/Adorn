@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/step",
   "textures": {
-    "texture": "byg:block/cika_planks"
+    "texture": "byg:block/cika/planks"
   }
 }

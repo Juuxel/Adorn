@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/table_leg",
   "textures": {
-    "log": "byg:block/imparius_stem"
+    "log": "byg:block/imparius/log"
   }
 }

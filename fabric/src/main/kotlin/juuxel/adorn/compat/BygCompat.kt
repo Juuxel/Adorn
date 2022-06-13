@@ -21,7 +21,6 @@ object BygCompat : BlockVariantSet {
         "jacaranda",
         "lament",
         "mahogany",
-        "mangrove",
         "maple",
         "nightshade",
         "palm",
@@ -30,6 +29,7 @@ object BygCompat : BlockVariantSet {
         "redwood",
         "skyris",
         "sythian",
+        "white_mangrove",
         "willow",
         "witch_hazel",
         "zelkova"

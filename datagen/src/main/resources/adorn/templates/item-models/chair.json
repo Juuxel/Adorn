@@ -1,6 +1,6 @@
 {
   "parent": "adorn:item/templates/chair",
   "textures": {
-    "planks": "<planks.namespace>:block/<planks.path>"
+    "planks": "<main-texture>"
   }
 }

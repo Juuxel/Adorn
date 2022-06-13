@@ -1,8 +1,8 @@
 {
   "parent": "adorn:block/templates/coffee_table",
   "textures": {
-    "planks": "byg:block/mahogany_planks",
-    "leg": "byg:block/mahogany_log",
-    "rim": "byg:block/mahogany_log"
+    "planks": "byg:block/mahogany/planks",
+    "leg": "byg:block/mahogany/log",
+    "rim": "byg:block/mahogany/log"
   }
 }

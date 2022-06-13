@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/table",
   "textures": {
-    "planks": "byg:block/green_enchanted_planks"
+    "planks": "byg:block/green_enchanted/planks"
   }
 }

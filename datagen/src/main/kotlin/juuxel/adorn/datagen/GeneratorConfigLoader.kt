@@ -17,20 +17,19 @@ object GeneratorConfigLoader {
         val wools = if (root.getAttribute(Attributes.WOOL).toBoolean()) ColorMaterial.values() else emptyArray()
         val conditionType = ConditionType.parse(root.getAttribute(Attributes.CONDITION_TYPE))
             ?: error("Unknown condition type in $path: ${root.getAttribute(Attributes.CONDITION_TYPE)}")
+        val rootReplacements = getReplacements(root)
         return GeneratorConfig(
             woods, stones,
             wools.mapTo(LinkedHashSet()) {
                 GeneratorConfig.MaterialEntry(it, exclude = emptySet(), replace = emptyMap())
             },
-            conditionType
+            conditionType,
+            rootReplacements,
         )
     }
 
-    private fun <M : Material> readMaterialEntry(element: Element, material: M): GeneratorConfig.MaterialEntry<M> {
-        val exclude = element.getElementSequenceByTagName(Tags.EXCLUDE).mapTo(LinkedHashSet()) {
-            it.getAttribute(Attributes.GENERATOR)
-        }
-        val replace = buildSubstitutions {
+    private fun getReplacements(element: Element): Map<String, String> =
+        buildSubstitutions {
             for (replaceElement in element.getElementSequenceByTagName(Tags.REPLACE)) {
                 val key = replaceElement.getAttribute(Attributes.KEY)
                 val value = replaceElement.getAttribute(Attributes.WITH)
@@ -38,6 +37,12 @@ object GeneratorConfigLoader {
                 if (id) key withId value else key with value
             }
         }
+
+    private fun <M : Material> readMaterialEntry(element: Element, material: M): GeneratorConfig.MaterialEntry<M> {
+        val exclude = element.getElementSequenceByTagName(Tags.EXCLUDE).mapTo(LinkedHashSet()) {
+            it.getAttribute(Attributes.GENERATOR)
+        }
+        val replace = getReplacements(element)
         return GeneratorConfig.MaterialEntry(material, exclude, replace)
     }
 

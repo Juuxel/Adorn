@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/post",
   "textures": {
-    "texture": "byg:block/willow_planks"
+    "texture": "byg:block/willow/planks"
   }
 }

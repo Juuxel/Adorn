@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/kitchen_counter",
   "textures": {
-    "planks": "byg:block/blue_enchanted_planks"
+    "planks": "byg:block/blue_enchanted/planks"
   }
 }

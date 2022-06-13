@@ -65,17 +65,17 @@ abstract class GenerateData : DefaultTask() {
     companion object {
         private fun generate(outputPath: Path, config: GeneratorConfig, cache: TemplateCache) {
             val stoneMaterials = config.stones
-            generate(outputPath, Generator.STONE_GENERATORS, stoneMaterials, cache, config.conditionType)
-            generate(outputPath, Generator.SIDED_STONE_GENERATORS, stoneMaterials.filter { it.material.hasSidedTexture }, cache, config.conditionType)
+            generate(outputPath, Generator.STONE_GENERATORS, stoneMaterials, cache, config)
+            generate(outputPath, Generator.SIDED_STONE_GENERATORS, stoneMaterials.filter { it.material.hasSidedTexture }, cache, config)
             generate(
                 outputPath,
                 Generator.UNSIDED_STONE_GENERATORS,
                 stoneMaterials.filter { !it.material.hasSidedTexture },
                 cache,
-                config.conditionType
+                config
             )
-            generate(outputPath, Generator.WOOD_GENERATORS, config.woods, cache, config.conditionType)
-            generate(outputPath, Generator.WOOL_GENERATORS, config.wools, cache, config.conditionType)
+            generate(outputPath, Generator.WOOD_GENERATORS, config.woods, cache, config)
+            generate(outputPath, Generator.WOOL_GENERATORS, config.wools, cache, config)
         }
 
         private fun <M : Material> generate(
@@ -83,8 +83,9 @@ abstract class GenerateData : DefaultTask() {
             gens: List<Generator<M>>,
             mats: Iterable<GeneratorConfig.MaterialEntry<M>>,
             templateCache: TemplateCache,
-            conditionType: ConditionType
+            config: GeneratorConfig,
         ) {
+            val conditionType = config.conditionType
             for (gen in gens) {
                 val templateText = templateCache.load(gen.templatePath)
 
@@ -92,6 +93,7 @@ abstract class GenerateData : DefaultTask() {
                     if (gen.id in exclude) continue
 
                     val mainSubstitutions = buildSubstitutions {
+                        "wood_texture_separator" with "_"
                         "advancement-condition" with "<load-condition>"
                         "loot-table-condition" with "<load-condition>"
                         "recipe-condition" with "<load-condition>"
@@ -101,6 +103,7 @@ abstract class GenerateData : DefaultTask() {
                             "$type-condition" with templateCache.load(path)
                         }
 
+                        putAll(config.rootReplacements)
                         init(mat)
                         gen.substitutionConfig(this, mat)
                         putAll(replace)

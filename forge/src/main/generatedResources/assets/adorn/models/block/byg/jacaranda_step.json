@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/step",
   "textures": {
-    "texture": "byg:block/jacaranda_planks"
+    "texture": "byg:block/jacaranda/planks"
   }
 }

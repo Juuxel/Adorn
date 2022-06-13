@@ -4,7 +4,8 @@ data class GeneratorConfig(
     val woods: Set<MaterialEntry<WoodMaterial>>,
     val stones: Set<MaterialEntry<StoneMaterial>>,
     val wools: Set<MaterialEntry<ColorMaterial>>,
-    val conditionType: ConditionType
+    val conditionType: ConditionType,
+    val rootReplacements: Map<String, String>,
 ) {
     data class MaterialEntry<out M : Material>(
         val material: M,

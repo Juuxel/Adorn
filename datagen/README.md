@@ -90,11 +90,13 @@ Each data generator config file is an XML file in `<project dir>/src/data` with 
   - Attributes common to all materials:
     - `id` (required): the unique namespaced ID of the material from which all the main properties are derived
 - "Fine tuning tags"
-  - Nested directly in material tags
   - `<exclude>`: excludes a generator from being used for this material
+    - Nested directly in material tags
     - Attributes:
       - `generator` (required): the ID of the excluded generator, see `Generator.kt` in this subproject
   - `<replace>`: replaces the value of a property
+    - Nested directly in the root tag or material tags
+      - Replacements in material tags take precedence over ones in the root tag
     - Attributes:
       - `key` (required): the property key/name
       - `value` (required): the property value

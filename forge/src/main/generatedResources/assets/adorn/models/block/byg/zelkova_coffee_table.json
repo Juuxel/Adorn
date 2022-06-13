@@ -1,8 +1,8 @@
 {
   "parent": "adorn:block/templates/coffee_table",
   "textures": {
-    "planks": "byg:block/zelkova_planks",
-    "leg": "byg:block/zelkova_log",
-    "rim": "byg:block/zelkova_log"
+    "planks": "byg:block/zelkova/planks",
+    "leg": "byg:block/zelkova/log",
+    "rim": "byg:block/zelkova/log"
   }
 }

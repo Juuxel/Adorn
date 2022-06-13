@@ -1,7 +1,7 @@
 {
   "parent": "adorn:block/templates/bench_leg",
   "textures": {
-    "log": "byg:block/bulbis_stem",
-    "end": "byg:block/bulbis_stem_top"
+    "log": "byg:block/bulbis/log",
+    "end": "byg:block/bulbis/log_top"
   }
 }

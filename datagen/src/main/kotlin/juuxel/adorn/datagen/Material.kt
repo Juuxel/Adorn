@@ -31,19 +31,18 @@ class WoodMaterial(override val id: Id, private val fungus: Boolean, val nonFlam
     override val planks = id.suffixed("planks")
     override val stick = Material.STICK
 
-    val log =
-        if (fungus) id.suffixed("stem")
-        else id.suffixed("log")
+    private val logName = if (fungus) "stem" else "log"
+    val log = id.suffixed(logName)
 
     override val snowflake = "wood/$id/fungus=$fungus"
 
     override fun TemplateDsl.appendTemplates() {
-        "main-texture" with "<planks.namespace>:block/<planks.path>"
+        "main-texture" with "<planks.namespace>:block/${id.path}<wood_texture_separator>planks"
         "planks" with planks
         "slab" with slab
         "log" with log
-        "log_side" with "<log.namespace>:block/<log.path>"
-        "log_end" with "<log.namespace>:block/<log.path>_top"
+        "log_side" with "<log.namespace>:block/${id.path}<wood_texture_separator>$logName"
+        "log_end" with "<log.namespace>:block/${id.path}<wood_texture_separator>${logName}_top"
     }
 }
 

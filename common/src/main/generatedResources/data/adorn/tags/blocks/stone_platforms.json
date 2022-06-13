@@ -59,6 +59,19 @@
     { "id": "adorn:terrestria/basalt_cobblestone_platform", "required": false },
     { "id": "adorn:terrestria/mossy_basalt_brick_platform", "required": false },
     { "id": "adorn:terrestria/mossy_basalt_cobblestone_platform", "required": false },
-    { "id": "adorn:terrestria/smooth_basalt_platform", "required": false }
+    { "id": "adorn:terrestria/smooth_basalt_platform", "required": false },
+    { "id": "adorn:architects_palette/myonite_platform", "required": false },
+    { "id": "adorn:architects_palette/myonite_brick_platform", "required": false },
+    { "id": "adorn:architects_palette/mushy_myonite_brick_platform", "required": false },
+    { "id": "adorn:biomesoplenty/mud_brick_platform", "required": false },
+    { "id": "adorn:biomesoplenty/black_sandstone_platform", "required": false },
+    { "id": "adorn:biomesoplenty/cut_black_sandstone_platform", "required": false },
+    { "id": "adorn:biomesoplenty/smooth_black_sandstone_platform", "required": false },
+    { "id": "adorn:biomesoplenty/orange_sandstone_platform", "required": false },
+    { "id": "adorn:biomesoplenty/cut_orange_sandstone_platform", "required": false },
+    { "id": "adorn:biomesoplenty/smooth_orange_sandstone_platform", "required": false },
+    { "id": "adorn:biomesoplenty/white_sandstone_platform", "required": false },
+    { "id": "adorn:biomesoplenty/cut_white_sandstone_platform", "required": false },
+    { "id": "adorn:biomesoplenty/smooth_white_sandstone_platform", "required": false }
   ]
 }

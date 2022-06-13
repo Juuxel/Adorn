@@ -1,6 +1,6 @@
 {
   "parent": "adorn:item/templates/kitchen_cupboard",
   "textures": {
-    "planks": "byg:block/willow_planks"
+    "planks": "byg:block/willow/planks"
   }
 }

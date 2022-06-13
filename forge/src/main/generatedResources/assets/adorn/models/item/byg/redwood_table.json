@@ -1,7 +1,7 @@
 {
   "parent": "adorn:item/templates/table",
   "textures": {
-    "planks": "byg:block/redwood_planks",
-    "log": "byg:block/redwood_log"
+    "planks": "byg:block/redwood/planks",
+    "log": "byg:block/redwood/log"
   }
 }

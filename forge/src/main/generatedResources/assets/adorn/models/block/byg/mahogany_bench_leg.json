@@ -1,7 +1,7 @@
 {
   "parent": "adorn:block/templates/bench_leg",
   "textures": {
-    "log": "byg:block/mahogany_log",
-    "end": "byg:block/mahogany_log_top"
+    "log": "byg:block/mahogany/log",
+    "end": "byg:block/mahogany/log_top"
   }
 }
