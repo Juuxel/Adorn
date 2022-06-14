@@ -1,4 +1,4 @@
-<data_generators condition_type="forge">
+<data_generators condition_type="fabric">
     <replace key="wood_texture_separator" with="/"/>
     <wood id="byg:aspen"/>
     <wood id="byg:baobab"/>
