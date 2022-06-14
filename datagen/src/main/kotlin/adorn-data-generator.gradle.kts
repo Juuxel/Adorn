@@ -1,3 +1,4 @@
+import juuxel.adorn.datagen.gradle.DataGeneratorExtension
 import juuxel.adorn.datagen.gradle.DeleteDuplicates
 import juuxel.adorn.datagen.gradle.GenerateData
 import juuxel.adorn.datagen.gradle.GenerateTags
@@ -6,11 +7,14 @@ plugins {
     java
 }
 
+val extension = extensions.create("dataGenerator", DataGeneratorExtension::class)
+
 val generatedResources = layout.projectDirectory.dir("src/main/generatedResources")
 
 val generateMainData by tasks.registering(GenerateData::class) {
     configs.from(fileTree("src/data").filter { it.extension == "xml" })
     output.convention(generatedResources)
+    conditionType.convention(extension.conditionType)
 }
 
 val generateTags by tasks.registering(GenerateTags::class) {

@@ -10,6 +10,8 @@ import juuxel.adorn.datagen.buildSubstitutions
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.provider.Property
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
@@ -27,6 +29,9 @@ abstract class GenerateData : DefaultTask() {
     @get:OutputDirectory
     abstract val output: DirectoryProperty
 
+    @get:Input
+    abstract val conditionType: Property<String>
+
     @get:Inject
     protected abstract val workerExecutor: WorkerExecutor
 
@@ -35,12 +40,14 @@ abstract class GenerateData : DefaultTask() {
         workerExecutor.noIsolation().submit(GenerationAction::class.java) {
             configs.from(this@GenerateData.configs)
             output.set(this@GenerateData.output)
+            conditionType.set(ConditionType.parse(this@GenerateData.conditionType.get()) ?: ConditionType.NONE)
         }
     }
 
     interface GenerationParameters : WorkParameters {
         val configs: ConfigurableFileCollection
         val output: DirectoryProperty
+        val conditionType: Property<ConditionType>
     }
 
     abstract class GenerationAction : WorkAction<GenerationParameters> {
@@ -57,25 +64,26 @@ abstract class GenerateData : DefaultTask() {
             val cache = TemplateCache()
 
             for (configFile in parameters.configs) {
-                generate(outputPath, GeneratorConfigLoader.read(configFile.toPath()), cache)
+                generate(outputPath, GeneratorConfigLoader.read(configFile.toPath()), cache, parameters.conditionType.get())
             }
         }
     }
 
     companion object {
-        private fun generate(outputPath: Path, config: GeneratorConfig, cache: TemplateCache) {
+        private fun generate(outputPath: Path, config: GeneratorConfig, cache: TemplateCache, conditionType: ConditionType) {
             val stoneMaterials = config.stones
-            generate(outputPath, Generator.STONE_GENERATORS, stoneMaterials, cache, config)
-            generate(outputPath, Generator.SIDED_STONE_GENERATORS, stoneMaterials.filter { it.material.hasSidedTexture }, cache, config)
+            generate(outputPath, Generator.STONE_GENERATORS, stoneMaterials, cache, config, conditionType)
+            generate(outputPath, Generator.SIDED_STONE_GENERATORS, stoneMaterials.filter { it.material.hasSidedTexture }, cache, config, conditionType)
             generate(
                 outputPath,
                 Generator.UNSIDED_STONE_GENERATORS,
                 stoneMaterials.filter { !it.material.hasSidedTexture },
                 cache,
-                config
+                config,
+                conditionType,
             )
-            generate(outputPath, Generator.WOOD_GENERATORS, config.woods, cache, config)
-            generate(outputPath, Generator.WOOL_GENERATORS, config.wools, cache, config)
+            generate(outputPath, Generator.WOOD_GENERATORS, config.woods, cache, config, conditionType)
+            generate(outputPath, Generator.WOOL_GENERATORS, config.wools, cache, config, conditionType)
         }
 
         private fun <M : Material> generate(
@@ -84,8 +92,8 @@ abstract class GenerateData : DefaultTask() {
             mats: Iterable<GeneratorConfig.MaterialEntry<M>>,
             templateCache: TemplateCache,
             config: GeneratorConfig,
+            conditionType: ConditionType,
         ) {
-            val conditionType = config.conditionType
             for (gen in gens) {
                 val templateText = templateCache.load(gen.templatePath)
 

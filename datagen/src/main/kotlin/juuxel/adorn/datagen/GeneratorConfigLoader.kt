@@ -15,15 +15,12 @@ object GeneratorConfigLoader {
         val woods = root.getElementSequenceByTagName(Tags.WOOD).map(::readWood).toSet()
         val stones = root.getElementSequenceByTagName(Tags.STONE).map(::readStone).toSet()
         val wools = if (root.getAttribute(Attributes.WOOL).toBoolean()) ColorMaterial.values() else emptyArray()
-        val conditionType = ConditionType.parse(root.getAttribute(Attributes.CONDITION_TYPE))
-            ?: error("Unknown condition type in $path: ${root.getAttribute(Attributes.CONDITION_TYPE)}")
         val rootReplacements = getReplacements(root)
         return GeneratorConfig(
             woods, stones,
             wools.mapTo(LinkedHashSet()) {
                 GeneratorConfig.MaterialEntry(it, exclude = emptySet(), replace = emptyMap())
             },
-            conditionType,
             rootReplacements,
         )
     }
@@ -82,7 +79,6 @@ object GeneratorConfigLoader {
     }
 
     private object Attributes {
-        const val CONDITION_TYPE = "condition_type"
         const val WOOL = "wool"
         const val ID = "id"
         const val FUNGUS = "fungus"

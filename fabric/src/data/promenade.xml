@@ -1,4 +1,4 @@
-<data_generators condition_type="fabric">
+<data_generators>
     <wood id="promenade:cherry_oak">
         <replace key="log_side" with="promenade:block/cherry_oak_log/side"/>
         <replace key="log_end" with="promenade:block/cherry_oak_log/top"/>

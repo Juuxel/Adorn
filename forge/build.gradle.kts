@@ -27,6 +27,11 @@ loom {
     }
 }
 
+// Set the data generator to generate files with Forge resource conditions.
+dataGenerator {
+    conditionType.set("forge")
+}
+
 repositories {
     // Set up Kotlin for Forge's Maven repository.
     maven {

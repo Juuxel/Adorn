@@ -15,7 +15,10 @@ enum class ConditionType(
         private val BY_ID = values().associateBy { it.id }
 
         fun parse(id: String): ConditionType? =
-            if (id.isEmpty()) NONE
-            else BY_ID[id]
+            if (id.isEmpty()) {
+                null
+            } else {
+                BY_ID[id] ?: throw IllegalArgumentException("Unknown condition type '$id' (should be one of ${BY_ID.keys})")
+            }
     }
 }

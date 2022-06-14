@@ -24,6 +24,11 @@ loom {
     accessWidenerPath.set(accessWidenerFile)
 }
 
+// Set the data generator to generate files with Fabric resource conditions.
+dataGenerator {
+    conditionType.set("fabric")
+}
+
 sourceSets {
     main {
         resources {
