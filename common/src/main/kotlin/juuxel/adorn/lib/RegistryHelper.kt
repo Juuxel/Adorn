@@ -22,18 +22,16 @@ abstract class RegistryHelper {
     protected fun <T : Block> registerBlock(name: String, itemGroup: ItemGroup = ItemGroup.DECORATIONS, block: () -> T): Registered<T> =
         registerBlock(name, itemSettings = { Item.Settings().group(itemGroup) }, block)
 
-    // TODO: Check whether un-inlining this reduces jar size
     /**
      * Registers a [block] with the [name] and the [itemSettings].
      */
-    protected inline fun <T : Block> registerBlock(name: String, crossinline itemSettings: () -> Item.Settings, noinline block: () -> T): Registered<T> =
+    protected fun <T : Block> registerBlock(name: String, itemSettings: () -> Item.Settings, block: () -> T): Registered<T> =
         registerBlock(name, itemProvider = { makeItemForBlock(it, itemSettings()) }, block)
 
-    // TODO: Check whether un-inlining this reduces jar size
     /**
      * Registers a [block] with the [name] and an item created by the [itemProvider].
      */
-    protected inline fun <T : Block> registerBlock(name: String, crossinline itemProvider: (T) -> Item, noinline block: () -> T): Registered<T> {
+    protected fun <T : Block> registerBlock(name: String, itemProvider: (T) -> Item, block: () -> T): Registered<T> {
         val registered = registerBlockWithoutItem(name, block)
         registerItem(name) { itemProvider(registered.get()) }
         return registered

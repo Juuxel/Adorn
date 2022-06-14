@@ -7,7 +7,7 @@ import net.minecraft.util.registry.Registry
  * Registers a [visitor] for this registry that will be called for each
  * entry currently in the registry, and all future entries.
  */
-inline fun <A> Registry<A>.visit(crossinline visitor: (A) -> Unit) {
+fun <A> Registry<A>.visit(visitor: (A) -> Unit) {
     this.forEach(visitor)
 
     RegistryEntryAddedCallback.event(this)
