@@ -22,19 +22,17 @@ import net.minecraft.util.ActionResult
 
 object AdornBlocksFabric {
     fun init() {
-        UseBlockCallback.EVENT.register(
-            UseBlockCallback { player, world, hand, hitResult ->
-                val state = world.getBlockState(hitResult.blockPos)
-                val block = state.block
-                // Check that:
-                // - the block is a sneak-click handler
-                // - the player is sneaking
-                // - the player isn't holding an item (for block item and bucket support)
-                if (block is SneakClickHandler && player.isSneaking && player.getStackInHand(hand).isEmpty) {
-                    block.onSneakClick(state, world, hitResult.blockPos, player, hand, hitResult)
-                } else ActionResult.PASS
-            }
-        )
+        UseBlockCallback.EVENT.register { player, world, hand, hitResult ->
+            val state = world.getBlockState(hitResult.blockPos)
+            val block = state.block
+            // Check that:
+            // - the block is a sneak-click handler
+            // - the player is sneaking
+            // - the player isn't holding an item (for block item and bucket support)
+            if (block is SneakClickHandler && player.isSneaking && player.getStackInHand(hand).isEmpty) {
+                block.onSneakClick(state, world, hitResult.blockPos, player, hand, hitResult)
+            } else ActionResult.PASS
+        }
 
         UseBlockCallback.EVENT.register(CommonEventHandlers::handleCarpets)
         FluidStorage.SIDED.registerForBlocks(

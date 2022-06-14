@@ -11,9 +11,7 @@ inline fun <A> Registry<A>.visit(crossinline visitor: (A) -> Unit) {
     this.forEach(visitor)
 
     RegistryEntryAddedCallback.event(this)
-        .register(
-            RegistryEntryAddedCallback { _, _, entry ->
-                visitor(entry)
-            }
-        )
+        .register { _, _, entry ->
+            visitor(entry)
+        }
 }
