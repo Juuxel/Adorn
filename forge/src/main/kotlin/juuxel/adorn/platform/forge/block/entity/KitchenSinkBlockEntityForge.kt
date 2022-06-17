@@ -12,13 +12,11 @@ import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.potion.PotionUtil
 import net.minecraft.potion.Potions
-import net.minecraft.sound.SoundCategory
 import net.minecraft.tag.FluidTags
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.MathHelper
-import net.minecraft.world.event.GameEvent
 import net.minecraftforge.common.SoundActions
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
@@ -56,11 +54,7 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
             val result = FluidUtil.tryEmptyContainer(stack, tank, tank.space, null, true)
 
             if (result.isSuccess) {
-                if (!w.isClient) {
-                    w.emitGameEvent(player, GameEvent.FLUID_PLACE, pos)
-                    player.playSound(getEmptySound(tank.fluid.fluid, stack).event, SoundCategory.BLOCKS, 1f, 1f)
-                }
-
+                onFill(tank.fluid.fluid, stack, player)
                 setStackOrInsert(player, hand, result.result)
                 markDirtyAndSync()
                 return true
@@ -72,11 +66,7 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
         val result = FluidUtil.tryFillContainer(stack, tank, tank.fluidAmount, null, true)
 
         if (result.isSuccess) {
-            if (!w.isClient) {
-                w.emitGameEvent(player, GameEvent.FLUID_PICKUP, pos)
-                player.playSound(getFillSound(tankFluid, stack).event, SoundCategory.BLOCKS, 1f, 1f)
-            }
-
+            onPickUp(tankFluid, stack, player)
             setStackOrInsert(player, hand, result.result)
             markDirtyAndSync()
             return true
@@ -89,9 +79,7 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
                 val bottle = ItemStack(Items.POTION)
                 PotionUtil.setPotion(bottle, Potions.WATER)
                 setStackOrInsert(player, hand, bottle)
-                if (!world!!.isClient) {
-                    player.playSound(getFillSound(Fluids.WATER, stack).event, SoundCategory.BLOCKS, 1f, 1f)
-                }
+                onPickUp(Fluids.WATER, stack, player)
                 return true
             }
         } else if (stack.isOf(Items.POTION)) {
@@ -103,9 +91,7 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
                 tank.fill(fluid, IFluidHandler.FluidAction.EXECUTE)
                 setStackOrInsert(player, hand, ItemStack(Items.GLASS_BOTTLE))
                 markDirtyAndSync()
-                if (!world!!.isClient) {
-                    player.playSound(getEmptySound(Fluids.WATER, stack).event, SoundCategory.BLOCKS, 1f, 1f)
-                }
+                onFill(Fluids.WATER, stack, player)
                 return true
             }
         }
@@ -132,11 +118,11 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
         return true
     }
 
-    override fun getFillSound(fluid: Fluid, stack: ItemStack): FluidItemSound =
-        super.getFillSound(fluid, stack).orElse(fluid.fluidType.getSound(SoundActions.BUCKET_FILL))
+    override fun getFillSound(fluid: Fluid, stack: ItemStack, player: PlayerEntity): FluidItemSound =
+        super.getFillSound(fluid, stack, player).orElse(fluid.fluidType.getSound(player, world, pos, SoundActions.BUCKET_FILL))
 
-    override fun getEmptySound(fluid: Fluid, stack: ItemStack): FluidItemSound =
-        super.getEmptySound(fluid, stack).orElse(fluid.fluidType.getSound(SoundActions.BUCKET_EMPTY))
+    override fun getEmptySound(fluid: Fluid, stack: ItemStack, player: PlayerEntity): FluidItemSound =
+        super.getEmptySound(fluid, stack, player).orElse(fluid.fluidType.getSound(player, world, pos, SoundActions.BUCKET_EMPTY))
 
     override fun readNbt(nbt: NbtCompound) {
         super.readNbt(nbt)

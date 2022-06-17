@@ -16,12 +16,14 @@ import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.potion.PotionUtil
 import net.minecraft.potion.Potions
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.tag.FluidTags
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraft.world.event.GameEvent
 
 abstract class KitchenSinkBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(AdornBlockEntities.KITCHEN_SINK, pos, state) {
     /** A reference to the current fluid contents of this sink. */
@@ -39,7 +41,31 @@ abstract class KitchenSinkBlockEntity(pos: BlockPos, state: BlockState) : BlockE
      */
     abstract fun clearFluidsWithSponge(): Boolean
 
-    protected open fun getFillSound(fluid: Fluid, stack: ItemStack): FluidItemSound {
+    /**
+     * Called when this kitchen sink is filled with fluids.
+     * Dispatches the game event and plays the sound.
+     */
+    protected fun onFill(fluid: Fluid, stack: ItemStack, player: PlayerEntity) {
+        val w = world!!
+        if (!w.isClient) {
+            w.emitGameEvent(player, GameEvent.FLUID_PLACE, pos)
+            player.playSound(getEmptySound(fluid, stack, player).event, SoundCategory.BLOCKS, 1f, 1f)
+        }
+    }
+
+    /**
+     * Called when fluids are picked up from this kitchen sink.
+     * Dispatches the game event and plays the sound.
+     */
+    protected fun onPickUp(fluid: Fluid, stack: ItemStack, player: PlayerEntity) {
+        val w = world!!
+        if (!w.isClient) {
+            w.emitGameEvent(player, GameEvent.FLUID_PICKUP, pos)
+            player.playSound(getFillSound(fluid, stack, player).event, SoundCategory.BLOCKS, 1f, 1f)
+        }
+    }
+
+    protected open fun getFillSound(fluid: Fluid, stack: ItemStack, player: PlayerEntity): FluidItemSound {
         if (stack.isOf(Items.GLASS_BOTTLE)) {
             return FluidItemSound(SoundEvents.ITEM_BOTTLE_FILL, true)
         }
@@ -47,7 +73,7 @@ abstract class KitchenSinkBlockEntity(pos: BlockPos, state: BlockState) : BlockE
         return FluidItemSound(fluid.bucketFillSound.orElse(SoundEvents.ITEM_BUCKET_FILL), false)
     }
 
-    protected open fun getEmptySound(fluid: Fluid, stack: ItemStack): FluidItemSound {
+    protected open fun getEmptySound(fluid: Fluid, stack: ItemStack, player: PlayerEntity): FluidItemSound {
         if (stack.isOf(Items.POTION) && PotionUtil.getPotion(stack) == Potions.WATER) {
             return FluidItemSound(SoundEvents.ITEM_BOTTLE_EMPTY, true)
         }

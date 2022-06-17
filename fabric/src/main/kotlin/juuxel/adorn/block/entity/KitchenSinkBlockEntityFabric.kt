@@ -19,13 +19,11 @@ import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.sound.SoundCategory
 import net.minecraft.tag.FluidTags
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.MathHelper
-import net.minecraft.world.event.GameEvent
 import kotlin.math.min
 
 class KitchenSinkBlockEntityFabric(pos: BlockPos, state: BlockState) : KitchenSinkBlockEntity(pos, state) {
@@ -63,11 +61,7 @@ class KitchenSinkBlockEntityFabric(pos: BlockPos, state: BlockState) : KitchenSi
             val moved = StorageUtil.move(itemStorage, storage, Predicates.alwaysTrue(), Long.MAX_VALUE, null)
 
             if (moved > 0) {
-                if (!w.isClient) {
-                    player.playSound(getEmptySound(storage.variant.fluid, stack).event, SoundCategory.BLOCKS, 1f, 1f)
-                    w.emitGameEvent(player, GameEvent.FLUID_PLACE, pos)
-                }
-
+                onFill(storage.variant.fluid, stack, player)
                 markDirtyAndSync()
                 return true
             }
@@ -76,11 +70,7 @@ class KitchenSinkBlockEntityFabric(pos: BlockPos, state: BlockState) : KitchenSi
         val moved = StorageUtil.move(storage, itemStorage, Predicates.alwaysTrue(), Long.MAX_VALUE, null)
 
         if (moved > 0) {
-            if (!w.isClient) {
-                player.playSound(getFillSound(storage.variant.fluid, stack).event, SoundCategory.BLOCKS, 1f, 1f)
-                w.emitGameEvent(player, GameEvent.FLUID_PICKUP, pos)
-            }
-
+            onPickUp(storage.variant.fluid, stack, player)
             markDirtyAndSync()
             return true
         }
