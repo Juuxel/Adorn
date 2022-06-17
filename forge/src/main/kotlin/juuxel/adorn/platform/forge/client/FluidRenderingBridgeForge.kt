@@ -31,7 +31,11 @@ object FluidRenderingBridgeForge : FluidRenderingBridge {
     @OnlyIn(Dist.CLIENT)
     override fun getColor(volume: FluidReference, world: BlockRenderView?, pos: BlockPos?): Int {
         val fluid: Fluid = volume.fluid
-        return RenderProperties.get(fluid).getColorTint(stackOf(volume))
+        return if (world != null && pos != null) {
+            RenderProperties.get(fluid).getColorTint(fluid.defaultState, world, pos)
+        } else {
+            RenderProperties.get(fluid).getColorTint(stackOf(volume))
+        }
     }
 
     @OnlyIn(Dist.CLIENT)
