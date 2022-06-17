@@ -2,6 +2,7 @@ package juuxel.adorn.platform.forge.client
 
 import juuxel.adorn.client.FluidRenderingBridge
 import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.platform.forge.util.FluidTankReference
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.texture.Sprite
@@ -19,7 +20,11 @@ import net.minecraftforge.registries.ForgeRegistries
 
 object FluidRenderingBridgeForge : FluidRenderingBridge {
     private fun stackOf(volume: FluidReference): FluidStack =
-        FluidStack(volume.fluid, volume.amount.toInt(), volume.nbt)
+        if (volume is FluidTankReference) {
+            volume.tank.fluid
+        } else {
+            FluidStack(volume.fluid, volume.amount.toInt(), volume.nbt)
+        }
 
     @OnlyIn(Dist.CLIENT)
     override fun getStillSprite(volume: FluidReference): Sprite? {

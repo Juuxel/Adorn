@@ -54,6 +54,9 @@ abstract class FluidReference : HasFluidAmount {
     fun matches(ingredient: FluidIngredient): Boolean =
         ingredient.fluid.matches(fluid) && FluidUnit.compareVolumes(this, ingredient) >= 0 && nbt == ingredient.nbt
 
+    override fun toString() =
+        "FluidReference(fluid=${Registry.FLUID.getId(fluid)}, amount=$amount, nbt=$nbt)"
+
     companion object {
         fun areFluidsEqual(a: FluidReference, b: FluidReference): Boolean {
             if (a.isEmpty) return b.isEmpty

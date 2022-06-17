@@ -1,6 +1,7 @@
 package juuxel.adorn.client
 
 import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.util.FluidStorageReference
 import juuxel.adorn.util.Fractions
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -16,7 +17,11 @@ import net.minecraft.world.BlockRenderView
 
 object FluidRenderingBridgeFabric : FluidRenderingBridge {
     private fun variantOf(volume: FluidReference): FluidVariant =
-        FluidVariant.of(volume.fluid, volume.nbt)
+        if (volume is FluidStorageReference) {
+            volume.variant
+        } else {
+            FluidVariant.of(volume.fluid, volume.nbt)
+        }
 
     @Environment(EnvType.CLIENT)
     override fun getStillSprite(volume: FluidReference): Sprite? =

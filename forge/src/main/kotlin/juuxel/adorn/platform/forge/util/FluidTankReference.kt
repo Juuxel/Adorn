@@ -1,0 +1,33 @@
+package juuxel.adorn.platform.forge.util
+
+import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.fluid.FluidUnit
+import net.minecraft.fluid.Fluid
+import net.minecraft.nbt.NbtCompound
+import net.minecraftforge.fluids.FluidStack
+import net.minecraftforge.fluids.capability.templates.FluidTank
+
+/**
+ * A [fluid reference][FluidReference] to a [FluidTank].
+ */
+class FluidTankReference(val tank: FluidTank) : FluidReference() {
+    override var fluid: Fluid
+        get() = tank.fluid.fluid
+        set(value) {
+            tank.fluid = FluidStack(value, tank.fluid.amount, tank.fluid.tag)
+        }
+
+    override var amount: Long
+        get() = tank.fluid.amount.toLong()
+        set(value) {
+            tank.fluid.amount = value.toInt()
+        }
+
+    override var nbt: NbtCompound?
+        get() = tank.fluid.tag
+        set(value) {
+            tank.fluid.tag = value
+        }
+
+    override val unit = FluidUnit.LITRE
+}

@@ -2,15 +2,13 @@ package juuxel.adorn.platform.forge.block.entity
 
 import juuxel.adorn.block.entity.BrewerBlockEntity
 import juuxel.adorn.fluid.FluidReference
-import juuxel.adorn.fluid.FluidUnit
+import juuxel.adorn.platform.forge.util.FluidTankReference
 import net.minecraft.block.BlockState
-import net.minecraft.fluid.Fluid
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
-import net.minecraftforge.fluids.FluidStack
 import net.minecraftforge.fluids.FluidType
 import net.minecraftforge.fluids.FluidUtil
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler
@@ -26,27 +24,7 @@ class BrewerBlockEntityForge(pos: BlockPos, state: BlockState) : BrewerBlockEnti
             markDirty()
         }
     }
-    override val fluidReference = object : FluidReference() {
-        override var fluid: Fluid
-            get() = tank.fluid.fluid
-            set(value) {
-                tank.fluid = FluidStack(value, tank.fluid.amount, tank.fluid.tag)
-            }
-
-        override var amount: Long
-            get() = tank.fluid.amount.toLong()
-            set(value) {
-                tank.fluid.amount = value.toInt()
-            }
-
-        override var nbt: NbtCompound?
-            get() = tank.fluid.tag
-            set(value) {
-                tank.fluid.tag = value
-            }
-
-        override val unit = FluidUnit.LITRE
-    }
+    override val fluidReference: FluidReference = FluidTankReference(tank)
     private val tankHolder = LazyOptional.of { tank }
 
     private fun createItemHandlers(): Array<LazyOptional<IItemHandlerModifiable>> =
