@@ -139,10 +139,13 @@ subprojects {
             options.release.set(17)
         }
 
-        // Set the Kotlin JVM target to match the Java version
-        // for all Kotlin compilation tasks.
         withType<KotlinCompile> {
+            // Set the Kotlin JVM target to match the Java version
+            // for all Kotlin compilation tasks.
             kotlinOptions.jvmTarget = "17"
+
+            // Compile lambdas to invokedynamic.
+            kotlinOptions.freeCompilerArgs = listOf("-Xlambdas=indy")
         }
 
         // Include the license in the jar files.
