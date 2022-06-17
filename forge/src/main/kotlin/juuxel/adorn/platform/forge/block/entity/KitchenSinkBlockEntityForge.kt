@@ -76,22 +76,22 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
         if (stack.isOf(Items.GLASS_BOTTLE)) {
             // Since it's water, note that it won't drain anything. (infinite fluid)
             if (tank.fluid.isFluidEqual(PLAIN_WATER) && tank.fluidAmount >= BOTTLE_LITRES) {
+                onPickUp(Fluids.WATER, stack, player)
                 val bottle = ItemStack(Items.POTION)
                 PotionUtil.setPotion(bottle, Potions.WATER)
                 setStackOrInsert(player, hand, bottle)
-                onPickUp(Fluids.WATER, stack, player)
                 return true
             }
         } else if (stack.isOf(Items.POTION)) {
             val spaceForWater = tank.fluid.isEmpty || (tank.fluid.isFluidEqual(PLAIN_WATER) && tank.space >= BOTTLE_LITRES)
 
             if (spaceForWater && PotionUtil.getPotion(stack) == Potions.WATER) {
+                onFill(Fluids.WATER, stack, player)
                 val fluid = PLAIN_WATER.copy()
                 fluid.amount = BOTTLE_LITRES
                 tank.fill(fluid, IFluidHandler.FluidAction.EXECUTE)
                 setStackOrInsert(player, hand, ItemStack(Items.GLASS_BOTTLE))
                 markDirtyAndSync()
-                onFill(Fluids.WATER, stack, player)
                 return true
             }
         }
