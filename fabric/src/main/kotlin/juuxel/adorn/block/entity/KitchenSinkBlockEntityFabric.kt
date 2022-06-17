@@ -3,6 +3,8 @@
 package juuxel.adorn.block.entity
 
 import com.google.common.base.Predicates
+import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.util.FluidStorageReference
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants
@@ -49,6 +51,8 @@ class KitchenSinkBlockEntityFabric(pos: BlockPos, state: BlockState) : KitchenSi
             markDirtyAndSync()
         }
     }
+
+    override val fluidReference: FluidReference = FluidStorageReference(storage)
 
     override fun interactWithItem(stack: ItemStack, player: PlayerEntity, hand: Hand): Boolean {
         val w = world!!

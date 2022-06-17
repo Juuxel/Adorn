@@ -2,6 +2,8 @@ package juuxel.adorn.client.renderer
 
 import juuxel.adorn.block.AbstractKitchenCounterBlock
 import juuxel.adorn.block.entity.KitchenSinkBlockEntity
+import juuxel.adorn.client.FluidRenderingBridge
+import juuxel.adorn.util.logger
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.MinecraftClient
@@ -9,7 +11,9 @@ import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
+import net.minecraft.client.texture.MissingSprite
 import net.minecraft.client.texture.Sprite
+import net.minecraft.client.texture.SpriteAtlasTexture
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.MathHelper
@@ -60,15 +64,28 @@ abstract class KitchenSinkRenderer<T : KitchenSinkBlockEntity>(context: BlockEnt
     }
 
     /** Gets the [entity]'s fluid's sprite. */
-    protected abstract fun getFluidSprite(entity: T): Sprite
+    private fun getFluidSprite(entity: T): Sprite {
+        val sprite = FluidRenderingBridge.get().getStillSprite(entity.fluidReference)
+
+        if (sprite == null) {
+            LOGGER.error("Could not find sprite for fluid reference {} when rendering kitchen sink at {}", entity.fluidReference, entity.pos)
+            return MinecraftClient.getInstance()
+                .getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE)
+                .apply(MissingSprite.getMissingSpriteId())
+        }
+
+        return sprite
+    }
     /** Gets the [entity]'s fluid's color. */
-    protected abstract fun getFluidColor(entity: T): Int
+    private fun getFluidColor(entity: T): Int =
+        FluidRenderingBridge.get().getColor(entity.fluidReference, entity.world, entity.pos)
     /** Gets the fluid level from the [entity] in litres. */
     protected abstract fun getFluidLevel(entity: T): Double
     /** Tests whether the [entity] has no fluid inside. */
     protected abstract fun isEmpty(entity: T): Boolean
 
     companion object {
+        private val LOGGER = logger()
         private const val PX = 1 / 16f
         private const val X_START = 2 * PX
         private const val X_END = 13 * PX

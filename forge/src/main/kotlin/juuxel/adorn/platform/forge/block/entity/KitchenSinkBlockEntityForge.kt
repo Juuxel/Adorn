@@ -1,6 +1,8 @@
 package juuxel.adorn.platform.forge.block.entity
 
 import juuxel.adorn.block.entity.KitchenSinkBlockEntity
+import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.platform.forge.util.FluidTankReference
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
@@ -43,6 +45,7 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
         }
     }
 
+    override val fluidReference: FluidReference = FluidTankReference(tank)
     private val tankHolder = LazyOptional.of { tank }
 
     override fun interactWithItem(stack: ItemStack, player: PlayerEntity, hand: Hand): Boolean {

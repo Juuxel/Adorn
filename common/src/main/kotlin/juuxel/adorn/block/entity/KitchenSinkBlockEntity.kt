@@ -1,6 +1,7 @@
 package juuxel.adorn.block.entity
 
 import juuxel.adorn.block.AdornBlockEntities
+import juuxel.adorn.fluid.FluidReference
 import juuxel.adorn.lib.AdornGameRules
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -23,6 +24,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 abstract class KitchenSinkBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(AdornBlockEntities.KITCHEN_SINK, pos, state) {
+    /** A reference to the current fluid contents of this sink. */
+    abstract val fluidReference: FluidReference
+
     /**
      * Tries to interact with this kitchen sink with a fluid container [stack].
      * @return true if inserted and false otherwise
