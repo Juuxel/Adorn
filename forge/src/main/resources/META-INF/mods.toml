@@ -19,4 +19,4 @@ versionRange = "[1.19,1.20)"
 [[dependencies.adorn]]
 modId = "forge"
 mandatory = true
-versionRange="[40.1.0,)"
+versionRange="[41.0.38,)"

@@ -17,10 +17,11 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.event.GameEvent
+import net.minecraftforge.common.SoundActions
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
-import net.minecraftforge.fluids.FluidAttributes
 import net.minecraftforge.fluids.FluidStack
+import net.minecraftforge.fluids.FluidType
 import net.minecraftforge.fluids.FluidUtil
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler
 import net.minecraftforge.fluids.capability.IFluidHandler
@@ -28,7 +29,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank
 import kotlin.math.min
 
 class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSinkBlockEntity(pos, state) {
-    val tank: FluidTank = object : FluidTank(FluidAttributes.BUCKET_VOLUME) {
+    val tank: FluidTank = object : FluidTank(FluidType.BUCKET_VOLUME) {
         override fun drain(maxDrain: Int, action: IFluidHandler.FluidAction?): FluidStack {
             return if (supportsInfiniteExtraction(world!!, fluid.fluid)) {
                 FluidStack(fluid, min(fluidAmount, maxDrain))
@@ -129,10 +130,10 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
     }
 
     override fun getFillSound(fluid: Fluid, stack: ItemStack): FluidItemSound =
-        super.getFillSound(fluid, stack).orElse(fluid.attributes.fillSound)
+        super.getFillSound(fluid, stack).orElse(fluid.fluidType.getSound(SoundActions.BUCKET_FILL))
 
     override fun getEmptySound(fluid: Fluid, stack: ItemStack): FluidItemSound =
-        super.getEmptySound(fluid, stack).orElse(fluid.attributes.emptySound)
+        super.getEmptySound(fluid, stack).orElse(fluid.fluidType.getSound(SoundActions.BUCKET_EMPTY))
 
     override fun readNbt(nbt: NbtCompound) {
         super.readNbt(nbt)

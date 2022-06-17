@@ -10,8 +10,8 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
-import net.minecraftforge.fluids.FluidAttributes
 import net.minecraftforge.fluids.FluidStack
+import net.minecraftforge.fluids.FluidType
 import net.minecraftforge.fluids.FluidUtil
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler
 import net.minecraftforge.fluids.capability.templates.FluidTank
@@ -21,7 +21,7 @@ import net.minecraftforge.items.wrapper.SidedInvWrapper
 
 class BrewerBlockEntityForge(pos: BlockPos, state: BlockState) : BrewerBlockEntity(pos, state) {
     private var itemHandlers = createItemHandlers()
-    val tank = object : FluidTank(FLUID_CAPACITY_IN_BUCKETS * FluidAttributes.BUCKET_VOLUME) {
+    val tank = object : FluidTank(FLUID_CAPACITY_IN_BUCKETS * FluidType.BUCKET_VOLUME) {
         override fun onContentsChanged() {
             markDirty()
         }
