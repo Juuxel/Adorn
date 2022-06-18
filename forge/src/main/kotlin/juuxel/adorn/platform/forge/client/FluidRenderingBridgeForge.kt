@@ -2,7 +2,7 @@ package juuxel.adorn.platform.forge.client
 
 import juuxel.adorn.client.FluidRenderingBridge
 import juuxel.adorn.fluid.FluidReference
-import juuxel.adorn.platform.forge.util.FluidTankReference
+import juuxel.adorn.platform.forge.util.toFluidStack
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.texture.Sprite
@@ -15,22 +15,14 @@ import net.minecraft.world.BlockRenderView
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
 import net.minecraftforge.client.RenderProperties
-import net.minecraftforge.fluids.FluidStack
 import net.minecraftforge.registries.ForgeRegistries
 
 object FluidRenderingBridgeForge : FluidRenderingBridge {
-    private fun stackOf(volume: FluidReference): FluidStack =
-        if (volume is FluidTankReference) {
-            volume.tank.fluid
-        } else {
-            FluidStack(volume.fluid, volume.amount.toInt(), volume.nbt)
-        }
-
     @OnlyIn(Dist.CLIENT)
     override fun getStillSprite(volume: FluidReference): Sprite? {
         val fluid: Fluid = volume.fluid
         val atlas = MinecraftClient.getInstance().getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE)
-        return atlas.apply(RenderProperties.get(fluid).getStillTexture(stackOf(volume)))
+        return atlas.apply(RenderProperties.get(fluid).getStillTexture(volume.toFluidStack()))
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -39,7 +31,7 @@ object FluidRenderingBridgeForge : FluidRenderingBridge {
         return if (world != null && pos != null) {
             RenderProperties.get(fluid).getColorTint(fluid.defaultState, world, pos)
         } else {
-            RenderProperties.get(fluid).getColorTint(stackOf(volume))
+            RenderProperties.get(fluid).getColorTint(volume.toFluidStack())
         }
     }
 
@@ -52,7 +44,7 @@ object FluidRenderingBridgeForge : FluidRenderingBridge {
     @OnlyIn(Dist.CLIENT)
     override fun getTooltip(volume: FluidReference, context: TooltipContext, maxAmountInLitres: Int?): List<Text> = buildList {
         val fluid: Fluid = volume.fluid
-        val stack = stackOf(volume)
+        val stack = volume.toFluidStack()
         val name = stack.displayName
         add(Text.empty().append(name).styled(fluid.fluidType.getRarity(stack).styleModifier))
 

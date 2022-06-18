@@ -42,7 +42,12 @@ abstract class FluidReference : HasFluidAmount {
         }
     }
 
-    fun copy(): FluidVolume = FluidVolume(fluid, amount, nbt, unit)
+    /**
+     * Creates an independent mutable snapshot of this fluid reference's current contents.
+     *
+     * For fluid volumes, this is the same as creating a standard copy with [FluidVolume.copy].
+     */
+    fun createSnapshot(): FluidVolume = FluidVolume(fluid, amount, nbt, unit)
 
     fun increment(amount: Long, unit: FluidUnit) {
         this.amount += FluidUnit.convert(amount, this.unit, unit)

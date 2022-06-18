@@ -33,3 +33,14 @@ class FluidStorageReference(private val storage: SingleVariantStorage<FluidVaria
 
     override val unit = FluidUnit.DROPLET
 }
+
+/**
+ * Converts this fluid reference to a [FluidVariant].
+ * This is faster than a manual conversion for a [FluidStorageReference].
+ */
+fun FluidReference.toFluidVariant(): FluidVariant =
+    if (this is FluidStorageReference) {
+        variant
+    } else {
+        FluidVariant.of(fluid, nbt)
+    }

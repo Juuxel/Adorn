@@ -31,3 +31,14 @@ class FluidTankReference(val tank: FluidTank) : FluidReference() {
 
     override val unit = FluidUnit.LITRE
 }
+
+/**
+ * Converts this fluid reference to a [FluidStack].
+ * This is faster than a manual conversion for a [FluidTankReference].
+ */
+fun FluidReference.toFluidStack(): FluidStack =
+    if (this is FluidTankReference) {
+        tank.fluid
+    } else {
+        FluidStack(fluid, amount.toInt(), nbt)
+    }

@@ -28,7 +28,7 @@ object NetworkBridgeImpl : NetworkBridge {
 
     override fun sendBrewerFluidSync(player: PlayerEntity, syncId: Int, fluid: FluidReference) {
         if (player is ServerPlayerEntity) {
-            AdornNetworking.CHANNEL.send(PacketDistributor.PLAYER.with { player }, BrewerFluidSyncS2CMessage(syncId, fluid.copy()))
+            AdornNetworking.CHANNEL.send(PacketDistributor.PLAYER.with { player }, BrewerFluidSyncS2CMessage(syncId, fluid.createSnapshot()))
         }
     }
 }

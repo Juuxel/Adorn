@@ -5,11 +5,13 @@ package juuxel.adorn.block.entity
 import com.google.common.base.Predicates
 import juuxel.adorn.fluid.FluidReference
 import juuxel.adorn.util.FluidStorageReference
+import juuxel.adorn.util.toFluidVariant
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariantAttributes
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage
 import net.fabricmc.fabric.api.transfer.v1.storage.StoragePreconditions
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil
@@ -53,7 +55,8 @@ class KitchenSinkBlockEntityFabric(pos: BlockPos, state: BlockState) : KitchenSi
     override val fluidReference: FluidReference = FluidStorageReference(storage)
 
     override fun interactWithItem(stack: ItemStack, player: PlayerEntity, hand: Hand): Boolean {
-        val w = world!!
+        // StorageUtil.move will mutate the stack and we need it for correct sounds (bottles!).
+        val originalStack = stack.copy()
         val itemStorage = FluidStorage.ITEM.find(stack, ContainerItemContext.ofPlayerHand(player, hand)) ?: return false
         val hasSpace = storage.amount < storage.capacity
 
@@ -61,16 +64,18 @@ class KitchenSinkBlockEntityFabric(pos: BlockPos, state: BlockState) : KitchenSi
             val moved = StorageUtil.move(itemStorage, storage, Predicates.alwaysTrue(), Long.MAX_VALUE, null)
 
             if (moved > 0) {
-                onFill(storage.variant.fluid, stack, player)
+                onFill(originalStack, player)
                 markDirtyAndSync()
                 return true
             }
         }
 
+        // Store fluid before moving (it might become empty!)
+        val fluid = fluidReference.createSnapshot()
         val moved = StorageUtil.move(storage, itemStorage, Predicates.alwaysTrue(), Long.MAX_VALUE, null)
 
         if (moved > 0) {
-            onPickUp(storage.variant.fluid, stack, player)
+            onPickUp(fluid, originalStack, player)
             markDirtyAndSync()
             return true
         }
@@ -84,6 +89,12 @@ class KitchenSinkBlockEntityFabric(pos: BlockPos, state: BlockState) : KitchenSi
         markDirtyAndSync()
         return true
     }
+
+    override fun getFillSound(fluid: FluidReference, stack: ItemStack): FluidItemSound =
+        super.getFillSound(fluid, stack).orElse(FluidVariantAttributes.getFillSound(fluid.toFluidVariant()))
+
+    override fun getEmptySound(fluid: FluidReference, stack: ItemStack): FluidItemSound =
+        super.getEmptySound(fluid, stack).orElse(FluidVariantAttributes.getEmptySound(fluid.toFluidVariant()))
 
     override fun readNbt(nbt: NbtCompound) {
         super.readNbt(nbt)
