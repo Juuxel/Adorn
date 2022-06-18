@@ -1,6 +1,7 @@
 import juuxel.adorn.datagen.gradle.DeleteDuplicates
 import juuxel.adorn.datagen.gradle.GenerateData
 import juuxel.adorn.datagen.gradle.GenerateTags
+import juuxel.adorn.datagen.util.MinifyJson
 
 plugins {
     java
@@ -31,5 +32,11 @@ val deleteDuplicateResources by tasks.registering(DeleteDuplicates::class) {
 sourceSets {
     main {
         resources.srcDir(generatedResources)
+    }
+}
+
+afterEvaluate {
+    tasks.named("remapJar") {
+        doLast(MinifyJson)
     }
 }
