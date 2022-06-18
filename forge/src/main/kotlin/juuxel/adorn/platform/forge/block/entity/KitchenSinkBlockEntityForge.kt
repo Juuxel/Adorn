@@ -72,8 +72,10 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
 
         // Special case bottles since they don't have a fluid handler.
         if (stack.isOf(Items.GLASS_BOTTLE)) {
-            // Since it's water, note that it won't drain anything. (infinite fluid)
-            if (tank.fluid.isFluidEqual(PLAIN_WATER) && tank.fluidAmount >= BOTTLE_LITRES) {
+            val drainingResult = tank.drain(BOTTLE_WATER, IFluidHandler.FluidAction.SIMULATE)
+            if (drainingResult.amount >= BOTTLE_LITRES) {
+                // Execute the draining for real this time.
+                tank.drain(BOTTLE_WATER, IFluidHandler.FluidAction.EXECUTE)
                 onPickUp(tankFluid, stack, player)
                 val bottle = ItemStack(Items.POTION)
                 PotionUtil.setPotion(bottle, Potions.WATER)
@@ -81,13 +83,11 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
                 return true
             }
         } else if (stack.isOf(Items.POTION)) {
-            val spaceForWater = tank.fluid.isEmpty || (tank.fluid.isFluidEqual(PLAIN_WATER) && tank.space >= BOTTLE_LITRES)
+            val spaceForWater = tank.fluid.isEmpty || (tank.fluid.isFluidEqual(BOTTLE_WATER) && tank.space >= BOTTLE_LITRES)
 
             if (spaceForWater && PotionUtil.getPotion(stack) == Potions.WATER) {
                 onFill(stack, player)
-                val fluid = PLAIN_WATER.copy()
-                fluid.amount = BOTTLE_LITRES
-                tank.fill(fluid, IFluidHandler.FluidAction.EXECUTE)
+                tank.fill(BOTTLE_WATER.copy(), IFluidHandler.FluidAction.EXECUTE)
                 setStackOrInsert(player, hand, ItemStack(Items.GLASS_BOTTLE))
                 markDirtyAndSync()
                 return true
@@ -147,6 +147,6 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
     companion object {
         // Bottles are 250 l in Adorn *on Forge*.
         private const val BOTTLE_LITRES = 250
-        private val PLAIN_WATER = FluidStack(Fluids.WATER, 1)
+        private val BOTTLE_WATER = FluidStack(Fluids.WATER, BOTTLE_LITRES)
     }
 }
