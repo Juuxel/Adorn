@@ -38,6 +38,12 @@
     ],
     "rei_client": [
       "juuxel.adorn.compat.rei.client.AdornReiClient"
+    ],
+    "emi": [
+      {
+        "value": "juuxel.adorn.compat.emi.AdornEmiPlugin",
+        "adapter": "kotlin"
+      }
     ]
   },
 

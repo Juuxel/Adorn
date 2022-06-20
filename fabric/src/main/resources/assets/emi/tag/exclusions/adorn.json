@@ -1,0 +1,6 @@
+{
+  "exclusions": [
+    "adorn:brick_chimney_ingredients",
+    "adorn:nether_brick_chimney_ingredients"
+  ]
+}

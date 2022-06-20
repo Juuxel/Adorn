@@ -49,13 +49,14 @@ repositories {
         }
     }
 
-    // TerraformersMC maven for Mod Menu.
+    // TerraformersMC maven for Mod Menu and EMI.
     maven {
         name = "TerraformersMC"
         url = uri("https://maven.terraformersmc.com/releases")
 
         content {
             includeGroup("com.terraformersmc")
+            includeGroup("dev.emi")
         }
     }
 
@@ -100,8 +101,9 @@ dependencies {
     modLocalRuntime(modCompileOnly("com.terraformersmc:modmenu:${rootProject.property("modmenu")}")!!)
     modCompileOnly("net.oskarstrom:DashLoader:${rootProject.property("dashloader")}")
     runtimeOnly("org.yaml:snakeyaml:1.27") // TODO: for dashloader, remove when pom is fixed
-    modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.property("rei")}")
-    modLocalRuntime("dev.architectury:architectury-fabric:${rootProject.property("architectury-api")}")
+    modLocalRuntime(modCompileOnly("dev.emi:emi:${rootProject.property("emi")}") {
+        isTransitive = false
+    })
 }
 
 tasks {
