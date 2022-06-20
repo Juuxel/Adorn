@@ -65,8 +65,8 @@ class BrewingEmiRecipe private constructor(
         widgets.addSlot(result, leftX + 26, topY + 35).drawBack(false).recipeContext(this).output(true)
         widgets.add(FluidSlotWidget(fluidIngredient, leftX + 87, topY, 18, BrewerScreen.FLUID_AREA_HEIGHT + 2))
 
-        // Empty mug, must have background since it's not in the screen texture
-        widgets.addSlot(inputItem, leftX + 3, topY + 38)
+        // Empty mug
+        widgets.addSlot(inputItem, leftX + 3, topY + 38).drawBack(false)
 
         // Fluid scale
         widgets.addDrawable(leftX + 88, topY + 5, 16, 51) { matrices, _, _, _ ->
