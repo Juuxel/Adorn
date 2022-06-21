@@ -4,17 +4,13 @@ import dev.emi.emi.api.EmiPlugin
 import dev.emi.emi.api.EmiRegistry
 import dev.emi.emi.api.recipe.EmiRecipeCategory
 import dev.emi.emi.api.render.EmiTexture
-import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.AdornBlocks
-import juuxel.adorn.fluid.FluidIngredient
-import juuxel.adorn.fluid.FluidUnit
 import juuxel.adorn.recipe.AdornRecipes
 import juuxel.adorn.recipe.FluidBrewingRecipe
 import juuxel.adorn.recipe.ItemBrewingRecipe
 import juuxel.adorn.util.logger
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 
 object AdornEmiPlugin : EmiPlugin {
     private val LOGGER = logger()
@@ -42,14 +38,5 @@ object AdornEmiPlugin : EmiPlugin {
 
             registry.addRecipe(emiRecipe)
         }
-    }
-
-    fun toEmiIngredient(ingredient: FluidIngredient): EmiIngredient {
-        val amount = FluidUnit.convert(ingredient.amount, ingredient.unit, FluidUnit.DROPLET)
-        return EmiIngredient.of(
-            ingredient.fluid.fluids.map {
-                EmiStack.of(FluidVariant.of(it, ingredient.nbt), amount)
-            }
-        )
     }
 }

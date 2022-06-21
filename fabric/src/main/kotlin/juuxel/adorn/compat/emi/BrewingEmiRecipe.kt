@@ -27,8 +27,8 @@ class BrewingEmiRecipe private constructor(
     constructor(recipe: ItemBrewingRecipe) : this(
         recipe.id,
         EmiStack.of(AdornItems.MUG),
-        EmiIngredient.of(recipe.firstIngredient),
-        EmiIngredient.of(recipe.secondIngredient),
+        EmiIngredient.of(recipe.firstIngredient).withRemainders(),
+        EmiIngredient.of(recipe.secondIngredient).withRemainders(),
         EmiStack.EMPTY,
         EmiStack.of(recipe.result)
     )
@@ -36,9 +36,9 @@ class BrewingEmiRecipe private constructor(
     constructor(recipe: FluidBrewingRecipe) : this(
         recipe.id,
         EmiStack.of(AdornItems.MUG),
-        EmiIngredient.of(recipe.firstIngredient),
-        EmiIngredient.of(recipe.secondIngredient),
-        AdornEmiPlugin.toEmiIngredient(recipe.fluid),
+        EmiIngredient.of(recipe.firstIngredient).withRemainders(),
+        EmiIngredient.of(recipe.secondIngredient).withRemainders(),
+        recipe.fluid.toEmiIngredient(),
         EmiStack.of(recipe.result)
     )
 
