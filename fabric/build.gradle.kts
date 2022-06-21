@@ -1,5 +1,6 @@
 plugins {
     id("adorn-data-generator")
+    id("adorn-data-generator.emi")
 }
 
 architectury {
@@ -130,6 +131,20 @@ tasks {
         // Replace the $version template in fabric.mod.json with the project version.
         filesMatching("fabric.mod.json") {
             expand("version" to project.version)
+        }
+    }
+
+    generateEmi {
+        val resourceDirs = project(":common").sourceSets.main.get().resources.srcDirs +
+            sourceSets.main.get().resources.srcDirs
+        for (dir in resourceDirs) {
+            recipes.from(fileTree(dir) {
+                include("data/adorn/recipes/**")
+
+                // The unpacking recipes create "uncraftable" vanilla items like
+                // nether wart, so exclude them.
+                exclude("data/adorn/recipes/crates/unpack/**")
+            })
         }
     }
 }
