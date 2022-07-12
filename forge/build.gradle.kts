@@ -73,8 +73,8 @@ dependencies {
     // Add regular mod dependency on REI - API for compile time and the mod itself for runtime.
     // modLocalRuntime won't be exposed if other mods depend on your mod unlike modRuntimeOnly.
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-forge:${rootProject.property("rei")}")
-    modLocalRuntime("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.property("rei")}")
-    modLocalRuntime("dev.architectury:architectury-forge:${rootProject.property("architectury-api")}")
+    //modLocalRuntime("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.property("rei")}")
+    //modLocalRuntime("dev.architectury:architectury-forge:${rootProject.property("architectury-api")}")
 }
 
 tasks {
