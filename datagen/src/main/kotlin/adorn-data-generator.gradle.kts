@@ -1,11 +1,15 @@
+import juuxel.adorn.datagen.gradle.DataGenerationExtension
 import juuxel.adorn.datagen.gradle.DeleteDuplicates
 import juuxel.adorn.datagen.gradle.GenerateData
 import juuxel.adorn.datagen.gradle.GenerateTags
+import juuxel.adorn.datagen.gradle.TransformJson
 import juuxel.adorn.datagen.util.MinifyJson
 
 plugins {
     java
 }
+
+val extension = extensions.create("dataGeneration", DataGenerationExtension::class.java)
 
 val generatedResources = layout.projectDirectory.dir("src/main/generatedResources")
 
@@ -27,6 +31,17 @@ val deleteDuplicateResources by tasks.registering(DeleteDuplicates::class) {
     generated.convention(generatedResources)
     main.convention(layout.dir(sourceSets.main.map { it.resources.srcDirs.first() }))
     mustRunAfter(generateMainData, generateTags, generateData)
+}
+
+val processResources = tasks.processResources
+
+val transformJson by tasks.registering(TransformJson::class) {
+    transformSets.convention(project.provider { extension.transformSets })
+    directory.convention(layout.dir(processResources.map { it.destinationDir }))
+}
+
+processResources {
+    finalizedBy(transformJson)
 }
 
 sourceSets {

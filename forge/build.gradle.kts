@@ -27,6 +27,13 @@ loom {
     }
 }
 
+dataGeneration {
+    transformJson("assets/adorn/models/**/*_coffee_table.json") {
+        withProperty("parent", "adorn:block/templates/coffee_table")
+        add("render_type", "translucent")
+    }
+}
+
 repositories {
     // Set up Kotlin for Forge's Maven repository.
     maven {
