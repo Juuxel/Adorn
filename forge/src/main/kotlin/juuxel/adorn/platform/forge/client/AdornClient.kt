@@ -7,7 +7,7 @@ import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.client.MinecraftClient
 import net.minecraft.resource.ReloadableResourceManagerImpl
 import net.minecraft.util.Identifier
-import net.minecraftforge.client.ConfigGuiHandler
+import net.minecraftforge.client.ConfigScreenHandler
 import net.minecraftforge.fml.ModLoadingContext
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
@@ -19,8 +19,8 @@ object AdornClient {
         val resourceManager = MinecraftClient.getInstance().resourceManager as ReloadableResourceManagerImpl
         resourceManager.registerReloader(PlatformBridges.resources.bookManager)
         resourceManager.registerReloader(PlatformBridges.resources.colorManager)
-        ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory::class.java) {
-            ConfigGuiHandler.ConfigGuiFactory { _, parent -> MainConfigScreen(parent) }
+        ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory::class.java) {
+            ConfigScreenHandler.ConfigScreenFactory { _, parent -> MainConfigScreen(parent) }
         }
         ClientCompatInit.init(MOD_BUS)
     }

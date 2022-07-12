@@ -14,7 +14,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.BlockRenderView
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
-import net.minecraftforge.client.RenderProperties
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions
 import net.minecraftforge.registries.ForgeRegistries
 
 object FluidRenderingBridgeForge : FluidRenderingBridge {
@@ -22,16 +22,16 @@ object FluidRenderingBridgeForge : FluidRenderingBridge {
     override fun getStillSprite(volume: FluidReference): Sprite? {
         val fluid: Fluid = volume.fluid
         val atlas = MinecraftClient.getInstance().getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE)
-        return atlas.apply(RenderProperties.get(fluid).getStillTexture(volume.toFluidStack()))
+        return atlas.apply(IClientFluidTypeExtensions.of(fluid).getStillTexture(volume.toFluidStack()))
     }
 
     @OnlyIn(Dist.CLIENT)
     override fun getColor(volume: FluidReference, world: BlockRenderView?, pos: BlockPos?): Int {
         val fluid: Fluid = volume.fluid
         return if (world != null && pos != null) {
-            RenderProperties.get(fluid).getColorTint(fluid.defaultState, world, pos)
+            IClientFluidTypeExtensions.of(fluid).getTintColor(fluid.defaultState, world, pos)
         } else {
-            RenderProperties.get(fluid).getColorTint(volume.toFluidStack())
+            IClientFluidTypeExtensions.of(fluid).getTintColor(volume.toFluidStack())
         }
     }
 

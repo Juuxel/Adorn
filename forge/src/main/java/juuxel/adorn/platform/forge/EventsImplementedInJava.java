@@ -51,7 +51,7 @@ final class EventsImplementedInJava {
     }
 
     private void handleCarpetedBlocks(PlayerInteractEvent.RightClickBlock event) {
-        ActionResult result = CommonEventHandlers.handleCarpets(event.getPlayer(), event.getWorld(), event.getHand(), event.getHitVec());
+        ActionResult result = CommonEventHandlers.handleCarpets(event.getEntity(), event.getLevel(), event.getHand(), event.getHitVec());
 
         if (result != ActionResult.PASS) {
             event.setCancellationResult(result);
@@ -60,15 +60,15 @@ final class EventsImplementedInJava {
     }
 
     private void handleSneakClicks(PlayerInteractEvent.RightClickBlock event) {
-        var player = event.getPlayer();
-        var state = event.getWorld().getBlockState(event.getPos());
+        var player = event.getEntity();
+        var state = event.getLevel().getBlockState(event.getPos());
 
         // Check that:
         // - the block is a sneak-click handler
         // - the player is sneaking
         // - the player isn't holding an item (for block item and bucket support)
         if (state.getBlock() instanceof SneakClickHandler clickHandler && player.isSneaking() && player.getStackInHand(event.getHand()).isEmpty()) {
-            var result = clickHandler.onSneakClick(state, event.getWorld(), event.getPos(), player, event.getHand(), event.getHitVec());
+            var result = clickHandler.onSneakClick(state, event.getLevel(), event.getPos(), player, event.getHand(), event.getHitVec());
 
             if (result != ActionResult.PASS) {
                 event.setCancellationResult(result);
@@ -80,7 +80,7 @@ final class EventsImplementedInJava {
     private void handleSofaSleepTime(SleepingTimeCheckEvent event) {
         BlockPos sleepingPos = event.getSleepingLocation().orElse(null);
         if (sleepingPos == null) return;
-        World world = event.getPlayer().world;
+        World world = event.getEntity().world;
 
         if (world.isDay() && world.getBlockState(sleepingPos).getBlock() instanceof SofaBlock) {
             event.setResult(Event.Result.ALLOW);
@@ -91,7 +91,7 @@ final class EventsImplementedInJava {
         BlockPos pos = event.getNewSpawn();
 
         if (pos != null) {
-            if (!event.isForced() && event.getPlayer().world.getBlockState(pos).getBlock() instanceof SofaBlock) {
+            if (!event.isForced() && event.getEntity().world.getBlockState(pos).getBlock() instanceof SofaBlock) {
                 event.setCanceled(true);
             }
         }

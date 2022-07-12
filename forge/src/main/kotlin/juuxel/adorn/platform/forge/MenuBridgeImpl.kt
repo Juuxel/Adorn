@@ -23,7 +23,7 @@ object MenuBridgeImpl : MenuBridge {
         }
 
         if (player is ServerPlayerEntity) {
-            NetworkHooks.openGui(player, factory, pos)
+            NetworkHooks.openScreen(player, factory, pos)
         }
     }
 
