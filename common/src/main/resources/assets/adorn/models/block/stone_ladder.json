@@ -1,5 +1,6 @@
 {
   "parent": "block/ladder",
+  "render_type": "cutout",
   "textures": {
     "texture": "adorn:block/stone_ladder",
     "particle": "adorn:block/stone_ladder"

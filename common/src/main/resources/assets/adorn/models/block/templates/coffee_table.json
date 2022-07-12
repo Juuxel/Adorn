@@ -1,5 +1,6 @@
 {
   "parent": "block/block",
+  "render_type": "translucent",
   "textures": {
     "glass": "minecraft:block/black_stained_glass",
     "particle": "#planks"

@@ -1,5 +1,6 @@
 {
   "parent": "block/block",
+  "render_type": "cutout",
   "ambientocclusion": false,
   "textures": {
     "main": "adorn:block/chain_link_fence",

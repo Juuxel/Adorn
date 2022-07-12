@@ -1,5 +1,6 @@
 {
   "parent": "block/block",
+  "render_type": "cutout",
   "textures": {
     "leg": "minecraft:block/dark_oak_log",
     "top": "minecraft:block/dark_oak_planks",

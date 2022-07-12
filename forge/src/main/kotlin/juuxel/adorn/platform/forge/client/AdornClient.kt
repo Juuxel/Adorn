@@ -22,11 +22,9 @@ object AdornClient {
         ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory::class.java) {
             ConfigScreenHandler.ConfigScreenFactory { _, parent -> MainConfigScreen(parent) }
         }
-        ClientCompatInit.init(MOD_BUS)
     }
 
     private fun setup(event: FMLClientSetupEvent) {
-        AdornRenderers.registerRenderLayers()
         AdornMenuScreens.register()
     }
 
