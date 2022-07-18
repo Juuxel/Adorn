@@ -2,6 +2,7 @@ package juuxel.adorn.item
 
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.AdornBlocks
+import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import net.minecraft.entity.effect.StatusEffectInstance
@@ -62,7 +63,7 @@ object AdornItems {
     fun isIn(group: ItemGroup?, item: Item): Boolean = when (group) {
         null -> false
         GROUP, ItemGroup.SEARCH -> true
-        item.group -> PlatformBridges.configManager.config.client.showItemsInStandardGroups
+        item.group -> ConfigManager.config().client.showItemsInStandardGroups
         else -> false
     }
 }

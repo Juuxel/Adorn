@@ -1,11 +1,13 @@
 package juuxel.adorn.platform
 
 import juuxel.adorn.fluid.FluidUnit
+import juuxel.adorn.util.ServiceDelegate
 
 interface FluidBridge {
     val fluidUnit: FluidUnit
 
     companion object {
-        fun get(): FluidBridge = PlatformBridges.get().fluids
+        private val instance: FluidBridge by ServiceDelegate()
+        fun get(): FluidBridge = instance
     }
 }

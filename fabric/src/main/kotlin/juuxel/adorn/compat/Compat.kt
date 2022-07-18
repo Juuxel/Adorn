@@ -1,7 +1,7 @@
 package juuxel.adorn.compat
 
 import juuxel.adorn.block.entity.KitchenSinkBlockEntityFabric
-import juuxel.adorn.platform.fabric.ConfigManagerImpl
+import juuxel.adorn.config.ConfigManager
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage
 import net.fabricmc.loader.api.FabricLoader
 
@@ -35,11 +35,11 @@ object Compat {
     }
 
     fun isCompatEnabled(mod: String): Boolean {
-        val compatMap = ConfigManagerImpl.config.compat
+        val compatMap = ConfigManager.config().compat
 
         if (mod !in compatMap) {
             compatMap[mod] = true
-            ConfigManagerImpl.save()
+            ConfigManager.INSTANCE.save()
             return true
         }
 

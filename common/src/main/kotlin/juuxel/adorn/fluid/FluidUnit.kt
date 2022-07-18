@@ -1,6 +1,9 @@
 package juuxel.adorn.fluid
 
 import com.mojang.serialization.Codec
+import juuxel.adorn.util.Displayable
+import juuxel.adorn.util.MixedFraction
+import net.minecraft.text.Text
 
 /**
  * Fluid volume units. This class is used for doing fluid volume
@@ -9,15 +12,24 @@ import com.mojang.serialization.Codec
  * The platform-specific unit is available via
  * [FluidBridge.fluidUnit][juuxel.adorn.platform.FluidBridge.fluidUnit].
  */
-enum class FluidUnit(private val id: String, val bucketVolume: Long) {
+enum class FluidUnit(val id: String, val bucketVolume: Long) : Displayable {
     /** Litres. Defined as one thousandth of a cubic metre ([bucketVolume] = 1000). */
     LITRE("litres", 1000),
     /** Droplets. Defined as 1/81 000 of a cubic metre ([bucketVolume] = 81 000). */
     DROPLET("droplets", 81_000);
 
+    override val displayName: Text = Text.translatable("gui.adorn.fluid_unit.$id.name")
+    val symbol: Text = Text.translatable("gui.adorn.fluid_unit.$id.symbol")
+
     companion object {
         private val BY_ID: Map<String, FluidUnit> = values().associateBy { it.id }
-        val CODEC: Codec<FluidUnit> = Codec.STRING.xmap(BY_ID::get, FluidUnit::id)
+        val CODEC: Codec<FluidUnit> = Codec.STRING.xmap(this::byId, FluidUnit::id)
+
+        /**
+         * Returns the fluid unit with the specified [ID][FluidUnit.id],
+         * or null if not found.
+         */
+        fun byId(id: String): FluidUnit? = BY_ID[id.lowercase()]
 
         /**
          * Converts a volume between two fluid units. Potentially lossy, use with caution!
@@ -25,6 +37,14 @@ enum class FluidUnit(private val id: String, val bucketVolume: Long) {
         fun convert(volume: Long, from: FluidUnit, to: FluidUnit): Long {
             if (from == to) return volume
             return volume * to.bucketVolume / from.bucketVolume
+        }
+
+        /**
+         * Converts a volume between two fluid units losslessly, returning a mixed fraction.
+         */
+        fun losslessConvert(volume: Long, from: FluidUnit, to: FluidUnit): MixedFraction {
+            if (from == to) return MixedFraction.whole(volume)
+            return MixedFraction(volume * to.bucketVolume, from.bucketVolume)
         }
 
         /**

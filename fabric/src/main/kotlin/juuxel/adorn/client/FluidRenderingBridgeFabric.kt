@@ -1,12 +1,11 @@
 package juuxel.adorn.client
 
 import juuxel.adorn.fluid.FluidReference
-import juuxel.adorn.util.Fractions
+import juuxel.adorn.fluid.FluidUnit
 import juuxel.adorn.util.toFluidVariant
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariantAttributes
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.texture.Sprite
@@ -32,22 +31,9 @@ object FluidRenderingBridgeFabric : FluidRenderingBridge {
         val result = FluidVariantRendering.getTooltip(volume.toFluidVariant(), context).toMutableList()
 
         if (maxAmountInLitres != null) {
-            result.add(
-                1,
-                Text.translatable(
-                    "gui.adorn.litres_fraction",
-                    Fractions.toString(volume.amount, FluidConstants.BUCKET / 1000),
-                    maxAmountInLitres
-                )
-            )
+            result.add(1, volume.getAmountText(maxAmountInLitres.toLong(), FluidUnit.LITRE))
         } else {
-            result.add(
-                1,
-                Text.translatable(
-                    "gui.adorn.litres",
-                    Fractions.toString(volume.amount, FluidConstants.BUCKET / 1000)
-                )
-            )
+            result.add(1, volume.getAmountText())
         }
 
         return result

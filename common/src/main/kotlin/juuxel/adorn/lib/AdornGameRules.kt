@@ -2,7 +2,7 @@ package juuxel.adorn.lib
 
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.config.Config
-import juuxel.adorn.platform.PlatformBridges
+import juuxel.adorn.config.ConfigManager
 import net.minecraft.world.GameRules
 import net.minecraft.world.GameRules.BooleanRule
 import net.minecraft.world.GameRules.Category
@@ -25,7 +25,7 @@ object AdornGameRules {
     }
 
     private inline fun createBooleanRule(default: (Config.GameRuleDefaults) -> Boolean): Type<BooleanRule> =
-        BooleanRule.create(default(PlatformBridges.configManager.config.gameRuleDefaults))
+        BooleanRule.create(default(ConfigManager.config().gameRuleDefaults))
 
     // <T extends Rule<T>> Key<T> register(String name, Category category, Type<T> type)
     private fun <T : Rule<T>> register(name: String, category: Category, type: Type<T>): Key<T> =

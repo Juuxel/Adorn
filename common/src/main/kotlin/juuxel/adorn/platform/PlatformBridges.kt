@@ -1,14 +1,11 @@
 package juuxel.adorn.platform
 
-import juuxel.adorn.config.ConfigManager
-import java.util.ServiceLoader
+import juuxel.adorn.util.ServiceDelegate
 
 interface PlatformBridges {
     val blockEntities: BlockEntityBridge
     val blockFactory: BlockFactory
-    val configManager: ConfigManager
     val entities: EntityBridge
-    val fluids: FluidBridge
     val items: ItemBridge
     val menus: MenuBridge
     val network: NetworkBridge
@@ -16,16 +13,11 @@ interface PlatformBridges {
     val resources: ResourceBridge
 
     companion object {
-        private val instance: PlatformBridges by lazy {
-            val serviceLoader = ServiceLoader.load(PlatformBridges::class.java)
-            serviceLoader.findFirst().orElseThrow { RuntimeException("Could not find Adorn platform implementation!") }
-        }
-
+        private val instance: PlatformBridges by ServiceDelegate()
         fun get() = instance
 
         inline val blockEntities get() = get().blockEntities
         inline val blockFactory get() = get().blockFactory
-        inline val configManager get() = get().configManager
         inline val entities get() = get().entities
         inline val items get() = get().items
         inline val menus get() = get().menus

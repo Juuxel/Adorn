@@ -1,7 +1,7 @@
 package juuxel.adorn.platform.forge.compat
 
 import juuxel.adorn.compat.CompatBlocks
-import juuxel.adorn.platform.forge.ConfigManagerImpl
+import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.platform.forge.registrar.ForgeRegistrar
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.fml.ModList
@@ -25,11 +25,11 @@ object Compat {
     }
 
     fun isCompatEnabled(mod: String): Boolean {
-        val compatMap = ConfigManagerImpl.config.compat
+        val compatMap = ConfigManager.config().compat
 
         if (mod !in compatMap) {
             compatMap[mod] = true
-            ConfigManagerImpl.save()
+            ConfigManager.INSTANCE.save()
             return true
         }
 

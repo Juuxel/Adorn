@@ -1353,6 +1353,8 @@
 
   "gui.adorn.config.title": "Adorn",
   "gui.adorn.config.game_rule_defaults": "Game rule defaults...",
+  "gui.adorn.config.option.displayedFluidUnit": "Fluid unit",
+  "gui.adorn.config.option.displayedFluidUnit.description": "The unit for fluid amounts in Adorn GUIs.",
   "gui.adorn.config.option.showItemsInStandardGroups": "Items in standard tabs",
   "gui.adorn.config.option.showItemsInStandardGroups.description": "Shows Adorn items in standard vanilla creative inventory tabs.",
   "gui.adorn.config.option.showTradingStationTooltips": "Trading station tooltips",
@@ -1360,8 +1362,12 @@
   "gui.adorn.config.requires_restart": "Requires restart",
   "gui.adorn.config.restart_required.title": "Restart required!",
   "gui.adorn.config.restart_required.message": "One of your changed options requires Minecraft to be restarted.",
-  "gui.adorn.litres": "%s L",
-  "gui.adorn.litres_fraction": "%s / %s L",
+  "gui.adorn.fluid_volume": "%s %s",
+  "gui.adorn.fluid_volume.fraction": "%s / %s %s",
+  "gui.adorn.fluid_unit.litres.name": "Liters",
+  "gui.adorn.fluid_unit.litres.symbol": "L",
+  "gui.adorn.fluid_unit.droplets.name": "Droplets",
+  "gui.adorn.fluid_unit.droplets.symbol": "dp",
 
   "stat.adorn.dye_sofa": "Sofas Dyed",
   "stat.adorn.dye_table_lamp": "Table Lamps Dyed",

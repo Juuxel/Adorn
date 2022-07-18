@@ -1,6 +1,8 @@
 package juuxel.adorn.config
 
 import blue.endless.jankson.Comment
+import juuxel.adorn.fluid.FluidUnit
+import juuxel.adorn.platform.FluidBridge
 
 class Config {
     @field:Comment("Client-side settings")
@@ -18,6 +20,9 @@ class Config {
 
         @field:Comment("If true, Adorn items will also be shown in matching vanilla item tabs.")
         var showItemsInStandardGroups: Boolean = true
+
+        @field:Comment("The fluid unit to show fluid amounts in. Options: [litres, droplets]")
+        var displayedFluidUnit: FluidUnit = FluidBridge.get().fluidUnit
     }
 
     class GameRuleDefaults {

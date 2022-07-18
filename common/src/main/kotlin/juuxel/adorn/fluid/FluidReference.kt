@@ -1,10 +1,13 @@
 package juuxel.adorn.fluid
 
+import juuxel.adorn.config.ConfigManager
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.Fluids
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.PacketByteBuf
+import net.minecraft.text.Text
 import net.minecraft.util.registry.Registry
+import kotlin.math.max
 
 /**
  * A mutable reference to a fluid volume.
@@ -59,10 +62,33 @@ abstract class FluidReference : HasFluidAmount {
     fun matches(ingredient: FluidIngredient): Boolean =
         ingredient.fluid.matches(fluid) && FluidUnit.compareVolumes(this, ingredient) >= 0 && nbt == ingredient.nbt
 
+    fun getAmountText(displayUnit: FluidUnit = getDefaultDisplayUnit()): Text =
+        Text.translatable(
+            "gui.adorn.fluid_volume",
+            FluidUnit.losslessConvert(amount, unit, displayUnit).resizeFraction(getUnitDenominator(unit, displayUnit)),
+            displayUnit.symbol
+        )
+
+    fun getAmountText(max: Long, maxUnit: FluidUnit, displayUnit: FluidUnit = getDefaultDisplayUnit()): Text =
+        Text.translatable(
+            "gui.adorn.fluid_volume.fraction",
+            FluidUnit.losslessConvert(amount, unit, displayUnit).resizeFraction(getUnitDenominator(unit, displayUnit)),
+            FluidUnit.losslessConvert(max, maxUnit, displayUnit).resizeFraction(getUnitDenominator(maxUnit, displayUnit)),
+            displayUnit.symbol
+        )
+
     override fun toString() =
         "FluidReference(fluid=${Registry.FLUID.getId(fluid)}, amount=$amount, nbt=$nbt)"
 
     companion object {
+        private fun getUnitDenominator(from: FluidUnit, to: FluidUnit): Long {
+            if (from.bucketVolume == to.bucketVolume) return 1
+            return max(1, from.bucketVolume / to.bucketVolume)
+        }
+
+        private fun getDefaultDisplayUnit() =
+            ConfigManager.config().client.displayedFluidUnit
+
         fun areFluidsEqual(a: FluidReference, b: FluidReference): Boolean {
             if (a.isEmpty) return b.isEmpty
             return a.fluid == b.fluid && a.nbt == b.nbt

@@ -9,6 +9,7 @@ object Fractions {
     private const val FRACTION_BAR = '\u2044'
 
     fun toString(numerator: Long, denominator: Long): String {
+        if (denominator == 1L) return numerator.toString()
         val realNumerator = numerator % denominator
         val whole = (numerator - realNumerator) / denominator
         return toString(whole, realNumerator, denominator)

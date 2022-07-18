@@ -1,11 +1,11 @@
 package juuxel.adorn.platform.forge
 
 import juuxel.adorn.AdornCommon
+import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.loot.AdornLootConditionTypes
 import juuxel.adorn.menu.AdornMenus
-import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import juuxel.adorn.platform.forge.client.AdornClient
 import juuxel.adorn.platform.forge.compat.Compat
@@ -26,7 +26,7 @@ import thedarkcolour.kotlinforforge.forge.MOD_BUS
 @Mod(AdornCommon.NAMESPACE)
 object Adorn {
     init {
-        PlatformBridges.configManager.init()
+        ConfigManager.INSTANCE.init()
         MOD_BUS.addListener(this::init)
         EventsImplementedInJava().register(MOD_BUS, FORGE_BUS)
         AdornRecipes.init()
@@ -47,6 +47,6 @@ object Adorn {
 
     private fun init(event: FMLCommonSetupEvent) {
         AdornStats.init()
-        PlatformBridges.configManager.finalize()
+        ConfigManager.INSTANCE.finalize()
     }
 }

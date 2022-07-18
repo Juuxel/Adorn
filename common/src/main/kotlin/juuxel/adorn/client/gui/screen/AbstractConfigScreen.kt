@@ -2,8 +2,9 @@ package juuxel.adorn.client.gui.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
-import juuxel.adorn.platform.PlatformBridges
+import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.util.Colors
+import juuxel.adorn.util.Displayable
 import juuxel.adorn.util.color
 import net.minecraft.client.gui.screen.NoticeScreen
 import net.minecraft.client.gui.screen.Screen
@@ -16,7 +17,6 @@ import net.minecraft.util.Formatting
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3f
 import kotlin.random.Random
-import kotlin.random.nextInt
 import kotlin.reflect.KMutableProperty
 
 abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : Screen(title) {
@@ -93,30 +93,40 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
     private fun wrapTooltipLines(text: Text) =
         textRenderer.wrapLines(text, 200)
 
-    protected fun createConfigToggle(
-        x: Int, y: Int, width: Int, property: KMutableProperty<Boolean>, restartRequired: Boolean = false
-    ): CyclingButtonWidget<Boolean> = CyclingButtonWidget.onOffBuilder(property.getter.call())
-        .tooltip {
-            buildList {
-                addAll(wrapTooltipLines(Text.translatable(getTooltipTranslationKey(property.name))))
-
-                if (restartRequired) {
-                    addAll(
-                        wrapTooltipLines(
-                            Text.translatable("gui.adorn.config.requires_restart").formatted(Formatting.ITALIC, Formatting.GOLD)
-                        )
-                    )
-                }
-            }
-        }
-        .build(x, y, width, 20, Text.translatable(getOptionTranslationKey(property.name))) { _, value ->
-            property.setter.call(value)
-            PlatformBridges.configManager.save()
+    private fun <T> createConfigButton(
+        builder: CyclingButtonWidget.Builder<T>, x: Int, y: Int, width: Int, property: KMutableProperty<T>, restartRequired: Boolean
+    ) = builder.tooltip {
+        buildList {
+            this += wrapTooltipLines(Text.translatable(getTooltipTranslationKey(property.name)))
 
             if (restartRequired) {
-                this.restartRequired = true
+                this += wrapTooltipLines(
+                    Text.translatable("gui.adorn.config.requires_restart").formatted(Formatting.ITALIC, Formatting.GOLD)
+                )
             }
         }
+    }.build(x, y, width, BUTTON_HEIGHT, Text.translatable(getOptionTranslationKey(property.name))) { _, value ->
+        property.setter.call(value)
+        ConfigManager.INSTANCE.save()
+
+        if (restartRequired) {
+            this.restartRequired = true
+        }
+    }
+
+    protected fun createConfigToggle(
+        x: Int, y: Int, width: Int, property: KMutableProperty<Boolean>, restartRequired: Boolean = false
+    ): CyclingButtonWidget<Boolean> = createConfigButton(
+        CyclingButtonWidget.onOffBuilder(property.getter.call()),
+        x, y, width, property, restartRequired
+    )
+
+    protected fun <T : Displayable> createConfigButton(
+        x: Int, y: Int, width: Int, property: KMutableProperty<T>, values: List<T>, restartRequired: Boolean = false
+    ): CyclingButtonWidget<T> = createConfigButton(
+        CyclingButtonWidget.builder<T> { it.displayName }.values(values).initially(property.getter.call()),
+        x, y, width, property, restartRequired
+    )
 
     protected open fun getOptionTranslationKey(name: String): String =
         "gui.adorn.config.option.$name"

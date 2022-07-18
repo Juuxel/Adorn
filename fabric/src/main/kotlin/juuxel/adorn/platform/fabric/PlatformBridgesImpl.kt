@@ -10,9 +10,7 @@ import net.minecraft.util.registry.RegistryKey
 class PlatformBridgesImpl : PlatformBridges {
     override val blockEntities = BlockEntityBridgeFabric
     override val blockFactory = BlockFactory
-    override val configManager = ConfigManagerImpl
     override val entities = EntityBridgeImpl
-    override val fluids = FluidBridgeFabric
     override val items = ItemBridgeImpl
     override val menus = MenuBridgeImpl
     override val network = NetworkBridgeImpl

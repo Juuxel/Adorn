@@ -2,6 +2,7 @@ package juuxel.adorn.platform.forge.client
 
 import juuxel.adorn.client.FluidRenderingBridge
 import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.fluid.FluidUnit
 import juuxel.adorn.platform.forge.util.toFluidStack
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.item.TooltipContext
@@ -49,9 +50,9 @@ object FluidRenderingBridgeForge : FluidRenderingBridge {
         add(Text.empty().append(name).styled(fluid.fluidType.getRarity(stack).styleModifier))
 
         if (maxAmountInLitres != null) {
-            add(Text.translatable("gui.adorn.litres_fraction", volume.amount, maxAmountInLitres))
+            add(volume.getAmountText(maxAmountInLitres.toLong(), FluidUnit.LITRE))
         } else {
-            add(Text.translatable("gui.adorn.litres", volume.amount))
+            add(volume.getAmountText())
         }
 
         // Append ID if advanced
