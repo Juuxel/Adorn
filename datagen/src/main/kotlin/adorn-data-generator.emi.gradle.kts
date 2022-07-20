@@ -3,7 +3,8 @@ import juuxel.adorn.datagen.gradle.GenerateEmi
 
 val generateEmi by tasks.registering(GenerateEmi::class) {
     val generateMainData = tasks.named("generateMainData", GenerateData::class)
-    mustRunAfter(generateMainData)
+    val generateTags = tasks.named("generateTags")
+    mustRunAfter(generateMainData, generateTags)
     output.convention(generateMainData.flatMap { it.output })
 }
 

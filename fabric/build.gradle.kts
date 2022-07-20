@@ -135,9 +135,13 @@ tasks {
     }
 
     generateEmi {
+        mustRunAfter(project(":common").tasks.named("generateData"))
         val resourceDirs = project(":common").sourceSets.main.get().resources.srcDirs +
             sourceSets.main.get().resources.srcDirs
         for (dir in resourceDirs) {
+            // Ignore the AW resource dir
+            if (dir == generatedResources) continue
+
             recipes.from(fileTree(dir) {
                 include("data/adorn/recipes/**")
 

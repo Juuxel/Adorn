@@ -23,6 +23,12 @@ val generateData by tasks.registering {
     dependsOn(generateMainData, generateTags)
 }
 
+tasks {
+    processResources {
+        mustRunAfter(generateData)
+    }
+}
+
 val deleteDuplicateResources by tasks.registering(DeleteDuplicates::class) {
     generated.convention(generatedResources)
     main.convention(layout.dir(sourceSets.main.map { it.resources.srcDirs.first() }))
