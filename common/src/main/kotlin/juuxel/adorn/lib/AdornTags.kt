@@ -14,6 +14,7 @@ object AdornTags {
     @JvmField val BENCHES = blockAndItem(AdornCommon.id("benches"))
     @JvmField val KITCHEN_COUNTERS = blockAndItem(AdornCommon.id("kitchen_counters"))
     @JvmField val KITCHEN_CUPBOARDS = blockAndItem(AdornCommon.id("kitchen_cupboards"))
+    @JvmField val KITCHEN_SINKS = blockAndItem(AdornCommon.id("kitchen_sinks"))
     @JvmField val KITCHEN_BLOCKS = blockAndItem(AdornCommon.id("kitchen_blocks"))
     @JvmField val SOFAS = blockAndItem(AdornCommon.id("sofas"))
     @JvmField val POSTS = blockAndItem(AdornCommon.id("posts"))
@@ -28,6 +29,9 @@ object AdornTags {
     @JvmField val SHELVES = blockAndItem(AdornCommon.id("shelves"))
     @JvmField val WOODEN_SHELVES = blockAndItem(AdornCommon.id("wooden_shelves"))
     @JvmField val CHIMNEYS = blockAndItem(AdornCommon.id("chimneys"))
+    @JvmField val CRATES = blockAndItem(AdornCommon.id("crates"))
+    @JvmField val COFFEE_TABLES = blockAndItem(AdornCommon.id("coffee_tables"))
+    @JvmField val TABLE_LAMPS = blockAndItem(AdornCommon.id("table_lamps"))
 
     @JvmStatic
     fun init() {}
