@@ -482,6 +482,9 @@
 
   "block.adorn.trading_station": "Trading Station",
   "block.adorn.trading_station.description": "Compact marketplace",
+  "block.adorn.trading_station.description.owner": "Owner: %s",
+  "block.adorn.trading_station.description.selling": "Selling: %s",
+  "block.adorn.trading_station.description.price": "Price: %s",
   "block.adorn.trading_station.selling": "Selling",
   "block.adorn.trading_station.price": "Price",
   "block.adorn.trading_station.label.owner": "%s's Trading Station",

@@ -10,13 +10,13 @@ data class Trade(var selling: ItemStack, var price: ItemStack) : NbtConvertible 
     fun isEmpty() = selling.isEmpty || price.isEmpty
 
     override fun readNbt(nbt: NbtCompound) {
-        selling = ItemStack.fromNbt(nbt.getCompound("Selling"))
-        price = ItemStack.fromNbt(nbt.getCompound("Price"))
+        selling = ItemStack.fromNbt(nbt.getCompound(NBT_SELLING))
+        price = ItemStack.fromNbt(nbt.getCompound(NBT_PRICE))
     }
 
     override fun writeNbt(nbt: NbtCompound) = nbt.apply {
-        put("Selling", selling.writeNbt(NbtCompound()))
-        put("Price", price.writeNbt(NbtCompound()))
+        put(NBT_SELLING, selling.writeNbt(NbtCompound()))
+        put(NBT_PRICE, price.writeNbt(NbtCompound()))
     }
 
     fun addListener(listener: TradeListener) {
@@ -33,6 +33,11 @@ data class Trade(var selling: ItemStack, var price: ItemStack) : NbtConvertible 
      * Creates a modifiable inventory for this trade.
      */
     fun createInventory() = TradeInventory(this)
+
+    companion object {
+        const val NBT_SELLING = "Selling"
+        const val NBT_PRICE = "Price"
+    }
 
     fun interface TradeListener {
         fun onTradeChanged(trade: Trade)

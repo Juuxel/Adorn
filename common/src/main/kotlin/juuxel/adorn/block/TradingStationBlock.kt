@@ -5,14 +5,20 @@ import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.lib.AdornGameRules
 import juuxel.adorn.lib.AdornStats
+import juuxel.adorn.trading.Trade
+import juuxel.adorn.util.getCompoundOrNull
+import juuxel.adorn.util.getText
+import juuxel.adorn.util.toTextWithCount
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.entity.BlockEntity
+import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
+import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.server.network.ServerPlayerEntity
@@ -20,6 +26,7 @@ import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
+import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
@@ -126,8 +133,26 @@ class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings)
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? =
         AdornBlockEntities.TRADING_STATION.instantiate(pos, state)
 
+    override fun appendTooltip(stack: ItemStack, world: BlockView?, tooltip: MutableList<Text>, options: TooltipContext) {
+        super.appendTooltip(stack, world, tooltip, options)
+
+        stack.getSubNbt(BlockItem.BLOCK_ENTITY_TAG_KEY)?.let { nbt ->
+            val owner = nbt.getText(TradingStationBlockEntity.NBT_TRADING_OWNER_NAME) ?: TradingStationBlockEntity.UNKNOWN_OWNER
+            val trade = nbt.getCompoundOrNull(TradingStationBlockEntity.NBT_TRADE) ?: return@let
+            val selling = ItemStack.fromNbt(trade.getCompoundOrNull(Trade.NBT_SELLING) ?: return@let)
+            val price = ItemStack.fromNbt(trade.getCompoundOrNull(Trade.NBT_PRICE) ?: return@let)
+
+            tooltip += Text.translatable(OWNER_DESCRIPTION, owner.copy().formatted(Formatting.WHITE)).formatted(Formatting.GREEN)
+            tooltip += Text.translatable(SELLING_DESCRIPTION, selling.toTextWithCount().formatted(Formatting.WHITE)).formatted(Formatting.GREEN)
+            tooltip += Text.translatable(PRICE_DESCRIPTION, price.toTextWithCount().formatted(Formatting.WHITE)).formatted(Formatting.GREEN)
+        }
+    }
+
     companion object {
         val WATERLOGGED = Properties.WATERLOGGED
+        private const val OWNER_DESCRIPTION = "block.adorn.trading_station.description.owner"
+        private const val SELLING_DESCRIPTION = "block.adorn.trading_station.description.selling"
+        private const val PRICE_DESCRIPTION = "block.adorn.trading_station.description.price"
 
         private val LEG_SHAPE = VoxelShapes.union(
             createCuboidShape(1.0, 0.0, 1.0, 4.0, 14.0, 4.0),

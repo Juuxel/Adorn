@@ -6,6 +6,9 @@ accessible method net/minecraft/block/TallPlantBlock onBreakInCreative (Lnet/min
 accessible method net/minecraft/block/TorchBlock <init> (Lnet/minecraft/block/AbstractBlock$Settings;Lnet/minecraft/particle/ParticleEffect;)V
 accessible method net/minecraft/block/WallTorchBlock <init> (Lnet/minecraft/block/AbstractBlock$Settings;Lnet/minecraft/particle/ParticleEffect;)V
 
+# Items
+accessible field net/minecraft/item/BlockItem BLOCK_ENTITY_TAG_KEY Ljava/lang/String;
+
 # Game rules
 accessible method net/minecraft/world/GameRules register (Ljava/lang/String;Lnet/minecraft/world/GameRules$Category;Lnet/minecraft/world/GameRules$Type;)Lnet/minecraft/world/GameRules$Key;
 accessible method net/minecraft/world/GameRules$BooleanRule create (Z)Lnet/minecraft/world/GameRules$Type;

@@ -3,6 +3,7 @@ package juuxel.adorn.util
 import com.mojang.serialization.Dynamic
 import com.mojang.serialization.JsonOps
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtOps
 import net.minecraft.text.Text
 import net.minecraft.util.math.BlockPos
@@ -44,3 +45,7 @@ fun NbtCompound.getBlockPos(key: String): BlockPos {
 fun NbtCompound.putBlockPos(key: String, pos: BlockPos) {
     putIntArray(key, intArrayOf(pos.x, pos.y, pos.z))
 }
+
+fun NbtCompound.getCompoundOrNull(key: String): NbtCompound? =
+    if (contains(key, NbtElement.COMPOUND_TYPE.toInt())) getCompound(key)
+    else null

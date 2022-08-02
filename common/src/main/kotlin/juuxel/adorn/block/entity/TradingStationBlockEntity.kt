@@ -94,6 +94,6 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
         const val NBT_TRADING_OWNER_NAME = "TradingOwnerName"
         const val NBT_TRADE = "Trade"
         const val NBT_STORAGE = "Storage"
-        private val UNKNOWN_OWNER: Text = Text.literal("???")
+        val UNKNOWN_OWNER: Text = Text.literal("???")
     }
 }
