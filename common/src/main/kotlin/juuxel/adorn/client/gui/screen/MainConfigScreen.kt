@@ -9,6 +9,7 @@ import net.minecraft.text.Text
 
 class MainConfigScreen(parent: Screen) : AbstractConfigScreen(Text.translatable("gui.adorn.config.title"), parent) {
     override fun init() {
+        super.init()
         val config = ConfigManager.config()
         val x = (width - BUTTON_WIDTH) / 2
         addDrawableChild(createConfigToggle(x, 40, BUTTON_WIDTH, config.client::showTradingStationTooltips))

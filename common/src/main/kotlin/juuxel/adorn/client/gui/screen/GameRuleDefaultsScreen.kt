@@ -8,6 +8,7 @@ import net.minecraft.text.Text
 
 class GameRuleDefaultsScreen(parent: Screen) : AbstractConfigScreen(Text.translatable("gui.adorn.config.game_rule_defaults"), parent) {
     override fun init() {
+        super.init()
         val config = ConfigManager.config()
         val x = (width - BUTTON_WIDTH) / 2
         addDrawableChild(createConfigToggle(x, 40, BUTTON_WIDTH, config.gameRuleDefaults::skipNightOnSofas))

@@ -23,10 +23,17 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
     private val random: Random = Random.Default
     private val hearts: MutableList<Heart> = ArrayList()
     private var restartRequired = false
+    private var heartThread: HeartTickerThread? = null
+
+    override fun init() {
+        heartThread = HeartTickerThread().also { it.start() }
+    }
 
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
         renderBackground(matrices)
-        renderHearts(matrices, delta)
+        synchronized(hearts) {
+            renderHearts(matrices, delta)
+        }
         drawCenteredText(matrices, textRenderer, title, width / 2, 20, Colors.WHITE)
         super.render(matrices, mouseX, mouseY, delta)
 
@@ -69,7 +76,11 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
         )
     }
 
-    override fun tick() {
+    override fun removed() {
+        heartThread?.interrupt()
+    }
+
+    private fun tickHearts() {
         val iter = hearts.iterator()
         while (iter.hasNext()) {
             val heart = iter.next()
@@ -81,11 +92,11 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
             }
         }
 
-        if (random.nextInt(25) == 0) {
+        if (random.nextInt(HEART_CHANCE) == 0) {
             val x = random.nextInt(width)
             val color = HEART_COLORS.random(random)
-            val speed = random.nextDouble() * 4 + 0.2
-            val angularSpeed = random.nextDouble() * 2 * MAX_HEART_SPEED - MAX_HEART_SPEED
+            val speed = random.nextDouble(MIN_HEART_SPEED, MAX_HEART_SPEED)
+            val angularSpeed = random.nextDouble(-MAX_HEART_ANGULAR_SPEED, MAX_HEART_ANGULAR_SPEED)
             hearts += Heart(x, -HEART_SIZE.toDouble(), color, speed, angularSpeed)
         }
     }
@@ -150,7 +161,11 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
             color(0xFCA1DF), // Pink
         )
         private val HEART_TEXTURE = AdornCommon.id("textures/gui/heart.png")
-        private const val MAX_HEART_SPEED = 0.2
+        private const val MIN_HEART_SPEED = 0.05
+        private const val MAX_HEART_SPEED = 1.5
+        private const val MAX_HEART_ANGULAR_SPEED = 0.07
+        private const val HEART_TICK_DELAY: Long = 10L
+        private const val HEART_CHANCE = 65
     }
 
     private class Heart(val x: Int, var y: Double, val color: Int, val speed: Double, val angularSpeed: Double) {
@@ -163,6 +178,22 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
             y += speed
             previousAngle = angle
             angle = (angle + angularSpeed) % MathHelper.TAU
+        }
+    }
+
+    private inner class HeartTickerThread : Thread() {
+        override fun run() {
+            while (!interrupted()) {
+                synchronized(hearts) {
+                    tickHearts()
+                }
+
+                try {
+                    sleep(HEART_TICK_DELAY)
+                } catch (e: InterruptedException) {
+                    break
+                }
+            }
         }
     }
 }
