@@ -78,6 +78,7 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
 
     override fun removed() {
         heartThread?.interrupt()
+        heartThread = null
     }
 
     private fun tickHearts() {
@@ -181,7 +182,7 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
         }
     }
 
-    private inner class HeartTickerThread : Thread() {
+    private inner class HeartTickerThread : Thread("Adorn screen ticker") {
         override fun run() {
             while (!interrupted()) {
                 synchronized(hearts) {
