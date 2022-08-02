@@ -1,10 +1,11 @@
 package juuxel.adorn.trading
 
 import juuxel.adorn.util.NbtConvertible
+import net.minecraft.client.item.TooltipData
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 
-data class Trade(var selling: ItemStack, var price: ItemStack) : NbtConvertible {
+data class Trade(var selling: ItemStack, var price: ItemStack) : NbtConvertible, TooltipData {
     private val listeners: MutableList<TradeListener> = ArrayList()
 
     fun isEmpty() = selling.isEmpty || price.isEmpty

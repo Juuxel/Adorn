@@ -3,6 +3,7 @@ package juuxel.adorn
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.client.ClientCompatInit
+import juuxel.adorn.client.ClientEvents
 import juuxel.adorn.client.gui.screen.AdornMenuScreens
 import juuxel.adorn.compat.Compat
 import juuxel.adorn.config.ConfigManager
@@ -57,6 +58,7 @@ object Adorn : ModInitializer {
         AdornMenuScreens.register()
         AdornNetworking.initClient()
         AdornResources.initClient()
+        ClientEvents.init()
         ClientCompatInit.init()
     }
 }

@@ -1,13 +1,16 @@
 package juuxel.adorn.platform.forge.client
 
+import juuxel.adorn.client.gui.TradeTooltipComponent
 import juuxel.adorn.client.gui.screen.AdornMenuScreens
 import juuxel.adorn.client.gui.screen.GuideBookScreen
 import juuxel.adorn.client.gui.screen.MainConfigScreen
 import juuxel.adorn.platform.PlatformBridges
+import juuxel.adorn.trading.Trade
 import net.minecraft.client.MinecraftClient
 import net.minecraft.resource.ReloadableResourceManagerImpl
 import net.minecraft.util.Identifier
 import net.minecraftforge.client.ConfigScreenHandler
+import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent
 import net.minecraftforge.fml.ModLoadingContext
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
@@ -16,6 +19,7 @@ object AdornClient {
     fun init() {
         MOD_BUS.addListener(this::setup)
         MOD_BUS.addListener(AdornRenderers::registerRenderers)
+        MOD_BUS.addListener(this::registerTooltipComponent)
         val resourceManager = MinecraftClient.getInstance().resourceManager as ReloadableResourceManagerImpl
         resourceManager.registerReloader(PlatformBridges.resources.bookManager)
         resourceManager.registerReloader(PlatformBridges.resources.colorManager)
@@ -26,6 +30,10 @@ object AdornClient {
 
     private fun setup(event: FMLClientSetupEvent) {
         AdornMenuScreens.register()
+    }
+
+    private fun registerTooltipComponent(event: RegisterClientTooltipComponentFactoriesEvent) {
+        event.register(Trade::class.java, ::TradeTooltipComponent)
     }
 
     fun openBookScreen(bookId: Identifier) {
