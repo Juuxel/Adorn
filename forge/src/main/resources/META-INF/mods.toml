@@ -1,5 +1,5 @@
 modLoader = "kotlinforforge"
-loaderVersion = "[3,)"
+loaderVersion = "[3.6,)"
 license = "MIT"
 issueTrackerURL = "https://github.com/Juuxel/Adorn/issues"
 
