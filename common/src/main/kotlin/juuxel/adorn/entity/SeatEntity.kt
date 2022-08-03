@@ -52,7 +52,6 @@ class SeatEntity(type: EntityType<*>, world: World) : Entity(type, world) {
         }
     }
 
-    override fun collides() = false
     override fun getMountedHeightOffset() = 0.0
     override fun createSpawnPacket() = PlatformBridges.network.createEntitySpawnPacket(this)
     override fun hasNoGravity() = true
