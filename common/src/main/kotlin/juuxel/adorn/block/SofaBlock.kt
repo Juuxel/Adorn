@@ -106,13 +106,12 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
         else super.getFluidState(state)
 
     override fun getStateForNeighborUpdate(
-        state: BlockState,
-        direction: Direction?,
-        neighborState: BlockState?,
-        world: WorldAccess,
-        pos: BlockPos,
-        neighborPos: BlockPos?
+        state: BlockState, direction: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ): BlockState {
+        if (state[WATERLOGGED]) {
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+        }
+
         return updateConnections(state, world, pos)
     }
 

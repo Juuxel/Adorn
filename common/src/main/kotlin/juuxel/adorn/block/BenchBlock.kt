@@ -47,7 +47,13 @@ class BenchBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), W
     override fun getStateForNeighborUpdate(
         state: BlockState, direction: Direction, neighborState: BlockState,
         world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
-    ): BlockState = updateConnections(world, pos, state)
+    ): BlockState {
+        if (state[WATERLOGGED]) {
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+        }
+
+        return updateConnections(world, pos, state)
+    }
 
     private fun updateConnections(world: BlockView, pos: BlockPos, state: BlockState): BlockState =
         Direction.AxisDirection.values().fold(state) { acc, axisDirection ->

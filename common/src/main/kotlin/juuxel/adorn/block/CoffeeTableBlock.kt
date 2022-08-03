@@ -13,8 +13,10 @@ import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
+import net.minecraft.world.WorldAccess
 
 class CoffeeTableBlock(variant: BlockVariant) : Block(variant.createSettings().nonOpaque()), Waterloggable, BlockWithDescription {
     override val descriptionKey = "block.adorn.coffee_table.description"
@@ -32,13 +34,23 @@ class CoffeeTableBlock(variant: BlockVariant) : Block(variant.createSettings().n
         defaultState.with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
 
     override fun getFluidState(state: BlockState) =
-        if (state[Properties.WATERLOGGED]) Fluids.WATER.getStill(false)
+        if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
         else super.getFluidState(state)
 
     override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape =
         SHAPE
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
+
+    override fun getStateForNeighborUpdate(
+        state: BlockState, direction: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
+    ): BlockState {
+        if (state[WATERLOGGED]) {
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+        }
+
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
+    }
 
     companion object {
         val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED

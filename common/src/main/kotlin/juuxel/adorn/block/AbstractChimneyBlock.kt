@@ -41,7 +41,17 @@ abstract class AbstractChimneyBlock(settings: Settings) : Block(settings), Water
 
     override fun getStateForNeighborUpdate(
         state: BlockState, side: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
-    ): BlockState = if (side == Direction.UP) state.updateConnections(neighborState) else state
+    ): BlockState {
+        if (state[WATERLOGGED]) {
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+        }
+
+        return if (side == Direction.UP) {
+            state.updateConnections(neighborState)
+        } else {
+            state
+        }
+    }
 
     override fun getFluidState(state: BlockState) =
         if (state[WATERLOGGED]) Fluids.WATER.getStill(false)

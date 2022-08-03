@@ -32,6 +32,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
+import net.minecraft.world.WorldAccess
 
 class TableLampBlock(settings: Settings) : Block(settings), Waterloggable, BlockWithDescription {
     override val descriptionKey = "block.adorn.table_lamp.description"
@@ -86,6 +87,16 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable, Block
         if (state[LIT]) 15 else 0
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
+
+    override fun getStateForNeighborUpdate(
+        state: BlockState, direction: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
+    ): BlockState {
+        if (state[WATERLOGGED]) {
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+        }
+
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
+    }
 
     companion object {
         private val SHAPES: Map<Direction, VoxelShape> = run {

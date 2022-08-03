@@ -72,15 +72,18 @@ class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createS
 
     // Based on WallTorchBlock.getStateForNeighborUpdate
     override fun getStateForNeighborUpdate(
-        state: BlockState,
-        side: Direction,
-        neighborState: BlockState?,
-        world: WorldAccess,
-        pos: BlockPos,
-        neighborPos: BlockPos?
-    ): BlockState =
-        if (state[FACING].opposite == side && !state.canPlaceAt(world, pos)) Blocks.AIR.defaultState
-        else state
+        state: BlockState, side: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
+    ): BlockState {
+        if (state[WATERLOGGED]) {
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+        }
+
+        return if (state[FACING].opposite == side && !state.canPlaceAt(world, pos)) {
+            Blocks.AIR.defaultState
+        } else {
+            state
+        }
+    }
 
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hitResult: BlockHitResult

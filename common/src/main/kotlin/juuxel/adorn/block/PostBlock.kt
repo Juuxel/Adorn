@@ -18,6 +18,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
+import net.minecraft.world.WorldAccess
 
 class PostBlock(variant: BlockVariant) : Block(variant.createSettings()), BlockWithDescription, Waterloggable {
     override val descriptionKey = "block.adorn.post.description"
@@ -59,6 +60,16 @@ class PostBlock(variant: BlockVariant) : Block(variant.createSettings()), BlockW
     }
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
+
+    override fun getStateForNeighborUpdate(
+        state: BlockState, direction: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
+    ): BlockState {
+        if (state[WATERLOGGED]) {
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+        }
+
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
+    }
 
     companion object {
         val AXIS: EnumProperty<Direction.Axis> = Properties.AXIS
