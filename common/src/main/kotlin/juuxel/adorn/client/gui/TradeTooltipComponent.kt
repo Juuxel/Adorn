@@ -12,7 +12,7 @@ import net.minecraft.client.util.math.MatrixStack
 
 class TradeTooltipComponent(private val trade: Trade) : TooltipComponent {
     override fun getWidth(textRenderer: TextRenderer?): Int = 3 * 16
-    override fun getHeight(): Int = 17
+    override fun getHeight(): Int = 18
 
     override fun drawItems(textRenderer: TextRenderer, x: Int, y: Int, matrices: MatrixStack, itemRenderer: ItemRenderer, z: Int) {
         itemRenderer.renderInGuiWithOverrides(trade.price, x, y, 0)
