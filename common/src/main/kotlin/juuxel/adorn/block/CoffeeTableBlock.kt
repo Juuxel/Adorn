@@ -28,11 +28,8 @@ class CoffeeTableBlock(variant: BlockVariant) : Block(variant.createSettings().n
         builder.add(WATERLOGGED)
     }
 
-    override fun getPlacementState(context: ItemPlacementContext) =
-        super.getPlacementState(context)?.with(
-            Properties.WATERLOGGED,
-            context.world.getFluidState(context.blockPos).fluid == Fluids.WATER
-        )
+    override fun getPlacementState(context: ItemPlacementContext): BlockState =
+        defaultState.with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
 
     override fun getFluidState(state: BlockState) =
         if (state[Properties.WATERLOGGED]) Fluids.WATER.getStill(false)

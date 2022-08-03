@@ -31,11 +31,8 @@ class PostBlock(variant: BlockVariant) : Block(variant.createSettings()), BlockW
         builder.add(AXIS, WATERLOGGED)
     }
 
-    override fun getPlacementState(context: ItemPlacementContext) =
-        super.getPlacementState(context)?.run {
-            with(AXIS, context.side.axis)
-                .with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
-        }
+    override fun getPlacementState(context: ItemPlacementContext): BlockState =
+        defaultState.with(AXIS, context.side.axis).with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
 
     override fun getFluidState(state: BlockState) =
         if (state[WATERLOGGED]) Fluids.WATER.getStill(false)

@@ -10,6 +10,7 @@ import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
+import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.shape.VoxelShape
@@ -20,21 +21,19 @@ class StepBlock(variant: BlockVariant) : Block(variant.createSettings()), BlockW
     override val descriptionKey = "block.adorn.step.description"
 
     init {
-        defaultState = defaultState.with(Properties.WATERLOGGED, false)
+        defaultState = defaultState.with(WATERLOGGED, false)
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.add(Properties.WATERLOGGED)
+        builder.add(WATERLOGGED)
     }
 
-    override fun getPlacementState(context: ItemPlacementContext) =
-        super.getPlacementState(context)?.run {
-            with(Properties.WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
-        }
+    override fun getPlacementState(context: ItemPlacementContext): BlockState =
+        defaultState.with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
 
     override fun getFluidState(state: BlockState) =
-        if (state[Properties.WATERLOGGED]) Fluids.WATER.getStill(false)
+        if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
         else super.getFluidState(state)
 
     override fun getOutlineShape(p0: BlockState?, p1: BlockView?, p2: BlockPos?, context: ShapeContext?): VoxelShape =
@@ -43,6 +42,7 @@ class StepBlock(variant: BlockVariant) : Block(variant.createSettings()), BlockW
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
     companion object {
+        val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
         private val SHAPE = VoxelShapes.union(
             /* Post     */ createCuboidShape(6.0, 0.0, 6.0, 10.0, 8.0, 10.0),
             /* Platform */ createCuboidShape(0.0, 6.0, 0.0, 16.0, 8.0, 16.0)

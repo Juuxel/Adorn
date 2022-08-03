@@ -31,10 +31,9 @@ abstract class AbstractChimneyBlock(settings: Settings) : Block(settings), Water
         builder.add(CONNECTED, WATERLOGGED)
     }
 
-    override fun getPlacementState(context: ItemPlacementContext) =
-        super.getPlacementState(context)?.run {
-            with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
-        }?.updateConnections(context.world.getBlockState(context.blockPos.up()))
+    override fun getPlacementState(context: ItemPlacementContext): BlockState =
+        defaultState.with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
+            .updateConnections(context.world.getBlockState(context.blockPos.up()))
 
     private fun BlockState.updateConnections(neighborState: BlockState): BlockState = run {
         with(CONNECTED, neighborState.isIn(AdornTags.CHIMNEYS.block))

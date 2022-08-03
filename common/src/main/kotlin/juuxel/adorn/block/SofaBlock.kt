@@ -94,7 +94,7 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState {
         return updateConnections(
-            super.getPlacementState(context)!!.with(FACING, context.playerFacing.opposite)
+            defaultState.with(FACING, context.playerFacing.opposite)
                 .with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER),
             context.world,
             context.blockPos

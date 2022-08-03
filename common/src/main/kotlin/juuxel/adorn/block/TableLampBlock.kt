@@ -69,7 +69,7 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable, Block
     }
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState =
-        super.getPlacementState(context)!!
+        defaultState
             .with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
             .with(FACING, context.side)
 

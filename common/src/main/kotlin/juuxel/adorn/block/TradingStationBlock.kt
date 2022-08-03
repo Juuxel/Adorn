@@ -42,9 +42,8 @@ class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings)
         builder.add(WATERLOGGED)
     }
 
-    override fun getPlacementState(context: ItemPlacementContext) =
-        super.getPlacementState(context)!!
-            .with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
+    override fun getPlacementState(context: ItemPlacementContext): BlockState =
+        defaultState.with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
 
     override fun getFluidState(state: BlockState) =
         if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
