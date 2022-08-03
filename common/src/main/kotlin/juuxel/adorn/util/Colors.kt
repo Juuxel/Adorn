@@ -12,6 +12,7 @@ object Colors {
     val BLACK = color(0x000000)
     val WHITE = color(0xFFFFFF)
     val SCREEN_TEXT = color(0x404040)
+    val TRANSPARENT = color(0x000000, alpha = 0)
 
     fun redOf(argb: Int): Float = ((argb shr 16) and 0xFF) / 255f
     fun greenOf(argb: Int): Float = ((argb shr 8) and 0xFF) / 255f

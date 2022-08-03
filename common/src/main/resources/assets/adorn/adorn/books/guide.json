@@ -192,7 +192,7 @@
       "image": {
         "location": "adorn:textures/gui/brewer_guide.png",
         "size": [113, 61],
-        "verticalAlignment": "bottom",
+        "placement": "afterText",
         "hoverAreas": [
           {
             "position": [1, 1],

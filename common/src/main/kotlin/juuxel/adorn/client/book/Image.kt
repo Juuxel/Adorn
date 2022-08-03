@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier
 data class Image(
     val location: Identifier,
     val size: Vec2i,
-    val verticalAlignment: VerticalAlignment,
+    val placement: Placement,
     val hoverAreas: List<HoverArea>
 ) {
     companion object {
@@ -18,20 +18,19 @@ data class Image(
             instance.group(
                 Identifier.CODEC.fieldOf("location").forGetter { it.location },
                 Vec2i.CODEC.fieldOf("size").forGetter { it.size },
-                VerticalAlignment.CODEC.optionalFieldOf("verticalAlignment", VerticalAlignment.CENTER).forGetter { it.verticalAlignment },
+                Placement.CODEC.optionalFieldOf("placement", Placement.AFTER_TEXT).forGetter { it.placement },
                 HoverArea.CODEC.listOf().optionalFieldOf("hoverAreas", emptyList()).forGetter { it.hoverAreas }
             ).apply(instance, ::Image)
         }
     }
 
-    enum class VerticalAlignment(private val id: String) {
-        TOP("top"),
-        CENTER("center"),
-        BOTTOM("bottom");
+    enum class Placement(private val id: String) {
+        BEFORE_TEXT("beforeText"),
+        AFTER_TEXT("afterText");
 
         companion object {
-            private val BY_ID: Map<String, VerticalAlignment> = values().associateBy { it.id }
-            val CODEC: Codec<VerticalAlignment> = Codec.STRING.xmap(BY_ID::get, VerticalAlignment::id)
+            private val BY_ID: Map<String, Placement> = values().associateBy { it.id }
+            val CODEC: Codec<Placement> = Codec.STRING.xmap(BY_ID::get, Placement::id)
         }
     }
 

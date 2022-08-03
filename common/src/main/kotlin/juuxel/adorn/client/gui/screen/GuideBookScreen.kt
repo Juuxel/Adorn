@@ -5,7 +5,11 @@ import juuxel.adorn.AdornCommon
 import juuxel.adorn.client.book.Book
 import juuxel.adorn.client.book.Image
 import juuxel.adorn.client.book.Page
+import juuxel.adorn.client.gui.Scissors
 import juuxel.adorn.client.gui.widget.FlipBook
+import juuxel.adorn.client.gui.widget.Panel
+import juuxel.adorn.client.gui.widget.ScrollEnvelope
+import juuxel.adorn.client.gui.widget.SizedElement
 import juuxel.adorn.client.gui.widget.TickingElement
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.color
@@ -25,6 +29,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.text.ClickEvent
 import net.minecraft.text.Style
 import net.minecraft.text.Text
+import kotlin.math.max
 
 class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
     private lateinit var flipBook: FlipBook
@@ -46,7 +51,10 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         flipBook = addDrawableChild(FlipBook(this::updatePageTurnButtons))
         flipBook.add(TitlePage(pageX, pageY, book))
         for (page in book.pages) {
-            flipBook.add(BookPage(pageX, pageY, page))
+            val panel = Panel()
+            panel.add(BookPageTitle(pageX, pageY, page))
+            panel.add(ScrollEnvelope(pageX, pageY + PAGE_TEXT_Y, PAGE_WIDTH, PAGE_BODY_HEIGHT, BookPageBody(pageX, pageY + PAGE_TEXT_Y, page)))
+            flipBook.add(panel)
         }
 
         updatePageTurnButtons()
@@ -99,14 +107,11 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         private const val BOOK_SIZE = 192
         private const val PAGE_TITLE_X = 20
         private const val PAGE_WIDTH = 116
-        // Height of page so that it has the same distance to top and bottom margins
-        // when it is placed at the location of the page widget.
-        private const val PAGE_HEIGHT = 164 - 2 * 6
+        private const val PAGE_BODY_HEIGHT = 121
         private const val PAGE_TITLE_WIDTH = PAGE_WIDTH - 2 * PAGE_TITLE_X
         private const val PAGE_TEXT_X = 4
         private const val PAGE_TEXT_Y = 24
-        // Height of page footer including the 6px offset from PAGE_HEIGHT
-        private const val PAGE_FOOTER_HEIGHT = 10
+        private const val PAGE_IMAGE_GAP = 4
         private const val ICON_DURATION = 25
         private val CLOSE_BOOK_ACTIVE_TEXTURE = AdornCommon.id("textures/gui/close_book_active.png")
         private val CLOSE_BOOK_INACTIVE_TEXTURE = AdornCommon.id("textures/gui/close_book_inactive.png")
@@ -130,18 +135,46 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         }
     }
 
-    private inner class BookPage(private val x: Int, private val y: Int, private val page: Page) : Element, Drawable, TickingElement {
+    private inner class BookPageTitle(private val x: Int, private val y: Int, page: Page) : Element, Drawable, TickingElement {
         private val wrappedTitleLines = textRenderer.wrapLines(page.title.copy().styled { it.withBold(true) }, PAGE_TITLE_WIDTH)
-        private val wrappedBodyLines = textRenderer.wrapLines(page.text, PAGE_WIDTH - PAGE_TEXT_X)
 
         private val icons: List<ItemStack> = interleave(page.icons.map { it.createStacks() })
         private var icon = 0
         private var iconTicks = 0
 
+        override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+            itemRenderer.renderGuiItemIcon(icons[icon], x, y)
+
+            val titleY = (y + 10 - textRenderer.fontHeight * wrappedTitleLines.size / 2).toFloat()
+            for ((i, line) in wrappedTitleLines.withIndex()) {
+                textRenderer.draw(matrices, line, (x + PAGE_TITLE_X).toFloat(), titleY + i * textRenderer.fontHeight, Colors.SCREEN_TEXT)
+            }
+        }
+
+        override fun tick() {
+            if (iconTicks++ >= ICON_DURATION) {
+                iconTicks = 0
+                icon = (icon + 1) % icons.size
+            }
+        }
+    }
+
+    private inner class BookPageBody(private val x: Int, private val y: Int, private val page: Page) : SizedElement, Drawable {
+        override val width = PAGE_WIDTH
+        private val wrappedBodyLines = textRenderer.wrapLines(page.text, PAGE_WIDTH - PAGE_TEXT_X)
+        private val textHeight = wrappedBodyLines.size * textRenderer.fontHeight
+        private val imageHeight = if (page.image != null) page.image.size.y + PAGE_IMAGE_GAP else 0
+        override val height = max(PAGE_BODY_HEIGHT, textHeight + imageHeight)
+
+        override fun isMouseOver(mouseX: Double, mouseY: Double): Boolean =
+            x <= mouseX && mouseX <= x + width && y <= mouseY && mouseY <= y + height
+
         private fun getTextStyleAt(x: Int, y: Int): Style? {
+            if (!isMouseOver(x.toDouble(), y.toDouble())) return null
+
             // coordinates in widget-space
             val wx = x - (this.x + PAGE_TEXT_X)
-            val wy = y - (this.y + PAGE_TEXT_Y)
+            val wy = y - (this.y)
             val lineIndex = wy / textRenderer.fontHeight
 
             if (lineIndex in wrappedBodyLines.indices) {
@@ -153,16 +186,14 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         }
 
         override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
-            itemRenderer.renderGuiItemIcon(icons[icon], x, y)
-
-            val titleY = (y + 10 - textRenderer.fontHeight * wrappedTitleLines.size / 2).toFloat()
-
-            for ((i, line) in wrappedTitleLines.withIndex()) {
-                textRenderer.draw(matrices, line, (x + PAGE_TITLE_X).toFloat(), titleY + i * textRenderer.fontHeight, Colors.SCREEN_TEXT)
+            val textYOffset = if (page.image != null && page.image.placement == Image.Placement.BEFORE_TEXT) {
+                imageHeight
+            } else {
+                0
             }
 
             for ((i, line) in wrappedBodyLines.withIndex()) {
-                textRenderer.draw(matrices, line, (x + PAGE_TEXT_X).toFloat(), (y + PAGE_TEXT_Y + i * textRenderer.fontHeight).toFloat(), Colors.SCREEN_TEXT)
+                textRenderer.draw(matrices, line, (x + PAGE_TEXT_X).toFloat(), (textYOffset + y + i * textRenderer.fontHeight).toFloat(), Colors.SCREEN_TEXT)
             }
 
             if (page.image != null) {
@@ -170,15 +201,16 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
             }
 
             val hoveredStyle = getTextStyleAt(mouseX, mouseY)
-            renderTextHoverEffect(matrices, hoveredStyle, mouseX, mouseY)
+            Scissors.suspendScissors {
+                renderTextHoverEffect(matrices, hoveredStyle, mouseX, mouseY)
+            }
         }
 
         private fun renderImage(matrices: MatrixStack, image: Image, mouseX: Int, mouseY: Int) {
             val imageX = x + (PAGE_WIDTH - image.size.x) / 2
-            val imageY = when (image.verticalAlignment) {
-                Image.VerticalAlignment.TOP -> y + PAGE_TEXT_Y
-                Image.VerticalAlignment.CENTER -> y + (PAGE_HEIGHT - image.size.y) / 2
-                Image.VerticalAlignment.BOTTOM -> y + PAGE_HEIGHT - image.size.y - PAGE_FOOTER_HEIGHT
+            val imageY = when (image.placement) {
+                Image.Placement.BEFORE_TEXT -> y
+                Image.Placement.AFTER_TEXT -> y + textHeight + PAGE_IMAGE_GAP
             }
 
             RenderSystem.enableBlend()
@@ -195,7 +227,9 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
                     fill(matrices, hX, hY, hX + hoverArea.size.x, hY + hoverArea.size.y, HOVER_AREA_HIGHLIGHT_COLOR)
 
                     val wrappedTooltip = client!!.textRenderer.wrapLines(hoverArea.tooltip, PAGE_WIDTH)
-                    renderOrderedTooltip(matrices, wrappedTooltip, mouseX, mouseY)
+                    Scissors.suspendScissors {
+                        renderOrderedTooltip(matrices, wrappedTooltip, mouseX, mouseY)
+                    }
                     break
                 }
             }
@@ -211,13 +245,6 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
             }
 
             return super.mouseClicked(mouseX, mouseY, button)
-        }
-
-        override fun tick() {
-            if (iconTicks++ >= ICON_DURATION) {
-                iconTicks = 0
-                icon = (icon + 1) % icons.size
-            }
         }
     }
 
