@@ -55,6 +55,10 @@ tasks {
     assemble {
         dependsOn(collectJars)
     }
+
+    // This is for IDEA. If "classes" doesn't exist, it runs "assemble" - which
+    // builds the final project jars and is slow - when you press the hammer icon.
+    register("classes")
 }
 
 // Do the shared set up for the Minecraft subprojects.
