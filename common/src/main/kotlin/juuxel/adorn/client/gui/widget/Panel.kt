@@ -13,19 +13,23 @@ class Panel : AbstractParentElement(), Drawable, TickingElement {
         children += element
     }
 
-    override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+    private inline fun <reified T> forEach(code: (T) -> Unit) {
         for (child in children) {
-            if (child is Drawable) {
-                child.render(matrices, mouseX, mouseY, delta)
+            if (child is T) {
+                code(child)
             }
         }
     }
 
+    override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+        forEach<Drawable> {
+            it.render(matrices, mouseX, mouseY, delta)
+        }
+    }
+
     override fun tick() {
-        for (child in children) {
-            if (child is TickingElement) {
-                child.tick()
-            }
+        forEach<TickingElement> {
+            it.tick()
         }
     }
 
