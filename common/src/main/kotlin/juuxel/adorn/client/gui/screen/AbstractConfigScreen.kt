@@ -5,6 +5,8 @@ import juuxel.adorn.AdornCommon
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.Displayable
+import juuxel.adorn.util.animation.AnimationEngine
+import juuxel.adorn.util.animation.AnimationTask
 import juuxel.adorn.util.color
 import net.minecraft.client.gui.screen.NoticeScreen
 import net.minecraft.client.gui.screen.Screen
@@ -23,10 +25,14 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
     private val random: Random = Random.Default
     private val hearts: MutableList<Heart> = ArrayList()
     private var restartRequired = false
-    private var heartThread: HeartTickerThread? = null
+    private val animationEngine = AnimationEngine()
+
+    init {
+        animationEngine.add(HeartAnimationTask())
+    }
 
     override fun init() {
-        heartThread = HeartTickerThread().also { it.start() }
+        animationEngine.start()
     }
 
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
@@ -77,8 +83,7 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
     }
 
     override fun removed() {
-        heartThread?.interrupt()
-        heartThread = null
+        animationEngine.stop()
     }
 
     private fun tickHearts() {
@@ -165,7 +170,6 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
         private const val MIN_HEART_SPEED = 0.05
         private const val MAX_HEART_SPEED = 1.5
         private const val MAX_HEART_ANGULAR_SPEED = 0.07
-        private const val HEART_TICK_DELAY: Long = 10L
         private const val HEART_CHANCE = 65
     }
 
@@ -182,18 +186,11 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
         }
     }
 
-    private inner class HeartTickerThread : Thread("Adorn screen ticker") {
-        override fun run() {
-            while (!interrupted()) {
-                synchronized(hearts) {
-                    tickHearts()
-                }
-
-                try {
-                    sleep(HEART_TICK_DELAY)
-                } catch (e: InterruptedException) {
-                    break
-                }
+    private inner class HeartAnimationTask : AnimationTask {
+        override fun isAlive(): Boolean = true
+        override fun tick() {
+            synchronized(hearts) {
+                tickHearts()
             }
         }
     }
