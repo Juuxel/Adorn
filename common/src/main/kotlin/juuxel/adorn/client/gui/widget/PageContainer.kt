@@ -1,8 +1,9 @@
 package juuxel.adorn.client.gui.widget
 
-interface PageContainer {
+interface PageContainer<out T> {
     var currentPage: Int // 0-indexed
     val pageCount: Int
+    val currentPageValue: T
 
     fun hasPreviousPage(): Boolean = currentPage > 0
     fun hasNextPage(): Boolean = currentPage < pageCount - 1

@@ -108,6 +108,18 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         }
     }
 
+    override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
+        val currentPage = flipBook.currentPageValue
+        if (currentPage is Panel) {
+            val scroll = currentPage.children().firstOrNull { it is ScrollEnvelope }
+            if (scroll != null) {
+                return scroll.keyPressed(keyCode, scanCode, modifiers)
+            }
+        }
+
+        return super.keyPressed(keyCode, scanCode, modifiers)
+    }
+
     companion object {
         private const val BOOK_SIZE = 192
         private const val PAGE_TITLE_X = 20

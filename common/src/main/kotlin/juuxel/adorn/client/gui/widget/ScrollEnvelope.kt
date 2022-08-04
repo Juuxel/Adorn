@@ -5,9 +5,13 @@ import juuxel.adorn.util.color
 import net.minecraft.client.gui.Element
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.MathHelper
+import org.lwjgl.glfw.GLFW
 
 class ScrollEnvelope(x: Int, y: Int, width: Int, height: Int, private val element: SizedElement) : ScissorEnvelope(x, y, width, height) {
     private var offset = 0
+        set(value) {
+            field = MathHelper.clamp(value, 0, heightDifference())
+        }
 
     // Scroll bar
     private val trackHeight = height - 2 * SCROLLING_TRACK_MARGIN
@@ -114,6 +118,23 @@ class ScrollEnvelope(x: Int, y: Int, width: Int, height: Int, private val elemen
     override fun stopDragging() {
         super.stopDragging()
         draggingThumb = false
+    }
+
+    override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
+        val scrollAmount = when (keyCode) {
+            GLFW.GLFW_KEY_UP -> -SCROLLING_SPEED
+            GLFW.GLFW_KEY_DOWN -> SCROLLING_SPEED
+            GLFW.GLFW_KEY_PAGE_UP -> -height
+            GLFW.GLFW_KEY_PAGE_DOWN -> height
+            else -> 0
+        }
+
+        if (scrollAmount != 0) {
+            offset += scrollAmount
+            return true
+        }
+
+        return super.keyPressed(keyCode, scanCode, modifiers)
     }
 
     companion object {
