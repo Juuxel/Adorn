@@ -254,7 +254,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             RenderSystem.setShaderTexture(
                 0,
-                if (isMouseOver(mouseX.toDouble(), mouseY.toDouble())) {
+                if (isHovered) {
                     CLOSE_BOOK_ACTIVE_TEXTURE
                 } else {
                     CLOSE_BOOK_INACTIVE_TEXTURE
