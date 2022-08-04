@@ -5,7 +5,7 @@ import net.minecraft.client.gui.Drawable
 import net.minecraft.client.gui.Element
 import net.minecraft.client.util.math.MatrixStack
 
-class Panel : AbstractParentElement(), Drawable, TickingElement {
+class Panel : AbstractParentElement(), Drawable, TickingElement, Draggable {
     private val children: MutableList<Element> = ArrayList()
     override fun children() = children
 
@@ -35,4 +35,10 @@ class Panel : AbstractParentElement(), Drawable, TickingElement {
 
     override fun isMouseOver(mouseX: Double, mouseY: Double) =
         children.any { it.isMouseOver(mouseX, mouseY) }
+
+    override fun stopDragging() {
+        forEach<Draggable> {
+            it.stopDragging()
+        }
+    }
 }

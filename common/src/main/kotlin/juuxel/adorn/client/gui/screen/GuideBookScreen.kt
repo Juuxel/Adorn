@@ -6,6 +6,7 @@ import juuxel.adorn.client.book.Book
 import juuxel.adorn.client.book.Image
 import juuxel.adorn.client.book.Page
 import juuxel.adorn.client.gui.Scissors
+import juuxel.adorn.client.gui.widget.Draggable
 import juuxel.adorn.client.gui.widget.FlipBook
 import juuxel.adorn.client.gui.widget.Panel
 import juuxel.adorn.client.gui.widget.ScrollEnvelope
@@ -100,6 +101,11 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
             if (child is TickingElement) {
                 child.tick()
             }
+        }
+
+        val focused = this.focused
+        if (focused is Draggable && !isDragging) {
+            focused.stopDragging()
         }
     }
 

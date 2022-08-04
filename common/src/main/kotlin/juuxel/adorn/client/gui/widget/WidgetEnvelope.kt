@@ -15,7 +15,7 @@ import net.minecraft.client.util.math.MatrixStack
  * such as [pagination][FlipBook], [scissoring][ScissorEnvelope] or
  * [scrolling][ScrollEnvelope].
  */
-abstract class WidgetEnvelope : DrawableHelper(), Element, Drawable, Selectable, TickingElement {
+abstract class WidgetEnvelope : DrawableHelper(), Element, Drawable, Selectable, TickingElement, Draggable {
     protected abstract fun current(): Element
 
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
@@ -78,6 +78,14 @@ abstract class WidgetEnvelope : DrawableHelper(), Element, Drawable, Selectable,
 
         if (current is TickingElement) {
             current.tick()
+        }
+    }
+
+    override fun stopDragging() {
+        val current = current()
+
+        if (current is Draggable) {
+            current.stopDragging()
         }
     }
 }
