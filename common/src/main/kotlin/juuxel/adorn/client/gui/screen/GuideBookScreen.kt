@@ -14,6 +14,7 @@ import juuxel.adorn.client.gui.widget.ScrollEnvelope
 import juuxel.adorn.client.gui.widget.SizedElement
 import juuxel.adorn.client.gui.widget.TickingElement
 import juuxel.adorn.util.Colors
+import juuxel.adorn.util.animation.AnimationEngine
 import juuxel.adorn.util.color
 import juuxel.adorn.util.interleave
 import net.minecraft.client.gui.Drawable
@@ -37,6 +38,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
     private lateinit var flipBook: FlipBook
     private lateinit var previousPageButton: PageTurnWidget
     private lateinit var nextPageButton: PageTurnWidget
+    private val animationEngine = AnimationEngine()
 
     override fun init() {
         val x = (width - BOOK_SIZE) / 2
@@ -55,11 +57,13 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         for (page in book.pages) {
             val panel = Panel()
             panel.add(BookPageTitle(pageX, pageY, page))
-            panel.add(ScrollEnvelope(pageX, pageY + PAGE_TEXT_Y, PAGE_WIDTH, PAGE_BODY_HEIGHT, BookPageBody(pageX, pageY + PAGE_TEXT_Y, page)))
+            val body = BookPageBody(pageX, pageY + PAGE_TEXT_Y, page)
+            panel.add(ScrollEnvelope(pageX, pageY + PAGE_TEXT_Y, PAGE_WIDTH, PAGE_BODY_HEIGHT, body, animationEngine))
             flipBook.add(panel)
         }
 
         updatePageTurnButtons()
+        animationEngine.start()
     }
 
     private fun updatePageTurnButtons() {
@@ -106,6 +110,10 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         if (focused is Draggable && !isDragging) {
             focused.stopDragging()
         }
+    }
+
+    override fun removed() {
+        animationEngine.stop()
     }
 
     override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {

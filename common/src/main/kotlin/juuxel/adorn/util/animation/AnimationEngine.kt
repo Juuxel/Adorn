@@ -10,6 +10,12 @@ class AnimationEngine {
         }
     }
 
+    fun remove(task: AnimationTask) {
+        synchronized(tasks) {
+            tasks -= task
+        }
+    }
+
     fun start() {
         thread = AnimatorThread().also { it.start() }
     }
@@ -29,6 +35,7 @@ class AnimationEngine {
                         if (task.isAlive()) {
                             task.tick()
                         } else {
+                            task.removed()
                             iter.remove()
                         }
                     }

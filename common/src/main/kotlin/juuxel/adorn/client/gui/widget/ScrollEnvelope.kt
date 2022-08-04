@@ -1,17 +1,28 @@
 package juuxel.adorn.client.gui.widget
 
 import juuxel.adorn.util.Colors
+import juuxel.adorn.util.animation.AnimatedPropertyWrapper
+import juuxel.adorn.util.animation.AnimationEngine
+import juuxel.adorn.util.animation.Interpolator
 import juuxel.adorn.util.color
 import net.minecraft.client.gui.Element
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.MathHelper
 import org.lwjgl.glfw.GLFW
 
-class ScrollEnvelope(x: Int, y: Int, width: Int, height: Int, private val element: SizedElement) : ScissorEnvelope(x, y, width, height) {
-    private var offset = 0
+class ScrollEnvelope(
+    x: Int, y: Int, width: Int, height: Int,
+    private val element: SizedElement,
+    animationEngine: AnimationEngine
+) : ScissorEnvelope(x, y, width, height) {
+    private var offset = 0.0
         set(value) {
-            field = MathHelper.clamp(value, 0, heightDifference())
+            field = MathHelper.clamp(value, 0.0, heightDifference().toDouble())
         }
+    private var animatedOffset by AnimatedPropertyWrapper(
+        animationEngine, duration = 50, Interpolator.DOUBLE,
+        getter = this::offset, setter = { offset = it }
+    )
 
     // Scroll bar
     private val trackHeight = height - 2 * SCROLLING_TRACK_MARGIN
@@ -47,17 +58,17 @@ class ScrollEnvelope(x: Int, y: Int, width: Int, height: Int, private val elemen
 
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
         matrices.push()
-        matrices.translate(0.0, -offset.toDouble(), 0.0)
-        super.render(matrices, mouseX, mouseY + offset, delta)
+        matrices.translate(0.0, -offset, 0.0)
+        super.render(matrices, mouseX, (mouseY + offset).toInt(), delta)
         matrices.pop()
 
         val heightDifference = heightDifference()
         if (heightDifference > 0) {
-            if (heightDifference - offset > 0) {
+            if (heightDifference - offset >= SHADOW_THRESHOLD) {
                 fillGradient(matrices, x, y + height - GRADIENT_HEIGHT, x + width, y + height, Colors.TRANSPARENT, GRADIENT_COLOR)
             }
 
-            if (offset > 0) {
+            if (offset >= SHADOW_THRESHOLD) {
                 fillGradient(matrices, x, y, x + width, y + GRADIENT_HEIGHT, GRADIENT_COLOR, Colors.TRANSPARENT)
             }
 
@@ -98,7 +109,7 @@ class ScrollEnvelope(x: Int, y: Int, width: Int, height: Int, private val elemen
                 0.0,
                 1.0
             )
-            offset = (pos * heightDifference()).toInt()
+            offset = pos * heightDifference()
             return true
         }
 
@@ -109,7 +120,7 @@ class ScrollEnvelope(x: Int, y: Int, width: Int, height: Int, private val elemen
         val heightDifference = heightDifference()
 
         if (heightDifference > 0) {
-            offset = MathHelper.clamp(offset - (amount * SCROLLING_SPEED).toInt(), 0, heightDifference)
+            animatedOffset = MathHelper.clamp(offset - (amount * SCROLLING_SPEED), 0.0, heightDifference.toDouble())
         }
 
         return true
@@ -130,7 +141,7 @@ class ScrollEnvelope(x: Int, y: Int, width: Int, height: Int, private val elemen
         }
 
         if (scrollAmount != 0) {
-            offset += scrollAmount
+            animatedOffset += scrollAmount
             return true
         }
 
@@ -138,8 +149,9 @@ class ScrollEnvelope(x: Int, y: Int, width: Int, height: Int, private val elemen
     }
 
     companion object {
+        private const val SHADOW_THRESHOLD = 1.0
         private const val GRADIENT_HEIGHT = 5
-        private const val SCROLLING_SPEED = 10
+        private const val SCROLLING_SPEED = 20
         private val GRADIENT_COLOR = color(0x000000, alpha = 0.2f)
         private const val SCROLLING_TRACK_MARGIN = 2
         private const val SCROLLING_TRACK_WIDTH = 4
