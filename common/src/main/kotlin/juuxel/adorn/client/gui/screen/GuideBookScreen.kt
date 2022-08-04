@@ -6,6 +6,7 @@ import juuxel.adorn.client.book.Book
 import juuxel.adorn.client.book.Image
 import juuxel.adorn.client.book.Page
 import juuxel.adorn.client.gui.Scissors
+import juuxel.adorn.client.gui.forEach
 import juuxel.adorn.client.gui.widget.Draggable
 import juuxel.adorn.client.gui.widget.FlipBook
 import juuxel.adorn.client.gui.widget.Panel
@@ -97,10 +98,8 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
     }
 
     override fun tick() {
-        for (child in children()) {
-            if (child is TickingElement) {
-                child.tick()
-            }
+        forEach<TickingElement> {
+            it.tick()
         }
 
         val focused = this.focused

@@ -1,5 +1,6 @@
 package juuxel.adorn.client.gui.widget
 
+import juuxel.adorn.client.gui.forEach
 import net.minecraft.client.gui.AbstractParentElement
 import net.minecraft.client.gui.Drawable
 import net.minecraft.client.gui.Element
@@ -11,14 +12,6 @@ class Panel : AbstractParentElement(), Drawable, TickingElement, Draggable {
 
     fun add(element: Element) {
         children += element
-    }
-
-    private inline fun <reified T> forEach(code: (T) -> Unit) {
-        for (child in children) {
-            if (child is T) {
-                code(child)
-            }
-        }
     }
 
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
