@@ -5,8 +5,11 @@ fun color(rgb: Int, alpha: Int = 0xFF) =
 
 fun color(rgb: Int, alpha: Float) = color(rgb, (alpha * 255f).toInt())
 
-// fun colorFromComponents(red: Int, green: Int, blue: Int): Int =
-//    ((red and 0xFF) shl 16) or ((green and 0xFF) shl 8) or (blue and 0xFF)
+fun color(red: Float, green: Float, blue: Float, alpha: Float = 1f): Int =
+    color((red * 255f).toInt(), (green * 255f).toInt(), (blue * 255f).toInt(), (alpha * 255f).toInt())
+
+fun color(red: Int, green: Int, blue: Int, alpha: Int = 0xFF): Int =
+    ((alpha and 0xFF) shl 24) or ((red and 0xFF) shl 16) or ((green and 0xFF) shl 8) or (blue and 0xFF)
 
 object Colors {
     val BLACK = color(0x000000)

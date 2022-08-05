@@ -1,6 +1,7 @@
 package juuxel.adorn.client.gui.widget
 
 import juuxel.adorn.util.Colors
+import juuxel.adorn.util.animation.AnimatedProperty
 import juuxel.adorn.util.animation.AnimatedPropertyWrapper
 import juuxel.adorn.util.animation.AnimationEngine
 import juuxel.adorn.util.animation.Interpolator
@@ -28,6 +29,11 @@ class ScrollEnvelope(
     private val trackHeight = height - 2 * SCROLLING_TRACK_MARGIN
     private var draggingThumb = false
     private var dragStart = 0.0
+    private var thumbHovered = false
+    private var thumbColor: Int by AnimatedProperty(
+        initial = SCROLL_THUMB_COLOR_INACTIVE,
+        animationEngine, duration = 20, Interpolator.COLOR
+    )
 
     private fun heightDifference() = element.height - height
     private fun thumbHeight() = (height.toFloat() / element.height.toFloat() * trackHeight.toFloat()).toInt()
@@ -72,10 +78,16 @@ class ScrollEnvelope(
                 fillGradient(matrices, x, y, x + width, y + GRADIENT_HEIGHT, GRADIENT_COLOR, Colors.TRANSPARENT)
             }
 
-            val thumbColor = if (draggingThumb || isMouseOverThumb(mouseX.toDouble(), mouseY.toDouble())) {
-                SCROLL_THUMB_COLOR_ACTIVE
-            } else {
-                SCROLL_THUMB_COLOR_INACTIVE
+            val prevHovered = thumbHovered
+            val hovered = draggingThumb || isMouseOverThumb(mouseX.toDouble(), mouseY.toDouble())
+
+            if (prevHovered != hovered) {
+                thumbHovered = hovered
+                thumbColor = if (hovered) {
+                    SCROLL_THUMB_COLOR_ACTIVE
+                } else {
+                    SCROLL_THUMB_COLOR_INACTIVE
+                }
             }
 
             val thumbX = x + width - SCROLLING_TRACK_MARGIN - SCROLLING_TRACK_WIDTH
@@ -156,6 +168,6 @@ class ScrollEnvelope(
         private const val SCROLLING_TRACK_MARGIN = 2
         private const val SCROLLING_TRACK_WIDTH = 4
         private val SCROLL_THUMB_COLOR_INACTIVE = color(0x000000, alpha = 0.2f)
-        private val SCROLL_THUMB_COLOR_ACTIVE = color(0x000000, alpha = 0.8f)
+        private val SCROLL_THUMB_COLOR_ACTIVE = color(0x000000, alpha = 0.6f)
     }
 }
