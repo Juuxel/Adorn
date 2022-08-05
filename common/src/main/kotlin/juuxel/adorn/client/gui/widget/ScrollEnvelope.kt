@@ -78,10 +78,8 @@ class ScrollEnvelope(
                 fillGradient(matrices, x, y, x + width, y + GRADIENT_HEIGHT, GRADIENT_COLOR, Colors.TRANSPARENT)
             }
 
-            val prevHovered = thumbHovered
             val hovered = draggingThumb || isMouseOverThumb(mouseX.toDouble(), mouseY.toDouble())
-
-            if (prevHovered != hovered) {
+            if (thumbHovered != hovered) {
                 thumbHovered = hovered
                 thumbColor = if (hovered) {
                     SCROLL_THUMB_COLOR_ACTIVE
