@@ -1,5 +1,5 @@
 {
-  "name": "Bug Report",
+  "name": "Bug report",
   "description": "Report a bug or a crash",
   "labels": ["bug"],
   "body": [
@@ -39,11 +39,11 @@
       }
     },
     {
-      "type": "textarea",
+      "type": "input",
       "id": "loader_version",
       "attributes": {
         "label": "Mod loader version",
-        "description": "Including Fabric API on Fabric and QSL on Quilt."
+        "description": "On Fabric: both Fabric Loader and Fabric API\nOn Quilt: both Quilt Loader and QFAPI"
       },
       "validations": {
         "required": true
@@ -69,7 +69,7 @@
         "render": "text"
       },
       "validations": {
-        "required": true
+        "required": false
       }
     },
     {
