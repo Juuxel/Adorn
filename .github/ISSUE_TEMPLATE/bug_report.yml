@@ -7,7 +7,8 @@
       "type": "input",
       "id": "adorn_version",
       "attributes": {
-        "label": "Adorn version"
+        "label": "Adorn version",
+        "description": "Make sure that you're running the latest version. Your bug may have been fixed already!"
       },
       "validations": {
         "required": true
@@ -54,7 +55,18 @@
       "id": "describe",
       "attributes": {
         "label": "Describe the bug",
-        "description": "A clear and concise description of what the bug is, and how we can reproduce it."
+        "description": "A clear and concise description of what the bug is and what you expected to happen. You can include images!"
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "reproduction",
+      "attributes": {
+        "label": "To reproduce",
+        "description": "Steps to reproduce the bug or crash."
       },
       "validations": {
         "required": true
@@ -65,7 +77,7 @@
       "id": "logs",
       "attributes": {
         "label": "Game logs",
-        "description": "**If your bug is a crash, attach the full game log here.** It can be found in `logs/latest.log` after the game crashes.",
+        "description": "**If your bug is a crash, attach the full game log here.** It can be found in `logs/latest.log` after the game crashes.\nIf the log is long, you can also upload it on GitHub Gist and paste the link here.",
         "render": "text"
       },
       "validations": {
