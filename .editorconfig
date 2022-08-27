@@ -25,3 +25,6 @@ ij_json_spaces_within_braces = true
 
 [*.accesswidener]
 indent_style = tab
+
+[*.yml]
+indent_size = 2

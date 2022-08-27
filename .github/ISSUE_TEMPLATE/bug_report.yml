@@ -1,0 +1,87 @@
+{
+  "name": "Bug Report",
+  "description": "Report a bug or a crash",
+  "labels": ["bug"],
+  "body": [
+    {
+      "type": "input",
+      "id": "adorn_version",
+      "attributes": {
+        "label": "Adorn version"
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "input",
+      "id": "minecraft_version",
+      "attributes": {
+        "label": "Minecraft version"
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "dropdown",
+      "id": "loader",
+      "attributes": {
+        "label": "Mod loader",
+        "options": [
+          "Fabric",
+          "Forge",
+          "Quilt"
+        ]
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "loader_version",
+      "attributes": {
+        "label": "Mod loader version",
+        "description": "Including Fabric API on Fabric and QSL on Quilt."
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "describe",
+      "attributes": {
+        "label": "Describe the bug",
+        "description": "A clear and concise description of what the bug is, and how we can reproduce it."
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "logs",
+      "attributes": {
+        "label": "Game logs",
+        "description": "**If your bug is a crash, attach the full game log here.** It can be found in `logs/latest.log` after the game crashes.",
+        "render": "text"
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "extra",
+      "attributes": {
+        "label": "Additional context",
+        "description": "If you have anything else to add, please say it here."
+      },
+      "validations": {
+        "required": false
+      }
+    }
+  ]
+}
