@@ -94,6 +94,12 @@
       "validations": {
         "required": false
       }
+    },
+    {
+      "type": "markdown",
+      "attributes": {
+        "value": "Thanks for taking the time to fill this bug report!"
+      }
     }
   ]
 }
