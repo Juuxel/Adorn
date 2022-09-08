@@ -7,6 +7,7 @@ import dev.emi.emi.api.render.EmiTexture
 import dev.emi.emi.api.stack.EmiStack
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.AdornBlocks
+import juuxel.adorn.client.gui.screen.TradingStationScreen
 import juuxel.adorn.recipe.AdornRecipes
 import juuxel.adorn.recipe.FluidBrewingRecipe
 import juuxel.adorn.recipe.ItemBrewingRecipe
@@ -38,5 +39,7 @@ object AdornEmiPlugin : EmiPlugin {
 
             registry.addRecipe(emiRecipe)
         }
+
+        registry.addDragDropHandler(TradingStationScreen::class.java, TradingStationDragDropHandler)
     }
 }
