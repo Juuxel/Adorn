@@ -1,6 +1,5 @@
 package juuxel.adorn.compat.rei.client
 
-import juuxel.adorn.client.ClientNetworkBridge
 import juuxel.adorn.client.gui.screen.TradingStationScreen
 import me.shedaniel.math.Rectangle
 import me.shedaniel.rei.api.client.gui.drag.DraggableStack
@@ -26,17 +25,16 @@ object TradingStationDraggableStackVisitor : DraggableStackVisitor<TradingStatio
         screen is TradingStationScreen
 
     override fun acceptDraggedStack(context: DraggingContext<TradingStationScreen>, stack: DraggableStack): DraggedAcceptorResult {
+        // Check that we're handling an item, no need to run any code for other entry types
+        val entryStack = stack.stack
+        if (entryStack.type != VanillaEntryTypes.ITEM) return DraggedAcceptorResult.PASS
+
         val pos = context.currentPosition ?: return DraggedAcceptorResult.PASS
         val slot = slots(context).find { (_, rect) -> rect.contains(pos) }?.first
 
         if (slot != null) {
-            val entryStack = stack.stack
-            if (entryStack.type == VanillaEntryTypes.ITEM) {
-                slot.stack = entryStack.castValue()
-                val menu = context.screen.menu
-                ClientNetworkBridge.get().sendSetTradeStack(menu.syncId, slot.id, slot.stack)
-                return DraggedAcceptorResult.CONSUMED
-            }
+            context.screen.updateTradeStack(slot, entryStack.castValue())
+            return DraggedAcceptorResult.CONSUMED
         }
 
         return DraggedAcceptorResult.PASS

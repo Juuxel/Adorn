@@ -2,11 +2,14 @@ package juuxel.adorn.client.gui.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
+import juuxel.adorn.client.ClientNetworkBridge
 import juuxel.adorn.menu.TradingStationMenu
 import juuxel.adorn.util.Colors
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.item.ItemStack
+import net.minecraft.menu.Slot
 import net.minecraft.text.Text
 
 class TradingStationScreen(
@@ -31,6 +34,15 @@ class TradingStationScreen(
         textRenderer.draw(matrices, playerInventoryTitle, playerInventoryTitleX.toFloat(), playerInventoryTitleY.toFloat(), Colors.WHITE)
         textRenderer.draw(matrices, SELLING_LABEL, 26f + 9f - textRenderer.getWidth(SELLING_LABEL) / 2, 25f, Colors.WHITE)
         textRenderer.draw(matrices, PRICE_LABEL, 26f + 9f - textRenderer.getWidth(PRICE_LABEL) / 2, 61f, Colors.WHITE)
+    }
+
+    /**
+     * Updates the trade selling/price [stack] in the specified [slot].
+     * This function is mostly meant for item viewer drag-and-drop interactions.
+     */
+    fun updateTradeStack(slot: Slot, stack: ItemStack) {
+        slot.stack = stack
+        ClientNetworkBridge.get().sendSetTradeStack(menu.syncId, slot.id, stack)
     }
 
     companion object {
