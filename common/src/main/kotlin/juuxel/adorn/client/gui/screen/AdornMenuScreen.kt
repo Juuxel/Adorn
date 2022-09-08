@@ -11,6 +11,9 @@ abstract class AdornMenuScreen<M : Menu>(
     playerInventory: PlayerInventory,
     title: Text
 ) : MenuScreen<M>(menu, playerInventory, title) {
+    val panelX get() = x
+    val panelY get() = y
+
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, tickDelta: Float) {
         renderBackground(matrices)
         super.render(matrices, mouseX, mouseY, tickDelta)

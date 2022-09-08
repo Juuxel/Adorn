@@ -11,6 +11,7 @@ import me.shedaniel.rei.api.client.plugins.REIClientPlugin
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry
 import me.shedaniel.rei.api.client.registry.entry.CollapsibleEntryRegistry
+import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry
 import me.shedaniel.rei.api.common.util.EntryIngredients
 import me.shedaniel.rei.api.common.util.EntryStacks
 import net.minecraft.item.Item
@@ -46,6 +47,10 @@ open class AdornReiClient : REIClientPlugin {
         registry.add(AdornTags.BENCHES.item)
         registry.add(AdornTags.CRATES.item)
         registry.add(AdornTags.TABLE_LAMPS.item)
+    }
+
+    override fun registerScreens(registry: ScreenRegistry) {
+        registry.registerDraggableStackVisitor(TradingStationDraggableStackVisitor)
     }
 
     private fun CollapsibleEntryRegistry.add(tag: TagKey<Item>) {

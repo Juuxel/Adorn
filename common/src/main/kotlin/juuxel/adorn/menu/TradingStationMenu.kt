@@ -19,8 +19,8 @@ class TradingStationMenu(
     private val context: MenuContext = MenuContext.EMPTY
 ) : Menu(AdornMenus.TRADING_STATION, syncId) {
     private val tradingStation: TradingStation
-    private val sellingSlot: Slot
-    private val priceSlot: Slot
+    val sellingSlot: Slot
+    val priceSlot: Slot
 
     init {
         val slot = 18
@@ -92,18 +92,29 @@ class TradingStationMenu(
 
         if (action == SlotActionType.PICKUP && slot is TradeSlot) {
             if (isValidItem(cursorStack)) {
-                slot.stack = cursorStack.copy()
-                slot.markDirty()
-
-                if (tradingStation is BlockEntity) {
-                    val state = tradingStation.cachedState
-                    player.world.updateListeners(tradingStation.pos, state, state, Block.NOTIFY_LISTENERS)
-                }
+                updateTradeStack(slot, cursorStack.copy(), player)
             }
 
             return
         } else {
             super.onSlotClick(slotNumber, button, action, player)
+        }
+    }
+
+    fun updateTradeStack(slotId: Int, stack: ItemStack, player: PlayerEntity) {
+        val slot = getSlot(slotId)
+        if (slot is TradeSlot) {
+            updateTradeStack(slot, stack, player)
+        }
+    }
+
+    private fun updateTradeStack(slot: TradeSlot, stack: ItemStack, player: PlayerEntity) {
+        slot.stack = stack
+        slot.markDirty()
+
+        if (tradingStation is BlockEntity) {
+            val state = tradingStation.cachedState
+            player.world.updateListeners(tradingStation.pos, state, state, Block.NOTIFY_LISTENERS)
         }
     }
 
