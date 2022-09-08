@@ -5,6 +5,7 @@ import juuxel.adorn.AdornCommon
 import juuxel.adorn.client.ClientNetworkBridge
 import juuxel.adorn.menu.TradingStationMenu
 import juuxel.adorn.util.Colors
+import juuxel.adorn.util.logger
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
@@ -41,11 +42,17 @@ class TradingStationScreen(
      * This function is mostly meant for item viewer drag-and-drop interactions.
      */
     fun updateTradeStack(slot: Slot, stack: ItemStack) {
+        if (!TradingStationMenu.isValidItem(stack)) {
+            LOGGER.error("Trying to set invalid item {} for slot {} in trading station", stack, slot)
+            return
+        }
+
         slot.stack = stack
         ClientNetworkBridge.get().sendSetTradeStack(menu.syncId, slot.id, stack)
     }
 
     companion object {
+        private val LOGGER = logger()
         private val BACKGROUND_TEXTURE = AdornCommon.id("textures/gui/trading_station.png")
         private val SELLING_LABEL: Text = Text.translatable("block.adorn.trading_station.selling")
         private val PRICE_LABEL: Text = Text.translatable("block.adorn.trading_station.price")

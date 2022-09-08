@@ -138,7 +138,7 @@ class TradingStationMenu(
                 TradingStation.createEmpty()
             }
 
-        private fun isValidItem(stack: ItemStack): Boolean =
+        fun isValidItem(stack: ItemStack): Boolean =
             stack.item.canBeNested()
     }
 }
