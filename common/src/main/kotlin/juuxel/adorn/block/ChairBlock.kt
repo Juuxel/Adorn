@@ -45,12 +45,10 @@ class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()
         builder.add(FACING, HALF, WATERLOGGED)
     }
 
-    override fun getPlacementState(context: ItemPlacementContext): BlockState? {
-        val pos = context.blockPos
-
-        return if (pos.y < 255 && context.world.getBlockState(pos.up()).canReplace(context))
-            super.getPlacementState(context)!!.with(FACING, context.playerFacing.opposite)
-                .with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
+    override fun getPlacementState(context: ItemPlacementContext): BlockState? = with(context) {
+        return if (blockPos.y < world.topY - 1 && world.getBlockState(blockPos.up()).canReplace(context))
+            super.getPlacementState(context)!!.with(FACING, playerFacing.opposite)
+                .with(WATERLOGGED, world.getFluidState(blockPos).fluid == Fluids.WATER)
         else null
     }
 
