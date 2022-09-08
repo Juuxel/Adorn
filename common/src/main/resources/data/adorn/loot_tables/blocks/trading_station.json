@@ -38,6 +38,9 @@
                   "game_rule": "adorn:dropLockedTradingStations"
                 }
               ]
+            },
+            {
+              "function": "adorn:check_trading_station_owner"
             }
           ]
         }

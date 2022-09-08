@@ -5,6 +5,7 @@ import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.loot.AdornLootConditionTypes
+import juuxel.adorn.loot.AdornLootFunctionTypes
 import juuxel.adorn.menu.AdornMenus
 import juuxel.adorn.platform.Registrar
 import juuxel.adorn.platform.forge.client.AdornClient
@@ -34,6 +35,7 @@ object Adorn {
         AdornRecipes.RECIPE_SERIALIZERS.registerToBus(MOD_BUS)
         AdornRecipes.RECIPE_TYPES.registerToBus(MOD_BUS)
         AdornLootConditionTypes.LOOT_CONDITION_TYPES.registerToBus(MOD_BUS)
+        AdornLootFunctionTypes.LOOT_FUNCTION_TYPES.registerToBus(MOD_BUS)
         AdornNetworking.init()
         AdornCriteria.init()
         ItemEvents.register(FORGE_BUS)

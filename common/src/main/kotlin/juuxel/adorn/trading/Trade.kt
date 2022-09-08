@@ -9,6 +9,7 @@ data class Trade(var selling: ItemStack, var price: ItemStack) : NbtConvertible,
     private val listeners: MutableList<TradeListener> = ArrayList()
 
     fun isEmpty() = selling.isEmpty || price.isEmpty
+    fun isFullyEmpty() = selling.isEmpty && price.isEmpty
 
     override fun readNbt(nbt: NbtCompound) {
         selling = ItemStack.fromNbt(nbt.getCompound(NBT_SELLING))
@@ -38,6 +39,15 @@ data class Trade(var selling: ItemStack, var price: ItemStack) : NbtConvertible,
     companion object {
         const val NBT_SELLING = "Selling"
         const val NBT_PRICE = "Price"
+
+        fun empty(): Trade =
+            Trade(ItemStack.EMPTY, ItemStack.EMPTY)
+
+        fun fromNbt(nbt: NbtCompound): Trade {
+            val trade = empty()
+            trade.readNbt(nbt)
+            return trade
+        }
     }
 
     fun interface TradeListener {

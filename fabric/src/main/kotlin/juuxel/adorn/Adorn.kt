@@ -20,6 +20,7 @@ import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.lib.AdornTags
 import juuxel.adorn.lib.SofaSleeping
 import juuxel.adorn.loot.AdornLootConditionTypes
+import juuxel.adorn.loot.AdornLootFunctionTypes
 import juuxel.adorn.menu.AdornMenus
 import juuxel.adorn.recipe.AdornRecipes
 import juuxel.adorn.resources.AdornResources
@@ -46,6 +47,7 @@ object Adorn : ModInitializer {
         AdornCriteria.init()
         AdornRecipes.init()
         AdornLootConditionTypes.init()
+        AdornLootFunctionTypes.init()
         Compat.init()
         ConfigManager.INSTANCE.finalize()
     }

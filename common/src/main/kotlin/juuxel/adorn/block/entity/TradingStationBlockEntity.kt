@@ -13,7 +13,6 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.item.ItemStack
 import net.minecraft.menu.Menu
 import net.minecraft.menu.NamedMenuFactory
 import net.minecraft.nbt.NbtCompound
@@ -28,8 +27,8 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
     BlockEntity(AdornBlockEntities.TRADING_STATION, pos, state), NamedMenuFactory, TradingStation {
     var owner: UUID? = null
     override var ownerName: Text = UNKNOWN_OWNER
-    override val trade: Trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
-    override val storage: InventoryComponent = InventoryComponent(12)
+    override val trade: Trade = Trade.empty()
+    override val storage: InventoryComponent = InventoryComponent(STORAGE_SIZE)
 
     init {
         trade.addListener {
@@ -90,6 +89,7 @@ class TradingStationBlockEntity(pos: BlockPos, state: BlockState) :
     override fun toInitialChunkDataNbt(): NbtCompound = createNbt()
 
     companion object {
+        const val STORAGE_SIZE = 12
         const val NBT_TRADING_OWNER = "TradingOwner"
         const val NBT_TRADING_OWNER_NAME = "TradingOwnerName"
         const val NBT_TRADE = "Trade"

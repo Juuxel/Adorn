@@ -13,13 +13,14 @@ class TradingStationItem(block: Block, settings: Settings) : BaseBlockItem(block
     override fun canBeNested(): Boolean = false
 
     override fun getTooltipData(stack: ItemStack): Optional<TooltipData> {
-        val data = stack.getSubNbt(BLOCK_ENTITY_TAG_KEY)?.let { nbt ->
+        stack.getSubNbt(BLOCK_ENTITY_TAG_KEY)?.let { nbt ->
             nbt.getCompoundOrNull(TradingStationBlockEntity.NBT_TRADE)?.let { tradeNbt ->
-                val trade = Trade(ItemStack.EMPTY, ItemStack.EMPTY)
-                trade.readNbt(tradeNbt)
-                trade
+                val trade = Trade.fromNbt(tradeNbt)
+                if (!trade.isFullyEmpty()) {
+                    return Optional.of(trade)
+                }
             }
         }
-        return Optional.ofNullable(data)
+        return Optional.empty()
     }
 }

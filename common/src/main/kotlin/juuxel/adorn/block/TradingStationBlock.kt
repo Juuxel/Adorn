@@ -133,8 +133,10 @@ class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings)
         super.appendTooltip(stack, world, tooltip, options)
 
         stack.getSubNbt(BlockItem.BLOCK_ENTITY_TAG_KEY)?.let { nbt ->
-            val owner = nbt.getText(TradingStationBlockEntity.NBT_TRADING_OWNER_NAME) ?: TradingStationBlockEntity.UNKNOWN_OWNER
-            tooltip += Text.translatable(OWNER_DESCRIPTION, owner.copy().formatted(Formatting.WHITE)).formatted(Formatting.GREEN)
+            if (nbt.contains(TradingStationBlockEntity.NBT_TRADING_OWNER)) {
+                val owner = nbt.getText(TradingStationBlockEntity.NBT_TRADING_OWNER_NAME) ?: TradingStationBlockEntity.UNKNOWN_OWNER
+                tooltip += Text.translatable(OWNER_DESCRIPTION, owner.copy().formatted(Formatting.WHITE)).formatted(Formatting.GREEN)
+            }
         }
     }
 
