@@ -10,7 +10,6 @@
     <wood id="biomesoplenty:redwood"/>
     <wood id="biomesoplenty:umbran"/>
     <wood id="biomesoplenty:willow"/>
-    <stone id="biomesoplenty:mud_brick" bricks="true"/>
     <stone id="biomesoplenty:black_sandstone" sided_texture="true">
         <replace key="side-texture" with="biomesoplenty:block/black_sandstone"/>
         <replace key="top-texture" with="biomesoplenty:block/black_sandstone_top"/>

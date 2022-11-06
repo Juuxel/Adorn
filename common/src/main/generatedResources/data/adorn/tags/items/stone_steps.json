@@ -63,7 +63,6 @@
     { "id": "adorn:architects_palette/myonite_step", "required": false },
     { "id": "adorn:architects_palette/myonite_brick_step", "required": false },
     { "id": "adorn:architects_palette/mushy_myonite_brick_step", "required": false },
-    { "id": "adorn:biomesoplenty/mud_brick_step", "required": false },
     { "id": "adorn:biomesoplenty/black_sandstone_step", "required": false },
     { "id": "adorn:biomesoplenty/cut_black_sandstone_step", "required": false },
     { "id": "adorn:biomesoplenty/smooth_black_sandstone_step", "required": false },
