@@ -74,7 +74,8 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
                     { client!!.setScreen(parent) },
                     Text.translatable("gui.adorn.config.restart_required.title"),
                     Text.translatable("gui.adorn.config.restart_required.message"),
-                    Text.translatable("gui.ok")
+                    Text.translatable("gui.ok"),
+                    true
                 )
             } else {
                 parent
