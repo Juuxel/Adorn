@@ -543,6 +543,8 @@
   "advancements.adorn.nether_wart_coffee.description": "Brew some nether wart coffee in a brewer.",
   "advancements.adorn.all_brewing.title": "Industrial Brewery",
   "advancements.adorn.all_brewing.description": "Brew every possible drink in a brewer.",
+  "advancements.adorn.candlelit_lantern.title": "Splash of Light",
+  "advancements.adorn.candlelit_lantern.description": "Craft a candlelit lantern.",
   "advancements.adorn.everything.title": "Master Decorator",
   "advancements.adorn.everything.description": "Craft every decoration block from Adorn.",
 
@@ -1300,6 +1302,7 @@
   "block.adorn.purple_candlelit_lantern": "Purple Candlelit Lantern",
   "block.adorn.magenta_candlelit_lantern": "Magenta Candlelit Lantern",
   "block.adorn.pink_candlelit_lantern": "Pink Candlelit Lantern",
+  "block.adorn.candlelit_lantern.description": "Repels the dark",
 
   "entity.adorn.seat": "Seat",
 

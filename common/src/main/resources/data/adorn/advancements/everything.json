@@ -33,6 +33,14 @@
         ]
       }
     },
+    "has_candlelit_lantern": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "tag": "adorn:candlelit_lanterns" }
+        ]
+      }
+    },
     "has_chain_link_fence": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
