@@ -349,6 +349,15 @@ object AdornBlocks : RegistryHelper() {
         )
     }
     val BREWER: Block by registerBlock("brewer") { BrewerBlock(AbstractBlock.Settings.of(Material.METAL).strength(0.8F)) }
+
+    val CANDLELIT_LANTERN: Block by registerBlock("candlelit_lantern") {
+        CandlelitLanternBlock(CandlelitLanternBlock.createBlockSettings())
+    }
+    val DYED_CANDLELIT_LANTERNS: Map<DyeColor, Block> by DyeColor.values().associateLazily {
+        registerBlock("${it.asString()}_candlelit_lantern") {
+            CandlelitLanternBlock(CandlelitLanternBlock.createBlockSettings())
+        }
+    }
     /* ktlint-enable max-line-length */
     // @formatter:on
 

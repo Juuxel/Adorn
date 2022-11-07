@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "hanging=true": { "model": "adorn:block/purple_candlelit_lantern_hanging" },
+    "hanging=false": { "model": "adorn:block/purple_candlelit_lantern_standing" }
+  }
+}

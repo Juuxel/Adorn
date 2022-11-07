@@ -32,6 +32,7 @@ object AdornTags {
     @JvmField val CRATES = blockAndItem(AdornCommon.id("crates"))
     @JvmField val COFFEE_TABLES = blockAndItem(AdornCommon.id("coffee_tables"))
     @JvmField val TABLE_LAMPS = blockAndItem(AdornCommon.id("table_lamps"))
+    @JvmField val CANDLELIT_LANTERNS = blockAndItem(AdornCommon.id("candlelit_lanterns"))
 
     @JvmStatic
     fun init() {}

@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "adorn:white_candlelit_lantern",
+    "adorn:orange_candlelit_lantern",
+    "adorn:magenta_candlelit_lantern",
+    "adorn:light_blue_candlelit_lantern",
+    "adorn:yellow_candlelit_lantern",
+    "adorn:lime_candlelit_lantern",
+    "adorn:pink_candlelit_lantern",
+    "adorn:gray_candlelit_lantern",
+    "adorn:light_gray_candlelit_lantern",
+    "adorn:cyan_candlelit_lantern",
+    "adorn:purple_candlelit_lantern",
+    "adorn:blue_candlelit_lantern",
+    "adorn:brown_candlelit_lantern",
+    "adorn:green_candlelit_lantern",
+    "adorn:red_candlelit_lantern",
+    "adorn:black_candlelit_lantern"
+  ]
+}

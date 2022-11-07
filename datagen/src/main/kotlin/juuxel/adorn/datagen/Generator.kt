@@ -155,6 +155,15 @@ internal class Generator<in M : Material>(
             blockLootTable("table_lamp"),
             recipe("table_lamp"),
             recipeAdvancement("table_lamp"),
+
+            // Candlelit lanterns
+            blockModel("candlelit_lantern_hanging"),
+            blockModel("candlelit_lantern_standing"),
+            blockState("candlelit_lantern"),
+            itemModel("candlelit_lantern"),
+            blockLootTable("candlelit_lantern"),
+            recipe("candlelit_lantern"),
+            recipeAdvancement("candlelit_lantern"),
         )
 
         private fun blockState(type: String, substitutionConfig: TemplateMaterialConfig = EMPTY_SUBSTITUTION): Generator<Material> =
