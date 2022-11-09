@@ -168,6 +168,14 @@ subprojects {
         // for bundling the common mod code in the platform jars.
         apply(plugin = "com.github.johnrengelman.shadow")
 
+        // Set a different run directory for the server run config,
+        // so it won't override client logs/config (or vice versa).
+        extensions.configure<LoomGradleExtensionAPI> {
+            runConfigs.getByName("server") {
+                runDir = "run/server"
+            }
+        }
+
         // Define the "bundle" configuration which will be included in the shadow jar.
         val bundle by configurations.creating {
             // This configuration is only meant to be resolved to its files but not published in

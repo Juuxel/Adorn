@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:light_blue_candlelit_lantern"
+    ]
+  },
+  "criteria": {
+    "has_candle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:light_blue_candle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:light_blue_candlelit_lantern"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_candle",
+      "has_the_recipe"
+    ]
+  ]
+}

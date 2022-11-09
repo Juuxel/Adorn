@@ -71,8 +71,13 @@ object AdornBlocksFabric {
             AdornBlocks.STONE_TORCH_GROUND,
             AdornBlocks.STONE_TORCH_WALL,
             AdornBlocks.CHAIN_LINK_FENCE,
-            AdornBlocks.STONE_LADDER
+            AdornBlocks.STONE_LADDER,
+            AdornBlocks.CANDLELIT_LANTERN
         )
+
+        for ((_, block) in AdornBlocks.DYED_CANDLELIT_LANTERNS) {
+            BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout())
+        }
 
         BlockRenderLayerMap.INSTANCE.putBlocks(
             RenderLayer.getTranslucent(),

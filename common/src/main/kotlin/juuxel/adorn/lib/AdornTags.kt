@@ -8,30 +8,31 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
 object AdornTags {
-    @JvmField val CHAIRS = blockAndItem(AdornCommon.id("chairs"))
-    @JvmField val TABLES = blockAndItem(AdornCommon.id("tables"))
-    @JvmField val DRAWERS = blockAndItem(AdornCommon.id("drawers"))
-    @JvmField val BENCHES = blockAndItem(AdornCommon.id("benches"))
-    @JvmField val KITCHEN_COUNTERS = blockAndItem(AdornCommon.id("kitchen_counters"))
-    @JvmField val KITCHEN_CUPBOARDS = blockAndItem(AdornCommon.id("kitchen_cupboards"))
-    @JvmField val KITCHEN_SINKS = blockAndItem(AdornCommon.id("kitchen_sinks"))
-    @JvmField val KITCHEN_BLOCKS = blockAndItem(AdornCommon.id("kitchen_blocks"))
-    @JvmField val SOFAS = blockAndItem(AdornCommon.id("sofas"))
-    @JvmField val POSTS = blockAndItem(AdornCommon.id("posts"))
-    @JvmField val PLATFORMS = blockAndItem(AdornCommon.id("platforms"))
-    @JvmField val STEPS = blockAndItem(AdornCommon.id("steps"))
-    @JvmField val WOODEN_POSTS = blockAndItem(AdornCommon.id("wooden_posts"))
-    @JvmField val WOODEN_PLATFORMS = blockAndItem(AdornCommon.id("wooden_platforms"))
-    @JvmField val WOODEN_STEPS = blockAndItem(AdornCommon.id("wooden_steps"))
-    @JvmField val STONE_POSTS = blockAndItem(AdornCommon.id("stone_posts"))
-    @JvmField val STONE_PLATFORMS = blockAndItem(AdornCommon.id("stone_platforms"))
-    @JvmField val STONE_STEPS = blockAndItem(AdornCommon.id("stone_steps"))
-    @JvmField val SHELVES = blockAndItem(AdornCommon.id("shelves"))
-    @JvmField val WOODEN_SHELVES = blockAndItem(AdornCommon.id("wooden_shelves"))
-    @JvmField val CHIMNEYS = blockAndItem(AdornCommon.id("chimneys"))
-    @JvmField val CRATES = blockAndItem(AdornCommon.id("crates"))
-    @JvmField val COFFEE_TABLES = blockAndItem(AdornCommon.id("coffee_tables"))
-    @JvmField val TABLE_LAMPS = blockAndItem(AdornCommon.id("table_lamps"))
+    val CHAIRS = blockAndItem("chairs")
+    val TABLES = blockAndItem("tables")
+    val DRAWERS = blockAndItem("drawers")
+    val BENCHES = blockAndItem("benches")
+    val KITCHEN_COUNTERS = blockAndItem("kitchen_counters")
+    val KITCHEN_CUPBOARDS = blockAndItem("kitchen_cupboards")
+    val KITCHEN_SINKS = blockAndItem("kitchen_sinks")
+    val KITCHEN_BLOCKS = blockAndItem("kitchen_blocks")
+    val SOFAS = blockAndItem("sofas")
+    val POSTS = blockAndItem("posts")
+    val PLATFORMS = blockAndItem("platforms")
+    val STEPS = blockAndItem("steps")
+    val WOODEN_POSTS = blockAndItem("wooden_posts")
+    val WOODEN_PLATFORMS = blockAndItem("wooden_platforms")
+    val WOODEN_STEPS = blockAndItem("wooden_steps")
+    val STONE_POSTS = blockAndItem("stone_posts")
+    val STONE_PLATFORMS = blockAndItem("stone_platforms")
+    val STONE_STEPS = blockAndItem("stone_steps")
+    val SHELVES = blockAndItem("shelves")
+    val WOODEN_SHELVES = blockAndItem("wooden_shelves")
+    val CHIMNEYS = blockAndItem("chimneys")
+    val CRATES = blockAndItem("crates")
+    val COFFEE_TABLES = blockAndItem("coffee_tables")
+    val TABLE_LAMPS = blockAndItem("table_lamps")
+    val CANDLELIT_LANTERNS = blockAndItem("candlelit_lanterns")
 
     @JvmStatic
     fun init() {}
@@ -42,10 +43,10 @@ object AdornTags {
     private fun item(id: Identifier): TagKey<Item> =
         TagKey.of(Registry.ITEM_KEY, id)
 
-    private fun blockAndItem(id: Identifier) = TagPair(
-        block(id),
-        item(id)
-    )
+    private fun blockAndItem(path: String): TagPair {
+        val id = AdornCommon.id(path)
+        return TagPair(block(id), item(id))
+    }
 
     data class TagPair(val block: TagKey<Block>, val item: TagKey<Item>)
 }

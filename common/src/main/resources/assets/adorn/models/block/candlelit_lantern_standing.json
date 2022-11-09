@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/candlelit_lantern_standing",
+  "textures": {
+    "candle": "minecraft:block/candle_lit"
+  }
+}

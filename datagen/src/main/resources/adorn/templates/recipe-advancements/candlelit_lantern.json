@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:<id.path>_candlelit_lantern"
+    ]
+  },
+  "criteria": {
+    "has_candle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "<id.namespace>:<id.path>_candle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:<id.path>_candlelit_lantern"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_candle",
+      "has_the_recipe"
+    ]
+  ]<advancement-condition>
+}

@@ -30,6 +30,7 @@ class TagGenerator(private val entries: TagEntryProvider) {
             adorn("chairs") to TagGenerator(TagEntryProviders.CHAIRS),
             adorn("coffee_tables") to TagGenerator(TagEntryProviders.COFFEE_TABLES),
             adorn("drawers") to TagGenerator(TagEntryProviders.DRAWERS),
+            adorn("dyed_candlelit_lanterns") to TagGenerator(TagEntryProviders.DYED_CANDLELIT_LANTERNS),
             adorn("kitchen_counters") to TagGenerator(TagEntryProviders.KITCHEN_COUNTERS),
             adorn("kitchen_cupboards") to TagGenerator(TagEntryProviders.KITCHEN_CUPBOARDS),
             adorn("kitchen_sinks") to TagGenerator(TagEntryProviders.KITCHEN_SINKS),

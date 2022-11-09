@@ -47,6 +47,7 @@ open class AdornReiClient : REIClientPlugin {
         registry.add(AdornTags.BENCHES.item)
         registry.add(AdornTags.CRATES.item)
         registry.add(AdornTags.TABLE_LAMPS.item)
+        registry.add(AdornTags.CANDLELIT_LANTERNS.item)
     }
 
     override fun registerScreens(registry: ScreenRegistry) {

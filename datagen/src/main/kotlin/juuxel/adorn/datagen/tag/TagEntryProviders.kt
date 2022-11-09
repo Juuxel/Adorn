@@ -9,6 +9,7 @@ object TagEntryProviders {
     val CHAIRS = wood("chair")
     val COFFEE_TABLES = wood("coffee_table")
     val DRAWERS = wood("drawer")
+    val DYED_CANDLELIT_LANTERNS = wool("candlelit_lantern")
     val KITCHEN_COUNTERS = wood("kitchen_counter")
     val KITCHEN_CUPBOARDS = wood("kitchen_cupboard")
     val KITCHEN_SINKS = wood("kitchen_sink")

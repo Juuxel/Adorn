@@ -22,7 +22,6 @@ object BiomesOPlentyCompat : BlockVariantSet {
         "black_sandstone",
         "cut_black_sandstone",
         "smooth_black_sandstone",
-        "mud_brick",
         "orange_sandstone",
         "cut_orange_sandstone",
         "smooth_orange_sandstone",

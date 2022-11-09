@@ -1,0 +1,18 @@
+{
+  "display": {
+    "icon": { "item": "adorn:candlelit_lantern" },
+    "title": { "translate": "advancements.adorn.candlelit_lantern.title" },
+    "description": { "translate": "advancements.adorn.candlelit_lantern.description" }
+  },
+  "parent": "adorn:root",
+  "criteria": {
+    "has_candlelit_lantern": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "tag": "adorn:candlelit_lanterns" }
+        ]
+      }
+    }
+  }
+}

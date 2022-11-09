@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:candlelit_lantern",
+  "pattern": [
+    "***",
+    "*|*",
+    "***"
+  ],
+  "key": {
+    "*": {
+      "tag": "c:iron_nuggets"
+    },
+    "|": {
+      "item": "minecraft:blue_candle"
+    }
+  },
+  "result": {
+    "item": "adorn:blue_candlelit_lantern",
+    "count": 1
+  }
+}

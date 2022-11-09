@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/candlelit_lantern_standing",
+  "textures": {
+    "candle": "<id.namespace>:block/<id.path>_candle_lit"
+  }
+}
