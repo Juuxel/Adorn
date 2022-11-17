@@ -10,7 +10,7 @@ import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant
 fun FluidIngredient.toEmiIngredient(): EmiIngredient {
     val amount = FluidUnit.convert(amount, unit, FluidUnit.DROPLET)
     return EmiIngredient.of(
-        fluid.fluids.map {
+        fluid.getFluids().map {
             EmiStack.of(FluidVariant.of(it, nbt), amount)
         }
     )

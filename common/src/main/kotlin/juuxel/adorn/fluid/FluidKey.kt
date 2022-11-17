@@ -30,9 +30,9 @@ import net.minecraft.util.registry.Registry
  */
 sealed class FluidKey {
     /**
-     * The set of all fluids matching this key.
+     * Returns the set of all fluids matching this key.
      */
-    abstract val fluids: Set<Fluid>
+    abstract fun getFluids(): Set<Fluid>
 
     /**
      * Tests whether the [fluid] matches this key.
@@ -44,6 +44,7 @@ sealed class FluidKey {
      * @see load
      */
     fun write(buf: PacketByteBuf) {
+        val fluids = getFluids()
         buf.writeVarInt(fluids.size)
 
         for (fluid in fluids) {
@@ -111,7 +112,7 @@ sealed class FluidKey {
 
     private data class OfFluid(val fluid: Fluid) : Simple() {
         override val id: String by lazy { Registry.FLUID.getId(fluid).toString() }
-        override val fluids = setOf(fluid)
+        override fun getFluids() = setOf(fluid)
 
         override fun matches(fluid: Fluid): Boolean =
             fluid === this.fluid
@@ -119,16 +120,17 @@ sealed class FluidKey {
 
     private data class OfTag(val tag: TagKey<Fluid>) : Simple() {
         override val id = "#${tag.id}"
-        override val fluids: Set<Fluid>
-            get() = Registry.FLUID.getOrCreateEntryList(tag).mapTo(HashSet()) { it.value() }
+
+        override fun getFluids(): Set<Fluid> =
+            Registry.FLUID.getOrCreateEntryList(tag).mapTo(HashSet()) { it.value() }
 
         override fun matches(fluid: Fluid): Boolean =
             fluid.isIn(tag)
     }
 
     private data class OfArray(val children: List<Simple>) : FluidKey() {
-        override val fluids: Set<Fluid>
-            get() = children.flatMapTo(HashSet()) { it.fluids }
+        override fun getFluids(): Set<Fluid> =
+            children.flatMapTo(HashSet()) { it.getFluids() }
 
         override fun matches(fluid: Fluid): Boolean =
             children.any { it.matches(fluid) }
