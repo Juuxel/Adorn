@@ -5,11 +5,13 @@ import blue.endless.jankson.JsonObject
 import blue.endless.jankson.JsonPrimitive
 import blue.endless.jankson.api.DeserializationException
 import juuxel.adorn.fluid.FluidUnit
-import juuxel.adorn.util.ServiceDelegate
+import juuxel.adorn.util.InlineServices
+import juuxel.adorn.util.loadService
 import juuxel.adorn.util.logger
 import java.nio.file.Files
 import java.nio.file.Path
 
+@InlineServices
 abstract class ConfigManager {
     protected abstract val configDirectory: Path
     private val configPath: Path by lazy { configDirectory.resolve("Adorn.json5") }
@@ -79,7 +81,7 @@ abstract class ConfigManager {
     }
 
     companion object {
-        val INSTANCE: ConfigManager by ServiceDelegate()
+        val INSTANCE: ConfigManager by lazy { loadService() }
         private val JANKSON = Jankson.builder()
             .registerSerializer(FluidUnit::class.java) { unit, _ -> JsonPrimitive(unit.id) }
             .registerDeserializer(JsonPrimitive::class.java, FluidUnit::class.java) { json, _ -> FluidUnit.byId(json.asString()) ?: FluidUnit.LITRE }

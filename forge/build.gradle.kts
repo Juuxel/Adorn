@@ -1,5 +1,6 @@
 plugins {
     id("adorn-data-generator")
+    id("adorn-service-inline")
 }
 
 architectury {
