@@ -9,14 +9,12 @@ import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant
 
 fun FluidIngredient.toEmiIngredient(): EmiIngredient {
     val amount = FluidUnit.convert(amount, unit, FluidUnit.DROPLET)
-    return EmiIngredient.of(
-        fluid.getFluids()
-            // TODO: See https://github.com/FabricMC/fabric/issues/2665
-            .filter { it.isStill(it.defaultState) }
-            .map {
-                EmiStack.of(FluidVariant.of(it, nbt), amount)
-            }
-    )
+    // Has to be a set since flowing/still normalisation might reduce the number
+    // of unique fluids
+    val variants = fluid.getFluids().mapTo(HashSet()) {
+        FluidVariant.of(it, nbt)
+    }
+    return EmiIngredient.of(variants.map { EmiStack.of(it, amount) })
 }
 
 fun EmiIngredient.withRemainders(): EmiIngredient {
