@@ -15,6 +15,7 @@ import net.minecraft.text.Text
 enum class FluidUnit(val id: String, val bucketVolume: Long) : Displayable {
     /** Litres. Defined as one thousandth of a cubic metre ([bucketVolume] = 1000). */
     LITRE("litres", 1000),
+
     /** Droplets. Defined as 1/81 000 of a cubic metre ([bucketVolume] = 81 000). */
     DROPLET("droplets", 81_000);
 

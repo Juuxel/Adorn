@@ -16,8 +16,11 @@ class MixedFraction private constructor(val whole: Long, val numerator: Long, va
     }
 
     fun resizeFraction(newDenominator: Long): MixedFraction =
-        if (numerator == 0L) this
-        else MixedFraction(whole, numerator * newDenominator / denominator, newDenominator)
+        if (numerator == 0L) {
+            this
+        } else {
+            MixedFraction(whole, numerator * newDenominator / denominator, newDenominator)
+        }
 
     override fun toString() = Fractions.toString(whole, numerator, denominator)
 

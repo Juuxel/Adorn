@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+
 package juuxel.adorn.block
 
 import juuxel.adorn.lib.AdornTags
@@ -54,8 +55,11 @@ abstract class AbstractChimneyBlock(settings: Settings) : Block(settings), Water
     }
 
     override fun getFluidState(state: BlockState) =
-        if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
-        else super.getFluidState(state)
+        if (state[WATERLOGGED]) {
+            Fluids.WATER.getStill(false)
+        } else {
+            super.getFluidState(state)
+        }
 
     override fun getOutlineShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: ShapeContext?) =
         if (state[CONNECTED]) MIDDLE_SHAPE else TOP_SHAPE

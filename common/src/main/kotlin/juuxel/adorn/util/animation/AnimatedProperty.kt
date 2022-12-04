@@ -6,7 +6,7 @@ class AnimatedProperty<T>(
     initial: T,
     engine: AnimationEngine,
     duration: Int,
-    interpolator: Interpolator<T>,
+    interpolator: Interpolator<T>
 ) : AbstractAnimatedProperty<T>(engine, duration, interpolator) {
     private var value: T = initial
 

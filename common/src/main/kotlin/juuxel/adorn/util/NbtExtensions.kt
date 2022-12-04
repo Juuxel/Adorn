@@ -47,5 +47,8 @@ fun NbtCompound.putBlockPos(key: String, pos: BlockPos) {
 }
 
 fun NbtCompound.getCompoundOrNull(key: String): NbtCompound? =
-    if (contains(key, NbtElement.COMPOUND_TYPE.toInt())) getCompound(key)
-    else null
+    if (contains(key, NbtElement.COMPOUND_TYPE.toInt())) {
+        getCompound(key)
+    } else {
+        null
+    }

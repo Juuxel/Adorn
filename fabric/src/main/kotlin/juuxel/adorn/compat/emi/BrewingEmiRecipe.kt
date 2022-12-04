@@ -22,7 +22,7 @@ class BrewingEmiRecipe private constructor(
     private val firstItemIngredient: EmiIngredient,
     private val secondItemIngredient: EmiIngredient,
     private val fluidIngredient: EmiIngredient,
-    private val result: EmiStack,
+    private val result: EmiStack
 ) : EmiRecipe {
     constructor(recipe: ItemBrewingRecipe) : this(
         recipe.id,

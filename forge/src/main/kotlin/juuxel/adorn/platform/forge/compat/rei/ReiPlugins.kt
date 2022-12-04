@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED")
+
 package juuxel.adorn.platform.forge.compat.rei
 
 import juuxel.adorn.compat.rei.AdornReiServer

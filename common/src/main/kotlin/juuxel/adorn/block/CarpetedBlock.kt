@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+
 package juuxel.adorn.block
 
 import juuxel.adorn.block.property.OptionalProperty
@@ -31,10 +32,11 @@ abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
     }
 
     override fun getPlacementState(context: ItemPlacementContext) =
-        if (isCarpetingEnabled())
+        if (isCarpetingEnabled()) {
             super.getPlacementState(context)!!.with(CARPET, getCarpetColor(context)?.let(CARPET::wrap) ?: CARPET.none)
-        else
+        } else {
             super.getPlacementState(context)
+        }
 
     override fun scheduledTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random?) {
         if (!isCarpetingEnabled()) return
@@ -55,8 +57,9 @@ abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
     ): BlockState {
         if (isCarpetingEnabled()) {
             val carpet = state[CARPET]
-            if (carpet.isPresent && !COLORS_TO_BLOCKS[carpet.value]!!.defaultState.canPlaceAt(world, pos))
+            if (carpet.isPresent && !COLORS_TO_BLOCKS[carpet.value]!!.defaultState.canPlaceAt(world, pos)) {
                 world.createAndScheduleBlockTick(pos, this, 1)
+            }
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)

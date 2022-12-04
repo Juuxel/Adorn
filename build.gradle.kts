@@ -19,7 +19,7 @@ plugins {
     id("dev.architectury.loom") version "1.0.302" apply false
     id("io.github.juuxel.loom-quiltflower") version "1.7.2" apply false
 
-    id("org.jmailen.kotlinter") version "3.2.0" apply false
+    id("org.jmailen.kotlinter") version "3.12.0" apply false
     id("com.github.johnrengelman.shadow") version "7.0.0" apply false
 }
 
@@ -134,7 +134,15 @@ subprojects {
     }
 
     extensions.configure<KotlinterExtension> {
-        disabledRules = arrayOf("parameter-list-wrapping")
+        disabledRules = arrayOf(
+            // Disable these since we often do grouping on the parameters and args:
+            //   x: Int, y: Int, z: Int
+            //   width: Int, height: Int, depth: Int
+            "parameter-list-wrapping",
+            "argument-list-wrapping",
+            // Used for minimising diffs on listOf
+            "trailing-comma-on-call-site",
+        )
     }
 
     tasks {

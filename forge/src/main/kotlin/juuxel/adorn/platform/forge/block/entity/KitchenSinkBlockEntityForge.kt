@@ -141,8 +141,11 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
     }
 
     override fun calculateComparatorOutput(): Int =
-        if (tank.isEmpty) 0
-        else 1 + MathHelper.floor(14 * tank.fluidAmount.toFloat() / tank.capacity.toFloat())
+        if (tank.isEmpty) {
+            0
+        } else {
+            1 + MathHelper.floor(14 * tank.fluidAmount.toFloat() / tank.capacity.toFloat())
+        }
 
     companion object {
         // Bottles are 250 l in Adorn *on Forge*.

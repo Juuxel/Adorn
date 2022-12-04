@@ -1,11 +1,10 @@
 package juuxel.adorn.datagen.gradle
 
-import juuxel.adorn.datagen.ConditionType
 import juuxel.adorn.datagen.Generator
 import juuxel.adorn.datagen.GeneratorConfig
+import juuxel.adorn.datagen.GeneratorConfigLoader
 import juuxel.adorn.datagen.Material
 import juuxel.adorn.datagen.TemplateApplier
-import juuxel.adorn.datagen.GeneratorConfigLoader
 import juuxel.adorn.datagen.buildSubstitutions
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileCollection

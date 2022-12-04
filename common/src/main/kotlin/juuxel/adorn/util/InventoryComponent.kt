@@ -107,9 +107,11 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
      * Ignores the stack's count.
      */
     fun getAmountWithNbt(stack: ItemStack): Int = items.sumOf {
-        if (stack.item == it.item && stack.nbt == it.nbt)
+        if (stack.item == it.item && stack.nbt == it.nbt) {
             it.count
-        else 0
+        } else {
+            0
+        }
     }
 
     // -----

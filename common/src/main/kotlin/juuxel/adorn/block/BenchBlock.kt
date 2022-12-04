@@ -69,8 +69,11 @@ class BenchBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), W
 
     @Suppress("DEPRECATION")
     override fun getFluidState(state: BlockState): FluidState =
-        if (state[Properties.WATERLOGGED]) Fluids.WATER.getStill(false)
-        else super.getFluidState(state)
+        if (state[Properties.WATERLOGGED]) {
+            Fluids.WATER.getStill(false)
+        } else {
+            super.getFluidState(state)
+        }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
@@ -78,10 +81,11 @@ class BenchBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), W
     }
 
     override fun rotate(state: BlockState, rotation: BlockRotation): BlockState =
-        if (rotation == BlockRotation.COUNTERCLOCKWISE_90 || rotation == BlockRotation.COUNTERCLOCKWISE_90)
+        if (rotation == BlockRotation.COUNTERCLOCKWISE_90 || rotation == BlockRotation.COUNTERCLOCKWISE_90) {
             state.with(AXIS, state[AXIS].turnHorizontally())
-        else
+        } else {
             state
+        }
 
     companion object {
         val AXIS: EnumProperty<Direction.Axis> = Properties.HORIZONTAL_AXIS

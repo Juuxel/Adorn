@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+
 package juuxel.adorn.block
 
 import juuxel.adorn.block.entity.TradingStationBlockEntity
@@ -46,8 +47,11 @@ class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings)
         defaultState.with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
 
     override fun getFluidState(state: BlockState) =
-        if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
-        else super.getFluidState(state)
+        if (state[WATERLOGGED]) {
+            Fluids.WATER.getStill(false)
+        } else {
+            super.getFluidState(state)
+        }
 
     override fun onPlaced(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack?) {
         if (entity is PlayerEntity) {

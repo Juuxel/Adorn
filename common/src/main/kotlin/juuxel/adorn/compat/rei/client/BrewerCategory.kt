@@ -88,7 +88,10 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
         private val DARK_TEXTURE = AdornCommon.id("textures/gui/brewer_rei_dark.png")
 
         private fun currentTexture(): Identifier =
-            if (REIRuntime.getInstance().isDarkThemeEnabled) DARK_TEXTURE
-            else LIGHT_TEXTURE
+            if (REIRuntime.getInstance().isDarkThemeEnabled) {
+                DARK_TEXTURE
+            } else {
+                LIGHT_TEXTURE
+            }
     }
 }

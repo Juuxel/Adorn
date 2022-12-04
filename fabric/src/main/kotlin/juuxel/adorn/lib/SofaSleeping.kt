@@ -9,8 +9,11 @@ import net.minecraft.util.ActionResult
 object SofaSleeping {
     fun init() {
         EntitySleepEvents.ALLOW_BED.register { _, _, state, _ ->
-            if (state.block is SofaBlock) ActionResult.SUCCESS
-            else ActionResult.PASS
+            if (state.block is SofaBlock) {
+                ActionResult.SUCCESS
+            } else {
+                ActionResult.PASS
+            }
         }
 
         EntitySleepEvents.ALLOW_SETTING_SPAWN.register { player, sleepingPos ->
@@ -18,22 +21,30 @@ object SofaSleeping {
         }
 
         EntitySleepEvents.ALLOW_SLEEP_TIME.register { player, sleepingPos, _ ->
-            if (player.world.isDay && player.world.getBlockState(sleepingPos).block is SofaBlock) ActionResult.SUCCESS
-            else ActionResult.PASS
+            if (player.world.isDay && player.world.getBlockState(sleepingPos).block is SofaBlock) {
+                ActionResult.SUCCESS
+            } else {
+                ActionResult.PASS
+            }
         }
 
         EntitySleepEvents.MODIFY_SLEEPING_DIRECTION.register { entity, sleepingPos, sleepingDirection ->
-            if (entity.world.getBlockState(sleepingPos).block is SofaBlock)
+            if (entity.world.getBlockState(sleepingPos).block is SofaBlock) {
                 SofaBlock.getSleepingDirection(entity.world, sleepingPos, ignoreNeighbors = true)?.opposite
-            else sleepingDirection
+            } else {
+                sleepingDirection
+            }
         }
 
         EntitySleepEvents.ALLOW_RESETTING_TIME.register { player ->
             val pos = player.sleepingPosition.orElse(null) ?: return@register true
 
             if (player.world.getBlockState(pos).block is SofaBlock) {
-                if (player.world.isDay) false
-                else player.world.gameRules.getBoolean(AdornGameRules.SKIP_NIGHT_ON_SOFAS)
+                if (player.world.isDay) {
+                    false
+                } else {
+                    player.world.gameRules.getBoolean(AdornGameRules.SKIP_NIGHT_ON_SOFAS)
+                }
             } else {
                 true // go on
             }

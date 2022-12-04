@@ -15,16 +15,16 @@ object InlineServiceLoaderAction : Action<Task> {
         listOf(
             InsnPattern(LdcInsnNode::class.java) { it.cst is Type },
             InsnPattern(MethodInsnNode::class.java) {
-                it.opcode == Opcodes.INVOKESTATIC
-                    && it.owner == "java/util/ServiceLoader"
-                    && it.name == "load"
-                    && it.desc == "(Ljava/lang/Class;)Ljava/util/ServiceLoader;"
+                it.opcode == Opcodes.INVOKESTATIC &&
+                    it.owner == "java/util/ServiceLoader" &&
+                    it.name == "load" &&
+                    it.desc == "(Ljava/lang/Class;)Ljava/util/ServiceLoader;"
             },
             InsnPattern(MethodInsnNode::class.java) {
-                it.opcode == Opcodes.INVOKEVIRTUAL
-                    && it.owner == "java/util/ServiceLoader"
-                    && it.name == "findFirst"
-                    && it.desc == "()Ljava/util/Optional;"
+                it.opcode == Opcodes.INVOKEVIRTUAL &&
+                    it.owner == "java/util/ServiceLoader" &&
+                    it.name == "findFirst" &&
+                    it.desc == "()Ljava/util/Optional;"
             },
         )
     )

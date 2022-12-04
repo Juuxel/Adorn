@@ -66,19 +66,26 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable, Blo
 
             var shape = when (neighborFacing) {
                 fenceFacing.rotateYClockwise() -> {
-                    if (inner) Shape.CLOCKWISE_INNER_CORNER
-                    else Shape.CLOCKWISE_CORNER
+                    if (inner) {
+                        Shape.CLOCKWISE_INNER_CORNER
+                    } else {
+                        Shape.CLOCKWISE_CORNER
+                    }
                 }
                 fenceFacing.rotateYCounterclockwise() -> {
-                    if (inner) Shape.COUNTERCLOCKWISE_INNER_CORNER
-                    else Shape.COUNTERCLOCKWISE_CORNER
+                    if (inner) {
+                        Shape.COUNTERCLOCKWISE_INNER_CORNER
+                    } else {
+                        Shape.COUNTERCLOCKWISE_CORNER
+                    }
                 }
                 else -> Shape.STRAIGHT
             }
 
             // Prevent funny connections
-            if (neighborBlock !is PicketFenceBlock || !neighborBlock.connectsTo(neighborState, side.opposite))
+            if (neighborBlock !is PicketFenceBlock || !neighborBlock.connectsTo(neighborState, side.opposite)) {
                 shape = Shape.STRAIGHT
+            }
 
             if (shape != Shape.STRAIGHT) {
                 return state.with(SHAPE, shape)
@@ -106,8 +113,11 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable, Blo
         }
 
     override fun getFluidState(state: BlockState) =
-        if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
-        else super.getFluidState(state)
+        if (state[WATERLOGGED]) {
+            Fluids.WATER.getStill(false)
+        } else {
+            super.getFluidState(state)
+        }
 
     override fun rotate(state: BlockState, rotation: BlockRotation): BlockState =
         state.with(FACING, rotation.rotate(state[FACING]))
@@ -164,7 +174,7 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable, Blo
         CLOCKWISE_CORNER("clockwise_corner"),
         COUNTERCLOCKWISE_CORNER("counterclockwise_corner"),
         CLOCKWISE_INNER_CORNER("clockwise_inner_corner"),
-        COUNTERCLOCKWISE_INNER_CORNER("counterclockwise_inner_corner"),
+        COUNTERCLOCKWISE_INNER_CORNER("counterclockwise_inner_corner")
         ;
 
         override fun asString() = id

@@ -10,6 +10,7 @@ abstract class AbstractAnimatedProperty<T>(
     private val interpolator: Interpolator<T>
 ) : ReadWriteProperty<Any?, T> {
     protected abstract fun setRawValue(value: T)
+
     @Volatile
     private var currentTask: Task? = null
 

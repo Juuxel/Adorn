@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
@@ -46,15 +47,20 @@ class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()
     }
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState? = with(context) {
-        return if (blockPos.y < world.topY - 1 && world.getBlockState(blockPos.up()).canReplace(context))
+        return if (blockPos.y < world.topY - 1 && world.getBlockState(blockPos.up()).canReplace(context)) {
             super.getPlacementState(context)!!.with(FACING, playerFacing.opposite)
                 .with(WATERLOGGED, world.getFluidState(blockPos).fluid == Fluids.WATER)
-        else null
+        } else {
+            null
+        }
     }
 
     override fun getFluidState(state: BlockState) =
-        if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
-        else super.getFluidState(state)
+        if (state[WATERLOGGED]) {
+            Fluids.WATER.getStill(false)
+        } else {
+            super.getFluidState(state)
+        }
 
     override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
         return if (state[HALF] != DoubleBlockHalf.UPPER) {
@@ -89,7 +95,9 @@ class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()
             } else {
                 LOWER_SHAPES[state[FACING]]
             }
-        } else UPPER_OUTLINE_SHAPES[state[FACING]]
+        } else {
+            UPPER_OUTLINE_SHAPES[state[FACING]]
+        }
 
     override fun getCollisionShape(state: BlockState, view: BlockView?, pos: BlockPos?, context: ShapeContext?) =
         if (state[HALF] == DoubleBlockHalf.LOWER) {
@@ -98,7 +106,9 @@ class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()
             } else {
                 LOWER_SHAPES[state[FACING]]
             }
-        } else VoxelShapes.empty() // Let the bottom one handle the collision
+        } else {
+            VoxelShapes.empty() // Let the bottom one handle the collision
+        }
 
     override fun getStateForNeighborUpdate(
         state: BlockState, direction: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
@@ -113,10 +123,11 @@ class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()
             direction.axis == Direction.Axis.Y && (half == DoubleBlockHalf.LOWER) == (direction == Direction.UP)
         ) {
             // If the other half is not a chair, break block
-            if (neighborState.block != this)
+            if (neighborState.block != this) {
                 Blocks.AIR.defaultState
-            else
+            } else {
                 state.with(FACING, neighborState[FACING])
+            }
         } else {
             super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
         }

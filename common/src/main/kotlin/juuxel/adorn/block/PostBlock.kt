@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
@@ -36,8 +37,11 @@ class PostBlock(variant: BlockVariant) : Block(variant.createSettings()), BlockW
         defaultState.with(AXIS, context.side.axis).with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
 
     override fun getFluidState(state: BlockState) =
-        if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
-        else super.getFluidState(state)
+        if (state[WATERLOGGED]) {
+            Fluids.WATER.getStill(false)
+        } else {
+            super.getFluidState(state)
+        }
 
     override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape =
         when (state[AXIS]) {

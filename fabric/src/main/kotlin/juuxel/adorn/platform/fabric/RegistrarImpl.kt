@@ -1,4 +1,5 @@
 @file:JvmName("RegistrarKtImpl")
+
 package juuxel.adorn.platform.fabric
 
 import juuxel.adorn.AdornCommon.id

@@ -12,7 +12,7 @@ import net.minecraft.client.util.math.MatrixStack
 class FluidSlotWidget(
     stack: EmiIngredient,
     x: Int, y: Int,
-    private val width: Int, private val height: Int,
+    private val width: Int, private val height: Int
 ) : SlotWidget(stack, x, y) {
     private val stacks = stack.emiStacks.map {
         val entry = it.entry

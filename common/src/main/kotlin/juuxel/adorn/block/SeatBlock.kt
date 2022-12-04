@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+
 package juuxel.adorn.block
 
 import com.google.common.base.Predicates
@@ -22,8 +23,11 @@ import net.minecraft.world.World
 
 abstract class SeatBlock(settings: Settings) : Block(settings) {
     init {
-        if (@Suppress("LeakingThis") isSittingEnabled())
+        if (@Suppress("LeakingThis")
+            isSittingEnabled()
+        ) {
             defaultState = defaultState.with(OCCUPIED, false)
+        }
     }
 
     open val sittingYOffset: Double = 0.0
@@ -32,14 +36,16 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hit: BlockHitResult
     ): ActionResult {
-        if (!isSittingEnabled())
+        if (!isSittingEnabled()) {
             return super.onUse(state, world, pos, player, hand, hit)
+        }
 
         val actualPos = getActualSeatPos(world, state, pos)
         val actualState = if (pos == actualPos) state else world.getBlockState(actualPos)
 
-        if (state !== actualState && actualState.block !is SeatBlock)
+        if (state !== actualState && actualState.block !is SeatBlock) {
             return ActionResult.PASS
+        }
 
         val occupied = actualState[OCCUPIED]
         return if (!occupied) {
