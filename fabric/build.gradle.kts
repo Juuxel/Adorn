@@ -79,13 +79,8 @@ dependencies {
     implementation(project(":common", configuration = "namedElements")) {
         isTransitive = false
     }
-    // Used at dev runtime by the Architectury Transformer to automatically read changes in the common jar
-    // and apply them.
-    "developmentFabric"(project(":common", configuration = "namedElements")) {
-        isTransitive = false
-    }
     // Bundle the transformed version of the common project in the mod.
-    // The transformed version replaces all @ExpectPlatform calls to call the Fabric versions.
+    // The transformed version includes things like fixed refmaps.
     bundle(project(path = ":common", configuration = "transformProductionFabric")) {
         isTransitive = false
     }

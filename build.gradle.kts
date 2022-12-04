@@ -15,7 +15,7 @@ plugins {
     // Note that of all these plugins, only the Architectury plugin needs to be applied.
     kotlin("jvm") version "1.7.0" apply false
 
-    id("architectury-plugin") version "3.4.135"
+    id("architectury-plugin") version "3.4.143"
     id("dev.architectury.loom") version "0.12.0.282" apply false
     id("io.github.juuxel.loom-quiltflower") version "1.7.2" apply false
 
@@ -77,9 +77,9 @@ subprojects {
     }
 
     architectury {
-        // Disable Architectury's injectables like @ExpectPlatform
-        // since we don't use them.
-        injectInjectables = false
+        // Disable Architectury's runtime transformer
+        // since we don't use it.
+        compileOnly()
     }
 
     // Copy the artifact metadata from the root project.
@@ -173,6 +173,13 @@ subprojects {
         extensions.configure<LoomGradleExtensionAPI> {
             runConfigs.getByName("server") {
                 runDir = "run/server"
+            }
+
+            // "main" matches the default Forge mod's name
+            with(mods.maybeCreate("main")) {
+                fun Project.sourceSets() = extensions.getByName<SourceSetContainer>("sourceSets")
+                sourceSet(sourceSets().getByName("main"))
+                sourceSet(project(":common").sourceSets().getByName("main"))
             }
         }
 
