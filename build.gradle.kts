@@ -17,10 +17,10 @@ plugins {
 
     id("architectury-plugin") version "3.4.143"
     id("dev.architectury.loom") version "1.0.302" apply false
-    id("io.github.juuxel.loom-quiltflower") version "1.7.2" apply false
+    id("io.github.juuxel.loom-quiltflower") version "1.8.0" apply false
 
     id("org.jmailen.kotlinter") version "3.12.0" apply false
-    id("com.github.johnrengelman.shadow") version "7.0.0" apply false
+    id("com.github.johnrengelman.shadow") version "7.1.2" apply false
 }
 
 // Set the Minecraft version for Architectury.
