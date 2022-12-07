@@ -1,45 +1,46 @@
 package juuxel.adorn.datagen.gradle
 
 import juuxel.adorn.datagen.DataGenerator
+import juuxel.adorn.datagen.tag.TagGenerator
 import org.gradle.api.DefaultTask
-import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.DirectoryProperty
-import org.gradle.api.tasks.InputFiles
+import org.gradle.api.provider.Property
+import org.gradle.api.provider.SetProperty
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
-import org.gradle.workers.WorkAction
-import org.gradle.workers.WorkParameters
-import org.gradle.workers.WorkerExecutor
-import javax.inject.Inject
 
 abstract class GenerateData : DefaultTask() {
-    @get:InputFiles
-    abstract val configs: ConfigurableFileCollection
+    @get:Internal
+    abstract val configs: SetProperty<DataConfig>
+
+    @get:Input
+    abstract val generateTags: Property<Boolean>
 
     @get:OutputDirectory
     abstract val output: DirectoryProperty
 
-    @get:Inject
-    protected abstract val workerExecutor: WorkerExecutor
+    init {
+        // Not exactly complete (ignores moving files between configs) but close enough
+        // for my uses. :^)
+        inputs.files(configs.map { it.map { config -> config.files } }).skipWhenEmpty()
+        inputs.property("configs.scope", configs.map { it.associate { config -> config.name to config.scope } })
+    }
 
     @TaskAction
     fun generate() {
-        workerExecutor.noIsolation().submit(GenerationAction::class.java) {
-            configs.from(this@GenerateData.configs)
-            output.set(this@GenerateData.output)
-        }
-    }
+        DataGenerator.generate(
+            configFiles = configs.get()
+                .filter { it.scope.get() != DataScope.TAGS_ONLY }
+                .flatMap { config -> config.files.map { it.toPath() } },
+            outputPath = output.get().asFile.toPath()
+        )
 
-    interface GenerationParameters : WorkParameters {
-        val configs: ConfigurableFileCollection
-        val output: DirectoryProperty
-    }
-
-    abstract class GenerationAction : WorkAction<GenerationParameters> {
-        override fun execute() {
-            DataGenerator.generate(
-                configFiles = parameters.configs.map { it.toPath() },
-                outputPath = parameters.output.get().asFile.toPath()
+        if (generateTags.get()) {
+            TagGenerator.generate(
+                configs = configs.get().flatMap { config -> config.files.map { it.toPath() } },
+                outputDirectory = output.get().asFile.toPath()
             )
         }
     }

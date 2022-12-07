@@ -1,3 +1,5 @@
+import juuxel.adorn.datagen.gradle.DataScope
+
 plugins {
     id("adorn-data-generator")
 }
@@ -28,12 +30,13 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:${rootProject.property("rei")}")
 }
 
-tasks {
-    generateTags {
-        // Include all src/data files from all subprojects
-        // for tag generation.
+dataGenerator {
+    generateTags.set(true)
+
+    configs.register("all") {
         rootProject.subprojects {
-            configs.from(fileTree("src/data"))
+            files.from(fileTree("src/data"))
         }
+        scope.set(DataScope.TAGS_ONLY)
     }
 }
