@@ -22,17 +22,17 @@ abstract class GenerateData : DefaultTask() {
     abstract val output: DirectoryProperty
 
     init {
-        // Not exactly complete (ignores moving files between configs) but close enough
-        // for my uses. :^)
+        // Not exactly complete (ignores moving files between configs, so their tagsOnly changes)
+        // but close enough for my uses. :^)
         inputs.files(configs.map { it.map { config -> config.files } }).skipWhenEmpty()
-        inputs.property("configs.scope", configs.map { it.associate { config -> config.name to config.scope } })
+        inputs.property("configs.tagsOnly", configs.map { it.associate { config -> config.name to config.tagsOnly } })
     }
 
     @TaskAction
     fun generate() {
         DataGenerator.generate(
             configFiles = configs.get()
-                .filter { it.scope.get() != DataScope.TAGS_ONLY }
+                .filter { !it.tagsOnly.get() }
                 .flatMap { config -> config.files.map { it.toPath() } },
             outputPath = output.get().asFile.toPath()
         )

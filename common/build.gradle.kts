@@ -1,5 +1,3 @@
-import juuxel.adorn.datagen.gradle.DataScope
-
 plugins {
     id("adorn-data-generator")
 }
@@ -37,6 +35,6 @@ dataGenerator {
         rootProject.subprojects {
             files.from(fileTree("src/data"))
         }
-        scope.set(DataScope.TAGS_ONLY)
+        tagsOnly.set(true)
     }
 }

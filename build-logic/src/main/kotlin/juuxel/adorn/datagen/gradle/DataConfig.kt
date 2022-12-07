@@ -7,7 +7,11 @@ import javax.inject.Inject
 
 abstract class DataConfig @Inject constructor(private val name: String) : Named {
     abstract val files: ConfigurableFileCollection
-    abstract val scope: Property<DataScope>
+    abstract val tagsOnly: Property<Boolean>
+
+    init {
+        tagsOnly.convention(false)
+    }
 
     override fun getName(): String = name
 }

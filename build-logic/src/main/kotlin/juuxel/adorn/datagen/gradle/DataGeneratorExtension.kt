@@ -11,11 +11,7 @@ import javax.inject.Inject
 abstract class DataGeneratorExtension @Inject constructor(project: Project) {
     abstract val generateTags: Property<Boolean>
 
-    val configs: NamedDomainObjectContainer<DataConfig> = project.container(DataConfig::class.java) { name ->
-        val dataConfig = project.objects.newInstance(DataConfig::class.java, name)
-        dataConfig.scope.set(DataScope.ALL)
-        dataConfig
-    }
+    val configs: NamedDomainObjectContainer<DataConfig> = project.container(DataConfig::class.java)
 
     init {
         generateTags.convention(false)
