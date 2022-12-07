@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:item/templates/kitchen_cupboard",
+  "textures": {
+    "planks": "blockus:block/white_oak_planks"
+  }
+}

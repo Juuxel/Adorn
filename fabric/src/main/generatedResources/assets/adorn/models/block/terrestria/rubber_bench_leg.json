@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/templates/bench_leg",
+  "textures": {
+    "log": "terrestria:block/rubber_log",
+    "end": "terrestria:block/rubber_log_top"
+  }
+}

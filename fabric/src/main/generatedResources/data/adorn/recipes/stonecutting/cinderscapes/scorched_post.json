@@ -1,0 +1,13 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "cinderscapes:scorched_planks"
+  },
+  "result": "adorn:cinderscapes/scorched_post",
+  "count": 2,
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["cinderscapes"]
+  }]
+
+}

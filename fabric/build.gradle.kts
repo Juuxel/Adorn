@@ -116,10 +116,8 @@ tasks {
     }
 
     processResources {
-        // Hook the AW copying and data generation to processResources.
-        // Note: this is done differently in the other subprojects where the data generator
-        // has to be run manually! TODO: make this consistent lol
-        dependsOn(copyAccessWidener, generateData)
+        // Hook the AW copying to processResources.
+        dependsOn(copyAccessWidener)
         // Mark that this task depends on the project version,
         // and should reset when the project version changes.
         inputs.property("version", project.version)

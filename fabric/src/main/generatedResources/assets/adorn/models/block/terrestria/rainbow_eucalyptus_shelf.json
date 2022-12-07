@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/shelf",
+  "textures": {
+    "texture": "terrestria:block/rainbow_eucalyptus_planks"
+  }
+}

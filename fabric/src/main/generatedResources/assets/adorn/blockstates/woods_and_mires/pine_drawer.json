@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "adorn:block/woods_and_mires/pine_drawer"
+    },
+    "facing=south": {
+      "model": "adorn:block/woods_and_mires/pine_drawer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "adorn:block/woods_and_mires/pine_drawer",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "adorn:block/woods_and_mires/pine_drawer",
+      "y": 180
+    }
+  }
+}

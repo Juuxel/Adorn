@@ -1,0 +1,52 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:techreborn/rubber_kitchen_cupboard"
+    ]
+  },
+  "criteria": {
+    "has_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "techreborn:rubber_planks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_kitchen_counter": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "adorn:techreborn/rubber_kitchen_counter"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:techreborn/rubber_kitchen_cupboard"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_planks",
+      "has_kitchen_counter",
+      "has_the_recipe"
+    ]
+  ],
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["techreborn"]
+  }]
+
+}

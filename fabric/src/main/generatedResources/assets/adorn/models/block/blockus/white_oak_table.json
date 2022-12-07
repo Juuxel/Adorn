@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/table",
+  "textures": {
+    "planks": "blockus:block/white_oak_planks"
+  }
+}

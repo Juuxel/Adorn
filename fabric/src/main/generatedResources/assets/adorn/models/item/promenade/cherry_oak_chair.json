@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:item/templates/chair",
+  "textures": {
+    "planks": "promenade:block/cherry_oak_planks"
+  }
+}

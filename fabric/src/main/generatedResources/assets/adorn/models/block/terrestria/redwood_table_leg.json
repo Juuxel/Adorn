@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/table_leg",
+  "textures": {
+    "log": "terrestria:block/redwood_log"
+  }
+}

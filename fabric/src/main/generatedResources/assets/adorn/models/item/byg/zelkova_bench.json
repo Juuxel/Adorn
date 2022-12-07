@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "byg:block/zelkova/planks",
+    "log": "byg:block/zelkova/log",
+    "end": "byg:block/zelkova/log_top"
+  }
+}

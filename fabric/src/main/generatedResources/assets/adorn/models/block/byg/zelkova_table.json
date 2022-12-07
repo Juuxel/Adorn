@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/table",
+  "textures": {
+    "planks": "byg:block/zelkova/planks"
+  }
+}

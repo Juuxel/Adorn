@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "byg:block/witch_hazel/planks",
+    "log": "byg:block/witch_hazel/log",
+    "end": "byg:block/witch_hazel/log_top"
+  }
+}

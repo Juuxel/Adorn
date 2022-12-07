@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/step",
+  "textures": {
+    "texture": "cinderscapes:block/scorched_planks"
+  }
+}

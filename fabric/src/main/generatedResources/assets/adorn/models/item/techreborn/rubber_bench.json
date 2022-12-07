@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "techreborn:block/rubber_planks",
+    "log": "techreborn:block/rubber_log_side",
+    "end": "techreborn:block/rubber_log_top"
+  }
+}

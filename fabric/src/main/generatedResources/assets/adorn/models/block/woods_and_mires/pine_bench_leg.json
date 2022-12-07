@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/templates/bench_leg",
+  "textures": {
+    "log": "woods_and_mires:block/pine_log",
+    "end": "woods_and_mires:block/pine_log_top"
+  }
+}

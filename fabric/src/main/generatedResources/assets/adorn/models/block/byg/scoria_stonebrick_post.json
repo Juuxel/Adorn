@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/post",
+  "textures": {
+    "texture": "byg:block/scoria_stone_bricks"
+  }
+}

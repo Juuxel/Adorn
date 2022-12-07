@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/templates/bench_leg",
+  "textures": {
+    "log": "cinderscapes:block/scorched_stem",
+    "end": "cinderscapes:block/scorched_stem_top"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "adorn:block/biomemakeover/swamp_cypress_drawer"
+    },
+    "facing=south": {
+      "model": "adorn:block/biomemakeover/swamp_cypress_drawer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "adorn:block/biomemakeover/swamp_cypress_drawer",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "adorn:block/biomemakeover/swamp_cypress_drawer",
+      "y": 180
+    }
+  }
+}

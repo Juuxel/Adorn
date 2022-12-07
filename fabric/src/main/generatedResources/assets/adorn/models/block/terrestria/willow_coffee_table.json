@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:block/templates/coffee_table",
+  "textures": {
+    "planks": "terrestria:block/willow_planks",
+    "leg": "terrestria:block/willow_log",
+    "rim": "terrestria:block/willow_log"
+  }
+}
