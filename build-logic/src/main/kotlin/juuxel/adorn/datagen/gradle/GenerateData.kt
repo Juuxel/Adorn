@@ -114,14 +114,15 @@ abstract class GenerateData : DefaultTask() {
                     Files.writeString(filePath, output)
 
                     if (gen.requiresCondition && mat.isModded()) {
-                        if (conditionType.separateFilePathTemplate != null) {
+                        val externalConditionPathTemplate = conditionType.separateFilePathTemplate
+                        if (externalConditionPathTemplate != null) {
                             val conditionTemplate = templateCache.load(conditionType.separateFileTemplatePath!!)
                             val conditionSubstitutions = buildSubstitutions {
                                 "mod-id" with mat.id.namespace
                                 "file-path" with filePathStr
                             }
                             val conditionText = TemplateApplier.apply(conditionTemplate, conditionSubstitutions)
-                            val conditionPathStr = TemplateApplier.apply(conditionType.separateFilePathTemplate, conditionSubstitutions)
+                            val conditionPathStr = TemplateApplier.apply(externalConditionPathTemplate, conditionSubstitutions)
                             val conditionPath = outputPath.resolve(conditionPathStr)
                             Files.createDirectories(conditionPath.parent)
                             Files.writeString(conditionPath, conditionText)

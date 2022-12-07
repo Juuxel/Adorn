@@ -1,17 +1,10 @@
 plugins {
-    // The Kotlin DSL plugin sets up Kotlin with the correct version
-    // and lets me do .gradle.kts files as plugins.
-    // See https://docs.gradle.org/current/userguide/kotlin_dsl.html#sec:kotlin-dsl_plugin
-    `kotlin-dsl`
+    kotlin("jvm") version "1.7.0"
     id("org.jmailen.kotlinter") version "3.2.0"
 }
 
 repositories {
     mavenCentral()
-}
-
-dependencies {
-    implementation("org.ow2.asm:asm-tree:9.4")
 }
 
 java {

@@ -2,7 +2,9 @@ package juuxel.adorn.datagen
 
 enum class ConditionType(
     private val id: String,
+    /** The template for the file path to an external condition file. */
     val separateFilePathTemplate: String? = null,
+    /** The path to the template for the text of an external condition file. */
     val separateFileTemplatePath: String? = null,
     val conditionsInFileTemplatePathsByType: Map<String, String> = emptyMap()
 ) {

@@ -8,7 +8,7 @@ interface TemplateDsl {
     fun putAll(properties: Map<String, String>)
 }
 
-internal fun buildSubstitutions(block: TemplateDsl.() -> Unit): Map<String, String> =
+fun buildSubstitutions(block: TemplateDsl.() -> Unit): Map<String, String> =
     TemplateBuilder().apply(block).build()
 
 private class TemplateBuilder : TemplateDsl {

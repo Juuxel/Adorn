@@ -10,7 +10,7 @@ private operator fun TemplateMaterialConfig.plus(other: TemplateMaterialConfig):
     if (other != EMPTY_SUBSTITUTION) other(this, it)
 }
 
-internal class Generator<in M : Material>(
+class Generator<in M : Material>(
     val id: String,
     val outputPathTemplate: String,
     val templatePath: String,
