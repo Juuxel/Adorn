@@ -69,7 +69,7 @@ abstract class GenerateEmi : DefaultTask() {
             .resolve("assets/emi/recipe/defaults/adorn.json")
         val outputJson = mapOf("recipes" to recipesByResult.values.mapTo(TreeSet()) { it.id })
         Files.createDirectories(outputPath.parent)
-        Files.writeString(outputPath, JsonOutput.toJson(outputJson))
+        Files.writeString(outputPath, JsonOutput.prettyPrint(JsonOutput.toJson(outputJson)))
     }
 
     @Suppress("UNCHECKED_CAST")
