@@ -54,9 +54,8 @@ If the properties are namespaced IDs, they can additionally be split to their na
 
 Run the Gradle task `generateData`. It depends on these two tasks:
 
-- `generateMainData`: apply the regular data generators
-- `generateTags` (only in the common subproject): apply the tag generators
-  which also include all materials from other subprojects
+- `generateMainData`: apply the regular data generators (including tags)
+- `generateEmi` (only in the Fabric subproject): generates the recipe defaults for EMI's recipe tree
 
 ## XML format
 
