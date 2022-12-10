@@ -5,12 +5,23 @@ import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.util.DyeColor
+import net.minecraft.util.Identifier
 
 interface BlockVariant {
     /**
      * The name of this variant. Must be a valid identifier path.
      */
     val name: String
+
+    fun nameAsIdentifier(): Identifier {
+        val name = this.name
+        return if ('/' in name) {
+            val (namespace, path) = name.split(' ', limit = 2)
+            Identifier(namespace, path)
+        } else {
+            Identifier("minecraft", name)
+        }
+    }
 
     /**
      * Creates a *new* `AbstractBlock.Settings`.
@@ -57,8 +68,8 @@ interface BlockVariant {
         val QUARTZ = variant("quartz", Blocks.QUARTZ_BLOCK)
         val END_STONE_BRICK = variant("end_stone_brick", Blocks.END_STONE_BRICKS)
         val PURPUR = variant("purpur", Blocks.PURPUR_BLOCK)
-        val POLISHED_BLACKSTONE = variant("blackstone", Blocks.POLISHED_BLACKSTONE)
-        val POLISHED_BLACKSTONE_BRICK = variant("red_nether_brick", Blocks.POLISHED_BLACKSTONE_BRICKS)
+        val POLISHED_BLACKSTONE = variant("polished_blackstone", Blocks.POLISHED_BLACKSTONE)
+        val POLISHED_BLACKSTONE_BRICK = variant("polished_blackstone_brick", Blocks.POLISHED_BLACKSTONE_BRICKS)
         val POLISHED_DIORITE = variant("polished_diorite", Blocks.POLISHED_DIORITE)
         val POLISHED_ANDESITE = variant("polished_andesite", Blocks.POLISHED_ANDESITE)
         val POLISHED_GRANITE = variant("polished_granite", Blocks.POLISHED_GRANITE)

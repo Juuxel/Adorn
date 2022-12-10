@@ -1,29 +1,57 @@
 package juuxel.adorn.item
 
 import juuxel.adorn.AdornCommon
+import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.AdornBlocks
-import juuxel.adorn.compat.CompatBlocks
+import juuxel.adorn.block.BlockKind
+import juuxel.adorn.block.BlockVariantSets
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.platform.ItemGroupBridge
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
+import net.minecraft.block.Block
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.FoodComponent
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroups
 import net.minecraft.item.ItemStack
+import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Rarity
 import net.minecraft.util.math.Direction
 
 object AdornItems {
-    @JvmField
+    // Block kinds for each vanilla item group
+    private val BUILDING_KINDS: List<BlockKind> = listOf(
+        BlockKind.POST,
+        BlockKind.PLATFORM,
+        BlockKind.STEP,
+    )
+    private val FUNCTIONAL_KINDS: List<BlockKind> = listOf(
+        BlockKind.CHAIR,
+        BlockKind.TABLE,
+        BlockKind.DRAWER,
+        BlockKind.KITCHEN_COUNTER,
+        BlockKind.KITCHEN_CUPBOARD,
+        BlockKind.KITCHEN_SINK,
+        BlockKind.SHELF,
+        BlockKind.COFFEE_TABLE,
+        BlockKind.BENCH,
+    )
+
     val ITEMS: Registrar<Item> = PlatformBridges.registrarFactory.create(RegistryKeys.ITEM)
     val GROUP by ItemGroupBridge.get().register(AdornCommon.id("items")) {
         icon { ItemStack(AdornBlocks.SOFAS[DyeColor.LIME]) }
         entries { _, entries, _ ->
+            // TODO: Better ordering
+            for (item in BlockVariantSets.items) {
+                entries.add(item)
+            }
+            for (item in AdornBlocks.items) {
+                entries.add(item)
+            }
             for (item in ITEMS) {
                 entries.add(item)
             }
@@ -77,12 +105,46 @@ object AdornItems {
 
     private fun addToVanillaItemGroups() {
         val itemGroups = ItemGroupBridge.get()
-        itemGroups.addItems(ItemGroups.FUNCTIONAL) {
-            // TODO: Some blocks shouldn't be here
-            for (item in AdornBlocks.items) {
-                add(item)
+        itemGroups.addItems(ItemGroups.BUILDING_BLOCKS) {
+            // TODO: Test on Forge what happens when you try to addAfter
+            //  and the "after" item isn't in the group
+
+            for (variant in BlockVariantSets.allVariants()) {
+                val after = findLastBuildingBlockEntry(variant)
+
+                if (after != null) {
+                    val items = BUILDING_KINDS.mapNotNull {
+                        BlockVariantSets.get(it, variant)?.get()
+                    }
+                    addAfter(after, items)
+                } else {
+                    for (kind in BUILDING_KINDS) {
+                        BlockVariantSets.get(kind, variant)?.let { add(it.get()) }
+                    }
+                }
             }
-            for (item in CompatBlocks.items) {
+        }
+        itemGroups.addItems(ItemGroups.COLORED_BLOCKS) {
+            for ((_, sofa) in AdornBlocks.SOFAS) {
+                add(sofa)
+            }
+            for ((_, lamp) in AdornBlocks.TABLE_LAMPS) {
+                add(lamp)
+            }
+            add(AdornBlocks.CANDLELIT_LANTERN)
+            for ((_, lantern) in AdornBlocks.DYED_CANDLELIT_LANTERNS) {
+                add(lantern)
+            }
+        }
+        itemGroups.addItems(ItemGroups.FUNCTIONAL) {
+            for (variant in BlockVariantSets.allVariants()) {
+                for (kind in FUNCTIONAL_KINDS) {
+                    BlockVariantSets.get(kind, variant)?.let { add(it.get()) }
+                }
+            }
+
+            // TODO: Better ordering
+            for (item in AdornBlocks.items) {
                 add(item)
             }
         }
@@ -100,5 +162,25 @@ object AdornItems {
             add(GUIDE_BOOK)
             add(TRADERS_MANUAL)
         }
+    }
+
+    private fun findLastBuildingBlockEntry(variant: BlockVariant): Block? {
+        // Buttons are the last entry in "building blocks" for each material currently,
+        // then walls and finally slabs
+        return findBaseBlock(variant, "button")
+            ?: findBaseBlock(variant, "wall")
+            ?: findBaseBlock(variant, "slab")
+            ?: findBaseBlock(variant, null)
+    }
+
+    private fun findBaseBlock(variant: BlockVariant, suffix: String?): Block? {
+        val variantId = variant.nameAsIdentifier()
+        val buttonId = if (suffix != null) variantId.withPath { it + "_$suffix" } else variantId
+
+        if (Registries.BLOCK.containsId(buttonId)) {
+            return Registries.BLOCK[buttonId]
+        }
+
+        return null
     }
 }

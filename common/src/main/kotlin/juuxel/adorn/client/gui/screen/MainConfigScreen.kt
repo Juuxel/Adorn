@@ -13,7 +13,7 @@ class MainConfigScreen(parent: Screen) : AbstractConfigScreen(Text.translatable(
         val config = ConfigManager.config()
         val x = (width - BUTTON_WIDTH) / 2
         addDrawableChild(createConfigToggle(x, 40, BUTTON_WIDTH, config.client::showTradingStationTooltips))
-        addDrawableChild(createConfigToggle(x, 40 + BUTTON_SPACING, BUTTON_WIDTH, config.client::showItemsInStandardGroups))
+        addDrawableChild(createConfigToggle(x, 40 + BUTTON_SPACING, BUTTON_WIDTH, config.client::showItemsInStandardGroups, restartRequired = true))
         addDrawableChild(
             ButtonWidget.builder(Text.translatable("gui.adorn.config.game_rule_defaults")) {
                 client!!.setScreen(GameRuleDefaultsScreen(this))

@@ -2,7 +2,7 @@ package juuxel.adorn
 
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
-import juuxel.adorn.client.ClientCompatInit
+import juuxel.adorn.block.BlockVariantSets
 import juuxel.adorn.client.ClientEvents
 import juuxel.adorn.client.gui.screen.AdornMenuScreens
 import juuxel.adorn.compat.Compat
@@ -49,6 +49,8 @@ object Adorn : ModInitializer {
         AdornLootConditionTypes.init()
         AdornLootFunctionTypes.init()
         Compat.init()
+        BlockVariantSets.register()
+        AdornBlocksFabric.afterRegister()
         ConfigManager.INSTANCE.finalize()
     }
 
@@ -61,6 +63,5 @@ object Adorn : ModInitializer {
         AdornNetworking.initClient()
         AdornResources.initClient()
         ClientEvents.init()
-        ClientCompatInit.init()
     }
 }

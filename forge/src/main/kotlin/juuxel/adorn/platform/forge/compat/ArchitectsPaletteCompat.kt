@@ -1,7 +1,7 @@
 package juuxel.adorn.platform.forge.compat
 
 import juuxel.adorn.api.block.BlockVariant
-import juuxel.adorn.compat.BlockVariantSet
+import juuxel.adorn.block.BlockVariantSet
 
 object ArchitectsPaletteCompat : BlockVariantSet {
     override val woodVariants = listOf(BlockVariant.Wood("architects_palette/twisted"))

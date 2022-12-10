@@ -1,6 +1,7 @@
 package juuxel.adorn.platform.forge
 
 import juuxel.adorn.AdornCommon
+import juuxel.adorn.block.BlockVariantSets
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.lib.AdornStats
@@ -38,8 +39,9 @@ object Adorn {
         AdornLootFunctionTypes.LOOT_FUNCTION_TYPES.registerToBus(MOD_BUS)
         AdornNetworking.init()
         AdornCriteria.init()
-        ItemEvents.register(FORGE_BUS)
+        ItemEvents.register(MOD_BUS, FORGE_BUS)
         Compat.init(MOD_BUS)
+        BlockVariantSets.register()
         ForgeMod.enableMilkFluid()
         DistExecutor.safeRunWhenOn(Dist.CLIENT) { SafeRunnable(AdornClient::init) }
     }

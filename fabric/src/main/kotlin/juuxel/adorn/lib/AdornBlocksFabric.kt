@@ -3,6 +3,8 @@ package juuxel.adorn.lib
 import juuxel.adorn.CommonEventHandlers
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
+import juuxel.adorn.block.BlockKind
+import juuxel.adorn.block.BlockVariantSets
 import juuxel.adorn.block.SneakClickHandler
 import juuxel.adorn.block.entity.BrewerBlockEntityFabric
 import juuxel.adorn.block.entity.KitchenSinkBlockEntityFabric
@@ -37,22 +39,16 @@ object AdornBlocksFabric {
         }
 
         UseBlockCallback.EVENT.register(CommonEventHandlers::handleCarpets)
-        FluidStorage.SIDED.registerForBlocks(
-            KitchenSinkBlockEntityFabric.FLUID_STORAGE_PROVIDER,
-            AdornBlocks.OAK_KITCHEN_SINK,
-            AdornBlocks.SPRUCE_KITCHEN_SINK,
-            AdornBlocks.BIRCH_KITCHEN_SINK,
-            AdornBlocks.JUNGLE_KITCHEN_SINK,
-            AdornBlocks.ACACIA_KITCHEN_SINK,
-            AdornBlocks.DARK_OAK_KITCHEN_SINK,
-            AdornBlocks.MANGROVE_KITCHEN_SINK,
-            AdornBlocks.CRIMSON_KITCHEN_SINK,
-            AdornBlocks.WARPED_KITCHEN_SINK,
-        )
         FluidStorage.SIDED.registerForBlockEntity(
             { brewer, _ -> (brewer as BrewerBlockEntityFabric).fluidStorage },
             AdornBlockEntities.BREWER
         )
+    }
+
+    fun afterRegister() {
+        for (kitchenSink in BlockVariantSets.get(BlockKind.KITCHEN_SINK)) {
+            FluidStorage.SIDED.registerForBlocks(KitchenSinkBlockEntityFabric.FLUID_STORAGE_PROVIDER, kitchenSink.get())
+        }
     }
 
     @Environment(EnvType.CLIENT)
@@ -81,17 +77,8 @@ object AdornBlocksFabric {
             BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout())
         }
 
-        BlockRenderLayerMap.INSTANCE.putBlocks(
-            RenderLayer.getTranslucent(),
-            AdornBlocks.OAK_COFFEE_TABLE,
-            AdornBlocks.SPRUCE_COFFEE_TABLE,
-            AdornBlocks.BIRCH_COFFEE_TABLE,
-            AdornBlocks.JUNGLE_COFFEE_TABLE,
-            AdornBlocks.ACACIA_COFFEE_TABLE,
-            AdornBlocks.DARK_OAK_COFFEE_TABLE,
-            AdornBlocks.MANGROVE_COFFEE_TABLE,
-            AdornBlocks.CRIMSON_COFFEE_TABLE,
-            AdornBlocks.WARPED_COFFEE_TABLE
-        )
+        for (coffeeTable in BlockVariantSets.get(BlockKind.COFFEE_TABLE)) {
+            BlockRenderLayerMap.INSTANCE.putBlock(coffeeTable.get(), RenderLayer.getTranslucent())
+        }
     }
 }

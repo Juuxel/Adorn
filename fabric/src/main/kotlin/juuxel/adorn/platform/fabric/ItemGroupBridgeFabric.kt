@@ -22,6 +22,10 @@ class ItemGroupBridgeFabric : ItemGroupBridge {
                 override fun add(item: ItemConvertible) {
                     entries.add(item)
                 }
+
+                override fun addAfter(after: ItemConvertible, items: List<ItemConvertible>) {
+                    entries.addAfter(after, *items.toTypedArray())
+                }
             }
 
             configurator(context)

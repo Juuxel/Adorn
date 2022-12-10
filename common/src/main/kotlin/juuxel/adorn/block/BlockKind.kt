@@ -1,4 +1,4 @@
-package juuxel.adorn.compat
+package juuxel.adorn.block
 
 enum class BlockKind {
     CHAIR,

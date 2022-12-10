@@ -13,6 +13,7 @@ interface ItemGroupBridge {
 
     interface ItemGroupContext {
         fun add(item: ItemConvertible)
+        fun addAfter(after: ItemConvertible, items: List<ItemConvertible>)
     }
 
     @InlineServices

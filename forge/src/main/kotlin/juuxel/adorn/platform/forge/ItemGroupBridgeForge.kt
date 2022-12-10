@@ -4,6 +4,7 @@ import juuxel.adorn.lib.Registered
 import juuxel.adorn.platform.ItemGroupBridge
 import net.minecraft.item.ItemConvertible
 import net.minecraft.item.ItemGroup
+import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraftforge.event.CreativeModeTabEvent
@@ -40,6 +41,16 @@ class ItemGroupBridgeForge : ItemGroupBridge {
             val context = object : ItemGroupBridge.ItemGroupContext {
                 override fun add(item: ItemConvertible) {
                     event.registerSimple(group, item)
+                }
+
+                override fun addAfter(after: ItemConvertible, items: List<ItemConvertible>) {
+                    event.register { _, populator, _ ->
+                        items.fold(ItemStack(after)) { nextAfter, item ->
+                            val stack = ItemStack(item)
+                            populator.accept(stack, ItemStack.EMPTY, nextAfter)
+                            stack
+                        }
+                    }
                 }
             }
             configurator(context)
