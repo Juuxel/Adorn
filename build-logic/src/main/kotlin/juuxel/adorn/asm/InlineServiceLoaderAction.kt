@@ -42,7 +42,7 @@ object InlineServiceLoaderAction : Action<Task> {
                     val type = (ldc.cst as Type).internalName.replace('/', '.')
                     val serviceFile = filer("META-INF/services/$type")
                     if (Files.exists(serviceFile)) {
-                        val implType = Files.readAllLines(serviceFile).single()
+                        val implType = Files.readAllLines(serviceFile).single().replace('.', '/')
                         ctx.replaceWith(
                             listOf(
                                 TypeInsnNode(Opcodes.NEW, implType),
