@@ -2,9 +2,13 @@ package juuxel.adorn.config
 
 import blue.endless.jankson.Comment
 import juuxel.adorn.fluid.FluidUnit
+import juuxel.adorn.item.group.ItemGroupingOption
 import juuxel.adorn.platform.FluidBridge
 
 class Config {
+    @field:Comment("How items will be grouped in Adorn's creative tab")
+    var groupItems: ItemGroupingOption = ItemGroupingOption.BY_MATERIAL
+
     @field:Comment("Client-side settings")
     var client: Client = Client()
 

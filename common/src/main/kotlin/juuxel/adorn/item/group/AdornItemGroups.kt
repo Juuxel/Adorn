@@ -38,7 +38,16 @@ object AdornItemGroups {
         entries { _, entries, _ ->
             val context = ItemGroupBuildContext { entries.add(it) }
             with(context) {
-                addByKinds(BlockKind.values().toList())
+                when (ConfigManager.config().groupItems) {
+                    ItemGroupingOption.BY_MATERIAL -> addByKinds(BlockKind.values().toList())
+                    ItemGroupingOption.BY_SHAPE -> {
+                        for (kind in BlockKind.values()) {
+                            for (block in BlockVariantSets.get(kind)) {
+                                add(block.get())
+                            }
+                        }
+                    }
+                }
                 addColoredBlocks()
                 addChimneys()
                 addFences()

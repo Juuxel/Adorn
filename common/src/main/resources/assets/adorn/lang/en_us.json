@@ -1386,6 +1386,8 @@
   "gui.adorn.config.game_rule_defaults": "Game rule defaults...",
   "gui.adorn.config.option.displayedFluidUnit": "Fluid unit",
   "gui.adorn.config.option.displayedFluidUnit.description": "The unit for fluid amounts in Adorn GUIs.",
+  "gui.adorn.config.option.groupItems": "Group items",
+  "gui.adorn.config.option.groupItems.description": "How items will be grouped in Adorn's creative tab",
   "gui.adorn.config.option.showItemsInStandardGroups": "Items in standard tabs",
   "gui.adorn.config.option.showItemsInStandardGroups.description": "Shows Adorn items in standard vanilla creative inventory tabs.",
   "gui.adorn.config.option.showTradingStationTooltips": "Trading station tooltips",
@@ -1399,6 +1401,8 @@
   "gui.adorn.fluid_unit.litres.symbol": "L",
   "gui.adorn.fluid_unit.droplets.name": "Droplets",
   "gui.adorn.fluid_unit.droplets.symbol": "dp",
+  "gui.adorn.item_grouping_option.by_material": "By Material",
+  "gui.adorn.item_grouping_option.by_shape": "By Shape",
 
   "stat.adorn.dye_sofa": "Sofas Dyed",
   "stat.adorn.dye_table_lamp": "Table Lamps Dyed",
