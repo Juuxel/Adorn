@@ -269,6 +269,8 @@
   "gui.adorn.config.visual": "Ulkonäkö",
   "gui.adorn.config.option.displayedFluidUnit": "Nesteyksikkö",
   "gui.adorn.config.option.displayedFluidUnit.description": "Nesteen ja kaasun määrän yksikkö Adornin valikoissa.",
+  "gui.adorn.config.option.groupItems": "Ryhmittele tavarat",
+  "gui.adorn.config.option.groupItems.description": "Miten tavarat ryhmitellään Adornin välilehdessä",
   "gui.adorn.config.option.showItemsInStandardGroups": "Tavarat tavallisissa välilehdissä",
   "gui.adorn.config.option.showItemsInStandardGroups.description": "Näyttää Adornin tavarat tavallisissa luovan tilan välilehdissä.",
   "gui.adorn.config.option.showTradingStationTooltips": "Kauppapöytien tiedot",
@@ -277,5 +279,7 @@
   "gui.adorn.config.restart_required.title": "Tarvitaan uudelleenkäynnistys!",
   "gui.adorn.config.restart_required.message": "Joku muokkaamasi asetus vaatii Minecraftin käynnistämistä uudelleen.",
   "gui.adorn.fluid_unit.litres.name": "Litrat",
-  "gui.adorn.fluid_unit.droplets.name": "Tipat"
+  "gui.adorn.fluid_unit.droplets.name": "Tipat",
+  "gui.adorn.item_grouping_option.by_material": "Materiaalin mukaan",
+  "gui.adorn.item_grouping_option.by_shape": "Muodon mukaan"
 }
