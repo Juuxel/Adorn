@@ -23,17 +23,19 @@ class ConfigScreenHeading(
         matrices.push()
         matrices.translate(x.toDouble(), y.toDouble(), 0.0)
 
-        // Left line
-        matrices.push()
-        matrices.translate(OUTER_GAP_WIDTH.toDouble(), 0.0, 0.0)
-        fill(matrices, 0, lineY, lineWidth, lineY + 1, Colors.WHITE)
-        matrices.pop()
+        if (textWidth <= width - 2 * OUTER_GAP_WIDTH - 2 * INNER_GAP_WIDTH) {
+            // Left line
+            matrices.push()
+            matrices.translate(OUTER_GAP_WIDTH.toDouble(), 0.0, 0.0)
+            fill(matrices, 0, lineY, lineWidth, lineY + 1, Colors.WHITE)
+            matrices.pop()
 
-        // Right line
-        matrices.push()
-        matrices.translate(width - lineWidth - OUTER_GAP_WIDTH.toDouble(), 0.0, 0.0)
-        fill(matrices, 0, lineY, lineWidth, lineY + 1, Colors.WHITE)
-        matrices.pop()
+            // Right line
+            matrices.push()
+            matrices.translate(width - lineWidth - OUTER_GAP_WIDTH.toDouble(), 0.0, 0.0)
+            fill(matrices, 0, lineY, lineWidth, lineY + 1, Colors.WHITE)
+            matrices.pop()
+        }
 
         // Label
         val textX = (width - textWidth) / 2f
