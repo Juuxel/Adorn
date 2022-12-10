@@ -1383,6 +1383,7 @@
   "gamerule.adorn:dropLockedTradingStations.description": "Broken trading stations drop a locked version with their contents inside.",
 
   "gui.adorn.config.title": "Adorn",
+  "gui.adorn.config.creative_inventory": "Creative Inventory",
   "gui.adorn.config.game_rule_defaults": "Game rule defaults...",
   "gui.adorn.config.other": "Other Settings",
   "gui.adorn.config.visual": "Visual",

@@ -15,6 +15,8 @@ class MainConfigScreen(parent: Screen) : AbstractConfigScreen(Text.translatable(
         val x = (width - BUTTON_WIDTH) / 2
         addHeading(Text.translatable("gui.adorn.config.visual"), BUTTON_WIDTH)
         addConfigToggle(BUTTON_WIDTH, config.client::showTradingStationTooltips)
+        addConfigButton(BUTTON_WIDTH, config.client::displayedFluidUnit, FluidUnit.values().toList())
+        addHeading(Text.translatable("gui.adorn.config.creative_inventory"), BUTTON_WIDTH)
         addConfigToggle(BUTTON_WIDTH, config.client::showItemsInStandardGroups)
         addConfigButton(
             BUTTON_WIDTH,
@@ -22,7 +24,6 @@ class MainConfigScreen(parent: Screen) : AbstractConfigScreen(Text.translatable(
             ItemGroupingOption.values().toList(),
             restartRequired = true
         )
-        addConfigButton(BUTTON_WIDTH, config.client::displayedFluidUnit, FluidUnit.values().toList())
         addHeading(Text.translatable("gui.adorn.config.other"), BUTTON_WIDTH)
         addDrawableChild(
             ButtonWidget.builder(Text.translatable("gui.adorn.config.game_rule_defaults")) {

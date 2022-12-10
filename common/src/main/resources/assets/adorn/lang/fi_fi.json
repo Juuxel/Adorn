@@ -259,6 +259,7 @@
   "gamerule.adorn:skipNightOnSofas": "Öiden ohitus nukkumalla sohvalla",
   "gamerule.adorn:skipNightOnSofas.description": "Sallii ohittaa yöt nukkumalla sohvalla.",
 
+  "gui.adorn.config.creative_inventory": "Luovan tilan tavaraluettelo",
   "gui.adorn.config.game_rule_defaults": "Pelisääntöjen oletukset...",
   "gui.adorn.config.other": "Muut asetukset",
   "gui.adorn.config.visual": "Ulkonäkö",
