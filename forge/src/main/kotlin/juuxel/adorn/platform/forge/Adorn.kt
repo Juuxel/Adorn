@@ -4,6 +4,7 @@ import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.BlockVariantSets
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.criterion.AdornCriteria
+import juuxel.adorn.item.group.AdornItemGroups
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.loot.AdornLootConditionTypes
 import juuxel.adorn.loot.AdornLootFunctionTypes
@@ -31,6 +32,7 @@ object Adorn {
         ConfigManager.INSTANCE.init()
         MOD_BUS.addListener(this::init)
         EventsImplementedInJava().register(MOD_BUS, FORGE_BUS)
+        AdornItemGroups.init()
         AdornRecipes.init()
         AdornMenus.MENUS.registerToBus(MOD_BUS)
         AdornRecipes.RECIPE_SERIALIZERS.registerToBus(MOD_BUS)

@@ -10,6 +10,7 @@ import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.entity.AdornEntities
 import juuxel.adorn.item.AdornItems
+import juuxel.adorn.item.group.AdornItemGroups
 import juuxel.adorn.lib.AdornBlocksFabric
 import juuxel.adorn.lib.AdornEntitiesFabric
 import juuxel.adorn.lib.AdornGameRules
@@ -37,6 +38,7 @@ object Adorn : ModInitializer {
         AdornBlockEntities.init()
         AdornItems.init()
         AdornItemsFabric.init()
+        AdornItemGroups.init()
         AdornEntities.init()
         AdornMenus.init()
         AdornNetworking.init()
