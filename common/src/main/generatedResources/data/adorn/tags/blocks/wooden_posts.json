@@ -10,6 +10,7 @@
     "adorn:mangrove_post",
     "adorn:crimson_post",
     "adorn:warped_post",
+    { "id": "adorn:biomemakeover/ancient_oak_post", "required": false },
     { "id": "adorn:biomemakeover/blighted_balsa_post", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_post", "required": false },
     { "id": "adorn:biomemakeover/willow_post", "required": false },

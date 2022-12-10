@@ -10,6 +10,7 @@
     "adorn:mangrove_kitchen_sink",
     "adorn:crimson_kitchen_sink",
     "adorn:warped_kitchen_sink",
+    { "id": "adorn:biomemakeover/ancient_oak_kitchen_sink", "required": false },
     { "id": "adorn:biomemakeover/blighted_balsa_kitchen_sink", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_kitchen_sink", "required": false },
     { "id": "adorn:biomemakeover/willow_kitchen_sink", "required": false },

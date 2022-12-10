@@ -10,6 +10,7 @@
     "adorn:mangrove_bench",
     "adorn:crimson_bench",
     "adorn:warped_bench",
+    { "id": "adorn:biomemakeover/ancient_oak_bench", "required": false },
     { "id": "adorn:biomemakeover/blighted_balsa_bench", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_bench", "required": false },
     { "id": "adorn:biomemakeover/willow_bench", "required": false },

@@ -10,6 +10,7 @@
     "adorn:mangrove_drawer",
     "adorn:crimson_drawer",
     "adorn:warped_drawer",
+    { "id": "adorn:biomemakeover/ancient_oak_drawer", "required": false },
     { "id": "adorn:biomemakeover/blighted_balsa_drawer", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_drawer", "required": false },
     { "id": "adorn:biomemakeover/willow_drawer", "required": false },

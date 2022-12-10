@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/step",
+  "textures": {
+    "texture": "biomemakeover:block/ancient_oak_planks"
+  }
+}
