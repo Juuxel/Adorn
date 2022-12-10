@@ -17,6 +17,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.network.Packet
+import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Identifier
@@ -47,7 +48,7 @@ object AdornNetworking {
             val packet = EntitySpawnS2CPacket(buf)
             client.execute {
                 val world = client.player?.world as? ClientWorld ?: return@execute
-                val entity = packet.entityTypeId.create(world)!!
+                val entity = packet.entityType.create(world)!!
                 entity.id = packet.id
                 entity.uuid = packet.uuid
                 entity.updatePositionAndAngles(
@@ -76,7 +77,7 @@ object AdornNetworking {
         }
     }
 
-    fun createEntitySpawnPacket(entity: Entity): Packet<*> =
+    fun createEntitySpawnPacket(entity: Entity): Packet<ClientPlayPacketListener> =
         ServerPlayNetworking.createS2CPacket(
             ENTITY_SPAWN,
             PacketByteBufs.create().apply {

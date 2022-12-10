@@ -16,7 +16,7 @@ import juuxel.adorn.block.TableLampBlock
 import juuxel.adorn.block.TradingStationBlock
 import juuxel.adorn.platform.fabric.visit
 import net.minecraft.block.Block
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registries
 import virtuoel.statement.api.StateRefresher
 import virtuoel.towelette.api.FluidProperties
 import virtuoel.towelette.api.ToweletteConfig
@@ -34,9 +34,9 @@ object ToweletteCompat {
             result
         }
 
-        Registry.BLOCK.visit {
+        Registries.BLOCK.visit {
             if (shouldFluidlog(it)) {
-                StateRefresher.INSTANCE.addBlockProperty(it, FluidProperties.FLUID, Registry.FLUID.defaultId)
+                StateRefresher.INSTANCE.addBlockProperty(it, FluidProperties.FLUID, Registries.FLUID.defaultId)
 
                 if (flowing) {
                     StateRefresher.INSTANCE.addBlockProperty(it, FluidProperties.LEVEL_1_8, 8)

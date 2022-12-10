@@ -2,7 +2,7 @@ package juuxel.adorn.platform
 
 import juuxel.adorn.lib.Registered
 
-interface Registrar<T> {
+interface Registrar<T> : Iterable<T> {
     /**
      * Registers an object with the [id]. The object is created using the [provider].
      */

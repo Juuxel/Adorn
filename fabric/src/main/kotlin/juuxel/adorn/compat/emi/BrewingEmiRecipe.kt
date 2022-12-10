@@ -72,7 +72,7 @@ class BrewingEmiRecipe private constructor(
         widgets.addDrawable(leftX + 88, topY + 5, 16, 51) { matrices, _, _, _ ->
             RenderSystem.setShaderTexture(0, TEXTURE)
             RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-            RenderSystem.setShader(GameRenderer::getPositionTexShader)
+            RenderSystem.setShader(GameRenderer::getPositionTexProgram)
             DrawableHelper.drawTexture(matrices, 0, 0, FLUID_SCALE_Z_OFFSET, 176f, 25f, 16, 51, 256, 256)
         }
 

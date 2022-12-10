@@ -58,7 +58,7 @@ abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
         if (isCarpetingEnabled()) {
             val carpet = state[CARPET]
             if (carpet.isPresent && !COLORS_TO_BLOCKS[carpet.value]!!.defaultState.canPlaceAt(world, pos)) {
-                world.createAndScheduleBlockTick(pos, this, 1)
+                world.scheduleBlockTick(pos, this, 1)
             }
         }
 

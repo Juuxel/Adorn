@@ -9,10 +9,11 @@ import com.mojang.serialization.DynamicOps
 import com.mojang.serialization.Encoder
 import net.minecraft.fluid.Fluid
 import net.minecraft.network.PacketByteBuf
-import net.minecraft.tag.TagKey
+import net.minecraft.registry.Registries
+import net.minecraft.registry.RegistryKeys
+import net.minecraft.registry.tag.TagKey
 import net.minecraft.util.Identifier
 import net.minecraft.util.dynamic.Codecs
-import net.minecraft.util.registry.Registry
 
 /**
  * A "key" that identifies a fluid or a group of fluids.
@@ -48,7 +49,7 @@ sealed class FluidKey {
         buf.writeVarInt(fluids.size)
 
         for (fluid in fluids) {
-            buf.writeVarInt(Registry.FLUID.getRawId(fluid))
+            buf.writeVarInt(Registries.FLUID.getRawId(fluid))
         }
     }
 
@@ -63,9 +64,9 @@ sealed class FluidKey {
                 ops.getStringValue(input)
                     .map {
                         if (it.startsWith('#')) {
-                            OfTag(TagKey.of(Registry.FLUID_KEY, Identifier(it.substring(1))))
+                            OfTag(TagKey.of(RegistryKeys.FLUID, Identifier(it.substring(1))))
                         } else {
-                            OfFluid(Registry.FLUID[Identifier(it)])
+                            OfFluid(Registries.FLUID[Identifier(it)])
                         }
                     }
                     .map { Pair.of(it, ops.empty()) }
@@ -92,7 +93,7 @@ sealed class FluidKey {
          */
         fun load(buf: PacketByteBuf): FluidKey {
             val size = buf.readVarInt()
-            fun readFluid(): Fluid = Registry.FLUID[buf.readVarInt()]
+            fun readFluid(): Fluid = Registries.FLUID[buf.readVarInt()]
 
             return if (size == 1) {
                 OfFluid(readFluid())
@@ -111,7 +112,7 @@ sealed class FluidKey {
     }
 
     private data class OfFluid(val fluid: Fluid) : Simple() {
-        override val id: String by lazy { Registry.FLUID.getId(fluid).toString() }
+        override val id: String by lazy { Registries.FLUID.getId(fluid).toString() }
         override fun getFluids() = setOf(fluid)
 
         override fun matches(fluid: Fluid): Boolean =
@@ -122,7 +123,7 @@ sealed class FluidKey {
         override val id = "#${tag.id}"
 
         override fun getFluids(): Set<Fluid> =
-            Registry.FLUID.getOrCreateEntryList(tag).mapTo(HashSet()) { it.value() }
+            Registries.FLUID.getOrCreateEntryList(tag).mapTo(HashSet()) { it.value() }
 
         override fun matches(fluid: Fluid): Boolean =
             fluid.isIn(tag)

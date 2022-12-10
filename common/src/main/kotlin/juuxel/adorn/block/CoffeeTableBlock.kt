@@ -50,7 +50,7 @@ class CoffeeTableBlock(variant: BlockVariant) : Block(variant.createSettings().n
         state: BlockState, direction: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ): BlockState {
         if (state[WATERLOGGED]) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)

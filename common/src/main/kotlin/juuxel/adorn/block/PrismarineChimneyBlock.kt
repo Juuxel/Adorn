@@ -4,8 +4,8 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.BubbleColumnBlock
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.registry.tag.FluidTags
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.tag.FluidTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
@@ -31,13 +31,13 @@ open class PrismarineChimneyBlock(settings: Settings) : AbstractChimneyBlock(set
         }
 
         override fun onBlockAdded(state: BlockState, world: World, pos: BlockPos, oldState: BlockState, moved: Boolean) {
-            world.createAndScheduleBlockTick(pos, this, 20)
+            world.scheduleBlockTick(pos, this, 20)
         }
 
         override fun neighborUpdate(
             state: BlockState, world: World, pos: BlockPos, neighbor: Block, neighborPos: BlockPos, moved: Boolean
         ) {
-            world.createAndScheduleBlockTick(pos, this, 20)
+            world.scheduleBlockTick(pos, this, 20)
         }
 
         override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {

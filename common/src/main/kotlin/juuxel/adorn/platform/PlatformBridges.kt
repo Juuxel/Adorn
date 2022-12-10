@@ -7,7 +7,6 @@ interface PlatformBridges {
     val blockEntities: BlockEntityBridge
     val blockFactory: BlockFactory
     val entities: EntityBridge
-    val items: ItemBridge
     val menus: MenuBridge
     val network: NetworkBridge
     val registrarFactory: RegistrarFactory
@@ -21,7 +20,6 @@ interface PlatformBridges {
         inline val blockEntities get() = get().blockEntities
         inline val blockFactory get() = get().blockFactory
         inline val entities get() = get().entities
-        inline val items get() = get().items
         inline val menus get() = get().menus
         inline val network get() = get().network
         inline val registrarFactory get() = get().registrarFactory

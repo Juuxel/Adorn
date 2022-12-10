@@ -8,10 +8,11 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import juuxel.adorn.util.MoreCodecs
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.tag.TagKey
+import net.minecraft.registry.Registries
+import net.minecraft.registry.RegistryKeys
+import net.minecraft.registry.tag.TagKey
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 import java.util.Optional
 
 data class Page(
@@ -45,14 +46,14 @@ data class Page(
 
         data class TagIcon(val tag: TagKey<Item>) : Icon() {
             override fun createStacks(): List<ItemStack> =
-                Registry.ITEM.getOrCreateEntryList(tag).map { it.value().defaultStack }
+                Registries.ITEM.getOrCreateEntryList(tag).map { it.value().defaultStack }
         }
 
         companion object {
             val CODEC: Codec<Icon> = object : Codec<Icon> {
                 override fun <T> encode(input: Icon, ops: DynamicOps<T>, prefix: T): DataResult<T> {
                     val id = when (input) {
-                        is ItemIcon -> Registry.ITEM.getId(input.item).toString()
+                        is ItemIcon -> Registries.ITEM.getId(input.item).toString()
                         is TagIcon -> "#${input.tag.id}"
                     }
                     return ops.mergeToPrimitive(prefix, ops.createString(id))
@@ -61,9 +62,9 @@ data class Page(
                 override fun <T> decode(ops: DynamicOps<T>, input: T): DataResult<Pair<Icon, T>> =
                     ops.getStringValue(input).map { id ->
                         if (id.startsWith('#')) {
-                            TagIcon(TagKey.of(Registry.ITEM_KEY, Identifier(id.substring(1))))
+                            TagIcon(TagKey.of(RegistryKeys.ITEM, Identifier(id.substring(1))))
                         } else {
-                            ItemIcon(Registry.ITEM[Identifier(id)])
+                            ItemIcon(Registries.ITEM[Identifier(id)])
                         }
                     }.map { Pair.of(it, ops.empty()) }
             }

@@ -32,7 +32,7 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
             Widgets.createDrawableWidget { helper, matrices, mouseX, mouseY, delta ->
                 RenderSystem.setShaderTexture(0, currentTexture())
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-                RenderSystem.setShader(GameRenderer::getPositionTexShader)
+                RenderSystem.setShader(GameRenderer::getPositionTexProgram)
                 helper.drawTexture(matrices, topLeft.x, topLeft.y, 49, 16, 105, 61)
                 val progressFraction = (System.currentTimeMillis() % 4000) / 4000.0
                 val height = (progressFraction * 25).roundToInt()
@@ -74,7 +74,7 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
             Widgets.createDrawableWidget { helper, matrices, mouseX, mouseY, delta ->
                 RenderSystem.setShaderTexture(0, currentTexture())
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-                RenderSystem.setShader(GameRenderer::getPositionTexShader)
+                RenderSystem.setShader(GameRenderer::getPositionTexProgram)
                 helper.zOffset += FLUID_SCALE_Z_OFFSET
                 helper.drawTexture(matrices, topLeft.x + 88, topLeft.y + 5, 176, 25, 16, 51)
                 helper.zOffset -= FLUID_SCALE_Z_OFFSET

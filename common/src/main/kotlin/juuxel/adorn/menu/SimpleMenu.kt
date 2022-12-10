@@ -47,7 +47,7 @@ abstract class SimpleMenu(
     override fun canUse(player: PlayerEntity) =
         inventory.canPlayerUse(player)
 
-    override fun transferSlot(player: PlayerEntity, index: Int): ItemStack {
+    override fun quickMove(player: PlayerEntity, index: Int): ItemStack {
         var result = ItemStack.EMPTY
         val slot = slots[index]
 

@@ -15,7 +15,7 @@ import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry
 import me.shedaniel.rei.api.common.util.EntryIngredients
 import me.shedaniel.rei.api.common.util.EntryStacks
 import net.minecraft.item.Item
-import net.minecraft.tag.TagKey
+import net.minecraft.registry.tag.TagKey
 import net.minecraft.text.Text
 
 open class AdornReiClient : REIClientPlugin {

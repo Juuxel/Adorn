@@ -9,22 +9,22 @@ import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.menu.Menu
+import net.minecraft.registry.Registries
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 
 abstract class PalettedMenuScreen<M>(menu: M, playerInventory: PlayerInventory, title: Text) :
     AdornMenuScreen<M>(menu, playerInventory, title)
     where M : Menu, M : ContainerBlockMenu {
     protected abstract val backgroundTexture: Identifier
     protected abstract val paletteId: Identifier
-    private val blockId = Registry.BLOCK.getId(menu.context.getBlock())
+    private val blockId = Registries.BLOCK.getId(menu.context.getBlock())
 
     private fun getPalette() = PlatformBridges.resources.colorManager.getColors(paletteId)[blockId]
 
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
         val bg = getPalette().bg
-        RenderSystem.setShader(GameRenderer::getPositionTexShader)
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram)
         RenderSystem.setShaderColor(Colors.redOf(bg), Colors.greenOf(bg), Colors.blueOf(bg), 1.0f)
         RenderSystem.setShaderTexture(0, backgroundTexture)
         drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight)

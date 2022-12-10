@@ -3,9 +3,9 @@ package juuxel.adorn.lib
 import juuxel.adorn.AdornCommon
 import net.minecraft.block.Block
 import net.minecraft.item.Item
-import net.minecraft.tag.TagKey
+import net.minecraft.registry.RegistryKeys
+import net.minecraft.registry.tag.TagKey
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 
 object AdornTags {
     val CHAIRS = blockAndItem("chairs")
@@ -38,10 +38,10 @@ object AdornTags {
     fun init() {}
 
     private fun block(id: Identifier): TagKey<Block> =
-        TagKey.of(Registry.BLOCK_KEY, id)
+        TagKey.of(RegistryKeys.BLOCK, id)
 
     private fun item(id: Identifier): TagKey<Item> =
-        TagKey.of(Registry.ITEM_KEY, id)
+        TagKey.of(RegistryKeys.ITEM, id)
 
     private fun blockAndItem(path: String): TagPair {
         val id = AdornCommon.id(path)

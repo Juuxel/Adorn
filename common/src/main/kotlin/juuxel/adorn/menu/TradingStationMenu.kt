@@ -55,7 +55,7 @@ class TradingStationMenu(
     override fun canUse(player: PlayerEntity) =
         canUse(context, player, AdornBlocks.TRADING_STATION)
 
-    override fun transferSlot(player: PlayerEntity, index: Int): ItemStack {
+    override fun quickMove(player: PlayerEntity, index: Int): ItemStack {
         val offset = 2
 
         // Ghost slots

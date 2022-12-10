@@ -17,7 +17,7 @@ import net.minecraft.client.texture.SpriteAtlasTexture
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.MathHelper
-import net.minecraft.util.math.Vec3f
+import net.minecraft.util.math.RotationAxis
 
 @Environment(EnvType.CLIENT)
 abstract class KitchenSinkRenderer<T : KitchenSinkBlockEntity>(context: BlockEntityRendererFactory.Context) : BlockEntityRenderer<T> {
@@ -26,7 +26,7 @@ abstract class KitchenSinkRenderer<T : KitchenSinkBlockEntity>(context: BlockEnt
         if (isEmpty(entity)) return
 
         val sprite = getFluidSprite(entity)
-        val buffer = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(sprite.atlas.id))
+        val buffer = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(sprite.atlasId))
         val u0 = MathHelper.lerp(2 * PX, sprite.minU, sprite.maxU)
         val u1 = MathHelper.lerp(14 * PX, sprite.minU, sprite.maxU)
         val v0 = MathHelper.lerp(2 * PX, sprite.minV, sprite.maxV)
@@ -35,7 +35,7 @@ abstract class KitchenSinkRenderer<T : KitchenSinkBlockEntity>(context: BlockEnt
         matrices.push()
         // Rotate because the model depends on the facing property
         matrices.translate(0.5, 0.0, 0.5)
-        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(getRotation(entity.cachedState[AbstractKitchenCounterBlock.FACING])))
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(getRotation(entity.cachedState[AbstractKitchenCounterBlock.FACING])))
         matrices.translate(-0.5, 0.0, -0.5)
 
         // Move vertically to correct level

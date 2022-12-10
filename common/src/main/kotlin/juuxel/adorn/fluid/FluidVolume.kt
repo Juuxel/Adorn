@@ -4,7 +4,7 @@ import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.Fluids
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.PacketByteBuf
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registries
 
 data class FluidVolume(
     override var fluid: Fluid,
@@ -13,7 +13,7 @@ data class FluidVolume(
     override val unit: FluidUnit
 ) : FluidReference() {
     override fun toString() =
-        "FluidVolume(fluid=${Registry.FLUID.getId(fluid)}, amount=$amount, nbt=$nbt)"
+        "FluidVolume(fluid=${Registries.FLUID.getId(fluid)}, amount=$amount, nbt=$nbt)"
 
     companion object {
         fun empty(unit: FluidUnit): FluidVolume =

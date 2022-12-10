@@ -114,7 +114,7 @@ class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()
         state: BlockState, direction: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ): BlockState {
         if (state[WATERLOGGED]) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
         val half = state[HALF]

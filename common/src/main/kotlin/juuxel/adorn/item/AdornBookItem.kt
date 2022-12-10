@@ -4,7 +4,6 @@ import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.stat.Stats
 import net.minecraft.text.Text
@@ -32,6 +31,4 @@ class AdornBookItem(private val bookId: Identifier, settings: Settings) : Item(s
             texts.add(Text.translatable("book.byAuthor", bookManager[bookId].author).formatted(Formatting.GRAY))
         }
     }
-
-    override fun isIn(group: ItemGroup?) = AdornItems.isIn(group, this)
 }

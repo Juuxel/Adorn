@@ -1,7 +1,7 @@
 package juuxel.adorn.platform.fabric
 
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 
 /**
  * Registers a [visitor] for this registry that will be called for each

@@ -77,7 +77,7 @@ class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createS
         state: BlockState, side: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ): BlockState {
         if (state[WATERLOGGED]) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
         return if (state[FACING].opposite == side && !state.canPlaceAt(world, pos)) {

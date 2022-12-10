@@ -115,7 +115,7 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
         state: BlockState, direction: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ): BlockState {
         if (state[WATERLOGGED]) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
         return updateConnections(state, world, pos)
@@ -229,6 +229,7 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
             COLLISION_SHAPE_MAP = buildShapeMap(thin = true)
         }
 
+        // TODO: Is the ignoreNeighbors = false state ever needed??
         @JvmOverloads
         @JvmStatic
         fun getSleepingDirection(world: BlockView, pos: BlockPos, ignoreNeighbors: Boolean = false): Direction? {

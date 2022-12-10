@@ -73,7 +73,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
 
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
         renderBackground(matrices)
-        RenderSystem.setShader(GameRenderer::getPositionTexShader)
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram)
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, BookScreen.BOOK_TEXTURE)
         val x = (width - BOOK_SIZE) / 2
@@ -243,7 +243,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
             }
 
             RenderSystem.enableBlend()
-            RenderSystem.setShader(GameRenderer::getPositionTexShader)
+            RenderSystem.setShader(GameRenderer::getPositionTexProgram)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             RenderSystem.setShaderTexture(0, image.location)
             drawTexture(matrices, imageX, imageY, 0f, 0f, image.size.x, image.size.y, image.size.x, image.size.y)
@@ -277,9 +277,10 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         }
     }
 
-    private class CloseButton(x: Int, y: Int, pressAction: PressAction) : ButtonWidget(x, y, 8, 8, Text.empty(), pressAction) {
+    private class CloseButton(x: Int, y: Int, pressAction: PressAction) :
+        ButtonWidget(x, y, 8, 8, Text.empty(), pressAction, DEFAULT_NARRATION_SUPPLIER) {
         override fun renderButton(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
-            RenderSystem.setShader(GameRenderer::getPositionTexShader)
+            RenderSystem.setShader(GameRenderer::getPositionTexProgram)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
             RenderSystem.setShaderTexture(
                 0,

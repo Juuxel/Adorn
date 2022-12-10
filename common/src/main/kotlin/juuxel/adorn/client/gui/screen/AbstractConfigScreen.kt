@@ -10,14 +10,14 @@ import juuxel.adorn.util.animation.AnimationTask
 import juuxel.adorn.util.color
 import net.minecraft.client.gui.screen.NoticeScreen
 import net.minecraft.client.gui.screen.Screen
+import net.minecraft.client.gui.tooltip.Tooltip
 import net.minecraft.client.gui.widget.CyclingButtonWidget
 import net.minecraft.client.render.GameRenderer
-import net.minecraft.client.util.OrderableTooltip
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.math.MathHelper
-import net.minecraft.util.math.Vec3f
+import net.minecraft.util.math.RotationAxis
 import kotlin.random.Random
 import kotlin.reflect.KMutableProperty
 
@@ -42,17 +42,10 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
         }
         drawCenteredText(matrices, textRenderer, title, width / 2, 20, Colors.WHITE)
         super.render(matrices, mouseX, mouseY, delta)
-
-        for (child in children()) {
-            if (child.isMouseOver(mouseX.toDouble(), mouseY.toDouble()) && child is OrderableTooltip) {
-                renderOrderedTooltip(matrices, child.orderedTooltip, mouseX, mouseY)
-                break
-            }
-        }
     }
 
     private fun renderHearts(matrices: MatrixStack, delta: Float) {
-        RenderSystem.setShader(GameRenderer::getPositionTexColorShader)
+        RenderSystem.setShader(GameRenderer::getPositionTexColorProgram)
         RenderSystem.setShaderTexture(0, HEART_TEXTURE)
 
         for (heart in hearts) {
@@ -60,7 +53,7 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
             matrices.push()
             matrices.translate(heart.x.toDouble(), MathHelper.lerp(delta.toDouble(), heart.previousY, heart.y), 0.0)
             matrices.translate(HEART_SIZE.toDouble() / 2, HEART_SIZE.toDouble() / 2, 0.0)
-            matrices.multiply(Vec3f.POSITIVE_Z.getRadialQuaternion(heart.angle.toFloat()))
+            matrices.multiply(RotationAxis.POSITIVE_Z.rotation(heart.angle.toFloat()))
             matrices.translate(-HEART_SIZE.toDouble() / 2, -HEART_SIZE.toDouble() / 2, 0.0)
             drawTexture(matrices, 0, 0, HEART_SIZE, HEART_SIZE, 0f, 0f, 8, 8, 8, 8)
             matrices.pop()
@@ -108,21 +101,15 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
         }
     }
 
-    private fun wrapTooltipLines(text: Text) =
-        textRenderer.wrapLines(text, 200)
-
     private fun <T> createConfigButton(
         builder: CyclingButtonWidget.Builder<T>, x: Int, y: Int, width: Int, property: KMutableProperty<T>, restartRequired: Boolean
     ) = builder.tooltip {
-        buildList {
-            this += wrapTooltipLines(Text.translatable(getTooltipTranslationKey(property.name)))
-
-            if (restartRequired) {
-                this += wrapTooltipLines(
-                    Text.translatable("gui.adorn.config.requires_restart").formatted(Formatting.ITALIC, Formatting.GOLD)
-                )
-            }
+        val text = Text.translatable(getTooltipTranslationKey(property.name))
+        if (restartRequired) {
+            text.append(Text.literal("\n"))
+                .append(Text.translatable("gui.adorn.config.requires_restart").formatted(Formatting.ITALIC, Formatting.GOLD))
         }
+        Tooltip.of(text)
     }.build(x, y, width, BUTTON_HEIGHT, Text.translatable(getOptionTranslationKey(property.name))) { _, value ->
         property.setter.call(value)
         ConfigManager.INSTANCE.save()

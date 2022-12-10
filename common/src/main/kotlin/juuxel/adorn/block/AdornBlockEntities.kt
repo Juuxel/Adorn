@@ -12,12 +12,12 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.registry.Registry
 
 object AdornBlockEntities {
     @JvmField
-    val BLOCK_ENTITIES = PlatformBridges.registrarFactory.create(Registry.BLOCK_ENTITY_TYPE_KEY)
+    val BLOCK_ENTITIES = PlatformBridges.registrarFactory.create(RegistryKeys.BLOCK_ENTITY_TYPE)
 
     /* ktlint-disable max-line-length */
     val SHELF: BlockEntityType<ShelfBlockEntity> by register("shelf", ::ShelfBlockEntity, ShelfBlock::class.java)

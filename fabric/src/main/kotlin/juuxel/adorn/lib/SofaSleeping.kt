@@ -65,7 +65,8 @@ object SofaSleeping {
 
         EntitySleepEvents.MODIFY_WAKE_UP_POSITION.register { entity, sleepingPos, state, wakeUpPos ->
             if (state.block is SofaBlock) {
-                BedBlock.findWakeUpPosition(entity.type, entity.world, sleepingPos, entity.yaw).orElse(null)
+                val direction = SofaBlock.getSleepingDirection(entity.world, sleepingPos, ignoreNeighbors = true)
+                BedBlock.findWakeUpPosition(entity.type, entity.world, sleepingPos, direction, entity.yaw).orElse(null)
             } else {
                 wakeUpPos
             }

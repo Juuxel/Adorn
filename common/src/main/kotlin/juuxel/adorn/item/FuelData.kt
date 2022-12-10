@@ -5,7 +5,7 @@ import juuxel.adorn.lib.AdornTags
 import net.minecraft.item.Item
 import net.minecraft.item.ItemConvertible
 import net.minecraft.item.ItemStack
-import net.minecraft.tag.TagKey
+import net.minecraft.registry.tag.TagKey
 
 sealed interface FuelData {
     val burnTime: Int

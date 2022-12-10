@@ -5,8 +5,8 @@ import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.Fluids
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.PacketByteBuf
+import net.minecraft.registry.Registries
 import net.minecraft.text.Text
-import net.minecraft.util.registry.Registry
 import kotlin.math.max
 
 /**
@@ -27,7 +27,7 @@ abstract class FluidReference : HasFluidAmount {
             buf.writeBoolean(false)
         } else {
             buf.writeBoolean(true)
-            buf.writeVarInt(Registry.FLUID.getRawId(fluid))
+            buf.writeVarInt(Registries.FLUID.getRawId(fluid))
             buf.writeVarLong(amount)
             buf.writeNbt(nbt)
         }
@@ -35,7 +35,7 @@ abstract class FluidReference : HasFluidAmount {
 
     protected fun readWithoutUnit(buf: PacketByteBuf) {
         if (buf.readBoolean()) {
-            fluid = Registry.FLUID[buf.readVarInt()]
+            fluid = Registries.FLUID[buf.readVarInt()]
             amount = buf.readVarLong()
             nbt = buf.readNbt()
         } else {
@@ -78,7 +78,7 @@ abstract class FluidReference : HasFluidAmount {
         )
 
     override fun toString() =
-        "FluidReference(fluid=${Registry.FLUID.getId(fluid)}, amount=$amount, nbt=$nbt)"
+        "FluidReference(fluid=${Registries.FLUID.getId(fluid)}, amount=$amount, nbt=$nbt)"
 
     companion object {
         private fun getUnitDenominator(from: FluidUnit, to: FluidUnit): Long {

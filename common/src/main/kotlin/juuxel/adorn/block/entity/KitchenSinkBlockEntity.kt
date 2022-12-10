@@ -16,10 +16,10 @@ import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.potion.PotionUtil
 import net.minecraft.potion.Potions
+import net.minecraft.registry.tag.FluidTags
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
-import net.minecraft.tag.FluidTags
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
@@ -99,11 +99,11 @@ abstract class KitchenSinkBlockEntity(pos: BlockPos, state: BlockState) : BlockE
     abstract fun calculateComparatorOutput(): Int
 
     companion object {
-        private fun isInfinite(fluid: Fluid): Boolean =
-            fluid is FlowableFluid && fluid.isInfinite
+        private fun isInfinite(fluid: Fluid, world: World): Boolean =
+            fluid is FlowableFluid && fluid.isInfinite(world)
 
         fun supportsInfiniteExtraction(world: World, fluid: Fluid): Boolean =
-            isInfinite(fluid) && world.gameRules.getBoolean(AdornGameRules.INFINITE_KITCHEN_SINKS)
+            isInfinite(fluid, world) && world.gameRules.getBoolean(AdornGameRules.INFINITE_KITCHEN_SINKS)
     }
 
     /**

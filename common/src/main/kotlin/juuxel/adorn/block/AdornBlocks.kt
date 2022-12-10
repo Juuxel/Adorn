@@ -18,7 +18,6 @@ import net.minecraft.block.Material
 import net.minecraft.block.TorchBlock
 import net.minecraft.block.WallTorchBlock
 import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.util.DyeColor
@@ -295,7 +294,7 @@ object AdornBlocks : RegistryHelper() {
 
     val TRADING_STATION: Block by registerBlock(
         "trading_station",
-        itemProvider = { TradingStationItem(it, Item.Settings().group(ItemGroup.DECORATIONS)) },
+        itemProvider = { TradingStationItem(it, Item.Settings()) },
         block = { TradingStationBlock(AbstractBlock.Settings.of(Material.WOOD).strength(2.5f).sounds(BlockSoundGroup.WOOD)) }
     )
 
@@ -367,7 +366,7 @@ object AdornBlocks : RegistryHelper() {
     private fun registerCrate(name: String): Registered<Block> =
         registerBlock(
             name,
-            itemSettings = { Item.Settings().group(ItemGroup.DECORATIONS).recipeRemainder(CRATE.asItem()) },
+            itemSettings = { Item.Settings().recipeRemainder(CRATE.asItem()) },
             block = { Block(CRATE.copySettingsSafely()) }
         )
 }

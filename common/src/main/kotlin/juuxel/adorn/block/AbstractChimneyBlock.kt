@@ -44,7 +44,7 @@ abstract class AbstractChimneyBlock(settings: Settings) : Block(settings), Water
         state: BlockState, side: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ): BlockState {
         if (state[WATERLOGGED]) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
         return if (side == Direction.UP) {

@@ -5,12 +5,13 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.network.Packet
+import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Identifier
 
 interface NetworkBridge {
     fun sendToTracking(entity: Entity, packet: Packet<*>)
-    fun createEntitySpawnPacket(entity: Entity): Packet<*>
+    fun createEntitySpawnPacket(entity: Entity): Packet<ClientPlayPacketListener>
     fun sendOpenBookPacket(player: PlayerEntity, bookId: Identifier)
     fun sendBrewerFluidSync(player: PlayerEntity, syncId: Int, fluid: FluidReference)
 

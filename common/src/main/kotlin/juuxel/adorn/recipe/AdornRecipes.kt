@@ -6,11 +6,11 @@ import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.RecipeType
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.RegistryKeys
 
 object AdornRecipes {
-    val RECIPE_SERIALIZERS = PlatformBridges.registrarFactory.create(Registry.RECIPE_SERIALIZER_KEY)
-    val RECIPE_TYPES = PlatformBridges.registrarFactory.create(Registry.RECIPE_TYPE_KEY)
+    val RECIPE_SERIALIZERS = PlatformBridges.registrarFactory.create(RegistryKeys.RECIPE_SERIALIZER)
+    val RECIPE_TYPES = PlatformBridges.registrarFactory.create(RegistryKeys.RECIPE_TYPE)
 
     val BREWING_TYPE: RecipeType<BrewingRecipe> by registerRecipeType("brewing")
     val BREWING_SERIALIZER: RecipeSerializer<ItemBrewingRecipe> by RECIPE_SERIALIZERS.register("brewing") { ItemBrewingRecipe.Serializer() }

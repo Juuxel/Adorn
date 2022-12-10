@@ -3,13 +3,13 @@ package juuxel.adorn.lib
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundEvent
-import net.minecraft.util.registry.Registry
 
 object AdornSounds {
     @JvmField
-    val SOUNDS: Registrar<SoundEvent> = PlatformBridges.registrarFactory.create(Registry.SOUND_EVENT_KEY)
+    val SOUNDS: Registrar<SoundEvent> = PlatformBridges.registrarFactory.create(RegistryKeys.SOUND_EVENT)
 
     val BLOCK_CHAIN_LINK_FENCE_BREAK = register("block.adorn.chain_link_fence.break")
     val BLOCK_CHAIN_LINK_FENCE_STEP = register("block.adorn.chain_link_fence.step")
@@ -30,7 +30,7 @@ object AdornSounds {
     fun init() {}
 
     private fun register(name: String): Registered<SoundEvent> =
-        SOUNDS.register(name) { SoundEvent(AdornCommon.id(name)) }
+        SOUNDS.register(name) { SoundEvent.of(AdornCommon.id(name)) }
 
     private class LazyBlockSoundGroup(
         volume: Float, pitch: Float,

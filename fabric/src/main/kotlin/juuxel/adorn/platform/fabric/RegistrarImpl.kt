@@ -5,11 +5,16 @@ package juuxel.adorn.platform.fabric
 import juuxel.adorn.AdornCommon.id
 import juuxel.adorn.lib.Registered
 import juuxel.adorn.platform.Registrar
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 
 class RegistrarImpl<T>(private val registry: Registry<T>) : Registrar<T> {
+    private val objects: MutableList<T> = ArrayList()
+
     override fun <U : T> register(id: String, provider: () -> U): Registered<U> {
         val registered = Registry.register(registry, id(id), provider.invoke())
+        objects += registered
         return Registered { registered }
     }
+
+    override fun iterator(): Iterator<T> = objects.iterator()
 }

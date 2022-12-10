@@ -49,7 +49,7 @@ class BenchBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), W
         world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
     ): BlockState {
         if (state[WATERLOGGED]) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
         return updateConnections(world, pos, state)

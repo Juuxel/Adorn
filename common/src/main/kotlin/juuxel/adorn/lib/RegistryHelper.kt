@@ -5,22 +5,21 @@ import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
 import net.minecraft.block.Block
 import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.RegistryKeys
 
 abstract class RegistryHelper {
-    val blocks: Registrar<Block> = PlatformBridges.registrarFactory.create(Registry.BLOCK_KEY)
-    val items: Registrar<Item> = PlatformBridges.registrarFactory.create(Registry.ITEM_KEY)
+    val blocks: Registrar<Block> = PlatformBridges.registrarFactory.create(RegistryKeys.BLOCK)
+    val items: Registrar<Item> = PlatformBridges.registrarFactory.create(RegistryKeys.ITEM)
 
     // ----------------------------------
     // Functions for registering blocks
     // ----------------------------------
 
     /**
-     * Registers a [block] with the [name] and an item in the [itemGroup].
+     * Registers a [block] with the [name] and an item with default settings.
      */
-    protected fun <T : Block> registerBlock(name: String, itemGroup: ItemGroup = ItemGroup.DECORATIONS, block: () -> T): Registered<T> =
-        registerBlock(name, itemSettings = { Item.Settings().group(itemGroup) }, block)
+    protected fun <T : Block> registerBlock(name: String, block: () -> T): Registered<T> =
+        registerBlock(name, itemSettings = { Item.Settings() }, block)
 
     /**
      * Registers a [block] with the [name] and the [itemSettings].

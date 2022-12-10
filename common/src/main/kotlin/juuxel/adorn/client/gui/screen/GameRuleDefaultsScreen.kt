@@ -14,7 +14,12 @@ class GameRuleDefaultsScreen(parent: Screen) : AbstractConfigScreen(Text.transla
         addDrawableChild(createConfigToggle(x, 40, BUTTON_WIDTH, config.gameRuleDefaults::skipNightOnSofas))
         addDrawableChild(createConfigToggle(x, 40 + BUTTON_SPACING, BUTTON_WIDTH, config.gameRuleDefaults::infiniteKitchenSinks))
         addDrawableChild(createConfigToggle(x, 40 + 2 * BUTTON_SPACING, BUTTON_WIDTH, config.gameRuleDefaults::dropLockedTradingStations))
-        addDrawableChild(ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.BACK) { close() })
+        addDrawableChild(
+            ButtonWidget.builder(ScreenTexts.BACK) { close() }
+                .position(this.width / 2 - 100, this.height - 27)
+                .size(200, 20)
+                .build()
+        )
     }
 
     override fun getOptionTranslationKey(name: String): String =

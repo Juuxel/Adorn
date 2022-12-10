@@ -19,7 +19,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.HitResult
-import net.minecraft.util.math.Vec3f
+import net.minecraft.util.math.RotationAxis
 
 @Environment(EnvType.CLIENT)
 class TradingStationRenderer(context: BlockEntityRendererFactory.Context) : BlockEntityRenderer<TradingStationBlockEntity> {
@@ -42,7 +42,7 @@ class TradingStationRenderer(context: BlockEntityRendererFactory.Context) : Bloc
             val playerAge = MinecraftClient.getInstance().player!!.age
 
             matrices.push()
-            matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion((playerAge + tickDelta) * SELLING_ROTATION_MULTIPLIER))
+            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((playerAge + tickDelta) * SELLING_ROTATION_MULTIPLIER))
             matrices.scale(0.6f, 0.6f, 0.6f)
             matrices.translate(0.0, 0.3, 0.0)
             val itemRenderer = MinecraftClient.getInstance().itemRenderer

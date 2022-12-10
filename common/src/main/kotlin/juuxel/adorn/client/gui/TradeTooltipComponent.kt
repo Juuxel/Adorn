@@ -20,7 +20,7 @@ class TradeTooltipComponent(private val trade: Trade) : TooltipComponent {
         itemRenderer.renderInGuiWithOverrides(trade.selling, x + 2 * 16, y, 1)
         itemRenderer.renderGuiItemOverlay(textRenderer, trade.selling, x + 2 * 16, y)
 
-        RenderSystem.setShader(GameRenderer::getPositionTexShader)
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram)
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, ARROW_TEXTURE)
         DrawableHelper.drawTexture(matrices, x + 16, y, z, 0f, 0f, 16, 16, 16, 16)

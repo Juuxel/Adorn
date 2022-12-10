@@ -25,12 +25,12 @@ import net.minecraft.util.math.MathHelper
 
 class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Text) : AdornMenuScreen<BrewerMenu>(menu, playerInventory, title) {
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader)
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram)
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, TEXTURE)
         drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight)
         drawFluid(matrices, x + 145, y + 17, menu.fluid)
-        RenderSystem.setShader(GameRenderer::getPositionTexShader)
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram)
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, TEXTURE)
         drawTexture(matrices, x + 145, y + 21, 176, 25, 16, 51)
@@ -55,9 +55,9 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
         FluidRenderingBridge.get().getTooltip(
             fluid,
             if (client!!.options.advancedItemTooltips) {
-                TooltipContext.Default.ADVANCED
+                TooltipContext.ADVANCED
             } else {
-                TooltipContext.Default.NORMAL
+                TooltipContext.BASIC
             },
             maxAmountInLitres = BrewerBlockEntity.FLUID_CAPACITY_IN_BUCKETS * 1000
         )
@@ -86,9 +86,9 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
             sprite: Sprite, color: Int
         ) {
             RenderSystem.enableBlend()
-            RenderSystem.setShader(GameRenderer::getPositionColorTexShader)
+            RenderSystem.setShader(GameRenderer::getPositionColorTexProgram)
             RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-            RenderSystem.setShaderTexture(0, sprite.atlas.id)
+            RenderSystem.setShaderTexture(0, sprite.atlasId)
             val buffer = Tessellator.getInstance().buffer
             val positionMatrix = matrices.peek().positionMatrix
             val au0 = MathHelper.lerp(u0, sprite.minU, sprite.maxU)
@@ -100,7 +100,7 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
             buffer.vertex(positionMatrix, x + width, y + height, 0f).color(color).texture(au1, av1).next()
             buffer.vertex(positionMatrix, x + width, y, 0f).color(color).texture(au1, av0).next()
             buffer.vertex(positionMatrix, x.toFloat(), y, 0f).color(color).texture(au0, av0).next()
-            BufferRenderer.drawWithShader(buffer.end())
+            BufferRenderer.drawWithGlobalProgram(buffer.end())
             RenderSystem.disableBlend()
         }
 
