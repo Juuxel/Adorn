@@ -1,0 +1,15 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "biomemakeover:willow_planks"
+  },
+  "result": "adorn:biomemakeover/willow_post",
+  "count": 2,
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomemakeover"
+    }
+  ]
+
+}

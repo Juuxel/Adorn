@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:chair",
+  "pattern": [
+    " S",
+    "SS",
+    "##"
+  ],
+  "key": {
+    "S": {
+      "item": "biomemakeover:swamp_cypress_slab"
+    },
+    "#": {
+      "tag": "c:wooden_rods"
+    }
+  },
+  "result": {
+    "item": "adorn:biomemakeover/swamp_cypress_chair",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomemakeover"
+    }
+  ]
+
+}

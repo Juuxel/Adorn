@@ -1,0 +1,15 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "biomemakeover:swamp_cypress_planks"
+  },
+  "result": "adorn:biomemakeover/swamp_cypress_post",
+  "count": 2,
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomemakeover"
+    }
+  ]
+
+}

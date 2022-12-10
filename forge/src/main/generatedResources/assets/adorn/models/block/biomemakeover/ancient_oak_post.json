@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/post",
+  "textures": {
+    "texture": "biomemakeover:block/ancient_oak_planks"
+  }
+}

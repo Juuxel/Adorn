@@ -1,0 +1,30 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:coffee_table",
+  "pattern": [
+    "S-S",
+    "# #"
+  ],
+  "key": {
+    "S": {
+      "item": "biomemakeover:blighted_balsa_slab"
+    },
+    "#": {
+      "tag": "c:wooden_rods"
+    },
+    "-": {
+      "tag": "c:glass_panes"
+    }
+  },
+  "result": {
+    "item": "adorn:biomemakeover/blighted_balsa_coffee_table",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomemakeover"
+    }
+  ]
+
+}

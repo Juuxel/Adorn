@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:biomemakeover/swamp_cypress_platform"
+    ]
+  },
+  "criteria": {
+    "has_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "biomemakeover:swamp_cypress_slab"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:biomemakeover/swamp_cypress_platform"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_slab",
+      "has_the_recipe"
+    ]
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomemakeover"
+    }
+  ]
+
+}
