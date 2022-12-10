@@ -1384,6 +1384,8 @@
 
   "gui.adorn.config.title": "Adorn",
   "gui.adorn.config.game_rule_defaults": "Game rule defaults...",
+  "gui.adorn.config.other": "Other Settings",
+  "gui.adorn.config.visual": "Visual",
   "gui.adorn.config.option.displayedFluidUnit": "Fluid unit",
   "gui.adorn.config.option.displayedFluidUnit.description": "The unit for fluid amounts in Adorn GUIs.",
   "gui.adorn.config.option.groupItems": "Group items",

@@ -2,6 +2,7 @@ package juuxel.adorn.client.gui.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
+import juuxel.adorn.client.gui.widget.ConfigScreenHeading
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.Displayable
@@ -27,11 +28,15 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
     private var restartRequired = false
     private val animationEngine = AnimationEngine()
 
+    /** The Y-coordinate of the next config option or heading to be added. */
+    protected var nextChildY: Int = CONFIG_BUTTON_START_Y
+
     init {
         animationEngine.add(HeartAnimationTask())
     }
 
     override fun init() {
+        nextChildY = CONFIG_BUTTON_START_Y
         animationEngine.start()
     }
 
@@ -119,19 +124,32 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
         }
     }
 
-    protected fun createConfigToggle(
-        x: Int, y: Int, width: Int, property: KMutableProperty<Boolean>, restartRequired: Boolean = false
-    ): CyclingButtonWidget<Boolean> = createConfigButton(
-        CyclingButtonWidget.onOffBuilder(property.getter.call()),
-        x, y, width, property, restartRequired
-    )
+    protected fun addConfigToggle(
+        width: Int, property: KMutableProperty<Boolean>, restartRequired: Boolean = false
+    ) {
+        val button = createConfigButton(
+            CyclingButtonWidget.onOffBuilder(property.getter.call()),
+            (this.width - width) / 2, nextChildY, width, property, restartRequired
+        )
+        addDrawableChild(button)
+        nextChildY += BUTTON_SPACING
+    }
 
-    protected fun <T : Displayable> createConfigButton(
-        x: Int, y: Int, width: Int, property: KMutableProperty<T>, values: List<T>, restartRequired: Boolean = false
-    ): CyclingButtonWidget<T> = createConfigButton(
-        CyclingButtonWidget.builder<T> { it.displayName }.values(values).initially(property.getter.call()),
-        x, y, width, property, restartRequired
-    )
+    protected fun <T : Displayable> addConfigButton(
+        width: Int, property: KMutableProperty<T>, values: List<T>, restartRequired: Boolean = false
+    ) {
+        val button = createConfigButton(
+            CyclingButtonWidget.builder<T> { it.displayName }.values(values).initially(property.getter.call()),
+            (this.width - width) / 2, nextChildY, width, property, restartRequired
+        )
+        addDrawableChild(button)
+        nextChildY += BUTTON_SPACING
+    }
+
+    protected fun addHeading(text: Text, width: Int) {
+        addDrawable(ConfigScreenHeading(text, (this.width - width) / 2, nextChildY, width))
+        nextChildY += ConfigScreenHeading.HEIGHT
+    }
 
     protected open fun getOptionTranslationKey(name: String): String =
         "gui.adorn.config.option.$name"
@@ -140,6 +158,7 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
         "${getOptionTranslationKey(name)}.description"
 
     companion object {
+        private const val CONFIG_BUTTON_START_Y = 40
         const val BUTTON_HEIGHT = 20
         const val BUTTON_GAP = 4
         const val BUTTON_SPACING = BUTTON_HEIGHT + BUTTON_GAP

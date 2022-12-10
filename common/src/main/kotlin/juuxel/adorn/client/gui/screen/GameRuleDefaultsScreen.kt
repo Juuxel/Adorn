@@ -10,10 +10,9 @@ class GameRuleDefaultsScreen(parent: Screen) : AbstractConfigScreen(Text.transla
     override fun init() {
         super.init()
         val config = ConfigManager.config()
-        val x = (width - BUTTON_WIDTH) / 2
-        addDrawableChild(createConfigToggle(x, 40, BUTTON_WIDTH, config.gameRuleDefaults::skipNightOnSofas))
-        addDrawableChild(createConfigToggle(x, 40 + BUTTON_SPACING, BUTTON_WIDTH, config.gameRuleDefaults::infiniteKitchenSinks))
-        addDrawableChild(createConfigToggle(x, 40 + 2 * BUTTON_SPACING, BUTTON_WIDTH, config.gameRuleDefaults::dropLockedTradingStations))
+        addConfigToggle(BUTTON_WIDTH, config.gameRuleDefaults::skipNightOnSofas)
+        addConfigToggle(BUTTON_WIDTH, config.gameRuleDefaults::infiniteKitchenSinks)
+        addConfigToggle(BUTTON_WIDTH, config.gameRuleDefaults::dropLockedTradingStations)
         addDrawableChild(
             ButtonWidget.builder(ScreenTexts.BACK) { close() }
                 .position(this.width / 2 - 100, this.height - 27)

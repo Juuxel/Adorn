@@ -260,6 +260,8 @@
   "gamerule.adorn:skipNightOnSofas.description": "Sallii ohittaa yöt nukkumalla sohvalla.",
 
   "gui.adorn.config.game_rule_defaults": "Pelisääntöjen oletukset...",
+  "gui.adorn.config.other": "Muut asetukset",
+  "gui.adorn.config.visual": "Ulkonäkö",
   "gui.adorn.config.option.showItemsInStandardGroups": "Tavarat tavallisissa välilehdissä",
   "gui.adorn.config.option.showItemsInStandardGroups.description": "Näyttää Adornin tavarat tavallisissa luovan tilan välilehdissä.",
   "gui.adorn.config.option.showTradingStationTooltips": "Kauppapöytien tiedot",
