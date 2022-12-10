@@ -1,5 +1,6 @@
 package juuxel.adorn.platform.fabric
 
+import juuxel.adorn.item.group.ItemGroupModifyContext
 import juuxel.adorn.lib.Registered
 import juuxel.adorn.platform.ItemGroupBridge
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
@@ -16,9 +17,9 @@ class ItemGroupBridgeFabric : ItemGroupBridge {
         return Registered { itemGroup }
     }
 
-    override fun addItems(group: ItemGroup, configurator: ItemGroupBridge.ItemGroupContext.() -> Unit) {
+    override fun addItems(group: ItemGroup, configurator: ItemGroupModifyContext.() -> Unit) {
         ItemGroupEvents.modifyEntriesEvent(group).register { entries ->
-            val context = object : ItemGroupBridge.ItemGroupContext {
+            val context = object : ItemGroupModifyContext {
                 override fun add(item: ItemConvertible) {
                     entries.add(item)
                 }

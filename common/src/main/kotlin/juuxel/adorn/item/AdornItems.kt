@@ -6,6 +6,7 @@ import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.block.BlockKind
 import juuxel.adorn.block.BlockVariantSets
 import juuxel.adorn.config.ConfigManager
+import juuxel.adorn.item.group.ItemGroupBuildContext
 import juuxel.adorn.platform.ItemGroupBridge
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.platform.Registrar
@@ -45,15 +46,19 @@ object AdornItems {
     val GROUP by ItemGroupBridge.get().register(AdornCommon.id("items")) {
         icon { ItemStack(AdornBlocks.SOFAS[DyeColor.LIME]) }
         entries { _, entries, _ ->
-            // TODO: Better ordering
-            for (item in BlockVariantSets.items) {
-                entries.add(item)
-            }
-            for (item in AdornBlocks.items) {
-                entries.add(item)
-            }
-            for (item in ITEMS) {
-                entries.add(item)
+            val context = ItemGroupBuildContext { entries.add(it) }
+            with(context) {
+                addByKinds(BlockKind.values().toList())
+                addColoredBlocks()
+                addChimneys()
+                addFences()
+                addCrates()
+                addMiscDecorations()
+                add(AdornBlocks.TRADING_STATION)
+                add(AdornBlocks.BREWER)
+                addFoodAndDrink()
+                addIngredients()
+                addTools()
             }
         }
     }
@@ -118,50 +123,116 @@ object AdornItems {
                     }
                     addAfter(after, items)
                 } else {
-                    for (kind in BUILDING_KINDS) {
-                        BlockVariantSets.get(kind, variant)?.let { add(it.get()) }
-                    }
+                    addByKinds(variant, BUILDING_KINDS)
                 }
             }
         }
         itemGroups.addItems(ItemGroups.COLORED_BLOCKS) {
-            for ((_, sofa) in AdornBlocks.SOFAS) {
-                add(sofa)
-            }
-            for ((_, lamp) in AdornBlocks.TABLE_LAMPS) {
-                add(lamp)
-            }
-            add(AdornBlocks.CANDLELIT_LANTERN)
-            for ((_, lantern) in AdornBlocks.DYED_CANDLELIT_LANTERNS) {
-                add(lantern)
-            }
+            addColoredBlocks()
         }
         itemGroups.addItems(ItemGroups.FUNCTIONAL) {
-            for (variant in BlockVariantSets.allVariants()) {
-                for (kind in FUNCTIONAL_KINDS) {
-                    BlockVariantSets.get(kind, variant)?.let { add(it.get()) }
-                }
-            }
-
-            // TODO: Better ordering
-            for (item in AdornBlocks.items) {
-                add(item)
-            }
+            addByKinds(FUNCTIONAL_KINDS)
+            addColoredBlocks()
+            addChimneys()
+            addFences()
+            addCrates()
+            addMiscDecorations()
+            add(AdornBlocks.TRADING_STATION)
+            add(AdornBlocks.BREWER)
         }
         itemGroups.addItems(ItemGroups.FOOD_AND_DRINK) {
-            add(MUG)
-            add(HOT_CHOCOLATE)
-            add(SWEET_BERRY_JUICE)
-            add(GLOW_BERRY_TEA)
-            add(NETHER_WART_COFFEE)
+            addFoodAndDrink()
         }
         itemGroups.addItems(ItemGroups.INGREDIENTS) {
-            add(STONE_ROD)
+            addIngredients()
         }
         itemGroups.addItems(ItemGroups.TOOLS) {
-            add(GUIDE_BOOK)
-            add(TRADERS_MANUAL)
+            addTools()
         }
+    }
+
+    private fun ItemGroupBuildContext.addByKinds(kinds: List<BlockKind>) {
+        for (variant in BlockVariantSets.allVariants()) {
+            addByKinds(variant, kinds)
+        }
+    }
+
+    private fun ItemGroupBuildContext.addByKinds(variant: BlockVariant, kinds: List<BlockKind>) {
+        for (kind in kinds) {
+            BlockVariantSets.get(kind, variant)?.let { add(it.get()) }
+        }
+    }
+
+    private fun ItemGroupBuildContext.addColoredBlocks() {
+        for ((_, sofa) in AdornBlocks.SOFAS) {
+            add(sofa)
+        }
+        for ((_, lamp) in AdornBlocks.TABLE_LAMPS) {
+            add(lamp)
+        }
+        add(AdornBlocks.CANDLELIT_LANTERN)
+        for ((_, lantern) in AdornBlocks.DYED_CANDLELIT_LANTERNS) {
+            add(lantern)
+        }
+    }
+
+    private fun ItemGroupBuildContext.addCrates() {
+        add(AdornBlocks.CRATE)
+        add(AdornBlocks.APPLE_CRATE)
+        add(AdornBlocks.WHEAT_CRATE)
+        add(AdornBlocks.CARROT_CRATE)
+        add(AdornBlocks.POTATO_CRATE)
+        add(AdornBlocks.MELON_CRATE)
+        add(AdornBlocks.WHEAT_SEED_CRATE)
+        add(AdornBlocks.MELON_SEED_CRATE)
+        add(AdornBlocks.PUMPKIN_SEED_CRATE)
+        add(AdornBlocks.BEETROOT_CRATE)
+        add(AdornBlocks.BEETROOT_SEED_CRATE)
+        add(AdornBlocks.SWEET_BERRY_CRATE)
+        add(AdornBlocks.COCOA_BEAN_CRATE)
+        add(AdornBlocks.NETHER_WART_CRATE)
+        add(AdornBlocks.SUGAR_CANE_CRATE)
+        add(AdornBlocks.EGG_CRATE)
+        add(AdornBlocks.HONEYCOMB_CRATE)
+        add(AdornBlocks.LIL_TATER_CRATE)
+    }
+
+    private fun ItemGroupBuildContext.addChimneys() {
+        add(AdornBlocks.BRICK_CHIMNEY)
+        add(AdornBlocks.STONE_BRICK_CHIMNEY)
+        add(AdornBlocks.NETHER_BRICK_CHIMNEY)
+        add(AdornBlocks.RED_NETHER_BRICK_CHIMNEY)
+        add(AdornBlocks.COBBLESTONE_CHIMNEY)
+        add(AdornBlocks.PRISMARINE_CHIMNEY)
+        add(AdornBlocks.MAGMATIC_PRISMARINE_CHIMNEY)
+        add(AdornBlocks.SOULFUL_PRISMARINE_CHIMNEY)
+    }
+
+    private fun ItemGroupBuildContext.addFences() {
+        add(AdornBlocks.PICKET_FENCE)
+        add(AdornBlocks.CHAIN_LINK_FENCE)
+    }
+
+    private fun ItemGroupBuildContext.addFoodAndDrink() {
+        add(MUG)
+        add(HOT_CHOCOLATE)
+        add(SWEET_BERRY_JUICE)
+        add(GLOW_BERRY_TEA)
+        add(NETHER_WART_COFFEE)
+    }
+
+    private fun ItemGroupBuildContext.addIngredients() {
+        add(STONE_ROD)
+    }
+
+    private fun ItemGroupBuildContext.addTools() {
+        add(GUIDE_BOOK)
+        add(TRADERS_MANUAL)
+    }
+
+    private fun ItemGroupBuildContext.addMiscDecorations() {
+        add(STONE_TORCH)
+        add(AdornBlocks.STONE_LADDER)
     }
 
     private fun findLastBuildingBlockEntry(variant: BlockVariant): Block? {

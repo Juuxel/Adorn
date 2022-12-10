@@ -1,5 +1,6 @@
 package juuxel.adorn.platform.forge
 
+import juuxel.adorn.item.group.ItemGroupModifyContext
 import juuxel.adorn.lib.Registered
 import juuxel.adorn.platform.ItemGroupBridge
 import net.minecraft.item.ItemConvertible
@@ -12,7 +13,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent
 
 class ItemGroupBridgeForge : ItemGroupBridge {
     private val entries: MutableList<Entry> = ArrayList()
-    private val additions: MutableList<Pair<ItemGroup, ItemGroupBridge.ItemGroupContext.() -> Unit>> = ArrayList()
+    private val additions: MutableList<Pair<ItemGroup, ItemGroupModifyContext.() -> Unit>> = ArrayList()
 
     override fun register(id: Identifier, configurator: ItemGroup.Builder.() -> Unit): Registered<ItemGroup> {
         val entry = Entry(id, configurator)
@@ -31,14 +32,14 @@ class ItemGroupBridgeForge : ItemGroupBridge {
         }
     }
 
-    override fun addItems(group: ItemGroup, configurator: ItemGroupBridge.ItemGroupContext.() -> Unit) {
+    override fun addItems(group: ItemGroup, configurator: ItemGroupModifyContext.() -> Unit) {
         additions += group to configurator
     }
 
     @SubscribeEvent
     fun addToGroups(event: CreativeModeTabEvent.BuildContents) {
         for ((group, configurator) in additions) {
-            val context = object : ItemGroupBridge.ItemGroupContext {
+            val context = object : ItemGroupModifyContext {
                 override fun add(item: ItemConvertible) {
                     event.registerSimple(group, item)
                 }
