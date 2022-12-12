@@ -51,7 +51,11 @@ object MinecraftBlockVariants : BlockVariantSet {
         BlockVariant.DEEPSLATE_TILE,
     )
 
-    override fun addVariants(consumer: (BlockVariant, List<BlockKind>) -> Unit) {
-        consumer(BlockVariant.IRON, listOf(BlockKind.SHELF))
+    override fun addVariants(consumer: BlockVariantSet.CustomVariantConsumer) {
+        consumer.add(BlockVariant.IRON, listOf(BlockKind.SHELF))
+    }
+
+    override fun sortVariants(sorter: BlockVariantSet.Sorter) {
+        sorter.moveAfter(variant = BlockVariant.IRON, after = woodVariants.last())
     }
 }

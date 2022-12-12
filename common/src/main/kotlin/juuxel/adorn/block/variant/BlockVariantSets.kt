@@ -33,7 +33,17 @@ object BlockVariantSets : RegistryHelper() {
     private val blocksByKindVariant: MutableMap<Pair<BlockKind, BlockVariant>, Registered<Block>> =
         LinkedHashMap()
 
-    fun allVariants(): Set<BlockVariant> = blocksByVariant.keySet()
+    fun allVariants(): Set<BlockVariant> {
+        val variants = blocksByVariant.keySet().toMutableList()
+        val sorter = BlockVariantSet.Sorter { variant, after ->
+            variants.remove(variant)
+            variants.add(index = variants.indexOf(after) + 1, element = variant)
+        }
+        for (variantSet in variantSets) {
+            variantSet.sortVariants(sorter)
+        }
+        return variants.toSet()
+    }
 
     fun add(variantSet: BlockVariantSet) {
         variantSets += variantSet
