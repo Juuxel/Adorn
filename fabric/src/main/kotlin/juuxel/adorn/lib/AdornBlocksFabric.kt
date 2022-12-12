@@ -3,11 +3,11 @@ package juuxel.adorn.lib
 import juuxel.adorn.CommonEventHandlers
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
-import juuxel.adorn.block.BlockKind
-import juuxel.adorn.block.BlockVariantSets
 import juuxel.adorn.block.SneakClickHandler
 import juuxel.adorn.block.entity.BrewerBlockEntityFabric
 import juuxel.adorn.block.entity.KitchenSinkBlockEntityFabric
+import juuxel.adorn.block.variant.BlockKind
+import juuxel.adorn.block.variant.BlockVariantSets
 import juuxel.adorn.client.renderer.KitchenSinkRendererFabric
 import juuxel.adorn.client.renderer.ShelfRenderer
 import juuxel.adorn.client.renderer.TradingStationRenderer

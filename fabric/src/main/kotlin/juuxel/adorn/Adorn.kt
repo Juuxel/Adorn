@@ -2,7 +2,7 @@ package juuxel.adorn
 
 import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.block.AdornBlocks
-import juuxel.adorn.block.BlockVariantSets
+import juuxel.adorn.block.variant.BlockVariantSets
 import juuxel.adorn.client.ClientEvents
 import juuxel.adorn.client.gui.screen.AdornMenuScreens
 import juuxel.adorn.compat.Compat

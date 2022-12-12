@@ -2,9 +2,9 @@
 
 package juuxel.adorn.block
 
-import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.block.entity.SimpleContainerBlockEntity
+import juuxel.adorn.block.variant.BlockVariant
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.block.BlockEntityProvider

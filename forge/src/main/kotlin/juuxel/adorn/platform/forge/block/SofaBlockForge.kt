@@ -1,7 +1,7 @@
 package juuxel.adorn.platform.forge.block
 
-import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.SofaBlock
+import juuxel.adorn.block.variant.BlockVariant
 import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity

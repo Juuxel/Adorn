@@ -1,10 +1,10 @@
 package juuxel.adorn.item.group
 
 import juuxel.adorn.AdornCommon
-import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.AdornBlocks
-import juuxel.adorn.block.BlockKind
-import juuxel.adorn.block.BlockVariantSets
+import juuxel.adorn.block.variant.BlockKind
+import juuxel.adorn.block.variant.BlockVariant
+import juuxel.adorn.block.variant.BlockVariantSets
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.item.AdornItems
 import juuxel.adorn.platform.ItemGroupBridge

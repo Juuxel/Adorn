@@ -1,7 +1,7 @@
 package juuxel.adorn.platform.forge
 
 import juuxel.adorn.AdornCommon
-import juuxel.adorn.block.BlockVariantSets
+import juuxel.adorn.block.variant.BlockVariantSets
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.item.group.AdornItemGroups

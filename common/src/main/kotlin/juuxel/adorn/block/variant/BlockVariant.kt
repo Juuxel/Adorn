@@ -1,4 +1,4 @@
-package juuxel.adorn.api.block
+package juuxel.adorn.block.variant
 
 import juuxel.adorn.util.copySettingsSafely
 import net.minecraft.block.AbstractBlock

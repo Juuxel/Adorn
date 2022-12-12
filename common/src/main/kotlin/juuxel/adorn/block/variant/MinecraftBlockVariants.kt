@@ -1,6 +1,4 @@
-package juuxel.adorn.block
-
-import juuxel.adorn.api.block.BlockVariant
+package juuxel.adorn.block.variant
 
 object MinecraftBlockVariants : BlockVariantSet {
     override val woodVariants: List<BlockVariant> = listOf(

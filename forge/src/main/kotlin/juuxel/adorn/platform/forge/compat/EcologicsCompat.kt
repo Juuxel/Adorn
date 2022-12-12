@@ -1,7 +1,7 @@
 package juuxel.adorn.platform.forge.compat
 
-import juuxel.adorn.api.block.BlockVariant
-import juuxel.adorn.block.BlockVariantSet
+import juuxel.adorn.block.variant.BlockVariant
+import juuxel.adorn.block.variant.BlockVariantSet
 
 object EcologicsCompat : BlockVariantSet {
     override val woodVariants = listOf(

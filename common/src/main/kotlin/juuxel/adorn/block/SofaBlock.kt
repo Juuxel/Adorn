@@ -5,8 +5,8 @@ package juuxel.adorn.block
 import com.google.common.collect.Sets
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap
-import juuxel.adorn.api.block.BlockVariant
 import juuxel.adorn.block.property.FrontConnection
+import juuxel.adorn.block.variant.BlockVariant
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.util.buildShapeRotations
 import juuxel.adorn.util.withBlock

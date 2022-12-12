@@ -1,8 +1,19 @@
-package juuxel.adorn.block
+package juuxel.adorn.block.variant
 
 import com.google.common.collect.ListMultimap
 import com.google.common.collect.MultimapBuilder
-import juuxel.adorn.api.block.BlockVariant
+import juuxel.adorn.block.BenchBlock
+import juuxel.adorn.block.ChairBlock
+import juuxel.adorn.block.CoffeeTableBlock
+import juuxel.adorn.block.DrawerBlock
+import juuxel.adorn.block.KitchenCounterBlock
+import juuxel.adorn.block.KitchenCupboardBlock
+import juuxel.adorn.block.KitchenSinkBlock
+import juuxel.adorn.block.PlatformBlock
+import juuxel.adorn.block.PostBlock
+import juuxel.adorn.block.ShelfBlock
+import juuxel.adorn.block.StepBlock
+import juuxel.adorn.block.TableBlock
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
 import juuxel.adorn.lib.Registered

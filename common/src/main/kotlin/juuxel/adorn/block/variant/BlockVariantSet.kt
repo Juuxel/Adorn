@@ -1,6 +1,4 @@
-package juuxel.adorn.block
-
-import juuxel.adorn.api.block.BlockVariant
+package juuxel.adorn.block.variant
 
 interface BlockVariantSet {
     val woodVariants: List<BlockVariant> get() = emptyList()

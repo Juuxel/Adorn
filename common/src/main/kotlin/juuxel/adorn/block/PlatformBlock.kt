@@ -2,7 +2,7 @@
 
 package juuxel.adorn.block
 
-import juuxel.adorn.api.block.BlockVariant
+import juuxel.adorn.block.variant.BlockVariant
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext

@@ -2,7 +2,7 @@ package juuxel.adorn.block
 
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectArrayMap
 import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap
-import juuxel.adorn.api.block.BlockVariant
+import juuxel.adorn.block.variant.BlockVariant
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.util.buildShapeRotationsFromNorth
 import juuxel.adorn.util.getDirection

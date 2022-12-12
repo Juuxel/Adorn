@@ -1,6 +1,6 @@
 package juuxel.adorn.compat
 
-import juuxel.adorn.block.BlockVariantSets
+import juuxel.adorn.block.variant.BlockVariantSets
 import juuxel.adorn.config.ConfigManager
 import net.fabricmc.loader.api.FabricLoader
 

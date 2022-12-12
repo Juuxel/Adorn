@@ -1,6 +1,6 @@
 package juuxel.adorn.block
 
-import juuxel.adorn.api.block.BlockVariant
+import juuxel.adorn.block.variant.BlockVariant
 import juuxel.adorn.item.TradingStationItem
 import juuxel.adorn.lib.AdornSounds
 import juuxel.adorn.lib.Registered

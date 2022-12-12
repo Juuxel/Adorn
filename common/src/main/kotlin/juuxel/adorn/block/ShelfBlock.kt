@@ -2,7 +2,7 @@
 
 package juuxel.adorn.block
 
-import juuxel.adorn.api.block.BlockVariant
+import juuxel.adorn.block.variant.BlockVariant
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.buildShapeRotations
