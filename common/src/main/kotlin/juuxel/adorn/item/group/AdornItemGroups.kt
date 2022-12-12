@@ -180,7 +180,11 @@ object AdornItemGroups {
     }
 
     private fun ItemGroupBuildContext.addIngredients() {
-        add(AdornItems.STONE_ROD)
+        if (this is ItemGroupModifyContext) {
+            addAfter(after = Items.STICK, listOf(AdornItems.STONE_ROD))
+        } else {
+            add(AdornItems.STONE_ROD)
+        }
     }
 
     private fun ItemGroupBuildContext.addTools() {
