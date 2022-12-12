@@ -11,6 +11,7 @@ import juuxel.adorn.platform.ItemGroupBridge
 import net.minecraft.block.Block
 import net.minecraft.item.ItemGroups
 import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.registry.Registries
 import net.minecraft.util.DyeColor
 
@@ -71,9 +72,6 @@ object AdornItemGroups {
     private fun addToVanillaItemGroups() {
         val itemGroups = ItemGroupBridge.get()
         itemGroups.addItems(ItemGroups.BUILDING_BLOCKS) {
-            // TODO: Test on Forge what happens when you try to addAfter
-            //  and the "after" item isn't in the group
-
             for (variant in BlockVariantSets.allVariants()) {
                 val after = findLastBuildingBlockEntry(variant)
 
