@@ -156,8 +156,12 @@ subprojects {
             // for all Kotlin compilation tasks.
             kotlinOptions.jvmTarget = "17"
 
-            // Compile lambdas to invokedynamic.
-            kotlinOptions.freeCompilerArgs = listOf("-Xlambdas=indy")
+            kotlinOptions.freeCompilerArgs = listOf(
+                // Compile lambdas to invokedynamic.
+                "-Xlambdas=indy",
+                // Compile interface functions with bodies to default methods.
+                "-Xjvm-default=all",
+            )
         }
 
         // Include the license in the jar files.
