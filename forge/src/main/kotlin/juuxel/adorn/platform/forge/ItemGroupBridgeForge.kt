@@ -30,6 +30,7 @@ class ItemGroupBridgeForge : ItemGroupBridge {
             }
             entry.itemGroup = group
         }
+        entries.clear()
     }
 
     override fun addItems(group: ItemGroup, configurator: ItemGroupModifyContext.() -> Unit) {
@@ -41,14 +42,16 @@ class ItemGroupBridgeForge : ItemGroupBridge {
         for ((group, configurator) in additions) {
             val context = object : ItemGroupModifyContext {
                 override fun add(item: ItemConvertible) {
-                    event.registerSimple(group, item)
+                    if (event.tab === group) {
+                        event.add(item)
+                    }
                 }
 
                 override fun addAfter(after: ItemConvertible, items: List<ItemConvertible>) {
-                    event.register { _, populator, _ ->
+                    if (event.tab === group) {
                         items.fold(ItemStack(after)) { nextAfter, item ->
                             val stack = ItemStack(item)
-                            populator.accept(stack, ItemStack.EMPTY, nextAfter)
+                            event.entries.putAfter(nextAfter, stack, DEFAULT_STACK_VISIBILITY)
                             stack
                         }
                     }
@@ -56,6 +59,10 @@ class ItemGroupBridgeForge : ItemGroupBridge {
             }
             configurator(context)
         }
+    }
+
+    companion object {
+        private val DEFAULT_STACK_VISIBILITY = ItemGroup.StackVisibility.PARENT_AND_SEARCH_TABS
     }
 
     private class Entry(val id: Identifier, val configurator: ItemGroup.Builder.() -> Unit) : Registered<ItemGroup> {
