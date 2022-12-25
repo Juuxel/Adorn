@@ -63,7 +63,6 @@ tasks {
 
 // Do the shared set up for the Minecraft subprojects.
 subprojects {
-    apply(plugin = "java")
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "dev.architectury.loom")
     apply(plugin = "architectury-plugin")
