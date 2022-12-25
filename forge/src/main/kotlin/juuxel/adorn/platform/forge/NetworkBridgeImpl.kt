@@ -18,9 +18,8 @@ object NetworkBridgeImpl : NetworkBridge {
     override fun sendToTracking(entity: Entity, packet: Packet<*>) =
         PacketDistributor.TRACKING_ENTITY.with { entity }.send(packet)
 
-    @Suppress("UNCHECKED_CAST") // forge pls
     override fun createEntitySpawnPacket(entity: Entity): Packet<ClientPlayPacketListener> =
-        NetworkHooks.getEntitySpawningPacket(entity) as Packet<ClientPlayPacketListener>
+        NetworkHooks.getEntitySpawningPacket(entity)
 
     override fun sendOpenBookPacket(player: PlayerEntity, bookId: Identifier) {
         if (player is ServerPlayerEntity) {
