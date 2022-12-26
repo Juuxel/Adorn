@@ -15,8 +15,8 @@ interface BlockVariant {
 
     fun nameAsIdentifier(): Identifier {
         val name = this.name
-        return if ('/' in name) {
-            val (namespace, path) = name.split(' ', limit = 2)
+        return if (MOD_ID_SEPARATOR in name) {
+            val (namespace, path) = name.split(MOD_ID_SEPARATOR, limit = 2)
             Identifier(namespace, path)
         } else {
             Identifier("minecraft", name)
@@ -37,6 +37,8 @@ interface BlockVariant {
     }
 
     companion object {
+        private const val MOD_ID_SEPARATOR = '/'
+
         val WOOLS: Map<DyeColor, BlockVariant> = DyeColor.values().asSequence().associateWith {
             variant(it.asString(), Blocks.WHITE_WOOL)
         }
