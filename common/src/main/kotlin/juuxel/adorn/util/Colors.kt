@@ -1,5 +1,7 @@
 package juuxel.adorn.util
 
+import net.minecraft.util.math.MathHelper
+
 fun color(rgb: Int, alpha: Int = 0xFF) =
     alpha shl 24 or rgb
 
@@ -21,4 +23,12 @@ object Colors {
     fun greenOf(argb: Int): Float = ((argb shr 8) and 0xFF) / 255f
     fun blueOf(argb: Int): Float = (argb and 0xFF) / 255f
     fun alphaOf(argb: Int): Float = ((argb shr 24) and 0xFF) / 255f
+
+    fun lerp(from: Int, to: Int, delta: Float): Int =
+        color(
+            red = MathHelper.clampedLerp(redOf(from), redOf(to), delta),
+            green = MathHelper.clampedLerp(greenOf(from), greenOf(to), delta),
+            blue = MathHelper.clampedLerp(blueOf(from), blueOf(to), delta),
+            alpha = MathHelper.clampedLerp(alphaOf(from), alphaOf(to), delta)
+        )
 }

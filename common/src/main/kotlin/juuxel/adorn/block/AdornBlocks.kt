@@ -123,6 +123,14 @@ object AdornBlocks : RegistryHelper() {
         }
     }
 
+    val FURNITURE_WORKBENCH: Block by registerBlock("furniture_workbench") {
+        FurnitureWorkbenchBlock(
+            AbstractBlock.Settings.of(Material.WOOD)
+                .strength(2.5F)
+                .sounds(BlockSoundGroup.WOOD)
+        )
+    }
+
     fun init() {
     }
 

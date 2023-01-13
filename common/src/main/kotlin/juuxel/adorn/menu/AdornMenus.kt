@@ -13,6 +13,7 @@ object AdornMenus {
     val KITCHEN_CUPBOARD: MenuType<KitchenCupboardMenu> by MENUS.register("kitchen_cupboard") { createType(KitchenCupboardMenu::load) }
     val TRADING_STATION: MenuType<TradingStationMenu> by MENUS.register("trading_station") { MenuType(::TradingStationMenu) }
     val BREWER: MenuType<BrewerMenu> by MENUS.register("brewer") { MenuType(::BrewerMenu) }
+    val FURNITURE_WORKBENCH: MenuType<FurnitureWorkbenchMenu> by MENUS.register("furniture_workbench") { MenuType(::FurnitureWorkbenchMenu) }
 
     fun init() {
     }
