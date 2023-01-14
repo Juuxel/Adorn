@@ -15,7 +15,11 @@ object DataGenerator {
         val cache = TemplateCache()
 
         for (configFile in configFiles) {
-            generate(outputPath, GeneratorConfigLoader.read(configFile), cache)
+            val config = GeneratorConfigLoader.read(configFile)
+            generate(outputPath, config, cache)
+
+            val configName = configFile.fileName.toString().removeSuffix(".xml")
+            generateBlockVariantIcons(config, configName, outputPath)
         }
     }
 
@@ -86,6 +90,16 @@ object DataGenerator {
                     }
                 }
             }
+        }
+    }
+
+    private fun generateBlockVariantIcons(config: GeneratorConfig, name: String, outputPath: Path) {
+        val content = BlockVariantGenerator.generateIconFile(config)
+
+        if (content != null) {
+            val path = outputPath.resolve("assets/adorn/adorn/block_variant_textures/$name.json")
+            Files.createDirectories(path.parent)
+            Files.writeString(path, content)
         }
     }
 

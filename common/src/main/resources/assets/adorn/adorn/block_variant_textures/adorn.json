@@ -1,0 +1,6 @@
+{
+  "minecraft:iron": {
+    "icon": { "id": "minecraft:iron_block" },
+    "texture": "minecraft:block/iron_block"
+  }
+}

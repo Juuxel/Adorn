@@ -1,5 +1,6 @@
 package juuxel.adorn.block.variant
 
+import com.mojang.serialization.Codec
 import juuxel.adorn.util.copySettingsSafely
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
@@ -38,6 +39,11 @@ interface BlockVariant {
 
     companion object {
         private const val MOD_ID_SEPARATOR = '/'
+
+        val CODEC: Codec<BlockVariant> = Identifier.CODEC.xmap(
+            { id -> BlockVariantSets.allVariantsUnsorted().first { it.nameAsIdentifier() == id } },
+            { it.nameAsIdentifier() }
+        )
 
         val WOOLS: Map<DyeColor, BlockVariant> = DyeColor.values().asSequence().associateWith {
             variant(it.asString(), Blocks.WHITE_WOOL)

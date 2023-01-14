@@ -33,7 +33,10 @@ object BlockVariantSets : RegistryHelper() {
     private val blocksByKindVariant: MutableMap<Pair<BlockKind, BlockVariant>, Registered<Block>> =
         LinkedHashMap()
 
-    fun allVariants(): Set<BlockVariant> {
+    /**
+     * Returns all registered variants. Does not contain duplicates.
+     */
+    fun allVariants(): List<BlockVariant> {
         val variants = blocksByVariant.keySet().toMutableList()
         val sorter = BlockVariantSet.Sorter { variant, after ->
             variants.remove(variant)
@@ -42,8 +45,10 @@ object BlockVariantSets : RegistryHelper() {
         for (variantSet in variantSets) {
             variantSet.sortVariants(sorter)
         }
-        return variants.toSet()
+        return variants
     }
+
+    fun allVariantsUnsorted(): Set<BlockVariant> = blocksByVariant.keySet()
 
     fun add(variantSet: BlockVariantSet) {
         variantSets += variantSet

@@ -4,6 +4,7 @@ import juuxel.adorn.client.gui.TradeTooltipComponent
 import juuxel.adorn.client.gui.screen.AdornMenuScreens
 import juuxel.adorn.client.gui.screen.GuideBookScreen
 import juuxel.adorn.client.gui.screen.MainConfigScreen
+import juuxel.adorn.client.resources.BlockVariantTextureLoader
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.trading.Trade
 import net.minecraft.client.MinecraftClient
@@ -23,6 +24,7 @@ object AdornClient {
         val resourceManager = MinecraftClient.getInstance().resourceManager as ReloadableResourceManagerImpl
         resourceManager.registerReloader(PlatformBridges.resources.bookManager)
         resourceManager.registerReloader(PlatformBridges.resources.colorManager)
+        resourceManager.registerReloader(BlockVariantTextureLoader)
         ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory::class.java) {
             ConfigScreenHandler.ConfigScreenFactory { _, parent -> MainConfigScreen(parent) }
         }

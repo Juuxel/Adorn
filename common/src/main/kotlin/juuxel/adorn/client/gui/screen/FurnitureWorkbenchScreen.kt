@@ -2,7 +2,11 @@ package juuxel.adorn.client.gui.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
+import juuxel.adorn.block.variant.BlockVariant
+import juuxel.adorn.client.gui.widget.BlockVariantGrid
+import juuxel.adorn.client.gui.widget.FlipBook
 import juuxel.adorn.client.gui.widget.NoOpSelectable
+import juuxel.adorn.client.resources.BlockVariantTextureLoader
 import juuxel.adorn.design.FurniturePart
 import juuxel.adorn.menu.FurnitureWorkbenchMenu
 import juuxel.adorn.util.Colors
@@ -11,7 +15,9 @@ import juuxel.adorn.util.color
 import net.minecraft.client.gui.Drawable
 import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.gui.Element
+import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.gui.widget.ButtonWidget
+import net.minecraft.client.gui.widget.PressableWidget
 import net.minecraft.client.render.BufferRenderer
 import net.minecraft.client.render.DiffuseLighting
 import net.minecraft.client.render.GameRenderer
@@ -19,9 +25,14 @@ import net.minecraft.client.render.LightmapTextureManager
 import net.minecraft.client.render.Tessellator
 import net.minecraft.client.render.VertexFormat
 import net.minecraft.client.render.VertexFormats
+import net.minecraft.client.texture.MissingSprite
+import net.minecraft.client.texture.Sprite
+import net.minecraft.client.texture.SpriteAtlasTexture
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.screen.ScreenTexts
 import net.minecraft.text.Text
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.RotationAxis
 import org.joml.Matrix3f
@@ -36,10 +47,15 @@ import kotlin.random.Random
 
 class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: PlayerInventory, title: Text) :
     AdornMenuScreen<FurnitureWorkbenchMenu>(menu, playerInventory, title) {
+    private var currentMaterial: BlockVariant = BlockVariant.OAK
     private val furnitureParts: MutableList<FurniturePart> = ArrayList()
+    private lateinit var materialFlipBook: FlipBook
+    private lateinit var previousPageButton: PageButton
+    private lateinit var nextPageButton: PageButton
+    private val spriteCache: MutableMap<Identifier, Sprite> = HashMap()
 
     init {
-        furnitureParts += FurniturePart(Vector3d(8.0, 8.0, 8.0), 4, 4, 4)
+        furnitureParts += FurniturePart(Vector3d(8.0, 8.0, 8.0), 4, 4, 4, currentMaterial)
     }
 
     override fun init() {
@@ -54,12 +70,22 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
             val depth = Random.nextInt(1, 16 - z + 1)
             furnitureParts += FurniturePart(
                 Vector3d(x.toDouble() + width / 2, y.toDouble() + height / 2, z.toDouble() + depth / 2),
-                width / 2, height / 2, depth / 2
+                width / 2, height / 2, depth / 2,
+                currentMaterial
             )
         }
             .position(5, y)
             .build()
         addDrawableChild(button)
+        materialFlipBook = addDrawableChild(BlockVariantGrid.createFlipBook(5, y + 34, { updatePageButtons() }, { currentMaterial = it }))
+        previousPageButton = addDrawableChild(PageButton(5, y + 25, false))
+        nextPageButton = addDrawableChild(PageButton(5 + 86 - 8, y + 25, true))
+        updatePageButtons()
+    }
+
+    private fun updatePageButtons() {
+        previousPageButton.visible = materialFlipBook.hasPreviousPage()
+        nextPageButton.visible = materialFlipBook.hasNextPage()
     }
 
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
@@ -95,17 +121,23 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
     }
 
     private fun drawPart(matrices: MatrixStack, part: FurniturePart, highlighted: Boolean) {
+        val texture = BlockVariantTextureLoader.get(part.material.nameAsIdentifier())?.mainTexture ?: MissingSprite.getMissingSpriteId()
+        val sprite = spriteCache.getOrPut(texture) {
+            val atlas = client!!.getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE)
+            atlas.apply(texture)
+        }
+
         // TODO: Rotation
         DiffuseLighting.enableGuiDepthLighting()
         RenderSystem.setShader(GameRenderer::getPositionColorTexLightmapProgram)
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-        RenderSystem.setShaderTexture(0, TEST_TEXTURE)
+        RenderSystem.setShaderTexture(0, sprite.atlasId)
 
         val matrixEntry = matrices.peek()
         val position = matrixEntry.positionMatrix
         val normal = matrixEntry.normalMatrix
         part.forEachFace { x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4 ->
-            drawFace(position, normal, x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, highlighted)
+            drawFace(position, normal, x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, sprite, highlighted)
         }
         DiffuseLighting.disableGuiDepthLighting()
     }
@@ -117,7 +149,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         x2: Double, y2: Double, z2: Double,
         x3: Double, y3: Double, z3: Double,
         x4: Double, y4: Double, z4: Double,
-        highlighted: Boolean
+        sprite: Sprite, highlighted: Boolean
     ) {
         val v1 = x2 - x1
         val v2 = y2 - y1
@@ -134,10 +166,10 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         normalZ *= scale
 
         // Calculate UVs
-        val minU: Float
-        val minV: Float
-        val maxU: Float
-        val maxV: Float
+        val rawMinU: Float
+        val rawMinV: Float
+        val rawMaxU: Float
+        val rawMaxV: Float
         val nxZero = abs(normalX) < 0.1f
         val nyZero = abs(normalY) < 0.1f
         val minX = minOf(x1, x2, x3, x4)
@@ -149,43 +181,47 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
 
         if (nxZero) {
             if (nyZero) {
-                minV = MathHelper.map(maxY, 16.0, 0.0, 0.0, 1.0).toFloat()
-                maxV = MathHelper.map(minY, 16.0, 0.0, 0.0, 1.0).toFloat()
+                rawMinV = MathHelper.map(maxY, 16.0, 0.0, 0.0, 1.0).toFloat()
+                rawMaxV = MathHelper.map(minY, 16.0, 0.0, 0.0, 1.0).toFloat()
 
                 // along z-axis
                 if (normalZ < 0) {
-                    minU = MathHelper.map(maxX, 16.0, 0.0, 0.0, 1.0).toFloat()
-                    maxU = MathHelper.map(minX, 16.0, 0.0, 0.0, 1.0).toFloat()
+                    rawMinU = MathHelper.map(maxX, 16.0, 0.0, 0.0, 1.0).toFloat()
+                    rawMaxU = MathHelper.map(minX, 16.0, 0.0, 0.0, 1.0).toFloat()
                 } else {
-                    minU = MathHelper.map(minX, 0.0, 16.0, 0.0, 1.0).toFloat()
-                    maxU = MathHelper.map(maxX, 0.0, 16.0, 0.0, 1.0).toFloat()
+                    rawMinU = MathHelper.map(minX, 0.0, 16.0, 0.0, 1.0).toFloat()
+                    rawMaxU = MathHelper.map(maxX, 0.0, 16.0, 0.0, 1.0).toFloat()
                 }
             } else {
                 // along y-axis
-                minU = MathHelper.map(minX, 0.0, 16.0, 0.0, 1.0).toFloat()
-                maxU = MathHelper.map(maxX, 0.0, 16.0, 0.0, 1.0).toFloat()
+                rawMinU = MathHelper.map(minX, 0.0, 16.0, 0.0, 1.0).toFloat()
+                rawMaxU = MathHelper.map(maxX, 0.0, 16.0, 0.0, 1.0).toFloat()
 
                 if (normalY < 0) {
-                    minV = MathHelper.map(maxZ, 16.0, 0.0, 0.0, 1.0).toFloat()
-                    maxV = MathHelper.map(minZ, 16.0, 0.0, 0.0, 1.0).toFloat()
+                    rawMinV = MathHelper.map(maxZ, 16.0, 0.0, 0.0, 1.0).toFloat()
+                    rawMaxV = MathHelper.map(minZ, 16.0, 0.0, 0.0, 1.0).toFloat()
                 } else {
-                    minV = MathHelper.map(maxZ, 0.0, 16.0, 0.0, 1.0).toFloat()
-                    maxV = MathHelper.map(minZ, 0.0, 16.0, 0.0, 1.0).toFloat()
+                    rawMinV = MathHelper.map(maxZ, 0.0, 16.0, 0.0, 1.0).toFloat()
+                    rawMaxV = MathHelper.map(minZ, 0.0, 16.0, 0.0, 1.0).toFloat()
                 }
             }
         } else {
             // along x-axis
-            minV = MathHelper.map(maxY, 16.0, 0.0, 0.0, 1.0).toFloat()
-            maxV = MathHelper.map(minY, 16.0, 0.0, 0.0, 1.0).toFloat()
+            rawMinV = MathHelper.map(maxY, 16.0, 0.0, 0.0, 1.0).toFloat()
+            rawMaxV = MathHelper.map(minY, 16.0, 0.0, 0.0, 1.0).toFloat()
 
             if (normalX < 0) {
-                minU = MathHelper.map(maxZ, 16.0, 0.0, 0.0, 1.0).toFloat()
-                maxU = MathHelper.map(minZ, 16.0, 0.0, 0.0, 1.0).toFloat()
+                rawMinU = MathHelper.map(maxZ, 16.0, 0.0, 0.0, 1.0).toFloat()
+                rawMaxU = MathHelper.map(minZ, 16.0, 0.0, 0.0, 1.0).toFloat()
             } else {
-                minU = MathHelper.map(minZ, 0.0, 16.0, 0.0, 1.0).toFloat()
-                maxU = MathHelper.map(maxZ, 0.0, 16.0, 0.0, 1.0).toFloat()
+                rawMinU = MathHelper.map(minZ, 0.0, 16.0, 0.0, 1.0).toFloat()
+                rawMaxU = MathHelper.map(maxZ, 0.0, 16.0, 0.0, 1.0).toFloat()
             }
         }
+        val minU = MathHelper.lerp(rawMinU, sprite.minU, sprite.maxU)
+        val maxU = MathHelper.lerp(rawMaxU, sprite.minU, sprite.maxU)
+        val minV = MathHelper.lerp(rawMinV, sprite.minV, sprite.maxV)
+        val maxV = MathHelper.lerp(rawMaxV, sprite.minV, sprite.maxV)
 
         val color = if (highlighted) {
             val time = System.currentTimeMillis() % HIGHLIGHT_PULSE_PERIOD_MS / HIGHLIGHT_PULSE_PERIOD_MS * MathHelper.TAU
@@ -221,8 +257,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         private const val MIN_ZOOM = 1f
         private const val MAX_ZOOM = 5f
         private val WIDGETS = AdornCommon.id("textures/gui/furniture_workbench_widgets.png")
-        private val TEST_TEXTURE = AdornCommon.id("textures/block/crate.png")
-        private val SELECTED_HIGHLIGHT_COLOR = color(0x55d2fc)
+        private val SELECTED_HIGHLIGHT_COLOR = color(0xa4e0fc)
         private const val HIGHLIGHT_PULSE_PERIOD_MS = 3000.0
     }
 
@@ -357,6 +392,28 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double): Boolean {
             zoom = MathHelper.clamp(zoom + amount.toFloat(), MIN_ZOOM, MAX_ZOOM)
             return true
+        }
+    }
+
+    private inner class PageButton(x: Int, y: Int, private val forwards: Boolean) : PressableWidget(x, y, 8, 8, ScreenTexts.EMPTY) {
+        override fun renderButton(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+            RenderSystem.setShaderTexture(0, WIDGETS)
+            RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
+            val u = if (forwards) 48f else 40f
+            val v = if (isHovered) 8f else 0f
+            drawTexture(matrices, x, y, u, v, width, height, 64, 64)
+        }
+
+        override fun appendClickableNarrations(builder: NarrationMessageBuilder) {
+            appendDefaultNarrations(builder)
+        }
+
+        override fun onPress() {
+            if (forwards) {
+                materialFlipBook.showNextPage()
+            } else {
+                materialFlipBook.showPreviousPage()
+            }
         }
     }
 }

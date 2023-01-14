@@ -2,6 +2,8 @@ package juuxel.adorn.design
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import juuxel.adorn.block.variant.BlockVariant
+import juuxel.adorn.block.variant.BlockVariantSets
 import juuxel.adorn.util.AdornCodecs
 import net.minecraft.network.PacketByteBuf
 import org.joml.Vector3d
@@ -9,10 +11,11 @@ import org.joml.Vector3d
 data class FurniturePart(
     val origin: Vector3d,
     var sizeX: Int, var sizeY: Int, var sizeZ: Int,
-    var yaw: Double, var pitch: Double, var roll: Double
+    var yaw: Double, var pitch: Double, var roll: Double,
+    val material: BlockVariant
 ) {
-    constructor(origin: Vector3d, sizeX: Int, sizeY: Int, sizeZ: Int) :
-        this(origin, sizeX, sizeY, sizeZ, yaw = 0.0, pitch = 0.0, roll = 0.0)
+    constructor(origin: Vector3d, sizeX: Int, sizeY: Int, sizeZ: Int, material: BlockVariant) :
+        this(origin, sizeX, sizeY, sizeZ, material = material, yaw = 0.0, pitch = 0.0, roll = 0.0)
 
     inline fun forEachVertex(consumer: (x: Double, y: Double, z: Double) -> Unit) {
         val minX = origin.x - sizeX * 0.5
@@ -59,18 +62,20 @@ data class FurniturePart(
         buf.writeDouble(yaw)
         buf.writeDouble(pitch)
         buf.writeDouble(roll)
+        buf.writeIdentifier(material.nameAsIdentifier())
     }
 
     companion object {
         val CODEC: Codec<FurniturePart> = RecordCodecBuilder.create { builder ->
             builder.group(
-                AdornCodecs.VECTOR_3D.fieldOf("origin").forGetter { it.origin },
-                Codec.intRange(1, 16).fieldOf("size_x").forGetter { it.sizeX },
-                Codec.intRange(1, 16).fieldOf("size_y").forGetter { it.sizeY },
-                Codec.intRange(1, 16).fieldOf("size_z").forGetter { it.sizeZ },
-                Codec.DOUBLE.fieldOf("yaw").forGetter { it.yaw },
-                Codec.DOUBLE.fieldOf("pitch").forGetter { it.pitch },
-                Codec.DOUBLE.fieldOf("roll").forGetter { it.roll }
+                AdornCodecs.VECTOR_3D.fieldOf("Origin").forGetter { it.origin },
+                Codec.intRange(1, 16).fieldOf("SizeX").forGetter { it.sizeX },
+                Codec.intRange(1, 16).fieldOf("SizeY").forGetter { it.sizeY },
+                Codec.intRange(1, 16).fieldOf("SizeZ").forGetter { it.sizeZ },
+                Codec.DOUBLE.fieldOf("Yaw").forGetter { it.yaw },
+                Codec.DOUBLE.fieldOf("Pitch").forGetter { it.pitch },
+                Codec.DOUBLE.fieldOf("Roll").forGetter { it.roll },
+                BlockVariant.CODEC.fieldOf("Material").forGetter { it.material }
             ).apply(builder, ::FurniturePart)
         }
 
@@ -85,7 +90,9 @@ data class FurniturePart(
             val yaw = buf.readDouble()
             val pitch = buf.readDouble()
             val roll = buf.readDouble()
-            return FurniturePart(origin, sizeX, sizeY, sizeZ, yaw, pitch, roll)
+            val materialId = buf.readIdentifier()
+            val material = BlockVariantSets.allVariantsUnsorted().first { it.nameAsIdentifier() == materialId }
+            return FurniturePart(origin, sizeX, sizeY, sizeZ, yaw, pitch, roll, material)
         }
     }
 
