@@ -181,6 +181,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         val highlighted = part == focusedPart
 
         // TODO: Rotation
+        RenderSystem.enableBlend()
         DiffuseLighting.enableGuiDepthLighting()
         RenderSystem.setShader(GameRenderer::getPositionColorTexLightmapProgram)
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
@@ -193,6 +194,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
             drawFace(position, normal, x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, sprite, highlighted)
         }
         DiffuseLighting.disableGuiDepthLighting()
+        RenderSystem.disableBlend()
     }
 
     private fun drawFace(
