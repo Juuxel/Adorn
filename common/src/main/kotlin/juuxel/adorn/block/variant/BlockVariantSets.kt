@@ -1,5 +1,7 @@
 package juuxel.adorn.block.variant
 
+import com.google.common.collect.BiMap
+import com.google.common.collect.ImmutableBiMap
 import com.google.common.collect.ListMultimap
 import com.google.common.collect.MultimapBuilder
 import juuxel.adorn.block.BenchBlock
@@ -19,8 +21,10 @@ import juuxel.adorn.item.TableBlockItem
 import juuxel.adorn.lib.Registered
 import juuxel.adorn.lib.RegistryHelper
 import net.minecraft.block.Block
+import net.minecraft.util.Identifier
 
 object BlockVariantSets : RegistryHelper() {
+    private var frozen = false
     private val variantSets: MutableList<BlockVariantSet> = mutableListOf(MinecraftBlockVariants)
     private val blocksByKind: ListMultimap<BlockKind, Registered<Block>> =
         MultimapBuilder.enumKeys(BlockKind::class.java)
@@ -32,11 +36,34 @@ object BlockVariantSets : RegistryHelper() {
             .build()
     private val blocksByKindVariant: MutableMap<Pair<BlockKind, BlockVariant>, Registered<Block>> =
         LinkedHashMap()
+    private lateinit var allVariants: List<BlockVariant>
+    private lateinit var variantsById: BiMap<Identifier, BlockVariant>
+
+    private fun checkFrozen() {
+        if (!frozen) throw IllegalStateException("[Adorn] Block variant sets not frozen yet!")
+    }
+
+    fun getVariant(id: Identifier): BlockVariant {
+        checkFrozen()
+        return variantsById[id]
+            ?: throw IllegalArgumentException("Block variant $id not registered!")
+    }
+
+    fun getId(variant: BlockVariant): Identifier {
+        checkFrozen()
+        return variantsById.inverse()[variant]
+            ?: throw IllegalArgumentException("Block variant ${variant.name} not registered!")
+    }
 
     /**
      * Returns all registered variants. Does not contain duplicates.
      */
     fun allVariants(): List<BlockVariant> {
+        checkFrozen()
+        return allVariants
+    }
+
+    private fun sortVariants(): List<BlockVariant> {
         val variants = blocksByVariant.keySet().toMutableList()
         val sorter = BlockVariantSet.Sorter { variant, after ->
             variants.remove(variant)
@@ -48,9 +75,11 @@ object BlockVariantSets : RegistryHelper() {
         return variants
     }
 
-    fun allVariantsUnsorted(): Set<BlockVariant> = blocksByVariant.keySet()
-
     fun add(variantSet: BlockVariantSet) {
+        if (frozen) {
+            throw IllegalStateException("[Adorn] Block variant sets have been frozen!")
+        }
+
         variantSets += variantSet
     }
 
@@ -60,7 +89,19 @@ object BlockVariantSets : RegistryHelper() {
     fun get(kind: BlockKind, variant: BlockVariant): Registered<Block>? =
         blocksByKindVariant[kind to variant]
 
+    private fun freeze() {
+        frozen = true
+        allVariants = sortVariants()
+
+        val builder = ImmutableBiMap.builder<Identifier, BlockVariant>()
+        for (variant in allVariants) {
+            builder.put(variant.nameAsIdentifier(), variant)
+        }
+        variantsById = builder.build()
+    }
+
     fun register() {
+        freeze()
         val woodVariants = variantSets.flatMap(BlockVariantSet::woodVariants)
         val stoneVariants = variantSets.flatMap(BlockVariantSet::stoneVariants)
         val allVariants = woodVariants + stoneVariants

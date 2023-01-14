@@ -208,7 +208,7 @@ object AdornItemGroups {
     }
 
     private fun findBaseBlock(variant: BlockVariant, suffix: String?): Block? {
-        val variantId = variant.nameAsIdentifier()
+        val variantId = BlockVariantSets.getId(variant)
         val buttonId = if (suffix != null) variantId.withPath { it + "_$suffix" } else variantId
 
         if (Registries.BLOCK.containsId(buttonId)) {

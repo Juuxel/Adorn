@@ -49,7 +49,7 @@ object BlockVariantGrid {
     // TODO: names for block variants
     private class BlockVariantButton(x: Int, y: Int, private val variant: BlockVariant, private val variantListener: (BlockVariant) -> Unit)
         : PressableWidget(x, y, CELL_SIZE, CELL_SIZE, Text.literal("TODO")) {
-        private val variantId = variant.nameAsIdentifier()
+        private val variantId = BlockVariantSets.getId(variant)
         private val itemRenderer = MinecraftClient.getInstance().itemRenderer
 
         override fun renderButton(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {

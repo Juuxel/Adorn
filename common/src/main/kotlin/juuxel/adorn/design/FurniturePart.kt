@@ -62,7 +62,7 @@ data class FurniturePart(
         buf.writeDouble(yaw)
         buf.writeDouble(pitch)
         buf.writeDouble(roll)
-        buf.writeIdentifier(material.nameAsIdentifier())
+        buf.writeIdentifier(BlockVariantSets.getId(material))
     }
 
     companion object {
@@ -91,7 +91,7 @@ data class FurniturePart(
             val pitch = buf.readDouble()
             val roll = buf.readDouble()
             val materialId = buf.readIdentifier()
-            val material = BlockVariantSets.allVariantsUnsorted().first { it.nameAsIdentifier() == materialId }
+            val material = BlockVariantSets.getVariant(materialId)
             return FurniturePart(origin, sizeX, sizeY, sizeZ, yaw, pitch, roll, material)
         }
     }

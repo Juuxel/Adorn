@@ -41,8 +41,8 @@ interface BlockVariant {
         private const val MOD_ID_SEPARATOR = '/'
 
         val CODEC: Codec<BlockVariant> = Identifier.CODEC.xmap(
-            { id -> BlockVariantSets.allVariantsUnsorted().first { it.nameAsIdentifier() == id } },
-            { it.nameAsIdentifier() }
+            { BlockVariantSets.getVariant(it) },
+            { BlockVariantSets.getId(it) }
         )
 
         val WOOLS: Map<DyeColor, BlockVariant> = DyeColor.values().asSequence().associateWith {

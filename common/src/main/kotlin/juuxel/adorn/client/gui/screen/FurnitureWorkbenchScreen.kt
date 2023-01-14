@@ -3,6 +3,7 @@ package juuxel.adorn.client.gui.screen
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.variant.BlockVariant
+import juuxel.adorn.block.variant.BlockVariantSets
 import juuxel.adorn.client.gui.widget.BlockVariantGrid
 import juuxel.adorn.client.gui.widget.FlipBook
 import juuxel.adorn.client.gui.widget.NoOpSelectable
@@ -121,7 +122,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
     }
 
     private fun drawPart(matrices: MatrixStack, part: FurniturePart, highlighted: Boolean) {
-        val texture = BlockVariantTextureLoader.get(part.material.nameAsIdentifier())?.mainTexture ?: MissingSprite.getMissingSpriteId()
+        val texture = BlockVariantTextureLoader.get(BlockVariantSets.getId(part.material))?.mainTexture ?: MissingSprite.getMissingSpriteId()
         val sprite = spriteCache.getOrPut(texture) {
             val atlas = client!!.getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE)
             atlas.apply(texture)
