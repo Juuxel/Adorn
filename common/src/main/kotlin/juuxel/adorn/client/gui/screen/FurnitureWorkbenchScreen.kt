@@ -12,6 +12,9 @@ import juuxel.adorn.design.FurniturePartMaterial
 import juuxel.adorn.menu.FurnitureWorkbenchMenu
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.Geometry
+import juuxel.adorn.util.animation.AnimatedProperty
+import juuxel.adorn.util.animation.AnimationEngine
+import juuxel.adorn.util.animation.Interpolator
 import juuxel.adorn.util.color
 import net.minecraft.client.gui.Drawable
 import net.minecraft.client.gui.DrawableHelper
@@ -54,6 +57,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
     private lateinit var previousPageButton: PageButton
     private lateinit var nextPageButton: PageButton
     private val spriteCache: MutableMap<Identifier, Sprite> = HashMap()
+    private val animationEngine = AnimationEngine()
 
     init {
         furnitureParts += FurniturePart(Vector3d(8.0, 8.0, 8.0), 4, 4, 4, currentMaterial)
@@ -82,6 +86,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         previousPageButton = addDrawableChild(PageButton(5, y + 25, false))
         nextPageButton = addDrawableChild(PageButton(5 + 86 - 8, y + 25, true))
         updatePageButtons()
+        animationEngine.start()
     }
 
     private fun updatePageButtons() {
@@ -249,6 +254,11 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         BufferRenderer.drawWithGlobalProgram(buffer.end())
     }
 
+    override fun removed() {
+        super.removed()
+        animationEngine.stop()
+    }
+
     companion object {
         private const val DESIGN_AREA_WIDTH = 8 * 18
         private const val DESIGN_AREA_HEIGHT = 5 * 18
@@ -263,7 +273,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
     }
 
     private inner class DesignView(private val x: Int, private val y: Int) : NoOpSelectable(), Drawable, Element {
-        private var zoom = 3f
+        private var zoom by AnimatedProperty(3f, animationEngine, 20, Interpolator.FLOAT)
         private var rotationY = MathHelper.PI
         private var rotationXZ = -MathHelper.PI * 0.1f
         private var focusedPart: FurniturePart? = null
