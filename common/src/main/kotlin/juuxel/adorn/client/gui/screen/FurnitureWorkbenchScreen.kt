@@ -9,7 +9,7 @@ import juuxel.adorn.client.gui.TextRendering
 import juuxel.adorn.client.gui.widget.FlipBook
 import juuxel.adorn.client.gui.widget.FurnitureMaterialGrid
 import juuxel.adorn.client.gui.widget.TabbedPane
-import juuxel.adorn.client.resources.BlockVariantIcon
+import juuxel.adorn.client.gui.Icon
 import juuxel.adorn.client.resources.BlockVariantTextureLoader
 import juuxel.adorn.design.FurniturePart
 import juuxel.adorn.design.FurniturePartMaterial
@@ -105,8 +105,8 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
                     }
                     if (materials.isEmpty()) continue
 
-                    val icon = BlockVariantTextureLoader.get(materials.first().id)?.icon ?: BlockVariantIcon.MISSING
-                    tab(TabbedPane.iconOf(icon), group.displayName) { x, y ->
+                    val icon = BlockVariantTextureLoader.get(materials.first().id)?.icon ?: Icon.MISSING
+                    tab(icon, group.displayName) { x, y ->
                         FurnitureMaterialGrid.createFlipBook(
                             x + 9, y + 13,
                             materials,

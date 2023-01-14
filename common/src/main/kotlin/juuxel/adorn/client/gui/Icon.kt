@@ -1,4 +1,4 @@
-package juuxel.adorn.client.resources
+package juuxel.adorn.client.gui
 
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
@@ -13,13 +13,13 @@ import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 import net.minecraft.util.JsonHelper
 
-sealed interface BlockVariantIcon {
+sealed interface Icon {
     fun render(matrices: MatrixStack, x: Int, y: Int, itemRenderer: ItemRenderer)
 
     companion object {
         val MISSING = TextureIcon(Identifier("minecraft:textures/item/barrier.png"))
 
-        fun fromJson(json: JsonElement): BlockVariantIcon {
+        fun fromJson(json: JsonElement): Icon {
             if (json is JsonObject) {
                 val id = JsonHelper.getString(json, "id")
 
@@ -41,13 +41,13 @@ sealed interface BlockVariantIcon {
         }
     }
 
-    class ItemIcon(private val stack: ItemStack) : BlockVariantIcon {
+    class ItemIcon(private val stack: ItemStack) : Icon {
         override fun render(matrices: MatrixStack, x: Int, y: Int, itemRenderer: ItemRenderer) {
             itemRenderer.renderGuiItemIcon(stack, x, y)
         }
     }
 
-    class TextureIcon(private val texture: Identifier) : BlockVariantIcon {
+    class TextureIcon(private val texture: Identifier) : Icon {
         override fun render(matrices: MatrixStack, x: Int, y: Int, itemRenderer: ItemRenderer) {
             RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
             RenderSystem.setShaderTexture(0, texture)

@@ -2,7 +2,7 @@ package juuxel.adorn.client.gui.widget
 
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
-import juuxel.adorn.client.resources.BlockVariantIcon
+import juuxel.adorn.client.gui.Icon
 import juuxel.adorn.client.resources.BlockVariantTextureLoader
 import juuxel.adorn.design.FurniturePartMaterial
 import net.minecraft.client.MinecraftClient
@@ -75,7 +75,7 @@ object FurnitureMaterialGrid {
             val u = if (currentMaterial() == material) 40 else 20
             val v = if (isHovered) 20 else 0
             drawTexture(matrices, x, y, u, v, width, height)
-            val icon = BlockVariantTextureLoader.get(material.id)?.icon ?: BlockVariantIcon.MISSING
+            val icon = BlockVariantTextureLoader.get(material.id)?.icon ?: Icon.MISSING
             icon.render(matrices, x + 2, y + 2, itemRenderer)
         }
 

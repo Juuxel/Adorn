@@ -3,7 +3,7 @@ package juuxel.adorn.client.gui.widget
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.client.gui.NinePatchRenderer
-import juuxel.adorn.client.resources.BlockVariantIcon
+import juuxel.adorn.client.gui.Icon
 import juuxel.libninepatch.NinePatch
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.Element
@@ -33,10 +33,10 @@ class TabbedPane<E : Element> private constructor(
             return this
         }
 
-        fun tab(icon: TabIcon, label: Text, element: (x: Int, y: Int) -> E): Builder<E> =
+        fun tab(icon: Icon, label: Text, element: (x: Int, y: Int) -> E): Builder<E> =
             tab(icon, label, element(x + HORIZONTAL_PADDING, y + VERTICAL_PADDING))
 
-        fun tab(icon: TabIcon, label: Text, element: E): Builder<E> {
+        fun tab(icon: Icon, label: Text, element: E): Builder<E> {
             tabs += Tab(icon, label, element)
             return this
         }
@@ -102,14 +102,9 @@ class TabbedPane<E : Element> private constructor(
 
         inline operator fun <E : Element> invoke(x: Int, y: Int, width: Int, height: Int, configurator: Builder<E>.() -> Unit): TabbedPane<E> =
             Builder<E>(x, y, width, height).apply(configurator).build()
-
-        fun iconOf(icon: BlockVariantIcon): TabIcon =
-            TabIcon { matrices, x, y ->
-                icon.render(matrices, x, y, MinecraftClient.getInstance().itemRenderer)
-            }
     }
 
-    class Tab<E : Element>(val icon: TabIcon, val label: Text, val element: E)
+    class Tab<E : Element>(val icon: Icon, val label: Text, val element: E)
 
     private inner class TabButton(
         x: Int, y: Int,
@@ -117,6 +112,8 @@ class TabbedPane<E : Element> private constructor(
         private val tab: Tab<E>,
         private val bottom: Boolean
     ) : PressableWidget(x, y, TAB_WIDTH, TAB_HEIGHT, tab.label) {
+        private val itemRenderer = MinecraftClient.getInstance().itemRenderer
+
         init {
             setTooltip(Tooltip.of(tab.label))
         }
@@ -133,7 +130,7 @@ class TabbedPane<E : Element> private constructor(
             } else {
                 ICON_Y
             }
-            tab.icon.render(matrices, x + ICON_X, y + iconY)
+            tab.icon.render(matrices, x + ICON_X, y + iconY, itemRenderer)
         }
 
         override fun appendClickableNarrations(builder: NarrationMessageBuilder) {
@@ -143,9 +140,5 @@ class TabbedPane<E : Element> private constructor(
         override fun onPress() {
             flipBook.showPage(tab.element)
         }
-    }
-
-    fun interface TabIcon {
-        fun render(matrices: MatrixStack, x: Int, y: Int)
     }
 }
