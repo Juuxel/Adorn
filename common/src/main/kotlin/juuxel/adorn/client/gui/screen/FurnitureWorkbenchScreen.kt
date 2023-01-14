@@ -35,9 +35,9 @@ import net.minecraft.screen.ScreenTexts
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
-import net.minecraft.util.math.RotationAxis
 import org.joml.Matrix3f
 import org.joml.Matrix4f
+import org.joml.Quaternionf
 import org.joml.Vector3d
 import org.joml.Vector3f
 import org.joml.Vector4f
@@ -254,7 +254,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         private const val DESIGN_AREA_HEIGHT = 5 * 18
         // Rotation speeds in radians per pixel
         private const val ROTATION_SPEED_AROUND_Y = 0.03
-        private const val ROTATION_SPEED_AROUND_X = 0.03
+        private const val HORIZONTAL_ROTATION_SPEED = 0.03
         private const val MIN_ZOOM = 1f
         private const val MAX_ZOOM = 5f
         private val WIDGETS = AdornCommon.id("textures/gui/furniture_workbench_widgets.png")
@@ -265,15 +265,18 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
     private inner class DesignView(private val x: Int, private val y: Int) : NoOpSelectable(), Drawable, Element {
         private var zoom = 3f
         private var rotationY = MathHelper.PI
-        private var rotationX = -MathHelper.PI * 0.1f
+        private var rotationXZ = -MathHelper.PI * 0.1f
         private var focusedPart: FurniturePart? = null
 
         private fun applyFurnitureTransforms(matrices: MatrixStack) {
             matrices.translate(x + 0.5f * DESIGN_AREA_WIDTH, y + 0.5f * DESIGN_AREA_HEIGHT, 100f)
             matrices.scale(zoom, -zoom, zoom)
             matrices.translate(0f, 0f, 8f)
-            matrices.multiply(RotationAxis.POSITIVE_Y.rotation(rotationY))
-            matrices.multiply(RotationAxis.POSITIVE_X.rotation(rotationX))
+            val quaternion = Quaternionf().rotateY(rotationY)
+            matrices.multiply(quaternion)
+            quaternion.identity().rotateY(-rotationY)
+            val horizontalAxis = Vector3f(1f, 0f, 0f).rotate(quaternion)
+            matrices.multiply(quaternion.rotationAxis(rotationXZ, horizontalAxis))
             matrices.translate(-8f, -8f, -8f)
         }
 
@@ -379,8 +382,8 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         override fun mouseDragged(mouseX: Double, mouseY: Double, button: Int, deltaX: Double, deltaY: Double): Boolean {
             if (button == 0) {
                 rotationY = (rotationY + (ROTATION_SPEED_AROUND_Y * deltaX).toFloat()) % MathHelper.TAU
-                rotationX = MathHelper.clamp(
-                    rotationX - (ROTATION_SPEED_AROUND_X * deltaY).toFloat(),
+                rotationXZ = MathHelper.clamp(
+                    rotationXZ + (HORIZONTAL_ROTATION_SPEED * deltaY).toFloat(),
                     -MathHelper.HALF_PI,
                     MathHelper.HALF_PI
                 )
