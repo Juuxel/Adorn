@@ -93,6 +93,9 @@ dependencies {
     // Bundle Jankson in the mod and use it as a regular "implementation" library.
     bundle(implementation("blue.endless:jankson:${rootProject.property("jankson")}")!!)
 
+    // JIJ LibNinePatch
+    include(runtimeOnly("io.github.juuxel:libninepatch:${rootProject.property("libninepatch")}")!!)
+
     // Mod compat
     modCompileOnly("com.github.Virtuoel:Towelette:${rootProject.property("towelette")}")
     modLocalRuntime(modCompileOnly("com.terraformersmc:modmenu:${rootProject.property("modmenu")}")!!)

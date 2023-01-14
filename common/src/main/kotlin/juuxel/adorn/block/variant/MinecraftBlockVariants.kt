@@ -52,7 +52,11 @@ object MinecraftBlockVariants : BlockVariantSet {
     )
 
     override fun addVariants(consumer: BlockVariantSet.CustomVariantConsumer) {
-        consumer.add(BlockVariant.IRON, listOf(BlockKind.SHELF))
+        consumer.add(BlockVariant.IRON, BlockVariantGroup.OTHER, listOf(BlockKind.SHELF))
+
+        for (wool in BlockVariant.WOOLS.values) {
+            consumer.add(wool, BlockVariantGroup.WOOL, listOf())
+        }
     }
 
     override fun sortVariants(sorter: BlockVariantSet.Sorter) {

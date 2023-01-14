@@ -11,18 +11,14 @@ import net.minecraft.util.Identifier
 sealed interface FurniturePartMaterial {
     val id: Identifier
     val type: Type
-    val displayName: Text get() = Text.translatable("furniture_material.adorn.${id.toShortTranslationKey()}")
+    val displayName: Text get() = Text.translatable("furniture_material.adorn.${getTranslationKey(id)}")
 
     companion object {
         val CODEC: Codec<FurniturePartMaterial> = Type.CODEC.dispatch({ it.type }, { it.codec() })
-        val ALL: List<FurniturePartMaterial> by lazy {
-            buildList {
-                for (variant in BlockVariantSets.allVariants()) {
-                    add(OfVariant(variant))
-                }
 
-                addAll(Functional.values())
-            }
+        private fun getTranslationKey(id: Identifier): String {
+            if (id.namespace == AdornCommon.NAMESPACE) return id.path
+            return id.toShortTranslationKey()
         }
     }
 

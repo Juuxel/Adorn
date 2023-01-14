@@ -66,6 +66,9 @@ dependencies {
     // In ForgeGradle projects, you might see a custom "library" configuration used for this.
     forgeRuntimeLibrary("blue.endless:jankson:${rootProject.property("jankson")}")
 
+    // JIJ LibNinePatch
+    include(forgeRuntimeLibrary("io.github.juuxel:libninepatch:${rootProject.property("libninepatch")}")!!)
+
     // Add regular mod dependency on REI - API for compile time and the mod itself for runtime.
     // modLocalRuntime won't be exposed if other mods depend on your mod unlike modRuntimeOnly.
     // TODO: Revert back to API jar after it's fixed: https://github.com/shedaniel/RoughlyEnoughItems/issues/1194

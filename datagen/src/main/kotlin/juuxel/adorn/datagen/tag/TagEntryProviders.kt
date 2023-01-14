@@ -1,6 +1,6 @@
 package juuxel.adorn.datagen.tag
 
-import juuxel.adorn.datagen.ColorMaterial
+import juuxel.adorn.datagen.WoolMaterial
 import juuxel.adorn.datagen.StoneMaterial
 import juuxel.adorn.datagen.WoodMaterial
 
@@ -56,6 +56,6 @@ object TagEntryProviders {
     private fun wool(blockType: String): TagEntryProvider =
         TagEntryProvider.Filtered(
             TagEntryProvider.Simple(blockType),
-            filter = { it is ColorMaterial }
+            filter = { it is WoolMaterial }
         )
 }

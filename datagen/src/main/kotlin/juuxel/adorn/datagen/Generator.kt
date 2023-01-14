@@ -135,7 +135,7 @@ class Generator<in M : Material>(
             blockModel("post", templateName = "post_with_sides"),
             blockModel("step", templateName = "step_with_sides"),
         )
-        val WOOL_GENERATORS: List<Generator<ColorMaterial>> = listOf(
+        val WOOL_GENERATORS: List<Generator<WoolMaterial>> = listOf(
             // Sofas
             blockState("sofa"),
             blockModel("sofa_arm_left"),

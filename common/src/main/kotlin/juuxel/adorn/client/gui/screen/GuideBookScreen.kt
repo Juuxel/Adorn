@@ -35,7 +35,7 @@ import net.minecraft.text.Text
 import kotlin.math.max
 
 class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
-    private lateinit var flipBook: FlipBook
+    private lateinit var flipBook: FlipBook<Element>
     private lateinit var previousPageButton: PageTurnWidget
     private lateinit var nextPageButton: PageTurnWidget
     private val animationEngine = AnimationEngine()

@@ -3,7 +3,7 @@ package juuxel.adorn.datagen
 data class GeneratorConfig(
     val woods: Set<MaterialEntry<WoodMaterial>>,
     val stones: Set<MaterialEntry<StoneMaterial>>,
-    val wools: Set<MaterialEntry<ColorMaterial>>,
+    val wools: Set<MaterialEntry<WoolMaterial>>,
     val conditionType: ConditionType,
     val rootReplacements: Map<String, String>,
 ) {

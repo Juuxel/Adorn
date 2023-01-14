@@ -17,6 +17,10 @@ abstract class AdornMenuScreen<M : Menu>(
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, tickDelta: Float) {
         renderBackground(matrices)
         super.render(matrices, mouseX, mouseY, tickDelta)
+        renderExtraForeground(matrices, mouseX, mouseY, tickDelta)
         drawMouseoverTooltip(matrices, mouseX, mouseY)
+    }
+
+    protected open fun renderExtraForeground(matrices: MatrixStack, mouseX: Int, mouseY: Int, tickDelta: Float) {
     }
 }

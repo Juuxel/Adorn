@@ -3,8 +3,13 @@ package juuxel.adorn.client.gui.screen
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.variant.BlockVariant
+import juuxel.adorn.block.variant.BlockVariantGroup
+import juuxel.adorn.block.variant.BlockVariantSets
+import juuxel.adorn.client.gui.TextRendering
 import juuxel.adorn.client.gui.widget.FlipBook
 import juuxel.adorn.client.gui.widget.FurnitureMaterialGrid
+import juuxel.adorn.client.gui.widget.TabbedPane
+import juuxel.adorn.client.resources.BlockVariantIcon
 import juuxel.adorn.client.resources.BlockVariantTextureLoader
 import juuxel.adorn.design.FurniturePart
 import juuxel.adorn.design.FurniturePartMaterial
@@ -54,7 +59,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
     private var currentMaterial: FurniturePartMaterial = FurniturePartMaterial.OfVariant(BlockVariant.OAK)
     private val furnitureParts: MutableList<FurniturePart> = ArrayList()
     private var focusedPart: FurniturePart? = null
-    private lateinit var materialFlipBook: FlipBook
+    private lateinit var materialTabs: TabbedPane<FlipBook<Element>>
     private lateinit var previousPageButton: PageButton
     private lateinit var nextPageButton: PageButton
     private val spriteCache: MutableMap<Identifier, Sprite> = HashMap()
@@ -83,23 +88,44 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
             .position(5, y)
             .build()
         addDrawableChild(button)
-        materialFlipBook = addDrawableChild(
-            FurnitureMaterialGrid.createFlipBook(
-                5, y + 34,
-                { updatePageButtons() },
-                { currentMaterial },
-                { updateCurrentMaterial(it) }
-            )
+        materialTabs = addDrawableChild(
+            TabbedPane(5, y + 25, 115, 140) {
+                for (group in BlockVariantGroup.values()) {
+                    val variants = BlockVariantSets.allVariantsByGroup().get(group)
+                    val materials = buildList {
+                        for (variant in variants) {
+                            add(FurniturePartMaterial.OfVariant(variant))
+                        }
+
+                        if (group == BlockVariantGroup.OTHER) {
+                            addAll(FurniturePartMaterial.Functional.values())
+                        }
+                    }
+                    if (materials.isEmpty()) continue
+
+                    val icon = BlockVariantTextureLoader.get(materials.first().id)?.icon ?: BlockVariantIcon.MISSING
+                    tab(TabbedPane.iconOf(icon), group.displayName) { x, y ->
+                        FurnitureMaterialGrid.createFlipBook(
+                            x + 9, y + 13,
+                            materials,
+                            { updatePageButtons() },
+                            { currentMaterial },
+                            { updateCurrentMaterial(it) }
+                        )
+                    }
+                }
+            }
         )
-        previousPageButton = addDrawableChild(PageButton(5, y + 25, false))
-        nextPageButton = addDrawableChild(PageButton(5 + 86 - 8, y + 25, true))
+        materialTabs.flipBook.addPageUpdateListener { updatePageButtons() }
+        previousPageButton = addDrawableChild(PageButton(5 + 16, y + TabbedPane.TAB_HEIGHT + 27, false))
+        nextPageButton = addDrawableChild(PageButton(5 + 16 + 83 - 12, y + TabbedPane.TAB_HEIGHT + 27, true))
         updatePageButtons()
         animationEngine.start()
     }
 
     private fun updatePageButtons() {
-        previousPageButton.visible = materialFlipBook.hasPreviousPage()
-        nextPageButton.visible = materialFlipBook.hasNextPage()
+        previousPageButton.visible = materialTabs.flipBook.currentPageValue.hasPreviousPage()
+        nextPageButton.visible = materialTabs.flipBook.currentPageValue.hasNextPage()
     }
 
     private fun updateCurrentMaterial(material: FurniturePartMaterial) {
@@ -108,6 +134,11 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
     }
 
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
+    }
+
+    override fun renderExtraForeground(matrices: MatrixStack, mouseX: Int, mouseY: Int, tickDelta: Float) {
+        val currentTab = materialTabs.currentTab() ?: return
+        TextRendering.drawCentered(matrices, textRenderer, currentTab.label, 62, y + TabbedPane.TAB_HEIGHT + 29, Colors.SCREEN_TEXT)
     }
 
     override fun mouseDragged(mouseX: Double, mouseY: Double, button: Int, deltaX: Double, deltaY: Double): Boolean {
@@ -293,7 +324,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
 
         private var zoom by AnimatedProperty(3f, animationEngine, 20, Interpolator.FLOAT)
         private var rotationY = MathHelper.PI
-        private var rotationXZ = -MathHelper.PI * 0.1f
+        private var rotationXZ = MathHelper.PI * 0.1f
 
         private fun applyFurnitureTransforms(matrices: MatrixStack) {
             matrices.translate(x + 0.5f * DESIGN_AREA_WIDTH, y + 0.5f * DESIGN_AREA_HEIGHT, 100f)
@@ -400,7 +431,12 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
                 // Sort intersecting parts based on distance.
                 intersectingParts.sortByDescending { (_, distance) -> distance }
                 // The first part is the focused part.
-                focusedPart = intersectingParts.firstOrNull()?.first
+                val newFocused = intersectingParts.firstOrNull()?.first
+                focusedPart = newFocused
+
+                if (newFocused != null) {
+                    currentMaterial = newFocused.material
+                }
 
                 return true
             }
@@ -445,12 +481,12 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         }
     }
 
-    private inner class PageButton(x: Int, y: Int, private val forwards: Boolean) : PressableWidget(x, y, 8, 8, ScreenTexts.EMPTY) {
+    private inner class PageButton(x: Int, y: Int, private val forwards: Boolean) : PressableWidget(x, y, 12, 12, ScreenTexts.EMPTY) {
         override fun renderButton(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
             RenderSystem.setShaderTexture(0, WIDGETS)
             RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-            val u = if (forwards) 68 else 60
-            val v = if (isHovered) 8 else 0
+            val u = if (forwards) 72 else 60
+            val v = if (isHovered) 12 else 0
             drawTexture(matrices, x, y, u, v, width, height)
         }
 
@@ -460,9 +496,9 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
 
         override fun onPress() {
             if (forwards) {
-                materialFlipBook.showNextPage()
+                materialTabs.flipBook.currentPageValue.showNextPage()
             } else {
-                materialFlipBook.showPreviousPage()
+                materialTabs.flipBook.currentPageValue.showPreviousPage()
             }
         }
     }

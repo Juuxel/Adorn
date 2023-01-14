@@ -14,7 +14,7 @@ object GeneratorConfigLoader {
         check(root.tagName == Tags.ROOT) { "generator config root element must be ${Tags.ROOT}, found ${root.tagName}" }
         val woods = root.getElementSequenceByTagName(Tags.WOOD).map(::readWood).toSet()
         val stones = root.getElementSequenceByTagName(Tags.STONE).map(::readStone).toSet()
-        val wools = if (root.getAttribute(Attributes.WOOL).toBoolean()) ColorMaterial.values() else emptyArray()
+        val wools = if (root.getAttribute(Attributes.WOOL).toBoolean()) WoolMaterial.values() else emptyArray()
         val conditionType = ConditionType.parse(root.getAttribute(Attributes.CONDITION_TYPE))
             ?: error("Unknown condition type in $path: ${root.getAttribute(Attributes.CONDITION_TYPE)}")
         val rootReplacements = getReplacements(root)

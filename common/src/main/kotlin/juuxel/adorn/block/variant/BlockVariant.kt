@@ -46,7 +46,7 @@ interface BlockVariant {
         )
 
         val WOOLS: Map<DyeColor, BlockVariant> = DyeColor.values().asSequence().associateWith {
-            variant(it.asString(), Blocks.WHITE_WOOL)
+            variant("${it.asString()}_wool", Blocks.WHITE_WOOL)
         }
 
         val IRON = variant("iron", Blocks.IRON_BARS)

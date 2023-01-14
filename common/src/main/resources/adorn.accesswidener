@@ -46,3 +46,6 @@ accessible method net/minecraft/client/gui/screen/ingame/MenuScreens register (L
 
 # Criteria
 accessible method net/minecraft/advancement/criterion/Criteria register (Lnet/minecraft/advancement/criterion/Criterion;)Lnet/minecraft/advancement/criterion/Criterion;
+
+# GUIs
+accessible method net/minecraft/client/gui/DrawableHelper drawTexturedQuad (Lorg/joml/Matrix4f;IIIIIFFFF)V

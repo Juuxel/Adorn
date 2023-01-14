@@ -13,7 +13,7 @@ interface BlockVariantSet {
     }
 
     fun interface CustomVariantConsumer {
-        fun add(variant: BlockVariant, kinds: List<BlockKind>)
+        fun add(variant: BlockVariant, group: BlockVariantGroup, kinds: List<BlockKind>)
     }
 
     fun interface Sorter {

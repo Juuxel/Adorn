@@ -61,7 +61,7 @@ class StoneMaterial(override val id: Id, private val bricks: Boolean, val hasSid
     }
 }
 
-enum class ColorMaterial(private val color: String) : Material {
+enum class WoolMaterial(private val color: String) : Material {
     WHITE("white"),
     ORANGE("orange"),
     MAGENTA("magenta"),
@@ -86,5 +86,8 @@ enum class ColorMaterial(private val color: String) : Material {
 
     override fun TemplateDsl.appendTemplates() {
         "wool" with wool
+        "block_variant_id" with wool
+        "planks" with wool
+        "main-texture" with "<wool.namespace>:block/<wool.path>"
     }
 }

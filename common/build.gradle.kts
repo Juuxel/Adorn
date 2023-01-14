@@ -20,6 +20,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
     implementation("blue.endless:jankson:${rootProject.property("jankson")}")
+    implementation("io.github.juuxel:libninepatch:${rootProject.property("libninepatch")}")
 
     // Just for @Environment and mixin deps :)
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric-loader")}")

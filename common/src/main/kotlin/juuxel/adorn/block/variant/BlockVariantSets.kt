@@ -4,6 +4,7 @@ import com.google.common.collect.BiMap
 import com.google.common.collect.ImmutableBiMap
 import com.google.common.collect.ListMultimap
 import com.google.common.collect.MultimapBuilder
+import com.google.common.collect.SetMultimap
 import juuxel.adorn.block.BenchBlock
 import juuxel.adorn.block.ChairBlock
 import juuxel.adorn.block.CoffeeTableBlock
@@ -36,6 +37,11 @@ object BlockVariantSets : RegistryHelper() {
             .build()
     private val blocksByKindVariant: MutableMap<Pair<BlockKind, BlockVariant>, Registered<Block>> =
         LinkedHashMap()
+    private val allVariantsUnsorted: MutableSet<BlockVariant> = HashSet()
+    private val variantsByGroup: SetMultimap<BlockVariantGroup, BlockVariant> =
+        MultimapBuilder.enumKeys(BlockVariantGroup::class.java)
+            .linkedHashSetValues()
+            .build()
     private lateinit var allVariants: List<BlockVariant>
     private lateinit var variantsById: BiMap<Identifier, BlockVariant>
 
@@ -64,7 +70,7 @@ object BlockVariantSets : RegistryHelper() {
     }
 
     private fun sortVariants(): List<BlockVariant> {
-        val variants = blocksByVariant.keySet().toMutableList()
+        val variants = allVariantsUnsorted.toMutableList()
         val sorter = BlockVariantSet.Sorter { variant, after ->
             variants.remove(variant)
             variants.add(index = variants.indexOf(after) + 1, element = variant)
@@ -73,6 +79,11 @@ object BlockVariantSets : RegistryHelper() {
             variantSet.sortVariants(sorter)
         }
         return variants
+    }
+
+    fun allVariantsByGroup(): SetMultimap<BlockVariantGroup, BlockVariant> {
+        checkFrozen()
+        return variantsByGroup
     }
 
     fun add(variantSet: BlockVariantSet) {
@@ -117,11 +128,18 @@ object BlockVariantSets : RegistryHelper() {
         register(BlockKind.COFFEE_TABLE, woodVariants)
         register(BlockKind.BENCH, woodVariants)
 
+        allVariantsUnsorted += allVariants
+        variantsByGroup.putAll(BlockVariantGroup.WOOD, woodVariants)
+        variantsByGroup.putAll(BlockVariantGroup.STONE, stoneVariants)
+
         for (set in variantSets) {
-            set.addVariants { variant, kinds ->
+            set.addVariants { variant, group, kinds ->
                 for (kind in kinds) {
                     register(kind, variant)
                 }
+
+                allVariantsUnsorted += variant
+                variantsByGroup.put(group, variant)
             }
         }
         freeze()
