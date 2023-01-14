@@ -12,7 +12,7 @@ data class FurniturePart(
     val origin: Vector3d,
     var sizeX: Int, var sizeY: Int, var sizeZ: Int,
     var yaw: Double, var pitch: Double, var roll: Double,
-    val material: FurniturePartMaterial
+    var material: FurniturePartMaterial
 ) {
     constructor(origin: Vector3d, sizeX: Int, sizeY: Int, sizeZ: Int, material: FurniturePartMaterial) :
         this(origin, sizeX, sizeY, sizeZ, material = material, yaw = 0.0, pitch = 0.0, roll = 0.0)

@@ -53,6 +53,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
     AdornMenuScreen<FurnitureWorkbenchMenu>(menu, playerInventory, title) {
     private var currentMaterial: FurniturePartMaterial = FurniturePartMaterial.OfVariant(BlockVariant.OAK)
     private val furnitureParts: MutableList<FurniturePart> = ArrayList()
+    private var focusedPart: FurniturePart? = null
     private lateinit var materialFlipBook: FlipBook
     private lateinit var previousPageButton: PageButton
     private lateinit var nextPageButton: PageButton
@@ -82,7 +83,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
             .position(5, y)
             .build()
         addDrawableChild(button)
-        materialFlipBook = addDrawableChild(FurnitureMaterialGrid.createFlipBook(5, y + 34, { updatePageButtons() }, { currentMaterial = it }))
+        materialFlipBook = addDrawableChild(FurnitureMaterialGrid.createFlipBook(5, y + 34, { updatePageButtons() }, { updateCurrentMaterial(it) }))
         previousPageButton = addDrawableChild(PageButton(5, y + 25, false))
         nextPageButton = addDrawableChild(PageButton(5 + 86 - 8, y + 25, true))
         updatePageButtons()
@@ -92,6 +93,11 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
     private fun updatePageButtons() {
         previousPageButton.visible = materialFlipBook.hasPreviousPage()
         nextPageButton.visible = materialFlipBook.hasNextPage()
+    }
+
+    private fun updateCurrentMaterial(material: FurniturePartMaterial) {
+        currentMaterial = material
+        focusedPart?.material = material
     }
 
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
@@ -126,12 +132,13 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         DiffuseLighting.disableGuiDepthLighting()
     }
 
-    private fun drawPart(matrices: MatrixStack, part: FurniturePart, highlighted: Boolean) {
+    private fun drawPart(matrices: MatrixStack, part: FurniturePart) {
         val texture = BlockVariantTextureLoader.get(part.material.id)?.mainTexture ?: MissingSprite.getMissingSpriteId()
         val sprite = spriteCache.getOrPut(texture) {
             val atlas = client!!.getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE)
             atlas.apply(texture)
         }
+        val highlighted = part == focusedPart
 
         // TODO: Rotation
         DiffuseLighting.enableGuiDepthLighting()
@@ -280,7 +287,6 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         private var zoom by AnimatedProperty(3f, animationEngine, 20, Interpolator.FLOAT)
         private var rotationY = MathHelper.PI
         private var rotationXZ = -MathHelper.PI * 0.1f
-        private var focusedPart: FurniturePart? = null
 
         private fun applyFurnitureTransforms(matrices: MatrixStack) {
             matrices.translate(x + 0.5f * DESIGN_AREA_WIDTH, y + 0.5f * DESIGN_AREA_HEIGHT, 100f)
@@ -310,7 +316,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
 
             // Draw each part in the scene
             for (part in furnitureParts) {
-                drawPart(matrices, part, part == focusedPart)
+                drawPart(matrices, part)
             }
 
             matrices.pop()
