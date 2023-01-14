@@ -54,6 +54,10 @@ object MinecraftBlockVariants : BlockVariantSet {
     override fun addVariants(consumer: BlockVariantSet.CustomVariantConsumer) {
         consumer.add(BlockVariant.IRON, BlockVariantGroup.METAL, listOf(BlockKind.SHELF))
 
+        for (glass in BlockVariant.STAINED_GLASS.values) {
+            consumer.add(glass, BlockVariantGroup.GLASS, listOf())
+        }
+
         for (wool in BlockVariant.WOOLS.values) {
             consumer.add(wool, BlockVariantGroup.WOOL, listOf())
         }

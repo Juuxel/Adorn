@@ -1,1 +1,26 @@
-{"architects_palette:mushy_myonite_brick": {"icon":{"id":"architects_palette:mushy_myonite_bricks"},"texture":"architects_palette:block/mushy_myonite_bricks"}, "architects_palette:myonite": {"icon":{"id":"architects_palette:myonite"},"texture":"architects_palette:block/myonite"}, "architects_palette:myonite_brick": {"icon":{"id":"architects_palette:myonite_bricks"},"texture":"architects_palette:block/myonite_bricks"}, "architects_palette:twisted": {"icon":{"id":"architects_palette:twisted_planks"},"texture":"architects_palette:block/twisted_planks"}}
+{
+  "architects_palette:mushy_myonite_brick": {
+    "icon": {
+      "id": "architects_palette:mushy_myonite_bricks"
+    },
+    "texture": "architects_palette:block/mushy_myonite_bricks"
+  },
+  "architects_palette:myonite": {
+    "icon": {
+      "id": "architects_palette:myonite"
+    },
+    "texture": "architects_palette:block/myonite"
+  },
+  "architects_palette:myonite_brick": {
+    "icon": {
+      "id": "architects_palette:myonite_bricks"
+    },
+    "texture": "architects_palette:block/myonite_bricks"
+  },
+  "architects_palette:twisted": {
+    "icon": {
+      "id": "architects_palette:twisted_planks"
+    },
+    "texture": "architects_palette:block/twisted_planks"
+  }
+}

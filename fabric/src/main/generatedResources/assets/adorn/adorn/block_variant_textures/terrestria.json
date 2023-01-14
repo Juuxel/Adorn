@@ -1,1 +1,92 @@
-{"terrestria:basalt": {"icon":{"id":"terrestria:basalt"},"texture":"terrestria:block/basalt"}, "terrestria:basalt_brick": {"icon":{"id":"terrestria:basalt_bricks"},"texture":"terrestria:block/basalt_bricks"}, "terrestria:basalt_cobblestone": {"icon":{"id":"terrestria:basalt_cobblestone"},"texture":"terrestria:block/basalt_cobblestone"}, "terrestria:cypress": {"icon":{"id":"terrestria:cypress_planks"},"texture":"terrestria:block/cypress_planks"}, "terrestria:hemlock": {"icon":{"id":"terrestria:hemlock_planks"},"texture":"terrestria:block/hemlock_planks"}, "terrestria:japanese_maple": {"icon":{"id":"terrestria:japanese_maple_planks"},"texture":"terrestria:block/japanese_maple_planks"}, "terrestria:mossy_basalt_brick": {"icon":{"id":"terrestria:mossy_basalt_bricks"},"texture":"terrestria:block/mossy_basalt_bricks"}, "terrestria:mossy_basalt_cobblestone": {"icon":{"id":"terrestria:mossy_basalt_cobblestone"},"texture":"terrestria:block/mossy_basalt_cobblestone"}, "terrestria:rainbow_eucalyptus": {"icon":{"id":"terrestria:rainbow_eucalyptus_planks"},"texture":"terrestria:block/rainbow_eucalyptus_planks"}, "terrestria:redwood": {"icon":{"id":"terrestria:redwood_planks"},"texture":"terrestria:block/redwood_planks"}, "terrestria:rubber": {"icon":{"id":"terrestria:rubber_planks"},"texture":"terrestria:block/rubber_planks"}, "terrestria:sakura": {"icon":{"id":"terrestria:sakura_planks"},"texture":"terrestria:block/sakura_planks"}, "terrestria:smooth_basalt": {"icon":{"id":"terrestria:smooth_basalt"},"texture":"terrestria:block/smooth_basalt"}, "terrestria:willow": {"icon":{"id":"terrestria:willow_planks"},"texture":"terrestria:block/willow_planks"}, "terrestria:yucca_palm": {"icon":{"id":"terrestria:yucca_palm_planks"},"texture":"terrestria:block/yucca_palm_planks"}}
+{
+  "terrestria:basalt": {
+    "icon": {
+      "id": "terrestria:basalt"
+    },
+    "texture": "terrestria:block/basalt"
+  },
+  "terrestria:basalt_brick": {
+    "icon": {
+      "id": "terrestria:basalt_bricks"
+    },
+    "texture": "terrestria:block/basalt_bricks"
+  },
+  "terrestria:basalt_cobblestone": {
+    "icon": {
+      "id": "terrestria:basalt_cobblestone"
+    },
+    "texture": "terrestria:block/basalt_cobblestone"
+  },
+  "terrestria:cypress": {
+    "icon": {
+      "id": "terrestria:cypress_planks"
+    },
+    "texture": "terrestria:block/cypress_planks"
+  },
+  "terrestria:hemlock": {
+    "icon": {
+      "id": "terrestria:hemlock_planks"
+    },
+    "texture": "terrestria:block/hemlock_planks"
+  },
+  "terrestria:japanese_maple": {
+    "icon": {
+      "id": "terrestria:japanese_maple_planks"
+    },
+    "texture": "terrestria:block/japanese_maple_planks"
+  },
+  "terrestria:mossy_basalt_brick": {
+    "icon": {
+      "id": "terrestria:mossy_basalt_bricks"
+    },
+    "texture": "terrestria:block/mossy_basalt_bricks"
+  },
+  "terrestria:mossy_basalt_cobblestone": {
+    "icon": {
+      "id": "terrestria:mossy_basalt_cobblestone"
+    },
+    "texture": "terrestria:block/mossy_basalt_cobblestone"
+  },
+  "terrestria:rainbow_eucalyptus": {
+    "icon": {
+      "id": "terrestria:rainbow_eucalyptus_planks"
+    },
+    "texture": "terrestria:block/rainbow_eucalyptus_planks"
+  },
+  "terrestria:redwood": {
+    "icon": {
+      "id": "terrestria:redwood_planks"
+    },
+    "texture": "terrestria:block/redwood_planks"
+  },
+  "terrestria:rubber": {
+    "icon": {
+      "id": "terrestria:rubber_planks"
+    },
+    "texture": "terrestria:block/rubber_planks"
+  },
+  "terrestria:sakura": {
+    "icon": {
+      "id": "terrestria:sakura_planks"
+    },
+    "texture": "terrestria:block/sakura_planks"
+  },
+  "terrestria:smooth_basalt": {
+    "icon": {
+      "id": "terrestria:smooth_basalt"
+    },
+    "texture": "terrestria:block/smooth_basalt"
+  },
+  "terrestria:willow": {
+    "icon": {
+      "id": "terrestria:willow_planks"
+    },
+    "texture": "terrestria:block/willow_planks"
+  },
+  "terrestria:yucca_palm": {
+    "icon": {
+      "id": "terrestria:yucca_palm_planks"
+    },
+    "texture": "terrestria:block/yucca_palm_planks"
+  }
+}

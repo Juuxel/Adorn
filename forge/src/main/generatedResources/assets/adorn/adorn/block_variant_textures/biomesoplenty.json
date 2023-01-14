@@ -1,1 +1,122 @@
-{"biomesoplenty:black_sandstone": {"icon":{"id":"biomesoplenty:black_sandstone"},"texture":"biomesoplenty:block/black_sandstone"}, "biomesoplenty:cherry": {"icon":{"id":"biomesoplenty:cherry_planks"},"texture":"biomesoplenty:block/cherry_planks"}, "biomesoplenty:cut_black_sandstone": {"icon":{"id":"biomesoplenty:cut_black_sandstone"},"texture":"biomesoplenty:block/cut_black_sandstone"}, "biomesoplenty:cut_orange_sandstone": {"icon":{"id":"biomesoplenty:cut_orange_sandstone"},"texture":"biomesoplenty:block/cut_orange_sandstone"}, "biomesoplenty:cut_white_sandstone": {"icon":{"id":"biomesoplenty:cut_white_sandstone"},"texture":"biomesoplenty:block/cut_white_sandstone"}, "biomesoplenty:dead": {"icon":{"id":"biomesoplenty:dead_planks"},"texture":"biomesoplenty:block/dead_planks"}, "biomesoplenty:fir": {"icon":{"id":"biomesoplenty:fir_planks"},"texture":"biomesoplenty:block/fir_planks"}, "biomesoplenty:hellbark": {"icon":{"id":"biomesoplenty:hellbark_planks"},"texture":"biomesoplenty:block/hellbark_planks"}, "biomesoplenty:jacaranda": {"icon":{"id":"biomesoplenty:jacaranda_planks"},"texture":"biomesoplenty:block/jacaranda_planks"}, "biomesoplenty:magic": {"icon":{"id":"biomesoplenty:magic_planks"},"texture":"biomesoplenty:block/magic_planks"}, "biomesoplenty:mahogany": {"icon":{"id":"biomesoplenty:mahogany_planks"},"texture":"biomesoplenty:block/mahogany_planks"}, "biomesoplenty:orange_sandstone": {"icon":{"id":"biomesoplenty:orange_sandstone"},"texture":"biomesoplenty:block/orange_sandstone"}, "biomesoplenty:palm": {"icon":{"id":"biomesoplenty:palm_planks"},"texture":"biomesoplenty:block/palm_planks"}, "biomesoplenty:redwood": {"icon":{"id":"biomesoplenty:redwood_planks"},"texture":"biomesoplenty:block/redwood_planks"}, "biomesoplenty:smooth_black_sandstone": {"icon":{"id":"biomesoplenty:smooth_black_sandstone"},"texture":"biomesoplenty:block/black_sandstone_top"}, "biomesoplenty:smooth_orange_sandstone": {"icon":{"id":"biomesoplenty:smooth_orange_sandstone"},"texture":"biomesoplenty:block/orange_sandstone_top"}, "biomesoplenty:smooth_white_sandstone": {"icon":{"id":"biomesoplenty:smooth_white_sandstone"},"texture":"biomesoplenty:block/white_sandstone_top"}, "biomesoplenty:umbran": {"icon":{"id":"biomesoplenty:umbran_planks"},"texture":"biomesoplenty:block/umbran_planks"}, "biomesoplenty:white_sandstone": {"icon":{"id":"biomesoplenty:white_sandstone"},"texture":"biomesoplenty:block/white_sandstone"}, "biomesoplenty:willow": {"icon":{"id":"biomesoplenty:willow_planks"},"texture":"biomesoplenty:block/willow_planks"}}
+{
+  "biomesoplenty:black_sandstone": {
+    "icon": {
+      "id": "biomesoplenty:black_sandstone"
+    },
+    "texture": "biomesoplenty:block/black_sandstone"
+  },
+  "biomesoplenty:cherry": {
+    "icon": {
+      "id": "biomesoplenty:cherry_planks"
+    },
+    "texture": "biomesoplenty:block/cherry_planks"
+  },
+  "biomesoplenty:cut_black_sandstone": {
+    "icon": {
+      "id": "biomesoplenty:cut_black_sandstone"
+    },
+    "texture": "biomesoplenty:block/cut_black_sandstone"
+  },
+  "biomesoplenty:cut_orange_sandstone": {
+    "icon": {
+      "id": "biomesoplenty:cut_orange_sandstone"
+    },
+    "texture": "biomesoplenty:block/cut_orange_sandstone"
+  },
+  "biomesoplenty:cut_white_sandstone": {
+    "icon": {
+      "id": "biomesoplenty:cut_white_sandstone"
+    },
+    "texture": "biomesoplenty:block/cut_white_sandstone"
+  },
+  "biomesoplenty:dead": {
+    "icon": {
+      "id": "biomesoplenty:dead_planks"
+    },
+    "texture": "biomesoplenty:block/dead_planks"
+  },
+  "biomesoplenty:fir": {
+    "icon": {
+      "id": "biomesoplenty:fir_planks"
+    },
+    "texture": "biomesoplenty:block/fir_planks"
+  },
+  "biomesoplenty:hellbark": {
+    "icon": {
+      "id": "biomesoplenty:hellbark_planks"
+    },
+    "texture": "biomesoplenty:block/hellbark_planks"
+  },
+  "biomesoplenty:jacaranda": {
+    "icon": {
+      "id": "biomesoplenty:jacaranda_planks"
+    },
+    "texture": "biomesoplenty:block/jacaranda_planks"
+  },
+  "biomesoplenty:magic": {
+    "icon": {
+      "id": "biomesoplenty:magic_planks"
+    },
+    "texture": "biomesoplenty:block/magic_planks"
+  },
+  "biomesoplenty:mahogany": {
+    "icon": {
+      "id": "biomesoplenty:mahogany_planks"
+    },
+    "texture": "biomesoplenty:block/mahogany_planks"
+  },
+  "biomesoplenty:orange_sandstone": {
+    "icon": {
+      "id": "biomesoplenty:orange_sandstone"
+    },
+    "texture": "biomesoplenty:block/orange_sandstone"
+  },
+  "biomesoplenty:palm": {
+    "icon": {
+      "id": "biomesoplenty:palm_planks"
+    },
+    "texture": "biomesoplenty:block/palm_planks"
+  },
+  "biomesoplenty:redwood": {
+    "icon": {
+      "id": "biomesoplenty:redwood_planks"
+    },
+    "texture": "biomesoplenty:block/redwood_planks"
+  },
+  "biomesoplenty:smooth_black_sandstone": {
+    "icon": {
+      "id": "biomesoplenty:smooth_black_sandstone"
+    },
+    "texture": "biomesoplenty:block/black_sandstone_top"
+  },
+  "biomesoplenty:smooth_orange_sandstone": {
+    "icon": {
+      "id": "biomesoplenty:smooth_orange_sandstone"
+    },
+    "texture": "biomesoplenty:block/orange_sandstone_top"
+  },
+  "biomesoplenty:smooth_white_sandstone": {
+    "icon": {
+      "id": "biomesoplenty:smooth_white_sandstone"
+    },
+    "texture": "biomesoplenty:block/white_sandstone_top"
+  },
+  "biomesoplenty:umbran": {
+    "icon": {
+      "id": "biomesoplenty:umbran_planks"
+    },
+    "texture": "biomesoplenty:block/umbran_planks"
+  },
+  "biomesoplenty:white_sandstone": {
+    "icon": {
+      "id": "biomesoplenty:white_sandstone"
+    },
+    "texture": "biomesoplenty:block/white_sandstone"
+  },
+  "biomesoplenty:willow": {
+    "icon": {
+      "id": "biomesoplenty:willow_planks"
+    },
+    "texture": "biomesoplenty:block/willow_planks"
+  }
+}

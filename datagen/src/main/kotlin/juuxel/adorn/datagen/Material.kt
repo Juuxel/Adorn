@@ -91,3 +91,13 @@ enum class WoolMaterial(private val color: String) : Material {
         "main-texture" with "<wool.namespace>:block/<wool.path>"
     }
 }
+
+class GenericMaterial(override val id: Id) : Material {
+    override val stick = Material.STICK
+    override val snowflake = "custom/$id"
+
+    override fun TemplateDsl.appendTemplates() {
+        "main-texture" with "<planks.namespace>:block/<planks.path>"
+        "planks" with id
+    }
+}

@@ -45,8 +45,12 @@ interface BlockVariant {
             { BlockVariantSets.getId(it) }
         )
 
-        val WOOLS: Map<DyeColor, BlockVariant> = DyeColor.values().asSequence().associateWith {
+        val WOOLS: Map<DyeColor, BlockVariant> = DyeColor.values().associateWith {
             variant("${it.asString()}_wool", Blocks.WHITE_WOOL)
+        }
+
+        val STAINED_GLASS: Map<DyeColor, BlockVariant> = DyeColor.values().associateWith {
+            variant("${it.asString()}_stained_glass", Blocks.WHITE_STAINED_GLASS)
         }
 
         val IRON = variant("iron", Blocks.IRON_BARS)

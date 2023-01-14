@@ -86,6 +86,9 @@ Each data generator config file is an XML file in `<project dir>/src/data` with 
       - `has_sided_texture`: whether the base block has different textures for top/side/bottom
         - Used for 3D models
         - Values: `true`, `false` (default)
+  - `<material>`: a custom material
+    - Attributes:
+      - attributes common to all materials
   - Attributes common to all materials:
     - `id` (required): the unique namespaced ID of the material from which all the main properties are derived
 - "Fine tuning tags"

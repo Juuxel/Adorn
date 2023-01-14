@@ -70,6 +70,7 @@ class TagGenerator(private val entries: TagEntryProvider) {
                         yieldAll(it.woods)
                         yieldAll(it.stones)
                         yieldAll(it.wools)
+                        yieldAll(it.genericMaterials)
                     }
                 }
                 .map { it.material }

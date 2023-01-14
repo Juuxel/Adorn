@@ -15,6 +15,7 @@ object GeneratorConfigLoader {
         val woods = root.getElementSequenceByTagName(Tags.WOOD).map(::readWood).toSet()
         val stones = root.getElementSequenceByTagName(Tags.STONE).map(::readStone).toSet()
         val wools = if (root.getAttribute(Attributes.WOOL).toBoolean()) WoolMaterial.values() else emptyArray()
+        val genericMaterials = root.getElementSequenceByTagName(Tags.MATERIAL).map(::readGenericMaterial).toSet()
         val conditionType = ConditionType.parse(root.getAttribute(Attributes.CONDITION_TYPE))
             ?: error("Unknown condition type in $path: ${root.getAttribute(Attributes.CONDITION_TYPE)}")
         val rootReplacements = getReplacements(root)
@@ -23,6 +24,7 @@ object GeneratorConfigLoader {
             wools.mapTo(LinkedHashSet()) {
                 GeneratorConfig.MaterialEntry(it, exclude = emptySet(), replace = emptyMap())
             },
+            genericMaterials,
             conditionType,
             rootReplacements,
         )
@@ -61,6 +63,11 @@ object GeneratorConfigLoader {
         return readMaterialEntry(element, StoneMaterial(id, bricks = bricks, hasSidedTexture = sidedTexture))
     }
 
+    private fun readGenericMaterial(element: Element): GeneratorConfig.MaterialEntry<GenericMaterial> {
+        val id = Id.parse(element.getAttribute(Attributes.ID))
+        return readMaterialEntry(element, GenericMaterial(id))
+    }
+
     private operator fun NodeList.iterator(): Iterator<Node> =
         iterator {
             for (i in 0 until length) {
@@ -79,6 +86,7 @@ object GeneratorConfigLoader {
         const val STONE = "stone"
         const val REPLACE = "replace"
         const val EXCLUDE = "exclude"
+        const val MATERIAL = "material"
     }
 
     private object Attributes {

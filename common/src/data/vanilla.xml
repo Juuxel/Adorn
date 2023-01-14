@@ -91,4 +91,25 @@
     <stone id="minecraft:smooth_stone"/>
     <stone id="minecraft:stone_brick" bricks="true"/>
     <stone id="minecraft:stone"/>
+
+    <!-- Other materials -->
+    <material id="minecraft:iron">
+        <replace key="planks" with="minecraft:iron_block" id="true"/>
+    </material>
+    <material id="minecraft:white_stained_glass"/>
+    <material id="minecraft:orange_stained_glass"/>
+    <material id="minecraft:magenta_stained_glass"/>
+    <material id="minecraft:light_blue_stained_glass"/>
+    <material id="minecraft:yellow_stained_glass"/>
+    <material id="minecraft:lime_stained_glass"/>
+    <material id="minecraft:pink_stained_glass"/>
+    <material id="minecraft:gray_stained_glass"/>
+    <material id="minecraft:light_gray_stained_glass"/>
+    <material id="minecraft:cyan_stained_glass"/>
+    <material id="minecraft:purple_stained_glass"/>
+    <material id="minecraft:blue_stained_glass"/>
+    <material id="minecraft:brown_stained_glass"/>
+    <material id="minecraft:green_stained_glass"/>
+    <material id="minecraft:red_stained_glass"/>
+    <material id="minecraft:black_stained_glass"/>
 </data_generators>
