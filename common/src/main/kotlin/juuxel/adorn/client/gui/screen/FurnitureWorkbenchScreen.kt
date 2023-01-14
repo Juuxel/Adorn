@@ -5,7 +5,6 @@ import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.variant.BlockVariant
 import juuxel.adorn.client.gui.widget.FurnitureMaterialGrid
 import juuxel.adorn.client.gui.widget.FlipBook
-import juuxel.adorn.client.gui.widget.NoOpSelectable
 import juuxel.adorn.client.resources.BlockVariantTextureLoader
 import juuxel.adorn.design.FurniturePart
 import juuxel.adorn.design.FurniturePartMaterial
@@ -19,6 +18,7 @@ import juuxel.adorn.util.color
 import net.minecraft.client.gui.Drawable
 import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.gui.Element
+import net.minecraft.client.gui.Selectable
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.gui.widget.ButtonWidget
 import net.minecraft.client.gui.widget.PressableWidget
@@ -272,7 +272,10 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         private const val HIGHLIGHT_PULSE_PERIOD_MS = 3000.0
     }
 
-    private inner class DesignView(private val x: Int, private val y: Int) : NoOpSelectable(), Drawable, Element {
+    private inner class DesignView(private val x: Int, private val y: Int) : Drawable, Element, Selectable {
+        private var focused: Boolean = false
+        private var hovered: Boolean = false
+
         private var zoom by AnimatedProperty(3f, animationEngine, 20, Interpolator.FLOAT)
         private var rotationY = MathHelper.PI
         private var rotationXZ = -MathHelper.PI * 0.1f
@@ -291,6 +294,8 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         }
 
         override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+            hovered = isMouseOver(mouseX.toDouble(), mouseY.toDouble())
+
             DrawableHelper.enableScissor(x, y, x + DESIGN_AREA_WIDTH, y + DESIGN_AREA_HEIGHT)
             RenderSystem.enableDepthTest()
             matrices.push()
@@ -406,6 +411,23 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double): Boolean {
             zoom = MathHelper.clamp(zoom + amount.toFloat(), MIN_ZOOM, MAX_ZOOM)
             return true
+        }
+
+        override fun appendNarrations(builder: NarrationMessageBuilder) {
+        }
+
+        override fun getType(): Selectable.SelectionType =
+            if (focused) {
+                Selectable.SelectionType.FOCUSED
+            } else if (hovered) {
+                Selectable.SelectionType.HOVERED
+            } else {
+                Selectable.SelectionType.NONE
+            }
+
+        override fun changeFocus(lookForwards: Boolean): Boolean {
+            focused = !focused
+            return focused
         }
     }
 
