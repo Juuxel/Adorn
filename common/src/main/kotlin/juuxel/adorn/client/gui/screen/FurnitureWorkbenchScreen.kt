@@ -83,7 +83,14 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
             .position(5, y)
             .build()
         addDrawableChild(button)
-        materialFlipBook = addDrawableChild(FurnitureMaterialGrid.createFlipBook(5, y + 34, { updatePageButtons() }, { updateCurrentMaterial(it) }))
+        materialFlipBook = addDrawableChild(
+            FurnitureMaterialGrid.createFlipBook(
+                5, y + 34,
+                { updatePageButtons() },
+                { currentMaterial },
+                { updateCurrentMaterial(it) }
+            )
+        )
         previousPageButton = addDrawableChild(PageButton(5, y + 25, false))
         nextPageButton = addDrawableChild(PageButton(5 + 86 - 8, y + 25, true))
         updatePageButtons()
@@ -119,7 +126,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
         RenderSystem.setShaderTexture(0, WIDGETS)
 
-        val px = 1 / 64f
+        val px = 1 / 256f
         val position = matrices.peek().positionMatrix
         val buffer = Tessellator.getInstance().buffer
         buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE)
@@ -442,9 +449,9 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
         override fun renderButton(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
             RenderSystem.setShaderTexture(0, WIDGETS)
             RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-            val u = if (forwards) 48f else 40f
-            val v = if (isHovered) 8f else 0f
-            drawTexture(matrices, x, y, u, v, width, height, 64, 64)
+            val u = if (forwards) 68 else 60
+            val v = if (isHovered) 8 else 0
+            drawTexture(matrices, x, y, u, v, width, height)
         }
 
         override fun appendClickableNarrations(builder: NarrationMessageBuilder) {

@@ -19,7 +19,13 @@ object FurnitureMaterialGrid {
     private const val CELL_GAP = 2
     private val TEXTURE = AdornCommon.id("textures/gui/furniture_workbench_widgets.png")
 
-    private fun createPage(x: Int, y: Int, materials: List<FurniturePartMaterial>, start: Int, materialListener: (FurniturePartMaterial) -> Unit): Panel {
+    private fun createPage(
+        x: Int, y: Int,
+        materials: List<FurniturePartMaterial>,
+        start: Int,
+        currentMaterial: () -> FurniturePartMaterial,
+        materialListener: (FurniturePartMaterial) -> Unit
+    ): Panel {
         val panel = Panel()
 
         for (i in start until (start + WIDTH * HEIGHT)) {
@@ -29,26 +35,34 @@ object FurnitureMaterialGrid {
             val col = (i - start) % WIDTH
             val buttonX = x + col * (CELL_SIZE + CELL_GAP)
             val buttonY = y + row * (CELL_SIZE + CELL_GAP)
-            panel.add(MaterialButton(buttonX, buttonY, materials[i], materialListener))
+            panel.add(MaterialButton(buttonX, buttonY, materials[i], currentMaterial, materialListener))
         }
 
         return panel
     }
 
-    fun createFlipBook(x: Int, y: Int, pageUpdateListener: () -> Unit, materialListener: (FurniturePartMaterial) -> Unit): FlipBook {
+    fun createFlipBook(
+        x: Int, y: Int,
+        pageUpdateListener: () -> Unit,
+        currentMaterial: () -> FurniturePartMaterial,
+        materialListener: (FurniturePartMaterial) -> Unit
+    ): FlipBook {
         val flipBook = FlipBook(pageUpdateListener)
         val materials = FurniturePartMaterial.ALL
 
         for (start in materials.indices step (WIDTH * HEIGHT)) {
-            flipBook.add(createPage(x, y, materials, start, materialListener))
+            flipBook.add(createPage(x, y, materials, start, currentMaterial, materialListener))
         }
 
         return flipBook
     }
 
-    // TODO: names for block variants
-    private class MaterialButton(x: Int, y: Int, private val material: FurniturePartMaterial, private val materialListener: (FurniturePartMaterial) -> Unit) :
-        PressableWidget(x, y, CELL_SIZE, CELL_SIZE, Text.literal("TODO")) {
+    private class MaterialButton(
+        x: Int, y: Int,
+        private val material: FurniturePartMaterial,
+        private val currentMaterial: () -> FurniturePartMaterial,
+        private val materialListener: (FurniturePartMaterial) -> Unit
+    ) : PressableWidget(x, y, CELL_SIZE, CELL_SIZE, material.displayName) {
         private val itemRenderer = MinecraftClient.getInstance().itemRenderer
 
         init {
@@ -58,8 +72,9 @@ object FurnitureMaterialGrid {
         override fun renderButton(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
             RenderSystem.setShaderTexture(0, TEXTURE)
             RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-            val v = if (isHovered) 20f else 0f
-            drawTexture(matrices, x, y, 20f, v, width, height, 64, 64)
+            val u = if (currentMaterial() == material) 40 else 20
+            val v = if (isHovered) 20 else 0
+            drawTexture(matrices, x, y, u, v, width, height)
             val icon = BlockVariantTextureLoader.get(material.id)?.icon ?: BlockVariantIcon.MISSING
             icon.render(matrices, x + 2, y + 2, itemRenderer)
         }
