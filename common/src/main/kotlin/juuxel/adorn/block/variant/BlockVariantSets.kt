@@ -101,7 +101,6 @@ object BlockVariantSets : RegistryHelper() {
     }
 
     fun register() {
-        freeze()
         val woodVariants = variantSets.flatMap(BlockVariantSet::woodVariants)
         val stoneVariants = variantSets.flatMap(BlockVariantSet::stoneVariants)
         val allVariants = woodVariants + stoneVariants
@@ -125,6 +124,7 @@ object BlockVariantSets : RegistryHelper() {
                 }
             }
         }
+        freeze()
     }
 
     private fun register(kind: BlockKind, variants: List<BlockVariant>) {
