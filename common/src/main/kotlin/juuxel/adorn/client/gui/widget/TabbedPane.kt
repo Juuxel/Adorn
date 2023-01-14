@@ -18,7 +18,7 @@ class TabbedPane<E : Element> private constructor(
     val flipBook: FlipBook<E>,
     private val panel: Panel,
     private val tabs: List<Tab<E>>
-    ) : WidgetEnvelope() {
+) : WidgetEnvelope() {
     override fun current(): Element = panel
 
     fun currentTab(): Tab<E>? =
