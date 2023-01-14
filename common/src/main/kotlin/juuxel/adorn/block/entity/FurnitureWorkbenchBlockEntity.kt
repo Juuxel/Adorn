@@ -8,7 +8,6 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.menu.Menu
-import net.minecraft.menu.MenuContext
 import net.minecraft.menu.NamedMenuFactory
 import net.minecraft.text.Text
 import net.minecraft.util.math.BlockPos

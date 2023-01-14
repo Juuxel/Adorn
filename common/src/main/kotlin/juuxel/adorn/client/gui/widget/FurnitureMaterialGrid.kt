@@ -47,8 +47,8 @@ object FurnitureMaterialGrid {
     }
 
     // TODO: names for block variants
-    private class MaterialButton(x: Int, y: Int, private val material: FurniturePartMaterial, private val materialListener: (FurniturePartMaterial) -> Unit)
-        : PressableWidget(x, y, CELL_SIZE, CELL_SIZE, Text.literal("TODO")) {
+    private class MaterialButton(x: Int, y: Int, private val material: FurniturePartMaterial, private val materialListener: (FurniturePartMaterial) -> Unit) :
+        PressableWidget(x, y, CELL_SIZE, CELL_SIZE, Text.literal("TODO")) {
         private val itemRenderer = MinecraftClient.getInstance().itemRenderer
 
         init {

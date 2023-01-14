@@ -3,8 +3,8 @@ package juuxel.adorn.client.gui.screen
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.variant.BlockVariant
-import juuxel.adorn.client.gui.widget.FurnitureMaterialGrid
 import juuxel.adorn.client.gui.widget.FlipBook
+import juuxel.adorn.client.gui.widget.FurnitureMaterialGrid
 import juuxel.adorn.client.resources.BlockVariantTextureLoader
 import juuxel.adorn.design.FurniturePart
 import juuxel.adorn.design.FurniturePartMaterial
@@ -262,6 +262,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
     companion object {
         private const val DESIGN_AREA_WIDTH = 8 * 18
         private const val DESIGN_AREA_HEIGHT = 5 * 18
+
         // Rotation speeds in radians per pixel
         private const val ROTATION_SPEED_AROUND_Y = 0.03
         private const val HORIZONTAL_ROTATION_SPEED = 0.03

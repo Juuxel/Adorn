@@ -1,6 +1,5 @@
 package juuxel.adorn.util
 
-import com.mojang.serialization.DataResult
 import com.mojang.serialization.Decoder
 import com.mojang.serialization.Encoder
 import juuxel.adorn.lib.Registered
