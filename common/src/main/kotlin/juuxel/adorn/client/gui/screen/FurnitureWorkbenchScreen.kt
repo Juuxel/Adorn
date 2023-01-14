@@ -89,7 +89,9 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
             .build()
         addDrawableChild(button)
         materialTabs = addDrawableChild(
-            TabbedPane(5, y + 25, 115, 140) {
+            TabbedPane(5, y + 25, 115, 166) {
+                topBottomTabs()
+
                 for (group in BlockVariantGroup.values()) {
                     val variants = BlockVariantSets.allVariantsByGroup().get(group)
                     val materials = buildList {
@@ -97,7 +99,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
                             add(FurniturePartMaterial.OfVariant(variant))
                         }
 
-                        if (group == BlockVariantGroup.OTHER) {
+                        if (group == BlockVariantGroup.FUNCTIONAL) {
                             addAll(FurniturePartMaterial.Functional.values())
                         }
                     }

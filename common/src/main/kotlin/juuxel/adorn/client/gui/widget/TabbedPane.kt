@@ -26,6 +26,12 @@ class TabbedPane<E : Element> private constructor(
 
     class Builder<E : Element>(private val x: Int, private val y: Int, private val width: Int, private val height: Int) {
         private val tabs: MutableList<Tab<E>> = ArrayList()
+        private var topBottomTabs = false
+
+        fun topBottomTabs(): Builder<E> {
+            topBottomTabs = true
+            return this
+        }
 
         fun tab(icon: TabIcon, label: Text, element: (x: Int, y: Int) -> E): Builder<E> =
             tab(icon, label, element(x + HORIZONTAL_PADDING, y + VERTICAL_PADDING))
@@ -37,23 +43,43 @@ class TabbedPane<E : Element> private constructor(
 
         fun build(): TabbedPane<E> {
             val panel = Panel()
-            val tabbedPane = TabbedPane<E>(FlipBook(), panel, tabs)
+            val tabbedPane = TabbedPane(FlipBook(), panel, tabs)
+            val tabsPerRow = 1 + (width - TAB_WIDTH) / (TAB_WIDTH + 1)
+            val hasBottomRow = topBottomTabs && tabs.size > tabsPerRow
+
             panel.add(tabbedPane.flipBook)
             panel.addDrawable { matrices, _, _, _ ->
+                val backgroundHeight = if (hasBottomRow) {
+                    height - 2 * TAB_HEIGHT + 8
+                } else {
+                    height - TAB_HEIGHT + 4
+                }
+
                 matrices.push()
                 matrices.translate(x.toFloat(), (y + TAB_HEIGHT - 4).toFloat(), 0f)
-                NINE_PATCH.draw(NinePatchRenderer, matrices, width, height - TAB_HEIGHT + 4)
+                NINE_PATCH.draw(NinePatchRenderer, matrices, width, backgroundHeight)
                 matrices.pop()
             }
 
             for ((index, tab) in tabs.withIndex()) {
-                val tabX = index * (TAB_WIDTH + 1)
+                val onBottomRow = topBottomTabs && index >= tabsPerRow
+                val indexOnRow = if (onBottomRow) {
+                    index - tabsPerRow
+                } else {
+                    index
+                }
+                val tabX = indexOnRow * (TAB_WIDTH + 1)
+                val tabY = if (onBottomRow) {
+                    height - TAB_HEIGHT
+                } else {
+                    0
+                }
                 val style = when {
-                    index == 0 -> 0
+                    indexOnRow == 0 -> 0
                     tabX + TAB_WIDTH == width -> 2
                     else -> 1
                 }
-                panel.add(tabbedPane.TabButton(x + tabX, y, style, tab))
+                panel.add(tabbedPane.TabButton(x + tabX, y + tabY, style, tab, onBottomRow))
                 tabbedPane.flipBook.add(tab.element)
             }
 
@@ -88,19 +114,26 @@ class TabbedPane<E : Element> private constructor(
     private inner class TabButton(
         x: Int, y: Int,
         private val style: Int,
-        private val tab: Tab<E>
+        private val tab: Tab<E>,
+        private val bottom: Boolean
     ) : PressableWidget(x, y, TAB_WIDTH, TAB_HEIGHT, tab.label) {
         init {
             setTooltip(Tooltip.of(tab.label))
         }
 
         override fun renderButton(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
-            val u = style * TAB_WIDTH
+            var u = style * TAB_WIDTH
+            if (bottom) u += 84
             val v = if (flipBook.currentPageValue === tab.element) TAB_HEIGHT else 0
             RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
             RenderSystem.setShaderTexture(0, TAB_TEXTURE)
             drawTexture(matrices, x, y, u, v, TAB_WIDTH, TAB_HEIGHT)
-            tab.icon.render(matrices, x + ICON_X, y + ICON_Y)
+            val iconY = if (bottom) {
+                height - ICON_Y - 16
+            } else {
+                ICON_Y
+            }
+            tab.icon.render(matrices, x + ICON_X, y + iconY)
         }
 
         override fun appendClickableNarrations(builder: NarrationMessageBuilder) {

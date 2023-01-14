@@ -1628,7 +1628,10 @@
   "furniture_material.adorn.architects_palette.mushy_myonite_brick": "Mushy Myonite Brick",
   "furniture_material_group.adorn.wood": "Wood",
   "furniture_material_group.adorn.stone": "Stone",
+  "furniture_material_group.adorn.metal": "Metal",
+  "furniture_material_group.adorn.glass": "Glass",
   "furniture_material_group.adorn.wool": "Wool",
+  "furniture_material_group.adorn.functional": "Functional",
   "furniture_material_group.adorn.other": "Other",
 
   "category.adorn.brewer": "Brewer",
