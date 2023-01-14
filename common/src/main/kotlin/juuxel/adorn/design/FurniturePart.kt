@@ -2,9 +2,9 @@ package juuxel.adorn.design
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
-import juuxel.adorn.block.variant.BlockVariant
-import juuxel.adorn.block.variant.BlockVariantSets
 import juuxel.adorn.util.AdornCodecs
+import juuxel.adorn.util.readNbtWithCodec
+import juuxel.adorn.util.writeNbtWithCodec
 import net.minecraft.network.PacketByteBuf
 import org.joml.Vector3d
 
@@ -12,9 +12,9 @@ data class FurniturePart(
     val origin: Vector3d,
     var sizeX: Int, var sizeY: Int, var sizeZ: Int,
     var yaw: Double, var pitch: Double, var roll: Double,
-    val material: BlockVariant
+    val material: FurniturePartMaterial
 ) {
-    constructor(origin: Vector3d, sizeX: Int, sizeY: Int, sizeZ: Int, material: BlockVariant) :
+    constructor(origin: Vector3d, sizeX: Int, sizeY: Int, sizeZ: Int, material: FurniturePartMaterial) :
         this(origin, sizeX, sizeY, sizeZ, material = material, yaw = 0.0, pitch = 0.0, roll = 0.0)
 
     inline fun forEachVertex(consumer: (x: Double, y: Double, z: Double) -> Unit) {
@@ -62,7 +62,7 @@ data class FurniturePart(
         buf.writeDouble(yaw)
         buf.writeDouble(pitch)
         buf.writeDouble(roll)
-        buf.writeIdentifier(BlockVariantSets.getId(material))
+        buf.writeNbtWithCodec(FurniturePartMaterial.CODEC, material)
     }
 
     companion object {
@@ -75,7 +75,7 @@ data class FurniturePart(
                 Codec.DOUBLE.fieldOf("Yaw").forGetter { it.yaw },
                 Codec.DOUBLE.fieldOf("Pitch").forGetter { it.pitch },
                 Codec.DOUBLE.fieldOf("Roll").forGetter { it.roll },
-                BlockVariant.CODEC.fieldOf("Material").forGetter { it.material }
+                FurniturePartMaterial.CODEC.fieldOf("Material").forGetter { it.material }
             ).apply(builder, ::FurniturePart)
         }
 
@@ -90,8 +90,7 @@ data class FurniturePart(
             val yaw = buf.readDouble()
             val pitch = buf.readDouble()
             val roll = buf.readDouble()
-            val materialId = buf.readIdentifier()
-            val material = BlockVariantSets.getVariant(materialId)
+            val material = buf.readNbtWithCodec(FurniturePartMaterial.CODEC)
             return FurniturePart(origin, sizeX, sizeY, sizeZ, yaw, pitch, roll, material)
         }
     }

@@ -3,12 +3,12 @@ package juuxel.adorn.client.gui.screen
 import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.variant.BlockVariant
-import juuxel.adorn.block.variant.BlockVariantSets
-import juuxel.adorn.client.gui.widget.BlockVariantGrid
+import juuxel.adorn.client.gui.widget.FurnitureMaterialGrid
 import juuxel.adorn.client.gui.widget.FlipBook
 import juuxel.adorn.client.gui.widget.NoOpSelectable
 import juuxel.adorn.client.resources.BlockVariantTextureLoader
 import juuxel.adorn.design.FurniturePart
+import juuxel.adorn.design.FurniturePartMaterial
 import juuxel.adorn.menu.FurnitureWorkbenchMenu
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.Geometry
@@ -48,7 +48,7 @@ import kotlin.random.Random
 
 class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: PlayerInventory, title: Text) :
     AdornMenuScreen<FurnitureWorkbenchMenu>(menu, playerInventory, title) {
-    private var currentMaterial: BlockVariant = BlockVariant.OAK
+    private var currentMaterial: FurniturePartMaterial = FurniturePartMaterial.OfVariant(BlockVariant.OAK)
     private val furnitureParts: MutableList<FurniturePart> = ArrayList()
     private lateinit var materialFlipBook: FlipBook
     private lateinit var previousPageButton: PageButton
@@ -78,7 +78,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
             .position(5, y)
             .build()
         addDrawableChild(button)
-        materialFlipBook = addDrawableChild(BlockVariantGrid.createFlipBook(5, y + 34, { updatePageButtons() }, { currentMaterial = it }))
+        materialFlipBook = addDrawableChild(FurnitureMaterialGrid.createFlipBook(5, y + 34, { updatePageButtons() }, { currentMaterial = it }))
         previousPageButton = addDrawableChild(PageButton(5, y + 25, false))
         nextPageButton = addDrawableChild(PageButton(5 + 86 - 8, y + 25, true))
         updatePageButtons()
@@ -122,7 +122,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
     }
 
     private fun drawPart(matrices: MatrixStack, part: FurniturePart, highlighted: Boolean) {
-        val texture = BlockVariantTextureLoader.get(BlockVariantSets.getId(part.material))?.mainTexture ?: MissingSprite.getMissingSpriteId()
+        val texture = BlockVariantTextureLoader.get(part.material.id)?.mainTexture ?: MissingSprite.getMissingSpriteId()
         val sprite = spriteCache.getOrPut(texture) {
             val atlas = client!!.getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE)
             atlas.apply(texture)

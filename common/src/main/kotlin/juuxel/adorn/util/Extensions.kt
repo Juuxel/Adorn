@@ -1,5 +1,8 @@
 package juuxel.adorn.util
 
+import com.mojang.serialization.DataResult
+import com.mojang.serialization.Decoder
+import com.mojang.serialization.Encoder
 import juuxel.adorn.lib.Registered
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
@@ -8,6 +11,9 @@ import net.minecraft.block.Blocks
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.menu.MenuContext
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.NbtOps
+import net.minecraft.network.PacketByteBuf
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.property.Property
 import net.minecraft.text.MutableText
@@ -15,6 +21,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
+import java.util.function.Function
 
 fun ItemStack.toTextWithCount(): MutableText =
     Text.translatable("text.adorn.item_stack_with_count", count, toHoverableText())
@@ -119,5 +126,22 @@ fun BlockEntity.syncToClient() {
         world.chunkManager.markForUpdate(pos)
     } else {
         throw IllegalStateException("[Adorn] Can't sync server->client from the server. What on earth am I doing?")
+    }
+}
+
+fun <T> PacketByteBuf.writeNbtWithCodec(encoder: Encoder<in T>, value: T) {
+    val nbt = encoder.encodeStart(NbtOps.INSTANCE, value).get().map(Function.identity()) {
+        throw IllegalArgumentException("Could not write $value to NBT using $encoder: ${it.message()}")
+    }
+    val wrapper = NbtCompound()
+    wrapper.put("Value", nbt)
+    writeNbt(wrapper)
+}
+
+fun <T> PacketByteBuf.readNbtWithCodec(decoder: Decoder<out T>): T {
+    val wrapper = readNbt()!!
+    val nbt = wrapper.get("Value")!!
+    return decoder.decode(NbtOps.INSTANCE, nbt).map { it.first }.get().map(Function.identity()) {
+        throw RuntimeException("Could not read a value from NBT using $decoder: ${it.message()}")
     }
 }
