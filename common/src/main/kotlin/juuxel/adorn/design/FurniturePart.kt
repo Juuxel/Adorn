@@ -93,6 +93,9 @@ data class FurniturePart(
             val material = buf.readNbtWithCodec(FurniturePartMaterial.CODEC)
             return FurniturePart(origin, sizeX, sizeY, sizeZ, yaw, pitch, roll, material)
         }
+
+        fun write(buf: PacketByteBuf, part: FurniturePart) =
+            part.write(buf)
     }
 
     fun interface FaceConsumer {

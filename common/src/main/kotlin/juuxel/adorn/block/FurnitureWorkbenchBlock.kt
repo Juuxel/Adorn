@@ -3,6 +3,7 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.block.entity.FurnitureWorkbenchBlockEntity
+import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -18,7 +19,7 @@ class FurnitureWorkbenchBlock(settings: Settings) : VisibleBlockWithEntity(setti
 
         val blockEntity = world.getBlockEntity(pos)
         if (blockEntity is FurnitureWorkbenchBlockEntity) {
-            player.openMenu(blockEntity)
+            PlatformBridges.menus.open(player, blockEntity, pos)
         }
 
         return ActionResult.CONSUME

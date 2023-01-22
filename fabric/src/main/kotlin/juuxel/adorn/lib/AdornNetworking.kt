@@ -6,27 +6,35 @@ import juuxel.adorn.client.gui.screen.GuideBookScreen
 import juuxel.adorn.client.resources.BookManagerFabric
 import juuxel.adorn.fluid.FluidReference
 import juuxel.adorn.fluid.FluidVolume
+import juuxel.adorn.menu.DataChannel
+import juuxel.adorn.menu.MenuWithDataChannels
 import juuxel.adorn.menu.TradingStationMenu
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
+import net.minecraft.client.gui.screen.ingame.MenuProvider
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.menu.Menu
 import net.minecraft.network.Packet
+import net.minecraft.network.PacketByteBuf
 import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Identifier
+import net.minecraft.util.thread.ThreadExecutor
 
 object AdornNetworking {
     val ENTITY_SPAWN = AdornCommon.id("entity_spawn")
     val OPEN_BOOK = AdornCommon.id("open_book")
     val BREWER_FLUID_SYNC = AdornCommon.id("brewer_fluid_sync")
     val SET_TRADE_STACK = AdornCommon.id("set_trade_stack")
+    val MENU_DATA_CHANNEL_S2C = AdornCommon.id("menu_data_channel_s2c")
+    val MENU_DATA_CHANNEL_C2S = AdornCommon.id("menu_data_channel_c2s")
 
     fun init() {
         ServerPlayNetworking.registerGlobalReceiver(SET_TRADE_STACK) { server, player, _, buf, _ ->
@@ -39,6 +47,10 @@ object AdornNetworking {
                     menu.updateTradeStack(slotId, stack, player)
                 }
             }
+        }
+
+        ServerPlayNetworking.registerGlobalReceiver(MENU_DATA_CHANNEL_C2S) { server, player, _, buf, _ ->
+            receiveMenuDataChannel(buf, server, menuGetter = { player.menu })
         }
     }
 
@@ -75,6 +87,10 @@ object AdornNetworking {
                 BrewerScreen.setFluidFromPacket(client, syncId, volume)
             }
         }
+
+        ClientPlayNetworking.registerGlobalReceiver(MENU_DATA_CHANNEL_S2C) { client, _, buf, _ ->
+            receiveMenuDataChannel(buf, client, menuGetter = { (client.currentScreen as? MenuProvider<*>)?.menu })
+        }
     }
 
     fun createEntitySpawnPacket(entity: Entity): Packet<ClientPlayPacketListener> =
@@ -102,6 +118,16 @@ object AdornNetworking {
         }
     }
 
+    fun sendDataChannelToClient(player: PlayerEntity, dataChannel: DataChannel<*>) {
+        if (player is ServerPlayerEntity) {
+            val buf = PacketByteBufs.create()
+            buf.writeVarInt(dataChannel.menuSyncId)
+            buf.writeByte(dataChannel.id.toInt())
+            dataChannel.write(buf)
+            ServerPlayNetworking.send(player, MENU_DATA_CHANNEL_S2C, buf)
+        }
+    }
+
     @Environment(EnvType.CLIENT)
     fun sendSetTradeStack(syncId: Int, slotId: Int, stack: ItemStack) {
         val buf = PacketByteBufs.create()
@@ -109,5 +135,32 @@ object AdornNetworking {
         buf.writeVarInt(slotId)
         buf.writeItemStack(stack)
         ClientPlayNetworking.send(SET_TRADE_STACK, buf)
+    }
+
+    @Environment(EnvType.CLIENT)
+    fun sendDataChannelToServer(dataChannel: DataChannel<*>) {
+        val buf = PacketByteBufs.create()
+        buf.writeVarInt(dataChannel.menuSyncId)
+        buf.writeByte(dataChannel.id.toInt())
+        dataChannel.write(buf)
+        ClientPlayNetworking.send(MENU_DATA_CHANNEL_C2S, buf)
+    }
+
+    private fun receiveMenuDataChannel(buf: PacketByteBuf, executor: ThreadExecutor<*>, menuGetter: () -> Menu?) {
+        val syncId = buf.readVarInt()
+        val channelId = buf.readByte()
+        buf.retain()
+
+        executor.execute {
+            try {
+                val menu = menuGetter()
+                if (menu != null && menu.syncId == syncId && menu is MenuWithDataChannels) {
+                    val channel = menu.dataChannels.get(channelId)
+                    channel?.read(buf)
+                }
+            } finally {
+                buf.release()
+            }
+        }
     }
 }

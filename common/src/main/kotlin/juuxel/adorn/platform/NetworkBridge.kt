@@ -1,6 +1,7 @@
 package juuxel.adorn.platform
 
 import juuxel.adorn.fluid.FluidReference
+import juuxel.adorn.menu.DataChannel
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
@@ -14,6 +15,7 @@ interface NetworkBridge {
     fun createEntitySpawnPacket(entity: Entity): Packet<ClientPlayPacketListener>
     fun sendOpenBookPacket(player: PlayerEntity, bookId: Identifier)
     fun sendBrewerFluidSync(player: PlayerEntity, syncId: Int, fluid: FluidReference)
+    fun sendDataChannelToClient(player: PlayerEntity, channel: DataChannel<*>)
 
     fun syncBlockEntity(be: BlockEntity) {
         // Logic taken from Fabric API's BlockEntityClientSerializable.sync()

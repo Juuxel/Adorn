@@ -2,6 +2,7 @@ package juuxel.adorn.platform.fabric
 
 import juuxel.adorn.fluid.FluidReference
 import juuxel.adorn.lib.AdornNetworking
+import juuxel.adorn.menu.DataChannel
 import juuxel.adorn.platform.NetworkBridge
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
@@ -27,4 +28,7 @@ object NetworkBridgeImpl : NetworkBridge {
     override fun sendBrewerFluidSync(player: PlayerEntity, syncId: Int, fluid: FluidReference) {
         AdornNetworking.sendBrewerFluidSync(player, syncId, fluid)
     }
+
+    override fun sendDataChannelToClient(player: PlayerEntity, channel: DataChannel<*>) =
+        AdornNetworking.sendDataChannelToClient(player, channel)
 }

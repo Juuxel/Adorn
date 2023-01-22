@@ -5,6 +5,7 @@ import com.mojang.serialization.DataResult
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.variant.BlockVariant
 import juuxel.adorn.block.variant.BlockVariantSets
+import juuxel.adorn.util.Cache
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 
@@ -15,6 +16,10 @@ sealed interface FurniturePartMaterial {
 
     companion object {
         val CODEC: Codec<FurniturePartMaterial> = Type.CODEC.dispatch({ it.type }, { it.codec() })
+        private val cache: Cache<BlockVariant, OfVariant> = Cache.soft()
+
+        fun of(variant: BlockVariant): OfVariant =
+            cache.getOrPut(variant) { OfVariant(variant) }
 
         private fun getTranslationKey(id: Identifier): String {
             if (id.namespace == AdornCommon.NAMESPACE) return id.path
@@ -40,7 +45,7 @@ sealed interface FurniturePartMaterial {
         override val id get() = BlockVariantSets.getId(variant)
 
         companion object {
-            val CODEC: Codec<OfVariant> = BlockVariant.CODEC.xmap(::OfVariant, OfVariant::variant)
+            val CODEC: Codec<OfVariant> = BlockVariant.CODEC.xmap(FurniturePartMaterial::of, OfVariant::variant)
         }
     }
 

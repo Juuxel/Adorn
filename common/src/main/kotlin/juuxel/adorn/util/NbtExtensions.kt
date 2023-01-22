@@ -1,5 +1,7 @@
 package juuxel.adorn.util
 
+import com.mojang.serialization.Codec
+import com.mojang.serialization.DataResult
 import com.mojang.serialization.Dynamic
 import com.mojang.serialization.JsonOps
 import net.minecraft.nbt.NbtCompound
@@ -8,6 +10,8 @@ import net.minecraft.nbt.NbtOps
 import net.minecraft.text.Text
 import net.minecraft.util.math.BlockPos
 import java.util.UUID
+
+private val LOGGER = logger()
 
 fun NbtCompound.putText(name: String, textComponent: Text) =
     put(
@@ -52,3 +56,18 @@ fun NbtCompound.getCompoundOrNull(key: String): NbtCompound? =
     } else {
         null
     }
+
+fun <T> NbtCompound.getWithCodec(key: String, codec: Codec<T>): DataResult<T> {
+    if (contains(key)) {
+        return codec.decode(NbtOps.INSTANCE, get(key)).map { it.first }
+    }
+
+    return DataResult.error("NBT does not contain key $key")
+}
+
+fun <T> NbtCompound.putWithCodec(key: String, t: T, codec: Codec<T>) {
+    val element = codec.encodeStart(NbtOps.INSTANCE, t).resultOrPartial {
+        LOGGER.error("[Adorn] Could not write '{}' {} using {}", key, t, codec)
+    }.orElse(null) ?: return
+    put(key, element)
+}

@@ -1,5 +1,6 @@
 package juuxel.adorn.util
 
+import com.mojang.serialization.DataResult
 import com.mojang.serialization.Decoder
 import com.mojang.serialization.Encoder
 import juuxel.adorn.lib.Registered
@@ -20,7 +21,6 @@ import net.minecraft.text.Text
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
-import java.util.function.Function
 
 fun ItemStack.toTextWithCount(): MutableText =
     Text.translatable("text.adorn.item_stack_with_count", count, toHoverableText())
@@ -129,8 +129,8 @@ fun BlockEntity.syncToClient() {
 }
 
 fun <T> PacketByteBuf.writeNbtWithCodec(encoder: Encoder<in T>, value: T) {
-    val nbt = encoder.encodeStart(NbtOps.INSTANCE, value).get().map(Function.identity()) {
-        throw IllegalArgumentException("Could not write $value to NBT using $encoder: ${it.message()}")
+    val nbt = encoder.encodeStart(NbtOps.INSTANCE, value).getOrThrow(false) {
+        throw IllegalArgumentException("Could not write $value to NBT using $encoder: $it")
     }
     val wrapper = NbtCompound()
     wrapper.put("Value", nbt)
@@ -140,7 +140,7 @@ fun <T> PacketByteBuf.writeNbtWithCodec(encoder: Encoder<in T>, value: T) {
 fun <T> PacketByteBuf.readNbtWithCodec(decoder: Decoder<out T>): T {
     val wrapper = readNbt()!!
     val nbt = wrapper.get("Value")!!
-    return decoder.decode(NbtOps.INSTANCE, nbt).map { it.first }.get().map(Function.identity()) {
-        throw RuntimeException("Could not read a value from NBT using $decoder: ${it.message()}")
+    return decoder.decode(NbtOps.INSTANCE, nbt).map { it.first }.getOrThrow(false) {
+        throw RuntimeException("Could not read a value from NBT using $decoder: $it")
     }
 }

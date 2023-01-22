@@ -49,17 +49,12 @@ import kotlin.random.Random
 
 class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: PlayerInventory, title: Text) :
     AdornMenuScreen<FurnitureWorkbenchMenu>(menu, playerInventory, title) {
-    private var currentMaterial: FurniturePartMaterial = FurniturePartMaterial.OfVariant(BlockVariant.OAK)
-    private val furnitureParts: MutableList<FurniturePart> = ArrayList()
+    private var currentMaterial: FurniturePartMaterial = FurniturePartMaterial.of(BlockVariant.OAK)
     private var focusedPart: FurniturePart? = null
     private lateinit var materialTabs: TabbedPane<FlipBook<Element>>
     private lateinit var previousPageButton: PageButton
     private lateinit var nextPageButton: PageButton
     private val animationEngine = AnimationEngine()
-
-    init {
-        furnitureParts += FurniturePart(Vector3d(8.0, 8.0, 8.0), 4, 4, 4, currentMaterial)
-    }
 
     override fun init() {
         super.init()
@@ -71,11 +66,12 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
             val width = Random.nextInt(1, 16 - x + 1)
             val height = Random.nextInt(1, 16 - y + 1)
             val depth = Random.nextInt(1, 16 - z + 1)
-            furnitureParts += FurniturePart(
+            menu.furnitureParts += FurniturePart(
                 Vector3d(x.toDouble() + width / 2, y.toDouble() + height / 2, z.toDouble() + depth / 2),
                 width / 2, height / 2, depth / 2,
                 currentMaterial
             )
+            menu.partChannel.pushToServer()
         }
             .position(5, y)
             .build()
@@ -88,7 +84,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
                     val variants = BlockVariantSets.allVariantsByGroup().get(group)
                     val materials = buildList {
                         for (variant in variants) {
-                            add(FurniturePartMaterial.OfVariant(variant))
+                            add(FurniturePartMaterial.of(variant))
                         }
 
                         if (group == BlockVariantGroup.FUNCTIONAL) {
@@ -125,6 +121,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
     private fun updateCurrentMaterial(material: FurniturePartMaterial) {
         currentMaterial = material
         focusedPart?.material = material
+        menu.partChannel.pushToServer()
     }
 
     override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
@@ -216,7 +213,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
             drawCompass(matrices)
 
             // Draw each part in the scene
-            for (part in furnitureParts) {
+            for (part in menu.furnitureParts) {
                 FurnitureDesignRenderer.drawPart(matrices, part, part === focusedPart, LightmapTextureManager.MAX_LIGHT_COORDINATE)
             }
 
@@ -248,7 +245,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
                 val intersectingParts = ArrayList<Pair<FurniturePart, Float>>()
 
                 // Find the intersecting part
-                for (part in furnitureParts) {
+                for (part in menu.furnitureParts) {
                     var distance = Float.MAX_VALUE // distance from cursor to intersection
                     var inside = false
                     part.forEachFace { x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4 ->
