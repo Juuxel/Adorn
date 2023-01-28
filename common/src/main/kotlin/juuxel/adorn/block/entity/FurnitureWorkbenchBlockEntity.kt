@@ -5,10 +5,7 @@ import juuxel.adorn.block.variant.BlockVariant
 import juuxel.adorn.design.FurniturePart
 import juuxel.adorn.design.FurniturePartMaterial
 import juuxel.adorn.menu.FurnitureWorkbenchMenu
-import juuxel.adorn.util.getWithCodec
-import juuxel.adorn.util.logger
 import juuxel.adorn.util.menuContextOf
-import juuxel.adorn.util.putWithCodec
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -16,7 +13,6 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.menu.Menu
 import net.minecraft.menu.NamedMenuFactory
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.network.PacketByteBuf
 import net.minecraft.text.Text
 import net.minecraft.util.math.BlockPos
 import org.joml.Vector3d
@@ -35,17 +31,14 @@ class FurnitureWorkbenchBlockEntity(pos: BlockPos, state: BlockState) : BlockEnt
         cachedState.block.name
 
     override fun readNbt(nbt: NbtCompound) {
-        nbt.getWithCodec(NBT_FURNITURE_PARTS, FurniturePart.CODEC.listOf())
-            .resultOrPartial { LOGGER.warn("[Adorn] Could not read furniture parts: {}", it) }
-            .ifPresent { furnitureParts = ArrayList(it) }
+        FurniturePart.fromNbt(nbt, NBT_FURNITURE_PARTS)?.let { furnitureParts = ArrayList(it) }
     }
 
     override fun writeNbt(nbt: NbtCompound) {
-        nbt.putWithCodec(NBT_FURNITURE_PARTS, furnitureParts, FurniturePart.CODEC.listOf())
+        FurniturePart.writeNbt(nbt, NBT_FURNITURE_PARTS, furnitureParts)
     }
 
     companion object {
-        private val LOGGER = logger()
         private const val NBT_FURNITURE_PARTS = "FurnitureParts"
     }
 }

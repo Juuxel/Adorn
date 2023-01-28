@@ -131,6 +131,14 @@ object AdornBlocks : RegistryHelper() {
         )
     }
 
+    val DYNAMIC_FURNITURE: Block by registerBlock("dynamic_furniture") {
+        DynamicFurnitureBlock(
+            AbstractBlock.Settings.of(Material.WOOD)
+                .strength(2.5F)
+                .sounds(BlockSoundGroup.WOOD)
+        )
+    }
+
     fun init() {
     }
 

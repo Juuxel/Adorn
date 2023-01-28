@@ -67,7 +67,7 @@ fun <T> NbtCompound.getWithCodec(key: String, codec: Codec<T>): DataResult<T> {
 
 fun <T> NbtCompound.putWithCodec(key: String, t: T, codec: Codec<T>) {
     val element = codec.encodeStart(NbtOps.INSTANCE, t).resultOrPartial {
-        LOGGER.error("[Adorn] Could not write '{}' {} using {}", key, t, codec)
+        LOGGER.error("[Adorn] Could not write '{}' {} using {}: {}", key, t, codec, it)
     }.orElse(null) ?: return
     put(key, element)
 }

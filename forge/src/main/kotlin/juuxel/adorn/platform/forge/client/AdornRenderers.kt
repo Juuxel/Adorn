@@ -4,6 +4,7 @@ import juuxel.adorn.block.AdornBlockEntities
 import juuxel.adorn.client.renderer.InvisibleEntityRenderer
 import juuxel.adorn.client.renderer.ShelfRenderer
 import juuxel.adorn.client.renderer.TradingStationRenderer
+import juuxel.adorn.client.renderer.design.DynamicFurnitureRenderer
 import juuxel.adorn.entity.AdornEntities
 import juuxel.adorn.platform.forge.block.entity.KitchenSinkBlockEntityForge
 import juuxel.adorn.platform.forge.client.renderer.KitchenSinkRendererForge
@@ -17,5 +18,6 @@ object AdornRenderers {
         event.registerBlockEntityRenderer(AdornBlockEntities.SHELF, ::ShelfRenderer)
         @Suppress("UNCHECKED_CAST")
         event.registerBlockEntityRenderer(AdornBlockEntities.KITCHEN_SINK as BlockEntityType<KitchenSinkBlockEntityForge>, ::KitchenSinkRendererForge)
+        event.registerBlockEntityRenderer(AdornBlockEntities.DYNAMIC_FURNITURE, ::DynamicFurnitureRenderer)
     }
 }

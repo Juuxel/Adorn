@@ -3,8 +3,12 @@ package juuxel.adorn.design
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import juuxel.adorn.util.AdornCodecs
+import juuxel.adorn.util.getWithCodec
+import juuxel.adorn.util.logger
+import juuxel.adorn.util.putWithCodec
 import juuxel.adorn.util.readNbtWithCodec
 import juuxel.adorn.util.writeNbtWithCodec
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.PacketByteBuf
 import org.joml.Vector3d
 
@@ -17,31 +21,17 @@ data class FurniturePart(
     constructor(origin: Vector3d, sizeX: Int, sizeY: Int, sizeZ: Int, material: FurniturePartMaterial) :
         this(origin, sizeX, sizeY, sizeZ, material = material, yaw = 0.0, pitch = 0.0, roll = 0.0)
 
-    inline fun forEachVertex(consumer: (x: Double, y: Double, z: Double) -> Unit) {
+    inline fun <R> withMinMax(consumer: (minX: Double, minY: Double, minZ: Double, maxX: Double, maxY: Double, maxZ: Double) -> R): R {
         val minX = origin.x - sizeX * 0.5
         val minY = origin.y - sizeY * 0.5
         val minZ = origin.z - sizeZ * 0.5
         val maxX = minX + sizeX
         val maxY = minY + sizeY
         val maxZ = minZ + sizeZ
-        consumer(minX, minY, minZ)
-        consumer(maxX, minY, minZ)
-        consumer(minX, maxY, minZ)
-        consumer(minX, minY, maxZ)
-        consumer(minX, maxY, maxZ)
-        consumer(maxX, minY, maxZ)
-        consumer(maxX, maxY, minZ)
-        consumer(maxX, maxY, maxZ)
+        return consumer(minX, minY, minZ, maxX, maxY, maxZ)
     }
 
-    fun forEachFace(consumer: FaceConsumer) {
-        val minX = origin.x - sizeX * 0.5
-        val minY = origin.y - sizeY * 0.5
-        val minZ = origin.z - sizeZ * 0.5
-        val maxX = minX + sizeX
-        val maxY = minY + sizeY
-        val maxZ = minZ + sizeZ
-
+    fun forEachFace(consumer: FaceConsumer) = withMinMax { minX, minY, minZ, maxX, maxY, maxZ ->
         consumer.acceptFace(minX, minY, minZ, minX, maxY, minZ, maxX, maxY, minZ, maxX, minY, minZ)
         consumer.acceptFace(maxX, minY, maxZ, maxX, maxY, maxZ, minX, maxY, maxZ, minX, minY, maxZ)
         consumer.acceptFace(maxX, minY, minZ, maxX, maxY, minZ, maxX, maxY, maxZ, maxX, minY, maxZ)
@@ -66,12 +56,14 @@ data class FurniturePart(
     }
 
     companion object {
+        private val LOGGER = logger()
+
         val CODEC: Codec<FurniturePart> = RecordCodecBuilder.create { builder ->
             builder.group(
                 AdornCodecs.VECTOR_3D.fieldOf("Origin").forGetter { it.origin },
-                Codec.intRange(1, 16).fieldOf("SizeX").forGetter { it.sizeX },
-                Codec.intRange(1, 16).fieldOf("SizeY").forGetter { it.sizeY },
-                Codec.intRange(1, 16).fieldOf("SizeZ").forGetter { it.sizeZ },
+                AdornCodecs.clampedIntRange(1..16).fieldOf("SizeX").forGetter { it.sizeX },
+                AdornCodecs.clampedIntRange(1..16).fieldOf("SizeY").forGetter { it.sizeY },
+                AdornCodecs.clampedIntRange(1..16).fieldOf("SizeZ").forGetter { it.sizeZ },
                 Codec.DOUBLE.fieldOf("Yaw").forGetter { it.yaw },
                 Codec.DOUBLE.fieldOf("Pitch").forGetter { it.pitch },
                 Codec.DOUBLE.fieldOf("Roll").forGetter { it.roll },
@@ -96,6 +88,15 @@ data class FurniturePart(
 
         fun write(buf: PacketByteBuf, part: FurniturePart) =
             part.write(buf)
+
+        fun fromNbt(nbt: NbtCompound, key: String): List<FurniturePart>? =
+            nbt.getWithCodec(key, CODEC.listOf())
+                .resultOrPartial { LOGGER.warn("[Adorn] Could not read furniture parts: {}", it) }
+                .orElse(null)
+
+        fun writeNbt(nbt: NbtCompound, key: String, parts: List<FurniturePart>) {
+            nbt.putWithCodec(key, parts, CODEC.listOf())
+        }
     }
 
     fun interface FaceConsumer {

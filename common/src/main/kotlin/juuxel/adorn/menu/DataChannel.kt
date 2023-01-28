@@ -17,11 +17,20 @@ class DataChannel<T : Any>(
 ) {
     private val isClient: Boolean = player.world.isClient
     private var cached: T? = null
+    private val syncListeners: MutableList<() -> Unit> = ArrayList()
+
+    fun addSyncListener(listener: () -> Unit) {
+        syncListeners += listener
+    }
 
     fun read(buf: PacketByteBuf) {
         val value = reader(buf)
         setter(value)
         cached = value
+
+        for (listener in syncListeners) {
+            listener()
+        }
     }
 
     fun write(buf: PacketByteBuf) {

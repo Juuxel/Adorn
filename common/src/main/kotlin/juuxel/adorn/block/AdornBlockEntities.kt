@@ -3,6 +3,7 @@ package juuxel.adorn.block
 import juuxel.adorn.block.entity.AdornBlockEntityType
 import juuxel.adorn.block.entity.BrewerBlockEntity
 import juuxel.adorn.block.entity.DrawerBlockEntity
+import juuxel.adorn.block.entity.DynamicFurnitureBlockEntity
 import juuxel.adorn.block.entity.FurnitureWorkbenchBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.block.entity.KitchenSinkBlockEntity
@@ -28,6 +29,7 @@ object AdornBlockEntities {
     val TRADING_STATION: BlockEntityType<TradingStationBlockEntity> by register("trading_station", ::TradingStationBlockEntity, AdornBlocks::TRADING_STATION)
     val BREWER: BlockEntityType<BrewerBlockEntity> by register("brewer", PlatformBridges.blockEntities::createBrewer, AdornBlocks::BREWER)
     val FURNITURE_WORKBENCH: BlockEntityType<FurnitureWorkbenchBlockEntity> by register("furniture_workbench", ::FurnitureWorkbenchBlockEntity, AdornBlocks::FURNITURE_WORKBENCH)
+    val DYNAMIC_FURNITURE: BlockEntityType<DynamicFurnitureBlockEntity> by register("dynamic_furniture", ::DynamicFurnitureBlockEntity, AdornBlocks::DYNAMIC_FURNITURE)
     /* ktlint-enable max-line-length */
 
     private fun <E : BlockEntity> register(name: String, factory: (BlockPos, BlockState) -> E, block: () -> Block) =

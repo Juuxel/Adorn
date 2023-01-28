@@ -68,7 +68,7 @@ class FurnitureWorkbenchScreen(menu: FurnitureWorkbenchMenu, playerInventory: Pl
             val depth = Random.nextInt(1, 16 - z + 1)
             menu.furnitureParts += FurniturePart(
                 Vector3d(x.toDouble() + width / 2, y.toDouble() + height / 2, z.toDouble() + depth / 2),
-                width / 2, height / 2, depth / 2,
+                MathHelper.ceil(width * 0.5), MathHelper.ceil(height * 0.5), MathHelper.ceil(depth * 0.5),
                 currentMaterial
             )
             menu.partChannel.pushToServer()

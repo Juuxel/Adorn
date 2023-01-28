@@ -11,6 +11,7 @@ import juuxel.adorn.block.variant.BlockVariantSets
 import juuxel.adorn.client.renderer.KitchenSinkRendererFabric
 import juuxel.adorn.client.renderer.ShelfRenderer
 import juuxel.adorn.client.renderer.TradingStationRenderer
+import juuxel.adorn.client.renderer.design.DynamicFurnitureRenderer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
@@ -61,6 +62,7 @@ object AdornBlocksFabric {
         BlockEntityRendererRegistry.register(AdornBlockEntities.TRADING_STATION, ::TradingStationRenderer)
         BlockEntityRendererRegistry.register(AdornBlockEntities.SHELF, ::ShelfRenderer)
         BlockEntityRendererRegistry.register(AdornBlockEntities.KITCHEN_SINK.forceType(), ::KitchenSinkRendererFabric)
+        BlockEntityRendererRegistry.register(AdornBlockEntities.DYNAMIC_FURNITURE, ::DynamicFurnitureRenderer)
 
         // RenderLayers
         BlockRenderLayerMap.INSTANCE.putBlocks(

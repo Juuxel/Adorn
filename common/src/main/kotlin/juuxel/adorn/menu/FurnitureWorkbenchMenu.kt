@@ -39,6 +39,14 @@ class FurnitureWorkbenchMenu(
         )
     )
 
+    init {
+        if (!world.isClient) {
+            partChannel.addSyncListener {
+                blockEntity.markDirty()
+            }
+        }
+    }
+
     fun addCuboid() {
         if (!world.isClient) {
             throw IllegalStateException("addCuboid must only be called on the client!")

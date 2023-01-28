@@ -6,7 +6,10 @@ import com.mojang.datafixers.util.Pair
 import com.mojang.serialization.Codec
 import com.mojang.serialization.DataResult
 import com.mojang.serialization.DynamicOps
+import net.minecraft.util.math.MathHelper
 import org.joml.Vector3d
+import java.util.function.Function
+import java.util.function.UnaryOperator
 import java.util.stream.Stream
 
 object AdornCodecs {
@@ -26,5 +29,10 @@ object AdornCodecs {
                 val vector = Vector3d(numbers[0].toDouble(), numbers[1].toDouble(), numbers[2].toDouble())
                 DataResult.success(Pair.of(vector, ops.empty()))
             }
+    }
+
+    fun clampedIntRange(range: IntRange): Codec<Int> {
+        val op = UnaryOperator<Int> { MathHelper.clamp(it, range.first, range.last) }
+        return Codec.INT.xmap(op, op)
     }
 }
