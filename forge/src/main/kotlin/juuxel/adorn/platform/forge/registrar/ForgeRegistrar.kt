@@ -1,6 +1,6 @@
 package juuxel.adorn.platform.forge.registrar
 
-import juuxel.adorn.platform.Registrar
+import juuxel.adorn.lib.registry.Registrar
 import net.minecraftforge.eventbus.api.IEventBus
 
 /**

@@ -1,7 +1,7 @@
 package juuxel.adorn.entity
 
+import juuxel.adorn.lib.registry.Registrar
 import juuxel.adorn.platform.PlatformBridges
-import juuxel.adorn.platform.Registrar
 import net.minecraft.entity.EntityType
 import net.minecraft.registry.RegistryKeys
 

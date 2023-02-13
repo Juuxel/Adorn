@@ -1,6 +1,6 @@
 package juuxel.adorn.util
 
-import juuxel.adorn.lib.Registered
+import juuxel.adorn.lib.registry.Registered
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState

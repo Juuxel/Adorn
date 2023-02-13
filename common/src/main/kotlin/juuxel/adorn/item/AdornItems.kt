@@ -2,8 +2,8 @@ package juuxel.adorn.item
 
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.AdornBlocks
+import juuxel.adorn.lib.registry.Registrar
 import juuxel.adorn.platform.PlatformBridges
-import juuxel.adorn.platform.Registrar
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.FoodComponent

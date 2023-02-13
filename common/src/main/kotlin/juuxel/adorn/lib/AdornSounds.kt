@@ -1,8 +1,9 @@
 package juuxel.adorn.lib
 
 import juuxel.adorn.AdornCommon
+import juuxel.adorn.lib.registry.Registered
+import juuxel.adorn.lib.registry.Registrar
 import juuxel.adorn.platform.PlatformBridges
-import juuxel.adorn.platform.Registrar
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundEvent

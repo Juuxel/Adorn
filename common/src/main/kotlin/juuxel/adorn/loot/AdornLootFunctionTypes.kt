@@ -1,7 +1,7 @@
 package juuxel.adorn.loot
 
+import juuxel.adorn.lib.registry.Registrar
 import juuxel.adorn.platform.PlatformBridges
-import juuxel.adorn.platform.Registrar
 import net.minecraft.loot.function.LootFunctionType
 import net.minecraft.registry.RegistryKeys
 

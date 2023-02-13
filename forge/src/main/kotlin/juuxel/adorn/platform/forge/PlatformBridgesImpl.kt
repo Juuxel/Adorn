@@ -1,8 +1,8 @@
 package juuxel.adorn.platform.forge
 
+import juuxel.adorn.lib.registry.Registrar
+import juuxel.adorn.lib.registry.RegistrarFactory
 import juuxel.adorn.platform.PlatformBridges
-import juuxel.adorn.platform.Registrar
-import juuxel.adorn.platform.RegistrarFactory
 import juuxel.adorn.platform.forge.registrar.DeferredRegistrar
 import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey

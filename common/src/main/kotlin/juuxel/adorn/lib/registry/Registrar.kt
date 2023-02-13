@@ -1,6 +1,4 @@
-package juuxel.adorn.platform
-
-import juuxel.adorn.lib.Registered
+package juuxel.adorn.lib.registry
 
 interface Registrar<T> : Iterable<T> {
     /**

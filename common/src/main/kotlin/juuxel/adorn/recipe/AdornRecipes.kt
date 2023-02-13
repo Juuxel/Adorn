@@ -1,7 +1,7 @@
 package juuxel.adorn.recipe
 
 import juuxel.adorn.AdornCommon
-import juuxel.adorn.lib.Registered
+import juuxel.adorn.lib.registry.Registered
 import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeSerializer

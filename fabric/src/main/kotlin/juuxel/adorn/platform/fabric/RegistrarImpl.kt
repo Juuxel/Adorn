@@ -3,8 +3,8 @@
 package juuxel.adorn.platform.fabric
 
 import juuxel.adorn.AdornCommon.id
-import juuxel.adorn.lib.Registered
-import juuxel.adorn.platform.Registrar
+import juuxel.adorn.lib.registry.Registered
+import juuxel.adorn.lib.registry.Registrar
 import net.minecraft.registry.Registry
 
 class RegistrarImpl<T>(private val registry: Registry<T>) : Registrar<T> {

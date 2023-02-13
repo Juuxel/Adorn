@@ -3,8 +3,8 @@ package juuxel.adorn.block
 import juuxel.adorn.block.variant.BlockVariant
 import juuxel.adorn.item.TradingStationItem
 import juuxel.adorn.lib.AdornSounds
-import juuxel.adorn.lib.Registered
-import juuxel.adorn.lib.RegistryHelper
+import juuxel.adorn.lib.registry.Registered
+import juuxel.adorn.lib.registry.RegistryHelper
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.associateLazily
 import juuxel.adorn.util.copySettingsSafely

@@ -16,8 +16,8 @@ import juuxel.adorn.block.StepBlock
 import juuxel.adorn.block.TableBlock
 import juuxel.adorn.item.ChairBlockItem
 import juuxel.adorn.item.TableBlockItem
-import juuxel.adorn.lib.Registered
-import juuxel.adorn.lib.RegistryHelper
+import juuxel.adorn.lib.registry.Registered
+import juuxel.adorn.lib.registry.RegistryHelper
 import net.minecraft.block.Block
 
 object BlockVariantSets : RegistryHelper() {

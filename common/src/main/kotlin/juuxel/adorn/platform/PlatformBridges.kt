@@ -1,5 +1,6 @@
 package juuxel.adorn.platform
 
+import juuxel.adorn.lib.registry.RegistrarFactory
 import juuxel.adorn.util.InlineServices
 import juuxel.adorn.util.loadService
 

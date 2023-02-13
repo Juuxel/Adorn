@@ -1,4 +1,4 @@
-package juuxel.adorn.lib
+package juuxel.adorn.lib.registry
 
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty

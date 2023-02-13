@@ -1,7 +1,7 @@
 package juuxel.adorn.platform.forge.registrar
 
 import juuxel.adorn.AdornCommon
-import juuxel.adorn.lib.Registered
+import juuxel.adorn.lib.registry.Registered
 import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
 import net.minecraftforge.eventbus.api.IEventBus

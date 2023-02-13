@@ -1,8 +1,7 @@
-package juuxel.adorn.lib
+package juuxel.adorn.lib.registry
 
 import juuxel.adorn.item.BaseBlockItem
 import juuxel.adorn.platform.PlatformBridges
-import juuxel.adorn.platform.Registrar
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.registry.RegistryKeys

@@ -6,10 +6,10 @@ import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.item.group.AdornItemGroups
 import juuxel.adorn.lib.AdornStats
+import juuxel.adorn.lib.registry.Registrar
 import juuxel.adorn.loot.AdornLootConditionTypes
 import juuxel.adorn.loot.AdornLootFunctionTypes
 import juuxel.adorn.menu.AdornMenus
-import juuxel.adorn.platform.Registrar
 import juuxel.adorn.platform.forge.client.AdornClient
 import juuxel.adorn.platform.forge.compat.Compat
 import juuxel.adorn.platform.forge.event.ItemEvents

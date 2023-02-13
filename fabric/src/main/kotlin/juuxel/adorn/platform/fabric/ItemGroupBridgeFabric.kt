@@ -1,7 +1,7 @@
 package juuxel.adorn.platform.fabric
 
 import juuxel.adorn.item.group.ItemGroupModifyContext
-import juuxel.adorn.lib.Registered
+import juuxel.adorn.lib.registry.Registered
 import juuxel.adorn.platform.ItemGroupBridge
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents

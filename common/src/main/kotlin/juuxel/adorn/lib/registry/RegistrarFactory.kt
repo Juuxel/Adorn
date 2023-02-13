@@ -1,4 +1,4 @@
-package juuxel.adorn.platform
+package juuxel.adorn.lib.registry
 
 import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey

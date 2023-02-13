@@ -1,7 +1,7 @@
 package juuxel.adorn.platform.forge
 
 import juuxel.adorn.item.group.ItemGroupModifyContext
-import juuxel.adorn.lib.Registered
+import juuxel.adorn.lib.registry.Registered
 import juuxel.adorn.platform.ItemGroupBridge
 import net.minecraft.item.ItemConvertible
 import net.minecraft.item.ItemGroup

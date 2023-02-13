@@ -10,7 +10,7 @@ import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.lib.AdornGameRules;
 import juuxel.adorn.lib.AdornSounds;
 import juuxel.adorn.lib.AdornTags;
-import juuxel.adorn.platform.Registrar;
+import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.platform.forge.registrar.ForgeRegistrar;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
