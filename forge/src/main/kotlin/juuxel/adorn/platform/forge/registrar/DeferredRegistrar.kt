@@ -9,7 +9,7 @@ import net.minecraftforge.registries.DeferredRegister
 import net.minecraftforge.registries.RegistryObject
 import java.util.function.Supplier
 
-class DeferredRegistrar<T>(registry: RegistryKey<out Registry<T>>) : ForgeRegistrar<T> {
+open class DeferredRegistrar<T>(registry: RegistryKey<out Registry<T>>) : ForgeRegistrar<T> {
     private val register: DeferredRegister<T> = DeferredRegister.create(registry, AdornCommon.NAMESPACE)
     private val objects: MutableList<RegistryObject<out T>> = ArrayList()
 
