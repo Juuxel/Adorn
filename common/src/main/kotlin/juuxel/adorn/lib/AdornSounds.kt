@@ -3,14 +3,14 @@ package juuxel.adorn.lib
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.lib.registry.Registered
 import juuxel.adorn.lib.registry.Registrar
-import juuxel.adorn.platform.PlatformBridges
+import juuxel.adorn.lib.registry.RegistrarFactory
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.sound.SoundEvent
 
 object AdornSounds {
     @JvmField
-    val SOUNDS: Registrar<SoundEvent> = PlatformBridges.registrarFactory.create(RegistryKeys.SOUND_EVENT)
+    val SOUNDS: Registrar<SoundEvent> = RegistrarFactory.get().create(RegistryKeys.SOUND_EVENT)
 
     val BLOCK_CHAIN_LINK_FENCE_BREAK = register("block.adorn.chain_link_fence.break")
     val BLOCK_CHAIN_LINK_FENCE_STEP = register("block.adorn.chain_link_fence.step")

@@ -3,7 +3,7 @@ package juuxel.adorn.item
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.lib.registry.Registrar
-import juuxel.adorn.platform.PlatformBridges
+import juuxel.adorn.lib.registry.RegistrarFactory
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.FoodComponent
@@ -14,7 +14,7 @@ import net.minecraft.util.math.Direction
 
 object AdornItems {
     @JvmField
-    val ITEMS: Registrar<Item> = PlatformBridges.registrarFactory.create(RegistryKeys.ITEM)
+    val ITEMS: Registrar<Item> = RegistrarFactory.get().create(RegistryKeys.ITEM)
     private val DRINK_FOOD_COMPONENT = drinkFoodComponentBuilder().build()
 
     private fun drinkFoodComponentBuilder() = FoodComponent.Builder().hunger(4).saturationModifier(0.3F).alwaysEdible()

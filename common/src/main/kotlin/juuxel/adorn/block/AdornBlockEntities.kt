@@ -7,6 +7,7 @@ import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.block.entity.KitchenSinkBlockEntity
 import juuxel.adorn.block.entity.ShelfBlockEntity
 import juuxel.adorn.block.entity.TradingStationBlockEntity
+import juuxel.adorn.lib.registry.RegistrarFactory
 import juuxel.adorn.platform.PlatformBridges
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -17,7 +18,7 @@ import net.minecraft.util.math.BlockPos
 
 object AdornBlockEntities {
     @JvmField
-    val BLOCK_ENTITIES = PlatformBridges.registrarFactory.create(RegistryKeys.BLOCK_ENTITY_TYPE)
+    val BLOCK_ENTITIES = RegistrarFactory.get().create(RegistryKeys.BLOCK_ENTITY_TYPE)
 
     /* ktlint-disable max-line-length */
     val SHELF: BlockEntityType<ShelfBlockEntity> by register("shelf", ::ShelfBlockEntity, ShelfBlock::class.java)

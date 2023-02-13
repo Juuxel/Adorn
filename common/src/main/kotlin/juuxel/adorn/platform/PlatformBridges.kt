@@ -1,6 +1,5 @@
 package juuxel.adorn.platform
 
-import juuxel.adorn.lib.registry.RegistrarFactory
 import juuxel.adorn.util.InlineServices
 import juuxel.adorn.util.loadService
 
@@ -10,7 +9,6 @@ interface PlatformBridges {
     val entities: EntityBridge
     val menus: MenuBridge
     val network: NetworkBridge
-    val registrarFactory: RegistrarFactory
     val resources: ResourceBridge
 
     @InlineServices
@@ -23,7 +21,6 @@ interface PlatformBridges {
         inline val entities get() = get().entities
         inline val menus get() = get().menus
         inline val network get() = get().network
-        inline val registrarFactory get() = get().registrarFactory
         inline val resources get() = get().resources
     }
 }
