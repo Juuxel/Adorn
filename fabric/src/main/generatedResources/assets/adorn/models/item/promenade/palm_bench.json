@@ -1,8 +1,8 @@
 {
   "parent": "adorn:item/templates/bench",
   "textures": {
-    "planks": "promenade:block/palm_planks",
-    "log": "promenade:block/palm_log/side",
-    "end": "promenade:block/palm_log/top"
+    "planks": "promenade:block/palm/planks",
+    "log": "promenade:block/palm/log/side",
+    "end": "promenade:block/palm/log/top"
   }
 }

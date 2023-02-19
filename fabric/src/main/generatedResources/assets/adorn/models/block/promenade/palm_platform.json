@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/platform",
   "textures": {
-    "texture": "promenade:block/palm_planks"
+    "texture": "promenade:block/palm/planks"
   }
 }

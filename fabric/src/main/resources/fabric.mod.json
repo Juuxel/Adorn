@@ -57,7 +57,8 @@
     "fabric": ">=0.68.1"
   },
   "conflicts": {
-    "byg": "<1.1"
+    "byg": "<1.1",
+    "promenade": "<3.1"
   },
   "breaks": {
     "towelette": "<4.0.0",

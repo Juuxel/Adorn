@@ -1,7 +1,0 @@
-{
-  "parent": "adorn:block/templates/bench_leg",
-  "textures": {
-    "log": "promenade:block/cherry_oak_log/side",
-    "end": "promenade:block/cherry_oak_log/top"
-  }
-}

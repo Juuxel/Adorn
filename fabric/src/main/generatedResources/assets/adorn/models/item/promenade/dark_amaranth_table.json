@@ -1,7 +1,7 @@
 {
   "parent": "adorn:item/templates/table",
   "textures": {
-    "planks": "promenade:block/dark_amaranth_planks",
-    "log": "promenade:block/dark_amaranth_stem/side"
+    "planks": "promenade:block/dark_amaranth/planks",
+    "log": "promenade:block/dark_amaranth/stem/side"
   }
 }
