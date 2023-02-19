@@ -123,6 +123,10 @@ object AdornBlocks : RegistryHelper() {
         }
     }
 
+    val FRIDGE: Block by registerBlock("fridge") {
+        FridgeBlock(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5F))
+    }
+
     fun init() {
     }
 

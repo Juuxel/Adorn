@@ -8,6 +8,7 @@ import juuxel.adorn.block.entity.BrewerBlockEntityFabric
 import juuxel.adorn.block.entity.KitchenSinkBlockEntityFabric
 import juuxel.adorn.block.variant.BlockKind
 import juuxel.adorn.block.variant.BlockVariantSets
+import juuxel.adorn.client.renderer.FridgeRenderer
 import juuxel.adorn.client.renderer.KitchenSinkRendererFabric
 import juuxel.adorn.client.renderer.ShelfRenderer
 import juuxel.adorn.client.renderer.TradingStationRenderer
@@ -61,6 +62,7 @@ object AdornBlocksFabric {
         BlockEntityRendererRegistry.register(AdornBlockEntities.TRADING_STATION, ::TradingStationRenderer)
         BlockEntityRendererRegistry.register(AdornBlockEntities.SHELF, ::ShelfRenderer)
         BlockEntityRendererRegistry.register(AdornBlockEntities.KITCHEN_SINK.forceType(), ::KitchenSinkRendererFabric)
+        BlockEntityRendererRegistry.register(AdornBlockEntities.FRIDGE, ::FridgeRenderer)
 
         // RenderLayers
         BlockRenderLayerMap.INSTANCE.putBlocks(

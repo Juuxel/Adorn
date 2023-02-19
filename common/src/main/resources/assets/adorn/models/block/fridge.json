@@ -1,0 +1,23 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "front": "adorn:block/fridge_front_back",
+    "back": "adorn:block/fridge_front_back",
+    "side": "adorn:block/fridge_side",
+    "particle": "minecraft:block/iron_block"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 5],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": { "texture": "#front", "cullface": "north" },
+        "south": { "texture": "#back", "cullface": "south" },
+        "east": { "texture": "#side", "cullface": "east", "uv": [16, 0, 5, 16] },
+        "west": { "texture": "#side", "cullface": "west", "uv": [5, 0, 16, 16] },
+        "up": { "texture": "#side", "cullface": "up" },
+        "down": { "texture": "#side", "cullface": "down" }
+      }
+    }
+  ]
+}

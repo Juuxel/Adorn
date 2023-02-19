@@ -1,7 +1,7 @@
 package juuxel.adorn.client.gui.screen
 
 import com.mojang.blaze3d.systems.RenderSystem
-import juuxel.adorn.menu.ContainerBlockMenu
+import juuxel.adorn.menu.MenuWithContext
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.getBlock
@@ -15,7 +15,7 @@ import net.minecraft.util.Identifier
 
 abstract class PalettedMenuScreen<M>(menu: M, playerInventory: PlayerInventory, title: Text) :
     AdornMenuScreen<M>(menu, playerInventory, title)
-    where M : Menu, M : ContainerBlockMenu {
+    where M : Menu, M : MenuWithContext {
     protected abstract val backgroundTexture: Identifier
     protected abstract val paletteId: Identifier
     private val blockId = Registries.BLOCK.getId(menu.context.getBlock())

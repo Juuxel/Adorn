@@ -3,6 +3,7 @@ package juuxel.adorn.block
 import juuxel.adorn.block.entity.AdornBlockEntityType
 import juuxel.adorn.block.entity.BrewerBlockEntity
 import juuxel.adorn.block.entity.DrawerBlockEntity
+import juuxel.adorn.block.entity.FridgeBlockEntity
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity
 import juuxel.adorn.block.entity.KitchenSinkBlockEntity
 import juuxel.adorn.block.entity.ShelfBlockEntity
@@ -27,6 +28,7 @@ object AdornBlockEntities {
     val KITCHEN_SINK: BlockEntityType<KitchenSinkBlockEntity> by register("kitchen_sink", PlatformBridges.blockEntities::createKitchenSink, KitchenSinkBlock::class.java)
     val TRADING_STATION: BlockEntityType<TradingStationBlockEntity> by register("trading_station", ::TradingStationBlockEntity, AdornBlocks::TRADING_STATION)
     val BREWER: BlockEntityType<BrewerBlockEntity> by register("brewer", PlatformBridges.blockEntities::createBrewer, AdornBlocks::BREWER)
+    val FRIDGE: BlockEntityType<FridgeBlockEntity> by register("fridge", ::FridgeBlockEntity, AdornBlocks::FRIDGE)
     /* ktlint-enable max-line-length */
 
     private fun <E : BlockEntity> register(name: String, factory: (BlockPos, BlockState) -> E, block: () -> Block) =

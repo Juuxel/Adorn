@@ -55,6 +55,7 @@ object AdornItemGroups {
                 addCrates()
                 addMiscDecorations()
                 add(AdornBlocks.TRADING_STATION)
+                add(AdornBlocks.FRIDGE)
                 add(AdornBlocks.BREWER)
                 addFoodAndDrink()
                 addIngredients()

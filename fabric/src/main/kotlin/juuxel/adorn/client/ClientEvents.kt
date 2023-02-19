@@ -2,6 +2,7 @@ package juuxel.adorn.client
 
 import juuxel.adorn.client.gui.TradeTooltipComponent
 import juuxel.adorn.trading.Trade
+import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback
 
 object ClientEvents {
@@ -11,6 +12,10 @@ object ClientEvents {
                 is Trade -> TradeTooltipComponent(data)
                 else -> null
             }
+        }
+
+        ModelLoadingRegistry.INSTANCE.registerModelProvider { _, out ->
+            ModelRequests.requestModels(out)
         }
     }
 }

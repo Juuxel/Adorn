@@ -5,17 +5,15 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.menu.Menu
-import net.minecraft.menu.MenuContext
 import net.minecraft.menu.MenuType
 import net.minecraft.menu.Slot
 
 abstract class SimpleMenu(
     type: MenuType<*>,
     syncId: Int,
-    private val dimensions: Pair<Int, Int>,
-    override val inventory: Inventory,
-    playerInventory: PlayerInventory,
-    override val context: MenuContext
+    private val dimensions: ContainerDimensions,
+    final override val inventory: Inventory,
+    playerInventory: PlayerInventory
 ) : Menu(type, syncId), ContainerBlockMenu {
     init {
         val (width, height) = dimensions
@@ -42,6 +40,8 @@ abstract class SimpleMenu(
         for (x in 0..8) {
             addSlot(Slot(playerInventory, x, 8 + x * slot, 142))
         }
+
+        inventory.onOpen(playerInventory.player)
     }
 
     override fun canUse(player: PlayerEntity) =
@@ -52,7 +52,7 @@ abstract class SimpleMenu(
         val slot = slots[index]
 
         if (slot != null && slot.hasStack()) {
-            val containerSize = dimensions.first * dimensions.second
+            val containerSize = dimensions.size
             val stack = slot.stack
             result = stack.copy()
 
@@ -72,5 +72,10 @@ abstract class SimpleMenu(
         }
 
         return result
+    }
+
+    override fun close(player: PlayerEntity) {
+        super.close(player)
+        inventory.onClose(player)
     }
 }

@@ -5,5 +5,4 @@ import net.minecraft.menu.MenuContext
 
 interface ContainerBlockMenu {
     val inventory: Inventory
-    val context: MenuContext
 }

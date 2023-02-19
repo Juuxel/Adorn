@@ -9,5 +9,6 @@ object AdornMenuScreens {
         MenuScreens.register(AdornMenus.KITCHEN_CUPBOARD, ::KitchenCupboardScreen)
         MenuScreens.register(AdornMenus.TRADING_STATION, ::TradingStationScreen)
         MenuScreens.register(AdornMenus.BREWER, ::BrewerScreen)
+        MenuScreens.register(AdornMenus.FRIDGE, ::FridgeScreen)
     }
 }

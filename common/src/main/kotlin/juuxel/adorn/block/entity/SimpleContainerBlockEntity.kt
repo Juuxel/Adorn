@@ -14,19 +14,11 @@ import net.minecraft.world.World
  */
 abstract class SimpleContainerBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: BlockState, size: Int) :
     BaseContainerBlockEntity(type, pos, state, size) {
-    private val viewerCountManager: ViewerCountManager = object : ViewerCountManager() {
-        override fun onContainerOpen(world: World, pos: BlockPos, state: BlockState) {}
-        override fun onContainerClose(world: World, pos: BlockPos, state: BlockState) {}
-        override fun onViewerCountUpdate(
-            world: World, pos: BlockPos, state: BlockState,
-            oldViewerCount: Int, newViewerCount: Int
-        ) {}
+    @Suppress("LeakingThis")
+    private val viewerCountManager = createViewerCountManager()
 
-        override fun isPlayerViewing(player: PlayerEntity): Boolean {
-            val menu = player.menu
-            return menu is ContainerBlockMenu && menu.inventory === this@SimpleContainerBlockEntity
-        }
-    }
+    protected open fun createViewerCountManager(): ViewerCountManager =
+        SimpleViewerCountManager(this)
 
     override fun onOpen(player: PlayerEntity) {
         viewerCountManager.openContainer(player, world, pos, cachedState)
@@ -39,6 +31,17 @@ abstract class SimpleContainerBlockEntity(type: BlockEntityType<*>, pos: BlockPo
     fun onScheduledTick() {
         if (!removed) {
             viewerCountManager.updateViewerCount(world, pos, cachedState)
+        }
+    }
+
+    protected open class SimpleViewerCountManager(private val entity: SimpleContainerBlockEntity) : ViewerCountManager() {
+        override fun onContainerOpen(world: World, pos: BlockPos, state: BlockState) {}
+        override fun onContainerClose(world: World, pos: BlockPos, state: BlockState) {}
+        override fun onViewerCountUpdate(world: World, pos: BlockPos, state: BlockState, oldViewerCount: Int, newViewerCount: Int) {}
+
+        override fun isPlayerViewing(player: PlayerEntity): Boolean {
+            val menu = player.menu
+            return menu is ContainerBlockMenu && menu.inventory === entity
         }
     }
 }

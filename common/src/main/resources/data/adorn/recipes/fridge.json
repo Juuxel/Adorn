@@ -1,0 +1,23 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "ISI",
+    "ICI",
+    "ISI"
+  ],
+  "key": {
+    "I": {
+      "tag": "c:iron_ingots"
+    },
+    "C": {
+      "tag": "c:wooden_chests"
+    },
+    "S": {
+      "item": "minecraft:snow_block"
+    }
+  },
+  "result": {
+    "item": "adorn:fridge",
+    "count": 1
+  }
+}

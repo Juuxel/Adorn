@@ -1,0 +1,55 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "front": "adorn:block/fridge_front_back",
+    "back": "adorn:block/fridge_front_back",
+    "side": "adorn:block/fridge_side",
+    "handle": "adorn:block/fridge_handle"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 3],
+      "to": [16, 16, 5],
+      "faces": {
+        "north": { "texture": "#front" },
+        "south": { "texture": "#back" },
+        "east": { "texture": "#side", "uv": [3, 0, 5, 16] },
+        "west": { "texture": "#side", "uv": [3, 0, 5, 16] },
+        "up": { "texture": "#side", "uv": [3, 16, 5, 0] },
+        "down": { "texture": "#side", "uv": [3, 16, 5, 0] }
+      }
+    },
+    {
+      "from": [2, 2, 1],
+      "to": [4, 14, 2],
+      "faces": {
+        "north": { "texture": "#handle" },
+        "east": { "texture": "#handle" },
+        "south": { "texture": "#handle" },
+        "west": { "texture": "#handle" },
+        "up": { "texture": "#handle" },
+        "down": { "texture": "#handle" }
+      }
+    },
+    {
+      "from": [2, 2, 2],
+      "to": [4, 3, 3],
+      "faces": {
+        "east": { "texture": "#handle" },
+        "west": { "texture": "#handle" },
+        "up": { "texture": "#handle" },
+        "down": { "texture": "#handle" }
+      }
+    },
+    {
+      "from": [2, 13, 2],
+      "to": [4, 14, 3],
+      "faces": {
+        "east": { "texture": "#handle" },
+        "west": { "texture": "#handle" },
+        "up": { "texture": "#handle" },
+        "down": { "texture": "#handle" }
+      }
+    }
+  ]
+}
