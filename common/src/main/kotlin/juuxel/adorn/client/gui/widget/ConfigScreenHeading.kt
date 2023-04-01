@@ -38,7 +38,7 @@ class ConfigScreenHeading(
         }
 
         // Label
-        val textX = (width - textWidth) / 2f
+        val textX = (width - textWidth) * 0.5f
         val textY = (HEIGHT - textRenderer.fontHeight) / 2
         textRenderer.draw(matrices, text, textX, textY.toFloat(), Colors.WHITE)
         matrices.pop()

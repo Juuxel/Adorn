@@ -24,7 +24,7 @@ public final class CommonEventHandlers {
                     var soundGroup = carpet.getDefaultState().getSoundGroup();
                     world.playSound(
                         player, pos, soundGroup.getPlaceSound(), SoundCategory.BLOCKS,
-                        (soundGroup.volume + 1f) / 2f, soundGroup.pitch * 0.8f
+                        (soundGroup.volume + 1f) * 0.5f, soundGroup.pitch * 0.8f
                     );
 
                     if (!player.getAbilities().creativeMode) {
