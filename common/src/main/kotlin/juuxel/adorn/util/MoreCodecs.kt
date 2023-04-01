@@ -23,7 +23,7 @@ object MoreCodecs {
             return if (text != null) {
                 DataResult.success(Pair.of(text, ops.empty()))
             } else {
-                DataResult.error("Could not decode text $json")
+                DataResult.error { "Could not decode text $json" }
             }
         }
 

@@ -7,8 +7,8 @@ import juuxel.adorn.platform.forge.networking.BrewerFluidSyncS2CMessage
 import juuxel.adorn.platform.forge.networking.OpenBookS2CMessage
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.network.Packet
 import net.minecraft.network.listener.ClientPlayPacketListener
+import net.minecraft.network.packet.Packet
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Identifier
 import net.minecraftforge.network.NetworkHooks

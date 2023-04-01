@@ -8,6 +8,7 @@ import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.ShapedRecipe
+import net.minecraft.registry.DynamicRegistryManager
 import net.minecraft.util.Identifier
 import net.minecraft.util.JsonHelper
 import net.minecraft.world.World
@@ -26,9 +27,9 @@ class ItemBrewingRecipe(
             (matches(RIGHT_INGREDIENT_SLOT, firstIngredient) && matches(LEFT_INGREDIENT_SLOT, secondIngredient))
     }
 
-    override fun craft(inventory: BrewerInventory): ItemStack = result.copy()
+    override fun craft(inventory: BrewerInventory, registryManager: DynamicRegistryManager): ItemStack = result.copy()
     override fun fits(width: Int, height: Int): Boolean = true
-    override fun getOutput(): ItemStack = result
+    override fun getOutput(registryManager: DynamicRegistryManager): ItemStack = result
     override fun getId(): Identifier = id
     override fun getSerializer(): RecipeSerializer<*> = AdornRecipes.BREWING_SERIALIZER
 

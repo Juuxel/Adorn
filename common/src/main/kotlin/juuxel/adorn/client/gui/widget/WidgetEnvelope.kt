@@ -49,8 +49,12 @@ abstract class WidgetEnvelope : DrawableHelper(), Element, Drawable, Selectable,
     override fun charTyped(chr: Char, modifiers: Int): Boolean =
         current().charTyped(chr, modifiers)
 
-    override fun changeFocus(lookForwards: Boolean): Boolean =
-        current().changeFocus(lookForwards)
+    override fun isFocused(): Boolean =
+        current().isFocused
+
+    override fun setFocused(focused: Boolean) {
+        current().isFocused = focused
+    }
 
     override fun isMouseOver(mouseX: Double, mouseY: Double): Boolean =
         current().isMouseOver(mouseX, mouseY)

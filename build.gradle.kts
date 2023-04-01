@@ -13,7 +13,7 @@ plugins {
 
     // Set up specific versions of the plugins we're using.
     // Note that of all these plugins, only the Architectury plugin needs to be applied.
-    kotlin("jvm") version "1.7.0" apply false
+    kotlin("jvm") version "1.8.10" apply false
 
     id("architectury-plugin") version "3.4.143"
     id("dev.architectury.loom") version "1.0.302" apply false

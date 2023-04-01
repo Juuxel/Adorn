@@ -40,7 +40,7 @@ class PicketFenceBlock(settings: Settings) : Block(settings), Waterloggable, Blo
     }
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState {
-        return defaultState.with(FACING, ctx.playerFacing.opposite)
+        return defaultState.with(FACING, ctx.horizontalPlayerFacing.opposite)
             .with(WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).fluid === Fluids.WATER)
             .let { updateShape(ctx.world, ctx.blockPos, it) }
     }

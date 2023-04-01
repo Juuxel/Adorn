@@ -40,7 +40,7 @@ class BenchBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()), W
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState =
         defaultState
-            .with(AXIS, ctx.playerFacing.axis.turnHorizontally())
+            .with(AXIS, ctx.horizontalPlayerFacing.axis.turnHorizontally())
             .with(WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).fluid == Fluids.WATER)
             .let { state -> updateConnections(ctx.world, ctx.blockPos, state) }
 

@@ -149,6 +149,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
 
     private inner class TitlePage(private val x: Int, private val y: Int, private val book: Book) : Element, Drawable {
         private val byAuthor = Text.translatable("book.byAuthor", book.author)
+        private var focused = false
 
         override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
             val cx = x + PAGE_WIDTH / 2
@@ -162,6 +163,13 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
             textRenderer.draw(matrices, book.subtitle, (cx - textRenderer.getWidth(book.subtitle) / 2).toFloat(), y + 45f, Colors.SCREEN_TEXT)
             textRenderer.draw(matrices, byAuthor, (cx - textRenderer.getWidth(byAuthor) / 2).toFloat(), y + 60f, Colors.SCREEN_TEXT)
         }
+
+        override fun isFocused(): Boolean =
+            focused
+
+        override fun setFocused(focused: Boolean) {
+            this.focused = focused
+        }
     }
 
     private inner class BookPageTitle(private val x: Int, private val y: Int, page: Page) : Element, Drawable, TickingElement {
@@ -170,9 +178,10 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         private val icons: List<ItemStack> = interleave(page.icons.map { it.createStacks() })
         private var icon = 0
         private var iconTicks = 0
+        private var focused = false
 
         override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
-            itemRenderer.renderGuiItemIcon(icons[icon], x, y)
+            itemRenderer.renderGuiItemIcon(matrices, icons[icon], x, y)
 
             val titleY = (y + 10 - textRenderer.fontHeight * wrappedTitleLines.size / 2).toFloat()
             for ((i, line) in wrappedTitleLines.withIndex()) {
@@ -186,6 +195,13 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
                 icon = (icon + 1) % icons.size
             }
         }
+
+        override fun isFocused(): Boolean =
+            focused
+
+        override fun setFocused(focused: Boolean) {
+            this.focused = focused
+        }
     }
 
     private inner class BookPageBody(private val x: Int, private val y: Int, private val page: Page) : SizedElement, Drawable {
@@ -194,6 +210,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         private val textHeight = wrappedBodyLines.size * textRenderer.fontHeight
         private val imageHeight = if (page.image != null) page.image.size.y + PAGE_IMAGE_GAP else 0
         override val height = max(PAGE_BODY_HEIGHT, textHeight + imageHeight)
+        private var focused = false
 
         override fun isMouseOver(mouseX: Double, mouseY: Double): Boolean =
             x <= mouseX && mouseX <= x + width && y <= mouseY && mouseY <= y + height
@@ -274,6 +291,13 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
             }
 
             return super.mouseClicked(mouseX, mouseY, button)
+        }
+
+        override fun isFocused(): Boolean =
+            focused
+
+        override fun setFocused(focused: Boolean) {
+            this.focused = focused
         }
     }
 

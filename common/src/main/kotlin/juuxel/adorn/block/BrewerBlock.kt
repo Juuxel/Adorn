@@ -39,7 +39,7 @@ class BrewerBlock(settings: Settings) : VisibleBlockWithEntity(settings), BlockW
     }
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState =
-        defaultState.with(FACING, ctx.playerFacing.opposite)
+        defaultState.with(FACING, ctx.horizontalPlayerFacing.opposite)
 
     override fun onUse(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hit: BlockHitResult): ActionResult {
         if (world.isClient) return ActionResult.SUCCESS

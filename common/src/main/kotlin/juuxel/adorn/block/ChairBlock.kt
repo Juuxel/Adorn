@@ -48,7 +48,7 @@ class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState? = with(context) {
         return if (blockPos.y < world.topY - 1 && world.getBlockState(blockPos.up()).canReplace(context)) {
-            super.getPlacementState(context)!!.with(FACING, playerFacing.opposite)
+            super.getPlacementState(context)!!.with(FACING, horizontalPlayerFacing.opposite)
                 .with(WATERLOGGED, world.getFluidState(blockPos).fluid == Fluids.WATER)
         } else {
             null

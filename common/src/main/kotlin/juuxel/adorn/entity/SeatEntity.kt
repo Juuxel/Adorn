@@ -20,7 +20,7 @@ class SeatEntity(type: EntityType<*>, world: World) : Entity(type, world) {
         isInvulnerable = true
     }
 
-    private var seatPos = BlockPos(this.pos)
+    private var seatPos = BlockPos.ofFloored(this.pos)
 
     fun setPos(pos: BlockPos, blockOffset: Double) {
         check(!world.isClient) {

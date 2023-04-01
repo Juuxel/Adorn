@@ -138,7 +138,7 @@ abstract class BrewerBlockEntity(pos: BlockPos, state: BlockState) :
                 if (brewer.progress++ >= MAX_PROGRESS) {
                     decrementIngredient(LEFT_INGREDIENT_SLOT)
                     decrementIngredient(RIGHT_INGREDIENT_SLOT)
-                    brewer.setStack(INPUT_SLOT, recipe.craft(brewer))
+                    brewer.setStack(INPUT_SLOT, recipe.craft(brewer, world.registryManager))
 
                     if (recipe is FluidBrewingRecipe) {
                         brewer.fluidReference.decrement(recipe.fluid.amount, recipe.fluid.unit)

@@ -45,7 +45,7 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
         synchronized(hearts) {
             renderHearts(matrices, delta)
         }
-        drawCenteredText(matrices, textRenderer, title, width / 2, 20, Colors.WHITE)
+        drawCenteredTextWithShadow(matrices, textRenderer, title, width / 2, 20, Colors.WHITE)
         super.render(matrices, mouseX, mouseY, delta)
     }
 

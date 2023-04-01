@@ -9,7 +9,7 @@ import java.util.stream.IntStream
 data class Vec2i(val x: Int, val y: Int) {
     companion object {
         private fun <T> mismatchedComponentCountResult(): DataResult<T> =
-            DataResult.error("Vec2i must have exactly two int components")
+            DataResult.error { "Vec2i must have exactly two int components" }
 
         val CODEC: Codec<Vec2i> = object : Codec<Vec2i> {
             override fun <T> encode(input: Vec2i, ops: DynamicOps<T>, prefix: T): DataResult<T> =

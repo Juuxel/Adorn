@@ -36,7 +36,7 @@ object AdornItemGroups {
 
     val GROUP by ItemGroupBridge.get().register(AdornCommon.id("items")) {
         icon { ItemStack(AdornBlocks.SOFAS[DyeColor.LIME]) }
-        entries { _, entries, _ ->
+        entries { _, entries ->
             val context = ItemGroupBuildContext { entries.add(it) }
             with(context) {
                 when (ConfigManager.config().groupItems) {

@@ -14,16 +14,16 @@ class TradeTooltipComponent(private val trade: Trade) : TooltipComponent {
     override fun getWidth(textRenderer: TextRenderer?): Int = 3 * 16
     override fun getHeight(): Int = 18
 
-    override fun drawItems(textRenderer: TextRenderer, x: Int, y: Int, matrices: MatrixStack, itemRenderer: ItemRenderer, z: Int) {
-        itemRenderer.renderInGuiWithOverrides(trade.price, x, y, 0)
-        itemRenderer.renderGuiItemOverlay(textRenderer, trade.price, x, y)
-        itemRenderer.renderInGuiWithOverrides(trade.selling, x + 2 * 16, y, 1)
-        itemRenderer.renderGuiItemOverlay(textRenderer, trade.selling, x + 2 * 16, y)
+    override fun drawItems(textRenderer: TextRenderer, x: Int, y: Int, matrices: MatrixStack, itemRenderer: ItemRenderer) {
+        itemRenderer.renderInGuiWithOverrides(matrices, trade.price, x, y, 0)
+        itemRenderer.renderGuiItemOverlay(matrices, textRenderer, trade.price, x, y)
+        itemRenderer.renderInGuiWithOverrides(matrices, trade.selling, x + 2 * 16, y, 1)
+        itemRenderer.renderGuiItemOverlay(matrices, textRenderer, trade.selling, x + 2 * 16, y)
 
         RenderSystem.setShader(GameRenderer::getPositionTexProgram)
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, ARROW_TEXTURE)
-        DrawableHelper.drawTexture(matrices, x + 16, y, z, 0f, 0f, 16, 16, 16, 16)
+        DrawableHelper.drawTexture(matrices, x + 16, y, 0f, 0f, 16, 16, 16, 16)
     }
 
     companion object {

@@ -39,7 +39,7 @@ class DrawerBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.create
     }
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState =
-        defaultState.with(FACING, context.playerFacing.opposite)
+        defaultState.with(FACING, context.horizontalPlayerFacing.opposite)
 
     override fun onUse(
         state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand?, hitResult: BlockHitResult?

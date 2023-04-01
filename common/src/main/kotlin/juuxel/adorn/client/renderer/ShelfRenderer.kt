@@ -8,7 +8,7 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
-import net.minecraft.client.render.model.json.ModelTransformation
+import net.minecraft.client.render.model.json.ModelTransformationMode
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.RotationAxis
@@ -51,11 +51,12 @@ class ShelfRenderer(context: BlockEntityRendererFactory.Context) : BlockEntityRe
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(ITEM_1_Y_ROT + 180 - facing.asRotation()))
         itemRenderer.renderItem(
             be.getStack(0),
-            ModelTransformation.Mode.FIXED,
+            ModelTransformationMode.FIXED,
             light,
             overlay,
             matrices,
             vertexConsumers,
+            be.world,
             0 // seed
         )
         matrices.pop()
@@ -66,11 +67,12 @@ class ShelfRenderer(context: BlockEntityRendererFactory.Context) : BlockEntityRe
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(ITEM_2_Y_ROT + 180 - facing.asRotation()))
         itemRenderer.renderItem(
             be.getStack(1),
-            ModelTransformation.Mode.FIXED,
+            ModelTransformationMode.FIXED,
             light,
             overlay,
             matrices,
             vertexConsumers,
+            be.world,
             0 // seed
         )
         matrices.pop()

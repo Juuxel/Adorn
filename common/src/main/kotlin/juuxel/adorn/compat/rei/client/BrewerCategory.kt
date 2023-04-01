@@ -14,6 +14,7 @@ import me.shedaniel.rei.api.client.gui.widgets.Widget
 import me.shedaniel.rei.api.client.gui.widgets.Widgets
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory
 import me.shedaniel.rei.api.common.util.EntryStacks
+import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
@@ -29,14 +30,14 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
         val topLeft = Point(bounds.centerX - 39, bounds.centerY - 30)
         add(Widgets.createRecipeBase(bounds))
         add(
-            Widgets.createDrawableWidget { helper, matrices, mouseX, mouseY, delta ->
+            Widgets.createDrawableWidget { _, matrices, _, _, _ ->
                 RenderSystem.setShaderTexture(0, currentTexture())
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
                 RenderSystem.setShader(GameRenderer::getPositionTexProgram)
-                helper.drawTexture(matrices, topLeft.x, topLeft.y, 49, 16, 105, 61)
+                DrawableHelper.drawTexture(matrices, topLeft.x, topLeft.y, 49, 16, 105, 61)
                 val progressFraction = (System.currentTimeMillis() % 4000) / 4000.0
                 val height = (progressFraction * 25).roundToInt()
-                helper.drawTexture(matrices, topLeft.x + 35, topLeft.y + 8, 176, 0, 8, height)
+                DrawableHelper.drawTexture(matrices, topLeft.x + 35, topLeft.y + 8, 176, 0, 8, height)
             }
         )
         add(
@@ -71,13 +72,14 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
         )
         // Fluid scale for empty fluid slots
         add(
-            Widgets.createDrawableWidget { helper, matrices, mouseX, mouseY, delta ->
+            Widgets.createDrawableWidget { _, matrices, _, _, _ ->
                 RenderSystem.setShaderTexture(0, currentTexture())
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
                 RenderSystem.setShader(GameRenderer::getPositionTexProgram)
-                helper.zOffset += FLUID_SCALE_Z_OFFSET
-                helper.drawTexture(matrices, topLeft.x + 88, topLeft.y + 5, 176, 25, 16, 51)
-                helper.zOffset -= FLUID_SCALE_Z_OFFSET
+                matrices.push()
+                matrices.translate(0f, 0f, FLUID_SCALE_Z_OFFSET.toFloat())
+                DrawableHelper.drawTexture(matrices, topLeft.x + 88, topLeft.y + 5, 176, 25, 16, 51)
+                matrices.pop()
             }
         )
     }

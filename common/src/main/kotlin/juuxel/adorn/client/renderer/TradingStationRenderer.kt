@@ -10,10 +10,11 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
-import net.minecraft.client.render.model.json.ModelTransformation
+import net.minecraft.client.render.model.json.ModelTransformationMode
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -46,7 +47,7 @@ class TradingStationRenderer(context: BlockEntityRendererFactory.Context) : Bloc
             matrices.scale(0.6f, 0.6f, 0.6f)
             matrices.translate(0.0, 0.3, 0.0)
             val itemRenderer = MinecraftClient.getInstance().itemRenderer
-            itemRenderer.renderItem(trade.selling, ModelTransformation.Mode.FIXED, light, overlay, matrices, vertexConsumers, 0)
+            itemRenderer.renderItem(trade.selling, ModelTransformationMode.FIXED, light, overlay, matrices, vertexConsumers, be.world, 0)
             matrices.pop()
 
             /*if (lookingAtBlock) {
@@ -89,7 +90,7 @@ class TradingStationRenderer(context: BlockEntityRendererFactory.Context) : Bloc
             val opacity = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25f)
             val backgroundColor = color(0x000000, opacity)
             val textX = -textRenderer.getWidth(label) / 2f
-            textRenderer.draw(label, textX, 0f, Colors.WHITE, false, positionMatrix, vertexConsumers, false, backgroundColor, light)
+            textRenderer.draw(label, textX, 0f, Colors.WHITE, false, positionMatrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, backgroundColor, light)
 
             matrices.pop()
         }

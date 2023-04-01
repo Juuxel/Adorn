@@ -25,7 +25,7 @@ abstract class AbstractKitchenCounterBlock(settings: Settings) : Block(settings)
     }
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState =
-        defaultState.with(FACING, context.playerFacing.opposite)
+        defaultState.with(FACING, context.horizontalPlayerFacing.opposite)
 
     override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, context: ShapeContext) =
         SHAPES[state[FACING]]

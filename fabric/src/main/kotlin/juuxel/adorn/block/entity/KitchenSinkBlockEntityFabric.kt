@@ -116,7 +116,7 @@ class KitchenSinkBlockEntityFabric(pos: BlockPos, state: BlockState) : KitchenSi
         }
 
     companion object {
-        val FLUID_STORAGE_PROVIDER: BlockApiLookup.BlockApiProvider<Storage<FluidVariant>, Direction> =
+        val FLUID_STORAGE_PROVIDER: BlockApiLookup.BlockApiProvider<Storage<FluidVariant>, Direction?> =
             BlockApiLookup.BlockApiProvider { _, _, _, blockEntity, _ ->
                 (blockEntity as? KitchenSinkBlockEntityFabric)?.storage
             }
