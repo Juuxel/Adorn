@@ -95,11 +95,11 @@ dependencies {
 
     // Mod compat
     modCompileOnly("com.github.Virtuoel:Towelette:${rootProject.property("towelette")}")
-    modLocalRuntime(modCompileOnly("com.terraformersmc:modmenu:${rootProject.property("modmenu")}")!!)
+    modCompileOnly("com.terraformersmc:modmenu:${rootProject.property("modmenu")}")
     modCompileOnly("net.oskarstrom:DashLoader:${rootProject.property("dashloader")}")
-    modLocalRuntime(modCompileOnly("dev.emi:emi:${rootProject.property("emi")}") {
+    modCompileOnly("dev.emi:emi:${rootProject.property("emi")}") {
         isTransitive = false
-    })
+    }
 }
 
 tasks {

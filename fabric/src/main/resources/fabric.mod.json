@@ -51,10 +51,10 @@
   "accessWidener": "adorn.accesswidener",
 
   "depends": {
-    "minecraft": "~1.19.3",
-    "fabricloader": ">=0.14.11",
-    "fabric-language-kotlin": "^1.8.1",
-    "fabric": ">=0.68.1"
+    "minecraft": "=1.20-alpha.23.13.ab",
+    "fabricloader": ">=0.14.19",
+    "fabric-language-kotlin": "^1.9.2",
+    "fabric": ">=0.76.3"
   },
   "conflicts": {
     "byg": "<1.1",

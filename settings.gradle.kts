@@ -26,5 +26,5 @@ includeBuild("build-logic")
 include(
     "common",
     "fabric",
-    "forge",
+    //"forge",
 )
