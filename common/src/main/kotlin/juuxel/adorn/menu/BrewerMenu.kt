@@ -66,7 +66,7 @@ class BrewerMenu(
             result = stack.copy()
 
             if (index <= BrewerBlockEntity.FLUID_CONTAINER_SLOT) {
-                if (!insertItem(stack, 3, slots.size, true)) {
+                if (!insertItem(stack, BrewerBlockEntity.FLUID_CONTAINER_SLOT + 1, slots.size, true)) {
                     return ItemStack.EMPTY
                 }
             } else {
