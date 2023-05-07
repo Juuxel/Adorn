@@ -20,6 +20,8 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
     implementation("blue.endless:jankson:${rootProject.property("jankson")}")
+    implementation(project(":common:lens"))
+    annotationProcessor(project(":common:lens"))
 
     // Just for @Environment and mixin deps :)
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric-loader")}")

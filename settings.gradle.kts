@@ -25,6 +25,7 @@ includeBuild("build-logic")
 
 include(
     "common",
+    "common:lens",
     "fabric",
     "forge",
 )

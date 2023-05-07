@@ -63,11 +63,12 @@ tasks {
 
 // Do the shared set up for the Minecraft subprojects.
 subprojects {
-    apply(plugin = "org.jetbrains.kotlin.jvm")
-    apply(plugin = "dev.architectury.loom")
-    apply(plugin = "architectury-plugin")
-    apply(plugin = "io.github.juuxel.loom-quiltflower")
-    apply(plugin = "org.jmailen.kotlinter")
+    apply(plugin = "java")
+
+    // Copy the artifact metadata from the root project.
+    group = rootProject.group
+    version = rootProject.version
+    base.archivesName.set(rootProject.base.archivesName)
 
     // Set Java version.
     extensions.configure<JavaPluginExtension> {
@@ -75,16 +76,45 @@ subprojects {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    tasks {
+        withType<JavaCompile> {
+            options.encoding = "UTF-8"
+            options.release.set(17)
+        }
+
+        withType<KotlinCompile> {
+            // Set the Kotlin JVM target to match the Java version
+            // for all Kotlin compilation tasks.
+            kotlinOptions.jvmTarget = "17"
+
+            kotlinOptions.freeCompilerArgs = listOf(
+                // Compile lambdas to invokedynamic.
+                "-Xlambdas=indy",
+                // Compile interface functions with bodies to default methods.
+                "-Xjvm-default=all",
+            )
+        }
+
+        // Include the license in the jar files.
+        // See the dependencies section above for why this is in quotes.
+        "jar"(Jar::class) {
+            from(rootProject.file("LICENSE"))
+        }
+    }
+
+    if (parent != rootProject) return@subprojects
+
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "dev.architectury.loom")
+    apply(plugin = "architectury-plugin")
+    apply(plugin = "io.github.juuxel.loom-quiltflower")
+    apply(plugin = "org.jmailen.kotlinter")
+
     architectury {
         // Disable Architectury's runtime transformer
         // since we don't use it.
         compileOnly()
     }
-
-    // Copy the artifact metadata from the root project.
-    group = rootProject.group
-    version = rootProject.version
-    base.archivesName.set(rootProject.base.archivesName)
 
     // Set up the custom "repository" for my Menu mappings.
     // (A mapping layer that replaces Yarn's "screen handler" with Mojang's own "menu". It's a long story.)
@@ -144,35 +174,7 @@ subprojects {
         )
     }
 
-    tasks {
-        withType<JavaCompile> {
-            options.encoding = "UTF-8"
-            options.release.set(17)
-        }
-
-        withType<KotlinCompile> {
-            // Set the Kotlin JVM target to match the Java version
-            // for all Kotlin compilation tasks.
-            kotlinOptions.jvmTarget = "17"
-
-            kotlinOptions.freeCompilerArgs = listOf(
-                // Compile lambdas to invokedynamic.
-                "-Xlambdas=indy",
-                // Compile interface functions with bodies to default methods.
-                "-Xjvm-default=all",
-            )
-        }
-
-        // Include the license in the jar files.
-        // See the dependencies section above for why this is in quotes.
-        "jar"(Jar::class) {
-            from(rootProject.file("LICENSE"))
-        }
-    }
-}
-
-// Set up "platform" subprojects (non-common subprojects).
-subprojects {
+    // Set up "platform" subprojects (non-common subprojects).
     if (path != ":common") {
         // Apply the shadow plugin which lets us include contents
         // of any libraries in our mod jars. Architectury uses it
