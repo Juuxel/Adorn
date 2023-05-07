@@ -6,6 +6,7 @@ import juuxel.adorn.client.gui.widget.ConfigScreenHeading
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.Displayable
+import juuxel.adorn.util.PropertyRef
 import juuxel.adorn.util.animation.AnimationEngine
 import juuxel.adorn.util.animation.AnimationTask
 import juuxel.adorn.util.color
@@ -20,7 +21,6 @@ import net.minecraft.util.Formatting
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.RotationAxis
 import kotlin.random.Random
-import kotlin.reflect.KMutableProperty
 
 abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : Screen(title) {
     private val random: Random = Random.Default
@@ -109,7 +109,7 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
     }
 
     private fun <T> createConfigButton(
-        builder: CyclingButtonWidget.Builder<T>, x: Int, y: Int, width: Int, property: KMutableProperty<T>, restartRequired: Boolean
+        builder: CyclingButtonWidget.Builder<T>, x: Int, y: Int, width: Int, property: PropertyRef<T>, restartRequired: Boolean
     ) = builder.tooltip {
         val text = Text.translatable(getTooltipTranslationKey(property.name))
         if (restartRequired) {
@@ -118,7 +118,7 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
         }
         Tooltip.of(text)
     }.build(x, y, width, BUTTON_HEIGHT, Text.translatable(getOptionTranslationKey(property.name))) { _, value ->
-        property.setter.call(value)
+        property.set(value)
         ConfigManager.INSTANCE.save()
 
         if (restartRequired) {
@@ -127,10 +127,10 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
     }
 
     protected fun addConfigToggle(
-        width: Int, property: KMutableProperty<Boolean>, restartRequired: Boolean = false
+        width: Int, property: PropertyRef<Boolean>, restartRequired: Boolean = false
     ) {
         val button = createConfigButton(
-            CyclingButtonWidget.onOffBuilder(property.getter.call()),
+            CyclingButtonWidget.onOffBuilder(property.get()),
             (this.width - width) / 2, nextChildY, width, property, restartRequired
         )
         addDrawableChild(button)
@@ -138,10 +138,10 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
     }
 
     protected fun <T : Displayable> addConfigButton(
-        width: Int, property: KMutableProperty<T>, values: List<T>, restartRequired: Boolean = false
+        width: Int, property: PropertyRef<T>, values: List<T>, restartRequired: Boolean = false
     ) {
         val button = createConfigButton(
-            CyclingButtonWidget.builder<T> { it.displayName }.values(values).initially(property.getter.call()),
+            CyclingButtonWidget.builder<T> { it.displayName }.values(values).initially(property.get()),
             (this.width - width) / 2, nextChildY, width, property, restartRequired
         )
         addDrawableChild(button)

@@ -45,7 +45,6 @@ dependencies {
     implementation("thedarkcolour:kotlinforforge:${rootProject.property("kotlin-for-forge")}")
     // Without the manually specified versions, Loom's generateDLIConfig fails??
     forgeRuntimeLibrary(kotlin("stdlib-jdk8", version = "1.6.0"))
-    forgeRuntimeLibrary(kotlin("reflect", version = "1.6.0"))
 
     // Depend on the common project. The "namedElements" configuration contains the non-remapped
     // classes and resources of the project.
