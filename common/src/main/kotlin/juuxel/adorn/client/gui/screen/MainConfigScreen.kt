@@ -3,7 +3,7 @@ package juuxel.adorn.client.gui.screen
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.fluid.FluidUnit
 import juuxel.adorn.item.group.ItemGroupingOption
-import juuxel.adorn.util.property
+import juuxel.adorn.util.ref
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.widget.ButtonWidget
 import net.minecraft.screen.ScreenTexts
@@ -15,13 +15,13 @@ class MainConfigScreen(parent: Screen) : AbstractConfigScreen(Text.translatable(
         val config = ConfigManager.config()
         val x = (width - BUTTON_WIDTH) / 2
         addHeading(Text.translatable("gui.adorn.config.visual"), BUTTON_WIDTH)
-        addConfigToggle(BUTTON_WIDTH, config.client.property { it::showTradingStationTooltips })
-        addConfigButton(BUTTON_WIDTH, config.client.property { it::displayedFluidUnit }, FluidUnit.values().toList())
+        addConfigToggle(BUTTON_WIDTH, config.client.ref { it::showTradingStationTooltips })
+        addConfigButton(BUTTON_WIDTH, config.client.ref { it::displayedFluidUnit }, FluidUnit.values().toList())
         addHeading(Text.translatable("gui.adorn.config.creative_inventory"), BUTTON_WIDTH)
-        addConfigToggle(BUTTON_WIDTH, config.client.property { it::showItemsInStandardGroups })
+        addConfigToggle(BUTTON_WIDTH, config.client.ref { it::showItemsInStandardGroups })
         addConfigButton(
             BUTTON_WIDTH,
-            config.property { it::groupItems },
+            config.ref { it::groupItems },
             ItemGroupingOption.values().toList(),
             restartRequired = true
         )

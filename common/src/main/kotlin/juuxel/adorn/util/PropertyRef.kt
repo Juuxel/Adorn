@@ -42,6 +42,6 @@ interface PropertyRef<T> {
 /**
  * Creates a reflected property reference for a [JvmField] property of `this` object.
  */
-inline fun <O : Any, T> O.property(finder: (O) -> KProperty<T>): PropertyRef<T> {
+inline fun <O : Any, T> O.ref(finder: (O) -> KProperty<T>): PropertyRef<T> {
     return PropertyRef.ofField(this, finder(this).name)
 }
