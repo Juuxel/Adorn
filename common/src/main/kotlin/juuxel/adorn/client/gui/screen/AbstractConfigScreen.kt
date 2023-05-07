@@ -63,6 +63,8 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
             drawTexture(matrices, 0, 0, HEART_SIZE, HEART_SIZE, 0f, 0f, 8, 8, 8, 8)
             matrices.pop()
         }
+
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
     }
 
     override fun close() {

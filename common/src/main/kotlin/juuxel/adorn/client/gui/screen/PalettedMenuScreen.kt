@@ -28,6 +28,7 @@ abstract class PalettedMenuScreen<M>(menu: M, playerInventory: PlayerInventory, 
         RenderSystem.setShaderColor(Colors.redOf(bg), Colors.greenOf(bg), Colors.blueOf(bg), 1.0f)
         RenderSystem.setShaderTexture(0, backgroundTexture)
         drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight)
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
     }
 
     override fun drawForeground(matrices: MatrixStack, mouseX: Int, mouseY: Int) {
