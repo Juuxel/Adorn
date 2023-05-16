@@ -15,8 +15,8 @@ plugins {
     // Note that of all these plugins, only the Architectury plugin needs to be applied.
     kotlin("jvm") version "1.8.10" apply false
 
-    id("architectury-plugin") version "3.4.143"
-    id("dev.architectury.loom") version "1.0.302" apply false
+    id("architectury-plugin") version "3.4.+"
+    id("dev.architectury.loom") version "1.2.+" apply false
     id("io.github.juuxel.loom-quiltflower") version "1.8.0" apply false
 
     id("org.jmailen.kotlinter") version "3.12.0" apply false
