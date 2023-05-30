@@ -88,7 +88,10 @@ dependencies {
     // Standard Fabric mod setup.
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric-loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric-api")}")
-    modApi("net.fabricmc:fabric-language-kotlin:${rootProject.property("fabric-kotlin")}")
+    modApi("net.fabricmc:fabric-language-kotlin:${rootProject.property("fabric-kotlin")}") {
+        // TODO: Check if this has been updated
+        exclude(group = "net.fabricmc", module = "fabric-loader")
+    }
 
     // Bundle Jankson in the mod and use it as a regular "implementation" library.
     bundle(implementation("blue.endless:jankson:${rootProject.property("jankson")}")!!)
@@ -97,9 +100,12 @@ dependencies {
     modCompileOnly("com.github.Virtuoel:Towelette:${rootProject.property("towelette")}")
     modLocalRuntime(modCompileOnly("com.terraformersmc:modmenu:${rootProject.property("modmenu")}")!!)
     modCompileOnly("net.oskarstrom:DashLoader:${rootProject.property("dashloader")}")
-    modLocalRuntime(modCompileOnly("dev.emi:emi:${rootProject.property("emi")}") {
+    modCompileOnly(libs.emi.fabric) {
         isTransitive = false
-    })
+    }
+    modLocalRuntime(libs.emi.fabric) {
+        isTransitive = false
+    }
 }
 
 tasks {

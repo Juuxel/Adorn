@@ -1,0 +1,7 @@
+[versions]
+emi = "1.0.0+1.19.4"
+
+[libraries]
+emi-common = { module = "dev.emi:emi-xplat-intermediary", version.ref = "emi" }
+emi-fabric = { module = "dev.emi:emi-fabric", version.ref = "emi" }
+emi-forge = { module = "dev.emi:emi-forge", version.ref = "emi" }

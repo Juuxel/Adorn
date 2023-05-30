@@ -6,21 +6,19 @@ import dev.emi.emi.api.widget.SlotWidget
 import juuxel.adorn.client.gui.screen.BrewerScreen
 import juuxel.adorn.fluid.FluidUnit
 import juuxel.adorn.fluid.FluidVolume
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.fluid.Fluid
 
 class FluidSlotWidget(
     stack: EmiIngredient,
     x: Int, y: Int,
     private val width: Int, private val height: Int
 ) : SlotWidget(stack, x, y) {
-    private val stacks = stack.emiStacks.map {
-        val entry = it.entry
-        require(FluidVariant::class.java.isAssignableFrom(entry.type)) {
-            "All stacks of ingredient $stack should be FluidVariants, but found $it with entry type ${entry.type}"
-        }
-        val variant = entry.value as FluidVariant
-        FluidVolume(variant.fluid, it.amount, variant.nbt, FluidUnit.DROPLET)
+    private val stacks = stack.emiStacks.mapNotNull {
+        if (it.isEmpty) return@mapNotNull null
+        val fluid = it.getKeyOfType(Fluid::class.java)
+            ?: throw IllegalArgumentException("All stacks of ingredient $stack should have fluid keys, but found $it with key ${it.key}")
+        FluidVolume(fluid, it.amount, it.nbt, FluidUnit.DROPLET)
     }
 
     override fun getBounds(): Bounds = Bounds(x, y, width, height)
