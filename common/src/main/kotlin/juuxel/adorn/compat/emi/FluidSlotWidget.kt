@@ -4,8 +4,8 @@ import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.widget.Bounds
 import dev.emi.emi.api.widget.SlotWidget
 import juuxel.adorn.client.gui.screen.BrewerScreen
-import juuxel.adorn.fluid.FluidUnit
 import juuxel.adorn.fluid.FluidVolume
+import juuxel.adorn.platform.FluidBridge
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.fluid.Fluid
 
@@ -18,7 +18,7 @@ class FluidSlotWidget(
         if (it.isEmpty) return@mapNotNull null
         val fluid = it.getKeyOfType(Fluid::class.java)
             ?: throw IllegalArgumentException("All stacks of ingredient $stack should have fluid keys, but found $it with key ${it.key}")
-        FluidVolume(fluid, it.amount, it.nbt, FluidUnit.DROPLET)
+        FluidVolume(fluid, it.amount, it.nbt, FluidBridge.get().fluidUnit)
     }
 
     override fun getBounds(): Bounds = Bounds(x, y, width, height)

@@ -43,8 +43,6 @@ dependencies {
     // Add Kotlin for Forge.
     // Based on their own instructions: https://github.com/thedarkcolour/KotlinForForge/blob/70385f5/thedarkcolour/kotlinforforge/gradle/kff-3.0.0.gradle
     implementation("thedarkcolour:kotlinforforge:${rootProject.property("kotlin-for-forge")}")
-    // Without the manually specified versions, Loom's generateDLIConfig fails??
-    forgeRuntimeLibrary(kotlin("stdlib-jdk8", version = "1.6.0"))
 
     // Depend on the common project. The "namedElements" configuration contains the non-remapped
     // classes and resources of the project.
@@ -69,8 +67,10 @@ dependencies {
     // modLocalRuntime won't be exposed if other mods depend on your mod unlike modRuntimeOnly.
     // TODO: Revert back to API jar after it's fixed: https://github.com/shedaniel/RoughlyEnoughItems/issues/1194
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.property("rei")}")
-    modLocalRuntime("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.property("rei")}")
-    modLocalRuntime("dev.architectury:architectury-forge:${rootProject.property("architectury-api")}")
+    /*modLocalRuntime("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.property("rei")}")
+    modLocalRuntime("dev.architectury:architectury-forge:${rootProject.property("architectury-api")}")*/
+
+    modLocalRuntime(libs.emi.forge)
 }
 
 tasks {
