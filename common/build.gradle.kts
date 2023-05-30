@@ -26,6 +26,7 @@ dependencies {
     // Add a mod dependency on some APIs for compat code.
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:${rootProject.property("rei")}")
     modCompileOnly(libs.emi.common)
+    modCompileOnly(libs.jei.fabric)
 }
 
 dataGenerator {

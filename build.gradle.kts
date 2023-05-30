@@ -119,6 +119,16 @@ subprojects {
                 includeGroup("dev.emi")
             }
         }
+
+        // For JEI.
+        maven {
+            name = "Modrinth"
+            url = uri("https://api.modrinth.com/maven")
+
+            content {
+                includeGroup("maven.modrinth")
+            }
+        }
     }
 
     dependencies {

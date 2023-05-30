@@ -41,6 +41,9 @@
     ],
     "emi": [
       "juuxel.adorn.compat.emi.AdornEmiPlugin"
+    ],
+    "jei_mod_plugin": [
+      "juuxel.adorn.compat.jei.AdornJeiPlugin"
     ]
   },
 
