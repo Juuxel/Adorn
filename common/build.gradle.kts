@@ -24,8 +24,9 @@ dependencies {
     // Just for @Environment and mixin deps :)
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric-loader")}")
 
-    // Add a mod dependency on REI's API for compat code.
+    // Add a mod dependency on some APIs for compat code.
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:${rootProject.property("rei")}")
+    modCompileOnly(libs.emi.common)
 }
 
 dataGenerator {

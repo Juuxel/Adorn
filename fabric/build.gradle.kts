@@ -51,17 +51,6 @@ repositories {
         }
     }
 
-    // TerraformersMC maven for Mod Menu and EMI.
-    maven {
-        name = "TerraformersMC"
-        url = uri("https://maven.terraformersmc.com/releases")
-
-        content {
-            includeGroup("com.terraformersmc")
-            includeGroup("dev.emi")
-        }
-    }
-
     // DashLoader maven.
     maven {
         url = uri("https://oskarstrom.net/maven")

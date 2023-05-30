@@ -1,5 +1,6 @@
 package juuxel.adorn.compat.emi
 
+import dev.emi.emi.api.EmiEntrypoint
 import dev.emi.emi.api.EmiPlugin
 import dev.emi.emi.api.EmiRegistry
 import dev.emi.emi.api.recipe.EmiRecipeCategory
@@ -13,14 +14,8 @@ import juuxel.adorn.recipe.FluidBrewingRecipe
 import juuxel.adorn.recipe.ItemBrewingRecipe
 import juuxel.adorn.util.logger
 
-object AdornEmiPlugin : EmiPlugin {
-    private val LOGGER = logger()
-    val BREWER_CATEGORY: EmiRecipeCategory = EmiRecipeCategory(
-        AdornCommon.id("brewer"),
-        EmiStack.of(AdornBlocks.BREWER),
-        EmiTexture(AdornCommon.id("textures/gui/brewer_emi.png"), 240, 0, 16, 16)
-    )
-
+@EmiEntrypoint
+class AdornEmiPlugin : EmiPlugin {
     override fun register(registry: EmiRegistry) {
         registry.addCategory(BREWER_CATEGORY)
         registry.addWorkstation(BREWER_CATEGORY, EmiStack.of(AdornBlocks.BREWER))
@@ -41,5 +36,15 @@ object AdornEmiPlugin : EmiPlugin {
         }
 
         registry.addDragDropHandler(TradingStationScreen::class.java, TradingStationDragDropHandler)
+    }
+
+    companion object {
+        private val LOGGER = logger()
+
+        val BREWER_CATEGORY: EmiRecipeCategory = EmiRecipeCategory(
+            AdornCommon.id("brewer"),
+            EmiStack.of(AdornBlocks.BREWER),
+            EmiTexture(AdornCommon.id("textures/gui/brewer_emi.png"), 240, 0, 16, 16)
+        )
     }
 }

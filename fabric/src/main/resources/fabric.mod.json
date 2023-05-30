@@ -40,10 +40,7 @@
       "juuxel.adorn.compat.rei.client.AdornReiClient"
     ],
     "emi": [
-      {
-        "value": "juuxel.adorn.compat.emi.AdornEmiPlugin",
-        "adapter": "kotlin"
-      }
+      "juuxel.adorn.compat.emi.AdornEmiPlugin"
     ]
   },
 
