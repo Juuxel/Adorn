@@ -1462,6 +1462,13 @@
   "tag.c.sweet_berries": "Sweet Berries",
   "tag.c.tea": "Tea",
   "tag.c.wooden_rods": "Wooden Rods",
+  "tag.item.forge.beans": "Beans",
+  "tag.item.forge.beans.cocoa": "Cocoa Beans",
+  "tag.item.forge.berries": "Berries",
+  "tag.item.forge.berries.glow": "Glow Berries",
+  "tag.item.forge.berries.sweet": "Sweet Berries",
+  "tag.item.forge.juices.sweet_berry": "Sweet Berry Juices",
+  "tag.item.forge.rods.stone": "Stone Rods",
 
   "category.adorn.brewer": "Brewer",
   "emi.category.adorn.brewer": "Brewer"
