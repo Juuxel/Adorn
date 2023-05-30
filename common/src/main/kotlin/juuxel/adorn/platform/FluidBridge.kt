@@ -10,6 +10,7 @@ interface FluidBridge {
     @InlineServices
     companion object {
         private val instance: FluidBridge by lazy { loadService() }
+
         @JvmStatic
         fun get(): FluidBridge = instance
     }
