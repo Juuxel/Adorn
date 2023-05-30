@@ -69,11 +69,11 @@ class BrewingEmiRecipe private constructor(
         widgets.addSlot(inputItem, leftX + 3, topY + 38).drawBack(false)
 
         // Fluid scale
-        widgets.addDrawable(leftX + 88, topY + 5, 16, 51) { matrices, _, _, _ ->
+        widgets.addDrawable(leftX + 88, topY + 1, 16, BrewerScreen.FLUID_AREA_HEIGHT) { matrices, _, _, _ ->
             RenderSystem.setShaderTexture(0, TEXTURE)
             RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
             RenderSystem.setShader(GameRenderer::getPositionTexShader)
-            DrawableHelper.drawTexture(matrices, 0, 0, FLUID_SCALE_Z_OFFSET, 176f, 25f, 16, 51, 256, 256)
+            DrawableHelper.drawTexture(matrices, 0, 0, FLUID_SCALE_Z_OFFSET, 154f, 17f, 16, BrewerScreen.FLUID_AREA_HEIGHT, 256, 256)
         }
 
         // Progress arrow
@@ -87,6 +87,6 @@ class BrewingEmiRecipe private constructor(
     companion object {
         private const val PADDING = 0
         private const val FLUID_SCALE_Z_OFFSET = 100
-        private val TEXTURE = AdornCommon.id("textures/gui/brewer_emi.png")
+        private val TEXTURE = AdornCommon.id("textures/gui/recipe_viewer/brewer_light.png")
     }
 }
