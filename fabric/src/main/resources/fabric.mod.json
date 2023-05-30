@@ -62,7 +62,8 @@
   "breaks": {
     "towelette": "<4.0.0",
     "dashloader": "<2.0-pre2",
-    "roughlyenoughitems": "<9.1"
+    "roughlyenoughitems": "<9.1",
+    "emi": "<1.0"
   },
 
   "custom": {

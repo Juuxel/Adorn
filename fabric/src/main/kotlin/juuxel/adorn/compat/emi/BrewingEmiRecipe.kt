@@ -62,7 +62,7 @@ class BrewingEmiRecipe private constructor(
         widgets.addTexture(TEXTURE, leftX, topY, 105, 61, 49, 16)
         widgets.addSlot(firstItemIngredient, leftX, topY).drawBack(false)
         widgets.addSlot(secondItemIngredient, leftX + 60, topY).drawBack(false)
-        widgets.addSlot(result, leftX + 26, topY + 35).drawBack(false).recipeContext(this).output(true)
+        widgets.addSlot(result, leftX + 26, topY + 35).drawBack(false).recipeContext(this).large(true)
         widgets.add(FluidSlotWidget(fluidIngredient, leftX + 87, topY, 18, BrewerScreen.FLUID_AREA_HEIGHT + 2))
 
         // Empty mug
