@@ -22,7 +22,6 @@ open class AdornReiClient : REIClientPlugin {
     override fun registerCategories(registry: CategoryRegistry) {
         registry.add(BrewerCategory())
         registry.addWorkstations(AdornReiServer.BREWER, EntryStacks.of(AdornBlocks.BREWER))
-        registry.removePlusButton(AdornReiServer.BREWER)
     }
 
     override fun registerDisplays(registry: DisplayRegistry) {
