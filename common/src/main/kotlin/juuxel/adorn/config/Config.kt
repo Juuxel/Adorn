@@ -3,7 +3,6 @@ package juuxel.adorn.config
 import blue.endless.jankson.Comment
 import juuxel.adorn.fluid.FluidUnit
 import juuxel.adorn.item.group.ItemGroupingOption
-import juuxel.adorn.platform.FluidBridge
 
 class Config {
     @JvmField
@@ -33,7 +32,7 @@ class Config {
 
         @JvmField
         @field:Comment("The fluid unit to show fluid amounts in. Options: [litres, droplets]")
-        var displayedFluidUnit: FluidUnit = FluidBridge.get().fluidUnit
+        var displayedFluidUnit: FluidUnit = FluidUnit.LITRE
     }
 
     class GameRuleDefaults {
