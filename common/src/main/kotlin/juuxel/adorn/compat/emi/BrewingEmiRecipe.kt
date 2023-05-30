@@ -5,10 +5,13 @@ import dev.emi.emi.api.recipe.EmiRecipe
 import dev.emi.emi.api.recipe.EmiRecipeCategory
 import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
+import dev.emi.emi.api.widget.TankWidget
 import dev.emi.emi.api.widget.WidgetHolder
 import juuxel.adorn.AdornCommon
+import juuxel.adorn.block.entity.BrewerBlockEntity
 import juuxel.adorn.client.gui.screen.BrewerScreen
 import juuxel.adorn.item.AdornItems
+import juuxel.adorn.platform.FluidBridge
 import juuxel.adorn.recipe.FluidBrewingRecipe
 import juuxel.adorn.recipe.ItemBrewingRecipe
 import net.minecraft.client.gui.DrawableHelper
@@ -63,7 +66,8 @@ class BrewingEmiRecipe private constructor(
         widgets.addSlot(firstItemIngredient, leftX, topY).drawBack(false)
         widgets.addSlot(secondItemIngredient, leftX + 60, topY).drawBack(false)
         widgets.addSlot(result, leftX + 26, topY + 35).drawBack(false).recipeContext(this).large(true)
-        widgets.add(FluidSlotWidget(fluidIngredient, leftX + 87, topY, 18, BrewerScreen.FLUID_AREA_HEIGHT + 2))
+        val capacity = BrewerBlockEntity.FLUID_CAPACITY_IN_BUCKETS * FluidBridge.get().fluidUnit.bucketVolume
+        widgets.add(TankWidget(fluidIngredient, leftX + 87, topY, 18, BrewerScreen.FLUID_AREA_HEIGHT + 2, capacity).drawBack(false))
 
         // Empty mug
         widgets.addSlot(inputItem, leftX + 3, topY + 38).drawBack(false)
