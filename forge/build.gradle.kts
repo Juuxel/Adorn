@@ -72,9 +72,8 @@ dependencies {
     // modLocalRuntime won't be exposed if other mods depend on your mod unlike modRuntimeOnly.
     // TODO: Revert back to API jar after it's fixed: https://github.com/shedaniel/RoughlyEnoughItems/issues/1194
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.property("rei")}")
-    /*modLocalRuntime("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.property("rei")}")
-    modLocalRuntime("dev.architectury:architectury-forge:${rootProject.property("architectury-api")}")*/
-
+    modLocalRuntime("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.property("rei")}")
+    modLocalRuntime("dev.architectury:architectury-forge:${rootProject.property("architectury-api")}")
     modLocalRuntime(libs.emi.forge)
 }
 
