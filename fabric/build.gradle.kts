@@ -26,6 +26,10 @@ loom {
     accessWidenerPath.set(accessWidenerFile)
 }
 
+emiDataGenerator {
+    setupForPlatform(generatedResources)
+}
+
 sourceSets {
     main {
         resources {
@@ -119,24 +123,6 @@ tasks {
         // Replace the $version template in fabric.mod.json with the project version.
         filesMatching("fabric.mod.json") {
             expand("version" to project.version)
-        }
-    }
-
-    generateEmi {
-        mustRunAfter(project(":common").tasks.named("generateData"))
-        val resourceDirs = project(":common").sourceSets.main.get().resources.srcDirs +
-            sourceSets.main.get().resources.srcDirs
-        for (dir in resourceDirs) {
-            // Ignore the AW resource dir
-            if (dir == generatedResources) continue
-
-            recipes.from(fileTree(dir) {
-                include("data/adorn/recipes/**")
-
-                // The unpacking recipes create "uncraftable" vanilla items like
-                // nether wart, so exclude them.
-                exclude("data/adorn/recipes/crates/unpack/**")
-            })
         }
     }
 }

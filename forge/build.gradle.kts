@@ -1,5 +1,6 @@
 plugins {
     id("adorn-data-generator")
+    id("adorn-data-generator.emi")
     id("adorn-service-inline")
 }
 
@@ -26,6 +27,10 @@ loom {
         // via Gradle; in Fabric, they're in fabric.mod.json.
         mixinConfigs("mixins.adorn.common.json", "mixins.adorn.forge.json")
     }
+}
+
+emiDataGenerator {
+    setupForPlatform()
 }
 
 repositories {
