@@ -44,7 +44,7 @@ class AdornEmiPlugin : EmiPlugin {
         val BREWER_CATEGORY: EmiRecipeCategory = EmiRecipeCategory(
             AdornCommon.id("brewer"),
             EmiStack.of(AdornBlocks.BREWER),
-            EmiTexture(AdornCommon.id("textures/gui/brewer_emi.png"), 240, 0, 16, 16)
+            EmiTexture(AdornCommon.id("textures/gui/recipe_viewer/brewer_light.png"), 240, 0, 16, 16)
         )
     }
 }
