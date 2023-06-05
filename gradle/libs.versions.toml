@@ -1,10 +1,10 @@
 [versions]
-emi = "1.0.0+1.19.4"
+emi = "1.0.0+1.19.2"
 
 [libraries]
 emi-common = { module = "dev.emi:emi-xplat-intermediary", version.ref = "emi" }
 emi-fabric = { module = "dev.emi:emi-fabric", version.ref = "emi" }
 emi-forge = { module = "dev.emi:emi-forge", version.ref = "emi" }
-jei-fabric = { module = "maven.modrinth:jei", version = "K3VXH3xw" }
-jei-forge = { module = "maven.modrinth:jei", version = "6CFibYwP" }
-rei-annotations = { module = "me.shedaniel:REIPluginCompatibilities-forge-annotations", version = "11.0.53" }
+jei-fabric = { module = "maven.modrinth:jei", version = "Fq2JkIID" }
+jei-forge = { module = "maven.modrinth:jei", version = "dGZUi2bk" }
+rei-annotations = { module = "me.shedaniel:REIPluginCompatibilities-forge-annotations", version = "9.0.48" }

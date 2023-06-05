@@ -89,7 +89,7 @@ public final class BrewerCategory implements IRecipeCategory<BrewingRecipe> {
         }
     }
 
-    private static final class Background implements IDrawable {
+    private static final class Background extends DrawableHelper implements IDrawable {
         @Override
         public int getWidth() {
             return 105;
@@ -104,11 +104,11 @@ public final class BrewerCategory implements IRecipeCategory<BrewingRecipe> {
         public void draw(MatrixStack matrices, int offsetX, int offsetY) {
             RenderSystem.setShaderTexture(0, TEXTURE);
             RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-            RenderSystem.setShader(GameRenderer::getPositionTexProgram);
-            DrawableHelper.drawTexture(matrices, offsetX, offsetY, 49, 16, getWidth(), getHeight());
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            drawTexture(matrices, offsetX, offsetY, 49, 16, getWidth(), getHeight());
             float progressFraction = (System.currentTimeMillis() % 4000) / 4000f;
             int height = Math.round(progressFraction * 25);
-            DrawableHelper.drawTexture(matrices, offsetX + 35, offsetY + 8, 176, 0, 8, height);
+            drawTexture(matrices, offsetX + 35, offsetY + 8, 176, 0, 8, height);
         }
     }
 }
