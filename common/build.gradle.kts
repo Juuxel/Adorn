@@ -27,6 +27,7 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:${rootProject.property("rei")}")
     modCompileOnly(libs.emi.common)
     modCompileOnly(libs.jei.fabric)
+    compileOnly(libs.rei.annotations)
 }
 
 dataGenerator {
