@@ -3,6 +3,7 @@ package juuxel.adorn.compat.jei;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.recipe.AdornRecipes;
+import me.shedaniel.rei.plugincompatibilities.api.REIPluginCompatIgnore;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
@@ -16,6 +17,7 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 
 @JeiPlugin
+@REIPluginCompatIgnore
 public final class AdornJeiPlugin implements IModPlugin {
     private static final Identifier ID = AdornCommon.id("jei_plugin");
 

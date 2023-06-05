@@ -7,3 +7,4 @@ emi-fabric = { module = "dev.emi:emi-fabric", version.ref = "emi" }
 emi-forge = { module = "dev.emi:emi-forge", version.ref = "emi" }
 jei-fabric = { module = "maven.modrinth:jei", version = "K3VXH3xw" }
 jei-forge = { module = "maven.modrinth:jei", version = "6CFibYwP" }
+rei-annotations = { module = "me.shedaniel:REIPluginCompatibilities-forge-annotations", version = "11.0.53" }
