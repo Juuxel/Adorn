@@ -3,7 +3,8 @@ package juuxel.adorn.datagen
 interface TemplateDsl {
     fun init(material: Material)
     infix fun String.with(other: String)
-    infix fun String.with(id: Id)
+    infix fun String.with(id: Id) = withId(id.namespace, id.path)
+    fun String.withId(namespace: String, path: String)
     infix fun String.withId(id: String) = with(Id.parse(id))
     fun putAll(properties: Map<String, String>)
 }
@@ -31,10 +32,10 @@ private class TemplateBuilder : TemplateDsl {
         substitutions[this] = other
     }
 
-    override fun String.with(id: Id) {
-        substitutions[this] = id.toString()
-        substitutions["$this.namespace"] = id.namespace
-        substitutions["$this.path"] = id.path
+    override fun String.withId(namespace: String, path: String) {
+        substitutions[this] = "$namespace:$path"
+        substitutions["$this.namespace"] = namespace
+        substitutions["$this.path"] = path
     }
 
     override fun putAll(properties: Map<String, String>) =

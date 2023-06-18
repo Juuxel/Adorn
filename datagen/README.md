@@ -40,6 +40,8 @@ Wood materials also have the following properties:
 - `log`: the block/item ID of the log/stem of this wood type
 - `log_side`: the side (bark) texture of the log/stem
 - `log_end`: the end/top texture of the log/stem
+- `log_type`: the suffix of the log/stem after the wood type's id
+  - By default, this is `log` for wood and `stem` for fungi
 
 The wood and stone materials are listed in various XML files stored in each subproject's
 `src/data` directories.
