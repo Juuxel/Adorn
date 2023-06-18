@@ -16,6 +16,7 @@ import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
+import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
@@ -58,6 +59,13 @@ class CoffeeTableBlock(variant: BlockVariant) : Block(variant.createSettings().n
 
     companion object {
         val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
-        private val SHAPE = createCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 16.0)
+        private val SHAPE = VoxelShapes.union(
+            createCuboidShape(0.0, 4.0, 0.0, 16.0, 6.0, 16.0),
+            createCuboidShape(0.0, 10.0, 0.0, 16.0, 12.0, 16.0),
+            createCuboidShape(0.0, 0.0, 0.0, 2.0, 10.0, 2.0),
+            createCuboidShape(14.0, 0.0, 0.0, 16.0, 10.0, 2.0),
+            createCuboidShape(14.0, 0.0, 14.0, 16.0, 10.0, 16.0),
+            createCuboidShape(0.0, 0.0, 14.0, 2.0, 10.0, 16.0)
+        )
     }
 }

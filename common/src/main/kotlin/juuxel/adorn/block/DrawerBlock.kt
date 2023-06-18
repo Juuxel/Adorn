@@ -7,8 +7,11 @@ import juuxel.adorn.block.entity.SimpleContainerBlockEntity
 import juuxel.adorn.block.variant.BlockVariant
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.platform.PlatformBridges
+import juuxel.adorn.util.buildShapeRotationsFromNorth
+import juuxel.adorn.util.mergeShapeMaps
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.ShapeContext
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.LootableContainerBlockEntity
 import net.minecraft.entity.LivingEntity
@@ -27,7 +30,10 @@ import net.minecraft.util.Hand
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Direction
 import net.minecraft.util.math.random.Random
+import net.minecraft.util.shape.VoxelShape
+import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
 class DrawerBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createSettings().nonOpaque()), BlockWithDescription {
@@ -68,6 +74,9 @@ class DrawerBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.create
         }
     }
 
+    override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape =
+        SHAPES[state[FACING]]!!
+
     override fun mirror(state: BlockState, mirror: BlockMirror) =
         state.rotate(mirror.getRotation(state[FACING]))
 
@@ -97,5 +106,13 @@ class DrawerBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.create
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING
+
+        private val SHAPES: Map<Direction, VoxelShape> = mergeShapeMaps(
+            buildShapeRotationsFromNorth(0, 0, 3, 16, 16, 16),
+            // Top drawer
+            buildShapeRotationsFromNorth(1, 9, 1, 15, 15, 3),
+            // Bottom drawer
+            buildShapeRotationsFromNorth(1, 1, 1, 15, 7, 3)
+        )
     }
 }
