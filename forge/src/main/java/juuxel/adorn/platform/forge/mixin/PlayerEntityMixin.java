@@ -21,6 +21,7 @@ abstract class PlayerEntityMixin extends LivingEntity {
     private void onCanResetTimeBySleeping(CallbackInfoReturnable<Boolean> info) {
         // Allow sleeping on sofas at daytime and (depending on config)
         // prevent skipping the night on sofas
+        var world = getWorld();
         boolean skipNight = world.getGameRules().getBoolean(AdornGameRules.SKIP_NIGHT_ON_SOFAS);
         if (info.getReturnValueZ() && (!skipNight || world.isDay()) &&
             getSleepingPosition().map(pos -> world.getBlockState(pos).getBlock() instanceof SofaBlock).orElse(false)) {

@@ -17,16 +17,15 @@ import juuxel.adorn.util.Colors
 import juuxel.adorn.util.animation.AnimationEngine
 import juuxel.adorn.util.color
 import juuxel.adorn.util.interleave
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.Drawable
 import net.minecraft.client.gui.Element
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.screen.ingame.BookScreen
 import net.minecraft.client.gui.widget.ButtonWidget
 import net.minecraft.client.gui.widget.PageTurnWidget
-import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.client.util.NarratorManager
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.ClickEvent
@@ -71,15 +70,12 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         nextPageButton.visible = flipBook.hasNextPage()
     }
 
-    override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
-        renderBackground(matrices)
-        RenderSystem.setShader(GameRenderer::getPositionTexProgram)
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-        RenderSystem.setShaderTexture(0, BookScreen.BOOK_TEXTURE)
+    override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
+        renderBackground(context)
         val x = (width - BOOK_SIZE) / 2
         val y = (height - BOOK_SIZE) / 2
-        drawTexture(matrices, x, y, 0, 0, BOOK_SIZE, BOOK_SIZE)
-        super.render(matrices, mouseX, mouseY, delta)
+        context.drawTexture(BookScreen.BOOK_TEXTURE, x, y, 0, 0, BOOK_SIZE, BOOK_SIZE)
+        super.render(context, mouseX, mouseY, delta)
     }
 
     override fun handleTextClick(style: Style?): Boolean {
@@ -151,17 +147,18 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         private val byAuthor = Text.translatable("book.byAuthor", book.author)
         private var focused = false
 
-        override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+        override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
             val cx = x + PAGE_WIDTH / 2
 
+            val matrices = context.matrices
             matrices.push()
             matrices.translate(cx.toDouble(), (y + 7).toDouble() + 25, 0.0)
             matrices.scale(book.titleScale, book.titleScale, 1.0f)
-            textRenderer.draw(matrices, book.title, -(textRenderer.getWidth(book.title) / 2).toFloat(), 0f, Colors.SCREEN_TEXT)
+            context.drawText(textRenderer, book.title, -textRenderer.getWidth(book.title) / 2, 0, Colors.SCREEN_TEXT, false)
             matrices.pop()
 
-            textRenderer.draw(matrices, book.subtitle, (cx - textRenderer.getWidth(book.subtitle) / 2).toFloat(), y + 45f, Colors.SCREEN_TEXT)
-            textRenderer.draw(matrices, byAuthor, (cx - textRenderer.getWidth(byAuthor) / 2).toFloat(), y + 60f, Colors.SCREEN_TEXT)
+            context.drawText(textRenderer, book.subtitle, cx - textRenderer.getWidth(book.subtitle) / 2, y + 45, Colors.SCREEN_TEXT, false)
+            context.drawText(textRenderer, byAuthor, cx - textRenderer.getWidth(byAuthor) / 2, y + 60, Colors.SCREEN_TEXT, false)
         }
 
         override fun isFocused(): Boolean =
@@ -180,12 +177,12 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
         private var iconTicks = 0
         private var focused = false
 
-        override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
-            itemRenderer.renderGuiItemIcon(matrices, icons[icon], x, y)
+        override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
+            context.drawItemWithoutEntity(icons[icon], x, y)
 
-            val titleY = (y + 10 - textRenderer.fontHeight * wrappedTitleLines.size / 2).toFloat()
+            val titleY = y + 10 - textRenderer.fontHeight * wrappedTitleLines.size / 2
             for ((i, line) in wrappedTitleLines.withIndex()) {
-                textRenderer.draw(matrices, line, (x + PAGE_TITLE_X).toFloat(), titleY + i * textRenderer.fontHeight, Colors.SCREEN_TEXT)
+                context.drawText(textRenderer, line, x + PAGE_TITLE_X, titleY + i * textRenderer.fontHeight, Colors.SCREEN_TEXT, false)
             }
         }
 
@@ -231,7 +228,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
             return null
         }
 
-        override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+        override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
             val textYOffset = if (page.image != null && page.image.placement == Image.Placement.BEFORE_TEXT) {
                 imageHeight
             } else {
@@ -239,20 +236,20 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
             }
 
             for ((i, line) in wrappedBodyLines.withIndex()) {
-                textRenderer.draw(matrices, line, (x + PAGE_TEXT_X).toFloat(), (textYOffset + y + i * textRenderer.fontHeight).toFloat(), Colors.SCREEN_TEXT)
+                context.drawText(textRenderer, line, x + PAGE_TEXT_X, textYOffset + y + i * textRenderer.fontHeight, Colors.SCREEN_TEXT, false)
             }
 
             if (page.image != null) {
-                renderImage(matrices, page.image, mouseX, mouseY)
+                renderImage(context, page.image, mouseX, mouseY)
             }
 
             val hoveredStyle = getTextStyleAt(mouseX, mouseY)
             Scissors.suspendScissors {
-                renderTextHoverEffect(matrices, hoveredStyle, mouseX, mouseY)
+                context.drawHoverEvent(textRenderer, hoveredStyle, mouseX, mouseY)
             }
         }
 
-        private fun renderImage(matrices: MatrixStack, image: Image, mouseX: Int, mouseY: Int) {
+        private fun renderImage(context: DrawContext, image: Image, mouseX: Int, mouseY: Int) {
             val imageX = x + (PAGE_WIDTH - image.size.x) / 2
             val imageY = when (image.placement) {
                 Image.Placement.BEFORE_TEXT -> y
@@ -260,21 +257,18 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
             }
 
             RenderSystem.enableBlend()
-            RenderSystem.setShader(GameRenderer::getPositionTexProgram)
-            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-            RenderSystem.setShaderTexture(0, image.location)
-            drawTexture(matrices, imageX, imageY, 0f, 0f, image.size.x, image.size.y, image.size.x, image.size.y)
+            context.drawTexture(image.location, imageX, imageY, 0f, 0f, image.size.x, image.size.y, image.size.x, image.size.y)
             RenderSystem.disableBlend()
 
             for (hoverArea in image.hoverAreas) {
                 if (hoverArea.contains(mouseX - imageX, mouseY - imageY)) {
                     val hX = imageX + hoverArea.position.x
                     val hY = imageY + hoverArea.position.y
-                    fill(matrices, hX, hY, hX + hoverArea.size.x, hY + hoverArea.size.y, HOVER_AREA_HIGHLIGHT_COLOR)
+                    context.fill(hX, hY, hX + hoverArea.size.x, hY + hoverArea.size.y, HOVER_AREA_HIGHLIGHT_COLOR)
 
-                    val wrappedTooltip = client!!.textRenderer.wrapLines(hoverArea.tooltip, PAGE_WIDTH)
+                    val wrappedTooltip = textRenderer.wrapLines(hoverArea.tooltip, PAGE_WIDTH)
                     Scissors.suspendScissors {
-                        renderOrderedTooltip(matrices, wrappedTooltip, mouseX, mouseY)
+                        context.drawOrderedTooltip(textRenderer, wrappedTooltip, mouseX, mouseY)
                     }
                     break
                 }
@@ -303,19 +297,9 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
 
     private class CloseButton(x: Int, y: Int, pressAction: PressAction) :
         ButtonWidget(x, y, 8, 8, Text.empty(), pressAction, DEFAULT_NARRATION_SUPPLIER) {
-        override fun renderButton(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
-            RenderSystem.setShader(GameRenderer::getPositionTexProgram)
-            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-            RenderSystem.setShaderTexture(
-                0,
-                if (isHovered) {
-                    CLOSE_BOOK_ACTIVE_TEXTURE
-                } else {
-                    CLOSE_BOOK_INACTIVE_TEXTURE
-                }
-            )
-
-            drawTexture(matrices, x, y, 0f, 0f, 8, 8, 8, 8)
+        override fun renderButton(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
+            val texture = if (isHovered) CLOSE_BOOK_ACTIVE_TEXTURE else CLOSE_BOOK_INACTIVE_TEXTURE
+            context.drawTexture(texture, x, y, 0f, 0f, 8, 8, 8, 8)
         }
     }
 }

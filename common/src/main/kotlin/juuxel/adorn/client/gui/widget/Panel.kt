@@ -2,9 +2,9 @@ package juuxel.adorn.client.gui.widget
 
 import juuxel.adorn.client.gui.forEach
 import net.minecraft.client.gui.AbstractParentElement
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.Drawable
 import net.minecraft.client.gui.Element
-import net.minecraft.client.util.math.MatrixStack
 
 class Panel : AbstractParentElement(), Drawable, TickingElement, Draggable {
     private val children: MutableList<Element> = ArrayList()
@@ -14,9 +14,9 @@ class Panel : AbstractParentElement(), Drawable, TickingElement, Draggable {
         children += element
     }
 
-    override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
         forEach<Drawable> {
-            it.render(matrices, mouseX, mouseY, delta)
+            it.render(context, mouseX, mouseY, delta)
         }
     }
 

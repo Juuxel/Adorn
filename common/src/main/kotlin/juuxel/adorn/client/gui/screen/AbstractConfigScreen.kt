@@ -10,12 +10,11 @@ import juuxel.adorn.util.PropertyRef
 import juuxel.adorn.util.animation.AnimationEngine
 import juuxel.adorn.util.animation.AnimationTask
 import juuxel.adorn.util.color
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.NoticeScreen
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.tooltip.Tooltip
 import net.minecraft.client.gui.widget.CyclingButtonWidget
-import net.minecraft.client.render.GameRenderer
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.math.MathHelper
@@ -40,27 +39,25 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
         animationEngine.start()
     }
 
-    override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
-        renderBackground(matrices)
+    override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
+        renderBackground(context)
         synchronized(hearts) {
-            renderHearts(matrices, delta)
+            renderHearts(context, delta)
         }
-        drawCenteredTextWithShadow(matrices, textRenderer, title, width / 2, 20, Colors.WHITE)
-        super.render(matrices, mouseX, mouseY, delta)
+        context.drawCenteredTextWithShadow(textRenderer, title, width / 2, 20, Colors.WHITE)
+        super.render(context, mouseX, mouseY, delta)
     }
 
-    private fun renderHearts(matrices: MatrixStack, delta: Float) {
-        RenderSystem.setShader(GameRenderer::getPositionTexColorProgram)
-        RenderSystem.setShaderTexture(0, HEART_TEXTURE)
-
+    private fun renderHearts(context: DrawContext, delta: Float) {
         for (heart in hearts) {
             RenderSystem.setShaderColor(Colors.redOf(heart.color), Colors.greenOf(heart.color), Colors.blueOf(heart.color), 1f)
+            val matrices = context.matrices
             matrices.push()
             matrices.translate(heart.x.toDouble(), MathHelper.lerp(delta.toDouble(), heart.previousY, heart.y), 0.0)
             matrices.translate(HEART_SIZE.toDouble() / 2, HEART_SIZE.toDouble() / 2, 0.0)
             matrices.multiply(RotationAxis.POSITIVE_Z.rotation(heart.angle.toFloat()))
             matrices.translate(-HEART_SIZE.toDouble() / 2, -HEART_SIZE.toDouble() / 2, 0.0)
-            drawTexture(matrices, 0, 0, HEART_SIZE, HEART_SIZE, 0f, 0f, 8, 8, 8, 8)
+            context.drawTexture(HEART_TEXTURE, 0, 0, HEART_SIZE, HEART_SIZE, 0f, 0f, 8, 8, 8, 8)
             matrices.pop()
         }
 

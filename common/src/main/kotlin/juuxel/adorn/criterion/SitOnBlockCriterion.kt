@@ -7,7 +7,7 @@ import net.minecraft.advancement.criterion.AbstractCriterionConditions
 import net.minecraft.predicate.BlockPredicate
 import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer
 import net.minecraft.predicate.entity.AdvancementEntityPredicateSerializer
-import net.minecraft.predicate.entity.EntityPredicate
+import net.minecraft.predicate.entity.LootContextPredicate
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
@@ -17,7 +17,7 @@ class SitOnBlockCriterion : AbstractCriterion<SitOnBlockCriterion.Conditions>() 
 
     override fun conditionsFromJson(
         json: JsonObject,
-        playerPredicate: EntityPredicate.Extended,
+        playerPredicate: LootContextPredicate,
         predicateDeserializer: AdvancementEntityPredicateDeserializer
     ): Conditions = Conditions(playerPredicate, BlockPredicate.fromJson(json["block"]))
 
@@ -29,10 +29,10 @@ class SitOnBlockCriterion : AbstractCriterion<SitOnBlockCriterion.Conditions>() 
         private val ID = AdornCommon.id("sit_on_block")
     }
 
-    class Conditions(playerPredicate: EntityPredicate.Extended, private val block: BlockPredicate) :
+    class Conditions(playerPredicate: LootContextPredicate, private val block: BlockPredicate) :
         AbstractCriterionConditions(ID, playerPredicate) {
         fun matches(player: ServerPlayerEntity, pos: BlockPos): Boolean =
-            block.test(player.getWorld(), pos)
+            block.test(player.serverWorld, pos)
 
         override fun toJson(predicateSerializer: AdvancementEntityPredicateSerializer): JsonObject {
             val json = super.toJson(predicateSerializer)

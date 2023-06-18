@@ -1,7 +1,7 @@
 package juuxel.adorn.client.gui.widget
 
 import juuxel.adorn.client.gui.Scissors
-import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.client.gui.DrawContext
 
 abstract class ScissorEnvelope(
     protected val x: Int, protected val y: Int,
@@ -41,9 +41,9 @@ abstract class ScissorEnvelope(
         return super.mouseScrolled(mouseX, mouseY, amount)
     }
 
-    override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
         Scissors.push(x, y, width, height)
-        super.render(matrices, mouseX, mouseY, delta)
+        super.render(context, mouseX, mouseY, delta)
         Scissors.pop()
     }
 }

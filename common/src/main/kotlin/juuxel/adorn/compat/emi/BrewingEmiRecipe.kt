@@ -1,6 +1,5 @@
 package juuxel.adorn.compat.emi
 
-import com.mojang.blaze3d.systems.RenderSystem
 import dev.emi.emi.api.recipe.EmiRecipe
 import dev.emi.emi.api.recipe.EmiRecipeCategory
 import dev.emi.emi.api.stack.EmiIngredient
@@ -14,8 +13,6 @@ import juuxel.adorn.item.AdornItems
 import juuxel.adorn.platform.FluidBridge
 import juuxel.adorn.recipe.FluidBrewingRecipe
 import juuxel.adorn.recipe.ItemBrewingRecipe
-import net.minecraft.client.gui.DrawableHelper
-import net.minecraft.client.render.GameRenderer
 import net.minecraft.util.Identifier
 import kotlin.math.roundToInt
 
@@ -73,18 +70,15 @@ class BrewingEmiRecipe private constructor(
         widgets.addSlot(inputItem, leftX + 3, topY + 38).drawBack(false)
 
         // Fluid scale
-        widgets.addDrawable(leftX + 88, topY + 1, 16, BrewerScreen.FLUID_AREA_HEIGHT) { matrices, _, _, _ ->
-            RenderSystem.setShaderTexture(0, TEXTURE)
-            RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-            RenderSystem.setShader(GameRenderer::getPositionTexProgram)
-            DrawableHelper.drawTexture(matrices, 0, 0, FLUID_SCALE_Z_OFFSET, 154f, 17f, 16, BrewerScreen.FLUID_AREA_HEIGHT, 256, 256)
+        widgets.addDrawable(leftX + 88, topY + 1, 16, BrewerScreen.FLUID_AREA_HEIGHT) { context, _, _, _ ->
+            context.drawTexture(TEXTURE, 0, 0, FLUID_SCALE_Z_OFFSET, 154f, 17f, 16, BrewerScreen.FLUID_AREA_HEIGHT, 256, 256)
         }
 
         // Progress arrow
-        widgets.addDrawable(leftX + 35, topY + 8, 8, BrewerScreen.FLUID_AREA_HEIGHT) { matrices, _, _, _ ->
+        widgets.addDrawable(leftX + 35, topY + 8, 8, BrewerScreen.FLUID_AREA_HEIGHT) { context, _, _, _ ->
             val progressFraction = (System.currentTimeMillis() % 4000) / 4000.0
             val height = (progressFraction * 25).roundToInt()
-            DrawableHelper.drawTexture(matrices, 0, 0, 1, 176f, 0f, 8, height, 256, 256)
+            context.drawTexture(TEXTURE, 0, 0, 1, 176f, 0f, 8, height, 256, 256)
         }
     }
 

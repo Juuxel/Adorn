@@ -1,15 +1,14 @@
 package juuxel.adorn.platform
 
 import juuxel.adorn.item.group.ItemGroupModifyContext
-import juuxel.adorn.lib.registry.Registered
 import juuxel.adorn.util.InlineServices
 import juuxel.adorn.util.loadService
 import net.minecraft.item.ItemGroup
-import net.minecraft.util.Identifier
+import net.minecraft.registry.RegistryKey
 
 interface ItemGroupBridge {
-    fun register(id: Identifier, configurator: ItemGroup.Builder.() -> Unit): Registered<ItemGroup>
-    fun addItems(group: ItemGroup, configurator: ItemGroupModifyContext.() -> Unit)
+    fun builder(): ItemGroup.Builder
+    fun addItems(group: RegistryKey<ItemGroup>, configurator: ItemGroupModifyContext.() -> Unit)
 
     @InlineServices
     companion object {

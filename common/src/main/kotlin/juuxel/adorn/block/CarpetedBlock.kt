@@ -9,7 +9,7 @@ import net.minecraft.block.Blocks
 import net.minecraft.block.DyedCarpetBlock
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
-import net.minecraft.loot.context.LootContext
+import net.minecraft.loot.context.LootContextParameterSet
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.EnumProperty
@@ -65,7 +65,7 @@ abstract class CarpetedBlock(settings: Settings) : SeatBlock(settings) {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
     }
 
-    override fun getDroppedStacks(state: BlockState, builder: LootContext.Builder): List<ItemStack> =
+    override fun getDroppedStacks(state: BlockState, builder: LootContextParameterSet.Builder): List<ItemStack> =
         if (isCarpetingEnabled()) {
             super.getDroppedStacks(state, builder) +
                 (COLORS_TO_BLOCKS[state[CARPET].value]?.defaultState?.getDroppedStacks(builder) ?: emptyList())

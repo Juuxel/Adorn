@@ -1,6 +1,5 @@
 package juuxel.adorn.compat.jei;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.block.entity.BrewerBlockEntity;
@@ -19,9 +18,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.text.Text;
@@ -101,14 +98,11 @@ public final class BrewerCategory implements IRecipeCategory<BrewingRecipe> {
         }
 
         @Override
-        public void draw(MatrixStack matrices, int offsetX, int offsetY) {
-            RenderSystem.setShaderTexture(0, TEXTURE);
-            RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-            RenderSystem.setShader(GameRenderer::getPositionTexProgram);
-            DrawableHelper.drawTexture(matrices, offsetX, offsetY, 49, 16, getWidth(), getHeight());
+        public void draw(DrawContext context, int offsetX, int offsetY) {
+            context.drawTexture(TEXTURE, offsetX, offsetY, 49, 16, getWidth(), getHeight());
             float progressFraction = (System.currentTimeMillis() % 4000) / 4000f;
             int height = Math.round(progressFraction * 25);
-            DrawableHelper.drawTexture(matrices, offsetX + 35, offsetY + 8, 176, 0, 8, height);
+            context.drawTexture(TEXTURE, offsetX + 35, offsetY + 8, 176, 0, 8, height);
         }
     }
 }

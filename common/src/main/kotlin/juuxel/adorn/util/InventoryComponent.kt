@@ -31,7 +31,7 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
         var remainingAmount = stack.count
 
         for (invStack in items) {
-            if (invStack.isItemEqual(stack)) {
+            if (ItemStack.areItemsEqual(invStack, stack)) {
                 remainingAmount -= invStack.count
                 if (remainingAmount <= 0) return true
             }
@@ -49,7 +49,7 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
         var remainingAmount = stack.count
 
         for (invStack in items) {
-            if (invStack.isItemEqual(stack) && invStack.nbt == stack.nbt) {
+            if (ItemStack.areItemsEqual(invStack, stack) && invStack.nbt == stack.nbt) {
                 val invStackAmount = invStack.count
                 invStack.decrement(min(invStackAmount, remainingAmount))
                 remainingAmount -= invStackAmount
@@ -67,7 +67,7 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
         var remainingAmount = stack.count
 
         for (invStack in items) {
-            if (invStack.isItemEqual(stack) && invStack.count < invStack.maxCount && stack.nbt == invStack.nbt) {
+            if (ItemStack.areItemsEqual(invStack, stack) && invStack.count < invStack.maxCount && stack.nbt == invStack.nbt) {
                 val insertionAmount = min(invStack.maxCount - invStack.count, remainingAmount)
                 remainingAmount -= insertionAmount
                 if (remainingAmount <= 0) return true
@@ -88,7 +88,7 @@ open class InventoryComponent(private val invSize: Int) : Inventory, NbtConverti
         var remainingAmount = stack.count
 
         for ((slot, invStack) in items.withIndex()) {
-            if (invStack.isItemEqual(stack) && invStack.count < invStack.maxCount && invStack.nbt == stack.nbt) {
+            if (ItemStack.areItemsEqual(invStack, stack) && invStack.count < invStack.maxCount && invStack.nbt == stack.nbt) {
                 val insertionAmount = min(invStack.maxCount - invStack.count, remainingAmount)
                 remainingAmount -= insertionAmount
                 invStack.increment(insertionAmount)

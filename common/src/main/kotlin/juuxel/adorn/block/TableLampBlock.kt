@@ -7,7 +7,6 @@ import juuxel.adorn.util.buildShapeRotationsFromNorth
 import juuxel.adorn.util.withBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.block.Material
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.ai.pathing.NavigationType
@@ -123,7 +122,9 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable, Block
         val FACING: DirectionProperty = Properties.FACING
 
         fun createBlockSettings(color: DyeColor): Settings =
-            Settings.of(Material.REDSTONE_LAMP, color)
+            Settings.create()
+                .mapColor(color)
+                .solid()
                 .hardness(0.3f)
                 .resistance(0.3f)
                 .sounds(BlockSoundGroup.WOOL)

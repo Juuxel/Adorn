@@ -1,6 +1,5 @@
 package juuxel.adorn.compat.rei.client
 
-import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.client.gui.screen.BrewerScreen
@@ -14,8 +13,6 @@ import me.shedaniel.rei.api.client.gui.widgets.Widget
 import me.shedaniel.rei.api.client.gui.widgets.Widgets
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory
 import me.shedaniel.rei.api.common.util.EntryStacks
-import net.minecraft.client.gui.DrawableHelper
-import net.minecraft.client.render.GameRenderer
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import kotlin.math.roundToInt
@@ -30,14 +27,11 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
         val topLeft = Point(bounds.centerX - 39, bounds.centerY - 30)
         add(Widgets.createRecipeBase(bounds))
         add(
-            Widgets.createDrawableWidget { _, matrices, _, _, _ ->
-                RenderSystem.setShaderTexture(0, currentTexture())
-                RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-                RenderSystem.setShader(GameRenderer::getPositionTexProgram)
-                DrawableHelper.drawTexture(matrices, topLeft.x, topLeft.y, 49, 16, 105, 61)
+            Widgets.createDrawableWidget { context, _, _, _ ->
+                context.drawTexture(currentTexture(), topLeft.x, topLeft.y, 49, 16, 105, 61)
                 val progressFraction = (System.currentTimeMillis() % 4000) / 4000.0
                 val height = (progressFraction * 25).roundToInt()
-                DrawableHelper.drawTexture(matrices, topLeft.x + 35, topLeft.y + 8, 176, 0, 8, height)
+                context.drawTexture(currentTexture(), topLeft.x + 35, topLeft.y + 8, 176, 0, 8, height)
             }
         )
         add(
@@ -72,14 +66,11 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
         )
         // Fluid scale for empty fluid slots
         add(
-            Widgets.createDrawableWidget { _, matrices, _, _, _ ->
-                RenderSystem.setShaderTexture(0, currentTexture())
-                RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-                RenderSystem.setShader(GameRenderer::getPositionTexProgram)
-                matrices.push()
-                matrices.translate(0f, 0f, FLUID_SCALE_Z_OFFSET.toFloat())
-                DrawableHelper.drawTexture(matrices, topLeft.x + 88, topLeft.y + 1, 154, 17, 16, BrewerScreen.FLUID_AREA_HEIGHT)
-                matrices.pop()
+            Widgets.createDrawableWidget { context, _, _, _ ->
+                context.matrices.push()
+                context.matrices.translate(0f, 0f, FLUID_SCALE_Z_OFFSET.toFloat())
+                context.drawTexture(currentTexture(), topLeft.x + 88, topLeft.y + 1, 154, 17, 16, BrewerScreen.FLUID_AREA_HEIGHT)
+                context.matrices.pop()
             }
         )
     }

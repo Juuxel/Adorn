@@ -5,8 +5,7 @@ import juuxel.adorn.menu.ContainerBlockMenu
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.getBlock
-import net.minecraft.client.render.GameRenderer
-import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.menu.Menu
 import net.minecraft.registry.Registries
@@ -22,18 +21,16 @@ abstract class PalettedMenuScreen<M>(menu: M, playerInventory: PlayerInventory, 
 
     private fun getPalette() = PlatformBridges.resources.colorManager.getColors(paletteId)[blockId]
 
-    override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
+    override fun drawBackground(context: DrawContext, delta: Float, mouseX: Int, mouseY: Int) {
         val bg = getPalette().bg
-        RenderSystem.setShader(GameRenderer::getPositionTexProgram)
         RenderSystem.setShaderColor(Colors.redOf(bg), Colors.greenOf(bg), Colors.blueOf(bg), 1.0f)
-        RenderSystem.setShaderTexture(0, backgroundTexture)
-        drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight)
+        context.drawTexture(backgroundTexture, x, y, 0, 0, backgroundWidth, backgroundHeight)
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
     }
 
-    override fun drawForeground(matrices: MatrixStack, mouseX: Int, mouseY: Int) {
+    override fun drawForeground(context: DrawContext, mouseX: Int, mouseY: Int) {
         val fg = getPalette().fg
-        textRenderer.draw(matrices, title, titleX.toFloat(), titleY.toFloat(), fg)
-        textRenderer.draw(matrices, playerInventoryTitle, playerInventoryTitleX.toFloat(), playerInventoryTitleY.toFloat(), fg)
+        context.drawText(textRenderer, title, titleX, titleY, fg, false)
+        context.drawText(textRenderer, playerInventoryTitle, playerInventoryTitleX, playerInventoryTitleY, fg, false)
     }
 }

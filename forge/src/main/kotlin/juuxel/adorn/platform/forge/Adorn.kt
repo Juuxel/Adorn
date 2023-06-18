@@ -33,6 +33,7 @@ object Adorn {
         MOD_BUS.addListener(this::init)
         EventsImplementedInJava().register(MOD_BUS, FORGE_BUS)
         AdornItemGroups.init()
+        AdornItemGroups.ITEM_GROUPS.registerToBus(MOD_BUS)
         AdornRecipes.init()
         AdornMenus.MENUS.registerToBus(MOD_BUS)
         AdornRecipes.RECIPE_SERIALIZERS.registerToBus(MOD_BUS)

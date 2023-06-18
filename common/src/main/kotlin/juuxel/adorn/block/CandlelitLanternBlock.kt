@@ -3,7 +3,7 @@ package juuxel.adorn.block
 import net.minecraft.block.AbstractCandleBlock
 import net.minecraft.block.BlockState
 import net.minecraft.block.LanternBlock
-import net.minecraft.block.Material
+import net.minecraft.block.MapColor
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
@@ -21,7 +21,9 @@ class CandlelitLanternBlock(settings: Settings) : LanternBlock(settings), BlockW
 
     companion object {
         fun createBlockSettings(): Settings =
-            Settings.of(Material.METAL)
+            Settings.create()
+                .mapColor(MapColor.IRON_GRAY)
+                .solid()
                 .requiresTool()
                 .strength(3.5f)
                 .sounds(BlockSoundGroup.LANTERN)

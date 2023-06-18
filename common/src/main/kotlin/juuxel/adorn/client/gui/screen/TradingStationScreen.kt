@@ -1,13 +1,11 @@
 package juuxel.adorn.client.gui.screen
 
-import com.mojang.blaze3d.systems.RenderSystem
 import juuxel.adorn.AdornCommon
 import juuxel.adorn.client.ClientNetworkBridge
 import juuxel.adorn.menu.TradingStationMenu
 import juuxel.adorn.util.Colors
 import juuxel.adorn.util.logger
-import net.minecraft.client.render.GameRenderer
-import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.menu.Slot
@@ -23,18 +21,15 @@ class TradingStationScreen(
         playerInventoryTitleY = backgroundHeight - 94 // copied from MenuScreen.<init>
     }
 
-    override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
-        RenderSystem.setShader(GameRenderer::getPositionTexProgram)
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-        RenderSystem.setShaderTexture(0, BACKGROUND_TEXTURE)
-        drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight)
+    override fun drawBackground(context: DrawContext, delta: Float, mouseX: Int, mouseY: Int) {
+        context.drawTexture(BACKGROUND_TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight)
     }
 
-    override fun drawForeground(matrices: MatrixStack, mouseX: Int, mouseY: Int) {
-        textRenderer.draw(matrices, title, titleX.toFloat(), titleY.toFloat(), Colors.WHITE)
-        textRenderer.draw(matrices, playerInventoryTitle, playerInventoryTitleX.toFloat(), playerInventoryTitleY.toFloat(), Colors.WHITE)
-        textRenderer.draw(matrices, SELLING_LABEL, 26f + 9f - textRenderer.getWidth(SELLING_LABEL) / 2, 25f, Colors.WHITE)
-        textRenderer.draw(matrices, PRICE_LABEL, 26f + 9f - textRenderer.getWidth(PRICE_LABEL) / 2, 61f, Colors.WHITE)
+    override fun drawForeground(context: DrawContext, mouseX: Int, mouseY: Int) {
+        context.drawText(textRenderer, title, titleX, titleY, Colors.WHITE, false)
+        context.drawText(textRenderer, playerInventoryTitle, playerInventoryTitleX, playerInventoryTitleY, Colors.WHITE, false)
+        context.drawText(textRenderer, SELLING_LABEL, 26 + 9 - textRenderer.getWidth(SELLING_LABEL) / 2, 25, Colors.WHITE, false)
+        context.drawText(textRenderer, PRICE_LABEL, 26 + 9 - textRenderer.getWidth(PRICE_LABEL) / 2, 61, Colors.WHITE, false)
     }
 
     /**

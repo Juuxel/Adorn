@@ -80,7 +80,7 @@ final class EventsImplementedInJava {
     private void handleSofaSleepTime(SleepingTimeCheckEvent event) {
         BlockPos sleepingPos = event.getSleepingLocation().orElse(null);
         if (sleepingPos == null) return;
-        World world = event.getEntity().world;
+        World world = event.getEntity().getWorld();
 
         if (world.isDay() && world.getBlockState(sleepingPos).getBlock() instanceof SofaBlock) {
             event.setResult(Event.Result.ALLOW);
@@ -91,7 +91,7 @@ final class EventsImplementedInJava {
         BlockPos pos = event.getNewSpawn();
 
         if (pos != null) {
-            if (!event.isForced() && event.getEntity().world.getBlockState(pos).getBlock() instanceof SofaBlock) {
+            if (!event.isForced() && event.getEntity().getWorld().getBlockState(pos).getBlock() instanceof SofaBlock) {
                 event.setCanceled(true);
             }
         }

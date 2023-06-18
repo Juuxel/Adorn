@@ -12,7 +12,6 @@ import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.MapColor
-import net.minecraft.block.Material
 import net.minecraft.block.TorchBlock
 import net.minecraft.block.WallTorchBlock
 import net.minecraft.item.Item
@@ -60,7 +59,7 @@ object AdornBlocks : RegistryHelper() {
     val TRADING_STATION: Block by registerBlock(
         "trading_station",
         itemProvider = { TradingStationItem(it, Item.Settings()) },
-        block = { TradingStationBlock(AbstractBlock.Settings.of(Material.WOOD).strength(2.5f).sounds(BlockSoundGroup.WOOD)) }
+        block = { TradingStationBlock(AbstractBlock.Settings.create().mapColor(MapColor.GREEN).strength(2.5f).sounds(BlockSoundGroup.WOOD)) }
     )
 
     val STONE_TORCH_GROUND: Block by registerBlockWithoutItem("stone_torch") {
@@ -112,7 +111,15 @@ object AdornBlocks : RegistryHelper() {
                 .nonOpaque()
         )
     }
-    val BREWER: Block by registerBlock("brewer") { BrewerBlock(AbstractBlock.Settings.of(Material.METAL).strength(0.8F)) }
+    val BREWER: Block by registerBlock("brewer") {
+        BrewerBlock(
+            AbstractBlock.Settings.create()
+                .mapColor(MapColor.DEEPSLATE_GRAY)
+                .solid()
+                .strength(0.8F)
+                .requiresTool()
+        )
+    }
 
     val CANDLELIT_LANTERN: Block by registerBlock("candlelit_lantern") {
         CandlelitLanternBlock(CandlelitLanternBlock.createBlockSettings())

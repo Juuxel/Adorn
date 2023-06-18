@@ -7,15 +7,23 @@ import juuxel.adorn.block.variant.BlockVariant
 import juuxel.adorn.block.variant.BlockVariantSets
 import juuxel.adorn.config.ConfigManager
 import juuxel.adorn.item.AdornItems
+import juuxel.adorn.lib.registry.Registrar
+import juuxel.adorn.lib.registry.RegistrarFactory
 import juuxel.adorn.platform.ItemGroupBridge
 import net.minecraft.block.Block
+import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemGroups
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.registry.Registries
+import net.minecraft.registry.RegistryKeys
+import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
+import net.minecraft.util.Util
 
 object AdornItemGroups {
+    val ITEM_GROUPS: Registrar<ItemGroup> = RegistrarFactory.get().create(RegistryKeys.ITEM_GROUP)
+
     // Block kinds for each vanilla item group
     private val BUILDING_KINDS: List<BlockKind> = listOf(
         BlockKind.POST,
@@ -34,33 +42,37 @@ object AdornItemGroups {
         BlockKind.BENCH,
     )
 
-    val GROUP by ItemGroupBridge.get().register(AdornCommon.id("items")) {
-        icon { ItemStack(AdornBlocks.SOFAS[DyeColor.LIME]) }
-        entries { _, entries ->
-            val context = ItemGroupBuildContext { entries.add(it) }
-            with(context) {
-                when (ConfigManager.config().groupItems) {
-                    ItemGroupingOption.BY_MATERIAL -> addByKinds(BlockKind.values().toList())
-                    ItemGroupingOption.BY_SHAPE -> {
-                        for (kind in BlockKind.values()) {
-                            for (block in BlockVariantSets.get(kind)) {
-                                add(block.get())
+    private const val GROUP_ID = "items"
+    val GROUP: ItemGroup by ITEM_GROUPS.register(GROUP_ID) {
+        ItemGroupBridge.get().builder()
+            .displayName(Text.translatable(Util.createTranslationKey("itemGroup", AdornCommon.id(GROUP_ID))))
+            .icon { ItemStack(AdornBlocks.SOFAS[DyeColor.LIME]) }
+            .entries { _, entries ->
+                val context = ItemGroupBuildContext { entries.add(it) }
+                with(context) {
+                    when (ConfigManager.config().groupItems) {
+                        ItemGroupingOption.BY_MATERIAL -> addByKinds(BlockKind.values().toList())
+                        ItemGroupingOption.BY_SHAPE -> {
+                            for (kind in BlockKind.values()) {
+                                for (block in BlockVariantSets.get(kind)) {
+                                    add(block.get())
+                                }
                             }
                         }
                     }
+                    addColoredBlocks()
+                    addChimneys()
+                    addFences()
+                    addCrates()
+                    addMiscDecorations()
+                    add(AdornBlocks.TRADING_STATION)
+                    add(AdornBlocks.BREWER)
+                    addFoodAndDrink()
+                    addIngredients()
+                    addTools()
                 }
-                addColoredBlocks()
-                addChimneys()
-                addFences()
-                addCrates()
-                addMiscDecorations()
-                add(AdornBlocks.TRADING_STATION)
-                add(AdornBlocks.BREWER)
-                addFoodAndDrink()
-                addIngredients()
-                addTools()
             }
-        }
+            .build()
     }
 
     fun init() {

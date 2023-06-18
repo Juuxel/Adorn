@@ -44,7 +44,8 @@ fun BlockEntity.getSquaredDistance(x: Double, y: Double, z: Double): Double {
  * Instead, the default state is used for the various lambdas.
  */
 fun Block.copySettingsSafely(): AbstractBlock.Settings =
-    AbstractBlock.Settings.of(defaultState.material)
+    AbstractBlock.Settings.create()
+        .mapColor(defaultMapColor)
         .luminance { defaultState.luminance }
         .apply { getHardness(defaultState)?.let(this::hardness) }
         .resistance(blastResistance)

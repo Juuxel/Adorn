@@ -6,8 +6,8 @@ import juuxel.adorn.util.animation.AnimatedPropertyWrapper
 import juuxel.adorn.util.animation.AnimationEngine
 import juuxel.adorn.util.animation.Interpolator
 import juuxel.adorn.util.color
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.Element
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.MathHelper
 import org.lwjgl.glfw.GLFW
 
@@ -62,20 +62,21 @@ class ScrollEnvelope(
     override fun isMouseWithinScissorForInput(x: Double, y: Double) =
         isMouseOver(x, y - offset)
 
-    override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
+        val matrices = context.matrices
         matrices.push()
         matrices.translate(0.0, -offset, 0.0)
-        super.render(matrices, mouseX, (mouseY + offset).toInt(), delta)
+        super.render(context, mouseX, (mouseY + offset).toInt(), delta)
         matrices.pop()
 
         val heightDifference = heightDifference()
         if (heightDifference > 0) {
             if (heightDifference - offset >= SHADOW_THRESHOLD) {
-                fillGradient(matrices, x, y + height - GRADIENT_HEIGHT, x + width, y + height, Colors.TRANSPARENT, GRADIENT_COLOR)
+                context.fillGradient(x, y + height - GRADIENT_HEIGHT, x + width, y + height, Colors.TRANSPARENT, GRADIENT_COLOR)
             }
 
             if (offset >= SHADOW_THRESHOLD) {
-                fillGradient(matrices, x, y, x + width, y + GRADIENT_HEIGHT, GRADIENT_COLOR, Colors.TRANSPARENT)
+                context.fillGradient(x, y, x + width, y + GRADIENT_HEIGHT, GRADIENT_COLOR, Colors.TRANSPARENT)
             }
 
             val hovered = draggingThumb || isMouseOverThumb(mouseX.toDouble(), mouseY.toDouble())
@@ -90,7 +91,7 @@ class ScrollEnvelope(
 
             val thumbX = x + width - SCROLLING_TRACK_MARGIN - SCROLLING_TRACK_WIDTH
             val thumbY = y + SCROLLING_TRACK_MARGIN + thumbY()
-            fill(matrices, thumbX, thumbY, thumbX + SCROLLING_TRACK_WIDTH, thumbY + thumbHeight(), thumbColor)
+            context.fill(thumbX, thumbY, thumbX + SCROLLING_TRACK_WIDTH, thumbY + thumbHeight(), thumbColor)
         }
     }
 

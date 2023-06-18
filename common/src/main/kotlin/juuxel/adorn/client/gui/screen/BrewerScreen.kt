@@ -10,6 +10,7 @@ import juuxel.adorn.menu.BrewerMenu
 import juuxel.adorn.util.color
 import juuxel.adorn.util.logger
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.MenuProvider
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.render.BufferRenderer
@@ -18,36 +19,29 @@ import net.minecraft.client.render.Tessellator
 import net.minecraft.client.render.VertexFormat
 import net.minecraft.client.render.VertexFormats
 import net.minecraft.client.texture.Sprite
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
 import net.minecraft.util.math.MathHelper
 
 class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Text) : AdornMenuScreen<BrewerMenu>(menu, playerInventory, title) {
-    override fun drawBackground(matrices: MatrixStack, delta: Float, mouseX: Int, mouseY: Int) {
-        RenderSystem.setShader(GameRenderer::getPositionTexProgram)
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-        RenderSystem.setShaderTexture(0, TEXTURE)
-        drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight)
-        drawFluid(matrices, x + 145, y + 17, menu.fluid)
-        RenderSystem.setShader(GameRenderer::getPositionTexProgram)
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-        RenderSystem.setShaderTexture(0, TEXTURE)
-        drawTexture(matrices, x + 145, y + 21, 176, 25, 16, 51)
+    override fun drawBackground(context: DrawContext, delta: Float, mouseX: Int, mouseY: Int) {
+        context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight)
+        drawFluid(context, x + 145, y + 17, menu.fluid)
+        context.drawTexture(TEXTURE, x + 145, y + 21, 176, 25, 16, 51)
 
         val progress = menu.progress
         if (progress > 0) {
             val progressFract = progress.toFloat() / BrewerBlockEntity.MAX_PROGRESS.toFloat()
-            drawTexture(matrices, x + 84, y + 24, 176, 0, 8, MathHelper.ceil(progressFract * 25))
+            context.drawTexture(TEXTURE, x + 84, y + 24, 176, 0, 8, MathHelper.ceil(progressFract * 25))
         }
     }
 
-    override fun drawMouseoverTooltip(matrices: MatrixStack, x: Int, y: Int) {
-        super.drawMouseoverTooltip(matrices, x, y)
+    override fun drawMouseoverTooltip(context: DrawContext, x: Int, y: Int) {
+        super.drawMouseoverTooltip(context, x, y)
         val x2 = x - this.x
         val y2 = y - this.y
         if (x2 in 145 until (145 + 16) && y2 in 17 until (17 + FLUID_AREA_HEIGHT)) {
-            renderTooltip(matrices, getFluidTooltip(menu.fluid), x, y)
+            context.drawTooltip(textRenderer, getFluidTooltip(menu.fluid), x, y)
         }
     }
 
@@ -78,7 +72,7 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
         }
 
         private fun drawSprite(
-            matrices: MatrixStack,
+            context: DrawContext,
             x: Int, y: Float,
             width: Float, height: Float,
             u0: Float, v0: Float,
@@ -90,7 +84,7 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
             RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
             RenderSystem.setShaderTexture(0, sprite.atlasId)
             val buffer = Tessellator.getInstance().buffer
-            val positionMatrix = matrices.peek().positionMatrix
+            val positionMatrix = context.matrices.peek().positionMatrix
             val au0 = MathHelper.lerp(u0, sprite.minU, sprite.maxU)
             val au1 = MathHelper.lerp(u1, sprite.minU, sprite.maxU)
             val av0 = MathHelper.lerp(v0, sprite.minV, sprite.maxV)
@@ -104,7 +98,7 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
             RenderSystem.disableBlend()
         }
 
-        fun drawFluid(matrices: MatrixStack, x: Int, y: Int, fluid: FluidReference) {
+        fun drawFluid(context: DrawContext, x: Int, y: Int, fluid: FluidReference) {
             if (fluid.isEmpty) return
 
             val bridge = FluidRenderingBridge.get()
@@ -125,12 +119,12 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
                 }
 
             for (i in 0 until MathHelper.floor(height / 16)) {
-                drawSprite(matrices, x, y + transformY(16f), 16f, 16f, 0f, 0f, 1f, 1f, sprite, color)
+                drawSprite(context, x, y + transformY(16f), 16f, 16f, 0f, 0f, 1f, 1f, sprite, color)
                 fluidY += 16
             }
 
             val leftover = height % 16
-            drawSprite(matrices, x, y + transformY(leftover), 16f, leftover, 0f, 0f, 1f, leftover / 16f, sprite, color)
+            drawSprite(context, x, y + transformY(leftover), 16f, leftover, 0f, 0f, 1f, leftover / 16f, sprite, color)
         }
     }
 }

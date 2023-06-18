@@ -74,9 +74,8 @@ class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings)
             if (!be.isOwner(player)) {
                 val handStack = player.getStackInHand(hand)
                 val trade = be.trade
-                val validPayment = handStack.isItemEqual(trade.price) &&
-                    handStack.count >= trade.price.count &&
-                    handStack.nbt == trade.price.nbt
+                val validPayment = ItemStack.canCombine(handStack, trade.price) &&
+                    handStack.count >= trade.price.count
                 val canInsertPayment = be.storage.canInsert(trade.price)
 
                 if (trade.isEmpty()) {

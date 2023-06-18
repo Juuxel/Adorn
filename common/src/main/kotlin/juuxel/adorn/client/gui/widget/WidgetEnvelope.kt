@@ -1,12 +1,11 @@
 package juuxel.adorn.client.gui.widget
 
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.Drawable
-import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.gui.Element
 import net.minecraft.client.gui.Narratable
 import net.minecraft.client.gui.Selectable
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
-import net.minecraft.client.util.math.MatrixStack
 
 /**
  * A wrapper for a widget (obtained by calling [WidgetEnvelope.current()][current]).
@@ -15,13 +14,13 @@ import net.minecraft.client.util.math.MatrixStack
  * such as [pagination][FlipBook], [scissoring][ScissorEnvelope] or
  * [scrolling][ScrollEnvelope].
  */
-abstract class WidgetEnvelope : DrawableHelper(), Element, Drawable, Selectable, TickingElement, Draggable {
+abstract class WidgetEnvelope : Element, Drawable, Selectable, TickingElement, Draggable {
     protected abstract fun current(): Element
 
-    override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
         val current = current()
         if (current is Drawable) {
-            current.render(matrices, mouseX, mouseY, delta)
+            current.render(context, mouseX, mouseY, delta)
         }
     }
 

@@ -6,7 +6,6 @@ import juuxel.adorn.lib.AdornTags
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.MapColor
-import net.minecraft.block.Material
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
 import net.minecraft.entity.ai.pathing.NavigationType
@@ -73,7 +72,9 @@ abstract class AbstractChimneyBlock(settings: Settings) : Block(settings), Water
         private val MIDDLE_SHAPE = createCuboidShape(5.0, 0.0, 5.0, 11.0, 16.0, 11.0)
 
         fun createBlockSettings(color: MapColor, hardness: Float = 2f): Settings =
-            Settings.of(Material.STONE, color)
+            Settings.create()
+                .mapColor(color)
+                .solid()
                 .requiresTool()
                 .strength(hardness, 6f)
                 .ticksRandomly()

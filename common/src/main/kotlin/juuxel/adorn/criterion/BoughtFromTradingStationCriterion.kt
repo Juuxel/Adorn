@@ -7,7 +7,7 @@ import net.minecraft.advancement.criterion.AbstractCriterionConditions
 import net.minecraft.item.ItemStack
 import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer
 import net.minecraft.predicate.entity.AdvancementEntityPredicateSerializer
-import net.minecraft.predicate.entity.EntityPredicate
+import net.minecraft.predicate.entity.LootContextPredicate
 import net.minecraft.predicate.item.ItemPredicate
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Identifier
@@ -17,7 +17,7 @@ class BoughtFromTradingStationCriterion : AbstractCriterion<BoughtFromTradingSta
 
     override fun conditionsFromJson(
         json: JsonObject,
-        playerPredicate: EntityPredicate.Extended,
+        playerPredicate: LootContextPredicate,
         predicateDeserializer: AdvancementEntityPredicateDeserializer
     ): Conditions = Conditions(playerPredicate, ItemPredicate.fromJson(json["item"]))
 
@@ -29,7 +29,7 @@ class BoughtFromTradingStationCriterion : AbstractCriterion<BoughtFromTradingSta
         private val ID = AdornCommon.id("bought_from_trading_station")
     }
 
-    class Conditions(playerPredicate: EntityPredicate.Extended, private val soldItem: ItemPredicate) :
+    class Conditions(playerPredicate: LootContextPredicate, private val soldItem: ItemPredicate) :
         AbstractCriterionConditions(ID, playerPredicate) {
         fun matches(stack: ItemStack): Boolean =
             soldItem.test(stack)
