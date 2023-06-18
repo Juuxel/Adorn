@@ -8,6 +8,8 @@
     "adorn:acacia_chair",
     "adorn:dark_oak_chair",
     "adorn:mangrove_chair",
+    "adorn:cherry_chair",
+    "adorn:bamboo_chair",
     "adorn:crimson_chair",
     "adorn:warped_chair",
     { "id": "adorn:biomemakeover/ancient_oak_chair", "required": false },

@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "minecraft:block/bamboo_planks",
+    "log": "minecraft:block/bamboo_block",
+    "end": "minecraft:block/bamboo_block_top"
+  }
+}

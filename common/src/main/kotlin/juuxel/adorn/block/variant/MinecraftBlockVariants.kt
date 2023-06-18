@@ -9,6 +9,8 @@ object MinecraftBlockVariants : BlockVariantSet {
         BlockVariant.ACACIA,
         BlockVariant.DARK_OAK,
         BlockVariant.MANGROVE,
+        BlockVariant.CHERRY,
+        BlockVariant.BAMBOO,
         BlockVariant.CRIMSON,
         BlockVariant.WARPED,
     )

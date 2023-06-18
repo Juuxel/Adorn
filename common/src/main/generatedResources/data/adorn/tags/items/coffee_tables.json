@@ -8,6 +8,8 @@
     "adorn:acacia_coffee_table",
     "adorn:dark_oak_coffee_table",
     "adorn:mangrove_coffee_table",
+    "adorn:cherry_coffee_table",
+    "adorn:bamboo_coffee_table",
     "adorn:crimson_coffee_table",
     "adorn:warped_coffee_table",
     { "id": "adorn:biomemakeover/ancient_oak_coffee_table", "required": false },

@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/templates/bench_leg",
+  "textures": {
+    "log": "minecraft:block/bamboo_block",
+    "end": "minecraft:block/bamboo_block_top"
+  }
+}

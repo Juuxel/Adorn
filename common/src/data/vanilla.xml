@@ -12,6 +12,10 @@
     </wood>
     <wood id="minecraft:dark_oak"/>
     <wood id="minecraft:mangrove"/>
+    <wood id="minecraft:cherry"/>
+    <wood id="minecraft:bamboo">
+        <replace key="log_type" with="block"/>
+    </wood>
     <wood id="minecraft:crimson" fungus="true" non_flammable="true"/>
     <wood id="minecraft:warped" fungus="true" non_flammable="true"/>
     <stone id="minecraft:andesite"/>

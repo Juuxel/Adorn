@@ -8,6 +8,8 @@
     "adorn:acacia_step",
     "adorn:dark_oak_step",
     "adorn:mangrove_step",
+    "adorn:cherry_step",
+    "adorn:bamboo_step",
     "adorn:crimson_step",
     "adorn:warped_step",
     { "id": "adorn:biomemakeover/ancient_oak_step", "required": false },

@@ -8,6 +8,8 @@
     "adorn:acacia_table",
     "adorn:dark_oak_table",
     "adorn:mangrove_table",
+    "adorn:cherry_table",
+    "adorn:bamboo_table",
     "adorn:crimson_table",
     "adorn:warped_table",
     { "id": "adorn:biomemakeover/ancient_oak_table", "required": false },

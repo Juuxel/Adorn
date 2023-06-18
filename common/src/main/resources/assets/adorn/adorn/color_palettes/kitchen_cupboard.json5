@@ -6,6 +6,8 @@
   "adorn:acacia_kitchen_cupboard": "#B66136",
   "adorn:dark_oak_kitchen_cupboard": { "bg": "#4D3117", "fg": "#BCBCBC" },
   "adorn:mangrove_kitchen_cupboard": { "bg": "#753136", "fg": "#BCBCBC" },
+  "adorn:cherry_kitchen_cupboard": "#E7BAB4",
+  "adorn:bamboo_kitchen_cupboard": "#E3CC6A",
   "adorn:crimson_kitchen_cupboard": { "bg": "#863E5A", "fg": "#BCBCBC" },
   "adorn:warped_kitchen_cupboard": { "bg": "#3A8E8C", "fg": "#BCBCBC" },
 

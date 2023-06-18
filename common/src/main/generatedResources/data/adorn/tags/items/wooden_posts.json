@@ -8,6 +8,8 @@
     "adorn:acacia_post",
     "adorn:dark_oak_post",
     "adorn:mangrove_post",
+    "adorn:cherry_post",
+    "adorn:bamboo_post",
     "adorn:crimson_post",
     "adorn:warped_post",
     { "id": "adorn:biomemakeover/ancient_oak_post", "required": false },

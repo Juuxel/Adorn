@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/shelf",
+  "textures": {
+    "texture": "minecraft:block/cherry_planks"
+  }
+}

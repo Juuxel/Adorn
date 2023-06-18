@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:cherry_slab"
+    }
+  },
+  "result": {
+    "item": "adorn:cherry_bench",
+    "count": 2
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:kitchen_cupboard",
+  "ingredients": [
+    {
+      "tag": "c:wooden_chests"
+    },
+    {
+      "item": "adorn:cherry_kitchen_counter"
+    },
+    {
+      "item": "adorn:cherry_kitchen_counter"
+    }
+  ],
+  "result": {
+    "item": "adorn:cherry_kitchen_cupboard",
+    "count": 2
+  }
+}

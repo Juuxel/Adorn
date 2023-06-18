@@ -8,6 +8,8 @@
     "adorn:acacia_kitchen_counter",
     "adorn:dark_oak_kitchen_counter",
     "adorn:mangrove_kitchen_counter",
+    "adorn:cherry_kitchen_counter",
+    "adorn:bamboo_kitchen_counter",
     "adorn:crimson_kitchen_counter",
     "adorn:warped_kitchen_counter",
     { "id": "adorn:biomemakeover/ancient_oak_kitchen_counter", "required": false },

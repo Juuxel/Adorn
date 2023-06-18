@@ -8,6 +8,8 @@
     "adorn:acacia_shelf",
     "adorn:dark_oak_shelf",
     "adorn:mangrove_shelf",
+    "adorn:cherry_shelf",
+    "adorn:bamboo_shelf",
     "adorn:crimson_shelf",
     "adorn:warped_shelf",
     { "id": "adorn:biomemakeover/ancient_oak_shelf", "required": false },

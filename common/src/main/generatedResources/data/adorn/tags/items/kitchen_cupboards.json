@@ -8,6 +8,8 @@
     "adorn:acacia_kitchen_cupboard",
     "adorn:dark_oak_kitchen_cupboard",
     "adorn:mangrove_kitchen_cupboard",
+    "adorn:cherry_kitchen_cupboard",
+    "adorn:bamboo_kitchen_cupboard",
     "adorn:crimson_kitchen_cupboard",
     "adorn:warped_kitchen_cupboard",
     { "id": "adorn:biomemakeover/ancient_oak_kitchen_cupboard", "required": false },

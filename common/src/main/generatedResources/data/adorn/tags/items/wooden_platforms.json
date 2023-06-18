@@ -8,6 +8,8 @@
     "adorn:acacia_platform",
     "adorn:dark_oak_platform",
     "adorn:mangrove_platform",
+    "adorn:cherry_platform",
+    "adorn:bamboo_platform",
     "adorn:crimson_platform",
     "adorn:warped_platform",
     { "id": "adorn:biomemakeover/ancient_oak_platform", "required": false },

@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:bamboo_slab"
+    }
+  },
+  "result": {
+    "item": "adorn:bamboo_bench",
+    "count": 2
+  }
+}

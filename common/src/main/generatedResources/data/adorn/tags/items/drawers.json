@@ -8,6 +8,8 @@
     "adorn:acacia_drawer",
     "adorn:dark_oak_drawer",
     "adorn:mangrove_drawer",
+    "adorn:cherry_drawer",
+    "adorn:bamboo_drawer",
     "adorn:crimson_drawer",
     "adorn:warped_drawer",
     { "id": "adorn:biomemakeover/ancient_oak_drawer", "required": false },

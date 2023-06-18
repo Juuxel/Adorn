@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:drawer",
+  "pattern": [
+    "S",
+    "C",
+    "S"
+  ],
+  "key": {
+    "C": {
+      "tag": "c:wooden_chests"
+    },
+    "S": {
+      "item": "minecraft:bamboo_slab"
+    }
+  },
+  "result": {
+    "item": "adorn:bamboo_drawer",
+    "count": 2
+  }
+}

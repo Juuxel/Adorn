@@ -51,6 +51,8 @@ interface BlockVariant {
         val ACACIA = variant("acacia", Blocks.ACACIA_PLANKS)
         val DARK_OAK = variant("dark_oak", Blocks.DARK_OAK_PLANKS)
         val MANGROVE = variant("mangrove", Blocks.MANGROVE_PLANKS)
+        val CHERRY = variant("cherry", Blocks.CHERRY_PLANKS)
+        val BAMBOO = variant("bamboo", Blocks.BAMBOO_PLANKS)
         val CRIMSON = variant("crimson", Blocks.CRIMSON_PLANKS)
         val WARPED = variant("warped", Blocks.WARPED_PLANKS)
         val STONE = variant("stone", Blocks.STONE)

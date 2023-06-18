@@ -8,6 +8,8 @@
     "adorn:acacia_bench",
     "adorn:dark_oak_bench",
     "adorn:mangrove_bench",
+    "adorn:cherry_bench",
+    "adorn:bamboo_bench",
     "adorn:crimson_bench",
     "adorn:warped_bench",
     { "id": "adorn:biomemakeover/ancient_oak_bench", "required": false },

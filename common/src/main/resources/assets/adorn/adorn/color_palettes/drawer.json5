@@ -6,6 +6,8 @@
   "adorn:acacia_drawer": "#B66136",
   "adorn:dark_oak_drawer": { "bg": "#4D3117", "fg": "#BCBCBC" },
   "adorn:mangrove_drawer": { "bg": "#753136", "fg": "#BCBCBC" },
+  "adorn:cherry_drawer": "#E7BAB4",
+  "adorn:bamboo_drawer": "#E3CC6A",
   "adorn:crimson_drawer": { "bg": "#863E5A", "fg": "#BCBCBC" },
   "adorn:warped_drawer": { "bg": "#3A8E8C", "fg": "#BCBCBC" },
 
