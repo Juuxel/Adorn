@@ -3,29 +3,10 @@
     {
       "apply": {
         "model": "adorn:block/terrestria/hemlock_kitchen_counter",
-        "y": 270,
         "uvlock": true
       },
       "when": {
         "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "adorn:block/terrestria/hemlock_kitchen_cupboard_door",
-        "y": 270
-      },
-      "when": {
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "adorn:block/terrestria/hemlock_kitchen_counter",
-        "uvlock": true
-      },
-      "when": {
-        "facing": "east"
       }
     },
     {
@@ -33,7 +14,7 @@
         "model": "adorn:block/terrestria/hemlock_kitchen_cupboard_door"
       },
       "when": {
-        "facing": "east"
+        "facing": "north"
       }
     },
     {
@@ -43,7 +24,7 @@
         "uvlock": true
       },
       "when": {
-        "facing": "south"
+        "facing": "east"
       }
     },
     {
@@ -52,7 +33,7 @@
         "y": 90
       },
       "when": {
-        "facing": "south"
+        "facing": "east"
       }
     },
     {
@@ -62,13 +43,32 @@
         "uvlock": true
       },
       "when": {
-        "facing": "west"
+        "facing": "south"
       }
     },
     {
       "apply": {
         "model": "adorn:block/terrestria/hemlock_kitchen_cupboard_door",
         "y": 180
+      },
+      "when": {
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/terrestria/hemlock_kitchen_counter",
+        "y": 270,
+        "uvlock": true
+      },
+      "when": {
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/terrestria/hemlock_kitchen_cupboard_door",
+        "y": 270
       },
       "when": {
         "facing": "west"

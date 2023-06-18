@@ -1,7 +1,8 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.block.variant.BlockVariant
-import juuxel.adorn.util.buildShapeRotations
+import juuxel.adorn.util.buildShapeRotationsFromNorth
+import juuxel.adorn.util.mergeIntoShapeMap
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
@@ -13,7 +14,6 @@ import net.minecraft.state.property.Properties
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 
 abstract class AbstractKitchenCounterBlock(settings: Settings) : Block(settings) {
@@ -46,12 +46,15 @@ abstract class AbstractKitchenCounterBlock(settings: Settings) : Block(settings)
             SoundEvents.BLOCK_WOOD_HIT,
             SoundEvents.BLOCK_STONE_FALL
         )
-        private val TOP_SHAPE = createCuboidShape(0.0, 12.0, 0.0, 16.0, 16.0, 16.0)
-        val SHAPES = buildShapeRotations(
-            0, 0, 0,
-            14, 12, 16
-        ).mapValues { (_, shape) ->
-            VoxelShapes.union(shape, TOP_SHAPE)
-        }
+        val SHAPES = mergeIntoShapeMap(
+            buildShapeRotationsFromNorth(
+                0, 0, 2,
+                16, 12, 16
+            ),
+            createCuboidShape(
+                0.0, 12.0, 0.0,
+                16.0, 16.0, 16.0
+            )
+        )
     }
 }

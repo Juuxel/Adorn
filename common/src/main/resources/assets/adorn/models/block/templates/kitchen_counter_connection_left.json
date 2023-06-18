@@ -1,8 +1,8 @@
 {
   "elements": [
     {
-      "from": [14, 0, 0],
-      "to": [16, 12, 14],
+      "from": [0, 0, 0],
+      "to": [14, 12, 2],
       "faces": {
         "down": { "texture": "#planks", "cullface": "down" },
         "east": { "texture": "#planks" },

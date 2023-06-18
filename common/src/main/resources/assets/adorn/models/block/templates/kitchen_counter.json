@@ -1,19 +1,19 @@
 {
-  "parent": "adorn:block/templates/rotatable",
+  "parent": "minecraft:block/block",
   "textures": {
     "stone": "minecraft:block/polished_andesite",
     "particle": "#planks"
   },
   "elements": [
     {
-      "from": [0, 0, 0],
-      "to": [14, 12, 16],
+      "from": [0, 0, 2],
+      "to": [16, 12, 16],
       "faces": {
         "down": { "texture": "#planks", "cullface": "down" },
-        "east": { "texture": "#planks" },
+        "east": { "texture": "#planks", "cullface": "east" },
         "west": { "texture": "#planks", "cullface": "west" },
         "south": { "texture": "#planks", "cullface": "south" },
-        "north": { "texture": "#planks", "cullface": "north" }
+        "north": { "texture": "#planks" }
       }
     },
     {

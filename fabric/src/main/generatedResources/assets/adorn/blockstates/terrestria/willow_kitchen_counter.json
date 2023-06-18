@@ -3,7 +3,6 @@
     {
       "apply": {
         "model": "adorn:block/terrestria/willow_kitchen_counter",
-        "y": 270,
         "uvlock": true
       },
       "when": {
@@ -12,39 +11,10 @@
     },
     {
       "apply": {
-        "model": "adorn:block/terrestria/willow_kitchen_counter_connection_left",
-        "y": 270
-      },
-      "when": {
-        "facing": "north",
-        "front": "left"
-      }
-    },
-    {
-      "apply": {
-        "model": "adorn:block/terrestria/willow_kitchen_counter_connection_right",
-        "y": 270
-      },
-      "when": {
-        "facing": "north",
-        "front": "right"
-      }
-    },
-    {
-      "apply": {
-        "model": "adorn:block/terrestria/willow_kitchen_counter",
-        "uvlock": true
-      },
-      "when": {
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
         "model": "adorn:block/terrestria/willow_kitchen_counter_connection_left"
       },
       "when": {
-        "facing": "east",
+        "facing": "north",
         "front": "left"
       }
     },
@@ -53,7 +23,7 @@
         "model": "adorn:block/terrestria/willow_kitchen_counter_connection_right"
       },
       "when": {
-        "facing": "east",
+        "facing": "north",
         "front": "right"
       }
     },
@@ -64,7 +34,7 @@
         "uvlock": true
       },
       "when": {
-        "facing": "south"
+        "facing": "east"
       }
     },
     {
@@ -73,7 +43,7 @@
         "y": 90
       },
       "when": {
-        "facing": "south",
+        "facing": "east",
         "front": "left"
       }
     },
@@ -83,7 +53,7 @@
         "y": 90
       },
       "when": {
-        "facing": "south",
+        "facing": "east",
         "front": "right"
       }
     },
@@ -94,13 +64,43 @@
         "uvlock": true
       },
       "when": {
-        "facing": "west"
+        "facing": "south"
       }
     },
     {
       "apply": {
         "model": "adorn:block/terrestria/willow_kitchen_counter_connection_left",
         "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "front": "left"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/terrestria/willow_kitchen_counter_connection_right",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "front": "right"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/terrestria/willow_kitchen_counter",
+        "y": 270,
+        "uvlock": true
+      },
+      "when": {
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "adorn:block/terrestria/willow_kitchen_counter_connection_left",
+        "y": 270
       },
       "when": {
         "facing": "west",
@@ -110,7 +110,7 @@
     {
       "apply": {
         "model": "adorn:block/terrestria/willow_kitchen_counter_connection_right",
-        "y": 180
+        "y": 270
       },
       "when": {
         "facing": "west",
