@@ -12,27 +12,17 @@ import java.util.EnumMap
  * The coordinates are specified like in a model json or [createCuboidShape]:
  * { from: ([x0], [y0], [z0]), to: ([x1], [y1], [z1]) }
  */
+@Deprecated(
+    "Use north instead",
+    ReplaceWith(
+        "buildShapeRotationsFromNorth(z0, y0, 16 - x1, z1, y1, 16 - x0)",
+        "juuxel.adorn.util.buildShapeRotationsFromNorth"
+    )
+)
 fun buildShapeRotations(x0: Int, y0: Int, z0: Int, x1: Int, y1: Int, z1: Int): MutableMap<Direction, VoxelShape> =
-    enumMapOf(
-        Direction.EAST to createCuboidShape(
-            x0.toDouble(), y0.toDouble(), z0.toDouble(),
-            x1.toDouble(), y1.toDouble(), z1.toDouble()
-        ),
-
-        Direction.WEST to createCuboidShape(
-            16.0 - x1, y0.toDouble(), 16.0 - z1,
-            16.0 - x0, y1.toDouble(), 16.0 - z0
-        ),
-
-        Direction.SOUTH to createCuboidShape(
-            16.0 - z1, y0.toDouble(), x0.toDouble(),
-            16.0 - z0, y1.toDouble(), x1.toDouble()
-        ),
-
-        Direction.NORTH to createCuboidShape(
-            z0.toDouble(), y0.toDouble(), 16.0 - x1,
-            z1.toDouble(), y1.toDouble(), 16.0 - x0
-        )
+    buildShapeRotationsFromNorth(
+        z0, y0, 16 - x1,
+        z1, y1, 16 - x0
     )
 
 /**
