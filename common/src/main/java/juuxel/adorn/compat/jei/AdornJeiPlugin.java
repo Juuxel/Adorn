@@ -2,10 +2,12 @@ package juuxel.adorn.compat.jei;
 
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.block.AdornBlocks;
+import juuxel.adorn.client.gui.screen.TradingStationScreen;
 import juuxel.adorn.recipe.AdornRecipes;
 import me.shedaniel.rei.plugincompatibilities.api.REIPluginCompatIgnore;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -45,5 +47,10 @@ public final class AdornJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(AdornBlocks.INSTANCE.getBREWER().asItem().getDefaultStack(), JeiRecipeTypes.BREWER);
+    }
+
+    @Override
+    public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        registration.addGhostIngredientHandler(TradingStationScreen.class, new TradingStationGhostIngredientHandler());
     }
 }
