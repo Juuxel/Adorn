@@ -47,7 +47,7 @@
         "up": { "texture": "#handle" },
         "east": { "texture": "#handle" },
         "west": { "texture": "#handle" },
-        "north": { "texture": "#handle" }
+        "north": { "texture": "#handle", "cullface": "north" }
       }
     },
     {
@@ -58,7 +58,7 @@
         "up": { "texture": "#handle" },
         "east": { "texture": "#handle" },
         "west": { "texture": "#handle" },
-        "north": { "texture": "#handle" }
+        "north": { "texture": "#handle", "cullface": "north" }
       }
     }
   ]
