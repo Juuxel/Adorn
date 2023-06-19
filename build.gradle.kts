@@ -189,6 +189,12 @@ subprojects {
         "jar"(Jar::class) {
             from(rootProject.file("LICENSE"))
         }
+
+        // Make all archives reproducible.
+        withType<AbstractArchiveTask> {
+            isReproducibleFileOrder = true
+            isPreserveFileTimestamps = false
+        }
     }
 }
 
