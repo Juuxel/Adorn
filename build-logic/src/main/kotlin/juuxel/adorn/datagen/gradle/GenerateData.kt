@@ -1,6 +1,7 @@
 package juuxel.adorn.datagen.gradle
 
 import juuxel.adorn.datagen.DataGenerator
+import juuxel.adorn.datagen.DataOutputImpl
 import juuxel.adorn.datagen.tag.TagGenerator
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
@@ -30,18 +31,22 @@ abstract class GenerateData : DefaultTask() {
 
     @TaskAction
     fun generate() {
+        val output = DataOutputImpl.load(output.get().asFile.toPath())
+
         DataGenerator.generate(
             configFiles = configs.get()
                 .filter { !it.tagsOnly.get() }
                 .flatMap { config -> config.files.map { it.toPath() } },
-            outputPath = output.get().asFile.toPath()
+            output = output
         )
 
         if (generateTags.get()) {
             TagGenerator.generate(
                 configs = configs.get().flatMap { config -> config.files.map { it.toPath() } },
-                outputDirectory = output.get().asFile.toPath()
+                output = output
             )
         }
+
+        output.finish()
     }
 }

@@ -40,6 +40,7 @@ val deleteDuplicateResources by tasks.registering(DeleteDuplicates::class) {
 sourceSets {
     main {
         resources.srcDir(generatedResources)
+        resources.exclude(".cache")
     }
 }
 

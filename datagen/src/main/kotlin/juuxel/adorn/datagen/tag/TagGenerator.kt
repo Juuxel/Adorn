@@ -1,10 +1,10 @@
 package juuxel.adorn.datagen.tag
 
+import juuxel.adorn.datagen.DataOutput
 import juuxel.adorn.datagen.GeneratorConfig
 import juuxel.adorn.datagen.GeneratorConfigLoader
 import juuxel.adorn.datagen.Id
 import juuxel.adorn.datagen.Material
-import java.nio.file.Files
 import java.nio.file.Path
 
 class TagGenerator(private val entries: TagEntryProvider) {
@@ -51,19 +51,16 @@ class TagGenerator(private val entries: TagEntryProvider) {
             minecraft("non_flammable_wood") to TagGenerator(TagEntryProviders.NON_FLAMMABLE_WOOD),
         )
 
-        fun generate(configs: List<Path>, outputDirectory: Path) {
+        @JvmName("generateFromConfigFiles")
+        fun generate(configs: List<Path>, output: DataOutput) {
             val configs = configs.asSequence()
                 .sortedBy { it.toAbsolutePath() }
                 .map { GeneratorConfigLoader.read(it) }
                 .toList()
-            generate(configs) { path, text ->
-                val outputPath = outputDirectory.resolve(path)
-                Files.createDirectories(outputPath.parent)
-                Files.writeString(outputPath, text)
-            }
+            generate(configs, output)
         }
 
-        fun generate(configs: List<GeneratorConfig>, consumer: (path: String, text: String) -> Unit) {
+        fun generate(configs: List<GeneratorConfig>, output: DataOutput) {
             val materials = configs.asSequence()
                 .flatMap {
                     sequence {
@@ -79,7 +76,7 @@ class TagGenerator(private val entries: TagEntryProvider) {
             for ((id, generator) in GENERATORS_BY_ID) {
                 for (tagType in arrayOf("blocks", "items")) {
                     val path = "data/${id.namespace}/tags/$tagType/${id.path}.json"
-                    consumer(path, generator.generate(materials))
+                    output.write(path, generator.generate(materials))
                 }
             }
         }

@@ -67,3 +67,4 @@ private.gradle
 
 # Generated sources
 **/src/generated/
+.cache

@@ -1,41 +1,33 @@
 package juuxel.adorn.datagen
 
-import java.nio.file.Files
 import java.nio.file.Path
 
 object DataGenerator {
-    fun generate(configFiles: List<Path>, outputPath: Path) {
-        if (Files.exists(outputPath)) {
-            // See https://stackoverflow.com/a/35989142
-            Files.walk(outputPath).use {
-                it.sorted(Comparator.reverseOrder()).forEach { child -> Files.delete(child) }
-            }
-        }
-
+    fun generate(configFiles: List<Path>, output: DataOutput) {
         val cache = TemplateCache()
 
         for (configFile in configFiles) {
-            generate(outputPath, GeneratorConfigLoader.read(configFile), cache)
+            generate(output, GeneratorConfigLoader.read(configFile), cache)
         }
     }
 
-    private fun generate(outputPath: Path, config: GeneratorConfig, cache: TemplateCache) {
+    private fun generate(output: DataOutput, config: GeneratorConfig, cache: TemplateCache) {
         val stoneMaterials = config.stones
-        generate(outputPath, Generator.STONE_GENERATORS, stoneMaterials, cache, config)
-        generate(outputPath, Generator.SIDED_STONE_GENERATORS, stoneMaterials.filter { it.material.hasSidedTexture }, cache, config)
+        generate(output, Generator.STONE_GENERATORS, stoneMaterials, cache, config)
+        generate(output, Generator.SIDED_STONE_GENERATORS, stoneMaterials.filter { it.material.hasSidedTexture }, cache, config)
         generate(
-            outputPath,
+            output,
             Generator.UNSIDED_STONE_GENERATORS,
             stoneMaterials.filter { !it.material.hasSidedTexture },
             cache,
             config
         )
-        generate(outputPath, Generator.WOOD_GENERATORS, config.woods, cache, config)
-        generate(outputPath, Generator.WOOL_GENERATORS, config.wools, cache, config)
+        generate(output, Generator.WOOD_GENERATORS, config.woods, cache, config)
+        generate(output, Generator.WOOL_GENERATORS, config.wools, cache, config)
     }
 
     private fun <M : Material> generate(
-        outputPath: Path,
+        dataOutput: DataOutput,
         gens: List<Generator<M>>,
         mats: Iterable<GeneratorConfig.MaterialEntry<M>>,
         templateCache: TemplateCache,
@@ -66,9 +58,7 @@ object DataGenerator {
                 }
                 val output = TemplateApplier.apply(templateText, mainSubstitutions)
                 val filePathStr = TemplateApplier.apply(gen.outputPathTemplate, mainSubstitutions)
-                val filePath = outputPath.resolve(filePathStr)
-                Files.createDirectories(filePath.parent)
-                Files.writeString(filePath, output)
+                dataOutput.write(filePathStr, output)
 
                 if (gen.requiresCondition && mat.isModded()) {
                     val externalConditionPathTemplate = conditionType.separateFilePathTemplate
@@ -80,9 +70,7 @@ object DataGenerator {
                         }
                         val conditionText = TemplateApplier.apply(conditionTemplate, conditionSubstitutions)
                         val conditionPathStr = TemplateApplier.apply(externalConditionPathTemplate, conditionSubstitutions)
-                        val conditionPath = outputPath.resolve(conditionPathStr)
-                        Files.createDirectories(conditionPath.parent)
-                        Files.writeString(conditionPath, conditionText)
+                        dataOutput.write(conditionPathStr, conditionText)
                     }
                 }
             }
