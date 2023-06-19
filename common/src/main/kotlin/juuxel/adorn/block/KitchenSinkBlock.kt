@@ -1,7 +1,7 @@
 package juuxel.adorn.block
 
 import juuxel.adorn.block.variant.BlockVariant
-import juuxel.adorn.util.buildShapeRotations
+import juuxel.adorn.util.buildShapeRotationsFromNorth
 import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
@@ -67,9 +67,9 @@ class KitchenSinkBlock(variant: BlockVariant) : KitchenCounterBlock(variant), Bl
         private val SHAPES: Map<Direction, VoxelShape>
 
         init {
-            val sinkShapes = buildShapeRotations(
-                2, 7, 2,
-                13, 16, 14
+            val sinkShapes = buildShapeRotationsFromNorth(
+                2, 7, 3,
+                14, 16, 14
             )
             SHAPES = AbstractKitchenCounterBlock.SHAPES.mapValues { (direction, shape) ->
                 VoxelShapes.combineAndSimplify(
