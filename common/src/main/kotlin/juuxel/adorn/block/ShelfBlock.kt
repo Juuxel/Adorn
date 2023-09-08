@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
@@ -63,8 +64,9 @@ class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createS
             .map { it.opposite }
             .forEach {
                 val state = defaultState.with(FACING, it).with(WATERLOGGED, waterlogged)
-                if (state.canPlaceAt(context.world, context.blockPos))
+                if (state.canPlaceAt(context.world, context.blockPos)) {
                     return state
+                }
             }
 
         return null
@@ -161,8 +163,11 @@ class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createS
     }
 
     override fun getFluidState(state: BlockState) =
-        if (state[Properties.WATERLOGGED]) Fluids.WATER.getStill(false)
-        else super.getFluidState(state)
+        if (state[Properties.WATERLOGGED]) {
+            Fluids.WATER.getStill(false)
+        } else {
+            super.getFluidState(state)
+        }
 
     override fun onStateReplaced(state: BlockState, world: World, pos: BlockPos, newState: BlockState, moved: Boolean) {
         if (!state.isOf(newState.block)) {

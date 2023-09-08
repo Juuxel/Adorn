@@ -10,6 +10,7 @@
     "adorn:mangrove_platform",
     "adorn:crimson_platform",
     "adorn:warped_platform",
+    { "id": "adorn:biomemakeover/ancient_oak_platform", "required": false },
     { "id": "adorn:biomemakeover/blighted_balsa_platform", "required": false },
     { "id": "adorn:biomemakeover/swamp_cypress_platform", "required": false },
     { "id": "adorn:biomemakeover/willow_platform", "required": false },

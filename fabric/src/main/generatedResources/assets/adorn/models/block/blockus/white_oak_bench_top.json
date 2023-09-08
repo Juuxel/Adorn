@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/bench_top",
+  "textures": {
+    "planks": "blockus:block/white_oak_planks"
+  }
+}

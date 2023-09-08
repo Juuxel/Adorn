@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:step",
+  "pattern": [
+    "S",
+    "#"
+  ],
+  "key": {
+    "S": {
+      "item": "techreborn:rubber_slab"
+    },
+    "#": {
+      "tag": "c:wooden_rods"
+    }
+  },
+  "result": {
+    "item": "adorn:techreborn/rubber_step",
+    "count": 1
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["techreborn"]
+  }]
+
+}

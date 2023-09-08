@@ -1,0 +1,13 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "terrestria:japanese_maple_planks"
+  },
+  "result": "adorn:terrestria/japanese_maple_post",
+  "count": 2,
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["terrestria"]
+  }]
+
+}

@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:fir_slab"
+    },
+    "P": {
+      "item": "adorn:byg/fir_post"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/fir_platform",
+    "count": 2
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
+}

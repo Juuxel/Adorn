@@ -109,8 +109,11 @@ class KitchenSinkBlockEntityFabric(pos: BlockPos, state: BlockState) : KitchenSi
     }
 
     override fun calculateComparatorOutput(): Int =
-        if (storage.amount == 0L) 0
-        else 1 + MathHelper.floor(14 * storage.amount.toDouble() / storage.capacity.toDouble())
+        if (storage.amount == 0L) {
+            0
+        } else {
+            1 + MathHelper.floor(14 * storage.amount.toDouble() / storage.capacity.toDouble())
+        }
 
     companion object {
         val FLUID_STORAGE_PROVIDER: BlockApiLookup.BlockApiProvider<Storage<FluidVariant>, Direction> =

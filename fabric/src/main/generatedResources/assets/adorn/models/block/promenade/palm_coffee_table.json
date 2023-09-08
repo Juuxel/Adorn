@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:block/templates/coffee_table",
+  "textures": {
+    "planks": "promenade:block/palm_planks",
+    "leg": "promenade:block/palm_log/side",
+    "rim": "promenade:block/palm_log/side"
+  }
+}

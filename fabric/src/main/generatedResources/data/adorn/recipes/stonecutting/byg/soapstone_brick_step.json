@@ -1,0 +1,13 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "byg:soapstone_bricks"
+  },
+  "result": "adorn:byg/soapstone_brick_step",
+  "count": 2,
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
+}

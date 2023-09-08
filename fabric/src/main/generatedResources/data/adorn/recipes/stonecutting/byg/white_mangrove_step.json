@@ -1,0 +1,13 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "byg:white_mangrove_planks"
+  },
+  "result": "adorn:byg/white_mangrove_step",
+  "count": 2,
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
+}

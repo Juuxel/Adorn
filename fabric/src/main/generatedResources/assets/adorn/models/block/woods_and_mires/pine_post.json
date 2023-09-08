@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/post",
+  "textures": {
+    "texture": "woods_and_mires:block/pine_planks"
+  }
+}

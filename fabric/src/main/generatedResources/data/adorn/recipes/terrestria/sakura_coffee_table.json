@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:coffee_table",
+  "pattern": [
+    "S-S",
+    "# #"
+  ],
+  "key": {
+    "S": {
+      "item": "terrestria:sakura_slab"
+    },
+    "#": {
+      "tag": "c:wooden_rods"
+    },
+    "-": {
+      "tag": "c:glass_panes"
+    }
+  },
+  "result": {
+    "item": "adorn:terrestria/sakura_coffee_table",
+    "count": 2
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["terrestria"]
+  }]
+
+}

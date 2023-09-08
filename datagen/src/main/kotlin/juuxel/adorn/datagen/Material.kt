@@ -6,7 +6,7 @@ interface Material {
     val stick: Id
     /**
      * A unique snowflake string containing all data for this material.
-     * Used for up-to-date checks in [GenerateData][juuxel.adorn.datagen.gradle.GenerateData].
+     * TODO: Used for up-to-date checks.
      */
     val snowflake: String
 

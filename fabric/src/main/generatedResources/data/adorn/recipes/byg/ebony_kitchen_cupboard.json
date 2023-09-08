@@ -1,0 +1,24 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:kitchen_cupboard",
+  "ingredients": [
+    {
+      "tag": "c:wooden_chests"
+    },
+    {
+      "item": "adorn:byg/ebony_kitchen_counter"
+    },
+    {
+      "item": "adorn:byg/ebony_kitchen_counter"
+    }
+  ],
+  "result": {
+    "item": "adorn:byg/ebony_kitchen_cupboard",
+    "count": 2
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
+}

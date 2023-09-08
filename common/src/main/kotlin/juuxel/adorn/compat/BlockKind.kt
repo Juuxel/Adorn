@@ -12,6 +12,6 @@ enum class BlockKind {
     STEP,
     SHELF,
     COFFEE_TABLE,
-    BENCH,
+    BENCH
     ;
 }

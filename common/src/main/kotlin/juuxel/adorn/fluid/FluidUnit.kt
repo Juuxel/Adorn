@@ -15,6 +15,7 @@ import net.minecraft.text.Text
 enum class FluidUnit(val id: String, val bucketVolume: Long) : Displayable {
     /** Litres. Defined as one thousandth of a cubic metre ([bucketVolume] = 1000). */
     LITRE("litres", 1000),
+
     /** Droplets. Defined as 1/81 000 of a cubic metre ([bucketVolume] = 81 000). */
     DROPLET("droplets", 81_000);
 
@@ -34,6 +35,7 @@ enum class FluidUnit(val id: String, val bucketVolume: Long) : Displayable {
         /**
          * Converts a volume between two fluid units. Potentially lossy, use with caution!
          */
+        @JvmStatic
         fun convert(volume: Long, from: FluidUnit, to: FluidUnit): Long {
             if (from == to) return volume
             return volume * to.bucketVolume / from.bucketVolume

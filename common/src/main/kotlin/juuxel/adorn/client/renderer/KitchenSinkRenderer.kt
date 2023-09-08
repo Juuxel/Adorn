@@ -76,11 +76,14 @@ abstract class KitchenSinkRenderer<T : KitchenSinkBlockEntity>(context: BlockEnt
 
         return sprite
     }
+
     /** Gets the [entity]'s fluid's color. */
     private fun getFluidColor(entity: T): Int =
         FluidRenderingBridge.get().getColor(entity.fluidReference, entity.world, entity.pos)
+
     /** Gets the fluid level from the [entity] in litres. */
     protected abstract fun getFluidLevel(entity: T): Double
+
     /** Tests whether the [entity] has no fluid inside. */
     protected abstract fun isEmpty(entity: T): Boolean
 
@@ -94,6 +97,7 @@ abstract class KitchenSinkRenderer<T : KitchenSinkBlockEntity>(context: BlockEnt
         private const val Y_START = 7 * PX
         private const val Y_END = 15 * PX
         private const val LITRES_PER_BLOCK: Double = 1000.0
+
         // Wave period in ms
         private const val WAVE_PERIOD: Float = 12_000f
         private const val WAVE_HEIGHT: Float = PX

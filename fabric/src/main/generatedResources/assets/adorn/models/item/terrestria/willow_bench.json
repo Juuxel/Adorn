@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "terrestria:block/willow_planks",
+    "log": "terrestria:block/willow_log",
+    "end": "terrestria:block/willow_log_top"
+  }
+}

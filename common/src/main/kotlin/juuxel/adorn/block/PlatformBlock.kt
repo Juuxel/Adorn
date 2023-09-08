@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+
 package juuxel.adorn.block
 
 import juuxel.adorn.api.block.BlockVariant
@@ -35,8 +36,11 @@ class PlatformBlock(variant: BlockVariant) : Block(variant.createSettings()), Bl
         defaultState.with(WATERLOGGED, context.world.getFluidState(context.blockPos).fluid == Fluids.WATER)
 
     override fun getFluidState(state: BlockState) =
-        if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
-        else super.getFluidState(state)
+        if (state[WATERLOGGED]) {
+            Fluids.WATER.getStill(false)
+        } else {
+            super.getFluidState(state)
+        }
 
     override fun getOutlineShape(p0: BlockState?, p1: BlockView?, p2: BlockPos?, context: ShapeContext?): VoxelShape =
         COMBINED_SHAPE

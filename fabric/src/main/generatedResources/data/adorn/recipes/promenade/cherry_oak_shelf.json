@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:shelf",
+  "pattern": [
+    "---",
+    "/ /"
+  ],
+  "key": {
+    "-": {
+      "item": "promenade:cherry_oak_slab"
+    },
+    "/": {
+      "tag": "c:wooden_rods"
+    }
+  },
+  "result": {
+    "item": "adorn:promenade/cherry_oak_shelf",
+    "count": 3
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["promenade"]
+  }]
+
+}

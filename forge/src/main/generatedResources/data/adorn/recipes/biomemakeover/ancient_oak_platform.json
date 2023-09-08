@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "biomemakeover:ancient_oak_slab"
+    },
+    "P": {
+      "item": "adorn:biomemakeover/ancient_oak_post"
+    }
+  },
+  "result": {
+    "item": "adorn:biomemakeover/ancient_oak_platform",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomemakeover"
+    }
+  ]
+
+}

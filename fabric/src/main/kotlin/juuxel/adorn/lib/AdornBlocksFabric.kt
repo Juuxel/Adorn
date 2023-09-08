@@ -31,7 +31,9 @@ object AdornBlocksFabric {
             // - the player isn't holding an item (for block item and bucket support)
             if (block is SneakClickHandler && player.isSneaking && player.getStackInHand(hand).isEmpty) {
                 block.onSneakClick(state, world, hitResult.blockPos, player, hand, hitResult)
-            } else ActionResult.PASS
+            } else {
+                ActionResult.PASS
+            }
         }
 
         UseBlockCallback.EVENT.register(CommonEventHandlers::handleCarpets)

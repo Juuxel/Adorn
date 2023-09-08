@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+
 package juuxel.adorn.block
 
 import net.minecraft.block.Block
@@ -37,8 +38,11 @@ abstract class AbstractTableBlock(settings: Settings) : CarpetedBlock(settings),
         )
 
     override fun getFluidState(state: BlockState) =
-        if (state[Properties.WATERLOGGED]) Fluids.WATER.getStill(false)
-        else super.getFluidState(state)
+        if (state[Properties.WATERLOGGED]) {
+            Fluids.WATER.getStill(false)
+        } else {
+            super.getFluidState(state)
+        }
 
     override fun getStateForNeighborUpdate(
         state: BlockState, direction: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos

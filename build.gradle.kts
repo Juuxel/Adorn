@@ -15,12 +15,12 @@ plugins {
     // Note that of all these plugins, only the Architectury plugin needs to be applied.
     kotlin("jvm") version "1.7.0" apply false
 
-    id("architectury-plugin") version "3.4.135"
-    id("dev.architectury.loom") version "0.12.0.282" apply false
-    id("io.github.juuxel.loom-quiltflower") version "1.7.2" apply false
+    id("architectury-plugin") version "3.4.+"
+    id("dev.architectury.loom") version "1.2.+" apply false
+    id("io.github.juuxel.loom-quiltflower") version "1.8.0" apply false
 
-    id("org.jmailen.kotlinter") version "3.2.0" apply false
-    id("com.github.johnrengelman.shadow") version "7.0.0" apply false
+    id("org.jmailen.kotlinter") version "3.12.0" apply false
+    id("com.github.johnrengelman.shadow") version "7.1.2" apply false
 }
 
 // Set the Minecraft version for Architectury.
@@ -63,7 +63,6 @@ tasks {
 
 // Do the shared set up for the Minecraft subprojects.
 subprojects {
-    apply(plugin = "java")
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "dev.architectury.loom")
     apply(plugin = "architectury-plugin")
@@ -77,9 +76,9 @@ subprojects {
     }
 
     architectury {
-        // Disable Architectury's injectables like @ExpectPlatform
-        // since we don't use them.
-        injectInjectables = false
+        // Disable Architectury's runtime transformer
+        // since we don't use it.
+        compileOnly()
     }
 
     // Copy the artifact metadata from the root project.
@@ -109,6 +108,27 @@ subprojects {
                 includeModule("io.github.juuxel", "menu")
             }
         }
+
+        // TerraformersMC maven for Mod Menu and EMI.
+        maven {
+            name = "TerraformersMC"
+            url = uri("https://maven.terraformersmc.com/releases")
+
+            content {
+                includeGroup("com.terraformersmc")
+                includeGroup("dev.emi")
+            }
+        }
+
+        // For JEI.
+        maven {
+            name = "Modrinth"
+            url = uri("https://api.modrinth.com/maven")
+
+            content {
+                includeGroup("maven.modrinth")
+            }
+        }
     }
 
     dependencies {
@@ -134,7 +154,15 @@ subprojects {
     }
 
     extensions.configure<KotlinterExtension> {
-        disabledRules = arrayOf("parameter-list-wrapping")
+        disabledRules = arrayOf(
+            // Disable these since we often do grouping on the parameters and args:
+            //   x: Int, y: Int, z: Int
+            //   width: Int, height: Int, depth: Int
+            "parameter-list-wrapping",
+            "argument-list-wrapping",
+            // Used for minimising diffs on listOf
+            "trailing-comma-on-call-site",
+        )
     }
 
     tasks {
@@ -148,8 +176,12 @@ subprojects {
             // for all Kotlin compilation tasks.
             kotlinOptions.jvmTarget = "17"
 
-            // Compile lambdas to invokedynamic.
-            kotlinOptions.freeCompilerArgs = listOf("-Xlambdas=indy")
+            kotlinOptions.freeCompilerArgs = listOf(
+                // Compile lambdas to invokedynamic.
+                "-Xlambdas=indy",
+                // Compile interface functions with bodies to default methods.
+                "-Xjvm-default=all",
+            )
         }
 
         // Include the license in the jar files.
@@ -173,6 +205,13 @@ subprojects {
         extensions.configure<LoomGradleExtensionAPI> {
             runConfigs.getByName("server") {
                 runDir = "run/server"
+            }
+
+            // "main" matches the default Forge mod's name
+            with(mods.maybeCreate("main")) {
+                fun Project.sourceSets() = extensions.getByName<SourceSetContainer>("sourceSets")
+                sourceSet(sourceSets().getByName("main"))
+                sourceSet(project(":common").sourceSets().getByName("main"))
             }
         }
 

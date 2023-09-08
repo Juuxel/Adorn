@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:item/templates/table",
+  "textures": {
+    "planks": "cinderscapes:block/scorched_planks",
+    "log": "cinderscapes:block/scorched_stem"
+  }
+}

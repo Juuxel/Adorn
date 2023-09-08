@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/drawer",
+  "textures": {
+    "planks": "byg:block/nightshade/planks"
+  }
+}

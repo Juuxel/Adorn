@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:item/templates/table",
+  "textures": {
+    "planks": "terrestria:block/yucca_palm_planks",
+    "log": "terrestria:block/yucca_palm_log"
+  }
+}

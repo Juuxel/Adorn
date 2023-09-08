@@ -1,6 +1,6 @@
 package juuxel.adorn.datagen
 
-internal object TemplateApplier {
+object TemplateApplier {
     fun apply(text: String, substitutions: Map<String, String>): String {
         var current = text
 

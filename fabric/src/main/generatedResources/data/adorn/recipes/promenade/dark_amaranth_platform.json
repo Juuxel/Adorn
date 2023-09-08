@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "promenade:dark_amaranth_slab"
+    },
+    "P": {
+      "item": "adorn:promenade/dark_amaranth_post"
+    }
+  },
+  "result": {
+    "item": "adorn:promenade/dark_amaranth_platform",
+    "count": 2
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["promenade"]
+  }]
+
+}

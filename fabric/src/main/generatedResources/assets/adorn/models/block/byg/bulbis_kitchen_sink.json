@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/kitchen_sink",
+  "textures": {
+    "planks": "byg:block/bulbis/planks"
+  }
+}

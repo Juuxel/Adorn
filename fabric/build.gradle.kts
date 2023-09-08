@@ -1,6 +1,7 @@
 plugins {
     id("adorn-data-generator")
     id("adorn-data-generator.emi")
+    id("adorn-service-inline")
 }
 
 architectury {
@@ -23,6 +24,10 @@ loom {
     // Make the Fabric project use the common access widener.
     // Technically useless, BUT this file is also needed at dev runtime of course
     accessWidenerPath.set(accessWidenerFile)
+}
+
+emiDataGenerator {
+    setupForPlatform(generatedResources)
 }
 
 sourceSets {
@@ -50,17 +55,6 @@ repositories {
         }
     }
 
-    // TerraformersMC maven for Mod Menu and EMI.
-    maven {
-        name = "TerraformersMC"
-        url = uri("https://maven.terraformersmc.com/releases")
-
-        content {
-            includeGroup("com.terraformersmc")
-            includeGroup("dev.emi")
-        }
-    }
-
     // DashLoader maven.
     maven {
         url = uri("https://oskarstrom.net/maven")
@@ -78,13 +72,8 @@ dependencies {
     implementation(project(":common", configuration = "namedElements")) {
         isTransitive = false
     }
-    // Used at dev runtime by the Architectury Transformer to automatically read changes in the common jar
-    // and apply them.
-    "developmentFabric"(project(":common", configuration = "namedElements")) {
-        isTransitive = false
-    }
     // Bundle the transformed version of the common project in the mod.
-    // The transformed version replaces all @ExpectPlatform calls to call the Fabric versions.
+    // The transformed version includes things like fixed refmaps.
     bundle(project(path = ":common", configuration = "transformProductionFabric")) {
         isTransitive = false
     }
@@ -92,7 +81,10 @@ dependencies {
     // Standard Fabric mod setup.
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric-loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric-api")}")
-    modApi("net.fabricmc:fabric-language-kotlin:${rootProject.property("fabric-kotlin")}")
+    modApi("net.fabricmc:fabric-language-kotlin:${rootProject.property("fabric-kotlin")}") {
+        // TODO: Check if this has been updated
+        exclude(group = "net.fabricmc", module = "fabric-loader")
+    }
 
     // Bundle Jankson in the mod and use it as a regular "implementation" library.
     bundle(implementation("blue.endless:jankson:${rootProject.property("jankson")}")!!)
@@ -101,10 +93,12 @@ dependencies {
     modCompileOnly("com.github.Virtuoel:Towelette:${rootProject.property("towelette")}")
     modLocalRuntime(modCompileOnly("com.terraformersmc:modmenu:${rootProject.property("modmenu")}")!!)
     modCompileOnly("net.oskarstrom:DashLoader:${rootProject.property("dashloader")}")
-    runtimeOnly("org.yaml:snakeyaml:1.27") // TODO: for dashloader, remove when pom is fixed
-    modLocalRuntime(modCompileOnly("dev.emi:emi:${rootProject.property("emi")}") {
+    modCompileOnly(libs.emi.fabric) {
         isTransitive = false
-    })
+    }
+    modLocalRuntime(libs.emi.fabric) {
+        isTransitive = false
+    }
 }
 
 tasks {
@@ -120,10 +114,8 @@ tasks {
     }
 
     processResources {
-        // Hook the AW copying and data generation to processResources.
-        // Note: this is done differently in the other subprojects where the data generator
-        // has to be run manually! TODO: make this consistent lol
-        dependsOn(copyAccessWidener, generateData)
+        // Hook the AW copying to processResources.
+        dependsOn(copyAccessWidener)
         // Mark that this task depends on the project version,
         // and should reset when the project version changes.
         inputs.property("version", project.version)
@@ -131,24 +123,6 @@ tasks {
         // Replace the $version template in fabric.mod.json with the project version.
         filesMatching("fabric.mod.json") {
             expand("version" to project.version)
-        }
-    }
-
-    generateEmi {
-        mustRunAfter(project(":common").tasks.named("generateData"))
-        val resourceDirs = project(":common").sourceSets.main.get().resources.srcDirs +
-            sourceSets.main.get().resources.srcDirs
-        for (dir in resourceDirs) {
-            // Ignore the AW resource dir
-            if (dir == generatedResources) continue
-
-            recipes.from(fileTree(dir) {
-                include("data/adorn/recipes/**")
-
-                // The unpacking recipes create "uncraftable" vanilla items like
-                // nether wart, so exclude them.
-                exclude("data/adorn/recipes/crates/unpack/**")
-            })
         }
     }
 }

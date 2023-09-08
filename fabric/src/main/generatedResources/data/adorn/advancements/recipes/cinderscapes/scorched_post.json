@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:cinderscapes/scorched_post"
+    ]
+  },
+  "criteria": {
+    "has_scorched_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "cinderscapes:scorched_planks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:cinderscapes/scorched_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_scorched_planks",
+      "has_the_recipe"
+    ]
+  ],
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["cinderscapes"]
+  }]
+
+}

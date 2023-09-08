@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "byg:pine_slab"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/pine_bench",
+    "count": 2
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
+}

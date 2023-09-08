@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:kitchen_counter",
+  "pattern": [
+    "SS",
+    "PP"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:polished_andesite_slab"
+    },
+    "P": {
+      "item": "byg:baobab_planks"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/baobab_kitchen_counter",
+    "count": 3
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
+}

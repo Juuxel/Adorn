@@ -1,7 +1,11 @@
 package juuxel.adorn.datagen.tag
 
+import juuxel.adorn.datagen.GeneratorConfig
+import juuxel.adorn.datagen.GeneratorConfigLoader
 import juuxel.adorn.datagen.Id
 import juuxel.adorn.datagen.Material
+import java.nio.file.Files
+import java.nio.file.Path
 
 class TagGenerator(private val entries: TagEntryProvider) {
     fun generate(materials: List<Material>): String {
@@ -46,6 +50,39 @@ class TagGenerator(private val entries: TagEntryProvider) {
             adorn("wooden_steps") to TagGenerator(TagEntryProviders.WOODEN_STEPS),
             minecraft("non_flammable_wood") to TagGenerator(TagEntryProviders.NON_FLAMMABLE_WOOD),
         )
+
+        fun generate(configs: List<Path>, outputDirectory: Path) {
+            val configs = configs.asSequence()
+                .sortedBy { it.toAbsolutePath() }
+                .map { GeneratorConfigLoader.read(it) }
+                .toList()
+            generate(configs) { path, text ->
+                val outputPath = outputDirectory.resolve(path)
+                Files.createDirectories(outputPath.parent)
+                Files.writeString(outputPath, text)
+            }
+        }
+
+        fun generate(configs: List<GeneratorConfig>, consumer: (path: String, text: String) -> Unit) {
+            val materials = configs.asSequence()
+                .flatMap {
+                    sequence {
+                        yieldAll(it.woods)
+                        yieldAll(it.stones)
+                        yieldAll(it.wools)
+                    }
+                }
+                .map { it.material }
+                .toList()
+                .distinctBy { it.id }
+
+            for ((id, generator) in GENERATORS_BY_ID) {
+                for (tagType in arrayOf("blocks", "items")) {
+                    val path = "data/${id.namespace}/tags/$tagType/${id.path}.json"
+                    consumer(path, generator.generate(materials))
+                }
+            }
+        }
 
         private fun adorn(path: String) = Id("adorn", path)
         private fun minecraft(path: String) = Id("minecraft", path)

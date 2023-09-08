@@ -1,0 +1,13 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "terrestria:smooth_basalt"
+  },
+  "result": "adorn:terrestria/smooth_basalt_platform",
+  "count": 1,
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["terrestria"]
+  }]
+
+}

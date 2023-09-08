@@ -17,7 +17,13 @@ class AnimationEngine {
     }
 
     fun start() {
-        thread = AnimatorThread().also { it.start() }
+        // Null check to make sure that this function can be called in Screen.init.
+        // It's also called when the screen is resized, so creating a new thread each time
+        //   1. leaks animator threads
+        //   2. causes the animations to speed up unreasonably
+        if (thread == null) {
+            thread = AnimatorThread().also { it.start() }
+        }
     }
 
     fun stop() {

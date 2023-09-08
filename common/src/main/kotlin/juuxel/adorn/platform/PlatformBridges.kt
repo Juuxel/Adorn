@@ -1,6 +1,7 @@
 package juuxel.adorn.platform
 
-import juuxel.adorn.util.ServiceDelegate
+import juuxel.adorn.util.InlineServices
+import juuxel.adorn.util.loadService
 
 interface PlatformBridges {
     val blockEntities: BlockEntityBridge
@@ -12,8 +13,9 @@ interface PlatformBridges {
     val registrarFactory: RegistrarFactory
     val resources: ResourceBridge
 
+    @InlineServices
     companion object {
-        private val instance: PlatformBridges by ServiceDelegate()
+        private val instance: PlatformBridges by lazy { loadService() }
         fun get() = instance
 
         inline val blockEntities get() = get().blockEntities

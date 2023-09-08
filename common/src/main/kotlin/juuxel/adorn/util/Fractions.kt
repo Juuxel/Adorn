@@ -42,8 +42,11 @@ object Fractions {
 
         for ((i, char) in str.withIndex()) {
             result[i] =
-                if (char in '0'..'9') char - '0'
-                else error("Unknown digit character: $char")
+                if (char in '0'..'9') {
+                    char - '0'
+                } else {
+                    error("Unknown digit character: $char")
+                }
         }
 
         return result

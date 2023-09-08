@@ -63,9 +63,9 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
                 .markInput()
                 .entries(display.fluid)
         )
-        // Empty mug, must have background since it's not in the screen texture
         add(
             Widgets.createSlot(Point(topLeft.x + 4, topLeft.y + 39))
+                .disableBackground()
                 .markInput()
                 .entries(display.input)
         )
@@ -76,7 +76,7 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
                 RenderSystem.setShader(GameRenderer::getPositionTexShader)
                 helper.zOffset += FLUID_SCALE_Z_OFFSET
-                helper.drawTexture(matrices, topLeft.x + 88, topLeft.y + 5, 176, 25, 16, 51)
+                helper.drawTexture(matrices, topLeft.x + 88, topLeft.y + 1, 154, 17, 16, BrewerScreen.FLUID_AREA_HEIGHT)
                 helper.zOffset -= FLUID_SCALE_Z_OFFSET
             }
         )
@@ -84,11 +84,14 @@ class BrewerCategory : DisplayCategory<BrewerDisplay> {
 
     companion object {
         private const val FLUID_SCALE_Z_OFFSET = 100
-        private val LIGHT_TEXTURE = AdornCommon.id("textures/gui/brewer_rei_light.png")
-        private val DARK_TEXTURE = AdornCommon.id("textures/gui/brewer_rei_dark.png")
+        private val LIGHT_TEXTURE = AdornCommon.id("textures/gui/recipe_viewer/brewer_light.png")
+        private val DARK_TEXTURE = AdornCommon.id("textures/gui/recipe_viewer/brewer_dark.png")
 
         private fun currentTexture(): Identifier =
-            if (REIRuntime.getInstance().isDarkThemeEnabled) DARK_TEXTURE
-            else LIGHT_TEXTURE
+            if (REIRuntime.getInstance().isDarkThemeEnabled) {
+                DARK_TEXTURE
+            } else {
+                LIGHT_TEXTURE
+            }
     }
 }

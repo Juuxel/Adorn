@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/table_leg",
+  "textures": {
+    "log": "promenade:block/dark_amaranth_stem/side"
+  }
+}

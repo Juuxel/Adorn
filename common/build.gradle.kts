@@ -24,16 +24,20 @@ dependencies {
     // Just for @Environment and mixin deps :)
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric-loader")}")
 
-    // Add a mod dependency on REI's API for compat code.
+    // Add a mod dependency on some APIs for compat code.
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:${rootProject.property("rei")}")
+    modCompileOnly(libs.emi.common)
+    modCompileOnly(libs.jei.fabric)
+    compileOnly(libs.rei.annotations)
 }
 
-tasks {
-    generateTags {
-        // Include all src/data files from all subprojects
-        // for tag generation.
+dataGenerator {
+    generateTags.set(true)
+
+    configs.register("all") {
         rootProject.subprojects {
-            configs.from(fileTree("src/data"))
+            files.from(fileTree("src/data"))
         }
+        tagsOnly.set(true)
     }
 }

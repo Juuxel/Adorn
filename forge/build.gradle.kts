@@ -1,5 +1,7 @@
 plugins {
     id("adorn-data-generator")
+    id("adorn-data-generator.emi")
+    id("adorn-service-inline")
 }
 
 architectury {
@@ -27,6 +29,10 @@ loom {
     }
 }
 
+emiDataGenerator {
+    setupForPlatform()
+}
+
 repositories {
     // Set up Kotlin for Forge's Maven repository.
     maven {
@@ -52,13 +58,8 @@ dependencies {
     implementation(project(":common", configuration = "namedElements")) {
         isTransitive = false
     }
-    // Used at dev runtime by the Architectury Transformer to automatically read changes in the common jar
-    // and apply them.
-    "developmentForge"(project(":common", configuration = "namedElements")) {
-        isTransitive = false
-    }
     // Bundle the transformed version of the common project in the mod.
-    // The transformed version replaces all @ExpectPlatform calls to call the Forge versions.
+    // The transformed version includes things like fixed refmaps.
     bundle(project(path = ":common", configuration = "transformProductionForge")) {
         isTransitive = false
     }
@@ -76,6 +77,8 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.property("rei")}")
     modLocalRuntime("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.property("rei")}")
     modLocalRuntime("dev.architectury:architectury-forge:${rootProject.property("architectury-api")}")
+    modLocalRuntime(libs.emi.forge)
+    //modLocalRuntime(libs.jei.forge)
 }
 
 tasks {

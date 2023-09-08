@@ -40,10 +40,10 @@
       "juuxel.adorn.compat.rei.client.AdornReiClient"
     ],
     "emi": [
-      {
-        "value": "juuxel.adorn.compat.emi.AdornEmiPlugin",
-        "adapter": "kotlin"
-      }
+      "juuxel.adorn.compat.emi.AdornEmiPlugin"
+    ],
+    "jei_mod_plugin": [
+      "juuxel.adorn.compat.jei.AdornJeiPlugin"
     ]
   },
 
@@ -51,11 +51,10 @@
   "accessWidener": "adorn.accesswidener",
 
   "depends": {
-    "minecraft": "~1.19.2",
+    "minecraft": "=1.19.2",
     "fabricloader": ">=0.14.10",
     "fabric-language-kotlin": "^1.8.1",
-
-    "fabric": ">=0.64.0"
+    "fabric": ">=0.68.0"
   },
   "conflicts": {
     "byg": "<1.1"
@@ -63,7 +62,8 @@
   "breaks": {
     "towelette": "<4.0.0",
     "dashloader": "<2.0-pre2",
-    "roughlyenoughitems": "<9.1"
+    "roughlyenoughitems": "<9.1",
+    "emi": "<1.0"
   },
 
   "custom": {

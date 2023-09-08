@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/platform",
+  "textures": {
+    "texture": "terrestria:block/yucca_palm_planks"
+  }
+}

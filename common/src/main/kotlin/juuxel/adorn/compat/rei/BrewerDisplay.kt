@@ -52,7 +52,7 @@ class BrewerDisplay(
     companion object {
         private fun entryIngredientOf(fluidIngredient: FluidIngredient): EntryIngredient {
             val amount = FluidUnit.convert(fluidIngredient.amount, fluidIngredient.unit, FluidBridge.get().fluidUnit)
-            val stacks = fluidIngredient.fluid.fluids.map {
+            val stacks = fluidIngredient.fluid.getFluids().map {
                 EntryStacks.of(FluidStack.create(it, amount, fluidIngredient.nbt))
             }
             return EntryIngredient.of(stacks)

@@ -42,7 +42,9 @@ open class KitchenCounterBlock(variant: BlockVariant) : AbstractKitchenCounterBl
                     facing.rotateYCounterclockwise() -> FrontConnection.RIGHT
                     else -> FrontConnection.NONE
                 }
-            } else FrontConnection.NONE
+            } else {
+                FrontConnection.NONE
+            }
 
         return state.with(FRONT, frontConnection)
     }

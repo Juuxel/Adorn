@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+
 package juuxel.adorn.block
 
 import com.google.common.collect.Sets
@@ -84,7 +85,9 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
                 }
             }
             ActionResult.SUCCESS
-        } else ActionResult.PASS
+        } else {
+            ActionResult.PASS
+        }
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
@@ -102,8 +105,11 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
     }
 
     override fun getFluidState(state: BlockState) =
-        if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
-        else super.getFluidState(state)
+        if (state[WATERLOGGED]) {
+            Fluids.WATER.getStill(false)
+        } else {
+            super.getFluidState(state)
+        }
 
     override fun getStateForNeighborUpdate(
         state: BlockState, direction: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos
@@ -234,8 +240,9 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
             val frontConnection = state[FRONT_CONNECTION]
             val facing = state[FACING]
 
-            if ((!connectedLeft && !connectedRight && frontConnection == FrontConnection.NONE) || (!ignoreNeighbors && state[OCCUPIED]))
+            if ((!connectedLeft && !connectedRight && frontConnection == FrontConnection.NONE) || (!ignoreNeighbors && state[OCCUPIED])) {
                 return null
+            }
 
             val result = when {
                 frontConnection != FrontConnection.NONE -> facing

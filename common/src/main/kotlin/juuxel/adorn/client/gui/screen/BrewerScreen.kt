@@ -54,8 +54,11 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
     private fun getFluidTooltip(fluid: FluidReference): List<Text> =
         FluidRenderingBridge.get().getTooltip(
             fluid,
-            if (client!!.options.advancedItemTooltips) TooltipContext.Default.ADVANCED
-            else TooltipContext.Default.NORMAL,
+            if (client!!.options.advancedItemTooltips) {
+                TooltipContext.Default.ADVANCED
+            } else {
+                TooltipContext.Default.NORMAL
+            },
             maxAmountInLitres = BrewerBlockEntity.FLUID_CAPACITY_IN_BUCKETS * 1000
         )
 
@@ -115,8 +118,11 @@ class BrewerScreen(menu: BrewerMenu, playerInventory: PlayerInventory, title: Te
             var fluidY = 0
 
             fun transformY(areaHeight: Float): Float =
-                if (bridge.fillsFromTop(fluid)) fluidY.toFloat()
-                else FLUID_AREA_HEIGHT - fluidY - areaHeight
+                if (bridge.fillsFromTop(fluid)) {
+                    fluidY.toFloat()
+                } else {
+                    FLUID_AREA_HEIGHT - fluidY - areaHeight
+                }
 
             for (i in 0 until MathHelper.floor(height / 16)) {
                 drawSprite(matrices, x, y + transformY(16f), 16f, 16f, 0f, 0f, 1f, 1f, sprite, color)

@@ -75,8 +75,11 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable, Block
             .with(FACING, context.side)
 
     override fun getFluidState(state: BlockState): FluidState =
-        if (state[WATERLOGGED]) Fluids.WATER.getStill(false)
-        else super.getFluidState(state)
+        if (state[WATERLOGGED]) {
+            Fluids.WATER.getStill(false)
+        } else {
+            super.getFluidState(state)
+        }
 
     override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, ePos: ShapeContext) =
         SHAPES[state[FACING]]

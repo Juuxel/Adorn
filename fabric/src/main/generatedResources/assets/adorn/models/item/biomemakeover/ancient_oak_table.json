@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:item/templates/table",
+  "textures": {
+    "planks": "biomemakeover:block/ancient_oak_planks",
+    "log": "biomemakeover:block/ancient_oak_log"
+  }
+}

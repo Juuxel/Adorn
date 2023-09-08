@@ -1,0 +1,13 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "byg:lament_planks"
+  },
+  "result": "adorn:byg/lament_step",
+  "count": 2,
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
+}

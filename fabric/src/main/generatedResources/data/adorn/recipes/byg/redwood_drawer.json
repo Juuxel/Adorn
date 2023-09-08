@@ -1,0 +1,26 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:drawer",
+  "pattern": [
+    "S",
+    "C",
+    "S"
+  ],
+  "key": {
+    "C": {
+      "tag": "c:wooden_chests"
+    },
+    "S": {
+      "item": "byg:redwood_slab"
+    }
+  },
+  "result": {
+    "item": "adorn:byg/redwood_drawer",
+    "count": 2
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
+}

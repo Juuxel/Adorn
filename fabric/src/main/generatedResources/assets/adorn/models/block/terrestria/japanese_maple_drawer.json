@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/drawer",
+  "textures": {
+    "planks": "terrestria:block/japanese_maple_planks"
+  }
+}
