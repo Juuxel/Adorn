@@ -8,6 +8,7 @@ import net.minecraft.block.Blocks
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.menu.MenuContext
+import net.minecraft.registry.Registries
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.property.Property
 import net.minecraft.text.MutableText
@@ -15,6 +16,8 @@ import net.minecraft.text.Text
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
+
+private val LOGGER = logger()
 
 fun ItemStack.toTextWithCount(): MutableText =
     Text.translatable("text.adorn.item_stack_with_count", count, toHoverableText())
@@ -43,23 +46,26 @@ fun BlockEntity.getSquaredDistance(x: Double, y: Double, z: Double): Double {
  * The safe copy does not have lambdas that reference this block directly.
  * Instead, the default state is used for the various lambdas.
  */
-fun Block.copySettingsSafely(): AbstractBlock.Settings =
-    AbstractBlock.Settings.create()
-        .mapColor(defaultMapColor)
-        .luminance { defaultState.luminance }
-        .apply { getHardness(defaultState)?.let(this::hardness) }
-        .resistance(blastResistance)
-        .velocityMultiplier(velocityMultiplier)
-        .jumpVelocityMultiplier(jumpVelocityMultiplier)
-        .slipperiness(slipperiness)
-        .sounds(defaultState.soundGroup)
+fun Block.copySettingsSafely(): AbstractBlock.Settings {
+    val settings = AbstractBlock.Settings.create()
+    caughtProperty(this, "mapColor") { settings.mapColor(defaultMapColor) }
+    caughtProperty(this, "luminance") { settings.luminance { defaultState.luminance } }
+    caughtProperty(this, "hardness") { settings.hardness(defaultState.getHardness(null, null)) }
+    caughtProperty(this, "resistance") { settings.resistance(blastResistance) }
+    caughtProperty(this, "velocityMultiplier") { settings.velocityMultiplier(velocityMultiplier) }
+    caughtProperty(this, "jumpVelocityMultiplier") { settings.jumpVelocityMultiplier(jumpVelocityMultiplier) }
+    caughtProperty(this, "slipperiness") { settings.slipperiness(slipperiness) }
+    caughtProperty(this, "soundGroup") { settings.sounds(defaultState.soundGroup) }
+    return settings
+}
 
-private fun getHardness(state: BlockState): Float? =
+private inline fun caughtProperty(block: Block, name: String, fn: () -> Unit) {
     try {
-        state.getHardness(null, null)
-    } catch (e: NullPointerException) {
-        null
+        fn()
+    } catch (e: Exception) {
+        LOGGER.warn("[Adorn] Could not get block property {} from {}", name, Registries.BLOCK.getId(block), e)
     }
+}
 
 fun Direction.Axis.turnHorizontally(): Direction.Axis =
     when (this) {
