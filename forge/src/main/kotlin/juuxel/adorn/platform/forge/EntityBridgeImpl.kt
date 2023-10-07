@@ -9,6 +9,5 @@ object EntityBridgeImpl : EntityBridge {
     override fun createSeatType(): EntityType<SeatEntity> =
         EntityType.Builder.create(::SeatEntity, SpawnGroup.MISC)
             .setDimensions(0f, 0f)
-            .disableSaving()
             .build(null)
 }

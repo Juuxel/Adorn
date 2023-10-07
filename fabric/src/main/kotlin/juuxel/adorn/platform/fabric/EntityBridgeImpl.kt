@@ -9,8 +9,7 @@ import net.minecraft.entity.SpawnGroup
 
 object EntityBridgeImpl : EntityBridge {
     override fun createSeatType(): EntityType<SeatEntity> =
-        FabricEntityTypeBuilder.create<SeatEntity>(SpawnGroup.MISC) { type, world -> SeatEntity(type, world) }
+        FabricEntityTypeBuilder.create(SpawnGroup.MISC) { type, world -> SeatEntity(type, world) }
             .dimensions(EntityDimensions.fixed(0f, 0f))
-            .disableSaving()
             .build()
 }
