@@ -96,9 +96,6 @@ dependencies {
     modCompileOnly(libs.emi.fabric) {
         isTransitive = false
     }
-    modLocalRuntime(libs.emi.fabric) {
-        isTransitive = false
-    }
 }
 
 tasks {
