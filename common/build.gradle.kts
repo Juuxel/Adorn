@@ -7,7 +7,7 @@ architectury {
     // This sets up the transformations (@ExpectPlatform etc.) we need for production environments.
     common(
         "fabric",
-        "forge",
+//        "forge",
     )
 }
 

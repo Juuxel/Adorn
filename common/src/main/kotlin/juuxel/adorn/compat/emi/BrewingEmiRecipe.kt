@@ -24,8 +24,8 @@ class BrewingEmiRecipe private constructor(
     private val fluidIngredient: EmiIngredient,
     private val result: EmiStack
 ) : EmiRecipe {
-    constructor(recipe: ItemBrewingRecipe) : this(
-        recipe.id,
+    constructor(id: Identifier, recipe: ItemBrewingRecipe) : this(
+        id,
         EmiStack.of(AdornItems.MUG),
         EmiIngredient.of(recipe.firstIngredient).withRemainders(),
         EmiIngredient.of(recipe.secondIngredient).withRemainders(),
@@ -33,8 +33,8 @@ class BrewingEmiRecipe private constructor(
         EmiStack.of(recipe.result)
     )
 
-    constructor(recipe: FluidBrewingRecipe) : this(
-        recipe.id,
+    constructor(id: Identifier, recipe: FluidBrewingRecipe) : this(
+        id,
         EmiStack.of(AdornItems.MUG),
         EmiIngredient.of(recipe.firstIngredient).withRemainders(),
         EmiIngredient.of(recipe.secondIngredient).withRemainders(),

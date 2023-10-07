@@ -1,14 +1,11 @@
 package juuxel.adorn.loot
 
-import com.google.gson.JsonDeserializationContext
-import com.google.gson.JsonObject
-import com.google.gson.JsonSerializationContext
+import com.mojang.serialization.Codec
+import com.mojang.serialization.codecs.RecordCodecBuilder
 import juuxel.adorn.util.logger
 import net.minecraft.loot.condition.LootCondition
 import net.minecraft.loot.condition.LootConditionType
 import net.minecraft.loot.context.LootContext
-import net.minecraft.util.JsonHelper
-import net.minecraft.util.JsonSerializer
 import net.minecraft.world.GameRules
 import net.minecraft.world.GameRules.BooleanRule
 
@@ -34,15 +31,11 @@ class GameRuleLootCondition(private val gameRule: String) : LootCondition {
         AdornLootConditionTypes.GAME_RULE
 
     companion object {
-        private val LOGGER = logger()
-    }
-
-    object Serializer : JsonSerializer<GameRuleLootCondition> {
-        override fun toJson(json: JsonObject, condition: GameRuleLootCondition, context: JsonSerializationContext) {
-            json.addProperty("game_rule", condition.gameRule)
+        val CODEC: Codec<GameRuleLootCondition> = RecordCodecBuilder.create { builder ->
+            builder.group(
+                Codec.STRING.fieldOf("game_rule").forGetter { it.gameRule }
+            ).apply(builder, ::GameRuleLootCondition)
         }
-
-        override fun fromJson(json: JsonObject, context: JsonDeserializationContext): GameRuleLootCondition =
-            GameRuleLootCondition(JsonHelper.getString(json, "game_rule"))
+        private val LOGGER = logger()
     }
 }

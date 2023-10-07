@@ -25,8 +25,8 @@ open class AdornReiClient : REIClientPlugin {
     }
 
     override fun registerDisplays(registry: DisplayRegistry) {
-        registry.registerRecipeFiller(ItemBrewingRecipe::class.java, AdornRecipes.BREWING_TYPE, ::BrewerDisplay)
-        registry.registerRecipeFiller(FluidBrewingRecipe::class.java, AdornRecipes.BREWING_TYPE, ::BrewerDisplay)
+        registry.registerRecipeFiller(ItemBrewingRecipe::class.java, AdornRecipes.BREWING_TYPE) { BrewerDisplay(it.value) }
+        registry.registerRecipeFiller(FluidBrewingRecipe::class.java, AdornRecipes.BREWING_TYPE) { BrewerDisplay(it.value) }
     }
 
     override fun registerCollapsibleEntries(registry: CollapsibleEntryRegistry) {

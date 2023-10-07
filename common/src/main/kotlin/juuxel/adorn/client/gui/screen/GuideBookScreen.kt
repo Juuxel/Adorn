@@ -71,7 +71,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
     }
 
     override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
-        renderBackground(context)
+        renderBackground(context, mouseX, mouseY, delta)
         val x = (width - BOOK_SIZE) / 2
         val y = (height - BOOK_SIZE) / 2
         context.drawTexture(BookScreen.BOOK_TEXTURE, x, y, 0, 0, BOOK_SIZE, BOOK_SIZE)

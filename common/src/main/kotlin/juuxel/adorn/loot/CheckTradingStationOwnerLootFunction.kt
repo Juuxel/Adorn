@@ -1,8 +1,6 @@
 package juuxel.adorn.loot
 
-import com.google.gson.JsonDeserializationContext
-import com.google.gson.JsonObject
-import com.google.gson.JsonSerializationContext
+import com.mojang.serialization.Codec
 import juuxel.adorn.block.AdornBlocks
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.trading.Trade
@@ -14,9 +12,10 @@ import net.minecraft.loot.context.LootContext
 import net.minecraft.loot.function.LootFunction
 import net.minecraft.loot.function.LootFunctionType
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.util.JsonSerializer
 
-class CheckTradingStationOwnerLootFunction : LootFunction {
+object CheckTradingStationOwnerLootFunction : LootFunction {
+    val CODEC: Codec<CheckTradingStationOwnerLootFunction> = Codec.unit(this)
+
     override fun apply(stack: ItemStack, context: LootContext): ItemStack {
         if (stack.isOf(AdornBlocks.TRADING_STATION.asItem())) {
             stack.getSubNbt(BlockItem.BLOCK_ENTITY_TAG_KEY)?.let { tag ->
@@ -49,12 +48,4 @@ class CheckTradingStationOwnerLootFunction : LootFunction {
 
     override fun getType(): LootFunctionType =
         AdornLootFunctionTypes.CHECK_TRADING_STATION_OWNER
-
-    object Serializer : JsonSerializer<CheckTradingStationOwnerLootFunction> {
-        override fun toJson(json: JsonObject, condition: CheckTradingStationOwnerLootFunction, context: JsonSerializationContext) {
-        }
-
-        override fun fromJson(json: JsonObject, context: JsonDeserializationContext): CheckTradingStationOwnerLootFunction =
-            CheckTradingStationOwnerLootFunction()
-    }
 }

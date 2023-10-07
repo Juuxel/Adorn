@@ -22,10 +22,10 @@ class AdornEmiPlugin : EmiPlugin {
 
         val recipeManager = registry.recipeManager
 
-        for (recipe in recipeManager.listAllOfType(AdornRecipes.BREWING_TYPE)) {
-            val emiRecipe = when (recipe) {
-                is ItemBrewingRecipe -> BrewingEmiRecipe(recipe)
-                is FluidBrewingRecipe -> BrewingEmiRecipe(recipe)
+        for (entry in recipeManager.listAllOfType(AdornRecipes.BREWING_TYPE)) {
+            val emiRecipe = when (val recipe = entry.value) {
+                is ItemBrewingRecipe -> BrewingEmiRecipe(entry.id, recipe)
+                is FluidBrewingRecipe -> BrewingEmiRecipe(entry.id, recipe)
                 else -> {
                     LOGGER.error("Unknown brewing recipe: {}", recipe)
                     continue

@@ -1,42 +1,44 @@
 package juuxel.adorn.criterion
 
 import com.google.gson.JsonObject
-import juuxel.adorn.AdornCommon
+import com.google.gson.JsonParseException
+import com.mojang.serialization.JsonOps
+import juuxel.adorn.util.logger
 import net.minecraft.advancement.criterion.AbstractCriterion
 import net.minecraft.advancement.criterion.AbstractCriterionConditions
 import net.minecraft.predicate.BlockPredicate
 import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer
-import net.minecraft.predicate.entity.AdvancementEntityPredicateSerializer
 import net.minecraft.predicate.entity.LootContextPredicate
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.util.Identifier
+import net.minecraft.util.Util
 import net.minecraft.util.math.BlockPos
+import java.util.Optional
 
 class SitOnBlockCriterion : AbstractCriterion<SitOnBlockCriterion.Conditions>() {
-    override fun getId(): Identifier = ID
-
     override fun conditionsFromJson(
         json: JsonObject,
-        playerPredicate: LootContextPredicate,
+        playerPredicate: Optional<LootContextPredicate>,
         predicateDeserializer: AdvancementEntityPredicateDeserializer
-    ): Conditions = Conditions(playerPredicate, BlockPredicate.fromJson(json["block"]))
+    ): Conditions = Conditions(playerPredicate, Util.getResult(BlockPredicate.CODEC.parse(JsonOps.INSTANCE, json["block"]), ::JsonParseException))
 
     fun trigger(player: ServerPlayerEntity, pos: BlockPos) {
         trigger(player) { it.matches(player, pos) }
     }
 
     companion object {
-        private val ID = AdornCommon.id("sit_on_block")
+        private val LOGGER = logger()
     }
 
-    class Conditions(playerPredicate: LootContextPredicate, private val block: BlockPredicate) :
-        AbstractCriterionConditions(ID, playerPredicate) {
+    class Conditions(playerPredicate: Optional<LootContextPredicate>, private val block: BlockPredicate) :
+        AbstractCriterionConditions(playerPredicate) {
         fun matches(player: ServerPlayerEntity, pos: BlockPos): Boolean =
             block.test(player.serverWorld, pos)
 
-        override fun toJson(predicateSerializer: AdvancementEntityPredicateSerializer): JsonObject {
-            val json = super.toJson(predicateSerializer)
-            json.add("block", block.toJson())
+        override fun toJson(): JsonObject {
+            val json = super.toJson()
+            json.add("block", BlockPredicate.CODEC.encodeStart(JsonOps.INSTANCE, block).getOrThrow(false) {
+                LOGGER.error("Could not encode block predicate {}: {}", block, it)
+            })
             return json
         }
     }

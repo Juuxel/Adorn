@@ -36,8 +36,8 @@ abstract class WidgetEnvelope : Element, Drawable, Selectable, TickingElement, D
     override fun mouseDragged(mouseX: Double, mouseY: Double, button: Int, deltaX: Double, deltaY: Double): Boolean =
         current().mouseDragged(mouseX, mouseY, button, deltaX, deltaY)
 
-    override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double): Boolean =
-        current().mouseScrolled(mouseX, mouseY, amount)
+    override fun mouseScrolled(mouseX: Double, mouseY: Double, horizontalAmount: Double, verticalAmount: Double): Boolean =
+        current().mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount)
 
     override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean =
         current().keyPressed(keyCode, scanCode, modifiers)

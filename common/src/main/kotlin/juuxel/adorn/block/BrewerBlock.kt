@@ -79,7 +79,7 @@ class BrewerBlock(settings: Settings) : VisibleBlockWithEntity(settings), BlockW
         AdornBlockEntities.BREWER.instantiate(pos, state)
 
     override fun <T : BlockEntity> getTicker(world: World, state: BlockState, type: BlockEntityType<T>): BlockEntityTicker<T>? =
-        if (!world.isClient) checkType(type, AdornBlockEntities.BREWER, BrewerBlockEntity::tick) else null
+        if (!world.isClient) validateTicker(type, AdornBlockEntities.BREWER, BrewerBlockEntity::tick) else null
 
     override fun rotate(state: BlockState, rotation: BlockRotation): BlockState =
         state.with(FACING, rotation.rotate(state[FACING]))

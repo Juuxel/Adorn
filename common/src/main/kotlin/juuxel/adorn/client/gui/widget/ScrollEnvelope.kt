@@ -127,11 +127,11 @@ class ScrollEnvelope(
         return super.mouseDragged(mouseX, mouseY + offset, button, deltaX, deltaY)
     }
 
-    override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double): Boolean {
+    override fun mouseScrolled(mouseX: Double, mouseY: Double, horizontalAmount: Double, verticalAmount: Double): Boolean {
         val heightDifference = heightDifference()
 
         if (heightDifference > 0) {
-            animatedOffset = MathHelper.clamp(offset - (amount * SCROLLING_SPEED), 0.0, heightDifference.toDouble())
+            animatedOffset = MathHelper.clamp(offset - (verticalAmount * SCROLLING_SPEED), 0.0, heightDifference.toDouble())
         }
 
         return true

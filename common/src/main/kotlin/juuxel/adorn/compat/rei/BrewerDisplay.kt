@@ -61,11 +61,11 @@ class BrewerDisplay(
 
     object Serializer : DisplaySerializer<BrewerDisplay> {
         override fun save(tag: NbtCompound, display: BrewerDisplay): NbtCompound = tag.apply {
-            put("Input", display.input.save())
-            put("FirstIngredient", display.first.save())
-            put("SecondIngredient", display.second.save())
-            put("Fluid", display.fluid.save())
-            put("Result", display.result.save())
+            put("Input", display.input.saveIngredient())
+            put("FirstIngredient", display.first.saveIngredient())
+            put("SecondIngredient", display.second.saveIngredient())
+            put("Fluid", display.fluid.saveIngredient())
+            put("Result", display.result.saveStack())
         }
 
         override fun read(tag: NbtCompound): BrewerDisplay {

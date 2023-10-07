@@ -13,14 +13,14 @@ plugins {
 
     // Set up specific versions of the plugins we're using.
     // Note that of all these plugins, only the Architectury plugin needs to be applied.
-    kotlin("jvm") version "1.8.10" apply false
+    kotlin("jvm") version "1.9.10" apply false
 
     id("architectury-plugin") version "3.4.+"
-    id("dev.architectury.loom") version "1.2.+" apply false
-    id("io.github.juuxel.loom-quiltflower") version "1.8.0" apply false
+    id("dev.architectury.loom") version "1.3.+" apply false
+    id("io.github.juuxel.loom-vineflower") version "1.11.0" apply false
 
     id("org.jmailen.kotlinter") version "3.12.0" apply false
-    id("com.github.johnrengelman.shadow") version "7.1.2" apply false
+    id("com.github.johnrengelman.shadow") version "8.1.1" apply false
 }
 
 // Set the Minecraft version for Architectury.
@@ -66,7 +66,7 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "dev.architectury.loom")
     apply(plugin = "architectury-plugin")
-    apply(plugin = "io.github.juuxel.loom-quiltflower")
+    apply(plugin = "io.github.juuxel.loom-vineflower")
     apply(plugin = "org.jmailen.kotlinter")
 
     // Set Java version.

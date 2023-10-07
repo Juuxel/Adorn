@@ -40,7 +40,7 @@ abstract class AbstractConfigScreen(title: Text, private val parent: Screen) : S
     }
 
     override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
-        renderBackground(context)
+        renderBackground(context, mouseX, mouseY, delta)
         synchronized(hearts) {
             renderHearts(context, delta)
         }

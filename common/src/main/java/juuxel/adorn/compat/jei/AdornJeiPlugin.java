@@ -4,6 +4,7 @@ import juuxel.adorn.AdornCommon;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.client.gui.screen.TradingStationScreen;
 import juuxel.adorn.recipe.AdornRecipes;
+import kotlin.collections.CollectionsKt;
 import me.shedaniel.rei.plugincompatibilities.api.REIPluginCompatIgnore;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -14,6 +15,7 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
@@ -41,7 +43,7 @@ public final class AdornJeiPlugin implements IModPlugin {
     private <C extends Inventory, T extends Recipe<C>> void registerRecipes(
         IRecipeRegistration registration, RecipeType<T> type, mezz.jei.api.recipe.RecipeType<T> jeiType) {
         RecipeManager manager = MinecraftClient.getInstance().world.getRecipeManager();
-        registration.addRecipes(jeiType, manager.listAllOfType(type));
+        registration.addRecipes(jeiType, CollectionsKt.map(manager.listAllOfType(type), RecipeEntry::value));
     }
 
     @Override

@@ -8,7 +8,7 @@ import net.minecraft.registry.RegistryKeys
 object AdornLootFunctionTypes {
     val LOOT_FUNCTION_TYPES: Registrar<LootFunctionType> = RegistrarFactory.get().create(RegistryKeys.LOOT_FUNCTION_TYPE)
     val CHECK_TRADING_STATION_OWNER: LootFunctionType by LOOT_FUNCTION_TYPES.register("check_trading_station_owner") {
-        LootFunctionType(CheckTradingStationOwnerLootFunction.Serializer)
+        LootFunctionType(CheckTradingStationOwnerLootFunction.CODEC)
     }
 
     fun init() {

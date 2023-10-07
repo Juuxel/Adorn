@@ -14,12 +14,12 @@ import juuxel.adorn.client.renderer.TradingStationRenderer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
-import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.client.render.RenderLayer
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 import net.minecraft.util.ActionResult
 
 object AdornBlocksFabric {
@@ -58,9 +58,9 @@ object AdornBlocksFabric {
             this as BlockEntityType<T>
 
         // BlockEntityRenderers
-        BlockEntityRendererRegistry.register(AdornBlockEntities.TRADING_STATION, ::TradingStationRenderer)
-        BlockEntityRendererRegistry.register(AdornBlockEntities.SHELF, ::ShelfRenderer)
-        BlockEntityRendererRegistry.register(AdornBlockEntities.KITCHEN_SINK.forceType(), ::KitchenSinkRendererFabric)
+        BlockEntityRendererFactories.register(AdornBlockEntities.TRADING_STATION, ::TradingStationRenderer)
+        BlockEntityRendererFactories.register(AdornBlockEntities.SHELF, ::ShelfRenderer)
+        BlockEntityRendererFactories.register(AdornBlockEntities.KITCHEN_SINK.forceType(), ::KitchenSinkRendererFabric)
 
         // RenderLayers
         BlockRenderLayerMap.INSTANCE.putBlocks(

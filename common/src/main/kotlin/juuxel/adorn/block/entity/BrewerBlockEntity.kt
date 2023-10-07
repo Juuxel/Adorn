@@ -118,7 +118,7 @@ abstract class BrewerBlockEntity(pos: BlockPos, state: BlockState) :
                 world.setBlockState(pos, state.with(BrewerBlock.HAS_MUG, hasMug))
             }
 
-            val recipe: BrewingRecipe? = world.recipeManager.getFirstMatch(AdornRecipes.BREWING_TYPE, brewer, world).orElse(null)
+            val recipe: BrewingRecipe? = world.recipeManager.getFirstMatch(AdornRecipes.BREWING_TYPE, brewer, world).orElse(null)?.value
 
             fun decrementIngredient(slot: Int) {
                 val stack = brewer.getStack(slot)

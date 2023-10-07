@@ -14,9 +14,9 @@ abstract class AdornMenuScreen<M : Menu>(
     val panelX get() = x
     val panelY get() = y
 
-    override fun render(context: DrawContext, mouseX: Int, mouseY: Int, tickDelta: Float) {
-        renderBackground(context)
-        super.render(context, mouseX, mouseY, tickDelta)
+    override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
+        renderBackground(context, mouseX, mouseY, delta)
+        super.render(context, mouseX, mouseY, delta)
         drawMouseoverTooltip(context, mouseX, mouseY)
     }
 }
