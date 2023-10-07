@@ -36,9 +36,12 @@ class SitOnBlockCriterion : AbstractCriterion<SitOnBlockCriterion.Conditions>() 
 
         override fun toJson(): JsonObject {
             val json = super.toJson()
-            json.add("block", BlockPredicate.CODEC.encodeStart(JsonOps.INSTANCE, block).getOrThrow(false) {
-                LOGGER.error("Could not encode block predicate {}: {}", block, it)
-            })
+            json.add(
+                "block",
+                BlockPredicate.CODEC.encodeStart(JsonOps.INSTANCE, block).getOrThrow(false) {
+                    LOGGER.error("Could not encode block predicate {}: {}", block, it)
+                }
+            )
             return json
         }
     }

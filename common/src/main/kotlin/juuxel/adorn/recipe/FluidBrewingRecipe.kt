@@ -1,8 +1,6 @@
 package juuxel.adorn.recipe
 
-import com.google.gson.JsonObject
 import com.mojang.serialization.Codec
-import com.mojang.serialization.JsonOps
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import juuxel.adorn.block.entity.BrewerBlockEntity.Companion.LEFT_INGREDIENT_SLOT
 import juuxel.adorn.block.entity.BrewerBlockEntity.Companion.RIGHT_INGREDIENT_SLOT
@@ -12,10 +10,7 @@ import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeCodecs
 import net.minecraft.recipe.RecipeSerializer
-import net.minecraft.recipe.ShapedRecipe
 import net.minecraft.registry.DynamicRegistryManager
-import net.minecraft.util.Identifier
-import net.minecraft.util.JsonHelper
 import net.minecraft.world.World
 
 class FluidBrewingRecipe(

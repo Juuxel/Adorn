@@ -16,9 +16,12 @@ class BoughtFromTradingStationCriterion : AbstractCriterion<BoughtFromTradingSta
         json: JsonObject,
         playerPredicate: Optional<LootContextPredicate>,
         predicateDeserializer: AdvancementEntityPredicateDeserializer
-    ): Conditions = Conditions(playerPredicate, ItemPredicate.fromJson(json["item"]).orElseThrow {
-        JsonParseException("Missing item in bought_from_trading_station criterion")
-    })
+    ): Conditions = Conditions(
+        playerPredicate,
+        ItemPredicate.fromJson(json["item"]).orElseThrow {
+            JsonParseException("Missing item in bought_from_trading_station criterion")
+        }
+    )
 
     fun trigger(player: ServerPlayerEntity, soldItem: ItemStack) {
         trigger(player) { it.matches(soldItem) }
