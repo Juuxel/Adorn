@@ -9,7 +9,6 @@ import juuxel.adorn.block.property.FrontConnection
 import juuxel.adorn.block.variant.BlockVariant
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.util.buildShapeRotations
-import juuxel.adorn.util.withBlock
 import net.minecraft.block.BedBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -58,7 +57,7 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
         val stack = player.getStackInHand(hand)
         val item = stack.item
         if (item is DyeItem) {
-            world.setBlockState(pos, state.withBlock(AdornBlocks.SOFAS[item.color]!!))
+            world.setBlockState(pos, AdornBlocks.SOFAS[item.color]!!.getStateWithProperties(state))
             world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.8f)
             if (!player.abilities.creativeMode) stack.decrement(1)
             if (!world.isClient) player.incrementStat(AdornStats.DYE_SOFA)

@@ -4,7 +4,6 @@ package juuxel.adorn.block
 
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.util.buildShapeRotationsFromNorth
-import juuxel.adorn.util.withBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
@@ -54,7 +53,7 @@ class TableLampBlock(settings: Settings) : Block(settings), Waterloggable, Block
         val stack = player.getStackInHand(hand)
         val item = stack.item
         if (item is DyeItem) {
-            world.setBlockState(pos, state.withBlock(AdornBlocks.TABLE_LAMPS[item.color]!!))
+            world.setBlockState(pos, AdornBlocks.TABLE_LAMPS[item.color]!!.getStateWithProperties(state))
             world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.8f)
             if (!player.abilities.creativeMode) stack.decrement(1)
             if (!world.isClient) player.incrementStat(AdornStats.DYE_TABLE_LAMP)

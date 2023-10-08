@@ -3,14 +3,12 @@ package juuxel.adorn.util
 import juuxel.adorn.lib.registry.Registered
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
-import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.menu.MenuContext
 import net.minecraft.registry.Registries
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.state.property.Property
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.math.BlockPos
@@ -21,12 +19,6 @@ private val LOGGER = logger()
 
 fun ItemStack.toTextWithCount(): MutableText =
     Text.translatable("text.adorn.item_stack_with_count", count, toHoverableText())
-
-fun BlockState.withBlock(block: Block): BlockState =
-    entries.entries.fold(block.defaultState) { acc, (key, value) ->
-        @Suppress("UNCHECKED_CAST") // Cast to Comparable<Any>
-        acc.with(key as Property<Comparable<Any>>, value as Comparable<Any>)
-    }
 
 /**
  * Gets the squared distance of this block entity to ([x], [y], [z]).
