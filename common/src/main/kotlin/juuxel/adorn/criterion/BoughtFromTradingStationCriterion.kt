@@ -1,7 +1,7 @@
 package juuxel.adorn.criterion
 
+import com.google.gson.JsonNull
 import com.google.gson.JsonObject
-import com.google.gson.JsonParseException
 import net.minecraft.advancement.criterion.AbstractCriterion
 import net.minecraft.advancement.criterion.AbstractCriterionConditions
 import net.minecraft.item.ItemStack
@@ -18,23 +18,21 @@ class BoughtFromTradingStationCriterion : AbstractCriterion<BoughtFromTradingSta
         predicateDeserializer: AdvancementEntityPredicateDeserializer
     ): Conditions = Conditions(
         playerPredicate,
-        ItemPredicate.fromJson(json["item"]).orElseThrow {
-            JsonParseException("Missing item in bought_from_trading_station criterion")
-        }
+        ItemPredicate.fromJson(json["item"]).orElse(null)
     )
 
     fun trigger(player: ServerPlayerEntity, soldItem: ItemStack) {
         trigger(player) { it.matches(soldItem) }
     }
 
-    class Conditions(playerPredicate: Optional<LootContextPredicate>, private val soldItem: ItemPredicate) :
+    class Conditions(playerPredicate: Optional<LootContextPredicate>, private val soldItem: ItemPredicate?) :
         AbstractCriterionConditions(playerPredicate) {
         fun matches(stack: ItemStack): Boolean =
-            soldItem.test(stack)
+            soldItem == null || soldItem.test(stack)
 
         override fun toJson(): JsonObject {
             val json = super.toJson()
-            json.add("sold_item", soldItem.toJson())
+            json.add("sold_item", soldItem?.toJson() ?: JsonNull.INSTANCE)
             return json
         }
     }
