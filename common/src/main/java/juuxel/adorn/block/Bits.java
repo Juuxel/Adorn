@@ -19,4 +19,15 @@ final class Bits {
     static byte buildBenchState(Direction.Axis axis, boolean connectedN, boolean connectedP) {
         return (byte) ((axis == Direction.Axis.X ? 1 : 0) << 2 | (connectedN ? 1 : 0) << 1 | (connectedP ? 1 : 0));
     }
+
+    static byte buildCopperPipeState(boolean north, boolean east, boolean south, boolean west, boolean up, boolean down) {
+        int northB = north ? 1 : 0;
+        int eastB = east ? 1 : 0;
+        int southB = south ? 1 : 0;
+        int westB = west ? 1 : 0;
+        int upB = up ? 1 : 0;
+        int downB = down ? 1 : 0;
+
+        return (byte) (northB << 5 | eastB << 4 | southB << 3 | westB << 2 | upB << 1 | downB);
+    }
 }

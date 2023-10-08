@@ -4,6 +4,7 @@ import juuxel.adorn.block.BenchBlock
 import juuxel.adorn.block.ChairBlock
 import juuxel.adorn.block.ChimneyBlock
 import juuxel.adorn.block.CoffeeTableBlock
+import juuxel.adorn.block.CopperPipeBlock
 import juuxel.adorn.block.PicketFenceBlock
 import juuxel.adorn.block.PlatformBlock
 import juuxel.adorn.block.PostBlock
@@ -51,6 +52,7 @@ object ToweletteCompat {
             block is ChairBlock ||
             block is ChimneyBlock ||
             block is CoffeeTableBlock ||
+            block is CopperPipeBlock ||
             block is PicketFenceBlock ||
             block is PlatformBlock ||
             block is PostBlock ||

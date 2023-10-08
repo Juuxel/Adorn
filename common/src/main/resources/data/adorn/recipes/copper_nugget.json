@@ -1,0 +1,10 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    { "tag": "c:copper_ingots" }
+  ],
+  "result": {
+    "item": "adorn:copper_nugget",
+    "count": 9
+  }
+}

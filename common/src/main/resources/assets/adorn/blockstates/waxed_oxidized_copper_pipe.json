@@ -1,0 +1,54 @@
+{
+  "multipart": [
+    {
+      "apply": { "model": "adorn:block/oxidized_copper_pipe_center" },
+      "when": {
+        "OR": [
+          { "north": false, "east": false, "south": false, "west": false, "up": false, "down": false },
+          { "north": true, "east": true },
+          { "north": true, "south": false },
+          { "north": true, "west": true },
+          { "north": true, "up": true },
+          { "north": true, "down": true },
+          { "east": true, "south": true },
+          { "east": true, "west": false },
+          { "east": true, "up": true },
+          { "east": true, "down": true },
+          { "south": true, "north": false },
+          { "south": true, "west": true },
+          { "south": true, "up": true },
+          { "south": true, "down": true },
+          { "west": true, "east": false },
+          { "west": true, "up": true },
+          { "west": true, "down": true },
+          { "up": true, "down": false },
+          { "down": true, "up": false }
+        ]
+      }
+    },
+    {
+      "apply": { "model": "adorn:block/oxidized_copper_pipe_side" },
+      "when": { "north": true }
+    },
+    {
+      "apply": { "model": "adorn:block/oxidized_copper_pipe_side", "y": 90 },
+      "when": { "east": true }
+    },
+    {
+      "apply": { "model": "adorn:block/oxidized_copper_pipe_side", "y": 180 },
+      "when": { "south": true }
+    },
+    {
+      "apply": { "model": "adorn:block/oxidized_copper_pipe_side", "y": 270 },
+      "when": { "west": true }
+    },
+    {
+      "apply": { "model": "adorn:block/oxidized_copper_pipe_side", "x": 270 },
+      "when": { "up": true }
+    },
+    {
+      "apply": { "model": "adorn:block/oxidized_copper_pipe_side", "x": 90 },
+      "when": { "down": true }
+    }
+  ]
+}

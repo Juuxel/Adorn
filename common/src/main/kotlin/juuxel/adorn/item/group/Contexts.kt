@@ -8,4 +8,8 @@ fun interface ItemGroupBuildContext {
 
 interface ItemGroupModifyContext : ItemGroupBuildContext {
     fun addAfter(after: ItemConvertible, items: List<ItemConvertible>)
+
+    fun addAfter(after: ItemConvertible, item: ItemConvertible) {
+        addAfter(after, listOf(item))
+    }
 }

@@ -55,6 +55,11 @@ object AdornItems {
         AdornBookItem(AdornCommon.id("traders_manual"), Item.Settings())
     }
 
+    val COPPER_NUGGET by ITEMS.register("copper_nugget") {
+        // TODO: Description?
+        Item(Item.Settings())
+    }
+
     fun init() {
     }
 }

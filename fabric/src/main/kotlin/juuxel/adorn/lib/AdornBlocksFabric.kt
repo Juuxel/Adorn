@@ -15,6 +15,7 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
+import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
@@ -43,6 +44,14 @@ object AdornBlocksFabric {
             { brewer, _ -> (brewer as BrewerBlockEntityFabric).fluidStorage },
             AdornBlockEntities.BREWER
         )
+
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(AdornBlocks.COPPER_PIPE, AdornBlocks.EXPOSED_COPPER_PIPE)
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(AdornBlocks.EXPOSED_COPPER_PIPE, AdornBlocks.WEATHERED_COPPER_PIPE)
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(AdornBlocks.WEATHERED_COPPER_PIPE, AdornBlocks.OXIDIZED_COPPER_PIPE)
+        OxidizableBlocksRegistry.registerWaxableBlockPair(AdornBlocks.COPPER_PIPE, AdornBlocks.WAXED_COPPER_PIPE)
+        OxidizableBlocksRegistry.registerWaxableBlockPair(AdornBlocks.EXPOSED_COPPER_PIPE, AdornBlocks.WAXED_EXPOSED_COPPER_PIPE)
+        OxidizableBlocksRegistry.registerWaxableBlockPair(AdornBlocks.WEATHERED_COPPER_PIPE, AdornBlocks.WAXED_WEATHERED_COPPER_PIPE)
+        OxidizableBlocksRegistry.registerWaxableBlockPair(AdornBlocks.OXIDIZED_COPPER_PIPE, AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE)
     }
 
     fun afterRegister() {

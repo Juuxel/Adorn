@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:block/block",
+  "elements": [
+    {
+      "from": [6, 6, 6],
+      "to": [10, 10, 10],
+      "faces": {
+        "north": { "texture": "#pipe" },
+        "east": { "texture": "#pipe" },
+        "south": { "texture": "#pipe" },
+        "west": { "texture": "#pipe" },
+        "up": { "texture": "#pipe" },
+        "down": { "texture": "#pipe" }
+      }
+    },
+    {
+      "from": [7, 7, 0],
+      "to": [9, 9, 6],
+      "faces": {
+        "north": { "texture": "#pipe", "uv": [7, 7, 9, 9] },
+        "east": { "texture": "#pipe", "uv": [7, 0, 9, 6], "rotation": 90 },
+        "west": { "texture": "#pipe", "uv": [7, 0, 9, 6], "rotation": 90 },
+        "up": { "texture": "#pipe", "uv": [7, 0, 9, 6] },
+        "down": { "texture": "#pipe", "uv": [7, 0, 9, 6] }
+      }
+    },
+    {
+      "from": [7, 7, 10],
+      "to": [9, 9, 16],
+      "faces": {
+        "south": { "texture": "#pipe", "uv": [7, 7, 9, 9] },
+        "east": { "texture": "#pipe", "uv": [7, 0, 9, 6], "rotation": 90 },
+        "west": { "texture": "#pipe", "uv": [7, 0, 9, 6], "rotation": 90 },
+        "up": { "texture": "#pipe", "uv": [7, 0, 9, 6] },
+        "down": { "texture": "#pipe", "uv": [7, 0, 9, 6] }
+      }
+    }
+  ]
+}

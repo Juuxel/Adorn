@@ -33,6 +33,8 @@ object AdornTags {
     val COFFEE_TABLES = blockAndItem("coffee_tables")
     val TABLE_LAMPS = blockAndItem("table_lamps")
     val CANDLELIT_LANTERNS = blockAndItem("candlelit_lanterns")
+    val COPPER_PIPES = blockAndItem("copper_pipes")
+    val COPPER_PIPES_CONNECT_TO = block(AdornCommon.id("copper_pipes_connect_to"))
 
     @JvmStatic
     fun init() {}

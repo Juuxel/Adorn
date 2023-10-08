@@ -63,6 +63,7 @@ object AdornItemGroups {
                     addColoredBlocks()
                     addChimneys()
                     addFences()
+                    addCopperPipes()
                     addCrates()
                     addMiscDecorations()
                     add(AdornBlocks.TRADING_STATION)
@@ -96,6 +97,15 @@ object AdornItemGroups {
                     addByKinds(variant, BUILDING_KINDS)
                 }
             }
+
+            addAfter(Items.CUT_COPPER_SLAB, AdornBlocks.COPPER_PIPE)
+            addAfter(Items.EXPOSED_CUT_COPPER_SLAB, AdornBlocks.EXPOSED_COPPER_PIPE)
+            addAfter(Items.WEATHERED_CUT_COPPER_SLAB, AdornBlocks.WEATHERED_COPPER_PIPE)
+            addAfter(Items.OXIDIZED_CUT_COPPER_SLAB, AdornBlocks.OXIDIZED_COPPER_PIPE)
+            addAfter(Items.WAXED_CUT_COPPER_SLAB, AdornBlocks.WAXED_COPPER_PIPE)
+            addAfter(Items.WAXED_EXPOSED_CUT_COPPER_SLAB, AdornBlocks.WAXED_EXPOSED_COPPER_PIPE)
+            addAfter(Items.WAXED_WEATHERED_CUT_COPPER_SLAB, AdornBlocks.WAXED_WEATHERED_COPPER_PIPE)
+            addAfter(Items.WAXED_OXIDIZED_CUT_COPPER_SLAB, AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE)
         }
         itemGroups.addItems(ItemGroups.COLORED_BLOCKS) {
             addColoredBlocks()
@@ -183,6 +193,17 @@ object AdornItemGroups {
         add(AdornBlocks.CHAIN_LINK_FENCE)
     }
 
+    private fun ItemGroupBuildContext.addCopperPipes() {
+        add(AdornBlocks.COPPER_PIPE)
+        add(AdornBlocks.EXPOSED_COPPER_PIPE)
+        add(AdornBlocks.WEATHERED_COPPER_PIPE)
+        add(AdornBlocks.OXIDIZED_COPPER_PIPE)
+        add(AdornBlocks.WAXED_COPPER_PIPE)
+        add(AdornBlocks.WAXED_EXPOSED_COPPER_PIPE)
+        add(AdornBlocks.WAXED_WEATHERED_COPPER_PIPE)
+        add(AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE)
+    }
+
     private fun ItemGroupBuildContext.addFoodAndDrink() {
         add(AdornItems.MUG)
         add(AdornItems.HOT_CHOCOLATE)
@@ -194,8 +215,10 @@ object AdornItemGroups {
     private fun ItemGroupBuildContext.addIngredients() {
         if (this is ItemGroupModifyContext) {
             addAfter(after = Items.STICK, listOf(AdornItems.STONE_ROD))
+            addAfter(after = Items.IRON_NUGGET, AdornItems.COPPER_NUGGET)
         } else {
             add(AdornItems.STONE_ROD)
+            add(AdornItems.COPPER_NUGGET)
         }
     }
 

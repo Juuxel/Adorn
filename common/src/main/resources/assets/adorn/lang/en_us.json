@@ -1340,6 +1340,15 @@
   "block.adorn.pink_candlelit_lantern": "Pink Candlelit Lantern",
   "block.adorn.candlelit_lantern.description": "Repels the dark",
 
+  "block.adorn.copper_pipe": "Copper Pipe",
+  "block.adorn.exposed_copper_pipe": "Exposed Copper Pipe",
+  "block.adorn.weathered_copper_pipe": "Weathered Copper Pipe",
+  "block.adorn.oxidized_copper_pipe": "Oxidized Copper Pipe",
+  "block.adorn.waxed_copper_pipe": "Waxed Copper Pipe",
+  "block.adorn.waxed_exposed_copper_pipe": "Waxed Exposed Copper Pipe",
+  "block.adorn.waxed_weathered_copper_pipe": "Waxed Weathered Copper Pipe",
+  "block.adorn.waxed_oxidized_copper_pipe": "Waxed Oxidized Copper Pipe",
+
   "entity.adorn.seat": "Seat",
 
   "item.adorn.stone_rod": "Stone Rod",
@@ -1354,6 +1363,7 @@
   "item.adorn.glow_berry_tea.description": "Bright beverage",
   "item.adorn.nether_wart_coffee": "Nether Wart Coffee",
   "item.adorn.nether_wart_coffee.description": "Blacker than a moonless night\u2026",
+  "item.adorn.copper_nugget": "Copper Nugget",
 
   "item.adorn.guide_book": "Decorating Your Home",
   "guide.adorn.topic.brewer.title": "Brewers",
@@ -1452,6 +1462,7 @@
   "tag.adorn.chairs": "Chairs",
   "tag.adorn.chimneys": "Chimneys",
   "tag.adorn.coffee_tables": "Coffee Tables",
+  "tag.adorn.copper_pipes": "Copper Pipes",
   "tag.adorn.crates": "Crates",
   "tag.adorn.drawers": "Drawers",
   "tag.adorn.dyed_candlelit_lanterns": "Dyed Candlelit Lanterns",
@@ -1478,6 +1489,7 @@
   "tag.adorn.wooden_steps": "Wooden Steps",
   "tag.c.cocoa_beans": "Cocoa Beans",
   "tag.c.coffees": "Coffees",
+  "tag.c.copper_nuggets": "Copper Nuggets",
   "tag.c.glow_berries": "Glow Berries",
   "tag.c.juices": "Juices",
   "tag.c.lanterns": "Lanterns",

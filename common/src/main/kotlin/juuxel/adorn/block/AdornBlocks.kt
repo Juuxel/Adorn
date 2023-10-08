@@ -12,6 +12,7 @@ import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.MapColor
+import net.minecraft.block.Oxidizable
 import net.minecraft.block.TorchBlock
 import net.minecraft.block.WallTorchBlock
 import net.minecraft.item.Item
@@ -128,6 +129,66 @@ object AdornBlocks : RegistryHelper() {
         registerBlock("${it.asString()}_candlelit_lantern") {
             CandlelitLanternBlock(CandlelitLanternBlock.createBlockSettings())
         }
+    }
+
+    val COPPER_PIPE: Block by registerBlock("copper_pipe") {
+        OxidizableCopperPipeBlock(
+            Oxidizable.OxidationLevel.UNAFFECTED,
+            AbstractBlock.Settings.create()
+                .requiresTool()
+                .strength(3f, 5f)
+                .sounds(BlockSoundGroup.COPPER)
+                .mapColor(MapColor.ORANGE)
+        )
+    }
+
+    val EXPOSED_COPPER_PIPE: Block by registerBlock("exposed_copper_pipe") {
+        OxidizableCopperPipeBlock(
+            Oxidizable.OxidationLevel.EXPOSED,
+            AbstractBlock.Settings.create()
+                .requiresTool()
+                .strength(3f, 5f)
+                .sounds(BlockSoundGroup.COPPER)
+                .mapColor(MapColor.TERRACOTTA_LIGHT_GRAY)
+        )
+    }
+
+    val WEATHERED_COPPER_PIPE: Block by registerBlock("weathered_copper_pipe") {
+        OxidizableCopperPipeBlock(
+            Oxidizable.OxidationLevel.WEATHERED,
+            AbstractBlock.Settings.create()
+                .requiresTool()
+                .strength(3f, 5f)
+                .sounds(BlockSoundGroup.COPPER)
+                .mapColor(MapColor.DARK_AQUA)
+        )
+    }
+
+    val OXIDIZED_COPPER_PIPE: Block by registerBlock("oxidized_copper_pipe") {
+        OxidizableCopperPipeBlock(
+            Oxidizable.OxidationLevel.OXIDIZED,
+            AbstractBlock.Settings.create()
+                .requiresTool()
+                .strength(3f, 5f)
+                .sounds(BlockSoundGroup.COPPER)
+                .mapColor(MapColor.TEAL)
+        )
+    }
+
+    val WAXED_COPPER_PIPE: Block by registerBlock("waxed_copper_pipe") {
+        CopperPipeBlock(AbstractBlock.Settings.copy(COPPER_PIPE))
+    }
+
+    val WAXED_EXPOSED_COPPER_PIPE: Block by registerBlock("waxed_exposed_copper_pipe") {
+        CopperPipeBlock(AbstractBlock.Settings.copy(EXPOSED_COPPER_PIPE))
+    }
+
+    val WAXED_WEATHERED_COPPER_PIPE: Block by registerBlock("waxed_weathered_copper_pipe") {
+        CopperPipeBlock(AbstractBlock.Settings.copy(WEATHERED_COPPER_PIPE))
+    }
+
+    val WAXED_OXIDIZED_COPPER_PIPE: Block by registerBlock("waxed_oxidized_copper_pipe") {
+        CopperPipeBlock(AbstractBlock.Settings.copy(OXIDIZED_COPPER_PIPE))
     }
 
     fun init() {
