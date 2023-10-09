@@ -50,7 +50,7 @@ open class CopperPipeBlock(settings: Settings) : Block(settings), Waterloggable 
         pos: BlockPos,
         neighborPos: BlockPos
     ): BlockState {
-        if (state[AbstractTableBlock.WATERLOGGED]) {
+        if (state[WATERLOGGED]) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
