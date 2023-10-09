@@ -99,6 +99,9 @@ open class CopperPipeBlock(settings: Settings) : Block(settings), Waterloggable 
             val pipes = buildShapeRotationsFromNorth(7, 7, 0, 9, 9, 8)
             pipes[Direction.UP] = createCuboidShape(7.0, 8.0, 7.0, 9.0, 16.0, 9.0)
             pipes[Direction.DOWN] = createCuboidShape(7.0, 0.0, 7.0, 9.0, 8.0, 9.0)
+            val ringX = createCuboidShape(7.0, 6.0, 6.0, 9.0, 10.0, 10.0)
+            val ringY = createCuboidShape(6.0, 7.0, 6.0, 10.0, 9.0, 10.0)
+            val ringZ = createCuboidShape(6.0, 6.0, 7.0, 10.0, 10.0, 9.0)
 
             val booleans = arrayOf(true, false)
             for (north in booleans) {
@@ -130,8 +133,12 @@ open class CopperPipeBlock(settings: Settings) : Block(settings), Waterloggable 
 
                                     var shape = if (hasCenter) {
                                         center
-                                    } else {
-                                        VoxelShapes.empty()
+                                    } else if (east) { // Straight pipe along X axis
+                                        ringX
+                                    } else if (up) { // Straight pipe along Y axis
+                                        ringY
+                                    } else { // Straight pipe along Z axis
+                                        ringZ
                                     }
 
                                     if (north) shape = VoxelShapes.union(shape, pipes[Direction.NORTH])

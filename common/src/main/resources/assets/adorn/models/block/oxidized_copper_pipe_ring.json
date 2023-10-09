@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/copper_pipe_ring",
+  "textures": {
+    "pipe": "adorn:block/oxidized_copper_pipe"
+  }
+}
