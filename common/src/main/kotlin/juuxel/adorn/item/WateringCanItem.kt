@@ -141,8 +141,8 @@ class WateringCanItem(settings: Settings) : ItemWithDescription(settings) {
         }
     }
 
-    override fun isItemBarVisible(stack: ItemStack): Boolean
-        = true
+    override fun isItemBarVisible(stack: ItemStack): Boolean =
+        true
 
     override fun getItemBarStep(stack: ItemStack): Int {
         if (stack.hasNbt()) {
