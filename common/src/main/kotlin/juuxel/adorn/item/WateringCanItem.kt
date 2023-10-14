@@ -5,6 +5,7 @@ import juuxel.adorn.fluid.StepMaximum
 import juuxel.adorn.platform.FluidBridge
 import juuxel.adorn.util.color
 import net.minecraft.block.Block
+import net.minecraft.block.BlockState
 import net.minecraft.block.FarmlandBlock
 import net.minecraft.block.Fertilizable
 import net.minecraft.block.FluidDrainable
@@ -101,11 +102,10 @@ class WateringCanItem(settings: Settings) : ItemWithDescription(settings) {
     private fun water(world: World, pos: BlockPos, player: PlayerEntity, stack: ItemStack) {
         val nbt = stack.getOrCreateNbt()
         val fertilizerLevel = nbt.getInt(NBT_FERTILIZER_LEVEL)
+        val state = world.getBlockState(pos)
+        val block = state.block
 
         if (fertilizerLevel > 0 && world.random.nextInt(9) == 0) {
-            val state = world.getBlockState(pos)
-            val block = state.block
-
             if (block is Fertilizable && block.isFertilizable(world, pos, state)) {
                 if (world is ServerWorld && block.canGrow(world, world.random, pos, state)) {
                     block.grow(world, world.random, pos, state)
@@ -118,18 +118,26 @@ class WateringCanItem(settings: Settings) : ItemWithDescription(settings) {
         }
 
         if (!world.isClient) {
-            val downPos = pos.down()
-            val downState = world.getBlockState(downPos)
+            if (block is FarmlandBlock) {
+                waterFarmlandBlock(world, pos, state)
+            } else if (!state.isFullCube(world, pos)) { // We can't water through full cubes
+                val downPos = pos.down()
+                val downState = world.getBlockState(downPos)
 
-            if (downState.block is FarmlandBlock) {
-                val moisture = downState.get(FarmlandBlock.MOISTURE)
-
-                if (moisture < FarmlandBlock.MAX_MOISTURE) {
-                    val moistureChange = world.random.nextBetween(2, 6)
-                    val newMoisture = min(moisture + moistureChange, FarmlandBlock.MAX_MOISTURE)
-                    world.setBlockState(downPos, downState.with(FarmlandBlock.MOISTURE, newMoisture), Block.NOTIFY_LISTENERS)
+                if (downState.block is FarmlandBlock) {
+                    waterFarmlandBlock(world, downPos, downState)
                 }
             }
+        }
+    }
+
+    private fun waterFarmlandBlock(world: World, pos: BlockPos, state: BlockState) {
+        val moisture = state.get(FarmlandBlock.MOISTURE)
+
+        if (moisture < FarmlandBlock.MAX_MOISTURE) {
+            val moistureChange = world.random.nextBetween(2, 6)
+            val newMoisture = min(moisture + moistureChange, FarmlandBlock.MAX_MOISTURE)
+            world.setBlockState(pos, state.with(FarmlandBlock.MOISTURE, newMoisture), Block.NOTIFY_LISTENERS)
         }
     }
 
