@@ -223,6 +223,7 @@ object AdornItemGroups {
     }
 
     private fun ItemGroupBuildContext.addTools() {
+        add(AdornItems.WATERING_CAN)
         add(AdornItems.GUIDE_BOOK)
         add(AdornItems.TRADERS_MANUAL)
     }

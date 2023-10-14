@@ -60,6 +60,8 @@ object AdornItems {
         Item(Item.Settings())
     }
 
+    val WATERING_CAN by ITEMS.register("watering_can") { WateringCanItem(Item.Settings()) }
+
     fun init() {
     }
 }
