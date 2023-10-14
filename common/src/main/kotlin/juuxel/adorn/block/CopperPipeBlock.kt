@@ -26,8 +26,6 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
 // TODO: Description
-// TODO: Waxing recipes
-// TODO: Recipe advancements
 open class CopperPipeBlock(settings: Settings) : Block(settings), Waterloggable {
     override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape =
         SHAPES.get(Bits.buildCopperPipeState(state[NORTH], state[EAST], state[SOUTH], state[WEST], state[UP], state[DOWN]))

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "waxed_copper_pipes",
+  "ingredients": [
+    {
+      "item": "adorn:copper_pipe"
+    },
+    {
+      "tag": "c:honeycombs"
+    }
+  ],
+  "result": {
+    "item": "adorn:waxed_copper_pipe"
+  }
+}

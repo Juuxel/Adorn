@@ -1491,6 +1491,7 @@
   "tag.c.coffees": "Coffees",
   "tag.c.copper_nuggets": "Copper Nuggets",
   "tag.c.glow_berries": "Glow Berries",
+  "tag.c.honeycombs": "Honeycombs",
   "tag.c.juices": "Juices",
   "tag.c.lanterns": "Lanterns",
   "tag.c.milks": "Milks",
@@ -1504,6 +1505,7 @@
   "tag.item.forge.berries": "Berries",
   "tag.item.forge.berries.glow": "Glow Berries",
   "tag.item.forge.berries.sweet": "Sweet Berries",
+  "tag.item.forge.honeycombs": "Honeycombs",
   "tag.item.forge.juices.sweet_berry": "Sweet Berry Juices",
   "tag.item.forge.rods.stone": "Stone Rods",
 
