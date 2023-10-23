@@ -5,7 +5,6 @@ import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.TagKey
-import net.minecraft.util.Identifier
 
 object AdornTags {
     val CHAIRS = blockAndItem("chairs")
@@ -34,21 +33,20 @@ object AdornTags {
     val TABLE_LAMPS = blockAndItem("table_lamps")
     val CANDLELIT_LANTERNS = blockAndItem("candlelit_lanterns")
     val COPPER_PIPES = blockAndItem("copper_pipes")
-    val COPPER_PIPES_CONNECT_TO = block(AdornCommon.id("copper_pipes_connect_to"))
+    val COPPER_PIPES_CONNECT_TO = block("copper_pipes_connect_to")
+    val WATERING_CAN_FERTILIZERS = item("watering_can_fertilizers")
 
     @JvmStatic
     fun init() {}
 
-    private fun block(id: Identifier): TagKey<Block> =
-        TagKey.of(RegistryKeys.BLOCK, id)
+    private fun block(path: String): TagKey<Block> =
+        TagKey.of(RegistryKeys.BLOCK, AdornCommon.id(path))
 
-    private fun item(id: Identifier): TagKey<Item> =
-        TagKey.of(RegistryKeys.ITEM, id)
+    private fun item(path: String): TagKey<Item> =
+        TagKey.of(RegistryKeys.ITEM, AdornCommon.id(path))
 
-    private fun blockAndItem(path: String): TagPair {
-        val id = AdornCommon.id(path)
-        return TagPair(block(id), item(id))
-    }
+    private fun blockAndItem(path: String): TagPair =
+        TagPair(block(path), item(path))
 
     data class TagPair(val block: TagKey<Block>, val item: TagKey<Item>)
 }

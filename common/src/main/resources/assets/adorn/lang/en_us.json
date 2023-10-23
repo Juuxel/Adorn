@@ -1366,6 +1366,7 @@
   "item.adorn.copper_nugget": "Copper Nugget",
   "item.adorn.watering_can": "Watering Can",
   "item.adorn.watering_can.description": "Portable hydration",
+  "item.adorn.watering_can.fertilizer": "Fertilizer: %s/%s",
 
   "item.adorn.guide_book": "Decorating Your Home",
   "guide.adorn.topic.brewer.title": "Brewers",

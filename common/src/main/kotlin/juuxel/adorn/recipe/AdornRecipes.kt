@@ -6,6 +6,7 @@ import juuxel.adorn.lib.registry.RegistrarFactory
 import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.RecipeType
+import net.minecraft.recipe.SpecialRecipeSerializer
 import net.minecraft.registry.RegistryKeys
 
 object AdornRecipes {
@@ -16,6 +17,11 @@ object AdornRecipes {
     val BREWING_SERIALIZER: RecipeSerializer<ItemBrewingRecipe> by RECIPE_SERIALIZERS.register("brewing") { ItemBrewingRecipe.Serializer() }
     val BREWING_FROM_FLUID_SERIALIZER: RecipeSerializer<FluidBrewingRecipe> by RECIPE_SERIALIZERS.register("brewing_from_fluid") {
         FluidBrewingRecipe.Serializer()
+    }
+
+    val FERTILIZER_REFILLING_TYPE: RecipeType<FertilizerRefillingRecipe> by registerRecipeType("fertilizer_refilling")
+    val FERTILIZER_REFILLING_SERIALIZER: RecipeSerializer<FertilizerRefillingRecipe> by RECIPE_SERIALIZERS.register("fertilizer_refilling") {
+        SpecialRecipeSerializer(::FertilizerRefillingRecipe)
     }
 
     fun init() {

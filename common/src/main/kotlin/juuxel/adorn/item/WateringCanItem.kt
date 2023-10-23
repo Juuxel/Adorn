@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.FarmlandBlock
 import net.minecraft.block.Fertilizable
 import net.minecraft.block.FluidDrainable
+import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemStack
@@ -16,6 +17,8 @@ import net.minecraft.item.Items
 import net.minecraft.nbt.NbtElement
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.text.Text
+import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.util.hit.HitResult
@@ -28,9 +31,6 @@ import net.minecraft.world.event.GameEvent
 import kotlin.math.min
 
 // TODO: Recipes, recipe advancements
-// TODO: Fertilizer tooltip, description
-// TODO: Texture
-// TODO: Translation
 class WateringCanItem(settings: Settings) : ItemWithDescription(settings) {
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = user.getStackInHand(hand)
@@ -169,9 +169,16 @@ class WateringCanItem(settings: Settings) : ItemWithDescription(settings) {
         return color(red = rg, green = rg, blue = 1f)
     }
 
+    override fun appendTooltip(stack: ItemStack, world: World?, texts: MutableList<Text>, context: TooltipContext) {
+        val currentLevel = Text.literal(stack.nbt?.getInt(NBT_FERTILIZER_LEVEL)?.toString() ?: "0").formatted(Formatting.DARK_AQUA)
+        val maxLevel = Text.literal(MAX_FERTILIZER_LEVEL.toString()).formatted(Formatting.DARK_AQUA)
+        texts += Text.translatable("item.adorn.watering_can.fertilizer", currentLevel, maxLevel).formatted(Formatting.GRAY)
+        super.appendTooltip(stack, world, texts, context)
+    }
+
     companion object {
         private const val NBT_WATER_LEVEL = "WaterLevel"
-        private const val NBT_FERTILIZER_LEVEL = "FertilizerLevel"
+        const val NBT_FERTILIZER_LEVEL = "FertilizerLevel"
         private const val ITEM_BAR_STEPS = 13
         private const val MAX_WATER_LEVEL = 50
         const val MAX_FERTILIZER_LEVEL = 32
