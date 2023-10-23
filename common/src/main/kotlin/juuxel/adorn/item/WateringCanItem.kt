@@ -84,6 +84,7 @@ class WateringCanItem(settings: Settings) : ItemWithDescription(settings) {
             nbt.putInt(NBT_WATER_LEVEL, waterLevel)
             world.emitGameEvent(user, GameEvent.ITEM_INTERACT_FINISH, pos)
             world.playSound(user, pos, AdornSounds.ITEM_WATERING_CAN_WATER, SoundCategory.PLAYERS)
+            user.itemCooldownManager.set(this, 10)
 
             val mut = BlockPos.Mutable()
             for (xo in -1..1) {
