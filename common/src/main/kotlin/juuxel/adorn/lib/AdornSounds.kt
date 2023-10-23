@@ -17,6 +17,7 @@ object AdornSounds {
     val BLOCK_CHAIN_LINK_FENCE_PLACE = register("block.adorn.chain_link_fence.place")
     val BLOCK_CHAIN_LINK_FENCE_HIT = register("block.adorn.chain_link_fence.hit")
     val BLOCK_CHAIN_LINK_FENCE_FALL = register("block.adorn.chain_link_fence.fall")
+    val ITEM_WATERING_CAN_WATER: SoundEvent by register("item.adorn.watering_can.water")
 
     val CHAIN_LINK_FENCE: BlockSoundGroup = LazyBlockSoundGroup(
         1.0F,

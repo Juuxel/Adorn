@@ -39,5 +39,14 @@
       { "name": "adorn:block.chain_link_fence.step", "volume": 0.7, "pitch": 0.8 },
       { "name": "adorn:block.chain_link_fence.step", "volume": 0.7, "pitch": 0.9 }
     ]
+  },
+  "item.adorn.watering_can.water": {
+    "subtitle": "subtitles.item.adorn.watering_can.water",
+    "sounds": [
+      { "name": "minecraft:liquid/swim1", "volume": 0.8 },
+      { "name": "minecraft:liquid/swim2", "volume": 0.8 },
+      { "name": "minecraft:liquid/swim3", "volume": 0.8 },
+      { "name": "minecraft:liquid/swim4", "volume": 0.8 }
+    ]
   }
 }

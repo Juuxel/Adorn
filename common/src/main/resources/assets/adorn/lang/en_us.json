@@ -1456,6 +1456,8 @@
   "stat.adorn.sit_on_chair": "Times Sat on a Chair",
   "stat.adorn.sit_on_sofa": "Times Sat on a Sofa",
 
+  "subtitles.item.adorn.watering_can.water": "Watering Can splashes",
+
   "itemGroup.adorn.items": "Adorn",
 
   "text.adorn.item_stack_with_count": "%sx %s",

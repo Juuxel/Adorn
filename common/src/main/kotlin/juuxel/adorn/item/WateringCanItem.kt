@@ -2,6 +2,7 @@ package juuxel.adorn.item
 
 import juuxel.adorn.fluid.FluidUnit
 import juuxel.adorn.fluid.StepMaximum
+import juuxel.adorn.lib.AdornSounds
 import juuxel.adorn.platform.FluidBridge
 import juuxel.adorn.util.color
 import net.minecraft.block.Block
@@ -17,6 +18,8 @@ import net.minecraft.item.Items
 import net.minecraft.nbt.NbtElement
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
@@ -53,6 +56,7 @@ class WateringCanItem(settings: Settings) : ItemWithDescription(settings) {
             // Note: we have a water check because we can't revert changes for non-water fluid sources
             if (block is FluidDrainable && world.getFluidState(pos).isOf(Fluids.WATER)) {
                 val drained = block.tryDrainFluid(user, world, pos, state)
+                block.bucketFillSound.ifPresent { user.playSound(it, 1f, 1f) }
 
                 if (drained.isOf(Items.WATER_BUCKET)) {
                     waterLevel = min(waterLevel + WATER_LEVELS_PER_BUCKET, MAX_WATER_LEVEL)
@@ -68,6 +72,7 @@ class WateringCanItem(settings: Settings) : ItemWithDescription(settings) {
                     waterLevel = min(waterLevel + levels, MAX_WATER_LEVEL)
                     nbt.putInt(NBT_WATER_LEVEL, waterLevel)
                     success = true
+                    user.playSound(SoundEvents.ITEM_BUCKET_FILL, 1f, 1f)
                 }
             }
         }
@@ -78,6 +83,7 @@ class WateringCanItem(settings: Settings) : ItemWithDescription(settings) {
             waterLevel--
             nbt.putInt(NBT_WATER_LEVEL, waterLevel)
             world.emitGameEvent(user, GameEvent.ITEM_INTERACT_FINISH, pos)
+            world.playSound(user, pos, AdornSounds.ITEM_WATERING_CAN_WATER, SoundCategory.PLAYERS)
 
             val mut = BlockPos.Mutable()
             for (xo in -1..1) {
