@@ -10,7 +10,6 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 
 class TableBlock(variant: BlockVariant) : AbstractTableBlock(variant.createSettings()), BlockWithDescription {
-    override val sittingYOffset = 0.6
     override val sittingStat: Identifier? = null
     override val descriptionKey = "block.adorn.table.description"
 
