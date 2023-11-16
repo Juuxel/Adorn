@@ -33,7 +33,6 @@ import net.minecraft.world.WorldEvents
 import net.minecraft.world.event.GameEvent
 import kotlin.math.min
 
-// TODO: Recipes, recipe advancements
 class WateringCanItem(settings: Settings) : ItemWithDescription(settings) {
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         val stack = user.getStackInHand(hand)
