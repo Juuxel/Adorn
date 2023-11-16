@@ -173,6 +173,9 @@ open class SofaBlock(variant: BlockVariant) : SeatBlock(variant.createSettings()
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
+    override fun getSittingOffset(world: World, state: BlockState, pos: BlockPos): Double
+        = 0.4375 // 7/16
+
     companion object {
         val FACING = Properties.HORIZONTAL_FACING
         val CONNECTED_LEFT = BooleanProperty.of("connected_left")

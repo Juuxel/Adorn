@@ -150,6 +150,9 @@ class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType) = false
 
+    override fun getSittingOffset(world: World, state: BlockState, pos: BlockPos): Double =
+        0.625 // 10/16
+
     companion object {
         val FACING = Properties.HORIZONTAL_FACING
         val HALF = Properties.DOUBLE_BLOCK_HALF

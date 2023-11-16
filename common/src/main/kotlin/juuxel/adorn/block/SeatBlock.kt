@@ -19,6 +19,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
+import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
 abstract class SeatBlock(settings: Settings) : Block(settings) {
@@ -30,7 +31,6 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
         }
     }
 
-    open val sittingYOffset: Double = 0.0
     abstract val sittingStat: Identifier?
 
     override fun onUse(
@@ -51,7 +51,7 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
         return if (!occupied) {
             if (world is ServerWorld) {
                 val entity = AdornEntities.SEAT.create(world)
-                entity?.setPos(actualPos, sittingYOffset)
+                entity?.setPos(actualPos)
                 world.spawnEntity(entity)
                 world.setBlockState(actualPos, actualState.with(OCCUPIED, true))
                 player.startRiding(entity, true)
@@ -93,6 +93,10 @@ abstract class SeatBlock(settings: Settings) : Block(settings) {
     }
 
     protected open fun isSittingEnabled() = true
+
+    open fun getSittingOffset(world: World, state: BlockState, pos: BlockPos): Double {
+        return state.getCollisionShape(world, pos).getMax(Direction.Axis.Y)
+    }
 
     companion object {
         @JvmField val OCCUPIED: BooleanProperty = Properties.OCCUPIED
