@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    " I ",
+    "IBI",
+    " II"
+  ],
+  "key": {
+    "I": {
+      "tag": "c:copper_ingots"
+    },
+    "B": {
+      "tag": "c:empty_buckets"
+    }
+  },
+  "result": {
+    "item": "adorn:watering_can"
+  }
+}
