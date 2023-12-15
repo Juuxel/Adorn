@@ -23,12 +23,6 @@ emiDataGenerator {
 repositories {
     // Set up NeoForge's Maven repository.
     maven("https://maven.neoforged.net/releases/")
-
-    // Set up Kotlin for Forge's Maven repository.
-    maven {
-        name = "kotlinforforge"
-        url = uri("https://thedarkcolour.github.io/KotlinForForge/")
-    }
 }
 
 dependencies {
