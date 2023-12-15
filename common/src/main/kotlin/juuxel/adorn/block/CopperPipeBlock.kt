@@ -25,8 +25,9 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
-// TODO: Description
-open class CopperPipeBlock(settings: Settings) : Block(settings), Waterloggable {
+open class CopperPipeBlock(settings: Settings) : Block(settings), Waterloggable, BlockWithDescription {
+    override val descriptionKey = "block.adorn.copper_pipe.description"
+
     override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape =
         SHAPES.get(Bits.buildCopperPipeState(state[NORTH], state[EAST], state[SOUTH], state[WEST], state[UP], state[DOWN]))
 

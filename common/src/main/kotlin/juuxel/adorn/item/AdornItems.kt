@@ -55,11 +55,7 @@ object AdornItems {
         AdornBookItem(AdornCommon.id("traders_manual"), Item.Settings())
     }
 
-    val COPPER_NUGGET by ITEMS.register("copper_nugget") {
-        // TODO: Description?
-        Item(Item.Settings())
-    }
-
+    val COPPER_NUGGET by ITEMS.register("copper_nugget") { ItemWithDescription(Item.Settings()) }
     val WATERING_CAN by ITEMS.register("watering_can") { WateringCanItem(Item.Settings()) }
 
     fun init() {

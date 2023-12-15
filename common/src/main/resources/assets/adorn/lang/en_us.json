@@ -1341,6 +1341,7 @@
   "block.adorn.candlelit_lantern.description": "Repels the dark",
 
   "block.adorn.copper_pipe": "Copper Pipe",
+  "block.adorn.copper_pipe.description": "Exquisite plumbing",
   "block.adorn.exposed_copper_pipe": "Exposed Copper Pipe",
   "block.adorn.weathered_copper_pipe": "Weathered Copper Pipe",
   "block.adorn.oxidized_copper_pipe": "Oxidized Copper Pipe",
@@ -1364,6 +1365,7 @@
   "item.adorn.nether_wart_coffee": "Nether Wart Coffee",
   "item.adorn.nether_wart_coffee.description": "Blacker than a moonless night\u2026",
   "item.adorn.copper_nugget": "Copper Nugget",
+  "item.adorn.copper_nugget.description": "Crafting ingredient",
   "item.adorn.watering_can": "Watering Can",
   "item.adorn.watering_can.description": "Portable hydration",
   "item.adorn.watering_can.fertilizer": "Fertilizer: %s/%s",
