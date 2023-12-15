@@ -31,7 +31,7 @@ abstract class GenerateEmi : DefaultTask() {
         val preferredRecipes = preferredRecipes.get()
         for (recipeFile in recipes) {
             val json = JsonSlurper().parse(recipeFile) as Map<String, *>
-            val result = getResult(json)
+            val result = getResult(json) ?: continue
             val path = recipeFile.absolutePath.replace(File.separator, "/")
             val recipeId = "adorn:" + path.substringAfterLast("/data/adorn/recipes/").removeSuffix(".json")
             val recipeData = RecipeData(id = recipeId, type = fixType(json["type"].toString()))
@@ -73,7 +73,7 @@ abstract class GenerateEmi : DefaultTask() {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun getResult(recipeJson: Map<String, *>): String =
+    private fun getResult(recipeJson: Map<String, *>): String? =
         when (val type = fixType(recipeJson["type"].toString())) {
             "minecraft:crafting_shaped", "minecraft:crafting_shapeless",
             "adorn:brewing", "adorn:brewing_from_fluid" ->
@@ -81,6 +81,8 @@ abstract class GenerateEmi : DefaultTask() {
 
             "minecraft:stonecutting" ->
                 recipeJson["result"].toString()
+
+            "adorn:fertilizer_refilling" -> null
 
             else -> throw IllegalArgumentException("Unknown recipe type: $type")
         }
