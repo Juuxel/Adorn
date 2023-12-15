@@ -15,8 +15,6 @@ architectury {
 // We need to copy the file from common resources to fabric resource
 // for Fabric Loader to find it and not crash.
 
-// The generated resources directory for the AW.
-val generatedResources = file("src/generated/resources")
 // The path to the AW file in the common subproject.
 val accessWidenerFile = project(":common").file("src/main/resources/adorn.accesswidener")
 
@@ -27,18 +25,7 @@ loom {
 }
 
 emiDataGenerator {
-    setupForPlatform(generatedResources)
-}
-
-sourceSets {
-    main {
-        resources {
-            // Mark the AW generated resource directory as
-            // a source directory for the resources of
-            // the "main" source set.
-            srcDir(generatedResources)
-        }
-    }
+    setupForPlatform()
 }
 
 // Set up various Maven repositories for mod compat.
@@ -99,20 +86,11 @@ dependencies {
 }
 
 tasks {
-    // The AW file is needed in :fabric project resources when the game is run.
-    // This task simply copies it.
-    val copyAccessWidener by registering(Copy::class) {
-        from(accessWidenerFile)
-        into(generatedResources)
-    }
-
     shadowJar {
         relocate("blue.endless.jankson", "juuxel.adorn.relocated.jankson")
     }
 
     processResources {
-        // Hook the AW copying to processResources.
-        dependsOn(copyAccessWidener)
         // Mark that this task depends on the project version,
         // and should reset when the project version changes.
         inputs.property("version", project.version)
