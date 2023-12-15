@@ -6,8 +6,8 @@ import juuxel.adorn.compat.rei.AdornReiServer
 import juuxel.adorn.compat.rei.client.AdornReiClient
 import me.shedaniel.rei.forge.REIPluginClient
 import me.shedaniel.rei.forge.REIPluginCommon
-import net.minecraftforge.api.distmarker.Dist
-import net.minecraftforge.api.distmarker.OnlyIn
+import net.neoforged.api.distmarker.Dist
+import net.neoforged.api.distmarker.OnlyIn
 
 @OnlyIn(Dist.CLIENT)
 @REIPluginClient

@@ -7,26 +7,13 @@ plugins {
 architectury {
     // Create the IDE launch configurations for this subproject.
     platformSetupLoomIde()
-    // Set up Architectury for Forge.
-    forge()
+    // Set up Architectury for NeoForge.
+    neoForge()
 }
 
 loom {
     // Make the Forge project use the common access widener.
     accessWidenerPath.set(project(":common").file("src/main/resources/adorn.accesswidener"))
-
-    forge {
-        // Enable Loom's AW -> AT conversion for Forge.
-        // This will make remapJar convert the common AW to a Forge access transformer.
-        convertAccessWideners.set(true)
-        // Add an "extra" converted access widener which comes from outside the project.
-        // The path is relative to the mod jar's root.
-        extraAccessWideners.add("adorn.accesswidener")
-
-        // Add mixin configs. Forge needs these explicitly declared
-        // via Gradle; in Fabric, they're in fabric.mod.json.
-        mixinConfigs("mixins.adorn.common.json", "mixins.adorn.forge.json")
-    }
 }
 
 emiDataGenerator {
@@ -34,6 +21,9 @@ emiDataGenerator {
 }
 
 repositories {
+    // Set up NeoForge's Maven repository.
+    maven("https://maven.neoforged.net/releases/")
+
     // Set up Kotlin for Forge's Maven repository.
     maven {
         name = "kotlinforforge"
@@ -42,12 +32,12 @@ repositories {
 }
 
 dependencies {
-    // Add dependency on Forge. This is mainly used for generating the patched Minecraft jar with Forge classes.
-    forge("net.minecraftforge:forge:${rootProject.property("minecraft-version")}-${rootProject.property("forge-version")}")
+    // Add dependency on NeoForge. This is mainly used for generating the patched Minecraft jar with NeoForge classes.
+    neoForge("net.neoforged:neoforge:${rootProject.property("neoforge-version")}")
 
-    // Add Kotlin for Forge.
-    // Based on their own instructions: https://github.com/thedarkcolour/KotlinForForge/blob/70385f5/thedarkcolour/kotlinforforge/gradle/kff-3.0.0.gradle
-    implementation("thedarkcolour:kotlinforforge:${rootProject.property("kotlin-for-forge")}")
+    // Add Kotlin.
+    implementation(kotlin("stdlib"))
+    forgeRuntimeLibrary(kotlin("stdlib", version = kotlin.coreLibrariesVersion))
 
     // Depend on the common project. The "namedElements" configuration contains the non-remapped
     // classes and resources of the project.
@@ -71,16 +61,22 @@ dependencies {
     // Add regular mod dependency on REI - API for compile time and the mod itself for runtime.
     // modLocalRuntime won't be exposed if other mods depend on your mod unlike modRuntimeOnly.
     // TODO: Revert back to API jar after it's fixed: https://github.com/shedaniel/RoughlyEnoughItems/issues/1194
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.property("rei")}")
-    modLocalRuntime("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.property("rei")}")
-    modLocalRuntime("dev.architectury:architectury-forge:${rootProject.property("architectury-api")}")
-    modLocalRuntime(libs.emi.forge)
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-neoforge:${rootProject.property("rei")}")
+    //modLocalRuntime("me.shedaniel:RoughlyEnoughItems-neoforge:${rootProject.property("rei")}")
+    //modLocalRuntime("dev.architectury:architectury-neoforge:${rootProject.property("architectury-api")}")
+    //modLocalRuntime(libs.emi.forge)
     //modLocalRuntime(libs.jei.forge)
 }
 
 tasks {
     shadowJar {
+        // TODO: Bundle and relocate Kotlin
         relocate("blue.endless.jankson", "juuxel.adorn.relocated.jankson")
+    }
+
+    remapJar {
+        // Convert the access widener to a NeoForge access transformer.
+        atAccessWideners.add("adorn.accesswidener")
     }
 
     processResources {

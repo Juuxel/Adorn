@@ -9,14 +9,14 @@ import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.texture.Sprite
 import net.minecraft.client.texture.SpriteAtlasTexture
 import net.minecraft.fluid.Fluid
+import net.minecraft.registry.Registries
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.BlockRenderView
-import net.minecraftforge.api.distmarker.Dist
-import net.minecraftforge.api.distmarker.OnlyIn
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions
-import net.minecraftforge.registries.ForgeRegistries
+import net.neoforged.api.distmarker.Dist
+import net.neoforged.api.distmarker.OnlyIn
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions
 
 object FluidRenderingBridgeForge : FluidRenderingBridge {
     @OnlyIn(Dist.CLIENT)
@@ -57,7 +57,7 @@ object FluidRenderingBridgeForge : FluidRenderingBridge {
 
         // Append ID if advanced
         if (context.isAdvanced) {
-            add(Text.literal(ForgeRegistries.FLUIDS.getKey(fluid).toString()).formatted(Formatting.DARK_GRAY))
+            add(Text.literal(Registries.FLUID.getId(fluid).toString()).formatted(Formatting.DARK_GRAY))
         }
     }
 }

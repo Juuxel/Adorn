@@ -5,9 +5,9 @@
   },
   "result": "adorn:architects_palette/mushy_myonite_brick_post",
   "count": 2,
-  "conditions": [
+  "neoforge:conditions": [
     {
-      "type": "forge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "architects_palette"
     }
   ]

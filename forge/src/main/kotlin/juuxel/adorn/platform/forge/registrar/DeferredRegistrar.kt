@@ -4,14 +4,14 @@ import juuxel.adorn.AdornCommon
 import juuxel.adorn.lib.registry.Registered
 import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
-import net.minecraftforge.eventbus.api.IEventBus
-import net.minecraftforge.registries.DeferredRegister
-import net.minecraftforge.registries.RegistryObject
+import net.neoforged.bus.api.IEventBus
+import net.neoforged.neoforge.registries.DeferredHolder
+import net.neoforged.neoforge.registries.DeferredRegister
 import java.util.function.Supplier
 
 class DeferredRegistrar<T>(registry: RegistryKey<out Registry<T>>) : ForgeRegistrar<T> {
     private val register: DeferredRegister<T> = DeferredRegister.create(registry, AdornCommon.NAMESPACE)
-    private val objects: MutableList<RegistryObject<out T>> = ArrayList()
+    private val objects: MutableList<DeferredHolder<T, out T>> = ArrayList()
 
     override fun hook(modBus: IEventBus) {
         register.register(modBus)

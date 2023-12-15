@@ -17,9 +17,9 @@
     "item": "adorn:byg/willow_platform",
     "count": 2
   },
-  "conditions": [
+  "neoforge:conditions": [
     {
-      "type": "forge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "byg"
     }
   ]

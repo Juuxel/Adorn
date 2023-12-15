@@ -5,9 +5,9 @@
   },
   "result": "adorn:biomesoplenty/white_sandstone_platform",
   "count": 1,
-  "conditions": [
+  "neoforge:conditions": [
     {
-      "type": "forge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "biomesoplenty"
     }
   ]

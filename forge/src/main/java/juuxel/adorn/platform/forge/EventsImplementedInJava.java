@@ -15,18 +15,19 @@ import juuxel.adorn.platform.forge.registrar.ForgeRegistrar;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
-import net.minecraftforge.event.entity.player.SleepingTimeCheckEvent;
-import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerSetSpawnEvent;
+import net.neoforged.neoforge.event.entity.player.SleepingTimeCheckEvent;
+import net.neoforged.bus.api.Event;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
 // If you're wondering *why* these are implemented in Java,
 // you can thank Forge for not initially having lang adapters on 1.17.
 // This was the mod class.
 final class EventsImplementedInJava {
-    void register(IEventBus modBus, IEventBus forgeBus) {
+    void register(IEventBus modBus) {
         register(AdornSounds.SOUNDS, modBus);
         register(AdornBlocks.INSTANCE.getBlocks(), modBus);
         register(AdornBlocks.INSTANCE.getItems(), modBus);
@@ -35,10 +36,10 @@ final class EventsImplementedInJava {
         register(AdornBlockEntities.BLOCK_ENTITIES, modBus);
         modBus.addListener(this::init);
 
-        forgeBus.addListener(this::handleCarpetedBlocks);
-        forgeBus.addListener(this::handleSneakClicks);
-        forgeBus.addListener(this::handleSofaSleepTime);
-        forgeBus.addListener(this::preventSofaSpawns);
+        NeoForge.EVENT_BUS.addListener(this::handleCarpetedBlocks);
+        NeoForge.EVENT_BUS.addListener(this::handleSneakClicks);
+        NeoForge.EVENT_BUS.addListener(this::handleSofaSleepTime);
+        NeoForge.EVENT_BUS.addListener(this::preventSofaSpawns);
     }
 
     private void init(FMLCommonSetupEvent event) {

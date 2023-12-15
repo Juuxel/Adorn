@@ -2,13 +2,14 @@ package juuxel.adorn.platform.forge.event
 
 import juuxel.adorn.item.FuelData
 import juuxel.adorn.platform.ItemGroupBridge
-import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent
-import net.minecraftforge.eventbus.api.IEventBus
-import net.minecraftforge.eventbus.api.SubscribeEvent
+import net.neoforged.bus.api.IEventBus
+import net.neoforged.bus.api.SubscribeEvent
+import net.neoforged.neoforge.common.NeoForge
+import net.neoforged.neoforge.event.furnace.FurnaceFuelBurnTimeEvent
 
 object ItemEvents {
-    fun register(modBus: IEventBus, forgeBus: IEventBus) {
-        forgeBus.register(this)
+    fun register(modBus: IEventBus) {
+        NeoForge.EVENT_BUS.register(this)
         modBus.register(ItemGroupBridge.get())
     }
 

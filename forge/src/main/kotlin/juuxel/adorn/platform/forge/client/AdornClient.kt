@@ -5,15 +5,15 @@ import juuxel.adorn.client.gui.screen.AdornMenuScreens
 import juuxel.adorn.client.gui.screen.GuideBookScreen
 import juuxel.adorn.client.gui.screen.MainConfigScreen
 import juuxel.adorn.platform.PlatformBridges
+import juuxel.adorn.platform.forge.Adorn.Companion.MOD_BUS
 import juuxel.adorn.trading.Trade
 import net.minecraft.client.MinecraftClient
 import net.minecraft.resource.ReloadableResourceManagerImpl
 import net.minecraft.util.Identifier
-import net.minecraftforge.client.ConfigScreenHandler
-import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent
-import net.minecraftforge.fml.ModLoadingContext
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
-import thedarkcolour.kotlinforforge.forge.MOD_BUS
+import net.neoforged.fml.ModLoadingContext
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
+import net.neoforged.neoforge.client.ConfigScreenHandler
+import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent
 
 object AdornClient {
     fun init() {

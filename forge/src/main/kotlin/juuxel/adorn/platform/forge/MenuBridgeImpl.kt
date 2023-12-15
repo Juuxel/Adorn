@@ -10,8 +10,8 @@ import net.minecraft.menu.NamedMenuFactory
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.math.BlockPos
-import net.minecraftforge.common.extensions.IForgeMenuType
-import net.minecraftforge.network.NetworkHooks
+import net.neoforged.neoforge.common.extensions.IMenuTypeExtension
+import net.neoforged.neoforge.network.NetworkHooks
 
 object MenuBridgeImpl : MenuBridge {
     private val LOGGER = logger()
@@ -28,5 +28,5 @@ object MenuBridgeImpl : MenuBridge {
     }
 
     override fun <M : Menu> createType(factory: (Int, PlayerInventory, PacketByteBuf) -> M): MenuType<M> =
-        IForgeMenuType.create(factory)
+        IMenuTypeExtension.create(factory)
 }

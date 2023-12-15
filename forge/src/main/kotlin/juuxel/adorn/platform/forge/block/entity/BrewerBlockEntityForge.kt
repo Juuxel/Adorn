@@ -6,28 +6,17 @@ import juuxel.adorn.platform.forge.util.FluidTankReference
 import net.minecraft.block.BlockState
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
-import net.minecraftforge.common.capabilities.Capability
-import net.minecraftforge.common.capabilities.ForgeCapabilities
-import net.minecraftforge.common.util.LazyOptional
-import net.minecraftforge.fluids.FluidType
-import net.minecraftforge.fluids.FluidUtil
-import net.minecraftforge.fluids.capability.templates.FluidTank
-import net.minecraftforge.items.IItemHandlerModifiable
-import net.minecraftforge.items.wrapper.SidedInvWrapper
+import net.neoforged.neoforge.fluids.FluidType
+import net.neoforged.neoforge.fluids.FluidUtil
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank
 
-class BrewerBlockEntityForge(pos: BlockPos, state: BlockState) : BrewerBlockEntity(pos, state) {
-    private var itemHandlers = createItemHandlers()
-    val tank = object : FluidTank(FLUID_CAPACITY_IN_BUCKETS * FluidType.BUCKET_VOLUME) {
+class BrewerBlockEntityForge(pos: BlockPos, state: BlockState) : BrewerBlockEntity(pos, state), BlockEntityWithFluidTank {
+    override val tank = object : FluidTank(FLUID_CAPACITY_IN_BUCKETS * FluidType.BUCKET_VOLUME) {
         override fun onContentsChanged() {
             markDirty()
         }
     }
     override val fluidReference: FluidReference = FluidTankReference(tank)
-    private val tankHolder = LazyOptional.of { tank }
-
-    private fun createItemHandlers(): Array<LazyOptional<IItemHandlerModifiable>> =
-        SidedInvWrapper.create(this, *Direction.values().sortedArrayWith(compareBy { it.id }))
 
     override fun canExtractFluidContainer() =
         !FluidUtil.tryEmptyContainer(getStack(FLUID_CONTAINER_SLOT), tank, tank.space, null, false).isSuccess
@@ -39,29 +28,6 @@ class BrewerBlockEntityForge(pos: BlockPos, state: BlockState) : BrewerBlockEnti
             setStack(FLUID_CONTAINER_SLOT, result.result)
             markDirty()
         }
-    }
-
-    override fun <T> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
-        if (!removed && cap == ForgeCapabilities.ITEM_HANDLER) {
-            return if (side != null) itemHandlers[side.id].cast() else LazyOptional.empty()
-        } else if (cap == ForgeCapabilities.FLUID_HANDLER) {
-            return tankHolder.cast()
-        }
-
-        return super.getCapability(cap, side)
-    }
-
-    override fun invalidateCaps() {
-        super.invalidateCaps()
-
-        for (itemHandler in itemHandlers) {
-            itemHandler.invalidate()
-        }
-    }
-
-    override fun reviveCaps() {
-        super.reviveCaps()
-        itemHandlers = createItemHandlers()
     }
 
     override fun writeNbt(nbt: NbtCompound) {

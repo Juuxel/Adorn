@@ -17,9 +17,9 @@
     "item": "adorn:byg/mossy_stone_step",
     "count": 1
   },
-  "conditions": [
+  "neoforge:conditions": [
     {
-      "type": "forge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "byg"
     }
   ]

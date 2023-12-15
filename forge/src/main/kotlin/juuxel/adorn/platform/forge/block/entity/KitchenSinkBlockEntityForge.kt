@@ -15,21 +15,17 @@ import net.minecraft.potion.Potions
 import net.minecraft.registry.tag.FluidTags
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
 import net.minecraft.util.math.MathHelper
-import net.minecraftforge.common.SoundActions
-import net.minecraftforge.common.capabilities.Capability
-import net.minecraftforge.common.capabilities.ForgeCapabilities
-import net.minecraftforge.common.util.LazyOptional
-import net.minecraftforge.fluids.FluidStack
-import net.minecraftforge.fluids.FluidType
-import net.minecraftforge.fluids.FluidUtil
-import net.minecraftforge.fluids.capability.IFluidHandler
-import net.minecraftforge.fluids.capability.templates.FluidTank
+import net.neoforged.neoforge.common.SoundActions
+import net.neoforged.neoforge.fluids.FluidStack
+import net.neoforged.neoforge.fluids.FluidType
+import net.neoforged.neoforge.fluids.FluidUtil
+import net.neoforged.neoforge.fluids.capability.IFluidHandler
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank
 import kotlin.math.min
 
-class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSinkBlockEntity(pos, state) {
-    val tank: FluidTank = object : FluidTank(FluidType.BUCKET_VOLUME) {
+class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSinkBlockEntity(pos, state), BlockEntityWithFluidTank {
+    override val tank: FluidTank = object : FluidTank(FluidType.BUCKET_VOLUME) {
         override fun drain(maxDrain: Int, action: IFluidHandler.FluidAction?): FluidStack {
             return if (supportsInfiniteExtraction(world!!, fluid.fluid)) {
                 FluidStack(fluid, min(fluidAmount, maxDrain))
@@ -44,7 +40,6 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
     }
 
     override val fluidReference: FluidReference = FluidTankReference(tank)
-    private val tankHolder = LazyOptional.of { tank }
 
     override fun interactWithItem(stack: ItemStack, player: PlayerEntity, hand: Hand): Boolean {
         if (tank.space > 0) {
@@ -130,14 +125,6 @@ class KitchenSinkBlockEntityForge(pos: BlockPos, state: BlockState) : KitchenSin
     override fun writeNbt(nbt: NbtCompound) {
         super.writeNbt(nbt)
         tank.writeToNBT(nbt)
-    }
-
-    override fun <T : Any?> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
-        if (cap == ForgeCapabilities.FLUID_HANDLER) {
-            return tankHolder.cast()
-        }
-
-        return super.getCapability(cap, side)
     }
 
     override fun calculateComparatorOutput(): Int =

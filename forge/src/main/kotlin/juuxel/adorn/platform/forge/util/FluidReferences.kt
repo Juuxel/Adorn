@@ -2,10 +2,11 @@ package juuxel.adorn.platform.forge.util
 
 import juuxel.adorn.fluid.FluidReference
 import juuxel.adorn.fluid.FluidUnit
+import juuxel.adorn.fluid.FluidVolume
 import net.minecraft.fluid.Fluid
 import net.minecraft.nbt.NbtCompound
-import net.minecraftforge.fluids.FluidStack
-import net.minecraftforge.fluids.capability.templates.FluidTank
+import net.neoforged.neoforge.fluids.FluidStack
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank
 
 /**
  * A [fluid reference][FluidReference] to a [FluidTank].
@@ -42,3 +43,6 @@ fun FluidReference.toFluidStack(): FluidStack =
     } else {
         FluidStack(fluid, amount.toInt(), nbt)
     }
+
+fun FluidStack.toFluidVolume(): FluidVolume =
+    FluidVolume(fluid, amount.toLong(), tag, FluidUnit.LITRE)

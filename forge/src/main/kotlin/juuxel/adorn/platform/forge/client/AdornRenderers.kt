@@ -8,7 +8,7 @@ import juuxel.adorn.entity.AdornEntities
 import juuxel.adorn.platform.forge.block.entity.KitchenSinkBlockEntityForge
 import juuxel.adorn.platform.forge.client.renderer.KitchenSinkRendererForge
 import net.minecraft.block.entity.BlockEntityType
-import net.minecraftforge.client.event.EntityRenderersEvent
+import net.neoforged.neoforge.client.event.EntityRenderersEvent
 
 object AdornRenderers {
     fun registerRenderers(event: EntityRenderersEvent.RegisterRenderers) {

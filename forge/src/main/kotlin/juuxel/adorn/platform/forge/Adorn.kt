@@ -16,22 +16,22 @@ import juuxel.adorn.platform.forge.event.ItemEvents
 import juuxel.adorn.platform.forge.networking.AdornNetworking
 import juuxel.adorn.platform.forge.registrar.ForgeRegistrar
 import juuxel.adorn.recipe.AdornRecipes
-import net.minecraftforge.api.distmarker.Dist
-import net.minecraftforge.common.ForgeMod
-import net.minecraftforge.eventbus.api.IEventBus
-import net.minecraftforge.fml.DistExecutor
-import net.minecraftforge.fml.DistExecutor.SafeRunnable
-import net.minecraftforge.fml.common.Mod
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
-import thedarkcolour.kotlinforforge.forge.FORGE_BUS
-import thedarkcolour.kotlinforforge.forge.MOD_BUS
+import net.neoforged.api.distmarker.Dist
+import net.neoforged.bus.api.IEventBus
+import net.neoforged.fml.DistExecutor
+import net.neoforged.fml.DistExecutor.SafeRunnable
+import net.neoforged.fml.ModLoadingContext
+import net.neoforged.fml.common.Mod
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
+import net.neoforged.neoforge.common.NeoForgeMod
 
 @Mod(AdornCommon.NAMESPACE)
-object Adorn {
+class Adorn {
     init {
+        MOD_BUS = ModLoadingContext.get().activeContainer.eventBus!!
         ConfigManager.INSTANCE.init()
         MOD_BUS.addListener(this::init)
-        EventsImplementedInJava().register(MOD_BUS, FORGE_BUS)
+        EventsImplementedInJava().register(MOD_BUS)
         AdornItemGroups.init()
         AdornItemGroups.ITEM_GROUPS.registerToBus(MOD_BUS)
         AdornRecipes.init()
@@ -42,10 +42,12 @@ object Adorn {
         AdornLootFunctionTypes.LOOT_FUNCTION_TYPES.registerToBus(MOD_BUS)
         AdornNetworking.init()
         AdornCriteria.init()
-        ItemEvents.register(MOD_BUS, FORGE_BUS)
+        AdornCriteria.CRITERIA.registerToBus(MOD_BUS)
+        ItemEvents.register(MOD_BUS)
+        MOD_BUS.register(AdornCapabilities)
         Compat.init(MOD_BUS)
         BlockVariantSets.register()
-        ForgeMod.enableMilkFluid()
+        NeoForgeMod.enableMilkFluid()
         DistExecutor.safeRunWhenOn(Dist.CLIENT) { SafeRunnable(AdornClient::init) }
     }
 
@@ -55,5 +57,9 @@ object Adorn {
     private fun init(event: FMLCommonSetupEvent) {
         AdornStats.init()
         ConfigManager.INSTANCE.finalize()
+    }
+
+    companion object {
+        lateinit var MOD_BUS: IEventBus
     }
 }

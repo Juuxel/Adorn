@@ -6,8 +6,8 @@ import net.minecraft.item.ItemConvertible
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.RegistryKey
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent
-import net.minecraftforge.eventbus.api.SubscribeEvent
+import net.neoforged.bus.api.SubscribeEvent
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent
 
 class ItemGroupBridgeForge : ItemGroupBridge {
     private val additions: MutableList<Pair<RegistryKey<ItemGroup>, ItemGroupModifyContext.() -> Unit>> = ArrayList()

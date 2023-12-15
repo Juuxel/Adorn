@@ -13,11 +13,10 @@ plugins {
 
     // Set up specific versions of the plugins we're using.
     // Note that of all these plugins, only the Architectury plugin needs to be applied.
-    kotlin("jvm") version "1.9.10" apply false
+    kotlin("jvm") version "1.9.21" apply false
 
     id("architectury-plugin") version "3.4.+"
-    id("dev.architectury.loom") version "1.3.+" apply false
-    id("io.github.juuxel.loom-vineflower") version "1.11.0" apply false
+    id("dev.architectury.loom") version "1.4.+" apply false
 
     id("org.jmailen.kotlinter") version "3.12.0" apply false
     id("com.github.johnrengelman.shadow") version "8.1.1" apply false
@@ -66,7 +65,6 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "dev.architectury.loom")
     apply(plugin = "architectury-plugin")
-    apply(plugin = "io.github.juuxel.loom-vineflower")
     apply(plugin = "org.jmailen.kotlinter")
 
     // Set Java version.
@@ -213,7 +211,7 @@ subprojects {
                 runDir = "run/server"
             }
 
-            // "main" matches the default Forge mod's name
+            // "main" matches the default NeoForge mod's name
             with(mods.maybeCreate("main")) {
                 fun Project.sourceSets() = extensions.getByName<SourceSetContainer>("sourceSets")
                 sourceSet(sourceSets().getByName("main"))
@@ -245,7 +243,7 @@ subprojects {
                 dependsOn("shadowJar")
                 // Replace the remap jar task's input with the shadow jar containing the common classes.
                 inputFile.set(named<ShadowJar>("shadowJar").flatMap { it.archiveFile })
-                // The project name will be "fabric" or "forge", so this will become the classifier/suffix
+                // The project name will be "fabric" or "neoforge", so this will become the classifier/suffix
                 // for the jar. For example: Adorn-3.4.0-fabric.jar
                 archiveClassifier.set(project.name)
             }

@@ -17,9 +17,9 @@
     "item": "adorn:biomemakeover/ancient_oak_step",
     "count": 1
   },
-  "conditions": [
+  "neoforge:conditions": [
     {
-      "type": "forge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "biomemakeover"
     }
   ]

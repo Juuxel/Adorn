@@ -18,9 +18,9 @@
     "item": "adorn:byg/fir_post",
     "count": 4
   },
-  "conditions": [
+  "neoforge:conditions": [
     {
-      "type": "forge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "byg"
     }
   ]

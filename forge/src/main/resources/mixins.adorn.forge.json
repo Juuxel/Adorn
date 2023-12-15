@@ -5,7 +5,6 @@
   "required": true,
 
   "mixins": [
-    "LootDataTypeMixin",
     "PlayerEntityMixin"
   ],
 
