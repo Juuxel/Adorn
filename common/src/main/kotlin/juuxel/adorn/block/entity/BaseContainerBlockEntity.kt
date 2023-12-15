@@ -19,19 +19,19 @@ abstract class BaseContainerBlockEntity(type: BlockEntityType<*>, pos: BlockPos,
     protected var items: DefaultedList<ItemStack> = DefaultedList.ofSize(size, ItemStack.EMPTY)
 
     override fun writeNbt(nbt: NbtCompound) = super.writeNbt(nbt).apply {
-        if (!serializeLootTable(nbt)) {
+        if (!writeLootTable(nbt)) {
             Inventories.writeNbt(nbt, items)
         }
     }
 
     override fun readNbt(nbt: NbtCompound) {
         super.readNbt(nbt)
-        if (!deserializeLootTable(nbt)) {
+        if (!readLootTable(nbt)) {
             Inventories.readNbt(nbt, items)
         }
     }
 
-    override fun getInvStackList() = items
+    override fun method_11282() = items
 
     override fun setInvStackList(items: DefaultedList<ItemStack>) {
         this.items = items

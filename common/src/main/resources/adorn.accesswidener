@@ -4,8 +4,6 @@ accessWidener	v1	named
 accessible method net/minecraft/block/AbstractCandleBlock spawnCandleParticles (Lnet/minecraft/world/World;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/random/Random;)V
 extendable method net/minecraft/block/PaneBlock connectsTo (Lnet/minecraft/block/BlockState;Z)Z
 accessible method net/minecraft/block/TallPlantBlock onBreakInCreative (Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/player/PlayerEntity;)V
-accessible method net/minecraft/block/TorchBlock <init> (Lnet/minecraft/block/AbstractBlock$Settings;Lnet/minecraft/particle/ParticleEffect;)V
-accessible method net/minecraft/block/WallTorchBlock <init> (Lnet/minecraft/block/AbstractBlock$Settings;Lnet/minecraft/particle/ParticleEffect;)V
 
 # Items
 accessible field net/minecraft/item/BlockItem BLOCK_ENTITY_TAG_KEY Ljava/lang/String;

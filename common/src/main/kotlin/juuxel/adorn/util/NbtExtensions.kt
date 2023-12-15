@@ -15,14 +15,14 @@ fun NbtCompound.putText(name: String, textComponent: Text) =
         Dynamic.convert(
             JsonOps.INSTANCE,
             NbtOps.INSTANCE,
-            Text.Serializer.toJsonTree(textComponent)
+            Text.Serialization.toJsonTree(textComponent)
         )
     )
 
 fun NbtCompound.getText(name: String): Text? {
     val tag = get(name) ?: return null
 
-    return Text.Serializer.fromJson(
+    return Text.Serialization.fromJsonTree(
         Dynamic.convert(
             NbtOps.INSTANCE,
             JsonOps.INSTANCE,

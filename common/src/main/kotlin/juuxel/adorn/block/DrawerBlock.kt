@@ -2,6 +2,7 @@
 
 package juuxel.adorn.block
 
+import com.mojang.serialization.MapCodec
 import juuxel.adorn.block.entity.DrawerBlockEntity
 import juuxel.adorn.block.entity.SimpleContainerBlockEntity
 import juuxel.adorn.block.variant.BlockVariant
@@ -11,12 +12,12 @@ import juuxel.adorn.util.buildShapeRotationsFromNorth
 import juuxel.adorn.util.mergeShapeMaps
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.BlockWithEntity
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.LootableContainerBlockEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.menu.Menu
@@ -62,16 +63,8 @@ class DrawerBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.create
     }
 
     override fun onStateReplaced(state: BlockState, world: World, pos: BlockPos, newState: BlockState, moved: Boolean) {
-        if (!state.isOf(newState.block)) {
-            val entity = world.getBlockEntity(pos)
-
-            if (entity is Inventory) {
-                ItemScatterer.spawn(world, pos, entity)
-                world.updateComparators(pos, this)
-            }
-
-            super.onStateReplaced(state, world, pos, newState, moved)
-        }
+        ItemScatterer.onStateReplaced(state, newState, world, pos)
+        super.onStateReplaced(state, world, pos, newState, moved)
     }
 
     override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape =
@@ -103,6 +96,8 @@ class DrawerBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.create
             entity.onScheduledTick()
         }
     }
+
+    override fun getCodec(): MapCodec<out BlockWithEntity> = throw UnsupportedOperationException()
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING

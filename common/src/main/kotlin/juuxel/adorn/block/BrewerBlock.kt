@@ -1,11 +1,13 @@
 package juuxel.adorn.block
 
+import com.mojang.serialization.MapCodec
 import juuxel.adorn.block.entity.BrewerBlockEntity
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.util.buildShapeRotationsFromNorth
 import juuxel.adorn.util.mergeShapeMaps
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.BlockWithEntity
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
@@ -13,7 +15,6 @@ import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.block.entity.LootableContainerBlockEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.particle.ParticleTypes
@@ -63,16 +64,8 @@ class BrewerBlock(settings: Settings) : VisibleBlockWithEntity(settings), BlockW
     }
 
     override fun onStateReplaced(state: BlockState, world: World, pos: BlockPos, newState: BlockState, moved: Boolean) {
-        if (!state.isOf(newState.block)) {
-            val entity = world.getBlockEntity(pos)
-
-            if (entity is Inventory) {
-                ItemScatterer.spawn(world, pos, entity)
-                world.updateComparators(pos, this)
-            }
-
-            super.onStateReplaced(state, world, pos, newState, moved)
-        }
+        ItemScatterer.onStateReplaced(state, newState, world, pos)
+        super.onStateReplaced(state, world, pos, newState, moved)
     }
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? =
@@ -105,6 +98,8 @@ class BrewerBlock(settings: Settings) : VisibleBlockWithEntity(settings), BlockW
             world.addParticle(ParticleTypes.CLOUD, x, y, z, 0.0, 0.0, 0.0)
         }
     }
+
+    override fun getCodec(): MapCodec<out BlockWithEntity> = throw UnsupportedOperationException()
 
     companion object {
         val FACING: DirectionProperty = Properties.HORIZONTAL_FACING

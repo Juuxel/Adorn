@@ -2,12 +2,14 @@
 
 package juuxel.adorn.block
 
+import com.mojang.serialization.MapCodec
 import juuxel.adorn.block.variant.BlockVariant
 import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.platform.PlatformBridges
 import juuxel.adorn.util.buildShapeRotations
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.BlockWithEntity
 import net.minecraft.block.Blocks
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
@@ -170,16 +172,8 @@ class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createS
         }
 
     override fun onStateReplaced(state: BlockState, world: World, pos: BlockPos, newState: BlockState, moved: Boolean) {
-        if (!state.isOf(newState.block)) {
-            val entity = world.getBlockEntity(pos)
-
-            if (entity is Inventory) {
-                ItemScatterer.spawn(world, pos, entity)
-                world.updateComparators(pos, this)
-            }
-
-            super.onStateReplaced(state, world, pos, newState, moved)
-        }
+        ItemScatterer.onStateReplaced(state, newState, world, pos)
+        super.onStateReplaced(state, world, pos, newState, moved)
     }
 
     override fun mirror(state: BlockState, mirror: BlockMirror) =
@@ -197,6 +191,8 @@ class ShelfBlock(variant: BlockVariant) : VisibleBlockWithEntity(variant.createS
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity? =
         AdornBlockEntities.SHELF.instantiate(pos, state)
+
+    override fun getCodec(): MapCodec<out BlockWithEntity> = throw UnsupportedOperationException()
 
     companion object {
         val FACING = Properties.HORIZONTAL_FACING

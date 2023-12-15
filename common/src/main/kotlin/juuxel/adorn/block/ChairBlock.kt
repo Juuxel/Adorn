@@ -71,12 +71,12 @@ class ChairBlock(variant: BlockVariant) : CarpetedBlock(variant.createSettings()
         }
     }
 
-    override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
+    override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity): BlockState {
         if (!world.isClient && player.isCreative) {
             TallPlantBlock.onBreakInCreative(world, pos, state, player)
         }
 
-        super.onBreak(world, pos, state, player)
+        return super.onBreak(world, pos, state, player)
     }
 
     override fun onPlaced(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) {

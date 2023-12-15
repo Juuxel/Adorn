@@ -65,16 +65,16 @@ object AdornBlocks : RegistryHelper() {
 
     val STONE_TORCH_GROUND: Block by registerBlockWithoutItem("stone_torch") {
         TorchBlock(
+            ParticleTypes.FLAME,
             AbstractBlock.Settings.copy(Blocks.TORCH)
                 .sounds(BlockSoundGroup.STONE)
-                .luminance { 15 },
-            ParticleTypes.FLAME
+                .luminance { 15 }
         )
     }
     val STONE_TORCH_WALL: Block by registerBlockWithoutItem("wall_stone_torch") {
         WallTorchBlock(
-            AbstractBlock.Settings.copy(STONE_TORCH_GROUND).dropsLike(STONE_TORCH_GROUND),
-            ParticleTypes.FLAME
+            ParticleTypes.FLAME,
+            AbstractBlock.Settings.copy(STONE_TORCH_GROUND).dropsLike(STONE_TORCH_GROUND)
         )
     }
 

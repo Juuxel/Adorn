@@ -13,7 +13,6 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.LootableContainerBlockEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.menu.Menu
 import net.minecraft.server.world.ServerWorld
@@ -43,16 +42,8 @@ class KitchenCupboardBlock(variant: BlockVariant) : AbstractKitchenCounterBlock(
     }
 
     override fun onStateReplaced(state: BlockState, world: World, pos: BlockPos, newState: BlockState, moved: Boolean) {
-        if (!state.isOf(newState.block)) {
-            val entity = world.getBlockEntity(pos)
-
-            if (entity is Inventory) {
-                ItemScatterer.spawn(world, pos, entity)
-                world.updateComparators(pos, this)
-            }
-
-            super.onStateReplaced(state, world, pos, newState, moved)
-        }
+        ItemScatterer.onStateReplaced(state, newState, world, pos)
+        super.onStateReplaced(state, world, pos, newState, moved)
     }
 
     override fun onPlaced(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) {

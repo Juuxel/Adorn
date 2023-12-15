@@ -2,6 +2,7 @@
 
 package juuxel.adorn.block
 
+import com.mojang.serialization.MapCodec
 import juuxel.adorn.block.entity.TradingStationBlockEntity
 import juuxel.adorn.criterion.AdornCriteria
 import juuxel.adorn.lib.AdornGameRules
@@ -9,6 +10,7 @@ import juuxel.adorn.lib.AdornStats
 import juuxel.adorn.util.getText
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.BlockWithEntity
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.client.item.TooltipContext
@@ -116,9 +118,9 @@ class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings)
 
                 world.updateComparators(pos, this)
             }
-
-            super.onStateReplaced(state, world, pos, newState, moved)
         }
+
+        super.onStateReplaced(state, world, pos, newState, moved)
     }
 
     override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext) =
@@ -142,6 +144,8 @@ class TradingStationBlock(settings: Settings) : VisibleBlockWithEntity(settings)
             }
         }
     }
+
+    override fun getCodec(): MapCodec<out BlockWithEntity> = throw UnsupportedOperationException()
 
     companion object {
         val WATERLOGGED = Properties.WATERLOGGED

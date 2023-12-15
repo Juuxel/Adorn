@@ -7,7 +7,6 @@ import juuxel.adorn.block.entity.BrewerBlockEntity.Companion.RIGHT_INGREDIENT_SL
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.Ingredient
-import net.minecraft.recipe.RecipeCodecs
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.registry.DynamicRegistryManager
 import net.minecraft.world.World
@@ -35,7 +34,7 @@ class ItemBrewingRecipe(
             builder.group(
                 Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("first_ingredient").forGetter { it.firstIngredient },
                 Ingredient.ALLOW_EMPTY_CODEC.optionalFieldOf("second_ingredient", Ingredient.empty()).forGetter { it.secondIngredient },
-                RecipeCodecs.CRAFTING_RESULT.fieldOf("result").forGetter { it.result }
+                ItemStack.RECIPE_RESULT_CODEC.fieldOf("result").forGetter { it.result }
             ).apply(builder, ::ItemBrewingRecipe)
         }
     }

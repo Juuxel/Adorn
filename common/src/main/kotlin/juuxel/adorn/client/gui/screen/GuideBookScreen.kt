@@ -297,7 +297,7 @@ class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
 
     private class CloseButton(x: Int, y: Int, pressAction: PressAction) :
         ButtonWidget(x, y, 8, 8, Text.empty(), pressAction, DEFAULT_NARRATION_SUPPLIER) {
-        override fun renderButton(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
+        override fun renderWidget(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
             val texture = if (isHovered) CLOSE_BOOK_ACTIVE_TEXTURE else CLOSE_BOOK_INACTIVE_TEXTURE
             context.drawTexture(texture, x, y, 0f, 0f, 8, 8, 8, 8)
         }

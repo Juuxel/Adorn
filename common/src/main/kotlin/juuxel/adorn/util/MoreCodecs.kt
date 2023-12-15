@@ -11,14 +11,14 @@ import net.minecraft.text.Text
 object MoreCodecs {
     val TEXT: Codec<Text> = object : Codec<Text> {
         override fun <T> encode(input: Text, ops: DynamicOps<T>, prefix: T): DataResult<T> {
-            val json = Text.Serializer.toJsonTree(input)
+            val json = Text.Serialization.toJsonTree(input)
             val converted = Dynamic.convert(JsonOps.INSTANCE, ops, json)
             return ops.mergeToPrimitive(prefix, converted)
         }
 
         override fun <T> decode(ops: DynamicOps<T>, input: T): DataResult<Pair<Text, T>> {
             val json = Dynamic.convert(ops, JsonOps.INSTANCE, input)
-            val text = Text.Serializer.fromJson(json)
+            val text = Text.Serialization.fromJsonTree(json)
 
             return if (text != null) {
                 DataResult.success(Pair.of(text, ops.empty()))
