@@ -5,69 +5,51 @@ import juuxel.adorn.client.gui.screen.BrewerScreen
 import juuxel.adorn.menu.TradingStationMenu
 import juuxel.adorn.platform.forge.client.AdornClient
 import net.minecraft.client.MinecraftClient
-import net.minecraft.network.PacketByteBuf
 import net.neoforged.api.distmarker.Dist
+import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.DistExecutor
-import net.neoforged.neoforge.network.INetworkDirection
-import net.neoforged.neoforge.network.NetworkEvent
-import net.neoforged.neoforge.network.NetworkRegistry
-import net.neoforged.neoforge.network.PlayNetworkDirection
-import java.util.Optional
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent
+import net.neoforged.neoforge.network.handling.PlayPayloadContext
 import java.util.concurrent.Callable
+import java.util.function.Consumer
 
 object AdornNetworking {
-    private const val PROTOCOL = "3"
-    val CHANNEL = NetworkRegistry.newSimpleChannel(
-        AdornCommon.id("main"),
-        { PROTOCOL },
-        PROTOCOL::equals,
-        PROTOCOL::equals
-    )
+    val OPEN_BOOK = AdornCommon.id("open_book")
+    val BREWER_FLUID_SYNC = AdornCommon.id("brewer_fluid_sync")
+    val SET_TRADE_STACK = AdornCommon.id("set_trade_stack")
 
-    private var nextId = 0
-
-    @Suppress("INACCESSIBLE_TYPE")
-    private inline fun <reified M : Message> register(
-        noinline decoder: (PacketByteBuf) -> M,
-        noinline listener: (M, NetworkEvent.Context) -> Unit,
-        direction: INetworkDirection<*>
-    ) {
-        CHANNEL.registerMessage(nextId++, M::class.java, Message::write, decoder, listener, Optional.of(direction))
+    @SubscribeEvent
+    fun register(event: RegisterPayloadHandlerEvent) {
+        val registrar = event.registrar(AdornCommon.NAMESPACE)
+        registrar.play(OPEN_BOOK, OpenBookS2CMessage::fromPacket, Consumer { it.client(this::handleBookOpen) })
+        registrar.play(BREWER_FLUID_SYNC, BrewerFluidSyncS2CMessage::fromPacket, Consumer { it.client(this::handleBrewerFluidSync) })
+        registrar.play(SET_TRADE_STACK, SetTradeStackC2SMessage::fromPacket, Consumer { it.server(this::handleSetTradeStack) })
     }
 
-    fun init() {
-        register(OpenBookS2CMessage::fromPacket, this::handleBookOpen, PlayNetworkDirection.PLAY_TO_CLIENT)
-        register(BrewerFluidSyncS2CMessage::fromPacket, this::handleBrewerFluidSync, PlayNetworkDirection.PLAY_TO_CLIENT)
-        register(SetTradeStackC2SMessage::fromPacket, this::handleSetTradeStack, PlayNetworkDirection.PLAY_TO_SERVER)
-    }
-
-    private fun handleBookOpen(message: OpenBookS2CMessage, context: NetworkEvent.Context) {
-        context.enqueueWork {
+    private fun handleBookOpen(message: OpenBookS2CMessage, context: PlayPayloadContext) {
+        context.workHandler.execute {
             DistExecutor.unsafeCallWhenOn(Dist.CLIENT) { Callable { AdornClient.openBookScreen(message.bookId) } }
         }
-        context.packetHandled = true
     }
 
-    private fun handleBrewerFluidSync(message: BrewerFluidSyncS2CMessage, context: NetworkEvent.Context) {
-        context.enqueueWork {
+    private fun handleBrewerFluidSync(message: BrewerFluidSyncS2CMessage, context: PlayPayloadContext) {
+        context.workHandler.execute {
             DistExecutor.unsafeCallWhenOn(Dist.CLIENT) {
                 Callable {
                     BrewerScreen.setFluidFromPacket(MinecraftClient.getInstance(), message.syncId, message.fluid)
                 }
             }
         }
-        context.packetHandled = true
     }
 
-    private fun handleSetTradeStack(message: SetTradeStackC2SMessage, context: NetworkEvent.Context) {
-        context.enqueueWork {
-            val sender = context.sender!!
+    private fun handleSetTradeStack(message: SetTradeStackC2SMessage, context: PlayPayloadContext) {
+        context.workHandler.execute {
+            val sender = context.player.orElseThrow()
             val menu = sender.menu
 
             if (menu.syncId == message.syncId && menu is TradingStationMenu) {
                 menu.updateTradeStack(message.slotId, message.stack, sender)
             }
         }
-        context.packetHandled = true
     }
 }

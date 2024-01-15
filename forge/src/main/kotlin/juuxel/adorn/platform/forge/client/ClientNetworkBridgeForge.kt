@@ -1,12 +1,12 @@
 package juuxel.adorn.platform.forge.client
 
 import juuxel.adorn.client.ClientNetworkBridge
-import juuxel.adorn.platform.forge.networking.AdornNetworking
 import juuxel.adorn.platform.forge.networking.SetTradeStackC2SMessage
 import net.minecraft.item.ItemStack
+import net.neoforged.neoforge.network.PacketDistributor
 
 class ClientNetworkBridgeForge : ClientNetworkBridge {
     override fun sendSetTradeStack(syncId: Int, slotId: Int, stack: ItemStack) {
-        AdornNetworking.CHANNEL.sendToServer(SetTradeStackC2SMessage(syncId, slotId, stack))
+        PacketDistributor.SERVER.noArg().send(SetTradeStackC2SMessage(syncId, slotId, stack))
     }
 }

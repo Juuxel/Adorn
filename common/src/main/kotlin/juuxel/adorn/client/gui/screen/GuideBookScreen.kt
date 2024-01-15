@@ -33,6 +33,7 @@ import net.minecraft.text.Style
 import net.minecraft.text.Text
 import kotlin.math.max
 
+// TODO: Fix dark foreground (also other screens if needed)
 class GuideBookScreen(private val book: Book) : Screen(NarratorManager.EMPTY) {
     private lateinit var flipBook: FlipBook
     private lateinit var previousPageButton: PageTurnWidget

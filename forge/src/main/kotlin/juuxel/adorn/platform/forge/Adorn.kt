@@ -40,7 +40,7 @@ class Adorn {
         AdornRecipes.RECIPE_TYPES.registerToBus(MOD_BUS)
         AdornLootConditionTypes.LOOT_CONDITION_TYPES.registerToBus(MOD_BUS)
         AdornLootFunctionTypes.LOOT_FUNCTION_TYPES.registerToBus(MOD_BUS)
-        AdornNetworking.init()
+        MOD_BUS.register(AdornNetworking)
         AdornCriteria.init()
         AdornCriteria.CRITERIA.registerToBus(MOD_BUS)
         ItemEvents.register(MOD_BUS)

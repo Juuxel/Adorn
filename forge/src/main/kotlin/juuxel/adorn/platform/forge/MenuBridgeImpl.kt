@@ -11,7 +11,6 @@ import net.minecraft.network.PacketByteBuf
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.math.BlockPos
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension
-import net.neoforged.neoforge.network.NetworkHooks
 
 object MenuBridgeImpl : MenuBridge {
     private val LOGGER = logger()
@@ -23,7 +22,7 @@ object MenuBridgeImpl : MenuBridge {
         }
 
         if (player is ServerPlayerEntity) {
-            NetworkHooks.openScreen(player, factory, pos)
+            player.openMenu(factory, pos)
         }
     }
 
