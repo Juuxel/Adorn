@@ -41,7 +41,7 @@ dependencies {
     }
     // Bundle the transformed version of the common project in the mod.
     // The transformed version includes things like fixed refmaps.
-    bundle(project(path = ":common", configuration = "transformProductionForge")) {
+    bundle(project(path = ":common", configuration = "transformProductionNeoForge")) {
         isTransitive = false
     }
 
