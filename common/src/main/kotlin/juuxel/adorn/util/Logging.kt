@@ -8,19 +8,20 @@ private val STACK_WALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLA
 /**
  * Gets a logger for the calling class.
  *
- * If called from a companion object, returns a logger
- * for the enclosing class.
+ * If called from a nested class, returns a logger
+ * for the outermost class in the nest.
  *
  * If called from a top-level property initialiser,
  * returns a logger for the enclosing file.
  */
 fun logger(): Logger {
-    @Suppress("UsePropertyAccessSyntax") // not a pure property
     var caller = STACK_WALKER.getCallerClass()
-    val enclosing = caller.enclosingClass
 
-    if (enclosing != null && caller.kotlin.isCompanion) {
-        caller = enclosing
+    // Locate the outermost class.
+    var next = caller.enclosingClass
+    while (next != null) {
+        caller = next
+        next = caller.enclosingClass
     }
 
     return LoggerFactory.getLogger(caller)
