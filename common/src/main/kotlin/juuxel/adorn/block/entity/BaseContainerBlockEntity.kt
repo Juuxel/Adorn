@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos
  */
 abstract class BaseContainerBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: BlockState, size: Int) :
     LootableContainerBlockEntity(type, pos, state) {
-    protected var items: DefaultedList<ItemStack> = DefaultedList.ofSize(size, ItemStack.EMPTY)
+    private var items: DefaultedList<ItemStack> = DefaultedList.ofSize(size, ItemStack.EMPTY)
 
     override fun writeNbt(nbt: NbtCompound) = super.writeNbt(nbt).apply {
         if (!writeLootTable(nbt)) {
