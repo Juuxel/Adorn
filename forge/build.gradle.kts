@@ -73,6 +73,7 @@ tasks {
     remapJar {
         // Convert the access widener to a NeoForge access transformer.
         atAccessWideners.add("adorn.accesswidener")
+        archiveClassifier.set("neoforge")
     }
 
     processResources {
