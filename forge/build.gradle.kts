@@ -32,6 +32,8 @@ dependencies {
     // Add Kotlin.
     implementation(kotlin("stdlib"))
     forgeRuntimeLibrary(kotlin("stdlib", version = kotlin.coreLibrariesVersion))
+    (bundle(kotlin("stdlib")) as ModuleDependency)
+        .exclude(group = "org.jetbrains", module = "annotations")
 
     // Depend on the common project. The "namedElements" configuration contains the non-remapped
     // classes and resources of the project.
@@ -64,7 +66,7 @@ dependencies {
 
 tasks {
     shadowJar {
-        // TODO: Bundle and relocate Kotlin
+        relocate("kotlin", "juuxel.adorn.relocated.kotlin")
         relocate("blue.endless.jankson", "juuxel.adorn.relocated.jankson")
     }
 
