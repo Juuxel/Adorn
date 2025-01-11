@@ -17,7 +17,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "adorn:shelves"
+            "items": "#adorn:shelves"
           }
         ]
       }

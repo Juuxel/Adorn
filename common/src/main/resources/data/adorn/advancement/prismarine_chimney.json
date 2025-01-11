@@ -16,7 +16,7 @@
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
-          { "tag": "adorn:prismarine_chimneys" }
+          { "items": "#adorn:prismarine_chimneys" }
         ]
       }
     }

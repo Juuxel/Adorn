@@ -16,7 +16,7 @@
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
-          { "tag": "adorn:coffee_tables" }
+          { "items": "#adorn:coffee_tables" }
         ]
       }
     }

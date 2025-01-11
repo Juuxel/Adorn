@@ -17,7 +17,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "adorn:kitchen_counters"
+            "items": "#adorn:kitchen_counters"
           }
         ]
       }
