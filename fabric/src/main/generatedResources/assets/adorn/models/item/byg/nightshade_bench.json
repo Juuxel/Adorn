@@ -4,5 +4,10 @@
     "planks": "byg:block/nightshade/planks",
     "log": "byg:block/nightshade/log",
     "end": "byg:block/nightshade/log_top"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
 }

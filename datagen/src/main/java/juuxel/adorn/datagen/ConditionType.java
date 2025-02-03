@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 public enum ConditionType {
     NONE("none", null, null, Map.of()),
-    FABRIC("fabric", null, null, Map.of("load", "fabric-conditions.json")),
-    FORGE("forge", null, null, Map.of("load", "forge-conditions.json", "loot-table", "forge-loot-conditions.json")),
+    FABRIC("fabric", null, null, Map.of("load-condition", "fabric-conditions.json", "model_condition", "fabric-model-conditions.json")),
+    FORGE("forge", null, null, Map.of("load-condition", "forge-conditions.json", "loot-table-condition", "forge-loot-conditions.json")),
     ;
 
     private static final Map<String, ConditionType> BY_ID = Arrays.stream(values())

@@ -3,5 +3,10 @@
   "textures": {
     "planks": "promenade:block/dark_amaranth/planks",
     "log": "promenade:block/dark_amaranth/stem/side"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["promenade"]
+  }]
+
 }

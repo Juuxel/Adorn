@@ -3,5 +3,10 @@
   "textures": {
     "planks": "cinderscapes:block/umbral_planks",
     "log": "cinderscapes:block/umbral_stem"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["cinderscapes"]
+  }]
+
 }

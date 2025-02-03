@@ -4,5 +4,5 @@
     "planks": "<main-texture>",
     "leg": "<log_side>",
     "rim": "<log_side>"
-  }
+  }<model_condition>
 }

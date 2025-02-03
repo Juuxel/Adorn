@@ -3,5 +3,10 @@
   "textures": {
     "log": "biomemakeover:block/swamp_cypress_log",
     "end": "biomemakeover:block/swamp_cypress_log_top"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["biomemakeover"]
+  }]
+
 }

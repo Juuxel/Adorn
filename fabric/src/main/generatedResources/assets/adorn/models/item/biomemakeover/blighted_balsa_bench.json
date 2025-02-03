@@ -4,5 +4,10 @@
     "planks": "biomemakeover:block/blighted_balsa_planks",
     "log": "biomemakeover:block/blighted_balsa_log",
     "end": "biomemakeover:block/blighted_balsa_log_top"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["biomemakeover"]
+  }]
+
 }

@@ -4,5 +4,5 @@
     "planks": "<main-texture>",
     "log": "<log_side>",
     "end": "<log_end>"
-  }
+  }<model_condition>
 }

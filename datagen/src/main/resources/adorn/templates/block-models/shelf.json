@@ -2,5 +2,5 @@
   "parent": "adorn:block/templates/shelf",
   "textures": {
     "texture": "<main-texture>"
-  }
+  }<model_condition>
 }

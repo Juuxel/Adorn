@@ -55,7 +55,7 @@ public final class DataGenerator {
                     it.set("load-condition", "");
 
                     conditionType.getConditionsInFileTemplatePathsByType().forEach((type, path) -> {
-                        it.set(type + "-condition", templateCache.load(path));
+                        it.set(type, templateCache.load(path));
                     });
 
                     it.putAll(config.rootReplacements());

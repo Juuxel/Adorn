@@ -2,5 +2,10 @@
   "parent": "adorn:block/templates/platform",
   "textures": {
     "texture": "byg:block/mahogany/planks"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
 }

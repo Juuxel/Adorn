@@ -3,5 +3,10 @@
   "textures": {
     "planks": "biomemakeover:block/blighted_balsa_planks",
     "log": "biomemakeover:block/blighted_balsa_log"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["biomemakeover"]
+  }]
+
 }

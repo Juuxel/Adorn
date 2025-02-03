@@ -2,5 +2,10 @@
   "parent": "adorn:block/templates/bench_top",
   "textures": {
     "planks": "byg:block/palm/planks"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
 }

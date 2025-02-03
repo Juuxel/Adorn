@@ -134,5 +134,9 @@
         "down": { "uv": [7, 10, 9, 12], "texture": "#leg", "cullface": "down" }
       }
     }
-  ]
+  ],
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["terrestria"]
+  }]
 }

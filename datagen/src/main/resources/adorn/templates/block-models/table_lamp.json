@@ -2,5 +2,5 @@
   "parent": "adorn:block/templates/table_lamp",
   "textures": {
     "wool": "<wool.namespace>:block/<wool.path>"
-  }
+  }<model_condition>
 }

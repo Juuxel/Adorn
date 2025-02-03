@@ -2,5 +2,10 @@
   "parent": "adorn:item/templates/chair",
   "textures": {
     "planks": "terrestria:block/willow_planks"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["terrestria"]
+  }]
+
 }

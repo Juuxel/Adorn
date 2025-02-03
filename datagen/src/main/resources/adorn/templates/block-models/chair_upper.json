@@ -2,5 +2,5 @@
   "parent": "adorn:block/templates/chair_upper",
   "textures": {
     "planks": "<main-texture>"
-  }
+  }<model_condition>
 }

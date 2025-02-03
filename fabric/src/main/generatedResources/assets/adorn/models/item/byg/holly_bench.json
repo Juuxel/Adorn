@@ -4,5 +4,10 @@
     "planks": "byg:block/holly/planks",
     "log": "byg:block/holly/log",
     "end": "byg:block/holly/log_top"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
 }

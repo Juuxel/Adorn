@@ -2,5 +2,5 @@
   "parent": "adorn:block/templates/kitchen_cupboard_door",
   "textures": {
     "planks": "<main-texture>"
-  }
+  }<model_condition>
 }

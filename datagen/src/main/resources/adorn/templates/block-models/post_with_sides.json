@@ -4,5 +4,5 @@
     "side": "<side-texture>",
     "up": "<top-texture>",
     "down": "<bottom-texture>"
-  }
+  }<model_condition>
 }

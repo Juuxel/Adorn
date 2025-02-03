@@ -4,5 +4,10 @@
     "planks": "blockus:block/white_oak_planks",
     "leg": "blockus:block/white_oak_log",
     "rim": "blockus:block/white_oak_log"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["blockus"]
+  }]
+
 }

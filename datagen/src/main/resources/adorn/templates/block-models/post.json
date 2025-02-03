@@ -2,5 +2,5 @@
   "parent": "adorn:block/templates/post",
   "textures": {
     "texture": "<main-texture>"
-  }
+  }<model_condition>
 }

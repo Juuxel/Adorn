@@ -4,5 +4,10 @@
     "planks": "byg:block/bulbis/planks",
     "leg": "byg:block/bulbis/log",
     "rim": "byg:block/bulbis/log"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
 }

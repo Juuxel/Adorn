@@ -3,5 +3,5 @@
   "textures": {
     "planks": "<main-texture>",
     "log": "<log_side>"
-  }
+  }<model_condition>
 }

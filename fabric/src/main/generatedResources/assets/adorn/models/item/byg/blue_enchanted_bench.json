@@ -4,5 +4,10 @@
     "planks": "byg:block/blue_enchanted/planks",
     "log": "byg:block/blue_enchanted/log",
     "end": "byg:block/blue_enchanted/log_top"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
 }

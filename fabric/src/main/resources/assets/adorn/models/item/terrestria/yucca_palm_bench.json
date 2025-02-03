@@ -4,5 +4,9 @@
     "planks": "terrestria:block/yucca_palm_planks",
     "log": "terrestria:block/yucca_palm_log",
     "end": "terrestria:block/yucca_palm_log"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["terrestria"]
+  }]
 }

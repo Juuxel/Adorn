@@ -4,5 +4,10 @@
     "planks": "biomemakeover:block/ancient_oak_planks",
     "log": "biomemakeover:block/ancient_oak_log",
     "end": "biomemakeover:block/ancient_oak_log_top"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["biomemakeover"]
+  }]
+
 }

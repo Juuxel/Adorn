@@ -2,5 +2,5 @@
   "parent": "adorn:item/templates/sofa",
   "textures": {
     "wool": "minecraft:block/<id.path>_wool"
-  }
+  }<model_condition>
 }

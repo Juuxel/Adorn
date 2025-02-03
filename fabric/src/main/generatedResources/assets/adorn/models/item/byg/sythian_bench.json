@@ -4,5 +4,10 @@
     "planks": "byg:block/sythian/planks",
     "log": "byg:block/sythian/log",
     "end": "byg:block/sythian/log_top"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
 }

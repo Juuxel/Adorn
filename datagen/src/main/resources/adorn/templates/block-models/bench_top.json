@@ -2,5 +2,5 @@
   "parent": "adorn:block/templates/bench_top",
   "textures": {
     "planks": "<main-texture>"
-  }
+  }<model_condition>
 }

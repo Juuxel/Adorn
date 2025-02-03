@@ -4,5 +4,10 @@
     "planks": "byg:block/baobab/planks",
     "leg": "byg:block/baobab/log",
     "rim": "byg:block/baobab/log"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
 }

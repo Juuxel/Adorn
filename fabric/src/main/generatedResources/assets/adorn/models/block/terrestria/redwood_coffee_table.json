@@ -4,5 +4,10 @@
     "planks": "terrestria:block/redwood_planks",
     "leg": "terrestria:block/redwood_log",
     "rim": "terrestria:block/redwood_log"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["terrestria"]
+  }]
+
 }

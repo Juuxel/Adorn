@@ -4,5 +4,10 @@
     "planks": "terrestria:block/rainbow_eucalyptus_planks",
     "log": "terrestria:block/rainbow_eucalyptus_log",
     "end": "terrestria:block/rainbow_eucalyptus_log_top"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["terrestria"]
+  }]
+
 }

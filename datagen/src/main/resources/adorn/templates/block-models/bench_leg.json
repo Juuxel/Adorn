@@ -3,5 +3,5 @@
   "textures": {
     "log": "<log_side>",
     "end": "<log_end>"
-  }
+  }<model_condition>
 }

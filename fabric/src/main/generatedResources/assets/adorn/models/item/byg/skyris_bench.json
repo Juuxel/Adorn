@@ -4,5 +4,10 @@
     "planks": "byg:block/skyris/planks",
     "log": "byg:block/skyris/log",
     "end": "byg:block/skyris/log_top"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
 }

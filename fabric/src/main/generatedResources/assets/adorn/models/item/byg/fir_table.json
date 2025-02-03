@@ -3,5 +3,10 @@
   "textures": {
     "planks": "byg:block/fir/planks",
     "log": "byg:block/fir/log"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
 }

@@ -4,5 +4,10 @@
     "planks": "biomemakeover:block/willow_planks",
     "leg": "biomemakeover:block/willow_log",
     "rim": "biomemakeover:block/willow_log"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["biomemakeover"]
+  }]
+
 }

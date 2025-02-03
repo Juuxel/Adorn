@@ -2,5 +2,10 @@
   "parent": "adorn:block/templates/post",
   "textures": {
     "texture": "traverse:block/fir_planks"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["traverse"]
+  }]
+
 }

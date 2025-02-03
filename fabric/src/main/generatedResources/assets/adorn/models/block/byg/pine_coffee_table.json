@@ -4,5 +4,10 @@
     "planks": "byg:block/pine/planks",
     "leg": "byg:block/pine/log",
     "rim": "byg:block/pine/log"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["byg"]
+  }]
+
 }

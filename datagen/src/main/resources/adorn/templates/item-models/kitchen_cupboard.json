@@ -2,5 +2,5 @@
   "parent": "adorn:item/templates/kitchen_cupboard",
   "textures": {
     "planks": "<main-texture>"
-  }
+  }<model_condition>
 }

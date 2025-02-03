@@ -2,5 +2,10 @@
   "parent": "adorn:block/templates/table_leg",
   "textures": {
     "log": "woods_and_mires:block/pine_log"
-  }
+  },
+  "adorn:conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["woods_and_mires"]
+  }]
+
 }
