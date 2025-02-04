@@ -62,7 +62,7 @@ public final class FluidTankReference extends FluidReference {
         if (reference instanceof FluidTankReference ftr) {
             return ftr.tank.getFluid();
         } else {
-            return new FluidStack(reference.getFluid().getRegistryEntry(), (int) reference.getAmount(), reference.getComponents());
+            return new FluidStack(reference.getFluid().getRegistryEntry(), (int) FluidUnit.convert(reference.getAmount(), reference.getUnit(), FluidUnit.LITRE), reference.getComponents());
         }
     }
 
