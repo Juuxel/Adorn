@@ -3,5 +3,12 @@
   "textures": {
     "log": "biomesoplenty:block/mahogany_log",
     "end": "biomesoplenty:block/mahogany_log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
 }

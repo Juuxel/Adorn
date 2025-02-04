@@ -4,5 +4,12 @@
     "planks": "byg:block/mahogany/planks",
     "leg": "byg:block/mahogany/log",
     "rim": "byg:block/mahogany/log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

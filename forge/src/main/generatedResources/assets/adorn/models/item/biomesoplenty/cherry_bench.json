@@ -4,5 +4,12 @@
     "planks": "biomesoplenty:block/cherry_planks",
     "log": "biomesoplenty:block/cherry_log",
     "end": "biomesoplenty:block/cherry_log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
 }

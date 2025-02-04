@@ -4,5 +4,12 @@
     "planks": "ecologics:block/flowering_azalea_planks",
     "log": "ecologics:block/flowering_azalea_log",
     "end": "ecologics:block/flowering_azalea_log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ecologics"
+    }
+  ]
+
 }

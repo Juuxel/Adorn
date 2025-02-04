@@ -4,5 +4,12 @@
     "planks": "biomesoplenty:block/umbran_planks",
     "log": "biomesoplenty:block/umbran_log",
     "end": "biomesoplenty:block/umbran_log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
 }

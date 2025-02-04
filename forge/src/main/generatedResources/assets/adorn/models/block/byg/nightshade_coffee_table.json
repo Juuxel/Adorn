@@ -4,5 +4,12 @@
     "planks": "byg:block/nightshade/planks",
     "leg": "byg:block/nightshade/log",
     "rim": "byg:block/nightshade/log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

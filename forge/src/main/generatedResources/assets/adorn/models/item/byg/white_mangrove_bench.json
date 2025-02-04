@@ -4,5 +4,12 @@
     "planks": "byg:block/white_mangrove/planks",
     "log": "byg:block/white_mangrove/log",
     "end": "byg:block/white_mangrove/log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

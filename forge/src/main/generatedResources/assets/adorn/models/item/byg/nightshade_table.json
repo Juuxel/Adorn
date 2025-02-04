@@ -3,5 +3,12 @@
   "textures": {
     "planks": "byg:block/nightshade/planks",
     "log": "byg:block/nightshade/log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

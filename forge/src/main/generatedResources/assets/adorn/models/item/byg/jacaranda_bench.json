@@ -4,5 +4,12 @@
     "planks": "byg:block/jacaranda/planks",
     "log": "byg:block/jacaranda/log",
     "end": "byg:block/jacaranda/log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

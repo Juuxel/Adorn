@@ -4,5 +4,12 @@
     "planks": "biomemakeover:block/ancient_oak_planks",
     "leg": "biomemakeover:block/ancient_oak_log",
     "rim": "biomemakeover:block/ancient_oak_log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomemakeover"
+    }
+  ]
+
 }

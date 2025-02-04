@@ -3,5 +3,12 @@
   "textures": {
     "log": "byg:block/aspen/log",
     "end": "byg:block/aspen/log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

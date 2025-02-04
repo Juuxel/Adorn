@@ -4,5 +4,12 @@
     "planks": "biomemakeover:block/blighted_balsa_planks",
     "leg": "biomemakeover:block/blighted_balsa_log",
     "rim": "biomemakeover:block/blighted_balsa_log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomemakeover"
+    }
+  ]
+
 }

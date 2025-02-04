@@ -4,5 +4,12 @@
     "planks": "biomesoplenty:block/fir_planks",
     "leg": "biomesoplenty:block/fir_log",
     "rim": "biomesoplenty:block/fir_log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
 }

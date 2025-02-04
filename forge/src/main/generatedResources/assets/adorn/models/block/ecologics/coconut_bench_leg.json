@@ -3,5 +3,12 @@
   "textures": {
     "log": "ecologics:block/coconut_log",
     "end": "ecologics:block/coconut_log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ecologics"
+    }
+  ]
+
 }

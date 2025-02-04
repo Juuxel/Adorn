@@ -4,5 +4,12 @@
     "planks": "byg:block/skyris/planks",
     "leg": "byg:block/skyris/log",
     "rim": "byg:block/skyris/log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

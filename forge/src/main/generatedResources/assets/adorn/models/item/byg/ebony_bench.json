@@ -4,5 +4,12 @@
     "planks": "byg:block/ebony/planks",
     "log": "byg:block/ebony/log",
     "end": "byg:block/ebony/log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

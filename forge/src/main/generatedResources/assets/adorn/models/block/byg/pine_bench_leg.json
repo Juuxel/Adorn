@@ -3,5 +3,12 @@
   "textures": {
     "log": "byg:block/pine/log",
     "end": "byg:block/pine/log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

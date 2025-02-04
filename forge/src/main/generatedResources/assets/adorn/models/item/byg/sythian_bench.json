@@ -4,5 +4,12 @@
     "planks": "byg:block/sythian/planks",
     "log": "byg:block/sythian/log",
     "end": "byg:block/sythian/log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

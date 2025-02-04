@@ -4,5 +4,12 @@
     "side": "biomesoplenty:block/black_sandstone",
     "up": "biomesoplenty:block/black_sandstone_top",
     "down": "biomesoplenty:block/black_sandstone_bottom"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
 }

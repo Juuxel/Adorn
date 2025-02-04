@@ -3,5 +3,12 @@
   "textures": {
     "log": "biomesoplenty:block/fir_log",
     "end": "biomesoplenty:block/fir_log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
 }

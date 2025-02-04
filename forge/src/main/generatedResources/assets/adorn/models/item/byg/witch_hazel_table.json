@@ -3,5 +3,12 @@
   "textures": {
     "planks": "byg:block/witch_hazel/planks",
     "log": "byg:block/witch_hazel/log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

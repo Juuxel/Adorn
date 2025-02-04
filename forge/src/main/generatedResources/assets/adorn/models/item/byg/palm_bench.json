@@ -4,5 +4,12 @@
     "planks": "byg:block/palm/planks",
     "log": "byg:block/palm/log",
     "end": "byg:block/palm/log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

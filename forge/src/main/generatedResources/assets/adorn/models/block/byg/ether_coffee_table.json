@@ -4,5 +4,12 @@
     "planks": "byg:block/ether/planks",
     "leg": "byg:block/ether/log",
     "rim": "byg:block/ether/log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

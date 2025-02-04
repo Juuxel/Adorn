@@ -3,5 +3,12 @@
   "textures": {
     "log": "biomemakeover:block/ancient_oak_log",
     "end": "biomemakeover:block/ancient_oak_log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomemakeover"
+    }
+  ]
+
 }

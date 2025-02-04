@@ -3,5 +3,12 @@
   "textures": {
     "log": "byg:block/baobab/log",
     "end": "byg:block/baobab/log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

@@ -2,5 +2,12 @@
   "parent": "adorn:block/templates/post",
   "textures": {
     "texture": "byg:block/rocky_stone"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

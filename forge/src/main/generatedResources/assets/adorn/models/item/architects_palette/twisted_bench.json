@@ -4,5 +4,12 @@
     "planks": "architects_palette:block/twisted_planks",
     "log": "architects_palette:block/twisted_log",
     "end": "architects_palette:block/twisted_log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "architects_palette"
+    }
+  ]
+
 }

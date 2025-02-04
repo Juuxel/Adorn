@@ -4,5 +4,12 @@
     "planks": "byg:block/bulbis/planks",
     "leg": "byg:block/bulbis/log",
     "rim": "byg:block/bulbis/log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

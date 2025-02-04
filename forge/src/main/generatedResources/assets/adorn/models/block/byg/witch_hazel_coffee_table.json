@@ -4,5 +4,12 @@
     "planks": "byg:block/witch_hazel/planks",
     "leg": "byg:block/witch_hazel/log",
     "rim": "byg:block/witch_hazel/log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

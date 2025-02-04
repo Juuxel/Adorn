@@ -4,5 +4,12 @@
     "planks": "biomesoplenty:block/willow_planks",
     "leg": "biomesoplenty:block/willow_log",
     "rim": "biomesoplenty:block/willow_log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
 }

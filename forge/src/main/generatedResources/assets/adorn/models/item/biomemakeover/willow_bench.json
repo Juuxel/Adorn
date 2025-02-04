@@ -4,5 +4,12 @@
     "planks": "biomemakeover:block/willow_planks",
     "log": "biomemakeover:block/willow_log",
     "end": "biomemakeover:block/willow_log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomemakeover"
+    }
+  ]
+
 }

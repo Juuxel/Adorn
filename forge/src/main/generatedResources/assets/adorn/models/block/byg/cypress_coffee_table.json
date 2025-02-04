@@ -4,5 +4,12 @@
     "planks": "byg:block/cypress/planks",
     "leg": "byg:block/cypress/log",
     "rim": "byg:block/cypress/log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

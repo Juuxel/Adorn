@@ -4,5 +4,12 @@
     "planks": "byg:block/blue_enchanted/planks",
     "leg": "byg:block/blue_enchanted/log",
     "rim": "byg:block/blue_enchanted/log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

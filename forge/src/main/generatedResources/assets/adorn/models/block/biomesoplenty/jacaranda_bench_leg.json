@@ -3,5 +3,12 @@
   "textures": {
     "log": "biomesoplenty:block/jacaranda_log",
     "end": "biomesoplenty:block/jacaranda_log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
 }

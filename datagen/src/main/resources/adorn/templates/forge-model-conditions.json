@@ -1,5 +1,5 @@
 ,
-  "neoforge:conditions": [
+  "adorn:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "<mod-id>"

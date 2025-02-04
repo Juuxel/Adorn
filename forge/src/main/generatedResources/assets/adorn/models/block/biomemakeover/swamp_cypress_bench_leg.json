@@ -3,5 +3,12 @@
   "textures": {
     "log": "biomemakeover:block/swamp_cypress_log",
     "end": "biomemakeover:block/swamp_cypress_log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomemakeover"
+    }
+  ]
+
 }

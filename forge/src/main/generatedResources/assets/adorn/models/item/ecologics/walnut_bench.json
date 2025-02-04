@@ -4,5 +4,12 @@
     "planks": "ecologics:block/walnut_planks",
     "log": "ecologics:block/walnut_log",
     "end": "ecologics:block/walnut_log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ecologics"
+    }
+  ]
+
 }

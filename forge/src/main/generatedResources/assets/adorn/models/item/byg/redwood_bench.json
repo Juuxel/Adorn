@@ -4,5 +4,12 @@
     "planks": "byg:block/redwood/planks",
     "log": "byg:block/redwood/log",
     "end": "byg:block/redwood/log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

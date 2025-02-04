@@ -3,5 +3,12 @@
   "textures": {
     "planks": "biomesoplenty:block/dead_planks",
     "log": "biomesoplenty:block/dead_log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
 }

@@ -3,5 +3,12 @@
   "textures": {
     "planks": "biomesoplenty:block/willow_planks",
     "log": "biomesoplenty:block/willow_log"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
 }

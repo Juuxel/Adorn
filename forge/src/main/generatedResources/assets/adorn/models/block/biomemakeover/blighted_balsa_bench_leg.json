@@ -3,5 +3,12 @@
   "textures": {
     "log": "biomemakeover:block/blighted_balsa_log",
     "end": "biomemakeover:block/blighted_balsa_log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomemakeover"
+    }
+  ]
+
 }

@@ -3,5 +3,12 @@
   "textures": {
     "log": "byg:block/bulbis/log",
     "end": "byg:block/bulbis/log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

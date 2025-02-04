@@ -3,5 +3,12 @@
   "textures": {
     "log": "byg:block/rainbow_eucalyptus/log",
     "end": "byg:block/rainbow_eucalyptus/log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ]
+
 }

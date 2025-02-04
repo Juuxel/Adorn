@@ -3,5 +3,12 @@
   "textures": {
     "log": "biomesoplenty:block/willow_log",
     "end": "biomesoplenty:block/willow_log_top"
-  }
+  },
+  "adorn:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
 }
