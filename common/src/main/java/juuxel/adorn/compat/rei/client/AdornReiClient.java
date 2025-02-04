@@ -2,14 +2,9 @@ package juuxel.adorn.compat.rei.client;
 
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.compat.rei.AdornReiServer;
-import juuxel.adorn.compat.rei.BrewerDisplay;
 import juuxel.adorn.lib.AdornTags;
-import juuxel.adorn.recipe.AdornRecipeTypes;
-import juuxel.adorn.recipe.FluidBrewingRecipe;
-import juuxel.adorn.recipe.ItemBrewingRecipe;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
-import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.client.registry.entry.CollapsibleEntryRegistry;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
@@ -24,12 +19,6 @@ public class AdornReiClient implements REIClientPlugin {
     public void registerCategories(CategoryRegistry registry) {
         registry.add(new BrewerCategory());
         registry.addWorkstations(AdornReiServer.BREWER, EntryStacks.of(AdornBlocks.BREWER.get()));
-    }
-
-    @Override
-    public void registerDisplays(DisplayRegistry registry) {
-        registry.registerRecipeFiller(ItemBrewingRecipe.class, AdornRecipeTypes.BREWING.get(), entry -> new BrewerDisplay(entry.value()));
-        registry.registerRecipeFiller(FluidBrewingRecipe.class, AdornRecipeTypes.BREWING.get(), entry -> new BrewerDisplay(entry.value()));
     }
 
     @Override

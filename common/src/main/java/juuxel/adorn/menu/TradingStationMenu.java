@@ -11,8 +11,8 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.menu.Menu;
 import net.minecraft.menu.MenuContext;
-import net.minecraft.menu.Slot;
-import net.minecraft.menu.SlotActionType;
+import net.minecraft.menu.slot.Slot;
+import net.minecraft.menu.slot.SlotActionType;
 
 public final class TradingStationMenu extends Menu {
     private final MenuContext context;

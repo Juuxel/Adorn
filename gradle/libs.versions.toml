@@ -5,8 +5,8 @@ fabric-loader = "0.16.10"
 fabric-api = "0.114.0+1.21.3"
 jankson = "1.2.1"
 modmenu = "12.0.0-beta.1"
-neoforge = "21.3.2-beta"
-rei = "16.0.744"
+neoforge = "21.3.60"
+rei = "17.0.794"
 towelette = "e5e39eb"
 
 [libraries]
@@ -29,4 +29,5 @@ modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 rei-annotations = { module = "me.shedaniel:REIPluginCompatibilities-forge-annotations", version = "12.0.54" }
 rei-common = { module = "me.shedaniel:RoughlyEnoughItems-api", version.ref = "rei" }
 rei-neoforge = { module = "me.shedaniel:RoughlyEnoughItems-api-neoforge", version.ref = "rei" }
+rei-fabric = { module = "me.shedaniel:RoughlyEnoughItems-fabric", version.ref = "rei" }
 towelette = { module = "com.github.Virtuoel:Towelette", version.ref = "towelette" }

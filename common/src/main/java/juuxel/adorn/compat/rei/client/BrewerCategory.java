@@ -14,6 +14,7 @@ import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -52,10 +53,10 @@ public final class BrewerCategory implements DisplayCategory<BrewerDisplay> {
         widgets.add(Widgets.createRecipeBase(bounds));
         widgets.add(
             Widgets.createDrawableWidget((context, _0, _1, _2) -> {
-                context.drawTexture(currentTexture(), topLeft.x, topLeft.y, 49, 16, 105, 61);
+                context.drawTexture(RenderLayer::getGuiTextured, currentTexture(), topLeft.x, topLeft.y, 49, 16, 105, 61, 256, 256);
                 float progressFraction = (System.currentTimeMillis() % 4000) / 4000f;
                 int height = Math.round(progressFraction * 25);
-                context.drawTexture(currentTexture(), topLeft.x + 35, topLeft.y + 8, 176, 0, 8, height);
+                context.drawTexture(RenderLayer::getGuiTextured, currentTexture(), topLeft.x + 35, topLeft.y + 8, 176, 0, 8, height, 256, 256);
             })
         );
         widgets.add(
@@ -93,7 +94,7 @@ public final class BrewerCategory implements DisplayCategory<BrewerDisplay> {
             Widgets.createDrawableWidget((context, _0, _1, _2) -> {
                 context.getMatrices().push();
                 context.getMatrices().translate(0f, 0f, FLUID_SCALE_Z_OFFSET);
-                context.drawTexture(currentTexture(), topLeft.x + 88, topLeft.y + 1, 154, 17, 16, BrewerScreen.FLUID_AREA_HEIGHT);
+                context.drawTexture(RenderLayer::getGuiTextured, currentTexture(), topLeft.x + 88, topLeft.y + 1, 154, 17, 16, BrewerScreen.FLUID_AREA_HEIGHT, 256, 256);
                 context.getMatrices().pop();
             })
         );

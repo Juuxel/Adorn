@@ -5,6 +5,7 @@ import juuxel.adorn.lib.AdornGameRules;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,7 +22,7 @@ abstract class PlayerEntityMixin extends LivingEntity {
     private void onCanResetTimeBySleeping(CallbackInfoReturnable<Boolean> info) {
         // Allow sleeping on sofas at daytime and (depending on config)
         // prevent skipping the night on sofas
-        var world = getWorld();
+        if (!(getWorld() instanceof ServerWorld world)) return;
         boolean skipNight = world.getGameRules().getBoolean(AdornGameRules.SKIP_NIGHT_ON_SOFAS);
         if (info.getReturnValueZ() && (!skipNight || world.isDay()) &&
             getSleepingPosition().map(pos -> world.getBlockState(pos).getBlock() instanceof SofaBlock).orElse(false)) {

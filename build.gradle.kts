@@ -143,6 +143,10 @@ subprojects {
             options.release.set(21)
         }
 
+        withType<net.fabricmc.loom.task.GenerateSourcesTask> {
+            useCache.set(false)
+        }
+
         // Include the license in the jar files.
         // See the dependencies section above for why this is in quotes.
         "jar"(Jar::class) {

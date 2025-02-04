@@ -13,9 +13,9 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.menu.Menu;
-import net.minecraft.menu.Slot;
 import net.minecraft.menu.property.ArrayPropertyDelegate;
 import net.minecraft.menu.property.PropertyDelegate;
+import net.minecraft.menu.slot.Slot;
 import org.jetbrains.annotations.Nullable;
 
 public final class BrewerMenu extends Menu {

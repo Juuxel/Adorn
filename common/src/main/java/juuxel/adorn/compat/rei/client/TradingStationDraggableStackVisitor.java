@@ -11,7 +11,7 @@ import me.shedaniel.rei.api.client.gui.drag.DraggingContext;
 import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.ItemStack;
-import net.minecraft.menu.Slot;
+import net.minecraft.menu.slot.Slot;
 
 import java.util.stream.Stream;
 

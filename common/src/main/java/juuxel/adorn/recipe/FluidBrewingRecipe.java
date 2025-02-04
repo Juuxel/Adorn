@@ -2,15 +2,19 @@ package juuxel.adorn.recipe;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.fluid.FluidIngredient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.display.RecipeDisplay;
+import net.minecraft.recipe.display.SlotDisplay;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.world.World;
 
+import java.util.List;
 import java.util.Optional;
 
 import static juuxel.adorn.block.entity.BrewerBlockEntity.LEFT_INGREDIENT_SLOT;
@@ -39,6 +43,19 @@ public record FluidBrewingRecipe(Ingredient firstIngredient, Optional<Ingredient
     @Override
     public RecipeSerializer<FluidBrewingRecipe> getSerializer() {
         return AdornRecipeSerializers.BREWING_FROM_FLUID.get();
+    }
+
+    @Override
+    public List<RecipeDisplay> getDisplays() {
+        return List.of(
+            new BrewingRecipeDisplay(
+                firstIngredient.toDisplay(),
+                secondIngredient.map(Ingredient::toDisplay).orElse(SlotDisplay.EmptySlotDisplay.INSTANCE),
+                new FluidIngredientSlotDisplay(fluid),
+                new SlotDisplay.StackSlotDisplay(result),
+                new SlotDisplay.ItemSlotDisplay(AdornBlocks.BREWER.get().asItem())
+            )
+        );
     }
 
     public static final class Serializer implements RecipeSerializer<FluidBrewingRecipe> {

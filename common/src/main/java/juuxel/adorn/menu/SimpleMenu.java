@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.menu.Menu;
 import net.minecraft.menu.MenuContext;
 import net.minecraft.menu.MenuType;
-import net.minecraft.menu.Slot;
+import net.minecraft.menu.slot.Slot;
 
 public abstract class SimpleMenu extends Menu implements ContainerBlockMenu {
     private final int width;

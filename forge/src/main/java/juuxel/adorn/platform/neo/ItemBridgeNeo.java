@@ -6,6 +6,6 @@ import net.minecraft.item.ItemStack;
 public final class ItemBridgeNeo implements ItemBridge {
     @Override
     public ItemStack getRecipeRemainder(ItemStack stack) {
-        return stack.hasCraftingRemainingItem() ? stack.getCraftingRemainingItem() : ItemStack.EMPTY;
+        return stack.getCraftingRemainder();
     }
 }

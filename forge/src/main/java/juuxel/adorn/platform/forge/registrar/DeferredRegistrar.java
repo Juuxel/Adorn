@@ -5,6 +5,7 @@ import juuxel.adorn.AdornCommon;
 import juuxel.adorn.lib.registry.Registered;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.util.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.extensions.IHolderExtension;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -13,6 +14,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public final class DeferredRegistrar<T> implements ForgeRegistrar<T> {
@@ -26,6 +28,12 @@ public final class DeferredRegistrar<T> implements ForgeRegistrar<T> {
     @Override
     public void hook(IEventBus modBus) {
         register.register(modBus);
+    }
+
+    @Override
+    public <U extends T> Registered.WithKey<T, U> register(String id, Function<? super RegistryKey<T>, ? extends U> provider) {
+        var key = RegistryKey.of(register.getRegistryKey(), Identifier.of(register.getNamespace(), id));
+        return register(id, () -> provider.apply(key));
     }
 
     @Override

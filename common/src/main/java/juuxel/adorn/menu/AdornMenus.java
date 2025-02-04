@@ -12,7 +12,7 @@ import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.util.math.BlockPos;
 
 public final class AdornMenus {
-    public static final Registrar<MenuType<?>> MENUS = RegistrarFactory.get().create(RegistryKeys.SCREEN_HANDLER);
+    public static final Registrar<MenuType<?>> MENUS = RegistrarFactory.get().create(RegistryKeys.MENU);
     public static final Registered<MenuType<DrawerMenu>> DRAWER =
         MENUS.register("drawer", () -> createType(DrawerMenu::load));
     public static final Registered<MenuType<KitchenCupboardMenu>> KITCHEN_CUPBOARD =

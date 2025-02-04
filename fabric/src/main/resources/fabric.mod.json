@@ -24,10 +24,10 @@
     "modmenu": [
       "juuxel.adorn.compat.modmenu.AdornModMenuPlugin"
     ],
-    "rei_common_disabled": [
+    "rei_common": [
       "juuxel.adorn.compat.rei.AdornReiServer"
     ],
-    "rei_client_disabled": [
+    "rei_client": [
       "juuxel.adorn.compat.rei.client.AdornReiClient"
     ],
     "emi_disabled": [
