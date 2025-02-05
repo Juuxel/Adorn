@@ -1,0 +1,19 @@
+{
+    "recipes": [
+        "adorn:stonecutting/traverse/fir_platform",
+        "adorn:stonecutting/traverse/fir_post",
+        "adorn:stonecutting/traverse/fir_step",
+        "adorn:traverse/fir_bench",
+        "adorn:traverse/fir_chair",
+        "adorn:traverse/fir_coffee_table",
+        "adorn:traverse/fir_drawer",
+        "adorn:traverse/fir_kitchen_counter",
+        "adorn:traverse/fir_kitchen_cupboard",
+        "adorn:traverse/fir_kitchen_sink",
+        "adorn:traverse/fir_platform",
+        "adorn:traverse/fir_post",
+        "adorn:traverse/fir_shelf",
+        "adorn:traverse/fir_step",
+        "adorn:traverse/fir_table"
+    ]
+}

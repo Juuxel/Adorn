@@ -1,0 +1,19 @@
+{
+    "recipes": [
+        "adorn:blockus/white_oak_bench",
+        "adorn:blockus/white_oak_chair",
+        "adorn:blockus/white_oak_coffee_table",
+        "adorn:blockus/white_oak_drawer",
+        "adorn:blockus/white_oak_kitchen_counter",
+        "adorn:blockus/white_oak_kitchen_cupboard",
+        "adorn:blockus/white_oak_kitchen_sink",
+        "adorn:blockus/white_oak_platform",
+        "adorn:blockus/white_oak_post",
+        "adorn:blockus/white_oak_shelf",
+        "adorn:blockus/white_oak_step",
+        "adorn:blockus/white_oak_table",
+        "adorn:stonecutting/blockus/white_oak_platform",
+        "adorn:stonecutting/blockus/white_oak_post",
+        "adorn:stonecutting/blockus/white_oak_step"
+    ]
+}

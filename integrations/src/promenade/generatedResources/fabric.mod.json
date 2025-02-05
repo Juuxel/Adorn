@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "adorn_integrations_promenade",
+  "name": "Adorn Integrations: Promenade",
+  "version": "6.0.0+1.21.3",
+  "description": "Integrates materials from Promenade into Adorn.",
+  "authors": ["Juuz"],
+  "license": "MIT",
+  "contact": {
+    "homepage": "https://modrinth.com/mod/adorn",
+    "sources": "https://github.com/Juuxel/Adorn",
+    "issues": "https://github.com/Juuxel/Adorn/issues"
+  },
+  "icon": "assets/adorn/icon.png",
+
+  "depends": {
+    "adorn": "*",
+    "promenade": "*"
+  }
+}

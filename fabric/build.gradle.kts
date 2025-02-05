@@ -1,6 +1,5 @@
 plugins {
     id("adorn-data-generator")
-    id("adorn-data-generator.emi")
     id("adorn-minify-json")
     id("adorn-service-inline")
 }
@@ -47,10 +46,6 @@ loom {
             property("adorn.data.tagConfigDirs", tagConfigDirs.joinToString(",") { it.absolutePath })
         }
     }
-}
-
-emiDataGenerator {
-    setupForPlatform()
 }
 
 // Set up various Maven repositories for mod compat.

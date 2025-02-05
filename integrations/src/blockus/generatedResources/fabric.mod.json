@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "adorn_integrations_blockus",
+  "name": "Adorn Integrations: Blockus",
+  "version": "6.0.0+1.21.3",
+  "description": "Integrates materials from Blockus into Adorn.",
+  "authors": ["Juuz"],
+  "license": "MIT",
+  "contact": {
+    "homepage": "https://modrinth.com/mod/adorn",
+    "sources": "https://github.com/Juuxel/Adorn",
+    "issues": "https://github.com/Juuxel/Adorn/issues"
+  },
+  "icon": "assets/adorn/icon.png",
+
+  "depends": {
+    "adorn": "*",
+    "blockus": "*"
+  }
+}

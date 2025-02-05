@@ -1,0 +1,19 @@
+{
+    "recipes": [
+        "adorn:stonecutting/woods_and_mires/pine_platform",
+        "adorn:stonecutting/woods_and_mires/pine_post",
+        "adorn:stonecutting/woods_and_mires/pine_step",
+        "adorn:woods_and_mires/pine_bench",
+        "adorn:woods_and_mires/pine_chair",
+        "adorn:woods_and_mires/pine_coffee_table",
+        "adorn:woods_and_mires/pine_drawer",
+        "adorn:woods_and_mires/pine_kitchen_counter",
+        "adorn:woods_and_mires/pine_kitchen_cupboard",
+        "adorn:woods_and_mires/pine_kitchen_sink",
+        "adorn:woods_and_mires/pine_platform",
+        "adorn:woods_and_mires/pine_post",
+        "adorn:woods_and_mires/pine_shelf",
+        "adorn:woods_and_mires/pine_step",
+        "adorn:woods_and_mires/pine_table"
+    ]
+}

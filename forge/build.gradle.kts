@@ -1,6 +1,5 @@
 plugins {
     id("adorn-data-generator")
-    id("adorn-data-generator.emi")
     id("adorn-minify-json")
     id("adorn-service-inline")
 }
@@ -8,10 +7,6 @@ plugins {
 loom {
     // Make the Forge project use the common access widener.
     accessWidenerPath.set(project(":common").file("src/main/resources/adorn.accesswidener"))
-}
-
-emiDataGenerator {
-    setupForPlatform()
 }
 
 repositories {

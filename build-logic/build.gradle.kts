@@ -23,9 +23,14 @@ gradlePlugin {
             implementationClass = "juuxel.adorn.gradle.DataGeneratorPlugin"
         }
 
-        register("adorn-data-generator.emi") {
-            id = "adorn-data-generator.emi"
-            implementationClass = "juuxel.adorn.gradle.EmiDataGeneratorPlugin"
+        register("adorn-data-generator.modular") {
+            id = "adorn-data-generator.modular"
+            implementationClass = "juuxel.adorn.gradle.ModularDataGeneratorPlugin"
+        }
+
+        register("adorn-compat") {
+            id = "adorn-compat"
+            implementationClass = "juuxel.adorn.gradle.CompatPlugin"
         }
 
         register("adorn-minify-json") {
