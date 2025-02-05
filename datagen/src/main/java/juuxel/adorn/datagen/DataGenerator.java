@@ -53,6 +53,7 @@ public final class DataGenerator {
                     it.set("loot-table-condition", "<load-condition>");
                     it.set("recipe-condition", "<load-condition>");
                     it.set("load-condition", "");
+                    it.set("model_condition", "");
 
                     conditionType.getConditionsInFileTemplatePathsByType().forEach((type, path) -> {
                         it.set(type, templateCache.load(path));
