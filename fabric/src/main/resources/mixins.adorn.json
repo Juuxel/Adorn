@@ -8,9 +8,6 @@
   "mixins": [
     "fluidloggable.FluidUtilMixin"
   ],
-  "client": [
-    "client.JsonUnbakedModelDeserializerMixin"
-  ],
 
   "injectors": {
     "defaultRequire": 1
