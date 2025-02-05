@@ -3,10 +3,5 @@
   "textures": {
     "planks": "promenade:block/palm/planks",
     "log": "promenade:block/palm/log/side"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["promenade"]
-  }]
-
+  }
 }

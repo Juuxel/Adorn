@@ -4,10 +4,5 @@
     "planks": "byg:block/cypress/planks",
     "leg": "byg:block/cypress/log",
     "rim": "byg:block/cypress/log"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

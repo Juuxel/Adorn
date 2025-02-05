@@ -2,10 +2,5 @@
   "parent": "adorn:block/templates/post",
   "textures": {
     "texture": "blockus:block/white_oak_planks"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["blockus"]
-  }]
-
+  }
 }

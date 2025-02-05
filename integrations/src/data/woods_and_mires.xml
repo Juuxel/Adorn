@@ -1,4 +1,4 @@
-<data_generators condition_type="fabric">
+<data_generators>
     <wood id="woods_and_mires:pine">
         <exclude generator="block_models/kitchen_counter"/>
         <exclude generator="block_models/kitchen_sink"/>

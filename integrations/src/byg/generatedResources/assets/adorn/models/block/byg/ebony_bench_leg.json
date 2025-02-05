@@ -3,10 +3,5 @@
   "textures": {
     "log": "byg:block/ebony/log",
     "end": "byg:block/ebony/log_top"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

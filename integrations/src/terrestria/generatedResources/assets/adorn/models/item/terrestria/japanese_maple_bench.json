@@ -4,10 +4,5 @@
     "planks": "terrestria:block/japanese_maple_planks",
     "log": "terrestria:block/japanese_maple_log",
     "end": "terrestria:block/japanese_maple_log_top"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["terrestria"]
-  }]
-
+  }
 }

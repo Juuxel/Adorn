@@ -2,10 +2,5 @@
   "parent": "adorn:block/templates/chair_lower",
   "textures": {
     "planks": "byg:block/green_enchanted/planks"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

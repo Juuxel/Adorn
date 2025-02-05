@@ -4,10 +4,5 @@
     "planks": "byg:block/embur/planks",
     "leg": "byg:block/embur/log",
     "rim": "byg:block/embur/log"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

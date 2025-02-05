@@ -2,10 +2,5 @@
   "parent": "adorn:block/templates/chair_upper",
   "textures": {
     "planks": "byg:block/mahogany/planks"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

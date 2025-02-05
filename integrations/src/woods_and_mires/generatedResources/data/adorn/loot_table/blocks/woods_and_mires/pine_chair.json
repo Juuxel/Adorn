@@ -24,10 +24,5 @@
         }
       ]
     }
-  ],
-  "fabric:load_conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["woods_and_mires"]
-  }]
-
+  ]
 }

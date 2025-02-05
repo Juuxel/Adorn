@@ -4,10 +4,5 @@
     "planks": "byg:block/cherry/planks",
     "leg": "byg:block/cherry/log",
     "rim": "byg:block/cherry/log"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

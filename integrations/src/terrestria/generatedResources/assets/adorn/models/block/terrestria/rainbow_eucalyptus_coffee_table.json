@@ -4,10 +4,5 @@
     "planks": "terrestria:block/rainbow_eucalyptus_planks",
     "leg": "terrestria:block/rainbow_eucalyptus_log",
     "rim": "terrestria:block/rainbow_eucalyptus_log"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["terrestria"]
-  }]
-
+  }
 }

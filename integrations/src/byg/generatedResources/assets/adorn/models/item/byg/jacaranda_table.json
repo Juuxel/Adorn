@@ -3,10 +3,5 @@
   "textures": {
     "planks": "byg:block/jacaranda/planks",
     "log": "byg:block/jacaranda/log"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

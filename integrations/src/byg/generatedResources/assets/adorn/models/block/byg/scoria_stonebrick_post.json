@@ -2,10 +2,5 @@
   "parent": "adorn:block/templates/post",
   "textures": {
     "texture": "byg:block/scoria_stone_bricks"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

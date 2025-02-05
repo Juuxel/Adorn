@@ -4,10 +4,5 @@
     "planks": "byg:block/redwood/planks",
     "log": "byg:block/redwood/log",
     "end": "byg:block/redwood/log_top"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

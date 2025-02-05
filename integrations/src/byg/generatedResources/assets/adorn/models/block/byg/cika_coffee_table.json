@@ -4,10 +4,5 @@
     "planks": "byg:block/cika/planks",
     "leg": "byg:block/cika/log",
     "rim": "byg:block/cika/log"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

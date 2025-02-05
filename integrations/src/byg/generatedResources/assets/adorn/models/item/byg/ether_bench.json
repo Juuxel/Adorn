@@ -4,10 +4,5 @@
     "planks": "byg:block/ether/planks",
     "log": "byg:block/ether/log",
     "end": "byg:block/ether/log_top"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

@@ -4,10 +4,5 @@
     "planks": "byg:block/mahogany/planks",
     "log": "byg:block/mahogany/log",
     "end": "byg:block/mahogany/log_top"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

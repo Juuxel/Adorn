@@ -2,10 +2,5 @@
   "parent": "adorn:block/templates/post",
   "textures": {
     "texture": "cinderscapes:block/umbral_planks"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["cinderscapes"]
-  }]
-
+  }
 }

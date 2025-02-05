@@ -4,10 +4,5 @@
     "planks": "terrestria:block/hemlock_planks",
     "leg": "terrestria:block/hemlock_log",
     "rim": "terrestria:block/hemlock_log"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["terrestria"]
-  }]
-
+  }
 }

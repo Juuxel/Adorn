@@ -30,10 +30,5 @@
       "has_scoria_stonebricks",
       "has_the_recipe"
     ]
-  ],
-  "fabric:load_conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  ]
 }

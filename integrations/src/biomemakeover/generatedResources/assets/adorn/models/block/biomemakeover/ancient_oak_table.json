@@ -2,10 +2,5 @@
   "parent": "adorn:block/templates/table",
   "textures": {
     "planks": "biomemakeover:block/ancient_oak_planks"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["biomemakeover"]
-  }]
-
+  }
 }

@@ -4,10 +4,5 @@
     "planks": "terrestria:block/cypress_planks",
     "leg": "terrestria:block/cypress_log",
     "rim": "terrestria:block/cypress_log"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["terrestria"]
-  }]
-
+  }
 }

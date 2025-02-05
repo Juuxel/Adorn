@@ -13,10 +13,5 @@
   "result": {
     "id": "adorn:promenade/dark_amaranth_coffee_table",
     "count": 2
-  },
-  "fabric:load_conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["promenade"]
-  }]
-
+  }
 }

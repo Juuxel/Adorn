@@ -8,10 +8,5 @@
   "result": {
     "id": "adorn:woods_and_mires/pine_kitchen_sink",
     "count": 1
-  },
-  "fabric:load_conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["woods_and_mires"]
-  }]
-
+  }
 }

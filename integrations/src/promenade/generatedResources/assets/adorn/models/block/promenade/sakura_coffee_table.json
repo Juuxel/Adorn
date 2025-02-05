@@ -4,10 +4,5 @@
     "planks": "promenade:block/sakura/planks",
     "leg": "promenade:block/sakura/log/side",
     "rim": "promenade:block/sakura/log/side"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["promenade"]
-  }]
-
+  }
 }

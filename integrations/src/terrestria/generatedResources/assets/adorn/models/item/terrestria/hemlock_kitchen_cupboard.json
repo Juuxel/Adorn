@@ -2,10 +2,5 @@
   "parent": "adorn:item/templates/kitchen_cupboard",
   "textures": {
     "planks": "terrestria:block/hemlock_planks"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["terrestria"]
-  }]
-
+  }
 }

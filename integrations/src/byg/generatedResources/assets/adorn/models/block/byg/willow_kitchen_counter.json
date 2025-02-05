@@ -2,10 +2,5 @@
   "parent": "adorn:block/templates/kitchen_counter",
   "textures": {
     "planks": "byg:block/willow/planks"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

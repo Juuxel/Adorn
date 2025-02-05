@@ -4,10 +4,5 @@
     "planks": "cinderscapes:block/scorched_planks",
     "log": "cinderscapes:block/scorched_stem",
     "end": "cinderscapes:block/scorched_stem_top"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["cinderscapes"]
-  }]
-
+  }
 }

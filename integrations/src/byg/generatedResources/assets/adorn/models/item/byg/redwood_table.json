@@ -3,10 +3,5 @@
   "textures": {
     "planks": "byg:block/redwood/planks",
     "log": "byg:block/redwood/log"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

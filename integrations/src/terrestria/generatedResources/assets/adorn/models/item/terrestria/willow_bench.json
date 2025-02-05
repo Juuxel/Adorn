@@ -4,10 +4,5 @@
     "planks": "terrestria:block/willow_planks",
     "log": "terrestria:block/willow_log",
     "end": "terrestria:block/willow_log_top"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["terrestria"]
-  }]
-
+  }
 }

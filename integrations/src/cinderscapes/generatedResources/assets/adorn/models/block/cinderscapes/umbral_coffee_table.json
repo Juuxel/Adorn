@@ -4,10 +4,5 @@
     "planks": "cinderscapes:block/umbral_planks",
     "leg": "cinderscapes:block/umbral_stem",
     "rim": "cinderscapes:block/umbral_stem"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["cinderscapes"]
-  }]
-
+  }
 }

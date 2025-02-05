@@ -2,10 +2,5 @@
   "parent": "adorn:block/templates/table",
   "textures": {
     "planks": "byg:block/blue_enchanted/planks"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

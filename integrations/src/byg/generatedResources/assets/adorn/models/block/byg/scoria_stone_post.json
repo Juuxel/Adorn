@@ -4,10 +4,5 @@
     "side": "byg:block/scoria_stone",
     "up": "byg:block/scoria_stone_top",
     "down": "byg:block/scoria_stone_top"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

@@ -4,10 +4,5 @@
   "result": {
     "id": "adorn:byg/mahogany_platform",
     "count": 1
-  },
-  "fabric:load_conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

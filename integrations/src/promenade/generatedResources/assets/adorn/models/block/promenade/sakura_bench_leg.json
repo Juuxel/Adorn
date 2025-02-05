@@ -3,10 +3,5 @@
   "textures": {
     "log": "promenade:block/sakura/log/side",
     "end": "promenade:block/sakura/log/top"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["promenade"]
-  }]
-
+  }
 }

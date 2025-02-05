@@ -4,10 +4,5 @@
     "planks": "byg:block/zelkova/planks",
     "leg": "byg:block/zelkova/log",
     "rim": "byg:block/zelkova/log"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

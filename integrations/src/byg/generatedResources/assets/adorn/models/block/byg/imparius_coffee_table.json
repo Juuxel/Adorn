@@ -4,10 +4,5 @@
     "planks": "byg:block/imparius/planks",
     "leg": "byg:block/imparius/log",
     "rim": "byg:block/imparius/log"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }

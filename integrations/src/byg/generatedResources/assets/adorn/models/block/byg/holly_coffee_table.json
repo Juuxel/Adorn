@@ -4,10 +4,5 @@
     "planks": "byg:block/holly/planks",
     "leg": "byg:block/holly/log",
     "rim": "byg:block/holly/log"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["byg"]
-  }]
-
+  }
 }
