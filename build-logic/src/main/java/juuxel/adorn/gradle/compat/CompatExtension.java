@@ -35,14 +35,20 @@ public abstract class CompatExtension {
             task.getArchiveClassifier().set(modId.replace('_', '-'));
             task.doLast(new MinifyJson());
         });
+        project.getTasks().named("assemble", task -> task.dependsOn(jar));
 
-        var dataSettings = dataGenerator.getSettings().register(modId, settings -> {
-            settings.getSourceSet().set(compatSourceSet);
-            settings.getModId().set("adorn_integrations_" + modId);
-            settings.getConfigs().register("main", config -> {
-                config.getFiles().from("src/data/" + modId + ".xml");
+        var dataConfig = project.file("src/data/" + modId + ".xml");
+        boolean setupData = dataConfig.exists();
+
+        if (setupData) {
+            dataGenerator.getSettings().register(modId, settings -> {
+                settings.getSourceSet().set(compatSourceSet);
+                settings.getModId().set("adorn_integrations_" + modId);
+                settings.getConfigs().register("main", config -> {
+                    config.getFiles().from("src/data/" + modId + ".xml");
+                });
             });
-        });
+        }
 
         if (fabric) {
             project.getArtifacts().add(CompatPlugin.FABRIC_COMPAT_ARTIFACTS_CONFIGURATION, jar);
@@ -50,13 +56,9 @@ public abstract class CompatExtension {
             var generateFmj = project.getTasks().register(compatSourceSet.getTaskName("generate", "FabricModJson"), GenerateFabricModJson.class, task -> {
                 task.getTargetModId().set(modId);
                 task.getTargetModName().set(modName);
-                task.getOutputFile().set(dataSettings.get().getGeneratedResources().file("fabric.mod.json"));
+                task.getOutputFile().set(project.getLayout().getBuildDirectory().file("mod-metadata/" + modId + "/fabric.mod.json"));
             });
-
-            project.afterEvaluate(p -> {
-                generateFmj.configure(task -> task.dependsOn(compatSourceSet.getTaskName("generate", "MainData")));
-                project.getTasks().named(compatSourceSet.getTaskName("generate", "Data"), task -> task.dependsOn(generateFmj));
-            });
+            jar.configure(task -> task.from(generateFmj.flatMap(GenerateFabricModJson::getOutputFile)));
         }
 
         if (neo) {

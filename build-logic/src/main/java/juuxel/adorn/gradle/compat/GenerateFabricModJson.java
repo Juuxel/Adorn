@@ -42,7 +42,7 @@ public abstract class GenerateFabricModJson extends DefaultTask {
               "id": "%s",
               "name": "Adorn Integrations: %s",
               "version": "%s",
-              "description": "Integrates materials from %s into Adorn.",
+              "description": "Integrates features from %s into Adorn.",
               "authors": ["Juuz"],
               "license": "MIT",
               "contact": {
