@@ -2,15 +2,15 @@ package juuxel.adorn.compat.biomemakeover;
 
 import com.google.auto.service.AutoService;
 import juuxel.adorn.block.variant.BlockVariant;
-import juuxel.adorn.block.variant.BlockVariantSet;
 import juuxel.adorn.block.variant.CompatBlockVariantSet;
+import juuxel.adorn.block.variant.PrefixedBlockVariantSet;
 
 import java.util.List;
 
-@AutoService(BlockVariantSet.class)
-public final class BiomeMakeoverCompat extends CompatBlockVariantSet {
+@AutoService(CompatBlockVariantSet.class)
+public final class BiomeMakeoverCompat extends PrefixedBlockVariantSet {
     @Override
-    protected String getModId() {
+    public String getModId() {
         return "biomemakeover";
     }
 

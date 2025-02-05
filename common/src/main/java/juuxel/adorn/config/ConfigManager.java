@@ -38,6 +38,18 @@ public abstract class ConfigManager {
         return get().config;
     }
 
+    public static boolean isCompatEnabled(String modId) {
+        var compatMap = ConfigManager.config().compat;
+
+        if (!compatMap.containsKey(modId)) {
+            compatMap.put(modId, true);
+            ConfigManager.get().save();
+            return true;
+        }
+
+        return compatMap.get(modId);
+    }
+
     protected abstract Path getConfigDirectory();
 
     private Path getConfigPath() {

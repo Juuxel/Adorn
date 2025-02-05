@@ -1,11 +1,11 @@
 package juuxel.adorn.platform.forge.compat;
 
 import juuxel.adorn.block.variant.BlockVariant;
-import juuxel.adorn.block.variant.CompatBlockVariantSet;
+import juuxel.adorn.block.variant.PrefixedBlockVariantSet;
 
 import java.util.List;
 
-public final class BygCompat extends CompatBlockVariantSet {
+public final class BygCompat extends PrefixedBlockVariantSet {
     @Override
     protected String getModId() {
         return "byg";

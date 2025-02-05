@@ -15,6 +15,7 @@ import juuxel.adorn.block.PostBlock;
 import juuxel.adorn.block.ShelfBlock;
 import juuxel.adorn.block.StepBlock;
 import juuxel.adorn.block.TableBlock;
+import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.item.ChairBlockItem;
 import juuxel.adorn.item.TableBlockItem;
 import juuxel.adorn.lib.registry.Registered;
@@ -71,8 +72,10 @@ public final class BlockVariantSets {
     }
 
     public static void loadCompatSets() {
-        for (var set : ServiceLoader.load(BlockVariantSet.class)) {
-            add(set);
+        for (var set : ServiceLoader.load(CompatBlockVariantSet.class)) {
+            if (ConfigManager.isCompatEnabled(set.getModId())) {
+                add(set);
+            }
         }
     }
 

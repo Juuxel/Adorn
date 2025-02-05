@@ -10,20 +10,8 @@ public final class Compat {
         ifModLoaded("towelette", () -> ToweletteCompat.init());
     }
 
-    public static boolean isCompatEnabled(String mod) {
-        var compatMap = ConfigManager.config().compat;
-
-        if (!compatMap.containsKey(mod)) {
-            compatMap.put(mod, true);
-            ConfigManager.get().save();
-            return true;
-        }
-
-        return compatMap.get(mod);
-    }
-
     private static void ifModLoaded(String mod, Runnable fn) {
-        if (isCompatEnabled(mod) && FabricLoader.getInstance().isModLoaded(mod)) {
+        if (ConfigManager.isCompatEnabled(mod) && FabricLoader.getInstance().isModLoaded(mod)) {
             fn.run();
         }
     }

@@ -1,11 +1,11 @@
 package juuxel.adorn.platform.forge.compat;
 
 import juuxel.adorn.block.variant.BlockVariant;
-import juuxel.adorn.block.variant.CompatBlockVariantSet;
+import juuxel.adorn.block.variant.PrefixedBlockVariantSet;
 
 import java.util.List;
 
-public final class ArchitectsPaletteCompat extends CompatBlockVariantSet {
+public final class ArchitectsPaletteCompat extends PrefixedBlockVariantSet {
     @Override
     protected String getModId() {
         return "architects_palette";

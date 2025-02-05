@@ -1,11 +1,11 @@
 package juuxel.adorn.platform.forge.compat;
 
 import juuxel.adorn.block.variant.BlockVariant;
-import juuxel.adorn.block.variant.CompatBlockVariantSet;
+import juuxel.adorn.block.variant.PrefixedBlockVariantSet;
 
 import java.util.List;
 
-public final class BiomesOPlentyCompat extends CompatBlockVariantSet {
+public final class BiomesOPlentyCompat extends PrefixedBlockVariantSet {
     @Override
     protected String getModId() {
         return "biomesoplenty";

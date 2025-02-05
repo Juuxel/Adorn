@@ -18,20 +18,8 @@ public final class Compat {
         ((ForgeRegistrar<?>) BlockVariantSets.ITEMS).hook(modBus);
     }
 
-    public static boolean isCompatEnabled(String mod) {
-        var compatMap = ConfigManager.config().compat;
-
-        if (!compatMap.containsKey(mod)) {
-            compatMap.put(mod, true);
-            ConfigManager.get().save();
-            return true;
-        }
-
-        return compatMap.get(mod);
-    }
-
     private static void ifModLoaded(String mod, Runnable fn) {
-        if (isCompatEnabled(mod) && ModList.get().isLoaded(mod)) {
+        if (ConfigManager.isCompatEnabled(mod) && ModList.get().isLoaded(mod)) {
             fn.run();
         }
     }
