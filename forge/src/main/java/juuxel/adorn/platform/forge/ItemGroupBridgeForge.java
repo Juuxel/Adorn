@@ -44,10 +44,15 @@ public final class ItemGroupBridgeForge implements ItemGroupBridge {
                 @Override
                 public void addBefore(ItemConvertible before, List<? extends ItemConvertible> items) {
                     if (event.getTabKey().equals(group)) {
+                        var allEntries = event.getParentEntries();
                         var beforeStack = new ItemStack(before);
                         for (ItemConvertible item : items.reversed()) {
                             var stack = new ItemStack(item);
-                            event.insertBefore(beforeStack, stack, DEFAULT_STACK_VISIBILITY);
+                            if (allEntries.contains(beforeStack)) {
+                                event.insertBefore(beforeStack, stack, DEFAULT_STACK_VISIBILITY);
+                            } else {
+                                event.add(stack);
+                            }
                             beforeStack = stack;
                         }
                     }
@@ -56,10 +61,15 @@ public final class ItemGroupBridgeForge implements ItemGroupBridge {
                 @Override
                 public void addAfter(ItemConvertible after, List<? extends ItemConvertible> items) {
                     if (event.getTabKey().equals(group)) {
+                        var allEntries = event.getParentEntries();
                         var afterStack = new ItemStack(after);
                         for (ItemConvertible item : items) {
                             var stack = new ItemStack(item);
-                            event.insertAfter(afterStack, stack, DEFAULT_STACK_VISIBILITY);
+                            if (allEntries.contains(afterStack)) {
+                                event.insertAfter(afterStack, stack, DEFAULT_STACK_VISIBILITY);
+                            } else {
+                                event.add(stack);
+                            }
                             afterStack = stack;
                         }
                     }
