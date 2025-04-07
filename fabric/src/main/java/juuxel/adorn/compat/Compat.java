@@ -6,8 +6,16 @@ import net.fabricmc.loader.api.FabricLoader;
 
 public final class Compat {
     public static void init() {
-        BlockVariantSets.loadCompatSets();
+        ifModLoaded("byg", () -> BlockVariantSets.add(new BygCompat()));
+        ifModLoaded("terrestria", () -> BlockVariantSets.add(new TerrestriaCompat()));
         ifModLoaded("towelette", () -> ToweletteCompat.init());
+        ifModLoaded("traverse", () -> BlockVariantSets.add(new TraverseCompat()));
+        ifModLoaded("woods_and_mires", () -> BlockVariantSets.add(new WamCompat()));
+        ifModLoaded("biomemakeover", () -> BlockVariantSets.add(new BiomeMakeoverCompat()));
+        ifModLoaded("cinderscapes", () -> BlockVariantSets.add(new CinderscapesCompat()));
+        ifModLoaded("promenade", () -> BlockVariantSets.add(new PromenadeCompat()));
+        ifModLoaded("techreborn", () -> BlockVariantSets.add(new TechRebornCompat()));
+        ifModLoaded("blockus", () -> BlockVariantSets.add(new BlockusCompat()));
     }
 
     private static void ifModLoaded(String mod, Runnable fn) {

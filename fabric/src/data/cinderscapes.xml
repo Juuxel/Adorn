@@ -1,0 +1,5 @@
+<data_generators>
+    <overlay directory="adorn_integration_cinderscapes" mod_id="cinderscapes"/>
+    <wood id="cinderscapes:scorched" fungus="true" non_flammable="true"/>
+    <wood id="cinderscapes:umbral" fungus="true" non_flammable="true"/>
+</data_generators>

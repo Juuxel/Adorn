@@ -1,0 +1,4 @@
+<data_generators>
+    <overlay directory="adorn_integration_blockus" mod_id="blockus"/>
+    <wood id="blockus:white_oak"/>
+</data_generators>

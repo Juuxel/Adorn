@@ -28,5 +28,4 @@ include(
     "common",
     "fabric",
     "forge",
-    "integrations",
 )

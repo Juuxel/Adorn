@@ -1,6 +1,88 @@
 {
   "fabric:overlays": {
-    "entries": []
+    "entries": [
+      {
+        "condition": {
+          "condition": "fabric:all_mods_loaded",
+          "values": [
+            "biomemakeover"
+          ]
+        },
+        "directory": "adorn_integration_biomemakeover"
+      },
+      {
+        "condition": {
+          "condition": "fabric:all_mods_loaded",
+          "values": [
+            "blockus"
+          ]
+        },
+        "directory": "adorn_integration_blockus"
+      },
+      {
+        "condition": {
+          "condition": "fabric:all_mods_loaded",
+          "values": [
+            "byg"
+          ]
+        },
+        "directory": "adorn_integration_byg"
+      },
+      {
+        "condition": {
+          "condition": "fabric:all_mods_loaded",
+          "values": [
+            "cinderscapes"
+          ]
+        },
+        "directory": "adorn_integration_cinderscapes"
+      },
+      {
+        "condition": {
+          "condition": "fabric:all_mods_loaded",
+          "values": [
+            "promenade"
+          ]
+        },
+        "directory": "adorn_integration_promenade"
+      },
+      {
+        "condition": {
+          "condition": "fabric:all_mods_loaded",
+          "values": [
+            "techreborn"
+          ]
+        },
+        "directory": "adorn_integration_techreborn"
+      },
+      {
+        "condition": {
+          "condition": "fabric:all_mods_loaded",
+          "values": [
+            "terrestria"
+          ]
+        },
+        "directory": "adorn_integration_terrestria"
+      },
+      {
+        "condition": {
+          "condition": "fabric:all_mods_loaded",
+          "values": [
+            "traverse"
+          ]
+        },
+        "directory": "adorn_integration_traverse"
+      },
+      {
+        "condition": {
+          "condition": "fabric:all_mods_loaded",
+          "values": [
+            "woods_and_mires"
+          ]
+        },
+        "directory": "adorn_integration_woods_and_mires"
+      }
+    ]
   },
   "neoforge:overlays": {
     "entries": [

@@ -1,0 +1,6 @@
+<data_generators>
+    <overlay directory="adorn_integration_techreborn" mod_id="techreborn"/>
+    <wood id="techreborn:rubber">
+        <replace key="log_side" with="techreborn:block/rubber_log_side"/>
+    </wood>
+</data_generators>

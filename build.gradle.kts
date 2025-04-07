@@ -27,7 +27,7 @@ tasks {
     // for testing and releasing.
     val collectJars by registering(Copy::class) {
         // Find the remapJar tasks of projects that aren't common (so :fabric and :forge) and depend on them.
-        val tasks = subprojects.filter { it.path != ":common" && it.path != ":integrations" }
+        val tasks = subprojects.filter { it.path != ":common" }
             .map { it.tasks.named("remapJar") }
         dependsOn(tasks)
 
@@ -160,7 +160,7 @@ subprojects {
 
 // Set up "platform" subprojects (non-common subprojects).
 subprojects {
-    if (path != ":common" && path != ":integrations") {
+    if (path != ":common") {
         fun Project.sourceSets() = extensions.getByName<SourceSetContainer>("sourceSets")
 
         // Set a different run directory for the server run config,

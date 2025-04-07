@@ -1,0 +1,9 @@
+<data_generators>
+    <overlay directory="adorn_integration_woods_and_mires" mod_id="woods_and_mires"/>
+    <wood id="woods_and_mires:pine">
+        <exclude generator="block_models/kitchen_counter"/>
+        <exclude generator="block_models/kitchen_sink"/>
+        <exclude generator="item_models/kitchen_cupboard"/>
+        <exclude generator="recipes/kitchen_counter"/>
+    </wood>
+</data_generators>
