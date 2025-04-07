@@ -52,11 +52,11 @@ public final class ModularDataGeneratorPlugin implements Plugin<Project> {
 
                 for (File dir : resourceDirs) {
                     task.getRecipes().from(project.fileTree(dir, tree -> {
-                        tree.include("data/adorn/recipe/**");
+                        tree.include("**/data/adorn/recipe/**");
 
                         // The unpacking recipes create "uncraftable" vanilla items like
                         // nether wart, so exclude them.
-                        tree.exclude("data/adorn/recipe/crates/unpack/**");
+                        tree.exclude("**/data/adorn/recipe/crates/unpack/**");
                     }));
                 }
             });
