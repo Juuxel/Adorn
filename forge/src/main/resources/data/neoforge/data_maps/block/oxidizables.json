@@ -1,0 +1,13 @@
+{
+  "values": {
+    "adorn:copper_pipe": {
+      "next_oxidation_stage": "adorn:exposed_copper_pipe"
+    },
+    "adorn:exposed_copper_pipe": {
+      "next_oxidation_stage": "adorn:weathered_copper_pipe"
+    },
+    "adorn:weathered_copper_pipe": {
+      "next_oxidation_stage": "adorn:oxidized_copper_pipe"
+    }
+  }
+}
