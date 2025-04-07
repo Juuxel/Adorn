@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:item/templates/copper_pipe",
-  "textures": {
-    "pipe": "adorn:block/weathered_copper_pipe"
-  }
-}

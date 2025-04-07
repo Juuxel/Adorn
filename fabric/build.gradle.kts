@@ -34,7 +34,7 @@ loom {
 
     runs {
         register("commonData") {
-            inherit(getByName("server"))
+            inherit(getByName("client"))
             configName = "Common Data Generator"
             source("commonData")
             property("fabric-api.datagen")

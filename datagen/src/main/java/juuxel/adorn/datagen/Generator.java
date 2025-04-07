@@ -17,6 +17,7 @@ public record Generator(
         // Platforms
         blockState("platform"),
         itemModel("platform"),
+        itemAsset("platform"),
         blockLootTable("platform"),
         recipe("platform"),
         stonecuttingRecipe("platform"),
@@ -25,6 +26,7 @@ public record Generator(
         // Posts
         blockState("post"),
         itemModel("post"),
+        itemAsset("post"),
         blockLootTable("post"),
         recipe("post"),
         stonecuttingRecipe("post"),
@@ -33,6 +35,7 @@ public record Generator(
         // Steps
         blockState("step"),
         itemModel("step"),
+        itemAsset("step"),
         blockLootTable("step"),
         recipe("step"),
         stonecuttingRecipe("step"),
@@ -50,6 +53,7 @@ public record Generator(
         blockModel("bench_leg"),
         blockModel("bench_top"),
         itemModel("bench"),
+        itemAsset("bench"),
         blockLootTable("bench"),
         recipe("bench"),
         recipeAdvancement("bench"),
@@ -59,6 +63,7 @@ public record Generator(
         blockModel("chair_lower"),
         blockModel("chair_upper"),
         itemModel("chair"),
+        itemAsset("chair"),
         blockLootTable("chair"),
         recipe("chair"),
         recipeAdvancement("chair"),
@@ -67,6 +72,7 @@ public record Generator(
         blockState("coffee_table"),
         blockModel("coffee_table"),
         itemModel("coffee_table"),
+        itemAsset("coffee_table"),
         blockLootTable("coffee_table"),
         recipe("coffee_table"),
         recipeAdvancement("coffee_table"),
@@ -75,6 +81,7 @@ public record Generator(
         blockState("drawer"),
         blockModel("drawer"),
         itemModel("drawer"),
+        itemAsset("drawer"),
         blockLootTable("drawer"),
         recipe("drawer"),
         recipeAdvancement("drawer"),
@@ -85,6 +92,7 @@ public record Generator(
         blockModel("kitchen_counter_connection_left"),
         blockModel("kitchen_counter_connection_right"),
         itemModel("kitchen_counter"),
+        itemAsset("kitchen_counter"),
         blockLootTable("kitchen_counter"),
         recipe("kitchen_counter"),
         recipeAdvancement("kitchen_counter"),
@@ -93,6 +101,7 @@ public record Generator(
         blockState("kitchen_cupboard"),
         blockModel("kitchen_cupboard_door"),
         itemModel("kitchen_cupboard"),
+        itemAsset("kitchen_cupboard"),
         blockLootTable("kitchen_cupboard"),
         recipe("kitchen_cupboard"),
         recipeAdvancement("kitchen_cupboard"),
@@ -101,6 +110,7 @@ public record Generator(
         blockState("kitchen_sink"),
         blockModel("kitchen_sink"),
         itemModel("kitchen_sink"),
+        itemAsset("kitchen_sink"),
         blockLootTable("kitchen_sink"),
         recipe("kitchen_sink"),
         recipeAdvancement("kitchen_sink"),
@@ -109,6 +119,7 @@ public record Generator(
         blockState("shelf"),
         blockModel("shelf"),
         itemModel("shelf"),
+        itemAsset("shelf"),
         blockLootTable("shelf"),
         recipe("shelf"),
         recipeAdvancement("shelf"),
@@ -118,6 +129,7 @@ public record Generator(
         blockModel("table"),
         blockModel("table_leg"),
         itemModel("table"),
+        itemAsset("table"),
         blockLootTable("table"),
         recipe("table"),
         recipeAdvancement("table")
@@ -139,6 +151,7 @@ public record Generator(
         blockModel("sofa_corner_left"),
         blockModel("sofa_corner_right"),
         itemModel("sofa"),
+        itemAsset("sofa"),
         blockLootTable("sofa"),
         recipe("sofa"),
         recipeAdvancement("sofa"),
@@ -147,6 +160,7 @@ public record Generator(
         blockState("table_lamp"),
         blockModel("table_lamp"),
         itemModel("table_lamp"),
+        itemAsset("table_lamp"),
         blockLootTable("table_lamp"),
         recipe("table_lamp"),
         recipeAdvancement("table_lamp"),
@@ -156,6 +170,7 @@ public record Generator(
         blockModel("candlelit_lantern_standing"),
         blockState("candlelit_lantern"),
         itemModel("candlelit_lantern"),
+        itemAsset("candlelit_lantern"),
         blockLootTable("candlelit_lantern"),
         recipe("candlelit_lantern"),
         recipeAdvancement("candlelit_lantern")
@@ -221,6 +236,15 @@ public record Generator(
             "recipe_advancements/" + type,
             "data/adorn/advancement/recipes/<mod-prefix><id.path>_%s.json".formatted(type),
             "recipe-advancements/%s.json".formatted(type),
+            true
+        );
+    }
+
+    private static Generator itemAsset(String type) {
+        return new Generator(
+            "item_assets/" + type,
+            "assets/adorn/items/<mod-prefix><id.path>_%s.json".formatted(type),
+            "item_assets/%s.json".formatted(type),
             true
         );
     }

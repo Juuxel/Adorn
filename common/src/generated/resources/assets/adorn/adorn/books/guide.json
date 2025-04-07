@@ -15,13 +15,13 @@
         "extra": [
           {
             "translate": "guide.adorn.topic.table.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "3"
+              "page": 3
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -34,13 +34,13 @@
           "\n",
           {
             "translate": "guide.adorn.topic.chair.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "4"
+              "page": 4
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -53,13 +53,13 @@
           "\n",
           {
             "translate": "guide.adorn.topic.building_blocks.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "5"
+              "page": 5
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -73,13 +73,13 @@
           "  ",
           {
             "translate": "guide.adorn.topic.post.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "6"
+              "page": 6
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -93,13 +93,13 @@
           "  ",
           {
             "translate": "guide.adorn.topic.platform.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "7"
+              "page": 7
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -113,13 +113,13 @@
           "  ",
           {
             "translate": "guide.adorn.topic.step.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "8"
+              "page": 8
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -132,13 +132,13 @@
           "\n",
           {
             "translate": "guide.adorn.topic.kitchen.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "9"
+              "page": 9
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -151,13 +151,13 @@
           "\n",
           {
             "translate": "guide.adorn.topic.kitchen_sink.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "10"
+              "page": 10
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -170,13 +170,13 @@
           "\n",
           {
             "translate": "guide.adorn.topic.sofa.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "11"
+              "page": 11
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -189,13 +189,13 @@
           "\n",
           {
             "translate": "guide.adorn.topic.trading_station.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "12"
+              "page": 12
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -208,13 +208,13 @@
           "\n",
           {
             "translate": "guide.adorn.topic.shelf.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "13"
+              "page": 13
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -227,13 +227,13 @@
           "\n",
           {
             "translate": "guide.adorn.topic.drawer.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "14"
+              "page": 14
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -246,13 +246,13 @@
           "\n",
           {
             "translate": "guide.adorn.topic.chimney.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "15"
+              "page": 15
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -265,13 +265,13 @@
           "\n",
           {
             "translate": "guide.adorn.topic.prismarine_chimney.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "16"
+              "page": 16
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -284,13 +284,13 @@
           "\n",
           {
             "translate": "guide.adorn.topic.brewer.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "17"
+              "page": 17
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -339,13 +339,13 @@
         "extra": [
           {
             "translate": "guide.adorn.topic.post.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "6"
+              "page": 6
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -358,13 +358,13 @@
           "\n",
           {
             "translate": "guide.adorn.topic.platform.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "7"
+              "page": 7
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
@@ -377,13 +377,13 @@
           "\n",
           {
             "translate": "guide.adorn.topic.step.title",
-            "clickEvent": {
+            "click_event": {
               "action": "change_page",
-              "value": "8"
+              "page": 8
             },
-            "hoverEvent": {
+            "hover_event": {
               "action": "show_text",
-              "contents": {
+              "value": {
                 "translate": "guide.adorn.contents.jump_to_page",
                 "italic": true,
                 "with": [
