@@ -102,12 +102,17 @@ public final class ScrollEnvelope extends ScissorEnvelope {
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+    protected void renderContent(DrawContext context, int mouseX, int mouseY, float delta) {
         var matrices = context.getMatrices();
         matrices.push();
         matrices.translate(0.0, -offset, 0.0);
-        super.render(context, mouseX, (int) (mouseY + offset), delta);
+        super.renderContent(context, mouseX, (int) (mouseY + offset), delta);
         matrices.pop();
+    }
+
+    @Override
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        super.render(context, mouseX, mouseY, delta);
 
         var heightDifference = heightDifference();
         if (heightDifference > 0) {

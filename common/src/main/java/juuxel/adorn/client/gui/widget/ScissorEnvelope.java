@@ -61,8 +61,12 @@ public abstract class ScissorEnvelope extends WidgetEnvelope {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        Scissors.push(x, y, width, height);
+        Scissors.push(context, x, y, width, height);
+        renderContent(context, mouseX, mouseY, delta);
+        Scissors.pop(context);
+    }
+
+    protected void renderContent(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
-        Scissors.pop();
     }
 }

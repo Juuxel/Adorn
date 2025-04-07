@@ -305,7 +305,7 @@ public final class GuideBookScreen extends Screen {
             }
 
             var hoveredStyle = getTextStyleAt(mouseX, mouseY);
-            Scissors.suspendScissors(() -> context.drawHoverEvent(textRenderer, hoveredStyle, mouseX, mouseY));
+            Scissors.suspendScissors(context, () -> context.drawHoverEvent(textRenderer, hoveredStyle, mouseX, mouseY));
         }
 
         private void renderImage(DrawContext context, Image image, int mouseX, int mouseY) {
@@ -326,7 +326,7 @@ public final class GuideBookScreen extends Screen {
                     context.fill(hX, hY, hX + hoverArea.size().x(), hY + hoverArea.size().y(), HOVER_AREA_HIGHLIGHT_COLOR);
 
                     var wrappedTooltip = textRenderer.wrapLines(hoverArea.tooltip(), PAGE_WIDTH);
-                    Scissors.suspendScissors(() -> context.drawOrderedTooltip(textRenderer, wrappedTooltip, mouseX, mouseY));
+                    Scissors.suspendScissors(context, () -> context.drawOrderedTooltip(textRenderer, wrappedTooltip, mouseX, mouseY));
                     break;
                 }
             }
