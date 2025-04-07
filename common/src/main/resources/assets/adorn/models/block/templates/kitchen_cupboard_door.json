@@ -1,5 +1,6 @@
 {
   "textures": {
+    "particle": "#planks",
     "handle": "minecraft:block/iron_block"
   },
   "elements": [

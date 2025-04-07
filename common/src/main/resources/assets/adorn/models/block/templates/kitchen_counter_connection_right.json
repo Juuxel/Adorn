@@ -1,4 +1,7 @@
 {
+  "textures": {
+    "particle": "#planks"
+  },
   "elements": [
     {
       "from": [2, 0, 0],

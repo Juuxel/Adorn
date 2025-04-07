@@ -1,6 +1,7 @@
 {
   "parent": "adorn:block/templates/rotatable",
   "textures": {
+    "particle": "#wool",
     "planks": "minecraft:block/oak_planks"
   },
   "elements": [

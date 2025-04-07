@@ -1,5 +1,8 @@
 {
   "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "#pipe"
+  },
   "elements": [
     {
       "from": [6, 6, 6],
