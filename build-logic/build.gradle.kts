@@ -28,11 +28,6 @@ gradlePlugin {
             implementationClass = "juuxel.adorn.gradle.ModularDataGeneratorPlugin"
         }
 
-        register("adorn-compat") {
-            id = "adorn-compat"
-            implementationClass = "juuxel.adorn.gradle.CompatPlugin"
-        }
-
         register("adorn-minify-json") {
             id = "adorn-minify-json"
             implementationClass = "juuxel.adorn.gradle.MinifyJsonPlugin"
