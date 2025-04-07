@@ -17,7 +17,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "adorn:kitchen_sinks"
+            "items": "#adorn:kitchen_sinks"
           }
         ]
       }

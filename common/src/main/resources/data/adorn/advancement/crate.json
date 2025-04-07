@@ -17,7 +17,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "adorn:filled_crates"
+            "items": "#adorn:filled_crates"
           }
         ]
       }

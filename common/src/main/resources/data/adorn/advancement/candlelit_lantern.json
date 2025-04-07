@@ -10,7 +10,9 @@
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
-          { "tag": "adorn:candlelit_lanterns" }
+          {
+            "items": "#adorn:candlelit_lanterns"
+          }
         ]
       }
     }
