@@ -103,6 +103,8 @@ public class CopperPipeBlock extends Block implements Waterloggable, BlockWithDe
 
     public CopperPipeBlock(Settings settings) {
         super(settings);
+
+        setDefaultState(getDefaultState().with(WATERLOGGED, false));
     }
 
     @Override
@@ -160,7 +162,7 @@ public class CopperPipeBlock extends Block implements Waterloggable, BlockWithDe
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.get(Properties.WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
     @Override

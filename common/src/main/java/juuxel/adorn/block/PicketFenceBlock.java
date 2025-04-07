@@ -50,8 +50,9 @@ public final class PicketFenceBlock extends Block implements Waterloggable, Bloc
     
     public PicketFenceBlock(Settings settings) {
         super(settings);
-    }
 
+        setDefaultState(getDefaultState().with(WATERLOGGED, false));
+    }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
