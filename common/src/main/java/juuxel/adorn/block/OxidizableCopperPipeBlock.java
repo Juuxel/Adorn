@@ -1,5 +1,6 @@
 package juuxel.adorn.block;
 
+import juuxel.adorn.platform.BlockBridge;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
@@ -22,7 +23,7 @@ public final class OxidizableCopperPipeBlock extends CopperPipeBlock implements 
 
     @Override
     public boolean hasRandomTicks(BlockState state) {
-        return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+        return BlockBridge.get().hasNextOxidationLevelForTicking(state);
     }
 
     @Override

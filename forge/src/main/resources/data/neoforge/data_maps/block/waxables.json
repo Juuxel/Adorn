@@ -1,0 +1,16 @@
+{
+  "values": {
+    "adorn:copper_pipe": {
+      "waxed": "adorn:waxed_copper_pipe"
+    },
+    "adorn:exposed_copper_pipe": {
+      "waxed": "adorn:waxed_exposed_copper_pipe"
+    },
+    "adorn:weathered_copper_pipe": {
+      "waxed": "adorn:waxed_weathered_copper_pipe"
+    },
+    "adorn:oxidized_copper_pipe": {
+      "waxed": "adorn:waxed_oxidized_copper_pipe"
+    }
+  }
+}
