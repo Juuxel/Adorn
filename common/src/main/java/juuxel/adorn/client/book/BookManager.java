@@ -1,5 +1,6 @@
 package juuxel.adorn.client.book;
 
+import juuxel.adorn.AdornCommon;
 import net.minecraft.resource.JsonDataLoader;
 import net.minecraft.resource.ResourceFinder;
 import net.minecraft.resource.ResourceManager;
@@ -9,6 +10,7 @@ import net.minecraft.util.profiler.Profiler;
 import java.util.Map;
 
 public class BookManager extends JsonDataLoader<Book> {
+    public static final Identifier ID = AdornCommon.id("book_manager");
     public static final String DATA_TYPE = "adorn/books";
 
     private Map<Identifier, Book> books = Map.of();

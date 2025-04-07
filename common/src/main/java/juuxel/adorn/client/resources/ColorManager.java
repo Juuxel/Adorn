@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class ColorManager extends SinglePreparationResourceReloader<Map<Identifier, List<JsonObject>>> {
+    public static final Identifier ID = AdornCommon.id("color_manager");
     private static final Logger LOGGER = Logging.logger();
     private static final Identifier FALLBACK = AdornCommon.id("fallback");
     private static final String PREFIX = "adorn/color_palettes";
