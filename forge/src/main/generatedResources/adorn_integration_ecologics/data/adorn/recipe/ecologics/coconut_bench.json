@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "ecologics:coconut_slab"
+  },
+  "result": {
+    "id": "adorn:ecologics/coconut_bench",
+    "count": 2
+  }
+}

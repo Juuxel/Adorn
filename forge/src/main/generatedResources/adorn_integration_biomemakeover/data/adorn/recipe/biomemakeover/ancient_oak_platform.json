@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomemakeover:ancient_oak_slab",
+    "P": "adorn:biomemakeover/ancient_oak_post"
+  },
+  "result": {
+    "id": "adorn:biomemakeover/ancient_oak_platform",
+    "count": 2
+  }
+}

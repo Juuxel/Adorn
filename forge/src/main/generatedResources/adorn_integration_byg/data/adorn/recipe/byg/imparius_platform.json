@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "byg:imparius_slab",
+    "P": "adorn:byg/imparius_post"
+  },
+  "result": {
+    "id": "adorn:byg/imparius_platform",
+    "count": 2
+  }
+}

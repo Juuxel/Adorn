@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomemakeover:swamp_cypress_slab",
+    "P": "adorn:biomemakeover/swamp_cypress_post"
+  },
+  "result": {
+    "id": "adorn:biomemakeover/swamp_cypress_platform",
+    "count": 2
+  }
+}

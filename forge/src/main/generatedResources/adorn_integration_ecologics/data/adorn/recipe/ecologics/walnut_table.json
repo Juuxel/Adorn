@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:table",
+  "pattern": [
+    "SSS",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "S": "ecologics:walnut_slab",
+    "#": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:ecologics/walnut_table",
+    "count": 3
+  }
+}

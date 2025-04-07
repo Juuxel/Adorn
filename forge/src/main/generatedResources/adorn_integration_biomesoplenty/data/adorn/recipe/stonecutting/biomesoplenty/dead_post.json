@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomesoplenty:dead_planks",
+  "result": {
+    "id": "adorn:biomesoplenty/dead_post",
+    "count": 2
+  }
+}

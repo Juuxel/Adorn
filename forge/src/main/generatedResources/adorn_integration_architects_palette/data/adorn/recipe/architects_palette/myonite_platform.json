@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "architects_palette:myonite_slab",
+    "P": "adorn:architects_palette/myonite_post"
+  },
+  "result": {
+    "id": "adorn:architects_palette/myonite_platform",
+    "count": 2
+  }
+}

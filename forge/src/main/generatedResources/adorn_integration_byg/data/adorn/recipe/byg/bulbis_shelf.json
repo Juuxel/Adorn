@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:shelf",
+  "pattern": [
+    "---",
+    "/ /"
+  ],
+  "key": {
+    "-": "byg:bulbis_slab",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:byg/bulbis_shelf",
+    "count": 3
+  }
+}

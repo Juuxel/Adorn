@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "byg:bulbis_slab"
+  },
+  "result": {
+    "id": "adorn:byg/bulbis_bench",
+    "count": 2
+  }
+}

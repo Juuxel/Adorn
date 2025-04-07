@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "ecologics:walnut_planks",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:ecologics/walnut_post",
+    "count": 4
+  }
+}

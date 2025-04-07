@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:chair",
+  "pattern": [
+    " S",
+    "SS",
+    "##"
+  ],
+  "key": {
+    "S": "byg:holly_slab",
+    "#": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:byg/holly_chair",
+    "count": 2
+  }
+}

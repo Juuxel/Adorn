@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "architects_palette:mushy_myonite_bricks",
+  "result": {
+    "id": "adorn:architects_palette/mushy_myonite_brick_post",
+    "count": 2
+  }
+}

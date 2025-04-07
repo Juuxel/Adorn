@@ -1,4 +1,5 @@
-<data_generators condition_type="forge">
+<data_generators>
+    <overlay directory="adorn_integration_architects_palette" mod_id="architects_palette"/>
     <wood id="architects_palette:twisted"/>
     <stone id="architects_palette:myonite"/>
     <stone id="architects_palette:myonite_brick" bricks="true"/>

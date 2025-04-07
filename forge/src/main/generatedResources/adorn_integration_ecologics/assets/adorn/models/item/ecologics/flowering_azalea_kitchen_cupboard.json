@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:item/templates/kitchen_cupboard",
+  "textures": {
+    "planks": "ecologics:block/flowering_azalea_planks"
+  }
+}

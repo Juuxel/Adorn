@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "byg:nightshade_slab",
+    "P": "adorn:byg/nightshade_post"
+  },
+  "result": {
+    "id": "adorn:byg/nightshade_platform",
+    "count": 2
+  }
+}

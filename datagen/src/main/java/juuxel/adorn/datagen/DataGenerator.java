@@ -24,6 +24,10 @@ public final class DataGenerator {
     }
 
     private static void generate(DataOutput output, GeneratorConfig config, TemplateCache cache) {
+        if (config.overlay() != null) {
+            output = new OverlayedDataOutput(output, config.overlay());
+        }
+
         var stoneMaterials = config.stones();
         generate(output, Generator.STONE_GENERATORS, stoneMaterials, cache, config);
         generate(output, Generator.SIDED_STONE_GENERATORS, stoneMaterials.stream().filter(entry -> entry.material().getHasSidedTexture()).toList(), cache, config);

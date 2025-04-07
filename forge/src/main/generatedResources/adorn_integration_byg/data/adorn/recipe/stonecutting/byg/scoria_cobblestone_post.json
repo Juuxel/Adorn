@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "byg:scoria_cobblestone",
+  "result": {
+    "id": "adorn:byg/scoria_cobblestone_post",
+    "count": 2
+  }
+}

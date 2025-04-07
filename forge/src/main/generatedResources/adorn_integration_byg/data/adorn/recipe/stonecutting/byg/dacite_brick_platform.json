@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "byg:dacite_bricks",
+  "result": {
+    "id": "adorn:byg/dacite_brick_platform",
+    "count": 1
+  }
+}

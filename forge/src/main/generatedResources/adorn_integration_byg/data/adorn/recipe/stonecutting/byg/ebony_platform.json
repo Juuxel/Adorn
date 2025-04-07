@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "byg:ebony_planks",
+  "result": {
+    "id": "adorn:byg/ebony_platform",
+    "count": 1
+  }
+}

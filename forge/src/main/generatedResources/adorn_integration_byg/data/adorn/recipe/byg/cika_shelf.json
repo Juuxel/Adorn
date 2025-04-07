@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:shelf",
+  "pattern": [
+    "---",
+    "/ /"
+  ],
+  "key": {
+    "-": "byg:cika_slab",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:byg/cika_shelf",
+    "count": 3
+  }
+}

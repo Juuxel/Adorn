@@ -1,0 +1,13 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:kitchen_cupboard",
+  "ingredients": [
+    "#c:chests/wooden",
+    "adorn:byg/cika_kitchen_counter",
+    "adorn:byg/cika_kitchen_counter"
+  ],
+  "result": {
+    "id": "adorn:byg/cika_kitchen_cupboard",
+    "count": 2
+  }
+}

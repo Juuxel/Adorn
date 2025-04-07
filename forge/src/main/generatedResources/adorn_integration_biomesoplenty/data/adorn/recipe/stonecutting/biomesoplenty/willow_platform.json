@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomesoplenty:willow_planks",
+  "result": {
+    "id": "adorn:biomesoplenty/willow_platform",
+    "count": 1
+  }
+}

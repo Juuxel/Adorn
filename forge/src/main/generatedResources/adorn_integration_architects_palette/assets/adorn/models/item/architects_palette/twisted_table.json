@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:item/templates/table",
+  "textures": {
+    "planks": "architects_palette:block/twisted_planks",
+    "log": "architects_palette:block/twisted_log"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "byg:nightshade_planks",
+  "result": {
+    "id": "adorn:byg/nightshade_post",
+    "count": 2
+  }
+}

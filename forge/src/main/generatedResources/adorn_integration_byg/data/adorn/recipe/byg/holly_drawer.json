@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:drawer",
+  "pattern": [
+    "S",
+    "C",
+    "S"
+  ],
+  "key": {
+    "C": "#c:chests/wooden",
+    "S": "byg:holly_slab"
+  },
+  "result": {
+    "id": "adorn:byg/holly_drawer",
+    "count": 2
+  }
+}

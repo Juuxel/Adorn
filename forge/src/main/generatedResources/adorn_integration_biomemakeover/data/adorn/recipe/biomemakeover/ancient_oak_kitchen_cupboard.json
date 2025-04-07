@@ -1,0 +1,13 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:kitchen_cupboard",
+  "ingredients": [
+    "#c:chests/wooden",
+    "adorn:biomemakeover/ancient_oak_kitchen_counter",
+    "adorn:biomemakeover/ancient_oak_kitchen_counter"
+  ],
+  "result": {
+    "id": "adorn:biomemakeover/ancient_oak_kitchen_cupboard",
+    "count": 2
+  }
+}

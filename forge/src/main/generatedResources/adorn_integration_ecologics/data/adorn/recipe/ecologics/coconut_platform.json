@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "ecologics:coconut_slab",
+    "P": "adorn:ecologics/coconut_post"
+  },
+  "result": {
+    "id": "adorn:ecologics/coconut_platform",
+    "count": 2
+  }
+}

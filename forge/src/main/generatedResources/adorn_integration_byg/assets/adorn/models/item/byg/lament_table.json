@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:item/templates/table",
+  "textures": {
+    "planks": "byg:block/lament/planks",
+    "log": "byg:block/lament/log"
+  }
+}

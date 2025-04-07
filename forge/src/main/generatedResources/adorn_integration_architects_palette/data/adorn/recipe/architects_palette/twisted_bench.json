@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "architects_palette:twisted_slab"
+  },
+  "result": {
+    "id": "adorn:architects_palette/twisted_bench",
+    "count": 2
+  }
+}

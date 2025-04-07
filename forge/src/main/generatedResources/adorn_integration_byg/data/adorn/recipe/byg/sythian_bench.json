@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "byg:sythian_slab"
+  },
+  "result": {
+    "id": "adorn:byg/sythian_bench",
+    "count": 2
+  }
+}

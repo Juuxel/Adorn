@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:table",
+  "pattern": [
+    "SSS",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "S": "byg:mahogany_slab",
+    "#": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:byg/mahogany_table",
+    "count": 3
+  }
+}

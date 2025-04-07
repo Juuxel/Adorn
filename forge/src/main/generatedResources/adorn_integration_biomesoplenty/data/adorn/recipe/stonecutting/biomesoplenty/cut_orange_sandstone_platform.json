@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomesoplenty:cut_orange_sandstone",
+  "result": {
+    "id": "adorn:biomesoplenty/cut_orange_sandstone_platform",
+    "count": 1
+  }
+}

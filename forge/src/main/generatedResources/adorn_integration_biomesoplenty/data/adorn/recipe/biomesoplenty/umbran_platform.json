@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomesoplenty:umbran_slab",
+    "P": "adorn:biomesoplenty/umbran_post"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/umbran_platform",
+    "count": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "byg:rocky_stone_slab",
+    "P": "adorn:byg/rocky_stone_post"
+  },
+  "result": {
+    "id": "adorn:byg/rocky_stone_platform",
+    "count": 2
+  }
+}

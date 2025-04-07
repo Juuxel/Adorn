@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "byg:fir_planks",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:byg/fir_post",
+    "count": 4
+  }
+}

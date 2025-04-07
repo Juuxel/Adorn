@@ -1,0 +1,13 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:kitchen_cupboard",
+  "ingredients": [
+    "#c:chests/wooden",
+    "adorn:ecologics/flowering_azalea_kitchen_counter",
+    "adorn:ecologics/flowering_azalea_kitchen_counter"
+  ],
+  "result": {
+    "id": "adorn:ecologics/flowering_azalea_kitchen_cupboard",
+    "count": 2
+  }
+}

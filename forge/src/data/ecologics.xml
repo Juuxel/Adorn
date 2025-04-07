@@ -1,4 +1,5 @@
-<data_generators condition_type="forge">
+<data_generators>
+    <overlay directory="adorn_integration_ecologics" mod_id="ecologics"/>
     <wood id="ecologics:azalea"/>
     <wood id="ecologics:flowering_azalea"/>
     <wood id="ecologics:coconut"/>

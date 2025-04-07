@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "byg:green_enchanted_slab"
+  },
+  "result": {
+    "id": "adorn:byg/green_enchanted_bench",
+    "count": 2
+  }
+}

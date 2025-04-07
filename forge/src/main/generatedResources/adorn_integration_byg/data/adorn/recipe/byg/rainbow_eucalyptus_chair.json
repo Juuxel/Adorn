@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:chair",
+  "pattern": [
+    " S",
+    "SS",
+    "##"
+  ],
+  "key": {
+    "S": "byg:rainbow_eucalyptus_slab",
+    "#": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:byg/rainbow_eucalyptus_chair",
+    "count": 2
+  }
+}

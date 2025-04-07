@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "ecologics:coconut_planks",
+  "result": {
+    "id": "adorn:ecologics/coconut_step",
+    "count": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "architects_palette:mushy_myonite_brick_slab",
+    "P": "adorn:architects_palette/mushy_myonite_brick_post"
+  },
+  "result": {
+    "id": "adorn:architects_palette/mushy_myonite_brick_platform",
+    "count": 2
+  }
+}

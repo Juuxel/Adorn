@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "ecologics:walnut_slab",
+    "P": "adorn:ecologics/walnut_post"
+  },
+  "result": {
+    "id": "adorn:ecologics/walnut_platform",
+    "count": 2
+  }
+}

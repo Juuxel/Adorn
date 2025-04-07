@@ -44,6 +44,8 @@ loom {
             property("adorn.data.mainConfig", project(":common").file("src/data/vanilla.xml").absolutePath)
             val tagConfigDirs = rootProject.subprojects.map { it.file("src/data") }
             property("adorn.data.tagConfigDirs", tagConfigDirs.joinToString(",") { it.absolutePath })
+            property("adorn.data.fabricConfigDirs", project(":fabric").file("src/data").absolutePath)
+            property("adorn.data.neoforgeConfigDirs", project(":forge").file("src/data").absolutePath)
         }
     }
 }

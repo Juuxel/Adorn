@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "ecologics:azalea_slab",
+    "P": "adorn:ecologics/azalea_post"
+  },
+  "result": {
+    "id": "adorn:ecologics/azalea_platform",
+    "count": 2
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "byg:polished_soapstone",
+    "/": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:byg/polished_soapstone_post",
+    "count": 4
+  }
+}

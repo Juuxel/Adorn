@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:byg/zelkova_post"
+    ]
+  },
+  "criteria": {
+    "has_zelkova_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "byg:zelkova_planks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:byg/zelkova_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_zelkova_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

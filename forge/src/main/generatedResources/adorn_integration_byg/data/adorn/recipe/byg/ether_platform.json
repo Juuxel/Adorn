@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "byg:ether_slab",
+    "P": "adorn:byg/ether_post"
+  },
+  "result": {
+    "id": "adorn:byg/ether_platform",
+    "count": 2
+  }
+}

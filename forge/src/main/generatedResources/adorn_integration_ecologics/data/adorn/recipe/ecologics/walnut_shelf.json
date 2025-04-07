@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:shelf",
+  "pattern": [
+    "---",
+    "/ /"
+  ],
+  "key": {
+    "-": "ecologics:walnut_slab",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:ecologics/walnut_shelf",
+    "count": 3
+  }
+}

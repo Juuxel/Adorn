@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/templates/bench_leg",
+  "textures": {
+    "log": "byg:block/sythian/log",
+    "end": "byg:block/sythian/log_top"
+  }
+}

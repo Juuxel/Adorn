@@ -1,4 +1,5 @@
-<data_generators condition_type="forge">
+<data_generators>
+    <overlay directory="adorn_integration_byg" mod_id="byg"/>
     <replace key="wood_texture_separator" with="/"/>
     <wood id="byg:aspen"/>
     <wood id="byg:baobab"/>

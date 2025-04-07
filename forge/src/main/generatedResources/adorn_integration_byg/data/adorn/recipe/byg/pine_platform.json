@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "byg:pine_slab",
+    "P": "adorn:byg/pine_post"
+  },
+  "result": {
+    "id": "adorn:byg/pine_platform",
+    "count": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:step",
+  "pattern": [
+    "S",
+    "#"
+  ],
+  "key": {
+    "S": "byg:chiseled_red_rock_brick_slab",
+    "#": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:byg/chiseled_red_rock_brick_step",
+    "count": 1
+  }
+}

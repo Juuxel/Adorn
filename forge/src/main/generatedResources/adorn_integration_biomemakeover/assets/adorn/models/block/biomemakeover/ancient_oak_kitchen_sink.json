@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/kitchen_sink",
+  "textures": {
+    "planks": "biomemakeover:block/ancient_oak_planks"
+  }
+}

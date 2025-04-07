@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:chair",
+  "pattern": [
+    " S",
+    "SS",
+    "##"
+  ],
+  "key": {
+    "S": "ecologics:flowering_azalea_slab",
+    "#": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:ecologics/flowering_azalea_chair",
+    "count": 2
+  }
+}

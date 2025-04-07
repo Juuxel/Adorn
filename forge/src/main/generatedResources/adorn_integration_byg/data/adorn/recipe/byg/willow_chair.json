@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:chair",
+  "pattern": [
+    " S",
+    "SS",
+    "##"
+  ],
+  "key": {
+    "S": "byg:willow_slab",
+    "#": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:byg/willow_chair",
+    "count": 2
+  }
+}

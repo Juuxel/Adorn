@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "ecologics:flowering_azalea_slab"
+  },
+  "result": {
+    "id": "adorn:ecologics/flowering_azalea_bench",
+    "count": 2
+  }
+}

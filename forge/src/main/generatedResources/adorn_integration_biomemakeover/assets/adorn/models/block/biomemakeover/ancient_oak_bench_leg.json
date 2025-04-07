@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/templates/bench_leg",
+  "textures": {
+    "log": "biomemakeover:block/ancient_oak_log",
+    "end": "biomemakeover:block/ancient_oak_log_top"
+  }
+}

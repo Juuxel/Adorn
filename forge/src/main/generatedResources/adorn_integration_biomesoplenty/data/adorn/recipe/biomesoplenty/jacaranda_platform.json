@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomesoplenty:jacaranda_slab",
+    "P": "adorn:biomesoplenty/jacaranda_post"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/jacaranda_platform",
+    "count": 2
+  }
+}

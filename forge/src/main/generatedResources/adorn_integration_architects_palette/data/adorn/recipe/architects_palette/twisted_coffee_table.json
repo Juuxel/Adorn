@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:coffee_table",
+  "pattern": [
+    "S-S",
+    "# #"
+  ],
+  "key": {
+    "S": "architects_palette:twisted_slab",
+    "#": "#c:rods/wooden",
+    "-": "#c:glass_panes"
+  },
+  "result": {
+    "id": "adorn:architects_palette/twisted_coffee_table",
+    "count": 2
+  }
+}

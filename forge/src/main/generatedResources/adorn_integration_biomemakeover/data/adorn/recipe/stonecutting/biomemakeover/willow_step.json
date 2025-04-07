@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomemakeover:willow_planks",
+  "result": {
+    "id": "adorn:biomemakeover/willow_step",
+    "count": 2
+  }
+}

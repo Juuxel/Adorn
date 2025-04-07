@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "byg:cherry_slab",
+    "P": "adorn:byg/cherry_post"
+  },
+  "result": {
+    "id": "adorn:byg/cherry_platform",
+    "count": 2
+  }
+}

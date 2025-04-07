@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "byg:bulbis_planks",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:byg/bulbis_post",
+    "count": 4
+  }
+}

@@ -29,3 +29,6 @@ accessible method net/minecraft/block/entity/BlockEntityType <init> (Lnet/minecr
 
 # Screens
 accessible field net/minecraft/client/gui/DrawContext vertexConsumers Lnet/minecraft/client/render/VertexConsumerProvider$Immediate;
+
+# Data generation
+accessible field net/minecraft/data/MetadataProvider metadata Ljava/util/Map;

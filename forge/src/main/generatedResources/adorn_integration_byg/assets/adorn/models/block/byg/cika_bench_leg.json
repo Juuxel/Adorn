@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/templates/bench_leg",
+  "textures": {
+    "log": "byg:block/cika/log",
+    "end": "byg:block/cika/log_top"
+  }
+}

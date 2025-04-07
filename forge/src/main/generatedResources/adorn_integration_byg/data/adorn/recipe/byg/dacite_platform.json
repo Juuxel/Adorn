@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "byg:dacite_slab",
+    "P": "adorn:byg/dacite_post"
+  },
+  "result": {
+    "id": "adorn:byg/dacite_platform",
+    "count": 2
+  }
+}

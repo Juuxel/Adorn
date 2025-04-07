@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "byg:sythian_slab",
+    "P": "adorn:byg/sythian_post"
+  },
+  "result": {
+    "id": "adorn:byg/sythian_platform",
+    "count": 2
+  }
+}

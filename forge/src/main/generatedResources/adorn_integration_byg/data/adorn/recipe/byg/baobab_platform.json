@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "byg:baobab_slab",
+    "P": "adorn:byg/baobab_post"
+  },
+  "result": {
+    "id": "adorn:byg/baobab_platform",
+    "count": 2
+  }
+}

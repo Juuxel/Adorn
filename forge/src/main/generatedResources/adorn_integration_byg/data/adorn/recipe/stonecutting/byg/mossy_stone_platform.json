@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "byg:mossy_stone",
+  "result": {
+    "id": "adorn:byg/mossy_stone_platform",
+    "count": 1
+  }
+}

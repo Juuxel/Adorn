@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:table",
+  "pattern": [
+    "SSS",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "S": "byg:cika_slab",
+    "#": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:byg/cika_table",
+    "count": 3
+  }
+}

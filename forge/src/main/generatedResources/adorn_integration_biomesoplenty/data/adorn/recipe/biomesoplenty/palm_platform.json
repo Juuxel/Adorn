@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomesoplenty:palm_slab",
+    "P": "adorn:biomesoplenty/palm_post"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/palm_platform",
+    "count": 2
+  }
+}

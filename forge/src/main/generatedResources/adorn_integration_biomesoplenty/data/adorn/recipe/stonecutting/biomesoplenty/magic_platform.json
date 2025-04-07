@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomesoplenty:magic_planks",
+  "result": {
+    "id": "adorn:biomesoplenty/magic_platform",
+    "count": 1
+  }
+}

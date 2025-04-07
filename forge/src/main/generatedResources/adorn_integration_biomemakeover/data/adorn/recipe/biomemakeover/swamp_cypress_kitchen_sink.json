@@ -1,0 +1,12 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:kitchen_sink",
+  "ingredients": [
+    "adorn:biomemakeover/swamp_cypress_kitchen_counter",
+    "#c:buckets/empty"
+  ],
+  "result": {
+    "id": "adorn:biomemakeover/swamp_cypress_kitchen_sink",
+    "count": 1
+  }
+}

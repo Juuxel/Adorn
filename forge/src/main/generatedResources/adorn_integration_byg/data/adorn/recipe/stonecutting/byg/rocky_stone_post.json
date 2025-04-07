@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "byg:rocky_stone",
+  "result": {
+    "id": "adorn:byg/rocky_stone_post",
+    "count": 2
+  }
+}

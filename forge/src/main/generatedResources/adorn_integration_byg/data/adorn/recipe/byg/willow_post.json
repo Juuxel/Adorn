@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "byg:willow_planks",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:byg/willow_post",
+    "count": 4
+  }
+}

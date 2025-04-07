@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "byg:willow_slab",
+    "P": "adorn:byg/willow_post"
+  },
+  "result": {
+    "id": "adorn:byg/willow_platform",
+    "count": 2
+  }
+}

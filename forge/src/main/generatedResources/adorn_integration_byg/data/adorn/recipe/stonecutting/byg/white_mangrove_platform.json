@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "byg:white_mangrove_planks",
+  "result": {
+    "id": "adorn:byg/white_mangrove_platform",
+    "count": 1
+  }
+}

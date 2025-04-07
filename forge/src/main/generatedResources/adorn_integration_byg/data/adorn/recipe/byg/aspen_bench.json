@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "byg:aspen_slab"
+  },
+  "result": {
+    "id": "adorn:byg/aspen_bench",
+    "count": 2
+  }
+}

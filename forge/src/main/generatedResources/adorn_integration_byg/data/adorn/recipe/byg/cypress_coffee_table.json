@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:coffee_table",
+  "pattern": [
+    "S-S",
+    "# #"
+  ],
+  "key": {
+    "S": "byg:cypress_slab",
+    "#": "#c:rods/wooden",
+    "-": "#c:glass_panes"
+  },
+  "result": {
+    "id": "adorn:byg/cypress_coffee_table",
+    "count": 2
+  }
+}

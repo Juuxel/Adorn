@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "architects_palette:twisted_slab",
+    "P": "adorn:architects_palette/twisted_post"
+  },
+  "result": {
+    "id": "adorn:architects_palette/twisted_platform",
+    "count": 2
+  }
+}

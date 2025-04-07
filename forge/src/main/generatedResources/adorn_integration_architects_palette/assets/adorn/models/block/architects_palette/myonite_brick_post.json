@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/post",
+  "textures": {
+    "texture": "architects_palette:block/myonite_bricks"
+  }
+}

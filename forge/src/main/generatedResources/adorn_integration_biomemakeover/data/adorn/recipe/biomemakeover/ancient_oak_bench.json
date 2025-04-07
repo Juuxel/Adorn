@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "biomemakeover:ancient_oak_slab"
+  },
+  "result": {
+    "id": "adorn:biomemakeover/ancient_oak_bench",
+    "count": 2
+  }
+}

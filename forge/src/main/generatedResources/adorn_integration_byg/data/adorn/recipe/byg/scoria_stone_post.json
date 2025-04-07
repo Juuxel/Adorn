@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "byg:scoria_stone",
+    "/": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:byg/scoria_stone_post",
+    "count": 4
+  }
+}

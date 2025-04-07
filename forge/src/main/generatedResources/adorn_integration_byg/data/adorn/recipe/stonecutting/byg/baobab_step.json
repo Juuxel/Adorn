@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "byg:baobab_planks",
+  "result": {
+    "id": "adorn:byg/baobab_step",
+    "count": 2
+  }
+}

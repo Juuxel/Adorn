@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/step",
+  "textures": {
+    "texture": "ecologics:block/flowering_azalea_planks"
+  }
+}

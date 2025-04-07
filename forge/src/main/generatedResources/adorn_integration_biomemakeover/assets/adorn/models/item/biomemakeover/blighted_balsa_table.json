@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:item/templates/table",
+  "textures": {
+    "planks": "biomemakeover:block/blighted_balsa_planks",
+    "log": "biomemakeover:block/blighted_balsa_log"
+  }
+}

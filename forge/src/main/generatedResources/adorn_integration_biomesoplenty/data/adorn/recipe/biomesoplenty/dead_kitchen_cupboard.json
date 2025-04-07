@@ -1,0 +1,13 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:kitchen_cupboard",
+  "ingredients": [
+    "#c:chests/wooden",
+    "adorn:biomesoplenty/dead_kitchen_counter",
+    "adorn:biomesoplenty/dead_kitchen_counter"
+  ],
+  "result": {
+    "id": "adorn:biomesoplenty/dead_kitchen_cupboard",
+    "count": 2
+  }
+}

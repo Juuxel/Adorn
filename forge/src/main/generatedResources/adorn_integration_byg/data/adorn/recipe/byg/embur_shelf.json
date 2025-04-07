@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:shelf",
+  "pattern": [
+    "---",
+    "/ /"
+  ],
+  "key": {
+    "-": "byg:embur_slab",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:byg/embur_shelf",
+    "count": 3
+  }
+}

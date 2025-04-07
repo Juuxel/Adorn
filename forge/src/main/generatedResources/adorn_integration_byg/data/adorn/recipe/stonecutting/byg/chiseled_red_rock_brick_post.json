@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "byg:chiseled_red_rock_bricks",
+  "result": {
+    "id": "adorn:byg/chiseled_red_rock_brick_post",
+    "count": 2
+  }
+}

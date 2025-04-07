@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "byg:soapstone_tile",
+    "/": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:byg/soapstone_tile_post",
+    "count": 4
+  }
+}

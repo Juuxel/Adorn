@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "byg:green_enchanted_slab",
+    "P": "adorn:byg/green_enchanted_post"
+  },
+  "result": {
+    "id": "adorn:byg/green_enchanted_platform",
+    "count": 2
+  }
+}

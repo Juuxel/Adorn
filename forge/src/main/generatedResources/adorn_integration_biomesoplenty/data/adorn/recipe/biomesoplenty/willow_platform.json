@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomesoplenty:willow_slab",
+    "P": "adorn:biomesoplenty/willow_post"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/willow_platform",
+    "count": 2
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "ecologics:azalea_planks",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:ecologics/azalea_post",
+    "count": 4
+  }
+}

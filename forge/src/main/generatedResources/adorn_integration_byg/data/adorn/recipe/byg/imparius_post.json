@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "byg:imparius_planks",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:byg/imparius_post",
+    "count": 4
+  }
+}

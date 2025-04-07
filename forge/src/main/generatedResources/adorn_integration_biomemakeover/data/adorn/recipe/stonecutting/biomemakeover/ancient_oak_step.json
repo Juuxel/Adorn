@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomemakeover:ancient_oak_planks",
+  "result": {
+    "id": "adorn:biomemakeover/ancient_oak_step",
+    "count": 2
+  }
+}

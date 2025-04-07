@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "byg:mahogany_slab"
+  },
+  "result": {
+    "id": "adorn:byg/mahogany_bench",
+    "count": 2
+  }
+}

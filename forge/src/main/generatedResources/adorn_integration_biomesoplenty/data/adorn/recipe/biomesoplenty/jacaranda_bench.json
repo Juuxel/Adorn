@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "biomesoplenty:jacaranda_slab"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/jacaranda_bench",
+    "count": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "byg:jacaranda_slab",
+    "P": "adorn:byg/jacaranda_post"
+  },
+  "result": {
+    "id": "adorn:byg/jacaranda_platform",
+    "count": 2
+  }
+}

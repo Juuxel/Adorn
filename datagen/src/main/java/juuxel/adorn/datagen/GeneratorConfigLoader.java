@@ -42,13 +42,15 @@ public final class GeneratorConfigLoader {
         var conditionType = ConditionType.parse(root.getAttribute(Attributes.CONDITION_TYPE));
         if (conditionType == null) throw new IllegalArgumentException("Unknown condition type in %s: %s".formatted(path, root.getAttribute(Attributes.CONDITION_TYPE)));
         var rootReplacements = getReplacements(root);
+        var overlay = readOverlay(root);
         return new GeneratorConfig(
             woods, stones,
             Arrays.stream(colors)
                 .map(material -> new GeneratorConfig.MaterialEntry<>(material, Set.of(), Map.of()))
                 .collect(Collectors.toCollection(LinkedHashSet::new)),
             conditionType,
-            rootReplacements
+            rootReplacements,
+            overlay
         );
     }
 
@@ -98,12 +100,27 @@ public final class GeneratorConfigLoader {
             .filter(node -> node.getNodeType() == Node.ELEMENT_NODE);
     }
 
+    private static Overlay readOverlay(Element parent) {
+        var overlayElements = parent.getElementsByTagName(Tags.OVERLAY);
+        return switch (overlayElements.getLength()) {
+            case 0 -> null;
+            case 1 -> {
+                var element = (Element) overlayElements.item(0);
+                var directory = element.getAttribute(Attributes.DIRECTORY);
+                var modId = element.getAttribute(Attributes.MOD_ID);
+                yield new Overlay(directory, modId);
+            }
+            default -> throw new IllegalArgumentException("There should be at most one <overlay> element in a data config");
+        };
+    }
+
     private static final class Tags {
         static final String ROOT = "data_generators";
         static final String WOOD = "wood";
         static final String STONE = "stone";
         static final String REPLACE = "replace";
         static final String EXCLUDE = "exclude";
+        static final String OVERLAY = "overlay";
     }
 
     private static final class Attributes {
@@ -117,5 +134,7 @@ public final class GeneratorConfigLoader {
         static final String GENERATOR = "generator";
         static final String KEY = "key";
         static final String WITH = "with";
+        static final String DIRECTORY = "directory";
+        static final String MOD_ID = "mod_id";
     }
 }

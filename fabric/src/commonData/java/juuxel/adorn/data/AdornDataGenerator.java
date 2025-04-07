@@ -17,6 +17,7 @@ public final class AdornDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(BookGenerator::new);
         var blockTags = pack.addProvider(AdornBlockTagGenerator::new);
         pack.addProvider((output, registriesFuture) -> new AdornItemTagGenerator(output, registriesFuture, blockTags));
+        pack.addProvider((output, registriesFuture) -> PackMcmetaGeneration.create(output));
     }
 
     @Override

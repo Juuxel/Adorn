@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomemakeover:blighted_balsa_slab",
+    "P": "adorn:biomemakeover/blighted_balsa_post"
+  },
+  "result": {
+    "id": "adorn:biomemakeover/blighted_balsa_platform",
+    "count": 2
+  }
+}

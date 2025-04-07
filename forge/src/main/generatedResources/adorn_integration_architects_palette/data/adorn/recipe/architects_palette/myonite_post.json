@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "architects_palette:myonite",
+    "/": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:architects_palette/myonite_post",
+    "count": 4
+  }
+}

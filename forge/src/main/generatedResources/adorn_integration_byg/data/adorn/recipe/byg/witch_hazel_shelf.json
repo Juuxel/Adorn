@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:shelf",
+  "pattern": [
+    "---",
+    "/ /"
+  ],
+  "key": {
+    "-": "byg:witch_hazel_slab",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:byg/witch_hazel_shelf",
+    "count": 3
+  }
+}
