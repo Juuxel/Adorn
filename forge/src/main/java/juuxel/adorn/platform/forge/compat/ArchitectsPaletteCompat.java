@@ -7,7 +7,7 @@ import java.util.List;
 
 public final class ArchitectsPaletteCompat extends PrefixedBlockVariantSet {
     @Override
-    protected String getModId() {
+    public String getModId() {
         return "architects_palette";
     }
 

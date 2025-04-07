@@ -7,7 +7,7 @@ import java.util.List;
 
 public final class EcologicsCompat extends PrefixedBlockVariantSet {
     @Override
-    protected String getModId() {
+    public String getModId() {
         return "ecologics";
     }
 

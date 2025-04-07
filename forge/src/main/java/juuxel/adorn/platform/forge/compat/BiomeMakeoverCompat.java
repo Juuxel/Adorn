@@ -7,7 +7,7 @@ import java.util.List;
 
 public final class BiomeMakeoverCompat extends PrefixedBlockVariantSet {
     @Override
-    protected String getModId() {
+    public String getModId() {
         return "biomemakeover";
     }
 
