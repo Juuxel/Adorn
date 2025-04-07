@@ -32,6 +32,7 @@
         "options": [
           "Fabric",
           "Forge",
+          "NeoForge",
           "Quilt"
         ]
       },
@@ -44,7 +45,7 @@
       "id": "loader_version",
       "attributes": {
         "label": "Mod loader version",
-        "description": "On Fabric: both Fabric Loader and Fabric API\nOn Quilt: both Quilt Loader and QFAPI"
+        "description": "On Fabric: both Fabric Loader and Fabric API\nOn Quilt: both Quilt Loader and QFAPI/Fabric API"
       },
       "validations": {
         "required": true
