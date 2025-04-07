@@ -13,6 +13,7 @@
     <wood id="minecraft:dark_oak"/>
     <wood id="minecraft:mangrove"/>
     <wood id="minecraft:cherry"/>
+    <wood id="minecraft:pale_oak"/>
     <wood id="minecraft:bamboo">
         <replace key="log_type" with="block"/>
     </wood>
@@ -82,6 +83,7 @@
         <replace key="top-texture" with="minecraft:block/red_sandstone_top"/>
         <replace key="bottom-texture" with="minecraft:block/red_sandstone_bottom"/>
     </stone>
+    <stone id="minecraft:resin_brick" bricks="true"/>
     <stone id="minecraft:sandstone" sided_texture="true">
         <replace key="side-texture" with="minecraft:block/sandstone"/>
         <replace key="top-texture" with="minecraft:block/sandstone_top"/>

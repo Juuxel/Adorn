@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "minecraft:resin_bricks",
+    "/": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:resin_brick_post",
+    "count": 4
+  }
+}

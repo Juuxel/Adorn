@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:chair",
+  "pattern": [
+    " S",
+    "SS",
+    "##"
+  ],
+  "key": {
+    "S": "minecraft:pale_oak_slab",
+    "#": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:pale_oak_chair",
+    "count": 2
+  }
+}

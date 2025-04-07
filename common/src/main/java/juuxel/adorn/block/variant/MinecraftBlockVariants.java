@@ -19,6 +19,7 @@ public final class MinecraftBlockVariants implements BlockVariantSet {
         result.add(BlockVariant.DARK_OAK);
         result.add(BlockVariant.MANGROVE);
         result.add(BlockVariant.CHERRY);
+        result.add(BlockVariant.PALE_OAK);
         result.add(BlockVariant.BAMBOO);
         result.add(BlockVariant.CRIMSON);
         result.add(BlockVariant.WARPED);
@@ -76,7 +77,8 @@ public final class MinecraftBlockVariants implements BlockVariantSet {
             BlockVariant.DEEPSLATE_TILE,
             BlockVariant.TUFF,
             BlockVariant.POLISHED_TUFF,
-            BlockVariant.TUFF_BRICK
+            BlockVariant.TUFF_BRICK,
+            BlockVariant.RESIN_BRICK
         );
     }
 

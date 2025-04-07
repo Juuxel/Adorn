@@ -33,6 +33,7 @@ public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
     BlockVariant DARK_OAK = variant("dark_oak", Blocks.DARK_OAK_PLANKS);
     BlockVariant MANGROVE = variant("mangrove", Blocks.MANGROVE_PLANKS);
     BlockVariant CHERRY = variant("cherry", Blocks.CHERRY_PLANKS);
+    BlockVariant PALE_OAK = variant("pale_oak", Blocks.PALE_OAK_PLANKS);
     BlockVariant BAMBOO = variant("bamboo", Blocks.BAMBOO_PLANKS);
     BlockVariant CRIMSON = variant("crimson", Blocks.CRIMSON_PLANKS);
     BlockVariant WARPED = variant("warped", Blocks.WARPED_PLANKS);
@@ -75,6 +76,7 @@ public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
     BlockVariant TUFF = variant("tuff", Blocks.TUFF);
     BlockVariant POLISHED_TUFF = variant("polished_tuff", Blocks.POLISHED_TUFF);
     BlockVariant TUFF_BRICK = variant("tuff_brick", Blocks.TUFF_BRICKS);
+    BlockVariant RESIN_BRICK = variant("resin_brick", Blocks.RESIN_BRICKS);
 
     /**
      * The name of this variant. Must be a valid identifier path.

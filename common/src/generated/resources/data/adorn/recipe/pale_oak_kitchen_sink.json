@@ -1,0 +1,12 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:kitchen_sink",
+  "ingredients": [
+    "adorn:pale_oak_kitchen_counter",
+    "#c:buckets/empty"
+  ],
+  "result": {
+    "id": "adorn:pale_oak_kitchen_sink",
+    "count": 1
+  }
+}

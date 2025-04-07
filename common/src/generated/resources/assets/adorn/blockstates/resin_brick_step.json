@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "adorn:block/resin_brick_step"
+    }
+  }
+}
