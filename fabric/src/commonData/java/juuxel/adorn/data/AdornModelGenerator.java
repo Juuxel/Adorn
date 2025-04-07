@@ -5,19 +5,24 @@ import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.block.variant.BlockKind;
 import juuxel.adorn.block.variant.BlockVariant;
 import juuxel.adorn.block.variant.BlockVariantSets;
+import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.item.AdornItems;
+import juuxel.adorn.item.BookKey;
 import juuxel.adorn.lib.registry.Registered;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.client.data.BlockStateModelGenerator;
 import net.minecraft.client.data.ItemModelGenerator;
+import net.minecraft.client.data.ItemModels;
 import net.minecraft.client.data.Model;
 import net.minecraft.client.data.ModelIds;
 import net.minecraft.client.data.Models;
 import net.minecraft.client.data.TextureKey;
 import net.minecraft.client.data.TextureMap;
+import net.minecraft.client.render.item.property.select.ComponentSelectProperty;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.util.Identifier;
 
 import java.util.Optional;
 
@@ -78,17 +83,35 @@ public final class AdornModelGenerator extends FabricModelProvider {
 
         registerFlat(generator, AdornItems.COPPER_NUGGET);
         registerFlat(generator, AdornItems.GLOW_BERRY_TEA);
-        registerFlat(generator, AdornItems.GUIDE_BOOK);
         registerFlat(generator, AdornItems.HOT_CHOCOLATE);
         registerFlat(generator, AdornItems.MUG);
         registerFlat(generator, AdornItems.NETHER_WART_COFFEE);
         registerFlat(generator, AdornItems.STONE_ROD);
         registerFlat(generator, AdornItems.SWEET_BERRY_JUICE);
-        registerFlat(generator, AdornItems.TRADERS_MANUAL);
+        registerGuideBook(generator);
         generator.register(AdornItems.WATERING_CAN.get(), Models.HANDHELD);
     }
 
     private static void registerFlat(ItemModelGenerator generator, Registered<? extends ItemConvertible> item) {
         generator.register(item.get().asItem(), Models.GENERATED);
+    }
+
+    private static void registerGuideBook(ItemModelGenerator generator) {
+        var guideModel = ItemModels.basic(registerGuideBookModel(generator, BookKey.GUIDE));
+        var tradersManualModel = ItemModels.basic(registerGuideBookModel(generator, BookKey.TRADERS_MANUAL));
+
+        generator.output.accept(
+            AdornItems.GUIDE_BOOK.get(),
+            ItemModels.select(
+                new ComponentSelectProperty<>(AdornComponentTypes.BOOK.get()),
+                ItemModels.switchCase(BookKey.GUIDE, guideModel),
+                ItemModels.switchCase(BookKey.TRADERS_MANUAL, tradersManualModel)
+            )
+        );
+    }
+
+    private static Identifier registerGuideBookModel(ItemModelGenerator generator, BookKey book) {
+        var id = book.getItemId().withPrefixedPath("item/");
+        return Models.GENERATED.upload(id, TextureMap.layer0(id), generator.modelCollector);
     }
 }

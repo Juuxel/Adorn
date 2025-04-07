@@ -1,6 +1,23 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "adorn:item/guide_book"
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:item/guide_book"
+        },
+        "when": "adorn:guide"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:item/traders_manual"
+        },
+        "when": "adorn:traders_manual"
+      }
+    ],
+    "component": "adorn:book",
+    "property": "minecraft:component"
   }
 }

@@ -57,11 +57,11 @@ public final class AdornItems {
         ));
 
     public static final Registered<Item> GUIDE_BOOK = register("guide_book",
-        settings -> new AdornBookItem(AdornCommon.id("guide"), settings),
-        () -> new Item.Settings().rarity(Rarity.UNCOMMON)
+        AdornBookItem::new,
+        () -> new Item.Settings()
+            .rarity(Rarity.UNCOMMON)
+            .component(AdornComponentTypes.BOOK.get(), BookKey.GUIDE)
     );
-    public static final Registered<Item> TRADERS_MANUAL = register("traders_manual",
-        settings -> new AdornBookItem(AdornCommon.id("traders_manual"), settings));
 
     public static final Registered<Item> COPPER_NUGGET = register("copper_nugget", ItemWithDescription::new);
     public static final Registered<Item> WATERING_CAN = register("watering_can",

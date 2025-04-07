@@ -6,7 +6,7 @@ import juuxel.adorn.client.book.Book;
 import juuxel.adorn.client.book.BookManager;
 import juuxel.adorn.client.book.Image;
 import juuxel.adorn.client.book.Page;
-import juuxel.adorn.item.AdornItems;
+import juuxel.adorn.item.BookKey;
 import juuxel.adorn.lib.AdornTags;
 import juuxel.adorn.util.Vec2i;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -36,7 +36,7 @@ public final class BookGenerator extends FabricCodecDataProvider<Book> {
             Book.builder()
                 .title(Text.literal("Adorn"))
                 .titleScale(1.5f)
-                .subtitle(AdornItems.GUIDE_BOOK.get().getName().copy().formatted(Formatting.ITALIC))
+                .subtitle(BookKey.GUIDE.createStack().getItemName().copy().formatted(Formatting.ITALIC))
                 .author(Text.translatable("item.adorn.guide_book.author"))
                 .pageTree(pageTree -> pageTree
                     .page(Page.builder()
@@ -161,7 +161,7 @@ public final class BookGenerator extends FabricCodecDataProvider<Book> {
         consumer.accept(
             AdornCommon.id("traders_manual"),
             Book.builder()
-                .title(AdornItems.TRADERS_MANUAL.get().getName().copy().formatted(Formatting.UNDERLINE, Formatting.BOLD))
+                .title(BookKey.TRADERS_MANUAL.createStack().getItemName().copy().formatted(Formatting.UNDERLINE, Formatting.BOLD))
                 .subtitle(Text.translatable("item.adorn.traders_manual.subtitle").formatted(Formatting.ITALIC))
                 .author(Text.translatable("item.adorn.traders_manual.author"))
                 .page(Page.builder()

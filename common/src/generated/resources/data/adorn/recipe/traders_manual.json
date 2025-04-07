@@ -7,7 +7,10 @@
     "#c:gems/emerald"
   ],
   "result": {
+    "components": {
+      "adorn:book": "adorn:traders_manual"
+    },
     "count": 1,
-    "id": "adorn:traders_manual"
+    "id": "adorn:guide_book"
   }
 }

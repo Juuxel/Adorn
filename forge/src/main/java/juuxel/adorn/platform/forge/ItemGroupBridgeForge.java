@@ -35,9 +35,9 @@ public final class ItemGroupBridgeForge implements ItemGroupBridge {
             var configurator = entry.getSecond();
             var context = new ItemGroupModifyContext() {
                 @Override
-                public void add(ItemConvertible item) {
+                public void add(ItemStack stack) {
                     if (event.getTabKey().equals(group)) {
-                        event.add(item);
+                        event.add(stack);
                     }
                 }
 

@@ -9,6 +9,7 @@ import juuxel.adorn.fluid.FluidIngredient;
 import juuxel.adorn.fluid.FluidKey;
 import juuxel.adorn.fluid.FluidUnit;
 import juuxel.adorn.item.AdornItems;
+import juuxel.adorn.item.BookKey;
 import juuxel.adorn.lib.AdornTags;
 import juuxel.adorn.recipe.BrewingRecipeJsonBuilder;
 import juuxel.adorn.util.EntryOrTag;
@@ -76,18 +77,18 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
     }
 
     private void generateBooks() {
-        createShapeless(RecipeCategory.MISC, AdornItems.GUIDE_BOOK.get())
+        createShapeless(RecipeCategory.MISC, BookKey.GUIDE.createStack())
             .criterion("has_book", conditionsFromItem(Items.BOOK))
             .input(Items.BOOK)
             .input(ItemTags.WOOL)
             .input(ItemTags.WOOL)
             .offerTo(exporter);
-        createShapeless(RecipeCategory.MISC, AdornItems.TRADERS_MANUAL.get())
+        createShapeless(RecipeCategory.MISC, BookKey.TRADERS_MANUAL.createStack())
             .criterion("has_book", conditionsFromItem(Items.BOOK))
             .input(Items.BOOK)
             .input(ConventionalItemTags.GOLD_INGOTS)
             .input(ConventionalItemTags.EMERALD_GEMS)
-            .offerTo(exporter);
+            .offerTo(exporter, AdornCommon.key(RegistryKeys.RECIPE, "traders_manual"));
     }
 
     private void generateBrewing() {

@@ -8,6 +8,7 @@ import juuxel.adorn.block.variant.BlockVariantSet;
 import juuxel.adorn.block.variant.BlockVariantSets;
 import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.item.AdornItems;
+import juuxel.adorn.item.BookKey;
 import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.lib.registry.RegisteredMap;
 import juuxel.adorn.lib.registry.Registrar;
@@ -284,8 +285,8 @@ public final class AdornItemGroups {
 
     private static void addTools(ItemGroupBuildContext context) {
         context.add(AdornItems.WATERING_CAN);
-        context.add(AdornItems.GUIDE_BOOK);
-        context.add(AdornItems.TRADERS_MANUAL);
+        context.add(BookKey.GUIDE.createStack());
+        context.add(BookKey.TRADERS_MANUAL.createStack());
     }
 
     private static void addMiscDecorations(ItemGroupBuildContext context) {
