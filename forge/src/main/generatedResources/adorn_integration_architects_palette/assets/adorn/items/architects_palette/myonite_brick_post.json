@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/architects_palette/myonite_brick_post"
+    "model": "adorn:block/architects_palette/myonite_brick_post"
   }
 }

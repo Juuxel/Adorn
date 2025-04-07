@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/blockus/white_oak_coffee_table"
+    "model": "adorn:block/blockus/white_oak_coffee_table"
   }
 }

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/byg/baobab_shelf"
+    "model": "adorn:block/byg/baobab_shelf"
   }
 }

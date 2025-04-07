@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/ecologics/coconut_step"
+    "model": "adorn:block/ecologics/coconut_step"
   }
 }

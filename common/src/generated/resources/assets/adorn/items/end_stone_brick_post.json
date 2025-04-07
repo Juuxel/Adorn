@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/end_stone_brick_post"
+    "model": "adorn:block/end_stone_brick_post"
   }
 }

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/ecologics/coconut_shelf"
+    "model": "adorn:block/ecologics/coconut_shelf"
   }
 }

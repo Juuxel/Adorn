@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/techreborn/rubber_step"
+    "model": "adorn:block/techreborn/rubber_step"
   }
 }

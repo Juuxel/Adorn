@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/mossy_cobblestone_post"
+    "model": "adorn:block/mossy_cobblestone_post"
   }
 }

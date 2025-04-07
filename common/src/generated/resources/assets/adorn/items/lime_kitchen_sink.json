@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/lime_kitchen_sink"
+    "model": "adorn:block/lime_kitchen_sink"
   }
 }

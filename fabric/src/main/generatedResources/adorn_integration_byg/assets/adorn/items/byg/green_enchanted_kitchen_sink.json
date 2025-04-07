@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/byg/green_enchanted_kitchen_sink"
+    "model": "adorn:block/byg/green_enchanted_kitchen_sink"
   }
 }

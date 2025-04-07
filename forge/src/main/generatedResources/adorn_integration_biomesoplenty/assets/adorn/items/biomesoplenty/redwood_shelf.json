@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/biomesoplenty/redwood_shelf"
+    "model": "adorn:block/biomesoplenty/redwood_shelf"
   }
 }

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/biomesoplenty/magic_drawer"
+    "model": "adorn:block/biomesoplenty/magic_drawer"
   }
 }

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/jungle_platform"
+    "model": "adorn:block/jungle_platform"
   }
 }

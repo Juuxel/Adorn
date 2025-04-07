@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/byg/sythian_coffee_table"
+    "model": "adorn:block/byg/sythian_coffee_table"
   }
 }

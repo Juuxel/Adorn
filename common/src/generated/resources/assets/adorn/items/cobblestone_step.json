@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/cobblestone_step"
+    "model": "adorn:block/cobblestone_step"
   }
 }

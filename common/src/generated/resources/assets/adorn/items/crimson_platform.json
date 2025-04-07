@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/crimson_platform"
+    "model": "adorn:block/crimson_platform"
   }
 }

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/biomesoplenty/palm_coffee_table"
+    "model": "adorn:block/biomesoplenty/palm_coffee_table"
   }
 }

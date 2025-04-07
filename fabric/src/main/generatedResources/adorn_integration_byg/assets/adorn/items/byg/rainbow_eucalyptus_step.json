@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/byg/rainbow_eucalyptus_step"
+    "model": "adorn:block/byg/rainbow_eucalyptus_step"
   }
 }

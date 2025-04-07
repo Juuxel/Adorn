@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/mangrove_shelf"
+    "model": "adorn:block/mangrove_shelf"
   }
 }

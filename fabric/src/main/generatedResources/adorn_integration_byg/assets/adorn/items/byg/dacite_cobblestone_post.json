@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/byg/dacite_cobblestone_post"
+    "model": "adorn:block/byg/dacite_cobblestone_post"
   }
 }

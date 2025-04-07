@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/polished_blackstone_brick_platform"
+    "model": "adorn:block/polished_blackstone_brick_platform"
   }
 }

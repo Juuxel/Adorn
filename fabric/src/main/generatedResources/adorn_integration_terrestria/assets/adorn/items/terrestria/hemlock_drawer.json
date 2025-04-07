@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/terrestria/hemlock_drawer"
+    "model": "adorn:block/terrestria/hemlock_drawer"
   }
 }

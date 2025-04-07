@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/gray_table_lamp"
+    "model": "adorn:block/gray_table_lamp"
   }
 }

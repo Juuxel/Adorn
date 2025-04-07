@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/ecologics/azalea_shelf"
+    "model": "adorn:block/ecologics/azalea_shelf"
   }
 }

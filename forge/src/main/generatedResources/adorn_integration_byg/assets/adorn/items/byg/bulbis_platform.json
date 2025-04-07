@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/byg/bulbis_platform"
+    "model": "adorn:block/byg/bulbis_platform"
   }
 }

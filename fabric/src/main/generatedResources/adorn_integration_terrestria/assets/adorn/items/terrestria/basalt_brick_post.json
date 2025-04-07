@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/terrestria/basalt_brick_post"
+    "model": "adorn:block/terrestria/basalt_brick_post"
   }
 }

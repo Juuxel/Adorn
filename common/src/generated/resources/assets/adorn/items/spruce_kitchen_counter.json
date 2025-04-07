@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/spruce_kitchen_counter"
+    "model": "adorn:block/spruce_kitchen_counter"
   }
 }

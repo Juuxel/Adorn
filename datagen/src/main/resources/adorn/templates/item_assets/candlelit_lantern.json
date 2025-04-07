@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/<id.path>_candlelit_lantern"
+    "model": "adorn:block/<id.path>_candlelit_lantern_standing"
   }
 }

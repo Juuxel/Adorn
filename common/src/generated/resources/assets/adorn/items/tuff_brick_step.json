@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/tuff_brick_step"
+    "model": "adorn:block/tuff_brick_step"
   }
 }

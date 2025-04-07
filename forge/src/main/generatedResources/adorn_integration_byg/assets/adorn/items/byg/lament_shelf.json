@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/byg/lament_shelf"
+    "model": "adorn:block/byg/lament_shelf"
   }
 }

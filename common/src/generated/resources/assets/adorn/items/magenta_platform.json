@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/magenta_platform"
+    "model": "adorn:block/magenta_platform"
   }
 }

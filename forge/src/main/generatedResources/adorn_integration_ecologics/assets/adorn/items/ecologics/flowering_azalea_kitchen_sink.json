@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/ecologics/flowering_azalea_kitchen_sink"
+    "model": "adorn:block/ecologics/flowering_azalea_kitchen_sink"
   }
 }

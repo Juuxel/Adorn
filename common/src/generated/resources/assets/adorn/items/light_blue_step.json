@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/light_blue_step"
+    "model": "adorn:block/light_blue_step"
   }
 }

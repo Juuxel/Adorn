@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/blue_shelf"
+    "model": "adorn:block/blue_shelf"
   }
 }

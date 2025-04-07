@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/dark_oak_platform"
+    "model": "adorn:block/dark_oak_platform"
   }
 }

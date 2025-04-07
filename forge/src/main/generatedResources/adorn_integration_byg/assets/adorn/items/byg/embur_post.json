@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/byg/embur_post"
+    "model": "adorn:block/byg/embur_post"
   }
 }

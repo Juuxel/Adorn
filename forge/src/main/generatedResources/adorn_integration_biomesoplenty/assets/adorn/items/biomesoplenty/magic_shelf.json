@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/biomesoplenty/magic_shelf"
+    "model": "adorn:block/biomesoplenty/magic_shelf"
   }
 }

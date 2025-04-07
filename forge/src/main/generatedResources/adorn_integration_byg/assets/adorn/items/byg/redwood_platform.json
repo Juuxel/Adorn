@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/byg/redwood_platform"
+    "model": "adorn:block/byg/redwood_platform"
   }
 }

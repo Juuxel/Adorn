@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/biomesoplenty/fir_step"
+    "model": "adorn:block/biomesoplenty/fir_step"
   }
 }

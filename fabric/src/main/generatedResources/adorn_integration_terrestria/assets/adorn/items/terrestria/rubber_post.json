@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/terrestria/rubber_post"
+    "model": "adorn:block/terrestria/rubber_post"
   }
 }

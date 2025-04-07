@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/biomemakeover/willow_kitchen_counter"
+    "model": "adorn:block/biomemakeover/willow_kitchen_counter"
   }
 }

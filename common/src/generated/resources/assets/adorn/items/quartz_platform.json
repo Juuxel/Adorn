@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/quartz_platform"
+    "model": "adorn:block/quartz_platform"
   }
 }

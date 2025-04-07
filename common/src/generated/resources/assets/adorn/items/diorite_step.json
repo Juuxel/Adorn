@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/diorite_step"
+    "model": "adorn:block/diorite_step"
   }
 }

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/byg/fir_coffee_table"
+    "model": "adorn:block/byg/fir_coffee_table"
   }
 }

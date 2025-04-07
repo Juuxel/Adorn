@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/biomesoplenty/smooth_black_sandstone_step"
+    "model": "adorn:block/biomesoplenty/smooth_black_sandstone_step"
   }
 }

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/architects_palette/twisted_coffee_table"
+    "model": "adorn:block/architects_palette/twisted_coffee_table"
   }
 }

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/purpur_step"
+    "model": "adorn:block/purpur_step"
   }
 }

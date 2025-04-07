@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/lime_candlelit_lantern"
+    "model": "adorn:block/lime_candlelit_lantern_standing"
   }
 }

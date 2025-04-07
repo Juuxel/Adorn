@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/yellow_step"
+    "model": "adorn:block/yellow_step"
   }
 }

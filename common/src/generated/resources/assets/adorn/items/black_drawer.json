@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/black_drawer"
+    "model": "adorn:block/black_drawer"
   }
 }

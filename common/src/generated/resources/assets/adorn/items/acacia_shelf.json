@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/acacia_shelf"
+    "model": "adorn:block/acacia_shelf"
   }
 }

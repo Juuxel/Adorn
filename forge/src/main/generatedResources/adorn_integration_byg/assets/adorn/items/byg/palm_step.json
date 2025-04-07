@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/byg/palm_step"
+    "model": "adorn:block/byg/palm_step"
   }
 }

@@ -16,7 +16,6 @@ public record Generator(
     public static final List<Generator> COMMON_GENERATORS = List.of(
         // Platforms
         blockState("platform"),
-        itemModel("platform"),
         itemAsset("platform"),
         blockLootTable("platform"),
         recipe("platform"),
@@ -25,7 +24,6 @@ public record Generator(
 
         // Posts
         blockState("post"),
-        itemModel("post"),
         itemAsset("post"),
         blockLootTable("post"),
         recipe("post"),
@@ -34,7 +32,6 @@ public record Generator(
 
         // Steps
         blockState("step"),
-        itemModel("step"),
         itemAsset("step"),
         blockLootTable("step"),
         recipe("step"),
@@ -71,7 +68,6 @@ public record Generator(
         // Coffee tables
         blockState("coffee_table"),
         blockModel("coffee_table"),
-        itemModel("coffee_table"),
         itemAsset("coffee_table"),
         blockLootTable("coffee_table"),
         recipe("coffee_table"),
@@ -80,7 +76,6 @@ public record Generator(
         // Drawers
         blockState("drawer"),
         blockModel("drawer"),
-        itemModel("drawer"),
         itemAsset("drawer"),
         blockLootTable("drawer"),
         recipe("drawer"),
@@ -91,7 +86,6 @@ public record Generator(
         blockModel("kitchen_counter"),
         blockModel("kitchen_counter_connection_left"),
         blockModel("kitchen_counter_connection_right"),
-        itemModel("kitchen_counter"),
         itemAsset("kitchen_counter"),
         blockLootTable("kitchen_counter"),
         recipe("kitchen_counter"),
@@ -109,7 +103,6 @@ public record Generator(
         // Kitchen sinks
         blockState("kitchen_sink"),
         blockModel("kitchen_sink"),
-        itemModel("kitchen_sink"),
         itemAsset("kitchen_sink"),
         blockLootTable("kitchen_sink"),
         recipe("kitchen_sink"),
@@ -118,7 +111,6 @@ public record Generator(
         // Shelves
         blockState("shelf"),
         blockModel("shelf"),
-        itemModel("shelf"),
         itemAsset("shelf"),
         blockLootTable("shelf"),
         recipe("shelf"),
@@ -159,7 +151,6 @@ public record Generator(
         // Table lamps
         blockState("table_lamp"),
         blockModel("table_lamp"),
-        itemModel("table_lamp"),
         itemAsset("table_lamp"),
         blockLootTable("table_lamp"),
         recipe("table_lamp"),
@@ -169,7 +160,6 @@ public record Generator(
         blockModel("candlelit_lantern_hanging"),
         blockModel("candlelit_lantern_standing"),
         blockState("candlelit_lantern"),
-        itemModel("candlelit_lantern"),
         itemAsset("candlelit_lantern"),
         blockLootTable("candlelit_lantern"),
         recipe("candlelit_lantern"),

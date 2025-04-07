@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/terrestria/yucca_palm_platform"
+    "model": "adorn:block/terrestria/yucca_palm_platform"
   }
 }

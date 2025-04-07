@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/terrestria/hemlock_step"
+    "model": "adorn:block/terrestria/hemlock_step"
   }
 }

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/byg/cika_drawer"
+    "model": "adorn:block/byg/cika_drawer"
   }
 }

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/birch_platform"
+    "model": "adorn:block/birch_platform"
   }
 }

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/terrestria/hemlock_kitchen_sink"
+    "model": "adorn:block/terrestria/hemlock_kitchen_sink"
   }
 }

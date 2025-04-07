@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/biomesoplenty/mahogany_kitchen_counter"
+    "model": "adorn:block/biomesoplenty/mahogany_kitchen_counter"
   }
 }

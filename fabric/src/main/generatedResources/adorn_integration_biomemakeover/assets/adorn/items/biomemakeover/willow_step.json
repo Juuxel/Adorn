@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/biomemakeover/willow_step"
+    "model": "adorn:block/biomemakeover/willow_step"
   }
 }

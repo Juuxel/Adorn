@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/purpur_platform"
+    "model": "adorn:block/purpur_platform"
   }
 }

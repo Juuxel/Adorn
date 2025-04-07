@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/byg/scoria_stonebrick_step"
+    "model": "adorn:block/byg/scoria_stonebrick_step"
   }
 }

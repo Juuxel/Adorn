@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/byg/mossy_stone_step"
+    "model": "adorn:block/byg/mossy_stone_step"
   }
 }

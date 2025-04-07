@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/terrestria/rubber_kitchen_sink"
+    "model": "adorn:block/terrestria/rubber_kitchen_sink"
   }
 }

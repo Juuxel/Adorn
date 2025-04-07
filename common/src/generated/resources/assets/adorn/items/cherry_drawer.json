@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/cherry_drawer"
+    "model": "adorn:block/cherry_drawer"
   }
 }

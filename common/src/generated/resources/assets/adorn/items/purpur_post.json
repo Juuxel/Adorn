@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/purpur_post"
+    "model": "adorn:block/purpur_post"
   }
 }

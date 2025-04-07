@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/biomesoplenty/cut_orange_sandstone_step"
+    "model": "adorn:block/biomesoplenty/cut_orange_sandstone_step"
   }
 }

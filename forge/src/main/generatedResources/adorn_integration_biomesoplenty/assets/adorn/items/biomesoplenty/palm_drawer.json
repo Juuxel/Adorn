@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "adorn:item/biomesoplenty/palm_drawer"
+    "model": "adorn:block/biomesoplenty/palm_drawer"
   }
 }
