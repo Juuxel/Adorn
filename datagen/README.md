@@ -10,8 +10,8 @@ contributing.
 
 ## Why not use Mojang's data generator?
 
-I've never learned how to use it. 😅 Also, mine is probably faster (since it doesn't launch the game)
-and works best for my own needs.
+It doesn't work with conditionally registered content. Adorn's custom generator
+can also be integrated – and is integrated – into the vanilla generator very easily. 
 
 ## Design
 
@@ -101,3 +101,10 @@ Each data generator config file is an XML file in `<project dir>/src/data` with 
     - Attributes:
       - `key` (required): the property key/name
       - `value` (required): the property value
+- Output format tags
+  - `<overlay>`: defines the resource pack overlay where the config outputs
+    - Nested directly in the root tag
+    - At most one `<overlay>` element is supported
+    - Attributes:
+      - `directory` (required): the overlay's directory
+      - `mod_id` (required): the ID of the mod that is needed for the overlay
