@@ -1,5 +1,4 @@
 [versions]
-autoservice = "1.1.1"
 dashloader = "2.0-pre2"
 emi = "1.1.10+1.21"
 fabric-loader = "0.16.10"
@@ -18,8 +17,6 @@ neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 
 # Non-mod library dependencies
 jankson = { module = "blue.endless:jankson", version.ref = "jankson" }
-autoservice-annotations = { module = "com.google.auto.service:auto-service-annotations", version.ref = "autoservice" }
-autoservice-processor = { module = "com.google.auto.service:auto-service", version.ref = "autoservice" }
 
 # Mod dependencies
 dashloader = { module = "net.oskarstrom:DashLoader", version.ref = "dashloader" }
