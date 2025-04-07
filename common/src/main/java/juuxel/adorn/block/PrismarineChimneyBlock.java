@@ -34,7 +34,7 @@ public class PrismarineChimneyBlock extends AbstractChimneyBlock implements Bloc
         double z = pos.getZ() + 0.5;
 
         for (int i = 0; i < 3; i++) {
-            world.addImportantParticle(ParticleTypes.BUBBLE_COLUMN_UP, x, y, z, 0.0, 0.0, 0.0);
+            world.addImportantParticleClient(ParticleTypes.BUBBLE_COLUMN_UP, x, y, z, 0.0, 0.0, 0.0);
         }
     }
 

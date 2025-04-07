@@ -142,7 +142,7 @@ public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
     record PaintedWood(DyeColor color) implements BlockVariant {
         @Override
         public String name() {
-            return color.getName();
+            return color.getId();
         }
 
         @Override

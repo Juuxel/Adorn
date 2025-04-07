@@ -10,7 +10,7 @@ plugins {
 
     // Set up a specific version of Loom. There's no code in the root project,
     // so we don't need to apply it here.
-    id("dev.architectury.loom") version "1.9.+" apply false
+    id("dev.architectury.loom") version "1.10.+" apply false
 }
 
 // Set up basic Maven artifact metadata, including the project version

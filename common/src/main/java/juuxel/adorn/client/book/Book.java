@@ -31,9 +31,8 @@ public record Book(Text title, Text subtitle, Text author, List<Page> pages, flo
     public static MutableText jumpToPage(MutableText text, int page) {
         return text.formatted(Formatting.UNDERLINE)
             .styled(style -> style
-                .withClickEvent(new ClickEvent(ClickEvent.Action.CHANGE_PAGE, Integer.toString(page)))
-                .withHoverEvent(new HoverEvent(
-                    HoverEvent.Action.SHOW_TEXT,
+                .withClickEvent(new ClickEvent.ChangePage(page))
+                .withHoverEvent(new HoverEvent.ShowText(
                     Text.translatable("guide.adorn.contents.jump_to_page", page)
                         .formatted(Formatting.ITALIC)
                 )));

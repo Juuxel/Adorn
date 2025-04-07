@@ -75,9 +75,8 @@ public final class BrewerBlock extends VisibleBlockWithEntity implements BlockWi
     }
 
     @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        ItemScatterer.onStateReplaced(state, newState, world, pos);
-        super.onStateReplaced(state, world, pos, newState, moved);
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
+        ItemScatterer.onStateReplaced(state, world, pos);
     }
 
     @Override
@@ -126,7 +125,7 @@ public final class BrewerBlock extends VisibleBlockWithEntity implements BlockWi
             double x = pos.getX() + 0.5 + random.nextDouble() * RANDOM_CLOUD_OFFSET + facing.getOffsetX() * FACING_CLOUD_OFFSET;
             double y = pos.getY() + 0.37 + random.nextDouble() * RANDOM_CLOUD_OFFSET;
             double z = pos.getZ() + 0.5 + random.nextDouble() * RANDOM_CLOUD_OFFSET + facing.getOffsetZ() * FACING_CLOUD_OFFSET;
-            world.addParticle(ParticleTypes.CLOUD, x, y, z, 0.0, 0.0, 0.0);
+            world.addParticleClient(ParticleTypes.CLOUD, x, y, z, 0.0, 0.0, 0.0);
         }
     }
 

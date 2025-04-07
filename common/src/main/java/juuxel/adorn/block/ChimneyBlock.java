@@ -48,7 +48,7 @@ public final class ChimneyBlock extends AbstractChimneyBlock implements BlockWit
         switch (state.get(SMOKE_TYPE)) {
             case CLASSIC -> {
                 for (int i = 0; i < count; i++) {
-                    world.addImportantParticle(
+                    world.addImportantParticleClient(
                         ParticleTypes.LARGE_SMOKE,
                         pos.getX() + 0.3 + random.nextDouble() * 0.4,
                         pos.getY() + 0.9,
@@ -60,7 +60,7 @@ public final class ChimneyBlock extends AbstractChimneyBlock implements BlockWit
 
             case CAMPFIRE -> {
                 for (int i = 0; i < count; i++) {
-                    world.addImportantParticle(
+                    world.addImportantParticleClient(
                         ParticleTypes.CAMPFIRE_COSY_SMOKE, true,
                         pos.getX() + 0.3 + random.nextDouble() * 0.4,
                         pos.getY() + 0.9 + random.nextDouble(),

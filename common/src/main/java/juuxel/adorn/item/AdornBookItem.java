@@ -2,6 +2,7 @@ package juuxel.adorn.item;
 
 import juuxel.adorn.networking.OpenBookS2CMessage;
 import juuxel.adorn.platform.PlatformBridges;
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,7 +15,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public final class AdornBookItem extends Item {
     private final Identifier bookId;
@@ -35,11 +36,11 @@ public final class AdornBookItem extends Item {
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        super.appendTooltip(stack, context, tooltip, type);
+    public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
+        super.appendTooltip(stack, context, displayComponent, textConsumer, type);
         var bookManager = PlatformBridges.get().getResources().getBookManager();
         if (bookManager.contains(bookId)) {
-            tooltip.add(Text.translatable("book.byAuthor", bookManager.get(bookId).author()).formatted(Formatting.GRAY));
+            textConsumer.accept(Text.translatable("book.byAuthor", bookManager.get(bookId).author()).formatted(Formatting.GRAY));
         }
     }
 }

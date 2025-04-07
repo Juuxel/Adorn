@@ -12,7 +12,7 @@ import java.util.Map;
 public final class AdornWoodTypes {
     public static final Map<DyeColor, WoodType> PAINTED_WOODS = Util.make(new EnumMap<>(DyeColor.class), map -> {
         for (DyeColor color : DyeColor.values()) {
-            map.put(color, register(color.getName() + "_wood", AdornBlockSetTypes.PAINTED_WOODS.get(color)));
+            map.put(color, register(color.getId() + "_wood", AdornBlockSetTypes.PAINTED_WOODS.get(color)));
         }
     });
 

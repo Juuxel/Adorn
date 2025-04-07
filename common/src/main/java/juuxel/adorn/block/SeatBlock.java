@@ -73,11 +73,8 @@ public abstract class SeatBlock extends Block {
     }
 
     @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        super.onStateReplaced(state, world, pos, newState, moved);
-
-        if (!state.isOf(newState.getBlock())) {
-            if (!(world instanceof ServerWorld serverWorld) || !isSittingEnabled()) return;
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
+        if (isSittingEnabled()) {
             var seats = world.getEntitiesByType(
                 AdornEntities.SEAT.get(),
                 new Box(getActualSeatPos(world, state, pos)),
@@ -85,7 +82,7 @@ public abstract class SeatBlock extends Block {
             );
             for (var seat : seats) {
                 seat.removeAllPassengers();
-                seat.kill(serverWorld);
+                seat.kill(world);
             }
         }
     }

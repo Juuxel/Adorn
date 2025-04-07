@@ -128,7 +128,7 @@ public final class KitchenSinkBlockEntityFabric extends KitchenSinkBlockEntity {
     public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
         super.readNbt(nbt, registries);
         storage.variant = NbtUtil.getWithCodec(nbt, NBT_FLUID, FluidVariant.CODEC, registries);
-        storage.amount = nbt.getLong(NBT_VOLUME);
+        storage.amount = nbt.getLong(NBT_VOLUME, 0);
     }
 
     @Override

@@ -2,7 +2,6 @@ package juuxel.adorn.entity;
 
 import juuxel.adorn.block.SeatBlock;
 import juuxel.adorn.platform.PlatformBridges;
-import juuxel.adorn.util.NbtUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -95,12 +94,12 @@ public final class SeatEntity extends Entity {
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
-        seatPos = NbtUtil.getBlockPos(nbt, NBT_SEAT_POS);
+        seatPos = nbt.get(NBT_SEAT_POS, BlockPos.CODEC).orElse(BlockPos.ORIGIN);
     }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
-        NbtUtil.putBlockPos(nbt, NBT_SEAT_POS, seatPos);
+        nbt.put(NBT_SEAT_POS, BlockPos.CODEC, seatPos);
     }
 
     @Override

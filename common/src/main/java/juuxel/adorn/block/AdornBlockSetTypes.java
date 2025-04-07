@@ -10,7 +10,7 @@ import net.minecraft.util.Util;
 public final class AdornBlockSetTypes {
     public static final BiMap<DyeColor, BlockSetType> PAINTED_WOODS = Util.make(EnumHashBiMap.create(DyeColor.class), map -> {
         for (DyeColor color : DyeColor.values()) {
-            map.put(color, register(color.getName() + "_wood"));
+            map.put(color, register(color.getId() + "_wood"));
         }
     });
 

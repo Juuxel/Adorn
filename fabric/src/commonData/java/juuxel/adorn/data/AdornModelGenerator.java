@@ -2,9 +2,9 @@ package juuxel.adorn.data;
 
 import juuxel.adorn.block.AdornBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
+import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
+import net.minecraft.client.data.BlockStateModelGenerator;
+import net.minecraft.client.data.ItemModelGenerator;
 
 public final class AdornModelGenerator extends FabricModelProvider {
     public AdornModelGenerator(FabricDataOutput output) {

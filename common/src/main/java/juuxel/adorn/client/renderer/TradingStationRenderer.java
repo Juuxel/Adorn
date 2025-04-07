@@ -12,12 +12,13 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ModelTransformationMode;
+import net.minecraft.item.ItemDisplayContext;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.Vec3d;
 
 public final class TradingStationRenderer implements BlockEntityRenderer<TradingStationBlockEntity> {
     private static final float SELLING_ROTATION_MULTIPLIER = 1.2f;
@@ -34,7 +35,7 @@ public final class TradingStationRenderer implements BlockEntityRenderer<Trading
     }
 
     @Override
-    public void render(TradingStationBlockEntity be, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    public void render(TradingStationBlockEntity be, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, Vec3d cameraPos) {
         var hitResult = dispatcher.crosshairTarget;
         var lookingAtBlock = hitResult != null && hitResult.getType() == HitResult.Type.BLOCK && be.getPos().equals(((BlockHitResult) hitResult).getBlockPos());
         var trade = be.getTrade();
@@ -47,7 +48,7 @@ public final class TradingStationRenderer implements BlockEntityRenderer<Trading
             matrices.scale(0.6f, 0.6f, 0.6f);
             matrices.translate(0.0, 0.3, 0.0);
             var itemRenderer = MinecraftClient.getInstance().getItemRenderer();
-            itemRenderer.renderItem(trade.getSelling(), ModelTransformationMode.FIXED, light, overlay, matrices, vertexConsumers, be.getWorld(), 0);
+            itemRenderer.renderItem(trade.getSelling(), ItemDisplayContext.FIXED, light, overlay, matrices, vertexConsumers, be.getWorld(), 0);
             matrices.pop();
         }
 

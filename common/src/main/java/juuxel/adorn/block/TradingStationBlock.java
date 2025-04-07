@@ -2,9 +2,7 @@ package juuxel.adorn.block;
 
 import com.mojang.serialization.MapCodec;
 import juuxel.adorn.block.entity.TradingStationBlockEntity;
-import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.criterion.AdornCriteria;
-import juuxel.adorn.lib.AdornGameRules;
 import juuxel.adorn.lib.AdornStats;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -16,10 +14,8 @@ import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
@@ -27,7 +23,6 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
@@ -38,11 +33,8 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
 public final class TradingStationBlock extends VisibleBlockWithEntity implements BlockWithDescription {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    private static final String OWNER_DESCRIPTION = "block.adorn.trading_station.description.owner";
     private static final VoxelShape OUTLINE_SHAPE = VoxelShapes.union(
         createCuboidShape(0.0, 11.0, 0.0, 16.0, 16.0, 16.0),
         createLegShape()
@@ -123,16 +115,8 @@ public final class TradingStationBlock extends VisibleBlockWithEntity implements
     }
 
     @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (!state.isOf(newState.getBlock()) && world.getBlockEntity(pos) instanceof TradingStationBlockEntity tradingStation) {
-            if (world instanceof ServerWorld serverWorld && !serverWorld.getGameRules().getBoolean(AdornGameRules.DROP_LOCKED_TRADING_STATIONS)) {
-                ItemScatterer.spawn(world, pos, tradingStation.getStorage());
-            }
-
-            world.updateComparators(pos, this);
-        }
-
-        super.onStateReplaced(state, world, pos, newState, moved);
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
+        ItemScatterer.onStateReplaced(state, world, pos);
     }
 
     @Override
@@ -153,16 +137,6 @@ public final class TradingStationBlock extends VisibleBlockWithEntity implements
     @Override
     public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return AdornBlockEntities.TRADING_STATION.get().instantiate(pos, state);
-    }
-
-    @Override
-    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
-        super.appendTooltip(stack, context, tooltip, options);
-
-        var owner = stack.get(AdornComponentTypes.TRADE_OWNER.get());
-        if (owner != null) {
-            tooltip.add(Text.translatable(OWNER_DESCRIPTION, owner.name().copy().formatted(Formatting.WHITE)).formatted(Formatting.GREEN));
-        }
     }
 
     @Override

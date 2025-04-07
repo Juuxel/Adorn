@@ -2,8 +2,8 @@ package juuxel.adorn.recipe;
 
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.fluid.FluidIngredient;
-import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;

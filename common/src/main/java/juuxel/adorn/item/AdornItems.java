@@ -67,7 +67,7 @@ public final class AdornItems {
     public static final Registered<Item> WATERING_CAN = register("watering_can",
         WateringCanItem::new,
         () -> new Item.Settings()
-            .component(AdornComponentTypes.FERTILIZER_LEVEL.get(), 0)
+            .component(AdornComponentTypes.FERTILIZER_LEVEL.get(), WateringCanItem.FertilizerLevel.ZERO)
             .component(AdornComponentTypes.WATER_LEVEL.get(), 0)
     );
 

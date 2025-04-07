@@ -84,6 +84,6 @@ public final class BrewerBlockEntityFabric extends BrewerBlockEntity {
     public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
         super.readNbt(nbt, registries);
         fluidStorage.variant = NbtUtil.getWithCodec(nbt, NBT_FLUID, FluidVariant.CODEC, registries);
-        fluidStorage.amount = nbt.getLong(NBT_VOLUME);
+        fluidStorage.amount = nbt.getLong(NBT_VOLUME, 0);
     }
 }

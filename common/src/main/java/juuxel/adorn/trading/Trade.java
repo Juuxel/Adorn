@@ -3,6 +3,7 @@ package juuxel.adorn.trading;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import juuxel.adorn.util.NbtConvertible;
+import juuxel.adorn.util.NbtUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipData;
 import net.minecraft.nbt.NbtCompound;
@@ -57,14 +58,14 @@ public final class Trade implements NbtConvertible, TooltipData {
 
     @Override
     public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        selling = ItemStack.fromNbtOrEmpty(registries, nbt.getCompound(NBT_SELLING));
-        price = ItemStack.fromNbtOrEmpty(registries, nbt.getCompound(NBT_PRICE));
+        selling = NbtUtil.getWithCodec(nbt, NBT_SELLING, ItemStack.OPTIONAL_CODEC, registries, ItemStack.EMPTY);
+        price = NbtUtil.getWithCodec(nbt, NBT_PRICE, ItemStack.OPTIONAL_CODEC, registries, ItemStack.EMPTY);
     }
 
     @Override
     public NbtCompound writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        nbt.put(NBT_SELLING, selling.toNbtAllowEmpty(registries));
-        nbt.put(NBT_PRICE, price.toNbtAllowEmpty(registries));
+        NbtUtil.putWithCodec(nbt, NBT_SELLING, ItemStack.OPTIONAL_CODEC, selling, registries);
+        NbtUtil.putWithCodec(nbt, NBT_PRICE, ItemStack.OPTIONAL_CODEC, price, registries);
         return nbt;
     }
 

@@ -248,7 +248,7 @@ public class SofaBlock extends SeatBlock implements Waterloggable, SneakClickHan
     }
 
     private static int getShapeKey(Direction facing, boolean left, boolean right, FrontConnection front) {
-        return front.ordinal() << 4 | (left ? 1 : 0) << 3 | (right ? 1 : 0) << 2 | facing.getHorizontal();
+        return front.ordinal() << 4 | (left ? 1 : 0) << 3 | (right ? 1 : 0) << 2 | facing.getHorizontalQuarterTurns();
     }
 
     public static @Nullable Direction getSleepingDirection(BlockView world, BlockPos pos) {

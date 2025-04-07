@@ -29,9 +29,9 @@ public final class FertilizerRefillingRecipe extends SpecialCraftingRecipe {
         if (match == null) return ItemStack.EMPTY;
 
         var result = match.wateringCan().copy();
-        int fertilizerLevel = result.getOrDefault(AdornComponentTypes.FERTILIZER_LEVEL.get(), 0);
+        int fertilizerLevel = WateringCanItem.FertilizerLevel.get(result);
         int newFertilizerLevel = Math.min(fertilizerLevel + match.fertilizers(), WateringCanItem.MAX_FERTILIZER_LEVEL);
-        result.set(AdornComponentTypes.FERTILIZER_LEVEL.get(), newFertilizerLevel);
+        result.set(AdornComponentTypes.FERTILIZER_LEVEL.get(), WateringCanItem.FertilizerLevel.of(newFertilizerLevel));
         return result;
     }
 

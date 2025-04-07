@@ -1,6 +1,7 @@
 package juuxel.adorn.client.book;
 
 import net.minecraft.resource.JsonDataLoader;
+import net.minecraft.resource.ResourceFinder;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.profiler.Profiler;
@@ -13,7 +14,7 @@ public class BookManager extends JsonDataLoader<Book> {
     private Map<Identifier, Book> books = Map.of();
 
     public BookManager() {
-        super(Book.CODEC, DATA_TYPE);
+        super(Book.CODEC, ResourceFinder.json(DATA_TYPE));
     }
 
     @Override

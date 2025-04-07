@@ -79,7 +79,7 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
     @Override
     public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
         super.readNbt(nbt, registries);
-        progress = nbt.getInt(NBT_PROGRESS);
+        progress = nbt.getInt(NBT_PROGRESS, 0);
     }
 
     @Override

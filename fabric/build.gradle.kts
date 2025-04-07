@@ -101,7 +101,6 @@ dependencies {
     modCompileOnly(libs.emi.fabric) {
         isTransitive = false
     }
-    modLocalRuntime(libs.rei.fabric)
 }
 
 tasks {

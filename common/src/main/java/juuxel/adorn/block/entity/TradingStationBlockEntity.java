@@ -2,6 +2,7 @@ package juuxel.adorn.block.entity;
 
 import juuxel.adorn.block.AdornBlockEntities;
 import juuxel.adorn.component.AdornComponentTypes;
+import juuxel.adorn.lib.AdornGameRules;
 import juuxel.adorn.menu.TradingStationMenu;
 import juuxel.adorn.trading.Trade;
 import juuxel.adorn.trading.TradeOwner;
@@ -11,6 +12,7 @@ import juuxel.adorn.util.NbtUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.component.ComponentMap;
+import net.minecraft.component.ComponentsAccess;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -21,7 +23,10 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.Uuids;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
@@ -105,23 +110,17 @@ public final class TradingStationBlockEntity extends BlockEntity implements Name
     public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
         super.readNbt(nbt, registries);
 
-        if (nbt.containsUuid(NBT_TRADING_OWNER)) {
-            owner = nbt.getUuid(NBT_TRADING_OWNER);
-        }
-
+        owner = nbt.get(NBT_TRADING_OWNER, Uuids.INT_STREAM_CODEC).orElse(null);
         ownerName = Objects.requireNonNullElse(NbtUtil.getText(nbt, NBT_TRADING_OWNER_NAME, registries), UNKNOWN_OWNER);
-        trade.readNbt(nbt.getCompound(NBT_TRADE), registries);
-        storage.readNbt(nbt.getCompound(NBT_STORAGE), registries);
+        trade.readNbt(nbt.getCompoundOrEmpty(NBT_TRADE), registries);
+        storage.readNbt(nbt.getCompoundOrEmpty(NBT_STORAGE), registries);
     }
 
     @Override
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
         super.writeNbt(nbt, registries);
 
-        if (owner != null) {
-            nbt.putUuid(NBT_TRADING_OWNER, owner);
-        }
-
+        nbt.putNullable(NBT_TRADING_OWNER, Uuids.INT_STREAM_CODEC, owner);
         NbtUtil.putText(nbt, NBT_TRADING_OWNER_NAME, ownerName, registries);
 
         nbt.put(NBT_TRADE, trade.writeNbt(new NbtCompound(), registries));
@@ -171,5 +170,12 @@ public final class TradingStationBlockEntity extends BlockEntity implements Name
         nbt.remove(NBT_STORAGE);
         nbt.remove(NBT_TRADING_OWNER);
         nbt.remove(NBT_TRADING_OWNER_NAME);
+    }
+
+    @Override
+    public void onBlockReplaced(BlockPos pos, BlockState oldState) {
+        if (world instanceof ServerWorld serverWorld && !serverWorld.getGameRules().getBoolean(AdornGameRules.DROP_LOCKED_TRADING_STATIONS)) {
+            ItemScatterer.spawn(world, pos, getStorage());
+        }
     }
 }

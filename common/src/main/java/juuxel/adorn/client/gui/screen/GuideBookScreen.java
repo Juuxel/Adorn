@@ -1,6 +1,5 @@
 package juuxel.adorn.client.gui.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.client.book.Book;
 import juuxel.adorn.client.book.Image;
@@ -106,13 +105,7 @@ public final class GuideBookScreen extends Screen {
         if (style != null) {
             var clickEvent = style.getClickEvent();
 
-            if (clickEvent != null && clickEvent.getAction() == ClickEvent.Action.CHANGE_PAGE) {
-                int page;
-                try {
-                    page = Integer.parseInt(clickEvent.getValue());
-                } catch (NumberFormatException e) {
-                    return false;
-                }
+            if (clickEvent instanceof ClickEvent.ChangePage(int page)) {
                 var pageIndex = page - 1; // 1-indexed => 0-indexed
 
                 if (0 <= pageIndex && pageIndex < flipBook.getPageCount()) {
@@ -316,9 +309,7 @@ public final class GuideBookScreen extends Screen {
                 case AFTER_TEXT -> y + textHeight + PAGE_IMAGE_GAP;
             };
 
-            RenderSystem.enableBlend();
             context.drawTexture(RenderLayer::getGuiTextured, image.location(), imageX, imageY, 0f, 0f, image.size().x(), image.size().y(), image.size().x(), image.size().y());
-            RenderSystem.disableBlend();
 
             for (var hoverArea : image.hoverAreas()) {
                 if (hoverArea.contains(mouseX - imageX, mouseY - imageY)) {

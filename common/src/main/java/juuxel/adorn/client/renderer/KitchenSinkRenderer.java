@@ -16,6 +16,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.Vec3d;
 import org.slf4j.Logger;
 
 public abstract class KitchenSinkRenderer<T extends KitchenSinkBlockEntity> implements BlockEntityRenderer<T> {
@@ -49,7 +50,7 @@ public abstract class KitchenSinkRenderer<T extends KitchenSinkBlockEntity> impl
     }
 
     @Override
-    public void render(T entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    public void render(T entity, float tickProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, Vec3d cameraPos) {
         // Skip if there's nothing to render
         if (isEmpty(entity)) return;
 
