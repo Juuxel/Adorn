@@ -299,7 +299,7 @@ public final class GuideBookScreen extends Screen {
             }
 
             var hoveredStyle = getTextStyleAt(mouseX, mouseY);
-            Scissors.suspendScissors(() -> context.drawHoverEvent(textRenderer, hoveredStyle, mouseX, mouseY));
+            Scissors.suspendScissors(context, () -> context.drawHoverEvent(textRenderer, hoveredStyle, mouseX, mouseY));
         }
 
         private void renderImage(DrawContext context, Image image, int mouseX, int mouseY) {
@@ -318,7 +318,7 @@ public final class GuideBookScreen extends Screen {
                     context.fill(hX, hY, hX + hoverArea.size().x(), hY + hoverArea.size().y(), HOVER_AREA_HIGHLIGHT_COLOR);
 
                     var wrappedTooltip = textRenderer.wrapLines(hoverArea.tooltip(), PAGE_WIDTH);
-                    Scissors.suspendScissors(() -> context.drawOrderedTooltip(textRenderer, wrappedTooltip, mouseX, mouseY));
+                    Scissors.suspendScissors(context, () -> context.drawOrderedTooltip(textRenderer, wrappedTooltip, mouseX, mouseY));
                     break;
                 }
             }
@@ -356,7 +356,7 @@ public final class GuideBookScreen extends Screen {
         @Override
         protected void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
             var texture = isHovered() ? CLOSE_BOOK_ACTIVE_TEXTURE : CLOSE_BOOK_INACTIVE_TEXTURE;
-            context.drawTexture(RenderLayer::getGuiTextured, texture, getX(), getY(), 0f, 0f, 8, 8, 8, 8, 256, 256);
+            context.drawTexture(RenderLayer::getGuiTextured, texture, getX(), getY(), 0f, 0f, 8, 8, 8, 8);
         }
     }
 }
