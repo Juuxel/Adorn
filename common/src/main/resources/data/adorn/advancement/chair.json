@@ -16,7 +16,7 @@
       "trigger": "adorn:sit_on_block",
       "conditions": {
         "block": {
-          "tag": "adorn:chairs"
+          "items": "#adorn:chairs"
         }
       }
     }
