@@ -1,6 +1,19 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "adorn:item/white_sofa"
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "adorn:block/white_sofa_center"
+      },
+      {
+        "type": "minecraft:model",
+        "model": "adorn:block/white_sofa_arm_left"
+      },
+      {
+        "type": "minecraft:model",
+        "model": "adorn:block/white_sofa_arm_right"
+      }
+    ]
   }
 }

@@ -142,7 +142,6 @@ public record Generator(
         blockModel("sofa_center"),
         blockModel("sofa_corner_left"),
         blockModel("sofa_corner_right"),
-        itemModel("sofa"),
         itemAsset("sofa"),
         blockLootTable("sofa"),
         recipe("sofa"),
