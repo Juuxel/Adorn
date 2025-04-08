@@ -74,7 +74,6 @@ repositories {
             includeGroup("net.oskarstrom")
         }
     }
-    mavenLocal()
 }
 
 dependencies {
@@ -95,9 +94,6 @@ dependencies {
 
     // Data generation
     "commonDataImplementation"("io.github.juuxel:adorn-data-generator")
-    "modCommonDataImplementation"("net.fabricmc.fabric-api:fabric-data-generation-api-v1:22.3.9999+local") {
-        isTransitive = false
-    }
 
     // Mod compat
     modCompileOnly(libs.towelette)

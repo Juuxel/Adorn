@@ -1,7 +1,6 @@
 package juuxel.adorn.data.mixin;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import juuxel.adorn.block.BenchBlock;
 import juuxel.adorn.block.CandlelitLanternBlock;
 import juuxel.adorn.block.ChairBlock;
@@ -23,22 +22,28 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.Map;
 
 @Mixin(targets = "net.minecraft.client.data.ModelProvider$ItemAssets")
 abstract class ModelProviderItemAssetsMixin {
-    @WrapOperation(method = "method_65470", at = @At(value = "INVOKE", target = "Ljava/util/Map;containsKey(Ljava/lang/Object;)Z", ordinal = 1))
-    private boolean dontGenerateUnnecessaryItemAssets(Map<Identifier, ItemAsset> itemAssets, Object key, Operation<Boolean> original, Item item) {
-        // if the key is an item, resolve it
-        if (key instanceof Item i) {
-            key = Registries.ITEM.getId(i);
-        }
+    @Shadow
+    @Final
+    private Map<Identifier, ItemAsset> itemAssets;
+
+    @ModifyExpressionValue(method = "method_65470", at = @At(value = "INVOKE", target = "Ljava/util/Map;containsKey(Ljava/lang/Object;)Z", ordinal = 1))
+    private boolean dontGenerateUnnecessaryItemAssets(boolean disable, Item item) {
+        if (disable) return true;
+
+        // Workaround for https://github.com/FabricMC/fabric/pull/4571
+        if (itemAssets.containsKey(Registries.ITEM.getId(item))) return true;
 
         Block block = ((BlockItem) item).getBlock();
-        return itemAssets.containsKey(key) || block instanceof BenchBlock
+        return block instanceof BenchBlock
             || block instanceof CandlelitLanternBlock
             || block instanceof ChairBlock
             || block instanceof CoffeeTableBlock
