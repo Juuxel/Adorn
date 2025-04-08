@@ -62,6 +62,12 @@ public final class TradingStationBlockEntity extends BlockEntity implements Name
         markDirty();
     }
 
+    public void setOwnerIfMissing(PlayerEntity player) {
+        if (owner == null) {
+            setOwner(player);
+        }
+    }
+
     public boolean isStorageStocked() {
         return storage.getCountWithComponents(trade.getSelling()) >= trade.getSelling().getCount();
     }

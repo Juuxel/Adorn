@@ -75,7 +75,7 @@ public final class TradingStationBlock extends VisibleBlockWithEntity implements
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         if (placer instanceof PlayerEntity player && world.getBlockEntity(pos) instanceof TradingStationBlockEntity tradingStation) {
-            tradingStation.setOwner(player);
+            tradingStation.setOwnerIfMissing(player);
         }
     }
 
@@ -84,9 +84,7 @@ public final class TradingStationBlock extends VisibleBlockWithEntity implements
         if (world.isClient) return ItemActionResult.SUCCESS;
 
         if (world.getBlockEntity(pos) instanceof TradingStationBlockEntity be) {
-            if (be.getOwner() == null) {
-                be.setOwner(player);
-            }
+            be.setOwnerIfMissing(player);
 
             if (!be.isOwner(player)) {
                 var trade = be.getTrade();
