@@ -1,6 +1,7 @@
 package juuxel.adorn.component;
 
 import com.mojang.serialization.Codec;
+import juuxel.adorn.item.BookKey;
 import juuxel.adorn.item.WateringCanItem;
 import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.lib.registry.Registrar;
@@ -19,6 +20,7 @@ public final class AdornComponentTypes {
     public static final Registered<ComponentType<TradeOwner>> TRADE_OWNER = register("trade_owner", builder -> builder.codec(TradeOwner.CODEC));
     public static final Registered<ComponentType<Integer>> WATER_LEVEL = register("water_level", builder -> builder.codec(Codec.INT));
     public static final Registered<ComponentType<WateringCanItem.FertilizerLevel>> FERTILIZER_LEVEL = register("fertilizer_level", builder -> builder.codec(WateringCanItem.FertilizerLevel.CODEC));
+    public static final Registered<ComponentType<BookKey>> BOOK = register("book", builder -> builder.codec(BookKey.CODEC));
 
     public static void init() {
     }

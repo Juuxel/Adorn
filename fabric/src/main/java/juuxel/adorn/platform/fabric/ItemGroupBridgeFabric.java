@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.RegistryKey;
 
 import java.util.List;
@@ -22,8 +23,8 @@ public final class ItemGroupBridgeFabric implements ItemGroupBridge {
         ItemGroupEvents.modifyEntriesEvent(group).register(entries -> {
             var context = new ItemGroupModifyContext() {
                 @Override
-                public void add(ItemConvertible item) {
-                    entries.add(item);
+                public void add(ItemStack stack) {
+                    entries.add(stack);
                 }
 
                 @Override

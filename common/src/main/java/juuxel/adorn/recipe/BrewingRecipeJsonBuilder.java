@@ -68,7 +68,7 @@ public final class BrewingRecipeJsonBuilder {
 
     public void offerTo(RecipeExporter exporter, String recipeName) {
         Objects.requireNonNull(firstIngredient, "First ingredient of brewing recipe not set");
-        var key = RegistryKey.of(RegistryKeys.RECIPE, AdornCommon.id("brewing/" + recipeName));
+        var key = AdornCommon.key(RegistryKeys.RECIPE, "brewing/" + recipeName);
         BrewingRecipe recipe = fluid != null
             ? new FluidBrewingRecipe(firstIngredient, Optional.ofNullable(secondIngredient), fluid, result)
             : new ItemBrewingRecipe(firstIngredient, Optional.ofNullable(secondIngredient), result);

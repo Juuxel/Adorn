@@ -51,7 +51,7 @@ public final class RegistrarImpl<T> implements Registrar<T> {
     }
 
     private RegistryKey<T> createKey(String id) {
-        return RegistryKey.of(registry.getKey(), AdornCommon.id(id));
+        return AdornCommon.key(registry.getKey(), id);
     }
 
     @Override
