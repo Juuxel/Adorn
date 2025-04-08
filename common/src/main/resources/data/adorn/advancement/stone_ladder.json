@@ -8,6 +8,9 @@
     },
     "description": {
       "translate": "advancements.adorn.stone_ladder.description"
+    },
+    "hint": {
+      "translate": "advancements.adorn.stone_ladder.description"
     }
   },
   "parent": "adorn:stone_torch",

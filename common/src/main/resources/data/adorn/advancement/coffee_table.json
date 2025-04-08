@@ -8,6 +8,9 @@
     },
     "description": {
       "translate": "advancements.adorn.coffee_table.description"
+    },
+    "hint": {
+      "translate": "advancements.adorn.coffee_table.description"
     }
   },
   "parent": "adorn:table",

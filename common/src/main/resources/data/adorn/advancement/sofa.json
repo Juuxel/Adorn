@@ -8,6 +8,9 @@
     },
     "description": {
       "translate": "advancements.adorn.sofa.description"
+    },
+    "hint": {
+      "translate": "advancements.adorn.sofa.description"
     }
   },
   "parent": "adorn:chair",

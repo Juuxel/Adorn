@@ -2,7 +2,8 @@
   "display": {
     "icon": { "id": "adorn:candlelit_lantern" },
     "title": { "translate": "advancements.adorn.candlelit_lantern.title" },
-    "description": { "translate": "advancements.adorn.candlelit_lantern.description" }
+    "description": { "translate": "advancements.adorn.candlelit_lantern.description" },
+    "hint": { "translate": "advancements.adorn.candlelit_lantern.description" }
   },
   "parent": "adorn:root",
   "criteria": {

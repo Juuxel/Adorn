@@ -8,6 +8,9 @@
     },
     "description": {
       "translate": "advancements.adorn.crate.description"
+    },
+    "hint": {
+      "translate": "advancements.adorn.crate.description"
     }
   },
   "parent": "adorn:shelf",

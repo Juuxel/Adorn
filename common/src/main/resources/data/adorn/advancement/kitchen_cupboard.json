@@ -8,6 +8,9 @@
     },
     "description": {
       "translate": "advancements.adorn.kitchen_cupboard.description"
+    },
+    "hint": {
+      "translate": "advancements.adorn.kitchen_cupboard.description"
     }
   },
   "parent": "adorn:kitchen_counter",

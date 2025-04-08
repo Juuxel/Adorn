@@ -7,6 +7,9 @@
     "description": {
       "translate": "advancements.adorn.root.description"
     },
+    "hint": {
+      "translate": "advancements.adorn.root.description"
+    },
     "show_toast": false,
     "announce_to_chat": false,
     "background": "minecraft:textures/block/lime_wool.png"

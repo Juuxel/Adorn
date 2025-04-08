@@ -8,6 +8,9 @@
     },
     "description": {
       "translate": "advancements.adorn.craft_trading_station.description"
+    },
+    "hint": {
+      "translate": "advancements.adorn.craft_trading_station.description"
     }
   },
   "parent": "adorn:buy_from_trading_station",

@@ -8,6 +8,9 @@
     },
     "description": {
       "translate": "advancements.adorn.chimney.description"
+    },
+    "hint": {
+      "translate": "advancements.adorn.chimney.description"
     }
   },
   "parent": "adorn:root",

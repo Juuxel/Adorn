@@ -8,6 +8,9 @@
     },
     "description": {
       "translate": "advancements.adorn.post.description"
+    },
+    "hint": {
+      "translate": "advancements.adorn.post.description"
     }
   },
   "parent": "adorn:root",

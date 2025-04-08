@@ -8,6 +8,9 @@
     },
     "description": {
       "translate": "advancements.adorn.step.description"
+    },
+    "hint": {
+      "translate": "advancements.adorn.step.description"
     }
   },
   "parent": "adorn:platform",

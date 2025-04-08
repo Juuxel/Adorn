@@ -9,6 +9,9 @@
     "description": {
       "translate": "advancements.adorn.all_brewing.description"
     },
+    "hint": {
+      "translate": "advancements.adorn.all_brewing.description"
+    },
     "frame": "goal"
   },
   "parent": "adorn:nether_wart_coffee",

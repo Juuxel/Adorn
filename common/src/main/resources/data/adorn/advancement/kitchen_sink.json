@@ -8,6 +8,9 @@
     },
     "description": {
       "translate": "advancements.adorn.kitchen_sink.description"
+    },
+    "hint": {
+      "translate": "advancements.adorn.kitchen_sink.description"
     }
   },
   "parent": "adorn:kitchen_cupboard",

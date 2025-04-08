@@ -9,6 +9,9 @@
     "description": {
       "translate": "advancements.adorn.everything.description"
     },
+    "hint": {
+      "translate": "advancements.adorn.everything.description"
+    },
     "frame": "challenge"
   },
   "parent": "adorn:root",
