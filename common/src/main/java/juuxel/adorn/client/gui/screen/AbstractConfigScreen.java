@@ -1,6 +1,5 @@
 package juuxel.adorn.client.gui.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.client.gui.widget.ConfigScreenHeading;
 import juuxel.adorn.config.ConfigManager;
@@ -70,17 +69,20 @@ public abstract class AbstractConfigScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        renderBackground(context, mouseX, mouseY, delta);
-        synchronized (hearts) {
-            renderHearts(context, delta);
-        }
-        context.drawCenteredTextWithShadow(textRenderer, title, width / 2, 20, Colors.WHITE);
         super.render(context, mouseX, mouseY, delta);
+        context.drawCenteredTextWithShadow(textRenderer, title, width / 2, 20, Colors.WHITE);
+    }
+
+    @Override
+    public void renderBackground(DrawContext context, int mouseX, int mouseY, float tickProgress) {
+        super.renderBackground(context, mouseX, mouseY, tickProgress);
+        synchronized (hearts) {
+            renderHearts(context, tickProgress);
+        }
     }
 
     private void renderHearts(DrawContext context, float delta) {
         for (var heart : hearts) {
-            RenderSystem.setShaderColor(Colors.redOf(heart.color), Colors.greenOf(heart.color), Colors.blueOf(heart.color), 1f);
             var matrices = context.getMatrices();
             matrices.push();
             matrices.translate(heart.x, MathHelper.lerp(delta, heart.previousY, heart.y), 0.0);
@@ -88,11 +90,9 @@ public abstract class AbstractConfigScreen extends Screen {
             var angle = MathHelper.lerp(delta, heart.previousAngle, heart.angle);
             matrices.multiply(RotationAxis.POSITIVE_Z.rotation((float) angle));
             matrices.translate(-0.5 * HEART_SIZE, -0.5 * HEART_SIZE, 0.0);
-            context.drawTexture(RenderLayer::getGuiTextured, HEART_TEXTURE, 0, 0, 0f, 0f, HEART_SIZE, HEART_SIZE, 8, 8, 8, 8);
+            context.drawTexture(RenderLayer::getGuiTextured, HEART_TEXTURE, 0, 0, 0f, 0f, HEART_SIZE, HEART_SIZE, 8, 8, 8, 8, heart.color);
             matrices.pop();
         }
-
-        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
     }
 
     @Override
