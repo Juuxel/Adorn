@@ -18,6 +18,8 @@ import net.minecraft.menu.property.PropertyDelegate;
 import net.minecraft.menu.slot.Slot;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public final class BrewerMenu extends Menu {
     private final Inventory container;
     private final PropertyDelegate propertyDelegate;
@@ -30,7 +32,7 @@ public final class BrewerMenu extends Menu {
         this.container = container;
         this.propertyDelegate = propertyDelegate;
         this.fluid = fluid;
-        this.player = playerInventory.player;
+        this.player = playerInventory.method_69259();
 
         checkSize(container, BrewerBlockEntity.CONTAINER_SIZE);
         checkDataCount(propertyDelegate, 1);
@@ -55,7 +57,7 @@ public final class BrewerMenu extends Menu {
         addProperties(propertyDelegate);
     }
     
-    public BrewerMenu(int syncId, PlayerInventory playerInventory) {
+    public BrewerMenu(int syncId, PlayerInventory playerInventory, List<Integer> unknown) {
         this(syncId, playerInventory, new SimpleInventory(BrewerBlockEntity.CONTAINER_SIZE), new ArrayPropertyDelegate(1), FluidVolume.empty(FluidUnit.LITRE));
     }
     

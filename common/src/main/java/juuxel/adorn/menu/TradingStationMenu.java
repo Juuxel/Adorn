@@ -14,6 +14,8 @@ import net.minecraft.menu.MenuContext;
 import net.minecraft.menu.slot.Slot;
 import net.minecraft.menu.slot.SlotActionType;
 
+import java.util.List;
+
 public final class TradingStationMenu extends Menu {
     private final MenuContext context;
     private final TradingStation tradingStation;
@@ -53,7 +55,7 @@ public final class TradingStationMenu extends Menu {
         }
     }
 
-    public TradingStationMenu(int syncId, PlayerInventory playerInventory) {
+    public TradingStationMenu(int syncId, PlayerInventory playerInventory, List<Integer> unknown) {
         this(syncId, playerInventory, MenuContext.EMPTY);
     }
 

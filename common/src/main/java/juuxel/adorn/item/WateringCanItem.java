@@ -12,7 +12,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.FarmlandBlock;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.block.FluidDrainable;
-import net.minecraft.component.ComponentsAccess;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
@@ -34,6 +33,7 @@ import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import net.minecraft.world.event.GameEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -205,7 +205,7 @@ public final class WateringCanItem extends ItemWithDescription {
         }
 
         @Override
-        public void appendTooltip(TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
+        public void appendTooltip(TooltipContext context, Consumer<Text> textConsumer, TooltipType type, @Nullable PlayerEntity player, ItemStack stack) {
             var currentLevel = Text.literal(Integer.toString(level)).formatted(Formatting.DARK_AQUA);
             var maxLevel = Text.literal(Integer.toString(MAX_FERTILIZER_LEVEL)).formatted(Formatting.DARK_AQUA);
             textConsumer.accept(Text.translatable("item.adorn.watering_can.fertilizer", currentLevel, maxLevel).formatted(Formatting.GRAY));

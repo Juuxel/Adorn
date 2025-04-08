@@ -29,7 +29,7 @@ public final class AdornUtil {
         caughtProperty(block, "resistance", () -> settings.resistance(block.getBlastResistance()));
         caughtProperty(block, "velocityMultiplier", () -> settings.velocityMultiplier(block.getVelocityMultiplier()));
         caughtProperty(block, "jumpVelocityMultiplier", () -> settings.jumpVelocityMultiplier(block.getJumpVelocityMultiplier()));
-        caughtProperty(block, "slipperiness", () -> settings.slipperiness(block.getSlipperiness()));
+        caughtProperty(block, "slipperiness", () -> settings.slipperiness(block.getSlipperiness(false)));
         caughtProperty(block, "soundGroup", () -> settings.sounds(block.getDefaultState().getSoundGroup()));
         caughtProperty(block, "burnable", () -> {
             if (block.getDefaultState().isBurnable()) {

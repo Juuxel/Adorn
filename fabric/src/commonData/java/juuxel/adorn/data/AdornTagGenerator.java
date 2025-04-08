@@ -31,7 +31,9 @@ public final class AdornTagGenerator extends AdornCustomDataGenerator {
     }
 
     static List<Path> getDataConfigs(String systemProperty) {
-        return Arrays.stream(System.getProperty(systemProperty).split(","))
+        var pathString = System.getProperty(systemProperty);
+        if (pathString == null) return List.of();
+        return Arrays.stream(pathString.split(","))
             .map(Path::of)
             .flatMap(dir -> {
                 // Support subprojects without src/data.

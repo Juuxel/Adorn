@@ -45,9 +45,11 @@ loom {
             val tagConfigDirs = rootProject.subprojects.map { it.file("src/data") }
             property("adorn.data.tagConfigDirs", tagConfigDirs.joinToString(",") { it.absolutePath })
             property("adorn.data.fabricConfigDirs", project(":fabric").file("src/data").absolutePath)
-            property("adorn.data.neoforgeConfigDirs", project(":forge").file("src/data").absolutePath)
+            // property("adorn.data.neoforgeConfigDirs", project(":forge").file("src/data").absolutePath)
         }
     }
+
+    createRemapConfigurations(sourceSets.getByName("commonData"))
 }
 
 // Set up various Maven repositories for mod compat.
@@ -72,6 +74,7 @@ repositories {
             includeGroup("net.oskarstrom")
         }
     }
+    mavenLocal()
 }
 
 dependencies {
@@ -92,6 +95,9 @@ dependencies {
 
     // Data generation
     "commonDataImplementation"("io.github.juuxel:adorn-data-generator")
+    "modCommonDataImplementation"("net.fabricmc.fabric-api:fabric-data-generation-api-v1:22.3.9999+local") {
+        isTransitive = false
+    }
 
     // Mod compat
     modCompileOnly(libs.towelette)

@@ -7,8 +7,8 @@ import juuxel.adorn.block.variant.BlockVariant;
 import juuxel.adorn.block.variant.BlockVariantSets;
 import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.lib.registry.Registered;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
 import net.minecraft.client.data.BlockStateModelGenerator;
 import net.minecraft.client.data.ItemModelGenerator;
@@ -45,7 +45,6 @@ public final class AdornModelGenerator extends FabricModelProvider {
                 .button(AdornBlocks.PAINTED_WOOD_BUTTONS.getEager(color));
         });
 
-        forwardBlockModel(generator, BlockVariantSets.get(BlockKind.SHELF, BlockVariant.IRON));
         generator.registerParentedItemModel(AdornBlocks.CANDLELIT_LANTERN.get(), AdornCommon.id("block/candlelit_lantern_standing"));
         generator.registerItemModel(AdornBlocks.CHAIN_LINK_FENCE.get());
         generator.registerItemModel(AdornBlocks.STONE_LADDER.get());
@@ -54,6 +53,36 @@ public final class AdornModelGenerator extends FabricModelProvider {
         registerCopperPipe(generator, AdornBlocks.EXPOSED_COPPER_PIPE, AdornBlocks.WAXED_EXPOSED_COPPER_PIPE);
         registerCopperPipe(generator, AdornBlocks.WEATHERED_COPPER_PIPE, AdornBlocks.WAXED_WEATHERED_COPPER_PIPE);
         registerCopperPipe(generator, AdornBlocks.OXIDIZED_COPPER_PIPE, AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE);
+
+        forwardBlockModel(generator, BlockVariantSets.get(BlockKind.SHELF, BlockVariant.IRON));
+        forwardBlockModel(generator, AdornBlocks.BREWER);
+        forwardBlockModel(generator, AdornBlocks.TRADING_STATION);
+        forwardBlockModel(generator, AdornBlocks.CRATE);
+        forwardBlockModel(generator, AdornBlocks.BRICK_CHIMNEY);
+        forwardBlockModel(generator, AdornBlocks.STONE_BRICK_CHIMNEY);
+        forwardBlockModel(generator, AdornBlocks.NETHER_BRICK_CHIMNEY);
+        forwardBlockModel(generator, AdornBlocks.RED_NETHER_BRICK_CHIMNEY);
+        forwardBlockModel(generator, AdornBlocks.COBBLESTONE_CHIMNEY);
+        forwardBlockModel(generator, AdornBlocks.PRISMARINE_CHIMNEY);
+        forwardBlockModel(generator, AdornBlocks.MAGMATIC_PRISMARINE_CHIMNEY);
+        forwardBlockModel(generator, AdornBlocks.SOULFUL_PRISMARINE_CHIMNEY);
+        forwardBlockModel(generator, AdornBlocks.APPLE_CRATE);
+        forwardBlockModel(generator, AdornBlocks.WHEAT_CRATE);
+        forwardBlockModel(generator, AdornBlocks.CARROT_CRATE);
+        forwardBlockModel(generator, AdornBlocks.POTATO_CRATE);
+        forwardBlockModel(generator, AdornBlocks.MELON_CRATE);
+        forwardBlockModel(generator, AdornBlocks.WHEAT_SEED_CRATE);
+        forwardBlockModel(generator, AdornBlocks.MELON_SEED_CRATE);
+        forwardBlockModel(generator, AdornBlocks.PUMPKIN_SEED_CRATE);
+        forwardBlockModel(generator, AdornBlocks.BEETROOT_CRATE);
+        forwardBlockModel(generator, AdornBlocks.BEETROOT_SEED_CRATE);
+        forwardBlockModel(generator, AdornBlocks.SWEET_BERRY_CRATE);
+        forwardBlockModel(generator, AdornBlocks.COCOA_BEAN_CRATE);
+        forwardBlockModel(generator, AdornBlocks.NETHER_WART_CRATE);
+        forwardBlockModel(generator, AdornBlocks.SUGAR_CANE_CRATE);
+        forwardBlockModel(generator, AdornBlocks.EGG_CRATE);
+        forwardBlockModel(generator, AdornBlocks.HONEYCOMB_CRATE);
+        forwardBlockModel(generator, AdornBlocks.LIL_TATER_CRATE);
     }
 
     private static void forwardBlockModel(BlockStateModelGenerator generator, Registered<? extends Block> block) {
