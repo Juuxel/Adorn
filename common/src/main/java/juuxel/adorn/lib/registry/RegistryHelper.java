@@ -7,7 +7,6 @@ import net.minecraft.item.Item;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public final class RegistryHelper {
     private final Registrar<Block> blocks;
@@ -25,8 +24,8 @@ public final class RegistryHelper {
     /**
      * Registers a block with the name and an item with default settings.
      */
-    public <T extends Block> Registered<T> registerBlock(String name, Function<AbstractBlock.Settings, T> block, BlockSettingsProvider settings) {
-        return registerBlock(name, ItemSettingsProvider.DEFAULT, block, settings);
+    public <T extends Block> Registered<T> registerBlock(String name, float exchangeValue, Function<AbstractBlock.Settings, T> block, BlockSettingsProvider settings) {
+        return registerBlock(name, ItemSettingsProvider.DEFAULT, exchangeValue, block, settings);
     }
 
     /**
@@ -35,10 +34,11 @@ public final class RegistryHelper {
     public <T extends Block> Registered<T> registerBlock(
         String name,
         ItemSettingsProvider itemSettings,
+        float exchangeValue,
         Function<AbstractBlock.Settings, T> block,
         BlockSettingsProvider settings
     ) {
-        return registerBlock(name, RegistryHelper::makeItemForBlock, itemSettings, block, settings);
+        return registerBlock(name, RegistryHelper::makeItemForBlock, itemSettings, exchangeValue, block, settings);
     }
 
     /**
@@ -47,10 +47,11 @@ public final class RegistryHelper {
     public <T extends Block> Registered<T> registerBlock(
         String name,
         BiFunction<T, Item.Settings, Item> itemProvider,
+        float exchangeValue,
         Function<AbstractBlock.Settings, T> block,
         BlockSettingsProvider settings
     ) {
-        return registerBlock(name, itemProvider, ItemSettingsProvider.DEFAULT, block, settings);
+        return registerBlock(name, itemProvider, ItemSettingsProvider.DEFAULT, exchangeValue, block, settings);
     }
 
     /**
@@ -60,6 +61,7 @@ public final class RegistryHelper {
         String name,
         BiFunction<T, Item.Settings, Item> itemProvider,
         ItemSettingsProvider itemSettings,
+        float exchangeValue,
         Function<AbstractBlock.Settings, T> block,
         BlockSettingsProvider settings
     ) {
@@ -69,6 +71,7 @@ public final class RegistryHelper {
             itemSettings.createItemSettings()
                 .registryKey(key)
                 .useBlockPrefixedTranslationKey()
+                .exchangeValue(exchangeValue)
         ));
         return registered;
     }

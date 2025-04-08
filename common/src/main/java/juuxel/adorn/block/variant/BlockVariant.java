@@ -8,6 +8,8 @@ import juuxel.adorn.util.AdornUtil;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.item.Item;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 
@@ -94,6 +96,8 @@ public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
     @Override
     AbstractBlock.Settings createBlockSettings();
 
+    float exchangeValue();
+
     static BlockVariant variant(String name, Block base) {
         return new BlockVariant() {
             @Override
@@ -104,6 +108,11 @@ public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
             @Override
             public AbstractBlock.Settings createBlockSettings() {
                 return AdornUtil.copySettingsSafely(base);
+            }
+
+            @Override
+            public float exchangeValue() {
+                return base.asItem().getComponents().getOrDefault(DataComponentTypes.EXCHANGE_VALUE, Item.DEFAULT_EXCHANGE_VALUE).value();
             }
         };
     }
@@ -132,12 +141,22 @@ public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
         public AbstractBlock.Settings createBlockSettings() {
             return AdornUtil.copySettingsSafely(Blocks.OAK_PLANKS);
         }
+
+        @Override
+        public float exchangeValue() {
+            return 0.005f;
+        }
     }
 
     record Stone(String name) implements BlockVariant {
         @Override
         public AbstractBlock.Settings createBlockSettings() {
             return AdornUtil.copySettingsSafely(Blocks.COBBLESTONE);
+        }
+
+        @Override
+        public float exchangeValue() {
+            return 0.02f;
         }
     }
 
@@ -155,6 +174,11 @@ public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
         @Override
         public AbstractBlock.Settings createBlockSettings() {
             return AdornUtil.copySettingsSafely(AdornBlocks.PAINTED_PLANKS.getEager(color));
+        }
+
+        @Override
+        public float exchangeValue() {
+            return 0.005f;
         }
     }
 }

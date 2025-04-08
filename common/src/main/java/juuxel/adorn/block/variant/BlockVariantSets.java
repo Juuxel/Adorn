@@ -17,6 +17,7 @@ import juuxel.adorn.block.StepBlock;
 import juuxel.adorn.block.TableBlock;
 import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.item.ChairBlockItem;
+import juuxel.adorn.item.ExchangeValues;
 import juuxel.adorn.item.TableBlockItem;
 import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.lib.registry.Registrar;
@@ -142,50 +143,62 @@ public final class BlockVariantSets {
     }
 
     private static Registered<Block> registerPost(BlockVariant variant) {
-        return HELPER.registerBlock(variant.name() + "_post", PostBlock::new, variant);
+        float value = ExchangeValues.round(0.25f * (variant.exchangeValue() + 2 * ExchangeValues.STICK));
+        return HELPER.registerBlock(variant.name() + "_post", value, PostBlock::new, variant);
     }
 
     private static Registered<Block> registerPlatform(BlockVariant variant) {
-        return HELPER.registerBlock(variant.name() + "_platform", PlatformBlock::new, variant);
+        float value = ExchangeValues.round(0.5f * (ExchangeValues.SLAB + 0.25f * (variant.exchangeValue() + 2 * ExchangeValues.STICK)));
+        return HELPER.registerBlock(variant.name() + "_platform", value, PlatformBlock::new, variant);
     }
 
     private static Registered<Block> registerStep(BlockVariant variant) {
-        return HELPER.registerBlock(variant.name() + "_step", StepBlock::new, variant);
+        float value = ExchangeValues.SLAB + ExchangeValues.STICK;
+        return HELPER.registerBlock(variant.name() + "_step", value, StepBlock::new, variant);
     }
 
     private static Registered<Block> registerDrawer(BlockVariant variant) {
-        return HELPER.registerBlock(variant.name() + "_drawer", DrawerBlock::new, variant);
+        float value = ExchangeValues.round(0.5f * (2 * ExchangeValues.SLAB + ExchangeValues.CHEST));
+        return HELPER.registerBlock(variant.name() + "_drawer", value, DrawerBlock::new, variant);
     }
 
     private static Registered<Block> registerChair(BlockVariant variant) {
-        return HELPER.registerBlock(variant.name() + "_chair", ChairBlockItem::new, ChairBlock::new, variant);
+        float value = ExchangeValues.round(0.5f * (3 * ExchangeValues.SLAB + 2 * ExchangeValues.STICK));
+        return HELPER.registerBlock(variant.name() + "_chair", ChairBlockItem::new, value, ChairBlock::new, variant);
     }
 
     private static Registered<Block> registerTable(BlockVariant variant) {
-        return HELPER.registerBlock(variant.name() + "_table", TableBlockItem::new, TableBlock::new, variant);
+        float value = ExchangeValues.round(0.33f * (3 * ExchangeValues.SLAB + 4 * ExchangeValues.STICK));
+        return HELPER.registerBlock(variant.name() + "_table", TableBlockItem::new, value, TableBlock::new, variant);
     }
 
     private static Registered<Block> registerKitchenCounter(BlockVariant variant) {
-        return HELPER.registerBlock(variant.name() + "_kitchen_counter", KitchenCounterBlock::new, variant);
+        float value = ExchangeValues.round(0.33f * (2 * ExchangeValues.SLAB + 2 * variant.exchangeValue()));
+        return HELPER.registerBlock(variant.name() + "_kitchen_counter", value, KitchenCounterBlock::new, variant);
     }
 
     private static Registered<Block> registerKitchenCupboard(BlockVariant variant) {
-        return HELPER.registerBlock(variant.name() + "_kitchen_cupboard", KitchenCupboardBlock::new, variant);
+        float value = ExchangeValues.round(0.5f * (ExchangeValues.CHEST + 2 * 0.33f * (2 * ExchangeValues.SLAB + 2 * variant.exchangeValue())));
+        return HELPER.registerBlock(variant.name() + "_kitchen_cupboard", value, KitchenCupboardBlock::new, variant);
     }
 
     private static Registered<Block> registerKitchenSink(BlockVariant variant) {
-        return HELPER.registerBlock(variant.name() + "_kitchen_sink", KitchenSinkBlock::new, variant);
+        float value = ExchangeValues.round(0.33f * (2 * ExchangeValues.SLAB + 2 * variant.exchangeValue()) + ExchangeValues.BUCKET);
+        return HELPER.registerBlock(variant.name() + "_kitchen_sink", value, KitchenSinkBlock::new, variant);
     }
 
     private static Registered<Block> registerShelf(BlockVariant variant) {
-        return HELPER.registerBlock(variant.name() + "_shelf", ShelfBlock::new, variant);
+        float value = ExchangeValues.round(0.33f * (3 * ExchangeValues.SLAB + 2 * ExchangeValues.STICK));
+        return HELPER.registerBlock(variant.name() + "_shelf", value, ShelfBlock::new, variant);
     }
 
     private static Registered<Block> registerCoffeeTable(BlockVariant variant) {
-        return HELPER.registerBlock(variant.name() + "_coffee_table", CoffeeTableBlock::new, variant);
+        float value = ExchangeValues.round(0.5f * (2 * ExchangeValues.SLAB + 2 * ExchangeValues.STICK + ExchangeValues.GLASS_PANE));
+        return HELPER.registerBlock(variant.name() + "_coffee_table", value, CoffeeTableBlock::new, variant);
     }
 
     private static Registered<Block> registerBench(BlockVariant variant) {
-        return HELPER.registerBlock(variant.name() + "_bench", BenchBlock::new, variant);
+        float value = ExchangeValues.round(0.5f * 5 * ExchangeValues.SLAB);
+        return HELPER.registerBlock(variant.name() + "_bench", value, BenchBlock::new, variant);
     }
 }
