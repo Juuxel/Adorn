@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.Waterloggable;
+import net.minecraft.entity.Entity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
@@ -142,5 +143,12 @@ public final class BenchBlock extends SeatBlock implements Waterloggable, BlockW
     @Override
     public String getDescriptionKey() {
         return DESCRIPTION_KEY;
+    }
+
+    @Override
+    public Direction getPreferredDismountDirection(BlockState state, Entity passenger) {
+        var axis = AdornUtil.turnHorizontally(state.get(AXIS));
+        var passengerFacing = passenger.getHorizontalFacing();
+        return passengerFacing.getAxis() == axis ? passengerFacing : Direction.get(Direction.AxisDirection.POSITIVE, axis);
     }
 }

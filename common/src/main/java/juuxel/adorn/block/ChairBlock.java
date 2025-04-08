@@ -9,6 +9,7 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.block.Waterloggable;
 import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -223,5 +224,10 @@ public final class ChairBlock extends CarpetedBlock implements Waterloggable, Bl
     @Override
     public double getSittingOffset(World world, BlockState state, BlockPos pos) {
         return 0.625; // 10/16
+    }
+
+    @Override
+    public Direction getPreferredDismountDirection(BlockState state, Entity passenger) {
+        return state.get(FACING);
     }
 }

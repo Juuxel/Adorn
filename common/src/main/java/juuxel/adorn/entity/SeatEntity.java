@@ -2,9 +2,14 @@ package juuxel.adorn.entity;
 
 import juuxel.adorn.block.SeatBlock;
 import juuxel.adorn.platform.PlatformBridges;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.Dismounting;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -16,8 +21,12 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // TODO: Rewrite using BlockAttachedEntity
 public final class SeatEntity extends Entity {
@@ -52,29 +61,21 @@ public final class SeatEntity extends Entity {
     }
 
     @Override
-    protected void removePassenger(Entity passenger) {
-        super.removePassenger(passenger);
-        if (getWorld() instanceof ServerWorld world) {
-            kill(world);
-        }
-    }
-
-    @Override
     public boolean damage(ServerWorld world, DamageSource source, float amount) {
         return false;
     }
 
     @Override
-    public void kill(ServerWorld world) {
+    public void remove(RemovalReason reason) {
         removeAllPassengers();
         if (!getWorld().isClient) {
             PlatformBridges.get().getNetwork().sendToTracking(this, new EntityPassengersSetS2CPacket(this));
         }
-        super.kill(world);
         var state = getWorld().getBlockState(seatPos);
         if (state.getBlock() instanceof SeatBlock) {
             getWorld().setBlockState(seatPos, state.with(SeatBlock.OCCUPIED, false));
         }
+        super.remove(reason);
     }
 
     @Override
@@ -114,5 +115,66 @@ public final class SeatEntity extends Entity {
         var posOffset = getY() - seatPos.getY();
 
         return new Vec3d(0, blockOffset - posOffset, 0);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (!hasPassengers()) {
+            remove(RemovalReason.DISCARDED);
+        }
+    }
+
+    @Override
+    public Vec3d updatePassengerForDismount(LivingEntity passenger) {
+        BlockPos seatPos = dataTracker.get(SEAT_POS);
+        BlockState state = getWorld().getBlockState(seatPos);
+        Block block = state.getBlock();
+        Direction preferred = block instanceof SeatBlock seat ? seat.getPreferredDismountDirection(state, passenger) : passenger.getHorizontalFacing();
+
+        // try the following, in order
+        // 1. at the seat pos
+        // 2. offset to preferred
+        // 3. offset to preferred CW, CCW
+        // 4. offset to preferred.opposite()
+        // 5. y + 1, middle
+        // 6. the same steps but y shifted up
+        // 7. if nothing else works, seatPos.up()
+
+        Direction[] directions = {
+            null,
+            preferred,
+            preferred.rotateYClockwise(),
+            preferred.rotateYCounterclockwise(),
+            preferred.getOpposite()
+        };
+        BlockPos.Mutable pos = new BlockPos.Mutable();
+        List<Vec3d> positionCandidates = new ArrayList<>(10);
+
+        for (int y = 0; y <= 1; y++) {
+            for (Direction direction : directions) {
+                pos.set(seatPos.getX(), seatPos.getY() + y, seatPos.getZ());
+                if (direction != null) pos.move(direction);
+
+                double height = getWorld().getDismountHeight(pos);
+
+                if (Dismounting.canDismountInBlock(height)) {
+                    positionCandidates.add(Vec3d.ofCenter(pos, height));
+                }
+            }
+        }
+
+        for (EntityPose pose : passenger.getPoses()) {
+            for (Vec3d candidate : positionCandidates) {
+                if (Dismounting.canPlaceEntityAt(getWorld(), candidate, passenger, pose)) {
+                    passenger.setPose(pose);
+                    return candidate;
+                }
+            }
+        }
+
+        // Horizontal center pos of the block above
+        return Vec3d.ofCenter(seatPos, 1.0);
     }
 }

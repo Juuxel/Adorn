@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.Waterloggable;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -205,6 +206,11 @@ public class SofaBlock extends SeatBlock implements Waterloggable, SneakClickHan
     @Override
     public double getSittingOffset(World world, BlockState state, BlockPos pos) {
         return 0.4375; // 7/16
+    }
+
+    @Override
+    public Direction getPreferredDismountDirection(BlockState state, Entity passenger) {
+        return state.get(FACING);
     }
 
     private static VoxelShape[] buildShapes(boolean thin) {

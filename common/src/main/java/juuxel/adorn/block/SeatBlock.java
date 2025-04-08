@@ -6,6 +6,7 @@ import juuxel.adorn.entity.AdornEntities;
 import juuxel.adorn.entity.SeatEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -103,5 +104,9 @@ public abstract class SeatBlock extends Block {
 
     public double getSittingOffset(World world, BlockState state, BlockPos pos) {
         return state.getCollisionShape(world, pos).getMax(Direction.Axis.Y);
+    }
+
+    public Direction getPreferredDismountDirection(BlockState state, Entity passenger) {
+        return passenger.getHorizontalFacing();
     }
 }
