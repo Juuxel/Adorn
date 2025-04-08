@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.platform.PlatformBridges;
-import net.minecraft.component.ComponentsAccess;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipAppender;
@@ -12,6 +12,7 @@ import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -36,7 +37,7 @@ public record BookKey(Identifier id) implements TooltipAppender {
     }
 
     @Override
-    public void appendTooltip(Item.TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
+    public void appendTooltip(Item.TooltipContext context, Consumer<Text> textConsumer, TooltipType type, @Nullable PlayerEntity player, ItemStack stack) {
         var bookManager = PlatformBridges.get().getResources().getBookManager();
         if (bookManager.contains(id)) {
             textConsumer.accept(Text.translatable("book.byAuthor", bookManager.get(id).author()).formatted(Formatting.GRAY));
