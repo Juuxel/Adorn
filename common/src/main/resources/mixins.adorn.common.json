@@ -8,6 +8,7 @@
     "BlockMixin",
     "BubbleColumnBlockMixin",
     "FenceGateBlockMixin",
+    "LivingEntityMixin",
     "ItemStackMixin"
   ],
   "client": [
