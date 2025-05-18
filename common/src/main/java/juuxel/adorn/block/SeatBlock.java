@@ -83,8 +83,7 @@ public abstract class SeatBlock extends Block {
                 Predicates.alwaysTrue()
             );
             for (var seat : seats) {
-                seat.removeAllPassengers();
-                seat.kill();
+                seat.discard();
             }
         }
     }

@@ -115,7 +115,7 @@ public final class SeatEntity extends Entity {
         super.tick();
 
         if (!hasPassengers()) {
-            remove(RemovalReason.DISCARDED);
+            discard();
         }
     }
 
@@ -169,5 +169,19 @@ public final class SeatEntity extends Entity {
 
         // Horizontal center pos of the block above
         return Vec3d.ofCenter(seatPos, 1.0);
+    }
+
+    // Should be called when the player logs out (incl. closing a singleplayer world)
+    // to remove any seat entities they're riding. Otherwise, the game will recreate
+    // an invalid seat entity when the player relogs.
+    public static void stopSitting(Entity entity) {
+        while (entity.hasVehicle()) {
+            var vehicle = entity.getVehicle();
+            assert vehicle != null;
+            if (vehicle instanceof SeatEntity) {
+                vehicle.discard();
+            }
+            entity = vehicle;
+        }
     }
 }
