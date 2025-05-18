@@ -47,6 +47,7 @@ public final class Adorn {
         AdornItemsFabric.init();
         AdornItemGroups.init();
         AdornEntities.init();
+        AdornEntitiesFabric.init();
         AdornMenus.init();
         AdornNetworking.init();
         AdornTags.init();
