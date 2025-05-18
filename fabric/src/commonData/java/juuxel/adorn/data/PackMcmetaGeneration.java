@@ -12,6 +12,7 @@ import net.minecraft.text.Text;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -38,9 +39,15 @@ public final class PackMcmetaGeneration {
             });
     }
 
+    private static Stream<Overlay> readOverlaysFromConfigs(String systemProperty) {
+        return readConfigs(systemProperty)
+            .map(GeneratorConfig::overlay)
+            .filter(Objects::nonNull);
+    }
+
     private static JsonElement generateFabricOverlays() {
-        var configs = readConfigs(FABRIC_CONFIG_DIRS_PROPERTY);
-        return generateOverlays(configs, overlay -> {
+        var overlays = readOverlaysFromConfigs(FABRIC_CONFIG_DIRS_PROPERTY);
+        return generateOverlays(overlays, overlay -> {
             JsonObject condition = new JsonObject();
             condition.addProperty("condition", "fabric:all_mods_loaded");
             var values = new JsonArray();
@@ -55,8 +62,8 @@ public final class PackMcmetaGeneration {
     }
 
     private static JsonElement generateNeoForgeOverlays() {
-        var configs = readConfigs(NEOFORGE_CONFIG_DIRS_PROPERTY);
-        return generateOverlays(configs, overlay -> {
+        var overlays = readOverlaysFromConfigs(NEOFORGE_CONFIG_DIRS_PROPERTY);
+        return generateOverlays(overlays, overlay -> {
             JsonObject condition = new JsonObject();
             condition.addProperty("type", "neoforge:mod_loaded");
             condition.addProperty("modid", overlay.modId());
@@ -75,14 +82,9 @@ public final class PackMcmetaGeneration {
         });
     }
 
-    private static JsonElement generateOverlays(Stream<GeneratorConfig> configs, Function<Overlay, JsonElement> overlayToJson) {
+    private static JsonElement generateOverlays(Stream<Overlay> overlays, Function<Overlay, JsonElement> overlayToJson) {
         JsonArray entriesArray = new JsonArray();
-
-        configs.forEach(config -> {
-            if (config.overlay() != null) {
-                entriesArray.add(overlayToJson.apply(config.overlay()));
-            }
-        });
+        overlays.map(overlayToJson).forEach(entriesArray::add);
 
         JsonObject result = new JsonObject();
         result.add("entries", entriesArray);
