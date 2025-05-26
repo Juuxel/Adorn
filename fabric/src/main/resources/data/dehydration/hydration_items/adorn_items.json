@@ -1,11 +1,11 @@
 {
-    "2": {
-        "replace": false,
-        "items": [
-            "adorn:hot_chocolate",
-            "adorn:sweet_berry_juice",
-            "adorn:glow_berry_tea",
-            "adorn:nether_wart_coffee"
-        ]
-    }
+  "2": {
+    "replace": false,
+    "items": [
+      "adorn:hot_chocolate",
+      "adorn:sweet_berry_juice",
+      "adorn:glow_berry_tea",
+      "adorn:nether_wart_coffee"
+    ]
+  }
 }
