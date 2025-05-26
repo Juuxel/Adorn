@@ -15,7 +15,7 @@ public final class AdornBlockLootTableGenerator extends FabricBlockLootTableProv
     @Override
     public void generate() {
         AdornBlocks.PAINTED_PLANKS.values().forEach(this::addDrop);
-        AdornBlocks.PAINTED_WOOD_SLABS.values().forEach(this::slabDrops);
+        AdornBlocks.PAINTED_WOOD_SLABS.values().forEach(block -> addDrop(block, this::slabDrops));
         AdornBlocks.PAINTED_WOOD_STAIRS.values().forEach(this::addDrop);
         AdornBlocks.PAINTED_WOOD_FENCES.values().forEach(this::addDrop);
         AdornBlocks.PAINTED_WOOD_FENCE_GATES.values().forEach(this::addDrop);
