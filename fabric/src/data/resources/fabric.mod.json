@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "adorn_fabric_data_generator",
+  "version": "1",
+
+  "entrypoints": {
+    "fabric-datagen": ["juuxel.adorn.data.fabric.AdornFabricDataGenerator"]
+  }
+}

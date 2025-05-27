@@ -6,13 +6,11 @@ import juuxel.adorn.entity.SeatEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 
 public final class AdornEntitiesFabric {
     public static void init() {
-        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
-            server.execute(() -> SeatEntity.stopSitting(handler.player));
-        });
+        ServerPlayerEvents.LEAVE.register(SeatEntity::stopSitting);
     }
 
     @Environment(EnvType.CLIENT)
