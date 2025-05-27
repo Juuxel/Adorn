@@ -3,7 +3,6 @@
   "id": "adorn_data_generator",
   "version": "1",
 
-  "mixins": ["mixins.adorn.common_data.json"],
   "entrypoints": {
     "fabric-datagen": ["juuxel.adorn.data.AdornDataGenerator"]
   }
