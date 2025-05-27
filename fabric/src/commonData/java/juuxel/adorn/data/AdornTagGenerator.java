@@ -4,6 +4,7 @@ import juuxel.adorn.datagen.DataOutput;
 import juuxel.adorn.datagen.tag.TagGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
@@ -31,16 +32,20 @@ public final class AdornTagGenerator extends AdornCustomDataGenerator {
     }
 
     static List<Path> getDataConfigs(String systemProperty) {
-        return Arrays.stream(System.getProperty(systemProperty).split(","))
+        return Arrays.stream(System.getProperty(systemProperty).split(File.pathSeparator))
             .map(Path::of)
-            .flatMap(dir -> {
+            .flatMap(path -> {
                 // Support subprojects without src/data.
-                if (Files.notExists(dir)) return Stream.empty();
+                if (Files.notExists(path)) return Stream.empty();
 
-                try {
-                    return Files.list(dir);
-                } catch (IOException e) {
-                    throw new UncheckedIOException(e);
+                if (Files.isDirectory(path)) {
+                    try {
+                        return Files.list(path);
+                    } catch (IOException e) {
+                        throw new UncheckedIOException(e);
+                    }
+                } else {
+                    return Stream.of(path);
                 }
             })
             .filter(path -> path.getFileName().toString().endsWith(".xml"))

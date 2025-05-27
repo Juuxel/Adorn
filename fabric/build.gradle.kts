@@ -11,40 +11,45 @@ plugins {
 // The path to the AW file in the common subproject.
 val accessWidenerFile = project(":common").file("src/main/resources/adorn.accesswidener")
 
-fun registerDataGenerator(name: String, displayName: String, targetProject: Project) {
-    sourceSets {
-        create(name) {
-            compileClasspath += main.get().compileClasspath
-            runtimeClasspath += main.get().runtimeClasspath
-            compileClasspath += main.get().output
-            runtimeClasspath += main.get().output
-        }
+sourceSets {
+    create("commonData") {
+        compileClasspath += main.get().compileClasspath
+        runtimeClasspath += main.get().runtimeClasspath
+        compileClasspath += main.get().output
+        runtimeClasspath += main.get().output
     }
+}
 
-    loom.mods.register(name) {
-        sourceSet(name)
+fun registerDataGenerator(name: String, displayName: String, common: Boolean) {
+    val targetProject = if (common) {
+        project(":common")
+    } else {
+        project
     }
 
     loom.runs.register(name) {
         inherit(loom.runs.getByName("client"))
         configName = displayName
-        source(name)
+        source("commonData")
         property("fabric-api.datagen")
         property("fabric-api.datagen.output-dir", targetProject.file("src/generated/resources").absolutePath)
         runDir("build/$name")
 
-        if (targetProject.path == ":common") {
-            property("adorn.data.mainConfig", targetProject.file("src/data/vanilla.xml").absolutePath)
+        if (common) {
+            property("adorn.data.commonMode", "true")
+            property("adorn.data.mainConfigs", targetProject.file("src/data/vanilla.xml").absolutePath)
             val tagConfigDirs = rootProject.subprojects.map { it.file("src/data") }
-            property("adorn.data.tagConfigDirs", tagConfigDirs.joinToString(",") { it.absolutePath })
+            property("adorn.data.tagConfigDirs", tagConfigDirs.joinToString(File.pathSeparator) { it.absolutePath })
             property("adorn.data.fabricConfigDirs", project(":fabric").file("src/data").absolutePath)
             property("adorn.data.neoforgeConfigDirs", project(":forge").file("src/data").absolutePath)
+        } else {
+            property("adorn.data.mainConfigs", file("src/data").absolutePath)
         }
     }
 }
 
-registerDataGenerator("commonData", "Common Data Generator", project(":common"))
-registerDataGenerator("data", "Fabric Data Generator", project)
+registerDataGenerator("commonData", "Common Data Generator", common = true)
+registerDataGenerator("data", "Fabric Data Generator", common = false)
 
 sourceSets {
     main {
@@ -58,6 +63,12 @@ loom {
     // Make the Fabric project use the common access widener.
     // Technically useless, BUT this file is also needed at dev runtime of course
     accessWidenerPath.set(accessWidenerFile)
+
+    mods {
+        register("data") {
+            sourceSet("commonData")
+        }
+    }
 }
 
 // Set up various Maven repositories for mod compat.
