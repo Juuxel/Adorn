@@ -1,20 +1,17 @@
 package juuxel.adorn.platform.fabric;
 
 import juuxel.adorn.AdornCommon;
+import juuxel.adorn.lib.registry.AbstractRegistrar;
+import juuxel.adorn.lib.registry.KeyedRegistrar;
 import juuxel.adorn.lib.registry.Registered;
-import juuxel.adorn.lib.registry.Registrar;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public final class RegistrarImpl<T> implements Registrar<T> {
+public final class RegistrarImpl<T> extends AbstractRegistrar<T> implements KeyedRegistrar<T> {
     private final Registry<T> registry;
-    private final List<T> objects = new ArrayList<>();
 
     public RegistrarImpl(Registry<T> registry) {
         this.registry = registry;
@@ -52,10 +49,5 @@ public final class RegistrarImpl<T> implements Registrar<T> {
 
     private RegistryKey<T> createKey(String id) {
         return RegistryKey.of(registry.getKey(), AdornCommon.id(id));
-    }
-
-    @Override
-    public Iterator<T> iterator() {
-        return objects.iterator();
     }
 }

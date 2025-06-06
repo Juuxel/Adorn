@@ -2,6 +2,7 @@ package juuxel.adorn.platform.forge.registrar;
 
 import com.google.common.collect.Iterators;
 import juuxel.adorn.AdornCommon;
+import juuxel.adorn.lib.registry.KeyedRegistrar;
 import juuxel.adorn.lib.registry.Registered;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public final class DeferredRegistrar<T> implements ForgeRegistrar<T> {
+public final class DeferredRegistrar<T> implements KeyedRegistrar<T>, ForgeRegistrar<T> {
     private final DeferredRegister<T> register;
     private final List<DeferredHolder<T, ? extends T>> objects = new ArrayList<>();
 

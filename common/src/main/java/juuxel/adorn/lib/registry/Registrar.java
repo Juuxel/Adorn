@@ -1,7 +1,5 @@
 package juuxel.adorn.lib.registry;
 
-import net.minecraft.registry.RegistryKey;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -12,12 +10,7 @@ public interface Registrar<T> extends Iterable<T> {
     /**
      * Registers an object with the id. The object is created using the provider.
      */
-    <U extends T> Registered.WithKey<T, U> register(String id, Supplier<? extends U> provider);
-
-    /**
-     * Registers an object with the id. The object is created using the provider.
-     */
-    <U extends T> Registered.WithKey<T, U> register(String id, Function<? super RegistryKey<T>, ? extends U> provider);
+    <U extends T> Registered<U> register(String id, Supplier<? extends U> provider);
 
     @SuppressWarnings("unchecked")
     static <K, U> RegisteredMap<K, U> registerBy(Collection<? extends K> keys, Function<K, Registered<? extends U>> factory) {

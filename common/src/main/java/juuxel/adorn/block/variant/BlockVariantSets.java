@@ -18,8 +18,8 @@ import juuxel.adorn.block.TableBlock;
 import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.item.ChairBlockItem;
 import juuxel.adorn.item.TableBlockItem;
+import juuxel.adorn.lib.registry.KeyedRegistrar;
 import juuxel.adorn.lib.registry.Registered;
-import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
 import juuxel.adorn.lib.registry.RegistryHelper;
 import net.minecraft.block.Block;
@@ -36,8 +36,8 @@ import java.util.ServiceLoader;
 import java.util.Set;
 
 public final class BlockVariantSets {
-    public static final Registrar<Block> BLOCKS = RegistrarFactory.get().create(RegistryKeys.BLOCK);
-    public static final Registrar<Item> ITEMS = RegistrarFactory.get().create(RegistryKeys.ITEM);
+    public static final KeyedRegistrar<Block> BLOCKS = RegistrarFactory.get().create(RegistryKeys.BLOCK);
+    public static final KeyedRegistrar<Item> ITEMS = RegistrarFactory.get().create(RegistryKeys.ITEM);
     private static final RegistryHelper HELPER = new RegistryHelper(BLOCKS, ITEMS);
 
     private static final List<BlockVariantSet> variantSets = new ArrayList<>();

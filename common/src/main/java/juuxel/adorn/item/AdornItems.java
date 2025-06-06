@@ -4,7 +4,10 @@ import juuxel.adorn.AdornCommon;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.component.ItemDescription;
+import juuxel.adorn.entity.AdornEntities;
+import juuxel.adorn.lib.registry.KeyedRegistrar;
 import juuxel.adorn.lib.registry.Registered;
+import juuxel.adorn.lib.registry.RegisteredMap;
 import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
 import net.minecraft.component.DataComponentTypes;
@@ -16,6 +19,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.VerticallyAttachableBlockItem;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.math.Direction;
 
@@ -24,7 +28,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public final class AdornItems {
-    public static final Registrar<Item> ITEMS = RegistrarFactory.get().create(RegistryKeys.ITEM);
+    public static final KeyedRegistrar<Item> ITEMS = RegistrarFactory.get().create(RegistryKeys.ITEM);
     private static final FoodComponent DRINK_FOOD_COMPONENT = drinkFoodComponentBuilder().build();
 
     public static final Registered<Item> STONE_ROD = registerWithDescription("stone_rod", Item::new);
@@ -75,6 +79,16 @@ public final class AdornItems {
         () -> new Item.Settings()
             .component(AdornComponentTypes.FERTILIZER_LEVEL.get(), WateringCanItem.FertilizerLevel.ZERO)
             .component(AdornComponentTypes.WATER_LEVEL.get(), 0)
+    );
+
+    public static final RegisteredMap<DyeColor, Item> CONES = Registrar.registerBy(
+        DyeColor.values(),
+        color -> register(
+            color.asString() + "_cone",
+            settings -> new ConeItem(color, settings),
+            key -> new Item.Settings()
+                .component(AdornComponentTypes.DESCRIPTION.get(), ItemDescription.ofItem(AdornEntities.CONE.key().getValue()))
+        )
     );
 
     private static Registered<Item> register(String name, Function<Item.Settings, Item> factory) {

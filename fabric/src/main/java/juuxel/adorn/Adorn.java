@@ -13,6 +13,7 @@ import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.criterion.AdornCriteria;
 import juuxel.adorn.entity.AdornEntities;
+import juuxel.adorn.entity.AdornTrackedDataHandlers;
 import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.item.group.AdornItemGroups;
 import juuxel.adorn.lib.AdornBlocksFabric;
@@ -49,6 +50,7 @@ public final class Adorn {
         AdornItems.init();
         AdornItemsFabric.init();
         AdornItemGroups.init();
+        AdornTrackedDataHandlers.init();
         AdornEntities.init();
         AdornEntitiesFabric.init();
         AdornMenus.init();

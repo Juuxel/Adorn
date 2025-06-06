@@ -1,5 +1,6 @@
 package juuxel.adorn.lib;
 
+import juuxel.adorn.client.renderer.ConeEntityRenderer;
 import juuxel.adorn.client.renderer.InvisibleEntityRenderer;
 import juuxel.adorn.entity.AdornEntities;
 import juuxel.adorn.entity.SeatEntity;
@@ -16,5 +17,6 @@ public final class AdornEntitiesFabric {
     @Environment(EnvType.CLIENT)
     public static void initClient() {
         EntityRendererRegistry.register(AdornEntities.SEAT.get(), InvisibleEntityRenderer::new);
+        EntityRendererRegistry.register(AdornEntities.CONE.get(), ConeEntityRenderer::new);
     }
 }

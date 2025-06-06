@@ -1,6 +1,7 @@
 package juuxel.adorn.platform.forge.client;
 
 import juuxel.adorn.block.AdornBlockEntities;
+import juuxel.adorn.client.renderer.ConeEntityRenderer;
 import juuxel.adorn.client.renderer.InvisibleEntityRenderer;
 import juuxel.adorn.client.renderer.ShelfRenderer;
 import juuxel.adorn.client.renderer.TradingStationRenderer;
@@ -13,6 +14,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 public final class AdornRenderers {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(AdornEntities.SEAT.get(), InvisibleEntityRenderer::new);
+        event.registerEntityRenderer(AdornEntities.CONE.get(), ConeEntityRenderer::new);
         event.registerBlockEntityRenderer(AdornBlockEntities.TRADING_STATION.get(), TradingStationRenderer::new);
         event.registerBlockEntityRenderer(AdornBlockEntities.SHELF.get(), ShelfRenderer::new);
         event.registerBlockEntityRenderer(forceType(AdornBlockEntities.KITCHEN_SINK.get()), KitchenSinkRendererForge::new);

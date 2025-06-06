@@ -1,8 +1,8 @@
 package juuxel.adorn.platform.forge;
 
-import juuxel.adorn.block.AdornBlockSetTypes;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.block.AdornBlockEntities;
+import juuxel.adorn.block.AdornBlockSetTypes;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.block.AdornWoodTypes;
 import juuxel.adorn.block.variant.BlockVariantSets;
@@ -10,6 +10,7 @@ import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.criterion.AdornCriteria;
 import juuxel.adorn.entity.AdornEntities;
+import juuxel.adorn.entity.AdornTrackedDataHandlers;
 import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.item.group.AdornItemGroups;
 import juuxel.adorn.lib.AdornGameRules;
@@ -53,6 +54,8 @@ public final class Adorn {
         register(AdornBlocks.BLOCKS, modBus);
         register(AdornBlocks.ITEMS, modBus);
         register(AdornItems.ITEMS, modBus);
+        AdornTrackedDataHandlers.init();
+        register(AdornTrackedDataHandlers.TRACKED_DATA_HANDLERS, modBus);
         register(AdornEntities.ENTITIES, modBus);
         register(AdornBlockEntities.BLOCK_ENTITIES, modBus);
         AdornItemGroups.init();
