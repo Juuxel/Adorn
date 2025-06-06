@@ -9,6 +9,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextCodecs;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 
 import java.util.function.Consumer;
 
@@ -22,6 +23,14 @@ public record ItemDescription(Text description) implements TooltipAppender {
 
     public static ItemDescription ofTranslation(String translationKey) {
         return new ItemDescription(Text.translatable(translationKey));
+    }
+
+    public static ItemDescription ofItem(Identifier id) {
+        return ofTranslation("item." + id.getNamespace() + "." + id.getPath() + ".description");
+    }
+
+    public static ItemDescription ofBlock(Identifier id) {
+        return ofTranslation("block." + id.getNamespace() + "." + id.getPath() + ".description");
     }
 
     public static MutableText applyDescriptionStyle(MutableText text) {

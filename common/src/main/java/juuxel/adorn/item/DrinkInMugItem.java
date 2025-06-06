@@ -2,11 +2,12 @@ package juuxel.adorn.item;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.consume.UseAction;
 import net.minecraft.world.World;
 
-public class DrinkInMugItem extends ItemWithDescription {
+public class DrinkInMugItem extends Item {
     public DrinkInMugItem(Settings settings) {
         super(settings);
     }

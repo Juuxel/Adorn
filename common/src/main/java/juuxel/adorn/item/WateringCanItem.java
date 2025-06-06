@@ -15,6 +15,7 @@ import net.minecraft.block.FluidDrainable;
 import net.minecraft.component.ComponentsAccess;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.tooltip.TooltipAppender;
@@ -37,7 +38,7 @@ import net.minecraft.world.event.GameEvent;
 
 import java.util.function.Consumer;
 
-public final class WateringCanItem extends ItemWithDescription {
+public final class WateringCanItem extends Item {
     private static final int ITEM_BAR_STEPS = 13;
     private static final int MAX_WATER_LEVEL = 50;
     public static final int MAX_FERTILIZER_LEVEL = 32;
