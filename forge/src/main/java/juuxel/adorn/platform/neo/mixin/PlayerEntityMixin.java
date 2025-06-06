@@ -1,4 +1,4 @@
-package juuxel.adorn.platform.forge.mixin;
+package juuxel.adorn.platform.neo.mixin;
 
 import juuxel.adorn.block.SofaBlock;
 import juuxel.adorn.lib.AdornGameRules;
