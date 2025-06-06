@@ -19,6 +19,7 @@ public interface Registrar<T> extends Iterable<T> {
      */
     <U extends T> Registered.WithKey<T, U> register(String id, Function<? super RegistryKey<T>, ? extends U> provider);
 
+    // TODO: Can't this be static?
     @SuppressWarnings("unchecked")
     default <K, U extends T> RegisteredMap<K, U> registerBy(Collection<? extends K> keys, Function<K, Registered<? extends U>> factory) {
         List<? extends K> keyList;

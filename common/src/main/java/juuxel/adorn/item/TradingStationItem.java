@@ -2,12 +2,13 @@ package juuxel.adorn.item;
 
 import juuxel.adorn.component.AdornComponentTypes;
 import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipData;
 
 import java.util.Optional;
 
-public final class TradingStationItem extends BaseBlockItem {
+public final class TradingStationItem extends BlockItem {
     public TradingStationItem(Block block, Settings settings) {
         super(block, settings);
     }

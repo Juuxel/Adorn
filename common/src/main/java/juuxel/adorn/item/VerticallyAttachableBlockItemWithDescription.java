@@ -10,6 +10,7 @@ import net.minecraft.util.math.Direction;
 
 import java.util.function.Consumer;
 
+@Deprecated
 public final class VerticallyAttachableBlockItemWithDescription extends VerticallyAttachableBlockItem {
     public VerticallyAttachableBlockItemWithDescription(Block standingBlock, Block wallBlock, Direction verticalAttachmentDirection, Settings settings) {
         super(standingBlock, wallBlock, verticalAttachmentDirection, settings);

@@ -16,7 +16,8 @@ public final class AdornItemsFabric {
             }
         });
 
-        ComponentTooltipAppenderRegistry.addFirst(AdornComponentTypes.TRADE_OWNER.get());
-        ComponentTooltipAppenderRegistry.addFirst(AdornComponentTypes.FERTILIZER_LEVEL.get());
+        for (var component : AdornComponentTypes.getTooltipComponents()) {
+            ComponentTooltipAppenderRegistry.addFirst(component.get());
+        }
     }
 }

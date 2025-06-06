@@ -24,7 +24,8 @@ abstract class ItemStackMixin {
 
     @Inject(method = "appendTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;appendComponentTooltip(Lnet/minecraft/component/ComponentType;Lnet/minecraft/item/Item$TooltipContext;Lnet/minecraft/component/type/TooltipDisplayComponent;Ljava/util/function/Consumer;Lnet/minecraft/item/tooltip/TooltipType;)V", ordinal = 0))
     private void appendTooltipsOfAdornComponents(Item.TooltipContext context, TooltipDisplayComponent displayComponent, PlayerEntity player, TooltipType type, Consumer<Text> textConsumer, CallbackInfo info) {
-        appendComponentTooltip(AdornComponentTypes.TRADE_OWNER.get(), context, displayComponent, textConsumer, type);
-        appendComponentTooltip(AdornComponentTypes.FERTILIZER_LEVEL.get(), context, displayComponent, textConsumer, type);
+        for (var component : AdornComponentTypes.getTooltipComponents()) {
+            appendComponentTooltip(component.get(), context, displayComponent, textConsumer, type);
+        }
     }
 }

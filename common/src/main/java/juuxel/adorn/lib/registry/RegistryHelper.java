@@ -1,13 +1,14 @@
 package juuxel.adorn.lib.registry;
 
-import juuxel.adorn.item.BaseBlockItem;
+import juuxel.adorn.block.BlockWithItemComponents;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.registry.RegistryKey;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public final class RegistryHelper {
     private final Registrar<Block> blocks;
@@ -66,11 +67,21 @@ public final class RegistryHelper {
         var registered = registerBlockWithoutItem(name, block, settings);
         items.register(name, key -> itemProvider.apply(
             registered.get(),
-            itemSettings.createItemSettings()
-                .registryKey(key)
-                .useBlockPrefixedTranslationKey()
+            createBlockItemSettings(registered.get(), key, itemSettings)
         ));
         return registered;
+    }
+
+    private static Item.Settings createBlockItemSettings(Block block, RegistryKey<Item> key, ItemSettingsProvider provider) {
+        var settings = provider.createItemSettings()
+            .registryKey(key)
+            .useBlockPrefixedTranslationKey();
+
+        if (block instanceof BlockWithItemComponents withItemComponents) {
+            withItemComponents.addItemComponents(settings::component);
+        }
+
+        return settings;
     }
 
     /**
@@ -81,7 +92,7 @@ public final class RegistryHelper {
     }
 
     private static Item makeItemForBlock(Block block, Item.Settings itemSettings) {
-        return new BaseBlockItem(block, itemSettings);
+        return new BlockItem(block, itemSettings);
     }
 
     // -----------------------------------------

@@ -1,13 +1,20 @@
 package juuxel.adorn.block;
 
+import juuxel.adorn.component.AdornComponentTypes;
+import juuxel.adorn.component.ItemDescription;
 import net.minecraft.block.Block;
 
 /**
  * Can be added to a block to provide a description for the block item
  * when registered using {@link juuxel.adorn.lib.RegistryHelper#registerBlock}.
  */
-public interface BlockWithDescription {
+public interface BlockWithDescription extends BlockWithItemComponents {
     default String getDescriptionKey() {
         return ((Block) this).getTranslationKey() + ".description";
+    }
+
+    @Override
+    default void addItemComponents(ComponentConsumer consumer) {
+        consumer.add(AdornComponentTypes.DESCRIPTION, ItemDescription.ofTranslation(getDescriptionKey()));
     }
 }
