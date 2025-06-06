@@ -29,7 +29,7 @@ public final class AdornBlocks {
     public static final Registrar<Item> ITEMS = RegistrarFactory.get().create(RegistryKeys.ITEM);
     private static final RegistryHelper HELPER = new RegistryHelper(BLOCKS, ITEMS);
 
-    public static final RegisteredMap<DyeColor, SofaBlock> SOFAS = BLOCKS.registerBy(
+    public static final RegisteredMap<DyeColor, SofaBlock> SOFAS = Registrar.registerBy(
         DyeColor.values(),
         color -> HELPER.registerBlock(
             color.asString() + "_sofa",
@@ -37,7 +37,7 @@ public final class AdornBlocks {
         )
     );
 
-    public static final RegisteredMap<DyeColor, Block> PAINTED_PLANKS = BLOCKS.registerBy(
+    public static final RegisteredMap<DyeColor, Block> PAINTED_PLANKS = Registrar.registerBy(
         DyeColor.values(),
         color -> HELPER.registerBlock(
             color.asString() + "_planks",
@@ -45,7 +45,7 @@ public final class AdornBlocks {
         )
     );
 
-    public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_SLABS = BLOCKS.registerBy(
+    public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_SLABS = Registrar.registerBy(
         DyeColor.values(),
         color -> HELPER.registerBlock(
             color.asString() + "_wood_slab",
@@ -53,7 +53,7 @@ public final class AdornBlocks {
         )
     );
 
-    public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_STAIRS = BLOCKS.registerBy(
+    public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_STAIRS = Registrar.registerBy(
         DyeColor.values(),
         color -> {
             var planks = PAINTED_PLANKS.get(color);
@@ -64,7 +64,7 @@ public final class AdornBlocks {
         }
     );
 
-    public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_FENCES = BLOCKS.registerBy(
+    public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_FENCES = Registrar.registerBy(
         DyeColor.values(),
         color -> HELPER.registerBlock(
             color.asString() + "_wood_fence",
@@ -72,7 +72,7 @@ public final class AdornBlocks {
         )
     );
 
-    public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_FENCE_GATES = BLOCKS.registerBy(
+    public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_FENCE_GATES = Registrar.registerBy(
         DyeColor.values(),
         color -> HELPER.registerBlock(
             color.asString() + "_wood_fence_gate",
@@ -83,7 +83,7 @@ public final class AdornBlocks {
         )
     );
 
-    public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_PRESSURE_PLATES = BLOCKS.registerBy(
+    public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_PRESSURE_PLATES = Registrar.registerBy(
         DyeColor.values(),
         color -> HELPER.registerBlock(
             color.asString() + "_wood_pressure_plate",
@@ -94,7 +94,7 @@ public final class AdornBlocks {
         )
     );
 
-    public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_BUTTONS = BLOCKS.registerBy(
+    public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_BUTTONS = Registrar.registerBy(
         DyeColor.values(),
         color -> HELPER.registerBlock(
             color.asString() + "_wood_button",
@@ -119,7 +119,7 @@ public final class AdornBlocks {
     public static final Registered<Block> SOULFUL_PRISMARINE_CHIMNEY = HELPER.registerBlock("soulful_prismarine_chimney",
         () -> new PrismarineChimneyBlock.WithColumn(false, AbstractChimneyBlock.createBlockSettings(MapColor.CYAN, 1.5f)));
 
-    public static final RegisteredMap<DyeColor, Block> TABLE_LAMPS = BLOCKS.registerBy(
+    public static final RegisteredMap<DyeColor, Block> TABLE_LAMPS = Registrar.registerBy(
         DyeColor.values(),
         color -> HELPER.registerBlock(color.asString() + "_table_lamp", () -> new TableLampBlock(TableLampBlock.createBlockSettings(color)))
     );
@@ -184,7 +184,7 @@ public final class AdornBlocks {
 
     public static final Registered<Block> CANDLELIT_LANTERN = HELPER.registerBlock("candlelit_lantern",
         () -> new CandlelitLanternBlock(CandlelitLanternBlock.createBlockSettings()));
-    public static final RegisteredMap<DyeColor, Block> DYED_CANDLELIT_LANTERNS = BLOCKS.registerBy(
+    public static final RegisteredMap<DyeColor, Block> DYED_CANDLELIT_LANTERNS = Registrar.registerBy(
         DyeColor.values(),
         color -> HELPER.registerBlock(
             color.asString() + "_candlelit_lantern",
