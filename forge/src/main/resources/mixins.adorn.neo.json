@@ -1,0 +1,14 @@
+{
+  "compatibilityLevel": "JAVA_16",
+  "minVersion": "0.8",
+  "package": "juuxel.adorn.platform.neo.mixin",
+  "required": true,
+
+  "mixins": [
+    "ItemStackMixin"
+  ],
+
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

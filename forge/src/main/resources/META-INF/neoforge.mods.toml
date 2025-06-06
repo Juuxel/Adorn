@@ -17,6 +17,9 @@ config = "mixins.adorn.common.json"
 [[mixins]]
 config = "mixins.adorn.forge.json"
 
+[[mixins]]
+config = "mixins.adorn.neo.json"
+
 [[dependencies.adorn]]
 modId = "minecraft"
 type = "required"

@@ -1,6 +1,8 @@
 package juuxel.adorn.lib;
 
+import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.item.FuelData;
+import net.fabricmc.fabric.api.item.v1.ComponentTooltipAppenderRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 
 public final class AdornItemsFabric {
@@ -13,5 +15,8 @@ public final class AdornItemsFabric {
                 }
             }
         });
+
+        ComponentTooltipAppenderRegistry.addFirst(AdornComponentTypes.TRADE_OWNER.get());
+        ComponentTooltipAppenderRegistry.addFirst(AdornComponentTypes.FERTILIZER_LEVEL.get());
     }
 }

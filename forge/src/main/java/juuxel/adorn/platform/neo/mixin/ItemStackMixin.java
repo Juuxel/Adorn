@@ -1,4 +1,4 @@
-package juuxel.adorn.commonmixin;
+package juuxel.adorn.platform.neo.mixin;
 
 import juuxel.adorn.component.AdornComponentTypes;
 import net.minecraft.component.ComponentType;
