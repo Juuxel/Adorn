@@ -4,9 +4,5 @@
     "planks": "terrestria:block/sakura_planks",
     "log": "terrestria:block/sakura_log",
     "end": "terrestria:block/sakura_log"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["terrestria"]
-  }]
+  }
 }

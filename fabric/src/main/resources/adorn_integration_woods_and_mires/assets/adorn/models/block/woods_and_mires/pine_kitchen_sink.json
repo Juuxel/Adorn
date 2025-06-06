@@ -3,9 +3,5 @@
   "textures": {
     "stone": "minecraft:block/polished_granite",
     "planks": "woods_and_mires:block/pine_planks"
-  },
-  "adorn:conditions": [{
-    "condition": "fabric:all_mods_loaded",
-    "values": ["woods_and_mires"]
-  }]
+  }
 }
