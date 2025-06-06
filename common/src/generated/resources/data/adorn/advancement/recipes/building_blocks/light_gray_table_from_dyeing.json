@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:light_gray_table_from_dyeing"
+        "recipe": "adorn:light_gray_table_from_dyeing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:light_gray_table_from_dyeing"
+      "adorn:light_gray_table_from_dyeing"
     ]
   }
 }

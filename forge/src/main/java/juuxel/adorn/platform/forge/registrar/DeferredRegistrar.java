@@ -2,20 +2,22 @@ package juuxel.adorn.platform.forge.registrar;
 
 import com.google.common.collect.Iterators;
 import juuxel.adorn.AdornCommon;
+import juuxel.adorn.lib.registry.KeyedRegistrar;
 import juuxel.adorn.lib.registry.Registered;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.common.extensions.IHolderExtension;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
-public final class DeferredRegistrar<T> implements ForgeRegistrar<T> {
+public final class DeferredRegistrar<T> implements ForgeRegistrar<T>, KeyedRegistrar<T> {
     private final DeferredRegister<T> register;
     private final List<DeferredHolder<T, ? extends T>> objects = new ArrayList<>();
 
@@ -30,17 +32,28 @@ public final class DeferredRegistrar<T> implements ForgeRegistrar<T> {
 
     @Override
     public <U extends T> Registered.WithKey<T, U> register(String id, Supplier<? extends U> provider) {
-        var registryObject = register.register(id, provider);
+        return register(id, key -> provider.get());
+    }
+
+    @Override
+    public <U extends T> Registered.WithKey<T, U> register(String id, Function<? super RegistryKey<T>, ? extends U> provider) {
+        var key = RegistryKey.of(register.getRegistryKey(), AdornCommon.id(id));
+        var registryObject = register.register(id, () -> provider.apply(key));
         objects.add(registryObject);
         return new Registered.WithKey<>() {
             @Override
             public RegistryKey<T> key() {
-                return ((IHolderExtension<T>) registryObject).getKey();
+                return key;
             }
 
             @Override
             public U get() {
                 return registryObject.get();
+            }
+
+            @Override
+            public RegistryEntry<T> entry() {
+                return registryObject;
             }
         };
     }

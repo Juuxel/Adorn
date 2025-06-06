@@ -1,8 +1,10 @@
 package juuxel.adorn.data;
 
+import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.lib.AdornTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
@@ -42,6 +44,9 @@ public final class AdornItemTagGenerator extends FabricTagProvider.ItemTagProvid
         copy(BlockTags.FENCE_GATES, ItemTags.FENCE_GATES);
         copy(BlockTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_PRESSURE_PLATES);
         copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
+
+        getOrCreateTagBuilder(AdornTags.CONES)
+            .add(AdornItems.CONES.values().toArray(Item[]::new));
     }
 
     private void copy(AdornTags.TagPair tagPair) {

@@ -1,8 +1,8 @@
 package juuxel.adorn.platform.forge;
 
-import juuxel.adorn.block.AdornBlockSetTypes;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.block.AdornBlockEntities;
+import juuxel.adorn.block.AdornBlockSetTypes;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.block.AdornWoodTypes;
 import juuxel.adorn.block.variant.BlockVariantSets;

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:white_wood_slab_from_dyeing"
+        "recipe": "adorn:white_wood_slab_from_dyeing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:white_wood_slab_from_dyeing"
+      "adorn:white_wood_slab_from_dyeing"
     ]
   }
 }

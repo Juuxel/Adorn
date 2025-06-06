@@ -2,7 +2,6 @@ package juuxel.adorn.platform.forge;
 
 import juuxel.adorn.platform.BlockEntityBridge;
 import juuxel.adorn.platform.BlockFactory;
-import juuxel.adorn.platform.EntityBridge;
 import juuxel.adorn.platform.MenuBridge;
 import juuxel.adorn.platform.NetworkBridge;
 import juuxel.adorn.platform.PlatformBridges;
@@ -17,11 +16,6 @@ public final class PlatformBridgesImpl implements PlatformBridges {
     @Override
     public BlockFactory getBlockFactory() {
         return BlockFactoryImpl.INSTANCE;
-    }
-
-    @Override
-    public EntityBridge getEntities() {
-        return EntityBridgeImpl.INSTANCE;
     }
 
     @Override

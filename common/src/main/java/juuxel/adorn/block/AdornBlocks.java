@@ -3,6 +3,7 @@ package juuxel.adorn.block;
 import juuxel.adorn.block.variant.BlockVariant;
 import juuxel.adorn.item.TradingStationItem;
 import juuxel.adorn.lib.AdornSounds;
+import juuxel.adorn.lib.registry.KeyedRegistrar;
 import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.lib.registry.RegisteredMap;
 import juuxel.adorn.lib.registry.Registrar;
@@ -25,8 +26,8 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 
 public final class AdornBlocks {
-    public static final Registrar<Block> BLOCKS = RegistrarFactory.get().create(RegistryKeys.BLOCK);
-    public static final Registrar<Item> ITEMS = RegistrarFactory.get().create(RegistryKeys.ITEM);
+    public static final KeyedRegistrar<Block> BLOCKS = RegistrarFactory.get().create(RegistryKeys.BLOCK);
+    public static final KeyedRegistrar<Item> ITEMS = RegistrarFactory.get().create(RegistryKeys.ITEM);
     private static final RegistryHelper HELPER = new RegistryHelper(BLOCKS, ITEMS);
 
     public static final RegisteredMap<DyeColor, SofaBlock> SOFAS = Registrar.registerBy(

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "adorn:wooden_cones",
+  "key": {
+    "-": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "D": {
+      "tag": "c:dyes/purple"
+    },
+    "|": {
+      "tag": "adorn:wooden_posts"
+    }
+  },
+  "pattern": [
+    "D",
+    "|",
+    "-"
+  ],
+  "result": {
+    "count": 1,
+    "id": "adorn:purple_cone"
+  }
+}

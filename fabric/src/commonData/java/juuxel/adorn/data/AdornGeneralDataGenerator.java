@@ -4,11 +4,8 @@ import juuxel.adorn.datagen.DataGenerator;
 import juuxel.adorn.datagen.DataOutput;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 
-import java.nio.file.Path;
-import java.util.List;
-
 public final class AdornGeneralDataGenerator extends AdornCustomDataGenerator {
-    private static final String MAIN_CONFIG_PROPERTY = "adorn.data.mainConfig";
+    private static final String MAIN_CONFIGS_PROPERTY = "adorn.data.mainConfigs";
 
     public AdornGeneralDataGenerator(FabricDataOutput output) {
         super(output);
@@ -16,7 +13,7 @@ public final class AdornGeneralDataGenerator extends AdornCustomDataGenerator {
 
     @Override
     protected void run(DataOutput output) {
-        DataGenerator.generate(List.of(Path.of(System.getProperty(MAIN_CONFIG_PROPERTY))), output);
+        DataGenerator.generate(AdornTagGenerator.getDataConfigs(MAIN_CONFIGS_PROPERTY), output);
     }
 
     @Override

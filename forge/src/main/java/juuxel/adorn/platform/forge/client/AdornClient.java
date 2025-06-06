@@ -5,6 +5,7 @@ import juuxel.adorn.client.gui.screen.AdornMenuScreens;
 import juuxel.adorn.client.gui.screen.GuideBookScreen;
 import juuxel.adorn.client.gui.screen.MainConfigScreen;
 import juuxel.adorn.platform.PlatformBridges;
+import juuxel.adorn.platform.neo.client.AdornModels;
 import juuxel.adorn.trading.Trade;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.resource.ReloadableResourceManagerImpl;
@@ -19,10 +20,12 @@ public final class AdornClient {
     public static void init(IEventBus modBus) {
         modBus.addListener(AdornClient::setup);
         modBus.addListener(AdornRenderers::registerRenderers);
+        modBus.addListener(AdornRenderers::registerFeatureRenderers);
         modBus.addListener(AdornClient::registerTooltipComponent);
         var resourceManager = (ReloadableResourceManagerImpl) MinecraftClient.getInstance().getResourceManager();
         resourceManager.registerReloader(PlatformBridges.get().getResources().getBookManager());
         resourceManager.registerReloader(PlatformBridges.get().getResources().getColorManager());
+        modBus.register(AdornModels.class);
         ModLoadingContext.get().registerExtensionPoint(
             IConfigScreenFactory.class,
             () -> (container, parent) -> new MainConfigScreen(parent)

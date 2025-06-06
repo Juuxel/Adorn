@@ -5,13 +5,17 @@ import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.block.variant.BlockKind;
 import juuxel.adorn.block.variant.BlockVariant;
 import juuxel.adorn.block.variant.BlockVariantSets;
+import juuxel.adorn.entity.ConeVariant;
+import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.lib.AdornTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryKeys;
@@ -21,6 +25,9 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public final class AdornRecipeGenerator extends FabricRecipeProvider {
@@ -58,6 +65,28 @@ public final class AdornRecipeGenerator extends FabricRecipeProvider {
             offerDyeingRecipe(exporter, color, AdornTags.COFFEE_TABLES.item(), BlockKind.COFFEE_TABLE);
             offerDyeingRecipe(exporter, color, AdornTags.BENCHES.item(), BlockKind.BENCH);
         }
+
+        generateCones(exporter);
+    }
+
+    private void generateCones(RecipeExporter exporter) {
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.WHITE), ConventionalItemTags.WHITE_DYES);
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.ORANGE), ConventionalItemTags.ORANGE_DYES);
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.MAGENTA), ConventionalItemTags.MAGENTA_DYES);
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.LIGHT_BLUE), ConventionalItemTags.LIGHT_BLUE_DYES);
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.YELLOW), ConventionalItemTags.YELLOW_DYES);
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.LIME), ConventionalItemTags.LIME_DYES);
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.PINK), ConventionalItemTags.PINK_DYES);
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.GRAY), ConventionalItemTags.GRAY_DYES);
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.LIGHT_GRAY), ConventionalItemTags.LIGHT_GRAY_DYES);
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.CYAN), ConventionalItemTags.CYAN_DYES);
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.PURPLE), ConventionalItemTags.PURPLE_DYES);
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.BLUE), ConventionalItemTags.BLUE_DYES);
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.BROWN), ConventionalItemTags.BROWN_DYES);
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.GREEN), ConventionalItemTags.GREEN_DYES);
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.RED), ConventionalItemTags.RED_DYES);
+        offerWoodenConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.BLACK), ConventionalItemTags.BLACK_DYES);
+        offerStoneConeRecipe(exporter, AdornItems.CONES.getEager(ConeVariant.OBSIDIAN), ConventionalItemTags.NORMAL_OBSIDIANS);
     }
 
     private static void offerPlankDyeingRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color) {
@@ -156,5 +185,34 @@ public final class AdornRecipeGenerator extends FabricRecipeProvider {
             .group(group)
             .criterion("has_" + kind, conditionsFromTag(ingredient))
             .offerTo(exporter, suffix ? getItemPath(output) + "_from_dyeing" : getItemPath(output));
+    }
+
+    private static void offerWoodenConeRecipe(RecipeExporter exporter, Item output, TagKey<Item> dyeTag) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output)
+            .criterion("has_slab", conditionsFromTag(ItemTags.WOODEN_SLABS))
+            .group(AdornCommon.NAMESPACE + ":wooden_cones")
+            .pattern("D")
+            .pattern("|")
+            .pattern("-")
+            .input('D', dyeTag)
+            .input('|', AdornTags.WOODEN_POSTS.item())
+            .input('-', ItemTags.WOODEN_SLABS)
+            .offerTo(exporter);
+    }
+
+    private static void offerStoneConeRecipe(RecipeExporter exporter, Item output, TagKey<Item> input) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 4)
+            .criterion(hasTag(input), conditionsFromTag(input))
+            .pattern("|")
+            .pattern("-")
+            .input('|', input)
+            .input('-', Items.SMOOTH_STONE_SLAB)
+            .offerTo(exporter);
+    }
+
+    private static String hasTag(TagKey<Item> tag) {
+        List<String> components = Arrays.asList(tag.id().getPath().split("/"));
+        Collections.reverse(components);
+        return "has_" + String.join("_", components);
     }
 }

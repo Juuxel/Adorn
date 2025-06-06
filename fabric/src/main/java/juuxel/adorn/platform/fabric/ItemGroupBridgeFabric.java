@@ -6,7 +6,9 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryWrapper;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -27,6 +29,11 @@ public final class ItemGroupBridgeFabric implements ItemGroupBridge {
                 }
 
                 @Override
+                public void add(ItemStack stack) {
+                    entries.add(stack);
+                }
+
+                @Override
                 public void addBefore(ItemConvertible before, List<? extends ItemConvertible> items) {
                     entries.addBefore(before, items.toArray(ItemConvertible[]::new));
                 }
@@ -34,6 +41,11 @@ public final class ItemGroupBridgeFabric implements ItemGroupBridge {
                 @Override
                 public void addAfter(ItemConvertible after, List<? extends ItemConvertible> items) {
                     entries.addAfter(after, items.toArray(ItemConvertible[]::new));
+                }
+
+                @Override
+                public RegistryWrapper.WrapperLookup getRegistries() {
+                    return entries.getContext().lookup();
                 }
             };
 

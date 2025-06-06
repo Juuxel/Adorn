@@ -7,7 +7,6 @@ import juuxel.adorn.util.Services;
 public interface PlatformBridges {
     BlockEntityBridge getBlockEntities();
     BlockFactory getBlockFactory();
-    EntityBridge getEntities();
     MenuBridge getMenus();
     NetworkBridge getNetwork();
     ResourceBridge getResources();

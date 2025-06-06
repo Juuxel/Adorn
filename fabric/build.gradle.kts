@@ -38,8 +38,6 @@ fun registerDataGenerator(name: String, displayName: String, common: Boolean) {
             property("adorn.data.mainConfigs", targetProject.file("src/data/vanilla.xml").absolutePath)
             val tagConfigDirs = rootProject.subprojects.map { it.file("src/data") }
             property("adorn.data.tagConfigDirs", tagConfigDirs.joinToString(File.pathSeparator) { it.absolutePath })
-            property("adorn.data.fabricConfigDirs", project(":fabric").file("src/data").absolutePath)
-            property("adorn.data.neoforgeConfigDirs", project(":forge").file("src/data").absolutePath)
         } else {
             property("adorn.data.mainConfigs", file("src/data").absolutePath)
         }

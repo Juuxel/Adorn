@@ -13,10 +13,14 @@ public class ItemWithDescription extends Item {
         super(settings);
     }
 
+    protected String getDescriptionKey(ItemStack stack) {
+        return getTranslationKey(stack) + ".description";
+    }
+
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         super.appendTooltip(stack, context, tooltip, type);
-        tooltip.add(createDescriptionText(getTranslationKey() + ".description"));
+        tooltip.add(createDescriptionText(getDescriptionKey(stack)));
     }
 
     public static Text createDescriptionText(String translationKey) {

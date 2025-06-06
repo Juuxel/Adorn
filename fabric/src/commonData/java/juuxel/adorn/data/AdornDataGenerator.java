@@ -1,14 +1,31 @@
 package juuxel.adorn.data;
 
 import juuxel.adorn.AdornCommon;
+import juuxel.adorn.data.fabric.AdornFabricBlockTagGenerator;
+import juuxel.adorn.util.Logging;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.JsonKeySortOrderCallback;
+import org.slf4j.Logger;
 
 public final class AdornDataGenerator implements DataGeneratorEntrypoint {
+    private static final Logger LOGGER = Logging.logger();
+    private static final String COMMON_MODE_PROPERTY = "adorn.data.commonMode";
+
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         var pack = fabricDataGenerator.createPack();
+
+        if (Boolean.getBoolean(COMMON_MODE_PROPERTY)) {
+            LOGGER.info("Running Adorn data generators in common mode");
+            initCommon(pack);
+        } else {
+            LOGGER.info("Running Adorn data generators in Fabric mode");
+            initFabric(pack);
+        }
+    }
+
+    private void initCommon(FabricDataGenerator.Pack pack) {
         pack.addProvider(AdornGeneralDataGenerator::new);
         pack.addProvider(AdornTagGenerator::new);
         pack.addProvider(AdornBlockLootTableGenerator::new);
@@ -17,6 +34,10 @@ public final class AdornDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(BookGenerator::new);
         var blockTags = pack.addProvider(AdornBlockTagGenerator::new);
         pack.addProvider((output, registriesFuture) -> new AdornItemTagGenerator(output, registriesFuture, blockTags));
+    }
+
+    private void initFabric(FabricDataGenerator.Pack pack) {
+        pack.addProvider(AdornFabricBlockTagGenerator::new);
     }
 
     @Override

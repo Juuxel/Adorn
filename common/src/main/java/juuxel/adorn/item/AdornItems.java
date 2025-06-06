@@ -3,10 +3,14 @@ package juuxel.adorn.item;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.component.AdornComponentTypes;
-import net.minecraft.component.type.FoodComponent;
+import juuxel.adorn.entity.ConeVariant;
+import juuxel.adorn.lib.registry.KeyedRegistrar;
 import juuxel.adorn.lib.registry.Registered;
+import juuxel.adorn.lib.registry.RegisteredMap;
 import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
+import juuxel.adorn.platform.ItemBridge;
+import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
@@ -15,7 +19,7 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.math.Direction;
 
 public final class AdornItems {
-    public static final Registrar<Item> ITEMS = RegistrarFactory.get().create(RegistryKeys.ITEM);
+    public static final KeyedRegistrar<Item> ITEMS = RegistrarFactory.get().create(RegistryKeys.ITEM);
     private static final FoodComponent DRINK_FOOD_COMPONENT = drinkFoodComponentBuilder().build();
 
     public static final Registered<Item> STONE_ROD = ITEMS.register("stone_rod", () -> new ItemWithDescription(new Item.Settings()));
@@ -53,6 +57,11 @@ public final class AdornItems {
                 .component(AdornComponentTypes.FERTILIZER_LEVEL.get(), 0)
                 .component(AdornComponentTypes.WATER_LEVEL.get(), 0)
         ));
+
+    public static final RegisteredMap<ConeVariant, Item> CONES = Registrar.registerBy(
+        ConeVariant.values(),
+        variant -> ITEMS.register(variant.id() + "_cone", () -> ItemBridge.get().createConeItem(variant, new Item.Settings()))
+    );
 
     private static FoodComponent.Builder drinkFoodComponentBuilder() {
         return new FoodComponent.Builder().nutrition(4).saturationModifier(0.3F).alwaysEdible();

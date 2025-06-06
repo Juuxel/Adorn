@@ -10,7 +10,7 @@ public interface Registrar<T> extends Iterable<T> {
     /**
      * Registers an object with the id. The object is created using the provider.
      */
-    <U extends T> Registered.WithKey<T, U> register(String id, Supplier<? extends U> provider);
+    <U extends T> Registered<U> register(String id, Supplier<? extends U> provider);
 
     @SuppressWarnings("unchecked")
     static <K, U> RegisteredMap<K, U> registerBy(Collection<? extends K> keys, Function<K, Registered<? extends U>> factory) {

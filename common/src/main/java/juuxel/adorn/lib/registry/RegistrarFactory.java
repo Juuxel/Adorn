@@ -7,7 +7,7 @@ import net.minecraft.registry.RegistryKey;
 
 @InlineServices
 public interface RegistrarFactory {
-    <T> Registrar<T> create(RegistryKey<Registry<T>> registryKey);
+    <T> KeyedRegistrar<T> create(RegistryKey<Registry<T>> registryKey);
 
     @InlineServices.Getter
     static RegistrarFactory get() {

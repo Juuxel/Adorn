@@ -8,10 +8,10 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public final class RegistryHelper {
-    private final Registrar<Block> blocks;
-    private final Registrar<Item> items;
+    private final KeyedRegistrar<Block> blocks;
+    private final KeyedRegistrar<Item> items;
 
-    public RegistryHelper(Registrar<Block> blocks, Registrar<Item> items) {
+    public RegistryHelper(KeyedRegistrar<Block> blocks, KeyedRegistrar<Item> items) {
         this.blocks = blocks;
         this.items = items;
     }

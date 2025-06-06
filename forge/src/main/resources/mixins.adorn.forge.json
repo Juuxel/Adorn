@@ -7,6 +7,9 @@
   "mixins": [
     "PlayerEntityMixin"
   ],
+  "client": [
+    "client.HeadFeatureRendererMixin"
+  ],
 
   "injectors": {
     "defaultRequire": 1
