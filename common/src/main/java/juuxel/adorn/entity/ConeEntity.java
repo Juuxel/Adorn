@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 // TODO: Drops
 // TODO: Placement sounds
 public final class ConeEntity extends Entity {
+    private static final String NBT_COLOR = "Color";
     private static final TrackedData<DyeColor> COLOR = DataTracker.registerData(ConeEntity.class, AdornTrackedDataHandlers.DYE_COLOR.get());
     private final PositionInterpolator interpolator = new PositionInterpolator(this);
 
@@ -78,12 +79,12 @@ public final class ConeEntity extends Entity {
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
-
+        nbt.get(NBT_COLOR, DyeColor.CODEC).ifPresent(this::setColor);
     }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
-
+        nbt.put(NBT_COLOR, DyeColor.CODEC, getColor());
     }
 
     public DyeColor getColor() {
