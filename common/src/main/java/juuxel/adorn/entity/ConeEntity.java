@@ -9,13 +9,14 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.DyeColor;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 
-// TODO: Drops
 // TODO: Placement sounds
 public final class ConeEntity extends Entity {
     private static final String NBT_COLOR = "Color";
@@ -67,14 +68,21 @@ public final class ConeEntity extends Entity {
         if (isAlwaysInvulnerableTo(source)) return false;
 
         if (!(source.getAttacker() instanceof PlayerEntity player) || !player.getAbilities().creativeMode) {
-            drop();
+            drop(world);
         }
         kill(world);
 
         return true;
     }
 
-    private void drop() {
+    private void drop(ServerWorld world) {
+        if (world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
+            dropStack(world, new ItemStack(asItem()));
+        }
+    }
+
+    private Item asItem() {
+        return AdornItems.CONES.getEager(getColor());
     }
 
     @Override
@@ -97,6 +105,6 @@ public final class ConeEntity extends Entity {
 
     @Override
     public ItemStack getPickBlockStack() {
-        return new ItemStack(AdornItems.CONES.getEager(getColor()));
+        return new ItemStack(asItem());
     }
 }
