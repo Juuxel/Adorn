@@ -1,5 +1,6 @@
 package juuxel.adorn.entity;
 
+import juuxel.adorn.item.AdornItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
@@ -8,12 +9,14 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.DyeColor;
 import net.minecraft.world.World;
 
-// TODO: Drops, pick stack
+// TODO: Drops
+// TODO: Placement sounds
 public final class ConeEntity extends Entity {
     private static final TrackedData<DyeColor> COLOR = DataTracker.registerData(ConeEntity.class, AdornTrackedDataHandlers.DYE_COLOR.get());
     private final PositionInterpolator interpolator = new PositionInterpolator(this);
@@ -89,5 +92,10 @@ public final class ConeEntity extends Entity {
 
     public void setColor(DyeColor color) {
         getDataTracker().set(COLOR, color);
+    }
+
+    @Override
+    public ItemStack getPickBlockStack() {
+        return new ItemStack(AdornItems.CONES.getEager(getColor()));
     }
 }
