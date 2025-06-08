@@ -18,6 +18,7 @@ import net.minecraft.client.data.Models;
 import net.minecraft.client.data.TextureKey;
 import net.minecraft.client.data.TextureMap;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.util.DyeColor;
 
 import java.util.Optional;
 
@@ -27,6 +28,14 @@ public final class AdornModelGenerator extends FabricModelProvider {
         Optional.of(AdornCommon.id("item/templates/copper_pipe")),
         Optional.empty(),
         PIPE_TEXTURE_KEY
+    );
+
+    private static final Model CONE_MODEL = new Model(
+        Optional.of(AdornCommon.id("block/templates/cone")),
+        Optional.empty(),
+        TextureKey.TOP,
+        TextureKey.SIDE,
+        TextureKey.BOTTOM
     );
 
     public AdornModelGenerator(FabricDataOutput output) {
@@ -82,6 +91,10 @@ public final class AdornModelGenerator extends FabricModelProvider {
         registerCopperPipe(generator, AdornBlocks.EXPOSED_COPPER_PIPE, AdornBlocks.WAXED_EXPOSED_COPPER_PIPE);
         registerCopperPipe(generator, AdornBlocks.WEATHERED_COPPER_PIPE, AdornBlocks.WAXED_WEATHERED_COPPER_PIPE);
         registerCopperPipe(generator, AdornBlocks.OXIDIZED_COPPER_PIPE, AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE);
+
+        for (DyeColor color : DyeColor.values()) {
+            registerCone(generator, color);
+        }
     }
 
     private static void forwardBlockModel(BlockStateModelGenerator generator, Registered<? extends Block> block) {
@@ -98,6 +111,16 @@ public final class AdornModelGenerator extends FabricModelProvider {
             )
         );
         generator.itemModelOutput.acceptAlias(base.get().asItem(), waxed.get().asItem());
+    }
+
+    private static void registerCone(BlockStateModelGenerator generator, DyeColor color) {
+        var modelId = AdornCommon.id("block/" + color.asString() + "_cone");
+        var textures = new TextureMap()
+            .put(TextureKey.TOP, modelId.withSuffixedPath("_top"))
+            .put(TextureKey.SIDE, modelId.withSuffixedPath("_side"))
+            .put(TextureKey.BOTTOM, modelId.withSuffixedPath("_bottom"));
+        CONE_MODEL.upload(modelId, textures, generator.modelCollector);
+        generator.registerItemModel(AdornItems.CONES.getEager(color), modelId);
     }
 
     @Override

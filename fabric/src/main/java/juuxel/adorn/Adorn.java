@@ -6,6 +6,7 @@ import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.block.AdornWoodTypes;
 import juuxel.adorn.block.variant.BlockVariantSets;
 import juuxel.adorn.client.AdornClientNetworking;
+import juuxel.adorn.client.AdornModels;
 import juuxel.adorn.client.ClientEvents;
 import juuxel.adorn.client.gui.screen.AdornMenuScreens;
 import juuxel.adorn.compat.Compat;
@@ -81,5 +82,6 @@ public final class Adorn {
         AdornClientNetworking.init();
         AdornResources.initClient();
         ClientEvents.init();
+        AdornModels.init();
     }
 }

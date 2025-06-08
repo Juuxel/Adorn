@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:block/templates/cone",
+  "textures": {
+    "bottom": "adorn:block/green_cone_bottom",
+    "side": "adorn:block/green_cone_side",
+    "top": "adorn:block/green_cone_top"
+  }
+}

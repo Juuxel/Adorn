@@ -8,6 +8,7 @@ import juuxel.adorn.client.gui.screen.MainConfigScreen;
 import juuxel.adorn.client.resources.ColorManager;
 import juuxel.adorn.platform.PlatformBridges;
 import juuxel.adorn.platform.ResourceBridge;
+import juuxel.adorn.platform.neo.client.AdornModels;
 import juuxel.adorn.trading.Trade;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Identifier;
@@ -24,6 +25,7 @@ public final class AdornClient {
         modBus.addListener(AdornRenderers::registerRenderers);
         modBus.addListener(AdornClient::registerTooltipComponent);
         modBus.addListener(AdornClient::registerReloaders);
+        modBus.register(AdornModels.class);
         ModLoadingContext.get().registerExtensionPoint(
             IConfigScreenFactory.class,
             () -> (container, parent) -> new MainConfigScreen(parent)
