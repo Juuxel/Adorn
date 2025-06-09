@@ -26,6 +26,8 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 // TODO: Placement sounds
 public final class ConeEntity extends Entity {
     private static final TrackedData<RegistryEntry<ConeVariant>> VARIANT = DataTracker.registerData(ConeEntity.class, AdornTrackedDataHandlers.CONE_VARIANT.get());
@@ -64,10 +66,28 @@ public final class ConeEntity extends Entity {
     public void tick() {
         super.tick();
         interpolator.tick();
-        applyGravity();
-        move(MovementType.SELF, getVelocity());
-        updateVelocityInAir();
-        tickBlockCollision();
+
+        if (canMoveVoluntarily()) {
+            applyGravity();
+            move(MovementType.SELF, getVelocity());
+            updateVelocityInAir();
+        }
+
+        if (!getWorld().isClient() || isLogicalSideForUpdatingMovement()) {
+            tickBlockCollision();
+        }
+
+        tickConeCramming();
+    }
+
+    private void tickConeCramming() {
+        List<Entity> crammed = getWorld().getCrammedEntities(this, getBoundingBox());
+
+        for (Entity entity : crammed) {
+            if (entity.getType() == AdornEntities.CONE.get()) {
+                entity.pushAwayFrom(this);
+            }
+        }
     }
 
     private void updateVelocityInAir() {
