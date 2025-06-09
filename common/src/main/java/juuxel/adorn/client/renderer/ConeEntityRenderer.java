@@ -25,6 +25,7 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEnt
     public ConeEntityRenderer(EntityRendererFactory.Context context) {
         super(context);
         this.modelManager = context.getModelManager();
+        this.shadowRadius = 0.5f;
     }
 
     @Override
