@@ -83,6 +83,7 @@ public final class AdornItems {
     public static final Registered<Item> CONE = register("cone",
         ConeItem::new,
         key -> new Item.Settings()
+            .translationKey(ConeVariant.DEFAULT_TRANSLATION_KEY)
             .component(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(ConeVariant.Keys.ORANGE))
             .component(AdornComponentTypes.DESCRIPTION.get(), ItemDescription.ofItem(AdornEntities.CONE.key().getValue()))
     );

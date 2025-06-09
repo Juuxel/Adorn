@@ -2,6 +2,7 @@ package juuxel.adorn.item;
 
 import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.entity.AdornEntities;
+import juuxel.adorn.entity.ConeVariant;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -9,7 +10,6 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Util;
 import net.minecraft.world.event.GameEvent;
 
 public final class ConeItem extends Item {
@@ -35,10 +35,7 @@ public final class ConeItem extends Item {
         // TODO: Add langs for all default variants and a generic "cone" for anon ones
         var variantComponent = stack.get(AdornComponentTypes.CONE_VARIANT.get());
         if (variantComponent != null) {
-            var key = variantComponent.variant().getKey().orElse(null);
-            if (key != null) {
-                return Text.translatable(Util.createTranslationKey("item", key.getValue().withSuffixedPath("_cone")));
-            }
+            return ConeVariant.getName(variantComponent.variant());
         }
 
         return super.getName(stack);

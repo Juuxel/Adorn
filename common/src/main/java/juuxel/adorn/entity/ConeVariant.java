@@ -10,15 +10,24 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.LazyRegistryEntryReference;
 import net.minecraft.registry.entry.RegistryElementCodec;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.text.Text;
+import net.minecraft.util.Util;
 import net.minecraft.util.dynamic.Codecs;
 
-public record ConeVariant(float weight, boolean canFloat, boolean canBurn) {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
+public record ConeVariant(float weight, boolean canFloat, boolean canBurn, Optional<RegistryKey<ConeVariant>> appearance) {
     public static final Codec<ConeVariant> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         Codecs.NON_NEGATIVE_FLOAT.optionalFieldOf("weight", 1f).forGetter(ConeVariant::weight),
         Codec.BOOL.optionalFieldOf("can_float", true).forGetter(ConeVariant::canFloat),
-        Codec.BOOL.optionalFieldOf("can_burn", true).forGetter(ConeVariant::canBurn)
+        Codec.BOOL.optionalFieldOf("can_burn", true).forGetter(ConeVariant::canBurn),
+        RegistryKey.createCodec(AdornRegistryKeys.CONE_VARIANT).optionalFieldOf("appearance").forGetter(ConeVariant::appearance)
     ).apply(instance, ConeVariant::new));
 
     public static final Codec<RegistryEntry<ConeVariant>> REGISTRY_CODEC = RegistryElementCodec.of(AdornRegistryKeys.CONE_VARIANT, CODEC);
@@ -27,11 +36,15 @@ public record ConeVariant(float weight, boolean canFloat, boolean canBurn) {
         PacketCodecs.FLOAT, ConeVariant::weight,
         PacketCodecs.BOOLEAN, ConeVariant::canFloat,
         PacketCodecs.BOOLEAN, ConeVariant::canBurn,
+        PacketCodecs.optional(RegistryKey.createPacketCodec(AdornRegistryKeys.CONE_VARIANT)), ConeVariant::appearance,
         ConeVariant::new
     );
 
     public static final PacketCodec<RegistryByteBuf, RegistryEntry<ConeVariant>> ENTRY_PACKET_CODEC =
         PacketCodecs.registryEntry(AdornRegistryKeys.CONE_VARIANT, PACKET_CODEC);
+
+    public static final String DEFAULT_TRANSLATION_KEY = Util.createTranslationKey("entity", AdornCommon.id("cone"));
+    public static final Text DEFAULT_NAME = Text.translatable(DEFAULT_TRANSLATION_KEY);
 
     public static void bootstrap(Registerable<ConeVariant> registerable) {
         registerable.register(Keys.WHITE, createDefault());
@@ -50,14 +63,28 @@ public record ConeVariant(float weight, boolean canFloat, boolean canBurn) {
         registerable.register(Keys.GREEN, createDefault());
         registerable.register(Keys.RED, createDefault());
         registerable.register(Keys.BLACK, createDefault());
-        registerable.register(Keys.OBSIDIAN, new ConeVariant(2f, false, false));
+        registerable.register(Keys.OBSIDIAN, new ConeVariant(2f, false, false, Optional.empty()));
     }
 
     private static ConeVariant createDefault() {
-        return new ConeVariant(1f, true, true);
+        return new ConeVariant(1f, true, true, Optional.empty());
+    }
+
+    public static Text getName(RegistryKey<ConeVariant> variant) {
+        return Text.translatable(Util.createTranslationKey("entity", variant.getValue().withSuffixedPath("_cone")));
+    }
+
+    public static Text getName(RegistryEntry<ConeVariant> variant) {
+        return variant.getKey().map(ConeVariant::getName).orElse(DEFAULT_NAME);
+    }
+
+    public static Text getName(LazyRegistryEntryReference<ConeVariant> variant) {
+        return variant.getKey().map(ConeVariant::getName).orElse(DEFAULT_NAME);
     }
 
     public static final class Keys {
+        private static final List<RegistryKey<ConeVariant>> ALL_BUILTIN = new ArrayList<>();
+
         public static final RegistryKey<ConeVariant> WHITE = of("white");
         public static final RegistryKey<ConeVariant> ORANGE = of("orange");
         public static final RegistryKey<ConeVariant> MAGENTA = of("magenta");
@@ -76,8 +103,14 @@ public record ConeVariant(float weight, boolean canFloat, boolean canBurn) {
         public static final RegistryKey<ConeVariant> BLACK = of("black");
         public static final RegistryKey<ConeVariant> OBSIDIAN = of("obsidian");
 
+        public static List<RegistryKey<ConeVariant>> getAllBuiltinVariants() {
+            return Collections.unmodifiableList(ALL_BUILTIN);
+        }
+
         private static RegistryKey<ConeVariant> of(String id) {
-            return RegistryKey.of(AdornRegistryKeys.CONE_VARIANT, AdornCommon.id(id));
+            var key = RegistryKey.of(AdornRegistryKeys.CONE_VARIANT, AdornCommon.id(id));
+            ALL_BUILTIN.add(key);
+            return key;
         }
     }
 }

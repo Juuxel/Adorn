@@ -1,8 +1,9 @@
 package juuxel.adorn.client.renderer;
 
+import juuxel.adorn.entity.ConeVariant;
 import net.minecraft.client.render.entity.state.EntityRenderState;
-import net.minecraft.util.DyeColor;
+import net.minecraft.registry.RegistryKey;
 
 public final class ConeEntityRenderState extends EntityRenderState {
-    public DyeColor color;
+    public RegistryKey<ConeVariant> variant;
 }

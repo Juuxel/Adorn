@@ -20,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
@@ -32,6 +33,11 @@ public final class ConeEntity extends Entity {
 
     public ConeEntity(EntityType<?> type, World world) {
         super(type, world);
+    }
+
+    @Override
+    protected Text getDefaultName() {
+        return ConeVariant.getName(getVariant());
     }
 
     @Override
