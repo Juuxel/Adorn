@@ -1,26 +1,32 @@
 package juuxel.adorn.entity;
 
+import juuxel.adorn.component.AdornComponentTypes;
+import juuxel.adorn.component.ConeVariantComponent;
 import juuxel.adorn.item.AdornItems;
+import juuxel.adorn.lib.registry.AdornRegistryKeys;
+import net.minecraft.component.ComponentType;
+import net.minecraft.component.ComponentsAccess;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.PositionInterpolator;
+import net.minecraft.entity.Variants;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.DyeColor;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 // TODO: Placement sounds
+// TODO: Weight mechanics
 public final class ConeEntity extends Entity {
-    private static final String NBT_COLOR = "Color";
-    private static final TrackedData<DyeColor> COLOR = DataTracker.registerData(ConeEntity.class, AdornTrackedDataHandlers.DYE_COLOR.get());
+    private static final TrackedData<RegistryEntry<ConeVariant>> VARIANT = DataTracker.registerData(ConeEntity.class, AdornTrackedDataHandlers.CONE_VARIANT.get());
     private final PositionInterpolator interpolator = new PositionInterpolator(this);
 
     public ConeEntity(EntityType<?> type, World world) {
@@ -59,7 +65,7 @@ public final class ConeEntity extends Entity {
 
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
-        builder.add(COLOR, DyeColor.ORANGE);
+        builder.add(VARIANT, Variants.getOrDefaultOrThrow(getRegistryManager(), ConeVariant.Keys.ORANGE));
     }
 
     @Override
@@ -77,34 +83,61 @@ public final class ConeEntity extends Entity {
 
     private void drop(ServerWorld world) {
         if (world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
-            dropStack(world, new ItemStack(asItem()));
+            dropStack(world, createItemStack());
         }
     }
 
-    private Item asItem() {
-        return AdornItems.CONES.getEager(getColor());
+    private ItemStack createItemStack() {
+        var stack = new ItemStack(AdornItems.CONE.get());
+        stack.set(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(getVariant()));
+        return stack;
     }
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
-        nbt.get(NBT_COLOR, DyeColor.CODEC).ifPresent(this::setColor);
+        Variants.readVariantFromNbt(nbt, getRegistryManager(), AdornRegistryKeys.CONE_VARIANT).ifPresent(this::setVariant);
     }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
-        nbt.put(NBT_COLOR, DyeColor.CODEC, getColor());
+        Variants.writeVariantToNbt(nbt, getVariant());
     }
 
-    public DyeColor getColor() {
-        return getDataTracker().get(COLOR);
+    @Override
+    public @Nullable <T> T get(ComponentType<? extends T> type) {
+        if (type == AdornComponentTypes.CONE_VARIANT.get()) {
+            return castComponentValue(type, getVariant());
+        }
+
+        return super.get(type);
     }
 
-    public void setColor(DyeColor color) {
-        getDataTracker().set(COLOR, color);
+    @Override
+    protected void copyComponentsFrom(ComponentsAccess from) {
+        copyComponentFrom(from, AdornComponentTypes.CONE_VARIANT.get());
+        super.copyComponentsFrom(from);
+    }
+
+    @Override
+    protected <T> boolean setApplicableComponent(ComponentType<T> type, T value) {
+        if (type == AdornComponentTypes.CONE_VARIANT.get()) {
+            setVariant(castComponentValue(AdornComponentTypes.CONE_VARIANT.get(), value).getVariant(getRegistryManager()).orElseThrow());
+            return true;
+        }
+
+        return super.setApplicableComponent(type, value);
+    }
+
+    public RegistryEntry<ConeVariant> getVariant() {
+        return getDataTracker().get(VARIANT);
+    }
+
+    public void setVariant(RegistryEntry<ConeVariant> variant) {
+        getDataTracker().set(VARIANT, variant);
     }
 
     @Override
     public ItemStack getPickBlockStack() {
-        return new ItemStack(asItem());
+        return createItemStack();
     }
 }

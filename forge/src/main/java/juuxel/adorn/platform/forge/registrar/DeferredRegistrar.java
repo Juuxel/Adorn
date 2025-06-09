@@ -6,6 +6,7 @@ import juuxel.adorn.lib.registry.KeyedRegistrar;
 import juuxel.adorn.lib.registry.Registered;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.extensions.IHolderExtension;
@@ -50,6 +51,11 @@ public final class DeferredRegistrar<T> implements KeyedRegistrar<T>, ForgeRegis
             @Override
             public U get() {
                 return registryObject.get();
+            }
+
+            @Override
+            public RegistryEntry<T> entry() {
+                return registryObject;
             }
         };
     }

@@ -1,26 +1,37 @@
 package juuxel.adorn.data;
 
+import com.google.common.collect.Lists;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.block.variant.BlockKind;
 import juuxel.adorn.block.variant.BlockVariant;
 import juuxel.adorn.block.variant.BlockVariantSets;
+import juuxel.adorn.component.AdornComponentTypes;
+import juuxel.adorn.component.ConeVariantComponent;
+import juuxel.adorn.entity.ConeVariant;
 import juuxel.adorn.item.AdornItems;
+import juuxel.adorn.lib.registry.AdornRegistryKeys;
 import juuxel.adorn.lib.registry.Registered;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
 import net.minecraft.client.data.BlockStateModelGenerator;
 import net.minecraft.client.data.ItemModelGenerator;
+import net.minecraft.client.data.ItemModels;
 import net.minecraft.client.data.Model;
 import net.minecraft.client.data.ModelIds;
 import net.minecraft.client.data.Models;
 import net.minecraft.client.data.TextureKey;
 import net.minecraft.client.data.TextureMap;
+import net.minecraft.client.render.item.property.select.ComponentSelectProperty;
+import net.minecraft.data.DataWriter;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.util.DyeColor;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.util.Identifier;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 public final class AdornModelGenerator extends FabricModelProvider {
     private static final TextureKey PIPE_TEXTURE_KEY = TextureKey.of("pipe");
@@ -38,8 +49,20 @@ public final class AdornModelGenerator extends FabricModelProvider {
         TextureKey.BOTTOM
     );
 
-    public AdornModelGenerator(FabricDataOutput output) {
+    private final CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture;
+    public RegistryWrapper.WrapperLookup registries;
+
+    public AdornModelGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output);
+        this.registriesFuture = registriesFuture;
+    }
+
+    @Override
+    public CompletableFuture<?> run(DataWriter writer) {
+        return registriesFuture.thenCompose(registries -> {
+            this.registries = registries;
+            return super.run(writer);
+        });
     }
 
     @Override
@@ -92,9 +115,25 @@ public final class AdornModelGenerator extends FabricModelProvider {
         registerCopperPipe(generator, AdornBlocks.WEATHERED_COPPER_PIPE, AdornBlocks.WAXED_WEATHERED_COPPER_PIPE);
         registerCopperPipe(generator, AdornBlocks.OXIDIZED_COPPER_PIPE, AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE);
 
-        for (DyeColor color : DyeColor.values()) {
-            registerCone(generator, color);
+        var coneVariantRegistry = registries.getOrThrow(AdornRegistryKeys.CONE_VARIANT);
+        var coneVariants = coneVariantRegistry.streamKeys().toList();
+        for (var variant : coneVariants) {
+            registerCone(generator, variant);
         }
+        generator.itemModelOutput.accept(
+            AdornItems.CONE.get(),
+            ItemModels.select(
+                new ComponentSelectProperty<>(AdornComponentTypes.CONE_VARIANT.get()),
+                ItemModels.basic(getConeModelId(ConeVariant.Keys.ORANGE)),
+                Lists.transform(
+                    coneVariants,
+                    variant -> ItemModels.switchCase(
+                        new ConeVariantComponent(variant),
+                        ItemModels.basic(getConeModelId(variant))
+                    )
+                )
+            )
+        );
     }
 
     private static void forwardBlockModel(BlockStateModelGenerator generator, Registered<? extends Block> block) {
@@ -113,14 +152,17 @@ public final class AdornModelGenerator extends FabricModelProvider {
         generator.itemModelOutput.acceptAlias(base.get().asItem(), waxed.get().asItem());
     }
 
-    private static void registerCone(BlockStateModelGenerator generator, DyeColor color) {
-        var modelId = AdornCommon.id("block/" + color.asString() + "_cone");
+    private static Identifier getConeModelId(RegistryKey<ConeVariant> variant) {
+        return AdornCommon.id("block/" + variant.getValue().getPath() + "_cone");
+    }
+
+    private static void registerCone(BlockStateModelGenerator generator, RegistryKey<ConeVariant> variant) {
+        var modelId = getConeModelId(variant);
         var textures = new TextureMap()
             .put(TextureKey.TOP, modelId.withSuffixedPath("_top"))
             .put(TextureKey.SIDE, modelId.withSuffixedPath("_side"))
             .put(TextureKey.BOTTOM, modelId.withSuffixedPath("_bottom"));
         CONE_MODEL.upload(modelId, textures, generator.modelCollector);
-        generator.registerItemModel(AdornItems.CONES.getEager(color), modelId);
     }
 
     @Override

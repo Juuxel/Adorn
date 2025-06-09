@@ -12,6 +12,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.model.BakedModelManager;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.DyeColor;
 
 public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEntityRenderState> {
     private final BakedModelManager modelManager;
@@ -41,6 +42,6 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEnt
     @Override
     public void updateRenderState(ConeEntity entity, ConeEntityRenderState state, float tickProgress) {
         super.updateRenderState(entity, state, tickProgress);
-        state.color = entity.getColor();
+        state.color = DyeColor.BLUE;
     }
 }

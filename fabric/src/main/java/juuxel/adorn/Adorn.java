@@ -26,6 +26,7 @@ import juuxel.adorn.lib.AdornSounds;
 import juuxel.adorn.lib.AdornStats;
 import juuxel.adorn.lib.AdornTags;
 import juuxel.adorn.lib.SofaSleeping;
+import juuxel.adorn.lib.registry.AdornDynamicRegistries;
 import juuxel.adorn.loot.AdornLootConditionTypes;
 import juuxel.adorn.loot.AdornLootFunctionTypes;
 import juuxel.adorn.menu.AdornMenus;
@@ -42,6 +43,7 @@ public final class Adorn {
     public static void init() {
         ConfigManager.get().init();
         AdornComponentTypes.init();
+        AdornDynamicRegistries.init();
         AdornSounds.init();
         AdornBlockSetTypes.init();
         AdornWoodTypes.init();

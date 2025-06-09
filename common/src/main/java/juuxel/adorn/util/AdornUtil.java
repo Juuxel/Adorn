@@ -6,6 +6,8 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.menu.MenuContext;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Direction;
@@ -57,5 +59,9 @@ public final class AdornUtil {
 
     public static MenuContext menuContextOf(BlockEntity blockEntity) {
         return MenuContext.create(blockEntity.getWorld(), blockEntity.getPos());
+    }
+
+    public static <T> Iterable<RegistryEntry.Reference<T>> iterateEntries(RegistryWrapper<T> registry) {
+        return () -> registry.streamEntries().iterator();
     }
 }

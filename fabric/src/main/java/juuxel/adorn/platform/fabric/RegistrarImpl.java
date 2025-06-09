@@ -6,6 +6,7 @@ import juuxel.adorn.lib.registry.KeyedRegistrar;
 import juuxel.adorn.lib.registry.Registered;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -32,7 +33,7 @@ public final class RegistrarImpl<T> extends AbstractRegistrar<T> implements Keye
     }
 
     private <U extends T> Registered.WithKey<T, U> register(RegistryKey<T> key, U value) {
-        Registry.register(registry, key, value);
+        var entry = Registry.registerReference(registry, key, value);
         objects.add(value);
         return new Registered.WithKey<>() {
             @Override
@@ -43,6 +44,11 @@ public final class RegistrarImpl<T> extends AbstractRegistrar<T> implements Keye
             @Override
             public RegistryKey<T> key() {
                 return key;
+            }
+
+            @Override
+            public RegistryEntry<T> entry() {
+                return entry;
             }
         };
     }

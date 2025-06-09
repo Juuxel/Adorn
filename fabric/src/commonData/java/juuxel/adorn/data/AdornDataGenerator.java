@@ -2,15 +2,23 @@ package juuxel.adorn.data;
 
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.data.fabric.AdornFabricBlockTagGenerator;
+import juuxel.adorn.entity.ConeVariant;
+import juuxel.adorn.lib.registry.AdornRegistryKeys;
 import juuxel.adorn.util.Logging;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.JsonKeySortOrderCallback;
+import net.minecraft.registry.RegistryBuilder;
 import org.slf4j.Logger;
 
 public final class AdornDataGenerator implements DataGeneratorEntrypoint {
     private static final Logger LOGGER = Logging.logger();
     private static final String COMMON_MODE_PROPERTY = "adorn.data.commonMode";
+
+    @Override
+    public void buildRegistry(RegistryBuilder registryBuilder) {
+        registryBuilder.addRegistry(AdornRegistryKeys.CONE_VARIANT, ConeVariant::bootstrap);
+    }
 
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
@@ -35,6 +43,7 @@ public final class AdornDataGenerator implements DataGeneratorEntrypoint {
         var blockTags = pack.addProvider(AdornBlockTagGenerator::new);
         pack.addProvider((output, registriesFuture) -> new AdornItemTagGenerator(output, registriesFuture, blockTags));
         pack.addProvider((output, registriesFuture) -> PackMcmetaGeneration.create(output));
+        pack.addProvider(AdornDynamicRegistryGenerator::new);
     }
 
     private void initFabric(FabricDataGenerator.Pack pack) {

@@ -6,12 +6,12 @@ import juuxel.adorn.lib.registry.RegistrarFactory;
 import net.minecraft.entity.data.TrackedDataHandler;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.util.DyeColor;
+import net.minecraft.registry.entry.RegistryEntry;
 
 public final class AdornTrackedDataHandlers {
     public static final Registrar<TrackedDataHandler<?>> TRACKED_DATA_HANDLERS = RegistrarFactory.get().createForTrackedDataHandlers();
 
-    public static final Registered<TrackedDataHandler<DyeColor>> DYE_COLOR = register("dye_color", DyeColor.PACKET_CODEC);
+    public static final Registered<TrackedDataHandler<RegistryEntry<ConeVariant>>> CONE_VARIANT = register("cone_variant", ConeVariant.ENTRY_PACKET_CODEC);
 
     public static void init() {
     }

@@ -3,12 +3,12 @@ package juuxel.adorn.item;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.component.AdornComponentTypes;
+import juuxel.adorn.component.ConeVariantComponent;
 import juuxel.adorn.component.ItemDescription;
 import juuxel.adorn.entity.AdornEntities;
+import juuxel.adorn.entity.ConeVariant;
 import juuxel.adorn.lib.registry.KeyedRegistrar;
 import juuxel.adorn.lib.registry.Registered;
-import juuxel.adorn.lib.registry.RegisteredMap;
-import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ConsumableComponents;
@@ -19,7 +19,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.VerticallyAttachableBlockItem;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.DyeColor;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.math.Direction;
 
@@ -81,14 +80,11 @@ public final class AdornItems {
             .component(AdornComponentTypes.WATER_LEVEL.get(), 0)
     );
 
-    public static final RegisteredMap<DyeColor, Item> CONES = Registrar.registerBy(
-        DyeColor.values(),
-        color -> register(
-            color.asString() + "_cone",
-            settings -> new ConeItem(color, settings),
-            key -> new Item.Settings()
-                .component(AdornComponentTypes.DESCRIPTION.get(), ItemDescription.ofItem(AdornEntities.CONE.key().getValue()))
-        )
+    public static final Registered<Item> CONE = register("cone",
+        ConeItem::new,
+        key -> new Item.Settings()
+            .component(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(ConeVariant.Keys.ORANGE))
+            .component(AdornComponentTypes.DESCRIPTION.get(), ItemDescription.ofItem(AdornEntities.CONE.key().getValue()))
     );
 
     private static Registered<Item> register(String name, Function<Item.Settings, Item> factory) {

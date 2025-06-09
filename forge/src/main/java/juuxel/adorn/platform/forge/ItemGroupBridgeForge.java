@@ -7,6 +7,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryWrapper;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
@@ -42,6 +43,13 @@ public final class ItemGroupBridgeForge implements ItemGroupBridge {
                 }
 
                 @Override
+                public void add(ItemStack stack) {
+                    if (event.getTabKey().equals(group)) {
+                        event.add(stack);
+                    }
+                }
+
+                @Override
                 public void addBefore(ItemConvertible before, List<? extends ItemConvertible> items) {
                     if (event.getTabKey().equals(group)) {
                         var allEntries = event.getParentEntries();
@@ -73,6 +81,11 @@ public final class ItemGroupBridgeForge implements ItemGroupBridge {
                             afterStack = stack;
                         }
                     }
+                }
+
+                @Override
+                public RegistryWrapper.WrapperLookup getRegistries() {
+                    return event.getParameters().lookup();
                 }
             };
             configurator.accept(context);

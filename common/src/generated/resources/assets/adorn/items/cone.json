@@ -1,0 +1,125 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/white_cone"
+        },
+        "when": "adorn:white"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/pink_cone"
+        },
+        "when": "adorn:pink"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/lime_cone"
+        },
+        "when": "adorn:lime"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/magenta_cone"
+        },
+        "when": "adorn:magenta"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/cyan_cone"
+        },
+        "when": "adorn:cyan"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/brown_cone"
+        },
+        "when": "adorn:brown"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/blue_cone"
+        },
+        "when": "adorn:blue"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/light_gray_cone"
+        },
+        "when": "adorn:light_gray"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/orange_cone"
+        },
+        "when": "adorn:orange"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/yellow_cone"
+        },
+        "when": "adorn:yellow"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/red_cone"
+        },
+        "when": "adorn:red"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/green_cone"
+        },
+        "when": "adorn:green"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/purple_cone"
+        },
+        "when": "adorn:purple"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/black_cone"
+        },
+        "when": "adorn:black"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/light_blue_cone"
+        },
+        "when": "adorn:light_blue"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/gray_cone"
+        },
+        "when": "adorn:gray"
+      }
+    ],
+    "component": "adorn:cone_variant",
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "adorn:block/orange_cone"
+    },
+    "property": "minecraft:component"
+  }
+}

@@ -4,15 +4,18 @@ import juuxel.adorn.AdornCommon;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.block.variant.BlockKind;
 import juuxel.adorn.block.variant.BlockVariant;
-import juuxel.adorn.block.variant.BlockVariantSet;
 import juuxel.adorn.block.variant.BlockVariantSets;
+import juuxel.adorn.component.AdornComponentTypes;
+import juuxel.adorn.component.ConeVariantComponent;
 import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.item.AdornItems;
+import juuxel.adorn.lib.registry.AdornRegistryKeys;
 import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.lib.registry.RegisteredMap;
 import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
 import juuxel.adorn.platform.ItemGroupBridge;
+import juuxel.adorn.util.AdornUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
@@ -21,6 +24,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.text.Text;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Util;
@@ -77,7 +81,22 @@ public final class AdornItemGroups {
             .displayName(Text.translatable(Util.createTranslationKey("itemGroup", AdornCommon.id(GROUP_ID))))
             .icon(() -> new ItemStack(AdornBlocks.SOFAS.getEager(DyeColor.LIME)))
             .entries((displayContext, entries) -> {
-                ItemGroupBuildContext context = entries::add;
+                ItemGroupBuildContext context = new ItemGroupBuildContext() {
+                    @Override
+                    public void add(ItemConvertible item) {
+                        entries.add(item);
+                    }
+
+                    @Override
+                    public void add(ItemStack stack) {
+                        entries.add(stack);
+                    }
+
+                    @Override
+                    public RegistryWrapper.WrapperLookup getRegistries() {
+                        return displayContext.lookup();
+                    }
+                };
                 switch (ConfigManager.config().groupItems) {
                     case BY_MATERIAL -> addByKinds(context, Arrays.asList(BlockKind.values()));
                     case BY_SHAPE -> {
@@ -208,6 +227,12 @@ public final class AdornItemGroups {
         }
         context.add(AdornBlocks.CANDLELIT_LANTERN);
         addColored(context, AdornBlocks.DYED_CANDLELIT_LANTERNS);
+
+        for (var variant : AdornUtil.iterateEntries(context.getRegistries().getOrThrow(AdornRegistryKeys.CONE_VARIANT))) {
+            var stack = new ItemStack(AdornItems.CONE.get());
+            stack.set(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(variant));
+            context.add(stack);
+        }
     }
 
     private static void addColored(ItemGroupBuildContext context, RegisteredMap<DyeColor, ? extends ItemConvertible> items) {

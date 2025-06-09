@@ -22,6 +22,9 @@ public final class AdornComponentTypes {
     public static final Registered<ComponentType<Integer>> WATER_LEVEL = register("water_level", builder -> builder.codec(Codec.INT));
     public static final Registered<ComponentType<WateringCanItem.FertilizerLevel>> FERTILIZER_LEVEL = register("fertilizer_level", builder -> builder.codec(WateringCanItem.FertilizerLevel.CODEC));
     public static final Registered<ComponentType<ItemDescription>> DESCRIPTION = register("description", builder -> builder.codec(ItemDescription.CODEC));
+    public static final Registered<ComponentType<ConeVariantComponent>> CONE_VARIANT = register("cone_variant",
+        builder -> builder.codec(ConeVariantComponent.CODEC).packetCodec(ConeVariantComponent.PACKET_CODEC)
+    );
 
     public static void init() {
     }

@@ -28,6 +28,7 @@ import juuxel.adorn.platform.forge.event.EntityEvents;
 import juuxel.adorn.platform.forge.event.ItemEvents;
 import juuxel.adorn.platform.forge.networking.AdornNetworking;
 import juuxel.adorn.platform.forge.registrar.ForgeRegistrar;
+import juuxel.adorn.platform.neo.lib.AdornDynamicRegistries;
 import juuxel.adorn.recipe.AdornRecipeBookCategories;
 import juuxel.adorn.recipe.AdornRecipeDisplays;
 import juuxel.adorn.recipe.AdornRecipeSerializers;
@@ -81,6 +82,7 @@ public final class Adorn {
         BlockEvents.init();
         EntityEvents.init();
         modBus.addListener(AdornCapabilities::register);
+        modBus.addListener(AdornDynamicRegistries::register);
         Compat.init(modBus);
         BlockVariantSets.register();
         NeoForgeMod.enableMilkFluid();

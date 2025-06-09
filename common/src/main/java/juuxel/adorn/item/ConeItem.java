@@ -1,30 +1,46 @@
 package juuxel.adorn.item;
 
+import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.entity.AdornEntities;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.DyeColor;
+import net.minecraft.util.Util;
+import net.minecraft.world.event.GameEvent;
 
 public final class ConeItem extends Item {
-    private final DyeColor color;
-
-    public ConeItem(DyeColor color, Settings settings) {
+    public ConeItem(Settings settings) {
         super(settings);
-        this.color = color;
     }
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
+        var player = context.getPlayer();
         if (context.getWorld() instanceof ServerWorld world) {
             var offsetPos = context.getBlockPos().offset(context.getSide());
-            var cone = AdornEntities.CONE.get().spawn(world, offsetPos, SpawnReason.SPAWN_ITEM_USE);
-            cone.setColor(color);
+            AdornEntities.CONE.get().spawnFromItemStack(world, context.getStack(), player, offsetPos, SpawnReason.SPAWN_ITEM_USE, false, false);
+            context.getWorld().emitGameEvent(player, GameEvent.ENTITY_PLACE, offsetPos);
         }
 
-        context.getStack().decrementUnlessCreative(1, context.getPlayer());
+        context.getStack().decrementUnlessCreative(1, player);
         return ActionResult.SUCCESS;
+    }
+
+    @Override
+    public Text getName(ItemStack stack) {
+        // TODO: Add langs for all default variants and a generic "cone" for anon ones
+        var variantComponent = stack.get(AdornComponentTypes.CONE_VARIANT.get());
+        if (variantComponent != null) {
+            var key = variantComponent.variant().getKey().orElse(null);
+            if (key != null) {
+                return Text.translatable(Util.createTranslationKey("item", key.getValue().withSuffixedPath("_cone")));
+            }
+        }
+
+        return super.getName(stack);
     }
 }
