@@ -18,7 +18,7 @@ public final class AdornEntities {
     public static final Registered.WithKey<EntityType<?>, EntityType<ConeEntity>> CONE = ENTITIES.register("cone",
         key -> EntityType.Builder.create(ConeEntity::new, SpawnGroup.MISC)
             .dropsNothing()
-            .dimensions(1f, 1f)
+            .dimensions(0.75f, 0.875f)
             .maxTrackingRange(10)
             .build(key));
 
