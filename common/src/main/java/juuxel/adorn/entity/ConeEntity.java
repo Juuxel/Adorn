@@ -111,7 +111,7 @@ public final class ConeEntity extends Entity {
     @Override
     public @Nullable <T> T get(ComponentType<? extends T> type) {
         if (type == AdornComponentTypes.CONE_VARIANT.get()) {
-            return castComponentValue(type, getVariant());
+            return castComponentValue(type, new ConeVariantComponent(getVariant()));
         }
 
         return super.get(type);
