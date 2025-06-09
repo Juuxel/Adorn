@@ -4,6 +4,7 @@ import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.component.ConeVariantComponent;
 import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.lib.registry.AdornRegistryKeys;
+import juuxel.adorn.platform.BlockBridge;
 import net.minecraft.component.ComponentType;
 import net.minecraft.component.ComponentsAccess;
 import net.minecraft.entity.Entity;
@@ -19,12 +20,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 // TODO: Placement sounds
-// TODO: Weight mechanics
 public final class ConeEntity extends Entity {
     private static final TrackedData<RegistryEntry<ConeVariant>> VARIANT = DataTracker.registerData(ConeEntity.class, AdornTrackedDataHandlers.CONE_VARIANT.get());
     private final PositionInterpolator interpolator = new PositionInterpolator(this);
@@ -59,8 +60,17 @@ public final class ConeEntity extends Entity {
         interpolator.tick();
         applyGravity();
         move(MovementType.SELF, getVelocity());
-        setVelocity(getVelocity().multiply(0.98));
+        updateVelocityInAir();
         tickBlockCollision();
+    }
+
+    private void updateVelocityInAir() {
+        BlockPos pos = getVelocityAffectingPos();
+        float slipperiness = isOnGround() ? BlockBridge.get().getSlipperiness(getWorld().getBlockState(pos), getWorld(), pos, this) : 1;
+        slipperiness = Math.min(1f, slipperiness);
+        double horizontalSpeedMultiplier = slipperiness / (0.95 * getVariant().value().weight());
+        var velocity = getVelocity();
+        setVelocity(velocity.x * horizontalSpeedMultiplier, velocity.y, velocity.z * horizontalSpeedMultiplier);
     }
 
     @Override

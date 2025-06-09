@@ -12,10 +12,11 @@ import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryElementCodec;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.util.dynamic.Codecs;
 
 public record ConeVariant(float weight, boolean canFloat, boolean canBurn) {
     public static final Codec<ConeVariant> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-        Codec.FLOAT.optionalFieldOf("weight", 1f).forGetter(ConeVariant::weight),
+        Codecs.NON_NEGATIVE_FLOAT.optionalFieldOf("weight", 1f).forGetter(ConeVariant::weight),
         Codec.BOOL.optionalFieldOf("can_float", true).forGetter(ConeVariant::canFloat),
         Codec.BOOL.optionalFieldOf("can_burn", true).forGetter(ConeVariant::canBurn)
     ).apply(instance, ConeVariant::new));
@@ -49,6 +50,7 @@ public record ConeVariant(float weight, boolean canFloat, boolean canBurn) {
         registerable.register(Keys.GREEN, createDefault());
         registerable.register(Keys.RED, createDefault());
         registerable.register(Keys.BLACK, createDefault());
+        registerable.register(Keys.OBSIDIAN, new ConeVariant(2f, false, false));
     }
 
     private static ConeVariant createDefault() {
@@ -72,6 +74,7 @@ public record ConeVariant(float weight, boolean canFloat, boolean canBurn) {
         public static final RegistryKey<ConeVariant> GREEN = of("green");
         public static final RegistryKey<ConeVariant> RED = of("red");
         public static final RegistryKey<ConeVariant> BLACK = of("black");
+        public static final RegistryKey<ConeVariant> OBSIDIAN = of("obsidian");
 
         private static RegistryKey<ConeVariant> of(String id) {
             return RegistryKey.of(AdornRegistryKeys.CONE_VARIANT, AdornCommon.id(id));
