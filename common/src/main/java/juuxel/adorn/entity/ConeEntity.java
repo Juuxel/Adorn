@@ -81,6 +81,11 @@ public final class ConeEntity extends Entity {
         return true;
     }
 
+    @Override
+    public boolean isFireImmune() {
+        return !getVariant().value().canBurn();
+    }
+
     private void drop(ServerWorld world) {
         if (world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
             dropStack(world, createItemStack());
