@@ -5,13 +5,6 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "adorn:block/black_cone"
-        },
-        "when": "adorn:black"
-      },
-      {
-        "model": {
-          "type": "minecraft:model",
           "model": "adorn:block/light_blue_cone"
         },
         "when": "adorn:light_blue"
@@ -26,9 +19,16 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "adorn:block/magenta_cone"
+          "model": "adorn:block/black_cone"
         },
-        "when": "adorn:magenta"
+        "when": "adorn:black"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/white_cone"
+        },
+        "when": "adorn:white"
       },
       {
         "model": {
@@ -43,27 +43,6 @@
           "model": "adorn:block/obsidian_cone"
         },
         "when": "adorn:obsidian"
-      },
-      {
-        "model": {
-          "type": "minecraft:model",
-          "model": "adorn:block/lime_cone"
-        },
-        "when": "adorn:lime"
-      },
-      {
-        "model": {
-          "type": "minecraft:model",
-          "model": "adorn:block/brown_cone"
-        },
-        "when": "adorn:brown"
-      },
-      {
-        "model": {
-          "type": "minecraft:model",
-          "model": "adorn:block/green_cone"
-        },
-        "when": "adorn:green"
       },
       {
         "model": {
@@ -89,13 +68,6 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "adorn:block/white_cone"
-        },
-        "when": "adorn:white"
-      },
-      {
-        "model": {
-          "type": "minecraft:model",
           "model": "adorn:block/purple_cone"
         },
         "when": "adorn:purple"
@@ -103,9 +75,37 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "adorn:block/light_gray_cone"
+          "model": "adorn:block/magenta_cone"
         },
-        "when": "adorn:light_gray"
+        "when": "adorn:magenta"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/green_cone"
+        },
+        "when": "adorn:green"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/brown_cone"
+        },
+        "when": "adorn:brown"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/lime_cone"
+        },
+        "when": "adorn:lime"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/gray_cone"
+        },
+        "when": "adorn:gray"
       },
       {
         "model": {
@@ -117,9 +117,9 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "adorn:block/gray_cone"
+          "model": "adorn:block/light_gray_cone"
         },
-        "when": "adorn:gray"
+        "when": "adorn:light_gray"
       }
     ],
     "component": "adorn:cone_variant",

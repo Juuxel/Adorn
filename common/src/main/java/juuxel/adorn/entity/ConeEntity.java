@@ -119,7 +119,7 @@ public final class ConeEntity extends Entity {
         var velocity = getVelocity();
         double verticalVelocity = velocity.y;
 
-        if (isTouchingWater() && getVariant().value().canFloat()) {
+        if (fluidState.isIn(getVariant().value().floatsIn())) {
             boolean surfacing = getWorld().getFluidState(getBlockPos().up()).isEmpty();
             double gravityCoefficient = surfacing ? fluidState.getHeight(getWorld(), getBlockPos()) - MathHelper.fractionalPart(getY()) : 1;
             verticalVelocity += gravityCoefficient * getFinalGravity();

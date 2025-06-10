@@ -1,5 +1,5 @@
 {
   "can_burn": false,
-  "can_float": false,
+  "floats_in": "#minecraft:lava",
   "weight": 2.0
 }
