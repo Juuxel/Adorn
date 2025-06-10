@@ -1,5 +1,6 @@
 {
   "can_burn": false,
   "floats_in": "#minecraft:lava",
+  "place_sound": "minecraft:block.stone.place",
   "weight": 2.0
 }

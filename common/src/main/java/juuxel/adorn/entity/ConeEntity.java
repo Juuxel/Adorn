@@ -31,7 +31,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-// TODO: Placement sounds
 public final class ConeEntity extends Entity {
     private static final TrackedData<RegistryEntry<ConeVariant>> VARIANT = DataTracker.registerData(ConeEntity.class, AdornTrackedDataHandlers.CONE_VARIANT.get());
     private final PositionInterpolator interpolator = new PositionInterpolator(this);
