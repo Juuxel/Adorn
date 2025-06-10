@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "-": "minecraft:smooth_stone_slab",
+    "|": "#c:obsidians/normal"
+  },
+  "pattern": [
+    "|",
+    "-"
+  ],
+  "result": {
+    "components": {
+      "adorn:cone_variant": "adorn:obsidian"
+    },
+    "count": 4,
+    "id": "adorn:cone"
+  }
+}

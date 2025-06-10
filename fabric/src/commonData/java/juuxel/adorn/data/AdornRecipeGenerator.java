@@ -5,6 +5,10 @@ import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.block.variant.BlockKind;
 import juuxel.adorn.block.variant.BlockVariant;
 import juuxel.adorn.block.variant.BlockVariantSets;
+import juuxel.adorn.component.AdornComponentTypes;
+import juuxel.adorn.component.ConeVariantComponent;
+import juuxel.adorn.data.util.ShapedRecipeJsonBuilderExtension;
+import juuxel.adorn.entity.ConeVariant;
 import juuxel.adorn.fluid.FluidIngredient;
 import juuxel.adorn.fluid.FluidKey;
 import juuxel.adorn.fluid.FluidUnit;
@@ -30,6 +34,7 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryEntryLookup;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
@@ -60,6 +65,7 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
         generateCopperPipes();
         generateMiscDecorations();
         generateTools();
+        generateCones();
     }
 
     private void generateChimneys() {
@@ -298,6 +304,26 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
             .offerTo(exporter);
     }
 
+    private void generateCones() {
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.WHITE, ConventionalItemTags.WHITE_DYES);
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.ORANGE, ConventionalItemTags.ORANGE_DYES);
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.MAGENTA, ConventionalItemTags.MAGENTA_DYES);
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.LIGHT_BLUE, ConventionalItemTags.LIGHT_BLUE_DYES);
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.YELLOW, ConventionalItemTags.YELLOW_DYES);
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.LIME, ConventionalItemTags.LIME_DYES);
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.PINK, ConventionalItemTags.PINK_DYES);
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.GRAY, ConventionalItemTags.GRAY_DYES);
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.LIGHT_GRAY, ConventionalItemTags.LIGHT_GRAY_DYES);
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.CYAN, ConventionalItemTags.CYAN_DYES);
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.PURPLE, ConventionalItemTags.PURPLE_DYES);
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.BLUE, ConventionalItemTags.BLUE_DYES);
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.BROWN, ConventionalItemTags.BROWN_DYES);
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.GREEN, ConventionalItemTags.GREEN_DYES);
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.RED, ConventionalItemTags.RED_DYES);
+        offerWoodenConeRecipe(exporter, ConeVariant.Keys.BLACK, ConventionalItemTags.BLACK_DYES);
+        offerStoneConeRecipe(exporter, ConeVariant.Keys.OBSIDIAN, ConventionalItemTags.NORMAL_OBSIDIANS);
+    }
+
     private void offerChimneyRecipe(RecipeExporter exporter, ItemConvertible output, EntryOrTag<Item> ingredient, boolean fromBlock) {
         offerChimneyRecipe(exporter, output, ingredient, fromBlock, false);
     }
@@ -457,6 +483,37 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
             .input(input)
             .input(MoreConventionalItemTags.HONEYCOMBS)
             .offerTo(exporter, "waxing/" + getItemPath(output));
+    }
+
+    private void offerWoodenConeRecipe(RecipeExporter exporter, RegistryKey<ConeVariant> variant, TagKey<Item> dyeTag) {
+        var builder = createShaped(RecipeCategory.DECORATIONS, AdornItems.CONE.get())
+            .criterion("has_slab", conditionsFromTag(ItemTags.WOODEN_SLABS))
+            .group(AdornCommon.NAMESPACE + ":wooden_cones")
+            .pattern("D")
+            .pattern("|")
+            .pattern("-")
+            .input('D', dyeTag)
+            .input('|', AdornTags.WOODEN_POSTS.item())
+            .input('-', ItemTags.WOODEN_SLABS);
+        ((ShapedRecipeJsonBuilderExtension) builder).adorn_setOutputModifier(stack -> {
+            stack.set(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(variant));
+            return stack;
+        });
+        builder.offerTo(exporter, variant.getValue().getPath() + "_cone");
+    }
+
+    private void offerStoneConeRecipe(RecipeExporter exporter, RegistryKey<ConeVariant> variant, TagKey<Item> input) {
+        var builder = createShaped(RecipeCategory.DECORATIONS, AdornItems.CONE.get(), 4)
+            .criterion("has_slab", conditionsFromItem(Items.SMOOTH_STONE_SLAB))
+            .pattern("|")
+            .pattern("-")
+            .input('|', input)
+            .input('-', Items.SMOOTH_STONE_SLAB);
+        ((ShapedRecipeJsonBuilderExtension) builder).adorn_setOutputModifier(stack -> {
+            stack.set(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(variant));
+            return stack;
+        });
+        builder.offerTo(exporter, variant.getValue().getPath() + "_cone");
     }
 
     private String has(EntryOrTag<Item> ingredient) {

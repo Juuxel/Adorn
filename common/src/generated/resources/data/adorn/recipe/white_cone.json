@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "adorn:wooden_cones",
+  "key": {
+    "-": "#minecraft:wooden_slabs",
+    "D": "#c:dyes/white",
+    "|": "#adorn:wooden_posts"
+  },
+  "pattern": [
+    "D",
+    "|",
+    "-"
+  ],
+  "result": {
+    "components": {
+      "adorn:cone_variant": "adorn:white"
+    },
+    "count": 1,
+    "id": "adorn:cone"
+  }
+}
