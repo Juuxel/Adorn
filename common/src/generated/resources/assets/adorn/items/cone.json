@@ -5,16 +5,9 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "adorn:block/black_cone"
+          "model": "adorn:block/lime_cone"
         },
-        "when": "adorn:black"
-      },
-      {
-        "model": {
-          "type": "minecraft:model",
-          "model": "adorn:block/white_cone"
-        },
-        "when": "adorn:white"
+        "when": "adorn:lime"
       },
       {
         "model": {
@@ -26,9 +19,9 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "adorn:block/brown_cone"
+          "model": "adorn:block/red_cone"
         },
-        "when": "adorn:brown"
+        "when": "adorn:red"
       },
       {
         "model": {
@@ -40,23 +33,9 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "adorn:block/cyan_cone"
-        },
-        "when": "adorn:cyan"
-      },
-      {
-        "model": {
-          "type": "minecraft:model",
           "model": "adorn:block/obsidian_cone"
         },
         "when": "adorn:obsidian"
-      },
-      {
-        "model": {
-          "type": "minecraft:model",
-          "model": "adorn:block/orange_cone"
-        },
-        "when": "adorn:orange"
       },
       {
         "model": {
@@ -68,16 +47,16 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "adorn:block/lime_cone"
+          "model": "adorn:block/green_cone"
         },
-        "when": "adorn:lime"
+        "when": "adorn:green"
       },
       {
         "model": {
           "type": "minecraft:model",
-          "model": "adorn:block/green_cone"
+          "model": "adorn:block/brown_cone"
         },
-        "when": "adorn:green"
+        "when": "adorn:brown"
       },
       {
         "model": {
@@ -89,9 +68,9 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "adorn:block/red_cone"
+          "model": "adorn:block/pink_cone"
         },
-        "when": "adorn:red"
+        "when": "adorn:pink"
       },
       {
         "model": {
@@ -103,9 +82,16 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "adorn:block/yellow_cone"
+          "model": "adorn:block/cyan_cone"
         },
-        "when": "adorn:yellow"
+        "when": "adorn:cyan"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/black_cone"
+        },
+        "when": "adorn:black"
       },
       {
         "model": {
@@ -117,9 +103,23 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "adorn:block/pink_cone"
+          "model": "adorn:block/yellow_cone"
         },
-        "when": "adorn:pink"
+        "when": "adorn:yellow"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/white_cone"
+        },
+        "when": "adorn:white"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "adorn:block/orange_cone"
+        },
+        "when": "adorn:orange"
       }
     ],
     "component": "adorn:cone_variant",

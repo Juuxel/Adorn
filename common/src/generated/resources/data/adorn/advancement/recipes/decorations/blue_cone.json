@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:blue_cone"
+        "recipe": "adorn:blue_cone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:blue_cone"
+      "adorn:blue_cone"
     ]
   }
 }

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:waxing/waxed_weathered_copper_pipe"
+        "recipe": "adorn:waxing/waxed_weathered_copper_pipe"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:waxing/waxed_weathered_copper_pipe"
+      "adorn:waxing/waxed_weathered_copper_pipe"
     ]
   }
 }

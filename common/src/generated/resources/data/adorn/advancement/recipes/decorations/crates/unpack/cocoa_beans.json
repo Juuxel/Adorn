@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crates/unpack/cocoa_beans"
+        "recipe": "adorn:crates/unpack/cocoa_beans"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crates/unpack/cocoa_beans"
+      "adorn:crates/unpack/cocoa_beans"
     ]
   }
 }

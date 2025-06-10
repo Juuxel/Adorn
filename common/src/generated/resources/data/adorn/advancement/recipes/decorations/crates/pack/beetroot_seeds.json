@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crates/pack/beetroot_seeds"
+        "recipe": "adorn:crates/pack/beetroot_seeds"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crates/pack/beetroot_seeds"
+      "adorn:crates/pack/beetroot_seeds"
     ]
   }
 }

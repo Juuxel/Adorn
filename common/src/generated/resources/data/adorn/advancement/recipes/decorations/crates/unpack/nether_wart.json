@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crates/unpack/nether_wart"
+        "recipe": "adorn:crates/unpack/nether_wart"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crates/unpack/nether_wart"
+      "adorn:crates/unpack/nether_wart"
     ]
   }
 }

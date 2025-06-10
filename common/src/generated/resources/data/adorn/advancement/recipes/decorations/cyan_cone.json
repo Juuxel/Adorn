@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:cyan_cone"
+        "recipe": "adorn:cyan_cone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:cyan_cone"
+      "adorn:cyan_cone"
     ]
   }
 }

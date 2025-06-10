@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:stonecutting/stone_rod"
+        "recipe": "adorn:stonecutting/stone_rod"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:stonecutting/stone_rod"
+      "adorn:stonecutting/stone_rod"
     ]
   }
 }

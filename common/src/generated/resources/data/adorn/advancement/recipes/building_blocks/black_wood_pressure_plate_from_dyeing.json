@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:black_wood_pressure_plate_from_dyeing"
+        "recipe": "adorn:black_wood_pressure_plate_from_dyeing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:black_wood_pressure_plate_from_dyeing"
+      "adorn:black_wood_pressure_plate_from_dyeing"
     ]
   }
 }

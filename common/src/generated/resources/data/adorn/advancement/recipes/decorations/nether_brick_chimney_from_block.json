@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:nether_brick_chimney_from_block"
+        "recipe": "adorn:nether_brick_chimney_from_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:nether_brick_chimney_from_block"
+      "adorn:nether_brick_chimney_from_block"
     ]
   }
 }

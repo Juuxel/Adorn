@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crates/unpack/apple"
+        "recipe": "adorn:crates/unpack/apple"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crates/unpack/apple"
+      "adorn:crates/unpack/apple"
     ]
   }
 }

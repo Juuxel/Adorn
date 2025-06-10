@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crates/unpack/melon_slice"
+        "recipe": "adorn:crates/unpack/melon_slice"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crates/unpack/melon_slice"
+      "adorn:crates/unpack/melon_slice"
     ]
   }
 }

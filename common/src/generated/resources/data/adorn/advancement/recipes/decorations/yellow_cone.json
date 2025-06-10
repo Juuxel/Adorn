@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:yellow_cone"
+        "recipe": "adorn:yellow_cone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:yellow_cone"
+      "adorn:yellow_cone"
     ]
   }
 }

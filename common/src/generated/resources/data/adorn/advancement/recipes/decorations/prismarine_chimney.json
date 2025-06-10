@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:prismarine_chimney"
+        "recipe": "adorn:prismarine_chimney"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:prismarine_chimney"
+      "adorn:prismarine_chimney"
     ]
   }
 }

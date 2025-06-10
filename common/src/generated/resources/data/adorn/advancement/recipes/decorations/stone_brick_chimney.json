@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:stone_brick_chimney"
+        "recipe": "adorn:stone_brick_chimney"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:stone_brick_chimney"
+      "adorn:stone_brick_chimney"
     ]
   }
 }

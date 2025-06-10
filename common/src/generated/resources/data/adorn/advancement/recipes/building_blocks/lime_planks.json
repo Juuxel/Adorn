@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:lime_planks"
+        "recipe": "adorn:lime_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:lime_planks"
+      "adorn:lime_planks"
     ]
   }
 }

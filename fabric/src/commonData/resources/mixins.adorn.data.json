@@ -5,6 +5,7 @@
   "required": true,
 
   "mixins": [
+    "CraftingRecipeJsonBuilderMixin",
     "ShapedRecipeJsonBuilderMixin"
   ],
 

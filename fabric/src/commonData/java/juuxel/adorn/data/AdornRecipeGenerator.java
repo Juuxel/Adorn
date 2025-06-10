@@ -339,7 +339,12 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
             case EntryOrTag.OfEntry(var item) -> builder.input('#', item);
             case EntryOrTag.OfTag(var tag) -> builder.input('#', tag);
         }
-        builder.offerTo(exporter, getItemPath(output) + (suffix ? "_from_block" : ""));
+
+        if (suffix) {
+            builder.offerTo(exporter, getItemPath(output) + "_from_block");
+        } else {
+            builder.offerTo(exporter);
+        }
     }
 
     private void offerModifiedPrismarineChimneyRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible ingredient) {
@@ -465,15 +470,20 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
     }
 
     private void offerDyeingRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color, TagKey<Item> ingredient, String kind, String group, boolean suffix) {
-        createShaped(RecipeCategory.BUILDING_BLOCKS, output, 8)
+        var builder = createShaped(RecipeCategory.BUILDING_BLOCKS, output, 8)
             .input('*', TagKey.of(RegistryKeys.ITEM, Identifier.of("c", "dyes/" + color.asString())))
             .input('#', ingredient)
             .pattern("###")
             .pattern("#*#")
             .pattern("###")
             .group(group)
-            .criterion("has_" + kind, conditionsFromTag(ingredient))
-            .offerTo(exporter, suffix ? getItemPath(output) + "_from_dyeing" : getItemPath(output));
+            .criterion("has_" + kind, conditionsFromTag(ingredient));
+
+        if (suffix) {
+            builder.offerTo(exporter, getItemPath(output) + "_from_dyeing");
+        } else {
+            builder.offerTo(exporter);
+        }
     }
 
     private void offerWaxingRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input, String group) {
