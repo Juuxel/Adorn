@@ -16,12 +16,15 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -68,9 +71,7 @@ public final class ConeEntity extends Entity {
         interpolator.tick();
 
         if (canMoveVoluntarily()) {
-            applyGravity();
-            move(MovementType.SELF, getVelocity());
-            updateVelocityInAir();
+            travel();
         }
 
         if (!getWorld().isClient() || isLogicalSideForUpdatingMovement()) {
@@ -90,13 +91,64 @@ public final class ConeEntity extends Entity {
         }
     }
 
-    private void updateVelocityInAir() {
+    private void travel() {
+        if (EntityBridge.get().isInFluid(this)) {
+            travelInFluids();
+        } else {
+            travelInAir();
+        }
+    }
+
+    private void travelInAir() {
+        applyGravity();
+        move(MovementType.SELF, getVelocity());
         BlockPos pos = getVelocityAffectingPos();
         float slipperiness = isOnGround() ? BlockBridge.get().getSlipperiness(getWorld().getBlockState(pos), getWorld(), pos, this) : 1;
         slipperiness = Math.min(1f, slipperiness);
         double horizontalSpeedMultiplier = slipperiness / (0.95 * getVariant().value().weight());
         var velocity = getVelocity();
         setVelocity(velocity.x * horizontalSpeedMultiplier, velocity.y, velocity.z * horizontalSpeedMultiplier);
+    }
+
+    private void travelInFluids() {
+        applyFluidGravity();
+        move(MovementType.SELF, getVelocity());
+        var fluidState = getFluidStateAtPos();
+        double horizontalDrag = Math.exp(-0.03 * fluidState.getFluid().getTickRate(getWorld()));
+        float verticalDrag = 0.8f;
+        var velocity = getVelocity();
+        double verticalVelocity = velocity.y;
+
+        if (isTouchingWater() && getVariant().value().canFloat()) {
+            boolean surfacing = getWorld().getFluidState(getBlockPos().up()).isEmpty();
+            double gravityCoefficient = surfacing ? fluidState.getHeight(getWorld(), getBlockPos()) - MathHelper.fractionalPart(getY()) : 1;
+            verticalVelocity += gravityCoefficient * getFinalGravity();
+        }
+
+        verticalVelocity *= verticalDrag;
+        setVelocity(horizontalDrag * velocity.x, verticalVelocity, horizontalDrag * velocity.z);
+    }
+
+    private FluidState getFluidStateAtPos() {
+        return getWorld().getFluidState(getBlockPos());
+    }
+
+    private void applyFluidGravity() {
+        double gravity = getFinalGravity();
+        if (gravity != 0.0) {
+            Vec3d velocity = getVelocity();
+            double velocityY = velocity.y;
+            boolean falling = velocityY < 0;
+
+            if (falling && Math.abs(velocityY - 0.005) >= 0.003 && Math.abs(velocityY - gravity / 16.0) < 0.003) {
+                // Apply terminal speed
+                velocityY = -0.003;
+            } else {
+                velocityY -= gravity / 16.0;
+            }
+
+            setVelocity(velocity.x, velocityY, velocity.z);
+        }
     }
 
     @Override
