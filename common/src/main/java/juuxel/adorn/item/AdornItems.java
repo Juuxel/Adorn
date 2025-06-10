@@ -85,7 +85,7 @@ public final class AdornItems {
         key -> new Item.Settings()
             .translationKey(ConeVariant.DEFAULT_TRANSLATION_KEY)
             .component(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(ConeVariant.Keys.ORANGE))
-            .component(AdornComponentTypes.DESCRIPTION.get(), ItemDescription.ofItem(AdornEntities.CONE.key().getValue()))
+            .component(AdornComponentTypes.DESCRIPTION.get(), ItemDescription.ofEntity(AdornEntities.CONE.key().getValue()))
     );
 
     private static Registered<Item> register(String name, Function<Item.Settings, Item> factory) {

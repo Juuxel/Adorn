@@ -44,7 +44,6 @@ public final class ConeItem extends Item {
 
     @Override
     public Text getName(ItemStack stack) {
-        // TODO: Add langs for all default variants and a generic "cone" for anon ones
         var variantComponent = stack.get(AdornComponentTypes.CONE_VARIANT.get());
         if (variantComponent != null) {
             return ConeVariant.getName(variantComponent.variant());

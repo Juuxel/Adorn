@@ -33,6 +33,10 @@ public record ItemDescription(Text description) implements TooltipAppender {
         return ofTranslation("block." + id.getNamespace() + "." + id.getPath() + ".description");
     }
 
+    public static ItemDescription ofEntity(Identifier id) {
+        return ofTranslation("entity." + id.getNamespace() + "." + id.getPath() + ".description");
+    }
+
     public static MutableText applyDescriptionStyle(MutableText text) {
         return text.styled(style -> style.withItalic(true).withColor(Formatting.DARK_GRAY));
     }
