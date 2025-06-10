@@ -30,6 +30,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -116,7 +117,10 @@ public final class AdornModelGenerator extends FabricModelProvider {
         registerCopperPipe(generator, AdornBlocks.OXIDIZED_COPPER_PIPE, AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE);
 
         var coneVariantRegistry = registries.getOrThrow(AdornRegistryKeys.CONE_VARIANT);
-        var coneVariants = coneVariantRegistry.streamKeys().toList();
+        // Sort the keys in order to get a consistent and reproducible output.
+        var coneVariants = coneVariantRegistry.streamKeys()
+            .sorted(Comparator.comparing(RegistryKey::getValue))
+            .toList();
         for (var variant : coneVariants) {
             registerCone(generator, variant);
         }
