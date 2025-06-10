@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_slab": {
+    "has_normal_obsidians": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:smooth_stone_slab"
+            "items": "#c:obsidians/normal"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_slab"
+      "has_normal_obsidians"
     ]
   ],
   "rewards": {

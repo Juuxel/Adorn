@@ -42,6 +42,9 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public final class AdornRecipeGenerator extends RecipeGenerator {
@@ -514,7 +517,7 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
 
     private void offerStoneConeRecipe(RecipeExporter exporter, RegistryKey<ConeVariant> variant, TagKey<Item> input) {
         var builder = createShaped(RecipeCategory.DECORATIONS, AdornItems.CONE.get(), 4)
-            .criterion("has_slab", conditionsFromItem(Items.SMOOTH_STONE_SLAB))
+            .criterion(hasTag(input), conditionsFromTag(input))
             .pattern("|")
             .pattern("-")
             .input('|', input)
@@ -534,7 +537,9 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
     }
 
     private String hasTag(TagKey<Item> tag) {
-        return "has_" + tag.id().getPath();
+        List<String> components = Arrays.asList(tag.id().getPath().split("/"));
+        Collections.reverse(components);
+        return "has_" + String.join("_", components);
     }
 
     private AdvancementCriterion<?> conditionsFrom(EntryOrTag<Item> ingredient) {
