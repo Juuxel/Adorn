@@ -8,6 +8,7 @@ import juuxel.adorn.block.variant.BlockVariantSets;
 import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.component.ConeVariantComponent;
 import juuxel.adorn.config.ConfigManager;
+import juuxel.adorn.entity.ConeVariant;
 import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.lib.registry.AdornRegistryKeys;
 import juuxel.adorn.lib.registry.Registered;
@@ -15,7 +16,6 @@ import juuxel.adorn.lib.registry.RegisteredMap;
 import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
 import juuxel.adorn.platform.ItemGroupBridge;
-import juuxel.adorn.util.AdornUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
@@ -25,6 +25,7 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Util;
@@ -32,6 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -227,8 +229,18 @@ public final class AdornItemGroups {
         }
         context.add(AdornBlocks.CANDLELIT_LANTERN);
         addColored(context, AdornBlocks.DYED_CANDLELIT_LANTERNS);
+        addCones(context);
+    }
 
-        for (var variant : AdornUtil.iterateEntries(context.getRegistries().getOrThrow(AdornRegistryKeys.CONE_VARIANT))) {
+    private static void addCones(ItemGroupBuildContext context) {
+        var coneVariantIter = context.getRegistries()
+            .getOrThrow(AdornRegistryKeys.CONE_VARIANT)
+            .streamEntries()
+            .sorted(Comparator.comparing(RegistryEntry.Reference::registryKey, ConeVariant.Keys.COMPARATOR))
+            .iterator();
+
+        while (coneVariantIter.hasNext()) {
+            var variant = coneVariantIter.next();
             var stack = new ItemStack(AdornItems.CONE.get());
             stack.set(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(variant));
             context.add(stack);
