@@ -120,7 +120,7 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEnt
 
     @FunctionalInterface
     private interface VertexConsumerFactory {
-        VertexConsumerFactory ENTITY = (vertexConsumers, texture) -> vertexConsumers.getBuffer(RenderLayer.getEntitySolid(texture));
+        VertexConsumerFactory ENTITY = (vertexConsumers, texture) -> vertexConsumers.getBuffer(RenderLayer.getEntityCutout(texture));
         VertexConsumerFactory ARMOR_WITHOUT_GLINT = (vertexConsumers, texture) -> vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(texture));
         // TODO: Figure out why the glint doesn't render
         VertexConsumerFactory ARMOR_WITH_GLINT = (vertexConsumers, texture) -> ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(texture), true);
