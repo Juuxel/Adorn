@@ -8,6 +8,11 @@
     "ItemStackMixin",
     "PlayerEntityMixin"
   ],
+  "client": [
+    "client.ArmorFeatureRendererMixin",
+    "client.BipedEntityRendererMixin",
+    "client.LivingEntityRendererMixin"
+  ],
 
   "injectors": {
     "defaultRequire": 1

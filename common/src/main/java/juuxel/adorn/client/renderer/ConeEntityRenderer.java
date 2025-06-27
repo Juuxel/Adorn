@@ -16,7 +16,6 @@ import net.minecraft.client.render.block.BlockModelRenderer;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.state.BipedEntityRenderState;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModelManager;
 import net.minecraft.client.texture.SpriteAtlasTexture;
@@ -66,7 +65,7 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEnt
         BlockModelRenderer.render(matrix, vertexConsumer, model, 1, 1, 1, light, OverlayTexture.DEFAULT_UV);
     }
 
-    public static void renderOnHead(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, int light, BipedEntityModel<BipedEntityRenderState> contextModel) {
+    public static void renderOnHead(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, int light, BipedEntityModel<?> contextModel) {
         // Resolve cone variant from stack
         var client = MinecraftClient.getInstance();
         var registryManager = client.world.getRegistryManager();
@@ -104,7 +103,7 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEnt
         return variant.getKey();
     }
 
-    private static float getHeadHeight(MatrixStack matrices, BipedEntityModel<BipedEntityRenderState> model) {
+    private static float getHeadHeight(MatrixStack matrices, BipedEntityModel<?> model) {
         var finder = new HeadHeightFinder();
         model.head.forEachCuboid(matrices, finder);
         return finder.headHeight;
