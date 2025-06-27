@@ -9,6 +9,7 @@ import juuxel.adorn.client.AdornClientNetworking;
 import juuxel.adorn.client.AdornModels;
 import juuxel.adorn.client.ClientEvents;
 import juuxel.adorn.client.gui.screen.AdornMenuScreens;
+import juuxel.adorn.client.renderer.AdornEntityRenderers;
 import juuxel.adorn.compat.Compat;
 import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.config.ConfigManager;
@@ -79,7 +80,7 @@ public final class Adorn {
     @Environment(EnvType.CLIENT)
     public static void initClient() {
         AdornBlocksFabric.initClient();
-        AdornEntitiesFabric.initClient();
+        AdornEntityRenderers.init();
         AdornMenuScreens.register();
         AdornClientNetworking.init();
         AdornResources.initClient();

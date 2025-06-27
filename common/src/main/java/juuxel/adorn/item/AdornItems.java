@@ -14,6 +14,7 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ConsumableComponents;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.component.type.SuspiciousStewEffectsComponent;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.VerticallyAttachableBlockItem;
@@ -86,6 +87,7 @@ public final class AdornItems {
             .translationKey(ConeVariant.DEFAULT_TRANSLATION_KEY)
             .component(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(ConeVariant.Keys.ORANGE))
             .component(AdornComponentTypes.DESCRIPTION.get(), ItemDescription.ofEntity(AdornEntities.CONE.key().getValue()))
+            .equippable(EquipmentSlot.HEAD)
     );
 
     private static Registered<Item> register(String name, Function<Item.Settings, Item> factory) {
