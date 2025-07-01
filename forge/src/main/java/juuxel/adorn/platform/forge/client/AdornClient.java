@@ -23,6 +23,7 @@ public final class AdornClient {
     public static void init(IEventBus modBus) {
         modBus.addListener(AdornClient::setup);
         modBus.addListener(AdornRenderers::registerRenderers);
+        modBus.addListener(AdornRenderers::registerFeatureRenderers);
         modBus.addListener(AdornClient::registerTooltipComponent);
         modBus.addListener(AdornClient::registerReloaders);
         modBus.register(AdornModels.class);

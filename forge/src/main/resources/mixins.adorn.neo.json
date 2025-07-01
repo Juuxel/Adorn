@@ -9,7 +9,6 @@
     "PlayerEntityMixin"
   ],
   "client": [
-    "client.ArmorFeatureRendererMixin",
     "client.BipedEntityRendererMixin",
     "client.LivingEntityRendererMixin"
   ],

@@ -6,14 +6,16 @@ import juuxel.adorn.client.renderer.InvisibleEntityRenderer;
 import juuxel.adorn.client.renderer.ShelfRenderer;
 import juuxel.adorn.client.renderer.TradingStationRenderer;
 import juuxel.adorn.entity.AdornEntities;
-import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.platform.forge.client.renderer.KitchenSinkRendererForge;
+import juuxel.adorn.platform.neo.client.renderer.ConeFeatureRenderer;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.BipedEntityRenderer;
+import net.minecraft.client.render.entity.LivingEntityRenderer;
+import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.state.BipedEntityRenderState;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.EntityType;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 public final class AdornRenderers {
@@ -30,10 +32,23 @@ public final class AdornRenderers {
         return (BlockEntityType<U>) type;
     }
 
-    public static void onArmorFeatureRender(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, BipedEntityRenderState renderState, BipedEntityModel<?> model) {
-        var headStack = renderState.equippedHeadStack;
-        if (headStack.isOf(AdornItems.CONE.get())) {
-           ConeEntityRenderer.renderOnHead(matrices, vertexConsumers, headStack, light, model);
+    public static void registerFeatureRenderers(EntityRenderersEvent.AddLayers event) {
+        // Players
+        for (var skin : event.getSkins()) {
+            if (event.getSkin(skin) instanceof PlayerEntityRenderer renderer) {
+                addConeFeatureRenderer(renderer);
+            }
         }
+
+        // Non-player bipeds
+        for (EntityType<?> entityType : event.getEntityTypes()) {
+            if (event.getRenderer(entityType) instanceof BipedEntityRenderer<?, ?, ?> renderer) {
+                addConeFeatureRenderer(renderer);
+            }
+        }
+    }
+
+    private static <S extends BipedEntityRenderState, M extends BipedEntityModel<S>> void addConeFeatureRenderer(LivingEntityRenderer<?, S, M> renderer) {
+        renderer.addFeature(new ConeFeatureRenderer<>(renderer));
     }
 }
