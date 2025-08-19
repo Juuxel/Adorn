@@ -7,12 +7,14 @@ import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.language.jvm.tasks.ProcessResources;
 
+import javax.inject.Inject;
 import java.io.File;
 import java.util.Map;
 
 public abstract class PlatformModuleExtension {
     private final Project project;
 
+    @Inject
     public PlatformModuleExtension(Project project) {
         this.project = project;
         getPlatformName().convention(project.getName());

@@ -1,5 +1,3 @@
-import net.fabricmc.loom.api.LoomGradleExtensionAPI
-
 plugins {
     // Apply the base plugin which mostly defines useful "build lifecycle" tasks like
     // assemble, check and build. The root project doesn't contain any code,
@@ -40,64 +38,4 @@ tasks {
     // This is for IDEA. If "classes" doesn't exist, it runs "assemble" - which
     // builds the final project jars and is slow - when you press the hammer icon.
     register("classes")
-}
-
-// Do the shared setup for the Minecraft subprojects.
-subprojects {
-    apply(plugin = "dev.architectury.loom")
-
-    // Find the loom extension. Since it's not applied to the root project, we can't access it directly
-    // by name in this file.
-    val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")
-    loom.mixin {
-        useLegacyMixinAp.set(false)
-    }
-
-    // Set Java version.
-    extensions.configure<JavaPluginExtension> {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-
-    // Copy the artifact metadata from the root project.
-    group = rootProject.group
-    version = rootProject.version
-    base.archivesName.set(rootProject.base.archivesName)
-
-    dependencies {
-        // Set the Minecraft dependency. The rootProject.property calls read from gradle.properties (and a variety of other sources).
-        // Note that the configuration name has to be in quotes (a string) since Loom isn't applied to the root project,
-        // and so the Kotlin accessor method for it isn't generated for this file.
-        "minecraft"("net.minecraft:minecraft:${rootProject.property("minecraft-version")}")
-
-        // Set up the layered mappings with Yarn, a NeoForge compatibility patch and my Menu mappings.
-        "mappings"(loom.layered {
-            mappings("net.fabricmc:yarn:${rootProject.property("minecraft-version")}+${rootProject.property("yarn-mappings")}:v2")
-            mappings("dev.architectury:yarn-mappings-patch-neoforge:${rootProject.property("neoforge-mappings-patch-version")}")
-            val menuVersion = rootProject.property("menu-mappings").toString()
-            mappings("io.github.juuxel:menu:$menuVersion") {
-                enigmaMappings()
-                mappingPath("Menu-${menuVersion.replace('+', '-')}/mappings")
-            }
-        })
-    }
-
-    tasks {
-        withType<JavaCompile> {
-            options.encoding = "UTF-8"
-            options.release.set(21)
-        }
-
-        // Include the license in the jar files.
-        // See the dependencies section above for why this is in quotes.
-        "jar"(Jar::class) {
-            from(rootProject.file("LICENSE"))
-        }
-
-        // Make all archives reproducible.
-        withType<AbstractArchiveTask> {
-            isReproducibleFileOrder = true
-            isPreserveFileTimestamps = false
-        }
-    }
 }

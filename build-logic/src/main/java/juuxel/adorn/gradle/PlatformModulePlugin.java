@@ -21,7 +21,8 @@ import java.util.Map;
 public final class PlatformModulePlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
-        var extension = project.getExtensions().create("adornPlatformModule", PlatformModuleExtension.class);
+        project.getPlugins().apply(MinecraftSetupPlugin.class);
+        var extension = CorePlugin.registerExtension(project, "platformModule", PlatformModuleExtension.class);
 
         // Include common files into platform jars
         project.getTasks().named("jar", Jar.class, task -> {
@@ -52,8 +53,8 @@ public final class PlatformModulePlugin implements Plugin<Project> {
 
         // Set up mod entry. "main" matches the default NeoForge mod's name.
         ModSettings mod = loom.getMods().maybeCreate("main");
-        mod.sourceSet(getSourceSets(project).getByName(SourceSet.MAIN_SOURCE_SET_NAME));
-        mod.sourceSet(getSourceSets(project.project(":common")).getByName(SourceSet.MAIN_SOURCE_SET_NAME));
+        mod.sourceSet(SourceSet.MAIN_SOURCE_SET_NAME);
+        mod.sourceSet(SourceSet.MAIN_SOURCE_SET_NAME, project.project(":common"));
 
         // Depend on the common project. The "namedElements" configuration contains the non-remapped
         // classes and resources of the project.

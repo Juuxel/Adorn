@@ -1,8 +1,8 @@
 package juuxel.adorn.gradle;
 
+import juuxel.adorn.gradle.datagen.DataGeneratorExtension;
 import juuxel.adorn.gradle.datagen.GenerateData;
 import juuxel.adorn.gradle.datagen.GenerateEmi;
-import juuxel.adorn.gradle.datagen.DataGeneratorExtension;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.plugins.JavaPluginExtension;
@@ -14,7 +14,8 @@ import java.util.ArrayList;
 public final class ModularDataGeneratorPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
-        var extension = project.getExtensions().create("dataGenerator", DataGeneratorExtension.class, project);
+        project.getPlugins().apply(CorePlugin.class);
+        var extension = CorePlugin.registerExtension(project, "dataGenerator", DataGeneratorExtension.class);
 
         project.getTasks().register("generateAllData");
 

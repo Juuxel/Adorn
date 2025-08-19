@@ -11,7 +11,7 @@ public final class DataGeneratorPlugin implements Plugin<Project> {
     public void apply(Project project) {
         project.getPlugins().apply(ModularDataGeneratorPlugin.class);
         var java = project.getExtensions().getByType(JavaPluginExtension.class);
-        var extension = project.getExtensions().getByType(DataGeneratorExtension.class);
+        var extension = CorePlugin.getExtension(project, DataGeneratorExtension.class);
         extension.getSettings().register("adorn", settings -> {
             settings.getSourceSet().set(java.getSourceSets().named(SourceSet.MAIN_SOURCE_SET_NAME));
             settings.getIncludeCommonFilesInEmi().set(true);

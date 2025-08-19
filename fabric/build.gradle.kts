@@ -3,8 +3,10 @@ plugins {
     id("adorn-data-generator")
 }
 
-adornPlatformModule {
-    setupVersionTemplating("fabric.mod.json")
+adorn {
+    platformModule {
+        setupVersionTemplating("fabric.mod.json")
+    }
 }
 
 sourceSets {

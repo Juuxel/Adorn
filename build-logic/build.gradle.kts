@@ -25,6 +25,16 @@ java {
 
 gradlePlugin {
     plugins {
+        register("adorn-core") {
+            id = "adorn-core"
+            implementationClass = "juuxel.adorn.gradle.CorePlugin"
+        }
+
+        register("adorn-minecraft-setup") {
+            id = "adorn-minecraft-setup"
+            implementationClass = "juuxel.adorn.gradle.MinecraftSetupPlugin"
+        }
+
         register("adorn-platform-module") {
             id = "adorn-platform-module"
             implementationClass = "juuxel.adorn.gradle.PlatformModulePlugin"

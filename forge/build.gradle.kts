@@ -3,9 +3,11 @@ plugins {
     id("adorn-data-generator")
 }
 
-adornPlatformModule {
-    platformName = "neoforge"
-    setupVersionTemplating("META-INF/neoforge.mods.toml")
+adorn {
+    platformModule {
+        platformName = "neoforge"
+        setupVersionTemplating("META-INF/neoforge.mods.toml")
+    }
 }
 
 dependencies {
