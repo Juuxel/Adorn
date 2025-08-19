@@ -4,11 +4,18 @@ plugins {
 
 repositories {
     mavenCentral()
+
+    maven("https://maven.fabricmc.net")
+    maven("https://maven.architectury.dev")
+    maven("https://maven.minecraftforge.net")
 }
 
 dependencies {
     implementation("org.ow2.asm:asm-tree:9.4")
     implementation("io.github.juuxel:adorn-data-generator")
+
+    // Must match the version in settings.gradle.kts!
+    implementation("dev.architectury:architectury-loom:1.11.+")
 }
 
 java {
@@ -18,6 +25,11 @@ java {
 
 gradlePlugin {
     plugins {
+        register("adorn-platform-module") {
+            id = "adorn-platform-module"
+            implementationClass = "juuxel.adorn.gradle.PlatformModulePlugin"
+        }
+
         register("adorn-data-generator") {
             id = "adorn-data-generator"
             implementationClass = "juuxel.adorn.gradle.DataGeneratorPlugin"
@@ -26,16 +38,6 @@ gradlePlugin {
         register("adorn-data-generator.modular") {
             id = "adorn-data-generator.modular"
             implementationClass = "juuxel.adorn.gradle.ModularDataGeneratorPlugin"
-        }
-
-        register("adorn-minify-json") {
-            id = "adorn-minify-json"
-            implementationClass = "juuxel.adorn.gradle.MinifyJsonPlugin"
-        }
-
-        register("adorn-service-inline") {
-            id = "adorn-service-inline"
-            implementationClass = "juuxel.adorn.gradle.ServiceInlinePlugin"
         }
     }
 }

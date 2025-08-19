@@ -1,5 +1,4 @@
 import net.fabricmc.loom.api.LoomGradleExtensionAPI
-import net.fabricmc.loom.task.RemapJarTask
 
 plugins {
     // Apply the base plugin which mostly defines useful "build lifecycle" tasks like
@@ -99,45 +98,6 @@ subprojects {
         withType<AbstractArchiveTask> {
             isReproducibleFileOrder = true
             isPreserveFileTimestamps = false
-        }
-    }
-}
-
-// Set up "platform" subprojects (non-common subprojects).
-subprojects {
-    if (path != ":common") {
-        fun Project.sourceSets() = extensions.getByName<SourceSetContainer>("sourceSets")
-
-        // Set a different run directory for the server run config,
-        // so it won't override client logs/config (or vice versa).
-        extensions.configure<LoomGradleExtensionAPI> {
-            // Generate IDE run configs for each run config.
-            runs.configureEach {
-                isIdeConfigGenerated = true
-            }
-
-            // Set a different run directory for the server so the log and config files don't conflict.
-            runs.named("server") {
-                runDir = "run/server"
-            }
-
-            // "main" matches the default NeoForge mod's name
-            with(mods.maybeCreate("main")) {
-                sourceSet(sourceSets().getByName("main"))
-                sourceSet(project(":common").sourceSets().getByName("main"))
-            }
-        }
-
-        tasks {
-            "jar"(Jar::class) {
-                from(project(":common").sourceSets().named("main").map { it.output })
-            }
-
-            "remapJar"(RemapJarTask::class) {
-                // The project name will be "fabric" or "neoforge", so this will become the classifier/suffix
-                // for the jar. For example: Adorn-3.4.0-fabric.jar
-                archiveClassifier.set(project.name)
-            }
         }
     }
 }

@@ -19,6 +19,7 @@ pluginManagement {
 plugins {
     // Set up a Loom version across the whole mod.
     // This also applies Loom's repositories to every Gradle project in the build.
+    // Must match the version in build-logic/build.gradle.kts!
     id("dev.architectury.loom") version "1.11.+"
 }
 
