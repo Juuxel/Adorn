@@ -51,7 +51,7 @@ tasks {
 
         // Replace the $version template in neoforge.mods.toml with the project version.
         filesMatching("META-INF/neoforge.mods.toml") {
-            expand("version" to project.version)
+            expand("version" to inputs.properties["version"]!!)
         }
     }
 }

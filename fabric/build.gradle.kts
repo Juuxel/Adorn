@@ -132,7 +132,7 @@ tasks {
 
         // Replace the $version template in fabric.mod.json with the project version.
         filesMatching("fabric.mod.json") {
-            expand("version" to project.version)
+            expand("version" to inputs.properties["version"]!!)
         }
     }
 }
