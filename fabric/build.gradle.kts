@@ -71,30 +71,6 @@ loom {
     }
 }
 
-// Set up various Maven repositories for mod compat.
-repositories {
-    // Jitpack for Virtuoel's mods (Towelette compat).
-    maven {
-        name = "Jitpack"
-        url = uri("https://jitpack.io")
-
-        // Since Jitpack is a very slow repository,
-        // it's best to filter it to only include the artifacts we want.
-        content {
-            includeGroup("com.github.Virtuoel")
-        }
-    }
-
-    // DashLoader maven.
-    maven {
-        url = uri("https://oskarstrom.net/maven")
-
-        content {
-            includeGroup("net.oskarstrom")
-        }
-    }
-}
-
 dependencies {
     // Depend on the common project. The "namedElements" configuration contains the non-remapped
     // classes and resources of the project.

@@ -9,11 +9,6 @@ loom {
     accessWidenerPath.set(project(":common").file("src/main/resources/adorn.accesswidener"))
 }
 
-repositories {
-    // Set up NeoForge's Maven repository.
-    maven("https://maven.neoforged.net/releases/")
-}
-
 dependencies {
     // Add dependency on NeoForge. This is mainly used for generating the patched Minecraft jar with NeoForge classes.
     neoForge(libs.neoforge)

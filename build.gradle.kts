@@ -7,10 +7,6 @@ plugins {
     // so we won't apply those plugins here. Only the assemble task is used in the root project.
     // See https://docs.gradle.org/current/userguide/base_plugin.html.
     base
-
-    // Set up a specific version of Loom. There's no code in the root project,
-    // so we don't need to apply it here.
-    id("dev.architectury.loom") version "1.11.+" apply false
 }
 
 // Set up basic Maven artifact metadata, including the project version
@@ -68,57 +64,6 @@ subprojects {
     group = rootProject.group
     version = rootProject.version
     base.archivesName.set(rootProject.base.archivesName)
-
-    // Set up the custom "repository" for my Menu mappings.
-    // (A mapping layer that replaces Yarn's "screen handler" with Mojang's own "menu". It's a long story.)
-    repositories {
-        // The exclusiveContent makes sure it's only used for io.github.juuxel:menu,
-        // and only this repo is used for that module.
-        exclusiveContent {
-            forRepository {
-                ivy {
-                    url = uri("https://github.com/Juuxel/Menu/archive/refs/tags")
-                    patternLayout {
-                        artifact("[revision].zip")
-                    }
-                    metadataSources {
-                        artifact()
-                    }
-                }
-            }
-
-            filter {
-                includeModule("io.github.juuxel", "menu")
-            }
-        }
-
-        // For Architectury and REI.
-        maven {
-            name = "Architectury"
-            url = uri("https://maven.architectury.dev")
-        }
-
-        // TerraformersMC maven for Mod Menu and EMI.
-        maven {
-            name = "TerraformersMC"
-            url = uri("https://maven.terraformersmc.com/releases")
-
-            content {
-                includeGroup("com.terraformersmc")
-                includeGroup("dev.emi")
-            }
-        }
-
-        // For JEI.
-        maven {
-            name = "Modrinth"
-            url = uri("https://api.modrinth.com/maven")
-
-            content {
-                includeGroup("maven.modrinth")
-            }
-        }
-    }
 
     dependencies {
         // Set the Minecraft dependency. The rootProject.property calls read from gradle.properties (and a variety of other sources).
