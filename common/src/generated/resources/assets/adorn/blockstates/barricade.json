@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "adorn:block/barricade",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "adorn:block/barricade"
+    },
+    "facing=south": {
+      "model": "adorn:block/barricade",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "adorn:block/barricade",
+      "y": 270
+    }
+  }
+}

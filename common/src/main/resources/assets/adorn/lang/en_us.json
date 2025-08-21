@@ -1670,6 +1670,9 @@
   "block.adorn.magenta_wood_button": "Magenta Wood Button",
   "block.adorn.pink_wood_button": "Pink Wood Button",
 
+  "block.adorn.barricade": "Barricade",
+  "block.adorn.barricade.description": "Access denied!",
+
   "entity.adorn.white_cone": "White Cone",
   "entity.adorn.light_gray_cone": "Light Gray Cone",
   "entity.adorn.gray_cone": "Gray Cone",

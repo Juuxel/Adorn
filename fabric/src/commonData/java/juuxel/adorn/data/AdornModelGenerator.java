@@ -58,6 +58,8 @@ public final class AdornModelGenerator extends FabricModelProvider {
         for (ConeVariant variant : ConeVariant.values()) {
             registerCone(generator, variant);
         }
+
+        generator.registerNorthDefaultHorizontalRotation(AdornBlocks.BARRICADE.get());
     }
 
     private static Identifier getConeModelId(ConeVariant variant) {

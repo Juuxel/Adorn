@@ -238,6 +238,16 @@ public final class AdornBlocks {
     public static final Registered<Block> WAXED_OXIDIZED_COPPER_PIPE = HELPER.registerBlock("waxed_oxidized_copper_pipe",
         () -> new CopperPipeBlock(AbstractBlock.Settings.copy(OXIDIZED_COPPER_PIPE.get())));
 
+    public static final Registered<Block> BARRICADE = HELPER.registerBlock("barricade",
+        () -> new BarricadeBlock(
+            AbstractBlock.Settings.create()
+                .strength(2f, 3f)
+                .sounds(BlockSoundGroup.STONE)
+                .nonOpaque()
+                .mapColor(DyeColor.RED)
+        )
+    );
+
     public static void init() {
     }
 
