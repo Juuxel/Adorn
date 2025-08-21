@@ -138,6 +138,8 @@ public final class AdornModelGenerator extends FabricModelProvider {
                 )
             )
         );
+
+        generator.registerNorthDefaultHorizontalRotation(AdornBlocks.BARRICADE.get());
     }
 
     private static void forwardBlockModel(BlockStateModelGenerator generator, Registered<? extends Block> block) {

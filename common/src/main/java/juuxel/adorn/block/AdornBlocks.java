@@ -272,6 +272,15 @@ public final class AdornBlocks {
         () -> AbstractBlock.Settings.copy(OXIDIZED_COPPER_PIPE.get())
     );
 
+    public static final Registered<Block> BARRICADE = HELPER.registerBlock("barricade",
+        BarricadeBlock::new,
+        () -> AbstractBlock.Settings.create()
+            .strength(2f, 3f)
+            .sounds(BlockSoundGroup.IRON)
+            .nonOpaque()
+            .mapColor(DyeColor.RED)
+    );
+
     public static void init() {
     }
 

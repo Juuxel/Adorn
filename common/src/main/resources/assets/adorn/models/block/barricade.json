@@ -1,0 +1,85 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "iron": "adorn:block/generic_steel",
+    "plank_front": "adorn:block/barricade_front",
+    "plank_back": "adorn:block/barricade_back",
+    "plank_left": "adorn:block/barricade_left",
+    "plank_right": "adorn:block/barricade_right",
+    "plank_top": "adorn:block/barricade_top",
+    "plank_bottom": "adorn:block/barricade_bottom",
+    "particle": "adorn:block/barricade_front"
+  },
+  "elements": [
+    {
+      "from": [0, 6, 6],
+      "to": [16, 10, 7],
+      "faces": {
+        "north": { "texture": "#plank_front" },
+        "east": { "texture": "#plank_left", "cullface": "east" },
+        "south": { "texture": "#plank_back" },
+        "west": { "texture": "#plank_right", "cullface": "west" },
+        "up": { "texture": "#plank_top" },
+        "down": { "texture": "#plank_bottom" }
+      }
+    },
+    {
+      "from": [0, 12, 6],
+      "to": [16, 16, 7],
+      "faces": {
+        "north": { "texture": "#plank_front" },
+        "east": { "texture": "#plank_left", "cullface": "east" },
+        "south": { "texture": "#plank_back" },
+        "west": { "texture": "#plank_right", "cullface": "west" },
+        "up": { "texture": "#plank_top" },
+        "down": { "texture": "#plank_bottom" }
+      }
+    },
+    {
+      "from": [2, 2, 7],
+      "to": [4, 16, 9],
+      "faces": {
+        "north": { "texture": "#iron" },
+        "east": { "texture": "#iron" },
+        "south": { "texture": "#iron" },
+        "west": { "texture": "#iron" },
+        "up": { "texture": "#iron", "cullface": "up" }
+      }
+    },
+    {
+      "from": [12, 2, 7],
+      "to": [14, 16, 9],
+      "faces": {
+        "north": { "texture": "#iron" },
+        "east": { "texture": "#iron" },
+        "south": { "texture": "#iron" },
+        "west": { "texture": "#iron" },
+        "up": { "texture": "#iron", "cullface": "up" }
+      }
+    },
+    {
+      "from": [2, 0, 4],
+      "to": [4, 2, 12],
+      "faces": {
+        "north": { "texture": "#iron" },
+        "east": { "texture": "#iron" },
+        "south": { "texture": "#iron" },
+        "west": { "texture": "#iron" },
+        "up": { "texture": "#iron" },
+        "down": { "texture": "#iron", "cullface": "down" }
+      }
+    },
+    {
+      "from": [12, 0, 4],
+      "to": [14, 2, 12],
+      "faces": {
+        "north": { "texture": "#iron" },
+        "east": { "texture": "#iron" },
+        "south": { "texture": "#iron" },
+        "west": { "texture": "#iron" },
+        "up": { "texture": "#iron" },
+        "down": { "texture": "#iron", "cullface": "down" }
+      }
+    }
+  ]
+}

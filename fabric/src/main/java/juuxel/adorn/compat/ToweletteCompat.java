@@ -1,5 +1,6 @@
 package juuxel.adorn.compat;
 
+import juuxel.adorn.block.BarricadeBlock;
 import juuxel.adorn.block.BenchBlock;
 import juuxel.adorn.block.ChairBlock;
 import juuxel.adorn.block.ChimneyBlock;
@@ -48,7 +49,9 @@ public final class ToweletteCompat {
     }
 
     private static boolean shouldFluidlog(Block block) {
-        return block instanceof BenchBlock ||
+        return
+            block instanceof BarricadeBlock ||
+            block instanceof BenchBlock ||
             block instanceof ChairBlock ||
             block instanceof ChimneyBlock ||
             block instanceof CoffeeTableBlock ||
