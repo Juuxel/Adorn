@@ -10,6 +10,7 @@ import juuxel.adorn.lib.registry.RegisteredMap;
 import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
 import juuxel.adorn.platform.ItemBridge;
+import net.minecraft.block.Block;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -62,6 +63,51 @@ public final class AdornItems {
         ConeVariant.values(),
         variant -> ITEMS.register(variant.id() + "_cone", () -> ItemBridge.get().createConeItem(variant, new Item.Settings()))
     );
+
+    public static final Registered<Item> CAUTION_SIGN = registerCautionSign("caution_sign",
+        AdornBlocks.CAUTION_SIGN,
+        AdornBlocks.WALL_CAUTION_SIGN
+    );
+    public static final Registered<Item> BEE_CAUTION_SIGN = registerCautionSign("bee_caution_sign",
+        AdornBlocks.BEE_CAUTION_SIGN,
+        AdornBlocks.BEE_WALL_CAUTION_SIGN
+    );
+    public static final Registered<Item> BOOK_CAUTION_SIGN = registerCautionSign("book_caution_sign",
+        AdornBlocks.BOOK_CAUTION_SIGN,
+        AdornBlocks.BOOK_WALL_CAUTION_SIGN
+    );
+    public static final Registered<Item> CLIFF_CAUTION_SIGN = registerCautionSign("cliff_caution_sign",
+        AdornBlocks.CLIFF_CAUTION_SIGN,
+        AdornBlocks.CLIFF_WALL_CAUTION_SIGN
+    );
+    public static final Registered<Item> FORBIDDEN_CAUTION_SIGN = registerCautionSign("forbidden_caution_sign",
+        AdornBlocks.FORBIDDEN_CAUTION_SIGN,
+        AdornBlocks.FORBIDDEN_WALL_CAUTION_SIGN
+    );
+    public static final Registered<Item> HELMET_CAUTION_SIGN = registerCautionSign("helmet_caution_sign",
+        AdornBlocks.HELMET_CAUTION_SIGN,
+        AdornBlocks.HELMET_WALL_CAUTION_SIGN
+    );
+    public static final Registered<Item> RAILS_CAUTION_SIGN = registerCautionSign("rails_caution_sign",
+        AdornBlocks.RAILS_CAUTION_SIGN,
+        AdornBlocks.RAILS_WALL_CAUTION_SIGN
+    );
+    public static final Registered<Item> SURPRISE_CAUTION_SIGN = registerCautionSign("surprise_caution_sign",
+        AdornBlocks.SURPRISE_CAUTION_SIGN,
+        AdornBlocks.SURPRISE_WALL_CAUTION_SIGN
+    );
+
+    private static Registered<Item> registerCautionSign(String name, Registered<? extends Block> standing, Registered<? extends Block> wall) {
+        return ITEMS.register(
+            name,
+            settings -> new VerticallyAttachableBlockItemWithDescription(
+                standing.get(),
+                wall.get(),
+                new Item.Settings(),
+                Direction.DOWN
+            )
+        );
+    }
 
     private static FoodComponent.Builder drinkFoodComponentBuilder() {
         return new FoodComponent.Builder().nutrition(4).saturationModifier(0.3F).alwaysEdible();

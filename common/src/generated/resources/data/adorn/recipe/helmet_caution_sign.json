@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "adorn:caution_signs",
+  "ingredients": [
+    {
+      "item": "adorn:caution_sign"
+    },
+    {
+      "tag": "minecraft:head_armor"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "adorn:helmet_caution_sign"
+  }
+}

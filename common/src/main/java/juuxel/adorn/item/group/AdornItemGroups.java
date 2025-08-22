@@ -115,6 +115,7 @@ public final class AdornItemGroups {
                 addColoredBlocks(context, false);
                 addChimneys(context);
                 addFences(context);
+                addConstruction(context);
                 addCopperPipes(context);
                 addCrates(context);
                 addMiscDecorations(context);
@@ -168,6 +169,7 @@ public final class AdornItemGroups {
             addColoredBlocks(context, false);
             addChimneys(context);
             addFences(context);
+            addConstruction(context);
             addCrates(context);
             addMiscDecorations(context);
             context.add(AdornBlocks.TRADING_STATION);
@@ -274,6 +276,18 @@ public final class AdornItemGroups {
     private static void addFences(ItemGroupBuildContext context) {
         context.add(AdornBlocks.PICKET_FENCE);
         context.add(AdornBlocks.CHAIN_LINK_FENCE);
+    }
+
+    private static void addConstruction(ItemGroupBuildContext context) {
+        context.add(AdornBlocks.BARRICADE);
+        context.add(AdornBlocks.CAUTION_SIGN);
+        context.add(AdornBlocks.BEE_CAUTION_SIGN);
+        context.add(AdornBlocks.BOOK_CAUTION_SIGN);
+        context.add(AdornBlocks.CLIFF_CAUTION_SIGN);
+        context.add(AdornBlocks.FORBIDDEN_CAUTION_SIGN);
+        context.add(AdornBlocks.HELMET_CAUTION_SIGN);
+        context.add(AdornBlocks.RAILS_CAUTION_SIGN);
+        context.add(AdornBlocks.SURPRISE_CAUTION_SIGN);
     }
 
     private static void addCopperPipes(ItemGroupBuildContext context) {

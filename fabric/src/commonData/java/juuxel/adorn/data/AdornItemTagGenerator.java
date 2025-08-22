@@ -5,6 +5,7 @@ import juuxel.adorn.lib.AdornTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
@@ -47,6 +48,22 @@ public final class AdornItemTagGenerator extends FabricTagProvider.ItemTagProvid
 
         getOrCreateTagBuilder(AdornTags.CONES)
             .add(AdornItems.CONES.values().toArray(Item[]::new));
+
+        getOrCreateTagBuilder(AdornTags.CAUTION_SIGNS.item())
+            .add(AdornItems.CAUTION_SIGN.get())
+            .add(AdornItems.BEE_CAUTION_SIGN.get())
+            .add(AdornItems.BOOK_CAUTION_SIGN.get())
+            .add(AdornItems.CLIFF_CAUTION_SIGN.get())
+            .add(AdornItems.FORBIDDEN_CAUTION_SIGN.get())
+            .add(AdornItems.HELMET_CAUTION_SIGN.get())
+            .add(AdornItems.RAILS_CAUTION_SIGN.get())
+            .add(AdornItems.SURPRISE_CAUTION_SIGN.get());
+
+        getOrCreateTagBuilder(MoreConventionalItemTags.BOOKS)
+            // Vanilla items
+            .add(Items.BOOK, Items.ENCHANTED_BOOK, Items.WRITABLE_BOOK, Items.WRITTEN_BOOK)
+            // Adorn items
+            .add(AdornItems.GUIDE_BOOK.get(), AdornItems.TRADERS_MANUAL.get());
     }
 
     private void copy(AdornTags.TagPair tagPair) {

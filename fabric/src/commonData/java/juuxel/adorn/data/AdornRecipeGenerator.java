@@ -13,6 +13,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
@@ -75,6 +76,13 @@ public final class AdornRecipeGenerator extends FabricRecipeProvider {
             .input('-', ItemTags.PLANKS)
             .input('|', ConventionalItemTags.IRON_INGOTS)
             .offerTo(exporter);
+        offerCautionSignRecipe(exporter, AdornBlocks.BEE_CAUTION_SIGN.get(), MoreConventionalItemTags.HONEYCOMBS);
+        offerCautionSignRecipe(exporter, AdornBlocks.BOOK_CAUTION_SIGN.get(), MoreConventionalItemTags.BOOKS);
+        offerCautionSignRecipe(exporter, AdornBlocks.CLIFF_CAUTION_SIGN.get(), ConventionalItemTags.COBBLESTONES);
+        offerCautionSignRecipe(exporter, AdornBlocks.FORBIDDEN_CAUTION_SIGN.get(), ItemTags.FENCES);
+        offerCautionSignRecipe(exporter, AdornBlocks.HELMET_CAUTION_SIGN.get(), ItemTags.HEAD_ARMOR);
+        offerCautionSignRecipe(exporter, AdornBlocks.RAILS_CAUTION_SIGN.get(), ItemTags.RAILS);
+        offerCautionSignRecipe(exporter, AdornBlocks.SURPRISE_CAUTION_SIGN.get(), ConventionalItemTags.EGGS);
     }
 
     private void generateCones(RecipeExporter exporter) {
@@ -215,6 +223,15 @@ public final class AdornRecipeGenerator extends FabricRecipeProvider {
             .pattern("-")
             .input('|', input)
             .input('-', Items.SMOOTH_STONE_SLAB)
+            .offerTo(exporter);
+    }
+
+    private void offerCautionSignRecipe(RecipeExporter exporter, ItemConvertible output, TagKey<Item> ingredient) {
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output)
+            .criterion(hasItem(AdornBlocks.CAUTION_SIGN.get()), conditionsFromItem(AdornBlocks.CAUTION_SIGN.get()))
+            .group(AdornCommon.NAMESPACE + ":caution_signs")
+            .input(AdornBlocks.CAUTION_SIGN.get())
+            .input(ingredient)
             .offerTo(exporter);
     }
 

@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/standing_caution_sign_rot3",
+  "textures": {
+    "sign": "adorn:block/rails_caution_sign"
+  }
+}

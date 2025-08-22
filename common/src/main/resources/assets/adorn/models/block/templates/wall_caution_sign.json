@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "back": "adorn:block/caution_sign_back",
+    "particle": "#sign"
+  },
+  "elements": [
+    {
+      "from": [1, 1, 15],
+      "to": [15, 15, 16],
+      "faces": {
+        "north": { "texture": "#sign" },
+        "east": { "texture": "#sign", "uv": [1, 1, 2, 15] },
+        "south": { "texture": "#back", "cullface": "south" },
+        "west": { "texture": "#sign", "uv": [14, 1, 15, 15] },
+        "up": { "texture": "#sign", "uv": [15, 2, 1, 1] },
+        "down": { "texture": "#sign", "uv": [15, 15, 1, 14] }
+      }
+    }
+  ]
+}

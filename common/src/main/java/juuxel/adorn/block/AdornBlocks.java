@@ -248,6 +248,39 @@ public final class AdornBlocks {
         )
     );
 
+    public static final Registered<Block> CAUTION_SIGN = HELPER.registerBlockWithoutItem("caution_sign",
+        () -> new StandingCautionSignBlock(StandingCautionSignBlock.createBlockSettings()));
+    public static final Registered<Block> BEE_CAUTION_SIGN = HELPER.registerBlockWithoutItem("bee_caution_sign",
+        () -> new StandingCautionSignBlock(StandingCautionSignBlock.createBlockSettings()));
+    public static final Registered<Block> BOOK_CAUTION_SIGN = HELPER.registerBlockWithoutItem("book_caution_sign",
+        () -> new StandingCautionSignBlock(StandingCautionSignBlock.createBlockSettings()));
+    public static final Registered<Block> CLIFF_CAUTION_SIGN = HELPER.registerBlockWithoutItem("cliff_caution_sign",
+        () -> new StandingCautionSignBlock(StandingCautionSignBlock.createBlockSettings()));
+    public static final Registered<Block> FORBIDDEN_CAUTION_SIGN = HELPER.registerBlockWithoutItem("forbidden_caution_sign",
+        () -> new StandingCautionSignBlock(StandingCautionSignBlock.createBlockSettings()));
+    public static final Registered<Block> HELMET_CAUTION_SIGN = HELPER.registerBlockWithoutItem("helmet_caution_sign",
+        () -> new StandingCautionSignBlock(StandingCautionSignBlock.createBlockSettings()));
+    public static final Registered<Block> RAILS_CAUTION_SIGN = HELPER.registerBlockWithoutItem("rails_caution_sign",
+        () -> new StandingCautionSignBlock(StandingCautionSignBlock.createBlockSettings()));
+    public static final Registered<Block> SURPRISE_CAUTION_SIGN = HELPER.registerBlockWithoutItem("surprise_caution_sign",
+        () -> new StandingCautionSignBlock(StandingCautionSignBlock.createBlockSettings()));
+    public static final Registered<Block> WALL_CAUTION_SIGN = HELPER.registerBlockWithoutItem("wall_caution_sign",
+        () -> new WallCautionSignBlock(WallCautionSignBlock.createBlockSettings(CAUTION_SIGN), CAUTION_SIGN));
+    public static final Registered<Block> BEE_WALL_CAUTION_SIGN = HELPER.registerBlockWithoutItem("bee_wall_caution_sign",
+        () -> new WallCautionSignBlock(WallCautionSignBlock.createBlockSettings(BEE_CAUTION_SIGN), BEE_CAUTION_SIGN));
+    public static final Registered<Block> BOOK_WALL_CAUTION_SIGN = HELPER.registerBlockWithoutItem("book_wall_caution_sign",
+        () -> new WallCautionSignBlock(WallCautionSignBlock.createBlockSettings(BOOK_CAUTION_SIGN), BOOK_CAUTION_SIGN));
+    public static final Registered<Block> CLIFF_WALL_CAUTION_SIGN = HELPER.registerBlockWithoutItem("cliff_wall_caution_sign",
+        () -> new WallCautionSignBlock(WallCautionSignBlock.createBlockSettings(CLIFF_CAUTION_SIGN), CLIFF_CAUTION_SIGN));
+    public static final Registered<Block> FORBIDDEN_WALL_CAUTION_SIGN = HELPER.registerBlockWithoutItem("forbidden_wall_caution_sign",
+        () -> new WallCautionSignBlock(WallCautionSignBlock.createBlockSettings(FORBIDDEN_CAUTION_SIGN), FORBIDDEN_CAUTION_SIGN));
+    public static final Registered<Block> HELMET_WALL_CAUTION_SIGN = HELPER.registerBlockWithoutItem("helmet_wall_caution_sign",
+        () -> new WallCautionSignBlock(WallCautionSignBlock.createBlockSettings(HELMET_CAUTION_SIGN), HELMET_CAUTION_SIGN));
+    public static final Registered<Block> RAILS_WALL_CAUTION_SIGN = HELPER.registerBlockWithoutItem("rails_wall_caution_sign",
+        () -> new WallCautionSignBlock(WallCautionSignBlock.createBlockSettings(RAILS_CAUTION_SIGN), RAILS_CAUTION_SIGN));
+    public static final Registered<Block> SURPRISE_WALL_CAUTION_SIGN = HELPER.registerBlockWithoutItem("surprise_wall_caution_sign",
+        () -> new WallCautionSignBlock(WallCautionSignBlock.createBlockSettings(SURPRISE_CAUTION_SIGN), SURPRISE_CAUTION_SIGN));
+
     public static void init() {
     }
 

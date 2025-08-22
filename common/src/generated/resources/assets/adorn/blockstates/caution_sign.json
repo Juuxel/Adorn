@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "rotation=0": {
+      "model": "adorn:block/caution_sign"
+    },
+    "rotation=1": {
+      "model": "adorn:block/caution_sign_rot1"
+    },
+    "rotation=10": {
+      "model": "adorn:block/caution_sign_rot2",
+      "y": 180
+    },
+    "rotation=11": {
+      "model": "adorn:block/caution_sign_rot3",
+      "y": 270
+    },
+    "rotation=12": {
+      "model": "adorn:block/caution_sign",
+      "y": 270
+    },
+    "rotation=13": {
+      "model": "adorn:block/caution_sign_rot1",
+      "y": 270
+    },
+    "rotation=14": {
+      "model": "adorn:block/caution_sign_rot2",
+      "y": 270
+    },
+    "rotation=15": {
+      "model": "adorn:block/caution_sign_rot3"
+    },
+    "rotation=2": {
+      "model": "adorn:block/caution_sign_rot2"
+    },
+    "rotation=3": {
+      "model": "adorn:block/caution_sign_rot3",
+      "y": 90
+    },
+    "rotation=4": {
+      "model": "adorn:block/caution_sign",
+      "y": 90
+    },
+    "rotation=5": {
+      "model": "adorn:block/caution_sign_rot1",
+      "y": 90
+    },
+    "rotation=6": {
+      "model": "adorn:block/caution_sign_rot2",
+      "y": 90
+    },
+    "rotation=7": {
+      "model": "adorn:block/caution_sign_rot3",
+      "y": 180
+    },
+    "rotation=8": {
+      "model": "adorn:block/caution_sign",
+      "y": 180
+    },
+    "rotation=9": {
+      "model": "adorn:block/caution_sign_rot1",
+      "y": 180
+    }
+  }
+}
