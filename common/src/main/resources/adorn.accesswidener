@@ -2,6 +2,7 @@ accessWidener	v1	named
 
 # Blocks
 accessible method net/minecraft/block/AbstractCandleBlock spawnCandleParticles (Lnet/minecraft/world/World;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/random/Random;)V
+accessible method net/minecraft/block/Blocks copyLootTable (Lnet/minecraft/block/Block;Z)Lnet/minecraft/block/AbstractBlock$Settings;
 accessible method net/minecraft/block/Blocks createButtonSettings ()Lnet/minecraft/block/AbstractBlock$Settings;
 accessible method net/minecraft/block/BlockSetType register (Lnet/minecraft/block/BlockSetType;)Lnet/minecraft/block/BlockSetType;
 extendable method net/minecraft/block/PaneBlock connectsTo (Lnet/minecraft/block/BlockState;Z)Z

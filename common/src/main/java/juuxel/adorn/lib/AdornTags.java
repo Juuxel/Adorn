@@ -54,6 +54,9 @@ public final class AdornTags {
     public static final TagPair PAINTED_WOOD_STEPS = blockAndItem("painted_wood_steps");
     public static final TagPair PAINTED_WOOD_SHELVES = blockAndItem("painted_wood_shelves");
     public static final TagPair PAINTED_COFFEE_TABLES = blockAndItem("painted_coffee_tables");
+    public static final TagPair CAUTION_SIGNS = blockAndItem("caution_signs");
+    public static final TagKey<Block> STANDING_CAUTION_SIGNS = block("standing_caution_signs");
+    public static final TagKey<Block> WALL_CAUTION_SIGNS = block("wall_caution_signs");
     public static final TagKey<Block> COPPER_PIPES_CONNECT_TO = block("copper_pipes_connect_to");
     public static final TagKey<Item> WATERING_CAN_FERTILIZERS = item("watering_can_fertilizers");
 

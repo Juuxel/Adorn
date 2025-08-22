@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "back": "adorn:block/caution_sign_back",
+    "iron": "adorn:block/generic_steel",
+    "particle": "#sign"
+  },
+  "elements": [
+    {
+      "from": [1, 2, 6],
+      "to": [15, 16, 7],
+      "faces": {
+        "north": { "texture": "#sign", "uv": [1, 1, 15, 15] },
+        "east": { "texture": "#sign", "uv": [1, 1, 2, 15] },
+        "south": { "texture": "#back", "cullface": "south", "uv": [1, 1, 15, 15] },
+        "west": { "texture": "#sign", "uv": [14, 1, 15, 15] },
+        "up": { "texture": "#sign", "uv": [15, 2, 1, 1] },
+        "down": { "texture": "#sign", "uv": [15, 15, 1, 14] }
+      },
+      "rotation": {
+        "origin": [8, 0, 8],
+        "axis": "y",
+        "angle": 22.5
+      }
+    },
+    {
+      "from": [7, 0, 7],
+      "to": [9, 14, 9],
+      "faces": {
+        "north": { "texture": "#iron" },
+        "east": { "texture": "#iron" },
+        "south": { "texture": "#iron" },
+        "west": { "texture": "#iron" },
+        "up": { "texture": "#iron" },
+        "down": { "texture": "#iron", "cullface": "down" }
+      },
+      "rotation": {
+        "origin": [8, 0, 8],
+        "axis": "y",
+        "angle": 22.5
+      }
+    }
+  ]
+}

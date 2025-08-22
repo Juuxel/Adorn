@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "adorn:block/rails_wall_caution_sign",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "adorn:block/rails_wall_caution_sign"
+    },
+    "facing=south": {
+      "model": "adorn:block/rails_wall_caution_sign",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "adorn:block/rails_wall_caution_sign",
+      "y": 270
+    }
+  }
+}

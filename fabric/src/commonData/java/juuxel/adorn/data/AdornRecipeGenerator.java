@@ -69,6 +69,7 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
         generateMiscDecorations();
         generateTools();
         generateCones();
+        generateCautionSigns();
     }
 
     private void generateChimneys() {
@@ -335,6 +336,25 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
         offerStoneConeRecipe(exporter, ConeVariant.Keys.OBSIDIAN, ConventionalItemTags.NORMAL_OBSIDIANS);
     }
 
+    private void generateCautionSigns() {
+        createShaped(RecipeCategory.DECORATIONS, AdornBlocks.CAUTION_SIGN.get())
+            .criterion("has_iron_ingot", conditionsFromTag(ConventionalItemTags.IRON_INGOTS))
+            .pattern(" I ")
+            .pattern("IDI")
+            .pattern(" I ")
+            .input('I' ,ConventionalItemTags.IRON_INGOTS)
+            .input('D' ,ConventionalItemTags.YELLOW_DYES)
+            .offerTo(exporter);
+
+        offerCautionSignRecipe(exporter, AdornBlocks.BEE_CAUTION_SIGN.get(), MoreConventionalItemTags.HONEYCOMBS);
+        offerCautionSignRecipe(exporter, AdornBlocks.BOOK_CAUTION_SIGN.get(), MoreConventionalItemTags.BOOKS);
+        offerCautionSignRecipe(exporter, AdornBlocks.CLIFF_CAUTION_SIGN.get(), ConventionalItemTags.COBBLESTONES);
+        offerCautionSignRecipe(exporter, AdornBlocks.FORBIDDEN_CAUTION_SIGN.get(), ItemTags.FENCES);
+        offerCautionSignRecipe(exporter, AdornBlocks.HELMET_CAUTION_SIGN.get(), ItemTags.HEAD_ARMOR);
+        offerCautionSignRecipe(exporter, AdornBlocks.RAILS_CAUTION_SIGN.get(), ItemTags.RAILS);
+        offerCautionSignRecipe(exporter, AdornBlocks.SURPRISE_CAUTION_SIGN.get(), ItemTags.EGGS);
+    }
+
     private void offerChimneyRecipe(RecipeExporter exporter, ItemConvertible output, EntryOrTag<Item> ingredient, boolean fromBlock) {
         offerChimneyRecipe(exporter, output, ingredient, fromBlock, false);
     }
@@ -535,6 +555,15 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
             return stack;
         });
         builder.offerTo(exporter, variant.getValue().getPath() + "_cone");
+    }
+
+    private void offerCautionSignRecipe(RecipeExporter exporter, ItemConvertible output, TagKey<Item> ingredient) {
+        createShapeless(RecipeCategory.DECORATIONS, output)
+            .criterion(hasItem(AdornBlocks.CAUTION_SIGN.get()), conditionsFromItem(AdornBlocks.CAUTION_SIGN.get()))
+            .group(AdornCommon.NAMESPACE + ":caution_signs")
+            .input(AdornBlocks.CAUTION_SIGN.get())
+            .input(ingredient)
+            .offerTo(exporter);
     }
 
     private String has(EntryOrTag<Item> ingredient) {

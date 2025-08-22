@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/standing_caution_sign",
+  "textures": {
+    "sign": "adorn:block/surprise_caution_sign"
+  }
+}

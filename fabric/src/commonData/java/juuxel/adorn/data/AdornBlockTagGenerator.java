@@ -54,6 +54,27 @@ public final class AdornBlockTagGenerator extends FabricTagProvider.BlockTagProv
         getOrCreateTagBuilder(BlockTags.FENCE_GATES).addTag(AdornTags.PAINTED_WOOD_FENCE_GATES.block());
         getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES).addTag(AdornTags.PAINTED_WOOD_PRESSURE_PLATES.block());
         getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS).addTag(AdornTags.PAINTED_WOOD_BUTTONS.block());
+        getOrCreateTagBuilder(AdornTags.STANDING_CAUTION_SIGNS)
+            .add(AdornBlocks.CAUTION_SIGN.get())
+            .add(AdornBlocks.BEE_CAUTION_SIGN.get())
+            .add(AdornBlocks.BOOK_CAUTION_SIGN.get())
+            .add(AdornBlocks.CLIFF_CAUTION_SIGN.get())
+            .add(AdornBlocks.FORBIDDEN_CAUTION_SIGN.get())
+            .add(AdornBlocks.HELMET_CAUTION_SIGN.get())
+            .add(AdornBlocks.RAILS_CAUTION_SIGN.get())
+            .add(AdornBlocks.SURPRISE_CAUTION_SIGN.get());
+        getOrCreateTagBuilder(AdornTags.WALL_CAUTION_SIGNS)
+            .add(AdornBlocks.WALL_CAUTION_SIGN.get())
+            .add(AdornBlocks.BEE_WALL_CAUTION_SIGN.get())
+            .add(AdornBlocks.BOOK_WALL_CAUTION_SIGN.get())
+            .add(AdornBlocks.CLIFF_WALL_CAUTION_SIGN.get())
+            .add(AdornBlocks.FORBIDDEN_WALL_CAUTION_SIGN.get())
+            .add(AdornBlocks.HELMET_WALL_CAUTION_SIGN.get())
+            .add(AdornBlocks.RAILS_WALL_CAUTION_SIGN.get())
+            .add(AdornBlocks.SURPRISE_WALL_CAUTION_SIGN.get());
+        getOrCreateTagBuilder(AdornTags.CAUTION_SIGNS.block())
+            .addTag(AdornTags.STANDING_CAUTION_SIGNS)
+            .addTag(AdornTags.WALL_CAUTION_SIGNS);
     }
 
     private void addPaintedVariants(TagKey<Block> tag, BlockKind kind) {

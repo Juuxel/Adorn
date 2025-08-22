@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "adorn:caution_signs",
+  "ingredients": [
+    "adorn:caution_sign",
+    "#minecraft:fences"
+  ],
+  "result": {
+    "count": 1,
+    "id": "adorn:forbidden_caution_sign"
+  }
+}

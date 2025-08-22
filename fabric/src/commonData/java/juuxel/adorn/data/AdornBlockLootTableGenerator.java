@@ -22,5 +22,13 @@ public final class AdornBlockLootTableGenerator extends FabricBlockLootTableProv
         AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.values().forEach(this::addDrop);
         AdornBlocks.PAINTED_WOOD_BUTTONS.values().forEach(this::addDrop);
         addDrop(AdornBlocks.BARRICADE.get());
+        addDrop(AdornBlocks.CAUTION_SIGN.get());
+        addDrop(AdornBlocks.BEE_CAUTION_SIGN.get());
+        addDrop(AdornBlocks.BOOK_CAUTION_SIGN.get());
+        addDrop(AdornBlocks.CLIFF_CAUTION_SIGN.get());
+        addDrop(AdornBlocks.FORBIDDEN_CAUTION_SIGN.get());
+        addDrop(AdornBlocks.HELMET_CAUTION_SIGN.get());
+        addDrop(AdornBlocks.RAILS_CAUTION_SIGN.get());
+        addDrop(AdornBlocks.SURPRISE_CAUTION_SIGN.get());
     }
 }

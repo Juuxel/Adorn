@@ -15,6 +15,7 @@ public final class MoreConventionalItemTags {
     public static final TagKey<Item> HONEYCOMBS = of("honeycombs");
     public static final TagKey<Item> COPPER_NUGGETS = of("nuggets/copper");
     public static final TagKey<Item> STONE_RODS = of("rods/stone");
+    public static final TagKey<Item> BOOKS = of("books");
 
     private static TagKey<Item> of(String name) {
         return TagKey.of(RegistryKeys.ITEM, Identifier.of(NAMESPACE, name));

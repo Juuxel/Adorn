@@ -12,10 +12,12 @@ import juuxel.adorn.block.PostBlock;
 import juuxel.adorn.block.PrismarineChimneyBlock;
 import juuxel.adorn.block.ShelfBlock;
 import juuxel.adorn.block.SofaBlock;
+import juuxel.adorn.block.StandingCautionSignBlock;
 import juuxel.adorn.block.StepBlock;
 import juuxel.adorn.block.TableBlock;
 import juuxel.adorn.block.TableLampBlock;
 import juuxel.adorn.block.TradingStationBlock;
+import juuxel.adorn.block.WallCautionSignBlock;
 import juuxel.adorn.util.RegistryUtil;
 import net.minecraft.block.Block;
 import net.minecraft.registry.Registries;
@@ -62,9 +64,11 @@ public final class ToweletteCompat {
             block instanceof PrismarineChimneyBlock ||
             block instanceof ShelfBlock ||
             block instanceof SofaBlock ||
+            block instanceof StandingCautionSignBlock ||
             block instanceof StepBlock ||
             block instanceof TableBlock ||
             block instanceof TableLampBlock ||
-            block instanceof TradingStationBlock;
+            block instanceof TradingStationBlock ||
+            block instanceof WallCautionSignBlock;
     }
 }
