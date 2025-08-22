@@ -1,3 +1,7 @@
+plugins {
+    id("adorn-minecraft-setup")
+}
+
 sourceSets {
     main {
         resources.srcDir("src/generated/resources")

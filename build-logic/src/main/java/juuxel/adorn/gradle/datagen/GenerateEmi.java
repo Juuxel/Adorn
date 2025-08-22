@@ -5,6 +5,7 @@ import groovy.json.JsonSlurper;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.file.DirectoryProperty;
+import org.gradle.api.provider.Property;
 import org.gradle.api.provider.SetProperty;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFiles;
@@ -28,6 +29,9 @@ public abstract class GenerateEmi extends DefaultTask {
 
     @Input
     public abstract SetProperty<String> getPreferredRecipes();
+
+    @Input
+    public abstract Property<String> getModId();
 
     @OutputDirectory
     public abstract DirectoryProperty getOutput();
@@ -75,7 +79,9 @@ public abstract class GenerateEmi extends DefaultTask {
                 recipesByResult.put(result, preferred);
             }
         }
-        var outputPath = getOutput().get().getAsFile().toPath().resolve("assets/emi/recipe/defaults/adorn.json");
+
+        var fileName = "assets/emi/recipe/defaults/%s.json".formatted(getModId().get());
+        var outputPath = getOutput().get().getAsFile().toPath().resolve(fileName);
         var outputJson = Map.of("recipes", recipesByResult.values().stream().map(RecipeData::id).collect(Collectors.toCollection(TreeSet::new)));
         Files.createDirectories(outputPath.getParent());
         Files.writeString(outputPath, JsonOutput.prettyPrint(JsonOutput.toJson(outputJson)));

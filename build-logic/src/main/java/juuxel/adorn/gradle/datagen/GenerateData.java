@@ -10,7 +10,11 @@ import org.gradle.api.provider.SetProperty;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.workers.WorkAction;
+import org.gradle.workers.WorkParameters;
+import org.gradle.workers.WorkerExecutor;
 
+import javax.inject.Inject;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.function.Function;
@@ -26,23 +30,54 @@ public abstract class GenerateData extends DefaultTask {
     @OutputDirectory
     public abstract DirectoryProperty getOutput();
 
+    @Inject
+    protected abstract WorkerExecutor getWorkerExecutor();
+
     @TaskAction
     public void generate() {
-        var output = DataOutputImpl.load(getOutput().get().getAsFile().toPath());
-        Function<DataConfig, Stream<Path>> configFileGetter = config -> config.getFiles().getFiles().stream().map(File::toPath);
+        var workQueue = getWorkerExecutor().noIsolation();
+        workQueue.submit(GenerateAction.class, parameters -> {
+            parameters.getConfigs().set(getConfigs());
+            parameters.getGenerateTags().set(getGenerateTags());
+            parameters.getOutput().set(getOutput());
+        });
+    }
 
-        DataGenerator.generate(
-            getConfigs().get().stream()
-                .filter(config -> !config.getTagsOnly().get())
-                .flatMap(configFileGetter)
-                .toList(),
-            output
-        );
+    public interface Parameters extends WorkParameters {
+        @Input
+        SetProperty<DataConfig> getConfigs();
 
-        if (getGenerateTags().get()) {
-            TagGenerator.generateFromConfigFiles(getConfigs().get().stream().flatMap(configFileGetter).toList(), output);
+        @Input
+        Property<Boolean> getGenerateTags();
+
+        @OutputDirectory
+        DirectoryProperty getOutput();
+    }
+
+    public abstract static class GenerateAction implements WorkAction<Parameters> {
+        @Inject
+        public GenerateAction() {
         }
 
-        output.finish();
+        @Override
+        public void execute() {
+            var params = getParameters();
+            var output = DataOutputImpl.load(params.getOutput().get().getAsFile().toPath());
+            Function<DataConfig, Stream<Path>> configFileGetter = config -> config.getFiles().getFiles().stream().map(File::toPath);
+
+            DataGenerator.generate(
+                params.getConfigs().get().stream()
+                    .filter(config -> !config.getTagsOnly().get())
+                    .flatMap(configFileGetter)
+                    .toList(),
+                output
+            );
+
+            if (params.getGenerateTags().get()) {
+                TagGenerator.generateFromConfigFiles(params.getConfigs().get().stream().flatMap(configFileGetter).toList(), output);
+            }
+
+            output.finish();
+        }
     }
 }
