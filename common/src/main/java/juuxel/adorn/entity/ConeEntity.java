@@ -55,11 +55,7 @@ public final class ConeEntity extends Entity {
     @Override
     public void tick() {
         super.tick();
-
-        if (canMoveVoluntarily()) {
-            travel();
-        }
-
+        travel();
         tickConeCramming();
     }
 
