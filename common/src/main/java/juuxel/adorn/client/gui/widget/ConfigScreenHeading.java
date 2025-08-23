@@ -20,27 +20,27 @@ public record ConfigScreenHeading(Text text, int x, int y, int width) implements
         var lineY = HEIGHT / 2 - 2;
 
         var matrices = context.getMatrices();
-        matrices.push();
-        matrices.translate(x, y, 0.0);
+        matrices.pushMatrix();
+        matrices.translate(x, y);
 
         if (textWidth <= width - 2 * OUTER_GAP_WIDTH - 2 * INNER_GAP_WIDTH) {
             // Left line
-            matrices.push();
-            matrices.translate(OUTER_GAP_WIDTH, 0.0, 0.0);
+            matrices.pushMatrix();
+            matrices.translate(OUTER_GAP_WIDTH, 0);
             context.fill(0, lineY, lineWidth, lineY + 1, Colors.WHITE);
-            matrices.pop();
+            matrices.popMatrix();
 
             // Right line
-            matrices.push();
-            matrices.translate(width - lineWidth - OUTER_GAP_WIDTH, 0.0, 0.0);
+            matrices.pushMatrix();
+            matrices.translate(width - lineWidth - OUTER_GAP_WIDTH, 0);
             context.fill(0, lineY, lineWidth, lineY + 1, Colors.WHITE);
-            matrices.pop();
+            matrices.popMatrix();
         }
 
         // Label
         var textX = (width - textWidth) * 0.5f;
         var textY = (HEIGHT - textRenderer.fontHeight) / 2;
         context.drawText(textRenderer, text, (int) textX, textY, Colors.WHITE, false);
-        matrices.pop();
+        matrices.popMatrix();
     }
 }

@@ -5,7 +5,7 @@ import juuxel.adorn.client.CustomModelKeys;
 import net.minecraft.client.render.model.BlockStateModel;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
-import net.neoforged.neoforge.client.model.standalone.StandaloneModelBaker;
+import net.neoforged.neoforge.client.model.standalone.SimpleUnbakedStandaloneModel;
 import net.neoforged.neoforge.client.model.standalone.StandaloneModelKey;
 
 public final class AdornModels {
@@ -15,7 +15,7 @@ public final class AdornModels {
         for (var key : CustomModelKeys.MODEL_KEYS) {
             var impl = (CustomModelKeyImpl<?>) key;
             if (impl.type() == CustomModelKey.BLOCK_STATE_MODEL) {
-                event.register((StandaloneModelKey<BlockStateModel>) impl.backing(), StandaloneModelBaker.blockStateModel());
+                event.register((StandaloneModelKey<BlockStateModel>) impl.backing(), SimpleUnbakedStandaloneModel.blockStateModel(key.id()));
             } else {
                 throw new UnsupportedOperationException("[Adorn] Unknown type: " + impl.type());
             }

@@ -3,7 +3,6 @@ package juuxel.adorn.block.entity;
 import com.google.common.base.Predicates;
 import juuxel.adorn.fluid.FluidReference;
 import juuxel.adorn.util.FluidStorageReference;
-import juuxel.adorn.util.NbtUtil;
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
@@ -14,8 +13,8 @@ import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.block.BlockState;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
@@ -74,16 +73,16 @@ public final class BrewerBlockEntityFabric extends BrewerBlockEntity {
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.writeNbt(nbt, registries);
-        NbtUtil.putWithCodec(nbt, NBT_FLUID, FluidVariant.CODEC, fluidStorage.variant, registries);
-        nbt.putLong(NBT_VOLUME, fluidStorage.amount);
+    protected void writeData(WriteView view) {
+        super.writeData(view);
+        view.put(NBT_FLUID, FluidVariant.CODEC, fluidStorage.variant);
+        view.putLong(NBT_VOLUME, fluidStorage.amount);
     }
 
     @Override
-    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.readNbt(nbt, registries);
-        fluidStorage.variant = NbtUtil.getWithCodec(nbt, NBT_FLUID, FluidVariant.CODEC, registries);
-        fluidStorage.amount = nbt.getLong(NBT_VOLUME, 0);
+    protected void readData(ReadView view) {
+        super.readData(view);
+        fluidStorage.variant = view.read(NBT_FLUID, FluidVariant.CODEC).orElse(FluidVariant.blank());
+        fluidStorage.amount = view.getLong(NBT_VOLUME, 0);
     }
 }

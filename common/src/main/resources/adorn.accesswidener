@@ -29,7 +29,7 @@ accessible method net/minecraft/text/TextCodecs combine (Ljava/util/List;)Lnet/m
 accessible method net/minecraft/block/entity/BlockEntityType <init> (Lnet/minecraft/block/entity/BlockEntityType$BlockEntityFactory;Ljava/util/Set;)V
 
 # Screens
-accessible field net/minecraft/client/gui/DrawContext vertexConsumers Lnet/minecraft/client/render/VertexConsumerProvider$Immediate;
+accessible method net/minecraft/client/gui/DrawContext drawTexturedQuad (Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/util/Identifier;IIIIFFFFI)V
 
 # Data generation
 accessible field net/minecraft/data/MetadataProvider metadata Ljava/util/Map;

@@ -14,6 +14,7 @@ import juuxel.adorn.client.gui.widget.TickingElement;
 import juuxel.adorn.util.CollectionUtil;
 import juuxel.adorn.util.Colors;
 import juuxel.adorn.util.animation.AnimationEngine;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.gui.Element;
@@ -21,7 +22,6 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.BookScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.PageTurnWidget;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenTexts;
@@ -97,7 +97,7 @@ public final class GuideBookScreen extends Screen {
         super.renderBackground(context, mouseX, mouseY, delta);
         int x = (width - BOOK_SIZE) / 2;
         int y = (height - BOOK_SIZE) / 2;
-        context.drawTexture(RenderLayer::getGuiTextured, BookScreen.BOOK_TEXTURE, x, y, 0, 0, BOOK_SIZE, BOOK_SIZE, 256, 256);
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, BookScreen.BOOK_TEXTURE, x, y, 0, 0, BOOK_SIZE, BOOK_SIZE, 256, 256);
     }
 
     @Override
@@ -167,11 +167,11 @@ public final class GuideBookScreen extends Screen {
         public void render(DrawContext context, int mouseX, int mouseY, float delta) {
             int cx = x + PAGE_WIDTH / 2;
             var matrices = context.getMatrices();
-            matrices.push();
-            matrices.translate(cx, y + 7 + 25, 0.0);
-            matrices.scale(book.titleScale(), book.titleScale(), 1.0f);
+            matrices.pushMatrix();
+            matrices.translate(cx, y + 7 + 25);
+            matrices.scale(book.titleScale(), book.titleScale());
             context.drawText(textRenderer, book.title(), -textRenderer.getWidth(book.title()) / 2, 0, Colors.SCREEN_TEXT, false);
-            matrices.pop();
+            matrices.popMatrix();
 
             context.drawText(textRenderer, book.subtitle(), cx - textRenderer.getWidth(book.subtitle()) / 2, y + 45, Colors.SCREEN_TEXT, false);
             context.drawText(textRenderer, byAuthor, cx - textRenderer.getWidth(byAuthor) / 2, y + 60, Colors.SCREEN_TEXT, false);
@@ -309,7 +309,7 @@ public final class GuideBookScreen extends Screen {
                 case AFTER_TEXT -> y + textHeight + PAGE_IMAGE_GAP;
             };
 
-            context.drawTexture(RenderLayer::getGuiTextured, image.location(), imageX, imageY, 0f, 0f, image.size().x(), image.size().y(), image.size().x(), image.size().y());
+            context.drawTexture(RenderPipelines.GUI_TEXTURED, image.location(), imageX, imageY, 0f, 0f, image.size().x(), image.size().y(), image.size().x(), image.size().y());
 
             for (var hoverArea : image.hoverAreas()) {
                 if (hoverArea.contains(mouseX - imageX, mouseY - imageY)) {
@@ -356,7 +356,7 @@ public final class GuideBookScreen extends Screen {
         @Override
         protected void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
             var texture = isHovered() ? CLOSE_BOOK_ACTIVE_TEXTURE : CLOSE_BOOK_INACTIVE_TEXTURE;
-            context.drawTexture(RenderLayer::getGuiTextured, texture, getX(), getY(), 0f, 0f, 8, 8, 8, 8);
+            context.drawTexture(RenderPipelines.GUI_TEXTURED, texture, getX(), getY(), 0f, 0f, 8, 8, 8, 8);
         }
     }
 }

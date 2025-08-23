@@ -2,19 +2,18 @@ package juuxel.adorn.trading;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import juuxel.adorn.util.NbtConvertible;
-import juuxel.adorn.util.NbtUtil;
+import juuxel.adorn.util.DataConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipData;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public final class Trade implements NbtConvertible, TooltipData {
+public final class Trade implements DataConvertible, TooltipData {
     public static final Codec<Trade> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         ItemStack.OPTIONAL_CODEC.fieldOf("selling").forGetter(Trade::getSelling),
         ItemStack.OPTIONAL_CODEC.fieldOf("price").forGetter(Trade::getPrice)
@@ -57,16 +56,15 @@ public final class Trade implements NbtConvertible, TooltipData {
     }
 
     @Override
-    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        selling = NbtUtil.getWithCodec(nbt, NBT_SELLING, ItemStack.OPTIONAL_CODEC, registries, ItemStack.EMPTY);
-        price = NbtUtil.getWithCodec(nbt, NBT_PRICE, ItemStack.OPTIONAL_CODEC, registries, ItemStack.EMPTY);
+    public void readData(ReadView view) {
+        selling = view.read(NBT_SELLING, ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY);
+        price = view.read(NBT_PRICE, ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY);
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        NbtUtil.putWithCodec(nbt, NBT_SELLING, ItemStack.OPTIONAL_CODEC, selling, registries);
-        NbtUtil.putWithCodec(nbt, NBT_PRICE, ItemStack.OPTIONAL_CODEC, price, registries);
-        return nbt;
+    public void writeData(WriteView view) {
+        view.put(NBT_SELLING, ItemStack.OPTIONAL_CODEC, selling);
+        view.put(NBT_PRICE, ItemStack.OPTIONAL_CODEC, price);
     }
 
     public void copyFrom(@Nullable Trade trade) {
@@ -108,9 +106,9 @@ public final class Trade implements NbtConvertible, TooltipData {
         return new Trade(ItemStack.EMPTY, ItemStack.EMPTY);
     }
 
-    public static Trade fromNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
+    public static Trade fromDataView(ReadView view) {
         var trade = empty();
-        trade.readNbt(nbt, registries);
+        trade.readData(view);
         return trade;
     }
 

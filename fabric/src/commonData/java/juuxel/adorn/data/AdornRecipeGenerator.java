@@ -173,7 +173,7 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
             .input('#', ConventionalItemTags.STONES)
             .offerTo(exporter);
         StonecuttingRecipeJsonBuilder.createStonecutting(
-            Ingredient.fromTag(itemLookup.getOrThrow(ConventionalItemTags.STONES)),
+            Ingredient.ofTag(itemLookup.getOrThrow(ConventionalItemTags.STONES)),
             RecipeCategory.MISC,
             AdornItems.STONE_ROD.get(),
             2

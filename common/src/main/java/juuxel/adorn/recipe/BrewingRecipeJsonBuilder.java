@@ -43,7 +43,7 @@ public final class BrewingRecipeJsonBuilder {
     }
 
     public BrewingRecipeJsonBuilder first(TagKey<Item> tag) {
-        firstIngredient = Ingredient.fromTag(itemLookup.getOrThrow(tag));
+        firstIngredient = Ingredient.ofTag(itemLookup.getOrThrow(tag));
         return this;
     }
 
@@ -53,7 +53,7 @@ public final class BrewingRecipeJsonBuilder {
     }
 
     public BrewingRecipeJsonBuilder second(TagKey<Item> tag) {
-        secondIngredient = Ingredient.fromTag(itemLookup.getOrThrow(tag));
+        secondIngredient = Ingredient.ofTag(itemLookup.getOrThrow(tag));
         return this;
     }
 

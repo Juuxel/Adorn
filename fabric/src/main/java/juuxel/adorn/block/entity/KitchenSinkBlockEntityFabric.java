@@ -3,7 +3,6 @@ package juuxel.adorn.block.entity;
 import com.google.common.base.Predicates;
 import juuxel.adorn.fluid.FluidReference;
 import juuxel.adorn.util.FluidStorageReference;
-import juuxel.adorn.util.NbtUtil;
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
@@ -17,9 +16,9 @@ import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -125,17 +124,17 @@ public final class KitchenSinkBlockEntityFabric extends KitchenSinkBlockEntity {
     }
 
     @Override
-    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.readNbt(nbt, registries);
-        storage.variant = NbtUtil.getWithCodec(nbt, NBT_FLUID, FluidVariant.CODEC, registries);
-        storage.amount = nbt.getLong(NBT_VOLUME, 0);
+    protected void readData(ReadView view) {
+        super.readData(view);
+        storage.variant = view.read(NBT_FLUID, FluidVariant.CODEC).orElse(FluidVariant.blank());
+        storage.amount = view.getLong(NBT_VOLUME, 0);
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.writeNbt(nbt, registries);
-        NbtUtil.putWithCodec(nbt, NBT_FLUID, FluidVariant.CODEC, storage.variant, registries);
-        nbt.putLong(NBT_VOLUME, storage.amount);
+    protected void writeData(WriteView view) {
+        super.writeData(view);
+        view.put(NBT_FLUID, FluidVariant.CODEC, storage.variant);
+        view.putLong(NBT_VOLUME, storage.amount);
     }
 
     @Override

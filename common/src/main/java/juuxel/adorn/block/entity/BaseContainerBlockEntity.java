@@ -5,8 +5,8 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
@@ -26,19 +26,19 @@ public abstract class BaseContainerBlockEntity extends LootableContainerBlockEnt
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.writeNbt(nbt, registries);
-        if (!writeLootTable(nbt)) {
-            Inventories.writeNbt(nbt, items, registries);
+    protected void writeData(WriteView view) {
+        super.writeData(view);
+        if (!writeLootTable(view)) {
+            Inventories.writeData(view, items);
         }
     }
 
     @Override
-    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.readNbt(nbt, registries);
+    protected void readData(ReadView view) {
+        super.readData(view);
         items = DefaultedList.ofSize(size, ItemStack.EMPTY);
-        if (!readLootTable(nbt)) {
-            Inventories.readNbt(nbt, items, registries);
+        if (!readLootTable(view)) {
+            Inventories.readData(view, items);
         }
     }
 

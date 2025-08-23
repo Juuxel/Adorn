@@ -16,15 +16,14 @@ import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.menu.Menu;
 import net.minecraft.menu.property.PropertyDelegate;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class BrewerBlockEntity extends BaseContainerBlockEntity implements SidedInventory {
@@ -71,15 +70,15 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.writeNbt(nbt, registries);
-        nbt.putInt(NBT_PROGRESS, progress);
+    protected void writeData(WriteView view) {
+        super.writeData(view);
+        view.putInt(NBT_PROGRESS, progress);
     }
 
     @Override
-    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.readNbt(nbt, registries);
-        progress = nbt.getInt(NBT_PROGRESS, 0);
+    protected void readData(ReadView view) {
+        super.readData(view);
+        view.getInt(NBT_PROGRESS, 0);
     }
 
     @Override

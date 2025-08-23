@@ -20,9 +20,9 @@ config = "mixins.adorn.neo.json"
 [[dependencies.adorn]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.5,)"
+versionRange = "[1.21.8,)"
 
 [[dependencies.adorn]]
 modId = "neoforge"
 type = "required"
-versionRange="[21.5.28-beta,)"
+versionRange="[21.8.36,)"

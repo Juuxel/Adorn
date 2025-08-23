@@ -18,9 +18,10 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -186,13 +187,13 @@ public final class ConeEntity extends Entity {
     }
 
     @Override
-    protected void readCustomDataFromNbt(NbtCompound nbt) {
-        Variants.readVariantFromNbt(nbt, getRegistryManager(), AdornRegistryKeys.CONE_VARIANT).ifPresent(this::setVariant);
+    protected void readCustomData(ReadView view) {
+        Variants.readVariantFromNbt(view, AdornRegistryKeys.CONE_VARIANT).ifPresent(this::setVariant);
     }
 
     @Override
-    protected void writeCustomDataToNbt(NbtCompound nbt) {
-        Variants.writeVariantToNbt(nbt, getVariant());
+    protected void writeCustomData(WriteView view) {
+        Variants.writeVariantToNbt(view, getVariant());
     }
 
     @Override

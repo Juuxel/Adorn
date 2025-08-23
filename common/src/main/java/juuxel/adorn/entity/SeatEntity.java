@@ -15,9 +15,10 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -94,13 +95,13 @@ public final class SeatEntity extends Entity {
     }
 
     @Override
-    protected void readCustomDataFromNbt(NbtCompound nbt) {
-        seatPos = nbt.get(NBT_SEAT_POS, BlockPos.CODEC).orElse(BlockPos.ORIGIN);
+    protected void readCustomData(ReadView view) {
+        seatPos = view.read(NBT_SEAT_POS, BlockPos.CODEC).orElse(BlockPos.ORIGIN);
     }
 
     @Override
-    protected void writeCustomDataToNbt(NbtCompound nbt) {
-        nbt.put(NBT_SEAT_POS, BlockPos.CODEC, seatPos);
+    protected void writeCustomData(WriteView view) {
+        view.put(NBT_SEAT_POS, BlockPos.CODEC, seatPos);
     }
 
     @Override

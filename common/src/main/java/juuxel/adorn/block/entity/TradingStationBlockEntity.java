@@ -8,7 +8,6 @@ import juuxel.adorn.trading.Trade;
 import juuxel.adorn.trading.TradeOwner;
 import juuxel.adorn.util.AdornUtil;
 import juuxel.adorn.util.InventoryComponent;
-import juuxel.adorn.util.NbtUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.component.ComponentMap;
@@ -24,13 +23,15 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextCodecs;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.Uuids;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
 import java.util.UUID;
 
 public final class TradingStationBlockEntity extends BlockEntity implements NamedMenuFactory, TradingStation {
@@ -110,27 +111,25 @@ public final class TradingStationBlockEntity extends BlockEntity implements Name
         return storage;
     }
 
-    // NBT
-
     @Override
-    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.readNbt(nbt, registries);
+    protected void readData(ReadView view) {
+        super.readData(view);
 
-        owner = nbt.get(NBT_TRADING_OWNER, Uuids.INT_STREAM_CODEC).orElse(null);
-        ownerName = Objects.requireNonNullElse(NbtUtil.getText(nbt, NBT_TRADING_OWNER_NAME, registries), UNKNOWN_OWNER);
-        trade.readNbt(nbt.getCompoundOrEmpty(NBT_TRADE), registries);
-        storage.readNbt(nbt.getCompoundOrEmpty(NBT_STORAGE), registries);
+        owner = view.read(NBT_TRADING_OWNER, Uuids.INT_STREAM_CODEC).orElse(null);
+        ownerName = view.read(NBT_TRADING_OWNER_NAME, TextCodecs.CODEC).orElse(UNKNOWN_OWNER);
+        trade.readData(view.getReadView(NBT_TRADE));
+        storage.readData(view.getReadView(NBT_STORAGE));
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.writeNbt(nbt, registries);
+    protected void writeData(WriteView view) {
+        super.writeData(view);
 
-        nbt.putNullable(NBT_TRADING_OWNER, Uuids.INT_STREAM_CODEC, owner);
-        NbtUtil.putText(nbt, NBT_TRADING_OWNER_NAME, ownerName, registries);
+        view.putNullable(NBT_TRADING_OWNER, Uuids.INT_STREAM_CODEC, owner);
+        view.put(NBT_TRADING_OWNER_NAME, TextCodecs.CODEC, ownerName);
 
-        nbt.put(NBT_TRADE, trade.writeNbt(new NbtCompound(), registries));
-        nbt.put(NBT_STORAGE, storage.writeNbt(new NbtCompound(), registries));
+        trade.writeData(view.get(NBT_TRADE));
+        storage.writeData(view.get(NBT_STORAGE));
     }
 
     @Override
@@ -170,12 +169,12 @@ public final class TradingStationBlockEntity extends BlockEntity implements Name
     }
 
     @Override
-    public void removeFromCopiedStackNbt(NbtCompound nbt) {
-        super.removeFromCopiedStackNbt(nbt);
-        nbt.remove(NBT_TRADE);
-        nbt.remove(NBT_STORAGE);
-        nbt.remove(NBT_TRADING_OWNER);
-        nbt.remove(NBT_TRADING_OWNER_NAME);
+    public void removeFromCopiedStackData(WriteView view) {
+        super.removeFromCopiedStackData(view);
+        view.remove(NBT_TRADE);
+        view.remove(NBT_STORAGE);
+        view.remove(NBT_TRADING_OWNER);
+        view.remove(NBT_TRADING_OWNER_NAME);
     }
 
     @Override

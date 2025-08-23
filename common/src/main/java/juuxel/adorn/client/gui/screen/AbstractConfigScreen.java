@@ -8,17 +8,16 @@ import juuxel.adorn.util.Displayable;
 import juuxel.adorn.util.PropertyRef;
 import juuxel.adorn.util.animation.AnimationEngine;
 import juuxel.adorn.util.animation.AnimationTask;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.NoticeScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.CyclingButtonWidget;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RotationAxis;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +40,9 @@ public abstract class AbstractConfigScreen extends Screen {
         0xFF_FCA1DF, // Pink
     };
     private static final Identifier HEART_TEXTURE = AdornCommon.id("textures/gui/heart.png");
-    private static final double MIN_HEART_SPEED = 0.05;
-    private static final double MAX_HEART_SPEED = 1.5;
-    private static final double MAX_HEART_ANGULAR_SPEED = 0.07;
+    private static final float MIN_HEART_SPEED = 0.05f;
+    private static final float MAX_HEART_SPEED = 1.5f;
+    private static final float MAX_HEART_ANGULAR_SPEED = 0.07f;
     private static final int HEART_CHANCE = 65;
 
     private final Screen parent;
@@ -84,14 +83,14 @@ public abstract class AbstractConfigScreen extends Screen {
     private void renderHearts(DrawContext context, float delta) {
         for (var heart : hearts) {
             var matrices = context.getMatrices();
-            matrices.push();
-            matrices.translate(heart.x, MathHelper.lerp(delta, heart.previousY, heart.y), 0.0);
-            matrices.translate(0.5 * HEART_SIZE, 0.5 * HEART_SIZE, 0.0);
+            matrices.pushMatrix();
+            matrices.translate(heart.x, MathHelper.lerp(delta, heart.previousY, heart.y));
+            matrices.translate(0.5f * HEART_SIZE, 0.5f * HEART_SIZE);
             var angle = MathHelper.lerp(delta, heart.previousAngle, heart.angle);
-            matrices.multiply(RotationAxis.POSITIVE_Z.rotation((float) angle));
-            matrices.translate(-0.5 * HEART_SIZE, -0.5 * HEART_SIZE, 0.0);
-            context.drawTexture(RenderLayer::getGuiTextured, HEART_TEXTURE, 0, 0, 0f, 0f, HEART_SIZE, HEART_SIZE, 8, 8, 8, 8, heart.color);
-            matrices.pop();
+            matrices.rotate(angle);
+            matrices.translate(-0.5f * HEART_SIZE, -0.5f * HEART_SIZE);
+            context.drawTexture(RenderPipelines.GUI_TEXTURED, HEART_TEXTURE, 0, 0, 0f, 0f, HEART_SIZE, HEART_SIZE, 8, 8, 8, 8, heart.color);
+            matrices.popMatrix();
         }
     }
 
@@ -126,8 +125,8 @@ public abstract class AbstractConfigScreen extends Screen {
         if (random.nextInt(HEART_CHANCE) == 0) {
             int x = random.nextInt(width);
             int color = HEART_COLORS[random.nextInt(HEART_COLORS.length)];
-            double speed = random.nextDouble(MIN_HEART_SPEED, MAX_HEART_SPEED);
-            double angularSpeed = random.nextDouble(-MAX_HEART_ANGULAR_SPEED, MAX_HEART_ANGULAR_SPEED);
+            float speed = random.nextFloat(MIN_HEART_SPEED, MAX_HEART_SPEED);
+            float angularSpeed = random.nextFloat(-MAX_HEART_ANGULAR_SPEED, MAX_HEART_ANGULAR_SPEED);
             hearts.add(new Heart(x, -HEART_SIZE, color, speed, angularSpeed));
         }
     }
@@ -193,15 +192,15 @@ public abstract class AbstractConfigScreen extends Screen {
 
     private static final class Heart {
         private final int x;
-        private double y;
+        private float y;
         private final int color;
-        private final double speed;
-        private final double angularSpeed;
-        private double previousY;
-        private double previousAngle = 0.0;
-        private double angle = 0.0;
+        private final float speed;
+        private final float angularSpeed;
+        private float previousY;
+        private float previousAngle = 0f;
+        private float angle = 0f;
 
-        private Heart(int x, double y, int color, double speed, double angularSpeed) {
+        private Heart(int x, float y, int color, float speed, float angularSpeed) {
             this.x = x;
             this.y = y;
             this.color = color;

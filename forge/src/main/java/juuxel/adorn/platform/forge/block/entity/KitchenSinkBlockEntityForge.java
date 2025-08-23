@@ -9,11 +9,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.potion.Potions;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -144,15 +144,15 @@ public final class KitchenSinkBlockEntityForge extends KitchenSinkBlockEntity im
     }
 
     @Override
-    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.readNbt(nbt, registries);
-        tank.readFromNBT(registries, nbt);
+    protected void readData(ReadView view) {
+        super.readData(view);
+        tank.deserialize(view);
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.writeNbt(nbt, registries);
-        tank.writeToNBT(registries, nbt);
+    protected void writeData(WriteView view) {
+        super.writeData(view);
+        tank.serialize(view);
     }
 
     @Override

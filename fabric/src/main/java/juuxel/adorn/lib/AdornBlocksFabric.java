@@ -13,14 +13,14 @@ import juuxel.adorn.client.renderer.ShelfRenderer;
 import juuxel.adorn.client.renderer.TradingStationRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.BlockRenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.util.ActionResult;
 
@@ -74,8 +74,8 @@ public final class AdornBlocksFabric {
         BlockEntityRendererFactories.register(forceType(AdornBlockEntities.KITCHEN_SINK.get()), KitchenSinkRendererFabric::new);
 
         // RenderLayers
-        BlockRenderLayerMap.INSTANCE.putBlocks(
-            RenderLayer.getCutout(),
+        BlockRenderLayerMap.putBlocks(
+            BlockRenderLayer.CUTOUT,
             AdornBlocks.TRADING_STATION.get(),
             AdornBlocks.STONE_TORCH_GROUND.get(),
             AdornBlocks.STONE_TORCH_WALL.get(),
@@ -85,11 +85,11 @@ public final class AdornBlocksFabric {
         );
 
         for (var block : AdornBlocks.DYED_CANDLELIT_LANTERNS.get().values()) {
-            BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout());
+            BlockRenderLayerMap.putBlock(block, BlockRenderLayer.CUTOUT);
         }
 
         for (var coffeeTable : BlockVariantSets.get(BlockKind.COFFEE_TABLE)) {
-            BlockRenderLayerMap.INSTANCE.putBlock(coffeeTable.get(), RenderLayer.getTranslucent());
+            BlockRenderLayerMap.putBlock(coffeeTable.get(), BlockRenderLayer.TRANSLUCENT);
         }
     }
 

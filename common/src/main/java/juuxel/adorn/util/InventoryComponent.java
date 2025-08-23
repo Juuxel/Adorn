@@ -6,15 +6,15 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.collection.DefaultedList;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryComponent implements Inventory, NbtConvertible {
+public class InventoryComponent implements Inventory, DataConvertible {
     private final int size;
     private final List<InventoryChangedListener> listeners = new ArrayList<>();
     private final DefaultedList<ItemStack> items;
@@ -130,14 +130,13 @@ public class InventoryComponent implements Inventory, NbtConvertible {
     // ------
 
     @Override
-    public NbtCompound writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        Inventories.writeNbt(nbt, items, registries);
-        return nbt;
+    public void writeData(WriteView view) {
+        Inventories.writeData(view, items);
     }
 
     @Override
-    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        Inventories.readNbt(nbt, items, registries);
+    public void readData(ReadView view) {
+        Inventories.readData(view, items);
     }
 
     public ContainerComponent toContainerComponent() {

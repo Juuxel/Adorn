@@ -9,7 +9,7 @@ import net.neoforged.neoforge.client.model.standalone.StandaloneModelKey;
 public final class ModelBridgeNeo implements ModelBridge {
     @Override
     public <T> CustomModelKey<T> createModelKey(Identifier id, CustomModelKey.Type<T> type) {
-        return new CustomModelKeyImpl<>(type, new StandaloneModelKey<>(id));
+        return new CustomModelKeyImpl<>(type, new StandaloneModelKey<>(id::toString), id);
     }
 
     @Override

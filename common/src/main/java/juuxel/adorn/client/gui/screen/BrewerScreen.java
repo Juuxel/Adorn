@@ -9,9 +9,9 @@ import juuxel.adorn.menu.BrewerMenu;
 import juuxel.adorn.util.Colors;
 import juuxel.adorn.util.Logging;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.MenuProvider;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.tooltip.TooltipType;
@@ -33,14 +33,14 @@ public final class BrewerScreen extends AdornMenuScreen<BrewerMenu> {
 
     @Override
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
-        context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, x, y, 0f, 0f, backgroundWidth, backgroundHeight, 256, 256);
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0f, 0f, backgroundWidth, backgroundHeight, 256, 256);
         drawFluid(context, x + 145, y + 17, menu.getFluid());
-        context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, x + 145, y + 21, 176, 25, 16, 51, 256, 256);
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, TEXTURE, x + 145, y + 21, 176, 25, 16, 51, 256, 256);
 
         var progress = menu.getProgress();
         if (progress > 0) {
             float progressFract = (float) progress / (float) BrewerBlockEntity.MAX_PROGRESS;
-            context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, x + 84, y + 24, 176, 0, 8, MathHelper.ceil(progressFract * 25), 256, 256);
+            context.drawTexture(RenderPipelines.GUI_TEXTURED, TEXTURE, x + 84, y + 24, 176, 0, 8, MathHelper.ceil(progressFract * 25), 256, 256);
         }
     }
 
@@ -72,18 +72,12 @@ public final class BrewerScreen extends AdornMenuScreen<BrewerMenu> {
         }
     }
 
-    private static void drawSprite(DrawContext context, int x, float y, float width, float height, float u0, float v0, float u1, float v1, Sprite sprite, int color) {
-        var positionMatrix = context.getMatrices().peek().getPositionMatrix();
+    private static void drawSprite(DrawContext context, int x, int y, int width, int height, float u0, float v0, float u1, float v1, Sprite sprite, int color) {
         var au0 = MathHelper.lerp(u0, sprite.getMinU(), sprite.getMaxU());
         var au1 = MathHelper.lerp(u1, sprite.getMinU(), sprite.getMaxU());
         var av0 = MathHelper.lerp(v0, sprite.getMinV(), sprite.getMaxV());
         var av1 = MathHelper.lerp(v1, sprite.getMinV(), sprite.getMaxV());
-        var renderLayer = RenderLayer.getGuiTextured(sprite.getAtlasId());
-        var buffer = context.vertexConsumers.getBuffer(renderLayer);
-        buffer.vertex(positionMatrix, x, y + height, 0f).texture(au0, av1).color(color);
-        buffer.vertex(positionMatrix, x + width, y + height, 0f).texture(au1, av1).color(color);
-        buffer.vertex(positionMatrix, x + width, y, 0f).texture(au1, av0).color(color);
-        buffer.vertex(positionMatrix, x, y, 0f).texture(au0, av0).color(color);
+        context.drawTexturedQuad(RenderPipelines.GUI_TEXTURED, sprite.getAtlasId(), x, x + width, y, y + height, au0, au1, av0, av1, color);
     }
 
     public static void drawFluid(DrawContext context, int x, int y, FluidReference fluid) {
@@ -97,20 +91,20 @@ public final class BrewerScreen extends AdornMenuScreen<BrewerMenu> {
         }
 
         var color = Colors.color(bridge.getColor(fluid));
-        var height = FLUID_AREA_HEIGHT * (fluid.getAmount() / (float) (BrewerBlockEntity.FLUID_CAPACITY_IN_BUCKETS * fluid.getUnit().getBucketVolume()));
+        var height = Math.round(FLUID_AREA_HEIGHT * (fluid.getAmount() / (float) (BrewerBlockEntity.FLUID_CAPACITY_IN_BUCKETS * fluid.getUnit().getBucketVolume())));
         var fluidY = 0;
 
-        int tiles = MathHelper.floor(height / 16);
+        int tiles = height / 16;
         for (int i = 0; i < tiles; i++) {
-            drawSprite(context, x, y + transformY(bridge, fluid, fluidY, 16f), 16f, 16f, 0f, 0f, 1f, 1f, sprite, color);
+            drawSprite(context, x, y + transformY(bridge, fluid, fluidY, 16), 16, 16, 0f, 0f, 1f, 1f, sprite, color);
             fluidY += 16;
         }
 
         var leftover = height % 16;
-        drawSprite(context, x, y + transformY(bridge, fluid, fluidY, leftover), 16f, leftover, 0f, 0f, 1f, leftover / 16f, sprite, color);
+        drawSprite(context, x, y + transformY(bridge, fluid, fluidY, leftover), 16, leftover, 0f, 0f, 1f, leftover / 16f, sprite, color);
     }
 
-    private static float transformY(FluidRenderingBridge bridge, FluidReference fluid, int fluidY, float areaHeight) {
+    private static int transformY(FluidRenderingBridge bridge, FluidReference fluid, int fluidY, int areaHeight) {
         if (bridge.fillsFromTop(fluid)) {
             return fluidY;
         } else {

@@ -6,8 +6,8 @@ import juuxel.adorn.menu.TradingStationMenu;
 import juuxel.adorn.networking.SetTradeStackC2SMessage;
 import juuxel.adorn.util.Colors;
 import juuxel.adorn.util.Logging;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.menu.slot.Slot;
@@ -29,7 +29,7 @@ public final class TradingStationScreen extends AdornMenuScreen<TradingStationMe
 
     @Override
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
-        context.drawTexture(RenderLayer::getGuiTextured, BACKGROUND_TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight, 256, 256);
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, BACKGROUND_TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight, 256, 256);
     }
 
     @Override

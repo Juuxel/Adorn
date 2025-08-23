@@ -21,19 +21,19 @@ public final class AdornBlockTagGenerator extends FabricTagProvider.BlockTagProv
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        getOrCreateTagBuilder(AdornTags.PAINTED_PLANKS.block())
+        valueLookupBuilder(AdornTags.PAINTED_PLANKS.block())
             .add(AdornBlocks.PAINTED_PLANKS.values().toArray(Block[]::new));
-        getOrCreateTagBuilder(AdornTags.PAINTED_WOOD_SLABS.block())
+        valueLookupBuilder(AdornTags.PAINTED_WOOD_SLABS.block())
             .add(AdornBlocks.PAINTED_WOOD_SLABS.values().toArray(Block[]::new));
-        getOrCreateTagBuilder(AdornTags.PAINTED_WOOD_STAIRS.block())
+        valueLookupBuilder(AdornTags.PAINTED_WOOD_STAIRS.block())
             .add(AdornBlocks.PAINTED_WOOD_STAIRS.values().toArray(Block[]::new));
-        getOrCreateTagBuilder(AdornTags.PAINTED_WOOD_FENCES.block())
+        valueLookupBuilder(AdornTags.PAINTED_WOOD_FENCES.block())
             .add(AdornBlocks.PAINTED_WOOD_FENCES.values().toArray(Block[]::new));
-        getOrCreateTagBuilder(AdornTags.PAINTED_WOOD_FENCE_GATES.block())
+        valueLookupBuilder(AdornTags.PAINTED_WOOD_FENCE_GATES.block())
             .add(AdornBlocks.PAINTED_WOOD_FENCE_GATES.values().toArray(Block[]::new));
-        getOrCreateTagBuilder(AdornTags.PAINTED_WOOD_PRESSURE_PLATES.block())
+        valueLookupBuilder(AdornTags.PAINTED_WOOD_PRESSURE_PLATES.block())
             .add(AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.values().toArray(Block[]::new));
-        getOrCreateTagBuilder(AdornTags.PAINTED_WOOD_BUTTONS.block())
+        valueLookupBuilder(AdornTags.PAINTED_WOOD_BUTTONS.block())
             .add(AdornBlocks.PAINTED_WOOD_BUTTONS.values().toArray(Block[]::new));
         addPaintedVariants(AdornTags.PAINTED_CHAIRS.block(), BlockKind.CHAIR);
         addPaintedVariants(AdornTags.PAINTED_TABLES.block(), BlockKind.TABLE);
@@ -47,14 +47,14 @@ public final class AdornBlockTagGenerator extends FabricTagProvider.BlockTagProv
         addPaintedVariants(AdornTags.PAINTED_WOOD_STEPS.block(), BlockKind.STEP);
         addPaintedVariants(AdornTags.PAINTED_WOOD_SHELVES.block(), BlockKind.SHELF);
         addPaintedVariants(AdornTags.PAINTED_COFFEE_TABLES.block(), BlockKind.COFFEE_TABLE);
-        getOrCreateTagBuilder(BlockTags.PLANKS).addTag(AdornTags.PAINTED_PLANKS.block());
-        getOrCreateTagBuilder(BlockTags.WOODEN_SLABS).addTag(AdornTags.PAINTED_WOOD_SLABS.block());
-        getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS).addTag(AdornTags.PAINTED_WOOD_STAIRS.block());
-        getOrCreateTagBuilder(BlockTags.WOODEN_FENCES).addTag(AdornTags.PAINTED_WOOD_FENCES.block());
-        getOrCreateTagBuilder(BlockTags.FENCE_GATES).addTag(AdornTags.PAINTED_WOOD_FENCE_GATES.block());
-        getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES).addTag(AdornTags.PAINTED_WOOD_PRESSURE_PLATES.block());
-        getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS).addTag(AdornTags.PAINTED_WOOD_BUTTONS.block());
-        getOrCreateTagBuilder(AdornTags.STANDING_CAUTION_SIGNS)
+        builder(BlockTags.PLANKS).addTag(AdornTags.PAINTED_PLANKS.block());
+        builder(BlockTags.WOODEN_SLABS).addTag(AdornTags.PAINTED_WOOD_SLABS.block());
+        builder(BlockTags.WOODEN_STAIRS).addTag(AdornTags.PAINTED_WOOD_STAIRS.block());
+        builder(BlockTags.WOODEN_FENCES).addTag(AdornTags.PAINTED_WOOD_FENCES.block());
+        builder(BlockTags.FENCE_GATES).addTag(AdornTags.PAINTED_WOOD_FENCE_GATES.block());
+        builder(BlockTags.WOODEN_PRESSURE_PLATES).addTag(AdornTags.PAINTED_WOOD_PRESSURE_PLATES.block());
+        builder(BlockTags.WOODEN_BUTTONS).addTag(AdornTags.PAINTED_WOOD_BUTTONS.block());
+        valueLookupBuilder(AdornTags.STANDING_CAUTION_SIGNS)
             .add(AdornBlocks.CAUTION_SIGN.get())
             .add(AdornBlocks.BEE_CAUTION_SIGN.get())
             .add(AdornBlocks.BOOK_CAUTION_SIGN.get())
@@ -63,7 +63,7 @@ public final class AdornBlockTagGenerator extends FabricTagProvider.BlockTagProv
             .add(AdornBlocks.HELMET_CAUTION_SIGN.get())
             .add(AdornBlocks.RAILS_CAUTION_SIGN.get())
             .add(AdornBlocks.SURPRISE_CAUTION_SIGN.get());
-        getOrCreateTagBuilder(AdornTags.WALL_CAUTION_SIGNS)
+        valueLookupBuilder(AdornTags.WALL_CAUTION_SIGNS)
             .add(AdornBlocks.WALL_CAUTION_SIGN.get())
             .add(AdornBlocks.BEE_WALL_CAUTION_SIGN.get())
             .add(AdornBlocks.BOOK_WALL_CAUTION_SIGN.get())
@@ -72,13 +72,13 @@ public final class AdornBlockTagGenerator extends FabricTagProvider.BlockTagProv
             .add(AdornBlocks.HELMET_WALL_CAUTION_SIGN.get())
             .add(AdornBlocks.RAILS_WALL_CAUTION_SIGN.get())
             .add(AdornBlocks.SURPRISE_WALL_CAUTION_SIGN.get());
-        getOrCreateTagBuilder(AdornTags.CAUTION_SIGNS.block())
+        builder(AdornTags.CAUTION_SIGNS.block())
             .addTag(AdornTags.STANDING_CAUTION_SIGNS)
             .addTag(AdornTags.WALL_CAUTION_SIGNS);
     }
 
     private void addPaintedVariants(TagKey<Block> tag, BlockKind kind) {
-        var builder = getOrCreateTagBuilder(tag);
+        var builder = valueLookupBuilder(tag);
 
         for (BlockVariant variant : BlockVariant.PAINTED_WOODS.values()) {
             var block = BlockVariantSets.get(kind, variant);

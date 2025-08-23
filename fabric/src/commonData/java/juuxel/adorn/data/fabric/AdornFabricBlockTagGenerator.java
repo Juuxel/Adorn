@@ -18,10 +18,10 @@ public final class AdornFabricBlockTagGenerator extends FabricTagProvider.BlockT
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup registries) {
-        getOrCreateTagBuilder(BlockFunctionalityTags.CAN_CLIMB_TRAPDOOR_ABOVE)
+        valueLookupBuilder(BlockFunctionalityTags.CAN_CLIMB_TRAPDOOR_ABOVE)
             .add(AdornBlocks.STONE_LADDER.get());
 
-        getOrCreateTagBuilder(TagKey.of(RegistryKeys.BLOCK, Identifier.of("towelette", "displaceable")))
+        valueLookupBuilder(TagKey.of(RegistryKeys.BLOCK, Identifier.of("towelette", "displaceable")))
             .add(AdornBlocks.STONE_TORCH_GROUND.get());
     }
 }

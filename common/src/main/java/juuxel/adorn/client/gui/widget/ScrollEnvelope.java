@@ -97,10 +97,10 @@ public final class ScrollEnvelope extends ScissorEnvelope {
     @Override
     protected void renderContent(DrawContext context, int mouseX, int mouseY, float delta) {
         var matrices = context.getMatrices();
-        matrices.push();
-        matrices.translate(0.0, -offset, 0.0);
+        matrices.pushMatrix();
+        matrices.translate(0f, (float) -offset);
         super.renderContent(context, mouseX, (int) (mouseY + offset), delta);
-        matrices.pop();
+        matrices.popMatrix();
     }
 
     @Override

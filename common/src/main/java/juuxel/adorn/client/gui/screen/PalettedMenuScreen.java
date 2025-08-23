@@ -4,8 +4,8 @@ import juuxel.adorn.client.resources.ColorManager;
 import juuxel.adorn.menu.ContainerBlockMenu;
 import juuxel.adorn.platform.PlatformBridges;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.menu.Menu;
 import net.minecraft.registry.Registries;
@@ -30,7 +30,7 @@ public abstract class PalettedMenuScreen<M extends Menu & ContainerBlockMenu> ex
     @Override
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         var bg = getPalette().bg();
-        context.drawTexture(RenderLayer::getGuiTextured, getBackgroundTexture(), x, y, 0, 0, backgroundWidth, backgroundHeight, 256, 256, bg);
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, getBackgroundTexture(), x, y, 0, 0, backgroundWidth, backgroundHeight, 256, 256, bg);
     }
 
     @Override

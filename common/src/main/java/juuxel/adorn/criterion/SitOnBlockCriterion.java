@@ -29,7 +29,7 @@ public final class SitOnBlockCriterion extends AbstractCriterion<SitOnBlockCrite
         ).apply(instance, Conditions::new));
 
         public boolean matches(ServerPlayerEntity player, BlockPos pos) {
-            return block.test(player.getServerWorld(), pos);
+            return block.test(player.getWorld(), pos);
         }
     }
 }

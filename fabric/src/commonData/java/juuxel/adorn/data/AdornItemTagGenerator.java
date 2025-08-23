@@ -45,7 +45,7 @@ public final class AdornItemTagGenerator extends FabricTagProvider.ItemTagProvid
         copy(BlockTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_PRESSURE_PLATES);
         copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
 
-        getOrCreateTagBuilder(AdornTags.CAUTION_SIGNS.item())
+        valueLookupBuilder(AdornTags.CAUTION_SIGNS.item())
             .add(AdornItems.CAUTION_SIGN.get())
             .add(AdornItems.BEE_CAUTION_SIGN.get())
             .add(AdornItems.BOOK_CAUTION_SIGN.get())
@@ -55,7 +55,7 @@ public final class AdornItemTagGenerator extends FabricTagProvider.ItemTagProvid
             .add(AdornItems.RAILS_CAUTION_SIGN.get())
             .add(AdornItems.SURPRISE_CAUTION_SIGN.get());
 
-        getOrCreateTagBuilder(MoreConventionalItemTags.BOOKS)
+        valueLookupBuilder(MoreConventionalItemTags.BOOKS)
             // Vanilla items
             .add(Items.BOOK, Items.ENCHANTED_BOOK, Items.WRITABLE_BOOK, Items.WRITTEN_BOOK)
             // Adorn items

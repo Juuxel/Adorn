@@ -3,9 +3,9 @@ package juuxel.adorn.client.gui;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.trading.Trade;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 
 public record TradeTooltipComponent(Trade trade) implements TooltipComponent {
@@ -27,6 +27,6 @@ public record TradeTooltipComponent(Trade trade) implements TooltipComponent {
         context.drawStackOverlay(textRenderer, trade.getPrice(), x, y);
         context.drawItem(trade.getSelling(), x + 2 * 16, y);
         context.drawStackOverlay(textRenderer, trade.getSelling(), x + 2 * 16, y);
-        context.drawTexture(RenderLayer::getGuiTextured, ARROW_TEXTURE, x + 16, y, 0f, 0f, 16, 16, 16, 16);
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, ARROW_TEXTURE, x + 16, y, 0f, 0f, 16, 16, 16, 16);
     }
 }
