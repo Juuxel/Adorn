@@ -100,12 +100,7 @@ public final class AdornItems {
     private static Registered<Item> registerCautionSign(String name, Registered<? extends Block> standing, Registered<? extends Block> wall) {
         return ITEMS.register(
             name,
-            settings -> new VerticallyAttachableBlockItemWithDescription(
-                standing.get(),
-                wall.get(),
-                new Item.Settings(),
-                Direction.DOWN
-            )
+            settings -> new CautionSignItem(standing.get(), wall.get(), new Item.Settings())
         );
     }
 
