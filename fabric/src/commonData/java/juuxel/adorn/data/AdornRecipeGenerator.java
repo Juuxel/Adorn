@@ -349,10 +349,10 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
         offerCautionSignRecipe(exporter, AdornBlocks.BEE_CAUTION_SIGN.get(), MoreConventionalItemTags.HONEYCOMBS);
         offerCautionSignRecipe(exporter, AdornBlocks.BOOK_CAUTION_SIGN.get(), MoreConventionalItemTags.BOOKS);
         offerCautionSignRecipe(exporter, AdornBlocks.CLIFF_CAUTION_SIGN.get(), ConventionalItemTags.COBBLESTONES);
-        offerCautionSignRecipe(exporter, AdornBlocks.FORBIDDEN_CAUTION_SIGN.get(), ItemTags.FENCES);
+        offerCautionSignRecipe(exporter, AdornBlocks.FORBIDDEN_CAUTION_SIGN.get(), ConventionalItemTags.FENCES);
         offerCautionSignRecipe(exporter, AdornBlocks.HELMET_CAUTION_SIGN.get(), ItemTags.HEAD_ARMOR);
         offerCautionSignRecipe(exporter, AdornBlocks.RAILS_CAUTION_SIGN.get(), ItemTags.RAILS);
-        offerCautionSignRecipe(exporter, AdornBlocks.SURPRISE_CAUTION_SIGN.get(), ItemTags.EGGS);
+        offerCautionSignRecipe(exporter, AdornBlocks.SURPRISE_CAUTION_SIGN.get(), ConventionalItemTags.EGGS);
     }
 
     private void offerChimneyRecipe(RecipeExporter exporter, ItemConvertible output, EntryOrTag<Item> ingredient, boolean fromBlock) {

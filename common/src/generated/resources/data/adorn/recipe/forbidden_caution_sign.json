@@ -4,7 +4,7 @@
   "group": "adorn:caution_signs",
   "ingredients": [
     "adorn:caution_sign",
-    "#minecraft:fences"
+    "#c:fences"
   ],
   "result": {
     "count": 1,
