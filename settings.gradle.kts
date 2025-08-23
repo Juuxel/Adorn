@@ -103,15 +103,6 @@ dependencyResolutionManagement {
                 includeGroup("com.github.Virtuoel")
             }
         }
-
-        // DashLoader maven.
-        maven {
-            url = uri("https://oskarstrom.net/maven")
-
-            content {
-                includeGroup("net.oskarstrom")
-            }
-        }
     }
 
     // To prevent any annoying issues, disable adding new repositories in projects altogether.

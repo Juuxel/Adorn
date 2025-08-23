@@ -1,5 +1,4 @@
 [versions]
-dashloader = "2.0-pre2"
 emi = "1.1.10+1.21"
 fabric-loader = "0.16.12"
 fabric-api = "0.128.1+1.21.5"
@@ -19,7 +18,6 @@ neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 jankson = { module = "blue.endless:jankson", version.ref = "jankson" }
 
 # Mod dependencies
-dashloader = { module = "net.oskarstrom:DashLoader", version.ref = "dashloader" }
 emi-common = { module = "dev.emi:emi-xplat-intermediary", version.ref = "emi" }
 emi-fabric = { module = "dev.emi:emi-fabric", version.ref = "emi" }
 emi-forge = { module = "dev.emi:emi-forge", version.ref = "emi" }

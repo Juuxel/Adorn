@@ -51,15 +51,6 @@
     "promenade": "<3.1"
   },
   "breaks": {
-    "towelette": "<4.0.0",
-    "dashloader": "<2.0-pre2"
-  },
-
-  "custom": {
-    "dashloader:customobject": [
-      "juuxel.adorn.compat.dashloader.DashOptionalProperty",
-      "juuxel.adorn.compat.dashloader.DashOptionalSomeValue",
-      "juuxel.adorn.compat.dashloader.DashOptionalNoneValue"
-    ]
+    "towelette": "<4.0.0"
   }
 }
