@@ -23,3 +23,6 @@ accessible method net/minecraft/client/gui/screen/ingame/MenuScreens register (L
 
 # Texts
 accessible method net/minecraft/text/TextCodecs combine (Ljava/util/List;)Lnet/minecraft/text/MutableText;
+
+# Entity rendering
+accessible field net/minecraft/client/render/entity/LivingEntityRenderer features Ljava/util/List;
