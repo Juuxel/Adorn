@@ -10,11 +10,11 @@ import juuxel.adorn.platform.forge.client.renderer.KitchenSinkRendererForge;
 import juuxel.adorn.platform.neo.client.renderer.ConeFeatureRenderer;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.render.entity.BipedEntityRenderer;
+import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
-import net.minecraft.client.render.entity.PlayerEntityRenderer;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.state.BipedEntityRenderState;
+import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
+import net.minecraft.client.render.entity.feature.FeatureRenderer;
+import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.entity.EntityType;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
@@ -35,20 +35,31 @@ public final class AdornRenderers {
     public static void registerFeatureRenderers(EntityRenderersEvent.AddLayers event) {
         // Players
         for (var skin : event.getSkins()) {
-            if (event.getSkin(skin) instanceof PlayerEntityRenderer renderer) {
-                addConeFeatureRenderer(renderer);
-            }
+            addConeFeatureRendererIfApplicable(event.getSkin(skin));
         }
 
         // Non-player bipeds
         for (EntityType<?> entityType : event.getEntityTypes()) {
-            if (event.getRenderer(entityType) instanceof BipedEntityRenderer<?, ?, ?> renderer) {
-                addConeFeatureRenderer(renderer);
-            }
+            addConeFeatureRendererIfApplicable(event.getRenderer(entityType));
         }
     }
 
-    private static <S extends BipedEntityRenderState, M extends BipedEntityModel<S>> void addConeFeatureRenderer(LivingEntityRenderer<?, S, M> renderer) {
-        renderer.addFeature(new ConeFeatureRenderer<>(renderer));
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static void addConeFeatureRendererIfApplicable(EntityRenderer<?, ?> renderer) {
+        if (renderer instanceof LivingEntityRenderer<?, ?, ?> living && shouldAddConeFeatureRenderer(living)) {
+            living.addFeature(new ConeFeatureRenderer<>((FeatureRendererContext) living));
+        }
+    }
+
+    private static boolean shouldAddConeFeatureRenderer(LivingEntityRenderer<?, ?, ?> renderer) {
+        for (FeatureRenderer<?, ?> feature : renderer.features) {
+            if (feature instanceof ArmorFeatureRenderer<?, ?, ?>) {
+                // Assumes that the state is a subtype of BipedEntityRenderState
+                // if the armor feature is able to be on the entity renderer.
+                return true;
+            }
+        }
+
+        return false;
     }
 }

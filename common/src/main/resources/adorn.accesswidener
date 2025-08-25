@@ -31,5 +31,8 @@ accessible method net/minecraft/block/entity/BlockEntityType <init> (Lnet/minecr
 # Screens
 accessible method net/minecraft/client/gui/DrawContext drawTexturedQuad (Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/util/Identifier;IIIIFFFFI)V
 
+# Entity rendering
+accessible field net/minecraft/client/render/entity/LivingEntityRenderer features Ljava/util/List;
+
 # Data generation
 accessible field net/minecraft/data/MetadataProvider metadata Ljava/util/Map;
