@@ -69,12 +69,16 @@ public abstract class AbstractConfigScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        renderBackground(context, mouseX, mouseY, delta);
+        super.render(context, mouseX, mouseY, delta);
+        context.drawCenteredTextWithShadow(textRenderer, title, width / 2, 20, Colors.WHITE);
+    }
+
+    @Override
+    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
+        super.renderBackground(context, mouseX, mouseY, delta);
         synchronized (hearts) {
             renderHearts(context, delta);
         }
-        context.drawCenteredTextWithShadow(textRenderer, title, width / 2, 20, Colors.WHITE);
-        super.render(context, mouseX, mouseY, delta);
     }
 
     private void renderHearts(DrawContext context, float delta) {
