@@ -143,7 +143,7 @@ public final class TradingStationMenu extends Menu {
 
         if (tradingStation instanceof BlockEntity be) {
             var state = be.getCachedState();
-            player.getWorld().updateListeners(be.getPos(), state, state, Block.NOTIFY_LISTENERS);
+            player.getEntityWorld().updateListeners(be.getPos(), state, state, Block.NOTIFY_LISTENERS);
         }
     }
 

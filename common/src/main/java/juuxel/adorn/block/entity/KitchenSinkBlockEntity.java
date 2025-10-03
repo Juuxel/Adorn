@@ -26,7 +26,6 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -67,7 +66,7 @@ public abstract class KitchenSinkBlockEntity extends BlockEntity {
      */
     protected void onPickUp(FluidReference fluid, ItemStack stack, PlayerEntity player) {
         world.emitGameEvent(player, GameEvent.FLUID_PICKUP, pos);
-        player.getWorld().playSound(player, player.getX(), player.getY(), player.getZ(), getFillSound(fluid, stack).event, SoundCategory.BLOCKS, 1f, 1f);
+        player.getEntityWorld().playSound(player, player.getX(), player.getY(), player.getZ(), getFillSound(fluid, stack).event, SoundCategory.BLOCKS, 1f, 1f);
     }
 
     protected FluidItemSound getFillSound(FluidReference fluid, ItemStack stack) {
@@ -95,7 +94,7 @@ public abstract class KitchenSinkBlockEntity extends BlockEntity {
     protected void markDirtyAndSync() {
         markDirty();
 
-        if (!world.isClient) {
+        if (!world.isClient()) {
             world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
         }
     }

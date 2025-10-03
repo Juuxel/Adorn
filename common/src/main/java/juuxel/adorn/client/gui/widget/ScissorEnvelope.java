@@ -1,6 +1,7 @@
 package juuxel.adorn.client.gui.widget;
 
 import juuxel.adorn.client.gui.Scissors;
+import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 
 public abstract class ScissorEnvelope extends WidgetEnvelope {
@@ -36,21 +37,21 @@ public abstract class ScissorEnvelope extends WidgetEnvelope {
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (!isMouseWithinScissorForInput(mouseX, mouseY)) return false;
-        return super.mouseClicked(mouseX, mouseY, button);
+    public boolean mouseClicked(Click click, boolean doubled) {
+        if (!isMouseWithinScissorForInput(click.x(), click.y())) return false;
+        return super.mouseClicked(click, doubled);
     }
 
     @Override
-    public boolean mouseReleased(double mouseX, double mouseY, int button) {
-        if (!isMouseWithinScissorForInput(mouseX, mouseY)) return false;
-        return super.mouseReleased(mouseX, mouseY, button);
+    public boolean mouseReleased(Click click) {
+        if (!isMouseWithinScissorForInput(click.x(), click.y())) return false;
+        return super.mouseReleased(click);
     }
 
     @Override
-    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
-        if (!isMouseWithinScissorForInput(mouseX, mouseY)) return false;
-        return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
+    public boolean mouseDragged(Click click, double offsetX, double offsetY) {
+        if (!isMouseWithinScissorForInput(click.x(), click.y())) return false;
+        return super.mouseDragged(click, offsetX, offsetY);
     }
 
     @Override

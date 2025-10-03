@@ -59,7 +59,7 @@ public final class BrewerBlock extends VisibleBlockWithEntity implements BlockWi
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if (world.isClient) return ActionResult.SUCCESS;
+        if (world.isClient()) return ActionResult.SUCCESS;
 
         if (world.getBlockEntity(pos) instanceof BrewerBlockEntity brewer) {
             player.openMenu(brewer);
@@ -114,7 +114,7 @@ public final class BrewerBlock extends VisibleBlockWithEntity implements BlockWi
     }
 
     @Override
-    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+    protected int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction) {
         return world.getBlockEntity(pos) instanceof BrewerBlockEntity brewer ? brewer.calculateComparatorOutput() : 0;
     }
 

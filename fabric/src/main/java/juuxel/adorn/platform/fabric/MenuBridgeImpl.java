@@ -28,7 +28,7 @@ public final class MenuBridgeImpl implements MenuBridge {
             return;
         }
 
-        if (!player.getWorld().isClient) {
+        if (!player.getEntityWorld().isClient()) {
             // ^ technically not needed as vanilla safeguards against it,
             // but no need to create the extra factory on the client
 

@@ -33,7 +33,7 @@ public final class RegistrarImpl<T> extends AbstractRegistrar<T> implements Keye
     }
 
     private <U extends T> Registered.WithKey<T, U> register(RegistryKey<T> key, U value) {
-        var entry = Registry.registerReference(registry, key, value);
+        RegistryEntry.Reference<T> entry = Registry.registerReference(registry, key, value);
         objects.add(value);
         return new Registered.WithKey<>() {
             @Override

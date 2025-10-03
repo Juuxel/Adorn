@@ -136,7 +136,7 @@ public final class WateringCanItem extends Item {
             stack.set(AdornComponentTypes.FERTILIZER_LEVEL.get(), FertilizerLevel.of(fertilizerLevel - 1));
         }
 
-        if (!world.isClient) {
+        if (!world.isClient()) {
             if (block instanceof FarmlandBlock) {
                 waterFarmlandBlock(world, pos, state);
             } else if (!state.isFullCube(world, pos)) { // We can't water through full cubes

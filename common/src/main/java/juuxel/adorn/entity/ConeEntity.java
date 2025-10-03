@@ -74,7 +74,7 @@ public final class ConeEntity extends Entity {
             travel();
         }
 
-        if (!getWorld().isClient() || isLogicalSideForUpdatingMovement()) {
+        if (!getEntityWorld().isClient() || isLogicalSideForUpdatingMovement()) {
             tickBlockCollision();
         }
 
@@ -82,7 +82,7 @@ public final class ConeEntity extends Entity {
     }
 
     private void tickConeCramming() {
-        List<Entity> crammed = getWorld().getCrammedEntities(this, getBoundingBox());
+        List<Entity> crammed = getEntityWorld().getCrammedEntities(this, getBoundingBox());
 
         for (Entity entity : crammed) {
             if (entity.getType() == AdornEntities.CONE.get()) {
@@ -103,7 +103,7 @@ public final class ConeEntity extends Entity {
         applyGravity();
         move(MovementType.SELF, getVelocity());
         BlockPos pos = getVelocityAffectingPos();
-        float slipperiness = isOnGround() ? BlockBridge.get().getSlipperiness(getWorld().getBlockState(pos), getWorld(), pos, this) : 1;
+        float slipperiness = isOnGround() ? BlockBridge.get().getSlipperiness(getEntityWorld().getBlockState(pos), getEntityWorld(), pos, this) : 1;
         slipperiness = Math.min(1f, slipperiness);
         double horizontalSpeedMultiplier = slipperiness / (0.95 * getVariant().value().weight());
         var velocity = getVelocity();
@@ -114,14 +114,14 @@ public final class ConeEntity extends Entity {
         applyFluidGravity();
         move(MovementType.SELF, getVelocity());
         var fluidState = getFluidStateAtPos();
-        double horizontalDrag = Math.exp(-0.03 * fluidState.getFluid().getTickRate(getWorld()));
+        double horizontalDrag = Math.exp(-0.03 * fluidState.getFluid().getTickRate(getEntityWorld()));
         float verticalDrag = 0.8f;
         var velocity = getVelocity();
         double verticalVelocity = velocity.y;
 
         if (fluidState.isIn(getVariant().value().floatsIn())) {
-            boolean surfacing = getWorld().getFluidState(getBlockPos().up()).isEmpty();
-            double gravityCoefficient = surfacing ? fluidState.getHeight(getWorld(), getBlockPos()) - MathHelper.fractionalPart(getY()) : 1;
+            boolean surfacing = getEntityWorld().getFluidState(getBlockPos().up()).isEmpty();
+            double gravityCoefficient = surfacing ? fluidState.getHeight(getEntityWorld(), getBlockPos()) - MathHelper.fractionalPart(getY()) : 1;
             verticalVelocity += gravityCoefficient * getFinalGravity();
         }
 
@@ -130,7 +130,7 @@ public final class ConeEntity extends Entity {
     }
 
     private FluidState getFluidStateAtPos() {
-        return getWorld().getFluidState(getBlockPos());
+        return getEntityWorld().getFluidState(getBlockPos());
     }
 
     private void applyFluidGravity() {

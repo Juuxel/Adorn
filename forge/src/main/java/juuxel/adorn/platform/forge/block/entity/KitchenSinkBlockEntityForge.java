@@ -20,38 +20,42 @@ import net.minecraft.util.math.MathHelper;
 import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.FluidUtil;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidUtil;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
+import net.neoforged.neoforge.transfer.transaction.TransactionContext;
 
 public final class KitchenSinkBlockEntityForge extends KitchenSinkBlockEntity implements BlockEntityWithFluidTank {
     // Bottles are 250 l in Adorn *on Forge*.
     private static final int BOTTLE_LITRES = 250;
-    private static final FluidStack BOTTLE_WATER = new FluidStack(Fluids.WATER, BOTTLE_LITRES);
+    private static final int CAPACITY = FluidType.BUCKET_VOLUME;
+    private static final FluidResource BOTTLE_WATER = FluidResource.of(Fluids.WATER);
 
-    private final FluidTank tank = new FluidTank(FluidType.BUCKET_VOLUME) {
+    private final FluidStacksResourceHandler tank = new FluidStacksResourceHandler(1, CAPACITY) {
         @Override
-        public FluidStack drain(int maxDrain, FluidAction action) {
-            if (getWorld() instanceof ServerWorld world && supportsInfiniteExtraction(world, fluid.getFluid())) {
-                return fluid.copyWithAmount(Math.min(getFluidAmount(), maxDrain));
+        public int extract(int index, FluidResource resource, int amount, TransactionContext transaction) {
+            if (index == 0 && resource.equals(getResource(0)) && getWorld() instanceof ServerWorld world && supportsInfiniteExtraction(world, resource.getFluid())) {
+                return Math.min(getAmountAsInt(0), amount);
             }
 
-            return super.drain(maxDrain, action);
+            return super.extract(index, resource, amount, transaction);
         }
 
         @Override
-        protected void onContentsChanged() {
+        protected void onContentsChanged(int index, FluidStack previousContents) {
             markDirtyAndSync();
         }
     };
-    private final FluidReference fluidReference = new FluidTankReference(tank);
+    private final FluidReference fluidReference = new FluidTankReference(tank, 0);
 
     public KitchenSinkBlockEntityForge(BlockPos pos, BlockState state) {
         super(pos, state);
     }
 
     @Override
-    public FluidTank getTank() {
+    public ResourceHandler<FluidResource> getTank() {
         return tank;
     }
 
@@ -62,49 +66,35 @@ public final class KitchenSinkBlockEntityForge extends KitchenSinkBlockEntity im
 
     @Override
     public boolean interactWithItem(ItemStack stack, PlayerEntity player, Hand hand) {
-        if (tank.getSpace() > 0) {
-            // The player in the tryEmpty/FillContainer calls is only used for sound.
-            var result = FluidUtil.tryEmptyContainer(stack, tank, tank.getSpace(), null, true);
-
-            if (result.isSuccess()) {
-                onFill(stack, player);
-                setStackOrInsert(player, hand, result.result);
-                markDirtyAndSync();
-                return true;
-            }
-        }
-
-        // Store before filling the item from the tank
-        var tankFluid = fluidReference.createSnapshot();
-        var result = FluidUtil.tryFillContainer(stack, tank, tank.getFluidAmount(), null, true);
-
-        if (result.isSuccess()) {
-            onPickUp(tankFluid, stack, player);
-            setStackOrInsert(player, hand, result.result);
+        if (FluidUtil.interactWithFluidHandler(player, hand, pos, tank)) {
             markDirtyAndSync();
             return true;
         }
 
+        var tankFluid = fluidReference.createSnapshot();
+
         // Special case bottles since they don't have a fluid handler.
         if (stack.isOf(Items.GLASS_BOTTLE)) {
-            var drainingResult = tank.drain(BOTTLE_WATER, IFluidHandler.FluidAction.SIMULATE);
-            if (drainingResult.getAmount() >= BOTTLE_LITRES) {
-                // Execute the draining for real this time.
-                tank.drain(BOTTLE_WATER, IFluidHandler.FluidAction.EXECUTE);
-                onPickUp(tankFluid, stack, player);
-                var bottle = PotionContentsComponent.createStack(Items.POTION, Potions.WATER);
-                setStackOrInsert(player, hand, bottle);
-                return true;
+            try (var tx = Transaction.open(null)) {
+                var drainingResult = tank.extract(BOTTLE_WATER, BOTTLE_LITRES, tx);
+                if (drainingResult >= BOTTLE_LITRES) {
+                    tx.commit();
+                    onPickUp(tankFluid, stack, player);
+                    var bottle = PotionContentsComponent.createStack(Items.POTION, Potions.WATER);
+                    setStackOrInsert(player, hand, bottle);
+                    return true;
+                }
             }
-        } else if (stack.isOf(Items.POTION)) {
-            var spaceForWater = tank.isEmpty() || (FluidStack.isSameFluidSameComponents(tank.getFluid(), BOTTLE_WATER) && tank.getSpace() >= BOTTLE_LITRES);
-
-            if (spaceForWater && isWaterBottle(stack)) {
-                onFill(stack, player);
-                tank.fill(BOTTLE_WATER.copy(), IFluidHandler.FluidAction.EXECUTE);
-                setStackOrInsert(player, hand, new ItemStack(Items.GLASS_BOTTLE));
-                markDirtyAndSync();
-                return true;
+        } else if (stack.isOf(Items.POTION) && isWaterBottle(stack)) {
+            try (var tx = Transaction.open(null)) {
+                int inserted = tank.insert(BOTTLE_WATER, BOTTLE_LITRES, tx);
+                if (inserted >= BOTTLE_LITRES) {
+                    tx.commit();
+                    onFill(stack, player);
+                    setStackOrInsert(player, hand, new ItemStack(Items.GLASS_BOTTLE));
+                    markDirtyAndSync();
+                    return true;
+                }
             }
         }
 
@@ -124,9 +114,9 @@ public final class KitchenSinkBlockEntityForge extends KitchenSinkBlockEntity im
 
     @Override
     public boolean clearFluidsWithSponge() {
-        if (!tank.getFluid().getFluid().isIn(FluidTags.WATER) || tank.isEmpty()) return false;
+        if (!tank.getResource(0).getFluid().isIn(FluidTags.WATER) || tank.getAmountAsInt(0) == 0) return false;
 
-        tank.getFluid().setAmount(0);
+        tank.set(0, FluidResource.EMPTY, 0);
         markDirtyAndSync();
         return true;
     }
@@ -157,6 +147,7 @@ public final class KitchenSinkBlockEntityForge extends KitchenSinkBlockEntity im
 
     @Override
     public int calculateComparatorOutput() {
-        return tank.isEmpty() ? 0 : 1 + MathHelper.floor(14 * (float) tank.getFluidAmount() / (float) tank.getCapacity());
+        int amount = tank.getAmountAsInt(0);
+        return amount == 0 ? 0 : 1 + MathHelper.floor(14 * (float) amount / (float) CAPACITY);
     }
 }

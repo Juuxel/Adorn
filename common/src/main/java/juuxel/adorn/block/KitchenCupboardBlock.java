@@ -2,7 +2,6 @@ package juuxel.adorn.block;
 
 import juuxel.adorn.block.entity.KitchenCupboardBlockEntity;
 import juuxel.adorn.block.entity.SimpleContainerBlockEntity;
-import juuxel.adorn.block.variant.BlockVariant;
 import juuxel.adorn.lib.AdornStats;
 import juuxel.adorn.platform.PlatformBridges;
 import net.minecraft.block.AbstractBlock;
@@ -16,6 +15,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -34,7 +34,7 @@ public final class KitchenCupboardBlock extends AbstractKitchenCounterBlock impl
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if (world.isClient) return ActionResult.SUCCESS;
+        if (world.isClient()) return ActionResult.SUCCESS;
 
         if (world.getBlockEntity(pos) instanceof KitchenCupboardBlockEntity cupboard) {
             PlatformBridges.get().getMenus().open(player, cupboard, pos);
@@ -55,7 +55,7 @@ public final class KitchenCupboardBlock extends AbstractKitchenCounterBlock impl
     }
 
     @Override
-    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+    protected int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction) {
         return Menu.calculateComparatorOutput(world.getBlockEntity(pos));
     }
 

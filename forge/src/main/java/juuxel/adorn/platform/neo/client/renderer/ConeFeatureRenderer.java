@@ -2,7 +2,7 @@ package juuxel.adorn.platform.neo.client.renderer;
 
 import juuxel.adorn.client.renderer.ConeEntityRenderer;
 import juuxel.adorn.item.AdornItems;
-import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
@@ -16,10 +16,10 @@ public final class ConeFeatureRenderer<S extends BipedEntityRenderState, M exten
     }
 
     @Override
-    public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, S state, float limbAngle, float limbDistance) {
+    public void render(MatrixStack matrices, OrderedRenderCommandQueue queue, int light, S state, float limbAngle, float limbDistance) {
         ItemStack headStack = state.equippedHeadStack;
         if (headStack.isOf(AdornItems.CONE.get())) {
-            ConeEntityRenderer.renderOnHead(matrices, vertexConsumers, headStack, light, getContextModel());
+            ConeEntityRenderer.renderOnHead(matrices, queue, headStack, light, state.outlineColor, getContextModel());
         }
     }
 }

@@ -7,7 +7,7 @@ public final class EntityBridgeNeo implements EntityBridge {
     @Override
     public boolean isInFluid(Entity entity) {
         // See LivingEntity
-        var fluidState = entity.getWorld().getFluidState(entity.getBlockPos());
+        var fluidState = entity.getEntityWorld().getFluidState(entity.getBlockPos());
         return entity.isTouchingWater() || entity.isInLava() || entity.isInFluidType(fluidState);
     }
 }

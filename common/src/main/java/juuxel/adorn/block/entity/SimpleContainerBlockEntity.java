@@ -4,6 +4,7 @@ import juuxel.adorn.menu.ContainerBlockMenu;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ViewerCountManager;
+import net.minecraft.entity.ContainerUser;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -27,7 +28,7 @@ public abstract class SimpleContainerBlockEntity extends BaseContainerBlockEntit
         }
 
         @Override
-        protected boolean isPlayerViewing(PlayerEntity player) {
+        public boolean isPlayerViewing(PlayerEntity player) {
             return player.menu instanceof ContainerBlockMenu cbm && cbm.getInventory() == SimpleContainerBlockEntity.this;
         }
     };
@@ -37,13 +38,17 @@ public abstract class SimpleContainerBlockEntity extends BaseContainerBlockEntit
     }
 
     @Override
-    public void onOpen(PlayerEntity player) {
-        viewerCountManager.openContainer(player, world, pos, getCachedState());
+    public void onOpen(ContainerUser user) {
+        if (!removed && !user.asLivingEntity().isSpectator()) {
+            viewerCountManager.openContainer(user.asLivingEntity(), world, pos, getCachedState(), user.getContainerInteractionRange());
+        }
     }
 
     @Override
-    public void onClose(PlayerEntity player) {
-        viewerCountManager.closeContainer(player, world, pos, getCachedState());
+    public void onClose(ContainerUser user) {
+        if (!removed && !user.asLivingEntity().isSpectator()) {
+            viewerCountManager.closeContainer(user.asLivingEntity(), world, pos, getCachedState());
+        }
     }
 
     public void onScheduledTick() {

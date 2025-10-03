@@ -2,51 +2,49 @@ package juuxel.adorn.platform.forge.util;
 
 import juuxel.adorn.fluid.FluidReference;
 import juuxel.adorn.fluid.FluidUnit;
-import juuxel.adorn.fluid.FluidVolume;
 import net.minecraft.component.ComponentChanges;
 import net.minecraft.fluid.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.StacksResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
 
 public final class FluidTankReference extends FluidReference {
-    private final FluidTank tank;
+    private final StacksResourceHandler<FluidStack, FluidResource> tank;
+    private final int slot;
 
-    public FluidTankReference(FluidTank tank) {
+    public FluidTankReference(StacksResourceHandler<FluidStack, FluidResource> tank, int slot) {
         this.tank = tank;
+        this.slot = slot;
     }
 
-    public FluidTank getTank() {
+    public ResourceHandler<FluidResource> getTank() {
         return tank;
     }
 
     @Override
     public Fluid getFluid() {
-        return tank.getFluid().getFluid();
+        return tank.getResource(slot).getFluid();
     }
 
     @Override
-    public void setFluid(Fluid fluid) {
-        tank.setFluid(new FluidStack(fluid.getRegistryEntry(), tank.getFluid().getAmount(), tank.getFluid().getComponentsPatch()));
+    public void setFluid(Fluid fluid, long amount, ComponentChanges components) {
+        tank.set(slot, FluidResource.of(fluid, components), (int) amount);
     }
 
     @Override
     public long getAmount() {
-        return tank.getFluid().getAmount();
+        return tank.getAmountAsLong(slot);
     }
 
     @Override
     public void setAmount(long amount) {
-        tank.getFluid().setAmount((int) amount);
+        tank.set(slot, tank.getResource(slot), (int) amount);
     }
 
     @Override
     public ComponentChanges getComponents() {
-        return tank.getFluid().getComponentsPatch();
-    }
-
-    @Override
-    public void setComponents(ComponentChanges changes) {
-        tank.getFluid().getComponents().setChanges(changes);
+        return tank.getResource(slot).getComponentsPatch();
     }
 
     @Override
@@ -60,13 +58,9 @@ public final class FluidTankReference extends FluidReference {
      */
     public static FluidStack toFluidStack(FluidReference reference) {
         if (reference instanceof FluidTankReference ftr) {
-            return ftr.tank.getFluid();
+            return ftr.tank.getResource(ftr.slot).toStack(ftr.tank.getAmountAsInt(ftr.slot));
         } else {
-            return new FluidStack(reference.getFluid().getRegistryEntry(), (int) FluidUnit.convert(reference.getAmount(), reference.getUnit(), FluidUnit.LITRE), reference.getComponents());
+            return new FluidStack(reference.getFluid(), (int) FluidUnit.convert(reference.getAmount(), reference.getUnit(), FluidUnit.LITRE), reference.getComponents());
         }
-    }
-
-    public static FluidVolume toFluidVolume(FluidStack stack) {
-        return new FluidVolume(stack.getFluid(), stack.getAmount(), stack.getComponentsPatch(), FluidUnit.LITRE);
     }
 }

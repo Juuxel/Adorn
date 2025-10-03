@@ -1,7 +1,8 @@
 package juuxel.adorn.platform.forge.block.entity;
 
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
 
 public interface BlockEntityWithFluidTank {
-    FluidTank getTank();
+    ResourceHandler<FluidResource> getTank();
 }

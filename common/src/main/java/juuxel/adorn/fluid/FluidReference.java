@@ -17,12 +17,11 @@ import java.util.Objects;
  */
 public abstract class FluidReference implements HasFluidAmount {
     public abstract Fluid getFluid();
-    public abstract void setFluid(Fluid fluid);
+    public abstract void setFluid(Fluid fluid, long amount, ComponentChanges components);
 
     public abstract void setAmount(long amount);
 
     public abstract ComponentChanges getComponents();
-    public abstract void setComponents(ComponentChanges components);
 
     public boolean isEmpty() {
         return getFluid() == Fluids.EMPTY || getAmount() == 0;
@@ -43,13 +42,12 @@ public abstract class FluidReference implements HasFluidAmount {
 
     protected void readWithoutUnit(RegistryByteBuf buf) {
         if (buf.readBoolean()) {
-            setFluid(Registries.FLUID.get(buf.readVarInt()));
-            setAmount(buf.readVarLong());
-            setComponents(ComponentChanges.PACKET_CODEC.decode(buf));
+            Fluid fluid = Registries.FLUID.get(buf.readVarInt());
+            long amount = buf.readVarLong();
+            ComponentChanges components = ComponentChanges.PACKET_CODEC.decode(buf);
+            setFluid(fluid, amount, components);
         } else {
-            setFluid(Fluids.EMPTY);
-            setAmount(0);
-            setComponents(ComponentChanges.EMPTY);
+            setFluid(Fluids.EMPTY, 0, ComponentChanges.EMPTY);
         }
     }
 

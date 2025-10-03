@@ -117,7 +117,7 @@ public final class ShelfBlock extends VisibleBlockWithEntity implements Waterlog
                 copy.setCount(1);
                 inventory.setStack(slot, copy);
                 be.markDirty();
-                if (!world.isClient) {
+                if (!world.isClient()) {
                     PlatformBridges.get().getNetwork().syncBlockEntity(be);
                     player.incrementStat(AdornStats.INTERACT_WITH_SHELF);
                 }
@@ -127,7 +127,7 @@ public final class ShelfBlock extends VisibleBlockWithEntity implements Waterlog
                 }
             }
         } else {
-            if (!world.isClient) {
+            if (!world.isClient()) {
                 if (player.getStackInHand(hand).isEmpty()) {
                     player.setStackInHand(hand, existing);
                 } else {
@@ -136,7 +136,7 @@ public final class ShelfBlock extends VisibleBlockWithEntity implements Waterlog
             }
             inventory.setStack(slot, ItemStack.EMPTY);
             be.markDirty();
-            if (!world.isClient) {
+            if (!world.isClient()) {
                 PlatformBridges.get().getNetwork().syncBlockEntity(be);
                 player.incrementStat(AdornStats.INTERACT_WITH_SHELF);
             }
@@ -201,7 +201,7 @@ public final class ShelfBlock extends VisibleBlockWithEntity implements Waterlog
     }
 
     @Override
-    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+    protected int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction) {
         return Menu.calculateComparatorOutput(world.getBlockEntity(pos));
     }
 

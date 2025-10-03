@@ -39,7 +39,7 @@ public final class SeatEntity extends Entity {
         super(type, world);
         noClip = true;
         setInvulnerable(true);
-        seatPos = BlockPos.ofFloored(getPos());
+        seatPos = BlockPos.ofFloored(getEntityPos());
     }
 
     private void setSeatPos(BlockPos seatPos) {
@@ -48,7 +48,7 @@ public final class SeatEntity extends Entity {
     }
 
     public void setPos(BlockPos pos) {
-        if (getWorld().isClient) {
+        if (getEntityWorld().isClient()) {
             throw new IllegalStateException("setPos must be called on the logical server");
         }
         updatePosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
@@ -69,12 +69,12 @@ public final class SeatEntity extends Entity {
     @Override
     public void remove(RemovalReason reason) {
         removeAllPassengers();
-        if (!getWorld().isClient) {
+        if (!getEntityWorld().isClient()) {
             PlatformBridges.get().getNetwork().sendToTracking(this, new EntityPassengersSetS2CPacket(this));
         }
-        var state = getWorld().getBlockState(seatPos);
+        var state = getEntityWorld().getBlockState(seatPos);
         if (state.getBlock() instanceof SeatBlock) {
-            getWorld().setBlockState(seatPos, state.with(SeatBlock.OCCUPIED, false));
+            getEntityWorld().setBlockState(seatPos, state.with(SeatBlock.OCCUPIED, false));
         }
         super.remove(reason);
     }
@@ -107,11 +107,11 @@ public final class SeatEntity extends Entity {
     @Override
     protected Vec3d getPassengerAttachmentPos(Entity passenger, EntityDimensions dimensions, float scaleFactor) {
         var seatPos = dataTracker.get(SEAT_POS);
-        var state = getWorld().getBlockState(seatPos);
+        var state = getEntityWorld().getBlockState(seatPos);
         var block = state.getBlock();
 
         // Add the offset that comes from the block's shape
-        var blockOffset = block instanceof SeatBlock seat ? seat.getSittingOffset(getWorld(), state, seatPos) : 0.0;
+        var blockOffset = block instanceof SeatBlock seat ? seat.getSittingOffset(getEntityWorld(), state, seatPos) : 0.0;
         // Remove the inherent offset that comes from this entity not being directly where the block is
         var posOffset = getY() - seatPos.getY();
 
@@ -130,7 +130,7 @@ public final class SeatEntity extends Entity {
     @Override
     public Vec3d updatePassengerForDismount(LivingEntity passenger) {
         BlockPos seatPos = dataTracker.get(SEAT_POS);
-        BlockState state = getWorld().getBlockState(seatPos);
+        BlockState state = getEntityWorld().getBlockState(seatPos);
         Block block = state.getBlock();
         Direction preferred = block instanceof SeatBlock seat ? seat.getPreferredDismountDirection(state, passenger) : passenger.getHorizontalFacing();
 
@@ -158,7 +158,7 @@ public final class SeatEntity extends Entity {
                 pos.set(seatPos.getX(), seatPos.getY() + y, seatPos.getZ());
                 if (direction != null) pos.move(direction);
 
-                double height = getWorld().getDismountHeight(pos);
+                double height = getEntityWorld().getDismountHeight(pos);
 
                 if (Dismounting.canDismountInBlock(height)) {
                     positionCandidates.add(Vec3d.ofCenter(pos, height));
@@ -168,7 +168,7 @@ public final class SeatEntity extends Entity {
 
         for (EntityPose pose : passenger.getPoses()) {
             for (Vec3d candidate : positionCandidates) {
-                if (Dismounting.canPlaceEntityAt(getWorld(), candidate, passenger, pose)) {
+                if (Dismounting.canPlaceEntityAt(getEntityWorld(), candidate, passenger, pose)) {
                     passenger.setPose(pose);
                     return candidate;
                 }

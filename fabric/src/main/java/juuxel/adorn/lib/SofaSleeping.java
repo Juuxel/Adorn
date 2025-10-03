@@ -12,10 +12,10 @@ public final class SofaSleeping {
             state.getBlock() instanceof SofaBlock ? ActionResult.SUCCESS : ActionResult.PASS);
 
         EntitySleepEvents.ALLOW_SETTING_SPAWN.register((player, sleepingPos) ->
-            !(player.getWorld().getBlockState(sleepingPos).getBlock() instanceof SofaBlock));
+            !(player.getEntityWorld().getBlockState(sleepingPos).getBlock() instanceof SofaBlock));
 
         EntitySleepEvents.ALLOW_SLEEP_TIME.register((player, sleepingPos, vanillaResult) -> {
-            if (player.getWorld().isDay() && player.getWorld().getBlockState(sleepingPos).getBlock() instanceof SofaBlock) {
+            if (player.getEntityWorld().isDay() && player.getEntityWorld().getBlockState(sleepingPos).getBlock() instanceof SofaBlock) {
                 return ActionResult.SUCCESS;
             }
 
@@ -23,8 +23,8 @@ public final class SofaSleeping {
         });
 
         EntitySleepEvents.MODIFY_SLEEPING_DIRECTION.register((entity, sleepingPos, sleepingDirection) -> {
-            if (entity.getWorld().getBlockState(sleepingPos).getBlock() instanceof SofaBlock) {
-                var direction = SofaBlock.getSleepingDirection(entity.getWorld(), sleepingPos, true);
+            if (entity.getEntityWorld().getBlockState(sleepingPos).getBlock() instanceof SofaBlock) {
+                var direction = SofaBlock.getSleepingDirection(entity.getEntityWorld(), sleepingPos, true);
                 return direction != null ? direction.getOpposite() : null;
             }
 
@@ -35,11 +35,11 @@ public final class SofaSleeping {
             var pos = player.getSleepingPosition().orElse(null);
             if (pos == null) return true;
 
-            if (player.getWorld().getBlockState(pos).getBlock() instanceof SofaBlock) {
-                if (player.getWorld().isDay()) {
+            if (player.getEntityWorld().getBlockState(pos).getBlock() instanceof SofaBlock) {
+                if (player.getEntityWorld().isDay()) {
                     return false;
                 } else {
-                    return player.getWorld() instanceof ServerWorld world && world.getGameRules().getBoolean(AdornGameRules.SKIP_NIGHT_ON_SOFAS);
+                    return player.getEntityWorld() instanceof ServerWorld world && world.getGameRules().getBoolean(AdornGameRules.SKIP_NIGHT_ON_SOFAS);
                 }
             } else {
                 return true; // go on
@@ -47,7 +47,7 @@ public final class SofaSleeping {
         });
 
         EntitySleepEvents.SET_BED_OCCUPATION_STATE.register((entity, pos, state, occupied) -> {
-            var world = entity.getWorld();
+            var world = entity.getEntityWorld();
 
             if (state.getBlock() instanceof SofaBlock) {
                 world.setBlockState(pos, state.with(SofaBlock.OCCUPIED, occupied));
@@ -61,8 +61,8 @@ public final class SofaSleeping {
 
         EntitySleepEvents.MODIFY_WAKE_UP_POSITION.register((entity, sleepingPos, state, wakeUpPos) -> {
             if (state.getBlock() instanceof SofaBlock) {
-                var direction = SofaBlock.getSleepingDirection(entity.getWorld(), sleepingPos, true);
-                return BedBlock.findWakeUpPosition(entity.getType(), entity.getWorld(), sleepingPos, direction, entity.getYaw()).orElse(null);
+                var direction = SofaBlock.getSleepingDirection(entity.getEntityWorld(), sleepingPos, true);
+                return BedBlock.findWakeUpPosition(entity.getType(), entity.getEntityWorld(), sleepingPos, direction, entity.getYaw()).orElse(null);
             } else {
                 return wakeUpPos;
             }

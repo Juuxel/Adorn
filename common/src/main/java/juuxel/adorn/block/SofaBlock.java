@@ -79,7 +79,7 @@ public class SofaBlock extends SeatBlock implements Waterloggable, SneakClickHan
             world.setBlockState(pos, AdornBlocks.SOFAS.getEager(dye.getColor()).getStateWithProperties(state));
             world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.8f);
             if (!player.getAbilities().creativeMode) stack.decrement(1);
-            if (!world.isClient) player.incrementStat(AdornStats.DYE_SOFA);
+            if (!world.isClient()) player.incrementStat(AdornStats.DYE_SOFA);
             return ActionResult.SUCCESS;
         }
 
@@ -96,7 +96,7 @@ public class SofaBlock extends SeatBlock implements Waterloggable, SneakClickHan
         }
 
         if (BedBlock.isBedWorking(world) && sleepingDirection != null) {
-            if (!world.isClient) {
+            if (!world.isClient()) {
                 player.trySleep(pos).ifLeft(reason -> {
                     if (reason.getMessage() != null) {
                         player.sendMessage(reason.getMessage(), true);

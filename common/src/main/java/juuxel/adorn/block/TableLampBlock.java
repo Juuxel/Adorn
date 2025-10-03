@@ -78,13 +78,13 @@ public final class TableLampBlock extends Block implements Waterloggable, BlockW
             world.setBlockState(pos, AdornBlocks.TABLE_LAMPS.getEager(dye.getColor()).getStateWithProperties(state));
             world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.8f);
             if (!player.getAbilities().creativeMode) stack.decrement(1);
-            if (!world.isClient) player.incrementStat(AdornStats.DYE_TABLE_LAMP);
+            if (!world.isClient()) player.incrementStat(AdornStats.DYE_TABLE_LAMP);
         } else {
             var wasLit = state.get(LIT);
             world.setBlockState(pos, state.with(LIT, !wasLit));
             var pitch = wasLit ? 0.5f : 0.6f;
             world.playSound(player, pos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 0.3f, pitch);
-            if (!world.isClient) player.incrementStat(AdornStats.INTERACT_WITH_TABLE_LAMP);
+            if (!world.isClient()) player.incrementStat(AdornStats.INTERACT_WITH_TABLE_LAMP);
         }
         return ActionResult.SUCCESS;
     }
@@ -112,7 +112,7 @@ public final class TableLampBlock extends Block implements Waterloggable, BlockW
     }
 
     @Override
-    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+    protected int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction) {
         return state.get(LIT) ? 15 : 0;
     }
 

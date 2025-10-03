@@ -27,8 +27,9 @@ public final class FluidStorageReference extends FluidReference {
     }
 
     @Override
-    public void setFluid(Fluid fluid) {
-        storage.variant = FluidVariant.of(fluid, storage.variant.getComponents());
+    public void setFluid(Fluid fluid, long amount, ComponentChanges components) {
+        storage.variant = FluidVariant.of(fluid, components);
+        setAmount(amount);
     }
 
     @Override
@@ -44,11 +45,6 @@ public final class FluidStorageReference extends FluidReference {
     @Override
     public ComponentChanges getComponents() {
         return storage.variant.getComponents();
-    }
-
-    @Override
-    public void setComponents(ComponentChanges components) {
-        storage.variant = FluidVariant.of(storage.variant.getFluid(), components);
     }
 
     @Override

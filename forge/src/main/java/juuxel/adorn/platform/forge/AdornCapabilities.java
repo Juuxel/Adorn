@@ -12,24 +12,25 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.capabilities.ICapabilityProvider;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.wrapper.InvWrapper;
-import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.item.VanillaContainerWrapper;
+import net.neoforged.neoforge.transfer.item.WorldlyContainerWrapper;
 import org.jetbrains.annotations.Nullable;
 
 public final class AdornCapabilities {
-    private static final IBlockCapabilityProvider<IItemHandler, @Nullable Direction> INVENTORY_WRAPPER_FOR_BLOCK =
+    private static final IBlockCapabilityProvider<ResourceHandler<ItemResource>, @Nullable Direction> INVENTORY_WRAPPER_FOR_BLOCK =
         (world, pos, state, blockEntity, side) -> blockEntity instanceof Inventory inventory ? getInventoryWrapper(inventory, side) : null;
-    private static final ICapabilityProvider<BlockEntity, @Nullable Direction, IItemHandler> INVENTORY_WRAPPER_FOR_BLOCK_ENTITY =
+    private static final ICapabilityProvider<BlockEntity, @Nullable Direction, ResourceHandler<ItemResource>> INVENTORY_WRAPPER_FOR_BLOCK_ENTITY =
         (blockEntity, side) -> blockEntity instanceof Inventory inventory ? getInventoryWrapper(inventory, side) : null;
-    private static final IBlockCapabilityProvider<IFluidHandler, @Nullable Direction> FLUID_TANK_FOR_BLOCK =
+    private static final IBlockCapabilityProvider<ResourceHandler<FluidResource>, @Nullable Direction> FLUID_TANK_FOR_BLOCK =
         (world, pos, state, blockEntity, side) -> blockEntity instanceof BlockEntityWithFluidTank withTank ? withTank.getTank() : null;
-    private static final ICapabilityProvider<BlockEntity, @Nullable Direction, IFluidHandler> FLUID_TANK_FOR_BLOCK_ENTITY =
+    private static final ICapabilityProvider<BlockEntity, @Nullable Direction, ResourceHandler<FluidResource>> FLUID_TANK_FOR_BLOCK_ENTITY =
         (blockEntity, side) -> blockEntity instanceof BlockEntityWithFluidTank withTank ? withTank.getTank() : null;
 
     public static void register(RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, AdornBlockEntities.BREWER.get(), INVENTORY_WRAPPER_FOR_BLOCK_ENTITY);
+        event.registerBlockEntity(Capabilities.Item.BLOCK, AdornBlockEntities.BREWER.get(), INVENTORY_WRAPPER_FOR_BLOCK_ENTITY);
 
         var containerBlockKinds = new BlockKind[] {
             BlockKind.DRAWER,
@@ -39,18 +40,18 @@ public final class AdornCapabilities {
 
         for (var kind : containerBlockKinds) {
             for (var block : BlockVariantSets.get(kind)) {
-                event.registerBlock(Capabilities.ItemHandler.BLOCK, INVENTORY_WRAPPER_FOR_BLOCK, block.get());
+                event.registerBlock(Capabilities.Item.BLOCK, INVENTORY_WRAPPER_FOR_BLOCK, block.get());
             }
         }
 
-        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, AdornBlockEntities.BREWER.get(), FLUID_TANK_FOR_BLOCK_ENTITY);
+        event.registerBlockEntity(Capabilities.Fluid.BLOCK, AdornBlockEntities.BREWER.get(), FLUID_TANK_FOR_BLOCK_ENTITY);
 
         for (var kitchenSink : BlockVariantSets.get(BlockKind.KITCHEN_SINK)) {
-            event.registerBlock(Capabilities.FluidHandler.BLOCK, FLUID_TANK_FOR_BLOCK, kitchenSink.get());
+            event.registerBlock(Capabilities.Fluid.BLOCK, FLUID_TANK_FOR_BLOCK, kitchenSink.get());
         }
     }
 
-    private static IItemHandler getInventoryWrapper(Inventory inventory, @Nullable Direction side) {
-        return side != null && inventory instanceof SidedInventory sided ? new SidedInvWrapper(sided, side) : new InvWrapper(inventory);
+    private static ResourceHandler<ItemResource> getInventoryWrapper(Inventory inventory, @Nullable Direction side) {
+        return side != null && inventory instanceof SidedInventory sided ? new WorldlyContainerWrapper(sided, side) : VanillaContainerWrapper.of(inventory);
     }
 }

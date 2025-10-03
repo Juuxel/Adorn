@@ -63,8 +63,8 @@ public final class TradingStationBlockEntity extends BlockEntity implements Name
     }
 
     public void setOwner(PlayerEntity player) {
-        owner = player.getGameProfile().getId();
-        ownerName = Text.literal(player.getGameProfile().getName());
+        owner = player.getGameProfile().id();
+        ownerName = Text.literal(player.getGameProfile().name());
         markDirty();
     }
 
@@ -79,7 +79,7 @@ public final class TradingStationBlockEntity extends BlockEntity implements Name
     }
 
     public boolean isOwner(PlayerEntity player) {
-        return player.getGameProfile().getId().equals(owner);
+        return player.getGameProfile().id().equals(owner);
     }
 
     @Override

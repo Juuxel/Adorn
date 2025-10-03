@@ -85,7 +85,7 @@ public final class KitchenSinkBlock extends KitchenCounterBlock implements Block
     }
 
     @Override
-    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+    protected int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction) {
         return world.getBlockEntity(pos) instanceof KitchenSinkBlockEntity sink ? sink.calculateComparatorOutput() : 0;
     }
 

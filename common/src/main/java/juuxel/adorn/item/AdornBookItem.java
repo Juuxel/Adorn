@@ -27,7 +27,7 @@ public final class AdornBookItem extends Item {
 
     @Override
     public ActionResult use(World world, PlayerEntity user, Hand hand) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             PlatformBridges.get().getNetwork().sendToClient(user, new OpenBookS2CMessage(bookId));
         }
         user.incrementStat(Stats.USED.getOrCreateStat(this));

@@ -87,7 +87,7 @@ public final class Adorn {
         BlockVariantSets.register();
         NeoForgeMod.enableMilkFluid();
 
-        if (FMLEnvironment.dist == Dist.CLIENT) {
+        if (FMLEnvironment.getDist() == Dist.CLIENT) {
             AdornClient.init(modBus);
         }
     }

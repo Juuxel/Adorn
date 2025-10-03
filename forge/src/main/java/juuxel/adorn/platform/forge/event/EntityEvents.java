@@ -20,7 +20,7 @@ public final class EntityEvents {
     private static void handleSofaSleepTime(CanContinueSleepingEvent event) {
         BlockPos sleepingPos = event.getEntity().getSleepingPosition().orElse(null);
         if (sleepingPos == null) return;
-        World world = event.getEntity().getWorld();
+        World world = event.getEntity().getEntityWorld();
 
         if (event.getProblem() == PlayerEntity.SleepFailureReason.NOT_POSSIBLE_NOW && world.isDay()
             && world.getBlockState(sleepingPos).getBlock() instanceof SofaBlock) {
@@ -32,7 +32,7 @@ public final class EntityEvents {
         BlockPos pos = event.getNewSpawn();
 
         if (pos != null) {
-            if (!event.isForced() && event.getEntity().getWorld().getBlockState(pos).getBlock() instanceof SofaBlock) {
+            if (!event.isForced() && event.getEntity().getEntityWorld().getBlockState(pos).getBlock() instanceof SofaBlock) {
                 event.setCanceled(true);
             }
         }

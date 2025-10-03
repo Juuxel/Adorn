@@ -36,8 +36,10 @@ public final class FluidVolume extends FluidReference {
     }
 
     @Override
-    public void setFluid(Fluid fluid) {
+    public void setFluid(Fluid fluid, long amount, ComponentChanges components) {
         this.fluid = fluid;
+        this.amount = amount;
+        this.components = components;
     }
 
     @Override
@@ -53,11 +55,6 @@ public final class FluidVolume extends FluidReference {
     @Override
     public ComponentChanges getComponents() {
         return components;
-    }
-
-    @Override
-    public void setComponents(ComponentChanges components) {
-        this.components = components;
     }
 
     @Override

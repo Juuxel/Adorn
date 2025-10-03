@@ -10,21 +10,19 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.block.BlockModelRenderer;
+import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModelManager;
+import net.minecraft.client.render.model.BlockStateModel;
+import net.minecraft.client.render.state.CameraRenderState;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.Identifier;
 
 import java.util.Optional;
 
@@ -34,17 +32,17 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEnt
 
     public ConeEntityRenderer(EntityRendererFactory.Context context) {
         super(context);
-        this.modelManager = context.getModelManager();
+        this.modelManager = context.getBlockRenderManager().getModels().getModelManager();
         this.shadowRadius = 0.5f;
     }
 
     @Override
-    public void render(ConeEntityRenderState state, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+    public void render(ConeEntityRenderState state, MatrixStack matrices, OrderedRenderCommandQueue queue, CameraRenderState cameraState) {
         matrices.push();
         matrices.translate(-0.5f, 0, -0.5f);
-        renderCone(modelManager, state.variant, matrices, vertexConsumers, light, VertexConsumerFactory.ENTITY);
+        queue.submitBlockStateModel(matrices, RenderLayer.getEntityCutout(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE), state.coneModel, 1, 1, 1, state.light, OverlayTexture.DEFAULT_UV, state.outlineColor);
         matrices.pop();
-        super.render(state, matrices, vertexConsumers, light);
+        super.render(state, matrices, queue, cameraState);
     }
 
     @Override
@@ -55,31 +53,36 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEnt
     @Override
     public void updateRenderState(ConeEntity entity, ConeEntityRenderState state, float tickProgress) {
         super.updateRenderState(entity, state, tickProgress);
-        state.variant = getEffectiveVariant(entity.getRegistryManager(), entity.getVariant()).orElse(ConeVariant.Keys.ORANGE);
+        RegistryKey<ConeVariant> variant = getEffectiveVariant(entity.getRegistryManager(), entity.getVariant()).orElse(ConeVariant.Keys.ORANGE);
+        state.coneModel = getModel(modelManager, variant);
     }
 
-    private static void renderCone(BakedModelManager modelManager, RegistryKey<ConeVariant> variant, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, VertexConsumerFactory vertexConsumerFactory) {
-        var model = ModelBridge.get().getModel(modelManager, CustomModelKeys.CONES.getEager(variant));
-        var matrix = matrices.peek();
-        var vertexConsumer = vertexConsumerFactory.createVertexConsumer(vertexConsumers, SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE);
-        BlockModelRenderer.render(matrix, vertexConsumer, model, 1, 1, 1, light, OverlayTexture.DEFAULT_UV);
+    private static BlockStateModel getModel(BakedModelManager modelManager, RegistryKey<ConeVariant> variant) {
+        return ModelBridge.get().getModel(modelManager, CustomModelKeys.CONES.getEager(variant));
     }
 
-    public static void renderOnHead(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, int light, BipedEntityModel<?> contextModel) {
+    public static void renderOnHead(MatrixStack matrices, OrderedRenderCommandQueue queue, ItemStack stack, int light, int outline, BipedEntityModel<?> contextModel) {
         // Resolve cone variant from stack
         var client = MinecraftClient.getInstance();
         var registryManager = client.world.getRegistryManager();
         var variant = getEffectiveVariant(registryManager, stack).orElse(ConeVariant.Keys.ORANGE);
-
-        var vertexConsumerFactory = stack.hasGlint() ? VertexConsumerFactory.ARMOR_WITH_GLINT : VertexConsumerFactory.ARMOR_WITHOUT_GLINT;
         var modelManager = client.getBakedModelManager();
+        var model = getModel(modelManager, variant);
+
+        RenderLayer renderLayer = RenderLayer.getArmorCutoutNoCull(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE);
+        RenderLayer glintLayer = RenderLayer.getArmorEntityGlint();
         matrices.push();
         contextModel.getRootPart().applyTransform(matrices);
         contextModel.getHead().applyTransform(matrices);
         float headSize = getHeadHeight(matrices, contextModel);
         matrices.translate(SIZE * 0.5f, -headSize, SIZE * 0.5f);
         matrices.scale(-SIZE, -SIZE, -SIZE);
-        renderCone(modelManager, variant, matrices, vertexConsumers, light, vertexConsumerFactory);
+        // TODO: Lighting is reversed (bright side <-> dark side)
+        queue.getBatchingQueue(0).submitBlockStateModel(matrices, renderLayer, model, 1, 1, 1, light, OverlayTexture.DEFAULT_UV, outline);
+        if (stack.hasGlint()) {
+            // TODO: Figure out why the glint doesn't render
+            queue.getBatchingQueue(1).submitBlockStateModel(matrices, glintLayer, model, 1, 1, 1, light, OverlayTexture.DEFAULT_UV, outline);
+        }
         matrices.pop();
     }
 
@@ -116,15 +119,5 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEnt
         public void accept(MatrixStack.Entry matrix, String path, int index, ModelPart.Cuboid cuboid) {
             if (headHeight == 0) headHeight = (cuboid.maxY - cuboid.minY) / 16f;
         }
-    }
-
-    @FunctionalInterface
-    private interface VertexConsumerFactory {
-        VertexConsumerFactory ENTITY = (vertexConsumers, texture) -> vertexConsumers.getBuffer(RenderLayer.getEntityCutout(texture));
-        VertexConsumerFactory ARMOR_WITHOUT_GLINT = (vertexConsumers, texture) -> vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(texture));
-        // TODO: Figure out why the glint doesn't render
-        VertexConsumerFactory ARMOR_WITH_GLINT = (vertexConsumers, texture) -> ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(texture), true);
-
-        VertexConsumer createVertexConsumer(VertexConsumerProvider vertexConsumers, Identifier texture);
     }
 }

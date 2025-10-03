@@ -5,8 +5,10 @@ import juuxel.adorn.util.animation.AnimatedProperty;
 import juuxel.adorn.util.animation.AnimatedPropertyWrapper;
 import juuxel.adorn.util.animation.AnimationEngine;
 import juuxel.adorn.util.animation.Interpolator;
+import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.Element;
+import net.minecraft.client.input.KeyInput;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.glfw.GLFW;
 
@@ -134,21 +136,30 @@ public final class ScrollEnvelope extends ScissorEnvelope {
         super.mouseMoved(mouseX, mouseY + offset);
     }
 
-    @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (isMouseOverThumb(mouseX, mouseY)) {
-            draggingThumb = true;
-            dragStart = mouseY - (y + SCROLLING_TRACK_MARGIN + thumbY());
-            return true;
-        }
-
-        return super.mouseClicked(mouseX, mouseY + offset, button);
+    private Click offsetClick(Click click) {
+        return new Click(click.x(), click.y() + offset, click.buttonInfo());
     }
 
     @Override
-    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+    public boolean mouseClicked(Click click, boolean doubled) {
+        if (isMouseOverThumb(click.x(), click.y())) {
+            draggingThumb = true;
+            dragStart = click.y() - (y + SCROLLING_TRACK_MARGIN + thumbY());
+            return true;
+        }
+
+        return super.mouseClicked(offsetClick(click), doubled);
+    }
+
+    @Override
+    public boolean mouseReleased(Click click) {
+        return super.mouseReleased(offsetClick(click));
+    }
+
+    @Override
+    public boolean mouseDragged(Click click, double offsetX, double offsetY) {
         if (draggingThumb) {
-            var realY = mouseY - dragStart;
+            var realY = click.y() - dragStart;
             var pos = MathHelper.clamp(
                 MathHelper.getLerpProgress(
                     realY,
@@ -162,7 +173,7 @@ public final class ScrollEnvelope extends ScissorEnvelope {
             return true;
         }
 
-        return super.mouseDragged(mouseX, mouseY + offset, button, deltaX, deltaY);
+        return super.mouseDragged(offsetClick(click), offsetX, offsetY);
     }
 
     @Override
@@ -183,8 +194,8 @@ public final class ScrollEnvelope extends ScissorEnvelope {
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        var scrollAmount = switch (keyCode) {
+    public boolean keyPressed(KeyInput input) {
+        var scrollAmount = switch (input.getKeycode()) {
             case GLFW.GLFW_KEY_UP -> -SCROLLING_SPEED;
             case GLFW.GLFW_KEY_DOWN -> SCROLLING_SPEED;
             case GLFW.GLFW_KEY_PAGE_UP -> -height;
@@ -197,6 +208,6 @@ public final class ScrollEnvelope extends ScissorEnvelope {
             return true;
         }
 
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        return super.keyPressed(input);
     }
 }

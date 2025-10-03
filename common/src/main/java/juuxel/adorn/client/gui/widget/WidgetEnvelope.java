@@ -1,11 +1,14 @@
 package juuxel.adorn.client.gui.widget;
 
+import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.Narratable;
 import net.minecraft.client.gui.Selectable;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
+import net.minecraft.client.input.CharInput;
+import net.minecraft.client.input.KeyInput;
 
 /**
  * A wrapper for a widget (obtained by calling {@link #current()}).
@@ -30,18 +33,18 @@ public abstract class WidgetEnvelope implements Element, Drawable, Selectable, T
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        return current().mouseClicked(mouseX, mouseY, button);
+    public boolean mouseClicked(Click click, boolean doubled) {
+        return current().mouseClicked(click, doubled);
     }
 
     @Override
-    public boolean mouseReleased(double mouseX, double mouseY, int button) {
-        return current().mouseReleased(mouseX, mouseY, button);
+    public boolean mouseReleased(Click click) {
+        return current().mouseReleased(click);
     }
 
     @Override
-    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
-        return current().mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
+    public boolean mouseDragged(Click click, double offsetX, double offsetY) {
+        return current().mouseDragged(click, offsetX, offsetY);
     }
 
     @Override
@@ -50,18 +53,18 @@ public abstract class WidgetEnvelope implements Element, Drawable, Selectable, T
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        return current().keyPressed(keyCode, scanCode, modifiers);
+    public boolean keyPressed(KeyInput input) {
+        return current().keyPressed(input);
     }
 
     @Override
-    public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
-        return current().keyReleased(keyCode, scanCode, modifiers);
+    public boolean keyReleased(KeyInput input) {
+        return current().keyReleased(input);
     }
 
     @Override
-    public boolean charTyped(char chr, int modifiers) {
-        return current().charTyped(chr, modifiers);
+    public boolean charTyped(CharInput input) {
+        return current().charTyped(input);
     }
 
     @Override

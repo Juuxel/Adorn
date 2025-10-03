@@ -8,7 +8,7 @@ import juuxel.adorn.block.entity.BrewerBlockEntityFabric;
 import juuxel.adorn.block.entity.KitchenSinkBlockEntityFabric;
 import juuxel.adorn.block.variant.BlockKind;
 import juuxel.adorn.block.variant.BlockVariantSets;
-import juuxel.adorn.client.renderer.KitchenSinkRendererFabric;
+import juuxel.adorn.client.renderer.KitchenSinkRenderer;
 import juuxel.adorn.client.renderer.ShelfRenderer;
 import juuxel.adorn.client.renderer.TradingStationRenderer;
 import net.fabricmc.api.EnvType;
@@ -71,7 +71,7 @@ public final class AdornBlocksFabric {
         // BlockEntityRenderers
         BlockEntityRendererFactories.register(AdornBlockEntities.TRADING_STATION.get(), TradingStationRenderer::new);
         BlockEntityRendererFactories.register(AdornBlockEntities.SHELF.get(), ShelfRenderer::new);
-        BlockEntityRendererFactories.register(forceType(AdornBlockEntities.KITCHEN_SINK.get()), KitchenSinkRendererFabric::new);
+        BlockEntityRendererFactories.register(forceType(AdornBlockEntities.KITCHEN_SINK.get()), KitchenSinkRenderer::new);
 
         // RenderLayers
         BlockRenderLayerMap.putBlocks(

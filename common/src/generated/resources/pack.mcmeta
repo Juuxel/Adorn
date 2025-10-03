@@ -155,6 +155,7 @@
   },
   "pack": {
     "description": "Adorn resources.",
-    "pack_format": 81
+    "max_format": 88,
+    "min_format": 88
   }
 }

@@ -1,5 +1,6 @@
 package juuxel.adorn.platform.forge.block.entity;
 
+import com.google.common.base.Predicates;
 import juuxel.adorn.block.entity.BrewerBlockEntity;
 import juuxel.adorn.fluid.FluidReference;
 import juuxel.adorn.platform.forge.util.FluidTankReference;
@@ -7,25 +8,35 @@ import net.minecraft.block.BlockState;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.BlockPos;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.FluidUtil;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.ResourceHandlerUtil;
+import net.neoforged.neoforge.transfer.access.ItemAccess;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
+import net.neoforged.neoforge.transfer.item.WorldlyContainerWrapper;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
+import org.jetbrains.annotations.Nullable;
 
 public final class BrewerBlockEntityForge extends BrewerBlockEntity implements BlockEntityWithFluidTank {
-    private final FluidTank tank = new FluidTank(FLUID_CAPACITY_IN_BUCKETS * FluidType.BUCKET_VOLUME) {
+    private static final int CAPACITY = FLUID_CAPACITY_IN_BUCKETS * FluidType.BUCKET_VOLUME;
+
+    private final FluidStacksResourceHandler tank = new FluidStacksResourceHandler(1, CAPACITY) {
         @Override
-        protected void onContentsChanged() {
+        protected void onContentsChanged(int index, FluidStack previousContents) {
             markDirty();
         }
     };
-    private final FluidReference fluidReference = new FluidTankReference(tank);
+    private final FluidReference fluidReference = new FluidTankReference(tank, 0);
 
     public BrewerBlockEntityForge(BlockPos pos, BlockState state) {
         super(pos, state);
     }
 
     @Override
-    public FluidTank getTank() {
+    public ResourceHandler<FluidResource> getTank() {
         return tank;
     }
 
@@ -34,19 +45,33 @@ public final class BrewerBlockEntityForge extends BrewerBlockEntity implements B
         return fluidReference;
     }
 
+    private boolean moveFromFluidContainer(boolean commit) {
+        try (var tx = Transaction.open(null)) {
+            ItemAccess itemAccess = ItemAccess.forHandlerIndex(new WorldlyContainerWrapper(this, null), FLUID_CONTAINER_SLOT);
+            @Nullable ResourceHandler<FluidResource> itemFluidHandler =
+                getStack(FLUID_CONTAINER_SLOT).getCapability(Capabilities.Fluid.ITEM, itemAccess);
+
+            if (itemFluidHandler != null) {
+                int maxAmount = CAPACITY - tank.getAmountAsInt(0);
+                int moved = ResourceHandlerUtil.move(itemFluidHandler, tank, Predicates.alwaysTrue(), maxAmount, tx);
+                if (moved > 0) {
+                    if (commit) tx.commit();
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     @Override
     protected boolean canExtractFluidContainer() {
-        return !FluidUtil.tryEmptyContainer(getStack(FLUID_CONTAINER_SLOT), tank, tank.getSpace(), null, false).isSuccess();
+        return moveFromFluidContainer(false);
     }
 
     @Override
     protected void tryExtractFluidContainer() {
-        var result = FluidUtil.tryEmptyContainer(getStack(FLUID_CONTAINER_SLOT), tank, tank.getSpace(), null, true);
-
-        if (result.isSuccess()) {
-            setStack(FLUID_CONTAINER_SLOT, result.result);
-            markDirty();
-        }
+        moveFromFluidContainer(true);
     }
 
     @Override

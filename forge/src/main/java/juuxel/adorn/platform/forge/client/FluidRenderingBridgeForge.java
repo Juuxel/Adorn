@@ -6,10 +6,10 @@ import juuxel.adorn.fluid.FluidUnit;
 import juuxel.adorn.platform.forge.util.FluidTankReference;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.texture.Sprite;
-import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
+import net.minecraft.util.Atlases;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockRenderView;
@@ -23,8 +23,8 @@ public final class FluidRenderingBridgeForge implements FluidRenderingBridge {
     @Override
     public @Nullable Sprite getStillSprite(FluidReference volume) {
         var fluid = volume.getFluid();
-        var atlas = MinecraftClient.getInstance().getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE);
-        return atlas.apply(IClientFluidTypeExtensions.of(fluid).getStillTexture(FluidTankReference.toFluidStack(volume)));
+        var atlas = MinecraftClient.getInstance().getAtlasManager().getAtlasTexture(Atlases.BLOCKS);
+        return atlas.getSprite(IClientFluidTypeExtensions.of(fluid).getStillTexture(FluidTankReference.toFluidStack(volume)));
     }
 
     @Override

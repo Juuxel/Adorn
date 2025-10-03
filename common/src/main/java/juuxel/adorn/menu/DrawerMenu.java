@@ -15,7 +15,7 @@ public final class DrawerMenu extends SimpleMenu {
     }
 
     public static DrawerMenu load(int syncId, PlayerInventory playerInventory, BlockPos pos) {
-        var context = MenuContext.create(playerInventory.player.getWorld(), pos);
+        var context = MenuContext.create(playerInventory.player.getEntityWorld(), pos);
         return new DrawerMenu(syncId, playerInventory, new SimpleInventory(WIDTH * HEIGHT), context);
     }
 }

@@ -51,12 +51,12 @@ public abstract class SeatBlock extends Block {
         var occupied = actualState.get(OCCUPIED);
 
         if (!occupied) {
-            if (!world.isClient) {
+            if (!world.isClient()) {
                 var entity = new SeatEntity(AdornEntities.SEAT.get(), world);
                 entity.setPos(actualPos);
                 world.spawnEntity(entity);
                 world.setBlockState(actualPos, actualState.with(OCCUPIED, true));
-                player.startRiding(entity, true);
+                player.startRiding(entity);
 
                 var sittingStat = getSittingStat();
                 if (sittingStat != null) {

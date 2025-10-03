@@ -15,6 +15,7 @@ import juuxel.adorn.util.CollectionUtil;
 import juuxel.adorn.util.Colors;
 import juuxel.adorn.util.animation.AnimationEngine;
 import net.minecraft.client.gl.RenderPipelines;
+import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.gui.Element;
@@ -22,6 +23,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.BookScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.PageTurnWidget;
+import net.minecraft.client.input.KeyInput;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenTexts;
@@ -136,15 +138,15 @@ public final class GuideBookScreen extends Screen {
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (super.keyPressed(keyCode, scanCode, modifiers)) {
+    public boolean keyPressed(KeyInput input) {
+        if (super.keyPressed(input)) {
             return true;
         }
 
         if (flipBook.getCurrentPageValue() instanceof Panel currentPage) {
             for (var child : currentPage.children()) {
                 if (child instanceof ScrollEnvelope) {
-                    return child.keyPressed(keyCode, scanCode, modifiers);
+                    return child.keyPressed(input);
                 }
             }
         }
@@ -325,16 +327,16 @@ public final class GuideBookScreen extends Screen {
         }
 
         @Override
-        public boolean mouseClicked(double mouseX, double mouseY, int button) {
-            if (button == 0) {
-                var style = getTextStyleAt((int) mouseX, (int) mouseY);
+        public boolean mouseClicked(Click click, boolean doubled) {
+            if (click.button() == 0) {
+                var style = getTextStyleAt((int) click.x(), (int) click.y());
 
                 if (style != null && handleTextClick(style)) {
                     return true;
                 }
             }
 
-            return SizedElement.super.mouseClicked(mouseX, mouseY, button);
+            return SizedElement.super.mouseClicked(click, doubled);
         }
 
         @Override

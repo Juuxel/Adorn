@@ -15,7 +15,7 @@ public final class KitchenCupboardMenu extends SimpleMenu {
     }
 
     public static KitchenCupboardMenu load(int syncId, PlayerInventory playerInventory, BlockPos pos) {
-        var context = MenuContext.create(playerInventory.player.getWorld(), pos);
+        var context = MenuContext.create(playerInventory.player.getEntityWorld(), pos);
         return new KitchenCupboardMenu(syncId, playerInventory, new SimpleInventory(WIDTH * HEIGHT), context);
     }
 }

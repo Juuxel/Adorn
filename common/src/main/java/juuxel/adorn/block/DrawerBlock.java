@@ -66,7 +66,7 @@ public final class DrawerBlock extends VisibleBlockWithEntity implements BlockWi
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if (world.isClient) return ActionResult.SUCCESS;
+        if (world.isClient()) return ActionResult.SUCCESS;
 
         if (world.getBlockEntity(pos) instanceof DrawerBlockEntity drawer) {
             PlatformBridges.get().getMenus().open(player, drawer, pos);;
@@ -102,7 +102,7 @@ public final class DrawerBlock extends VisibleBlockWithEntity implements BlockWi
     }
 
     @Override
-    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+    protected int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction) {
         return Menu.calculateComparatorOutput(world.getBlockEntity(pos));
     }
 
