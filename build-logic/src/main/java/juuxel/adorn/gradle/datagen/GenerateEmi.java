@@ -39,7 +39,7 @@ public abstract class GenerateEmi extends DefaultTask {
     @SuppressWarnings("unchecked")
     @TaskAction
     public void generateRecipeDefaults() throws IOException {
-        var recipesByResult = new HashMap<String, RecipeData>();
+        var recipesByResult = new HashMap<RecipeResult, RecipeData>();
         var preferredRecipes = getPreferredRecipes().get();
         for (var recipeFile : getRecipes()) {
             var json = (Map<String, ?>) new JsonSlurper().parse(recipeFile);
@@ -88,13 +88,15 @@ public abstract class GenerateEmi extends DefaultTask {
     }
 
     @SuppressWarnings("unchecked")
-    private @Nullable String getResult(Map<String, ?> recipeJson) {
+    private @Nullable RecipeResult getResult(Map<String, ?> recipeJson) {
         var type = fixType(recipeJson.get("type").toString());
         return switch (type) {
-            case "minecraft:crafting_shaped", "minecraft:crafting_shapeless", "adorn:brewing", "adorn:brewing_from_fluid" ->
-                ((Map<String, ?>) recipeJson.get("result")).get("id").toString();
+            case "minecraft:crafting_shaped", "minecraft:crafting_shapeless", "adorn:brewing", "adorn:brewing_from_fluid" -> {
+                var resultJson = (Map<String, ?>) recipeJson.get("result");
+                yield new RecipeResult(resultJson.get("id").toString(), (Map<String, ?>) resultJson.get("components"));
+            }
 
-            case "minecraft:stonecutting" -> recipeJson.get("result").toString();
+            case "minecraft:stonecutting" -> new RecipeResult(recipeJson.get("result").toString(), Map.of());
             case "adorn:fertilizer_refilling" -> null;
 
             default -> throw new IllegalArgumentException("Unknown recipe type: " + type);
@@ -106,5 +108,16 @@ public abstract class GenerateEmi extends DefaultTask {
     }
 
     private record RecipeData(String id, String type) {
+    }
+
+    private record RecipeResult(String id, Map<String, ?> components) {
+        @Override
+        public String toString() {
+            if (components.isEmpty()) {
+                return id;
+            } else {
+                return id + components;
+            }
+        }
     }
 }
