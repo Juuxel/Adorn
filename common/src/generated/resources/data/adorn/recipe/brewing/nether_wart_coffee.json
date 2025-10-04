@@ -5,6 +5,7 @@
     "amount": 250,
     "fluid": "minecraft:water"
   },
+  "input": "adorn:mug",
   "result": {
     "count": 1,
     "id": "adorn:nether_wart_coffee"

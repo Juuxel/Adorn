@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.IngredientPlacement;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.display.RecipeDisplay;
 import net.minecraft.recipe.display.SlotDisplay;
@@ -17,11 +18,11 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Optional;
 
-import static juuxel.adorn.block.entity.BrewerBlockEntity.LEFT_INGREDIENT_SLOT;
-import static juuxel.adorn.block.entity.BrewerBlockEntity.RIGHT_INGREDIENT_SLOT;
+import static juuxel.adorn.block.entity.BrewerBlockEntity.*;
 
-public record FluidBrewingRecipe(Ingredient firstIngredient, Optional<Ingredient> secondIngredient, FluidIngredient fluid, ItemStack result) implements BrewingRecipe {
+public record FluidBrewingRecipe(Ingredient input, Ingredient firstIngredient, Optional<Ingredient> secondIngredient, FluidIngredient fluid, ItemStack result) implements BrewingRecipe {
     public static final MapCodec<FluidBrewingRecipe> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(
+        Ingredient.CODEC.fieldOf("input").forGetter(FluidBrewingRecipe::input),
         Ingredient.CODEC.fieldOf("first_ingredient").forGetter(FluidBrewingRecipe::firstIngredient),
         Ingredient.CODEC.optionalFieldOf("second_ingredient").forGetter(FluidBrewingRecipe::secondIngredient),
         FluidIngredient.CODEC.fieldOf("fluid").forGetter(FluidBrewingRecipe::fluid),
@@ -30,9 +31,9 @@ public record FluidBrewingRecipe(Ingredient firstIngredient, Optional<Ingredient
 
     @Override
     public boolean matches(BrewerInput input, World world) {
-        var itemsMatch = (input.matches(LEFT_INGREDIENT_SLOT, firstIngredient) && input.matches(RIGHT_INGREDIENT_SLOT, secondIngredient)) ||
+        var ingredientsMatch = (input.matches(LEFT_INGREDIENT_SLOT, firstIngredient) && input.matches(RIGHT_INGREDIENT_SLOT, secondIngredient)) ||
             (input.matches(RIGHT_INGREDIENT_SLOT, firstIngredient) && input.matches(LEFT_INGREDIENT_SLOT, secondIngredient));
-        return itemsMatch && input.getFluidReference().matches(fluid);
+        return ingredientsMatch && input.matches(INPUT_SLOT, this.input) && input.getFluidReference().matches(fluid);
     }
 
     @Override
@@ -49,6 +50,7 @@ public record FluidBrewingRecipe(Ingredient firstIngredient, Optional<Ingredient
     public List<RecipeDisplay> getDisplays() {
         return List.of(
             new BrewingRecipeDisplay(
+                input.toDisplay(),
                 firstIngredient.toDisplay(),
                 secondIngredient.map(Ingredient::toDisplay).orElse(SlotDisplay.EmptySlotDisplay.INSTANCE),
                 new FluidIngredientSlotDisplay(fluid),
@@ -58,8 +60,20 @@ public record FluidBrewingRecipe(Ingredient firstIngredient, Optional<Ingredient
         );
     }
 
+    @Override
+    public boolean isIgnoredInRecipeBook() {
+        return true;
+    }
+
+    @Override
+    public IngredientPlacement getIngredientPlacement() {
+        return IngredientPlacement.NONE;
+    }
+
     public static final class Serializer implements RecipeSerializer<FluidBrewingRecipe> {
         private static final PacketCodec<RegistryByteBuf, FluidBrewingRecipe> PACKET_CODEC = PacketCodec.tuple(
+            Ingredient.PACKET_CODEC,
+            FluidBrewingRecipe::input,
             Ingredient.PACKET_CODEC,
             FluidBrewingRecipe::firstIngredient,
             Ingredient.OPTIONAL_PACKET_CODEC,

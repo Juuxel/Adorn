@@ -3,6 +3,7 @@ package juuxel.adorn.client.gui.screen;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.block.entity.BrewerBlockEntity;
 import juuxel.adorn.client.FluidRenderingBridge;
+import juuxel.adorn.client.gui.widget.BrewingRecipeBookWidget;
 import juuxel.adorn.fluid.FluidReference;
 import juuxel.adorn.fluid.FluidVolume;
 import juuxel.adorn.menu.BrewerMenu;
@@ -11,7 +12,9 @@ import juuxel.adorn.util.Logging;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.ScreenPos;
 import net.minecraft.client.gui.screen.ingame.MenuProvider;
+import net.minecraft.client.gui.screen.ingame.RecipeBookScreen;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.tooltip.TooltipType;
@@ -22,13 +25,13 @@ import org.slf4j.Logger;
 
 import java.util.List;
 
-public final class BrewerScreen extends AdornMenuScreen<BrewerMenu> {
+public final class BrewerScreen extends RecipeBookScreen<BrewerMenu> {
     private static final Logger LOGGER = Logging.logger();
     public static final Identifier TEXTURE = AdornCommon.id("textures/gui/brewer.png");
     public static final int FLUID_AREA_HEIGHT = 59;
 
     public BrewerScreen(BrewerMenu menu, PlayerInventory playerInventory, Text title) {
-        super(menu, playerInventory, title);
+        super(menu, new BrewingRecipeBookWidget(menu), playerInventory, title);
     }
 
     @Override
@@ -54,6 +57,10 @@ public final class BrewerScreen extends AdornMenuScreen<BrewerMenu> {
         }
     }
 
+    @Override
+    protected ScreenPos getRecipeBookButtonPos() {
+        return new ScreenPos(x + 16, height / 2 - 49);
+    }
 
     private List<Text> getFluidTooltip(FluidReference fluid) {
         return FluidRenderingBridge.get().getTooltip(

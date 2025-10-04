@@ -112,14 +112,17 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
 
         BrewingRecipeJsonBuilder.create(itemLookup, AdornItems.GLOW_BERRY_TEA.get())
             .first(MoreConventionalItemTags.GLOW_BERRY_FOODS)
+            .criterion("has_brewer", conditionsFromItem(AdornBlocks.BREWER.get()))
             .offerTo(exporter);
         BrewingRecipeJsonBuilder.create(itemLookup, AdornItems.HOT_CHOCOLATE.get())
             .first(ConventionalItemTags.COCOA_BEAN_CROPS)
             .second(MoreConventionalItemTags.MILK_FOODS)
+            .criterion("has_brewer", conditionsFromItem(AdornBlocks.BREWER.get()))
             .offerTo(exporter);
         BrewingRecipeJsonBuilder.create(itemLookup, AdornItems.HOT_CHOCOLATE.get())
             .first(ConventionalItemTags.COCOA_BEAN_CROPS)
             .fluid(new FluidIngredient(FluidKey.of(ConventionalFluidTags.MILK), 250, FluidUnit.LITRE))
+            .criterion("has_brewer", conditionsFromItem(AdornBlocks.BREWER.get()))
             .offerTo(
                 conditions.apply(exporter, ResourceConditions.tagsPopulated(ConventionalFluidTags.MILK)),
                 getItemPath(AdornItems.HOT_CHOCOLATE.get()) + "_from_fluid"
@@ -127,13 +130,16 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
         BrewingRecipeJsonBuilder.create(itemLookup, AdornItems.NETHER_WART_COFFEE.get())
             .first(ConventionalItemTags.NETHER_WART_CROPS)
             .fluid(new FluidIngredient(FluidKey.of(Fluids.WATER), 250, FluidUnit.LITRE))
+            .criterion("has_brewer", conditionsFromItem(AdornBlocks.BREWER.get()))
             .offerTo(exporter);
         BrewingRecipeJsonBuilder.create(itemLookup, AdornItems.NETHER_WART_COFFEE.get())
             .first(ConventionalItemTags.NETHER_WART_CROPS)
             .second(Items.WATER_BUCKET)
+            .criterion("has_brewer", conditionsFromItem(AdornBlocks.BREWER.get()))
             .offerTo(exporter, convertBetween(AdornItems.NETHER_WART_COFFEE.get(), Items.WATER_BUCKET));
         BrewingRecipeJsonBuilder.create(itemLookup, AdornItems.SWEET_BERRY_JUICE.get())
             .first(MoreConventionalItemTags.SWEET_BERRY_FOODS)
+            .criterion("has_brewer", conditionsFromItem(AdornBlocks.BREWER.get()))
             .offerTo(exporter);
     }
 

@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.IngredientPlacement;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.display.RecipeDisplay;
 import net.minecraft.recipe.display.SlotDisplay;
@@ -16,11 +17,11 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Optional;
 
-import static juuxel.adorn.block.entity.BrewerBlockEntity.LEFT_INGREDIENT_SLOT;
-import static juuxel.adorn.block.entity.BrewerBlockEntity.RIGHT_INGREDIENT_SLOT;
+import static juuxel.adorn.block.entity.BrewerBlockEntity.*;
 
-public record ItemBrewingRecipe(Ingredient firstIngredient, Optional<Ingredient> secondIngredient, ItemStack result) implements BrewingRecipe {
+public record ItemBrewingRecipe(Ingredient input, Ingredient firstIngredient, Optional<Ingredient> secondIngredient, ItemStack result) implements BrewingRecipe {
     public static final MapCodec<ItemBrewingRecipe> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(
+        Ingredient.CODEC.fieldOf("input").forGetter(ItemBrewingRecipe::input),
         Ingredient.CODEC.fieldOf("first_ingredient").forGetter(ItemBrewingRecipe::firstIngredient),
         Ingredient.CODEC.optionalFieldOf("second_ingredient").forGetter(ItemBrewingRecipe::secondIngredient),
         ItemStack.VALIDATED_CODEC.fieldOf("result").forGetter(ItemBrewingRecipe::result)
@@ -28,8 +29,9 @@ public record ItemBrewingRecipe(Ingredient firstIngredient, Optional<Ingredient>
 
     @Override
     public boolean matches(BrewerInput input, World world) {
-        return (input.matches(LEFT_INGREDIENT_SLOT, firstIngredient) && input.matches(RIGHT_INGREDIENT_SLOT, secondIngredient)) ||
+        var ingredientsMatch = (input.matches(LEFT_INGREDIENT_SLOT, firstIngredient) && input.matches(RIGHT_INGREDIENT_SLOT, secondIngredient)) ||
             (input.matches(RIGHT_INGREDIENT_SLOT, firstIngredient) && input.matches(LEFT_INGREDIENT_SLOT, secondIngredient));
+        return ingredientsMatch && input.matches(INPUT_SLOT, this.input);
     }
 
     @Override
@@ -46,6 +48,7 @@ public record ItemBrewingRecipe(Ingredient firstIngredient, Optional<Ingredient>
     public List<RecipeDisplay> getDisplays() {
         return List.of(
             new BrewingRecipeDisplay(
+                input.toDisplay(),
                 firstIngredient.toDisplay(),
                 secondIngredient.map(Ingredient::toDisplay).orElse(SlotDisplay.EmptySlotDisplay.INSTANCE),
                 SlotDisplay.EmptySlotDisplay.INSTANCE,
@@ -55,8 +58,15 @@ public record ItemBrewingRecipe(Ingredient firstIngredient, Optional<Ingredient>
         );
     }
 
+    @Override
+    public IngredientPlacement getIngredientPlacement() {
+        return IngredientPlacement.forMultipleSlots(List.of(Optional.of(input), Optional.of(firstIngredient), secondIngredient));
+    }
+
     public static final class Serializer implements RecipeSerializer<ItemBrewingRecipe> {
         private static final PacketCodec<RegistryByteBuf, ItemBrewingRecipe> PACKET_CODEC = PacketCodec.tuple(
+            Ingredient.PACKET_CODEC,
+            ItemBrewingRecipe::input,
             Ingredient.PACKET_CODEC,
             ItemBrewingRecipe::firstIngredient,
             Ingredient.OPTIONAL_PACKET_CODEC,

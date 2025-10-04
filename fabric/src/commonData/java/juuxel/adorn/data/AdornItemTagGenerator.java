@@ -60,6 +60,9 @@ public final class AdornItemTagGenerator extends FabricTagProvider.ItemTagProvid
             .add(Items.BOOK, Items.ENCHANTED_BOOK, Items.WRITABLE_BOOK, Items.WRITTEN_BOOK)
             // Adorn items
             .add(AdornItems.GUIDE_BOOK.get(), AdornItems.TRADERS_MANUAL.get());
+
+        valueLookupBuilder(AdornTags.BREWING_INPUTS)
+            .add(AdornItems.MUG.get());
     }
 
     private void copy(AdornTags.TagPair tagPair) {

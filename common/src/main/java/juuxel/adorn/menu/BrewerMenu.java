@@ -4,21 +4,31 @@ import juuxel.adorn.block.entity.BrewerBlockEntity;
 import juuxel.adorn.fluid.FluidReference;
 import juuxel.adorn.fluid.FluidUnit;
 import juuxel.adorn.fluid.FluidVolume;
-import juuxel.adorn.item.AdornItems;
+import juuxel.adorn.lib.AdornTags;
 import juuxel.adorn.networking.BrewerFluidSyncS2CMessage;
 import juuxel.adorn.platform.PlatformBridges;
+import juuxel.adorn.recipe.BrewerInput;
+import juuxel.adorn.recipe.BrewingRecipe;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.menu.Menu;
+import net.minecraft.menu.AbstractRecipeMenu;
 import net.minecraft.menu.property.ArrayPropertyDelegate;
 import net.minecraft.menu.property.PropertyDelegate;
 import net.minecraft.menu.slot.Slot;
+import net.minecraft.recipe.InputSlotFiller;
+import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.recipe.RecipeFinder;
+import net.minecraft.recipe.RecipeInputProvider;
+import net.minecraft.recipe.book.RecipeBookType;
+import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.Nullable;
 
-public final class BrewerMenu extends Menu {
+import java.util.List;
+
+public final class BrewerMenu extends AbstractRecipeMenu {
     private final Inventory container;
     private final PropertyDelegate propertyDelegate;
     private FluidReference fluid;
@@ -122,6 +132,56 @@ public final class BrewerMenu extends Menu {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public PostFillAction fillInputSlots(boolean craftAll, boolean creative, RecipeEntry<?> recipe, ServerWorld world, PlayerInventory inventory) {
+        List<Slot> inputSlots = slots.subList(0, 3);
+        BrewerInput input = ((BrewerInputProvider) container).createRecipeInput();
+        // Note: in the call below, width * height must equal the number of input slots in the recipe (3).
+        // Thus, we pretend that we have a row of three slots.
+        return InputSlotFiller.fill(new InputSlotFiller.Handler<>() {
+            @Override
+            public void populateRecipeFinder(RecipeFinder finder) {
+                BrewerMenu.this.populateRecipeFinder(finder);
+            }
+
+            @Override
+            public void clear() {
+                inputSlots.forEach(slot -> slot.setStackNoCallbacks(ItemStack.EMPTY));
+            }
+
+            @Override
+            public boolean matches(RecipeEntry<BrewingRecipe> entry) {
+                return entry.value().matches(input, world);
+            }
+        }, 3, 1, inputSlots, inputSlots, player.getInventory(), (RecipeEntry<BrewingRecipe>) recipe, craftAll, creative);
+    }
+
+    @Override
+    public void populateRecipeFinder(RecipeFinder finder) {
+        if (container instanceof RecipeInputProvider inputProvider) {
+            inputProvider.provideRecipeInputs(finder);
+        }
+    }
+
+    @Override
+    public RecipeBookType getCategory() {
+        // seems to only be used for toggling the gui elements
+        return RecipeBookType.CRAFTING;
+    }
+
+    public Slot getMainSlot() {
+        return slots.getFirst();
+    }
+
+    public Slot getFirstIngredientSlot() {
+        return slots.get(1);
+    }
+
+    public Slot getSecondIngredientSlot() {
+        return slots.get(2);
+    }
+
     private static final class MainSlot extends Slot {
         private MainSlot(Inventory inventory, int index, int x, int y) {
             super(inventory, index, x, y);
@@ -134,7 +194,7 @@ public final class BrewerMenu extends Menu {
 
         @Override
         public boolean canInsert(ItemStack stack) {
-            return stack.isOf(AdornItems.MUG.get());
+            return stack.isIn(AdornTags.BREWING_INPUTS);
         }
     }
 
@@ -147,5 +207,9 @@ public final class BrewerMenu extends Menu {
         public int getMaxItemCount() {
             return 1;
         }
+    }
+
+    public interface BrewerInputProvider {
+        BrewerInput createRecipeInput();
     }
 }
