@@ -71,7 +71,7 @@ public final class AdornBlocksFabric {
         // BlockEntityRenderers
         BlockEntityRendererFactories.register(AdornBlockEntities.TRADING_STATION.get(), TradingStationRenderer::new);
         BlockEntityRendererFactories.register(AdornBlockEntities.SHELF.get(), ShelfRenderer::new);
-        BlockEntityRendererFactories.register(forceType(AdornBlockEntities.KITCHEN_SINK.get()), KitchenSinkRenderer::new);
+        BlockEntityRendererFactories.register(AdornBlockEntities.KITCHEN_SINK.get(), KitchenSinkRenderer::new);
 
         // RenderLayers
         BlockRenderLayerMap.putBlocks(

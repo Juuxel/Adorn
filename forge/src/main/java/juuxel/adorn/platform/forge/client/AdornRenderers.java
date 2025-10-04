@@ -24,7 +24,7 @@ public final class AdornRenderers {
         event.registerEntityRenderer(AdornEntities.CONE.get(), ConeEntityRenderer::new);
         event.registerBlockEntityRenderer(AdornBlockEntities.TRADING_STATION.get(), TradingStationRenderer::new);
         event.registerBlockEntityRenderer(AdornBlockEntities.SHELF.get(), ShelfRenderer::new);
-        event.registerBlockEntityRenderer(forceType(AdornBlockEntities.KITCHEN_SINK.get()), KitchenSinkRenderer::new);
+        event.registerBlockEntityRenderer(AdornBlockEntities.KITCHEN_SINK.get(), KitchenSinkRenderer::new);
     }
 
     @SuppressWarnings("unchecked")
