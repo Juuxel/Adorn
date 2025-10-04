@@ -10,10 +10,12 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModelManager;
 import net.minecraft.client.render.model.BlockStateModel;
 import net.minecraft.client.render.state.CameraRenderState;
@@ -24,6 +26,7 @@ import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 
+import java.util.List;
 import java.util.Optional;
 
 public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEntityRenderState> {
@@ -69,19 +72,16 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEnt
         var modelManager = client.getBakedModelManager();
         var model = getModel(modelManager, variant);
 
-        RenderLayer renderLayer = RenderLayer.getArmorCutoutNoCull(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE);
-        RenderLayer glintLayer = RenderLayer.getArmorEntityGlint();
+        List<RenderLayer> renderLayers = ItemRenderer.getGlintRenderLayers(TexturedRenderLayers.getEntitySolid(), false, stack.hasGlint());
         matrices.push();
         contextModel.getRootPart().applyTransform(matrices);
         contextModel.getHead().applyTransform(matrices);
         float headSize = getHeadHeight(matrices, contextModel);
-        matrices.translate(SIZE * 0.5f, -headSize, SIZE * 0.5f);
-        matrices.scale(-SIZE, -SIZE, -SIZE);
-        // TODO: Lighting is reversed (bright side <-> dark side)
-        queue.getBatchingQueue(0).submitBlockStateModel(matrices, renderLayer, model, 1, 1, 1, light, OverlayTexture.DEFAULT_UV, outline);
-        if (stack.hasGlint()) {
-            // TODO: Figure out why the glint doesn't render
-            queue.getBatchingQueue(1).submitBlockStateModel(matrices, glintLayer, model, 1, 1, 1, light, OverlayTexture.DEFAULT_UV, outline);
+        matrices.scale(-1, -1, 1);
+        matrices.translate(-SIZE * 0.5f, headSize, -SIZE * 0.5f);
+        matrices.scale(SIZE, SIZE, SIZE);
+        for (int i = 0; i < renderLayers.size(); i++) {
+            queue.getBatchingQueue(i).submitBlockStateModel(matrices, renderLayers.get(i), model, 1, 1, 1, light, OverlayTexture.DEFAULT_UV, outline);
         }
         matrices.pop();
     }
