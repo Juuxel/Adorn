@@ -19,6 +19,7 @@ import net.minecraft.menu.property.PropertyDelegate;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -26,8 +27,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public abstract class BrewerBlockEntity extends BaseContainerBlockEntity implements SidedInventory {
     private static final String NBT_PROGRESS = "Progress";
+    private static final String NBT_CURRENT_RECIPE = "CurrentRecipe";
     public static final int CONTAINER_SIZE = 4;
     public static final int INPUT_SLOT = 0;
     public static final int LEFT_INGREDIENT_SLOT = 1;
@@ -37,6 +41,7 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
     public static final int FLUID_CAPACITY_IN_BUCKETS = 2;
 
     private int progress = 0;
+    private @Nullable Identifier currentRecipe;
     private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
         @Override
         public int get(int index) {
@@ -73,12 +78,14 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
         super.writeNbt(nbt, registries);
         nbt.putInt(NBT_PROGRESS, progress);
+        if (currentRecipe != null) nbt.putString(NBT_CURRENT_RECIPE, currentRecipe.toString());
     }
 
     @Override
     public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
         super.readNbt(nbt, registries);
         progress = nbt.getInt(NBT_PROGRESS);
+        currentRecipe = nbt.contains(NBT_CURRENT_RECIPE) ? Identifier.of(nbt.getString(NBT_CURRENT_RECIPE)) : null;
     }
 
     @Override
@@ -167,8 +174,16 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
         }
 
         var input = new RecipeInputImpl(brewer);
-        var recipe = world.getRecipeManager().getFirstMatch(AdornRecipeTypes.BREWING.get(), input, world).map(RecipeEntry::value).orElse(null);
+        var recipeEntry = world.getRecipeManager().getFirstMatch(AdornRecipeTypes.BREWING.get(), input, world);
+        var id = recipeEntry.map(RecipeEntry::id).orElse(null);
 
+        if (!Objects.equals(id, brewer.currentRecipe)) {
+            brewer.currentRecipe = id;
+            brewer.progress = 0;
+            dirty = true;
+        }
+
+        var recipe = recipeEntry.map(RecipeEntry::value).orElse(null);
         if (recipe != null && brewer.getStack(INPUT_SLOT).isOf(AdornItems.MUG.get())) {
             if (brewer.progress++ >= MAX_PROGRESS) {
                 decrementIngredient(brewer, LEFT_INGREDIENT_SLOT);
@@ -181,11 +196,6 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
             }
 
             dirty = true;
-        } else {
-            if (brewer.progress != 0) {
-                brewer.progress = 0;
-                dirty = true;
-            }
         }
 
         var activeNow = brewer.isActive();
