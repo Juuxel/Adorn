@@ -59,6 +59,7 @@ public final class AdornTags {
     public static final TagKey<Block> WALL_CAUTION_SIGNS = block("wall_caution_signs");
     public static final TagKey<Block> COPPER_PIPES_CONNECT_TO = block("copper_pipes_connect_to");
     public static final TagKey<Item> WATERING_CAN_FERTILIZERS = item("watering_can_fertilizers");
+    public static final TagKey<Item> BREWING_INPUTS = item("brewing_inputs");
 
     public static void init() {
     }

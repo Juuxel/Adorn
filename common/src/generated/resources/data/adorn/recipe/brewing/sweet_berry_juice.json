@@ -1,6 +1,7 @@
 {
   "type": "adorn:brewing",
   "first_ingredient": "#c:foods/berry/sweet",
+  "input": "adorn:mug",
   "result": {
     "count": 1,
     "id": "adorn:sweet_berry_juice"

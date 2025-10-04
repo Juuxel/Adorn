@@ -8,8 +8,9 @@ import net.minecraft.recipe.display.RecipeDisplay;
 import net.minecraft.recipe.display.SlotDisplay;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 
-public record BrewingRecipeDisplay(SlotDisplay firstIngredient, SlotDisplay secondIngredient, SlotDisplay fluid, SlotDisplay result, SlotDisplay craftingStation) implements RecipeDisplay {
+public record BrewingRecipeDisplay(SlotDisplay input, SlotDisplay firstIngredient, SlotDisplay secondIngredient, SlotDisplay fluid, SlotDisplay result, SlotDisplay craftingStation) implements RecipeDisplay {
     public static final MapCodec<BrewingRecipeDisplay> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+        SlotDisplay.CODEC.fieldOf("input").forGetter(BrewingRecipeDisplay::input),
         SlotDisplay.CODEC.fieldOf("first_ingredient").forGetter(BrewingRecipeDisplay::firstIngredient),
         SlotDisplay.CODEC.fieldOf("second_ingredient").forGetter(BrewingRecipeDisplay::secondIngredient),
         SlotDisplay.CODEC.fieldOf("fluid").forGetter(BrewingRecipeDisplay::fluid),
@@ -18,6 +19,7 @@ public record BrewingRecipeDisplay(SlotDisplay firstIngredient, SlotDisplay seco
     ).apply(instance, BrewingRecipeDisplay::new));
 
     public static final PacketCodec<RegistryByteBuf, BrewingRecipeDisplay> PACKET_CODEC = PacketCodec.tuple(
+        SlotDisplay.PACKET_CODEC, BrewingRecipeDisplay::input,
         SlotDisplay.PACKET_CODEC, BrewingRecipeDisplay::firstIngredient,
         SlotDisplay.PACKET_CODEC, BrewingRecipeDisplay::secondIngredient,
         SlotDisplay.PACKET_CODEC, BrewingRecipeDisplay::fluid,
@@ -30,7 +32,7 @@ public record BrewingRecipeDisplay(SlotDisplay firstIngredient, SlotDisplay seco
 
     @Override
     public boolean isEnabled(FeatureSet features) {
-        return firstIngredient.isEnabled(features) && secondIngredient.isEnabled(features) && RecipeDisplay.super.isEnabled(features);
+        return input.isEnabled(features) && firstIngredient.isEnabled(features) && secondIngredient.isEnabled(features) && RecipeDisplay.super.isEnabled(features);
     }
 
     @Override

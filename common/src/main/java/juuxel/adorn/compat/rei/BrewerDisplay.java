@@ -5,7 +5,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.architectury.fluid.FluidStack;
 import juuxel.adorn.fluid.FluidIngredient;
 import juuxel.adorn.fluid.FluidUnit;
-import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.platform.FluidBridge;
 import juuxel.adorn.recipe.FluidBrewingRecipe;
 import juuxel.adorn.recipe.ItemBrewingRecipe;
@@ -56,7 +55,7 @@ public record BrewerDisplay(
 
     public BrewerDisplay(ItemBrewingRecipe recipe, @Nullable Identifier id) {
         this(
-            EntryIngredients.of(AdornItems.MUG.get()),
+            EntryIngredients.ofIngredient(recipe.input()),
             EntryIngredients.ofIngredient(recipe.firstIngredient()),
             recipe.secondIngredient().map(EntryIngredients::ofIngredient).orElse(EntryIngredient.empty()),
             EntryIngredient.empty(),
@@ -67,7 +66,7 @@ public record BrewerDisplay(
 
     public BrewerDisplay(FluidBrewingRecipe recipe, @Nullable Identifier id) {
         this(
-            EntryIngredients.of(AdornItems.MUG.get()),
+            EntryIngredients.ofIngredient(recipe.input()),
             EntryIngredients.ofIngredient(recipe.firstIngredient()),
             recipe.secondIngredient().map(EntryIngredients::ofIngredient).orElse(EntryIngredient.empty()),
             entryIngredientOf(recipe.fluid()),

@@ -1,0 +1,41 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:fluid",
+      "values": [
+        "c:milk"
+      ]
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_brewer": {
+      "conditions": {
+        "items": [
+          {
+            "items": "adorn:brewer"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "adorn:brewing/hot_chocolate_from_fluid"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_brewer"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "adorn:brewing/hot_chocolate_from_fluid"
+    ]
+  }
+}

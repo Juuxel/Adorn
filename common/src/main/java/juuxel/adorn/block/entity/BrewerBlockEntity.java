@@ -3,7 +3,7 @@ package juuxel.adorn.block.entity;
 import juuxel.adorn.block.AdornBlockEntities;
 import juuxel.adorn.block.BrewerBlock;
 import juuxel.adorn.fluid.FluidReference;
-import juuxel.adorn.item.AdornItems;
+import juuxel.adorn.lib.AdornTags;
 import juuxel.adorn.menu.BrewerMenu;
 import juuxel.adorn.platform.ItemBridge;
 import juuxel.adorn.recipe.AdornRecipeTypes;
@@ -17,6 +17,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.menu.Menu;
 import net.minecraft.menu.property.PropertyDelegate;
 import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.recipe.RecipeFinder;
+import net.minecraft.recipe.RecipeInputProvider;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
@@ -26,7 +28,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class BrewerBlockEntity extends BaseContainerBlockEntity implements SidedInventory {
+public abstract class BrewerBlockEntity extends BaseContainerBlockEntity implements SidedInventory, RecipeInputProvider, BrewerMenu.BrewerInputProvider {
     private static final String NBT_PROGRESS = "Progress";
     public static final int CONTAINER_SIZE = 4;
     public static final int INPUT_SLOT = 0;
@@ -102,7 +104,7 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
 
     @Override
     public boolean isValid(int slot, ItemStack stack) {
-        if (slot == INPUT_SLOT && !(stack.isOf(AdornItems.MUG.get()) && getStack(slot).isEmpty())) return false;
+        if (slot == INPUT_SLOT && !(stack.isIn(AdornTags.BREWING_INPUTS) && getStack(slot).isEmpty())) return false;
         if (slot == FLUID_CONTAINER_SLOT && !getStack(slot).isEmpty()) return false;
         return true;
     }
@@ -120,7 +122,7 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
     public int calculateComparatorOutput() {
         // If brewing has finished
         var mugStack = getStack(INPUT_SLOT);
-        if (!mugStack.isEmpty() && !mugStack.isOf(AdornItems.MUG.get())) {
+        if (!mugStack.isEmpty() && !mugStack.isIn(AdornTags.BREWING_INPUTS)) {
             return 15;
         }
 
@@ -139,6 +141,13 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
 
     private boolean isActive() {
         return progress != 0;
+    }
+
+    @Override
+    public void provideRecipeInputs(RecipeFinder finder) {
+        finder.addInput(getStack(INPUT_SLOT));
+        finder.addInput(getStack(LEFT_INGREDIENT_SLOT));
+        finder.addInput(getStack(RIGHT_INGREDIENT_SLOT));
     }
 
     private static void decrementIngredient(BrewerBlockEntity brewer, int slot) {
@@ -166,10 +175,10 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
             world.setBlockState(pos, state.with(BrewerBlock.HAS_MUG, hasMug));
         }
 
-        var input = new RecipeInputImpl(brewer);
+        var input = brewer.createRecipeInput();
         var recipe = world.getRecipeManager().getFirstMatch(AdornRecipeTypes.BREWING.get(), input, world).map(RecipeEntry::value).orElse(null);
 
-        if (recipe != null && brewer.getStack(INPUT_SLOT).isOf(AdornItems.MUG.get())) {
+        if (recipe != null) {
             if (brewer.progress++ >= MAX_PROGRESS) {
                 decrementIngredient(brewer, LEFT_INGREDIENT_SLOT);
                 decrementIngredient(brewer, RIGHT_INGREDIENT_SLOT);
@@ -198,6 +207,11 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
         if (dirty) {
             markDirty(world, pos, state);
         }
+    }
+
+    @Override
+    public BrewerInput createRecipeInput() {
+        return new RecipeInputImpl(this);
     }
 
     private static final class RecipeInputImpl extends InventoryWrappingRecipeInput<BrewerBlockEntity> implements BrewerInput {

@@ -1815,6 +1815,7 @@
   "gui.adorn.fluid_unit.droplets.symbol": "dp",
   "gui.adorn.item_grouping_option.by_material": "By Material",
   "gui.adorn.item_grouping_option.by_shape": "By Shape",
+  "gui.adorn.recipebook.toggleRecipes.brewable": "Showing Brewable",
 
   "stat.adorn.dye_sofa": "Sofas Dyed",
   "stat.adorn.dye_table_lamp": "Table Lamps Dyed",
@@ -1888,6 +1889,7 @@
   "tag.block.adorn.wooden_steps": "Wooden Steps",
   "tag.block.c.lanterns": "Lanterns",
   "tag.item.adorn.benches": "Benches",
+  "tag.item.adorn.brewing_inputs": "Brewing Inputs",
   "tag.item.adorn.candlelit_lanterns": "Candlelit Lanterns",
   "tag.item.adorn.caution_signs": "Caution Signs",
   "tag.item.adorn.chairs": "Chairs",
