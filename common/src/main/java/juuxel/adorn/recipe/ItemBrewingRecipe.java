@@ -17,7 +17,9 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Optional;
 
-import static juuxel.adorn.block.entity.BrewerBlockEntity.*;
+import static juuxel.adorn.block.entity.BrewerBlockEntity.INPUT_SLOT;
+import static juuxel.adorn.block.entity.BrewerBlockEntity.LEFT_INGREDIENT_SLOT;
+import static juuxel.adorn.block.entity.BrewerBlockEntity.RIGHT_INGREDIENT_SLOT;
 
 public record ItemBrewingRecipe(Ingredient input, Ingredient firstIngredient, Optional<Ingredient> secondIngredient, ItemStack result) implements BrewingRecipe {
     public static final MapCodec<ItemBrewingRecipe> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(
