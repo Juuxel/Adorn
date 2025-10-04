@@ -18,11 +18,13 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Optional;
 
-import static juuxel.adorn.block.entity.BrewerBlockEntity.*;
+import static juuxel.adorn.block.entity.BrewerBlockEntity.INPUT_SLOT;
+import static juuxel.adorn.block.entity.BrewerBlockEntity.LEFT_INGREDIENT_SLOT;
+import static juuxel.adorn.block.entity.BrewerBlockEntity.RIGHT_INGREDIENT_SLOT;
 
 public record FluidBrewingRecipe(Ingredient input, Ingredient firstIngredient, Optional<Ingredient> secondIngredient, FluidIngredient fluid, ItemStack result) implements BrewingRecipe {
     public static final MapCodec<FluidBrewingRecipe> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(
-        Ingredient.CODEC.fieldOf("input").forGetter(FluidBrewingRecipe::input),
+        Ingredient.CODEC.optionalFieldOf("input").xmap(ItemBrewingRecipe::getIngredientOrMug, Optional::of).forGetter(FluidBrewingRecipe::input),
         Ingredient.CODEC.fieldOf("first_ingredient").forGetter(FluidBrewingRecipe::firstIngredient),
         Ingredient.CODEC.optionalFieldOf("second_ingredient").forGetter(FluidBrewingRecipe::secondIngredient),
         FluidIngredient.CODEC.fieldOf("fluid").forGetter(FluidBrewingRecipe::fluid),

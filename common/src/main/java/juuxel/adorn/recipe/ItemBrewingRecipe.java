@@ -3,6 +3,7 @@ package juuxel.adorn.recipe;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import juuxel.adorn.block.AdornBlocks;
+import juuxel.adorn.item.AdornItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
@@ -17,15 +18,21 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Optional;
 
-import static juuxel.adorn.block.entity.BrewerBlockEntity.*;
+import static juuxel.adorn.block.entity.BrewerBlockEntity.INPUT_SLOT;
+import static juuxel.adorn.block.entity.BrewerBlockEntity.LEFT_INGREDIENT_SLOT;
+import static juuxel.adorn.block.entity.BrewerBlockEntity.RIGHT_INGREDIENT_SLOT;
 
 public record ItemBrewingRecipe(Ingredient input, Ingredient firstIngredient, Optional<Ingredient> secondIngredient, ItemStack result) implements BrewingRecipe {
     public static final MapCodec<ItemBrewingRecipe> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(
-        Ingredient.CODEC.fieldOf("input").forGetter(ItemBrewingRecipe::input),
+        Ingredient.CODEC.optionalFieldOf("input").xmap(ItemBrewingRecipe::getIngredientOrMug, Optional::of).forGetter(ItemBrewingRecipe::input),
         Ingredient.CODEC.fieldOf("first_ingredient").forGetter(ItemBrewingRecipe::firstIngredient),
         Ingredient.CODEC.optionalFieldOf("second_ingredient").forGetter(ItemBrewingRecipe::secondIngredient),
         ItemStack.VALIDATED_CODEC.fieldOf("result").forGetter(ItemBrewingRecipe::result)
     ).apply(builder, ItemBrewingRecipe::new));
+
+    static Ingredient getIngredientOrMug(Optional<Ingredient> opt) {
+        return opt.orElseGet(() -> Ingredient.ofItem(AdornItems.MUG.get()));
+    }
 
     @Override
     public boolean matches(BrewerInput input, World world) {
