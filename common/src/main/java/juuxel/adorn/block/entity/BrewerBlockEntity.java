@@ -16,20 +16,28 @@ import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.menu.Menu;
 import net.minecraft.menu.property.PropertyDelegate;
+import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeFinder;
 import net.minecraft.recipe.RecipeInputProvider;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
 import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+import java.util.Optional;
+
 public abstract class BrewerBlockEntity extends BaseContainerBlockEntity implements SidedInventory, RecipeInputProvider, BrewerMenu.BrewerInputProvider {
     private static final String NBT_PROGRESS = "Progress";
+    private static final String NBT_CURRENT_RECIPE = "CurrentRecipe";
     public static final int CONTAINER_SIZE = 4;
     public static final int INPUT_SLOT = 0;
     public static final int LEFT_INGREDIENT_SLOT = 1;
@@ -39,6 +47,7 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
     public static final int FLUID_CAPACITY_IN_BUCKETS = 2;
 
     private int progress = 0;
+    private @Nullable RegistryKey<Recipe<?>> currentRecipe;
     private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
         @Override
         public int get(int index) {
@@ -75,12 +84,14 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
     protected void writeData(WriteView view) {
         super.writeData(view);
         view.putInt(NBT_PROGRESS, progress);
+        view.put(NBT_CURRENT_RECIPE, Codecs.optional(RegistryKey.createCodec(RegistryKeys.RECIPE)), Optional.ofNullable(currentRecipe));
     }
 
     @Override
     protected void readData(ReadView view) {
         super.readData(view);
         progress = view.getInt(NBT_PROGRESS, 0);
+        currentRecipe = view.read(NBT_CURRENT_RECIPE, Codecs.optional(RegistryKey.createCodec(RegistryKeys.RECIPE))).flatMap(x -> x).orElse(null);
     }
 
     @Override
@@ -176,8 +187,16 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
         }
 
         var input = brewer.createRecipeInput();
-        var recipe = world.getRecipeManager().getFirstMatch(AdornRecipeTypes.BREWING.get(), input, world).map(RecipeEntry::value).orElse(null);
+        var recipeEntry = world.getRecipeManager().getFirstMatch(AdornRecipeTypes.BREWING.get(), input, world);
+        var key = recipeEntry.map(RecipeEntry::id).orElse(null);
 
+        if (!Objects.equals(key, brewer.currentRecipe)) {
+            brewer.currentRecipe = key;
+            brewer.progress = 0;
+            dirty = true;
+        }
+
+        var recipe = recipeEntry.map(RecipeEntry::value).orElse(null);
         if (recipe != null) {
             if (brewer.progress++ >= MAX_PROGRESS) {
                 decrementIngredient(brewer, LEFT_INGREDIENT_SLOT);
@@ -190,11 +209,6 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
             }
 
             dirty = true;
-        } else {
-            if (brewer.progress != 0) {
-                brewer.progress = 0;
-                dirty = true;
-            }
         }
 
         var activeNow = brewer.isActive();
