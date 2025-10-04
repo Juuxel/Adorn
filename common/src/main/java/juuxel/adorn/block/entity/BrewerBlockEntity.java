@@ -80,7 +80,7 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
     @Override
     protected void readData(ReadView view) {
         super.readData(view);
-        view.getInt(NBT_PROGRESS, 0);
+        progress = view.getInt(NBT_PROGRESS, 0);
     }
 
     @Override
