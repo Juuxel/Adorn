@@ -8,8 +8,7 @@ import juuxel.adorn.item.ConeItem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.BlockModelRenderer;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -41,29 +40,29 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity> {
     public void render(ConeEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         matrices.push();
         matrices.translate(-0.5f, 0, -0.5f);
-        renderCone(modelManager, entity.getVariant(), matrices, vertexConsumers, light, VertexConsumerFactory.ENTITY);
+        renderCone(modelManager, entity.getVariant(), matrices, vertexConsumers, light, false);
         matrices.pop();
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
     }
 
-    private static void renderCone(BakedModelManager modelManager, ConeVariant variant, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, VertexConsumerFactory vertexConsumerFactory) {
+    private static void renderCone(BakedModelManager modelManager, ConeVariant variant, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, boolean glint) {
         var model = ModelBridge.get().getModel(modelManager, CustomModelKeys.CONES.getEager(variant));
         var matrix = matrices.peek();
-        var vertexConsumer = vertexConsumerFactory.createVertexConsumer(vertexConsumers, SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE);
+        var vertexConsumer = ItemRenderer.getItemGlintConsumer(vertexConsumers, TexturedRenderLayers.getEntitySolid(), false, glint);
         BlockModelRenderer modelRenderer = MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer();
         modelRenderer.render(matrix, vertexConsumer, null, model, 1, 1, 1, light, OverlayTexture.DEFAULT_UV);
     }
 
     public static void renderOnHead(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, int light, BipedEntityModel<?> contextModel) {
         var variant = ((ConeItem) stack.getItem()).getVariant();
-        var vertexConsumerFactory = stack.hasGlint() ? VertexConsumerFactory.ARMOR_WITH_GLINT : VertexConsumerFactory.ARMOR_WITHOUT_GLINT;
         var modelManager = MinecraftClient.getInstance().getBakedModelManager();
         matrices.push();
         contextModel.getHead().rotate(matrices);
         float headSize = getHeadHeight(matrices, contextModel);
-        matrices.translate(SIZE * 0.5f, -headSize, SIZE * 0.5f);
-        matrices.scale(-SIZE, -SIZE, -SIZE);
-        renderCone(modelManager, variant, matrices, vertexConsumers, light, vertexConsumerFactory);
+        matrices.scale(-1, -1, 1);
+        matrices.translate(-SIZE * 0.5f, headSize, -SIZE * 0.5f);
+        matrices.scale(SIZE, SIZE, SIZE);
+        renderCone(modelManager, variant, matrices, vertexConsumers, light, stack.hasGlint());
         matrices.pop();
     }
 
@@ -80,15 +79,5 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity> {
         public void accept(MatrixStack.Entry matrix, String path, int index, ModelPart.Cuboid cuboid) {
             if (headHeight == 0) headHeight = (cuboid.maxY - cuboid.minY) / 16f;
         }
-    }
-
-    @FunctionalInterface
-    private interface VertexConsumerFactory {
-        VertexConsumerFactory ENTITY = (vertexConsumers, texture) -> vertexConsumers.getBuffer(RenderLayer.getEntityCutout(texture));
-        VertexConsumerFactory ARMOR_WITHOUT_GLINT = (vertexConsumers, texture) -> vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(texture));
-        // TODO: Figure out why the glint doesn't render
-        VertexConsumerFactory ARMOR_WITH_GLINT = (vertexConsumers, texture) -> ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(texture), true);
-
-        VertexConsumer createVertexConsumer(VertexConsumerProvider vertexConsumers, Identifier texture);
     }
 }
