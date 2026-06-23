@@ -15,7 +15,6 @@ public final class BiomesOPlentyCompat extends CompatBlockVariantSet {
     public List<BlockVariant> getWoodVariants() {
         return createVariants(
             BlockVariant.Wood::new,
-            "cherry",
             "dead",
             "fir",
             "hellbark",

@@ -65,7 +65,6 @@
     { "id": "adorn:traverse/fir_bench", "required": false },
     { "id": "adorn:woods_and_mires/pine_bench", "required": false },
     { "id": "adorn:architects_palette/twisted_bench", "required": false },
-    { "id": "adorn:biomesoplenty/cherry_bench", "required": false },
     { "id": "adorn:biomesoplenty/dead_bench", "required": false },
     { "id": "adorn:biomesoplenty/fir_bench", "required": false },
     { "id": "adorn:biomesoplenty/hellbark_bench", "required": false },

@@ -65,7 +65,6 @@
     { "id": "adorn:traverse/fir_drawer", "required": false },
     { "id": "adorn:woods_and_mires/pine_drawer", "required": false },
     { "id": "adorn:architects_palette/twisted_drawer", "required": false },
-    { "id": "adorn:biomesoplenty/cherry_drawer", "required": false },
     { "id": "adorn:biomesoplenty/dead_drawer", "required": false },
     { "id": "adorn:biomesoplenty/fir_drawer", "required": false },
     { "id": "adorn:biomesoplenty/hellbark_drawer", "required": false },
