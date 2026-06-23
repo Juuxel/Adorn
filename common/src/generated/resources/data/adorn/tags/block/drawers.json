@@ -51,6 +51,7 @@
     { "id": "adorn:cinderscapes/scorched_drawer", "required": false },
     { "id": "adorn:cinderscapes/umbral_drawer", "required": false },
     { "id": "adorn:promenade/dark_amaranth_drawer", "required": false },
+    { "id": "adorn:promenade/maple_drawer", "required": false },
     { "id": "adorn:promenade/palm_drawer", "required": false },
     { "id": "adorn:promenade/sakura_drawer", "required": false },
     { "id": "adorn:techreborn/rubber_drawer", "required": false },

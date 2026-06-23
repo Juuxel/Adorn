@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:table",
+  "pattern": [
+    "SSS",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "S": "promenade:maple_slab",
+    "#": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:promenade/maple_table",
+    "count": 3
+  }
+}

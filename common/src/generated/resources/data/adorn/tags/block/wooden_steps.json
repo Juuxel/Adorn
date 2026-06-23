@@ -51,6 +51,7 @@
     { "id": "adorn:cinderscapes/scorched_step", "required": false },
     { "id": "adorn:cinderscapes/umbral_step", "required": false },
     { "id": "adorn:promenade/dark_amaranth_step", "required": false },
+    { "id": "adorn:promenade/maple_step", "required": false },
     { "id": "adorn:promenade/palm_step", "required": false },
     { "id": "adorn:promenade/sakura_step", "required": false },
     { "id": "adorn:techreborn/rubber_step", "required": false },

@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "promenade:block/maple_planks",
+    "log": "promenade:block/maple_log",
+    "end": "promenade:block/maple_log_top"
+  }
+}

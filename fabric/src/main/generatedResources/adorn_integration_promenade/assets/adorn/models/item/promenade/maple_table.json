@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:item/templates/table",
+  "textures": {
+    "planks": "promenade:block/maple_planks",
+    "log": "promenade:block/maple_log"
+  }
+}

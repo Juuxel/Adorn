@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "promenade:maple_slab",
+    "P": "adorn:promenade/maple_post"
+  },
+  "result": {
+    "id": "adorn:promenade/maple_platform",
+    "count": 2
+  }
+}

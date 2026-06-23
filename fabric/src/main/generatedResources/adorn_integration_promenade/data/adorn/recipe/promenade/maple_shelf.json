@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:shelf",
+  "pattern": [
+    "---",
+    "/ /"
+  ],
+  "key": {
+    "-": "promenade:maple_slab",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:promenade/maple_shelf",
+    "count": 3
+  }
+}

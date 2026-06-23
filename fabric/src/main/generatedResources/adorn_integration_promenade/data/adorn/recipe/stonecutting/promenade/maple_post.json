@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "promenade:maple_planks",
+  "result": {
+    "id": "adorn:promenade/maple_post",
+    "count": 2
+  }
+}

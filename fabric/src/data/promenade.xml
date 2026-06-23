@@ -1,6 +1,7 @@
 <data_generators>
     <overlay directory="adorn_integration_promenade" mod_id="promenade"/>
     <wood id="promenade:dark_amaranth" fungus="true" non_flammable="true"/>
+    <wood id="promenade:maple"/>
     <wood id="promenade:palm"/>
     <wood id="promenade:sakura"/>
 </data_generators>

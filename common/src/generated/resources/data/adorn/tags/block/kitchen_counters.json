@@ -51,6 +51,7 @@
     { "id": "adorn:cinderscapes/scorched_kitchen_counter", "required": false },
     { "id": "adorn:cinderscapes/umbral_kitchen_counter", "required": false },
     { "id": "adorn:promenade/dark_amaranth_kitchen_counter", "required": false },
+    { "id": "adorn:promenade/maple_kitchen_counter", "required": false },
     { "id": "adorn:promenade/palm_kitchen_counter", "required": false },
     { "id": "adorn:promenade/sakura_kitchen_counter", "required": false },
     { "id": "adorn:techreborn/rubber_kitchen_counter", "required": false },

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "adorn:block/promenade/maple_drawer"
+    },
+    "facing=east": {
+      "model": "adorn:block/promenade/maple_drawer",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "adorn:block/promenade/maple_drawer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "adorn:block/promenade/maple_drawer",
+      "y": 270
+    }
+  }
+}
