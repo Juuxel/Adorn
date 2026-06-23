@@ -66,7 +66,6 @@
     { "id": "adorn:traverse/fir_kitchen_counter", "required": false },
     { "id": "adorn:woods_and_mires/pine_kitchen_counter", "required": false },
     { "id": "adorn:architects_palette/twisted_kitchen_counter", "required": false },
-    { "id": "adorn:biomesoplenty/cherry_kitchen_counter", "required": false },
     { "id": "adorn:biomesoplenty/dead_kitchen_counter", "required": false },
     { "id": "adorn:biomesoplenty/fir_kitchen_counter", "required": false },
     { "id": "adorn:biomesoplenty/hellbark_kitchen_counter", "required": false },
