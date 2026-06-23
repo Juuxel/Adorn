@@ -31,12 +31,12 @@ public final class TerrestriaCompat extends PrefixedBlockVariantSet {
     public List<BlockVariant> getStoneVariants() {
         return createVariants(
             BlockVariant.Stone::new,
-            "basalt",
-            "basalt_cobblestone",
-            "smooth_basalt",
-            "basalt_brick",
-            "mossy_basalt_cobblestone",
-            "mossy_basalt_brick"
+            "volcanic_rock",
+            "volcanic_rock_cobblestone",
+            "smooth_volcanic_rock",
+            "volcanic_rock_brick",
+            "mossy_volcanic_rock_cobblestone",
+            "mossy_volcanic_rock_brick"
         );
     }
 }

@@ -16,6 +16,7 @@ public final class PromenadeCompat extends PrefixedBlockVariantSet {
         return createVariants(
             BlockVariant.Wood::new,
             "dark_amaranth",
+            "maple",
             "palm",
             "sakura"
         );

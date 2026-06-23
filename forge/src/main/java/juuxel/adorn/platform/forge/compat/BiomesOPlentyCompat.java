@@ -15,14 +15,17 @@ public final class BiomesOPlentyCompat extends PrefixedBlockVariantSet {
     public List<BlockVariant> getWoodVariants() {
         return createVariants(
             BlockVariant.Wood::new,
-            "cherry",
             "dead",
+            "empyreal",
             "fir",
             "hellbark",
             "jacaranda",
             "magic",
             "mahogany",
+            "maple",
+            "origin_oak",
             "palm",
+            "pine",
             "redwood",
             "umbran",
             "willow"
