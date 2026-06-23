@@ -7,10 +7,11 @@ public record Generator(
     String id,
     String outputPathTemplate,
     String templatePath,
+    String templateDependenciesPath,
     boolean requiresCondition
 ) {
-    public Generator(String id, String outputPathTemplate, String templatePath) {
-        this(id, outputPathTemplate, templatePath, false);
+    public Generator(String id, String outputPathTemplate, String templatePath, String templateDependenciesPath) {
+        this(id, outputPathTemplate, templatePath, templateDependenciesPath, false);
     }
 
     public static final List<Generator> COMMON_GENERATORS = List.of(
@@ -169,7 +170,8 @@ public record Generator(
         return new Generator(
             "block_states/" + type,
             "assets/adorn/blockstates/<mod-prefix><id.path>_%s.json".formatted(type),
-            "block-states/%s.json".formatted(type)
+            "block-states/%s.json".formatted(type),
+            "block-states/%s.dependencies.properties".formatted(type)
         );
     }
 
@@ -181,7 +183,8 @@ public record Generator(
         return new Generator(
             "block_models/" + type,
             "assets/adorn/models/block/<mod-prefix><id.path>_%s.json".formatted(type),
-            "block-models/%s.json".formatted(templateName)
+            "block-models/%s.json".formatted(templateName),
+            "block-models/%s.dependencies.properties".formatted(templateName)
         );
     }
 
@@ -189,7 +192,8 @@ public record Generator(
         return new Generator(
             "item_models/" + type,
             "assets/adorn/models/item/<mod-prefix><id.path>_%s.json".formatted(type),
-            "item-models/%s.json".formatted(type)
+            "item-models/%s.json".formatted(type),
+            "item-models/%s.dependencies.properties".formatted(type)
         );
     }
 
@@ -198,6 +202,7 @@ public record Generator(
             "loot_tables/" + type,
             "data/adorn/loot_table/blocks/<mod-prefix><id.path>_%s.json".formatted(type),
             "loot-tables/%s.json".formatted(type),
+            "loot-tables/%s.dependencies.properties".formatted(type),
             true
         );
     }
@@ -207,6 +212,7 @@ public record Generator(
             "recipes/" + type,
             "data/adorn/recipe/<mod-prefix><id.path>_%s.json".formatted(type),
             "recipes/%s.json".formatted(type),
+            "recipes/%s.dependencies.properties".formatted(type),
             true
         );
     }
@@ -216,6 +222,7 @@ public record Generator(
             "recipes/%s/stonecutting".formatted(type),
             "data/adorn/recipe/stonecutting/<mod-prefix><id.path>_%s.json".formatted(type),
             "recipes/stonecutting/%s.json".formatted(type),
+            "recipes/stonecutting/%s.dependencies.properties".formatted(type),
             true
         );
     }
@@ -225,6 +232,7 @@ public record Generator(
             "recipe_advancements/" + type,
             "data/adorn/advancement/recipes/<mod-prefix><id.path>_%s.json".formatted(type),
             "recipe-advancements/%s.json".formatted(type),
+            "recipe-advancements/%s.dependencies.properties".formatted(type),
             true
         );
     }
@@ -234,6 +242,7 @@ public record Generator(
             "item_assets/" + type,
             "assets/adorn/items/<mod-prefix><id.path>_%s.json".formatted(type),
             "item_assets/%s.json".formatted(type),
+            "item_assets/%s.dependencies.properties".formatted(type),
             true
         );
     }

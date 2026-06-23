@@ -11,6 +11,8 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jspecify:jspecify:1.0.0")
+    implementation("com.google.code.gson:gson:2.14.0")
     implementation("org.ow2.asm:asm-tree:9.4")
     implementation("io.github.juuxel:adorn-data-generator")
 
