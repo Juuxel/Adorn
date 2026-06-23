@@ -32,7 +32,6 @@ public final class ModrinthModDownloader implements ModDownloader {
         var loaders = URLEncoder.encode("[\"" + loader + "\"]", StandardCharsets.UTF_8);
         var gameVersions = URLEncoder.encode("[\"" + gameVersion + "\"]", StandardCharsets.UTF_8);
         var url = "%s/project/%s/version?loaders=%s&game_versions=%s".formatted(API_URL, id, loaders, gameVersions);
-        System.out.println(url);
         var request = HttpRequest.newBuilder(URI.create(url)).build();
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
             .thenCompose(versionListResponse -> {

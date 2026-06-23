@@ -124,9 +124,6 @@ public abstract class CheckModDataCompat extends DefaultTask {
             });
             generatorBuilder.build().generate();
 
-            System.out.println("Checking items: " + items);
-            System.out.println("Checking textures: " + items);
-
             // check
             List<String> missingFiles = new ArrayList<>();
 
