@@ -77,6 +77,8 @@ public final class PackMcmetaGeneration {
             JsonObject entry = new JsonObject();
             entry.addProperty("directory", overlay.directory());
             entry.add("formats", formats);
+            entry.addProperty("min_format", 0);
+            entry.addProperty("max_format", Integer.MAX_VALUE);
             entry.add("neoforge:conditions", conditions);
             return entry;
         });
