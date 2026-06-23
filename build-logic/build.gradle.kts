@@ -16,7 +16,7 @@ dependencies {
     implementation("io.github.juuxel:adorn-data-generator")
 
     // Must match the version in settings.gradle.kts!
-    implementation("dev.architectury:architectury-loom:1.11.+")
+    implementation("dev.architectury:architectury-loom:1.17.+")
 }
 
 java {

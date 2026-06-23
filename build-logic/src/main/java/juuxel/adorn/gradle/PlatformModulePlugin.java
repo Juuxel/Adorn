@@ -43,10 +43,10 @@ public final class PlatformModulePlugin implements Plugin<Project> {
 
         var loom = project.getExtensions().getByType(LoomGradleExtensionAPI.class);
         // Generate IDE run configs for each run config.
-        loom.getRuns().configureEach(run -> run.setIdeConfigGenerated(true));
+        loom.getRuns().configureEach(run -> run.getGenerateRunConfig().set(true));
 
         // Set a different run directory for the server so the log and config files don't conflict.
-        loom.getRuns().named("server", run -> run.setRunDir("run/server"));
+        loom.getRuns().named("server", run -> run.getRunDirectory().set(project.file("run/server")));
 
         // Set up the access widener.
         loom.getAccessWidenerPath().set(extension.getAccessWidenerFile());
@@ -54,7 +54,7 @@ public final class PlatformModulePlugin implements Plugin<Project> {
         // Set up mod entry. "main" matches the default NeoForge mod's name.
         ModSettings mod = loom.getMods().maybeCreate("main");
         mod.sourceSet(SourceSet.MAIN_SOURCE_SET_NAME);
-        mod.sourceSet(SourceSet.MAIN_SOURCE_SET_NAME, project.project(":common"));
+        mod.sourceSet(SourceSet.MAIN_SOURCE_SET_NAME, ":common");
 
         // Depend on the common project. The "namedElements" configuration contains the non-remapped
         // classes and resources of the project.
