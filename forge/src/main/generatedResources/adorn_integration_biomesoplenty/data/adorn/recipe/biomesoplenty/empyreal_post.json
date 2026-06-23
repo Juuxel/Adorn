@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "biomesoplenty:empyreal_planks",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/empyreal_post",
+    "count": 4
+  }
+}

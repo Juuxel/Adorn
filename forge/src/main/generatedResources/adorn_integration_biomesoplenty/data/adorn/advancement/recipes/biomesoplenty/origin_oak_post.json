@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:biomesoplenty/origin_oak_post"
+    ]
+  },
+  "criteria": {
+    "has_origin_oak_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "biomesoplenty:origin_oak_planks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:biomesoplenty/origin_oak_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_origin_oak_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

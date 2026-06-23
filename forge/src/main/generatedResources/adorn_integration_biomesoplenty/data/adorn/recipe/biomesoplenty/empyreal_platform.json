@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomesoplenty:empyreal_slab",
+    "P": "adorn:biomesoplenty/empyreal_post"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/empyreal_platform",
+    "count": 2
+  }
+}

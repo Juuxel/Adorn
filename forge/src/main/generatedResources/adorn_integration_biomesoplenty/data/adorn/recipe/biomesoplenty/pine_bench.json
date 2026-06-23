@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "biomesoplenty:pine_slab"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/pine_bench",
+    "count": 2
+  }
+}
