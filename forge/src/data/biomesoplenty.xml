@@ -1,6 +1,5 @@
 <data_generators>
     <overlay directory="adorn_integration_biomesoplenty" mod_id="biomesoplenty"/>
-    <wood id="biomesoplenty:cherry"/>
     <wood id="biomesoplenty:dead"/>
     <wood id="biomesoplenty:fir"/>
     <wood id="biomesoplenty:hellbark" non_flammable="true"/>

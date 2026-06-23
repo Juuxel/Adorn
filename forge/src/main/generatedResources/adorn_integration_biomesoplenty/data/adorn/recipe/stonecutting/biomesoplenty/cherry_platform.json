@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": "biomesoplenty:cherry_planks",
-  "result": {
-    "id": "adorn:biomesoplenty/cherry_platform",
-    "count": 1
-  }
-}
