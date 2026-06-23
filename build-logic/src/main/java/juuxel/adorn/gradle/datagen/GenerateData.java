@@ -8,6 +8,7 @@ import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.SetProperty;
 import org.gradle.api.tasks.Input;
+import org.gradle.api.tasks.Nested;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.workers.WorkAction;
@@ -21,7 +22,7 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 public abstract class GenerateData extends DefaultTask {
-    @Input
+    @Nested
     public abstract SetProperty<DataConfig> getConfigs();
 
     @Input
@@ -44,7 +45,7 @@ public abstract class GenerateData extends DefaultTask {
     }
 
     public interface Parameters extends WorkParameters {
-        @Input
+        @Nested
         SetProperty<DataConfig> getConfigs();
 
         @Input
