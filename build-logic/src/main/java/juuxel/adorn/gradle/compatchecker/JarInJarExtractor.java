@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Set;
 import java.util.zip.ZipFile;
@@ -16,7 +17,7 @@ import java.util.zip.ZipFile;
 public final class JarInJarExtractor {
     private static final String NEOFORGE_JAR_JAR_METADATA_PATH = "META-INF/jarjar/metadata.json";
 
-    public static void extractJarInJar(Path directory, Path modJar, Set<Path> jars) throws IOException {
+    public static void extractJarInJar(Path directory, Path modJar, Set<Path> jars, boolean overwriteExisting) throws IOException {
         jars.add(modJar);
         Gson gson = new Gson();
 
@@ -27,8 +28,8 @@ public final class JarInJarExtractor {
                      var reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
                     var metadata = gson.fromJson(reader, NeoForgeJarJarMetadata.class);
                     for (NeoForgeJarJarJar jar : metadata.jars) {
-                        Path extracted = extractNested(directory, zip, jar.path);
-                        extractJarInJar(directory, extracted, jars);
+                        Path extracted = extractNested(directory, zip, jar.path, overwriteExisting);
+                        extractJarInJar(directory, extracted, jars, overwriteExisting);
                     }
                 }
             }
@@ -42,8 +43,8 @@ public final class JarInJarExtractor {
                     if (jarsArray != null) {
                         for (JsonElement jar : jarsArray) {
                             String path = jar.getAsJsonObject().getAsJsonPrimitive("file").getAsString();
-                            Path extracted = extractNested(directory, zip, path);
-                            extractJarInJar(directory, extracted, jars);
+                            Path extracted = extractNested(directory, zip, path, overwriteExisting);
+                            extractJarInJar(directory, extracted, jars, overwriteExisting);
                         }
                     }
                 }
@@ -51,13 +52,13 @@ public final class JarInJarExtractor {
         }
     }
 
-    private static Path extractNested(Path directory, ZipFile zip, String entry) throws IOException {
+    private static Path extractNested(Path directory, ZipFile zip, String entry, boolean overwriteExisting) throws IOException {
         int slashIndex = entry.lastIndexOf('/');
         String fileName = slashIndex >= 0 ? entry.substring(slashIndex + 1) : entry;
         Path targetPath = directory.resolve(fileName);
-        if (Files.exists(targetPath)) return targetPath;
+        if (!overwriteExisting && Files.exists(targetPath)) return targetPath;
         try (var in = zip.getInputStream(zip.getEntry(entry))) {
-            Files.copy(in, targetPath);
+            Files.copy(in, targetPath, StandardCopyOption.REPLACE_EXISTING);
         }
         return targetPath;
     }
