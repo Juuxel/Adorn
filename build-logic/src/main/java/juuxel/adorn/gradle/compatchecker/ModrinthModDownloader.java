@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-public final class ModrinthModDownloader implements ModDownloader {
+public final class ModrinthModDownloader implements ModFileMetadataProvider<String>, ModDownloader<String> {
     private static final String API_URL = "https://api.modrinth.com/v2";
     private final HttpClient client;
     private final Gson gson = new Gson();
@@ -28,13 +28,13 @@ public final class ModrinthModDownloader implements ModDownloader {
     }
 
     @Override
-    public CompletableFuture<Path> download(String id, String loader, String gameVersion, Path outputDirectory, boolean forceRedownload) {
+    public CompletableFuture<ModFileMetadata<String>> findLatestVersion(String id, String loader, String gameVersion) {
         var loaders = URLEncoder.encode("[\"" + loader + "\"]", StandardCharsets.UTF_8);
         var gameVersions = URLEncoder.encode("[\"" + gameVersion + "\"]", StandardCharsets.UTF_8);
         var url = "%s/project/%s/version?loaders=%s&game_versions=%s".formatted(API_URL, id, loaders, gameVersions);
         var request = HttpRequest.newBuilder(URI.create(url)).build();
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-            .thenCompose(versionListResponse -> {
+            .thenApply(versionListResponse -> {
                 if (versionListResponse.statusCode() != 200) {
                     throw new RuntimeException("Got code " + versionListResponse.statusCode() + " with body " + versionListResponse.body());
                 }
@@ -42,21 +42,26 @@ public final class ModrinthModDownloader implements ModDownloader {
                 var versions = gson.fromJson(versionListResponse.body(), ModrinthVersionInfo[].class);
                 Arrays.sort(versions, Comparator.comparing(ModrinthVersionInfo::datePublished).reversed());
                 var latestFile = versions[0].findPrimaryFile();
-                var targetPath = outputDirectory.resolve(latestFile.filename);
-
-                if (forceRedownload || !Files.exists(targetPath)) {
-                    var fileRequest = HttpRequest.newBuilder(URI.create(latestFile.url)).build();
-                    var bodyHandler = HttpResponse.BodyHandlers.ofFile(
-                        targetPath,
-                        StandardOpenOption.CREATE,
-                        StandardOpenOption.WRITE,
-                        StandardOpenOption.TRUNCATE_EXISTING
-                    );
-                    return client.sendAsync(fileRequest, bodyHandler).thenApply(HttpResponse::body);
-                } else {
-                    return CompletableFuture.completedFuture(targetPath);
-                }
+                return new ModFileMetadata<>(latestFile.filename, latestFile.url);
             });
+    }
+
+    @Override
+    public CompletableFuture<Path> download(ModFileMetadataProvider.ModFileMetadata<String> metadata, Path outputDirectory, boolean forceRedownload) {
+        var targetPath = outputDirectory.resolve(metadata.fileName());
+
+        if (forceRedownload || !Files.exists(targetPath)) {
+            var fileRequest = HttpRequest.newBuilder(URI.create(metadata.value())).build();
+            var bodyHandler = HttpResponse.BodyHandlers.ofFile(
+                targetPath,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.WRITE,
+                StandardOpenOption.TRUNCATE_EXISTING
+            );
+            return client.sendAsync(fileRequest, bodyHandler).thenApply(HttpResponse::body);
+        } else {
+            return CompletableFuture.completedFuture(targetPath);
+        }
     }
 
     @Override

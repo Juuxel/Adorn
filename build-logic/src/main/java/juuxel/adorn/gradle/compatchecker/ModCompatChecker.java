@@ -2,18 +2,16 @@ package juuxel.adorn.gradle.compatchecker;
 
 import juuxel.adorn.datagen.Id;
 
-import java.io.Closeable;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class ModCompatChecker implements Closeable {
+public final class ModCompatChecker {
     private final List<Id> textures;
     private final List<Id> items;
-    private final Vfs modJar;
+    private final JarIndex modJar;
     private final List<String> missingFiles = new ArrayList<>();
 
-    public ModCompatChecker(List<Id> textures, List<Id> items, Vfs modJar) throws IOException {
+    public ModCompatChecker(List<Id> textures, List<Id> items, JarIndex modJar) {
         this.textures = textures;
         this.items = items;
         this.modJar = modJar;
@@ -40,13 +38,8 @@ public final class ModCompatChecker implements Closeable {
     }
 
     private void checkPath(String path) {
-        if (!modJar.exists(path)) {
+        if (!modJar.files().contains(path)) {
             missingFiles.add(path);
         }
-    }
-
-    @Override
-    public void close() throws IOException {
-        modJar.close();
     }
 }

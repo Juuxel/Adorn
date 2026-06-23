@@ -4,14 +4,17 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public interface Vfs extends Closeable {
-    boolean exists(String filePath);
+    Stream<String> files();
 
-    static Vfs ofZips(List<Path> zips) throws IOException {
-        if (zips.size() == 1) return new Zip(zips.getFirst());
+    static Vfs ofZips(Collection<Path> zips) throws IOException {
+        if (zips.size() == 1) return new Zip(zips.iterator().next());
 
         List<Zip> zipVfs = new ArrayList<>(zips.size());
 
@@ -30,8 +33,10 @@ public interface Vfs extends Closeable {
         }
 
         @Override
-        public boolean exists(String filePath) {
-            return zip.getEntry(filePath) != null;
+        public Stream<String> files() {
+            return zip.stream()
+                .filter(entry -> !entry.isDirectory())
+                .map(ZipEntry::getName);
         }
 
         @Override
@@ -42,14 +47,8 @@ public interface Vfs extends Closeable {
 
     record Union(List<? extends Vfs> children) implements Vfs {
         @Override
-        public boolean exists(String filePath) {
-            for (Vfs child : children) {
-                if (child.exists(filePath)) {
-                    return true;
-                }
-            }
-
-            return false;
+        public Stream<String> files() {
+            return children.stream().flatMap(Vfs::files);
         }
 
         @Override

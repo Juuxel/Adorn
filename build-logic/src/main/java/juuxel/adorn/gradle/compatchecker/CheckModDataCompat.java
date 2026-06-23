@@ -79,23 +79,55 @@ public abstract class CheckModDataCompat extends DefaultTask {
 
         try (var executor = Executors.newVirtualThreadPerTaskExecutor();
              var downloader = new ModrinthModDownloader(executor)) {
-            record ModFile(String id, List<Path> paths) {
+            record ModFile(String id, JarIndex index) {
             }
 
-            // download all jars
-            List<CompletableFuture<ModFile>> modJarFutures = new ArrayList<>();
+            // download and index all jars
+            List<CompletableFuture<ModFile>> jarIndexFutures = new ArrayList<>();
 
             for (Mod mod : getMods().get()) {
                 String id = mod.getModId().get();
-                modJarFutures.add(
-                    downloader.download(mod.getSlug().get(), loader, mc, modJarCache, forceRedownload)
-                        .thenApply(path -> {
-                            try {
-                                Set<Path> paths = new HashSet<>();
-                                JarInJarExtractor.extractJarInJar(modJarCache, path, paths);
-                                return new ModFile(id, List.copyOf(paths));
-                            } catch (IOException e) {
-                                throw new UncheckedIOException(e);
+                jarIndexFutures.add(
+                    downloader.findLatestVersion(mod.getSlug().get(), loader, mc)
+                        .thenCompose(metadata -> {
+                            Path indexPath = modJarCache.resolve(metadata.fileName() + ".index.json.gz");
+
+                            if (forceRedownload || !Files.exists(indexPath)) {
+                                // If redownloading mods or the index is missing, generate a new one
+                                return downloader.download(metadata, modJarCache, forceRedownload)
+                                    .thenApply(path -> {
+                                        try {
+                                            // Extract nested mods
+                                            Set<Path> paths = new HashSet<>();
+                                            Path jijDir = modJarCache.resolve(id);
+                                            Files.createDirectories(jijDir);
+                                            JarInJarExtractor.extractJarInJar(jijDir, path, paths, forceRedownload);
+
+                                            // Build index
+                                            JarIndex index;
+                                            try (var vfs = Vfs.ofZips(paths)) {
+                                                index = JarIndex.ofVfs(vfs);
+                                            }
+                                            index.write(indexPath);
+
+                                            // Delete mod files (they can be very big)
+                                            for (Path downloadedJar : paths) {
+                                                Files.delete(downloadedJar);
+                                            }
+                                            Files.delete(jijDir);
+
+                                            return new ModFile(id, index);
+                                        } catch (IOException e) {
+                                            throw new UncheckedIOException(e);
+                                        }
+                                    });
+                            } else {
+                                try {
+                                    var index = JarIndex.read(indexPath);
+                                    return CompletableFuture.completedFuture(new ModFile(id, index));
+                                } catch (IOException e) {
+                                    throw new UncheckedIOException(e);
+                                }
                             }
                         })
                 );
@@ -127,17 +159,13 @@ public abstract class CheckModDataCompat extends DefaultTask {
             // check
             List<String> missingFiles = new ArrayList<>();
 
-            for (CompletableFuture<ModFile> future : modJarFutures) {
+            for (CompletableFuture<ModFile> future : jarIndexFutures) {
                 future.thenAcceptAsync(modFile -> {
                     List<Id> texturesToCheck = textures.stream().filter(id -> id.namespace().equals(modFile.id)).toList();
                     List<Id> itemsToCheck = items.stream().filter(id -> id.namespace().equals(modFile.id)).toList();
-
-                    try (var checker = new ModCompatChecker(texturesToCheck, itemsToCheck, Vfs.ofZips(modFile.paths))) {
-                        synchronized (missingFiles) {
-                            missingFiles.addAll(checker.check());
-                        }
-                    } catch (IOException e) {
-                        throw new UncheckedIOException(e);
+                    var checker = new ModCompatChecker(texturesToCheck, itemsToCheck, modFile.index);
+                    synchronized (missingFiles) {
+                        missingFiles.addAll(checker.check());
                     }
                 }, executor).join();
             }
