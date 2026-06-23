@@ -1,5 +1,6 @@
 package juuxel.adorn.gradle;
 
+import juuxel.adorn.gradle.xplat.MinecraftExtension;
 import net.fabricmc.loom.api.LoomGradleExtensionAPI;
 import org.gradle.api.JavaVersion;
 import org.gradle.api.Plugin;
@@ -10,17 +11,22 @@ import org.gradle.api.tasks.bundling.AbstractArchiveTask;
 import org.gradle.api.tasks.bundling.Jar;
 import org.gradle.api.tasks.compile.JavaCompile;
 
+import java.util.Objects;
+
 public final class MinecraftSetupPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
         project.getPlugins().apply("dev.architectury.loom");
         project.getPlugins().apply(CorePlugin.class);
+        var extension = CorePlugin.registerExtension(project, "minecraft", MinecraftExtension.class);
 
         // Copy the artifact metadata from the root project.
         Project rootProject = project.getRootProject();
         project.setGroup(rootProject.getGroup());
         project.setVersion(rootProject.getVersion());
         getBase(project).getArchivesName().set(getBase(rootProject).getArchivesName());
+
+        extension.getMinecraftVersion().convention(Objects.toString(rootProject.property("minecraft-version")));
 
         // Set up Java version
         var java = project.getExtensions().getByType(JavaPluginExtension.class);
@@ -47,18 +53,18 @@ public final class MinecraftSetupPlugin implements Plugin<Project> {
         loom.getMixin().getUseLegacyMixinAp().set(false);
 
         // Set the Minecraft dependency. The rootProject.property calls read from gradle.properties (and a variety of other sources).
-        project.getDependencies().add("minecraft", "net.minecraft:minecraft:" + rootProject.property("minecraft-version"));
+        project.getDependencies().add("minecraft", extension.getMinecraftVersion().map(version -> "net.minecraft:minecraft:" + version));
 
         // Set up the layered mappings with Yarn, a NeoForge compatibility patch and my Menu mappings.
-        project.getDependencies().add("mappings", loom.layered(spec -> {
-            spec.mappings("net.fabricmc:yarn:%s+%s:v2".formatted(rootProject.property("minecraft-version"), rootProject.property("yarn-mappings")));
+        project.getDependencies().add("mappings", extension.getMinecraftVersion().map(gameVersion -> loom.layered(spec -> {
+            spec.mappings("net.fabricmc:yarn:%s+%s:v2".formatted(gameVersion, rootProject.property("yarn-mappings")));
             spec.mappings("dev.architectury:yarn-mappings-patch-neoforge:" + rootProject.property("neoforge-mappings-patch-version"));
             var menuVersion = rootProject.property("menu-mappings").toString();
             spec.mappings("io.github.juuxel:menu:" + menuVersion, m -> {
                 m.enigmaMappings();
                 m.mappingPath("Menu-%s/mappings".formatted(menuVersion.replace('+', '-')));
             });
-        }));
+        })));
     }
 
     private static BasePluginExtension getBase(Project project) {

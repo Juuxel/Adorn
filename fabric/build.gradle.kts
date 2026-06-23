@@ -1,3 +1,5 @@
+import juuxel.adorn.gradle.compatchecker.CheckModDataCompat
+
 plugins {
     id("adorn-platform-module")
     id("adorn-data-generator")
@@ -81,5 +83,20 @@ dependencies {
     modLocalRuntime(libs.modmenu)
     modCompileOnly(libs.emi.fabric) {
         isTransitive = false
+    }
+}
+
+tasks {
+    register<CheckModDataCompat>("checkModDataCompat") {
+        configs.addAll(adorn.dataGenerator.settings.named("adorn").map { it.configs })
+        mod("blockus")
+        mod("cinderscapes")
+        mod("promenade")
+        mod("terrestria")
+        mod("traverse")
+    }
+
+    check {
+        dependsOn("checkModDataCompat")
     }
 }
