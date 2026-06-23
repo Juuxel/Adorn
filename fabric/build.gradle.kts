@@ -27,19 +27,19 @@ fun registerDataGenerator(name: String, displayName: String, common: Boolean) {
 
     loom.runs.register(name) {
         inherit(loom.runs.getByName("client"))
-        configName = displayName
-        source("commonData")
-        property("fabric-api.datagen")
-        property("fabric-api.datagen.output-dir", targetProject.file("src/generated/resources").absolutePath)
-        runDir("build/$name")
+        this.displayName = displayName
+        sourceSet = "commonData"
+        systemProperties.put("fabric-api.datagen", "")
+        systemProperties.put("fabric-api.datagen.output-dir", targetProject.file("src/generated/resources").absolutePath)
+        runDirectory = file("build/$name")
 
         if (common) {
-            property("adorn.data.commonMode", "true")
-            property("adorn.data.mainConfigs", targetProject.file("src/data/vanilla.xml").absolutePath)
+            systemProperties.put("adorn.data.commonMode", "true")
+            systemProperties.put("adorn.data.mainConfigs", targetProject.file("src/data/vanilla.xml").absolutePath)
             val tagConfigDirs = rootProject.subprojects.map { it.file("src/data") }
-            property("adorn.data.tagConfigDirs", tagConfigDirs.joinToString(File.pathSeparator) { it.absolutePath })
+            systemProperties.put("adorn.data.tagConfigDirs", tagConfigDirs.joinToString(File.pathSeparator) { it.absolutePath })
         } else {
-            property("adorn.data.mainConfigs", file("src/data").absolutePath)
+            systemProperties.put("adorn.data.mainConfigs", file("src/data").absolutePath)
         }
     }
 }
