@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-public final class ModrinthModDownloader implements ModFileMetadataProvider<String>, ModDownloader<String> {
+public final class ModrinthModDownloader implements ModDownloader<String> {
     private static final String API_URL = "https://api.modrinth.com/v2";
     private final HttpClient client;
     private final Gson gson = new Gson();
@@ -47,7 +47,7 @@ public final class ModrinthModDownloader implements ModFileMetadataProvider<Stri
     }
 
     @Override
-    public CompletableFuture<Path> download(ModFileMetadataProvider.ModFileMetadata<String> metadata, Path outputDirectory, boolean forceRedownload) {
+    public CompletableFuture<Path> download(ModFileMetadata<String> metadata, Path outputDirectory, boolean forceRedownload) {
         var targetPath = outputDirectory.resolve(metadata.fileName());
 
         if (forceRedownload || !Files.exists(targetPath)) {
