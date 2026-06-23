@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "terrestria:mossy_volcanic_rock_brick_slab",
+    "P": "adorn:terrestria/mossy_volcanic_rock_brick_post"
+  },
+  "result": {
+    "id": "adorn:terrestria/mossy_volcanic_rock_brick_platform",
+    "count": 2
+  }
+}

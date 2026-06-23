@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "terrestria:mossy_volcanic_rock_bricks",
+  "result": {
+    "id": "adorn:terrestria/mossy_volcanic_rock_brick_post",
+    "count": 2
+  }
+}

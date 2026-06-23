@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "terrestria:volcanic_rock",
+    "/": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:terrestria/volcanic_rock_post",
+    "count": 4
+  }
+}

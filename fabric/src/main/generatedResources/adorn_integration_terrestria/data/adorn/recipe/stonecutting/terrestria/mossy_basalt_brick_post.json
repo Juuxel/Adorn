@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": "terrestria:mossy_basalt_bricks",
-  "result": {
-    "id": "adorn:terrestria/mossy_basalt_brick_post",
-    "count": 2
-  }
-}

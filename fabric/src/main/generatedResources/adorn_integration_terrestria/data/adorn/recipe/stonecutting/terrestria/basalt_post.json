@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": "terrestria:basalt",
-  "result": {
-    "id": "adorn:terrestria/basalt_post",
-    "count": 2
-  }
-}

@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "terrestria:smooth_volcanic_rock",
+  "result": {
+    "id": "adorn:terrestria/smooth_volcanic_rock_post",
+    "count": 2
+  }
+}

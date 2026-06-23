@@ -188,8 +188,8 @@
   "block.adorn.terrestria.rubber_post": "Gumowy słupek",
   "block.adorn.terrestria.sakura_post": "Sakurowy słupek",
   "block.adorn.terrestria.willow_post": "Wierzbowy słupek",
-  "block.adorn.terrestria.basalt_post": "Bazaltowy słupek",
-  "block.adorn.terrestria.basalt_cobblestone_post": "Bazaltowy brukowy słupek",
+  "block.adorn.terrestria.volcanic_rock_post": "Bazaltowy słupek",
+  "block.adorn.terrestria.volcanic_rock_cobblestone_post": "Bazaltowy brukowy słupek",
   "block.adorn.woods_and_mires.pine_post": "Sosnowy słupek",
   "block.adorn.post.description": "Trochę jak słupek ogrodzeniowy",
 
@@ -221,8 +221,8 @@
   "block.adorn.terrestria.rubber_platform": "Gumowa platforma",
   "block.adorn.terrestria.sakura_platform": "Sakurowa platforma",
   "block.adorn.terrestria.willow_platform": "Wierzbowa platforma",
-  "block.adorn.terrestria.basalt_platform": "Bazaltowa platforma",
-  "block.adorn.terrestria.basalt_cobblestone_platform": "Bazaltowa brukowa platforma",
+  "block.adorn.terrestria.volcanic_rock_platform": "Bazaltowa platforma",
+  "block.adorn.terrestria.volcanic_rock_cobblestone_platform": "Bazaltowa brukowa platforma",
   "block.adorn.woods_and_mires.pine_platform": "Sosnowa platforma",
   "block.adorn.platform.description": "Słupek z platformą na górze",
 
@@ -254,8 +254,8 @@
   "block.adorn.terrestria.rubber_step": "Gumowy stopień",
   "block.adorn.terrestria.sakura_step": "Sakurowy stopień",
   "block.adorn.terrestria.willow_step": "Wierzbowy stopień",
-  "block.adorn.terrestria.basalt_step": "Bazaltowy stopień",
-  "block.adorn.terrestria.basalt_cobblestone_step": "Bazaltowy brukowy stopień",
+  "block.adorn.terrestria.volcanic_rock_step": "Bazaltowy stopień",
+  "block.adorn.terrestria.volcanic_rock_cobblestone_step": "Bazaltowy brukowy stopień",
   "block.adorn.woods_and_mires.pine_step": "Sosnowy stopień",
   "block.adorn.step.description": "Mały stopień ze słupkiem pod spodem",
 

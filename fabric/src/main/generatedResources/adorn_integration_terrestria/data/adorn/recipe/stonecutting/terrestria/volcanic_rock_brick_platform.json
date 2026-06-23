@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "terrestria:volcanic_rock_bricks",
+  "result": {
+    "id": "adorn:terrestria/volcanic_rock_brick_platform",
+    "count": 1
+  }
+}

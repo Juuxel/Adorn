@@ -1,7 +1,7 @@
 {
   "parent": "adorn:block/templates/bench_leg",
   "textures": {
-    "log": "promenade:block/sakura/log/side",
-    "end": "promenade:block/sakura/log/top"
+    "log": "promenade:block/sakura_log",
+    "end": "promenade:block/sakura_log_top"
   }
 }

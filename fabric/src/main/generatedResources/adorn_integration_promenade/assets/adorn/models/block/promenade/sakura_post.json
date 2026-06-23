@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/post",
   "textures": {
-    "texture": "promenade:block/sakura/planks"
+    "texture": "promenade:block/sakura_planks"
   }
 }

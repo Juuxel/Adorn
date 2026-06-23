@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:step",
+  "pattern": [
+    "S",
+    "#"
+  ],
+  "key": {
+    "S": "terrestria:volcanic_rock_cobblestone_slab",
+    "#": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:terrestria/volcanic_rock_cobblestone_step",
+    "count": 1
+  }
+}

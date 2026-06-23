@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": "terrestria:basalt_cobblestone",
-  "result": {
-    "id": "adorn:terrestria/basalt_cobblestone_step",
-    "count": 2
-  }
-}

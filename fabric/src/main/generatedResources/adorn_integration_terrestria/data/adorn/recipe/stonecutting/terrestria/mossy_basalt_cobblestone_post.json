@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": "terrestria:mossy_basalt_cobblestone",
-  "result": {
-    "id": "adorn:terrestria/mossy_basalt_cobblestone_post",
-    "count": 2
-  }
-}
