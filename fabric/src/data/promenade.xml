@@ -1,18 +1,6 @@
 <data_generators>
     <overlay directory="adorn_integration_promenade" mod_id="promenade"/>
-    <wood id="promenade:dark_amaranth" fungus="true" non_flammable="true">
-        <replace key="log_side" with="promenade:block/dark_amaranth/stem/side"/>
-        <replace key="log_end" with="promenade:block/dark_amaranth/stem/top"/>
-        <replace key="main-texture" with="promenade:block/dark_amaranth/planks"/>
-    </wood>
-    <wood id="promenade:palm">
-        <replace key="log_side" with="promenade:block/palm/log/side"/>
-        <replace key="log_end" with="promenade:block/palm/log/top"/>
-        <replace key="main-texture" with="promenade:block/palm/planks"/>
-    </wood>
-    <wood id="promenade:sakura">
-        <replace key="log_side" with="promenade:block/sakura/log/side"/>
-        <replace key="log_end" with="promenade:block/sakura/log/top"/>
-        <replace key="main-texture" with="promenade:block/sakura/planks"/>
-    </wood>
+    <wood id="promenade:dark_amaranth" fungus="true" non_flammable="true"/>
+    <wood id="promenade:palm"/>
+    <wood id="promenade:sakura"/>
 </data_generators>
