@@ -11,6 +11,7 @@ import net.minecraft.loot.function.LootFunctionType;
 
 public final class CheckTradingStationOwnerLootFunction implements LootFunction {
     public static final CheckTradingStationOwnerLootFunction INSTANCE = new CheckTradingStationOwnerLootFunction();
+    public static final Builder BUILDER = new Builder();
     public static final MapCodec<CheckTradingStationOwnerLootFunction> CODEC = MapCodec.unit(INSTANCE);
 
     private CheckTradingStationOwnerLootFunction() {
@@ -45,5 +46,15 @@ public final class CheckTradingStationOwnerLootFunction implements LootFunction 
     @Override
     public LootFunctionType<? extends LootFunction> getType() {
         return AdornLootFunctionTypes.CHECK_TRADING_STATION_OWNER.get();
+    }
+
+    public static final class Builder implements LootFunction.Builder {
+        private Builder() {
+        }
+
+        @Override
+        public LootFunction build() {
+            return INSTANCE;
+        }
     }
 }

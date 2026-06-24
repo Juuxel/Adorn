@@ -75,6 +75,7 @@ public final class Adorn {
         register(AdornLootConditionTypes.LOOT_CONDITION_TYPES, modBus);
         register(AdornLootFunctionTypes.LOOT_FUNCTION_TYPES, modBus);
         register(AdornStats.CUSTOM_STATS, modBus);
+        register(AdornGameRules.GAME_RULES, modBus);
         modBus.addListener(AdornNetworking::register);
         AdornCriteria.init();
         register(AdornCriteria.CRITERIA, modBus);
@@ -97,7 +98,6 @@ public final class Adorn {
     }
 
     private void init(FMLCommonSetupEvent event) {
-        AdornGameRules.init();
         AdornTags.init();
         AdornStats.init();
         ConfigManager.get().finish();

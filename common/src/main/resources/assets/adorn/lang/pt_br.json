@@ -1377,12 +1377,12 @@
   "item.adorn.traders_manual.selling.title": "Vendendo",
   "item.adorn.traders_manual.selling.text": "Configurar suas próprias estações de troca é muito simples! Basta colocar uma estação de troca e abri-la. No lado esquerdo, você pode definir o produto e o pagamento. O estoque do lado direito terá os produtos e os pagamentos.",
   
-  "gamerule.adorn:skipNightOnSofas": "Passar a noite dormindo nos sofás",
-  "gamerule.adorn:skipNightOnSofas.description": "Permite que você passe a noite se dormir em sofás.",
-  "gamerule.adorn:infiniteKitchenSinks": "Pias de cozinha são fontes infinitas",
-  "gamerule.adorn:infiniteKitchenSinks.description": "Faz com que pias de cozinha sejam fontes infinitas de recursos flúidos como água.",
-  "gamerule.adorn:dropLockedTradingStations": "Soltar estações de troca bloqueadas",
-  "gamerule.adorn:dropLockedTradingStations.description": "As estações de troca quebradas soltam uma versão bloqueada com seu conteúdo dentro.",
+  "gamerule.adorn.skip_night_on_sofas": "Passar a noite dormindo nos sofás",
+  "gamerule.adorn.skip_night_on_sofas.description": "Permite que você passe a noite se dormir em sofás.",
+  "gamerule.adorn.infinite_kitchen_sinks": "Pias de cozinha são fontes infinitas",
+  "gamerule.adorn.infinite_kitchen_sinks.description": "Faz com que pias de cozinha sejam fontes infinitas de recursos flúidos como água.",
+  "gamerule.adorn.drop_locked_trading_stations": "Soltar estações de troca bloqueadas",
+  "gamerule.adorn.drop_locked_trading_stations.description": "As estações de troca quebradas soltam uma versão bloqueada com seu conteúdo dentro.",
   
   "gui.adorn.config.title": "Adorn",
   "gui.adorn.config.creative_inventory": "Inventário criativo",

@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "conditions": [
+                {
+                  "condition": "adorn:game_rule",
+                  "game_rule": "adorn:drop_locked_trading_stations"
+                }
+              ],
+              "function": "minecraft:copy_components",
+              "include": [
+                "minecraft:container",
+                "adorn:trade",
+                "adorn:trade_owner"
+              ],
+              "source": "block_entity"
+            },
+            {
+              "function": "adorn:check_trading_station_owner"
+            }
+          ],
+          "name": "adorn:trading_station"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

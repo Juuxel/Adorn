@@ -7,7 +7,7 @@ import juuxel.adorn.fluid.FluidUnit;
 import juuxel.adorn.util.Logging;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
@@ -88,7 +88,7 @@ public final class KitchenSinkRenderer implements BlockEntityRenderer<KitchenSin
         fluidRenderWrapper.renderState = state;
         var sprite = getFluidSprite(state);
         fluidRenderWrapper.sprite = sprite;
-        queue.submitCustom(matrices, RenderLayer.getEntityTranslucent(sprite.getAtlasId()), fluidRenderWrapper);
+        queue.submitCustom(matrices, RenderLayers.entityTranslucent(sprite.getAtlasId()), fluidRenderWrapper);
 
         matrices.pop();
     }

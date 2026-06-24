@@ -22,10 +22,6 @@ accessible field net/minecraft/item/ItemGroups FOOD_AND_DRINK Lnet/minecraft/reg
 accessible field net/minecraft/item/ItemGroups INGREDIENTS Lnet/minecraft/registry/RegistryKey;
 accessible field net/minecraft/item/ItemGroups TOOLS Lnet/minecraft/registry/RegistryKey;
 
-# Game rules
-accessible method net/minecraft/world/GameRules register (Ljava/lang/String;Lnet/minecraft/world/GameRules$Category;Lnet/minecraft/world/GameRules$Type;)Lnet/minecraft/world/GameRules$Key;
-accessible method net/minecraft/world/GameRules$BooleanRule create (Z)Lnet/minecraft/world/GameRules$Type;
-
 # Fluids
 accessible method net/minecraft/fluid/FlowableFluid isInfinite (Lnet/minecraft/server/world/ServerWorld;)Z
 

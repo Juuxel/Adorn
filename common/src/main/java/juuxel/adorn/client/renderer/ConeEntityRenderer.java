@@ -10,6 +10,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -43,7 +44,7 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEnt
     public void render(ConeEntityRenderState state, MatrixStack matrices, OrderedRenderCommandQueue queue, CameraRenderState cameraState) {
         matrices.push();
         matrices.translate(-0.5f, 0, -0.5f);
-        queue.submitBlockStateModel(matrices, RenderLayer.getEntityCutout(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE), state.coneModel, 1, 1, 1, state.light, OverlayTexture.DEFAULT_UV, state.outlineColor);
+        queue.submitBlockStateModel(matrices, RenderLayers.entityCutout(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE), state.coneModel, 1, 1, 1, state.light, OverlayTexture.DEFAULT_UV, state.outlineColor);
         matrices.pop();
         super.render(state, matrices, queue, cameraState);
     }

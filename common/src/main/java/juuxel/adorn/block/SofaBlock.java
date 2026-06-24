@@ -3,7 +3,6 @@ package juuxel.adorn.block;
 import juuxel.adorn.block.property.FrontConnection;
 import juuxel.adorn.lib.AdornStats;
 import juuxel.adorn.util.Shapes;
-import net.minecraft.block.BedBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -37,6 +36,8 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.attribute.BedRule;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 
@@ -95,11 +96,14 @@ public class SofaBlock extends SeatBlock implements Waterloggable, SneakClickHan
             return ActionResult.SUCCESS;
         }
 
-        if (BedBlock.isBedWorking(world) && sleepingDirection != null) {
+        var bedRule = modifyBedRuleForSofas(
+            world.getEnvironmentAttributes().getAttributeValue(EnvironmentAttributes.BED_RULE_GAMEPLAY, pos)
+        );
+        if (bedRule.canSleep(world) && sleepingDirection != null) {
             if (!world.isClient()) {
                 player.trySleep(pos).ifLeft(reason -> {
-                    if (reason.getMessage() != null) {
-                        player.sendMessage(reason.getMessage(), true);
+                    if (reason.message() != null) {
+                        player.sendMessage(reason.message(), true);
                     }
                 });
             }
@@ -108,6 +112,10 @@ public class SofaBlock extends SeatBlock implements Waterloggable, SneakClickHan
         } else {
             return ActionResult.PASS;
         }
+    }
+
+    public static BedRule modifyBedRuleForSofas(BedRule rule) {
+        return rule.canSleep() == BedRule.Condition.WHEN_DARK ? new BedRule(BedRule.Condition.ALWAYS, rule.canSetSpawn(), rule.explodes(), rule.errorMessage()) : rule;
     }
 
     @Override

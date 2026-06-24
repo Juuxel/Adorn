@@ -8,7 +8,7 @@ import net.minecraft.client.gui.Element;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Panel extends AbstractParentElement implements Drawable, TickingElement, Draggable {
+public class Panel extends AbstractParentElement implements Drawable, TickingElement, Draggable {
     private final List<Element> children = new ArrayList<>();
 
     @Override

@@ -1354,12 +1354,12 @@
   "item.adorn.traders_manual.selling.title": "Продажа",
   "item.adorn.traders_manual.selling.text": "Настройка собственных торговых станций очень проста! Просто поставьте торговую станцию и откройте ее. С левой стороны вы можете установить товар и оплату. Инвентарь на правой стороне будет иметь продукты и платежи.",
 
-  "gamerule.adorn:skipNightOnSofas": "Пропускать ночи, спя на диване",
-  "gamerule.adorn:skipNightOnSofas.description": "Позволяет пропустить ночь, когда вы спите на диване.",
-  "gamerule.adorn:infiniteKitchenSinks": "Раковины - бесконечные источники",
-  "gamerule.adorn:infiniteKitchenSinks.description": "Делает кухонные раковины бесконечными источниками жидкости.",
-  "gamerule.adorn:dropLockedTradingStations": "Выпадение заблокированных торговых станций",
-  "gamerule.adorn:dropLockedTradingStations.description": "Сломанные торговые станции будут заблокированными, то есть со всем своим содержимым внутри.",
+  "gamerule.adorn.skip_night_on_sofas": "Пропускать ночи, спя на диване",
+  "gamerule.adorn.skip_night_on_sofas.description": "Позволяет пропустить ночь, когда вы спите на диване.",
+  "gamerule.adorn.infinite_kitchen_sinks": "Раковины - бесконечные источники",
+  "gamerule.adorn.infinite_kitchen_sinks.description": "Делает кухонные раковины бесконечными источниками жидкости.",
+  "gamerule.adorn.drop_locked_trading_stations": "Выпадение заблокированных торговых станций",
+  "gamerule.adorn.drop_locked_trading_stations.description": "Сломанные торговые станции будут заблокированными, то есть со всем своим содержимым внутри.",
 
   "gui.adorn.config.title": "Adorn",
   "gui.adorn.config.game_rule_defaults": "Правила игры по умолчанию...",

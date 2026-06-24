@@ -394,8 +394,8 @@
   "item.adorn.deprecated_item.desc.1": "Ten przedmiot został przeniesiony.",
   "item.adorn.deprecated_item.desc.2": "Możesz go zamienić, naciskając %s.",
 
-  "gamerule.adorn:skipNightOnSofas": "Pomijaj noce śpiąc na sofach",
-  "gamerule.adorn:skipNightOnSofas.description": "Pozwala ci pominąć noc, kiedy śpisz na sofie.",
+  "gamerule.adorn.skip_night_on_sofas": "Pomijaj noce śpiąc na sofach",
+  "gamerule.adorn.skip_night_on_sofas.description": "Pozwala ci pominąć noc, kiedy śpisz na sofie.",
 
   "gui.adorn.config.title": "Adorn",
   "gui.adorn.config.category.general": "Ogólne",

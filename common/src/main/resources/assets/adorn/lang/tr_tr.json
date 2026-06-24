@@ -944,7 +944,7 @@
   "item.adorn.deprecated_item.desc.1": "This item has been moved.",
   "item.adorn.deprecated_item.desc.2": "You can replace it by pressing %s.",
 
-  "gamerule.adorn:skipNightOnSofas": "Kanepelerde uyuyarak geceleri atlayın",
+  "gamerule.adorn.skip_night_on_sofas": "Kanepelerde uyuyarak geceleri atlayın",
 
   "gui.adorn.config.title": "Adorn",
   "gui.adorn.config.category.general": "Genel",

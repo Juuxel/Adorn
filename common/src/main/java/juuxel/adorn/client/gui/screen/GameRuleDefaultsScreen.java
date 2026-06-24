@@ -1,6 +1,7 @@
 package juuxel.adorn.client.gui.screen;
 
 import juuxel.adorn.config.ConfigManager;
+import juuxel.adorn.util.Casing;
 import juuxel.adorn.util.PropertyRef;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -16,6 +17,7 @@ public final class GameRuleDefaultsScreen extends AbstractConfigScreen {
 
     @Override
     protected void init() {
+        // TODO: make this screen look like the game rule settings screen
         super.init();
         var config = ConfigManager.config();
         addConfigToggle(BUTTON_WIDTH, PropertyRef.ofField(config.gameRuleDefaults, "skipNightOnSofas"));
@@ -31,6 +33,6 @@ public final class GameRuleDefaultsScreen extends AbstractConfigScreen {
 
     @Override
     protected String getOptionTranslationKey(String name) {
-        return "gamerule.adorn:" + name;
+        return "gamerule.adorn." + Casing.fromCamelCase().toSnakeCase().convert(name);
     }
 }

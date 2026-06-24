@@ -170,7 +170,7 @@ public abstract class AbstractConfigScreen extends Screen {
 
     protected <T extends Displayable> void addConfigButton(int width, PropertyRef<T> property, List<T> values, boolean restartRequired) {
         var button = createConfigButton(
-            CyclingButtonWidget.<T>builder(Displayable::getDisplayName).values(values).initially(property.get()),
+            CyclingButtonWidget.<T>builder(Displayable::getDisplayName, property.get()).values(values),
             (this.width - width) / 2, nextChildY, width, property, restartRequired
         );
         addDrawableChild(button);

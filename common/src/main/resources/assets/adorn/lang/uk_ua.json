@@ -1317,12 +1317,12 @@
   "item.adorn.traders_manual.selling.title": "Продаж",
   "item.adorn.traders_manual.selling.text": "Створити власні торгові станції дуже просто! Просто розмістіть торгову станцію та відкрийте її. Зліва ви можете вказати товар і оплату. В інвентарі з правого боку будуть товари та платежі.",
 
-  "gamerule.adorn:skipNightOnSofas": "Пропускати ночі, спавши на диванах",
-  "gamerule.adorn:skipNightOnSofas.description": "Дозволяє пропустити ніч, коли ви спите на дивані.",
-  "gamerule.adorn:infiniteKitchenSinks": "Кухонні мийки - це нескінченні джерела",
-  "gamerule.adorn:infiniteKitchenSinks.description": "Робить кухонні раковини нескінченними джерелами нескінченних рідин, як-от вода.",
-  "gamerule.adorn:dropLockedTradingStations": "Відкинути заблоковані торгові станції",
-  "gamerule.adorn:dropLockedTradingStations.description": "Зламані торгові станції викидають заблоковану версію з вмістом усередині.",
+  "gamerule.adorn.skip_night_on_sofas": "Пропускати ночі, спавши на диванах",
+  "gamerule.adorn.skip_night_on_sofas.description": "Дозволяє пропустити ніч, коли ви спите на дивані.",
+  "gamerule.adorn.infinite_kitchen_sinks": "Кухонні мийки - це нескінченні джерела",
+  "gamerule.adorn.infinite_kitchen_sinks.description": "Робить кухонні раковини нескінченними джерелами нескінченних рідин, як-от вода.",
+  "gamerule.adorn.drop_locked_trading_stations": "Відкинути заблоковані торгові станції",
+  "gamerule.adorn.drop_locked_trading_stations.description": "Зламані торгові станції викидають заблоковану версію з вмістом усередині.",
 
   "gui.adorn.config.title": "Adorn",
   "gui.adorn.config.game_rule_defaults": "Правила гри за замовчуванням...",

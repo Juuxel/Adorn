@@ -209,7 +209,7 @@ public final class AdornModelGenerator extends FabricModelProvider {
             )
         );
 
-        generator.registerNorthDefaultHorizontalRotation(AdornBlocks.BARRICADE.get());
+        generator.registerNorthDefaultHorizontalRotatable(AdornBlocks.BARRICADE.get());
         registerCautionSign(generator, AdornBlocks.CAUTION_SIGN, AdornBlocks.WALL_CAUTION_SIGN);
         registerCautionSign(generator, AdornBlocks.BEE_CAUTION_SIGN, AdornBlocks.BEE_WALL_CAUTION_SIGN);
         registerCautionSign(generator, AdornBlocks.BOOK_CAUTION_SIGN, AdornBlocks.BOOK_WALL_CAUTION_SIGN);
@@ -243,10 +243,10 @@ public final class AdornModelGenerator extends FabricModelProvider {
         STANDING_CAUTION_SIGN_ROT3_MODEL_FACTORY.upload(standing.get(), generator.modelCollector);
 
         BlockModelDefinitionCreator modelDefinitionCreator = VariantsBlockModelDefinitionCreator.of(standing.get(), standingVariantRot0)
-            .coordinate(STANDING_CAUTION_SIGN_OPERATIONS);
+            .apply(STANDING_CAUTION_SIGN_OPERATIONS);
 
         generator.blockStateCollector.accept(modelDefinitionCreator);
-        generator.registerNorthDefaultHorizontalRotated(wall.get(), WALL_CAUTION_SIGN_MODEL_FACTORY);
+        generator.registerNorthDefaultHorizontalRotatable(wall.get(), WALL_CAUTION_SIGN_MODEL_FACTORY);
         generator.registerItemModel(standing.get());
     }
 

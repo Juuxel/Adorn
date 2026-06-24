@@ -26,8 +26,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import net.minecraft.world.rule.GameRules;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -175,7 +175,7 @@ public final class ConeEntity extends Entity {
     }
 
     private void drop(ServerWorld world) {
-        if (world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
+        if (world.getGameRules().getValue(GameRules.ENTITY_DROPS)) {
             dropStack(world, createItemStack());
         }
     }
@@ -188,12 +188,12 @@ public final class ConeEntity extends Entity {
 
     @Override
     protected void readCustomData(ReadView view) {
-        Variants.readVariantFromNbt(view, AdornRegistryKeys.CONE_VARIANT).ifPresent(this::setVariant);
+        Variants.fromData(view, AdornRegistryKeys.CONE_VARIANT).ifPresent(this::setVariant);
     }
 
     @Override
     protected void writeCustomData(WriteView view) {
-        Variants.writeVariantToNbt(view, getVariant());
+        Variants.writeData(view, getVariant());
     }
 
     @Override

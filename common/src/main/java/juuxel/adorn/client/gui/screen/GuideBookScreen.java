@@ -14,6 +14,7 @@ import juuxel.adorn.client.gui.widget.TickingElement;
 import juuxel.adorn.util.CollectionUtil;
 import juuxel.adorn.util.Colors;
 import juuxel.adorn.util.animation.AnimationEngine;
+import net.minecraft.client.font.DrawnTextConsumer;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
@@ -32,6 +33,7 @@ import net.minecraft.text.ClickEvent;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.text.Texts;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
@@ -50,6 +52,7 @@ public final class GuideBookScreen extends Screen {
     private static final Identifier CLOSE_BOOK_ACTIVE_TEXTURE = AdornCommon.id("textures/gui/close_book_active.png");
     private static final Identifier CLOSE_BOOK_INACTIVE_TEXTURE = AdornCommon.id("textures/gui/close_book_inactive.png");
     private static final int HOVER_AREA_HIGHLIGHT_COLOR = 0x80_FFFFFF;
+    private static final Style BOOK_CONTENTS_STYLE = Style.EMPTY.withoutShadow().withColor(Colors.SCREEN_TEXT);
 
     private final Book book;
     private FlipBook flipBook;
@@ -78,9 +81,9 @@ public final class GuideBookScreen extends Screen {
         flipBook = addDrawableChild(new FlipBook(this::updatePageTurnButtons));
         flipBook.add(new TitlePage(pageX, pageY));
         for (var page : book.pages()) {
-            var panel = new Panel();
-            panel.add(new BookPageTitle(pageX, pageY, page));
             var body = new BookPageBody(pageX, pageY + PAGE_TEXT_Y, page);
+            var panel = new BookPagePanel(body);
+            panel.add(new BookPageTitle(pageX, pageY, page));
             panel.add(new ScrollEnvelope(pageX, pageY + PAGE_TEXT_Y, PAGE_WIDTH, PAGE_BODY_HEIGHT, body, animationEngine));
             flipBook.add(panel);
         }
@@ -102,23 +105,18 @@ public final class GuideBookScreen extends Screen {
         context.drawTexture(RenderPipelines.GUI_TEXTURED, BookScreen.BOOK_TEXTURE, x, y, 0, 0, BOOK_SIZE, BOOK_SIZE, 256, 256);
     }
 
-    @Override
-    public boolean handleTextClick(@Nullable Style style) {
-        if (style != null) {
-            var clickEvent = style.getClickEvent();
+    private boolean handleTextClick(@Nullable ClickEvent clickEvent) {
+        if (clickEvent instanceof ClickEvent.ChangePage(int page)) {
+            var pageIndex = page - 1; // 1-indexed => 0-indexed
 
-            if (clickEvent instanceof ClickEvent.ChangePage(int page)) {
-                var pageIndex = page - 1; // 1-indexed => 0-indexed
-
-                if (0 <= pageIndex && pageIndex < flipBook.getPageCount()) {
-                    flipBook.setCurrentPage(pageIndex);
-                    client.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.ITEM_BOOK_PAGE_TURN, 1f));
-                    return true;
-                }
+            if (0 <= pageIndex && pageIndex < flipBook.getPageCount()) {
+                flipBook.setCurrentPage(pageIndex);
+                client.getSoundManager().play(PositionedSoundInstance.ui(SoundEvents.ITEM_BOOK_PAGE_TURN, 1f));
+                return true;
             }
         }
 
-        return super.handleTextClick(style);
+        return false;
     }
 
     @Override
@@ -190,6 +188,14 @@ public final class GuideBookScreen extends Screen {
         }
     }
 
+    private final class BookPagePanel extends Panel {
+        private final BookPageBody body;
+
+        private BookPagePanel(BookPageBody body) {
+            this.body = body;
+        }
+    }
+
     private final class BookPageTitle implements Element, Drawable, TickingElement {
         private final int x;
         private final int y;
@@ -250,7 +256,7 @@ public final class GuideBookScreen extends Screen {
             this.x = x;
             this.y = y;
             this.page = page;
-            this.wrappedBodyLines = textRenderer.wrapLines(page.text(), PAGE_WIDTH - PAGE_TEXT_X);
+            this.wrappedBodyLines = textRenderer.wrapLines(Texts.withStyle(page.text(), BOOK_CONTENTS_STYLE), PAGE_WIDTH - PAGE_TEXT_X);
             this.textHeight = wrappedBodyLines.size() * textRenderer.fontHeight;
             this.imageHeight = page.image() != null ? page.image().size().y() + PAGE_IMAGE_GAP : 0;
             this.height = Math.max(PAGE_BODY_HEIGHT, textHeight + imageHeight);
@@ -271,37 +277,22 @@ public final class GuideBookScreen extends Screen {
             return x <= mouseX && mouseX <= x + width && y <= mouseY && mouseY <= y + height;
         }
 
-        private @Nullable Style getTextStyleAt(int x, int y) {
-            if (!isMouseOver(x, y)) return null;
-
-            // coordinates in widget-space
-            int wx = x - (this.x + PAGE_TEXT_X);
-            int wy = y - this.y;
-            int lineIndex = wy / textRenderer.fontHeight;
-
-            if (0 <= lineIndex && lineIndex < wrappedBodyLines.size()) {
-                var line = wrappedBodyLines.get(lineIndex);
-                return textRenderer.getTextHandler().getStyleAt(line, wx);
-            }
-
-            return null;
-        }
-
         @Override
         public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-            int textYOffset = page.image() != null && page.image().placement() == Image.Placement.BEFORE_TEXT ? imageHeight : 0;
-
-            for (int i = 0; i < wrappedBodyLines.size(); i++) {
-                var line = wrappedBodyLines.get(i);
-                context.drawText(textRenderer, line, x + PAGE_TEXT_X, textYOffset + y + i * textRenderer.fontHeight, Colors.SCREEN_TEXT, false);
-            }
+            drawText(context.getTextConsumer(DrawContext.HoverType.TOOLTIP_AND_CURSOR));
 
             if (page.image() != null) {
                 renderImage(context, page.image(), mouseX, mouseY);
             }
+        }
 
-            var hoveredStyle = getTextStyleAt(mouseX, mouseY);
-            Scissors.suspendScissors(context, () -> context.drawHoverEvent(textRenderer, hoveredStyle, mouseX, mouseY));
+        private void drawText(DrawnTextConsumer drawer) {
+            int textYOffset = page.image() != null && page.image().placement() == Image.Placement.BEFORE_TEXT ? imageHeight : 0;
+
+            for (int i = 0; i < wrappedBodyLines.size(); i++) {
+                var line = wrappedBodyLines.get(i);
+                drawer.text(x + PAGE_TEXT_X, textYOffset + y + i * textRenderer.fontHeight, line);
+            }
         }
 
         private void renderImage(DrawContext context, Image image, int mouseX, int mouseY) {
@@ -329,10 +320,13 @@ public final class GuideBookScreen extends Screen {
         @Override
         public boolean mouseClicked(Click click, boolean doubled) {
             if (click.button() == 0) {
-                var style = getTextStyleAt((int) click.x(), (int) click.y());
-
-                if (style != null && handleTextClick(style)) {
-                    return true;
+                if (flipBook.getCurrentPageValue() instanceof BookPagePanel panel) {
+                    var clickHandler = new DrawnTextConsumer.ClickHandler(textRenderer, (int) click.x(), (int) click.y());
+                    panel.body.drawText(clickHandler);
+                    var style = clickHandler.getStyle();
+                    if (style != null && handleTextClick(style.getClickEvent())) {
+                        return true;
+                    }
                 }
             }
 
@@ -356,7 +350,7 @@ public final class GuideBookScreen extends Screen {
         }
 
         @Override
-        protected void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
+        protected void drawIcon(DrawContext context, int mouseX, int mouseY, float deltaTicks) {
             var texture = isHovered() ? CLOSE_BOOK_ACTIVE_TEXTURE : CLOSE_BOOK_INACTIVE_TEXTURE;
             context.drawTexture(RenderPipelines.GUI_TEXTURED, texture, getX(), getY(), 0f, 0f, 8, 8, 8, 8);
         }

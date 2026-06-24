@@ -1362,12 +1362,12 @@
   "item.adorn.traders_manual.selling.title": "Vendere",
   "item.adorn.traders_manual.selling.text": "Impostare le proprie stazioni di commercio è molto semplice! Basta posizionare una stazione commerciale e aprirla. Sul lato sinistro, è possibile impostare il prodotto e il pagamento. L'inventario sul lato destro avrà i prodotti e i pagamenti.",
 
-  "gamerule.adorn:skipNightOnSofas": "Salta la notte dormendo su un divano",
-  "gamerule.adorn:skipNightOnSofas.description": "Ti permette di saltaree la notte quando dormi su un divano.",
-  "gamerule.adorn:infiniteKitchenSinks": "I lavelli da cucina sono fonti infinite",
-  "gamerule.adorn:infiniteKitchenSinks.description": "Rende i lavelli da cucina fonti infinite per fluidi infiniti come l'acqua.",
-  "gamerule.adorn:dropLockedTradingStations": "Rilascia le stazioni commerciali bloccate",
-  "gamerule.adorn:dropLockedTradingStations.description": "Le stazioni commerciali bloccate quando rotte rilasciano una versione bloccata che conserva il loro contenuto.",
+  "gamerule.adorn.skip_night_on_sofas": "Salta la notte dormendo su un divano",
+  "gamerule.adorn.skip_night_on_sofas.description": "Ti permette di saltaree la notte quando dormi su un divano.",
+  "gamerule.adorn.infinite_kitchen_sinks": "I lavelli da cucina sono fonti infinite",
+  "gamerule.adorn.infinite_kitchen_sinks.description": "Rende i lavelli da cucina fonti infinite per fluidi infiniti come l'acqua.",
+  "gamerule.adorn.drop_locked_trading_stations": "Rilascia le stazioni commerciali bloccate",
+  "gamerule.adorn.drop_locked_trading_stations.description": "Le stazioni commerciali bloccate quando rotte rilasciano una versione bloccata che conserva il loro contenuto.",
 
   "gui.adorn.config.title": "Adorn",
   "gui.adorn.config.creative_inventory": "Inventario creativo",

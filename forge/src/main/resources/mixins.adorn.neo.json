@@ -6,7 +6,8 @@
 
   "mixins": [
     "ItemStackMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "ServerPlayerEntityMixin"
   ],
   "client": [
     "client.BipedEntityRendererMixin",

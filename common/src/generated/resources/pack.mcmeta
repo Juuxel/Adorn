@@ -174,7 +174,10 @@
   },
   "pack": {
     "description": "Adorn resources.",
-    "max_format": 88,
-    "min_format": 88
+    "max_format": 94,
+    "min_format": [
+      94,
+      1
+    ]
   }
 }

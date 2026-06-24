@@ -1073,8 +1073,8 @@
   "item.adorn.deprecated_item.desc.1": "Este artículo se ha movido.",
   "item.adorn.deprecated_item.desc.2": "Puede reemplazarlo presionando %s.",
 
-  "gamerule.adorn:skipNightOnSofas": "Salta las noches durmiendo en sofás",
-  "gamerule.adorn:skipNightOnSofas.description": "Te permite saltarte la noche cuando duermes en un sofá.",
+  "gamerule.adorn.skip_night_on_sofas": "Salta las noches durmiendo en sofás",
+  "gamerule.adorn.skip_night_on_sofas.description": "Te permite saltarte la noche cuando duermes en un sofá.",
 
   "gui.adorn.config.title": "Adornos",
   "gui.adorn.config.category.general": "General",

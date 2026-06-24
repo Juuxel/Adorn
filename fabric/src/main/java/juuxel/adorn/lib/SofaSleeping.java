@@ -14,14 +14,6 @@ public final class SofaSleeping {
         EntitySleepEvents.ALLOW_SETTING_SPAWN.register((player, sleepingPos) ->
             !(player.getEntityWorld().getBlockState(sleepingPos).getBlock() instanceof SofaBlock));
 
-        EntitySleepEvents.ALLOW_SLEEP_TIME.register((player, sleepingPos, vanillaResult) -> {
-            if (player.getEntityWorld().isDay() && player.getEntityWorld().getBlockState(sleepingPos).getBlock() instanceof SofaBlock) {
-                return ActionResult.SUCCESS;
-            }
-
-            return ActionResult.PASS;
-        });
-
         EntitySleepEvents.MODIFY_SLEEPING_DIRECTION.register((entity, sleepingPos, sleepingDirection) -> {
             if (entity.getEntityWorld().getBlockState(sleepingPos).getBlock() instanceof SofaBlock) {
                 var direction = SofaBlock.getSleepingDirection(entity.getEntityWorld(), sleepingPos, true);
@@ -39,7 +31,7 @@ public final class SofaSleeping {
                 if (player.getEntityWorld().isDay()) {
                     return false;
                 } else {
-                    return player.getEntityWorld() instanceof ServerWorld world && world.getGameRules().getBoolean(AdornGameRules.SKIP_NIGHT_ON_SOFAS);
+                    return player.getEntityWorld() instanceof ServerWorld world && world.getGameRules().getValue(AdornGameRules.SKIP_NIGHT_ON_SOFAS.get());
                 }
             } else {
                 return true; // go on

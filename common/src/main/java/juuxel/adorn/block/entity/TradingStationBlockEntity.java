@@ -179,7 +179,7 @@ public final class TradingStationBlockEntity extends BlockEntity implements Name
 
     @Override
     public void onBlockReplaced(BlockPos pos, BlockState oldState) {
-        if (world instanceof ServerWorld serverWorld && !serverWorld.getGameRules().getBoolean(AdornGameRules.DROP_LOCKED_TRADING_STATIONS)) {
+        if (world instanceof ServerWorld serverWorld && !serverWorld.getGameRules().getValue(AdornGameRules.DROP_LOCKED_TRADING_STATIONS.get())) {
             ItemScatterer.spawn(world, pos, getStorage());
         }
     }

@@ -119,7 +119,7 @@ public abstract class KitchenSinkBlockEntity extends BlockEntity {
     }
 
     public static boolean supportsInfiniteExtraction(ServerWorld world, Fluid fluid) {
-        return isInfinite(fluid, world) && world.getGameRules().getBoolean(AdornGameRules.INFINITE_KITCHEN_SINKS);
+        return isInfinite(fluid, world) && world.getGameRules().getValue(AdornGameRules.INFINITE_KITCHEN_SINKS.get());
     }
 
     /**

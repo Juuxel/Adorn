@@ -1387,12 +1387,12 @@
   "item.adorn.traders_manual.selling.title": "出售",
   "item.adorn.traders_manual.selling.text": "建立自己的交易站非常简单！只要把一个交易站放下来打开就行了。在左侧，您可以设置产品和付款。右侧的库存将包含产品和付款。",
   
-  "gamerule.adorn:skipNightOnSofas": "在沙发上睡觉来跳过夜晚",
-  "gamerule.adorn:skipNightOnSofas.description": "你可以在沙发上过夜。",
-  "gamerule.adorn:infiniteKitchenSinks": "厨房水槽是无限水源",
-  "gamerule.adorn:infiniteKitchenSinks.description": "对于像水这样的无限液体，厨房水槽将会是无限水源。",
-  "gamerule.adorn:dropLockedTradingStations": "掉落上锁的交易站",
-  "gamerule.adorn:dropLockedTradingStations.description": "破坏交易站后，掉落物内装有上锁的版本。",
+  "gamerule.adorn.skip_night_on_sofas": "在沙发上睡觉来跳过夜晚",
+  "gamerule.adorn.skip_night_on_sofas.description": "你可以在沙发上过夜。",
+  "gamerule.adorn.infinite_kitchen_sinks": "厨房水槽是无限水源",
+  "gamerule.adorn.infinite_kitchen_sinks.description": "对于像水这样的无限液体，厨房水槽将会是无限水源。",
+  "gamerule.adorn.drop_locked_trading_stations": "掉落上锁的交易站",
+  "gamerule.adorn.drop_locked_trading_stations.description": "破坏交易站后，掉落物内装有上锁的版本。",
 
   "gui.adorn.config.title": "Adorn",
   "gui.adorn.config.creative_inventory": "创造模式物品栏",

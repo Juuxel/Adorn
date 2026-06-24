@@ -1329,12 +1329,12 @@
   "item.adorn.traders_manual.selling.title": "판매",
   "item.adorn.traders_manual.selling.text": "여러분 자신의 교역소를 만드는 건 정말 간단합니다! 그저 교역소를 설치하고 열기만 하면 됩니다. 왼쪽에는 판매할 상품과 그에 대한 대가를 설정할 수 있습니다. 오른쪽에는 상품과 그에 대한 대가가 보관됩니다.",
 
-  "gamerule.adorn:skipNightOnSofas": "소파에서 자면 밤을 넘깁니다.",
-  "gamerule.adorn:skipNightOnSofas.description": "소파에서 잠을 잘 경우 밤을 건너 뜁니다.",
-  "gamerule.adorn:infiniteKitchenSinks": "부엌 싱크대는 무한한 공급원",
-  "gamerule.adorn:infiniteKitchenSinks.description": "부엌 싱크대에 있는 물과 같은 액체를 무한하게 사용합니다.",
-  "gamerule.adorn:dropLockedTradingStations": "잠긴 교역소 드랍",
-  "gamerule.adorn:dropLockedTradingStations.description": "깨진 교역소는 안에 내용물을 보관하여 잠긴 상태로 떨어뜨립니다.",
+  "gamerule.adorn.skip_night_on_sofas": "소파에서 자면 밤을 넘깁니다.",
+  "gamerule.adorn.skip_night_on_sofas.description": "소파에서 잠을 잘 경우 밤을 건너 뜁니다.",
+  "gamerule.adorn.infinite_kitchen_sinks": "부엌 싱크대는 무한한 공급원",
+  "gamerule.adorn.infinite_kitchen_sinks.description": "부엌 싱크대에 있는 물과 같은 액체를 무한하게 사용합니다.",
+  "gamerule.adorn.drop_locked_trading_stations": "잠긴 교역소 드랍",
+  "gamerule.adorn.drop_locked_trading_stations.description": "깨진 교역소는 안에 내용물을 보관하여 잠긴 상태로 떨어뜨립니다.",
 
   "gui.adorn.config.title": "Adorn",
   "gui.adorn.config.game_rule_defaults": "게임 규칙 기본값...",
