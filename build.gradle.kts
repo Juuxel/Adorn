@@ -18,7 +18,7 @@ tasks {
     // Register a custom "collect jars" task that copies the Fabric and Forge mod jars
     // into the root project's build/libs. This makes it easier for me to find them
     // for testing and releasing.
-    val collectJars by registering(Copy::class) {
+    val collectJars = register<Copy>("collectJars") {
         // Find the remapJar tasks of projects that aren't common (so :fabric and :forge) and depend on them.
         val tasks = subprojects.filter { it.path != ":common" }
             .map { it.tasks.named("remapJar") }
