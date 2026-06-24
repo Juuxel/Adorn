@@ -26,7 +26,7 @@ public abstract class DataGeneratorExtension {
         action.execute(settings);
     }
 
-    public static abstract class Settings implements Named {
+    public abstract static class Settings implements Named {
         private final NamedDomainObjectContainer<DataConfig> configs;
 
         @Inject
