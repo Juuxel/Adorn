@@ -1,4 +1,4 @@
-<data_generators>
+<data_generators class_name="juuxel.adorn.compat.WamCompat">
     <overlay directory="adorn_integration_woods_and_mires" mod_id="woods_and_mires"/>
     <wood id="woods_and_mires:pine">
         <exclude generator="block_models/kitchen_counter"/>

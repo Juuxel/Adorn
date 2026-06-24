@@ -9,7 +9,8 @@ public record GeneratorConfig(
     Set<MaterialEntry<ColorMaterial>> colors,
     ConditionType conditionType,
     Map<String, String> rootReplacements,
-    Overlay overlay
+    Overlay overlay,
+    String className
 ) {
     public record MaterialEntry<M extends Material>(
         M material,

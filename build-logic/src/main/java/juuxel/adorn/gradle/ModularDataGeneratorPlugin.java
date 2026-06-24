@@ -2,6 +2,7 @@ package juuxel.adorn.gradle;
 
 import juuxel.adorn.gradle.datagen.DataGeneratorExtension;
 import juuxel.adorn.gradle.datagen.GenerateData;
+import juuxel.adorn.gradle.datagen.GenerateDataCode;
 import juuxel.adorn.gradle.datagen.GenerateEmi;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -62,6 +63,15 @@ public final class ModularDataGeneratorPlugin implements Plugin<Project> {
                 }
             });
             generateData.configure(task -> task.dependsOn(generateEmi));
+        }
+
+        if (settings.getGenerateCode().get()) {
+            var generatedSources = settings.getGeneratedSources();
+            var generateDataCode = project.getTasks().register(sourceSet.getTaskName("generate", "DataCode"), GenerateDataCode.class, task -> {
+                task.getConfigs().set(settings.getConfigs());
+                task.getOutput().convention(generatedSources);
+            });
+            sourceSet.getJava().srcDir(generateDataCode.flatMap(GenerateDataCode::getOutput));
         }
     }
 

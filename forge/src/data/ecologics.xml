@@ -1,4 +1,4 @@
-<data_generators>
+<data_generators class_name="juuxel.adorn.platform.forge.compat.EcologicsCompat">
     <overlay directory="adorn_integration_ecologics" mod_id="ecologics"/>
     <wood id="ecologics:azalea"/>
     <wood id="ecologics:flowering_azalea"/>

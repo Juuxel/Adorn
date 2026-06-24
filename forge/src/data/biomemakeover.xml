@@ -1,4 +1,4 @@
-<data_generators>
+<data_generators class_name="juuxel.adorn.platform.forge.compat.BiomeMakeoverCompat">
     <overlay directory="adorn_integration_biomemakeover" mod_id="biomemakeover"/>
     <wood id="biomemakeover:ancient_oak"/>
     <wood id="biomemakeover:blighted_balsa"/>

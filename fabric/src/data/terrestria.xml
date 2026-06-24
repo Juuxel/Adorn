@@ -1,4 +1,4 @@
-<data_generators>
+<data_generators class_name="juuxel.adorn.compat.TerrestriaCompat">
     <overlay directory="adorn_integration_terrestria" mod_id="terrestria"/>
     <wood id="terrestria:cypress"/>
     <wood id="terrestria:hemlock"/>

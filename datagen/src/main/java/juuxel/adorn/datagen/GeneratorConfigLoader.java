@@ -43,6 +43,7 @@ public final class GeneratorConfigLoader {
         if (conditionType == null) throw new IllegalArgumentException("Unknown condition type in %s: %s".formatted(path, root.getAttribute(Attributes.CONDITION_TYPE)));
         var rootReplacements = getReplacements(root);
         var overlay = readOverlay(root);
+        var className = root.getAttribute(Attributes.CLASS_NAME);
         return new GeneratorConfig(
             woods, stones,
             Arrays.stream(colors)
@@ -50,7 +51,8 @@ public final class GeneratorConfigLoader {
                 .collect(Collectors.toCollection(LinkedHashSet::new)),
             conditionType,
             rootReplacements,
-            overlay
+            overlay,
+            className
         );
     }
 
@@ -136,5 +138,6 @@ public final class GeneratorConfigLoader {
         static final String WITH = "with";
         static final String DIRECTORY = "directory";
         static final String MOD_ID = "mod_id";
+        static final String CLASS_NAME = "class_name";
     }
 }

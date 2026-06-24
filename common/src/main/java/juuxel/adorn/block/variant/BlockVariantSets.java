@@ -15,7 +15,6 @@ import juuxel.adorn.block.PostBlock;
 import juuxel.adorn.block.ShelfBlock;
 import juuxel.adorn.block.StepBlock;
 import juuxel.adorn.block.TableBlock;
-import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.item.ChairBlockItem;
 import juuxel.adorn.item.TableBlockItem;
 import juuxel.adorn.lib.registry.KeyedRegistrar;
@@ -32,7 +31,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.ServiceLoader;
 import java.util.Set;
 
 public final class BlockVariantSets {
@@ -69,14 +67,6 @@ public final class BlockVariantSets {
 
     public static void add(BlockVariantSet variantSet) {
         variantSets.add(variantSet);
-    }
-
-    public static void loadCompatSets() {
-        for (var set : ServiceLoader.load(CompatBlockVariantSet.class)) {
-            if (ConfigManager.isCompatEnabled(set.getModId())) {
-                add(set);
-            }
-        }
     }
 
     public static List<Registered<Block>> get(BlockKind kind) {

@@ -1,4 +1,4 @@
-<data_generators>
+<data_generators class_name="juuxel.adorn.platform.forge.compat.ArchitectsPaletteCompat">
     <overlay directory="adorn_integration_architects_palette" mod_id="architects_palette"/>
     <wood id="architects_palette:twisted"/>
     <stone id="architects_palette:myonite"/>
