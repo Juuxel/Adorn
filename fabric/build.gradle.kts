@@ -91,7 +91,7 @@ tasks {
         configs.addAll(adorn.dataGenerator.settings.named("adorn").map { it.configs })
         mod("blockus")
         mod("cinderscapes")
-        mod("promenade")
+        mod("techreborn")
         mod("terrestria")
         mod("traverse")
     }

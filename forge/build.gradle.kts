@@ -36,7 +36,9 @@ tasks {
 
     register<CheckModDataCompat>("checkModDataCompat") {
         configs.addAll(adorn.dataGenerator.settings.named("adorn").map { it.configs })
+        mod("architects_palette", "architects-palette")
         mod("biomesoplenty", "biomes-o-plenty")
+        mod("ecologics")
     }
 
     check {

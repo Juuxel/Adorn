@@ -30,7 +30,7 @@ public final class ModCompatChecker {
     }
 
     private void checkItem(Id itemId) {
-        checkPath("assets/" + itemId.namespace() + "/items/" + itemId.path() + ".json");
+        checkPath("assets/" + itemId.namespace() + "/models/item/" + itemId.path() + ".json");
     }
 
     private void checkTexture(Id textureLocation) {
