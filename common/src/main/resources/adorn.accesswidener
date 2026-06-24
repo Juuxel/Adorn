@@ -42,6 +42,8 @@ accessible method net/minecraft/block/entity/BlockEntityType <init> (Lnet/minecr
 accessible method net/minecraft/client/gui/DrawContext drawTexturedQuad (Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/util/Identifier;IIIIFFFFI)V
 accessible method net/minecraft/client/gui/screen/recipebook/GhostRecipe addInputs (Lnet/minecraft/menu/slot/Slot;Lnet/minecraft/util/context/ContextParameterMap;Lnet/minecraft/recipe/display/SlotDisplay;)V
 accessible method net/minecraft/client/gui/screen/recipebook/GhostRecipe addResults (Lnet/minecraft/menu/slot/Slot;Lnet/minecraft/util/context/ContextParameterMap;Lnet/minecraft/recipe/display/SlotDisplay;)V
+accessible field net/minecraft/client/gui/widget/EntryListWidget MENU_LIST_BACKGROUND_TEXTURE Lnet/minecraft/util/Identifier;
+accessible field net/minecraft/client/gui/widget/EntryListWidget INWORLD_MENU_LIST_BACKGROUND_TEXTURE Lnet/minecraft/util/Identifier;
 
 # Entity rendering
 accessible field net/minecraft/client/render/entity/LivingEntityRenderer features Ljava/util/List;
