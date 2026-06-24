@@ -12,6 +12,7 @@ import net.minecraft.text.Text;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -42,7 +43,8 @@ public final class PackMcmetaGeneration {
     private static Stream<Overlay> readOverlaysFromConfigs(String systemProperty) {
         return readConfigs(systemProperty)
             .map(GeneratorConfig::overlay)
-            .filter(Objects::nonNull);
+            .filter(Objects::nonNull)
+            .sorted(Comparator.comparing(Overlay::modId));
     }
 
     private static JsonElement generateFabricOverlays() {
