@@ -68,6 +68,13 @@ public final class AdornRecipeGenerator extends FabricRecipeProvider {
         }
 
         generateCones(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, BlockVariantSets.get(BlockKind.SHELF, BlockVariant.IRON).get(), 3)
+            .criterion("has_iron_ingot", conditionsFromTag(ConventionalItemTags.IRON_INGOTS))
+            .pattern("---")
+            .pattern("/ /")
+            .input('-', ConventionalItemTags.IRON_INGOTS)
+            .input('/', MoreConventionalItemTags.STONE_RODS)
+            .offerTo(exporter);
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, AdornBlocks.BARRICADE.get(), 4)
             .criterion("has_iron", conditionsFromTag(ConventionalItemTags.IRON_INGOTS))
             .pattern("---")
