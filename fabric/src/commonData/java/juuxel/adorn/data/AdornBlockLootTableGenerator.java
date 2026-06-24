@@ -1,6 +1,9 @@
 package juuxel.adorn.data;
 
 import juuxel.adorn.block.AdornBlocks;
+import juuxel.adorn.block.variant.BlockKind;
+import juuxel.adorn.block.variant.BlockVariant;
+import juuxel.adorn.block.variant.BlockVariantSets;
 import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.lib.AdornGameRules;
 import juuxel.adorn.loot.CheckTradingStationOwnerLootFunction;
@@ -25,6 +28,47 @@ public final class AdornBlockLootTableGenerator extends FabricBlockLootTableProv
 
     @Override
     public void generate() {
+        addDrop(AdornBlocks.STONE_TORCH_GROUND.get());
+        addDrop(AdornBlocks.STONE_LADDER.get());
+        addDrop(AdornBlocks.CHAIN_LINK_FENCE.get());
+        addDrop(AdornBlocks.PICKET_FENCE.get());
+        addDrop(AdornBlocks.CRATE.get());
+        addDrop(AdornBlocks.APPLE_CRATE.get());
+        addDrop(AdornBlocks.WHEAT_CRATE.get());
+        addDrop(AdornBlocks.CARROT_CRATE.get());
+        addDrop(AdornBlocks.POTATO_CRATE.get());
+        addDrop(AdornBlocks.MELON_CRATE.get());
+        addDrop(AdornBlocks.WHEAT_SEED_CRATE.get());
+        addDrop(AdornBlocks.MELON_SEED_CRATE.get());
+        addDrop(AdornBlocks.PUMPKIN_SEED_CRATE.get());
+        addDrop(AdornBlocks.BEETROOT_CRATE.get());
+        addDrop(AdornBlocks.BEETROOT_SEED_CRATE.get());
+        addDrop(AdornBlocks.SWEET_BERRY_CRATE.get());
+        addDrop(AdornBlocks.COCOA_BEAN_CRATE.get());
+        addDrop(AdornBlocks.NETHER_WART_CRATE.get());
+        addDrop(AdornBlocks.SUGAR_CANE_CRATE.get());
+        addDrop(AdornBlocks.EGG_CRATE.get());
+        addDrop(AdornBlocks.HONEYCOMB_CRATE.get());
+        addDrop(AdornBlocks.LIL_TATER_CRATE.get());
+        addDrop(AdornBlocks.BREWER.get());
+        addDrop(AdornBlocks.BRICK_CHIMNEY.get());
+        addDrop(AdornBlocks.STONE_BRICK_CHIMNEY.get());
+        addDrop(AdornBlocks.NETHER_BRICK_CHIMNEY.get());
+        addDrop(AdornBlocks.RED_NETHER_BRICK_CHIMNEY.get());
+        addDrop(AdornBlocks.COBBLESTONE_CHIMNEY.get());
+        addDrop(AdornBlocks.PRISMARINE_CHIMNEY.get());
+        addDrop(AdornBlocks.MAGMATIC_PRISMARINE_CHIMNEY.get());
+        addDrop(AdornBlocks.SOULFUL_PRISMARINE_CHIMNEY.get());
+        addDrop(BlockVariantSets.get(BlockKind.SHELF, BlockVariant.IRON).get());
+        addDrop(AdornBlocks.COPPER_PIPE.get());
+        addDrop(AdornBlocks.EXPOSED_COPPER_PIPE.get());
+        addDrop(AdornBlocks.WEATHERED_COPPER_PIPE.get());
+        addDrop(AdornBlocks.OXIDIZED_COPPER_PIPE.get());
+        addDrop(AdornBlocks.WAXED_COPPER_PIPE.get());
+        addDrop(AdornBlocks.WAXED_EXPOSED_COPPER_PIPE.get());
+        addDrop(AdornBlocks.WAXED_WEATHERED_COPPER_PIPE.get());
+        addDrop(AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE.get());
+        addDrop(AdornBlocks.CANDLELIT_LANTERN.get());
         AdornBlocks.PAINTED_PLANKS.values().forEach(this::addDrop);
         AdornBlocks.PAINTED_WOOD_SLABS.values().forEach(block -> addDrop(block, this::slabDrops));
         AdornBlocks.PAINTED_WOOD_STAIRS.values().forEach(this::addDrop);
