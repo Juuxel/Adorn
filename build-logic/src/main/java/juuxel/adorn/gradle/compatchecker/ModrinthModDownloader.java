@@ -40,6 +40,11 @@ public final class ModrinthModDownloader implements ModDownloader<String> {
                 }
 
                 var versions = gson.fromJson(versionListResponse.body(), ModrinthVersionInfo[].class);
+
+                if (versions.length == 0) {
+                    throw new RuntimeException("No versions for " + id + " on " + loader + " " + gameVersion);
+                }
+
                 Arrays.sort(versions, Comparator.comparing(ModrinthVersionInfo::datePublished).reversed());
                 var latestFile = versions[0].findPrimaryFile();
                 return new ModFileMetadata<>(latestFile.filename, latestFile.url);
