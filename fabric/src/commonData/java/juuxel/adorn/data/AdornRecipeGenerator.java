@@ -76,6 +76,14 @@ public final class AdornRecipeGenerator extends FabricRecipeProvider {
             .input('-', ItemTags.PLANKS)
             .input('|', ConventionalItemTags.IRON_INGOTS)
             .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, AdornBlocks.CAUTION_SIGN.get())
+            .criterion("has_iron_ingot", conditionsFromTag(ConventionalItemTags.IRON_INGOTS))
+            .pattern(" I ")
+            .pattern("IDI")
+            .pattern(" I ")
+            .input('I' ,ConventionalItemTags.IRON_INGOTS)
+            .input('D' ,ConventionalItemTags.YELLOW_DYES)
+            .offerTo(exporter);
         offerCautionSignRecipe(exporter, AdornBlocks.BEE_CAUTION_SIGN.get(), MoreConventionalItemTags.HONEYCOMBS);
         offerCautionSignRecipe(exporter, AdornBlocks.BOOK_CAUTION_SIGN.get(), MoreConventionalItemTags.BOOKS);
         offerCautionSignRecipe(exporter, AdornBlocks.CLIFF_CAUTION_SIGN.get(), ConventionalItemTags.COBBLESTONES);
