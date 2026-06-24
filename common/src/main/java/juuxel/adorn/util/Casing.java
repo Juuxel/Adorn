@@ -61,10 +61,12 @@ public final class Casing {
         }
     }
 
+    @FunctionalInterface
     private interface WordSplitter {
         String[] split(String source);
     }
 
+    @FunctionalInterface
     private interface WordMerger {
         String merge(String[] words);
     }
