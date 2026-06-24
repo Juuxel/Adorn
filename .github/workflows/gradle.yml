@@ -38,4 +38,4 @@ jobs:
       - name: Generate resources (mod compatibility)
         run: ./gradlew generateAllData
       - name: Check for changes
-        run: if [ -n "$(git status --porcelain)" ]; then exit 1; fi
+        run: if [ -n "$(git status --porcelain)" ]; then git status; exit 1; fi
