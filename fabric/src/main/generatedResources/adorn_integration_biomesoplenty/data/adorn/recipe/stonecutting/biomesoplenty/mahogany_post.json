@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomesoplenty:mahogany_planks",
+  "result": {
+    "id": "adorn:biomesoplenty/mahogany_post",
+    "count": 2
+  }
+}

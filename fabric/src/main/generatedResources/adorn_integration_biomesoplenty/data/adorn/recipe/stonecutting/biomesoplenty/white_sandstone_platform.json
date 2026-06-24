@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomesoplenty:white_sandstone",
+  "result": {
+    "id": "adorn:biomesoplenty/white_sandstone_platform",
+    "count": 1
+  }
+}

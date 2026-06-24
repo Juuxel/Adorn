@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomesoplenty:pine_slab",
+    "P": "adorn:biomesoplenty/pine_post"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/pine_platform",
+    "count": 2
+  }
+}

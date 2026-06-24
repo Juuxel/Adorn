@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "biomesoplenty:origin_oak_slab"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/origin_oak_bench",
+    "count": 2
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:chair",
+  "pattern": [
+    " S",
+    "SS",
+    "##"
+  ],
+  "key": {
+    "S": "biomesoplenty:umbran_slab",
+    "#": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/umbran_chair",
+    "count": 2
+  }
+}

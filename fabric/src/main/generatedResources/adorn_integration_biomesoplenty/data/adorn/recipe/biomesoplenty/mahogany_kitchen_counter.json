@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:kitchen_counter",
+  "pattern": [
+    "SS",
+    "PP"
+  ],
+  "key": {
+    "S": "minecraft:polished_andesite_slab",
+    "P": "biomesoplenty:mahogany_planks"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/mahogany_kitchen_counter",
+    "count": 3
+  }
+}

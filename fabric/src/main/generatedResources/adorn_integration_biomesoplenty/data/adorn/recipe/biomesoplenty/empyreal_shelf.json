@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:shelf",
+  "pattern": [
+    "---",
+    "/ /"
+  ],
+  "key": {
+    "-": "biomesoplenty:empyreal_slab",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/empyreal_shelf",
+    "count": 3
+  }
+}

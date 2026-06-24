@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "biomesoplenty:maple_planks",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/maple_post",
+    "count": 4
+  }
+}

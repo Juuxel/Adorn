@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomesoplenty:pine_planks",
+  "result": {
+    "id": "adorn:biomesoplenty/pine_step",
+    "count": 2
+  }
+}

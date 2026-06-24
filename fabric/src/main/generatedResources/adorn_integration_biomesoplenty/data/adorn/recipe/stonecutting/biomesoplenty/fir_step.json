@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomesoplenty:fir_planks",
+  "result": {
+    "id": "adorn:biomesoplenty/fir_step",
+    "count": 2
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomesoplenty:maple_planks",
+  "result": {
+    "id": "adorn:biomesoplenty/maple_platform",
+    "count": 1
+  }
+}

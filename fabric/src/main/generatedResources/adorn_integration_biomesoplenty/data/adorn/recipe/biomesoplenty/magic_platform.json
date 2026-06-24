@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomesoplenty:magic_slab",
+    "P": "adorn:biomesoplenty/magic_post"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/magic_platform",
+    "count": 2
+  }
+}

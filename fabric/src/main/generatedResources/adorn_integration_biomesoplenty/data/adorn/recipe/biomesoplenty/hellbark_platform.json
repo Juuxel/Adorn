@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomesoplenty:hellbark_slab",
+    "P": "adorn:biomesoplenty/hellbark_post"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/hellbark_platform",
+    "count": 2
+  }
+}

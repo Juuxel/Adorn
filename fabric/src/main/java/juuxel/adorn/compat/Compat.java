@@ -16,6 +16,7 @@ public final class Compat {
         ifModLoaded("promenade", () -> BlockVariantSets.add(new PromenadeCompat()));
         ifModLoaded("techreborn", () -> BlockVariantSets.add(new TechRebornCompat()));
         ifModLoaded("blockus", () -> BlockVariantSets.add(new BlockusCompat()));
+        ifModLoaded("biomesoplenty", () -> BlockVariantSets.add(new BiomesOPlentyCompat()));
     }
 
     private static void ifModLoaded(String mod, Runnable fn) {

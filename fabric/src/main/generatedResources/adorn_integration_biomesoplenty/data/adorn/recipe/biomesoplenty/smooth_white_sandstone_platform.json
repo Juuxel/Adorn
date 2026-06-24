@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomesoplenty:smooth_white_sandstone_slab",
+    "P": "adorn:biomesoplenty/smooth_white_sandstone_post"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/smooth_white_sandstone_platform",
+    "count": 2
+  }
+}

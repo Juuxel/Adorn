@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomesoplenty:maple_slab",
+    "P": "adorn:biomesoplenty/maple_post"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/maple_platform",
+    "count": 2
+  }
+}

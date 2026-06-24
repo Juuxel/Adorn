@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomesoplenty:dead_slab",
+    "P": "adorn:biomesoplenty/dead_post"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/dead_platform",
+    "count": 2
+  }
+}

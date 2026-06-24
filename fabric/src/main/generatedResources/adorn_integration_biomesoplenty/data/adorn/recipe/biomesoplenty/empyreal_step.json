@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:step",
+  "pattern": [
+    "S",
+    "#"
+  ],
+  "key": {
+    "S": "biomesoplenty:empyreal_slab",
+    "#": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/empyreal_step",
+    "count": 1
+  }
+}

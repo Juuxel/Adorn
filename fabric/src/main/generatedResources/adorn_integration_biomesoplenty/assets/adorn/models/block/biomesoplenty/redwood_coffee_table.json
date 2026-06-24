@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:block/templates/coffee_table",
+  "textures": {
+    "planks": "biomesoplenty:block/redwood_planks",
+    "leg": "biomesoplenty:block/redwood_log",
+    "rim": "biomesoplenty:block/redwood_log"
+  }
+}

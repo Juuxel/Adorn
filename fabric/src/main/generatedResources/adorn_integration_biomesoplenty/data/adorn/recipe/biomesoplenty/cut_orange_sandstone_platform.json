@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomesoplenty:cut_orange_sandstone_slab",
+    "P": "adorn:biomesoplenty/cut_orange_sandstone_post"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/cut_orange_sandstone_platform",
+    "count": 2
+  }
+}

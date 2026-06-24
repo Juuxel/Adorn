@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "biomesoplenty:smooth_white_sandstone",
+    "/": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/smooth_white_sandstone_post",
+    "count": 4
+  }
+}

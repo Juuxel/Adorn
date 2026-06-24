@@ -14,6 +14,15 @@
         "condition": {
           "condition": "fabric:all_mods_loaded",
           "values": [
+            "biomesoplenty"
+          ]
+        },
+        "directory": "adorn_integration_biomesoplenty"
+      },
+      {
+        "condition": {
+          "condition": "fabric:all_mods_loaded",
+          "values": [
             "blockus"
           ]
         },

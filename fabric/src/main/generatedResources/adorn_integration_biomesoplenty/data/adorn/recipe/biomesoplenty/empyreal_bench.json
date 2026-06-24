@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "biomesoplenty:empyreal_slab"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/empyreal_bench",
+    "count": 2
+  }
+}

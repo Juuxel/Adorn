@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:chair",
+  "pattern": [
+    " S",
+    "SS",
+    "##"
+  ],
+  "key": {
+    "S": "biomesoplenty:empyreal_slab",
+    "#": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/empyreal_chair",
+    "count": 2
+  }
+}

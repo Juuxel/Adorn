@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:drawer",
+  "pattern": [
+    "S",
+    "C",
+    "S"
+  ],
+  "key": {
+    "C": "#c:chests/wooden",
+    "S": "biomesoplenty:jacaranda_slab"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/jacaranda_drawer",
+    "count": 2
+  }
+}

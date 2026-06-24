@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:step",
+  "pattern": [
+    "S",
+    "#"
+  ],
+  "key": {
+    "S": "biomesoplenty:dead_slab",
+    "#": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/dead_step",
+    "count": 1
+  }
+}

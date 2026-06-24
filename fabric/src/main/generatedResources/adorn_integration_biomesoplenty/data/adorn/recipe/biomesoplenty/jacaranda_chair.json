@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:chair",
+  "pattern": [
+    " S",
+    "SS",
+    "##"
+  ],
+  "key": {
+    "S": "biomesoplenty:jacaranda_slab",
+    "#": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/jacaranda_chair",
+    "count": 2
+  }
+}

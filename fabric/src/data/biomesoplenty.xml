@@ -1,0 +1,56 @@
+<data_generators class_name="juuxel.adorn.compat.BiomesOPlentyCompat">
+    <overlay directory="adorn_integration_biomesoplenty" mod_id="biomesoplenty"/>
+    <wood id="biomesoplenty:dead"/>
+    <wood id="biomesoplenty:empyreal"/>
+    <wood id="biomesoplenty:fir"/>
+    <wood id="biomesoplenty:hellbark" non_flammable="true"/>
+    <wood id="biomesoplenty:jacaranda"/>
+    <wood id="biomesoplenty:magic"/>
+    <wood id="biomesoplenty:mahogany"/>
+    <wood id="biomesoplenty:maple"/>
+    <wood id="biomesoplenty:origin_oak"/>
+    <wood id="biomesoplenty:palm"/>
+    <wood id="biomesoplenty:pine"/>
+    <wood id="biomesoplenty:redwood"/>
+    <wood id="biomesoplenty:umbran"/>
+    <wood id="biomesoplenty:willow"/>
+    <stone id="biomesoplenty:black_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomesoplenty:block/black_sandstone"/>
+        <replace key="top-texture" with="biomesoplenty:block/black_sandstone_top"/>
+        <replace key="bottom-texture" with="biomesoplenty:block/black_sandstone_bottom"/>
+    </stone>
+    <stone id="biomesoplenty:cut_black_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomesoplenty:block/cut_black_sandstone"/>
+        <replace key="top-texture" with="biomesoplenty:block/black_sandstone_top"/>
+        <replace key="bottom-texture" with="biomesoplenty:block/black_sandstone_top"/>
+    </stone>
+    <stone id="biomesoplenty:smooth_black_sandstone">
+        <replace key="main-texture" with="biomesoplenty:block/black_sandstone_top"/>
+    </stone>
+    <stone id="biomesoplenty:orange_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomesoplenty:block/orange_sandstone"/>
+        <replace key="top-texture" with="biomesoplenty:block/orange_sandstone_top"/>
+        <replace key="bottom-texture" with="biomesoplenty:block/orange_sandstone_bottom"/>
+    </stone>
+    <stone id="biomesoplenty:cut_orange_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomesoplenty:block/cut_orange_sandstone"/>
+        <replace key="top-texture" with="biomesoplenty:block/orange_sandstone_top"/>
+        <replace key="bottom-texture" with="biomesoplenty:block/orange_sandstone_top"/>
+    </stone>
+    <stone id="biomesoplenty:smooth_orange_sandstone">
+        <replace key="main-texture" with="biomesoplenty:block/orange_sandstone_top"/>
+    </stone>
+    <stone id="biomesoplenty:white_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomesoplenty:block/white_sandstone"/>
+        <replace key="top-texture" with="biomesoplenty:block/white_sandstone_top"/>
+        <replace key="bottom-texture" with="biomesoplenty:block/white_sandstone_bottom"/>
+    </stone>
+    <stone id="biomesoplenty:cut_white_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomesoplenty:block/cut_white_sandstone"/>
+        <replace key="top-texture" with="biomesoplenty:block/white_sandstone_top"/>
+        <replace key="bottom-texture" with="biomesoplenty:block/white_sandstone_top"/>
+    </stone>
+    <stone id="biomesoplenty:smooth_white_sandstone">
+        <replace key="main-texture" with="biomesoplenty:block/white_sandstone_top"/>
+    </stone>
+</data_generators>

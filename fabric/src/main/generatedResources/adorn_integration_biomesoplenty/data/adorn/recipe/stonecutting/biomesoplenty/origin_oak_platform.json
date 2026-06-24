@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomesoplenty:origin_oak_planks",
+  "result": {
+    "id": "adorn:biomesoplenty/origin_oak_platform",
+    "count": 1
+  }
+}

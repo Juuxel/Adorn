@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:shelf",
+  "pattern": [
+    "---",
+    "/ /"
+  ],
+  "key": {
+    "-": "biomesoplenty:dead_slab",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/dead_shelf",
+    "count": 3
+  }
+}

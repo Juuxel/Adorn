@@ -41,6 +41,15 @@
     "adorn:stone_post",
     "adorn:tuff_post",
     "adorn:tuff_brick_post",
+    { "id": "adorn:biomesoplenty/black_sandstone_post", "required": false },
+    { "id": "adorn:biomesoplenty/cut_black_sandstone_post", "required": false },
+    { "id": "adorn:biomesoplenty/smooth_black_sandstone_post", "required": false },
+    { "id": "adorn:biomesoplenty/orange_sandstone_post", "required": false },
+    { "id": "adorn:biomesoplenty/cut_orange_sandstone_post", "required": false },
+    { "id": "adorn:biomesoplenty/smooth_orange_sandstone_post", "required": false },
+    { "id": "adorn:biomesoplenty/white_sandstone_post", "required": false },
+    { "id": "adorn:biomesoplenty/cut_white_sandstone_post", "required": false },
+    { "id": "adorn:biomesoplenty/smooth_white_sandstone_post", "required": false },
     { "id": "adorn:byg/dacite_post", "required": false },
     { "id": "adorn:byg/dacite_brick_post", "required": false },
     { "id": "adorn:byg/dacite_cobblestone_post", "required": false },
@@ -66,15 +75,6 @@
     { "id": "adorn:terrestria/smooth_volcanic_rock_post", "required": false },
     { "id": "adorn:architects_palette/myonite_post", "required": false },
     { "id": "adorn:architects_palette/myonite_brick_post", "required": false },
-    { "id": "adorn:architects_palette/mushy_myonite_brick_post", "required": false },
-    { "id": "adorn:biomesoplenty/black_sandstone_post", "required": false },
-    { "id": "adorn:biomesoplenty/cut_black_sandstone_post", "required": false },
-    { "id": "adorn:biomesoplenty/smooth_black_sandstone_post", "required": false },
-    { "id": "adorn:biomesoplenty/orange_sandstone_post", "required": false },
-    { "id": "adorn:biomesoplenty/cut_orange_sandstone_post", "required": false },
-    { "id": "adorn:biomesoplenty/smooth_orange_sandstone_post", "required": false },
-    { "id": "adorn:biomesoplenty/white_sandstone_post", "required": false },
-    { "id": "adorn:biomesoplenty/cut_white_sandstone_post", "required": false },
-    { "id": "adorn:biomesoplenty/smooth_white_sandstone_post", "required": false }
+    { "id": "adorn:architects_palette/mushy_myonite_brick_post", "required": false }
   ]
 }

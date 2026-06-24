@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomesoplenty:empyreal_planks",
+  "result": {
+    "id": "adorn:biomesoplenty/empyreal_post",
+    "count": 2
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "biomesoplenty:magic_slab"
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/magic_bench",
+    "count": 2
+  }
+}
