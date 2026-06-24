@@ -28,11 +28,11 @@ import java.util.Random;
 
 public abstract class AbstractConfigScreen extends Screen {
     private static final int HEADER_FOOTER_HEIGHT = 33;
-    protected static final int BACK_BUTTON_Y_FROM_BOTTOM = 27;
     private static final int CONFIG_BUTTON_START_Y = HEADER_FOOTER_HEIGHT + 2;
     public static final int BUTTON_HEIGHT = 20;
     public static final int BUTTON_GAP = 4;
     public static final int BUTTON_SPACING = BUTTON_HEIGHT + BUTTON_GAP;
+    protected static final int BACK_BUTTON_Y_FROM_BOTTOM = (HEADER_FOOTER_HEIGHT + BUTTON_HEIGHT) / 2;
     private static final int HEART_SIZE = 12;
     private static final int[] HEART_COLORS = new int[] {
         0xFF_FF0000, // Red
