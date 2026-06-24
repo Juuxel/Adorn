@@ -5,8 +5,20 @@ accessible method net/minecraft/block/AbstractCandleBlock spawnCandleParticles (
 accessible method net/minecraft/block/Blocks createWoodenButtonBlock (Lnet/minecraft/block/BlockSetType;)Lnet/minecraft/block/Block;
 accessible method net/minecraft/block/BlockSetType register (Lnet/minecraft/block/BlockSetType;)Lnet/minecraft/block/BlockSetType;
 extendable method net/minecraft/block/PaneBlock connectsTo (Lnet/minecraft/block/BlockState;Z)Z
+accessible method net/minecraft/block/PressurePlateBlock <init> (Lnet/minecraft/block/BlockSetType;Lnet/minecraft/block/AbstractBlock$Settings;)V
+accessible method net/minecraft/block/StairsBlock <init> (Lnet/minecraft/block/BlockState;Lnet/minecraft/block/AbstractBlock$Settings;)V
 accessible method net/minecraft/block/TallPlantBlock onBreakInCreative (Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/player/PlayerEntity;)V
+accessible method net/minecraft/block/TorchBlock <init> (Lnet/minecraft/particle/SimpleParticleType;Lnet/minecraft/block/AbstractBlock$Settings;)V
+accessible method net/minecraft/block/WallTorchBlock <init> (Lnet/minecraft/particle/SimpleParticleType;Lnet/minecraft/block/AbstractBlock$Settings;)V
 accessible method net/minecraft/block/WoodType register (Lnet/minecraft/block/WoodType;)Lnet/minecraft/block/WoodType;
+
+# Items
+accessible field net/minecraft/item/ItemGroups BUILDING_BLOCKS Lnet/minecraft/registry/RegistryKey;
+accessible field net/minecraft/item/ItemGroups COLORED_BLOCKS Lnet/minecraft/registry/RegistryKey;
+accessible field net/minecraft/item/ItemGroups FUNCTIONAL Lnet/minecraft/registry/RegistryKey;
+accessible field net/minecraft/item/ItemGroups FOOD_AND_DRINK Lnet/minecraft/registry/RegistryKey;
+accessible field net/minecraft/item/ItemGroups INGREDIENTS Lnet/minecraft/registry/RegistryKey;
+accessible field net/minecraft/item/ItemGroups TOOLS Lnet/minecraft/registry/RegistryKey;
 
 # Game rules
 accessible method net/minecraft/world/GameRules register (Ljava/lang/String;Lnet/minecraft/world/GameRules$Category;Lnet/minecraft/world/GameRules$Type;)Lnet/minecraft/world/GameRules$Key;
@@ -23,6 +35,9 @@ accessible method net/minecraft/client/gui/screen/ingame/MenuScreens register (L
 
 # Texts
 accessible method net/minecraft/text/TextCodecs combine (Ljava/util/List;)Lnet/minecraft/text/MutableText;
+
+# Block entities
+accessible class net/minecraft/block/entity/BlockEntityType$BlockEntityFactory
 
 # Entity rendering
 accessible field net/minecraft/client/render/entity/LivingEntityRenderer features Ljava/util/List;
