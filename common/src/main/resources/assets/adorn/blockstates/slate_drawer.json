@@ -1,0 +1,1 @@
+{"variants":{"facing=north":{"model":"adorn:block/slate_drawer"},"facing=east":{"model":"adorn:block/slate_drawer","y":90},"facing=south":{"model":"adorn:block/slate_drawer","y":180},"facing=west":{"model":"adorn:block/slate_drawer","y":270}}}
