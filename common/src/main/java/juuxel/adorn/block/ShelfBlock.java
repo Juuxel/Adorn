@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import juuxel.adorn.lib.AdornStats;
 import juuxel.adorn.platform.PlatformBridges;
 import juuxel.adorn.util.Shapes;
+import juuxel.adorn.util.verification.UsesBlockProperty;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -42,6 +43,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
+@UsesBlockProperty(Direction.class)
 public final class ShelfBlock extends VisibleBlockWithEntity implements Waterloggable, BlockWithDescription {
     public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;

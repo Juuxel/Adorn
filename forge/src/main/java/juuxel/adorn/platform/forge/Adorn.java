@@ -28,26 +28,34 @@ import juuxel.adorn.platform.forge.event.EntityEvents;
 import juuxel.adorn.platform.forge.event.ItemEvents;
 import juuxel.adorn.platform.forge.networking.AdornNetworking;
 import juuxel.adorn.platform.forge.registrar.ForgeRegistrar;
+import juuxel.adorn.platform.neo.ModContentBridgeNeo;
 import juuxel.adorn.platform.neo.lib.AdornDynamicRegistries;
 import juuxel.adorn.recipe.AdornRecipeBookCategories;
 import juuxel.adorn.recipe.AdornRecipeDisplays;
 import juuxel.adorn.recipe.AdornRecipeSerializers;
 import juuxel.adorn.recipe.AdornRecipeTypes;
 import juuxel.adorn.recipe.AdornSlotDisplays;
+import juuxel.adorn.util.verification.EnumVerifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.javafmlmod.FMLModContainer;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForgeMod;
 
 @Mod(AdornCommon.NAMESPACE)
 public final class Adorn {
-    public Adorn() {
-        var modBus = ModLoadingContext.get().getActiveContainer().getEventBus();
+    // TODO: Split into separate common and client @Mods
+    public Adorn(FMLModContainer container, IEventBus modBus, Dist dist) {
+        ModContentBridgeNeo.modContainer = container;
         ConfigManager.get().init();
         modBus.addListener(this::init);
+
+        if (FMLEnvironment.isProduction()) {
+            EnumVerifier.verifyEnums();
+        }
+
         register(AdornComponentTypes.DATA_COMPONENT_TYPES, modBus);
         register(AdornSounds.SOUNDS, modBus);
         AdornBlockSetTypes.init();
@@ -88,7 +96,7 @@ public final class Adorn {
         BlockVariantSets.register();
         NeoForgeMod.enableMilkFluid();
 
-        if (FMLEnvironment.getDist() == Dist.CLIENT) {
+        if (dist == Dist.CLIENT) {
             AdornClient.init(modBus);
         }
     }

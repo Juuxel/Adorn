@@ -2,6 +2,7 @@ package juuxel.adorn.block;
 
 import juuxel.adorn.lib.AdornStats;
 import juuxel.adorn.util.Shapes;
+import juuxel.adorn.util.verification.UsesBlockProperty;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -37,6 +38,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
+@UsesBlockProperty({Direction.class, DoubleBlockHalf.class})
 public final class ChairBlock extends CarpetedBlock implements Waterloggable, BlockWithDescription {
     public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;

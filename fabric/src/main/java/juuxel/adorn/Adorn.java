@@ -37,12 +37,14 @@ import juuxel.adorn.recipe.AdornRecipeSerializers;
 import juuxel.adorn.recipe.AdornRecipeTypes;
 import juuxel.adorn.recipe.AdornSlotDisplays;
 import juuxel.adorn.resources.AdornResources;
+import juuxel.adorn.util.verification.EnumVerifier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 public final class Adorn {
     public static void init() {
         ConfigManager.get().init();
+        EnumVerifier.verifyEnums();
         AdornComponentTypes.init();
         AdornDynamicRegistries.init();
         AdornSounds.init();
