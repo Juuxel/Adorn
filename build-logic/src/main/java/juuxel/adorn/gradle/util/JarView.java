@@ -1,19 +1,16 @@
 package juuxel.adorn.gradle.util;
 
+import net.fabricmc.loom.util.FileSystemUtil;
 import org.gradle.api.file.FileCollection;
 
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.net.URI;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
 public interface JarView extends Closeable {
@@ -24,14 +21,14 @@ public interface JarView extends Closeable {
         List<JarView> views = new ArrayList<>();
 
         for (File file : jars) {
-            var fs = FileSystems.newFileSystem(URI.create("jar:" + file.toURI()), Map.of("create", false));
+            var fs = FileSystemUtil.getJarFileSystem(file, false);
             views.add(new OfFileSystem(fs));
         }
 
         return views.size() > 1 ? new Union(views) : views.getFirst();
     }
 
-    record OfFileSystem(FileSystem fs) implements JarView {
+    record OfFileSystem(FileSystemUtil.Delegate fs) implements JarView {
         @Override
         public Path getPath(String path) {
             return fs.getPath(path);
