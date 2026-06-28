@@ -1,6 +1,7 @@
 package juuxel.adorn.client.gui.widget;
 
 import juuxel.adorn.util.Colors;
+import juuxel.adorn.util.FakeScopedValue;
 import juuxel.adorn.util.animation.AnimatedProperty;
 import juuxel.adorn.util.animation.AnimatedPropertyWrapper;
 import juuxel.adorn.util.animation.AnimationEngine;
@@ -24,6 +25,8 @@ public final class ScrollEnvelope extends ScissorEnvelope {
     private static final int SCROLL_THUMB_COLOR_ACTIVE = Colors.color(0x000000, 0.6f);
     private static final int SCROLL_THUMB_COLOR_INACTIVE_DARK = Colors.color(0xFFFFFF, 0.2f);
     private static final int SCROLL_THUMB_COLOR_ACTIVE_DARK = Colors.color(0xFFFFFF, 0.6f);
+
+    public static final FakeScopedValue<Double> OFFSET = new FakeScopedValue<>();
 
     private final SizedElement element;
     private double offset = 0.0;
@@ -108,7 +111,7 @@ public final class ScrollEnvelope extends ScissorEnvelope {
         var matrices = context.getMatrices();
         matrices.pushMatrix();
         matrices.translate(0f, (float) -offset);
-        super.renderContent(context, mouseX, (int) (mouseY + offset), delta);
+        OFFSET.with(offset, () -> super.renderContent(context, mouseX, (int) (mouseY + offset), delta));
         matrices.popMatrix();
     }
 
