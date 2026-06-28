@@ -8,22 +8,22 @@ import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 
 public final class GameRuleDefaultsScreen extends AbstractConfigScreen {
-    private static final int BUTTON_WIDTH = 250;
+    private static final Layout LAYOUT = new Layout.Tabular(250, 44);
 
     public GameRuleDefaultsScreen(Screen parent) {
-        super(Text.translatable("gui.adorn.config.game_rule_defaults"), parent);
+        super(Text.translatable("gui.adorn.config.game_rule_defaults"), parent, LAYOUT);
     }
 
     @Override
     protected void init() {
         super.init();
         var config = ConfigManager.config();
-        addConfigToggle(BUTTON_WIDTH, PropertyRef.ofField(config.gameRuleDefaults, "skipNightOnSofas"));
-        addConfigToggle(BUTTON_WIDTH, PropertyRef.ofField(config.gameRuleDefaults, "infiniteKitchenSinks"));
-        addConfigToggle(BUTTON_WIDTH, PropertyRef.ofField(config.gameRuleDefaults, "dropLockedTradingStations"));
+        addConfigToggle(PropertyRef.ofField(config.gameRuleDefaults, "skipNightOnSofas"));
+        addConfigToggle(PropertyRef.ofField(config.gameRuleDefaults, "infiniteKitchenSinks"));
+        addConfigToggle(PropertyRef.ofField(config.gameRuleDefaults, "dropLockedTradingStations"));
         addDrawableChild(
             ButtonWidget.builder(ScreenTexts.BACK, button -> close())
-                .position(this.width / 2 - 100, this.height - 27)
+                .position(width / 2 - 100, height - BACK_BUTTON_Y_FROM_BOTTOM)
                 .size(200, 20)
                 .build()
         );

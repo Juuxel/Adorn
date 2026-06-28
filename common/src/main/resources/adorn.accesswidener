@@ -39,5 +39,9 @@ accessible method net/minecraft/text/TextCodecs combine (Ljava/util/List;)Lnet/m
 # Block entities
 accessible class net/minecraft/block/entity/BlockEntityType$BlockEntityFactory
 
+# Screens
+accessible field net/minecraft/client/gui/widget/EntryListWidget MENU_LIST_BACKGROUND_TEXTURE Lnet/minecraft/util/Identifier;
+accessible field net/minecraft/client/gui/widget/EntryListWidget INWORLD_MENU_LIST_BACKGROUND_TEXTURE Lnet/minecraft/util/Identifier;
+
 # Entity rendering
 accessible field net/minecraft/client/render/entity/LivingEntityRenderer features Ljava/util/List;

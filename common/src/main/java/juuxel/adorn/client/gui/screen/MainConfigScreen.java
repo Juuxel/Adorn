@@ -13,9 +13,10 @@ import java.util.Arrays;
 
 public final class MainConfigScreen extends AbstractConfigScreen {
     private static final int BUTTON_WIDTH = 200;
+    private static final Layout LAYOUT = new Layout.BigButtons(BUTTON_WIDTH);
 
     public MainConfigScreen(Screen parent) {
-        super(Text.translatable("gui.adorn.config.title"), parent);
+        super(Text.translatable("gui.adorn.config.title"), parent, LAYOUT);
     }
 
     @Override
@@ -23,18 +24,17 @@ public final class MainConfigScreen extends AbstractConfigScreen {
         super.init();
         var config = ConfigManager.config();
         int x = (width - BUTTON_WIDTH) / 2;
-        addHeading(Text.translatable("gui.adorn.config.visual"), BUTTON_WIDTH);
-        addConfigToggle(BUTTON_WIDTH, PropertyRef.ofField(config.client, "showTradingStationTooltips"));
-        addConfigButton(BUTTON_WIDTH, PropertyRef.ofField(config.client, "displayedFluidUnit"), Arrays.asList(FluidUnit.values()));
-        addHeading(Text.translatable("gui.adorn.config.creative_inventory"), BUTTON_WIDTH);
-        addConfigToggle(BUTTON_WIDTH, PropertyRef.ofField(config.client, "showItemsInStandardGroups"));
+        addHeading(Text.translatable("gui.adorn.config.visual"));
+        addConfigToggle(PropertyRef.ofField(config.client, "showTradingStationTooltips"));
+        addConfigButton(PropertyRef.ofField(config.client, "displayedFluidUnit"), Arrays.asList(FluidUnit.values()));
+        addHeading(Text.translatable("gui.adorn.config.creative_inventory"));
+        addConfigToggle(PropertyRef.ofField(config.client, "showItemsInStandardGroups"));
         addConfigButton(
-            BUTTON_WIDTH,
             PropertyRef.ofField(config, "groupItems"),
             Arrays.asList(ItemGroupingOption.values()),
             true
         );
-        addHeading(Text.translatable("gui.adorn.config.other"), BUTTON_WIDTH);
+        addHeading(Text.translatable("gui.adorn.config.other"));
         addDrawableChild(
             ButtonWidget.builder(Text.translatable("gui.adorn.config.game_rule_defaults"),
                     widget -> client.setScreen(new GameRuleDefaultsScreen(this)))
@@ -44,7 +44,7 @@ public final class MainConfigScreen extends AbstractConfigScreen {
         );
         addDrawableChild(
             ButtonWidget.builder(ScreenTexts.DONE, widget -> close())
-                .position(this.width / 2 - 100, this.height - 27)
+                .position(width / 2 - 100, height - BACK_BUTTON_Y_FROM_BOTTOM)
                 .size(200, 20)
                 .build()
         );
