@@ -2,19 +2,23 @@ package juuxel.adorn.gradle;
 
 import juuxel.adorn.gradle.action.InlineServiceLoader;
 import juuxel.adorn.gradle.action.MinifyJson;
+import juuxel.adorn.gradle.datagen.GenerateEnumVerificationData;
 import juuxel.adorn.gradle.xplat.PlatformModuleExtension;
+import net.fabricmc.loom.LoomGradleExtension;
 import net.fabricmc.loom.api.LoomGradleExtensionAPI;
 import net.fabricmc.loom.api.ModSettings;
 import net.fabricmc.loom.task.RemapJarTask;
 import net.fabricmc.loom.util.Constants;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
 import org.gradle.api.plugins.JavaPlugin;
 import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.api.tasks.bundling.Jar;
+import org.gradle.language.jvm.tasks.ProcessResources;
 
 import java.util.Map;
 
@@ -23,9 +27,30 @@ public final class PlatformModulePlugin implements Plugin<Project> {
     public void apply(Project project) {
         project.getPlugins().apply(MinecraftSetupPlugin.class);
         var extension = CorePlugin.registerExtension(project, "platformModule", PlatformModuleExtension.class);
+        var loom = project.getExtensions().getByType(LoomGradleExtensionAPI.class);
+
+        var generateEnumVerificationData = project.getTasks().register("generateEnumVerificationData", GenerateEnumVerificationData.class, task -> {
+            var modJarConfig = project.getConfigurations().detachedConfiguration(createCommonDependency(project));
+            task.getModJars().from(modJarConfig);
+
+            if (!"official".equals(loom.getProductionNamespace().get())) {
+                // Use Loom internals to get the mapping file with Mojang names on NeoForge.
+                var loomInternal = LoomGradleExtension.get(project);
+                var mappingFile = loomInternal.getMappingConfiguration().getPlatformMappingFile(loomInternal);
+                task.getMappings().set(mappingFile.toFile());
+                task.getRuntimeNamespace().convention(loom.getProductionNamespace());
+            }
+
+            task.getMinecraftJars().from(loom.getNamedMinecraftJars());
+            task.getOutputFile().convention(project.getLayout().getBuildDirectory().file("enum_verification_data.json"));
+        });
+
+        project.getTasks().named(JavaPlugin.PROCESS_RESOURCES_TASK_NAME, ProcessResources.class, task -> {
+            task.from(generateEnumVerificationData.flatMap(GenerateEnumVerificationData::getOutputFile));
+        });
 
         // Include common files into platform jars
-        project.getTasks().named("jar", Jar.class, task -> {
+        project.getTasks().named(JavaPlugin.JAR_TASK_NAME, Jar.class, task -> {
             var commonSourceSets = getSourceSets(project.project(":common"));
             task.from(commonSourceSets.named("main").map(SourceSet::getOutput));
         });
@@ -41,7 +66,6 @@ public final class PlatformModulePlugin implements Plugin<Project> {
             task.doLast(new MinifyJson());
         });
 
-        var loom = project.getExtensions().getByType(LoomGradleExtensionAPI.class);
         // Generate IDE run configs for each run config.
         loom.getRuns().configureEach(run -> run.getGenerateRunConfig().set(true));
 
@@ -56,12 +80,16 @@ public final class PlatformModulePlugin implements Plugin<Project> {
         mod.sourceSet(SourceSet.MAIN_SOURCE_SET_NAME);
         mod.sourceSet(SourceSet.MAIN_SOURCE_SET_NAME, ":common");
 
-        // Depend on the common project. The "namedElements" configuration contains the non-remapped
-        // classes and resources of the project.
+        // Depend on the common project.
+        project.getDependencies().add(JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME, createCommonDependency(project));
+    }
+
+    private static Dependency createCommonDependency(Project project) {
+        // The "namedElements" configuration contains the non-remapped classes and resources of the project.
         // It follows Gradle's own convention of xyzElements for "outgoing" configurations like apiElements.
         var commonDependency = project.getDependencies().project(Map.of("path", ":common", "configuration", Constants.Configurations.NAMED_ELEMENTS));
         ((ModuleDependency) commonDependency).setTransitive(false);
-        project.getDependencies().add(JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME, commonDependency);
+        return commonDependency;
     }
 
     private static SourceSetContainer getSourceSets(Project project) {

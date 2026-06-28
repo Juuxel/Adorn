@@ -4,6 +4,7 @@ import juuxel.adorn.block.variant.BlockVariant;
 import juuxel.adorn.lib.AdornStats;
 import juuxel.adorn.util.AdornUtil;
 import juuxel.adorn.util.Shapes;
+import juuxel.adorn.util.verification.UsesBlockProperty;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -28,6 +29,7 @@ import net.minecraft.world.WorldAccess;
 import java.util.ArrayList;
 import java.util.List;
 
+@UsesBlockProperty(Direction.Axis.class)
 public final class BenchBlock extends SeatBlock implements Waterloggable, BlockWithDescription {
     public static final EnumProperty<Direction.Axis> AXIS = Properties.HORIZONTAL_AXIS;
     public static final BooleanProperty CONNECTED_N = BooleanProperty.of("connected_n");

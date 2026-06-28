@@ -4,6 +4,7 @@ import juuxel.adorn.block.property.FrontConnection;
 import juuxel.adorn.block.variant.BlockVariant;
 import juuxel.adorn.lib.AdornStats;
 import juuxel.adorn.util.Shapes;
+import juuxel.adorn.util.verification.UsesBlockProperty;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -44,6 +45,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+@UsesBlockProperty(Direction.class)
 public class SofaBlock extends SeatBlock implements Waterloggable, SneakClickHandler, BlockWithDescription {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     public static final BooleanProperty CONNECTED_LEFT = BooleanProperty.of("connected_left");
