@@ -27,7 +27,7 @@ import juuxel.adorn.platform.forge.event.EntityEvents;
 import juuxel.adorn.platform.forge.event.ItemEvents;
 import juuxel.adorn.platform.forge.networking.AdornNetworking;
 import juuxel.adorn.platform.forge.registrar.ForgeRegistrar;
-import juuxel.adorn.platform.neo.ModContentBridgeNeo;
+import juuxel.adorn.platform.neo.ModBridgeNeo;
 import juuxel.adorn.recipe.AdornRecipeSerializers;
 import juuxel.adorn.recipe.AdornRecipeTypes;
 import juuxel.adorn.util.verification.EnumVerifier;
@@ -43,7 +43,7 @@ import net.neoforged.neoforge.common.NeoForgeMod;
 public final class Adorn {
     // TODO: Split into separate common and client @Mods
     public Adorn(FMLModContainer container, IEventBus modBus, Dist dist) {
-        ModContentBridgeNeo.modContainer = container;
+        ModBridgeNeo.modContainer = container;
         ConfigManager.get().init();
         modBus.addListener(this::init);
 
