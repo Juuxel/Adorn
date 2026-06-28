@@ -18,6 +18,7 @@ import net.minecraft.client.gui.screen.NoticeScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.tooltip.TooltipState;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.CyclingButtonWidget;
 import net.minecraft.client.gui.widget.EntryListWidget;
 import net.minecraft.text.Text;
@@ -28,6 +29,7 @@ import net.minecraft.util.math.MathHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.UnaryOperator;
 
 public abstract class AbstractConfigScreen extends Screen {
     private static final int HEADER_FOOTER_HEIGHT = 33;
@@ -177,7 +179,7 @@ public abstract class AbstractConfigScreen extends Screen {
     }
 
     private Tooltip createTooltip(PropertyRef<?> property, boolean restartRequired) {
-        var text = Text.translatable(getTooltipTranslationKey(property.getName()));
+        var text = Text.empty().append(getOptionTooltip(property.getName()));
         if (restartRequired) {
             text.append(Text.literal("\n"))
                 .append(Text.translatable("gui.adorn.config.requires_restart").formatted(Formatting.ITALIC, Formatting.GOLD));
@@ -195,7 +197,7 @@ public abstract class AbstractConfigScreen extends Screen {
 
         return builder
             .tooltip(value -> createTooltip(property, restartRequired))
-            .build(x, y, layout.buttonWidth(), BUTTON_HEIGHT, Text.translatable(getOptionTranslationKey(property.getName())), (button, value) -> {
+            .build(x, y, layout.buttonWidth(), BUTTON_HEIGHT, getOptionLabel(property.getName()), (button, value) -> {
                 property.set(value);
                 ConfigManager.get().save();
 
@@ -221,7 +223,7 @@ public abstract class AbstractConfigScreen extends Screen {
             var tooltipState = new TooltipState();
             tooltipState.setTooltip(createTooltip(property, restartRequired));
             var label = new ConfigScreenLabel(
-                Text.translatable(getOptionTranslationKey(property.getName())),
+                getOptionLabel(property.getName()),
                 tooltipState,
                 computeLeftMarginX(),
                 nextChildY,
@@ -264,6 +266,24 @@ public abstract class AbstractConfigScreen extends Screen {
     protected void addHeading(Text text) {
         mainPanel.addStandaloneDrawable(new ConfigScreenHeading(text, (width - layout.totalWidth()) / 2, nextChildY, layout.totalWidth()));
         nextChildY += ConfigScreenHeading.HEIGHT;
+    }
+
+    protected void addSubscreenButton(Text label, UnaryOperator<Screen> factory) {
+        mainPanel.add(
+            ButtonWidget.builder(label, widget -> client.setScreen(factory.apply(this)))
+                .position(computeLeftMarginX(), nextChildY)
+                .size(layout.totalWidth(), BUTTON_HEIGHT)
+                .build()
+        );
+        nextChildY += BUTTON_SPACING;
+    }
+
+    protected Text getOptionLabel(String name) {
+        return Text.translatable(getOptionTranslationKey(name));
+    }
+
+    protected Text getOptionTooltip(String name) {
+        return Text.translatable(getTooltipTranslationKey(name));
     }
 
     protected String getOptionTranslationKey(String name) {

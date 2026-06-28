@@ -45,14 +45,10 @@ public final class MainConfigScreen extends AbstractConfigScreen {
             Arrays.asList(ItemGroupingOption.values()),
             true
         );
+        addHeading(Text.translatable("gui.adorn.config.mod_compatibility"));
+        addConfigToggle(PropertyRef.ofField(config, "checkModCompatIssues"), true);
+        addSubscreenButton(Text.translatable("gui.adorn.config.toggle_mod_compatibility"), ModCompatConfigScreen::new);
         addHeading(Text.translatable("gui.adorn.config.other"));
-        panel.add(
-            ButtonWidget.builder(Text.translatable("gui.adorn.config.game_rule_defaults"),
-                    widget -> client.setScreen(new GameRuleDefaultsScreen(this)))
-                .position(x, nextChildY)
-                .size(BUTTON_WIDTH, 20)
-                .build()
-        );
-        nextChildY += BUTTON_SPACING;
+        addSubscreenButton(Text.translatable("gui.adorn.config.game_rule_defaults"), GameRuleDefaultsScreen::new);
     }
 }

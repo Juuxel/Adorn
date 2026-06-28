@@ -6,11 +6,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
-public interface ModContentBridge {
+public interface ModBridge {
     byte @Nullable [] readModFile(String path) throws IOException;
+    boolean isModLoaded(String modId);
+    String getModName(String modId);
 
     @InlineServices.Getter
-    static ModContentBridge get() {
-        return Services.load(ModContentBridge.class);
+    static ModBridge get() {
+        return Services.load(ModBridge.class);
     }
 }

@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.platform.MappingBridge;
-import juuxel.adorn.platform.ModContentBridge;
+import juuxel.adorn.platform.ModBridge;
 import juuxel.adorn.util.Logging;
 import org.slf4j.Logger;
 
@@ -32,7 +32,7 @@ public final class EnumVerifier {
         if (!ConfigManager.config().checkModCompatIssues) return;
 
         try {
-            byte[] dataBytes = ModContentBridge.get().readModFile("enum_verification_data.json");
+            byte[] dataBytes = ModBridge.get().readModFile("enum_verification_data.json");
 
             if (dataBytes == null) {
                 LOGGER.error("[Adorn] Enum verification data not present");
