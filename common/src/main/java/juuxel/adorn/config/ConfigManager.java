@@ -105,7 +105,7 @@ public abstract class ConfigManager {
 
             if (entry.getValue() instanceof JsonObject value) {
                 var actual = config.get(JsonObject.class, entry.getKey());
-                return actual == null || isMissingKeys(actual, value);
+                if (actual == null || isMissingKeys(actual, value)) return true;
             }
         }
 

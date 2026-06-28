@@ -1,6 +1,7 @@
 package juuxel.adorn.util;
 
 import java.lang.invoke.MethodHandles;
+import java.util.Map;
 
 /**
  * Reference to a mutable property.
@@ -48,5 +49,24 @@ public interface PropertyRef<T> {
         } catch (ReflectiveOperationException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    static <T> PropertyRef<T> ofMapEntry(Map<String, T> map, String key) {
+        return new PropertyRef<>() {
+            @Override
+            public String getName() {
+                return key;
+            }
+
+            @Override
+            public T get() {
+                return map.get(key);
+            }
+
+            @Override
+            public void set(T value) {
+                map.put(key, value);
+            }
+        };
     }
 }

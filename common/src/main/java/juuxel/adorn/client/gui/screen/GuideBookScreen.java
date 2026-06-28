@@ -79,7 +79,7 @@ public final class GuideBookScreen extends Screen {
             var panel = new Panel();
             panel.add(new BookPageTitle(pageX, pageY, page));
             var body = new BookPageBody(pageX, pageY + PAGE_TEXT_Y, page);
-            panel.add(new ScrollEnvelope(pageX, pageY + PAGE_TEXT_Y, PAGE_WIDTH, PAGE_BODY_HEIGHT, body, animationEngine));
+            panel.add(new ScrollEnvelope(pageX, pageY + PAGE_TEXT_Y, PAGE_WIDTH, PAGE_BODY_HEIGHT, body, animationEngine, false));
             flipBook.add(panel);
         }
 
@@ -305,7 +305,7 @@ public final class GuideBookScreen extends Screen {
             }
 
             var hoveredStyle = getTextStyleAt(mouseX, mouseY);
-            Scissors.suspendScissors(() -> context.drawHoverEvent(textRenderer, hoveredStyle, mouseX, mouseY));
+            Scissors.suspendScissors(context, () -> context.drawHoverEvent(textRenderer, hoveredStyle, mouseX, mouseY));
         }
 
         private void renderImage(DrawContext context, Image image, int mouseX, int mouseY) {
@@ -326,7 +326,7 @@ public final class GuideBookScreen extends Screen {
                     context.fill(hX, hY, hX + hoverArea.size().x(), hY + hoverArea.size().y(), HOVER_AREA_HIGHLIGHT_COLOR);
 
                     var wrappedTooltip = textRenderer.wrapLines(hoverArea.tooltip(), PAGE_WIDTH);
-                    Scissors.suspendScissors(() -> context.drawOrderedTooltip(textRenderer, wrappedTooltip, mouseX, mouseY));
+                    Scissors.suspendScissors(context, () -> context.drawOrderedTooltip(textRenderer, wrappedTooltip, mouseX, mouseY));
                     break;
                 }
             }

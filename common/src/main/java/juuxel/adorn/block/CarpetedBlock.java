@@ -1,6 +1,7 @@
 package juuxel.adorn.block;
 
 import juuxel.adorn.block.property.OptionalProperty;
+import juuxel.adorn.util.verification.UsesBlockProperty;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -24,6 +25,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+@UsesBlockProperty(DyeColor.class)
 public abstract class CarpetedBlock extends SeatBlock {
     public static final OptionalProperty<DyeColor> CARPET = new OptionalProperty<>(EnumProperty.of("carpet", DyeColor.class));
     public static final VoxelShape CARPET_SHAPE = createCuboidShape(0.0, 0.0, 0.0, 16.0, 1.0, 16.0);

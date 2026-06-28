@@ -38,4 +38,11 @@ jobs:
       - name: Generate resources (mod compatibility)
         run: ./gradlew generateAllData
       - name: Check for changes
-        run: if [ -n "$(git status --porcelain)" ]; then exit 1; fi
+        run: python ./build-logic/check_and_package_git_diff.py
+      - name: Upload changed resources
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: Changed resources
+          path: diff.zip
+          archive: false
