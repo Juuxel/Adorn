@@ -79,7 +79,7 @@ public final class GuideBookScreen extends Screen {
             var panel = new Panel();
             panel.add(new BookPageTitle(pageX, pageY, page));
             var body = new BookPageBody(pageX, pageY + PAGE_TEXT_Y, page);
-            panel.add(new ScrollEnvelope(pageX, pageY + PAGE_TEXT_Y, PAGE_WIDTH, PAGE_BODY_HEIGHT, body, animationEngine));
+            panel.add(new ScrollEnvelope(pageX, pageY + PAGE_TEXT_Y, PAGE_WIDTH, PAGE_BODY_HEIGHT, body, animationEngine, false));
             flipBook.add(panel);
         }
 

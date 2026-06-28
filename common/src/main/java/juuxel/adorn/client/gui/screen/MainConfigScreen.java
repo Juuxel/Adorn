@@ -1,5 +1,6 @@
 package juuxel.adorn.client.gui.screen;
 
+import juuxel.adorn.client.gui.widget.Panel;
 import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.fluid.FluidUnit;
 import juuxel.adorn.item.group.ItemGroupingOption;
@@ -22,6 +23,16 @@ public final class MainConfigScreen extends AbstractConfigScreen {
     @Override
     protected void init() {
         super.init();
+        addDrawableChild(
+            ButtonWidget.builder(ScreenTexts.DONE, widget -> close())
+                .position(width / 2 - 100, height - BACK_BUTTON_Y_FROM_BOTTOM)
+                .size(200, 20)
+                .build()
+        );
+    }
+
+    @Override
+    protected void initConfigWidgets(Panel panel) {
         var config = ConfigManager.config();
         int x = (width - BUTTON_WIDTH) / 2;
         addHeading(Text.translatable("gui.adorn.config.visual"));
@@ -35,18 +46,13 @@ public final class MainConfigScreen extends AbstractConfigScreen {
             true
         );
         addHeading(Text.translatable("gui.adorn.config.other"));
-        addDrawableChild(
+        panel.add(
             ButtonWidget.builder(Text.translatable("gui.adorn.config.game_rule_defaults"),
                     widget -> client.setScreen(new GameRuleDefaultsScreen(this)))
                 .position(x, nextChildY)
                 .size(BUTTON_WIDTH, 20)
                 .build()
         );
-        addDrawableChild(
-            ButtonWidget.builder(ScreenTexts.DONE, widget -> close())
-                .position(width / 2 - 100, height - BACK_BUTTON_Y_FROM_BOTTOM)
-                .size(200, 20)
-                .build()
-        );
+        nextChildY += BUTTON_SPACING;
     }
 }
