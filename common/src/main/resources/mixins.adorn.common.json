@@ -12,6 +12,7 @@
     "FenceGateBlockMixin"
   ],
   "client": [
+    "client.ClickableWidgetMixin"
   ],
 
   "injectors": {
