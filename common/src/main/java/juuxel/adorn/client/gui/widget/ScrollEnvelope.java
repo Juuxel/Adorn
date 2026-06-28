@@ -19,8 +19,11 @@ public final class ScrollEnvelope extends ScissorEnvelope {
     private static final int GRADIENT_COLOR = Colors.color(0x000000, 0.2f);
     private static final int SCROLLING_TRACK_MARGIN = 2;
     private static final int SCROLLING_TRACK_WIDTH = 4;
+    public static final int ADDED_WIDTH = SCROLLING_TRACK_WIDTH + SCROLLING_TRACK_MARGIN;
     private static final int SCROLL_THUMB_COLOR_INACTIVE = Colors.color(0x000000, 0.2f);
     private static final int SCROLL_THUMB_COLOR_ACTIVE = Colors.color(0x000000, 0.6f);
+    private static final int SCROLL_THUMB_COLOR_INACTIVE_DARK = Colors.color(0xFFFFFF, 0.2f);
+    private static final int SCROLL_THUMB_COLOR_ACTIVE_DARK = Colors.color(0xFFFFFF, 0.6f);
 
     private final SizedElement element;
     private double offset = 0.0;
@@ -32,8 +35,10 @@ public final class ScrollEnvelope extends ScissorEnvelope {
     private double dragStart = 0.0;
     private boolean thumbHovered = false;
     private final AnimatedProperty<Integer> thumbColor;
+    private final int inactiveScrollThumbColor;
+    private final int activeScrollThumbColor;
 
-    public ScrollEnvelope(int x, int y, int width, int height, SizedElement element, AnimationEngine animationEngine) {
+    public ScrollEnvelope(int x, int y, int width, int height, SizedElement element, AnimationEngine animationEngine, boolean darkMode) {
         super(x, y, width, height);
         this.element = element;
         this.animatedOffset = new AnimatedPropertyWrapper<>(
@@ -41,8 +46,10 @@ public final class ScrollEnvelope extends ScissorEnvelope {
             () -> offset, this::setOffset
         );
         this.trackHeight = height - 2 * SCROLLING_TRACK_MARGIN;
+        this.inactiveScrollThumbColor = darkMode ? SCROLL_THUMB_COLOR_INACTIVE_DARK : SCROLL_THUMB_COLOR_INACTIVE;
+        this.activeScrollThumbColor = darkMode ? SCROLL_THUMB_COLOR_ACTIVE_DARK : SCROLL_THUMB_COLOR_ACTIVE;
         this.thumbColor = new AnimatedProperty<>(
-            SCROLL_THUMB_COLOR_INACTIVE,
+            inactiveScrollThumbColor,
             animationEngine, 20, Interpolator.COLOR
         );
     }
@@ -122,7 +129,7 @@ public final class ScrollEnvelope extends ScissorEnvelope {
             var hovered = draggingThumb || isMouseOverThumb(mouseX, mouseY);
             if (thumbHovered != hovered) {
                 thumbHovered = hovered;
-                thumbColor.set(hovered ? SCROLL_THUMB_COLOR_ACTIVE : SCROLL_THUMB_COLOR_INACTIVE);
+                thumbColor.set(hovered ? activeScrollThumbColor : inactiveScrollThumbColor);
             }
 
             var thumbX = x + width - SCROLLING_TRACK_MARGIN - SCROLLING_TRACK_WIDTH;

@@ -1,5 +1,6 @@
 package juuxel.adorn.client.gui.screen;
 
+import juuxel.adorn.client.gui.widget.Panel;
 import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.util.Casing;
 import juuxel.adorn.util.PropertyRef;
@@ -18,16 +19,20 @@ public final class GameRuleDefaultsScreen extends AbstractConfigScreen {
     @Override
     protected void init() {
         super.init();
-        var config = ConfigManager.config();
-        addConfigToggle(PropertyRef.ofField(config.gameRuleDefaults, "skipNightOnSofas"));
-        addConfigToggle(PropertyRef.ofField(config.gameRuleDefaults, "infiniteKitchenSinks"));
-        addConfigToggle(PropertyRef.ofField(config.gameRuleDefaults, "dropLockedTradingStations"));
         addDrawableChild(
             ButtonWidget.builder(ScreenTexts.BACK, button -> close())
                 .position(width / 2 - 100, height - BACK_BUTTON_Y_FROM_BOTTOM)
                 .size(200, 20)
                 .build()
         );
+    }
+
+    @Override
+    protected void initConfigWidgets(Panel panel) {
+        var config = ConfigManager.config();
+        addConfigToggle(PropertyRef.ofField(config.gameRuleDefaults, "skipNightOnSofas"));
+        addConfigToggle(PropertyRef.ofField(config.gameRuleDefaults, "infiniteKitchenSinks"));
+        addConfigToggle(PropertyRef.ofField(config.gameRuleDefaults, "dropLockedTradingStations"));
     }
 
     @Override

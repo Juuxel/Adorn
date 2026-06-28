@@ -3,6 +3,9 @@ package juuxel.adorn.client.gui.screen;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.client.gui.widget.ConfigScreenHeading;
 import juuxel.adorn.client.gui.widget.ConfigScreenLabel;
+import juuxel.adorn.client.gui.widget.Draggable;
+import juuxel.adorn.client.gui.widget.Panel;
+import juuxel.adorn.client.gui.widget.ScrollEnvelope;
 import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.util.Colors;
 import juuxel.adorn.util.Displayable;
@@ -51,7 +54,12 @@ public abstract class AbstractConfigScreen extends Screen {
     private static final int HEART_CHANCE = 65;
 
     private final Screen parent;
+
     private final Layout layout;
+    private final int backgroundY = HEADER_FOOTER_HEIGHT;
+    private int backgroundHeight;
+    private Panel mainPanel;
+
     private final Random random = new Random();
     private final List<Heart> hearts = new ArrayList<>();
     private boolean restartRequired = false;
@@ -71,7 +79,25 @@ public abstract class AbstractConfigScreen extends Screen {
     protected void init() {
         nextChildY = CONFIG_BUTTON_START_Y;
         animationEngine.start();
+
+        backgroundHeight = height - backgroundY - HEADER_FOOTER_HEIGHT;
+        mainPanel = new Panel();
+        initConfigWidgets(mainPanel);
+        var sizedPanel = mainPanel.asSized(layout.totalWidth(), nextChildY - backgroundY - BUTTON_GAP);
+        addDrawableChild(
+            new ScrollEnvelope(
+                computeLeftMarginX(),
+                backgroundY,
+                layout.totalWidth() + ScrollEnvelope.ADDED_WIDTH + 2,
+                backgroundHeight,
+                sizedPanel,
+                animationEngine,
+                true
+            )
+        );
     }
+
+    protected abstract void initConfigWidgets(Panel panel);
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
@@ -90,8 +116,6 @@ public abstract class AbstractConfigScreen extends Screen {
 
         // Draw darkened background
         var background = client.world == null ? EntryListWidget.MENU_LIST_BACKGROUND_TEXTURE : EntryListWidget.INWORLD_MENU_LIST_BACKGROUND_TEXTURE;
-        int backgroundY = HEADER_FOOTER_HEIGHT;
-        int backgroundHeight = height - backgroundY - HEADER_FOOTER_HEIGHT;
         context.drawTexture(RenderPipelines.GUI_TEXTURED, background, 0, backgroundY, width, backgroundY + backgroundHeight, width, backgroundHeight, 32, 32);
 
         // Draw headers and footers
@@ -203,7 +227,7 @@ public abstract class AbstractConfigScreen extends Screen {
                 nextChildY,
                 totalWidth - buttonWidth
             );
-            addDrawable(label);
+            mainPanel.addStandaloneDrawable(label);
         }
     }
 
@@ -218,7 +242,7 @@ public abstract class AbstractConfigScreen extends Screen {
         );
 
         addConfigLabelIfNeeded(property, restartRequired);
-        addDrawableChild(button);
+        mainPanel.add(button);
         nextChildY += BUTTON_SPACING;
     }
 
@@ -233,12 +257,12 @@ public abstract class AbstractConfigScreen extends Screen {
         );
 
         addConfigLabelIfNeeded(property, restartRequired);
-        addDrawableChild(button);
+        mainPanel.add(button);
         nextChildY += BUTTON_SPACING;
     }
 
     protected void addHeading(Text text) {
-        addDrawable(new ConfigScreenHeading(text, (width - layout.totalWidth()) / 2, nextChildY, layout.totalWidth()));
+        mainPanel.addStandaloneDrawable(new ConfigScreenHeading(text, (width - layout.totalWidth()) / 2, nextChildY, layout.totalWidth()));
         nextChildY += ConfigScreenHeading.HEIGHT;
     }
 
@@ -248,6 +272,13 @@ public abstract class AbstractConfigScreen extends Screen {
 
     private String getTooltipTranslationKey(String name) {
         return getOptionTranslationKey(name) + ".description";
+    }
+
+    @Override
+    public void tick() {
+        if (getFocused() instanceof Draggable focused && !isDragging()) {
+            focused.stopDragging();
+        }
     }
 
     private static final class Heart {
