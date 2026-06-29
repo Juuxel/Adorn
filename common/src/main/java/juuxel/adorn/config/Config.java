@@ -3,6 +3,7 @@ package juuxel.adorn.config;
 import blue.endless.jankson.Comment;
 import juuxel.adorn.fluid.FluidUnit;
 import juuxel.adorn.item.group.ItemGroupingOption;
+import juuxel.adorn.util.verification.CompatCheckMode;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,8 +21,8 @@ public final class Config {
     @Comment("Mod compatibility toggles (enabled: true, disabled: false)")
     public Map<String, Boolean> compat = new HashMap<>();
 
-    @Comment("If true, Adorn will automatically check for mod compatibility issues")
-    public boolean checkModCompatIssues = true;
+    @Comment("If true, Adorn will automatically check for mod compatibility issues. Options: [LOG_AND_GUI, LOG_ONLY, OFF]")
+    public CompatCheckMode checkModCompatIssues = CompatCheckMode.LOG_AND_GUI;
 
     public static final class Client {
         @Comment("If true, floating tooltips are shown above trading stations.")

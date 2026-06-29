@@ -5,6 +5,7 @@ import juuxel.adorn.AdornCommon;
 import juuxel.adorn.client.gui.widget.ConfigScreenHeading;
 import juuxel.adorn.client.gui.widget.ConfigScreenLabel;
 import juuxel.adorn.client.gui.widget.Draggable;
+import juuxel.adorn.client.gui.widget.HeaderFooterOptions;
 import juuxel.adorn.client.gui.widget.Panel;
 import juuxel.adorn.client.gui.widget.ScrollEnvelope;
 import juuxel.adorn.config.ConfigManager;
@@ -20,7 +21,6 @@ import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.tooltip.TooltipState;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.CyclingButtonWidget;
-import net.minecraft.client.gui.widget.EntryListWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -33,12 +33,10 @@ import java.util.Random;
 import java.util.function.UnaryOperator;
 
 public abstract class AbstractConfigScreen extends Screen {
-    private static final int HEADER_FOOTER_HEIGHT = 33;
-    private static final int CONFIG_BUTTON_START_Y = HEADER_FOOTER_HEIGHT + 2;
+    private static final int CONFIG_BUTTON_START_Y = HeaderFooterOptions.DEFAULT_HEADER_FOOTER_HEIGHT + 2;
     public static final int BUTTON_HEIGHT = 20;
     public static final int BUTTON_GAP = 4;
     public static final int BUTTON_SPACING = BUTTON_HEIGHT + BUTTON_GAP;
-    protected static final int BACK_BUTTON_Y_FROM_BOTTOM = (HEADER_FOOTER_HEIGHT + BUTTON_HEIGHT) / 2;
     private static final int HEART_SIZE = 12;
     private static final int[] HEART_COLORS = new int[] {
         0xFF_FF0000, // Red
@@ -59,8 +57,8 @@ public abstract class AbstractConfigScreen extends Screen {
     private final Screen parent;
 
     private final Layout layout;
-    private final int backgroundY = HEADER_FOOTER_HEIGHT;
-    private int backgroundHeight;
+    protected final HeaderFooterOptions headerFooterOptions = new HeaderFooterOptions();
+    private final int backgroundY = headerFooterOptions.backgroundY();
     private Panel mainPanel;
 
     private final Random random = new Random();
@@ -83,7 +81,6 @@ public abstract class AbstractConfigScreen extends Screen {
         nextChildY = CONFIG_BUTTON_START_Y;
         animationEngine.start();
 
-        backgroundHeight = height - backgroundY - HEADER_FOOTER_HEIGHT;
         mainPanel = new Panel();
         initConfigWidgets(mainPanel);
         var sizedPanel = mainPanel.asSized(layout.totalWidth(), nextChildY - backgroundY - BUTTON_GAP);
@@ -92,7 +89,7 @@ public abstract class AbstractConfigScreen extends Screen {
                 computeLeftMarginX(),
                 backgroundY,
                 layout.totalWidth() + ScrollEnvelope.ADDED_WIDTH + 2,
-                backgroundHeight,
+                headerFooterOptions.backgroundHeight(height),
                 sizedPanel,
                 animationEngine,
                 true
@@ -105,7 +102,7 @@ public abstract class AbstractConfigScreen extends Screen {
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
-        context.drawCenteredTextWithShadow(textRenderer, title, width / 2, (HEADER_FOOTER_HEIGHT - textRenderer.fontHeight) / 2, Colors.WHITE);
+        headerFooterOptions.renderTitle(context, title, width);
     }
 
     @Override
@@ -117,19 +114,7 @@ public abstract class AbstractConfigScreen extends Screen {
             renderHearts(context, delta);
         }
 
-        RenderSystem.enableBlend();
-
-        // Draw darkened background
-        var background = client.world == null ? EntryListWidget.MENU_LIST_BACKGROUND_TEXTURE : EntryListWidget.INWORLD_MENU_LIST_BACKGROUND_TEXTURE;
-        context.drawTexture(background, 0, backgroundY, width, backgroundY + backgroundHeight, width, backgroundHeight, 32, 32);
-
-        // Draw headers and footers
-        var headerSeparator = client.world == null ? Screen.HEADER_SEPARATOR_TEXTURE : Screen.INWORLD_HEADER_SEPARATOR_TEXTURE;
-        var footerSeparator = client.world == null ? Screen.FOOTER_SEPARATOR_TEXTURE : Screen.INWORLD_FOOTER_SEPARATOR_TEXTURE;
-        context.drawTexture(headerSeparator, 0, backgroundY - 2, 0, 0, width, 2, 32, 2);
-        context.drawTexture(footerSeparator, 0, height - HEADER_FOOTER_HEIGHT, 0, 0, width, 2, 32, 2);
-
-        RenderSystem.disableBlend();
+        headerFooterOptions.renderBackground(context, width, height);
     }
 
     private void renderHearts(DrawContext context, float delta) {
@@ -195,7 +180,7 @@ public abstract class AbstractConfigScreen extends Screen {
         return Tooltip.of(text);
     }
 
-    private <T> CyclingButtonWidget<T> createConfigButton(CyclingButtonWidget.Builder<T> builder, PropertyRef<T> property, boolean restartRequired) {
+    protected <T> CyclingButtonWidget<T> createConfigButton(CyclingButtonWidget.Builder<T> builder, PropertyRef<T> property, boolean restartRequired, int width) {
         int x = computeButtonX();
         int y = nextChildY;
 
@@ -205,7 +190,7 @@ public abstract class AbstractConfigScreen extends Screen {
 
         return builder
             .tooltip(value -> createTooltip(property, restartRequired))
-            .build(x, y, layout.buttonWidth(), BUTTON_HEIGHT, getOptionLabel(property.getName()), (button, value) -> {
+            .build(x, y, width, BUTTON_HEIGHT, getOptionLabel(property.getName()), (button, value) -> {
                 property.set(value);
                 ConfigManager.get().save();
 
@@ -215,7 +200,7 @@ public abstract class AbstractConfigScreen extends Screen {
             });
     }
 
-    private int computeLeftMarginX() {
+    protected int computeLeftMarginX() {
         return (width - layout.totalWidth()) / 2;
     }
 
@@ -248,7 +233,7 @@ public abstract class AbstractConfigScreen extends Screen {
     protected void addConfigToggle(PropertyRef<Boolean> property, boolean restartRequired) {
         var button = createConfigButton(
             CyclingButtonWidget.onOffBuilder(property.get()),
-            property, restartRequired
+            property, restartRequired, layout.buttonWidth()
         );
 
         addConfigLabelIfNeeded(property, restartRequired);
@@ -261,14 +246,14 @@ public abstract class AbstractConfigScreen extends Screen {
     }
 
     protected <T extends Displayable> void addConfigButton(PropertyRef<T> property, List<T> values, boolean restartRequired) {
-        var button = createConfigButton(
-            CyclingButtonWidget.<T>builder(Displayable::getDisplayName).values(values).initially(property.get()),
-            property, restartRequired
-        );
-
+        var button = createConfigButton(createConfigButtonBuilder(property, values), property, restartRequired, layout.buttonWidth());
         addConfigLabelIfNeeded(property, restartRequired);
         mainPanel.add(button);
         nextChildY += BUTTON_SPACING;
+    }
+
+    protected <T extends Displayable> CyclingButtonWidget.Builder<T> createConfigButtonBuilder(PropertyRef<T> property, List<T> values) {
+        return CyclingButtonWidget.<T>builder(Displayable::getDisplayName).values(values).initially(property.get());
     }
 
     protected void addHeading(Text text) {

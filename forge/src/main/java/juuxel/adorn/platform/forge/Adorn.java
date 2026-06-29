@@ -48,7 +48,7 @@ public final class Adorn {
         modBus.addListener(this::init);
 
         if (FMLEnvironment.production) {
-            EnumVerifier.verifyEnums();
+            EnumVerifier.verifyEnumsOnLaunch();
         }
 
         register(AdornComponentTypes.DATA_COMPONENT_TYPES, modBus);

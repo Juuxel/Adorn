@@ -20,7 +20,7 @@ public final class GameRuleDefaultsScreen extends AbstractConfigScreen {
         super.init();
         addDrawableChild(
             ButtonWidget.builder(ScreenTexts.BACK, button -> close())
-                .position(width / 2 - 100, height - BACK_BUTTON_Y_FROM_BOTTOM)
+                .position(width / 2 - 100, height - headerFooterOptions.footerWidgetYFromBottom(BUTTON_HEIGHT))
                 .size(200, 20)
                 .build()
         );

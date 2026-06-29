@@ -1,12 +1,15 @@
 package juuxel.adorn.client.gui.screen;
 
 import juuxel.adorn.client.gui.widget.Panel;
+import juuxel.adorn.config.Config;
 import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.fluid.FluidUnit;
 import juuxel.adorn.item.group.ItemGroupingOption;
 import juuxel.adorn.util.PropertyRef;
+import juuxel.adorn.util.verification.CompatCheckMode;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.CyclingButtonWidget;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 
@@ -25,7 +28,7 @@ public final class MainConfigScreen extends AbstractConfigScreen {
         super.init();
         addDrawableChild(
             ButtonWidget.builder(ScreenTexts.DONE, widget -> close())
-                .position(width / 2 - 100, height - BACK_BUTTON_Y_FROM_BOTTOM)
+                .position(width / 2 - 100, height - headerFooterOptions.footerWidgetYFromBottom(BUTTON_HEIGHT))
                 .size(200, 20)
                 .build()
         );
@@ -46,9 +49,27 @@ public final class MainConfigScreen extends AbstractConfigScreen {
             true
         );
         addHeading(Text.translatable("gui.adorn.config.mod_compatibility"));
-        addConfigToggle(PropertyRef.ofField(config, "checkModCompatIssues"), true);
+        var modCompatOptionButton = createModCompatButton(config);
+        panel.add(modCompatOptionButton);
+        panel.add(
+            ButtonWidget.builder(Text.translatable("gui.adorn.mod_compatibility_warning.run_now"), widget -> client.setScreen(ModCompatWarningScreen.checkAndCreate(this, true)))
+                .position(computeLeftMarginX() + BUTTON_WIDTH - 44, nextChildY)
+                .size(44, BUTTON_HEIGHT)
+                .build()
+        );
+        nextChildY += BUTTON_SPACING;
         addSubscreenButton(Text.translatable("gui.adorn.config.toggle_mod_compatibility"), ModCompatConfigScreen::new);
         addHeading(Text.translatable("gui.adorn.config.other"));
         addSubscreenButton(Text.translatable("gui.adorn.config.game_rule_defaults"), GameRuleDefaultsScreen::new);
+    }
+
+    private CyclingButtonWidget<?> createModCompatButton(Config config) {
+        PropertyRef<CompatCheckMode> property = PropertyRef.ofField(config, "checkModCompatIssues");
+        return createConfigButton(
+            createConfigButtonBuilder(property, Arrays.asList(CompatCheckMode.values())),
+            property,
+            false,
+            BUTTON_WIDTH - 46
+        );
     }
 }

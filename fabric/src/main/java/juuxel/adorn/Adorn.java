@@ -39,7 +39,7 @@ import net.fabricmc.api.Environment;
 public final class Adorn {
     public static void init() {
         ConfigManager.get().init();
-        EnumVerifier.verifyEnums();
+        EnumVerifier.verifyEnumsOnLaunch();
         AdornComponentTypes.init();
         AdornSounds.init();
         AdornBlockSetTypes.init();

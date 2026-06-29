@@ -21,15 +21,22 @@ import java.util.stream.Collectors;
 
 public final class EnumVerifier {
     private static final Logger LOGGER = Logging.logger();
+    private static boolean checked = false;
     private static final List<Violation> violations = new ArrayList<>();
 
     public static List<Violation> getViolations() {
         return Collections.unmodifiableList(violations);
     }
 
+    public static void verifyEnumsOnLaunch() {
+        if (!ConfigManager.config().checkModCompatIssues.enabled()) return;
+        verifyEnums();
+    }
+
     @SuppressWarnings("unchecked")
     public static void verifyEnums() {
-        if (!ConfigManager.config().checkModCompatIssues) return;
+        if (checked) return;
+        checked = true;
 
         try {
             byte[] dataBytes = ModBridge.get().readModFile("enum_verification_data.json");
