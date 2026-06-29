@@ -13,7 +13,6 @@ repositories {
 dependencies {
     implementation("com.google.code.gson:gson:2.14.0")
     implementation("org.ow2.asm:asm-tree:9.4")
-    implementation("net.fabricmc:mapping-io:0.8.0")
     implementation("io.github.juuxel:adorn-data-generator")
 
     // Must match the version in settings.gradle.kts!
