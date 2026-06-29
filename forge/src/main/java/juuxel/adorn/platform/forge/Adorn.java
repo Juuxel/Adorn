@@ -28,34 +28,24 @@ import juuxel.adorn.platform.forge.event.EntityEvents;
 import juuxel.adorn.platform.forge.event.ItemEvents;
 import juuxel.adorn.platform.forge.networking.AdornNetworking;
 import juuxel.adorn.platform.forge.registrar.ForgeRegistrar;
-import juuxel.adorn.platform.neo.ModBridgeNeo;
 import juuxel.adorn.platform.neo.lib.AdornDynamicRegistries;
 import juuxel.adorn.recipe.AdornRecipeBookCategories;
 import juuxel.adorn.recipe.AdornRecipeDisplays;
 import juuxel.adorn.recipe.AdornRecipeSerializers;
 import juuxel.adorn.recipe.AdornRecipeTypes;
 import juuxel.adorn.recipe.AdornSlotDisplays;
-import juuxel.adorn.util.verification.EnumVerifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.javafmlmod.FMLModContainer;
-import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForgeMod;
 
 @Mod(AdornCommon.NAMESPACE)
 public final class Adorn {
     // TODO: Split into separate common and client @Mods
-    public Adorn(FMLModContainer container, IEventBus modBus, Dist dist) {
-        ModBridgeNeo.modContainer = container;
+    public Adorn(IEventBus modBus, Dist dist) {
         ConfigManager.get().init();
         modBus.addListener(this::init);
-
-        if (FMLEnvironment.isProduction()) {
-            EnumVerifier.verifyEnums();
-        }
-
         register(AdornComponentTypes.DATA_COMPONENT_TYPES, modBus);
         register(AdornSounds.SOUNDS, modBus);
         AdornBlockSetTypes.init();

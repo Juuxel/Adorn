@@ -1,6 +1,5 @@
 package juuxel.adorn.block;
 
-import juuxel.adorn.util.verification.UsesBlockProperty;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -22,7 +21,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
 
-@UsesBlockProperty(Direction.Axis.class)
 public final class PostBlock extends Block implements BlockWithDescription, Waterloggable {
     public static final EnumProperty<Direction.Axis> AXIS = Properties.AXIS;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;

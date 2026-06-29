@@ -2,7 +2,6 @@ package juuxel.adorn.block;
 
 import juuxel.adorn.lib.AdornStats;
 import juuxel.adorn.util.Shapes;
-import juuxel.adorn.util.verification.UsesBlockProperty;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -36,7 +35,6 @@ import net.minecraft.world.tick.ScheduledTickView;
 
 import java.util.Map;
 
-@UsesBlockProperty(Direction.class)
 public final class TableLampBlock extends Block implements Waterloggable, BlockWithDescription {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final BooleanProperty LIT = Properties.LIT;
