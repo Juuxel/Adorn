@@ -2,7 +2,6 @@ package juuxel.adorn.block;
 
 import juuxel.adorn.block.variant.BlockVariant;
 import juuxel.adorn.util.Shapes;
-import juuxel.adorn.util.verification.UsesBlockProperty;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -21,7 +20,6 @@ import net.minecraft.world.BlockView;
 
 import java.util.Map;
 
-@UsesBlockProperty(Direction.class)
 public abstract class AbstractKitchenCounterBlock extends Block {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     public static final BlockSoundGroup SOUND_GROUP = new BlockSoundGroup(

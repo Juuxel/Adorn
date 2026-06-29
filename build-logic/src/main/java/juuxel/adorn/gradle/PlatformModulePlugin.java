@@ -2,9 +2,7 @@ package juuxel.adorn.gradle;
 
 import juuxel.adorn.gradle.action.InlineServiceLoader;
 import juuxel.adorn.gradle.action.MinifyJson;
-import juuxel.adorn.gradle.datagen.GenerateEnumVerificationData;
 import juuxel.adorn.gradle.xplat.PlatformModuleExtension;
-import net.fabricmc.loom.LoomGradleExtension;
 import net.fabricmc.loom.api.LoomGradleExtensionAPI;
 import net.fabricmc.loom.api.ModSettings;
 import net.fabricmc.loom.task.RemapJarTask;
@@ -18,7 +16,6 @@ import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.api.tasks.bundling.Jar;
-import org.gradle.language.jvm.tasks.ProcessResources;
 
 import java.util.Map;
 
@@ -28,26 +25,6 @@ public final class PlatformModulePlugin implements Plugin<Project> {
         project.getPlugins().apply(MinecraftSetupPlugin.class);
         var extension = CorePlugin.registerExtension(project, "platformModule", PlatformModuleExtension.class);
         var loom = project.getExtensions().getByType(LoomGradleExtensionAPI.class);
-
-        var generateEnumVerificationData = project.getTasks().register("generateEnumVerificationData", GenerateEnumVerificationData.class, task -> {
-            var modJarConfig = project.getConfigurations().detachedConfiguration(createCommonDependency(project));
-            task.getModJars().from(modJarConfig);
-
-            if (!"official".equals(loom.getProductionNamespace().get())) {
-                // Use Loom internals to get the mapping file with Mojang names on NeoForge.
-                var loomInternal = LoomGradleExtension.get(project);
-                var mappingFile = loomInternal.getMappingConfiguration().getPlatformMappingFile(loomInternal);
-                task.getMappings().set(mappingFile.toFile());
-                task.getRuntimeNamespace().convention(loom.getProductionNamespace());
-            }
-
-            task.getMinecraftJars().from(loom.getNamedMinecraftJars());
-            task.getOutputFile().convention(project.getLayout().getBuildDirectory().file("enum_verification_data.json"));
-        });
-
-        project.getTasks().named(JavaPlugin.PROCESS_RESOURCES_TASK_NAME, ProcessResources.class, task -> {
-            task.from(generateEnumVerificationData.flatMap(GenerateEnumVerificationData::getOutputFile));
-        });
 
         // Include common files into platform jars
         project.getTasks().named(JavaPlugin.JAR_TASK_NAME, Jar.class, task -> {

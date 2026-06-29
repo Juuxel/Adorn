@@ -20,9 +20,6 @@ public final class Config {
     @Comment("Mod compatibility toggles (enabled: true, disabled: false)")
     public Map<String, Boolean> compat = new HashMap<>();
 
-    @Comment("If true, Adorn will automatically check for mod compatibility issues")
-    public boolean checkModCompatIssues = true;
-
     public static final class Client {
         @Comment("If true, floating tooltips are shown above trading stations.")
         public boolean showTradingStationTooltips = true;
