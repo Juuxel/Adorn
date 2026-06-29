@@ -3,13 +3,14 @@ package juuxel.adorn.block;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.EnumHashBiMap;
 import juuxel.adorn.AdornCommon;
+import juuxel.adorn.util.Dyes;
 import net.minecraft.block.BlockSetType;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Util;
 
 public final class AdornBlockSetTypes {
     public static final BiMap<DyeColor, BlockSetType> PAINTED_WOODS = Util.make(EnumHashBiMap.create(DyeColor.class), map -> {
-        for (DyeColor color : DyeColor.values()) {
+        for (DyeColor color : Dyes.ALL_DYES) {
             map.put(color, register(color.getId() + "_wood"));
         }
     });

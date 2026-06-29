@@ -11,6 +11,7 @@ import juuxel.adorn.lib.registry.RegistrarFactory;
 import juuxel.adorn.lib.registry.RegistryHelper;
 import juuxel.adorn.platform.PlatformBridges;
 import juuxel.adorn.util.AdornUtil;
+import juuxel.adorn.util.Dyes;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -32,7 +33,7 @@ public final class AdornBlocks {
     private static final RegistryHelper HELPER = new RegistryHelper(BLOCKS, ITEMS);
 
     public static final RegisteredMap<DyeColor, SofaBlock> SOFAS = Registrar.registerBy(
-        DyeColor.values(),
+        Dyes.ALL_DYES,
         color -> HELPER.registerBlock(
             color.asString() + "_sofa",
             settings -> PlatformBridges.get().getBlockFactory().createSofa(settings),
@@ -41,7 +42,7 @@ public final class AdornBlocks {
     );
 
     public static final RegisteredMap<DyeColor, Block> PAINTED_PLANKS = Registrar.registerBy(
-        DyeColor.values(),
+        Dyes.ALL_DYES,
         color -> HELPER.registerBlock(
             color.asString() + "_planks",
             settings -> PlatformBridges.get().getBlockFactory().createPaintedPlanks(settings),
@@ -50,7 +51,7 @@ public final class AdornBlocks {
     );
 
     public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_SLABS = Registrar.registerBy(
-        DyeColor.values(),
+        Dyes.ALL_DYES,
         color -> HELPER.registerBlock(
             color.asString() + "_wood_slab",
             settings -> PlatformBridges.get().getBlockFactory().createPaintedWoodSlab(settings),
@@ -59,7 +60,7 @@ public final class AdornBlocks {
     );
 
     public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_STAIRS = Registrar.registerBy(
-        DyeColor.values(),
+        Dyes.ALL_DYES,
         color -> {
             var planks = PAINTED_PLANKS.get(color);
             return HELPER.registerBlock(
@@ -71,7 +72,7 @@ public final class AdornBlocks {
     );
 
     public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_FENCES = Registrar.registerBy(
-        DyeColor.values(),
+        Dyes.ALL_DYES,
         color -> HELPER.registerBlock(
             color.asString() + "_wood_fence",
             settings -> PlatformBridges.get().getBlockFactory().createPaintedWoodFence(settings),
@@ -80,7 +81,7 @@ public final class AdornBlocks {
     );
 
     public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_FENCE_GATES = Registrar.registerBy(
-        DyeColor.values(),
+        Dyes.ALL_DYES,
         color -> HELPER.registerBlock(
             color.asString() + "_wood_fence_gate",
             settings -> PlatformBridges.get().getBlockFactory().createPaintedWoodFenceGate(
@@ -92,7 +93,7 @@ public final class AdornBlocks {
     );
 
     public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_PRESSURE_PLATES = Registrar.registerBy(
-        DyeColor.values(),
+        Dyes.ALL_DYES,
         color -> HELPER.registerBlock(
             color.asString() + "_wood_pressure_plate",
             settings -> new PressurePlateBlock(AdornBlockSetTypes.PAINTED_WOODS.get(color), settings),
@@ -101,7 +102,7 @@ public final class AdornBlocks {
     );
 
     public static final RegisteredMap<DyeColor, Block> PAINTED_WOOD_BUTTONS = Registrar.registerBy(
-        DyeColor.values(),
+        Dyes.ALL_DYES,
         color -> HELPER.registerBlock(
             color.asString() + "_wood_button",
             settings -> new ButtonBlock(AdornBlockSetTypes.PAINTED_WOODS.get(color), 30, settings),
@@ -143,7 +144,7 @@ public final class AdornBlocks {
     );
 
     public static final RegisteredMap<DyeColor, Block> TABLE_LAMPS = Registrar.registerBy(
-        DyeColor.values(),
+        Dyes.ALL_DYES,
         color -> HELPER.registerBlock(color.asString() + "_table_lamp", TableLampBlock::new, () -> TableLampBlock.createBlockSettings(color))
     );
 
@@ -215,7 +216,7 @@ public final class AdornBlocks {
         CandlelitLanternBlock::createBlockSettings
     );
     public static final RegisteredMap<DyeColor, Block> DYED_CANDLELIT_LANTERNS = Registrar.registerBy(
-        DyeColor.values(),
+        Dyes.ALL_DYES,
         color -> HELPER.registerBlock(
             color.asString() + "_candlelit_lantern",
             CandlelitLanternBlock::new,

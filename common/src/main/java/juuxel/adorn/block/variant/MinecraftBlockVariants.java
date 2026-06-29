@@ -1,6 +1,6 @@
 package juuxel.adorn.block.variant;
 
-import juuxel.adorn.item.group.AdornItemGroups;
+import juuxel.adorn.util.Dyes;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -28,7 +28,7 @@ public final class MinecraftBlockVariants implements BlockVariantSet {
                 .entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByKey(
-                    Comparator.comparingInt(AdornItemGroups.DYE_COLORS_IN_ORDER::indexOf)
+                    Comparator.comparingInt(Dyes.DYES_IN_CREATIVE_INVENTORY_ORDER::indexOf)
                 ))
                 .map(Map.Entry::getValue)
                 .toList()

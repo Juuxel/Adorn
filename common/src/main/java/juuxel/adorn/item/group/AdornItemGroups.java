@@ -16,6 +16,7 @@ import juuxel.adorn.lib.registry.RegisteredMap;
 import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
 import juuxel.adorn.platform.ItemGroupBridge;
+import juuxel.adorn.util.Dyes;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
@@ -56,25 +57,6 @@ public final class AdornItemGroups {
         BlockKind.SHELF,
         BlockKind.COFFEE_TABLE,
         BlockKind.BENCH
-    );
-
-    public static final List<DyeColor> DYE_COLORS_IN_ORDER = List.of(
-        DyeColor.WHITE,
-        DyeColor.LIGHT_GRAY,
-        DyeColor.GRAY,
-        DyeColor.BLACK,
-        DyeColor.BROWN,
-        DyeColor.RED,
-        DyeColor.ORANGE,
-        DyeColor.YELLOW,
-        DyeColor.LIME,
-        DyeColor.GREEN,
-        DyeColor.CYAN,
-        DyeColor.LIGHT_BLUE,
-        DyeColor.BLUE,
-        DyeColor.PURPLE,
-        DyeColor.MAGENTA,
-        DyeColor.PINK
     );
 
     private static final String GROUP_ID = "items";
@@ -223,7 +205,7 @@ public final class AdornItemGroups {
             addColored(context, AdornBlocks.PAINTED_WOOD_BUTTONS);
 
             for (BlockKind kind : BlockKind.values()) {
-                for (DyeColor color : DYE_COLORS_IN_ORDER) {
+                for (DyeColor color : Dyes.DYES_IN_CREATIVE_INVENTORY_ORDER) {
                     var item = BlockVariantSets.get(kind, BlockVariant.PAINTED_WOODS.get(color));
                     if (item != null) context.add(item);
                 }
@@ -250,7 +232,7 @@ public final class AdornItemGroups {
     }
 
     private static void addColored(ItemGroupBuildContext context, RegisteredMap<DyeColor, ? extends ItemConvertible> items) {
-        for (DyeColor color : DYE_COLORS_IN_ORDER) {
+        for (DyeColor color : Dyes.DYES_IN_CREATIVE_INVENTORY_ORDER) {
             context.add(items.get(color));
         }
     }
@@ -347,7 +329,7 @@ public final class AdornItemGroups {
     private static List<ItemConvertible> getPaintedWood() {
         List<ItemConvertible> items = new ArrayList<>();
 
-        for (DyeColor color : DYE_COLORS_IN_ORDER) {
+        for (DyeColor color : Dyes.DYES_IN_CREATIVE_INVENTORY_ORDER) {
             items.add(AdornBlocks.PAINTED_PLANKS.getEager(color));
             items.add(AdornBlocks.PAINTED_WOOD_SLABS.getEager(color));
             items.add(AdornBlocks.PAINTED_WOOD_STAIRS.getEager(color));

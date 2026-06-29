@@ -15,6 +15,7 @@ import juuxel.adorn.fluid.FluidUnit;
 import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.lib.AdornTags;
 import juuxel.adorn.recipe.BrewingRecipeJsonBuilder;
+import juuxel.adorn.util.Dyes;
 import juuxel.adorn.util.EntryOrTag;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -220,7 +221,7 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
         AdornBlocks.PAINTED_WOOD_BUTTONS.forEach((color, block) -> offerPaintedButtonRecipe(exporter, block, color));
         AdornBlocks.PAINTED_WOOD_BUTTONS.forEach((color, block) -> offerButtonDyeingRecipe(exporter, block, color));
 
-        for (DyeColor color : DyeColor.values()) {
+        for (DyeColor color : Dyes.ALL_DYES) {
             offerDyeingRecipe(exporter, color, AdornTags.CHAIRS.item(), BlockKind.CHAIR);
             offerDyeingRecipe(exporter, color, AdornTags.TABLES.item(), BlockKind.TABLE);
             offerDyeingRecipe(exporter, color, AdornTags.DRAWERS.item(), BlockKind.DRAWER);
