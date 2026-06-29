@@ -4,15 +4,16 @@ import com.mojang.datafixers.util.Pair;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.util.AdornUtil;
+import juuxel.adorn.util.Dyes;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -20,8 +21,8 @@ import java.util.stream.Collectors;
 public interface BlockVariant {
     char MOD_ID_SEPARATOR = '/';
 
-    Map<DyeColor, BlockVariant> WOOLS = createBy(DyeColor.values(), color -> variant(color.asString(), Blocks.WHITE_WOOL));
-    Map<DyeColor, BlockVariant> PAINTED_WOODS = createBy(DyeColor.values(), PaintedWood::new);
+    Map<DyeColor, BlockVariant> WOOLS = createBy(Dyes.ALL_DYES, color -> variant(color.asString(), Blocks.WHITE_WOOL));
+    Map<DyeColor, BlockVariant> PAINTED_WOODS = createBy(Dyes.ALL_DYES, PaintedWood::new);
 
     BlockVariant IRON = variant("iron", Blocks.IRON_BARS);
     BlockVariant OAK = variant("oak", Blocks.OAK_PLANKS);
@@ -109,10 +110,10 @@ public interface BlockVariant {
     }
 
     @SuppressWarnings("unchecked")
-    private static <K extends Enum<K>> Map<K, BlockVariant> createBy(K[] keys, Function<K, BlockVariant> factory) {
-        Class<K> keyType = (Class<K>) keys[0].getClass();
+    private static <K extends Enum<K>> Map<K, BlockVariant> createBy(List<K> keys, Function<K, BlockVariant> factory) {
+        Class<K> keyType = (Class<K>) keys.getFirst().getClass();
         return Collections.unmodifiableMap(
-            Arrays.stream(keys)
+            keys.stream()
                 .map(key -> Pair.of(key, factory.apply(key)))
                 .collect(Collectors.toMap(
                     Pair::getFirst,

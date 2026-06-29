@@ -32,8 +32,10 @@ import juuxel.adorn.menu.AdornMenus;
 import juuxel.adorn.recipe.AdornRecipeSerializers;
 import juuxel.adorn.recipe.AdornRecipeTypes;
 import juuxel.adorn.resources.AdornResources;
+import juuxel.adorn.util.Dyes;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 
 public final class Adorn {
     public static void init() {
@@ -65,6 +67,10 @@ public final class Adorn {
         BlockVariantSets.register();
         AdornBlocksFabric.afterRegister();
         ConfigManager.get().finish();
+
+        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+            Dyes.checkInDev();
+        }
     }
 
     @Environment(EnvType.CLIENT)

@@ -29,10 +29,12 @@ import juuxel.adorn.platform.forge.networking.AdornNetworking;
 import juuxel.adorn.platform.forge.registrar.ForgeRegistrar;
 import juuxel.adorn.recipe.AdornRecipeSerializers;
 import juuxel.adorn.recipe.AdornRecipeTypes;
+import juuxel.adorn.util.Dyes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForgeMod;
 
 @Mod(AdornCommon.NAMESPACE)
@@ -73,6 +75,10 @@ public final class Adorn {
 
         if (dist == Dist.CLIENT) {
             AdornClient.init(modBus);
+        }
+
+        if (!FMLEnvironment.production) {
+            Dyes.checkInDev();
         }
     }
 

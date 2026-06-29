@@ -2,6 +2,7 @@ package juuxel.adorn.data;
 
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.data.fabric.AdornFabricBlockTagGenerator;
+import juuxel.adorn.util.Dyes;
 import juuxel.adorn.util.Logging;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -14,6 +15,7 @@ public final class AdornDataGenerator implements DataGeneratorEntrypoint {
 
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
+        Dyes.checkInDev(); // run this check in CI when generating data
         var pack = fabricDataGenerator.createPack();
 
         if (Boolean.getBoolean(COMMON_MODE_PROPERTY)) {
