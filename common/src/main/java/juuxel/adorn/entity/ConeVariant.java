@@ -3,8 +3,8 @@ package juuxel.adorn.entity;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import juuxel.adorn.AdornCommon;
-import juuxel.adorn.item.group.AdornItemGroups;
 import juuxel.adorn.lib.registry.AdornRegistryKeys;
+import juuxel.adorn.util.Dyes;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
@@ -135,7 +135,7 @@ public record ConeVariant(
             @Nullable DyeColor colorB = COLORS_BY_VARIANT.get(b);
 
             if (colorA != null) {
-                return colorB != null ? AdornItemGroups.DYE_COLORS_IN_ORDER.indexOf(colorA) - AdornItemGroups.DYE_COLORS_IN_ORDER.indexOf(colorB) : -1;
+                return colorB != null ? Dyes.DYES_IN_CREATIVE_INVENTORY_ORDER.indexOf(colorA) - Dyes.DYES_IN_CREATIVE_INVENTORY_ORDER.indexOf(colorB) : -1;
             } else if (colorB != null) {
                 return 1;
             }
