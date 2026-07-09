@@ -57,6 +57,10 @@
     { "id": "adorn:blockus/white_oak_kitchen_counter", "required": false },
     { "id": "adorn:cinderscapes/scorched_kitchen_counter", "required": false },
     { "id": "adorn:cinderscapes/umbral_kitchen_counter", "required": false },
+    { "id": "adorn:ecologics/azalea_kitchen_counter", "required": false },
+    { "id": "adorn:ecologics/flowering_azalea_kitchen_counter", "required": false },
+    { "id": "adorn:ecologics/coconut_kitchen_counter", "required": false },
+    { "id": "adorn:ecologics/walnut_kitchen_counter", "required": false },
     { "id": "adorn:promenade/dark_amaranth_kitchen_counter", "required": false },
     { "id": "adorn:promenade/palm_kitchen_counter", "required": false },
     { "id": "adorn:promenade/sakura_kitchen_counter", "required": false },
@@ -72,10 +76,6 @@
     { "id": "adorn:terrestria/yucca_palm_kitchen_counter", "required": false },
     { "id": "adorn:traverse/fir_kitchen_counter", "required": false },
     { "id": "adorn:woods_and_mires/pine_kitchen_counter", "required": false },
-    { "id": "adorn:architects_palette/twisted_kitchen_counter", "required": false },
-    { "id": "adorn:ecologics/azalea_kitchen_counter", "required": false },
-    { "id": "adorn:ecologics/flowering_azalea_kitchen_counter", "required": false },
-    { "id": "adorn:ecologics/coconut_kitchen_counter", "required": false },
-    { "id": "adorn:ecologics/walnut_kitchen_counter", "required": false }
+    { "id": "adorn:architects_palette/twisted_kitchen_counter", "required": false }
   ]
 }

@@ -1,0 +1,9 @@
+<data_generators condition_type="fabric">
+    <wood id="ecologics:azalea"/>
+    <wood id="ecologics:flowering_azalea"/>
+    <wood id="ecologics:coconut"/>
+    <wood id="ecologics:walnut"/>
+    <stone id="ecologics:seashell_tile" bricks="true"/>
+    <stone id="ecologics:snow_brick" bricks="true"/>
+    <stone id="ecologics:ice_brick" bricks="true"/>
+</data_generators>

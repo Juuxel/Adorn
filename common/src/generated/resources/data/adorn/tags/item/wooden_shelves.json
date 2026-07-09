@@ -57,6 +57,10 @@
     { "id": "adorn:blockus/white_oak_shelf", "required": false },
     { "id": "adorn:cinderscapes/scorched_shelf", "required": false },
     { "id": "adorn:cinderscapes/umbral_shelf", "required": false },
+    { "id": "adorn:ecologics/azalea_shelf", "required": false },
+    { "id": "adorn:ecologics/flowering_azalea_shelf", "required": false },
+    { "id": "adorn:ecologics/coconut_shelf", "required": false },
+    { "id": "adorn:ecologics/walnut_shelf", "required": false },
     { "id": "adorn:promenade/dark_amaranth_shelf", "required": false },
     { "id": "adorn:promenade/palm_shelf", "required": false },
     { "id": "adorn:promenade/sakura_shelf", "required": false },
@@ -72,10 +76,6 @@
     { "id": "adorn:terrestria/yucca_palm_shelf", "required": false },
     { "id": "adorn:traverse/fir_shelf", "required": false },
     { "id": "adorn:woods_and_mires/pine_shelf", "required": false },
-    { "id": "adorn:architects_palette/twisted_shelf", "required": false },
-    { "id": "adorn:ecologics/azalea_shelf", "required": false },
-    { "id": "adorn:ecologics/flowering_azalea_shelf", "required": false },
-    { "id": "adorn:ecologics/coconut_shelf", "required": false },
-    { "id": "adorn:ecologics/walnut_shelf", "required": false }
+    { "id": "adorn:architects_palette/twisted_shelf", "required": false }
   ]
 }

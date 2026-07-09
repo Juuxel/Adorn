@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "ecologics:block/coconut_planks",
+    "log": "ecologics:block/coconut_log",
+    "end": "ecologics:block/coconut_log_top"
+  }
+}

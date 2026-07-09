@@ -17,6 +17,7 @@ public final class Compat {
         ifModLoaded("techreborn", () -> BlockVariantSets.add(new TechRebornCompat()));
         ifModLoaded("blockus", () -> BlockVariantSets.add(new BlockusCompat()));
         ifModLoaded("biomesoplenty", () -> BlockVariantSets.add(new BiomesOPlentyCompat()));
+        ifModLoaded("ecologics", () -> BlockVariantSets.add(new EcologicsCompat()));
     }
 
     public static boolean isCompatEnabled(String mod) {

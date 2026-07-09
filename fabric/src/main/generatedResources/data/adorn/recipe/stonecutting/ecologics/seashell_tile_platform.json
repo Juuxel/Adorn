@@ -1,0 +1,15 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "ecologics:seashell_tiles"
+  },
+  "result": {
+    "id": "adorn:ecologics/seashell_tile_platform",
+    "count": 1
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["ecologics"]
+  }]
+
+}
