@@ -1,0 +1,17 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "ecologics:ice_bricks"
+  },
+  "result": {
+    "id": "adorn:ecologics/ice_brick_step",
+    "count": 2
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ecologics"
+    }
+  ]
+
+}

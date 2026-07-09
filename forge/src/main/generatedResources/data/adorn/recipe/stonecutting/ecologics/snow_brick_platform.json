@@ -1,0 +1,17 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "ecologics:snow_bricks"
+  },
+  "result": {
+    "id": "adorn:ecologics/snow_brick_platform",
+    "count": 1
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ecologics"
+    }
+  ]
+
+}

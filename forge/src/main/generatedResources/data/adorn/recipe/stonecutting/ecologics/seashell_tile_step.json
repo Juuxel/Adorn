@@ -1,0 +1,17 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "ecologics:seashell_tiles"
+  },
+  "result": {
+    "id": "adorn:ecologics/seashell_tile_step",
+    "count": 2
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ecologics"
+    }
+  ]
+
+}

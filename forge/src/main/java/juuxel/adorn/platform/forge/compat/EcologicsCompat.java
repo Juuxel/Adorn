@@ -21,4 +21,14 @@ public final class EcologicsCompat extends CompatBlockVariantSet {
             "walnut"
         );
     }
+
+    @Override
+    public List<BlockVariant> getStoneVariants() {
+        return createVariants(
+            BlockVariant.Stone::new,
+            "ice_brick",
+            "seashell_tile",
+            "snow_brick"
+        );
+    }
 }
