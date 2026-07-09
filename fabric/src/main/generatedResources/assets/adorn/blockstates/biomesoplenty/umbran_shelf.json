@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "adorn:block/biomesoplenty/umbran_shelf"
+    },
+    "facing=south": {
+      "model": "adorn:block/biomesoplenty/umbran_shelf",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "adorn:block/biomesoplenty/umbran_shelf",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "adorn:block/biomesoplenty/umbran_shelf",
+      "y": 180
+    }
+  }
+}

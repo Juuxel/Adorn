@@ -1,0 +1,26 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:table",
+  "pattern": [
+    "SSS",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "S": {
+      "item": "biomesoplenty:empyreal_slab"
+    },
+    "#": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/empyreal_table",
+    "count": 3
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["biomesoplenty"]
+  }]
+
+}
