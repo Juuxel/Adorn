@@ -1,0 +1,15 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "biomeswevegone:florus_planks"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/florus_platform",
+    "count": 1
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["biomeswevegone"]
+  }]
+
+}

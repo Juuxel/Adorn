@@ -1,0 +1,17 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "biomeswevegone:mossy_stone"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/mossy_stone_post",
+    "count": 2
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomeswevegone"
+    }
+  ]
+
+}

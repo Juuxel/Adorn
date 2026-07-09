@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "biomeswevegone:block/skyris/planks",
+    "log": "biomeswevegone:block/skyris/log",
+    "end": "biomeswevegone:block/skyris/log_top"
+  }
+}

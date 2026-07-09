@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/platform",
+  "textures": {
+    "texture": "biomeswevegone:block/chiseled_red_rock_bricks"
+  }
+}

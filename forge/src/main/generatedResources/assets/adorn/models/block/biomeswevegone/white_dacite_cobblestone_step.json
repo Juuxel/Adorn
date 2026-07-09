@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/step",
+  "textures": {
+    "texture": "biomeswevegone:block/white_dacite_cobblestone"
+  }
+}

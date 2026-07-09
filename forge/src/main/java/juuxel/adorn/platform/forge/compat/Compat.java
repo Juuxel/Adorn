@@ -10,7 +10,7 @@ public final class Compat {
     public static void init(IEventBus modBus) {
         ifModLoaded("biomemakeover", () -> BlockVariantSets.add(new BiomeMakeoverCompat()));
         ifModLoaded("biomesoplenty", () -> BlockVariantSets.add(new BiomesOPlentyCompat()));
-        ifModLoaded("byg", () -> BlockVariantSets.add(new BygCompat()));
+        ifModLoaded("biomeswevegone", () -> BlockVariantSets.add(new BwgCompat()));
         ifModLoaded("ecologics", () -> BlockVariantSets.add(new EcologicsCompat()));
         ifModLoaded("architects_palette", () -> BlockVariantSets.add(new ArchitectsPaletteCompat()));
 

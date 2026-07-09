@@ -1,0 +1,17 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "biomeswevegone:smooth_black_sandstone"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/smooth_black_sandstone_post",
+    "count": 2
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomeswevegone"
+    }
+  ]
+
+}

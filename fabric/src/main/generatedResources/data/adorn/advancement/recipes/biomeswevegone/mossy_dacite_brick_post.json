@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:biomeswevegone/mossy_dacite_brick_post"
+    ]
+  },
+  "criteria": {
+    "has_mossy_dacite_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "biomeswevegone:mossy_dacite_bricks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:biomeswevegone/mossy_dacite_brick_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mossy_dacite_bricks",
+      "has_the_recipe"
+    ]
+  ],
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["biomeswevegone"]
+  }]
+
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/templates/bench_leg",
+  "textures": {
+    "log": "biomeswevegone:block/blue_enchanted/log",
+    "end": "biomeswevegone:block/blue_enchanted/log_top"
+  }
+}

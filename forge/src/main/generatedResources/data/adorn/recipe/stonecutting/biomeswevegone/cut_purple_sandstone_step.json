@@ -1,0 +1,17 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "biomeswevegone:cut_purple_sandstone"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/cut_purple_sandstone_step",
+    "count": 2
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomeswevegone"
+    }
+  ]
+
+}

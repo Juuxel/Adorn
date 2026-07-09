@@ -1,0 +1,24 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:kitchen_cupboard",
+  "ingredients": [
+    {
+      "tag": "c:chests/wooden"
+    },
+    {
+      "item": "adorn:biomeswevegone/palm_kitchen_counter"
+    },
+    {
+      "item": "adorn:biomeswevegone/palm_kitchen_counter"
+    }
+  ],
+  "result": {
+    "id": "adorn:biomeswevegone/palm_kitchen_cupboard",
+    "count": 2
+  },
+  "fabric:load_conditions": [{
+    "condition": "fabric:all_mods_loaded",
+    "values": ["biomeswevegone"]
+  }]
+
+}

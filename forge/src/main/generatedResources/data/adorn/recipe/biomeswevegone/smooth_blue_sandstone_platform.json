@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "biomeswevegone:smooth_blue_sandstone_slab"
+    },
+    "P": {
+      "item": "adorn:biomeswevegone/smooth_blue_sandstone_post"
+    }
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/smooth_blue_sandstone_platform",
+    "count": 2
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomeswevegone"
+    }
+  ]
+
+}

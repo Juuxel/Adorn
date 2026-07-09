@@ -38,6 +38,7 @@ tasks {
         configs.addAll(adorn.dataGenerator.settings.named("adorn").map { it.configs })
         mod("architects_palette", "architects-palette")
         mod("biomesoplenty", "biomes-o-plenty")
+        mod("biomeswevegone", "oh-the-biomes-weve-gone")
         mod("ecologics")
     }
 

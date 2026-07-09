@@ -1,0 +1,23 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:kitchen_sink",
+  "ingredients": [
+    {
+      "item": "adorn:biomeswevegone/cika_kitchen_counter"
+    },
+    {
+      "tag": "c:buckets/empty"
+    }
+  ],
+  "result": {
+    "id": "adorn:biomeswevegone/cika_kitchen_sink",
+    "count": 1
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomeswevegone"
+    }
+  ]
+
+}

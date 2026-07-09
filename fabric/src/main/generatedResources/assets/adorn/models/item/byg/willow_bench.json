@@ -1,8 +1,0 @@
-{
-  "parent": "adorn:item/templates/bench",
-  "textures": {
-    "planks": "byg:block/willow/planks",
-    "log": "byg:block/willow/log",
-    "end": "byg:block/willow/log_top"
-  }
-}

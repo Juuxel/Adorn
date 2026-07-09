@@ -1,0 +1,24 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "biomeswevegone:rainbow_eucalyptus_slab"
+    }
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/rainbow_eucalyptus_bench",
+    "count": 2
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomeswevegone"
+    }
+  ]
+
+}

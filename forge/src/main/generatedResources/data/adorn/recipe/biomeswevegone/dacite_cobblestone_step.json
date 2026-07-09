@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:step",
+  "pattern": [
+    "S",
+    "#"
+  ],
+  "key": {
+    "S": {
+      "item": "biomeswevegone:dacite_cobblestone_slab"
+    },
+    "#": {
+      "tag": "c:rods/stone"
+    }
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/dacite_cobblestone_step",
+    "count": 1
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomeswevegone"
+    }
+  ]
+
+}

@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "biomeswevegone:red_rock_tile_slab"
+    },
+    "P": {
+      "item": "adorn:biomeswevegone/red_rock_tile_post"
+    }
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/red_rock_tile_platform",
+    "count": 2
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomeswevegone"
+    }
+  ]
+
+}

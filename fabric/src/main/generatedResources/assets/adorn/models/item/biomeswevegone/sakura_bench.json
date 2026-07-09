@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "biomeswevegone:block/sakura/planks",
+    "log": "biomeswevegone:block/sakura/log",
+    "end": "biomeswevegone:block/sakura/log_top"
+  }
+}

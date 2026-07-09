@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/post",
+  "textures": {
+    "texture": "biomeswevegone:block/purple_sandstone_top"
+  }
+}

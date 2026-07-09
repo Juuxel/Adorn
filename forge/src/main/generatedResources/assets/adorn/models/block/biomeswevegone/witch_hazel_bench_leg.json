@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/templates/bench_leg",
+  "textures": {
+    "log": "biomeswevegone:block/witch_hazel/log",
+    "end": "biomeswevegone:block/witch_hazel/log_top"
+  }
+}

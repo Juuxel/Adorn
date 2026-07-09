@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:item/templates/table",
+  "textures": {
+    "planks": "biomeswevegone:block/zelkova/planks",
+    "log": "biomeswevegone:block/zelkova/log"
+  }
+}

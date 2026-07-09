@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:kitchen_counter",
+  "pattern": [
+    "SS",
+    "PP"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:polished_andesite_slab"
+    },
+    "P": {
+      "item": "biomeswevegone:palm_planks"
+    }
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/palm_kitchen_counter",
+    "count": 3
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomeswevegone"
+    }
+  ]
+
+}

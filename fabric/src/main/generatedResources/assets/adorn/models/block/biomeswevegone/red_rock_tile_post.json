@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/post",
+  "textures": {
+    "texture": "biomeswevegone:block/red_rock_tiles"
+  }
+}

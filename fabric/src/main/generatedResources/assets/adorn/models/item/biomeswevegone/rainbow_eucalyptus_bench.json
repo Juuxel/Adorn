@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:item/templates/bench",
+  "textures": {
+    "planks": "biomeswevegone:block/rainbow_eucalyptus/planks",
+    "log": "biomeswevegone:block/rainbow_eucalyptus/log",
+    "end": "biomeswevegone:block/rainbow_eucalyptus/log_top"
+  }
+}
