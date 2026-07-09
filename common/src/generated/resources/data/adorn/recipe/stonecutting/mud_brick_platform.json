@@ -1,0 +1,10 @@
+{
+  "type": "stonecutting",
+  "ingredient": {
+    "item": "minecraft:mud_bricks"
+  },
+  "result": {
+    "id": "adorn:mud_brick_platform",
+    "count": 1
+  }
+}
