@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:smooth_black_sandstone",
+  "result": {
+    "id": "adorn:biomeswevegone/smooth_black_sandstone_post",
+    "count": 2
+  }
+}

@@ -32,15 +32,6 @@
         "condition": {
           "condition": "fabric:all_mods_loaded",
           "values": [
-            "byg"
-          ]
-        },
-        "directory": "adorn_integration_byg"
-      },
-      {
-        "condition": {
-          "condition": "fabric:all_mods_loaded",
-          "values": [
             "cinderscapes"
           ]
         },
@@ -137,21 +128,6 @@
           {
             "type": "neoforge:mod_loaded",
             "modid": "biomesoplenty"
-          }
-        ]
-      },
-      {
-        "directory": "adorn_integration_byg",
-        "formats": [
-          0,
-          2147483647
-        ],
-        "max_format": 2147483647,
-        "min_format": 0,
-        "neoforge:conditions": [
-          {
-            "type": "neoforge:mod_loaded",
-            "modid": "byg"
           }
         ]
       },

@@ -6,7 +6,7 @@ import net.fabricmc.loader.api.FabricLoader;
 
 public final class Compat {
     public static void init() {
-        ifModLoaded("byg", () -> BlockVariantSets.add(new BygCompat()));
+        ifModLoaded("biomeswevegone", () -> BlockVariantSets.add(new BwgCompat()));
         ifModLoaded("terrestria", () -> BlockVariantSets.add(new TerrestriaCompat()));
         ifModLoaded("towelette", () -> ToweletteCompat.init());
         ifModLoaded("traverse", () -> BlockVariantSets.add(new TraverseCompat()));

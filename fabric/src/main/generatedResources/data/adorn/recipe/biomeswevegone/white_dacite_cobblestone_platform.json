@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomeswevegone:white_dacite_cobblestone_slab",
+    "P": "adorn:biomeswevegone/white_dacite_cobblestone_post"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/white_dacite_cobblestone_platform",
+    "count": 2
+  }
+}

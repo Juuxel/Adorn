@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:dacite_tiles",
+  "result": {
+    "id": "adorn:biomeswevegone/dacite_tile_platform",
+    "count": 1
+  }
+}

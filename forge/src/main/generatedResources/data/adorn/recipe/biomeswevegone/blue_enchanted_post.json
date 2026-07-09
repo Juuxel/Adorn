@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "biomeswevegone:blue_enchanted_planks",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/blue_enchanted_post",
+    "count": 4
+  }
+}

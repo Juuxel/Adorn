@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:pale_mud_bricks",
+  "result": {
+    "id": "adorn:biomeswevegone/pale_mud_bricks_step",
+    "count": 2
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": "byg:green_enchanted_planks",
-  "result": {
-    "id": "adorn:byg/green_enchanted_step",
-    "count": 2
-  }
-}

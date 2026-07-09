@@ -1,0 +1,130 @@
+<data_generators class_name="juuxel.adorn.platform.forge.compat.BwgCompat">
+    <replace key="wood_texture_separator" with="/"/>
+    <wood id="biomeswevegone:aspen"/>
+    <wood id="biomeswevegone:baobab"/>
+    <wood id="biomeswevegone:blue_enchanted"/>
+    <wood id="biomeswevegone:cika"/>
+    <wood id="biomeswevegone:cypress"/>
+    <wood id="biomeswevegone:ebony"/>
+    <wood id="biomeswevegone:fir"/>
+    <wood id="biomeswevegone:florus" fungus="true"/>
+    <wood id="biomeswevegone:green_enchanted"/>
+    <wood id="biomeswevegone:holly"/>
+    <wood id="biomeswevegone:ironwood"/>
+    <wood id="biomeswevegone:jacaranda"/>
+    <wood id="biomeswevegone:mahogany"/>
+    <wood id="biomeswevegone:maple"/>
+    <wood id="biomeswevegone:palm"/>
+    <wood id="biomeswevegone:pine"/>
+    <wood id="biomeswevegone:rainbow_eucalyptus"/>
+    <wood id="biomeswevegone:redwood"/>
+    <wood id="biomeswevegone:sakura"/>
+    <wood id="biomeswevegone:skyris"/>
+    <wood id="biomeswevegone:spirit"/>
+    <wood id="biomeswevegone:white_mangrove"/>
+    <wood id="biomeswevegone:willow"/>
+    <wood id="biomeswevegone:witch_hazel"/>
+    <wood id="biomeswevegone:zelkova"/>
+    <stone id="biomeswevegone:black_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomeswevegone:block/black_sandstone"/>
+        <replace key="top-texture" with="biomeswevegone:block/black_sandstone_top"/>
+        <replace key="bottom-texture" with="biomeswevegone:block/black_sandstone_bottom"/>
+    </stone>
+    <stone id="biomeswevegone:blue_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomeswevegone:block/blue_sandstone"/>
+        <replace key="top-texture" with="biomeswevegone:block/blue_sandstone_top"/>
+        <replace key="bottom-texture" with="biomeswevegone:block/blue_sandstone_bottom"/>
+    </stone>
+    <stone id="biomeswevegone:chiseled_dacite_brick" bricks="true"/>
+    <stone id="biomeswevegone:chiseled_red_rock_brick" bricks="true"/>
+    <stone id="biomeswevegone:chiseled_white_dacite_brick" bricks="true"/>
+    <stone id="biomeswevegone:cracked_dacite_brick" bricks="true"/>
+    <stone id="biomeswevegone:cracked_red_rock_brick" bricks="true"/>
+    <stone id="biomeswevegone:cracked_white_dacite_brick" bricks="true"/>
+    <stone id="biomeswevegone:cut_black_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomeswevegone:block/cut_black_sandstone"/>
+        <replace key="top-texture" with="biomeswevegone:block/black_sandstone_top"/>
+        <replace key="bottom-texture" with="biomeswevegone:block/black_sandstone_bottom"/>
+    </stone>
+    <stone id="biomeswevegone:cut_blue_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomeswevegone:block/cut_blue_sandstone"/>
+        <replace key="top-texture" with="biomeswevegone:block/blue_sandstone_top"/>
+        <replace key="bottom-texture" with="biomeswevegone:block/blue_sandstone_bottom"/>
+    </stone>
+    <stone id="biomeswevegone:cut_pink_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomeswevegone:block/cut_pink_sandstone"/>
+        <replace key="top-texture" with="biomeswevegone:block/pink_sandstone_top"/>
+        <replace key="bottom-texture" with="biomeswevegone:block/pink_sandstone_bottom"/>
+    </stone>
+    <stone id="biomeswevegone:cut_purple_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomeswevegone:block/cut_purple_sandstone"/>
+        <replace key="top-texture" with="biomeswevegone:block/purple_sandstone_top"/>
+        <replace key="bottom-texture" with="biomeswevegone:block/purple_sandstone_bottom"/>
+    </stone>
+    <stone id="biomeswevegone:cut_white_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomeswevegone:block/cut_white_sandstone"/>
+        <replace key="top-texture" with="biomeswevegone:block/white_sandstone_top"/>
+        <replace key="bottom-texture" with="biomeswevegone:block/white_sandstone_bottom"/>
+    </stone>
+    <stone id="biomeswevegone:cut_windswept_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomeswevegone:block/cut_windswept_sandstone"/>
+        <replace key="top-texture" with="biomeswevegone:block/windswept_sandstone_top"/>
+        <replace key="bottom-texture" with="biomeswevegone:block/windswept_sandstone_bottom"/>
+    </stone>
+    <stone id="biomeswevegone:dacite_brick" bricks="true"/>
+    <stone id="biomeswevegone:dacite_cobblestone"/>
+    <stone id="biomeswevegone:dacite_tile" bricks="true"/>
+    <stone id="biomeswevegone:dacite"/>
+    <stone id="biomeswevegone:mossy_dacite_brick" bricks="true"/>
+    <stone id="biomeswevegone:mossy_red_rock_brick" bricks="true"/>
+    <stone id="biomeswevegone:mossy_stone"/>
+    <stone id="biomeswevegone:mossy_white_dacite_brick" bricks="true"/>
+    <stone id="biomeswevegone:pale_mud_bricks"/>
+    <stone id="biomeswevegone:pink_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomeswevegone:block/pink_sandstone"/>
+        <replace key="top-texture" with="biomeswevegone:block/pink_sandstone_top"/>
+        <replace key="bottom-texture" with="biomeswevegone:block/pink_sandstone_bottom"/>
+    </stone>
+    <stone id="biomeswevegone:polished_red_rock"/>
+    <stone id="biomeswevegone:purple_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomeswevegone:block/purple_sandstone"/>
+        <replace key="top-texture" with="biomeswevegone:block/purple_sandstone_top"/>
+        <replace key="bottom-texture" with="biomeswevegone:block/purple_sandstone_bottom"/>
+    </stone>
+    <stone id="biomeswevegone:red_rock_brick" bricks="true"/>
+    <stone id="biomeswevegone:red_rock_tile" bricks="true"/>
+    <stone id="biomeswevegone:red_rock"/>
+    <stone id="biomeswevegone:rocky_stone"/>
+    <stone id="biomeswevegone:smooth_black_sandstone">
+        <replace key="main-texture" with="biomeswevegone:block/black_sandstone_top"/>
+    </stone>
+    <stone id="biomeswevegone:smooth_blue_sandstone">
+        <replace key="main-texture" with="biomeswevegone:block/blue_sandstone_top"/>
+    </stone>
+    <stone id="biomeswevegone:smooth_pink_sandstone">
+        <replace key="main-texture" with="biomeswevegone:block/pink_sandstone_top"/>
+    </stone>
+    <stone id="biomeswevegone:smooth_purple_sandstone">
+        <replace key="main-texture" with="biomeswevegone:block/purple_sandstone_top"/>
+    </stone>
+    <stone id="biomeswevegone:smooth_white_sandstone">
+        <replace key="main-texture" with="biomeswevegone:block/white_sandstone_top"/>
+    </stone>
+    <stone id="biomeswevegone:smooth_windswept_sandstone">
+        <replace key="main-texture" with="biomeswevegone:block/windswept_sandstone_top"/>
+    </stone>
+    <stone id="biomeswevegone:white_dacite_brick" bricks="true"/>
+    <stone id="biomeswevegone:white_dacite_cobblestone"/>
+    <stone id="biomeswevegone:white_dacite_tile" bricks="true"/>
+    <stone id="biomeswevegone:white_dacite"/>
+    <stone id="biomeswevegone:white_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomeswevegone:block/white_sandstone"/>
+        <replace key="top-texture" with="biomeswevegone:block/white_sandstone_top"/>
+        <replace key="bottom-texture" with="biomeswevegone:block/white_sandstone_bottom"/>
+    </stone>
+    <stone id="biomeswevegone:windswept_sandstone" sided_texture="true">
+        <replace key="side-texture" with="biomeswevegone:block/windswept_sandstone"/>
+        <replace key="top-texture" with="biomeswevegone:block/windswept_sandstone_top"/>
+        <replace key="bottom-texture" with="biomeswevegone:block/windswept_sandstone_bottom"/>
+    </stone>
+</data_generators>

@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": "byg:holly_planks",
-  "result": {
-    "id": "adorn:byg/holly_platform",
-    "count": 1
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": "byg:jacaranda_planks",
-  "result": {
-    "id": "adorn:byg/jacaranda_platform",
-    "count": 1
-  }
-}

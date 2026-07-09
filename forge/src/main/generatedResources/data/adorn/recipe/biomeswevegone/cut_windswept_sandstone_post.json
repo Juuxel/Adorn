@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "biomeswevegone:cut_windswept_sandstone",
+    "/": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/cut_windswept_sandstone_post",
+    "count": 4
+  }
+}

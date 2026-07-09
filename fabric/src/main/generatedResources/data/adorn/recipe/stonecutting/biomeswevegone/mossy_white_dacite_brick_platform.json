@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:mossy_white_dacite_bricks",
+  "result": {
+    "id": "adorn:biomeswevegone/mossy_white_dacite_brick_platform",
+    "count": 1
+  }
+}

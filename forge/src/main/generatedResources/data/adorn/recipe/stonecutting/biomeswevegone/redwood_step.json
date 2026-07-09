@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:redwood_planks",
+  "result": {
+    "id": "adorn:biomeswevegone/redwood_step",
+    "count": 2
+  }
+}

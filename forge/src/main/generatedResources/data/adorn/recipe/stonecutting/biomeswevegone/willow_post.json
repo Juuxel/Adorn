@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:willow_planks",
+  "result": {
+    "id": "adorn:biomeswevegone/willow_post",
+    "count": 2
+  }
+}

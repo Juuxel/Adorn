@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "biomeswevegone:white_dacite_cobblestone",
+    "/": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/white_dacite_cobblestone_post",
+    "count": 4
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomeswevegone:cut_black_sandstone_slab",
+    "P": "adorn:biomeswevegone/cut_black_sandstone_post"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/cut_black_sandstone_platform",
+    "count": 2
+  }
+}

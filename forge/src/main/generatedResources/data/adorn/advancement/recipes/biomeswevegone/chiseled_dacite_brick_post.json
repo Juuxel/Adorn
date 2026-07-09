@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:biomeswevegone/chiseled_dacite_brick_post"
+    ]
+  },
+  "criteria": {
+    "has_chiseled_dacite_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "biomeswevegone:chiseled_dacite_bricks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:biomeswevegone/chiseled_dacite_brick_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_chiseled_dacite_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

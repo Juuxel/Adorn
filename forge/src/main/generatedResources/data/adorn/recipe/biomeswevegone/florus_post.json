@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "biomeswevegone:florus_planks",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/florus_post",
+    "count": 4
+  }
+}

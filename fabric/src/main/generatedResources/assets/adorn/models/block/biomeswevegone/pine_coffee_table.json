@@ -1,0 +1,8 @@
+{
+  "parent": "adorn:block/templates/coffee_table",
+  "textures": {
+    "planks": "biomeswevegone:block/pine/planks",
+    "leg": "biomeswevegone:block/pine/log",
+    "rim": "biomeswevegone:block/pine/log"
+  }
+}

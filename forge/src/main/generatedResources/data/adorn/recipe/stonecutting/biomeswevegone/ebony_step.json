@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:ebony_planks",
+  "result": {
+    "id": "adorn:biomeswevegone/ebony_step",
+    "count": 2
+  }
+}

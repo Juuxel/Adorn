@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/step",
+  "textures": {
+    "texture": "biomeswevegone:block/blue_enchanted/planks"
+  }
+}

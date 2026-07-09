@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:holly_planks",
+  "result": {
+    "id": "adorn:biomeswevegone/holly_platform",
+    "count": 1
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": "byg:aspen_planks",
-  "result": {
-    "id": "adorn:byg/aspen_step",
-    "count": 2
-  }
-}

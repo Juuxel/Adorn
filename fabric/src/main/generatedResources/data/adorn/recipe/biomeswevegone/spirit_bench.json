@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "biomeswevegone:spirit_slab"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/spirit_bench",
+    "count": 2
+  }
+}

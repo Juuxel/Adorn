@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "biomeswevegone:smooth_black_sandstone",
+    "/": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/smooth_black_sandstone_post",
+    "count": 4
+  }
+}

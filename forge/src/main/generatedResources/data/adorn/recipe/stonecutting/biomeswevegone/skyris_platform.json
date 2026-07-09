@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:skyris_planks",
+  "result": {
+    "id": "adorn:biomeswevegone/skyris_platform",
+    "count": 1
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:shelf",
+  "pattern": [
+    "---",
+    "/ /"
+  ],
+  "key": {
+    "-": "biomeswevegone:green_enchanted_slab",
+    "/": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/green_enchanted_shelf",
+    "count": 3
+  }
+}

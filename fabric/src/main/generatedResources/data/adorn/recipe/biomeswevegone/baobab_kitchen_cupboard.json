@@ -1,0 +1,13 @@
+{
+  "type": "crafting_shapeless",
+  "group": "adorn:kitchen_cupboard",
+  "ingredients": [
+    "#c:chests/wooden",
+    "adorn:biomeswevegone/baobab_kitchen_counter",
+    "adorn:biomeswevegone/baobab_kitchen_counter"
+  ],
+  "result": {
+    "id": "adorn:biomeswevegone/baobab_kitchen_cupboard",
+    "count": 2
+  }
+}

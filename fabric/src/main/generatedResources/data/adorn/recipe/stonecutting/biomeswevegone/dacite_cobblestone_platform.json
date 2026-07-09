@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:dacite_cobblestone",
+  "result": {
+    "id": "adorn:biomeswevegone/dacite_cobblestone_platform",
+    "count": 1
+  }
+}

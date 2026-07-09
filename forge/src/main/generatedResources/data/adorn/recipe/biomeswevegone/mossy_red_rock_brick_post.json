@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "biomeswevegone:mossy_red_rock_bricks",
+    "/": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/mossy_red_rock_brick_post",
+    "count": 4
+  }
+}

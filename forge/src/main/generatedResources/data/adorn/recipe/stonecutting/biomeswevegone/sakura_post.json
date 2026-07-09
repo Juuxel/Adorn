@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:sakura_planks",
+  "result": {
+    "id": "adorn:biomeswevegone/sakura_post",
+    "count": 2
+  }
+}

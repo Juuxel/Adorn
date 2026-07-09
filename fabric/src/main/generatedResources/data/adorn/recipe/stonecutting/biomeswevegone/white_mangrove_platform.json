@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:white_mangrove_planks",
+  "result": {
+    "id": "adorn:biomeswevegone/white_mangrove_platform",
+    "count": 1
+  }
+}

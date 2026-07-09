@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomeswevegone:cika_slab",
+    "P": "adorn:biomeswevegone/cika_post"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/cika_platform",
+    "count": 2
+  }
+}

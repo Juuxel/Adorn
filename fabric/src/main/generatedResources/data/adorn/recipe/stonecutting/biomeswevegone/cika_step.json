@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:cika_planks",
+  "result": {
+    "id": "adorn:biomeswevegone/cika_step",
+    "count": 2
+  }
+}

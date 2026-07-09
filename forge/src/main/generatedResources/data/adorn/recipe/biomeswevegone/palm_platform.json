@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomeswevegone:palm_slab",
+    "P": "adorn:biomeswevegone/palm_post"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/palm_platform",
+    "count": 2
+  }
+}

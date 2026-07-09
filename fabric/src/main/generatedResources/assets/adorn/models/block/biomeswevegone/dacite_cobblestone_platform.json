@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/platform",
+  "textures": {
+    "texture": "biomeswevegone:block/dacite_cobblestone"
+  }
+}

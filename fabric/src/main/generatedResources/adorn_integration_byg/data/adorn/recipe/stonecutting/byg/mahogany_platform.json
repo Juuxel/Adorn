@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": "byg:mahogany_planks",
-  "result": {
-    "id": "adorn:byg/mahogany_platform",
-    "count": 1
-  }
-}

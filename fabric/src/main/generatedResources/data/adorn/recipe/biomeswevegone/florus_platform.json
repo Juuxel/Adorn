@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomeswevegone:florus_slab",
+    "P": "adorn:biomeswevegone/florus_post"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/florus_platform",
+    "count": 2
+  }
+}

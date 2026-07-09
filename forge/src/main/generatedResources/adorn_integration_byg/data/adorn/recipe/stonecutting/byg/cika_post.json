@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": "byg:cika_planks",
-  "result": {
-    "id": "adorn:byg/cika_post",
-    "count": 2
-  }
-}

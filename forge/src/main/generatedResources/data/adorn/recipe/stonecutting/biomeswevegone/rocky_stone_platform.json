@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:rocky_stone",
+  "result": {
+    "id": "adorn:biomeswevegone/rocky_stone_platform",
+    "count": 1
+  }
+}

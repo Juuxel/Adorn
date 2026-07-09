@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomeswevegone:smooth_windswept_sandstone_slab",
+    "P": "adorn:biomeswevegone/smooth_windswept_sandstone_post"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/smooth_windswept_sandstone_platform",
+    "count": 2
+  }
+}

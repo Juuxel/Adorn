@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:mossy_red_rock_bricks",
+  "result": {
+    "id": "adorn:biomeswevegone/mossy_red_rock_brick_platform",
+    "count": 1
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/post",
+  "textures": {
+    "texture": "biomeswevegone:block/chiseled_dacite_bricks"
+  }
+}

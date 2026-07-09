@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:bench",
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": "biomeswevegone:white_mangrove_slab"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/white_mangrove_bench",
+    "count": 2
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": "byg:rainbow_eucalyptus_planks",
-  "result": {
-    "id": "adorn:byg/rainbow_eucalyptus_platform",
-    "count": 1
-  }
-}

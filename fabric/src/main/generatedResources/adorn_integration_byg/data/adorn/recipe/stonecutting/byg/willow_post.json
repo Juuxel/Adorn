@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": "byg:willow_planks",
-  "result": {
-    "id": "adorn:byg/willow_post",
-    "count": 2
-  }
-}

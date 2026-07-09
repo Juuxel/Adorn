@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomeswevegone:white_mangrove_slab",
+    "P": "adorn:biomeswevegone/white_mangrove_post"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/white_mangrove_platform",
+    "count": 2
+  }
+}

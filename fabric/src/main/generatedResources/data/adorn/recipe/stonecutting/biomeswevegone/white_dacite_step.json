@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:white_dacite",
+  "result": {
+    "id": "adorn:biomeswevegone/white_dacite_step",
+    "count": 2
+  }
+}

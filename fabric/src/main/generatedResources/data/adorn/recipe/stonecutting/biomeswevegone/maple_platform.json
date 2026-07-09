@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:maple_planks",
+  "result": {
+    "id": "adorn:biomeswevegone/maple_platform",
+    "count": 1
+  }
+}

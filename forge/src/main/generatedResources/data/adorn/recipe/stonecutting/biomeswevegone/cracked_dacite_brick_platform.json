@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:cracked_dacite_bricks",
+  "result": {
+    "id": "adorn:biomeswevegone/cracked_dacite_brick_platform",
+    "count": 1
+  }
+}

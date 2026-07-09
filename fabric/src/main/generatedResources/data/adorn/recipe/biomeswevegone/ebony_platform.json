@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomeswevegone:ebony_slab",
+    "P": "adorn:biomeswevegone/ebony_post"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/ebony_platform",
+    "count": 2
+  }
+}

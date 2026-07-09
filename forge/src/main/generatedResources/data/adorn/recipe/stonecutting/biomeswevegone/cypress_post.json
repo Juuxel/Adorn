@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:cypress_planks",
+  "result": {
+    "id": "adorn:biomeswevegone/cypress_post",
+    "count": 2
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": "byg:zelkova_planks",
-  "result": {
-    "id": "adorn:byg/zelkova_post",
-    "count": 2
-  }
-}

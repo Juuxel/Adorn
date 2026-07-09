@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomeswevegone:cypress_slab",
+    "P": "adorn:biomeswevegone/cypress_post"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/cypress_platform",
+    "count": 2
+  }
+}

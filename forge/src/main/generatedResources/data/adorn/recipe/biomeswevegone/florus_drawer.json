@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:drawer",
+  "pattern": [
+    "S",
+    "C",
+    "S"
+  ],
+  "key": {
+    "C": "#c:chests/wooden",
+    "S": "biomeswevegone:florus_slab"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/florus_drawer",
+    "count": 2
+  }
+}

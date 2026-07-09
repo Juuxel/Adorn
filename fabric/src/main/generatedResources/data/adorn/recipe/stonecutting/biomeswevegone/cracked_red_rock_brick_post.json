@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:cracked_red_rock_bricks",
+  "result": {
+    "id": "adorn:biomeswevegone/cracked_red_rock_brick_post",
+    "count": 2
+  }
+}

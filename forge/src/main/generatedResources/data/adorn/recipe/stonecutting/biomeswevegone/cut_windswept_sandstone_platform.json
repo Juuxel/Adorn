@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:cut_windswept_sandstone",
+  "result": {
+    "id": "adorn:biomeswevegone/cut_windswept_sandstone_platform",
+    "count": 1
+  }
+}

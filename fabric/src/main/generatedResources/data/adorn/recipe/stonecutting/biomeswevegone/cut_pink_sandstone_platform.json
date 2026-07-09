@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:cut_pink_sandstone",
+  "result": {
+    "id": "adorn:biomeswevegone/cut_pink_sandstone_platform",
+    "count": 1
+  }
+}

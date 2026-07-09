@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:blue_enchanted_planks",
+  "result": {
+    "id": "adorn:biomeswevegone/blue_enchanted_platform",
+    "count": 1
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:block/templates/shelf",
+  "textures": {
+    "texture": "biomeswevegone:block/witch_hazel/planks"
+  }
+}

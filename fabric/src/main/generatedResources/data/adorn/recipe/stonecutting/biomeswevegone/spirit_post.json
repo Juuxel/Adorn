@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:spirit_planks",
+  "result": {
+    "id": "adorn:biomeswevegone/spirit_post",
+    "count": 2
+  }
+}

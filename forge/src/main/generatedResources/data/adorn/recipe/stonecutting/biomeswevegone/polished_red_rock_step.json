@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:polished_red_rock",
+  "result": {
+    "id": "adorn:biomeswevegone/polished_red_rock_step",
+    "count": 2
+  }
+}

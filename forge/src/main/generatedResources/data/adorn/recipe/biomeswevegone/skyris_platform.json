@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomeswevegone:skyris_slab",
+    "P": "adorn:biomeswevegone/skyris_post"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/skyris_platform",
+    "count": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:step",
+  "pattern": [
+    "S",
+    "#"
+  ],
+  "key": {
+    "S": "biomeswevegone:rocky_stone_slab",
+    "#": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/rocky_stone_step",
+    "count": 1
+  }
+}

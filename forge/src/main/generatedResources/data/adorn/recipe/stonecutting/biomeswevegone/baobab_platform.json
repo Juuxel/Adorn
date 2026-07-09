@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:baobab_planks",
+  "result": {
+    "id": "adorn:biomeswevegone/baobab_platform",
+    "count": 1
+  }
+}

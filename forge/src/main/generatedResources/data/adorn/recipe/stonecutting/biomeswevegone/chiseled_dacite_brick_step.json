@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:chiseled_dacite_bricks",
+  "result": {
+    "id": "adorn:biomeswevegone/chiseled_dacite_brick_step",
+    "count": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomeswevegone:chiseled_dacite_brick_slab",
+    "P": "adorn:biomeswevegone/chiseled_dacite_brick_post"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/chiseled_dacite_brick_platform",
+    "count": 2
+  }
+}

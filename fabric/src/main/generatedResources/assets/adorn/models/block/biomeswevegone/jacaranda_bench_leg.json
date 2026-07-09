@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:block/templates/bench_leg",
+  "textures": {
+    "log": "biomeswevegone:block/jacaranda/log",
+    "end": "biomeswevegone:block/jacaranda/log_top"
+  }
+}

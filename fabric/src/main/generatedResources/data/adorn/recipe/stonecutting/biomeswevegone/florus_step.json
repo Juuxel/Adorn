@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:florus_planks",
+  "result": {
+    "id": "adorn:biomeswevegone/florus_step",
+    "count": 2
+  }
+}

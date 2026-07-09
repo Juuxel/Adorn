@@ -1,8 +1,0 @@
-{
-  "type": "stonecutting",
-  "ingredient": "byg:skyris_planks",
-  "result": {
-    "id": "adorn:byg/skyris_platform",
-    "count": 1
-  }
-}

@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:drawer",
+  "pattern": [
+    "S",
+    "C",
+    "S"
+  ],
+  "key": {
+    "C": "#c:chests/wooden",
+    "S": "biomeswevegone:white_mangrove_slab"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/white_mangrove_drawer",
+    "count": 2
+  }
+}

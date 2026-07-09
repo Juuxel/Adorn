@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "biomeswevegone:maple_slab",
+    "P": "adorn:biomeswevegone/maple_post"
+  },
+  "result": {
+    "id": "adorn:biomeswevegone/maple_platform",
+    "count": 2
+  }
+}

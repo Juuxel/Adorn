@@ -1,0 +1,6 @@
+{
+  "parent": "adorn:item/templates/chair",
+  "textures": {
+    "planks": "biomeswevegone:block/sakura/planks"
+  }
+}

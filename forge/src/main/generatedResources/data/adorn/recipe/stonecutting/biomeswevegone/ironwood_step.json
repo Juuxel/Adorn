@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "biomeswevegone:ironwood_planks",
+  "result": {
+    "id": "adorn:biomeswevegone/ironwood_step",
+    "count": 2
+  }
+}

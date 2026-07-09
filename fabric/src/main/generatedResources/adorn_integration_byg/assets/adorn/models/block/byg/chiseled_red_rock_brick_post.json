@@ -1,6 +1,0 @@
-{
-  "parent": "adorn:block/templates/post",
-  "textures": {
-    "texture": "byg:block/chiseled_red_rock_bricks"
-  }
-}
