@@ -101,6 +101,9 @@
     { "id": "adorn:terrestria/smooth_volcanic_rock_platform", "required": false },
     { "id": "adorn:architects_palette/myonite_platform", "required": false },
     { "id": "adorn:architects_palette/myonite_brick_platform", "required": false },
-    { "id": "adorn:architects_palette/mushy_myonite_brick_platform", "required": false }
+    { "id": "adorn:architects_palette/mushy_myonite_brick_platform", "required": false },
+    { "id": "adorn:ecologics/seashell_tile_platform", "required": false },
+    { "id": "adorn:ecologics/snow_brick_platform", "required": false },
+    { "id": "adorn:ecologics/ice_brick_platform", "required": false }
   ]
 }

@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "ecologics:seashell_tiles",
+  "result": {
+    "id": "adorn:ecologics/seashell_tile_post",
+    "count": 2
+  }
+}

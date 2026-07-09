@@ -101,6 +101,9 @@
     { "id": "adorn:terrestria/smooth_volcanic_rock_step", "required": false },
     { "id": "adorn:architects_palette/myonite_step", "required": false },
     { "id": "adorn:architects_palette/myonite_brick_step", "required": false },
-    { "id": "adorn:architects_palette/mushy_myonite_brick_step", "required": false }
+    { "id": "adorn:architects_palette/mushy_myonite_brick_step", "required": false },
+    { "id": "adorn:ecologics/seashell_tile_step", "required": false },
+    { "id": "adorn:ecologics/snow_brick_step", "required": false },
+    { "id": "adorn:ecologics/ice_brick_step", "required": false }
   ]
 }

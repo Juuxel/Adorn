@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "ecologics:ice_bricks",
+    "/": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:ecologics/ice_brick_post",
+    "count": 4
+  }
+}
