@@ -1,11 +1,14 @@
 <data_generators condition_type="forge">
     <wood id="biomesoplenty:dead"/>
+    <wood id="biomesoplenty:empyreal"/>
     <wood id="biomesoplenty:fir"/>
     <wood id="biomesoplenty:hellbark" non_flammable="true"/>
     <wood id="biomesoplenty:jacaranda"/>
     <wood id="biomesoplenty:magic"/>
     <wood id="biomesoplenty:mahogany"/>
+    <wood id="biomesoplenty:maple"/>
     <wood id="biomesoplenty:palm"/>
+    <wood id="biomesoplenty:pine"/>
     <wood id="biomesoplenty:redwood"/>
     <wood id="biomesoplenty:umbran"/>
     <wood id="biomesoplenty:willow"/>

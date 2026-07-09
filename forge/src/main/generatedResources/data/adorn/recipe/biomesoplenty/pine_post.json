@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "biomesoplenty:pine_planks"
+    },
+    "/": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/pine_post",
+    "count": 4
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
+}

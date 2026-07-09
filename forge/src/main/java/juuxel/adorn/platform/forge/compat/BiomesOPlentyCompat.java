@@ -16,12 +16,15 @@ public final class BiomesOPlentyCompat extends CompatBlockVariantSet {
         return createVariants(
             BlockVariant.Wood::new,
             "dead",
+            "empyreal",
             "fir",
             "hellbark",
             "jacaranda",
             "magic",
             "mahogany",
+            "maple",
             "palm",
+            "pine",
             "redwood",
             "umbran",
             "willow"

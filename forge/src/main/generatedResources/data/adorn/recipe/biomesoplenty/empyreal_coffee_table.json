@@ -1,0 +1,30 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:coffee_table",
+  "pattern": [
+    "S-S",
+    "# #"
+  ],
+  "key": {
+    "S": {
+      "item": "biomesoplenty:empyreal_slab"
+    },
+    "#": {
+      "tag": "c:rods/wooden"
+    },
+    "-": {
+      "tag": "c:glass_panes"
+    }
+  },
+  "result": {
+    "id": "adorn:biomesoplenty/empyreal_coffee_table",
+    "count": 2
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ]
+
+}

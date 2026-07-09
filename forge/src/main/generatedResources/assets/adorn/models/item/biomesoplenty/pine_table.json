@@ -1,0 +1,7 @@
+{
+  "parent": "adorn:item/templates/table",
+  "textures": {
+    "planks": "biomesoplenty:block/pine_planks",
+    "log": "biomesoplenty:block/pine_log"
+  }
+}
