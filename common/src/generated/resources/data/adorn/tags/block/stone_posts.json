@@ -93,6 +93,9 @@
     { "id": "adorn:biomeswevegone/white_dacite_post", "required": false },
     { "id": "adorn:biomeswevegone/white_sandstone_post", "required": false },
     { "id": "adorn:biomeswevegone/windswept_sandstone_post", "required": false },
+    { "id": "adorn:ecologics/seashell_tile_post", "required": false },
+    { "id": "adorn:ecologics/snow_brick_post", "required": false },
+    { "id": "adorn:ecologics/ice_brick_post", "required": false },
     { "id": "adorn:terrestria/volcanic_rock_post", "required": false },
     { "id": "adorn:terrestria/volcanic_rock_brick_post", "required": false },
     { "id": "adorn:terrestria/volcanic_rock_cobblestone_post", "required": false },
@@ -101,9 +104,6 @@
     { "id": "adorn:terrestria/smooth_volcanic_rock_post", "required": false },
     { "id": "adorn:architects_palette/myonite_post", "required": false },
     { "id": "adorn:architects_palette/myonite_brick_post", "required": false },
-    { "id": "adorn:architects_palette/mushy_myonite_brick_post", "required": false },
-    { "id": "adorn:ecologics/seashell_tile_post", "required": false },
-    { "id": "adorn:ecologics/snow_brick_post", "required": false },
-    { "id": "adorn:ecologics/ice_brick_post", "required": false }
+    { "id": "adorn:architects_palette/mushy_myonite_brick_post", "required": false }
   ]
 }

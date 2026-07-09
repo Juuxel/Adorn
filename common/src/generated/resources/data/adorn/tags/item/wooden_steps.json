@@ -60,6 +60,10 @@
     { "id": "adorn:blockus/white_oak_step", "required": false },
     { "id": "adorn:cinderscapes/scorched_step", "required": false },
     { "id": "adorn:cinderscapes/umbral_step", "required": false },
+    { "id": "adorn:ecologics/azalea_step", "required": false },
+    { "id": "adorn:ecologics/flowering_azalea_step", "required": false },
+    { "id": "adorn:ecologics/coconut_step", "required": false },
+    { "id": "adorn:ecologics/walnut_step", "required": false },
     { "id": "adorn:promenade/dark_amaranth_step", "required": false },
     { "id": "adorn:promenade/maple_step", "required": false },
     { "id": "adorn:promenade/palm_step", "required": false },
@@ -76,10 +80,6 @@
     { "id": "adorn:terrestria/yucca_palm_step", "required": false },
     { "id": "adorn:traverse/fir_step", "required": false },
     { "id": "adorn:woods_and_mires/pine_step", "required": false },
-    { "id": "adorn:architects_palette/twisted_step", "required": false },
-    { "id": "adorn:ecologics/azalea_step", "required": false },
-    { "id": "adorn:ecologics/flowering_azalea_step", "required": false },
-    { "id": "adorn:ecologics/coconut_step", "required": false },
-    { "id": "adorn:ecologics/walnut_step", "required": false }
+    { "id": "adorn:architects_palette/twisted_step", "required": false }
   ]
 }

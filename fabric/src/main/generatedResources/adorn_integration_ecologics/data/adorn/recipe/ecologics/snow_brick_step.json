@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:step",
+  "pattern": [
+    "S",
+    "#"
+  ],
+  "key": {
+    "S": "ecologics:snow_brick_slab",
+    "#": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:ecologics/snow_brick_step",
+    "count": 1
+  }
+}

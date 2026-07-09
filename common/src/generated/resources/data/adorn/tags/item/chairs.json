@@ -60,6 +60,10 @@
     { "id": "adorn:blockus/white_oak_chair", "required": false },
     { "id": "adorn:cinderscapes/scorched_chair", "required": false },
     { "id": "adorn:cinderscapes/umbral_chair", "required": false },
+    { "id": "adorn:ecologics/azalea_chair", "required": false },
+    { "id": "adorn:ecologics/flowering_azalea_chair", "required": false },
+    { "id": "adorn:ecologics/coconut_chair", "required": false },
+    { "id": "adorn:ecologics/walnut_chair", "required": false },
     { "id": "adorn:promenade/dark_amaranth_chair", "required": false },
     { "id": "adorn:promenade/maple_chair", "required": false },
     { "id": "adorn:promenade/palm_chair", "required": false },
@@ -76,10 +80,6 @@
     { "id": "adorn:terrestria/yucca_palm_chair", "required": false },
     { "id": "adorn:traverse/fir_chair", "required": false },
     { "id": "adorn:woods_and_mires/pine_chair", "required": false },
-    { "id": "adorn:architects_palette/twisted_chair", "required": false },
-    { "id": "adorn:ecologics/azalea_chair", "required": false },
-    { "id": "adorn:ecologics/flowering_azalea_chair", "required": false },
-    { "id": "adorn:ecologics/coconut_chair", "required": false },
-    { "id": "adorn:ecologics/walnut_chair", "required": false }
+    { "id": "adorn:architects_palette/twisted_chair", "required": false }
   ]
 }

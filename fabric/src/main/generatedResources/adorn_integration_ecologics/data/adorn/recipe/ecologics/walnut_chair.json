@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:chair",
+  "pattern": [
+    " S",
+    "SS",
+    "##"
+  ],
+  "key": {
+    "S": "ecologics:walnut_slab",
+    "#": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "adorn:ecologics/walnut_chair",
+    "count": 2
+  }
+}

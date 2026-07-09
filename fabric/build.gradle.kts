@@ -95,6 +95,7 @@ tasks {
         mod("biomeswevegone", "oh-the-biomes-weve-gone")
         mod("blockus")
         mod("cinderscapes")
+        mod("ecologics")
         mod("promenade")
         mod("terrestria")
         mod("traverse")

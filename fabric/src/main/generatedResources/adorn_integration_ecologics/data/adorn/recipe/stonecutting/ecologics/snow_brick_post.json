@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "ecologics:snow_bricks",
+  "result": {
+    "id": "adorn:ecologics/snow_brick_post",
+    "count": 2
+  }
+}

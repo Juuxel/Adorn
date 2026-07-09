@@ -41,6 +41,15 @@
         "condition": {
           "condition": "fabric:all_mods_loaded",
           "values": [
+            "ecologics"
+          ]
+        },
+        "directory": "adorn_integration_ecologics"
+      },
+      {
+        "condition": {
+          "condition": "fabric:all_mods_loaded",
+          "values": [
             "promenade"
           ]
         },

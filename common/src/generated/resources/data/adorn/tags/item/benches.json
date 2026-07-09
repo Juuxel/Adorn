@@ -60,6 +60,10 @@
     { "id": "adorn:blockus/white_oak_bench", "required": false },
     { "id": "adorn:cinderscapes/scorched_bench", "required": false },
     { "id": "adorn:cinderscapes/umbral_bench", "required": false },
+    { "id": "adorn:ecologics/azalea_bench", "required": false },
+    { "id": "adorn:ecologics/flowering_azalea_bench", "required": false },
+    { "id": "adorn:ecologics/coconut_bench", "required": false },
+    { "id": "adorn:ecologics/walnut_bench", "required": false },
     { "id": "adorn:promenade/dark_amaranth_bench", "required": false },
     { "id": "adorn:promenade/maple_bench", "required": false },
     { "id": "adorn:promenade/palm_bench", "required": false },
@@ -76,10 +80,6 @@
     { "id": "adorn:terrestria/yucca_palm_bench", "required": false },
     { "id": "adorn:traverse/fir_bench", "required": false },
     { "id": "adorn:woods_and_mires/pine_bench", "required": false },
-    { "id": "adorn:architects_palette/twisted_bench", "required": false },
-    { "id": "adorn:ecologics/azalea_bench", "required": false },
-    { "id": "adorn:ecologics/flowering_azalea_bench", "required": false },
-    { "id": "adorn:ecologics/coconut_bench", "required": false },
-    { "id": "adorn:ecologics/walnut_bench", "required": false }
+    { "id": "adorn:architects_palette/twisted_bench", "required": false }
   ]
 }
