@@ -58,6 +58,7 @@
     <stone id="minecraft:granite"/>
     <stone id="minecraft:mossy_cobblestone"/>
     <stone id="minecraft:mossy_stone_brick" bricks="true"/>
+    <stone id="minecraft:mud_brick" bricks="true"/>
     <stone id="minecraft:nether_brick" bricks="true"/>
     <stone id="minecraft:polished_andesite"/>
     <stone id="minecraft:polished_blackstone"/>

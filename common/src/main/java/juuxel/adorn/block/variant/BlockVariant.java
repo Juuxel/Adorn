@@ -77,6 +77,7 @@ public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
     BlockVariant TUFF = variant("tuff", Blocks.TUFF);
     BlockVariant POLISHED_TUFF = variant("polished_tuff", Blocks.POLISHED_TUFF);
     BlockVariant TUFF_BRICK = variant("tuff_brick", Blocks.TUFF_BRICKS);
+    BlockVariant MUD_BRICK = variant("mud_brick", Blocks.MUD_BRICKS);
     BlockVariant RESIN_BRICK = variant("resin_brick", Blocks.RESIN_BRICKS);
 
     /**

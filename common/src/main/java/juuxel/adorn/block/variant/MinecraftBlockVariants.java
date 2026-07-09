@@ -78,6 +78,7 @@ public final class MinecraftBlockVariants implements BlockVariantSet {
             BlockVariant.TUFF,
             BlockVariant.POLISHED_TUFF,
             BlockVariant.TUFF_BRICK,
+            BlockVariant.MUD_BRICK,
             BlockVariant.RESIN_BRICK
         );
     }
