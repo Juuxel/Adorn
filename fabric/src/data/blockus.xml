@@ -1,3 +1,3 @@
-<data_generators condition_type="fabric">
+<data_generators condition_type="fabric" class_name="juuxel.adorn.compat.BlockusCompat">
     <wood id="blockus:white_oak"/>
 </data_generators>

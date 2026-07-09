@@ -1,3 +1,3 @@
-<data_generators condition_type="fabric">
+<data_generators condition_type="fabric" class_name="juuxel.adorn.compat.TraverseCompat">
     <wood id="traverse:fir"/>
 </data_generators>

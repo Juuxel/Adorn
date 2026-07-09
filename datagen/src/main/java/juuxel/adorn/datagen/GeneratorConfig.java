@@ -8,7 +8,8 @@ public record GeneratorConfig(
     Set<MaterialEntry<StoneMaterial>> stones,
     Set<MaterialEntry<ColorMaterial>> colors,
     ConditionType conditionType,
-    Map<String, String> rootReplacements
+    Map<String, String> rootReplacements,
+    String className
 ) {
     public record MaterialEntry<M extends Material>(
         M material,

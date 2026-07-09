@@ -70,6 +70,8 @@ Each data generator config file is an XML file in `<project dir>/src/data` with 
       - Values: `none` (default), `fabric`, `forge`
     - `color`: whether to include the colour materials, this is intended for the common subproject only
       - Values: `true`, `false` (default)
+    - `class_name`: the name of the class holding generated `BlockVariant` definitions
+      - If empty or not specified, the class won't be generated.
 - Material tags
   - Nested directly in the root tag
   - `<wood>`: a wood material

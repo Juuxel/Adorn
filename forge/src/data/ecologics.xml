@@ -1,4 +1,4 @@
-<data_generators condition_type="forge">
+<data_generators condition_type="forge" class_name="juuxel.adorn.platform.forge.compat.EcologicsCompat">
     <wood id="ecologics:azalea"/>
     <wood id="ecologics:flowering_azalea"/>
     <wood id="ecologics:coconut"/>

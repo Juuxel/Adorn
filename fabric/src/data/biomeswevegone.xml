@@ -1,4 +1,4 @@
-<data_generators condition_type="fabric">
+<data_generators condition_type="fabric" class_name="juuxel.adorn.compat.BwgCompat">
     <replace key="wood_texture_separator" with="/"/>
     <wood id="biomeswevegone:aspen"/>
     <wood id="biomeswevegone:baobab"/>

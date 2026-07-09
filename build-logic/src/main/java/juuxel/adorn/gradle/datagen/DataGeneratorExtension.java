@@ -32,16 +32,20 @@ public abstract class DataGeneratorExtension {
         @Inject
         public Settings(Project project) {
             configs = project.container(DataConfig.class);
+            getGeneratedSources().convention(getSourceSet().flatMap(sourceSet -> project.getLayout().getBuildDirectory().dir("%sDataGeneratedSources".formatted(sourceSet.getName()))));
             getGeneratedResources().convention(getSourceSet().map(sourceSet -> project.getLayout().getProjectDirectory().dir("src/%s/generatedResources".formatted(sourceSet.getName()))));
             getGenerateTags().convention(false);
             getGenerateEmiFiles().convention(true);
             getIncludeCommonFilesInEmi().convention(false);
+            getGenerateCode().convention(true);
         }
 
         public abstract Property<SourceSet> getSourceSet();
+        public abstract DirectoryProperty getGeneratedSources();
         public abstract DirectoryProperty getGeneratedResources();
         public abstract Property<String> getModId();
         public abstract Property<Boolean> getGenerateTags();
+        public abstract Property<Boolean> getGenerateCode();
 
         public abstract Property<Boolean> getGenerateEmiFiles();
         public abstract Property<Boolean> getIncludeCommonFilesInEmi();

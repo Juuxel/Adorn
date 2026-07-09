@@ -42,13 +42,15 @@ public final class GeneratorConfigLoader {
         var conditionType = ConditionType.parse(root.getAttribute(Attributes.CONDITION_TYPE));
         if (conditionType == null) throw new IllegalArgumentException("Unknown condition type in %s: %s".formatted(path, root.getAttribute(Attributes.CONDITION_TYPE)));
         var rootReplacements = getReplacements(root);
+        var className = root.getAttribute(Attributes.CLASS_NAME);
         return new GeneratorConfig(
             woods, stones,
             Arrays.stream(colors)
                 .map(material -> new GeneratorConfig.MaterialEntry<>(material, Set.of(), Map.of()))
                 .collect(Collectors.toCollection(LinkedHashSet::new)),
             conditionType,
-            rootReplacements
+            rootReplacements,
+            className
         );
     }
 
@@ -117,5 +119,6 @@ public final class GeneratorConfigLoader {
         static final String GENERATOR = "generator";
         static final String KEY = "key";
         static final String WITH = "with";
+        static final String CLASS_NAME = "class_name";
     }
 }
