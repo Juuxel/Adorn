@@ -50,6 +50,7 @@
     { "id": "adorn:biomeswevegone/redwood_post", "required": false },
     { "id": "adorn:biomeswevegone/sakura_post", "required": false },
     { "id": "adorn:biomeswevegone/skyris_post", "required": false },
+    { "id": "adorn:biomeswevegone/spirit_post", "required": false },
     { "id": "adorn:biomeswevegone/white_mangrove_post", "required": false },
     { "id": "adorn:biomeswevegone/willow_post", "required": false },
     { "id": "adorn:biomeswevegone/witch_hazel_post", "required": false },

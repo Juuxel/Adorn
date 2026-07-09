@@ -50,6 +50,7 @@
     { "id": "adorn:biomeswevegone/redwood_kitchen_counter", "required": false },
     { "id": "adorn:biomeswevegone/sakura_kitchen_counter", "required": false },
     { "id": "adorn:biomeswevegone/skyris_kitchen_counter", "required": false },
+    { "id": "adorn:biomeswevegone/spirit_kitchen_counter", "required": false },
     { "id": "adorn:biomeswevegone/white_mangrove_kitchen_counter", "required": false },
     { "id": "adorn:biomeswevegone/willow_kitchen_counter", "required": false },
     { "id": "adorn:biomeswevegone/witch_hazel_kitchen_counter", "required": false },

@@ -50,6 +50,7 @@
     { "id": "adorn:biomeswevegone/redwood_shelf", "required": false },
     { "id": "adorn:biomeswevegone/sakura_shelf", "required": false },
     { "id": "adorn:biomeswevegone/skyris_shelf", "required": false },
+    { "id": "adorn:biomeswevegone/spirit_shelf", "required": false },
     { "id": "adorn:biomeswevegone/white_mangrove_shelf", "required": false },
     { "id": "adorn:biomeswevegone/willow_shelf", "required": false },
     { "id": "adorn:biomeswevegone/witch_hazel_shelf", "required": false },

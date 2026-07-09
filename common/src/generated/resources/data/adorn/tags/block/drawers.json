@@ -50,6 +50,7 @@
     { "id": "adorn:biomeswevegone/redwood_drawer", "required": false },
     { "id": "adorn:biomeswevegone/sakura_drawer", "required": false },
     { "id": "adorn:biomeswevegone/skyris_drawer", "required": false },
+    { "id": "adorn:biomeswevegone/spirit_drawer", "required": false },
     { "id": "adorn:biomeswevegone/white_mangrove_drawer", "required": false },
     { "id": "adorn:biomeswevegone/willow_drawer", "required": false },
     { "id": "adorn:biomeswevegone/witch_hazel_drawer", "required": false },

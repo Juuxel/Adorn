@@ -50,6 +50,7 @@
     { "id": "adorn:biomeswevegone/redwood_platform", "required": false },
     { "id": "adorn:biomeswevegone/sakura_platform", "required": false },
     { "id": "adorn:biomeswevegone/skyris_platform", "required": false },
+    { "id": "adorn:biomeswevegone/spirit_platform", "required": false },
     { "id": "adorn:biomeswevegone/white_mangrove_platform", "required": false },
     { "id": "adorn:biomeswevegone/willow_platform", "required": false },
     { "id": "adorn:biomeswevegone/witch_hazel_platform", "required": false },

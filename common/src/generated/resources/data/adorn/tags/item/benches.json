@@ -50,6 +50,7 @@
     { "id": "adorn:biomeswevegone/redwood_bench", "required": false },
     { "id": "adorn:biomeswevegone/sakura_bench", "required": false },
     { "id": "adorn:biomeswevegone/skyris_bench", "required": false },
+    { "id": "adorn:biomeswevegone/spirit_bench", "required": false },
     { "id": "adorn:biomeswevegone/white_mangrove_bench", "required": false },
     { "id": "adorn:biomeswevegone/willow_bench", "required": false },
     { "id": "adorn:biomeswevegone/witch_hazel_bench", "required": false },

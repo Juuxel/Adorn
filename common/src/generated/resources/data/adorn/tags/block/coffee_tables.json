@@ -50,6 +50,7 @@
     { "id": "adorn:biomeswevegone/redwood_coffee_table", "required": false },
     { "id": "adorn:biomeswevegone/sakura_coffee_table", "required": false },
     { "id": "adorn:biomeswevegone/skyris_coffee_table", "required": false },
+    { "id": "adorn:biomeswevegone/spirit_coffee_table", "required": false },
     { "id": "adorn:biomeswevegone/white_mangrove_coffee_table", "required": false },
     { "id": "adorn:biomeswevegone/willow_coffee_table", "required": false },
     { "id": "adorn:biomeswevegone/witch_hazel_coffee_table", "required": false },

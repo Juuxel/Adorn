@@ -50,6 +50,7 @@
     { "id": "adorn:biomeswevegone/redwood_chair", "required": false },
     { "id": "adorn:biomeswevegone/sakura_chair", "required": false },
     { "id": "adorn:biomeswevegone/skyris_chair", "required": false },
+    { "id": "adorn:biomeswevegone/spirit_chair", "required": false },
     { "id": "adorn:biomeswevegone/white_mangrove_chair", "required": false },
     { "id": "adorn:biomeswevegone/willow_chair", "required": false },
     { "id": "adorn:biomeswevegone/witch_hazel_chair", "required": false },
