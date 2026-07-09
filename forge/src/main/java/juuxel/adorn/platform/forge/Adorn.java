@@ -87,7 +87,7 @@ public final class Adorn {
     }
 
     private void init(FMLCommonSetupEvent event) {
-        AdornGameRules.init();
+        event.enqueueWork(() -> AdornGameRules.init());
         AdornTags.init();
         AdornStats.init();
         ConfigManager.get().finish();
