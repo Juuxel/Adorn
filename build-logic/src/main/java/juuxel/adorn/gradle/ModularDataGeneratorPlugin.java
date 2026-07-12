@@ -18,7 +18,7 @@ public final class ModularDataGeneratorPlugin implements Plugin<Project> {
         project.getPlugins().apply(CorePlugin.class);
         var extension = CorePlugin.registerExtension(project, "dataGenerator", DataGeneratorExtension.class);
 
-        project.getTasks().register("generateAllData");
+        project.getTasks().register("generateAllData", task -> task.setGroup(CorePlugin.TASK_GROUP));
 
         project.afterEvaluate(p -> {
             for (var config : extension.getSettings()) {
@@ -31,11 +31,15 @@ public final class ModularDataGeneratorPlugin implements Plugin<Project> {
         var sourceSet = settings.getSourceSet().get();
         var generatedResources = settings.getGeneratedResources();
         var generateMainData = project.getTasks().register(sourceSet.getTaskName("generate", "MainData"), GenerateData.class, task -> {
+            task.setGroup(CorePlugin.TASK_GROUP);
             task.getConfigs().set(settings.getConfigs());
             task.getGenerateTags().set(settings.getGenerateTags());
             task.getOutput().convention(generatedResources);
         });
-        var generateData = project.getTasks().register(sourceSet.getTaskName("generate", "Data"), task -> task.dependsOn(generateMainData));
+        var generateData = project.getTasks().register(sourceSet.getTaskName("generate", "Data"), task -> {
+            task.setGroup(CorePlugin.TASK_GROUP);
+            task.dependsOn(generateMainData);
+        });
         project.getTasks().named("generateAllData", task -> task.dependsOn(generateData));
         project.getTasks().named(sourceSet.getProcessResourcesTaskName(), task -> task.mustRunAfter(generateData));
         sourceSet.getResources().srcDir(generatedResources);
@@ -43,6 +47,7 @@ public final class ModularDataGeneratorPlugin implements Plugin<Project> {
 
         if (settings.getGenerateEmiFiles().get()) {
             var generateEmi = project.getTasks().register(sourceSet.getTaskName("generate", "Emi"), GenerateEmi.class, task -> {
+                task.setGroup(CorePlugin.TASK_GROUP);
                 task.mustRunAfter(generateMainData);
                 task.getOutput().convention(generateMainData.flatMap(GenerateData::getOutput));
                 task.getModId().set(settings.getModId());
@@ -68,6 +73,7 @@ public final class ModularDataGeneratorPlugin implements Plugin<Project> {
         if (settings.getGenerateCode().get()) {
             var generatedSources = settings.getGeneratedSources();
             var generateDataCode = project.getTasks().register(sourceSet.getTaskName("generate", "DataCode"), GenerateDataCode.class, task -> {
+                task.setGroup(CorePlugin.TASK_GROUP);
                 task.getConfigs().set(settings.getConfigs());
                 task.getOutput().convention(generatedSources);
             });

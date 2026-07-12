@@ -21,6 +21,7 @@ public final class TranslationPlugin implements Plugin<Project> {
         project.getDependencies().addProvider(kelp.getName(), extension.getKelpVersion().map(v -> "io.github.juuxel:kelp:" + v));
 
         project.getTasks().register("reformatTranslations", JavaExec.class, task -> {
+            task.setGroup(CorePlugin.TASK_GROUP);
             task.classpath(kelpCp);
             task.getMainModule().set("io.github.juuxel.translationtool");
 
@@ -30,6 +31,7 @@ public final class TranslationPlugin implements Plugin<Project> {
         });
 
         project.getTasks().register("editTranslations", JavaExec.class, task -> {
+            task.setGroup(CorePlugin.TASK_GROUP);
             task.classpath(kelpCp);
             task.getMainModule().set("io.github.juuxel.translationtool");
 

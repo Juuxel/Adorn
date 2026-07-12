@@ -5,6 +5,8 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
 public final class CorePlugin implements Plugin<Project> {
+    public static final String TASK_GROUP = "adorn";
+
     @Override
     public void apply(Project project) {
         project.getExtensions().create("adorn", AdornExtension.class);
