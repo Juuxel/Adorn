@@ -1,5 +1,6 @@
 plugins {
     id("adorn-minecraft-setup")
+    id("adorn-translations")
 }
 
 sourceSets {

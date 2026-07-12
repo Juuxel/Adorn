@@ -50,5 +50,10 @@ gradlePlugin {
             id = "adorn-data-generator.modular"
             implementationClass = "juuxel.adorn.gradle.ModularDataGeneratorPlugin"
         }
+
+        register("adorn-translations") {
+            id = "adorn-translations"
+            implementationClass = "juuxel.adorn.gradle.TranslationPlugin"
+        }
     }
 }

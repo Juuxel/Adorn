@@ -103,6 +103,25 @@ dependencyResolutionManagement {
                 includeGroup("com.github.Virtuoel")
             }
         }
+
+        // For Kelp.
+        exclusiveContent {
+            forRepository {
+                ivy {
+                    url = uri("https://github.com/Juuxel/Kelp/releases/download/")
+                    patternLayout {
+                        artifact("[revision]/[artifact]-[revision].[ext]")
+                    }
+                    metadataSources {
+                        artifact()
+                    }
+                }
+            }
+
+            filter {
+                includeModule("io.github.juuxel", "kelp")
+            }
+        }
     }
 
     // To prevent any annoying issues, disable adding new repositories in projects altogether.
