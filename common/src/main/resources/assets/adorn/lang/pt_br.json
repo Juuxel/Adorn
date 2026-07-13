@@ -17,7 +17,7 @@
   "block.adorn.pink_sofa": "Sofá rosa",
   "block.adorn.sofa.description": "O lugar perfeito para relaxar",
   "block.adorn.sofa.occupied": "Este sofá está ocupado",
-  
+
   "block.adorn.oak_chair": "Cadeira de carvalho",
   "block.adorn.spruce_chair": "Cadeira de pinheiro",
   "block.adorn.birch_chair": "Cadeira de bétula",
@@ -88,7 +88,7 @@
   "block.adorn.ecologics.walnut_chair": "Cadeira de nogueira",
   "block.adorn.architects_palette.twisted_chair": "Cadeira retorcida",
   "block.adorn.chair.description": "Assento rápido",
-  
+
   "block.adorn.oak_table": "Mesa de carvalho",
   "block.adorn.spruce_table": "Mesa de pinheiro",
   "block.adorn.birch_table": "Mesa de bétula",
@@ -159,7 +159,7 @@
   "block.adorn.ecologics.walnut_table": "Mesa de nogueira",
   "block.adorn.architects_palette.twisted_table": "Mesa retorcida",
   "block.adorn.table.description": "Versátil e de uso geral",
-  
+
   "block.adorn.oak_kitchen_counter": "Balcão de cozinha de carvalho",
   "block.adorn.spruce_kitchen_counter": "Balcão de cozinha de pinheiro",
   "block.adorn.birch_kitchen_counter": "Balcão de cozinha de bétula",
@@ -230,7 +230,7 @@
   "block.adorn.ecologics.walnut_kitchen_counter": "Balcão de cozinha de nogueira",
   "block.adorn.architects_palette.twisted_kitchen_counter": "Balcão de cozinha retorcido",
   "block.adorn.kitchen_counter.description": "Para todas as suas necessidades de cozinha",
-  
+
   "block.adorn.oak_kitchen_cupboard": "Armário de cozinha de carvalho",
   "block.adorn.spruce_kitchen_cupboard": "Armário de cozinha de pinheiro",
   "block.adorn.birch_kitchen_cupboard": "Armário de cozinha de bétula",
@@ -301,7 +301,7 @@
   "block.adorn.ecologics.walnut_kitchen_cupboard": "Armário de cozinha de nogueira",
   "block.adorn.architects_palette.twisted_kitchen_cupboard": "Armário de cozinha retorcido",
   "block.adorn.kitchen_cupboard.description": "Armazenamento para um chef",
-  
+
   "block.adorn.oak_kitchen_sink": "Pia de cozinha de carvalho",
   "block.adorn.spruce_kitchen_sink": "Pia de cozinha de pinheiro",
   "block.adorn.birch_kitchen_sink": "Pia de cozinha de bétula",
@@ -372,7 +372,7 @@
   "block.adorn.ecologics.walnut_kitchen_sink": "Pia de cozinha de nogueira",
   "block.adorn.architects_palette.twisted_kitchen_sink": "Pia de cozinha retorcido",
   "block.adorn.kitchen_sink.description": "Encha-me com água!",
-  
+
   "block.adorn.oak_drawer": "Gaveta de carvalho",
   "block.adorn.spruce_drawer": "Gaveta de pinheiro",
   "block.adorn.birch_drawer": "Gaveta de bétula",
@@ -443,7 +443,7 @@
   "block.adorn.ecologics.walnut_drawer": "Gaveta de nogueira",
   "block.adorn.architects_palette.twisted_drawer": "Gaveta retorcido",
   "block.adorn.drawer.description": "Armazenamento de Empurrar e Puxar",
-  
+
   "block.adorn.trading_station": "Estação de troca",
   "block.adorn.trading_station.description": "Mercado compacto",
   "block.adorn.trading_station.description.owner": "Dono: %s",
@@ -455,7 +455,7 @@
   "block.adorn.trading_station.empty_trade": "Essa estação não está vendendo nada.",
   "block.adorn.trading_station.storage_not_stocked": "A estação não tem produtos suficientes.",
   "block.adorn.trading_station.storage_full": "O armazenamento da estação está cheio.",
-  
+
   "advancements.adorn.root.description": "Decore sua casa!",
   "advancements.adorn.chair.title": "Bom lugar para sentar",
   "advancements.adorn.chair.description": "Sente-se em uma cadeira.",
@@ -511,10 +511,10 @@
   "advancements.adorn.candlelit_lantern.description": "Crie uma lamparina.",
   "advancements.adorn.everything.title": "Decorador mestre",
   "advancements.adorn.everything.description": "Crie todos os blocos de decoração de adorn.",
-  
+
   "block.adorn.stone_torch": "Tocha de pedra.",
   "block.adorn.stone_torch.description": "Mais clara que uma tocha de madeira.",
-  
+
   "block.adorn.oak_post": "Poste de carvalho",
   "block.adorn.spruce_post": "Poste de pinheiro",
   "block.adorn.birch_post": "Poste de bétula",
@@ -639,7 +639,7 @@
   "block.adorn.architects_palette.myonite_brick_post": "Poste de tijolo de myonita",
   "block.adorn.architects_palette.mushy_myonite_brick_post": "Poste de tijolo macio de myonita",
   "block.adorn.post.description": "Um pouco parecido com um poste de cerca",
-  
+
   "block.adorn.oak_platform": "Plataforma de carvalho",
   "block.adorn.spruce_platform": "Plataforma de pinheiro",
   "block.adorn.birch_platform": "Plataforma de bétula",
@@ -774,7 +774,7 @@
   "block.adorn.architects_palette.myonite_brick_platform": "Plataforma de tijolo de myonita",
   "block.adorn.architects_palette.mushy_myonite_brick_platform": "Plataforma de tijolo de myonita esponjosa",
   "block.adorn.platform.description": "Um poste com uma plataforma em cima",
-  
+
   "block.adorn.oak_step": "Degrau de carvalho",
   "block.adorn.spruce_step": "Degrau de abeto",
   "block.adorn.birch_step": "Degrau de bétula",
@@ -909,19 +909,19 @@
   "block.adorn.architects_palette.myonite_brick_step": "Degrau de tijolo de myonita",
   "block.adorn.architects_palette.mushy_myonite_brick_step": "Degrau de tijolo de myonita amolecido",
   "block.adorn.step.description": "Um pequeno degrau com um pilar por baixo",
-  
+
   "block.adorn.brick_chimney": "Chaminé de tijolos",
   "block.adorn.stone_brick_chimney": "Chaminé de tijolos de pedra",
   "block.adorn.nether_brick_chimney": "Chaminé de tijolos do nether",
   "block.adorn.red_nether_brick_chimney": "Chaminé de tijolos vermelhos do nether",
   "block.adorn.cobblestone_chimney": "Chaminé de pedregulho",
   "block.adorn.chimney.description": "De onde saem pequenas núvens",
-  
+
   "block.adorn.prismarine_chimney": "Chaminé de prismarinho",
   "block.adorn.prismarine_chimney.description": "Bolhas debaixo d'agua",
   "block.adorn.magmatic_prismarine_chimney": "Chaminé de prismarinho magmático",
   "block.adorn.soulful_prismarine_chimney": "Chaminé de prismarinho de almas",
-  
+
   "block.adorn.oak_shelf": "Prateleira de carvalho",
   "block.adorn.spruce_shelf": "Prateleira de pinho",
   "block.adorn.birch_shelf": "Prateleira de bétula",
@@ -993,7 +993,7 @@
   "block.adorn.ecologics.walnut_shelf": "Prateleira de nogueira",
   "block.adorn.architects_palette.twisted_shelf": "Prateleira de retorcido",
   "block.adorn.shelf.description": "Um local prático para itens do dia a dia",
-  
+
   "block.adorn.white_table_lamp": "Luminária de mesa branca",
   "block.adorn.light_gray_table_lamp": "Luminária de mesa cinza claro",
   "block.adorn.gray_table_lamp": "Luminária de mesa cinza",
@@ -1011,7 +1011,7 @@
   "block.adorn.magenta_table_lamp": "Luminária de mesa magenta",
   "block.adorn.pink_table_lamp": "Luminária de mesa rosa",
   "block.adorn.table_lamp.description": "Ilumina o ambiente",
-  
+
   "block.adorn.oak_coffee_table": "Mesa de centro de carvalho",
   "block.adorn.spruce_coffee_table": "Mesa de centro de abeto",
   "block.adorn.birch_coffee_table": "Mesa de centro de bétula",
@@ -1082,7 +1082,7 @@
   "block.adorn.ecologics.walnut_coffee_table": "Mesa de centro de nogueira",
   "block.adorn.architects_palette.twisted_coffee_table": "Mesa de centro torcido Architects",
   "block.adorn.coffee_table.description": "Uma mesa menor para necessidades menores",
-  
+
   "block.adorn.crate": "Baú",
   "block.adorn.wheat_crate": "Baú de trigo",
   "block.adorn.wheat_seed_crate": "Baú de sementes de trigo",
@@ -1101,7 +1101,7 @@
   "block.adorn.sweet_berry_crate": "Baú de bagas doce",
   "block.adorn.cocoa_bean_crate": "Baú de sementes de cacau",
   "block.adorn.egg_crate": "Baú de ovos",
-  
+
   "block.adorn.picket_fence": "Cerca de estaca",
   "block.adorn.picket_fence.description": "Cerca o seu quintal",
   "block.adorn.chain_link_fence": "Cerca de arame",
@@ -1110,7 +1110,7 @@
   "block.adorn.stone_ladder.description": "pedras paras mineiros subirem",
   "block.adorn.brewer": "Refinaria",
   "block.adorn.brewer.description": "Mais avançado que uma chaleira!",
-  
+
   "block.adorn.oak_bench": "Banco de carvalho",
   "block.adorn.spruce_bench": "Banco de pinheiro",
   "block.adorn.birch_bench": "Banco de bétula",
@@ -1181,7 +1181,7 @@
   "block.adorn.ecologics.walnut_bench": "Banco de nogueira",
   "block.adorn.architects_palette.twisted_bench": "Banco torcido",
   "block.adorn.bench.description": "Ao ar livre!",
-  
+
   "block.adorn.candlelit_lantern": "Lamparina",
   "block.adorn.white_candlelit_lantern": "Lamparina branca",
   "block.adorn.light_gray_candlelit_lantern": "Lamparina cinza claro",
@@ -1200,9 +1200,9 @@
   "block.adorn.magenta_candlelit_lantern": "Lamparina magenta",
   "block.adorn.pink_candlelit_lantern": "Lamparina Rosa",
   "block.adorn.candlelit_lantern.description": "Repele o escuro",
-  
+
   "entity.adorn.seat": "Assento",
-  
+
   "item.adorn.stone_rod": "Haste de pedra",
   "item.adorn.stone_rod.description": "Ingredientes de crafting",
   "item.adorn.mug": "Caneca",
@@ -1214,8 +1214,8 @@
   "item.adorn.glow_berry_tea": "Chá de bagas brilhantes",
   "item.adorn.glow_berry_tea.description": "Bebita resplandencente",
   "item.adorn.nether_wart_coffee": "Café de fungos do nether",
-  "item.adorn.nether_wart_coffee.description": "Mais escuro que uma noite sem lua\u2026",
-  
+  "item.adorn.nether_wart_coffee.description": "Mais escuro que uma noite sem lua…",
+
   "item.adorn.guide_book": "Decorando sua casa",
   "guide.adorn.topic.brewer.title": "Cervejeiros",
   "guide.adorn.topic.brewer.text": "Cervejeiros preparam várias bebidas para você aproveitar. Passe o mouse sobre o diagrama abaixo para obter detalhes!",
@@ -1252,21 +1252,21 @@
   "guide.adorn.topic.trading_station.text": "Veja o Manual do comerciante para mais informações sobre as estações de troca.",
   "guide.adorn.contents.title": "Conteúdo",
   "guide.adorn.contents.jump_to_page": "Pular para página %s",
-  
+
   "item.adorn.traders_manual": "Manual do comerciante",
   "item.adorn.traders_manual.subtitle": "Usando estações de troca",
   "item.adorn.traders_manual.buying.title": "Comprando",
   "item.adorn.traders_manual.buying.text": "Você pode comprar itens de estações de troca usando a estação com o item de pagamento.",
   "item.adorn.traders_manual.selling.title": "Vendendo",
   "item.adorn.traders_manual.selling.text": "Configurar suas próprias estações de troca é muito simples! Basta colocar uma estação de troca e abri-la. No lado esquerdo, você pode definir o produto e o pagamento. O estoque do lado direito terá os produtos e os pagamentos.",
-  
+
   "gamerule.adorn.skip_night_on_sofas": "Passar a noite dormindo nos sofás",
   "gamerule.adorn.skip_night_on_sofas.description": "Permite que você passe a noite se dormir em sofás.",
   "gamerule.adorn.infinite_kitchen_sinks": "Pias de cozinha são fontes infinitas",
   "gamerule.adorn.infinite_kitchen_sinks.description": "Faz com que pias de cozinha sejam fontes infinitas de recursos flúidos como água.",
   "gamerule.adorn.drop_locked_trading_stations": "Soltar estações de troca bloqueadas",
   "gamerule.adorn.drop_locked_trading_stations.description": "As estações de troca quebradas soltam uma versão bloqueada com seu conteúdo dentro.",
-  
+
   "gui.adorn.config.title": "Adorn",
   "gui.adorn.config.creative_inventory": "Inventário criativo",
   "gui.adorn.config.game_rule_defaults": "Regras padrões do jogo...",
@@ -1289,9 +1289,9 @@
   "gui.adorn.fluid_unit.litres.symbol": "L",
   "gui.adorn.fluid_unit.droplets.name": "Gotas",
   "gui.adorn.fluid_unit.droplets.symbol": "gt",
-  "gui.adorn.item_grouping_option.by_material": "Pelo material" ,
+  "gui.adorn.item_grouping_option.by_material": "Pelo material",
   "gui.adorn.item_grouping_option.by_shape": "Pelo formato",
-  
+
   "stat.adorn.dye_sofa": "Sofás pintados",
   "stat.adorn.dye_table_lamp": "Lâmpadas de mesa pintadas",
   "stat.adorn.interact_with_shelf": "Interações com prateleiras",
@@ -1303,11 +1303,11 @@
   "stat.adorn.sit_on_bench": "Vezes que sentou em bancos",
   "stat.adorn.sit_on_chair": "Vezes que sentou em cadeiras",
   "stat.adorn.sit_on_sofa": "Vezes que sentou em sofás",
-  
+
   "itemGroup.adorn.items": "Mobílias",
-  
+
   "text.adorn.item_stack_with_count": "%sx %s",
-  
+
   "tag.block.adorn.benches": "Bancos",
   "tag.block.adorn.candlelit_lanterns": "Lamparinas",
   "tag.block.adorn.chairs": "Cadeiras",

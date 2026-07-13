@@ -89,19 +89,14 @@
   "block.adorn.trading_station.storage_full": "Bu istasyonun depolama alanı dolu.",
 
   "advancements.adorn.root.description": "Evini dekore et!",
-
   "advancements.adorn.chair.title": "Rahat Oturuş",
   "advancements.adorn.chair.description": "Bir sandalye üret.",
-
   "advancements.adorn.sofa.title": "Hayaller",
   "advancements.adorn.sofa.description": "Yün ve çubuklar ile bir kanepe yap.",
-
   "advancements.adorn.craft_trading_station.title": "Pazar Günü",
   "advancements.adorn.craft_trading_station.description": "Bir Ticaret istasyonu üret.",
-
   "advancements.adorn.chimney.title": "Tuğla ve Duman",
   "advancements.adorn.chimney.description": "Bir baca yap.",
-
   "advancements.adorn.stone_torch.title": "Taş Gibi Aydınlatma",
   "advancements.adorn.stone_torch.description": "Taştan bir meşale üret.",
 
@@ -346,10 +341,6 @@
   "item.adorn.traders_manual.buying.text": "Ödeme öğesi olan bir istasyonu kullanarak ticaret istasyonlarından ürün satın alabilirsiniz.",
   "item.adorn.traders_manual.selling.title": "Satış",
   "item.adorn.traders_manual.selling.text": "Kendi ticaret istasyonunu kurman çok kolay! Bir ticaret istasyonunu yere yerleştir ve aç. Sol tarafta satılacak öğeyi ve fiyatı ayarlayabilirsin. Sağ taraftaki envanterde ürünler ve ödemeler olacaktır.",
-
-  "item.adorn.deprecated_item.name": "%s - Deprecated",
-  "item.adorn.deprecated_item.desc.1": "This item has been moved.",
-  "item.adorn.deprecated_item.desc.2": "You can replace it by pressing %s.",
 
   "gamerule.adorn.skip_night_on_sofas": "Kanepelerde uyuyarak geceleri atlayın",
 

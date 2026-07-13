@@ -191,9 +191,9 @@
   "block.adorn.chimney.description": "Koriste",
 
   "block.adorn.prismarine_chimney": "Prismariinipiippu",
+  "block.adorn.prismarine_chimney.description": "Kuplii veden alla",
   "block.adorn.magmatic_prismarine_chimney": "Magmakas prismariinipiippu",
   "block.adorn.soulful_prismarine_chimney": "Sielukas prismariinipiippu",
-  "block.adorn.prismarine_chimney.description": "Kuplii veden alla",
 
   "block.adorn.oak_shelf": "Pieni tammihylly",
   "block.adorn.spruce_shelf": "Pieni kuusihylly",
@@ -251,10 +251,6 @@
   "item.adorn.traders_manual.buying.text": "Kauppapöydiltä voi ostaa tavaroita käyttämällä niitä maksuvälineellä.",
   "item.adorn.traders_manual.selling.title": "Myyminen",
   "item.adorn.traders_manual.selling.text": "Omien kauppapöytien tekeminen on helppoa! Laita kauppapöytä maahan ja avaa se. Vasemmalla puolella näkyy tuote ja hinta. Oikean puolen tavaroihin tulevat myytävät tuotteet ja maksetut hinnat.",
-
-  "item.adorn.deprecated_item.name": "%s - vanhentunut",
-  "item.adorn.deprecated_item.desc.1": "Tämä esine on siirretty.",
-  "item.adorn.deprecated_item.desc.2": "Sen voi korvata painamalla %s.",
 
   "gamerule.adorn.skip_night_on_sofas": "Öiden ohitus nukkumalla sohvalla",
   "gamerule.adorn.skip_night_on_sofas.description": "Sallii ohittaa yöt nukkumalla sohvalla.",

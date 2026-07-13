@@ -141,19 +141,14 @@
   "block.adorn.trading_station.storage_full": "Ekwipunek stacji jest pełny.",
 
   "advancements.adorn.root.description": "Udekoruj swój dom!",
-
   "advancements.adorn.chair.title": "Wygodne siedzisko",
   "advancements.adorn.chair.description": "Stwórz krzesło.",
-
   "advancements.adorn.sofa.title": "Sen na jawie",
   "advancements.adorn.sofa.description": "Stwórz sofę z wełny i patyków.",
-
   "advancements.adorn.buy_from_trading_station.title": "Dzień na markecie",
   "advancements.adorn.craft_trading_station.description": "Stwórz stację handlową.",
-
   "advancements.adorn.chimney.title": "Cegły i dym",
   "advancements.adorn.chimney.description": "Stwórz komin.",
-
   "advancements.adorn.stone_torch.title": "Kamienne oświetlenie",
   "advancements.adorn.stone_torch.description": "Stwórz kamienną pochodnię.",
 
@@ -390,16 +385,10 @@
   "item.adorn.traders_manual.selling.title": "Sprzedaż",
   "item.adorn.traders_manual.selling.text": "Ustawienie swojej własnej stacji handlowej jest bardzo proste! Postaw stację handlową i ją otwórz. Po lewej stronie możesz umieścić produkt i płatność. Ekwipunek po prawej stronie będzie miał produkty i płatności.",
 
-  "item.adorn.deprecated_item.name": "%s - Przestarzałe",
-  "item.adorn.deprecated_item.desc.1": "Ten przedmiot został przeniesiony.",
-  "item.adorn.deprecated_item.desc.2": "Możesz go zamienić, naciskając %s.",
-
   "gamerule.adorn.skip_night_on_sofas": "Pomijaj noce śpiąc na sofach",
   "gamerule.adorn.skip_night_on_sofas.description": "Pozwala ci pominąć noc, kiedy śpisz na sofie.",
 
   "gui.adorn.config.title": "Adorn",
-  "gui.adorn.config.category.general": "Ogólne",
-  "gui.adorn.config.category.advanced": "Zaawansowane",
   "gui.adorn.config.option.showTradingStationTooltips": "Pokazuj podpowiedzi stacji handlowej",
   "gui.adorn.config.option.showTradingStationTooltips.description": "Pokazuj informacje o stacjach handlowych, kiedy na nie patrzysz.",
   "gui.adorn.config.requires_restart": "Wymaga restartu",
