@@ -60,9 +60,9 @@ public final class DataOutputImpl implements DataOutput {
         var hashBytes = digest.digest(content.getBytes(StandardCharsets.UTF_8));
         var humanReadableHash = HexFormat.of().withUpperCase().formatHex(hashBytes);
         var outputPath = directory.resolve(path);
-        existing.remove(outputPath.toAbsolutePath());
+        boolean hadExisting = existing.remove(outputPath.toAbsolutePath());
         newHashes.put(path, humanReadableHash);
-        if (!humanReadableHash.equals(originalHashes.get(path))) {
+        if (!hadExisting || !humanReadableHash.equals(originalHashes.get(path))) {
             try {
                 Files.createDirectories(outputPath.getParent());
                 Files.writeString(outputPath, content);
