@@ -1,5 +1,6 @@
 package juuxel.adorn.compat;
 
+/*
 import juuxel.adorn.block.BarricadeBlock;
 import juuxel.adorn.block.BenchBlock;
 import juuxel.adorn.block.ChairBlock;
@@ -70,5 +71,12 @@ public final class ToweletteCompat {
             block instanceof TableLampBlock ||
             block instanceof TradingStationBlock ||
             block instanceof WallCautionSignBlock;
+    }
+}
+*/
+
+public final class ToweletteCompat {
+    public static void init() {
+        // disabled
     }
 }

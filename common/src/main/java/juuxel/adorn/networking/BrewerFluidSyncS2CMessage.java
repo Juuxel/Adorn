@@ -3,10 +3,9 @@ package juuxel.adorn.networking;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.fluid.FluidVolume;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
 
 public record BrewerFluidSyncS2CMessage(int syncId, FluidVolume fluid) implements CustomPacketPayload {
     public static final Type<BrewerFluidSyncS2CMessage> ID = new Type<>(AdornCommon.id("brewer_fluid_sync"));

@@ -18,11 +18,10 @@ dependencies {
     implementation(libs.jankson)
 
     // Just for @Environment and mixin deps :)
-    modImplementation(libs.fabric.loader)
+    implementation(libs.fabric.loader)
 
     // Add a mod dependency on some APIs for compat code.
-    modCompileOnly(libs.rei.common)
-    modCompileOnly(libs.emi.common)
-    modCompileOnly(libs.jei.fabric)
+    compileOnly(libs.rei.common)
+    compileOnly(libs.jei.fabric)
     compileOnly(libs.rei.annotations)
 }

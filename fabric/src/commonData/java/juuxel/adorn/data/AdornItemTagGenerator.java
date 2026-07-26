@@ -2,17 +2,17 @@ package juuxel.adorn.data;
 
 import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.lib.AdornTags;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.world.item.Items;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 
 import java.util.concurrent.CompletableFuture;
 
-public final class AdornItemTagGenerator extends FabricTagProvider.ItemTagProvider {
-    public AdornItemTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, FabricTagProvider.BlockTagProvider blockTagProvider) {
+public final class AdornItemTagGenerator extends FabricTagsProvider.ItemTagsProvider {
+    public AdornItemTagGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, FabricTagsProvider.BlockTagsProvider blockTagProvider) {
         super(output, registriesFuture, blockTagProvider);
     }
 
@@ -66,6 +66,9 @@ public final class AdornItemTagGenerator extends FabricTagProvider.ItemTagProvid
 
         valueLookupBuilder(ItemTags.BOOKSHELF_BOOKS)
             .add(AdornItems.GUIDE_BOOK.get(), AdornItems.TRADERS_MANUAL.get());
+
+        valueLookupBuilder(AdornTags.FURNITURE_DYES)
+            .forceAddTag(ItemTags.DYES);
     }
 
     private void copy(AdornTags.TagPair tagPair) {

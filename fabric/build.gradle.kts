@@ -69,8 +69,8 @@ loom {
 
 dependencies {
     // Standard Fabric mod setup.
-    modImplementation(libs.fabric.loader)
-    modImplementation(libs.fabric.api)
+    implementation(libs.fabric.loader)
+    implementation(libs.fabric.api)
 
     // Bundle Jankson in the mod and use it as a regular "implementation" library.
     implementation(libs.jankson)
@@ -80,12 +80,9 @@ dependencies {
     "commonDataImplementation"("io.github.juuxel:adorn-data-generator")
 
     // Mod compat
-    modCompileOnly(libs.towelette)
-    modCompileOnly(libs.modmenu)
-    modLocalRuntime(libs.modmenu)
-    modCompileOnly(libs.emi.fabric) {
-        isTransitive = false
-    }
+    // compileOnly(libs.towelette)
+    compileOnly(libs.modmenu)
+    localRuntime(libs.modmenu)
 }
 
 tasks {

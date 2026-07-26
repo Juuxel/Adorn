@@ -2,44 +2,44 @@ package juuxel.adorn.block;
 
 import juuxel.adorn.block.property.FrontConnection;
 import juuxel.adorn.lib.AdornStats;
+import juuxel.adorn.lib.AdornTags;
 import juuxel.adorn.util.ShapeRotation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.item.DyeItem;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.attribute.BedRule;
+import net.minecraft.world.attribute.EnvironmentAttributes;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.attribute.BedRule;
-import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -77,12 +77,15 @@ public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock, Snea
 
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (stack.getItem() instanceof DyeItem dye) {
-            world.setBlockAndUpdate(pos, AdornBlocks.SOFAS.getEager(dye.getDyeColor()).withPropertiesOf(state));
-            world.playSound(player, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1f, 0.8f);
-            if (!player.getAbilities().instabuild) stack.shrink(1);
-            if (!world.isClientSide()) player.awardStat(AdornStats.DYE_SOFA);
-            return InteractionResult.SUCCESS;
+        if (stack.is(AdornTags.FURNITURE_DYES)) {
+            var dye = stack.get(DataComponents.DYE);
+            if (dye != null) {
+                world.setBlockAndUpdate(pos, AdornBlocks.SOFAS.getEager(dye).withPropertiesOf(state));
+                world.playSound(player, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1f, 0.8f);
+                if (!player.getAbilities().instabuild) stack.shrink(1);
+                if (!world.isClientSide()) player.awardStat(AdornStats.DYE_SOFA);
+                return InteractionResult.SUCCESS;
+            }
         }
 
         return super.useItemOn(stack, state, world, pos, player, hand, hit);
@@ -93,7 +96,7 @@ public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock, Snea
         var sleepingDirection = getSleepingDirection(world, pos);
 
         if (state.getValue(OCCUPIED)) {
-            player.displayClientMessage(Component.translatable("block.adorn.sofa.occupied"), true);
+            player.sendOverlayMessage(Component.translatable("block.adorn.sofa.occupied"));
             return InteractionResult.SUCCESS;
         }
 
@@ -104,7 +107,7 @@ public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock, Snea
             if (!world.isClientSide()) {
                 player.startSleepInBed(pos).ifLeft(reason -> {
                     if (reason.message() != null) {
-                        player.displayClientMessage(reason.message(), true);
+                        player.sendOverlayMessage(reason.message());
                     }
                 });
             }

@@ -3,15 +3,14 @@ package juuxel.adorn.item;
 import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.entity.AdornEntities;
 import juuxel.adorn.entity.ConeVariant;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Item.Properties;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.gameevent.GameEvent;
 
 public final class ConeItem extends Item {
@@ -29,14 +28,9 @@ public final class ConeItem extends Item {
             context.getLevel().gameEvent(player, GameEvent.ENTITY_PLACE, offsetPos);
         }
 
-        var coneVariantComponent = context.getItemInHand().get(AdornComponentTypes.CONE_VARIANT.get());
-        if (coneVariantComponent != null) {
-            var variant = coneVariantComponent.variant()
-                .unwrap(context.getLevel().registryAccess())
-                .orElse(null);
-            if (variant != null) {
-                context.getLevel().playSound(player, offsetPos, variant.value().placeSound().value(), SoundSource.BLOCKS, 1f, 0.8f);
-            }
+        var variant = context.getItemInHand().get(AdornComponentTypes.CONE_VARIANT.get());
+        if (variant != null) {
+            context.getLevel().playSound(player, offsetPos, variant.value().placeSound().value(), SoundSource.BLOCKS, 1f, 0.8f);
         }
 
         context.getItemInHand().consume(1, player);
@@ -45,9 +39,9 @@ public final class ConeItem extends Item {
 
     @Override
     public Component getName(ItemStack stack) {
-        var variantComponent = stack.get(AdornComponentTypes.CONE_VARIANT.get());
-        if (variantComponent != null) {
-            return ConeVariant.getName(variantComponent.variant());
+        var variant = stack.get(AdornComponentTypes.CONE_VARIANT.get());
+        if (variant != null) {
+            return ConeVariant.getName(variant);
         }
 
         return super.getName(stack);

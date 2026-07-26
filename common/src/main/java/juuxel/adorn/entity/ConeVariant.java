@@ -5,27 +5,26 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.lib.registry.AdornRegistryKeys;
 import juuxel.adorn.util.Dyes;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.RegistryCodecs;
-import net.minecraft.core.HolderGetter;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.item.EitherHolder;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
+import net.minecraft.core.RegistryCodecs;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryFixedCodec;
-import net.minecraft.tags.FluidTags;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.util.Util;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ExtraCodecs;
+import net.minecraft.util.Util;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.material.Fluid;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -102,10 +101,6 @@ public record ConeVariant(
 
     public static Component getName(Holder<ConeVariant> variant) {
         return variant.unwrapKey().map(ConeVariant::getName).orElse(DEFAULT_NAME);
-    }
-
-    public static Component getName(EitherHolder<ConeVariant> variant) {
-        return variant.key().map(ConeVariant::getName).orElse(DEFAULT_NAME);
     }
 
     public static final class Keys {

@@ -3,20 +3,20 @@ package juuxel.adorn.platform.forge.block.entity;
 import juuxel.adorn.block.entity.KitchenSinkBlockEntity;
 import juuxel.adorn.fluid.FluidReference;
 import juuxel.adorn.platform.forge.util.FluidTankReference;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -66,7 +66,7 @@ public final class KitchenSinkBlockEntityForge extends KitchenSinkBlockEntity im
 
     @Override
     public boolean interactWithItem(ItemStack stack, Player player, InteractionHand hand) {
-        if (FluidUtil.interactWithFluidHandler(player, hand, worldPosition, tank)) {
+        if (FluidUtil.interactWithFluidHandler(player, hand, worldPosition, tank, null)) {
             markDirtyAndSync();
             return true;
         }

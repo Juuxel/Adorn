@@ -1,15 +1,14 @@
 package juuxel.adorn.client.gui.widget;
 
 import juuxel.adorn.util.Colors;
-import juuxel.adorn.util.FakeScopedValue;
 import juuxel.adorn.util.animation.AnimatedProperty;
 import juuxel.adorn.util.animation.AnimatedPropertyWrapper;
 import juuxel.adorn.util.animation.AnimationEngine;
 import juuxel.adorn.util.animation.Interpolator;
-import net.minecraft.client.input.MouseButtonEvent;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.util.Mth;
 import org.lwjgl.glfw.GLFW;
 
@@ -26,7 +25,7 @@ public final class ScrollEnvelope extends ScissorEnvelope {
     private static final int SCROLL_THUMB_COLOR_INACTIVE_DARK = Colors.color(0xFFFFFF, 0.2f);
     private static final int SCROLL_THUMB_COLOR_ACTIVE_DARK = Colors.color(0xFFFFFF, 0.6f);
 
-    public static final FakeScopedValue<Double> OFFSET = new FakeScopedValue<>();
+    public static final ScopedValue<Double> OFFSET = ScopedValue.newInstance();
 
     private final SizedElement element;
     private double offset = 0.0;
@@ -55,6 +54,14 @@ public final class ScrollEnvelope extends ScissorEnvelope {
             inactiveScrollThumbColor,
             animationEngine, 20, Interpolator.COLOR
         );
+    }
+
+    public static int getRealMouseY(int mouseY) {
+        if (OFFSET.isBound()) {
+            return mouseY - OFFSET.get().intValue();
+        }
+
+        return mouseY;
     }
 
     private void setOffset(double offset) {
@@ -107,17 +114,17 @@ public final class ScrollEnvelope extends ScissorEnvelope {
     }
 
     @Override
-    protected void renderContent(GuiGraphics context, int mouseX, int mouseY, float delta) {
+    protected void extractContent(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
         var matrices = context.pose();
         matrices.pushMatrix();
         matrices.translate(0f, (float) -offset);
-        OFFSET.with(offset, () -> super.renderContent(context, mouseX, (int) (mouseY + offset), delta));
+        ScopedValue.where(OFFSET, offset).run(() -> super.extractContent(context, mouseX, (int) (mouseY + offset), delta));
         matrices.popMatrix();
     }
 
     @Override
-    public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
-        super.render(context, mouseX, mouseY, delta);
+    public void extractRenderState(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
+        super.extractRenderState(context, mouseX, mouseY, delta);
 
         var heightDifference = heightDifference();
         if (heightDifference > 0) {

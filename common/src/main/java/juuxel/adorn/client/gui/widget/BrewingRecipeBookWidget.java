@@ -9,13 +9,12 @@ import juuxel.adorn.recipe.BrewingRecipeDisplay;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.recipebook.GhostSlots;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
-import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent.TabInfo;
 import net.minecraft.client.gui.screens.recipebook.RecipeCollection;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.entity.player.StackedItemContents;
-import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.context.ContextMap;
+import net.minecraft.world.entity.player.StackedItemContents;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
 
 import java.util.List;
 import java.util.function.Supplier;

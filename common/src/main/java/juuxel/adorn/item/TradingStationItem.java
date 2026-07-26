@@ -1,11 +1,10 @@
 package juuxel.adorn.item;
 
 import juuxel.adorn.component.AdornComponentTypes;
-import net.minecraft.world.item.Item.Properties;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.level.block.Block;
 
 import java.util.Optional;
 

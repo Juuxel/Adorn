@@ -1,21 +1,26 @@
 package juuxel.adorn.recipe;
 
+import com.mojang.serialization.MapCodec;
 import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.item.WateringCanItem;
 import juuxel.adorn.lib.AdornTags;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.CustomRecipe;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public final class FertilizerRefillingRecipe extends CustomRecipe {
-    public FertilizerRefillingRecipe(CraftingBookCategory category) {
-        super(category);
+    public static final FertilizerRefillingRecipe INSTANCE = new FertilizerRefillingRecipe();
+    public static final MapCodec<FertilizerRefillingRecipe> MAP_CODEC = MapCodec.unit(INSTANCE);
+    public static final StreamCodec<RegistryFriendlyByteBuf, FertilizerRefillingRecipe> STREAM_CODEC = StreamCodec.unit(INSTANCE);
+    public static final RecipeSerializer<FertilizerRefillingRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
+
+    private FertilizerRefillingRecipe() {
     }
 
     @Override
@@ -24,7 +29,7 @@ public final class FertilizerRefillingRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingInput input, HolderLookup.Provider registries) {
+    public ItemStack assemble(CraftingInput input) {
         var match = match(input);
         if (match == null) return ItemStack.EMPTY;
 
@@ -67,10 +72,9 @@ public final class FertilizerRefillingRecipe extends CustomRecipe {
 
     @Override
     public RecipeSerializer<FertilizerRefillingRecipe> getSerializer() {
-        return AdornRecipeSerializers.FERTILIZER_REFILLING.get();
+        return SERIALIZER;
     }
 
-    private record MatchResult(
-        ItemStack wateringCan, int fertilizers) {
+    private record MatchResult(ItemStack wateringCan, int fertilizers) {
     }
 }

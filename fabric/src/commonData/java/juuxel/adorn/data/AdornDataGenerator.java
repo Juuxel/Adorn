@@ -36,6 +36,7 @@ public final class AdornDataGenerator implements DataGeneratorEntrypoint {
     }
 
     private void initCommon(FabricDataGenerator.Pack pack) {
+        pack.addProvider(AdornDynamicRegistryGenerator::new);
         pack.addProvider(AdornGeneralDataGenerator::new);
         pack.addProvider(AdornTagGenerator::new);
         pack.addProvider(AdornBlockLootTableGenerator::new);
@@ -44,8 +45,7 @@ public final class AdornDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(BookGenerator::new);
         var blockTags = pack.addProvider(AdornBlockTagGenerator::new);
         pack.addProvider((output, registriesFuture) -> new AdornItemTagGenerator(output, registriesFuture, blockTags));
-        pack.addProvider((output, registriesFuture) -> PackMcmetaGeneration.create(output));
-        pack.addProvider(AdornDynamicRegistryGenerator::new);
+        pack.addProvider((output, _) -> PackMcmetaGeneration.create(output));
     }
 
     private void initFabric(FabricDataGenerator.Pack pack) {

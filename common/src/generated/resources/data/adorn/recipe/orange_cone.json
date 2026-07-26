@@ -13,7 +13,9 @@
     "-"
   ],
   "result": {
-    "count": 1,
+    "components": {
+      "adorn:cone_variant": "adorn:orange"
+    },
     "id": "adorn:cone"
   }
 }

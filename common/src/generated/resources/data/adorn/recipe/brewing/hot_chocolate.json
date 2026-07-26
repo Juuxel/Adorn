@@ -3,7 +3,6 @@
   "first_ingredient": "#c:crops/cocoa_bean",
   "input": "adorn:mug",
   "result": {
-    "count": 1,
     "id": "adorn:hot_chocolate"
   },
   "second_ingredient": "#c:foods/milk"

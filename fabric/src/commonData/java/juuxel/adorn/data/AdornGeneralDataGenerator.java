@@ -2,12 +2,12 @@ package juuxel.adorn.data;
 
 import juuxel.adorn.datagen.DataGenerator;
 import juuxel.adorn.datagen.DataOutput;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 
 public final class AdornGeneralDataGenerator extends AdornCustomDataGenerator {
     private static final String MAIN_CONFIGS_PROPERTY = "adorn.data.mainConfigs";
 
-    public AdornGeneralDataGenerator(FabricDataOutput output) {
+    public AdornGeneralDataGenerator(FabricPackOutput output) {
         super(output);
     }
 

@@ -2,18 +2,17 @@ package juuxel.adorn.client.gui.widget;
 
 import juuxel.adorn.util.Colors;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.network.chat.Component;
 
-public record ConfigScreenHeading(
-    Component text, int x, int y, int width) implements Renderable {
+public record ConfigScreenHeading(Component text, int x, int y, int width) implements Renderable {
     public static final int HEIGHT = 18;
     private static final int OUTER_GAP_WIDTH = 5;
     private static final int INNER_GAP_WIDTH = 5;
 
     @Override
-    public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
+    public void extractRenderState(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
         var client = Minecraft.getInstance();
         var textRenderer = client.font;
         var textWidth = textRenderer.width(text);
@@ -41,7 +40,7 @@ public record ConfigScreenHeading(
         // Label
         var textX = (width - textWidth) * 0.5f;
         var textY = (HEIGHT - textRenderer.lineHeight) / 2;
-        context.drawString(textRenderer, text, (int) textX, textY, Colors.WHITE, false);
+        context.text(textRenderer, text, (int) textX, textY, Colors.WHITE, false);
         matrices.popMatrix();
     }
 }

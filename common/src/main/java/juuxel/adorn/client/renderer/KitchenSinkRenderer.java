@@ -1,25 +1,26 @@
 package juuxel.adorn.client.renderer;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import juuxel.adorn.block.AbstractKitchenCounterBlock;
 import juuxel.adorn.block.entity.KitchenSinkBlockEntity;
 import juuxel.adorn.client.FluidRenderingBridge;
 import juuxel.adorn.fluid.FluidUnit;
 import juuxel.adorn.util.Logging;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.rendertype.RenderTypes;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
-import net.minecraft.client.renderer.SubmitNodeCollector;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.data.AtlasIds;
 import net.minecraft.core.Direction;
+import net.minecraft.data.AtlasIds;
 import net.minecraft.util.Mth;
-import com.mojang.math.Axis;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -133,7 +134,7 @@ public final class KitchenSinkRenderer implements BlockEntityRenderer<KitchenSin
 
     /** Gets the entity's fluid's color. */
     private int getFluidColor(KitchenSinkBlockEntity entity) {
-        return FluidRenderingBridge.get().getColor(entity.getFluidReference(), entity.getLevel(), entity.getBlockPos());
+        return FluidRenderingBridge.get().getColor(entity.getFluidReference(), (ClientLevel) entity.getLevel(), entity.getBlockPos());
     }
 
     /** Gets the fluid level from the entity in litres. */

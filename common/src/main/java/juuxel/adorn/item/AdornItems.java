@@ -3,26 +3,25 @@ package juuxel.adorn.item;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.component.AdornComponentTypes;
-import juuxel.adorn.component.ConeVariantComponent;
 import juuxel.adorn.component.ItemDescription;
 import juuxel.adorn.entity.AdornEntities;
 import juuxel.adorn.entity.ConeVariant;
 import juuxel.adorn.lib.registry.KeyedRegistrar;
 import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.lib.registry.RegistrarFactory;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.item.component.Consumables;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.component.SuspiciousStewEffects;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.StandingAndWallBlockItem;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.item.Rarity;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.StandingAndWallBlockItem;
+import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.component.SuspiciousStewEffects;
+import net.minecraft.world.level.block.Block;
 
 import java.util.List;
 import java.util.function.Function;
@@ -86,7 +85,7 @@ public final class AdornItems {
         ConeItem::new,
         key -> new Item.Properties()
             .overrideDescription(ConeVariant.DEFAULT_TRANSLATION_KEY)
-            .component(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(ConeVariant.Keys.ORANGE))
+            .delayedHolderComponent(AdornComponentTypes.CONE_VARIANT.get(), ConeVariant.Keys.ORANGE)
             .component(AdornComponentTypes.DESCRIPTION.get(), ItemDescription.ofEntity(AdornEntities.CONE.key().identifier()))
             .equippable(EquipmentSlot.HEAD)
     );

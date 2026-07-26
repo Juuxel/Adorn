@@ -1,15 +1,14 @@
 package juuxel.adorn.util;
 
 import net.minecraft.core.Direction;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public record FourWayShapeConfig(
-    VoxelShape baseShape, VoxelShape cornerX0Z0, VoxelShape cornerX1Z0, VoxelShape cornerX0Z1, VoxelShape cornerX1Z1, Map<Direction, VoxelShape> edges) {
+public record FourWayShapeConfig(VoxelShape baseShape, VoxelShape cornerX0Z0, VoxelShape cornerX1Z0, VoxelShape cornerX0Z1, VoxelShape cornerX1Z1, Map<Direction, VoxelShape> edges) {
     public FourWayShapeConfig(VoxelShape baseShape, VoxelShape cornerX0Z0, VoxelShape cornerX1Z0, VoxelShape cornerX0Z1, VoxelShape cornerX1Z1) {
         this(baseShape, cornerX0Z0, cornerX1Z0, cornerX0Z1, cornerX1Z1, Map.of());
     }

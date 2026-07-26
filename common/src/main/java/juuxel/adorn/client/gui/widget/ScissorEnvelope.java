@@ -1,8 +1,8 @@
 package juuxel.adorn.client.gui.widget;
 
 import juuxel.adorn.client.gui.Scissors;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.input.MouseButtonEvent;
-import net.minecraft.client.gui.GuiGraphics;
 
 public abstract class ScissorEnvelope extends WidgetEnvelope {
     protected final int x;
@@ -61,13 +61,13 @@ public abstract class ScissorEnvelope extends WidgetEnvelope {
     }
 
     @Override
-    public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
+    public void extractRenderState(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
         Scissors.push(context, x, y, width, height);
-        renderContent(context, mouseX, mouseY, delta);
+        extractContent(context, mouseX, mouseY, delta);
         Scissors.pop(context);
     }
 
-    protected void renderContent(GuiGraphics context, int mouseX, int mouseY, float delta) {
-        super.render(context, mouseX, mouseY, delta);
+    protected void extractContent(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
+        super.extractRenderState(context, mouseX, mouseY, delta);
     }
 }

@@ -9,9 +9,9 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 
 public final class AdornNetworking {
     public static void init() {
-        PayloadTypeRegistry.playC2S().register(SetTradeStackC2SMessage.ID, SetTradeStackC2SMessage.PACKET_CODEC);
-        PayloadTypeRegistry.playS2C().register(BrewerFluidSyncS2CMessage.ID, BrewerFluidSyncS2CMessage.PACKET_CODEC);
-        PayloadTypeRegistry.playS2C().register(OpenBookS2CMessage.ID, OpenBookS2CMessage.PACKET_CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(SetTradeStackC2SMessage.ID, SetTradeStackC2SMessage.PACKET_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(BrewerFluidSyncS2CMessage.ID, BrewerFluidSyncS2CMessage.PACKET_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(OpenBookS2CMessage.ID, OpenBookS2CMessage.PACKET_CODEC);
 
         ServerPlayNetworking.registerGlobalReceiver(SetTradeStackC2SMessage.ID, (payload, context) -> {
             var menu = context.player().containerMenu;

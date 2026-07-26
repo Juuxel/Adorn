@@ -1,15 +1,14 @@
 package juuxel.adorn.block;
 
-import net.minecraft.world.level.block.AbstractCandleBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.LanternBlock;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AbstractCandleBlock;
+import net.minecraft.world.level.block.LanternBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.phys.Vec3;
 
 public final class CandlelitLanternBlock extends LanternBlock implements BlockWithDescription {
     private static final String DESCRIPTION_KEY = "block.adorn.candlelit_lantern.description";

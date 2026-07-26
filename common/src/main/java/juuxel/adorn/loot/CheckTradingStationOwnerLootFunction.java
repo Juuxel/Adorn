@@ -7,7 +7,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 
 public final class CheckTradingStationOwnerLootFunction implements LootItemFunction {
     public static final CheckTradingStationOwnerLootFunction INSTANCE = new CheckTradingStationOwnerLootFunction();
@@ -36,7 +35,7 @@ public final class CheckTradingStationOwnerLootFunction implements LootItemFunct
     private boolean hasStorage(ItemStack stack) {
         var container = stack.get(DataComponents.CONTAINER);
         if (container == null) return false;
-        return container.nonEmptyStream().findAny().isPresent();
+        return container.nonEmptyItems().iterator().hasNext();
     }
 
     private void clearOwner(ItemStack stack) {
@@ -44,11 +43,11 @@ public final class CheckTradingStationOwnerLootFunction implements LootItemFunct
     }
 
     @Override
-    public LootItemFunctionType<? extends LootItemFunction> getType() {
-        return AdornLootFunctionTypes.CHECK_TRADING_STATION_OWNER.get();
+    public MapCodec<? extends LootItemFunction> codec() {
+        return CODEC;
     }
 
-    public static final class Builder implements net.minecraft.world.level.storage.loot.functions.LootItemFunction.Builder {
+    public static final class Builder implements LootItemFunction.Builder {
         private Builder() {
         }
 

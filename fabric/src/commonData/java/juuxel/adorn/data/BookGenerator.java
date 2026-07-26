@@ -8,15 +8,18 @@ import juuxel.adorn.client.book.Image;
 import juuxel.adorn.client.book.Page;
 import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.lib.AdornTags;
+import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.util.Vec2i;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricCodecDataProvider;
-import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Items;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -25,7 +28,7 @@ import java.util.function.BiConsumer;
 public final class BookGenerator extends FabricCodecDataProvider<Book> {
     private static final String DIRECTORY = BookManager.DATA_TYPE;
 
-    public BookGenerator(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public BookGenerator(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(dataOutput, registriesFuture, PackOutput.Target.RESOURCE_PACK, DIRECTORY, Book.CODEC);
     }
 
@@ -36,7 +39,7 @@ public final class BookGenerator extends FabricCodecDataProvider<Book> {
             Book.builder()
                 .title(Component.literal("Adorn"))
                 .titleScale(1.5f)
-                .subtitle(AdornItems.GUIDE_BOOK.get().getName().copy().withStyle(ChatFormatting.ITALIC))
+                .subtitle(getItemName(AdornItems.GUIDE_BOOK).withStyle(ChatFormatting.ITALIC))
                 .author(Component.translatable("item.adorn.guide_book.author"))
                 .pageTree(pageTree -> pageTree
                     .page(Page.builder()
@@ -161,7 +164,7 @@ public final class BookGenerator extends FabricCodecDataProvider<Book> {
         consumer.accept(
             AdornCommon.id("traders_manual"),
             Book.builder()
-                .title(AdornItems.TRADERS_MANUAL.get().getName().copy().withStyle(ChatFormatting.UNDERLINE, ChatFormatting.BOLD))
+                .title(getItemName(AdornItems.TRADERS_MANUAL).withStyle(ChatFormatting.UNDERLINE, ChatFormatting.BOLD))
                 .subtitle(Component.translatable("item.adorn.traders_manual.subtitle").withStyle(ChatFormatting.ITALIC))
                 .author(Component.translatable("item.adorn.traders_manual.author"))
                 .page(Page.builder()
@@ -176,6 +179,10 @@ public final class BookGenerator extends FabricCodecDataProvider<Book> {
                     .build())
                 .build()
         );
+    }
+
+    private static MutableComponent getItemName(Registered<? extends Item> item) {
+        return Component.translatable(item.get().getDescriptionId());
     }
 
     @Override

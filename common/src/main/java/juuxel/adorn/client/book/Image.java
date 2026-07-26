@@ -13,8 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public record Image(
-    Identifier location, Vec2i size, Placement placement, List<HoverArea> hoverAreas) {
+public record Image(Identifier location, Vec2i size, Placement placement, List<HoverArea> hoverAreas) {
     public static final Codec<Image> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         Identifier.CODEC.fieldOf("location").forGetter(Image::location),
         Vec2i.CODEC.fieldOf("size").forGetter(Image::size),

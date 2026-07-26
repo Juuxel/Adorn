@@ -13,16 +13,15 @@ import juuxel.adorn.client.renderer.ShelfRenderer;
 import juuxel.adorn.client.renderer.TradingStationRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.level.block.WeatheringCopperBlocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public final class AdornBlocksFabric {
     public static void init() {
@@ -45,13 +44,17 @@ public final class AdornBlocksFabric {
             AdornBlockEntities.BREWER.get()
         );
 
-        OxidizableBlocksRegistry.registerOxidizableBlockPair(AdornBlocks.COPPER_PIPE.get(), AdornBlocks.EXPOSED_COPPER_PIPE.get());
-        OxidizableBlocksRegistry.registerOxidizableBlockPair(AdornBlocks.EXPOSED_COPPER_PIPE.get(), AdornBlocks.WEATHERED_COPPER_PIPE.get());
-        OxidizableBlocksRegistry.registerOxidizableBlockPair(AdornBlocks.WEATHERED_COPPER_PIPE.get(), AdornBlocks.OXIDIZED_COPPER_PIPE.get());
-        OxidizableBlocksRegistry.registerWaxableBlockPair(AdornBlocks.COPPER_PIPE.get(), AdornBlocks.WAXED_COPPER_PIPE.get());
-        OxidizableBlocksRegistry.registerWaxableBlockPair(AdornBlocks.EXPOSED_COPPER_PIPE.get(), AdornBlocks.WAXED_EXPOSED_COPPER_PIPE.get());
-        OxidizableBlocksRegistry.registerWaxableBlockPair(AdornBlocks.WEATHERED_COPPER_PIPE.get(), AdornBlocks.WAXED_WEATHERED_COPPER_PIPE.get());
-        OxidizableBlocksRegistry.registerWaxableBlockPair(AdornBlocks.OXIDIZED_COPPER_PIPE.get(), AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE.get());
+        var copperPipeBlocks = new WeatheringCopperBlocks(
+            AdornBlocks.COPPER_PIPE.get(),
+            AdornBlocks.EXPOSED_COPPER_PIPE.get(),
+            AdornBlocks.WEATHERED_COPPER_PIPE.get(),
+            AdornBlocks.OXIDIZED_COPPER_PIPE.get(),
+            AdornBlocks.WAXED_COPPER_PIPE.get(),
+            AdornBlocks.WAXED_EXPOSED_COPPER_PIPE.get(),
+            AdornBlocks.WAXED_WEATHERED_COPPER_PIPE.get(),
+            AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE.get()
+        );
+        OxidizableBlocksRegistry.registerWeatheringCopperBlocks(copperPipeBlocks);
 
         FlammableBlockRegistry.getDefaultInstance().add(AdornTags.PAINTED_PLANKS.block(), 5, 20);
         FlammableBlockRegistry.getDefaultInstance().add(AdornTags.PAINTED_WOOD_SLABS.block(), 5, 20);
@@ -72,25 +75,6 @@ public final class AdornBlocksFabric {
         BlockEntityRenderers.register(AdornBlockEntities.TRADING_STATION.get(), TradingStationRenderer::new);
         BlockEntityRenderers.register(AdornBlockEntities.SHELF.get(), ShelfRenderer::new);
         BlockEntityRenderers.register(AdornBlockEntities.KITCHEN_SINK.get(), KitchenSinkRenderer::new);
-
-        // RenderLayers
-        BlockRenderLayerMap.putBlocks(
-            ChunkSectionLayer.CUTOUT,
-            AdornBlocks.TRADING_STATION.get(),
-            AdornBlocks.STONE_TORCH_GROUND.get(),
-            AdornBlocks.STONE_TORCH_WALL.get(),
-            AdornBlocks.CHAIN_LINK_FENCE.get(),
-            AdornBlocks.STONE_LADDER.get(),
-            AdornBlocks.CANDLELIT_LANTERN.get()
-        );
-
-        for (var block : AdornBlocks.DYED_CANDLELIT_LANTERNS.get().values()) {
-            BlockRenderLayerMap.putBlock(block, ChunkSectionLayer.CUTOUT);
-        }
-
-        for (var coffeeTable : BlockVariantSets.get(BlockKind.COFFEE_TABLE)) {
-            BlockRenderLayerMap.putBlock(coffeeTable.get(), ChunkSectionLayer.TRANSLUCENT);
-        }
     }
 
     @SuppressWarnings("unchecked")

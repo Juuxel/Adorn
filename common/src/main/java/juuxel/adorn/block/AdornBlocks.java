@@ -12,20 +12,20 @@ import juuxel.adorn.lib.registry.RegistryHelper;
 import juuxel.adorn.platform.PlatformBridges;
 import juuxel.adorn.util.AdornUtil;
 import juuxel.adorn.util.Dyes;
-import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ButtonBlock;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.TorchBlock;
 import net.minecraft.world.level.block.WallTorchBlock;
-import net.minecraft.world.item.Item;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 
 public final class AdornBlocks {
     public static final KeyedRegistrar<Block> BLOCKS = RegistrarFactory.get().create(Registries.BLOCK);
@@ -351,7 +351,7 @@ public final class AdornBlocks {
     }
 
     private static Registered<Block> registerCrate(String name) {
-        return HELPER.registerBlock(name, () -> new net.minecraft.world.item.Item.Properties().craftRemainder(CRATE.get().asItem()), Block::new, () -> AdornUtil.copySettingsSafely(CRATE.get()));
+        return HELPER.registerBlock(name, () -> new Item.Properties().craftRemainder(CRATE.get().asItem()), Block::new, () -> AdornUtil.copySettingsSafely(CRATE.get()));
     }
 
     private static BlockBehaviour.Properties alternativeFormOf(BlockBehaviour.Properties settings, Block other) {

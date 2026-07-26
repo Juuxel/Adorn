@@ -7,36 +7,34 @@ import juuxel.adorn.fluid.StepMaximum;
 import juuxel.adorn.lib.AdornSounds;
 import juuxel.adorn.platform.FluidBridge;
 import juuxel.adorn.util.Colors;
-import net.minecraft.world.item.Item.Properties;
-import net.minecraft.world.item.Item.TooltipContext;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.FarmBlock;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.BucketPickup;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.ChatFormatting;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
+import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.BucketPickup;
+import net.minecraft.world.level.block.FarmlandBlock;
 import net.minecraft.world.level.block.LevelEvent;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.HitResult;
 
 import java.util.function.Consumer;
 
@@ -126,10 +124,10 @@ public final class WateringCanItem extends Item {
         var state = world.getBlockState(pos);
         var block = state.getBlock();
 
-        if (fertilizerLevel > 0 && world.random.nextInt(9) == 0) {
+        if (fertilizerLevel > 0 && world.getRandom().nextInt(9) == 0) {
             if (block instanceof BonemealableBlock fertilizable && fertilizable.isValidBonemealTarget(world, pos, state)) {
-                if (world instanceof ServerLevel serverWorld && fertilizable.isBonemealSuccess(world, world.random, pos, state)) {
-                    fertilizable.performBonemeal(serverWorld, world.random, pos, state);
+                if (world instanceof ServerLevel serverWorld && fertilizable.isBonemealSuccess(world, world.getRandom(), pos, state)) {
+                    fertilizable.performBonemeal(serverWorld, world.getRandom(), pos, state);
                 }
 
                 world.levelEvent(player, LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH, pos, 5);
@@ -139,13 +137,13 @@ public final class WateringCanItem extends Item {
         }
 
         if (!world.isClientSide()) {
-            if (block instanceof FarmBlock) {
+            if (block instanceof FarmlandBlock) {
                 waterFarmlandBlock(world, pos, state);
             } else if (!state.isCollisionShapeFullBlock(world, pos)) { // We can't water through full cubes
                 var downPos = pos.below();
                 var downState = world.getBlockState(downPos);
 
-                if (downState.getBlock() instanceof FarmBlock) {
+                if (downState.getBlock() instanceof FarmlandBlock) {
                     waterFarmlandBlock(world, downPos, downState);
                 }
             }
@@ -153,12 +151,12 @@ public final class WateringCanItem extends Item {
     }
 
     private void waterFarmlandBlock(Level world, BlockPos pos, BlockState state) {
-        var moisture = state.getValue(FarmBlock.MOISTURE);
+        int moisture = state.getValue(FarmlandBlock.MOISTURE);
 
-        if (moisture < FarmBlock.MAX_MOISTURE) {
-            var moistureChange = world.random.nextIntBetweenInclusive(2, 6);
-            var newMoisture = Math.min(moisture + moistureChange, FarmBlock.MAX_MOISTURE);
-            world.setBlock(pos, state.setValue(FarmBlock.MOISTURE, newMoisture), Block.UPDATE_CLIENTS);
+        if (moisture < FarmlandBlock.MAX_MOISTURE) {
+            var moistureChange = world.getRandom().nextIntBetweenInclusive(2, 6);
+            var newMoisture = Math.min(moisture + moistureChange, FarmlandBlock.MAX_MOISTURE);
+            world.setBlock(pos, state.setValue(FarmlandBlock.MOISTURE, newMoisture), Block.UPDATE_CLIENTS);
         }
     }
 
@@ -186,12 +184,12 @@ public final class WateringCanItem extends Item {
     }
 
     private static void spawnParticlesAt(ServerLevel world, BlockPos pos, double y) {
-        double px = pos.getX() + 0.3 + world.random.nextDouble() * 0.4;
+        double px = pos.getX() + 0.3 + world.getRandom().nextDouble() * 0.4;
         double py = y + 0.1;
-        double pz = pos.getZ() + 0.3 + world.random.nextDouble() * 0.4;
-        double vx = world.random.nextDouble() * 0.2 - 0.1;
+        double pz = pos.getZ() + 0.3 + world.getRandom().nextDouble() * 0.4;
+        double vx = world.getRandom().nextDouble() * 0.2 - 0.1;
         double vy = 0.1;
-        double vz = world.random.nextDouble() * 0.2 - 0.1;
+        double vz = world.getRandom().nextDouble() * 0.2 - 0.1;
         world.sendParticles(ParticleTypes.SPLASH, px, py, pz, 4, vx, vy, vz, 0.5);
     }
 

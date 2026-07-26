@@ -1,12 +1,11 @@
 package juuxel.adorn.platform.forge.block;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.WoodType;
 
 public final class PaintedWoodFenceGateBlockNeo extends FenceGateBlock {
     public PaintedWoodFenceGateBlockNeo(WoodType woodType, Properties settings) {

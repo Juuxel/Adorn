@@ -1,10 +1,10 @@
 package juuxel.adorn.lib;
 
 import juuxel.adorn.AdornCommon;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.item.Item;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public final class AdornTags {
     public static final TagPair CHAIRS = blockAndItem("chairs");
@@ -60,6 +60,7 @@ public final class AdornTags {
     public static final TagKey<Block> COPPER_PIPES_CONNECT_TO = block("copper_pipes_connect_to");
     public static final TagKey<Item> WATERING_CAN_FERTILIZERS = item("watering_can_fertilizers");
     public static final TagKey<Item> BREWING_INPUTS = item("brewing_inputs");
+    public static final TagKey<Item> FURNITURE_DYES = item("furniture_dyes");
 
     public static void init() {
     }
@@ -76,7 +77,6 @@ public final class AdornTags {
         return new TagPair(block(path), item(path));
     }
 
-    public record TagPair(
-        TagKey<Block> block, TagKey<Item> item) {
+    public record TagPair(TagKey<Block> block, TagKey<Item> item) {
     }
 }

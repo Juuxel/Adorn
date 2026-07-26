@@ -4,13 +4,11 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.item.crafting.display.RecipeDisplay;
-import net.minecraft.world.item.crafting.display.RecipeDisplay.Type;
-import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 
-public record BrewingRecipeDisplay(
-    SlotDisplay input, SlotDisplay firstIngredient, SlotDisplay secondIngredient, SlotDisplay fluid, SlotDisplay result, SlotDisplay craftingStation) implements RecipeDisplay {
+public record BrewingRecipeDisplay(SlotDisplay input, SlotDisplay firstIngredient, SlotDisplay secondIngredient, SlotDisplay fluid, SlotDisplay result, SlotDisplay craftingStation) implements RecipeDisplay {
     public static final MapCodec<BrewingRecipeDisplay> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
         SlotDisplay.CODEC.fieldOf("input").forGetter(BrewingRecipeDisplay::input),
         SlotDisplay.CODEC.fieldOf("first_ingredient").forGetter(BrewingRecipeDisplay::firstIngredient),

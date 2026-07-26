@@ -1,14 +1,14 @@
 package juuxel.adorn.data;
 
 import juuxel.adorn.lib.registry.AdornRegistryKeys;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.HolderLookup;
 
 import java.util.concurrent.CompletableFuture;
 
 public final class AdornDynamicRegistryGenerator extends FabricDynamicRegistryProvider {
-    public AdornDynamicRegistryGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public AdornDynamicRegistryGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

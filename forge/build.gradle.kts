@@ -5,6 +5,13 @@ plugins {
     id("adorn-data-generator")
 }
 
+loom {
+    neoForge {
+        // Convert the access widener to a NeoForge access transformer.
+        convertAccessWideners(tasks.jar, "adorn.accesswidener")
+    }
+}
+
 adorn {
     platformModule {
         platformName = "neoforge"
@@ -25,15 +32,10 @@ dependencies {
 
     // Add regular mod dependency on REI - API for compile time and the mod itself for runtime.
     // modLocalRuntime won't be exposed if other mods depend on your mod unlike modRuntimeOnly.
-    modCompileOnly(libs.rei.neoforge)
+    compileOnly(libs.rei.neoforge)
 }
 
 tasks {
-    remapJar {
-        // Convert the access widener to a NeoForge access transformer.
-        atAccessWideners.add("adorn.accesswidener")
-    }
-
     register<CheckModDataCompat>("checkModDataCompat") {
         configs.addAll(adorn.dataGenerator.settings.named("adorn").map { it.configs })
         mod("biomesoplenty", "biomes-o-plenty")

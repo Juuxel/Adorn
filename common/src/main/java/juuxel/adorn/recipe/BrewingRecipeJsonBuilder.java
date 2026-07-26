@@ -4,21 +4,21 @@ import juuxel.adorn.AdornCommon;
 import juuxel.adorn.fluid.FluidIngredient;
 import juuxel.adorn.item.AdornItems;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.core.HolderGetter;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -27,14 +27,14 @@ import java.util.Optional;
 
 public final class BrewingRecipeJsonBuilder {
     private final HolderGetter<Item> itemLookup;
-    private final ItemStack result;
+    private final ItemStackTemplate result;
     private Ingredient input = Ingredient.of(AdornItems.MUG.get());
     private @Nullable Ingredient firstIngredient;
     private @Nullable Ingredient secondIngredient;
     private @Nullable FluidIngredient fluid;
     private final Map<String, Criterion<?>> criteria = new HashMap<>();
 
-    private BrewingRecipeJsonBuilder(HolderGetter<Item> itemLookup, ItemStack result) {
+    private BrewingRecipeJsonBuilder(HolderGetter<Item> itemLookup, ItemStackTemplate result) {
         this.itemLookup = itemLookup;
         this.result = result;
     }
@@ -44,7 +44,7 @@ public final class BrewingRecipeJsonBuilder {
     }
 
     public static BrewingRecipeJsonBuilder create(HolderGetter<Item> itemLookup, ItemLike item, int count) {
-        return new BrewingRecipeJsonBuilder(itemLookup, new ItemStack(item, count));
+        return new BrewingRecipeJsonBuilder(itemLookup, new ItemStackTemplate(item.asItem(), count));
     }
 
     public BrewingRecipeJsonBuilder input(ItemLike item) {
@@ -88,7 +88,7 @@ public final class BrewingRecipeJsonBuilder {
     }
 
     public void offerTo(RecipeOutput exporter) {
-        offerTo(exporter, RecipeBuilder.getDefaultRecipeId(result.getItem()).getPath());
+        offerTo(exporter, RecipeBuilder.getDefaultRecipeId(result).identifier().getPath());
     }
 
     public void offerTo(RecipeOutput exporter, String recipeName) {
@@ -96,12 +96,13 @@ public final class BrewingRecipeJsonBuilder {
         validate(key);
         Advancement.Builder advancementBuilder = exporter.advancement()
             .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(key))
-            .rewards(net.minecraft.advancements.AdvancementRewards.Builder.recipe(key))
+            .rewards(AdvancementRewards.Builder.recipe(key))
             .requirements(AdvancementRequirements.Strategy.OR);
+        var commonInfo = RecipeBuilder.createCraftingCommonInfo(true);
         criteria.forEach(advancementBuilder::addCriterion);
         BrewingRecipe recipe = fluid != null
-            ? new FluidBrewingRecipe(input, firstIngredient, Optional.ofNullable(secondIngredient), fluid, result)
-            : new ItemBrewingRecipe(input, firstIngredient, Optional.ofNullable(secondIngredient), result);
+            ? new FluidBrewingRecipe(commonInfo, input, firstIngredient, Optional.ofNullable(secondIngredient), fluid, result)
+            : new ItemBrewingRecipe(commonInfo, input, firstIngredient, Optional.ofNullable(secondIngredient), result);
         exporter.accept(key, recipe, advancementBuilder.build(key.identifier().withPrefix("recipes/")));
     }
 

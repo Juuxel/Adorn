@@ -1,11 +1,11 @@
 package juuxel.adorn.lib.registry;
 
 import juuxel.adorn.block.BlockWithItemComponents;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -47,7 +47,7 @@ public final class RegistryHelper {
      */
     public <T extends Block> Registered<T> registerBlock(
         String name,
-        BiFunction<T, net.minecraft.world.item.Item.Properties, Item> itemProvider,
+        BiFunction<T, Item.Properties, Item> itemProvider,
         Function<BlockBehaviour.Properties, T> block,
         BlockSettingsProvider settings
     ) {
@@ -59,7 +59,7 @@ public final class RegistryHelper {
      */
     public <T extends Block> Registered<T> registerBlock(
         String name,
-        BiFunction<T, net.minecraft.world.item.Item.Properties, Item> itemProvider,
+        BiFunction<T, Item.Properties, Item> itemProvider,
         ItemSettingsProvider itemSettings,
         Function<BlockBehaviour.Properties, T> block,
         BlockSettingsProvider settings
@@ -72,7 +72,7 @@ public final class RegistryHelper {
         return registered;
     }
 
-    private static net.minecraft.world.item.Item.Properties createBlockItemSettings(Block block, ResourceKey<Item> key, ItemSettingsProvider provider) {
+    private static Item.Properties createBlockItemSettings(Block block, ResourceKey<Item> key, ItemSettingsProvider provider) {
         var settings = provider.createItemSettings()
             .setId(key)
             .useBlockDescriptionPrefix();
@@ -91,7 +91,7 @@ public final class RegistryHelper {
         return blocks.register(name, key -> block.apply(settings.createBlockSettings().setId(key)));
     }
 
-    private static Item makeItemForBlock(Block block, net.minecraft.world.item.Item.Properties itemSettings) {
+    private static Item makeItemForBlock(Block block, Item.Properties itemSettings) {
         return new BlockItem(block, itemSettings);
     }
 
@@ -99,11 +99,11 @@ public final class RegistryHelper {
     // Functions for registering other content
     // -----------------------------------------
 
-    public <T extends Item> Registered<T> registerItem(String name, Function<net.minecraft.world.item.Item.Properties, T> factory) {
+    public <T extends Item> Registered<T> registerItem(String name, Function<Item.Properties, T> factory) {
         return registerItem(name, factory, ItemSettingsProvider.DEFAULT);
     }
 
-    public <T extends Item> Registered<T> registerItem(String name, Function<net.minecraft.world.item.Item.Properties, T> factory, ItemSettingsProvider settings) {
+    public <T extends Item> Registered<T> registerItem(String name, Function<Item.Properties, T> factory, ItemSettingsProvider settings) {
         return items.register(name, key -> factory.apply(settings.createItemSettings().setId(key)));
     }
 
@@ -114,8 +114,8 @@ public final class RegistryHelper {
 
     @FunctionalInterface
     public interface ItemSettingsProvider {
-        ItemSettingsProvider DEFAULT = net.minecraft.world.item.Item.Properties::new;
+        ItemSettingsProvider DEFAULT = Item.Properties::new;
 
-        net.minecraft.world.item.Item.Properties createItemSettings();
+        Item.Properties createItemSettings();
     }
 }

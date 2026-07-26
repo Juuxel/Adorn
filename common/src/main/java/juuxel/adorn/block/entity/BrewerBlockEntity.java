@@ -10,26 +10,26 @@ import juuxel.adorn.recipe.AdornRecipeTypes;
 import juuxel.adorn.recipe.BrewerInput;
 import juuxel.adorn.recipe.FluidBrewingRecipe;
 import juuxel.adorn.recipe.InventoryWrappingRecipeInput;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.WorldlyContainer;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.entity.player.StackedItemContents;
-import net.minecraft.world.inventory.StackedContentsCompatible;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
-import net.minecraft.world.Containers;
-import net.minecraft.util.ExtraCodecs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.Mth;
+import net.minecraft.world.Containers;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.StackedItemContents;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.StackedContentsCompatible;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -163,7 +163,7 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
 
     private static void decrementIngredient(BrewerBlockEntity brewer, int slot) {
         var stack = brewer.getItem(slot);
-        var remainder = ItemBridge.get().getRecipeRemainder(stack);
+        var remainder = ItemBridge.get().getRecipeRemainder(stack).create();
         stack.shrink(1);
 
         if (!remainder.isEmpty()) {
@@ -201,7 +201,7 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
             if (brewer.progress++ >= MAX_PROGRESS) {
                 decrementIngredient(brewer, LEFT_INGREDIENT_SLOT);
                 decrementIngredient(brewer, RIGHT_INGREDIENT_SLOT);
-                brewer.setItem(INPUT_SLOT, recipe.assemble(input, world.registryAccess()));
+                brewer.setItem(INPUT_SLOT, recipe.assemble(input));
 
                 if (recipe instanceof FluidBrewingRecipe fluidRecipe) {
                     brewer.getFluidReference().decrement(fluidRecipe.fluid().amount(), fluidRecipe.fluid().unit());

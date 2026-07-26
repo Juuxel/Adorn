@@ -12,17 +12,17 @@ import juuxel.adorn.util.Displayable;
 import juuxel.adorn.util.PropertyRef;
 import juuxel.adorn.util.animation.AnimationEngine;
 import juuxel.adorn.util.animation.AnimationTask;
-import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.AlertScreen;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.components.Tooltip;
-import net.minecraft.client.gui.components.WidgetTooltipHolder;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.AbstractSelectionList;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.CycleButton;
-import net.minecraft.client.gui.components.AbstractSelectionList;
+import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.gui.components.WidgetTooltipHolder;
+import net.minecraft.client.gui.screens.AlertScreen;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.ChatFormatting;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
@@ -102,14 +102,14 @@ public abstract class AbstractConfigScreen extends Screen {
     protected abstract void initConfigWidgets(Panel panel);
 
     @Override
-    public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
-        super.render(context, mouseX, mouseY, delta);
-        context.drawCenteredString(font, title, width / 2, (HEADER_FOOTER_HEIGHT - font.lineHeight) / 2, Colors.WHITE);
+    public void extractRenderState(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
+        super.extractRenderState(context, mouseX, mouseY, delta);
+        context.centeredText(font, title, width / 2, (HEADER_FOOTER_HEIGHT - font.lineHeight) / 2, Colors.WHITE);
     }
 
     @Override
-    public void renderBackground(GuiGraphics context, int mouseX, int mouseY, float tickProgress) {
-        super.renderBackground(context, mouseX, mouseY, tickProgress);
+    public void extractBackground(GuiGraphicsExtractor context, int mouseX, int mouseY, float tickProgress) {
+        super.extractBackground(context, mouseX, mouseY, tickProgress);
 
         // Draw hearts
         synchronized (hearts) {
@@ -127,7 +127,7 @@ public abstract class AbstractConfigScreen extends Screen {
         context.blit(RenderPipelines.GUI_TEXTURED, footerSeparator, 0, height - HEADER_FOOTER_HEIGHT, 0, 0, width, 2, 32, 2);
     }
 
-    private void renderHearts(GuiGraphics context, float delta) {
+    private void renderHearts(GuiGraphicsExtractor context, float delta) {
         for (var heart : hearts) {
             var matrices = context.pose();
             matrices.pushMatrix();

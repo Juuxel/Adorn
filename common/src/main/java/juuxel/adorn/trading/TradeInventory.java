@@ -12,7 +12,7 @@ public final class TradeInventory extends InventoryComponent {
         setItem(0, trade.getSelling());
         setItem(1, trade.getPrice());
 
-        addListener(sender -> {
+        addListener(() -> {
             trade.setSelling(getItem(0));
             trade.setPrice(getItem(1));
             trade.callListeners();

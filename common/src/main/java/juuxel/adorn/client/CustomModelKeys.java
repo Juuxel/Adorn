@@ -6,7 +6,7 @@ import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.lib.registry.RegisteredMap;
 import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.StandaloneRegistrar;
-import net.minecraft.client.renderer.block.model.BlockStateModel;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.resources.ResourceKey;
 
 public final class CustomModelKeys {

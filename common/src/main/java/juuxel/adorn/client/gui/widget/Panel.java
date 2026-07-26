@@ -1,8 +1,8 @@
 package juuxel.adorn.client.gui.widget;
 
-import net.minecraft.client.gui.components.events.AbstractContainerEventHandler;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.events.AbstractContainerEventHandler;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 
 import java.util.ArrayList;
@@ -34,9 +34,9 @@ public class Panel extends AbstractContainerEventHandler implements Renderable, 
     }
 
     @Override
-    public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
+    public void extractRenderState(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
         for (var child : drawables) {
-            child.render(context, mouseX, mouseY, delta);
+            child.extractRenderState(context, mouseX, mouseY, delta);
         }
     }
 

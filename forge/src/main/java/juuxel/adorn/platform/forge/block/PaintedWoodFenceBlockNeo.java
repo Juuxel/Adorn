@@ -1,6 +1,5 @@
 package juuxel.adorn.platform.forge.block;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.core.BlockPos;

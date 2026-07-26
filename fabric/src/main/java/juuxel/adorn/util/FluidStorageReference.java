@@ -44,7 +44,7 @@ public final class FluidStorageReference extends FluidReference {
 
     @Override
     public DataComponentPatch getComponents() {
-        return storage.variant.getComponents();
+        return storage.variant.getComponentsPatch();
     }
 
     @Override

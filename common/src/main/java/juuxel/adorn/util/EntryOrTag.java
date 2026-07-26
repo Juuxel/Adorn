@@ -2,8 +2,8 @@ package juuxel.adorn.util;
 
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 
@@ -23,7 +23,6 @@ public sealed interface EntryOrTag<T> {
     record OfEntry<T>(T value) implements EntryOrTag<T> {
     }
 
-    record OfTag<T>(
-        TagKey<T> tag) implements EntryOrTag<T> {
+    record OfTag<T>(TagKey<T> tag) implements EntryOrTag<T> {
     }
 }

@@ -3,16 +3,16 @@ package juuxel.adorn.menu;
 import juuxel.adorn.block.AdornBlockEntities;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.block.entity.TradingStation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.Container;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 public final class TradingStationMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess context;
@@ -118,16 +118,16 @@ public final class TradingStationMenu extends AbstractContainerMenu {
     }
 
     @Override
-    public void clicked(int slotIndex, int button, ClickType actionType, Player player) {
+    public void clicked(int slotIndex, int buttonNum, ContainerInput containerInput, Player player) {
         var slot = 0 <= slotIndex && slotIndex < slots.size() ? slots.get(slotIndex) : null;
 
-        if (actionType == ClickType.PICKUP && slot instanceof TradeSlot tradeSlot) {
+        if (containerInput == ContainerInput.PICKUP && slot instanceof TradeSlot tradeSlot) {
             var cursorStack = getCarried();
             if (isValidItem(cursorStack)) {
                 updateTradeStack(tradeSlot, cursorStack.copy(), player);
             }
         } else {
-            super.clicked(slotIndex, button, actionType, player);
+            super.clicked(slotIndex, buttonNum, containerInput, player);
         }
     }
 

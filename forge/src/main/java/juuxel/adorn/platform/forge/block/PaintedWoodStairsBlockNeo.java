@@ -1,11 +1,10 @@
 package juuxel.adorn.platform.forge.block;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 public final class PaintedWoodStairsBlockNeo extends StairBlock {
     public PaintedWoodStairsBlockNeo(BlockState baseBlockState, Properties settings) {

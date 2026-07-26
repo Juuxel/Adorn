@@ -2,19 +2,17 @@ package juuxel.adorn.item;
 
 import juuxel.adorn.networking.OpenBookS2CMessage;
 import juuxel.adorn.platform.PlatformBridges;
-import net.minecraft.world.item.Item.Properties;
-import net.minecraft.world.item.Item.TooltipContext;
-import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.stats.Stats;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.ChatFormatting;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 
 import java.util.function.Consumer;

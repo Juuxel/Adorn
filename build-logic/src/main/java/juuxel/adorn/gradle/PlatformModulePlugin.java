@@ -1,12 +1,8 @@
 package juuxel.adorn.gradle;
 
-import juuxel.adorn.gradle.action.InlineServiceLoader;
-import juuxel.adorn.gradle.action.MinifyJson;
 import juuxel.adorn.gradle.xplat.PlatformModuleExtension;
 import net.fabricmc.loom.api.LoomGradleExtensionAPI;
 import net.fabricmc.loom.api.ModSettings;
-import net.fabricmc.loom.task.RemapJarTask;
-import net.fabricmc.loom.util.Constants;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Dependency;
@@ -32,16 +28,17 @@ public final class PlatformModulePlugin implements Plugin<Project> {
             task.from(commonSourceSets.named("main").map(SourceSet::getOutput));
         });
 
-        project.getTasks().named("remapJar", RemapJarTask.class, task -> {
-            // Add platform classifier to final jar
-            task.getArchiveClassifier().set(extension.getPlatformName());
-
-            // Inline platform services
-            task.doLast(new InlineServiceLoader());
-
-            // Minify JSON files
-            task.doLast(new MinifyJson());
-        });
+        // TODO: Re-enable service loader inlining and json minification
+        // project.getTasks().named("remapJar", RemapJarTask.class, task -> {
+        //     // Add platform classifier to final jar
+        //     task.getArchiveClassifier().set(extension.getPlatformName());
+        //
+        //     // Inline platform services
+        //     task.doLast(new InlineServiceLoader());
+        //
+        //     // Minify JSON files
+        //     task.doLast(new MinifyJson());
+        // });
 
         // Generate IDE run configs for each run config.
         loom.getRuns().configureEach(run -> run.getGenerateRunConfig().set(true));
@@ -62,9 +59,7 @@ public final class PlatformModulePlugin implements Plugin<Project> {
     }
 
     private static Dependency createCommonDependency(Project project) {
-        // The "namedElements" configuration contains the non-remapped classes and resources of the project.
-        // It follows Gradle's own convention of xyzElements for "outgoing" configurations like apiElements.
-        var commonDependency = project.getDependencies().project(Map.of("path", ":common", "configuration", Constants.Configurations.NAMED_ELEMENTS));
+        var commonDependency = project.getDependencies().project(Map.of("path", ":common"));
         ((ModuleDependency) commonDependency).setTransitive(false);
         return commonDependency;
     }

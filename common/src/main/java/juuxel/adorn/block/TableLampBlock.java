@@ -1,38 +1,38 @@
 package juuxel.adorn.block;
 
 import juuxel.adorn.lib.AdornStats;
+import juuxel.adorn.lib.AdornTags;
 import juuxel.adorn.util.ShapeRotation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.item.DyeItem;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Map;
 
@@ -75,11 +75,14 @@ public final class TableLampBlock extends Block implements SimpleWaterloggedBloc
 
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (stack.getItem() instanceof DyeItem dye) {
-            world.setBlockAndUpdate(pos, AdornBlocks.TABLE_LAMPS.getEager(dye.getDyeColor()).withPropertiesOf(state));
-            world.playSound(player, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1f, 0.8f);
-            if (!player.getAbilities().instabuild) stack.shrink(1);
-            if (!world.isClientSide()) player.awardStat(AdornStats.DYE_TABLE_LAMP);
+        if (stack.is(AdornTags.FURNITURE_DYES)) {
+            var dye = stack.get(DataComponents.DYE);
+            if (dye != null) {
+                world.setBlockAndUpdate(pos, AdornBlocks.TABLE_LAMPS.getEager(dye).withPropertiesOf(state));
+                world.playSound(player, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1f, 0.8f);
+                if (!player.getAbilities().instabuild) stack.shrink(1);
+                if (!world.isClientSide()) player.awardStat(AdornStats.DYE_TABLE_LAMP);
+            }
         } else {
             var wasLit = state.getValue(LIT);
             world.setBlockAndUpdate(pos, state.setValue(LIT, !wasLit));

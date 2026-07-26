@@ -1,20 +1,19 @@
 package juuxel.adorn.component;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentGetter;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.component.TooltipProvider;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
-import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipProvider;
 
 import java.util.function.Consumer;
 
-public record ItemDescription(
-    Component description) implements TooltipProvider {
+public record ItemDescription(Component description) implements TooltipProvider {
     public static final Codec<ItemDescription> CODEC = ComponentSerialization.CODEC.xmap(ItemDescription::new, ItemDescription::description);
 
     @Override

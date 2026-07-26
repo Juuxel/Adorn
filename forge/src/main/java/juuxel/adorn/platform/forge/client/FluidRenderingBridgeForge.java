@@ -4,16 +4,12 @@ import juuxel.adorn.client.FluidRenderingBridge;
 import juuxel.adorn.fluid.FluidReference;
 import juuxel.adorn.fluid.FluidUnit;
 import juuxel.adorn.platform.forge.util.FluidTankReference;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.renderer.block.BlockAndTintGetter;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.data.AtlasIds;
-import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockAndTintGetter;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -21,19 +17,17 @@ import java.util.List;
 
 public final class FluidRenderingBridgeForge implements FluidRenderingBridge {
     @Override
-    public @Nullable TextureAtlasSprite getStillSprite(FluidReference volume) {
-        var fluid = volume.getFluid();
-        var atlas = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AtlasIds.BLOCKS);
-        return atlas.getSprite(IClientFluidTypeExtensions.of(fluid).getStillTexture(FluidTankReference.toFluidStack(volume)));
-    }
-
-    @Override
     public int getColor(FluidReference volume, @Nullable BlockAndTintGetter world, @Nullable BlockPos pos) {
-        var fluid = volume.getFluid();
+        var fluidModel = getFluidModel(volume);
+        var tintSource = fluidModel.fluidTintSource();
+
+        if (tintSource == null) return 0xFF_FFFFFF;
+
         if (world != null && pos != null) {
-            return IClientFluidTypeExtensions.of(fluid).getTintColor(fluid.defaultFluidState(), world, pos);
+            var fluidState = volume.getFluid().defaultFluidState();
+            return tintSource.colorInWorld(fluidState, fluidState.createLegacyBlock(), world, pos);
         } else {
-            return IClientFluidTypeExtensions.of(fluid).getTintColor(FluidTankReference.toFluidStack(volume));
+            return tintSource.colorAsStack(FluidTankReference.toFluidStack(volume));
         }
     }
 

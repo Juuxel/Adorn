@@ -1,9 +1,9 @@
 package juuxel.adorn.data.util;
 
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 
 import java.util.function.UnaryOperator;
 
 public interface ShapedRecipeJsonBuilderExtension {
-    void adorn_setOutputModifier(UnaryOperator<ItemStack> outputModifier);
+    void adorn_setOutputModifier(UnaryOperator<ItemStackTemplate> outputModifier);
 }

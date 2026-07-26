@@ -8,40 +8,43 @@ import juuxel.adorn.block.variant.BlockKind;
 import juuxel.adorn.block.variant.BlockVariant;
 import juuxel.adorn.block.variant.BlockVariantSets;
 import juuxel.adorn.component.AdornComponentTypes;
-import juuxel.adorn.component.ConeVariantComponent;
 import juuxel.adorn.entity.ConeVariant;
 import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.lib.registry.AdornRegistryKeys;
 import juuxel.adorn.lib.registry.Registered;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.client.data.models.BlockModelGenerators;
-import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.ItemModelGenerators;
-import net.minecraft.client.data.models.model.ItemModelUtils;
-import net.minecraft.client.data.models.model.ModelTemplate;
-import net.minecraft.client.data.models.model.ModelLocationUtils;
-import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TextureSlot;
-import net.minecraft.client.data.models.model.TextureMapping;
-import net.minecraft.client.data.models.model.TexturedModel;
-import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
-import net.minecraft.client.renderer.item.properties.select.ComponentContents;
-import net.minecraft.client.renderer.block.model.VariantMutator;
 import net.minecraft.client.data.models.MultiVariant;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
+import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplate;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.client.renderer.block.dispatch.VariantMutator;
+import net.minecraft.client.renderer.item.properties.select.ComponentContents;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.UnaryOperator;
 
 public final class AdornModelGenerator extends FabricModelProvider {
+    public static final ScopedValue<HolderLookup.Provider> REGISTRIES = ScopedValue.newInstance();
+
     private static final TextureSlot PIPE_TEXTURE_KEY = TextureSlot.create("pipe");
     private static final ModelTemplate COPPER_PIPE_INVENTORY_MODEL = new ModelTemplate(
         Optional.of(AdornCommon.id("item/templates/copper_pipe")),
@@ -64,7 +67,7 @@ public final class AdornModelGenerator extends FabricModelProvider {
         SIGN_TEXTURE_KEY
     );
     private static final TexturedModel.Provider WALL_CAUTION_SIGN_MODEL_FACTORY =
-        TexturedModel.createDefault(block -> new TextureMapping().put(SIGN_TEXTURE_KEY, TextureMapping.getBlockTexture(block).withPath(path -> path.replace("wall_", ""))), WALL_CAUTION_SIGN_MODEL);
+        TexturedModel.createDefault(block -> new TextureMapping().put(SIGN_TEXTURE_KEY, modifyPath(TextureMapping.getBlockTexture(block), path -> path.replace("wall_", ""))), WALL_CAUTION_SIGN_MODEL);
     private static final ModelTemplate STANDING_CAUTION_SIGN_ROT0_MODEL = new ModelTemplate(
         Optional.of(AdornCommon.id("block/templates/standing_caution_sign")),
         Optional.empty(),
@@ -120,10 +123,10 @@ public final class AdornModelGenerator extends FabricModelProvider {
         return variant -> variant.withModel(variant.modelLocation().withSuffix("_rot" + n));
     }
 
-    private final CompletableFuture<net.minecraft.core.HolderLookup.Provider> registriesFuture;
-    public net.minecraft.core.HolderLookup.Provider registries;
+    private final CompletableFuture<HolderLookup.Provider> registriesFuture;
+    public HolderLookup.Provider registries;
 
-    public AdornModelGenerator(FabricDataOutput output, CompletableFuture<net.minecraft.core.HolderLookup.Provider> registriesFuture) {
+    public AdornModelGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output);
         this.registriesFuture = registriesFuture;
     }
@@ -132,7 +135,7 @@ public final class AdornModelGenerator extends FabricModelProvider {
     public CompletableFuture<?> run(CachedOutput writer) {
         return registriesFuture.thenCompose(registries -> {
             this.registries = registries;
-            return super.run(writer);
+            return ScopedValue.where(REGISTRIES, registries).call(() -> super.run(writer));
         });
     }
 
@@ -202,7 +205,7 @@ public final class AdornModelGenerator extends FabricModelProvider {
                 Lists.transform(
                     coneVariants,
                     variant -> ItemModelUtils.when(
-                        new ConeVariantComponent(variant),
+                        registries.getOrThrow(variant),
                         ItemModelUtils.plainModel(getConeModelId(variant))
                     )
                 )
@@ -257,9 +260,9 @@ public final class AdornModelGenerator extends FabricModelProvider {
     private static void registerCone(BlockModelGenerators generator, ResourceKey<ConeVariant> variant) {
         var modelId = getConeModelId(variant);
         var textures = new TextureMapping()
-            .put(TextureSlot.TOP, modelId.withSuffix("_top"))
-            .put(TextureSlot.SIDE, modelId.withSuffix("_side"))
-            .put(TextureSlot.BOTTOM, modelId.withSuffix("_bottom"));
+            .put(TextureSlot.TOP, new Material(modelId.withSuffix("_top")))
+            .put(TextureSlot.SIDE, new Material(modelId.withSuffix("_side")))
+            .put(TextureSlot.BOTTOM, new Material(modelId.withSuffix("_bottom")));
         CONE_MODEL.create(modelId, textures, generator.modelOutput);
     }
 
@@ -281,5 +284,9 @@ public final class AdornModelGenerator extends FabricModelProvider {
 
     private static void registerFlat(ItemModelGenerators generator, Registered<? extends ItemLike> item) {
         generator.generateFlatItem(item.get().asItem(), ModelTemplates.FLAT_ITEM);
+    }
+
+    private static Material modifyPath(Material material, UnaryOperator<String> op) {
+        return new Material(material.sprite().withPath(op), material.forceTranslucent());
     }
 }

@@ -1,12 +1,11 @@
 package juuxel.adorn.item;
 
-import net.minecraft.world.item.Item.Properties;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.DoubleHighBlockItem;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CarpetBlock;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.item.DoubleHighBlockItem;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.core.Direction;
 
 public final class ChairBlockItem extends DoubleHighBlockItem {
     public ChairBlockItem(Block block, Properties settings) {

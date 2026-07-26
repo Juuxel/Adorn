@@ -2,13 +2,13 @@ package juuxel.adorn.platform.fabric;
 
 import juuxel.adorn.item.group.ItemGroupModifyContext;
 import juuxel.adorn.platform.ItemGroupBridge;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.world.level.ItemLike;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -16,12 +16,12 @@ import java.util.function.Consumer;
 public final class ItemGroupBridgeFabric implements ItemGroupBridge {
     @Override
     public CreativeModeTab.Builder builder() {
-        return FabricItemGroup.builder();
+        return FabricCreativeModeTab.builder();
     }
 
     @Override
     public void addItems(ResourceKey<CreativeModeTab> group, Consumer<ItemGroupModifyContext> configurator) {
-        ItemGroupEvents.modifyEntriesEvent(group).register(entries -> {
+        CreativeModeTabEvents.modifyOutputEvent(group).register(entries -> {
             var context = new ItemGroupModifyContext() {
                 @Override
                 public void add(ItemLike item) {
@@ -35,12 +35,12 @@ public final class ItemGroupBridgeFabric implements ItemGroupBridge {
 
                 @Override
                 public void addBefore(ItemLike before, List<? extends ItemLike> items) {
-                    entries.addBefore(before, items.toArray(ItemLike[]::new));
+                    entries.insertBefore(before, items.toArray(ItemLike[]::new));
                 }
 
                 @Override
                 public void addAfter(ItemLike after, List<? extends ItemLike> items) {
-                    entries.addAfter(after, items.toArray(ItemLike[]::new));
+                    entries.insertAfter(after, items.toArray(ItemLike[]::new));
                 }
 
                 @Override

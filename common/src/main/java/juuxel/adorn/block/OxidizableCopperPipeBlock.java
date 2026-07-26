@@ -1,13 +1,12 @@
 package juuxel.adorn.block;
 
 import juuxel.adorn.platform.BlockBridge;
-import net.minecraft.world.level.block.WeatheringCopper.WeatherState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.WeatheringCopper;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
 
 public final class OxidizableCopperPipeBlock extends CopperPipeBlock implements WeatheringCopper {
     private final WeatherState oxidationLevel;

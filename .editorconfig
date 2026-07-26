@@ -11,6 +11,7 @@ max_line_length = 160
 [*.java]
 ij_continuation_indent_size = 4
 ij_java_class_count_to_use_import_on_demand = 1000
+ij_java_record_components_wrap = off
 
 [*.{json,mcmeta,json5}]
 indent_size = 2

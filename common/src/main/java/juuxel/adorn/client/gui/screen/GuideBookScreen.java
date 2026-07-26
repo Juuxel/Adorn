@@ -15,27 +15,26 @@ import juuxel.adorn.util.CollectionUtil;
 import juuxel.adorn.util.Colors;
 import juuxel.adorn.util.animation.AnimationEngine;
 import net.minecraft.client.gui.ActiveTextCollector;
-import net.minecraft.client.gui.components.Button.OnPress;
-import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.input.MouseButtonEvent;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.BookViewScreen;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.PageButton;
 import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.chat.CommonComponents;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.network.chat.ClickEvent;
-import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentUtils;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -99,8 +98,8 @@ public final class GuideBookScreen extends Screen {
     }
 
     @Override
-    public void renderBackground(GuiGraphics context, int mouseX, int mouseY, float delta) {
-        super.renderBackground(context, mouseX, mouseY, delta);
+    public void extractBackground(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
+        super.extractBackground(context, mouseX, mouseY, delta);
         int x = (width - BOOK_SIZE) / 2;
         int y = (height - BOOK_SIZE) / 2;
         context.blit(RenderPipelines.GUI_TEXTURED, BookViewScreen.BOOK_LOCATION, x, y, 0, 0, BOOK_SIZE, BOOK_SIZE, 256, 256);
@@ -165,17 +164,17 @@ public final class GuideBookScreen extends Screen {
         }
 
         @Override
-        public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
+        public void extractRenderState(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
             int cx = x + PAGE_WIDTH / 2;
             var matrices = context.pose();
             matrices.pushMatrix();
             matrices.translate(cx, y + 7 + 25);
             matrices.scale(book.titleScale(), book.titleScale());
-            context.drawString(font, book.title(), -font.width(book.title()) / 2, 0, Colors.SCREEN_TEXT, false);
+            context.text(font, book.title(), -font.width(book.title()) / 2, 0, Colors.SCREEN_TEXT, false);
             matrices.popMatrix();
 
-            context.drawString(font, book.subtitle(), cx - font.width(book.subtitle()) / 2, y + 45, Colors.SCREEN_TEXT, false);
-            context.drawString(font, byAuthor, cx - font.width(byAuthor) / 2, y + 60, Colors.SCREEN_TEXT, false);
+            context.text(font, book.subtitle(), cx - font.width(book.subtitle()) / 2, y + 45, Colors.SCREEN_TEXT, false);
+            context.text(font, byAuthor, cx - font.width(byAuthor) / 2, y + 60, Colors.SCREEN_TEXT, false);
         }
 
         @Override
@@ -214,13 +213,13 @@ public final class GuideBookScreen extends Screen {
         }
 
         @Override
-        public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
-            context.renderFakeItem(icons.get(icon), x, y);
+        public void extractRenderState(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
+            context.fakeItem(icons.get(icon), x, y);
 
             int titleY = y + 10 - font.lineHeight * wrappedTitleLines.size() / 2;
             for (int i = 0; i < wrappedTitleLines.size(); i++) {
                 var line = wrappedTitleLines.get(i);
-                context.drawString(font, line, x + PAGE_TITLE_X, titleY + i * font.lineHeight, Colors.SCREEN_TEXT, false);
+                context.text(font, line, x + PAGE_TITLE_X, titleY + i * font.lineHeight, Colors.SCREEN_TEXT, false);
             }
         }
 
@@ -279,8 +278,8 @@ public final class GuideBookScreen extends Screen {
         }
 
         @Override
-        public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
-            drawText(context.textRenderer(GuiGraphics.HoveredTextEffects.TOOLTIP_AND_CURSOR));
+        public void extractRenderState(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
+            drawText(context.textRenderer(GuiGraphicsExtractor.HoveredTextEffects.TOOLTIP_AND_CURSOR));
 
             if (page.image() != null) {
                 renderImage(context, page.image(), mouseX, mouseY);
@@ -296,7 +295,7 @@ public final class GuideBookScreen extends Screen {
             }
         }
 
-        private void renderImage(GuiGraphics context, Image image, int mouseX, int mouseY) {
+        private void renderImage(GuiGraphicsExtractor context, Image image, int mouseX, int mouseY) {
             var imageX = x + (PAGE_WIDTH - image.size().x()) / 2;
             var imageY = switch (image.placement()) {
                 case BEFORE_TEXT -> y;
@@ -351,7 +350,7 @@ public final class GuideBookScreen extends Screen {
         }
 
         @Override
-        protected void renderContents(GuiGraphics context, int mouseX, int mouseY, float deltaTicks) {
+        protected void extractContents(GuiGraphicsExtractor context, int mouseX, int mouseY, float deltaTicks) {
             var texture = isHovered() ? CLOSE_BOOK_ACTIVE_TEXTURE : CLOSE_BOOK_INACTIVE_TEXTURE;
             context.blit(RenderPipelines.GUI_TEXTURED, texture, getX(), getY(), 0f, 0f, 8, 8, 8, 8);
         }

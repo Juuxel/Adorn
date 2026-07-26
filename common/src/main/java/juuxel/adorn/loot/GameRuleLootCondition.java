@@ -4,15 +4,13 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.util.Logging;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
-import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.gamerules.GameRule;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import org.slf4j.Logger;
 
-public record GameRuleLootCondition(
-    GameRule<?> gameRule) implements LootItemCondition {
+public record GameRuleLootCondition(GameRule<?> gameRule) implements LootItemCondition {
     public static final MapCodec<GameRuleLootCondition> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(
         BuiltInRegistries.GAME_RULE.byNameCodec()
             .fieldOf("game_rule")
@@ -34,8 +32,8 @@ public record GameRuleLootCondition(
     }
 
     @Override
-    public LootItemConditionType getType() {
-        return AdornLootConditionTypes.GAME_RULE.get();
+    public MapCodec<? extends LootItemCondition> codec() {
+        return CODEC;
     }
 
     public static Builder builder(GameRule<?> gameRule) {
@@ -46,7 +44,7 @@ public record GameRuleLootCondition(
         return builder(gameRule.get());
     }
 
-    public static final class Builder implements net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder {
+    public static final class Builder implements LootItemCondition.Builder {
         private final GameRule<?> gameRule;
 
         private Builder(GameRule<?> gameRule) {

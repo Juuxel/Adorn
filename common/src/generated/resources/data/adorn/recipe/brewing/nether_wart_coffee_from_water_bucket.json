@@ -3,7 +3,6 @@
   "first_ingredient": "#c:crops/nether_wart",
   "input": "adorn:mug",
   "result": {
-    "count": 1,
     "id": "adorn:nether_wart_coffee"
   },
   "second_ingredient": "minecraft:water_bucket"

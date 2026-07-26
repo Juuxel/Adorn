@@ -3,8 +3,8 @@ package juuxel.adorn.trading;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import juuxel.adorn.util.DataConvertible;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+// TODO (26.1): Migrate to ItemStackTemplate
 public final class Trade implements DataConvertible, TooltipComponent {
     public static final Codec<Trade> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         ItemStack.OPTIONAL_CODEC.fieldOf("selling").forGetter(Trade::getSelling),

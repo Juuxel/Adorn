@@ -2,7 +2,7 @@ package juuxel.adorn.data;
 
 import juuxel.adorn.datagen.DataOutput;
 import juuxel.adorn.datagen.tag.TagGenerator;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public final class AdornTagGenerator extends AdornCustomDataGenerator {
     private static final String TAG_CONFIG_DIRS_PROPERTY = "adorn.data.tagConfigDirs";
 
-    public AdornTagGenerator(FabricDataOutput output) {
+    public AdornTagGenerator(FabricPackOutput output) {
         super(output);
     }
 

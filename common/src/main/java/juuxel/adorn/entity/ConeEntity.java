@@ -1,33 +1,32 @@
 package juuxel.adorn.entity;
 
 import juuxel.adorn.component.AdornComponentTypes;
-import juuxel.adorn.component.ConeVariantComponent;
 import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.lib.registry.AdornRegistryKeys;
 import juuxel.adorn.platform.BlockBridge;
-import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.InterpolationHandler;
-import net.minecraft.world.entity.variant.VariantUtils;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.core.Holder;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
-import net.minecraft.network.chat.Component;
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gamerules.GameRules;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -182,7 +181,7 @@ public final class ConeEntity extends Entity {
 
     private ItemStack createItemStack() {
         var stack = new ItemStack(AdornItems.CONE.get());
-        stack.set(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(getVariant()));
+        stack.set(AdornComponentTypes.CONE_VARIANT.get(), getVariant());
         return stack;
     }
 
@@ -199,7 +198,7 @@ public final class ConeEntity extends Entity {
     @Override
     public @Nullable <T> T get(DataComponentType<? extends T> type) {
         if (type == AdornComponentTypes.CONE_VARIANT.get()) {
-            return castComponentValue(type, new ConeVariantComponent(getVariant()));
+            return castComponentValue(type, getVariant());
         }
 
         return super.get(type);
@@ -214,7 +213,7 @@ public final class ConeEntity extends Entity {
     @Override
     protected <T> boolean applyImplicitComponent(DataComponentType<T> type, T value) {
         if (type == AdornComponentTypes.CONE_VARIANT.get()) {
-            setVariant(castComponentValue(AdornComponentTypes.CONE_VARIANT.get(), value).getVariant(registryAccess()).orElseThrow());
+            setVariant(castComponentValue(AdornComponentTypes.CONE_VARIANT.get(), value));
             return true;
         }
 

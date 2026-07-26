@@ -15,7 +15,6 @@ public final class ModelBridgeFabric implements ModelBridge {
         return manager.getModel(((CustomModelKeyImpl<T>) key).backing);
     }
 
-    record CustomModelKeyImpl<T>(
-        Identifier id, CustomModelKey.Type<T> type, ExtraModelKey<T> backing) implements CustomModelKey<T> {
+    record CustomModelKeyImpl<T>(Identifier id, CustomModelKey.Type<T> type, ExtraModelKey<T> backing) implements CustomModelKey<T> {
     }
 }

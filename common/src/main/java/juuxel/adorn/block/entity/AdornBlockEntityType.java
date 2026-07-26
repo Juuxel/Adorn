@@ -1,10 +1,9 @@
 package juuxel.adorn.block.entity;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntityType.BlockEntitySupplier;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Set;
 import java.util.function.Predicate;

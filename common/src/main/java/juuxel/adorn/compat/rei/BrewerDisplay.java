@@ -16,8 +16,8 @@ import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,7 +59,7 @@ public record BrewerDisplay(
             EntryIngredients.ofIngredient(recipe.firstIngredient()),
             recipe.secondIngredient().map(EntryIngredients::ofIngredient).orElse(EntryIngredient.empty()),
             EntryIngredient.empty(),
-            EntryStacks.of(recipe.result()),
+            EntryStacks.of(recipe.result().create()),
             Optional.ofNullable(id)
         );
     }
@@ -70,7 +70,7 @@ public record BrewerDisplay(
             EntryIngredients.ofIngredient(recipe.firstIngredient()),
             recipe.secondIngredient().map(EntryIngredients::ofIngredient).orElse(EntryIngredient.empty()),
             entryIngredientOf(recipe.fluid()),
-            EntryStacks.of(recipe.result()),
+            EntryStacks.of(recipe.result().create()),
             Optional.ofNullable(id)
         );
     }

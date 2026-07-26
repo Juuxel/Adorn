@@ -23,6 +23,15 @@
         "condition": {
           "condition": "fabric:all_mods_loaded",
           "values": [
+            "biomeswevegone"
+          ]
+        },
+        "directory": "adorn_integration_biomeswevegone"
+      },
+      {
+        "condition": {
+          "condition": "fabric:all_mods_loaded",
+          "values": [
             "blockus"
           ]
         },
@@ -141,6 +150,21 @@
         ]
       },
       {
+        "directory": "adorn_integration_biomeswevegone",
+        "formats": [
+          0,
+          2147483647
+        ],
+        "max_format": 2147483647,
+        "min_format": 0,
+        "neoforge:conditions": [
+          {
+            "type": "neoforge:mod_loaded",
+            "modid": "biomeswevegone"
+          }
+        ]
+      },
+      {
         "directory": "adorn_integration_ecologics",
         "formats": [
           0,
@@ -159,9 +183,9 @@
   },
   "pack": {
     "description": "Adorn resources.",
-    "max_format": 94,
+    "max_format": 101,
     "min_format": [
-      94,
+      101,
       1
     ]
   }

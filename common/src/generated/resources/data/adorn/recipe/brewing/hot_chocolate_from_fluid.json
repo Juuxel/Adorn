@@ -16,7 +16,6 @@
   },
   "input": "adorn:mug",
   "result": {
-    "count": 1,
     "id": "adorn:hot_chocolate"
   }
 }

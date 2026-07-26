@@ -2,9 +2,9 @@ package juuxel.adorn.data;
 
 import com.google.common.hash.Hashing;
 import juuxel.adorn.datagen.DataOutput;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.data.DataProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.data.CachedOutput;
+import net.minecraft.data.DataProvider;
 import net.minecraft.util.Util;
 
 import java.io.IOException;
@@ -13,9 +13,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
 
 public abstract class AdornCustomDataGenerator implements DataProvider {
-    private final FabricDataOutput output;
+    private final FabricPackOutput output;
 
-    public AdornCustomDataGenerator(FabricDataOutput output) {
+    public AdornCustomDataGenerator(FabricPackOutput output) {
         this.output = output;
     }
 

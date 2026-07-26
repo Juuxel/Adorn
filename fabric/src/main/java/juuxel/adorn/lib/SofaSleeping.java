@@ -2,14 +2,14 @@ package juuxel.adorn.lib;
 
 import juuxel.adorn.block.SofaBlock;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
-import net.minecraft.world.level.block.BedBlock;
+import net.fabricmc.fabric.api.util.EventResult;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.level.block.BedBlock;
 
 public final class SofaSleeping {
     public static void init() {
-        EntitySleepEvents.ALLOW_BED.register((entity, sleepingPos, state, vanillaResult) ->
-            state.getBlock() instanceof SofaBlock ? InteractionResult.SUCCESS : InteractionResult.PASS);
+        EntitySleepEvents.ALLOW_BED.register((_, _, state, _) ->
+            state.getBlock() instanceof SofaBlock ? EventResult.ALLOW : EventResult.PASS);
 
         EntitySleepEvents.ALLOW_SETTING_SPAWN.register((player, sleepingPos) ->
             !(player.level().getBlockState(sleepingPos).getBlock() instanceof SofaBlock));

@@ -1,15 +1,14 @@
 package juuxel.adorn.client.gui.widget;
 
-import net.minecraft.client.gui.narration.NarratableEntry.NarrationPriority;
-import net.minecraft.client.input.MouseButtonEvent;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
-import net.minecraft.client.gui.narration.NarrationSupplier;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.narration.NarrationSupplier;
 import net.minecraft.client.input.CharacterEvent;
 import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
 
 /**
  * A wrapper for a widget (obtained by calling {@link #current()}).
@@ -22,9 +21,9 @@ public abstract class WidgetEnvelope implements GuiEventListener, Renderable, Na
     protected abstract GuiEventListener current();
 
     @Override
-    public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
+    public void extractRenderState(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
         if (current() instanceof Renderable drawable) {
-            drawable.render(context, mouseX, mouseY, delta);
+            drawable.extractRenderState(context, mouseX, mouseY, delta);
         }
     }
 

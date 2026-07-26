@@ -1,10 +1,9 @@
 package juuxel.adorn.block;
 
 import juuxel.adorn.util.FourWayShapeConfig;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.resources.Identifier;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 

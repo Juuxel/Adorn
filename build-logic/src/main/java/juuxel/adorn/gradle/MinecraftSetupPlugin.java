@@ -11,12 +11,10 @@ import org.gradle.api.tasks.bundling.AbstractArchiveTask;
 import org.gradle.api.tasks.bundling.Jar;
 import org.gradle.api.tasks.compile.JavaCompile;
 
-import java.util.Objects;
-
 public final class MinecraftSetupPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
-        project.getPlugins().apply("dev.architectury.loom");
+        project.getPlugins().apply("dev.architectury.loom-no-remap");
         project.getPlugins().apply(CorePlugin.class);
         var extension = CorePlugin.registerExtension(project, "minecraft", MinecraftExtension.class);
 
@@ -30,10 +28,10 @@ public final class MinecraftSetupPlugin implements Plugin<Project> {
 
         // Set up Java version
         var java = project.getExtensions().getByType(JavaPluginExtension.class);
-        java.setSourceCompatibility(JavaVersion.VERSION_21);
-        java.setTargetCompatibility(JavaVersion.VERSION_21);
+        java.setSourceCompatibility(JavaVersion.VERSION_25);
+        java.setTargetCompatibility(JavaVersion.VERSION_25);
         project.getTasks().withType(JavaCompile.class).configureEach(task -> {
-            task.getOptions().getRelease().set(21);
+            task.getOptions().getRelease().set(25);
         });
 
         // Make all archives reproducible.
@@ -54,7 +52,6 @@ public final class MinecraftSetupPlugin implements Plugin<Project> {
 
         // Set the Minecraft dependency.
         project.getDependencies().add("minecraft", extension.getMinecraftVersion().map(version -> "net.minecraft:minecraft:" + version));
-        project.getDependencies().add("mappings", loom.officialMojangMappings());
     }
 
     private static BasePluginExtension getBase(Project project) {

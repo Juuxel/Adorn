@@ -3,30 +3,30 @@ package juuxel.adorn.block.entity;
 import juuxel.adorn.block.AdornBlockEntities;
 import juuxel.adorn.fluid.FluidReference;
 import juuxel.adorn.lib.AdornGameRules;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.tags.FluidTags;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class KitchenSinkBlockEntity extends BlockEntity {
@@ -127,8 +127,7 @@ public abstract class KitchenSinkBlockEntity extends BlockEntity {
      * Used for a cursed priority system for fill/empty sounds:
      * bottle sounds are preferred by default, then Forge's fluid sounds and finally vanilla sounds.
      */
-    public record FluidItemSound(
-        SoundEvent event, boolean preferred) {
+    public record FluidItemSound(SoundEvent event, boolean preferred) {
         public FluidItemSound orElse(@Nullable SoundEvent fallback) {
             if (preferred) return this;
             return fallback != null ? new FluidItemSound(fallback, true) : this;

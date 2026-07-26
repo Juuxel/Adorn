@@ -4,34 +4,33 @@ import com.mojang.serialization.MapCodec;
 import juuxel.adorn.block.entity.TradingStationBlockEntity;
 import juuxel.adorn.criterion.AdornCriteria;
 import juuxel.adorn.lib.AdornStats;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.Containers;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public final class TradingStationBlock extends VisibleBlockWithEntity implements BlockWithDescription {
@@ -87,11 +86,11 @@ public final class TradingStationBlock extends VisibleBlockWithEntity implements
                 var canInsertPayment = be.getStorage().canInsert(trade.getPrice());
 
                 if (trade.isEmpty()) {
-                    player.displayClientMessage(Component.translatable("block.adorn.trading_station.empty_trade"), true);
+                    player.sendOverlayMessage(Component.translatable("block.adorn.trading_station.empty_trade"));
                 } else if (!be.isStorageStocked()) {
-                    player.displayClientMessage(Component.translatable("block.adorn.trading_station.storage_not_stocked"), true);
+                    player.sendOverlayMessage(Component.translatable("block.adorn.trading_station.storage_not_stocked"));
                 } else if (!canInsertPayment) {
-                    player.displayClientMessage(Component.translatable("block.adorn.trading_station.storage_full"), true);
+                    player.sendOverlayMessage(Component.translatable("block.adorn.trading_station.storage_full"));
                 } else if (validPayment) {
                     stack.shrink(trade.getPrice().getCount());
                     var soldItem = trade.getSelling().copy();

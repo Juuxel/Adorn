@@ -5,17 +5,17 @@ import juuxel.adorn.block.variant.BlockKind;
 import juuxel.adorn.block.variant.BlockVariant;
 import juuxel.adorn.block.variant.BlockVariantSets;
 import juuxel.adorn.lib.AdornTags;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.world.level.block.Block;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 
 import java.util.concurrent.CompletableFuture;
 
-public final class AdornBlockTagGenerator extends FabricTagProvider.BlockTagProvider {
-    public AdornBlockTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+public final class AdornBlockTagGenerator extends FabricTagsProvider.BlockTagsProvider {
+    public AdornBlockTagGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

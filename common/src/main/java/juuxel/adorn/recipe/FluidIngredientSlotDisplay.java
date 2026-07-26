@@ -5,10 +5,9 @@ import juuxel.adorn.fluid.FluidIngredient;
 import juuxel.adorn.platform.RecipeBridge;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.context.ContextMap;
 import net.minecraft.world.item.crafting.display.DisplayContentsFactory;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
-import net.minecraft.util.context.ContextMap;
-import net.minecraft.world.item.crafting.display.SlotDisplay.Type;
 
 import java.util.stream.Stream;
 

@@ -6,11 +6,11 @@ import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.lib.registry.RegistryHelper;
 import juuxel.adorn.util.AdornUtil;
 import juuxel.adorn.util.Dyes;
-import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.Collections;
 import java.util.EnumMap;
@@ -143,8 +143,7 @@ public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
         }
     }
 
-    record PaintedWood(
-        DyeColor color) implements BlockVariant {
+    record PaintedWood(DyeColor color) implements BlockVariant {
         @Override
         public String name() {
             return color.getName();

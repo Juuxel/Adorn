@@ -6,7 +6,6 @@ import juuxel.adorn.block.variant.BlockKind;
 import juuxel.adorn.block.variant.BlockVariant;
 import juuxel.adorn.block.variant.BlockVariantSets;
 import juuxel.adorn.component.AdornComponentTypes;
-import juuxel.adorn.component.ConeVariantComponent;
 import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.entity.ConeVariant;
 import juuxel.adorn.item.AdornItems;
@@ -17,19 +16,19 @@ import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
 import juuxel.adorn.platform.ItemGroupBridge;
 import juuxel.adorn.util.Dyes;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.util.Util;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -226,7 +225,7 @@ public final class AdornItemGroups {
         while (coneVariantIter.hasNext()) {
             var variant = coneVariantIter.next();
             var stack = new ItemStack(AdornItems.CONE.get());
-            stack.set(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(variant));
+            stack.set(AdornComponentTypes.CONE_VARIANT.get(), variant);
             context.add(stack);
         }
     }

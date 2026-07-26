@@ -6,7 +6,6 @@ import juuxel.adorn.block.variant.BlockKind;
 import juuxel.adorn.block.variant.BlockVariant;
 import juuxel.adorn.block.variant.BlockVariantSets;
 import juuxel.adorn.component.AdornComponentTypes;
-import juuxel.adorn.component.ConeVariantComponent;
 import juuxel.adorn.data.util.ShapedRecipeJsonBuilderExtension;
 import juuxel.adorn.entity.ConeVariant;
 import juuxel.adorn.fluid.FluidIngredient;
@@ -17,31 +16,35 @@ import juuxel.adorn.lib.AdornTags;
 import juuxel.adorn.recipe.BrewingRecipeJsonBuilder;
 import juuxel.adorn.util.Dyes;
 import juuxel.adorn.util.EntryOrTag;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceCondition;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalFluidTags;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.advancements.Criterion;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.TypedDataComponent;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.core.HolderGetter;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluids;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -52,7 +55,7 @@ public final class AdornRecipeGenerator extends RecipeProvider {
     private final HolderGetter<Item> itemLookup;
     private final ConditionApplier conditions;
 
-    private AdornRecipeGenerator(net.minecraft.core.HolderLookup.Provider registries, RecipeOutput exporter, ConditionApplier conditions) {
+    private AdornRecipeGenerator(HolderLookup.Provider registries, RecipeOutput exporter, ConditionApplier conditions) {
         super(registries, exporter);
         this.itemLookup = registries.lookupOrThrow(Registries.ITEM);
         this.conditions = conditions;
@@ -180,11 +183,11 @@ public final class AdornRecipeGenerator extends RecipeProvider {
             .define('#', ConventionalItemTags.STONES)
             .save(output);
         SingleItemRecipeBuilder.stonecutting(
-            Ingredient.of(itemLookup.getOrThrow(ConventionalItemTags.STONES)),
-            RecipeCategory.MISC,
-            AdornItems.STONE_ROD.get(),
-            2
-        )
+                Ingredient.of(itemLookup.getOrThrow(ConventionalItemTags.STONES)),
+                RecipeCategory.MISC,
+                AdornItems.STONE_ROD.get(),
+                2
+            )
             .unlockedBy("has_stone", has(ConventionalItemTags.STONES))
             .save(output, "stonecutting/" + getItemName(AdornItems.STONE_ROD.get()));
         shaped(RecipeCategory.MISC, AdornItems.MUG.get(), 3)
@@ -349,8 +352,8 @@ public final class AdornRecipeGenerator extends RecipeProvider {
             .pattern(" I ")
             .pattern("IDI")
             .pattern(" I ")
-            .define('I' ,ConventionalItemTags.IRON_INGOTS)
-            .define('D' ,ConventionalItemTags.YELLOW_DYES)
+            .define('I', ConventionalItemTags.IRON_INGOTS)
+            .define('D', ConventionalItemTags.YELLOW_DYES)
             .save(output);
 
         offerCautionSignRecipe(output, AdornBlocks.BEE_CAUTION_SIGN.get(), MoreConventionalItemTags.HONEYCOMBS);
@@ -543,10 +546,11 @@ public final class AdornRecipeGenerator extends RecipeProvider {
             .define('D', dyeTag)
             .define('|', AdornTags.WOODEN_POSTS.item())
             .define('-', ItemTags.WOODEN_SLABS);
-        ((ShapedRecipeJsonBuilderExtension) builder).adorn_setOutputModifier(stack -> {
-            stack.set(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(variant));
-            return stack;
-        });
+        ((ShapedRecipeJsonBuilderExtension) builder).adorn_setOutputModifier(template -> setComponentInTemplate(
+            template,
+            AdornComponentTypes.CONE_VARIANT.get(),
+            registries.getOrThrow(variant)
+        ));
         builder.save(exporter, variant.identifier().getPath() + "_cone");
     }
 
@@ -557,10 +561,11 @@ public final class AdornRecipeGenerator extends RecipeProvider {
             .pattern("-")
             .define('|', input)
             .define('-', Items.SMOOTH_STONE_SLAB);
-        ((ShapedRecipeJsonBuilderExtension) builder).adorn_setOutputModifier(stack -> {
-            stack.set(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(variant));
-            return stack;
-        });
+        ((ShapedRecipeJsonBuilderExtension) builder).adorn_setOutputModifier(template -> setComponentInTemplate(
+            template,
+            AdornComponentTypes.CONE_VARIANT.get(),
+            registries.getOrThrow(variant)
+        ));
         builder.save(exporter, variant.identifier().getPath() + "_cone");
     }
 
@@ -593,13 +598,27 @@ public final class AdornRecipeGenerator extends RecipeProvider {
         };
     }
 
+    private static <T> ItemStackTemplate setComponentInTemplate(ItemStackTemplate template, DataComponentType<T> type, T value) {
+        var existingComponents = template.components().entrySet()
+            .stream()
+            .<TypedDataComponent<?>>map(entry -> TypedDataComponent.createUnchecked(entry.getKey(), entry.getValue()))
+            .toList();
+
+        var newPatch = DataComponentPatch.builder()
+            .set(existingComponents)
+            .set(type, value)
+            .build();
+
+        return new ItemStackTemplate(template.item(), template.count(), newPatch);
+    }
+
     public static final class Provider extends FabricRecipeProvider {
-        public Provider(FabricDataOutput output, CompletableFuture<net.minecraft.core.HolderLookup.Provider> registriesFuture) {
+        public Provider(FabricPackOutput output, CompletableFuture<net.minecraft.core.HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
 
         @Override
-        protected RecipeProvider createRecipeProvider(net.minecraft.core.HolderLookup.Provider registries, RecipeOutput exporter) {
+        protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
             return new AdornRecipeGenerator(registries, exporter, this::withConditions);
         }
 

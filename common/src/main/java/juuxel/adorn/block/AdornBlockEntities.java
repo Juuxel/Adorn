@@ -11,11 +11,10 @@ import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
 import juuxel.adorn.platform.PlatformBridges;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.BlockEntityType.BlockEntitySupplier;
-import net.minecraft.core.registries.Registries;
 
 import java.util.Set;
 import java.util.function.Supplier;
@@ -34,11 +33,11 @@ public final class AdornBlockEntities {
     public static final Registered<BlockEntityType<BrewerBlockEntity>> BREWER =
         register("brewer", PlatformBridges.get().getBlockEntities()::createBrewer, AdornBlocks.BREWER);
 
-    private static <E extends BlockEntity> Registered<BlockEntityType<E>> register(String name, BlockEntitySupplier<E> factory, Supplier<? extends Block> block) {
+    private static <E extends BlockEntity> Registered<BlockEntityType<E>> register(String name, BlockEntityType.BlockEntitySupplier<E> factory, Supplier<? extends Block> block) {
         return BLOCK_ENTITIES.register(name, () -> new BlockEntityType<>(factory, Set.of(block.get())));
     }
 
-    private static <E extends BlockEntity> Registered<BlockEntityType<E>> register(String name, BlockEntitySupplier<E> factory, Class<? extends Block> blockClass) {
+    private static <E extends BlockEntity> Registered<BlockEntityType<E>> register(String name, BlockEntityType.BlockEntitySupplier<E> factory, Class<? extends Block> blockClass) {
         return BLOCK_ENTITIES.register(name, () -> new AdornBlockEntityType<>(factory, blockClass::isInstance));
     }
 

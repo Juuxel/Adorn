@@ -3,7 +3,7 @@ package juuxel.adorn.datagen;
 import java.util.regex.Pattern;
 
 /**
- * A namespaced ID. Mimics {@code net.minecraft.util.Identifier}.
+ * A namespaced ID. Mimics {@code net.minecraft.resources.Identifier}.
  */
 public record Id(String namespace, String path) {
     private static final Pattern NAMESPACE_PATTERN = Pattern.compile("^[a-z0-9._-]+$");

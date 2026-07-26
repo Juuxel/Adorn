@@ -8,21 +8,21 @@ import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.lib.AdornGameRules;
 import juuxel.adorn.loot.CheckTradingStationOwnerLootFunction;
 import juuxel.adorn.loot.GameRuleLootCondition;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.minecraft.world.level.block.Block;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 import java.util.concurrent.CompletableFuture;
 
-public final class AdornBlockLootTableGenerator extends FabricBlockLootTableProvider {
-    public AdornBlockLootTableGenerator(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+public final class AdornBlockLootTableGenerator extends FabricBlockLootSubProvider {
+    public AdornBlockLootTableGenerator(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(dataOutput, registryLookup);
     }
 

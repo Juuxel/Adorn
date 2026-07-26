@@ -2,12 +2,12 @@ package juuxel.adorn.client.book;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.ClickEvent;
-import net.minecraft.network.chat.HoverEvent;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
-import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.HoverEvent;
+import net.minecraft.network.chat.MutableComponent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -15,8 +15,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
 
-public record Book(
-    Component title, Component subtitle, Component author, List<Page> pages, float titleScale) {
+public record Book(Component title, Component subtitle, Component author, List<Page> pages, float titleScale) {
     public static final Codec<Book> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         ComponentSerialization.CODEC.fieldOf("title").forGetter(Book::title),
         ComponentSerialization.CODEC.fieldOf("subtitle").forGetter(Book::subtitle),

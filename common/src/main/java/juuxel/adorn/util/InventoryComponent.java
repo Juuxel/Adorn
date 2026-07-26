@@ -1,14 +1,13 @@
 package juuxel.adorn.util;
 
-import net.minecraft.world.item.component.ItemContainerContents;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.ContainerHelper;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
-import net.minecraft.world.ContainerListener;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import net.minecraft.core.NonNullList;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.List;
 
 public class InventoryComponent implements Container, DataConvertible {
     private final int size;
-    private final List<ContainerListener> listeners = new ArrayList<>();
+    private final List<Runnable> listeners = new ArrayList<>();
     private final NonNullList<ItemStack> items;
 
     public InventoryComponent(int size) {
@@ -206,11 +205,11 @@ public class InventoryComponent implements Container, DataConvertible {
     @Override
     public void setChanged() {
         for (var listener : listeners) {
-            listener.containerChanged(this);
+            listener.run();
         }
     }
 
-    public void addListener(ContainerListener listener) {
+    public void addListener(Runnable listener) {
         listeners.add(listener);
     }
 }

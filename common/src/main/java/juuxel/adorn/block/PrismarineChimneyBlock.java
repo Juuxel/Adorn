@@ -1,16 +1,16 @@
 package juuxel.adorn.block;
 
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.BubbleColumnBlock;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BubbleColumnBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.redstone.Orientation;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,7 +53,7 @@ public class PrismarineChimneyBlock extends AbstractChimneyBlock implements Bloc
 
         @Override
         public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-            BubbleColumnBlock.updateColumn(world, pos.above(), state);
+            BubbleColumnBlock.updateColumn(Blocks.BUBBLE_COLUMN, world, pos.above(), state);
         }
 
         @Override
