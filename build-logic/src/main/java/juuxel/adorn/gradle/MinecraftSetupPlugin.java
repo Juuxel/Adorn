@@ -26,7 +26,7 @@ public final class MinecraftSetupPlugin implements Plugin<Project> {
         project.setVersion(rootProject.getVersion());
         getBase(project).getArchivesName().set(getBase(rootProject).getArchivesName());
 
-        extension.getMinecraftVersion().convention(Objects.toString(rootProject.property("minecraft-version")));
+        extension.getMinecraftVersion().convention(project.getProviders().gradleProperty("minecraft-version"));
 
         // Set up Java version
         var java = project.getExtensions().getByType(JavaPluginExtension.class);
@@ -52,7 +52,7 @@ public final class MinecraftSetupPlugin implements Plugin<Project> {
         // Disable the mixin annotation processor on all platforms
         loom.getMixin().getUseLegacyMixinAp().set(false);
 
-        // Set the Minecraft dependency. The rootProject.property calls read from gradle.properties (and a variety of other sources).
+        // Set the Minecraft dependency.
         project.getDependencies().add("minecraft", extension.getMinecraftVersion().map(version -> "net.minecraft:minecraft:" + version));
 
         // Set up the layered mappings with Yarn, a NeoForge compatibility patch and my Menu mappings.
