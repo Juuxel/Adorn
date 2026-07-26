@@ -82,6 +82,10 @@ public final class DataOutputImpl implements DataOutput {
         }
     }
 
+    public void preserveFile(Path path) {
+        existing.remove(path);
+    }
+
     public void finish() {
         try {
             try (var writer = Files.newBufferedWriter(directory.resolve(".cache"))) {
