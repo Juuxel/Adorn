@@ -31,6 +31,11 @@ public abstract class GenerateData extends DefaultTask {
     @OutputDirectory
     public abstract DirectoryProperty getOutput();
 
+    /// The files that aren't deleted by the cache validator.
+    /// These files are produced by another task in the output directory.
+    @Input
+    public abstract SetProperty<String> getPreservedFilePaths();
+
     @Inject
     protected abstract WorkerExecutor getWorkerExecutor();
 
@@ -41,6 +46,7 @@ public abstract class GenerateData extends DefaultTask {
             parameters.getConfigs().set(getConfigs());
             parameters.getGenerateTags().set(getGenerateTags());
             parameters.getOutput().set(getOutput());
+            parameters.getPreservedFilePaths().set(getPreservedFilePaths());
         });
     }
 
@@ -53,6 +59,9 @@ public abstract class GenerateData extends DefaultTask {
 
         @OutputDirectory
         DirectoryProperty getOutput();
+
+        @Input
+        SetProperty<String> getPreservedFilePaths();
     }
 
     public abstract static class GenerateAction implements WorkAction<Parameters> {
@@ -63,7 +72,8 @@ public abstract class GenerateData extends DefaultTask {
         @Override
         public void execute() {
             var params = getParameters();
-            var output = DataOutputImpl.load(params.getOutput().get().getAsFile().toPath());
+            var directory = params.getOutput().get().getAsFile().toPath();
+            var output = DataOutputImpl.load(directory);
             Function<DataConfig, Stream<Path>> configFileGetter = config -> config.getFiles().getFiles().stream().map(File::toPath);
 
             DataGenerator.generate(
@@ -76,6 +86,10 @@ public abstract class GenerateData extends DefaultTask {
 
             if (params.getGenerateTags().get()) {
                 TagGenerator.generateFromConfigFiles(params.getConfigs().get().stream().flatMap(configFileGetter).toList(), output);
+            }
+
+            for (String path : params.getPreservedFilePaths().get()) {
+                output.preserveFile(directory.resolve(path));
             }
 
             output.finish();

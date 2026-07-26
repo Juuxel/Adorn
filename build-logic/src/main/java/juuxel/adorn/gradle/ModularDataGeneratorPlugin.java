@@ -49,7 +49,7 @@ public final class ModularDataGeneratorPlugin implements Plugin<Project> {
             var generateEmi = project.getTasks().register(sourceSet.getTaskName("generate", "Emi"), GenerateEmi.class, task -> {
                 task.setGroup(CorePlugin.TASK_GROUP);
                 task.mustRunAfter(generateMainData);
-                task.getOutput().convention(generateMainData.flatMap(GenerateData::getOutput));
+                task.getOutput().convention(GenerateEmi.getOutputFile(generateMainData.flatMap(GenerateData::getOutput), task.getModId()));
                 task.getModId().set(settings.getModId());
                 var resourceDirs = new ArrayList<>(sourceSet.getResources().getSrcDirs());
 
@@ -68,6 +68,10 @@ public final class ModularDataGeneratorPlugin implements Plugin<Project> {
                 }
             });
             generateData.configure(task -> task.dependsOn(generateEmi));
+            generateMainData.configure(task -> {
+                var emiOutput = generateEmi.flatMap(GenerateEmi::getModId).map(GenerateEmi::getFilePath);
+                task.getPreservedFilePaths().add(emiOutput);
+            });
         }
 
         if (settings.getGenerateCode().get()) {

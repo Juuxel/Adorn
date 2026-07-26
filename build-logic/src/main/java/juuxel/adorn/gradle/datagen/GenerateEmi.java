@@ -4,12 +4,15 @@ import groovy.json.JsonOutput;
 import groovy.json.JsonSlurper;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.file.ConfigurableFileCollection;
-import org.gradle.api.file.DirectoryProperty;
+import org.gradle.api.file.Directory;
+import org.gradle.api.file.RegularFile;
+import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Property;
+import org.gradle.api.provider.Provider;
 import org.gradle.api.provider.SetProperty;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFiles;
-import org.gradle.api.tasks.OutputDirectory;
+import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.PathSensitive;
 import org.gradle.api.tasks.PathSensitivity;
 import org.gradle.api.tasks.TaskAction;
@@ -36,8 +39,16 @@ public abstract class GenerateEmi extends DefaultTask {
     @Input
     public abstract Property<String> getModId();
 
-    @OutputDirectory
-    public abstract DirectoryProperty getOutput();
+    @OutputFile
+    public abstract RegularFileProperty getOutput();
+
+    public static String getFilePath(String modId) {
+        return "assets/emi/recipe/defaults/%s.json".formatted(modId);
+    }
+
+    public static Provider<RegularFile> getOutputFile(Provider<Directory> directoryProvider, Provider<String> modIdProvider) {
+        return modIdProvider.flatMap(modId -> directoryProvider.map(dir -> dir.file("assets/emi/recipe/defaults/%s.json".formatted(modId))));
+    }
 
     @SuppressWarnings("unchecked")
     @TaskAction
@@ -83,8 +94,7 @@ public abstract class GenerateEmi extends DefaultTask {
             }
         }
 
-        var fileName = "assets/emi/recipe/defaults/%s.json".formatted(getModId().get());
-        var outputPath = getOutput().get().getAsFile().toPath().resolve(fileName);
+        var outputPath = getOutput().get().getAsFile().toPath();
         var outputJson = Map.of("recipes", recipesByResult.values().stream().map(RecipeData::id).collect(Collectors.toCollection(TreeSet::new)));
         Files.createDirectories(outputPath.getParent());
         Files.writeString(outputPath, JsonOutput.prettyPrint(JsonOutput.toJson(outputJson)));
