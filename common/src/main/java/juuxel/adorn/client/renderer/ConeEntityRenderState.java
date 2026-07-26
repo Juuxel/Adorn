@@ -1,7 +1,7 @@
 package juuxel.adorn.client.renderer;
 
-import net.minecraft.client.render.entity.state.EntityRenderState;
-import net.minecraft.client.render.model.BlockStateModel;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.client.renderer.block.model.BlockStateModel;
 
 public final class ConeEntityRenderState extends EntityRenderState {
     public BlockStateModel coneModel;

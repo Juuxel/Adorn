@@ -5,22 +5,22 @@ import juuxel.adorn.block.entity.KitchenSinkBlockEntity;
 import juuxel.adorn.client.FluidRenderingBridge;
 import juuxel.adorn.fluid.FluidUnit;
 import juuxel.adorn.util.Logging;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayers;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.block.entity.BlockEntityRenderer;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
-import net.minecraft.client.render.command.ModelCommandRenderer;
-import net.minecraft.client.render.command.OrderedRenderCommandQueue;
-import net.minecraft.client.render.state.CameraRenderState;
-import net.minecraft.client.texture.Sprite;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Atlases;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RotationAxis;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.data.AtlasIds;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import com.mojang.math.Axis;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
@@ -53,7 +53,7 @@ public final class KitchenSinkRenderer implements BlockEntityRenderer<KitchenSin
 
     private final FluidRenderWrapper fluidRenderWrapper = new FluidRenderWrapper();
 
-    public KitchenSinkRenderer(BlockEntityRendererFactory.Context context) {
+    public KitchenSinkRenderer(BlockEntityRendererProvider.Context context) {
     }
 
     @Override
@@ -62,8 +62,8 @@ public final class KitchenSinkRenderer implements BlockEntityRenderer<KitchenSin
     }
 
     @Override
-    public void updateRenderState(KitchenSinkBlockEntity blockEntity, KitchenSinkRenderState state, float tickProgress, Vec3d cameraPos, @Nullable ModelCommandRenderer.CrumblingOverlayCommand crumblingOverlay) {
-        BlockEntityRenderer.super.updateRenderState(blockEntity, state, tickProgress, cameraPos, crumblingOverlay);
+    public void extractRenderState(KitchenSinkBlockEntity blockEntity, KitchenSinkRenderState state, float tickProgress, Vec3 cameraPos, @Nullable ModelFeatureRenderer.CrumblingOverlay crumblingOverlay) {
+        BlockEntityRenderer.super.extractRenderState(blockEntity, state, tickProgress, cameraPos, crumblingOverlay);
         state.fluid = blockEntity.getFluidReference().createSnapshot();
         state.fluidColor = getFluidColor(blockEntity);
         state.animationTime = (float) ((double) System.currentTimeMillis() % WAVE_PERIOD / MS_PER_TICK);
@@ -71,61 +71,61 @@ public final class KitchenSinkRenderer implements BlockEntityRenderer<KitchenSin
     }
 
     @Override
-    public void render(KitchenSinkRenderState state, MatrixStack matrices, OrderedRenderCommandQueue queue, CameraRenderState cameraState) {
+    public void submit(KitchenSinkRenderState state, PoseStack matrices, SubmitNodeCollector queue, CameraRenderState cameraState) {
         // Skip if there's nothing to render
         if (state.fluid.isEmpty()) return;
 
-        matrices.push();
+        matrices.pushPose();
         // Rotate because the model depends on the facing property
         matrices.translate(0.5, 0.0, 0.5);
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(getRotation(state.blockState.get(AbstractKitchenCounterBlock.FACING))));
+        matrices.mulPose(Axis.YP.rotationDegrees(getRotation(state.blockState.getValue(AbstractKitchenCounterBlock.FACING))));
         matrices.translate(-0.5, 0.0, -0.5);
 
         // Move vertically to correct level
         double fluidLevel = getFluidLevel(state) / LITRES_PER_BLOCK;
-        matrices.translate(0.0, MathHelper.lerp(fluidLevel, Y_START, Y_END), 0.0);
+        matrices.translate(0.0, Mth.lerp(fluidLevel, Y_START, Y_END), 0.0);
 
         fluidRenderWrapper.renderState = state;
         var sprite = getFluidSprite(state);
         fluidRenderWrapper.sprite = sprite;
-        queue.submitCustom(matrices, RenderLayers.entityTranslucent(sprite.getAtlasId()), fluidRenderWrapper);
+        queue.submitCustomGeometry(matrices, RenderTypes.entityTranslucent(sprite.atlasLocation()), fluidRenderWrapper);
 
-        matrices.pop();
+        matrices.popPose();
     }
 
-    private void renderFluid(KitchenSinkRenderState state, Sprite sprite, MatrixStack.Entry matrixEntry, VertexConsumer vertexConsumer) {
-        float u0 = MathHelper.lerp(2 * PX, sprite.getMinU(), sprite.getMaxU());
-        float u1 = MathHelper.lerp(14 * PX, sprite.getMinU(), sprite.getMaxU());
-        float v0 = MathHelper.lerp(2 * PX, sprite.getMinV(), sprite.getMaxV());
-        float v1 = MathHelper.lerp(13 * PX, sprite.getMinV(), sprite.getMaxV());
+    private void renderFluid(KitchenSinkRenderState state, TextureAtlasSprite sprite, PoseStack.Pose matrixEntry, VertexConsumer vertexConsumer) {
+        float u0 = Mth.lerp(2 * PX, sprite.getU0(), sprite.getU1());
+        float u1 = Mth.lerp(14 * PX, sprite.getU0(), sprite.getU1());
+        float v0 = Mth.lerp(2 * PX, sprite.getV0(), sprite.getV1());
+        float v1 = Mth.lerp(13 * PX, sprite.getV0(), sprite.getV1());
 
-        var positionMatrix = matrixEntry.getPositionMatrix();
+        var positionMatrix = matrixEntry.pose();
         var color = state.fluidColor;
-        vertexConsumer.vertex(positionMatrix, X_START, computeY(state, X_START, Z_END), Z_END)
-            .color(color).texture(u0, v0).overlay(OverlayTexture.DEFAULT_UV).light(state.lightmapCoordinates).normal(matrixEntry, 0f, 1f, 0f);
-        vertexConsumer.vertex(positionMatrix, X_END, computeY(state, X_END, Z_END), Z_END)
-            .color(color).texture(u0, v1).overlay(OverlayTexture.DEFAULT_UV).light(state.lightmapCoordinates).normal(matrixEntry, 0f, 1f, 0f);
-        vertexConsumer.vertex(positionMatrix, X_END, computeY(state, X_END, Z_START), Z_START)
-            .color(color).texture(u1, v1).overlay(OverlayTexture.DEFAULT_UV).light(state.lightmapCoordinates).normal(matrixEntry, 0f, 1f, 0f);
-        vertexConsumer.vertex(positionMatrix, X_START, computeY(state, X_START, Z_START), Z_START)
-            .color(color).texture(u1, v0).overlay(OverlayTexture.DEFAULT_UV).light(state.lightmapCoordinates).normal(matrixEntry, 0f, 1f, 0f);
+        vertexConsumer.addVertex(positionMatrix, X_START, computeY(state, X_START, Z_END), Z_END)
+            .setColor(color).setUv(u0, v0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(state.lightCoords).setNormal(matrixEntry, 0f, 1f, 0f);
+        vertexConsumer.addVertex(positionMatrix, X_END, computeY(state, X_END, Z_END), Z_END)
+            .setColor(color).setUv(u0, v1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(state.lightCoords).setNormal(matrixEntry, 0f, 1f, 0f);
+        vertexConsumer.addVertex(positionMatrix, X_END, computeY(state, X_END, Z_START), Z_START)
+            .setColor(color).setUv(u1, v1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(state.lightCoords).setNormal(matrixEntry, 0f, 1f, 0f);
+        vertexConsumer.addVertex(positionMatrix, X_START, computeY(state, X_START, Z_START), Z_START)
+            .setColor(color).setUv(u1, v0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(state.lightCoords).setNormal(matrixEntry, 0f, 1f, 0f);
     }
 
     private static float computeY(KitchenSinkRenderState state, float x, float z) {
         var time = ((state.animationTime + state.tickProgress) * MS_PER_TICK) % WAVE_PERIOD;
-        var t = time * MathHelper.TAU / WAVE_PERIOD;
-        return MathHelper.sin(t + x + z) * WAVE_HEIGHT / 2;
+        var t = time * Mth.TWO_PI / WAVE_PERIOD;
+        return Mth.sin(t + x + z) * WAVE_HEIGHT / 2;
     }
 
-    private Sprite getFluidSprite(KitchenSinkRenderState state) {
+    private TextureAtlasSprite getFluidSprite(KitchenSinkRenderState state) {
         var sprite = FluidRenderingBridge.get().getStillSprite(state.fluid);
 
         if (sprite == null) {
-            LOGGER.error("Could not find sprite for fluid reference {} when rendering kitchen sink at {}", state.fluid, state.pos);
-            return MinecraftClient.getInstance()
+            LOGGER.error("Could not find sprite for fluid reference {} when rendering kitchen sink at {}", state.fluid, state.blockPos);
+            return Minecraft.getInstance()
                 .getAtlasManager()
-                .getAtlasTexture(Atlases.BLOCKS)
-                .getMissingSprite();
+                .getAtlasOrThrow(AtlasIds.BLOCKS)
+                .missingSprite();
         }
 
         return sprite;
@@ -133,7 +133,7 @@ public final class KitchenSinkRenderer implements BlockEntityRenderer<KitchenSin
 
     /** Gets the entity's fluid's color. */
     private int getFluidColor(KitchenSinkBlockEntity entity) {
-        return FluidRenderingBridge.get().getColor(entity.getFluidReference(), entity.getWorld(), entity.getPos());
+        return FluidRenderingBridge.get().getColor(entity.getFluidReference(), entity.getLevel(), entity.getBlockPos());
     }
 
     /** Gets the fluid level from the entity in litres. */
@@ -141,12 +141,12 @@ public final class KitchenSinkRenderer implements BlockEntityRenderer<KitchenSin
         return FluidUnit.convertAsDouble(state.fluid.getAmount(), state.fluid.getUnit(), FluidUnit.LITRE);
     }
 
-    private final class FluidRenderWrapper implements OrderedRenderCommandQueue.Custom {
+    private final class FluidRenderWrapper implements SubmitNodeCollector.CustomGeometryRenderer {
         private KitchenSinkRenderState renderState;
-        private Sprite sprite;
+        private TextureAtlasSprite sprite;
 
         @Override
-        public void render(MatrixStack.Entry matricesEntry, VertexConsumer vertexConsumer) {
+        public void render(PoseStack.Pose matricesEntry, VertexConsumer vertexConsumer) {
             renderFluid(renderState, sprite, matricesEntry, vertexConsumer);
         }
     }

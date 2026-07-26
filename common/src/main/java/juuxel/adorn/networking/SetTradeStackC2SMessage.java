@@ -1,26 +1,27 @@
 package juuxel.adorn.networking;
 
 import juuxel.adorn.AdornCommon;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.network.packet.CustomPayload;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
-public record SetTradeStackC2SMessage(int syncId, int slotId, ItemStack stack) implements CustomPayload {
-    public static final Id<SetTradeStackC2SMessage> ID = new Id<>(AdornCommon.id("set_trade_stack"));
-    public static final PacketCodec<RegistryByteBuf, SetTradeStackC2SMessage> PACKET_CODEC = PacketCodec.tuple(
-        PacketCodecs.VAR_INT,
+public record SetTradeStackC2SMessage(int syncId, int slotId, ItemStack stack) implements CustomPacketPayload {
+    public static final Type<SetTradeStackC2SMessage> ID = new Type<>(AdornCommon.id("set_trade_stack"));
+    public static final StreamCodec<RegistryFriendlyByteBuf, SetTradeStackC2SMessage> PACKET_CODEC = StreamCodec.composite(
+        ByteBufCodecs.VAR_INT,
         SetTradeStackC2SMessage::syncId,
-        PacketCodecs.VAR_INT,
+        ByteBufCodecs.VAR_INT,
         SetTradeStackC2SMessage::slotId,
-        ItemStack.PACKET_CODEC,
+        ItemStack.STREAM_CODEC,
         SetTradeStackC2SMessage::stack,
         SetTradeStackC2SMessage::new
     );
 
     @Override
-    public Id<? extends CustomPayload> getId() {
+    public Type<? extends CustomPacketPayload> type() {
         return ID;
     }
 }

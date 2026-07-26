@@ -2,24 +2,24 @@ package juuxel.adorn.platform.neo.client.renderer;
 
 import juuxel.adorn.client.renderer.ConeEntityRenderer;
 import juuxel.adorn.item.AdornItems;
-import net.minecraft.client.render.command.OrderedRenderCommandQueue;
-import net.minecraft.client.render.entity.feature.FeatureRenderer;
-import net.minecraft.client.render.entity.feature.FeatureRendererContext;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.state.BipedEntityRenderState;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.world.item.ItemStack;
 
-public final class ConeFeatureRenderer<S extends BipedEntityRenderState, M extends BipedEntityModel<S>> extends FeatureRenderer<S, M> {
-    public ConeFeatureRenderer(FeatureRendererContext<S, M> context) {
+public final class ConeFeatureRenderer<S extends HumanoidRenderState, M extends HumanoidModel<S>> extends RenderLayer<S, M> {
+    public ConeFeatureRenderer(RenderLayerParent<S, M> context) {
         super(context);
     }
 
     @Override
-    public void render(MatrixStack matrices, OrderedRenderCommandQueue queue, int light, S state, float limbAngle, float limbDistance) {
-        ItemStack headStack = state.equippedHeadStack;
-        if (headStack.isOf(AdornItems.CONE.get())) {
-            ConeEntityRenderer.renderOnHead(matrices, queue, headStack, light, state.outlineColor, getContextModel());
+    public void submit(PoseStack matrices, SubmitNodeCollector queue, int light, S state, float limbAngle, float limbDistance) {
+        ItemStack headStack = state.headEquipment;
+        if (headStack.is(AdornItems.CONE.get())) {
+            ConeEntityRenderer.renderOnHead(matrices, queue, headStack, light, state.outlineColor, getParentModel());
         }
     }
 }

@@ -1,25 +1,26 @@
 package juuxel.adorn.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.CarpetBlock;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.TallBlockItem;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.Direction;
+import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CarpetBlock;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.DoubleHighBlockItem;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.core.Direction;
 
-public final class ChairBlockItem extends TallBlockItem {
-    public ChairBlockItem(Block block, Settings settings) {
+public final class ChairBlockItem extends DoubleHighBlockItem {
+    public ChairBlockItem(Block block, Properties settings) {
         super(block, settings);
     }
 
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        var world = context.getWorld();
-        var pos = context.getBlockPos();
-        if (context.getSide() == Direction.UP && world.getBlockState(pos).getBlock() instanceof CarpetBlock) {
+    public InteractionResult useOn(UseOnContext context) {
+        var world = context.getLevel();
+        var pos = context.getClickedPos();
+        if (context.getClickedFace() == Direction.UP && world.getBlockState(pos).getBlock() instanceof CarpetBlock) {
             return place(new CarpetedTopPlacementContext(context));
         }
 
-        return super.useOnBlock(context);
+        return super.useOn(context);
     }
 }

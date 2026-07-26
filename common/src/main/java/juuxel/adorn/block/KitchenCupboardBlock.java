@@ -4,26 +4,26 @@ import juuxel.adorn.block.entity.KitchenCupboardBlockEntity;
 import juuxel.adorn.block.entity.SimpleContainerBlockEntity;
 import juuxel.adorn.lib.AdornStats;
 import juuxel.adorn.platform.PlatformBridges;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.menu.Menu;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.Containers;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-public final class KitchenCupboardBlock extends AbstractKitchenCounterBlock implements BlockEntityProvider, BlockWithDescription {
+public final class KitchenCupboardBlock extends AbstractKitchenCounterBlock implements EntityBlock, BlockWithDescription {
     private static final String DESCRIPTION_KEY = "block.adorn.kitchen_cupboard.description";
 
-    public KitchenCupboardBlock(AbstractBlock.Settings settings) {
+    public KitchenCupboardBlock(BlockBehaviour.Properties settings) {
         super(settings);
     }
 
@@ -33,39 +33,39 @@ public final class KitchenCupboardBlock extends AbstractKitchenCounterBlock impl
     }
 
     @Override
-    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if (world.isClient()) return ActionResult.SUCCESS;
+    protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        if (world.isClientSide()) return InteractionResult.SUCCESS;
 
         if (world.getBlockEntity(pos) instanceof KitchenCupboardBlockEntity cupboard) {
             PlatformBridges.get().getMenus().open(player, cupboard, pos);
-            player.incrementStat(AdornStats.OPEN_KITCHEN_CUPBOARD);
+            player.awardStat(AdornStats.OPEN_KITCHEN_CUPBOARD);
         }
 
-        return ActionResult.CONSUME;
+        return InteractionResult.CONSUME;
     }
 
     @Override
-    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
-        ItemScatterer.onStateReplaced(state, world, pos);
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean moved) {
+        Containers.updateNeighboursAfterDestroy(state, world, pos);
     }
 
     @Override
-    public boolean hasComparatorOutput(BlockState state) {
+    public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
     @Override
-    protected int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction) {
-        return Menu.calculateComparatorOutput(world.getBlockEntity(pos));
+    protected int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos, Direction direction) {
+        return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(world.getBlockEntity(pos));
     }
 
     @Override
-    public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return AdornBlockEntities.KITCHEN_CUPBOARD.get().instantiate(pos, state);
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return AdornBlockEntities.KITCHEN_CUPBOARD.get().create(pos, state);
     }
 
     @Override
-    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (world.getBlockEntity(pos) instanceof SimpleContainerBlockEntity container) {
             container.onScheduledTick();
         }

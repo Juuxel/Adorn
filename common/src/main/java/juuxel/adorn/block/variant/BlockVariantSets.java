@@ -21,9 +21,9 @@ import juuxel.adorn.lib.registry.KeyedRegistrar;
 import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.lib.registry.RegistrarFactory;
 import juuxel.adorn.lib.registry.RegistryHelper;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKeys;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Item;
+import net.minecraft.core.registries.Registries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -34,8 +34,8 @@ import java.util.Map;
 import java.util.Set;
 
 public final class BlockVariantSets {
-    public static final KeyedRegistrar<Block> BLOCKS = RegistrarFactory.get().create(RegistryKeys.BLOCK);
-    public static final KeyedRegistrar<Item> ITEMS = RegistrarFactory.get().create(RegistryKeys.ITEM);
+    public static final KeyedRegistrar<Block> BLOCKS = RegistrarFactory.get().create(Registries.BLOCK);
+    public static final KeyedRegistrar<Item> ITEMS = RegistrarFactory.get().create(Registries.ITEM);
     private static final RegistryHelper HELPER = new RegistryHelper(BLOCKS, ITEMS);
 
     private static final List<BlockVariantSet> variantSets = new ArrayList<>();

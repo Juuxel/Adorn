@@ -1,26 +1,26 @@
 package juuxel.adorn.client.book;
 
 import juuxel.adorn.AdornCommon;
-import net.minecraft.resource.JsonDataLoader;
-import net.minecraft.resource.ResourceFinder;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.profiler.Profiler;
+import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.resources.FileToIdConverter;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.profiling.ProfilerFiller;
 
 import java.util.Map;
 
-public class BookManager extends JsonDataLoader<Book> {
+public class BookManager extends SimpleJsonResourceReloadListener<Book> {
     public static final Identifier ID = AdornCommon.id("book_manager");
     public static final String DATA_TYPE = "adorn/books";
 
     private Map<Identifier, Book> books = Map.of();
 
     public BookManager() {
-        super(Book.CODEC, ResourceFinder.json(DATA_TYPE));
+        super(Book.CODEC, FileToIdConverter.json(DATA_TYPE));
     }
 
     @Override
-    protected void apply(Map<Identifier, Book> prepared, ResourceManager manager, Profiler profiler) {
+    protected void apply(Map<Identifier, Book> prepared, ResourceManager manager, ProfilerFiller profiler) {
         books = Map.copyOf(prepared);
     }
 

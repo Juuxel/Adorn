@@ -3,10 +3,10 @@ package juuxel.adorn.item;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.lib.AdornTags;
 import juuxel.adorn.lib.registry.Registered;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.tags.TagKey;
 
 import java.util.Set;
 
@@ -29,17 +29,18 @@ public sealed interface FuelData {
     int burnTime();
     boolean matches(ItemStack stack);
 
-    record ForItem(Registered<? extends ItemConvertible> item, int burnTime) implements FuelData {
+    record ForItem(Registered<? extends ItemLike> item, int burnTime) implements FuelData {
         @Override
         public boolean matches(ItemStack stack) {
-            return stack.isOf(item.get().asItem());
+            return stack.is(item.get().asItem());
         }
     }
 
-    record ForTag(TagKey<Item> tag, int burnTime) implements FuelData {
+    record ForTag(
+        TagKey<Item> tag, int burnTime) implements FuelData {
         @Override
         public boolean matches(ItemStack stack) {
-            return stack.isIn(tag);
+            return stack.is(tag);
         }
     }
 }

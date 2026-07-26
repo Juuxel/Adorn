@@ -2,21 +2,21 @@ package juuxel.adorn.lib;
 
 import juuxel.adorn.block.SofaBlock;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
-import net.minecraft.block.BedBlock;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.ActionResult;
+import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionResult;
 
 public final class SofaSleeping {
     public static void init() {
         EntitySleepEvents.ALLOW_BED.register((entity, sleepingPos, state, vanillaResult) ->
-            state.getBlock() instanceof SofaBlock ? ActionResult.SUCCESS : ActionResult.PASS);
+            state.getBlock() instanceof SofaBlock ? InteractionResult.SUCCESS : InteractionResult.PASS);
 
         EntitySleepEvents.ALLOW_SETTING_SPAWN.register((player, sleepingPos) ->
-            !(player.getEntityWorld().getBlockState(sleepingPos).getBlock() instanceof SofaBlock));
+            !(player.level().getBlockState(sleepingPos).getBlock() instanceof SofaBlock));
 
         EntitySleepEvents.MODIFY_SLEEPING_DIRECTION.register((entity, sleepingPos, sleepingDirection) -> {
-            if (entity.getEntityWorld().getBlockState(sleepingPos).getBlock() instanceof SofaBlock) {
-                var direction = SofaBlock.getSleepingDirection(entity.getEntityWorld(), sleepingPos, true);
+            if (entity.level().getBlockState(sleepingPos).getBlock() instanceof SofaBlock) {
+                var direction = SofaBlock.getSleepingDirection(entity.level(), sleepingPos, true);
                 return direction != null ? direction.getOpposite() : null;
             }
 
@@ -24,14 +24,14 @@ public final class SofaSleeping {
         });
 
         EntitySleepEvents.ALLOW_RESETTING_TIME.register(player -> {
-            var pos = player.getSleepingPosition().orElse(null);
+            var pos = player.getSleepingPos().orElse(null);
             if (pos == null) return true;
 
-            if (player.getEntityWorld().getBlockState(pos).getBlock() instanceof SofaBlock) {
-                if (player.getEntityWorld().isDay()) {
+            if (player.level().getBlockState(pos).getBlock() instanceof SofaBlock) {
+                if (player.level().isBrightOutside()) {
                     return false;
                 } else {
-                    return player.getEntityWorld() instanceof ServerWorld world && world.getGameRules().getValue(AdornGameRules.SKIP_NIGHT_ON_SOFAS.get());
+                    return player.level() instanceof ServerLevel world && world.getGameRules().get(AdornGameRules.SKIP_NIGHT_ON_SOFAS.get());
                 }
             } else {
                 return true; // go on
@@ -39,12 +39,12 @@ public final class SofaSleeping {
         });
 
         EntitySleepEvents.SET_BED_OCCUPATION_STATE.register((entity, pos, state, occupied) -> {
-            var world = entity.getEntityWorld();
+            var world = entity.level();
 
             if (state.getBlock() instanceof SofaBlock) {
-                world.setBlockState(pos, state.with(SofaBlock.OCCUPIED, occupied));
-                var neighborPos = pos.offset(SofaBlock.getSleepingDirection(world, pos, true));
-                world.setBlockState(neighborPos, world.getBlockState(neighborPos).with(SofaBlock.OCCUPIED, occupied));
+                world.setBlockAndUpdate(pos, state.setValue(SofaBlock.OCCUPIED, occupied));
+                var neighborPos = pos.relative(SofaBlock.getSleepingDirection(world, pos, true));
+                world.setBlockAndUpdate(neighborPos, world.getBlockState(neighborPos).setValue(SofaBlock.OCCUPIED, occupied));
                 return true;
             } else {
                 return false; // go on
@@ -53,8 +53,8 @@ public final class SofaSleeping {
 
         EntitySleepEvents.MODIFY_WAKE_UP_POSITION.register((entity, sleepingPos, state, wakeUpPos) -> {
             if (state.getBlock() instanceof SofaBlock) {
-                var direction = SofaBlock.getSleepingDirection(entity.getEntityWorld(), sleepingPos, true);
-                return BedBlock.findWakeUpPosition(entity.getType(), entity.getEntityWorld(), sleepingPos, direction, entity.getYaw()).orElse(null);
+                var direction = SofaBlock.getSleepingDirection(entity.level(), sleepingPos, true);
+                return BedBlock.findStandUpPosition(entity.getType(), entity.level(), sleepingPos, direction, entity.getYRot()).orElse(null);
             } else {
                 return wakeUpPos;
             }

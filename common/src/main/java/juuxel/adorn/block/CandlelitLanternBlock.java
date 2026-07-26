@@ -1,19 +1,20 @@
 package juuxel.adorn.block;
 
-import net.minecraft.block.AbstractCandleBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.LanternBlock;
-import net.minecraft.block.MapColor;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.AbstractCandleBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.LanternBlock;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
 
 public final class CandlelitLanternBlock extends LanternBlock implements BlockWithDescription {
     private static final String DESCRIPTION_KEY = "block.adorn.candlelit_lantern.description";
 
-    public CandlelitLanternBlock(Settings settings) {
+    public CandlelitLanternBlock(Properties settings) {
         super(settings);
     }
 
@@ -23,20 +24,20 @@ public final class CandlelitLanternBlock extends LanternBlock implements BlockWi
     }
 
     @Override
-    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         var px = 1 / 16.0;
-        var vec = Vec3d.ofCenter(pos, state.get(HANGING) ? 6 * px : 5 * px);
-        AbstractCandleBlock.spawnCandleParticles(world, vec, random);
+        var vec = Vec3.upFromBottomCenterOf(pos, state.getValue(HANGING) ? 6 * px : 5 * px);
+        AbstractCandleBlock.addParticlesAndSound(world, vec, random);
     }
 
-    public static Settings createBlockSettings() {
-        return Settings.create()
-            .mapColor(MapColor.IRON_GRAY)
-            .solid()
-            .requiresTool()
+    public static Properties createBlockSettings() {
+        return Properties.of()
+            .mapColor(MapColor.METAL)
+            .forceSolidOn()
+            .requiresCorrectToolForDrops()
             .strength(3.5f)
-            .sounds(BlockSoundGroup.LANTERN)
-            .luminance(state -> 12)
-            .nonOpaque();
+            .sound(SoundType.LANTERN)
+            .lightLevel(state -> 12)
+            .noOcclusion();
     }
 }

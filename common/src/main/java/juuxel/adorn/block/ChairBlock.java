@@ -1,46 +1,47 @@
 package juuxel.adorn.block;
 
 import juuxel.adorn.lib.AdornStats;
-import juuxel.adorn.util.Shapes;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.TallPlantBlock;
-import net.minecraft.block.Waterloggable;
-import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+import juuxel.adorn.util.ShapeRotation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public final class ChairBlock extends CarpetedBlock implements Waterloggable, BlockWithDescription {
-    public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
-    public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
-    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+public final class ChairBlock extends CarpetedBlock implements SimpleWaterloggedBlock, BlockWithDescription {
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     private static final String DESCRIPTION_KEY = "block.adorn.chair.description";
     private static final Map<Direction, VoxelShape> LOWER_SHAPES;
@@ -48,35 +49,35 @@ public final class ChairBlock extends CarpetedBlock implements Waterloggable, Bl
     private static final Map<Direction, VoxelShape> UPPER_OUTLINE_SHAPES;
 
     static {
-        var lowerSeatShape = VoxelShapes.union(
-            createCuboidShape(2.0, 8.0, 2.0, 14.0, 10.0, 14.0),
+        var lowerSeatShape = Shapes.or(
+            box(2.0, 8.0, 2.0, 14.0, 10.0, 14.0),
             // Legs
-            createCuboidShape(2.0, 0.0, 2.0, 4.0, 8.0, 4.0),
-            createCuboidShape(12.0, 0.0, 2.0, 14.0, 8.0, 4.0),
-            createCuboidShape(2.0, 0.0, 12.0, 4.0, 8.0, 14.0),
-            createCuboidShape(12.0, 0.0, 12.0, 14.0, 8.0, 14.0)
+            box(2.0, 0.0, 2.0, 4.0, 8.0, 4.0),
+            box(12.0, 0.0, 2.0, 14.0, 8.0, 4.0),
+            box(2.0, 0.0, 12.0, 4.0, 8.0, 14.0),
+            box(12.0, 0.0, 12.0, 14.0, 8.0, 14.0)
         );
-        var lowerBackShapes = Shapes.buildShapeRotations(2, 10, 2, 4, 24, 14);
-        LOWER_SHAPES = Shapes.mergeIntoShapeMap(lowerBackShapes, lowerSeatShape);
-        LOWER_SHAPES_WITH_CARPET = Shapes.mergeIntoShapeMap(LOWER_SHAPES, CARPET_SHAPE);
+        var lowerBackShapes = ShapeRotation.buildShapeRotations(2, 10, 2, 4, 24, 14);
+        LOWER_SHAPES = ShapeRotation.mergeIntoShapeMap(lowerBackShapes, lowerSeatShape);
+        LOWER_SHAPES_WITH_CARPET = ShapeRotation.mergeIntoShapeMap(LOWER_SHAPES, CARPET_SHAPE);
 
-        var upperSeatShape = VoxelShapes.union(
-            createCuboidShape(2.0, -8.0, 2.0, 14.0, -6.0, 14.0),
+        var upperSeatShape = Shapes.or(
+            box(2.0, -8.0, 2.0, 14.0, -6.0, 14.0),
             // Legs
-            createCuboidShape(2.0, -16.0, 2.0, 4.0, -8.0, 4.0),
-            createCuboidShape(12.0, -16.0, 2.0, 14.0, -8.0, 4.0),
-            createCuboidShape(2.0, -16.0, 12.0, 4.0, -8.0, 14.0),
-            createCuboidShape(12.0, -16.0, 12.0, 14.0, -8.0, 14.0)
+            box(2.0, -16.0, 2.0, 4.0, -8.0, 4.0),
+            box(12.0, -16.0, 2.0, 14.0, -8.0, 4.0),
+            box(2.0, -16.0, 12.0, 4.0, -8.0, 14.0),
+            box(12.0, -16.0, 12.0, 14.0, -8.0, 14.0)
         );
-        var upperBackShapes = Shapes.buildShapeRotations(2, -6, 2, 4, 8, 14);
-        UPPER_OUTLINE_SHAPES = Shapes.mergeIntoShapeMap(upperBackShapes, upperSeatShape);
+        var upperBackShapes = ShapeRotation.buildShapeRotations(2, -6, 2, 4, 8, 14);
+        UPPER_OUTLINE_SHAPES = ShapeRotation.mergeIntoShapeMap(upperBackShapes, upperSeatShape);
     }
 
-    public ChairBlock(Settings settings) {
+    public ChairBlock(Properties settings) {
         super(settings);
 
-        setDefaultState(getDefaultState().with(HALF, DoubleBlockHalf.LOWER)
-            .with(WATERLOGGED, false));
+        registerDefaultState(defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER)
+            .setValue(WATERLOGGED, false));
     }
 
     @Override
@@ -90,19 +91,19 @@ public final class ChairBlock extends CarpetedBlock implements Waterloggable, Bl
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(FACING, HALF, WATERLOGGED);
     }
 
     @Override
-    public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
-        var world = ctx.getWorld();
-        var pos = ctx.getBlockPos();
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        var world = ctx.getLevel();
+        var pos = ctx.getClickedPos();
 
-        if (pos.getY() < world.getTopYInclusive() && world.getBlockState(pos.up()).canReplace(ctx)) {
-            return super.getPlacementState(ctx).with(FACING, ctx.getHorizontalPlayerFacing().getOpposite())
-                .with(WATERLOGGED, world.getFluidState(pos).getFluid() == Fluids.WATER);
+        if (pos.getY() < world.getMaxY() && world.getBlockState(pos.above()).canBeReplaced(ctx)) {
+            return super.getStateForPlacement(ctx).setValue(FACING, ctx.getHorizontalDirection().getOpposite())
+                .setValue(WATERLOGGED, world.getFluidState(pos).getType() == Fluids.WATER);
         }
 
         return null;
@@ -110,123 +111,123 @@ public final class ChairBlock extends CarpetedBlock implements Waterloggable, Bl
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-            var downState = world.getBlockState(pos.down());
-            return downState.getBlock() == this && downState.get(HALF) == DoubleBlockHalf.LOWER;
+    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+        if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
+            var downState = world.getBlockState(pos.below());
+            return downState.getBlock() == this && downState.getValue(HALF) == DoubleBlockHalf.LOWER;
         }
 
-        return super.canPlaceAt(state, world, pos);
+        return super.canSurvive(state, world, pos);
     }
 
     @Override
-    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        if (!world.isClient() && player.isCreative()) {
-            TallPlantBlock.onBreakInCreative(world, pos, state, player);
+    public BlockState playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
+        if (!world.isClientSide() && player.isCreative()) {
+            DoublePlantBlock.preventDropFromBottomPart(world, pos, state, player);
         }
 
-        return super.onBreak(world, pos, state, player);
+        return super.playerWillDestroy(world, pos, state, player);
     }
 
     @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        world.setBlockState(
-            pos.up(),
+    public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        world.setBlockAndUpdate(
+            pos.above(),
             FluidUtil.updateFluidFromState(
-                getDefaultState()
-                    .with(HALF, DoubleBlockHalf.UPPER)
-                    .with(FACING, state.get(FACING)),
-                world.getFluidState(pos.up())
+                defaultBlockState()
+                    .setValue(HALF, DoubleBlockHalf.UPPER)
+                    .setValue(FACING, state.getValue(FACING)),
+                world.getFluidState(pos.above())
             )
         );
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        if (state.get(HALF) == DoubleBlockHalf.LOWER) {
-            if (isCarpetingEnabled() && state.get(CARPET).isPresent()) {
-                return LOWER_SHAPES_WITH_CARPET.get(state.get(FACING));
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
+            if (isCarpetingEnabled() && state.getValue(CARPET).isPresent()) {
+                return LOWER_SHAPES_WITH_CARPET.get(state.getValue(FACING));
             } else {
-                return LOWER_SHAPES.get(state.get(FACING));
+                return LOWER_SHAPES.get(state.getValue(FACING));
             }
         } else {
-            return UPPER_OUTLINE_SHAPES.get(state.get(FACING));
+            return UPPER_OUTLINE_SHAPES.get(state.getValue(FACING));
         }
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        if (state.get(HALF) == DoubleBlockHalf.LOWER) {
-            if (isCarpetingEnabled() && state.get(CARPET).isPresent()) {
-                return LOWER_SHAPES_WITH_CARPET.get(state.get(FACING));
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
+            if (isCarpetingEnabled() && state.getValue(CARPET).isPresent()) {
+                return LOWER_SHAPES_WITH_CARPET.get(state.getValue(FACING));
             } else {
-                return LOWER_SHAPES.get(state.get(FACING));
+                return LOWER_SHAPES.get(state.getValue(FACING));
             }
         } else {
-            return VoxelShapes.empty(); // Let the bottom one handle the collision
+            return Shapes.empty(); // Let the bottom one handle the collision
         }
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
-        if (state.get(WATERLOGGED)) {
-            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+    protected BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        if (state.getValue(WATERLOGGED)) {
+            tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
         }
 
-        var half = state.get(HALF);
+        var half = state.getValue(HALF);
 
         // If updated from other half's direction vertically (LOWER + UP or UPPER + DOWN)
         if (direction.getAxis() == Direction.Axis.Y && (half == DoubleBlockHalf.LOWER) == (direction == Direction.UP)) {
             // If the other half is not a chair, break block
             if (neighborState.getBlock() != this) {
-                return Blocks.AIR.getDefaultState();
+                return Blocks.AIR.defaultBlockState();
             } else {
-                return state.with(FACING, neighborState.get(FACING));
+                return state.setValue(FACING, neighborState.getValue(FACING));
             }
         } else {
-            return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
+            return super.updateShape(state, world, tickView, pos, direction, neighborPos, neighborState, random);
         }
     }
 
     @Override
-    protected BlockPos getActualSeatPos(World world, BlockState state, BlockPos pos) {
-        return switch (state.get(HALF)) {
-            case UPPER -> pos.down();
+    protected BlockPos getActualSeatPos(Level world, BlockState state, BlockPos pos) {
+        return switch (state.getValue(HALF)) {
+            case UPPER -> pos.below();
             case LOWER -> pos;
         };
     }
 
     @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation(state.get(FACING)));
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
     @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return state.with(FACING, rotation.rotate(state.get(FACING)));
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
     public boolean canStateBeCarpeted(BlockState state) {
-        return super.canStateBeCarpeted(state) && state.get(HALF) == DoubleBlockHalf.LOWER;
+        return super.canStateBeCarpeted(state) && state.getValue(HALF) == DoubleBlockHalf.LOWER;
     }
 
     @Override
-    public boolean canPathfindThrough(BlockState state, NavigationType type) {
+    public boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
     }
 
     @Override
-    public double getSittingOffset(World world, BlockState state, BlockPos pos) {
+    public double getSittingOffset(Level world, BlockState state, BlockPos pos) {
         return 0.625; // 10/16
     }
 
     @Override
     public Direction getPreferredDismountDirection(BlockState state, Entity passenger) {
-        return state.get(FACING);
+        return state.getValue(FACING);
     }
 }

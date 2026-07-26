@@ -1,10 +1,10 @@
 package juuxel.adorn.recipe;
 
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.input.RecipeInput;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeInput;
 
-public class InventoryWrappingRecipeInput<I extends Inventory> implements RecipeInput {
+public class InventoryWrappingRecipeInput<I extends Container> implements RecipeInput {
     protected final I parent;
 
     public InventoryWrappingRecipeInput(I parent) {
@@ -12,13 +12,13 @@ public class InventoryWrappingRecipeInput<I extends Inventory> implements Recipe
     }
 
     @Override
-    public ItemStack getStackInSlot(int slot) {
-        return parent.getStack(slot);
+    public ItemStack getItem(int slot) {
+        return parent.getItem(slot);
     }
 
     @Override
     public int size() {
-        return parent.size();
+        return parent.getContainerSize();
     }
 
     @Override

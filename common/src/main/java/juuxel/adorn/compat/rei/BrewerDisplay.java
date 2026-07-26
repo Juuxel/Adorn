@@ -15,10 +15,10 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.util.Identifier;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -41,13 +41,13 @@ public record BrewerDisplay(
         Identifier.CODEC.optionalFieldOf("id").forGetter(BrewerDisplay::id)
     ).apply(instance, BrewerDisplay::new));
 
-    public static final PacketCodec<RegistryByteBuf, BrewerDisplay> PACKET_CODEC = PacketCodec.tuple(
+    public static final StreamCodec<RegistryFriendlyByteBuf, BrewerDisplay> PACKET_CODEC = StreamCodec.composite(
         EntryIngredient.streamCodec(), BrewerDisplay::input,
         EntryIngredient.streamCodec(), BrewerDisplay::first,
         EntryIngredient.streamCodec(), BrewerDisplay::second,
         EntryIngredient.streamCodec(), BrewerDisplay::fluid,
         EntryStack.streamCodec(), BrewerDisplay::result,
-        PacketCodecs.optional(Identifier.PACKET_CODEC), BrewerDisplay::id,
+        ByteBufCodecs.optional(Identifier.STREAM_CODEC), BrewerDisplay::id,
         BrewerDisplay::new
     );
 

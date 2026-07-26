@@ -1,26 +1,26 @@
 package juuxel.adorn.util;
 
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.text.TextCodecs;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public final class TextBuilder {
-    private final List<Text> parts = new ArrayList<>();
+    private final List<Component> parts = new ArrayList<>();
 
-    public TextBuilder add(Text text) {
+    public TextBuilder add(Component text) {
         parts.add(text);
         return this;
     }
 
     public TextBuilder newLine() {
-        parts.add(Text.literal("\n"));
+        parts.add(Component.literal("\n"));
         return this;
     }
 
-    public MutableText build() {
-        return TextCodecs.combine(parts);
+    public MutableComponent build() {
+        return ComponentSerialization.createFromList(parts);
     }
 }

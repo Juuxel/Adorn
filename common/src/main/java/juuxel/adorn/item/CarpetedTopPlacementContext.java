@@ -1,12 +1,12 @@
 package juuxel.adorn.item;
 
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemUsageContext;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 
-public final class CarpetedTopPlacementContext extends ItemPlacementContext {
-    public CarpetedTopPlacementContext(ItemUsageContext context) {
+public final class CarpetedTopPlacementContext extends BlockPlaceContext {
+    public CarpetedTopPlacementContext(UseOnContext context) {
         super(context);
         // We know that the block is a carpet block
-        canReplaceExisting = true;
+        replaceClicked = true;
     }
 }

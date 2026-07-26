@@ -1,25 +1,26 @@
 package juuxel.adorn.item;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.consume.UseAction;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUseAnimation;
+import net.minecraft.world.level.Level;
 
 public class DrinkInMugItem extends Item {
-    public DrinkInMugItem(Settings settings) {
+    public DrinkInMugItem(Properties settings) {
         super(settings);
     }
 
     @Override
-    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        var result = super.finishUsing(stack, world, user);
-        return user instanceof PlayerEntity player && player.getAbilities().creativeMode ? result : new ItemStack(AdornItems.MUG.get());
+    public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
+        var result = super.finishUsingItem(stack, world, user);
+        return user instanceof Player player && player.getAbilities().instabuild ? result : new ItemStack(AdornItems.MUG.get());
     }
 
     @Override
-    public UseAction getUseAction(ItemStack stack) {
-        return UseAction.DRINK;
+    public ItemUseAnimation getUseAnimation(ItemStack stack) {
+        return ItemUseAnimation.DRINK;
     }
 }

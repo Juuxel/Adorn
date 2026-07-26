@@ -40,28 +40,6 @@ include(
 // Set up custom repositories.
 dependencyResolutionManagement {
     repositories {
-        // Set up the custom "repository" for my Menu mappings.
-        // (A mapping layer that replaces Yarn's "screen handler" with Mojang's own "menu". It's a long story.)
-        // The exclusiveContent makes sure it's only used for io.github.juuxel:menu,
-        // and only this repo is used for that module.
-        exclusiveContent {
-            forRepository {
-                ivy {
-                    url = uri("https://github.com/Juuxel/Menu/archive/refs/tags")
-                    patternLayout {
-                        artifact("[revision].zip")
-                    }
-                    metadataSources {
-                        artifact()
-                    }
-                }
-            }
-
-            filter {
-                includeModule("io.github.juuxel", "menu")
-            }
-        }
-
         // For Architectury and REI.
         maven {
             name = "Architectury"

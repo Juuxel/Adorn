@@ -1,9 +1,9 @@
 package juuxel.adorn.block;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.state.property.Properties;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public final class FluidUtil {
     /**
@@ -11,6 +11,6 @@ public final class FluidUtil {
      * for Towelette support.
      */
     public static BlockState updateFluidFromState(BlockState state, FluidState fluidState) {
-        return state.with(Properties.WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+        return state.setValue(BlockStateProperties.WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }
 }

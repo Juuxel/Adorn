@@ -2,7 +2,7 @@ package juuxel.adorn.platform.forge.event;
 
 import juuxel.adorn.block.SofaBlock;
 import juuxel.adorn.entity.SeatEntity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerSetSpawnEvent;
@@ -17,7 +17,7 @@ public final class EntityEvents {
         BlockPos pos = event.getNewSpawn();
 
         if (pos != null) {
-            if (!event.isForced() && event.getEntity().getEntityWorld().getBlockState(pos).getBlock() instanceof SofaBlock) {
+            if (!event.isForced() && event.getEntity().level().getBlockState(pos).getBlock() instanceof SofaBlock) {
                 event.setCanceled(true);
             }
         }

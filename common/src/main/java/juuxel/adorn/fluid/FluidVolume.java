@@ -1,19 +1,19 @@
 package juuxel.adorn.fluid;
 
-import net.minecraft.component.ComponentChanges;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 
 public final class FluidVolume extends FluidReference {
-    public static final PacketCodec<RegistryByteBuf, FluidVolume> PACKET_CODEC = PacketCodec.of(FluidVolume::write, FluidVolume::load);
+    public static final StreamCodec<RegistryFriendlyByteBuf, FluidVolume> PACKET_CODEC = StreamCodec.ofMember(FluidVolume::write, FluidVolume::load);
     private Fluid fluid;
     private long amount;
-    private ComponentChanges components;
+    private DataComponentPatch components;
     private final FluidUnit unit;
 
-    public FluidVolume(Fluid fluid, long amount, ComponentChanges components, FluidUnit unit) {
+    public FluidVolume(Fluid fluid, long amount, DataComponentPatch components, FluidUnit unit) {
         this.fluid = fluid;
         this.amount = amount;
         this.components = components;
@@ -21,11 +21,11 @@ public final class FluidVolume extends FluidReference {
     }
 
     public static FluidVolume empty(FluidUnit unit) {
-        return new FluidVolume(Fluids.EMPTY, 0, ComponentChanges.EMPTY, unit);
+        return new FluidVolume(Fluids.EMPTY, 0, DataComponentPatch.EMPTY, unit);
     }
 
-    public static FluidVolume load(RegistryByteBuf buf) {
-        var volume = empty(buf.readEnumConstant(FluidUnit.class));
+    public static FluidVolume load(RegistryFriendlyByteBuf buf) {
+        var volume = empty(buf.readEnum(FluidUnit.class));
         volume.readWithoutUnit(buf);
         return volume;
     }
@@ -36,7 +36,7 @@ public final class FluidVolume extends FluidReference {
     }
 
     @Override
-    public void setFluid(Fluid fluid, long amount, ComponentChanges components) {
+    public void setFluid(Fluid fluid, long amount, DataComponentPatch components) {
         this.fluid = fluid;
         this.amount = amount;
         this.components = components;
@@ -53,7 +53,7 @@ public final class FluidVolume extends FluidReference {
     }
 
     @Override
-    public ComponentChanges getComponents() {
+    public DataComponentPatch getComponents() {
         return components;
     }
 

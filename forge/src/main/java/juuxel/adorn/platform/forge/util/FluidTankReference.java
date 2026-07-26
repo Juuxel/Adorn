@@ -2,8 +2,8 @@ package juuxel.adorn.platform.forge.util;
 
 import juuxel.adorn.fluid.FluidReference;
 import juuxel.adorn.fluid.FluidUnit;
-import net.minecraft.component.ComponentChanges;
-import net.minecraft.fluid.Fluid;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.StacksResourceHandler;
@@ -28,7 +28,7 @@ public final class FluidTankReference extends FluidReference {
     }
 
     @Override
-    public void setFluid(Fluid fluid, long amount, ComponentChanges components) {
+    public void setFluid(Fluid fluid, long amount, DataComponentPatch components) {
         tank.set(slot, FluidResource.of(fluid, components), (int) amount);
     }
 
@@ -43,7 +43,7 @@ public final class FluidTankReference extends FluidReference {
     }
 
     @Override
-    public ComponentChanges getComponents() {
+    public DataComponentPatch getComponents() {
         return tank.getResource(slot).getComponentsPatch();
     }
 

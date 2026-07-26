@@ -2,8 +2,8 @@ package juuxel.adorn.platform.neo.client;
 
 import juuxel.adorn.client.CustomModelKey;
 import juuxel.adorn.client.ModelBridge;
-import net.minecraft.client.render.model.BakedModelManager;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.resources.model.ModelManager;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.model.standalone.StandaloneModelKey;
 
 public final class ModelBridgeNeo implements ModelBridge {
@@ -13,7 +13,7 @@ public final class ModelBridgeNeo implements ModelBridge {
     }
 
     @Override
-    public <T> T getModel(BakedModelManager manager, CustomModelKey<T> key) {
+    public <T> T getModel(ModelManager manager, CustomModelKey<T> key) {
         return manager.getStandaloneModel(((CustomModelKeyImpl<T>) key).backing());
     }
 }

@@ -1,8 +1,8 @@
 package juuxel.adorn.commonmixin;
 
 import juuxel.adorn.block.PicketFenceBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FenceGateBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.FenceGateBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

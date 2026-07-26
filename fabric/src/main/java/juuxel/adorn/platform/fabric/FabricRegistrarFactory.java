@@ -4,22 +4,22 @@ import juuxel.adorn.lib.registry.KeyedRegistrar;
 import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
 import juuxel.adorn.lib.registry.TrackedDataHandlerRegistrar;
-import net.minecraft.entity.data.TrackedDataHandler;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.network.syncher.EntityDataSerializer;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 
 public final class FabricRegistrarFactory implements RegistrarFactory {
     @SuppressWarnings("unchecked")
     @Override
-    public <T> KeyedRegistrar<T> create(RegistryKey<Registry<T>> registryKey) {
-        var registry = ((Registry<Registry<T>>) Registries.REGISTRIES).get(registryKey);
+    public <T> KeyedRegistrar<T> create(ResourceKey<Registry<T>> registryKey) {
+        var registry = ((Registry<Registry<T>>) BuiltInRegistries.REGISTRY).getValue(registryKey);
         if (registry == null) throw new IllegalArgumentException("No registry found for key " + registryKey);
         return new RegistrarImpl<>(registry);
     }
 
     @Override
-    public Registrar<TrackedDataHandler<?>> createForTrackedDataHandlers() {
+    public Registrar<EntityDataSerializer<?>> createForTrackedDataHandlers() {
         return new TrackedDataHandlerRegistrar();
     }
 }

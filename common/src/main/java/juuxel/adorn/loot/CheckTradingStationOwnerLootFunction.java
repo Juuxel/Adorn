@@ -3,13 +3,13 @@ package juuxel.adorn.loot;
 import com.mojang.serialization.MapCodec;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.component.AdornComponentTypes;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.function.LootFunction;
-import net.minecraft.loot.function.LootFunctionType;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 
-public final class CheckTradingStationOwnerLootFunction implements LootFunction {
+public final class CheckTradingStationOwnerLootFunction implements LootItemFunction {
     public static final CheckTradingStationOwnerLootFunction INSTANCE = new CheckTradingStationOwnerLootFunction();
     public static final Builder BUILDER = new Builder();
     public static final MapCodec<CheckTradingStationOwnerLootFunction> CODEC = MapCodec.unit(INSTANCE);
@@ -19,7 +19,7 @@ public final class CheckTradingStationOwnerLootFunction implements LootFunction 
 
     @Override
     public ItemStack apply(ItemStack stack, LootContext lootContext) {
-        if (stack.isOf(AdornBlocks.TRADING_STATION.get().asItem())) {
+        if (stack.is(AdornBlocks.TRADING_STATION.get().asItem())) {
             if (!hasTrade(stack) && !hasStorage(stack)) {
                 clearOwner(stack);
             }
@@ -34,9 +34,9 @@ public final class CheckTradingStationOwnerLootFunction implements LootFunction 
     }
 
     private boolean hasStorage(ItemStack stack) {
-        var container = stack.get(DataComponentTypes.CONTAINER);
+        var container = stack.get(DataComponents.CONTAINER);
         if (container == null) return false;
-        return container.streamNonEmpty().findAny().isPresent();
+        return container.nonEmptyStream().findAny().isPresent();
     }
 
     private void clearOwner(ItemStack stack) {
@@ -44,16 +44,16 @@ public final class CheckTradingStationOwnerLootFunction implements LootFunction 
     }
 
     @Override
-    public LootFunctionType<? extends LootFunction> getType() {
+    public LootItemFunctionType<? extends LootItemFunction> getType() {
         return AdornLootFunctionTypes.CHECK_TRADING_STATION_OWNER.get();
     }
 
-    public static final class Builder implements LootFunction.Builder {
+    public static final class Builder implements net.minecraft.world.level.storage.loot.functions.LootItemFunction.Builder {
         private Builder() {
         }
 
         @Override
-        public LootFunction build() {
+        public LootItemFunction build() {
             return INSTANCE;
         }
     }

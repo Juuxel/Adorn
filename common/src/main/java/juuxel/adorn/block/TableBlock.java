@@ -1,10 +1,11 @@
 package juuxel.adorn.block;
 
 import juuxel.adorn.util.FourWayShapeConfig;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.resources.Identifier;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public final class TableBlock extends AbstractTableBlock implements BlockWithDescription {
@@ -12,11 +13,11 @@ public final class TableBlock extends AbstractTableBlock implements BlockWithDes
     private static final VoxelShape[] SHAPES = new VoxelShape[32];
 
     static {
-        var topShape = createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0);
-        var legX0Z0 = createCuboidShape(1.0, 0.0, 1.0, 4.0, 14.0, 4.0);
-        var legX1Z0 = createCuboidShape(12.0, 0.0, 1.0, 15.0, 14.0, 4.0);
-        var legX0Z1 = createCuboidShape(1.0, 0.0, 12.0, 4.0, 14.0, 15.0);
-        var legX1Z1 = createCuboidShape(12.0, 0.0, 12.0, 15.0, 14.0, 15.0);
+        var topShape = box(0.0, 14.0, 0.0, 16.0, 16.0, 16.0);
+        var legX0Z0 = box(1.0, 0.0, 1.0, 4.0, 14.0, 4.0);
+        var legX1Z0 = box(12.0, 0.0, 1.0, 15.0, 14.0, 4.0);
+        var legX0Z1 = box(1.0, 0.0, 12.0, 4.0, 14.0, 15.0);
+        var legX1Z1 = box(12.0, 0.0, 12.0, 15.0, 14.0, 15.0);
         FourWayShapeConfig nonCarpetedConfig = new FourWayShapeConfig(topShape, legX0Z0, legX1Z0, legX0Z1, legX1Z1);
         FourWayShapeConfig carpetedConfig = nonCarpetedConfig.addToBaseShape(CARPET_SHAPE);
         var booleans = new boolean[] { true, false };
@@ -37,8 +38,8 @@ public final class TableBlock extends AbstractTableBlock implements BlockWithDes
         }
     }
 
-    public TableBlock(Settings settings) {
-        super(settings.solid());
+    public TableBlock(Properties settings) {
+        super(settings.forceSolidOn());
     }
 
     @Override

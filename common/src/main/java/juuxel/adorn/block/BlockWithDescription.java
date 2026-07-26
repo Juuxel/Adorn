@@ -2,7 +2,7 @@ package juuxel.adorn.block;
 
 import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.component.ItemDescription;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 
 /**
  * Can be added to a block to provide a description for the block item
@@ -10,7 +10,7 @@ import net.minecraft.block.Block;
  */
 public interface BlockWithDescription extends BlockWithItemComponents {
     default String getDescriptionKey() {
-        return ((Block) this).getTranslationKey() + ".description";
+        return ((Block) this).getDescriptionId() + ".description";
     }
 
     @Override

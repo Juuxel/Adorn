@@ -1,9 +1,9 @@
 package juuxel.adorn.util;
 
-import net.minecraft.block.Block;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
 
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public final class Shapes {
+public final class ShapeRotation {
     /**
      * Creates a map of horizontal cuboid VoxelShape rotations from the provided coordinates for <strong>east</strong>.
      *
@@ -33,10 +33,10 @@ public final class Shapes {
      */
     public static Map<Direction, VoxelShape> buildShapeRotationsFromNorth(int x0, int y0, int z0, int x1, int y1, int z1) {
         Map<Direction, VoxelShape> result = new EnumMap<>(Direction.class);
-        result.put(Direction.NORTH, Block.createCuboidShape(x0, y0, z0, x1, y1, z1));
-        result.put(Direction.SOUTH, Block.createCuboidShape(16.0 - x1, y0, 16.0 - z1, 16.0 - x0, y1, 16.0 - z0));
-        result.put(Direction.EAST, Block.createCuboidShape(16.0 - z1, y0, x0, 16.0 - z0, y1, x1));
-        result.put(Direction.WEST, Block.createCuboidShape(z0, y0, 16.0 - x1, z1, y1, 16.0 - x0));
+        result.put(Direction.NORTH, Block.box(x0, y0, z0, x1, y1, z1));
+        result.put(Direction.SOUTH, Block.box(16.0 - x1, y0, 16.0 - z1, 16.0 - x0, y1, 16.0 - z0));
+        result.put(Direction.EAST, Block.box(16.0 - z1, y0, x0, 16.0 - z0, y1, x1));
+        result.put(Direction.WEST, Block.box(z0, y0, 16.0 - x1, z1, y1, 16.0 - x0));
         return result;
     }
 
@@ -46,7 +46,7 @@ public final class Shapes {
     @SafeVarargs
     public static Map<Direction, VoxelShape> mergeShapeMaps(Map<Direction, VoxelShape>... maps) {
         return new EnumMap<>(
-            Direction.Type.HORIZONTAL.stream().collect(Collectors.toMap(
+            Direction.Plane.HORIZONTAL.stream().collect(Collectors.toMap(
                 Function.identity(),
                 direction -> Arrays.stream(maps)
                     .map(map -> {
@@ -54,7 +54,7 @@ public final class Shapes {
                         if (shape == null) throw new IllegalArgumentException("Map is missing shape for " + direction);
                         return shape;
                     })
-                    .reduce(VoxelShapes::union)
+                    .reduce(Shapes::or)
                     .orElseThrow()
             ))
         );
@@ -65,7 +65,7 @@ public final class Shapes {
      */
     public static Map<Direction, VoxelShape> mergeIntoShapeMap(Map<Direction, VoxelShape> map, VoxelShape shape) {
         var result = new EnumMap<Direction, VoxelShape>(Direction.class);
-        map.forEach((direction, existing) -> result.put(direction, VoxelShapes.union(existing, shape)));
+        map.forEach((direction, existing) -> result.put(direction, Shapes.or(existing, shape)));
         return result;
     }
 }

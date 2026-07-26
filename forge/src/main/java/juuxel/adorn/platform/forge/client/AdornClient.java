@@ -10,8 +10,8 @@ import juuxel.adorn.platform.PlatformBridges;
 import juuxel.adorn.platform.ResourceBridge;
 import juuxel.adorn.platform.neo.client.AdornModels;
 import juuxel.adorn.trading.Trade;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.Minecraft;
+import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -48,6 +48,6 @@ public final class AdornClient {
     }
 
     public static void openBookScreen(Identifier bookId) {
-        MinecraftClient.getInstance().setScreen(new GuideBookScreen(PlatformBridges.get().getResources().getBookManager().get(bookId)));
+        Minecraft.getInstance().setScreen(new GuideBookScreen(PlatformBridges.get().getResources().getBookManager().get(bookId)));
     }
 }

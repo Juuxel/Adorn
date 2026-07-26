@@ -2,19 +2,19 @@ package juuxel.adorn.client.renderer;
 
 import juuxel.adorn.block.ShelfBlock;
 import juuxel.adorn.block.entity.ShelfBlockEntity;
-import net.minecraft.client.item.ItemModelManager;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.block.entity.BlockEntityRenderer;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
-import net.minecraft.client.render.command.ModelCommandRenderer;
-import net.minecraft.client.render.command.OrderedRenderCommandQueue;
-import net.minecraft.client.render.item.ItemRenderState;
-import net.minecraft.client.render.state.CameraRenderState;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemDisplayContext;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.RotationAxis;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.client.renderer.state.CameraRenderState;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.core.Direction;
+import com.mojang.math.Axis;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public final class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity, ShelfRenderState> {
@@ -22,10 +22,10 @@ public final class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity
     private static final float ITEM_1_Y_ROT = 10f;
     private static final float ITEM_2_Y_ROT = -17f;
 
-    private final ItemModelManager itemModelManager;
+    private final ItemModelResolver itemModelManager;
 
-    public ShelfRenderer(BlockEntityRendererFactory.Context context) {
-        this.itemModelManager = context.itemModelManager();
+    public ShelfRenderer(BlockEntityRendererProvider.Context context) {
+        this.itemModelManager = context.itemModelResolver();
     }
 
     @Override
@@ -34,23 +34,23 @@ public final class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity
     }
 
     @Override
-    public void updateRenderState(ShelfBlockEntity blockEntity, ShelfRenderState state, float tickProgress, Vec3d cameraPos, @Nullable ModelCommandRenderer.CrumblingOverlayCommand crumblingOverlay) {
-        BlockEntityRenderer.super.updateRenderState(blockEntity, state, tickProgress, cameraPos, crumblingOverlay);
+    public void extractRenderState(ShelfBlockEntity blockEntity, ShelfRenderState state, float tickProgress, Vec3 cameraPos, @Nullable ModelFeatureRenderer.CrumblingOverlay crumblingOverlay) {
+        BlockEntityRenderer.super.extractRenderState(blockEntity, state, tickProgress, cameraPos, crumblingOverlay);
 
-        int seed = (int) blockEntity.getPos().asLong();
+        int seed = (int) blockEntity.getBlockPos().asLong();
 
-        var first = new ItemRenderState();
-        itemModelManager.clearAndUpdate(first, blockEntity.getStack(0), ItemDisplayContext.FIXED, blockEntity.getWorld(), null, seed);
+        var first = new ItemStackRenderState();
+        itemModelManager.updateForTopItem(first, blockEntity.getItem(0), ItemDisplayContext.FIXED, blockEntity.getLevel(), null, seed);
         state.firstItem = first;
 
-        var second = new ItemRenderState();
-        itemModelManager.clearAndUpdate(second, blockEntity.getStack(1), ItemDisplayContext.FIXED, blockEntity.getWorld(), null, seed + 1);
+        var second = new ItemStackRenderState();
+        itemModelManager.updateForTopItem(second, blockEntity.getItem(1), ItemDisplayContext.FIXED, blockEntity.getLevel(), null, seed + 1);
         state.secondItem = second;
     }
 
     @Override
-    public void render(ShelfRenderState state, MatrixStack matrices, OrderedRenderCommandQueue queue, CameraRenderState cameraState) {
-        Direction facing = state.blockState.get(ShelfBlock.FACING);
+    public void submit(ShelfRenderState state, PoseStack matrices, SubmitNodeCollector queue, CameraRenderState cameraState) {
+        Direction facing = state.blockState.getValue(ShelfBlock.FACING);
 
         // For first item
         double tx1 = switch (facing) {
@@ -72,18 +72,18 @@ public final class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity
             default -> 4 / 16.0;
         };
 
-        matrices.push();
+        matrices.pushPose();
         matrices.translate(tx1, 9.6 / 16.0, tz1);
         matrices.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE);
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(ITEM_1_Y_ROT + 180 - facing.getPositiveHorizontalDegrees()));
-        state.firstItem.render(matrices, queue, state.lightmapCoordinates, OverlayTexture.DEFAULT_UV, 0);
-        matrices.pop();
+        matrices.mulPose(Axis.YP.rotationDegrees(ITEM_1_Y_ROT + 180 - facing.toYRot()));
+        state.firstItem.submit(matrices, queue, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+        matrices.popPose();
 
-        matrices.push();
+        matrices.pushPose();
         matrices.translate(tx2, 9.6 / 16.0, tz2);
         matrices.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE);
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(ITEM_2_Y_ROT + 180 - facing.getPositiveHorizontalDegrees()));
-        state.secondItem.render(matrices, queue, state.lightmapCoordinates, OverlayTexture.DEFAULT_UV, 0);
-        matrices.pop();
+        matrices.mulPose(Axis.YP.rotationDegrees(ITEM_2_Y_ROT + 180 - facing.toYRot()));
+        state.secondItem.submit(matrices, queue, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+        matrices.popPose();
     }
 }

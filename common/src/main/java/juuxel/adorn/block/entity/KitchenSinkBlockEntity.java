@@ -3,30 +3,30 @@ package juuxel.adorn.block.entity;
 import juuxel.adorn.block.AdornBlockEntities;
 import juuxel.adorn.fluid.FluidReference;
 import juuxel.adorn.lib.AdornGameRules;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.PotionContentsComponent;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FlowableFluid;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.potion.Potions;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class KitchenSinkBlockEntity extends BlockEntity {
@@ -43,7 +43,7 @@ public abstract class KitchenSinkBlockEntity extends BlockEntity {
      * Tries to interact with this kitchen sink with a fluid container stack.
      * @return true if inserted and false otherwise
      */
-    public abstract boolean interactWithItem(ItemStack stack, PlayerEntity player, Hand hand);
+    public abstract boolean interactWithItem(ItemStack stack, Player player, InteractionHand hand);
 
     /**
      * Clears all fluids from this kitchen sink.
@@ -55,8 +55,8 @@ public abstract class KitchenSinkBlockEntity extends BlockEntity {
      * Called when this kitchen sink is filled with fluids.
      * Dispatches the game event and plays the sound.
      */
-    protected void onFill(ItemStack stack, PlayerEntity player) {
-        world.emitGameEvent(player, GameEvent.FLUID_PLACE, pos);
+    protected void onFill(ItemStack stack, Player player) {
+        level.gameEvent(player, GameEvent.FLUID_PLACE, worldPosition);
         player.playSound(getEmptySound(getFluidReference(), stack).event, 1f, 1f);
     }
 
@@ -64,49 +64,49 @@ public abstract class KitchenSinkBlockEntity extends BlockEntity {
      * Called when fluids are picked up from this kitchen sink.
      * Dispatches the game event and plays the sound.
      */
-    protected void onPickUp(FluidReference fluid, ItemStack stack, PlayerEntity player) {
-        world.emitGameEvent(player, GameEvent.FLUID_PICKUP, pos);
-        player.getEntityWorld().playSound(player, player.getX(), player.getY(), player.getZ(), getFillSound(fluid, stack).event, SoundCategory.BLOCKS, 1f, 1f);
+    protected void onPickUp(FluidReference fluid, ItemStack stack, Player player) {
+        level.gameEvent(player, GameEvent.FLUID_PICKUP, worldPosition);
+        player.level().playSound(player, player.getX(), player.getY(), player.getZ(), getFillSound(fluid, stack).event, SoundSource.BLOCKS, 1f, 1f);
     }
 
     protected FluidItemSound getFillSound(FluidReference fluid, ItemStack stack) {
-        if (stack.isOf(Items.GLASS_BOTTLE)) {
-            return new FluidItemSound(SoundEvents.ITEM_BOTTLE_FILL, true);
+        if (stack.is(Items.GLASS_BOTTLE)) {
+            return new FluidItemSound(SoundEvents.BOTTLE_FILL, true);
         }
 
-        return new FluidItemSound(fluid.getFluid().getBucketFillSound().orElse(SoundEvents.ITEM_BUCKET_FILL), false);
+        return new FluidItemSound(fluid.getFluid().getPickupSound().orElse(SoundEvents.BUCKET_FILL), false);
     }
 
     protected FluidItemSound getEmptySound(FluidReference fluid, ItemStack stack) {
         if (isWaterBottle(stack)) {
-            return new FluidItemSound(SoundEvents.ITEM_BOTTLE_EMPTY, true);
+            return new FluidItemSound(SoundEvents.BOTTLE_EMPTY, true);
         }
 
-        return new FluidItemSound(fluid.getFluid().isIn(FluidTags.LAVA) ? SoundEvents.ITEM_BUCKET_EMPTY_LAVA : SoundEvents.ITEM_BUCKET_EMPTY, false);
+        return new FluidItemSound(fluid.getFluid().is(FluidTags.LAVA) ? SoundEvents.BUCKET_EMPTY_LAVA : SoundEvents.BUCKET_EMPTY, false);
     }
 
     protected static boolean isWaterBottle(ItemStack stack) {
-        if (!stack.isOf(Items.POTION)) return false;
-        var potionContents = stack.getOrDefault(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent.DEFAULT);
-        return potionContents.matches(Potions.WATER);
+        if (!stack.is(Items.POTION)) return false;
+        var potionContents = stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
+        return potionContents.is(Potions.WATER);
     }
 
     protected void markDirtyAndSync() {
-        markDirty();
+        setChanged();
 
-        if (!world.isClient()) {
-            world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
+        if (!level.isClientSide()) {
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
         }
     }
 
     @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registries) {
-        return createComponentlessNbt(registries);
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return saveCustomOnly(registries);
     }
 
     /**
@@ -114,12 +114,12 @@ public abstract class KitchenSinkBlockEntity extends BlockEntity {
      */
     public abstract int calculateComparatorOutput();
 
-    private static boolean isInfinite(Fluid fluid, ServerWorld world) {
-        return fluid instanceof FlowableFluid flowable && flowable.isInfinite(world);
+    private static boolean isInfinite(Fluid fluid, ServerLevel world) {
+        return fluid instanceof FlowingFluid flowable && flowable.canConvertToSource(world);
     }
 
-    public static boolean supportsInfiniteExtraction(ServerWorld world, Fluid fluid) {
-        return isInfinite(fluid, world) && world.getGameRules().getValue(AdornGameRules.INFINITE_KITCHEN_SINKS.get());
+    public static boolean supportsInfiniteExtraction(ServerLevel world, Fluid fluid) {
+        return isInfinite(fluid, world) && world.getGameRules().get(AdornGameRules.INFINITE_KITCHEN_SINKS.get());
     }
 
     /**
@@ -127,7 +127,8 @@ public abstract class KitchenSinkBlockEntity extends BlockEntity {
      * Used for a cursed priority system for fill/empty sounds:
      * bottle sounds are preferred by default, then Forge's fluid sounds and finally vanilla sounds.
      */
-    public record FluidItemSound(SoundEvent event, boolean preferred) {
+    public record FluidItemSound(
+        SoundEvent event, boolean preferred) {
         public FluidItemSound orElse(@Nullable SoundEvent fallback) {
             if (preferred) return this;
             return fallback != null ? new FluidItemSound(fallback, true) : this;

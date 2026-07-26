@@ -4,7 +4,7 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntStack;
 import juuxel.adorn.util.TextBuilder;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,18 +36,18 @@ public final class PageTreeBuilder {
         return this;
     }
 
-    public PageTreeBuilder end(Function<Text, Page> tocBuilder) {
+    public PageTreeBuilder end(Function<Component, Page> tocBuilder) {
         depth--;
         int tocIndex = levelStartIndices.popInt();
         TextBuilder contentBuilder = new TextBuilder();
-        contentBuilder.add(Text.empty());
+        contentBuilder.add(Component.empty());
 
         for (int i = tocIndex + 1; i < pages.size(); i++) {
             if (i != tocIndex + 1) contentBuilder.newLine();
 
             int pageDepth = pageDepths.getInt(i);
             var indent = "  ".repeat(pageDepth - depth - 1);
-            if (!indent.isEmpty()) contentBuilder.add(Text.literal(indent));
+            if (!indent.isEmpty()) contentBuilder.add(Component.literal(indent));
             contentBuilder.add(Book.jumpToPage(pages.get(i).title().copy(), offset + i));
         }
 

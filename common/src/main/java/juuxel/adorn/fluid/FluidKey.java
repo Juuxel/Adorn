@@ -2,10 +2,10 @@ package juuxel.adorn.fluid;
 
 import com.mojang.serialization.Codec;
 import juuxel.adorn.util.EntryOrTag;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.tags.TagKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +48,12 @@ public sealed interface FluidKey permits FluidKeyImpl.Simple, FluidKeyImpl.OfArr
      * Writes this key to a packet buffer.
      * @see #load
      */
-    default void write(PacketByteBuf buf) {
+    default void write(FriendlyByteBuf buf) {
         var fluids = getFluids();
         buf.writeVarInt(fluids.size());
 
         for (Fluid fluid : fluids) {
-            buf.writeVarInt(Registries.FLUID.getRawId(fluid));
+            buf.writeVarInt(BuiltInRegistries.FLUID.getId(fluid));
         }
     }
 
@@ -61,15 +61,15 @@ public sealed interface FluidKey permits FluidKeyImpl.Simple, FluidKeyImpl.OfArr
      * Reads a key from a packet buffer.
      * @see #write
      */
-    static FluidKey load(PacketByteBuf buf) {
+    static FluidKey load(FriendlyByteBuf buf) {
         var size = buf.readVarInt();
 
         if (size == 1) {
-            return new FluidKeyImpl.Simple(new EntryOrTag.OfEntry<>(Registries.FLUID.get(buf.readVarInt())));
+            return new FluidKeyImpl.Simple(new EntryOrTag.OfEntry<>(BuiltInRegistries.FLUID.byId(buf.readVarInt())));
         } else {
             List<FluidKeyImpl.Simple> children = new ArrayList<>(size);
             for (int i = 0; i < size; i++) {
-                children.add(new FluidKeyImpl.Simple(new EntryOrTag.OfEntry<>(Registries.FLUID.get(buf.readVarInt()))));
+                children.add(new FluidKeyImpl.Simple(new EntryOrTag.OfEntry<>(BuiltInRegistries.FLUID.byId(buf.readVarInt()))));
             }
             return new FluidKeyImpl.OfArray(children);
         }

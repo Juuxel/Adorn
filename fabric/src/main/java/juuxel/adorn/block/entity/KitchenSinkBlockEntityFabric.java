@@ -13,16 +13,16 @@ import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 
 public final class KitchenSinkBlockEntityFabric extends KitchenSinkBlockEntity {
@@ -75,7 +75,7 @@ public final class KitchenSinkBlockEntityFabric extends KitchenSinkBlockEntity {
     }
 
     @Override
-    public boolean interactWithItem(ItemStack stack, PlayerEntity player, Hand hand) {
+    public boolean interactWithItem(ItemStack stack, Player player, InteractionHand hand) {
         // StorageUtil.move will mutate the stack and we need it for correct sounds (bottles!).
         var originalStack = stack.copy();
         var itemStorage = FluidStorage.ITEM.find(stack, ContainerItemContext.forPlayerInteraction(player, hand));
@@ -107,7 +107,7 @@ public final class KitchenSinkBlockEntityFabric extends KitchenSinkBlockEntity {
 
     @Override
     public boolean clearFluidsWithSponge() {
-        if (!storage.variant.getFluid().isIn(FluidTags.WATER) || storage.amount == 0L) return false;
+        if (!storage.variant.getFluid().is(FluidTags.WATER) || storage.amount == 0L) return false;
         storage.amount = 0;
         markDirtyAndSync();
         return true;
@@ -124,16 +124,16 @@ public final class KitchenSinkBlockEntityFabric extends KitchenSinkBlockEntity {
     }
 
     @Override
-    protected void readData(ReadView view) {
-        super.readData(view);
+    protected void loadAdditional(ValueInput view) {
+        super.loadAdditional(view);
         storage.variant = view.read(NBT_FLUID, FluidVariant.CODEC).orElse(FluidVariant.blank());
-        storage.amount = view.getLong(NBT_VOLUME, 0);
+        storage.amount = view.getLongOr(NBT_VOLUME, 0);
     }
 
     @Override
-    protected void writeData(WriteView view) {
-        super.writeData(view);
-        view.put(NBT_FLUID, FluidVariant.CODEC, storage.variant);
+    protected void saveAdditional(ValueOutput view) {
+        super.saveAdditional(view);
+        view.store(NBT_FLUID, FluidVariant.CODEC, storage.variant);
         view.putLong(NBT_VOLUME, storage.amount);
     }
 
@@ -142,7 +142,7 @@ public final class KitchenSinkBlockEntityFabric extends KitchenSinkBlockEntity {
         if (storage.amount == 0) {
             return 0;
         } else {
-            return 1 + MathHelper.floor(14 * (double) storage.amount / (double) storage.getCapacity());
+            return 1 + Mth.floor(14 * (double) storage.amount / (double) storage.getCapacity());
         }
     }
 }

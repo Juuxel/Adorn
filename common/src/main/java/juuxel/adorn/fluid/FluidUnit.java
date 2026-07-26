@@ -3,7 +3,7 @@ package juuxel.adorn.fluid;
 import com.mojang.serialization.Codec;
 import juuxel.adorn.util.Displayable;
 import juuxel.adorn.util.MixedFraction;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -32,14 +32,14 @@ public enum FluidUnit implements Displayable {
 
     private final String id;
     private final long bucketVolume;
-    private final Text displayName;
-    private final Text symbol;
+    private final Component displayName;
+    private final Component symbol;
 
     FluidUnit(String id, long bucketVolume) {
         this.id = id;
         this.bucketVolume = bucketVolume;
-        this.displayName = Text.translatable("gui.adorn.fluid_unit.%s.name".formatted(id));
-        this.symbol = Text.translatable("gui.adorn.fluid_unit.%s.symbol".formatted(id));
+        this.displayName = Component.translatable("gui.adorn.fluid_unit.%s.name".formatted(id));
+        this.symbol = Component.translatable("gui.adorn.fluid_unit.%s.symbol".formatted(id));
     }
 
     public String getId() {
@@ -51,11 +51,11 @@ public enum FluidUnit implements Displayable {
     }
 
     @Override
-    public Text getDisplayName() {
+    public Component getDisplayName() {
         return displayName;
     }
 
-    public Text getSymbol() {
+    public Component getSymbol() {
         return symbol;
     }
 

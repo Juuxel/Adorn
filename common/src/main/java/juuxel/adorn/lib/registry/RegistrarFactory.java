@@ -2,15 +2,15 @@ package juuxel.adorn.lib.registry;
 
 import juuxel.adorn.util.InlineServices;
 import juuxel.adorn.util.Services;
-import net.minecraft.entity.data.TrackedDataHandler;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.network.syncher.EntityDataSerializer;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 
 @InlineServices
 public interface RegistrarFactory {
-    <T> KeyedRegistrar<T> create(RegistryKey<Registry<T>> registryKey);
+    <T> KeyedRegistrar<T> create(ResourceKey<Registry<T>> registryKey);
 
-    Registrar<TrackedDataHandler<?>> createForTrackedDataHandlers();
+    Registrar<EntityDataSerializer<?>> createForTrackedDataHandlers();
 
     @InlineServices.Getter
     static RegistrarFactory get() {

@@ -21,9 +21,9 @@ public class AdornReiServer implements REICommonPlugin {
     public void registerDisplays(ServerDisplayRegistry registry) {
         registry.beginRecipeFiller(ItemBrewingRecipe.class)
             .filterType(AdornRecipeTypes.BREWING.get())
-            .fill(entry -> new BrewerDisplay(entry.value(), entry.id().getValue()));
+            .fill(entry -> new BrewerDisplay(entry.value(), entry.id().identifier()));
         registry.beginRecipeFiller(FluidBrewingRecipe.class)
             .filterType(AdornRecipeTypes.BREWING.get())
-            .fill(entry -> new BrewerDisplay(entry.value(), entry.id().getValue()));
+            .fill(entry -> new BrewerDisplay(entry.value(), entry.id().identifier()));
     }
 }

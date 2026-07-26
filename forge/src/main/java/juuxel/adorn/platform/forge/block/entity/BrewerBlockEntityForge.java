@@ -4,10 +4,10 @@ import com.google.common.base.Predicates;
 import juuxel.adorn.block.entity.BrewerBlockEntity;
 import juuxel.adorn.fluid.FluidReference;
 import juuxel.adorn.platform.forge.util.FluidTankReference;
-import net.minecraft.block.BlockState;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.core.BlockPos;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -26,7 +26,7 @@ public final class BrewerBlockEntityForge extends BrewerBlockEntity implements B
     private final FluidStacksResourceHandler tank = new FluidStacksResourceHandler(1, CAPACITY) {
         @Override
         protected void onContentsChanged(int index, FluidStack previousContents) {
-            markDirty();
+            setChanged();
         }
     };
     private final FluidReference fluidReference = new FluidTankReference(tank, 0);
@@ -49,7 +49,7 @@ public final class BrewerBlockEntityForge extends BrewerBlockEntity implements B
         try (var tx = Transaction.open(null)) {
             ItemAccess itemAccess = ItemAccess.forHandlerIndex(new WorldlyContainerWrapper(this, null), FLUID_CONTAINER_SLOT);
             @Nullable ResourceHandler<FluidResource> itemFluidHandler =
-                getStack(FLUID_CONTAINER_SLOT).getCapability(Capabilities.Fluid.ITEM, itemAccess);
+                getItem(FLUID_CONTAINER_SLOT).getCapability(Capabilities.Fluid.ITEM, itemAccess);
 
             if (itemFluidHandler != null) {
                 int maxAmount = CAPACITY - tank.getAmountAsInt(0);
@@ -75,14 +75,14 @@ public final class BrewerBlockEntityForge extends BrewerBlockEntity implements B
     }
 
     @Override
-    protected void writeData(WriteView view) {
-        super.writeData(view);
+    protected void saveAdditional(ValueOutput view) {
+        super.saveAdditional(view);
         tank.serialize(view);
     }
 
     @Override
-    protected void readData(ReadView view) {
-        super.readData(view);
+    protected void loadAdditional(ValueInput view) {
+        super.loadAdditional(view);
         tank.deserialize(view);
     }
 }

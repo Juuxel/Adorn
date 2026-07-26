@@ -2,18 +2,18 @@ package juuxel.adorn.block.entity;
 
 import juuxel.adorn.trading.Trade;
 import juuxel.adorn.util.InventoryComponent;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 public interface TradingStation {
-    Text getOwnerName();
+    Component getOwnerName();
     Trade getTrade();
     InventoryComponent getStorage();
 
     static TradingStation createEmpty() {
         return new TradingStation() {
             @Override
-            public Text getOwnerName() {
-                return Text.empty();
+            public Component getOwnerName() {
+                return Component.empty();
             }
 
             @Override

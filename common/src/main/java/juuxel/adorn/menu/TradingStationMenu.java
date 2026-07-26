@@ -3,24 +3,24 @@ package juuxel.adorn.menu;
 import juuxel.adorn.block.AdornBlockEntities;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.block.entity.TradingStation;
-import net.minecraft.block.Block;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.menu.Menu;
-import net.minecraft.menu.MenuContext;
-import net.minecraft.menu.slot.Slot;
-import net.minecraft.menu.slot.SlotActionType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.ClickType;
 
-public final class TradingStationMenu extends Menu {
-    private final MenuContext context;
+public final class TradingStationMenu extends AbstractContainerMenu {
+    private final ContainerLevelAccess context;
     private final TradingStation tradingStation;
     private final Slot sellingSlot;
     private final Slot priceSlot;
 
-    public TradingStationMenu(int syncId, PlayerInventory playerInventory, MenuContext context) {
+    public TradingStationMenu(int syncId, Inventory playerInventory, ContainerLevelAccess context) {
         super(AdornMenus.TRADING_STATION.get(), syncId);
         this.context = context;
 
@@ -53,22 +53,22 @@ public final class TradingStationMenu extends Menu {
         }
     }
 
-    public TradingStationMenu(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, MenuContext.EMPTY);
+    public TradingStationMenu(int syncId, Inventory playerInventory) {
+        this(syncId, playerInventory, ContainerLevelAccess.NULL);
     }
 
     /**
      * Gets the {@link juuxel.adorn.block.entity.TradingStationBlockEntity} at the context's location.
      * If it's not present, creates an empty trading station using {@link TradingStation#createEmpty()}.
      */
-    private static TradingStation getTradingStation(MenuContext context) {
-        return context.get((world, pos) -> world.getBlockEntity(pos, AdornBlockEntities.TRADING_STATION.get()))
+    private static TradingStation getTradingStation(ContainerLevelAccess context) {
+        return context.evaluate((world, pos) -> world.getBlockEntity(pos, AdornBlockEntities.TRADING_STATION.get()))
             .<TradingStation>flatMap(tradingStation -> tradingStation)
             .orElseGet(TradingStation::createEmpty);
     }
 
     public static boolean isValidItem(ItemStack stack) {
-        return stack.getItem().canBeNested();
+        return stack.getItem().canFitInsideContainerItems();
     }
 
     public Slot getSellingSlot() {
@@ -80,12 +80,12 @@ public final class TradingStationMenu extends Menu {
     }
 
     @Override
-    public boolean canUse(PlayerEntity player) {
-        return canUse(context, player, AdornBlocks.TRADING_STATION.get());
+    public boolean stillValid(Player player) {
+        return stillValid(context, player, AdornBlocks.TRADING_STATION.get());
     }
 
     @Override
-    public ItemStack quickMove(PlayerEntity player, int index) {
+    public ItemStack quickMoveStack(Player player, int index) {
         var offset = 2;
 
         // Ghost slots
@@ -94,23 +94,23 @@ public final class TradingStationMenu extends Menu {
         var result = ItemStack.EMPTY;
         var slot = slots.get(index);
 
-        if (slot.hasStack()) {
+        if (slot.hasItem()) {
             var containerSize = 12;
-            var stack = slot.getStack();
+            var stack = slot.getItem();
             result = stack.copy();
 
             if (offset <= index && index < containerSize + offset) {
-                if (!insertItem(stack, containerSize + offset, slots.size(), true)) {
+                if (!moveItemStackTo(stack, containerSize + offset, slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!insertItem(stack, offset, containerSize + offset, false)) {
+            } else if (!moveItemStackTo(stack, offset, containerSize + offset, false)) {
                 return ItemStack.EMPTY;
             }
 
             if (stack.isEmpty()) {
-                slot.setStack(ItemStack.EMPTY);
+                slot.setByPlayer(ItemStack.EMPTY);
             } else {
-                slot.markDirty();
+                slot.setChanged();
             }
         }
 
@@ -118,63 +118,63 @@ public final class TradingStationMenu extends Menu {
     }
 
     @Override
-    public void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player) {
+    public void clicked(int slotIndex, int button, ClickType actionType, Player player) {
         var slot = 0 <= slotIndex && slotIndex < slots.size() ? slots.get(slotIndex) : null;
 
-        if (actionType == SlotActionType.PICKUP && slot instanceof TradeSlot tradeSlot) {
-            var cursorStack = getCursorStack();
+        if (actionType == ClickType.PICKUP && slot instanceof TradeSlot tradeSlot) {
+            var cursorStack = getCarried();
             if (isValidItem(cursorStack)) {
                 updateTradeStack(tradeSlot, cursorStack.copy(), player);
             }
         } else {
-            super.onSlotClick(slotIndex, button, actionType, player);
+            super.clicked(slotIndex, button, actionType, player);
         }
     }
 
-    public void updateTradeStack(int slotId, ItemStack stack, PlayerEntity player) {
+    public void updateTradeStack(int slotId, ItemStack stack, Player player) {
         if (getSlot(slotId) instanceof TradeSlot slot) {
             updateTradeStack(slot, stack, player);
         }
     }
 
-    private void updateTradeStack(TradeSlot slot, ItemStack stack, PlayerEntity player) {
-        slot.setStack(stack);
-        slot.markDirty();
+    private void updateTradeStack(TradeSlot slot, ItemStack stack, Player player) {
+        slot.setByPlayer(stack);
+        slot.setChanged();
 
         if (tradingStation instanceof BlockEntity be) {
-            var state = be.getCachedState();
-            player.getEntityWorld().updateListeners(be.getPos(), state, state, Block.NOTIFY_LISTENERS);
+            var state = be.getBlockState();
+            player.level().sendBlockUpdated(be.getBlockPos(), state, state, Block.UPDATE_CLIENTS);
         }
     }
 
     private static final class TradeSlot extends Slot {
-        private TradeSlot(Inventory inventory, int index, int x, int y) {
+        private TradeSlot(Container inventory, int index, int x, int y) {
             super(inventory, index, x, y);
         }
 
         @Override
-        public boolean canTakeItems(PlayerEntity playerEntity) {
+        public boolean mayPickup(Player playerEntity) {
             return false;
         }
 
         @Override
-        public boolean canInsert(ItemStack stack) {
+        public boolean mayPlace(ItemStack stack) {
             return false;
         }
 
         @Override
-        public ItemStack takeStack(int amount) {
+        public ItemStack remove(int amount) {
             return ItemStack.EMPTY;
         }
     }
 
     private static final class StorageSlot extends Slot {
-        private StorageSlot(Inventory inventory, int index, int x, int y) {
+        private StorageSlot(Container inventory, int index, int x, int y) {
             super(inventory, index, x, y);
         }
 
         @Override
-        public boolean canInsert(ItemStack stack) {
+        public boolean mayPlace(ItemStack stack) {
             return isValidItem(stack);
         }
     }

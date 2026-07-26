@@ -5,8 +5,8 @@ import juuxel.adorn.block.entity.BrewerBlockEntityFabric;
 import juuxel.adorn.block.entity.KitchenSinkBlockEntity;
 import juuxel.adorn.block.entity.KitchenSinkBlockEntityFabric;
 import juuxel.adorn.platform.BlockEntityBridge;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
 
 public final class BlockEntityBridgeFabric implements BlockEntityBridge {
     public static final BlockEntityBridgeFabric INSTANCE = new BlockEntityBridgeFabric();

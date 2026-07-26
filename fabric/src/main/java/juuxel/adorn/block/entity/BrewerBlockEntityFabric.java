@@ -12,10 +12,10 @@ import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
-import net.minecraft.block.BlockState;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
 public final class BrewerBlockEntityFabric extends BrewerBlockEntity {
@@ -35,7 +35,7 @@ public final class BrewerBlockEntityFabric extends BrewerBlockEntity {
 
         @Override
         protected void onFinalCommit() {
-            markDirty();
+            setChanged();
         }
     };
 
@@ -68,21 +68,21 @@ public final class BrewerBlockEntityFabric extends BrewerBlockEntity {
 
     private long extractFluidContainer(@Nullable TransactionContext transaction) {
         var fluidContainerSlot = InventoryStorage.of(this, null).getSlot(FLUID_CONTAINER_SLOT);
-        var itemStorage = FluidStorage.ITEM.find(getStack(FLUID_CONTAINER_SLOT), ContainerItemContext.ofSingleSlot(fluidContainerSlot));
+        var itemStorage = FluidStorage.ITEM.find(getItem(FLUID_CONTAINER_SLOT), ContainerItemContext.ofSingleSlot(fluidContainerSlot));
         return StorageUtil.move(itemStorage, fluidStorage, Predicates.alwaysTrue(), Long.MAX_VALUE, transaction);
     }
 
     @Override
-    protected void writeData(WriteView view) {
-        super.writeData(view);
-        view.put(NBT_FLUID, FluidVariant.CODEC, fluidStorage.variant);
+    protected void saveAdditional(ValueOutput view) {
+        super.saveAdditional(view);
+        view.store(NBT_FLUID, FluidVariant.CODEC, fluidStorage.variant);
         view.putLong(NBT_VOLUME, fluidStorage.amount);
     }
 
     @Override
-    protected void readData(ReadView view) {
-        super.readData(view);
+    protected void loadAdditional(ValueInput view) {
+        super.loadAdditional(view);
         fluidStorage.variant = view.read(NBT_FLUID, FluidVariant.CODEC).orElse(FluidVariant.blank());
-        fluidStorage.amount = view.getLong(NBT_VOLUME, 0);
+        fluidStorage.amount = view.getLongOr(NBT_VOLUME, 0);
     }
 }

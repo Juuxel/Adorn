@@ -4,12 +4,12 @@ import juuxel.adorn.fluid.FluidAmountPredicate;
 import juuxel.adorn.fluid.FluidUnit;
 import juuxel.adorn.fluid.FluidVolume;
 import juuxel.adorn.platform.FluidBridge;
-import net.minecraft.block.BlockState;
-import net.minecraft.component.ComponentChanges;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
@@ -23,7 +23,7 @@ public final class FluidBridgeForge implements FluidBridge {
 
     @Nullable
     @Override
-    public FluidVolume drain(World world, BlockPos pos, @Nullable BlockState state, Direction side, Fluid fluid, FluidAmountPredicate amountPredicate) {
+    public FluidVolume drain(Level world, BlockPos pos, @Nullable BlockState state, Direction side, Fluid fluid, FluidAmountPredicate amountPredicate) {
         // This method is a port of the Fabric fluid bridge code.
         var fluidHandler = world.getCapability(Capabilities.Fluid.BLOCK, pos, state, null, side);
 
@@ -36,7 +36,7 @@ public final class FluidBridgeForge implements FluidBridge {
 
                 if (extracted > 0 && amountPredicate.test(extracted, FluidUnit.LITRE)) {
                     tx.commit();
-                    return new FluidVolume(fluid, extracted, ComponentChanges.EMPTY, FluidUnit.LITRE);
+                    return new FluidVolume(fluid, extracted, DataComponentPatch.EMPTY, FluidUnit.LITRE);
                 }
             }
         }

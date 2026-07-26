@@ -4,13 +4,13 @@ import juuxel.adorn.entity.AdornEntities;
 import juuxel.adorn.item.AdornItems;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.render.command.OrderedRenderCommandQueue;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.state.BipedEntityRenderState;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 
 public final class AdornEntityRenderers {
     public static void init() {
@@ -22,7 +22,7 @@ public final class AdornEntityRenderers {
 
     private static final class ConeArmorRenderer implements ArmorRenderer {
         @Override
-        public void render(MatrixStack matrices, OrderedRenderCommandQueue queue, ItemStack stack, BipedEntityRenderState renderState, EquipmentSlot slot, int light, BipedEntityModel<BipedEntityRenderState> contextModel) {
+        public void render(PoseStack matrices, SubmitNodeCollector queue, ItemStack stack, HumanoidRenderState renderState, EquipmentSlot slot, int light, HumanoidModel<HumanoidRenderState> contextModel) {
             if (slot == EquipmentSlot.HEAD) {
                 ConeEntityRenderer.renderOnHead(matrices, queue, stack, light, renderState.outlineColor, contextModel);
             }

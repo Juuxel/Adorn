@@ -1,35 +1,35 @@
 package juuxel.adorn.block.entity;
 
 import juuxel.adorn.menu.ContainerBlockMenu;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.ViewerCountManager;
-import net.minecraft.entity.ContainerUser;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
+import net.minecraft.world.entity.ContainerUser;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 /**
  * A simple container block entity with a menu.
  * These block entities also send game events when they are opened/closed.
  */
 public abstract class SimpleContainerBlockEntity extends BaseContainerBlockEntity {
-    private final ViewerCountManager viewerCountManager = new ViewerCountManager() {
+    private final ContainerOpenersCounter viewerCountManager = new ContainerOpenersCounter() {
         @Override
-        protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
+        protected void onOpen(Level world, BlockPos pos, BlockState state) {
         }
 
         @Override
-        protected void onContainerClose(World world, BlockPos pos, BlockState state) {
+        protected void onClose(Level world, BlockPos pos, BlockState state) {
         }
 
         @Override
-        protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+        protected void openerCountChanged(Level world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
         }
 
         @Override
-        public boolean isPlayerViewing(PlayerEntity player) {
-            return player.menu instanceof ContainerBlockMenu cbm && cbm.getInventory() == SimpleContainerBlockEntity.this;
+        public boolean isOwnContainer(Player player) {
+            return player.containerMenu instanceof ContainerBlockMenu cbm && cbm.getInventory() == SimpleContainerBlockEntity.this;
         }
     };
 
@@ -38,22 +38,22 @@ public abstract class SimpleContainerBlockEntity extends BaseContainerBlockEntit
     }
 
     @Override
-    public void onOpen(ContainerUser user) {
-        if (!removed && !user.asLivingEntity().isSpectator()) {
-            viewerCountManager.openContainer(user.asLivingEntity(), world, pos, getCachedState(), user.getContainerInteractionRange());
+    public void startOpen(ContainerUser user) {
+        if (!remove && !user.getLivingEntity().isSpectator()) {
+            viewerCountManager.incrementOpeners(user.getLivingEntity(), level, worldPosition, getBlockState(), user.getContainerInteractionRange());
         }
     }
 
     @Override
-    public void onClose(ContainerUser user) {
-        if (!removed && !user.asLivingEntity().isSpectator()) {
-            viewerCountManager.closeContainer(user.asLivingEntity(), world, pos, getCachedState());
+    public void stopOpen(ContainerUser user) {
+        if (!remove && !user.getLivingEntity().isSpectator()) {
+            viewerCountManager.decrementOpeners(user.getLivingEntity(), level, worldPosition, getBlockState());
         }
     }
 
     public void onScheduledTick() {
-        if (!removed) {
-            viewerCountManager.updateViewerCount(world, pos, getCachedState());
+        if (!remove) {
+            viewerCountManager.recheckOpeners(level, worldPosition, getBlockState());
         }
     }
 }

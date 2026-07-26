@@ -5,53 +5,53 @@ import juuxel.adorn.component.ConeVariantComponent;
 import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.lib.registry.AdornRegistryKeys;
 import juuxel.adorn.platform.BlockBridge;
-import net.minecraft.component.ComponentType;
-import net.minecraft.component.ComponentsAccess;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MovementType;
-import net.minecraft.entity.PositionInterpolator;
-import net.minecraft.entity.Variants;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-import net.minecraft.world.rule.GameRules;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.InterpolationHandler;
+import net.minecraft.world.entity.variant.VariantUtils;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.network.chat.Component;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gamerules.GameRules;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public final class ConeEntity extends Entity {
-    private static final TrackedData<RegistryEntry<ConeVariant>> VARIANT = DataTracker.registerData(ConeEntity.class, AdornTrackedDataHandlers.CONE_VARIANT.get());
-    private final PositionInterpolator interpolator = new PositionInterpolator(this);
+    private static final EntityDataAccessor<Holder<ConeVariant>> VARIANT = SynchedEntityData.defineId(ConeEntity.class, AdornTrackedDataHandlers.CONE_VARIANT.get());
+    private final InterpolationHandler interpolator = new InterpolationHandler(this);
 
-    public ConeEntity(EntityType<?> type, World world) {
+    public ConeEntity(EntityType<?> type, Level world) {
         super(type, world);
     }
 
     @Override
-    protected Text getDefaultName() {
+    protected Component getTypeName() {
         return ConeVariant.getName(getVariant());
     }
 
     @Override
-    public PositionInterpolator getInterpolator() {
+    public InterpolationHandler getInterpolation() {
         return interpolator;
     }
 
     @Override
-    protected double getGravity() {
+    protected double getDefaultGravity() {
         return 0.08;
     }
 
@@ -61,32 +61,32 @@ public final class ConeEntity extends Entity {
     }
 
     @Override
-    public boolean canHit() {
+    public boolean isPickable() {
         return true;
     }
 
     @Override
     public void tick() {
         super.tick();
-        interpolator.tick();
+        interpolator.interpolate();
 
-        if (canMoveVoluntarily()) {
+        if (canSimulateMovement()) {
             travel();
         }
 
-        if (!getEntityWorld().isClient() || isLogicalSideForUpdatingMovement()) {
-            tickBlockCollision();
+        if (!level().isClientSide() || isLocalInstanceAuthoritative()) {
+            applyEffectsFromBlocks();
         }
 
         tickConeCramming();
     }
 
     private void tickConeCramming() {
-        List<Entity> crammed = getEntityWorld().getCrammedEntities(this, getBoundingBox());
+        List<Entity> crammed = level().getPushableEntities(this, getBoundingBox());
 
         for (Entity entity : crammed) {
             if (entity.getType() == AdornEntities.CONE.get()) {
-                entity.pushAwayFrom(this);
+                entity.push(this);
             }
         }
     }
@@ -101,42 +101,42 @@ public final class ConeEntity extends Entity {
 
     private void travelInAir() {
         applyGravity();
-        move(MovementType.SELF, getVelocity());
-        BlockPos pos = getVelocityAffectingPos();
-        float slipperiness = isOnGround() ? BlockBridge.get().getSlipperiness(getEntityWorld().getBlockState(pos), getEntityWorld(), pos, this) : 1;
+        move(MoverType.SELF, getDeltaMovement());
+        BlockPos pos = getBlockPosBelowThatAffectsMyMovement();
+        float slipperiness = onGround() ? BlockBridge.get().getSlipperiness(level().getBlockState(pos), level(), pos, this) : 1;
         slipperiness = Math.min(1f, slipperiness);
         double horizontalSpeedMultiplier = slipperiness / (0.95 * getVariant().value().weight());
-        var velocity = getVelocity();
-        setVelocity(velocity.x * horizontalSpeedMultiplier, velocity.y, velocity.z * horizontalSpeedMultiplier);
+        var velocity = getDeltaMovement();
+        setDeltaMovement(velocity.x * horizontalSpeedMultiplier, velocity.y, velocity.z * horizontalSpeedMultiplier);
     }
 
     private void travelInFluids() {
         applyFluidGravity();
-        move(MovementType.SELF, getVelocity());
+        move(MoverType.SELF, getDeltaMovement());
         var fluidState = getFluidStateAtPos();
-        double horizontalDrag = Math.exp(-0.03 * fluidState.getFluid().getTickRate(getEntityWorld()));
+        double horizontalDrag = Math.exp(-0.03 * fluidState.getType().getTickDelay(level()));
         float verticalDrag = 0.8f;
-        var velocity = getVelocity();
+        var velocity = getDeltaMovement();
         double verticalVelocity = velocity.y;
 
-        if (fluidState.isIn(getVariant().value().floatsIn())) {
-            boolean surfacing = getEntityWorld().getFluidState(getBlockPos().up()).isEmpty();
-            double gravityCoefficient = surfacing ? fluidState.getHeight(getEntityWorld(), getBlockPos()) - MathHelper.fractionalPart(getY()) : 1;
-            verticalVelocity += gravityCoefficient * getFinalGravity();
+        if (fluidState.is(getVariant().value().floatsIn())) {
+            boolean surfacing = level().getFluidState(blockPosition().above()).isEmpty();
+            double gravityCoefficient = surfacing ? fluidState.getHeight(level(), blockPosition()) - Mth.frac(getY()) : 1;
+            verticalVelocity += gravityCoefficient * getGravity();
         }
 
         verticalVelocity *= verticalDrag;
-        setVelocity(horizontalDrag * velocity.x, verticalVelocity, horizontalDrag * velocity.z);
+        setDeltaMovement(horizontalDrag * velocity.x, verticalVelocity, horizontalDrag * velocity.z);
     }
 
     private FluidState getFluidStateAtPos() {
-        return getEntityWorld().getFluidState(getBlockPos());
+        return level().getFluidState(blockPosition());
     }
 
     private void applyFluidGravity() {
-        double gravity = getFinalGravity();
+        double gravity = getGravity();
         if (gravity != 0.0) {
-            Vec3d velocity = getVelocity();
+            Vec3 velocity = getDeltaMovement();
             double velocityY = velocity.y;
             boolean falling = velocityY < 0;
 
@@ -147,21 +147,21 @@ public final class ConeEntity extends Entity {
                 velocityY -= gravity / 16.0;
             }
 
-            setVelocity(velocity.x, velocityY, velocity.z);
+            setDeltaMovement(velocity.x, velocityY, velocity.z);
         }
     }
 
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-        builder.add(VARIANT, Variants.getOrDefaultOrThrow(getRegistryManager(), ConeVariant.Keys.ORANGE));
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        builder.define(VARIANT, VariantUtils.getDefaultOrAny(registryAccess(), ConeVariant.Keys.ORANGE));
     }
 
     @Override
-    public boolean damage(ServerWorld world, DamageSource source, float amount) {
+    public boolean hurtServer(ServerLevel world, DamageSource source, float amount) {
         if (isRemoved()) return true;
-        if (isAlwaysInvulnerableTo(source)) return false;
+        if (isInvulnerableToBase(source)) return false;
 
-        if (!(source.getAttacker() instanceof PlayerEntity player) || !player.getAbilities().creativeMode) {
+        if (!(source.getEntity() instanceof Player player) || !player.getAbilities().instabuild) {
             drop(world);
         }
         kill(world);
@@ -170,13 +170,13 @@ public final class ConeEntity extends Entity {
     }
 
     @Override
-    public boolean isFireImmune() {
+    public boolean fireImmune() {
         return !getVariant().value().canBurn();
     }
 
-    private void drop(ServerWorld world) {
-        if (world.getGameRules().getValue(GameRules.ENTITY_DROPS)) {
-            dropStack(world, createItemStack());
+    private void drop(ServerLevel world) {
+        if (world.getGameRules().get(GameRules.ENTITY_DROPS)) {
+            spawnAtLocation(world, createItemStack());
         }
     }
 
@@ -187,17 +187,17 @@ public final class ConeEntity extends Entity {
     }
 
     @Override
-    protected void readCustomData(ReadView view) {
-        Variants.fromData(view, AdornRegistryKeys.CONE_VARIANT).ifPresent(this::setVariant);
+    protected void readAdditionalSaveData(ValueInput view) {
+        VariantUtils.readVariant(view, AdornRegistryKeys.CONE_VARIANT).ifPresent(this::setVariant);
     }
 
     @Override
-    protected void writeCustomData(WriteView view) {
-        Variants.writeData(view, getVariant());
+    protected void addAdditionalSaveData(ValueOutput view) {
+        VariantUtils.writeVariant(view, getVariant());
     }
 
     @Override
-    public @Nullable <T> T get(ComponentType<? extends T> type) {
+    public @Nullable <T> T get(DataComponentType<? extends T> type) {
         if (type == AdornComponentTypes.CONE_VARIANT.get()) {
             return castComponentValue(type, new ConeVariantComponent(getVariant()));
         }
@@ -206,31 +206,31 @@ public final class ConeEntity extends Entity {
     }
 
     @Override
-    protected void copyComponentsFrom(ComponentsAccess from) {
-        copyComponentFrom(from, AdornComponentTypes.CONE_VARIANT.get());
-        super.copyComponentsFrom(from);
+    protected void applyImplicitComponents(DataComponentGetter from) {
+        applyImplicitComponentIfPresent(from, AdornComponentTypes.CONE_VARIANT.get());
+        super.applyImplicitComponents(from);
     }
 
     @Override
-    protected <T> boolean setApplicableComponent(ComponentType<T> type, T value) {
+    protected <T> boolean applyImplicitComponent(DataComponentType<T> type, T value) {
         if (type == AdornComponentTypes.CONE_VARIANT.get()) {
-            setVariant(castComponentValue(AdornComponentTypes.CONE_VARIANT.get(), value).getVariant(getRegistryManager()).orElseThrow());
+            setVariant(castComponentValue(AdornComponentTypes.CONE_VARIANT.get(), value).getVariant(registryAccess()).orElseThrow());
             return true;
         }
 
-        return super.setApplicableComponent(type, value);
+        return super.applyImplicitComponent(type, value);
     }
 
-    public RegistryEntry<ConeVariant> getVariant() {
-        return getDataTracker().get(VARIANT);
+    public Holder<ConeVariant> getVariant() {
+        return getEntityData().get(VARIANT);
     }
 
-    public void setVariant(RegistryEntry<ConeVariant> variant) {
-        getDataTracker().set(VARIANT, variant);
+    public void setVariant(Holder<ConeVariant> variant) {
+        getEntityData().set(VARIANT, variant);
     }
 
     @Override
-    public ItemStack getPickBlockStack() {
+    public ItemStack getPickResult() {
         return createItemStack();
     }
 }

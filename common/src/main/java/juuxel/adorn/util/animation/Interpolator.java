@@ -1,12 +1,12 @@
 package juuxel.adorn.util.animation;
 
 import juuxel.adorn.util.Colors;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
 @FunctionalInterface
 public interface Interpolator<T> {
-    Interpolator<Float> FLOAT = MathHelper::lerp;
-    Interpolator<Double> DOUBLE = MathHelper::lerp;
+    Interpolator<Float> FLOAT = Mth::lerp;
+    Interpolator<Double> DOUBLE = Mth::lerp;
     Interpolator<Integer> COLOR = (delta, from, to) -> {
         float alpha = FLOAT.interpolate(delta, Colors.alphaOf(from), Colors.alphaOf(to));
         float red = FLOAT.interpolate(delta, Colors.redOf(from), Colors.redOf(to));

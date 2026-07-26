@@ -9,10 +9,10 @@
     "BubbleColumnBlockMixin",
     "FallLocationMixin",
     "FenceGateBlockMixin",
-    "PlayerEntityMixin"
+    "PlayerMixin"
   ],
   "client": [
-    "client.ClickableWidgetMixin"
+    "client.AbstractWidgetMixin"
   ],
 
   "injectors": {

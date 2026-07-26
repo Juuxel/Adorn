@@ -14,8 +14,8 @@ public final class AdornNetworking {
         PayloadTypeRegistry.playS2C().register(OpenBookS2CMessage.ID, OpenBookS2CMessage.PACKET_CODEC);
 
         ServerPlayNetworking.registerGlobalReceiver(SetTradeStackC2SMessage.ID, (payload, context) -> {
-            var menu = context.player().menu;
-            if (menu.syncId == payload.syncId() && menu instanceof TradingStationMenu tradingStationMenu) {
+            var menu = context.player().containerMenu;
+            if (menu.containerId == payload.syncId() && menu instanceof TradingStationMenu tradingStationMenu) {
                 tradingStationMenu.updateTradeStack(payload.slotId(), payload.stack(), context.player());
             }
         });

@@ -14,27 +14,28 @@ import juuxel.adorn.client.gui.widget.TickingElement;
 import juuxel.adorn.util.CollectionUtil;
 import juuxel.adorn.util.Colors;
 import juuxel.adorn.util.animation.AnimationEngine;
-import net.minecraft.client.font.DrawnTextConsumer;
-import net.minecraft.client.gl.RenderPipelines;
-import net.minecraft.client.gui.Click;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.Drawable;
-import net.minecraft.client.gui.Element;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ingame.BookScreen;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.PageTurnWidget;
-import net.minecraft.client.input.KeyInput;
-import net.minecraft.client.sound.PositionedSoundInstance;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.ScreenTexts;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.ClickEvent;
-import net.minecraft.text.OrderedText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.text.Texts;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.gui.ActiveTextCollector;
+import net.minecraft.client.gui.components.Button.OnPress;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.BookViewScreen;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.inventory.PageButton;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.network.chat.ClickEvent;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentUtils;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -56,12 +57,12 @@ public final class GuideBookScreen extends Screen {
 
     private final Book book;
     private FlipBook flipBook;
-    private PageTurnWidget previousPageButton;
-    private PageTurnWidget nextPageButton;
+    private PageButton previousPageButton;
+    private PageButton nextPageButton;
     private final AnimationEngine animationEngine = new AnimationEngine();
 
     public GuideBookScreen(Book book) {
-        super(ScreenTexts.EMPTY);
+        super(CommonComponents.EMPTY);
         this.book = book;
     }
 
@@ -72,13 +73,13 @@ public final class GuideBookScreen extends Screen {
         int pageX = x + 35;
         int pageY = y + 14;
 
-        addDrawableChild(new CloseButton(x + 142, y + 14, button -> close()));
-        previousPageButton = addDrawableChild(new PageTurnWidget(x + 49, y + 159, false, widget -> flipBook.showPreviousPage(), true));
-        nextPageButton = addDrawableChild(new PageTurnWidget(x + 116, y + 159, true, widget -> flipBook.showNextPage(), true));
+        addRenderableWidget(new CloseButton(x + 142, y + 14, button -> onClose()));
+        previousPageButton = addRenderableWidget(new PageButton(x + 49, y + 159, false, widget -> flipBook.showPreviousPage(), true));
+        nextPageButton = addRenderableWidget(new PageButton(x + 116, y + 159, true, widget -> flipBook.showNextPage(), true));
 
         // The flip book has to be added last so that
         // its mouse hover tooltip renders on top of all widgets.
-        flipBook = addDrawableChild(new FlipBook(this::updatePageTurnButtons));
+        flipBook = addRenderableWidget(new FlipBook(this::updatePageTurnButtons));
         flipBook.add(new TitlePage(pageX, pageY));
         for (var page : book.pages()) {
             var body = new BookPageBody(pageX, pageY + PAGE_TEXT_Y, page);
@@ -98,11 +99,11 @@ public final class GuideBookScreen extends Screen {
     }
 
     @Override
-    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void renderBackground(GuiGraphics context, int mouseX, int mouseY, float delta) {
         super.renderBackground(context, mouseX, mouseY, delta);
         int x = (width - BOOK_SIZE) / 2;
         int y = (height - BOOK_SIZE) / 2;
-        context.drawTexture(RenderPipelines.GUI_TEXTURED, BookScreen.BOOK_TEXTURE, x, y, 0, 0, BOOK_SIZE, BOOK_SIZE, 256, 256);
+        context.blit(RenderPipelines.GUI_TEXTURED, BookViewScreen.BOOK_LOCATION, x, y, 0, 0, BOOK_SIZE, BOOK_SIZE, 256, 256);
     }
 
     private boolean handleTextClick(@Nullable ClickEvent clickEvent) {
@@ -111,7 +112,7 @@ public final class GuideBookScreen extends Screen {
 
             if (0 <= pageIndex && pageIndex < flipBook.getPageCount()) {
                 flipBook.setCurrentPage(pageIndex);
-                client.getSoundManager().play(PositionedSoundInstance.ui(SoundEvents.ITEM_BOOK_PAGE_TURN, 1f));
+                minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.BOOK_PAGE_TURN, 1f));
                 return true;
             }
         }
@@ -136,7 +137,7 @@ public final class GuideBookScreen extends Screen {
     }
 
     @Override
-    public boolean keyPressed(KeyInput input) {
+    public boolean keyPressed(KeyEvent input) {
         if (super.keyPressed(input)) {
             return true;
         }
@@ -152,10 +153,10 @@ public final class GuideBookScreen extends Screen {
         return false;
     }
 
-    private final class TitlePage implements Element, Drawable {
+    private final class TitlePage implements GuiEventListener, Renderable {
         private final int x;
         private final int y;
-        private final Text byAuthor = Text.translatable("book.byAuthor", book.author());
+        private final Component byAuthor = Component.translatable("book.byAuthor", book.author());
         private boolean focused = false;
 
         private TitlePage(int x, int y) {
@@ -164,17 +165,17 @@ public final class GuideBookScreen extends Screen {
         }
 
         @Override
-        public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
             int cx = x + PAGE_WIDTH / 2;
-            var matrices = context.getMatrices();
+            var matrices = context.pose();
             matrices.pushMatrix();
             matrices.translate(cx, y + 7 + 25);
             matrices.scale(book.titleScale(), book.titleScale());
-            context.drawText(textRenderer, book.title(), -textRenderer.getWidth(book.title()) / 2, 0, Colors.SCREEN_TEXT, false);
+            context.drawString(font, book.title(), -font.width(book.title()) / 2, 0, Colors.SCREEN_TEXT, false);
             matrices.popMatrix();
 
-            context.drawText(textRenderer, book.subtitle(), cx - textRenderer.getWidth(book.subtitle()) / 2, y + 45, Colors.SCREEN_TEXT, false);
-            context.drawText(textRenderer, byAuthor, cx - textRenderer.getWidth(byAuthor) / 2, y + 60, Colors.SCREEN_TEXT, false);
+            context.drawString(font, book.subtitle(), cx - font.width(book.subtitle()) / 2, y + 45, Colors.SCREEN_TEXT, false);
+            context.drawString(font, byAuthor, cx - font.width(byAuthor) / 2, y + 60, Colors.SCREEN_TEXT, false);
         }
 
         @Override
@@ -196,10 +197,10 @@ public final class GuideBookScreen extends Screen {
         }
     }
 
-    private final class BookPageTitle implements Element, Drawable, TickingElement {
+    private final class BookPageTitle implements GuiEventListener, Renderable, TickingElement {
         private final int x;
         private final int y;
-        private final List<OrderedText> wrappedTitleLines;
+        private final List<FormattedCharSequence> wrappedTitleLines;
         private final List<ItemStack> icons;
         private int icon = 0;
         private int iconTicks = 0;
@@ -208,18 +209,18 @@ public final class GuideBookScreen extends Screen {
         private BookPageTitle(int x, int y, Page page) {
             this.x = x;
             this.y = y;
-            this.wrappedTitleLines = textRenderer.wrapLines(page.title().copy().styled(style -> style.withBold(true)), PAGE_TITLE_WIDTH);
+            this.wrappedTitleLines = font.split(page.title().copy().withStyle(style -> style.withBold(true)), PAGE_TITLE_WIDTH);
             this.icons = CollectionUtil.interleave(page.icons().stream().map(Page.Icon::createStacks).toList());
         }
 
         @Override
-        public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-            context.drawItemWithoutEntity(icons.get(icon), x, y);
+        public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
+            context.renderFakeItem(icons.get(icon), x, y);
 
-            int titleY = y + 10 - textRenderer.fontHeight * wrappedTitleLines.size() / 2;
+            int titleY = y + 10 - font.lineHeight * wrappedTitleLines.size() / 2;
             for (int i = 0; i < wrappedTitleLines.size(); i++) {
                 var line = wrappedTitleLines.get(i);
-                context.drawText(textRenderer, line, x + PAGE_TITLE_X, titleY + i * textRenderer.fontHeight, Colors.SCREEN_TEXT, false);
+                context.drawString(font, line, x + PAGE_TITLE_X, titleY + i * font.lineHeight, Colors.SCREEN_TEXT, false);
             }
         }
 
@@ -242,11 +243,11 @@ public final class GuideBookScreen extends Screen {
         }
     }
 
-    private final class BookPageBody implements SizedElement, Drawable {
+    private final class BookPageBody implements SizedElement, Renderable {
         private final int x;
         private final int y;
         private final Page page;
-        private final List<OrderedText> wrappedBodyLines;
+        private final List<FormattedCharSequence> wrappedBodyLines;
         private final int textHeight;
         private final int imageHeight;
         private final int height;
@@ -256,8 +257,8 @@ public final class GuideBookScreen extends Screen {
             this.x = x;
             this.y = y;
             this.page = page;
-            this.wrappedBodyLines = textRenderer.wrapLines(Texts.withStyle(page.text(), BOOK_CONTENTS_STYLE), PAGE_WIDTH - PAGE_TEXT_X);
-            this.textHeight = wrappedBodyLines.size() * textRenderer.fontHeight;
+            this.wrappedBodyLines = font.split(ComponentUtils.mergeStyles(page.text(), BOOK_CONTENTS_STYLE), PAGE_WIDTH - PAGE_TEXT_X);
+            this.textHeight = wrappedBodyLines.size() * font.lineHeight;
             this.imageHeight = page.image() != null ? page.image().size().y() + PAGE_IMAGE_GAP : 0;
             this.height = Math.max(PAGE_BODY_HEIGHT, textHeight + imageHeight);
         }
@@ -278,31 +279,31 @@ public final class GuideBookScreen extends Screen {
         }
 
         @Override
-        public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-            drawText(context.getTextConsumer(DrawContext.HoverType.TOOLTIP_AND_CURSOR));
+        public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
+            drawText(context.textRenderer(GuiGraphics.HoveredTextEffects.TOOLTIP_AND_CURSOR));
 
             if (page.image() != null) {
                 renderImage(context, page.image(), mouseX, mouseY);
             }
         }
 
-        private void drawText(DrawnTextConsumer drawer) {
+        private void drawText(ActiveTextCollector drawer) {
             int textYOffset = page.image() != null && page.image().placement() == Image.Placement.BEFORE_TEXT ? imageHeight : 0;
 
             for (int i = 0; i < wrappedBodyLines.size(); i++) {
                 var line = wrappedBodyLines.get(i);
-                drawer.text(x + PAGE_TEXT_X, textYOffset + y + i * textRenderer.fontHeight, line);
+                drawer.accept(x + PAGE_TEXT_X, textYOffset + y + i * font.lineHeight, line);
             }
         }
 
-        private void renderImage(DrawContext context, Image image, int mouseX, int mouseY) {
+        private void renderImage(GuiGraphics context, Image image, int mouseX, int mouseY) {
             var imageX = x + (PAGE_WIDTH - image.size().x()) / 2;
             var imageY = switch (image.placement()) {
                 case BEFORE_TEXT -> y;
                 case AFTER_TEXT -> y + textHeight + PAGE_IMAGE_GAP;
             };
 
-            context.drawTexture(RenderPipelines.GUI_TEXTURED, image.location(), imageX, imageY, 0f, 0f, image.size().x(), image.size().y(), image.size().x(), image.size().y());
+            context.blit(RenderPipelines.GUI_TEXTURED, image.location(), imageX, imageY, 0f, 0f, image.size().x(), image.size().y(), image.size().x(), image.size().y());
 
             for (var hoverArea : image.hoverAreas()) {
                 if (hoverArea.contains(mouseX - imageX, mouseY - imageY)) {
@@ -310,20 +311,20 @@ public final class GuideBookScreen extends Screen {
                     var hY = imageY + hoverArea.position().y();
                     context.fill(hX, hY, hX + hoverArea.size().x(), hY + hoverArea.size().y(), HOVER_AREA_HIGHLIGHT_COLOR);
 
-                    var wrappedTooltip = textRenderer.wrapLines(hoverArea.tooltip(), PAGE_WIDTH);
-                    Scissors.suspendScissors(context, () -> context.drawOrderedTooltip(textRenderer, wrappedTooltip, mouseX, mouseY));
+                    var wrappedTooltip = font.split(hoverArea.tooltip(), PAGE_WIDTH);
+                    Scissors.suspendScissors(context, () -> context.setTooltipForNextFrame(font, wrappedTooltip, mouseX, mouseY));
                     break;
                 }
             }
         }
 
         @Override
-        public boolean mouseClicked(Click click, boolean doubled) {
+        public boolean mouseClicked(MouseButtonEvent click, boolean doubled) {
             if (click.button() == 0) {
                 if (flipBook.getCurrentPageValue() instanceof BookPagePanel panel) {
-                    var clickHandler = new DrawnTextConsumer.ClickHandler(textRenderer, (int) click.x(), (int) click.y());
+                    var clickHandler = new ActiveTextCollector.ClickableStyleFinder(font, (int) click.x(), (int) click.y());
                     panel.body.drawText(clickHandler);
-                    var style = clickHandler.getStyle();
+                    var style = clickHandler.result();
                     if (style != null && handleTextClick(style.getClickEvent())) {
                         return true;
                     }
@@ -344,15 +345,15 @@ public final class GuideBookScreen extends Screen {
         }
     }
 
-    private final class CloseButton extends ButtonWidget {
-        private CloseButton(int x, int y, PressAction onPress) {
-            super(x, y, 8, 8, ScreenTexts.EMPTY, onPress, DEFAULT_NARRATION_SUPPLIER);
+    private final class CloseButton extends Button {
+        private CloseButton(int x, int y, OnPress onPress) {
+            super(x, y, 8, 8, CommonComponents.EMPTY, onPress, DEFAULT_NARRATION);
         }
 
         @Override
-        protected void drawIcon(DrawContext context, int mouseX, int mouseY, float deltaTicks) {
+        protected void renderContents(GuiGraphics context, int mouseX, int mouseY, float deltaTicks) {
             var texture = isHovered() ? CLOSE_BOOK_ACTIVE_TEXTURE : CLOSE_BOOK_INACTIVE_TEXTURE;
-            context.drawTexture(RenderPipelines.GUI_TEXTURED, texture, getX(), getY(), 0f, 0f, 8, 8, 8, 8);
+            context.blit(RenderPipelines.GUI_TEXTURED, texture, getX(), getY(), 0f, 0f, 8, 8, 8, 8);
         }
     }
 }

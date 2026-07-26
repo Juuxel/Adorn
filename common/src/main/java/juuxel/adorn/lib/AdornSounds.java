@@ -4,14 +4,14 @@ import juuxel.adorn.AdornCommon;
 import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.sound.SoundEvent;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.sounds.SoundEvent;
 
 import java.util.function.Supplier;
 
 public final class AdornSounds {
-    public static final Registrar<SoundEvent> SOUNDS = RegistrarFactory.get().create(RegistryKeys.SOUND_EVENT);
+    public static final Registrar<SoundEvent> SOUNDS = RegistrarFactory.get().create(Registries.SOUND_EVENT);
 
     public static final Registered<SoundEvent> BLOCK_CHAIN_LINK_FENCE_BREAK = register("block.adorn.chain_link_fence.break");
     public static final Registered<SoundEvent> BLOCK_CHAIN_LINK_FENCE_STEP = register("block.adorn.chain_link_fence.step");
@@ -20,7 +20,7 @@ public final class AdornSounds {
     public static final Registered<SoundEvent> BLOCK_CHAIN_LINK_FENCE_FALL = register("block.adorn.chain_link_fence.fall");
     public static final Registered<SoundEvent> ITEM_WATERING_CAN_WATER = register("item.adorn.watering_can.water");
 
-    public static final BlockSoundGroup CHAIN_LINK_FENCE = new LazyBlockSoundGroup(
+    public static final SoundType CHAIN_LINK_FENCE = new LazyBlockSoundGroup(
         1.0F,
         1.5F,
         BLOCK_CHAIN_LINK_FENCE_BREAK,
@@ -34,10 +34,10 @@ public final class AdornSounds {
     }
 
     private static Registered<SoundEvent> register(String name) {
-        return SOUNDS.register(name, () -> SoundEvent.of(AdornCommon.id(name)));
+        return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(AdornCommon.id(name)));
     }
 
-    private static final class LazyBlockSoundGroup extends BlockSoundGroup {
+    private static final class LazyBlockSoundGroup extends SoundType {
         private final Supplier<SoundEvent> breakSound;
         private final Supplier<SoundEvent> stepSound;
         private final Supplier<SoundEvent> placeSound;

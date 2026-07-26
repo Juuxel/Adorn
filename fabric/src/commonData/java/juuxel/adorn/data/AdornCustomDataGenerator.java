@@ -4,7 +4,7 @@ import com.google.common.hash.Hashing;
 import juuxel.adorn.datagen.DataOutput;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.DataWriter;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.util.Util;
 
 import java.io.IOException;
@@ -22,18 +22,18 @@ public abstract class AdornCustomDataGenerator implements DataProvider {
     protected abstract void run(DataOutput output);
 
     @Override
-    public CompletableFuture<?> run(DataWriter writer) {
+    public CompletableFuture<?> run(CachedOutput writer) {
         return CompletableFuture.runAsync(() -> {
             run((path, content) -> {
                 byte[] data = content.getBytes(StandardCharsets.UTF_8);
                 var hashCode = Hashing.sha256().hashBytes(data);
 
                 try {
-                    writer.write(this.output.getPath().resolve(path), data, hashCode);
+                    writer.writeIfNeeded(this.output.getOutputFolder().resolve(path), data, hashCode);
                 } catch (IOException e) {
                     throw new UncheckedIOException(e);
                 }
             });
-        }, Util.getMainWorkerExecutor());
+        }, Util.backgroundExecutor());
     }
 }

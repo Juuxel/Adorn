@@ -1,20 +1,20 @@
 package juuxel.adorn.commonmixin.client;
 
 import juuxel.adorn.client.gui.widget.ScrollEnvelope;
-import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.client.gui.components.AbstractWidget;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-@Mixin(ClickableWidget.class)
-abstract class ClickableWidgetMixin {
-    @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;scissorContains(II)Z"), index = 1)
+@Mixin(AbstractWidget.class)
+abstract class AbstractWidgetMixin {
+    @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;containsPointInScissor(II)Z"), index = 1)
     private int modifyYForHoverScissor(int y) {
         return modifyYForScissor(y);
     }
 
-    @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/tooltip/TooltipState;render(Lnet/minecraft/client/gui/DrawContext;IIZZLnet/minecraft/client/gui/ScreenRect;)V"), index = 2)
+    @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/WidgetTooltipHolder;refreshTooltipForNextRenderPass(Lnet/minecraft/client/gui/GuiGraphics;IIZZLnet/minecraft/client/gui/navigation/ScreenRectangle;)V"), index = 2)
     private int modifyYForTooltip(int y) {
         return modifyYForScissor(y);
     }

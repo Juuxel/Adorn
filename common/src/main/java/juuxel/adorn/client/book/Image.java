@@ -4,16 +4,17 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import juuxel.adorn.util.Vec2i;
-import net.minecraft.text.Text;
-import net.minecraft.text.TextCodecs;
-import net.minecraft.util.Identifier;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.resources.Identifier;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public record Image(Identifier location, Vec2i size, Placement placement, List<HoverArea> hoverAreas) {
+public record Image(
+    Identifier location, Vec2i size, Placement placement, List<HoverArea> hoverAreas) {
     public static final Codec<Image> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         Identifier.CODEC.fieldOf("location").forGetter(Image::location),
         Vec2i.CODEC.fieldOf("size").forGetter(Image::size),
@@ -37,11 +38,11 @@ public record Image(Identifier location, Vec2i size, Placement placement, List<H
         }
     }
 
-    public record HoverArea(Vec2i position, Vec2i size, Text tooltip) {
+    public record HoverArea(Vec2i position, Vec2i size, Component tooltip) {
         public static final Codec<HoverArea> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Vec2i.CODEC.fieldOf("position").forGetter(HoverArea::position),
             Vec2i.CODEC.fieldOf("size").forGetter(HoverArea::size),
-            TextCodecs.CODEC.fieldOf("tooltip").forGetter(HoverArea::tooltip)
+            ComponentSerialization.CODEC.fieldOf("tooltip").forGetter(HoverArea::tooltip)
         ).apply(instance, HoverArea::new));
 
         public boolean contains(int x, int y) {

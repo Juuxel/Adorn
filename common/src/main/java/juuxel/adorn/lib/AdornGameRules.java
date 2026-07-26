@@ -8,17 +8,17 @@ import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.resource.featuretoggle.FeatureSet;
-import net.minecraft.world.rule.GameRule;
-import net.minecraft.world.rule.GameRuleCategory;
-import net.minecraft.world.rule.GameRuleType;
-import net.minecraft.world.rule.GameRuleVisitor;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.level.gamerules.GameRule;
+import net.minecraft.world.level.gamerules.GameRuleCategory;
+import net.minecraft.world.level.gamerules.GameRuleType;
+import net.minecraft.world.level.gamerules.GameRuleTypeVisitor;
 
 import java.util.function.Predicate;
 
 public final class AdornGameRules {
-    public static final Registrar<GameRule<?>> GAME_RULES = RegistrarFactory.get().create(RegistryKeys.GAME_RULE);
+    public static final Registrar<GameRule<?>> GAME_RULES = RegistrarFactory.get().create(Registries.GAME_RULE);
     public static final Registered<GameRule<Boolean>> SKIP_NIGHT_ON_SOFAS =
         registerBoolean("skip_night_on_sofas", GameRuleCategory.PLAYER, defaults -> defaults.skipNightOnSofas);
     public static final Registered<GameRule<Boolean>> INFINITE_KITCHEN_SINKS =
@@ -39,11 +39,11 @@ public final class AdornGameRules {
             category,
             GameRuleType.BOOL,
             BoolArgumentType.bool(),
-            GameRuleVisitor::visitBoolean,
+            GameRuleTypeVisitor::visitBoolean,
             Codec.BOOL,
             (value) -> value ? Command.SINGLE_SUCCESS : 0,
             defaultValue,
-            FeatureSet.empty()
+            FeatureFlagSet.of()
         );
     }
 }

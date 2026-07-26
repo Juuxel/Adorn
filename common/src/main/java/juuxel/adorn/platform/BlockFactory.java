@@ -1,39 +1,39 @@
 package juuxel.adorn.platform;
 
 import juuxel.adorn.block.SofaBlock;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.WoodType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.state.properties.WoodType;
 
 public interface BlockFactory {
     BlockFactory DEFAULT = new BlockFactory() {};
 
-    default SofaBlock createSofa(AbstractBlock.Settings settings) {
+    default SofaBlock createSofa(BlockBehaviour.Properties settings) {
         return new SofaBlock(settings);
     }
 
-    default Block createPaintedPlanks(AbstractBlock.Settings settings) {
+    default Block createPaintedPlanks(BlockBehaviour.Properties settings) {
         return new Block(settings);
     }
 
-    default Block createPaintedWoodSlab(AbstractBlock.Settings settings) {
+    default Block createPaintedWoodSlab(BlockBehaviour.Properties settings) {
         return new SlabBlock(settings);
     }
 
-    default Block createPaintedWoodStairs(BlockState baseBlockState, AbstractBlock.Settings settings) {
-        return new StairsBlock(baseBlockState, settings);
+    default Block createPaintedWoodStairs(BlockState baseBlockState, BlockBehaviour.Properties settings) {
+        return new StairBlock(baseBlockState, settings);
     }
 
-    default Block createPaintedWoodFence(AbstractBlock.Settings settings) {
+    default Block createPaintedWoodFence(BlockBehaviour.Properties settings) {
         return new FenceBlock(settings);
     }
 
-    default Block createPaintedWoodFenceGate(WoodType woodType, AbstractBlock.Settings settings) {
+    default Block createPaintedWoodFenceGate(WoodType woodType, BlockBehaviour.Properties settings) {
         return new FenceGateBlock(woodType, settings);
     }
 }

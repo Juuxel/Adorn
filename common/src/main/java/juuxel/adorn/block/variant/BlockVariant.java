@@ -6,11 +6,11 @@ import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.lib.registry.RegistryHelper;
 import juuxel.adorn.util.AdornUtil;
 import juuxel.adorn.util.Dyes;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.DyeColor;
-import net.minecraft.util.Identifier;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.resources.Identifier;
 
 import java.util.Collections;
 import java.util.EnumMap;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
     char MOD_ID_SEPARATOR = '/';
 
-    Map<DyeColor, BlockVariant> WOOLS = createBy(Dyes.ALL_DYES, color -> variant(color.asString(), Blocks.WHITE_WOOL));
+    Map<DyeColor, BlockVariant> WOOLS = createBy(Dyes.ALL_DYES, color -> variant(color.getSerializedName(), Blocks.WHITE_WOOL));
     Map<DyeColor, BlockVariant> PAINTED_WOODS = createBy(Dyes.ALL_DYES, PaintedWood::new);
 
     BlockVariant IRON = variant("iron", Blocks.IRON_BARS);
@@ -87,14 +87,14 @@ public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
 
     default Identifier nameAsIdentifier() {
         var name = this.name();
-        return Identifier.splitOn(name, MOD_ID_SEPARATOR);
+        return Identifier.bySeparator(name, MOD_ID_SEPARATOR);
     }
 
     /**
      * Creates a <em>new</em> {@code AbstractBlock.Settings}.
      */
     @Override
-    AbstractBlock.Settings createBlockSettings();
+    BlockBehaviour.Properties createBlockSettings();
 
     static BlockVariant variant(String name, Block base) {
         return new BlockVariant() {
@@ -104,7 +104,7 @@ public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
             }
 
             @Override
-            public AbstractBlock.Settings createBlockSettings() {
+            public BlockBehaviour.Properties createBlockSettings() {
                 return AdornUtil.copySettingsSafely(base);
             }
         };
@@ -131,22 +131,23 @@ public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
 
     record Wood(String name) implements BlockVariant {
         @Override
-        public AbstractBlock.Settings createBlockSettings() {
+        public BlockBehaviour.Properties createBlockSettings() {
             return AdornUtil.copySettingsSafely(Blocks.OAK_PLANKS);
         }
     }
 
     record Stone(String name) implements BlockVariant {
         @Override
-        public AbstractBlock.Settings createBlockSettings() {
+        public BlockBehaviour.Properties createBlockSettings() {
             return AdornUtil.copySettingsSafely(Blocks.COBBLESTONE);
         }
     }
 
-    record PaintedWood(DyeColor color) implements BlockVariant {
+    record PaintedWood(
+        DyeColor color) implements BlockVariant {
         @Override
         public String name() {
-            return color.getId();
+            return color.getName();
         }
 
         @Override
@@ -155,7 +156,7 @@ public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
         }
 
         @Override
-        public AbstractBlock.Settings createBlockSettings() {
+        public BlockBehaviour.Properties createBlockSettings() {
             return AdornUtil.copySettingsSafely(AdornBlocks.PAINTED_PLANKS.getEager(color));
         }
     }

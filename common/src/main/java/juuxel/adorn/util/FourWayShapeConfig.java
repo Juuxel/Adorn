@@ -1,20 +1,21 @@
 package juuxel.adorn.util;
 
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public record FourWayShapeConfig(VoxelShape baseShape, VoxelShape cornerX0Z0, VoxelShape cornerX1Z0, VoxelShape cornerX0Z1, VoxelShape cornerX1Z1, Map<Direction, VoxelShape> edges) {
+public record FourWayShapeConfig(
+    VoxelShape baseShape, VoxelShape cornerX0Z0, VoxelShape cornerX1Z0, VoxelShape cornerX0Z1, VoxelShape cornerX1Z1, Map<Direction, VoxelShape> edges) {
     public FourWayShapeConfig(VoxelShape baseShape, VoxelShape cornerX0Z0, VoxelShape cornerX1Z0, VoxelShape cornerX0Z1, VoxelShape cornerX1Z1) {
         this(baseShape, cornerX0Z0, cornerX1Z0, cornerX0Z1, cornerX1Z1, Map.of());
     }
 
     public FourWayShapeConfig addToBaseShape(VoxelShape shape) {
-        return new FourWayShapeConfig(VoxelShapes.union(baseShape, shape), cornerX0Z0, cornerX1Z0, cornerX0Z1, cornerX1Z1);
+        return new FourWayShapeConfig(Shapes.or(baseShape, shape), cornerX0Z0, cornerX1Z0, cornerX0Z1, cornerX1Z1);
     }
 
     public VoxelShape makeShape(boolean north, boolean east, boolean south, boolean west) {
@@ -83,6 +84,6 @@ public record FourWayShapeConfig(VoxelShape baseShape, VoxelShape cornerX0Z0, Vo
             if (shape != null) parts.add(shape);
         }
 
-        return parts.stream().reduce(VoxelShapes::union).get();
+        return parts.stream().reduce(Shapes::or).get();
     }
 }

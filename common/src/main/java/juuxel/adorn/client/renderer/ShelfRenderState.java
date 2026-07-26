@@ -1,9 +1,9 @@
 package juuxel.adorn.client.renderer;
 
-import net.minecraft.client.render.block.entity.state.BlockEntityRenderState;
-import net.minecraft.client.render.item.ItemRenderState;
+import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
 
 public final class ShelfRenderState extends BlockEntityRenderState {
-    public ItemRenderState firstItem;
-    public ItemRenderState secondItem;
+    public ItemStackRenderState firstItem;
+    public ItemStackRenderState secondItem;
 }

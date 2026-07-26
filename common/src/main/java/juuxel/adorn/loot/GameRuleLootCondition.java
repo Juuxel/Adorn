@@ -4,16 +4,17 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.util.Logging;
-import net.minecraft.loot.condition.LootCondition;
-import net.minecraft.loot.condition.LootConditionType;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.registry.Registries;
-import net.minecraft.world.rule.GameRule;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.gamerules.GameRule;
 import org.slf4j.Logger;
 
-public record GameRuleLootCondition(GameRule<?> gameRule) implements LootCondition {
+public record GameRuleLootCondition(
+    GameRule<?> gameRule) implements LootItemCondition {
     public static final MapCodec<GameRuleLootCondition> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(
-        Registries.GAME_RULE.getCodec()
+        BuiltInRegistries.GAME_RULE.byNameCodec()
             .fieldOf("game_rule")
             .forGetter(GameRuleLootCondition::gameRule)
     ).apply(builder, GameRuleLootCondition::new));
@@ -21,7 +22,7 @@ public record GameRuleLootCondition(GameRule<?> gameRule) implements LootConditi
 
     @Override
     public boolean test(LootContext lootContext) {
-        var rule = lootContext.getWorld().getGameRules().getValue(gameRule);
+        var rule = lootContext.getLevel().getGameRules().get(gameRule);
 
         if (rule instanceof Boolean b) {
             return b;
@@ -33,7 +34,7 @@ public record GameRuleLootCondition(GameRule<?> gameRule) implements LootConditi
     }
 
     @Override
-    public LootConditionType getType() {
+    public LootItemConditionType getType() {
         return AdornLootConditionTypes.GAME_RULE.get();
     }
 
@@ -45,7 +46,7 @@ public record GameRuleLootCondition(GameRule<?> gameRule) implements LootConditi
         return builder(gameRule.get());
     }
 
-    public static final class Builder implements LootCondition.Builder {
+    public static final class Builder implements net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder {
         private final GameRule<?> gameRule;
 
         private Builder(GameRule<?> gameRule) {
@@ -53,7 +54,7 @@ public record GameRuleLootCondition(GameRule<?> gameRule) implements LootConditi
         }
 
         @Override
-        public LootCondition build() {
+        public LootItemCondition build() {
             return new GameRuleLootCondition(gameRule);
         }
     }

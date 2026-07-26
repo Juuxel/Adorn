@@ -1,12 +1,12 @@
 package juuxel.adorn.fluid;
 
 import juuxel.adorn.config.ConfigManager;
-import net.minecraft.component.ComponentChanges;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.registry.Registries;
-import net.minecraft.text.Text;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 
 import java.util.Objects;
 
@@ -17,37 +17,37 @@ import java.util.Objects;
  */
 public abstract class FluidReference implements HasFluidAmount {
     public abstract Fluid getFluid();
-    public abstract void setFluid(Fluid fluid, long amount, ComponentChanges components);
+    public abstract void setFluid(Fluid fluid, long amount, DataComponentPatch components);
 
     public abstract void setAmount(long amount);
 
-    public abstract ComponentChanges getComponents();
+    public abstract DataComponentPatch getComponents();
 
     public boolean isEmpty() {
         return getFluid() == Fluids.EMPTY || getAmount() == 0;
     }
 
-    public void write(RegistryByteBuf buf) {
-        buf.writeEnumConstant(getUnit());
+    public void write(RegistryFriendlyByteBuf buf) {
+        buf.writeEnum(getUnit());
 
         if (isEmpty()) {
             buf.writeBoolean(false);
         } else {
             buf.writeBoolean(true);
-            buf.writeVarInt(Registries.FLUID.getRawId(getFluid()));
+            buf.writeVarInt(BuiltInRegistries.FLUID.getId(getFluid()));
             buf.writeVarLong(getAmount());
-            ComponentChanges.PACKET_CODEC.encode(buf, getComponents());
+            DataComponentPatch.STREAM_CODEC.encode(buf, getComponents());
         }
     }
 
-    protected void readWithoutUnit(RegistryByteBuf buf) {
+    protected void readWithoutUnit(RegistryFriendlyByteBuf buf) {
         if (buf.readBoolean()) {
-            Fluid fluid = Registries.FLUID.get(buf.readVarInt());
+            Fluid fluid = BuiltInRegistries.FLUID.byId(buf.readVarInt());
             long amount = buf.readVarLong();
-            ComponentChanges components = ComponentChanges.PACKET_CODEC.decode(buf);
+            DataComponentPatch components = DataComponentPatch.STREAM_CODEC.decode(buf);
             setFluid(fluid, amount, components);
         } else {
-            setFluid(Fluids.EMPTY, 0, ComponentChanges.EMPTY);
+            setFluid(Fluids.EMPTY, 0, DataComponentPatch.EMPTY);
         }
     }
 
@@ -72,18 +72,18 @@ public abstract class FluidReference implements HasFluidAmount {
             && Objects.equals(getComponents(), ingredient.components());
     }
 
-    public Text getAmountText() {
+    public Component getAmountText() {
         var displayUnit = getDefaultDisplayUnit();
-        return Text.translatable(
+        return Component.translatable(
             "gui.adorn.fluid_volume",
             FluidUnit.losslessConvert(getAmount(), getUnit(), displayUnit).resizeFraction(getUnitDenominator(getUnit(), displayUnit)),
             displayUnit.getSymbol()
         );
     }
 
-    public Text getAmountText(long max, FluidUnit maxUnit) {
+    public Component getAmountText(long max, FluidUnit maxUnit) {
         var displayUnit = getDefaultDisplayUnit();
-        return Text.translatable(
+        return Component.translatable(
             "gui.adorn.fluid_volume.fraction",
             FluidUnit.losslessConvert(getAmount(), getUnit(), displayUnit).resizeFraction(getUnitDenominator(getUnit(), displayUnit)).toString(),
             FluidUnit.losslessConvert(max, maxUnit, displayUnit).resizeFraction(getUnitDenominator(maxUnit, displayUnit)).toString(),
@@ -103,7 +103,7 @@ public abstract class FluidReference implements HasFluidAmount {
     @Override
     public String toString() {
         return "FluidReference(fluid=%s, amount=%d, nbt=%s)"
-            .formatted(Registries.FLUID.getId(getFluid()), getAmount(), getComponents());
+            .formatted(BuiltInRegistries.FLUID.getKey(getFluid()), getAmount(), getComponents());
     }
 
     public static boolean areFluidsEqual(FluidReference a, FluidReference b) {

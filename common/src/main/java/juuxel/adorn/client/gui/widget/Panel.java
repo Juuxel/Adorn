@@ -1,32 +1,32 @@
 package juuxel.adorn.client.gui.widget;
 
-import net.minecraft.client.gui.AbstractParentElement;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.Drawable;
-import net.minecraft.client.gui.Element;
+import net.minecraft.client.gui.components.events.AbstractContainerEventHandler;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.events.GuiEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Panel extends AbstractParentElement implements Drawable, TickingElement, Draggable {
-    private final List<Element> children = new ArrayList<>();
-    private final List<Drawable> drawables = new ArrayList<>();
+public class Panel extends AbstractContainerEventHandler implements Renderable, TickingElement, Draggable {
+    private final List<GuiEventListener> children = new ArrayList<>();
+    private final List<Renderable> drawables = new ArrayList<>();
 
     @Override
-    public List<? extends Element> children() {
+    public List<? extends GuiEventListener> children() {
         return children;
     }
 
-    public void add(Element element) {
+    public void add(GuiEventListener element) {
         children.add(element);
 
-        if (element instanceof Drawable drawable) {
+        if (element instanceof Renderable drawable) {
             drawables.add(drawable);
         }
     }
 
-    public void addStandaloneDrawable(Drawable drawable) {
-        if (drawable instanceof Element) {
+    public void addStandaloneDrawable(Renderable drawable) {
+        if (drawable instanceof GuiEventListener) {
             throw new IllegalArgumentException("Elements cannot be added with addStandaloneDrawable");
         }
 
@@ -34,7 +34,7 @@ public class Panel extends AbstractParentElement implements Drawable, TickingEle
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
         for (var child : drawables) {
             child.render(context, mouseX, mouseY, delta);
         }
@@ -87,7 +87,7 @@ public class Panel extends AbstractParentElement implements Drawable, TickingEle
         }
 
         @Override
-        protected Element current() {
+        protected GuiEventListener current() {
             return Panel.this;
         }
     }

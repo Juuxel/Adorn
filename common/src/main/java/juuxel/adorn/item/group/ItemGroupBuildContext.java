@@ -1,17 +1,17 @@
 package juuxel.adorn.item.group;
 
 import juuxel.adorn.lib.registry.Registered;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.HolderLookup;
 
 public interface ItemGroupBuildContext {
-    void add(ItemConvertible item);
+    void add(ItemLike item);
     void add(ItemStack stack);
 
-    RegistryWrapper.WrapperLookup getRegistries();
+    HolderLookup.Provider getRegistries();
 
-    default void add(Registered<? extends ItemConvertible> item) {
+    default void add(Registered<? extends ItemLike> item) {
         add(item.get());
     }
 }

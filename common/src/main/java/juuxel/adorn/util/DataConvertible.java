@@ -1,9 +1,9 @@
 package juuxel.adorn.util;
 
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 public interface DataConvertible {
-    void readData(ReadView view);
-    void writeData(WriteView view);
+    void readData(ValueInput view);
+    void writeData(ValueOutput view);
 }

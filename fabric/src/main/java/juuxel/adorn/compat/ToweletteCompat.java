@@ -19,8 +19,8 @@ import juuxel.adorn.block.TableLampBlock;
 import juuxel.adorn.block.TradingStationBlock;
 import juuxel.adorn.block.WallCautionSignBlock;
 import juuxel.adorn.util.RegistryUtil;
-import net.minecraft.block.Block;
-import net.minecraft.registry.Registries;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.core.registries.BuiltInRegistries;
 import virtuoel.statement.api.StateRefresher;
 import virtuoel.towelette.api.FluidProperties;
 import virtuoel.towelette.api.ToweletteConfig;
@@ -29,9 +29,9 @@ public final class ToweletteCompat {
     public static void init() {
         boolean flowing = isFlowingFluidloggingEnabled();
 
-        RegistryUtil.visit(Registries.BLOCK, block -> {
+        RegistryUtil.visit(BuiltInRegistries.BLOCK, block -> {
             if (shouldFluidlog(block)) {
-                StateRefresher.INSTANCE.addBlockProperty(block, FluidProperties.FLUID, Registries.FLUID.getDefaultId());
+                StateRefresher.INSTANCE.addBlockProperty(block, FluidProperties.FLUID, BuiltInRegistries.FLUID.getDefaultKey());
 
                 if (flowing) {
                     StateRefresher.INSTANCE.addBlockProperty(block, FluidProperties.LEVEL_1_8, 8);

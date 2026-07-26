@@ -6,11 +6,11 @@ import juuxel.adorn.util.animation.AnimatedProperty;
 import juuxel.adorn.util.animation.AnimatedPropertyWrapper;
 import juuxel.adorn.util.animation.AnimationEngine;
 import juuxel.adorn.util.animation.Interpolator;
-import net.minecraft.client.gui.Click;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.Element;
-import net.minecraft.client.input.KeyInput;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.util.Mth;
 import org.lwjgl.glfw.GLFW;
 
 public final class ScrollEnvelope extends ScissorEnvelope {
@@ -58,7 +58,7 @@ public final class ScrollEnvelope extends ScissorEnvelope {
     }
 
     private void setOffset(double offset) {
-        this.offset = MathHelper.clamp(offset, 0.0, heightDifference());
+        this.offset = Mth.clamp(offset, 0.0, heightDifference());
     }
 
     private int heightDifference() {
@@ -92,7 +92,7 @@ public final class ScrollEnvelope extends ScissorEnvelope {
     }
 
     @Override
-    protected Element current() {
+    protected GuiEventListener current() {
         return element;
     }
 
@@ -107,8 +107,8 @@ public final class ScrollEnvelope extends ScissorEnvelope {
     }
 
     @Override
-    protected void renderContent(DrawContext context, int mouseX, int mouseY, float delta) {
-        var matrices = context.getMatrices();
+    protected void renderContent(GuiGraphics context, int mouseX, int mouseY, float delta) {
+        var matrices = context.pose();
         matrices.pushMatrix();
         matrices.translate(0f, (float) -offset);
         OFFSET.with(offset, () -> super.renderContent(context, mouseX, (int) (mouseY + offset), delta));
@@ -116,7 +116,7 @@ public final class ScrollEnvelope extends ScissorEnvelope {
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
 
         var heightDifference = heightDifference();
@@ -146,12 +146,12 @@ public final class ScrollEnvelope extends ScissorEnvelope {
         super.mouseMoved(mouseX, mouseY + offset);
     }
 
-    private Click offsetClick(Click click) {
-        return new Click(click.x(), click.y() + offset, click.buttonInfo());
+    private MouseButtonEvent offsetClick(MouseButtonEvent click) {
+        return new MouseButtonEvent(click.x(), click.y() + offset, click.buttonInfo());
     }
 
     @Override
-    public boolean mouseClicked(Click click, boolean doubled) {
+    public boolean mouseClicked(MouseButtonEvent click, boolean doubled) {
         if (isMouseOverThumb(click.x(), click.y())) {
             draggingThumb = true;
             dragStart = click.y() - (y + SCROLLING_TRACK_MARGIN + thumbY());
@@ -162,16 +162,16 @@ public final class ScrollEnvelope extends ScissorEnvelope {
     }
 
     @Override
-    public boolean mouseReleased(Click click) {
+    public boolean mouseReleased(MouseButtonEvent click) {
         return super.mouseReleased(offsetClick(click));
     }
 
     @Override
-    public boolean mouseDragged(Click click, double offsetX, double offsetY) {
+    public boolean mouseDragged(MouseButtonEvent click, double offsetX, double offsetY) {
         if (draggingThumb) {
             var realY = click.y() - dragStart;
-            var pos = MathHelper.clamp(
-                MathHelper.getLerpProgress(
+            var pos = Mth.clamp(
+                Mth.inverseLerp(
                     realY,
                     y + SCROLLING_TRACK_MARGIN,
                     y + SCROLLING_TRACK_MARGIN + trackHeight - thumbHeight()
@@ -191,7 +191,7 @@ public final class ScrollEnvelope extends ScissorEnvelope {
         var heightDifference = heightDifference();
 
         if (heightDifference > 0) {
-            animatedOffset.set(MathHelper.clamp(offset - (verticalAmount * SCROLLING_SPEED), 0.0, heightDifference));
+            animatedOffset.set(Mth.clamp(offset - (verticalAmount * SCROLLING_SPEED), 0.0, heightDifference));
         }
 
         return true;
@@ -204,8 +204,8 @@ public final class ScrollEnvelope extends ScissorEnvelope {
     }
 
     @Override
-    public boolean keyPressed(KeyInput input) {
-        var scrollAmount = switch (input.getKeycode()) {
+    public boolean keyPressed(KeyEvent input) {
+        var scrollAmount = switch (input.input()) {
             case GLFW.GLFW_KEY_UP -> -SCROLLING_SPEED;
             case GLFW.GLFW_KEY_DOWN -> SCROLLING_SPEED;
             case GLFW.GLFW_KEY_PAGE_UP -> -height;

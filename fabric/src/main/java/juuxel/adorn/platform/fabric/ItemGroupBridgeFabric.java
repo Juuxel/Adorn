@@ -4,48 +4,48 @@ import juuxel.adorn.item.group.ItemGroupModifyContext;
 import juuxel.adorn.platform.ItemGroupBridge;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.HolderLookup;
 
 import java.util.List;
 import java.util.function.Consumer;
 
 public final class ItemGroupBridgeFabric implements ItemGroupBridge {
     @Override
-    public ItemGroup.Builder builder() {
+    public CreativeModeTab.Builder builder() {
         return FabricItemGroup.builder();
     }
 
     @Override
-    public void addItems(RegistryKey<ItemGroup> group, Consumer<ItemGroupModifyContext> configurator) {
+    public void addItems(ResourceKey<CreativeModeTab> group, Consumer<ItemGroupModifyContext> configurator) {
         ItemGroupEvents.modifyEntriesEvent(group).register(entries -> {
             var context = new ItemGroupModifyContext() {
                 @Override
-                public void add(ItemConvertible item) {
-                    entries.add(item);
+                public void add(ItemLike item) {
+                    entries.accept(item);
                 }
 
                 @Override
                 public void add(ItemStack stack) {
-                    entries.add(stack);
+                    entries.accept(stack);
                 }
 
                 @Override
-                public void addBefore(ItemConvertible before, List<? extends ItemConvertible> items) {
-                    entries.addBefore(before, items.toArray(ItemConvertible[]::new));
+                public void addBefore(ItemLike before, List<? extends ItemLike> items) {
+                    entries.addBefore(before, items.toArray(ItemLike[]::new));
                 }
 
                 @Override
-                public void addAfter(ItemConvertible after, List<? extends ItemConvertible> items) {
-                    entries.addAfter(after, items.toArray(ItemConvertible[]::new));
+                public void addAfter(ItemLike after, List<? extends ItemLike> items) {
+                    entries.addAfter(after, items.toArray(ItemLike[]::new));
                 }
 
                 @Override
-                public RegistryWrapper.WrapperLookup getRegistries() {
-                    return entries.getContext().lookup();
+                public HolderLookup.Provider getRegistries() {
+                    return entries.getContext().holders();
                 }
             };
 

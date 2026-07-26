@@ -2,7 +2,7 @@ package juuxel.adorn.platform.forge.event;
 
 import juuxel.adorn.CommonEventHandlers;
 import juuxel.adorn.block.SneakClickHandler;
-import net.minecraft.util.ActionResult;
+import net.minecraft.world.InteractionResult;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
@@ -13,9 +13,9 @@ public final class BlockEvents {
     }
 
     private static void handleCarpetedBlocks(PlayerInteractEvent.RightClickBlock event) {
-        ActionResult result = CommonEventHandlers.handleCarpets(event.getEntity(), event.getLevel(), event.getHand(), event.getHitVec());
+        InteractionResult result = CommonEventHandlers.handleCarpets(event.getEntity(), event.getLevel(), event.getHand(), event.getHitVec());
 
-        if (result != ActionResult.PASS) {
+        if (result != InteractionResult.PASS) {
             event.setCancellationResult(result);
             event.setCanceled(true);
         }
@@ -29,10 +29,10 @@ public final class BlockEvents {
         // - the block is a sneak-click handler
         // - the player is sneaking
         // - the player isn't holding an item (for block item and bucket support)
-        if (state.getBlock() instanceof SneakClickHandler clickHandler && player.isSneaking() && player.getStackInHand(event.getHand()).isEmpty()) {
+        if (state.getBlock() instanceof SneakClickHandler clickHandler && player.isShiftKeyDown() && player.getItemInHand(event.getHand()).isEmpty()) {
             var result = clickHandler.onSneakClick(state, event.getLevel(), event.getPos(), player, event.getHand(), event.getHitVec());
 
-            if (result != ActionResult.PASS) {
+            if (result != InteractionResult.PASS) {
                 event.setCancellationResult(result);
                 event.setCanceled(true);
             }

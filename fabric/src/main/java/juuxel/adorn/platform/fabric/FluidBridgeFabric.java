@@ -7,12 +7,12 @@ import juuxel.adorn.platform.FluidBridge;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.minecraft.block.BlockState;
-import net.minecraft.component.ComponentChanges;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public final class FluidBridgeFabric implements FluidBridge {
@@ -22,7 +22,7 @@ public final class FluidBridgeFabric implements FluidBridge {
     }
 
     @Override
-    public @Nullable FluidVolume drain(World world, BlockPos pos, @Nullable BlockState state, Direction side, Fluid fluid, FluidAmountPredicate amountPredicate) {
+    public @Nullable FluidVolume drain(Level world, BlockPos pos, @Nullable BlockState state, Direction side, Fluid fluid, FluidAmountPredicate amountPredicate) {
         var storage = FluidStorage.SIDED.find(world, pos, state, null, side);
 
         if (storage != null) {
@@ -33,7 +33,7 @@ public final class FluidBridgeFabric implements FluidBridge {
 
                 if (extracted > 0 && amountPredicate.test(extracted, FluidUnit.DROPLET)) {
                     transaction.commit();
-                    return new FluidVolume(fluid, extracted, ComponentChanges.EMPTY, FluidUnit.DROPLET);
+                    return new FluidVolume(fluid, extracted, DataComponentPatch.EMPTY, FluidUnit.DROPLET);
                 }
             }
         }

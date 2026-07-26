@@ -5,8 +5,8 @@
   "required": true,
 
   "mixins": [
-    "CraftingRecipeJsonBuilderMixin",
-    "ShapedRecipeJsonBuilderMixin"
+    "RecipeBuilderMixin",
+    "ShapedRecipeBuilderMixin"
   ],
 
   "injectors": {

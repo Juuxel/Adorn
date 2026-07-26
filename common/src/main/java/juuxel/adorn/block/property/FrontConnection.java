@@ -1,11 +1,11 @@
 package juuxel.adorn.block.property;
 
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.util.StringRepresentable;
 
 /**
  * Note: sofas have left and right flipped
  */
-public enum FrontConnection implements StringIdentifiable {
+public enum FrontConnection implements StringRepresentable {
     /**
      * No connection to the block in front.
      */
@@ -28,7 +28,7 @@ public enum FrontConnection implements StringIdentifiable {
     }
 
     @Override
-    public String asString() {
+    public String getSerializedName() {
         return id;
     }
 }

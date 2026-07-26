@@ -1,6 +1,6 @@
 package juuxel.adorn.util;
 
-import net.minecraft.util.DyeColor;
+import net.minecraft.world.item.DyeColor;
 
 import java.util.Arrays;
 import java.util.List;

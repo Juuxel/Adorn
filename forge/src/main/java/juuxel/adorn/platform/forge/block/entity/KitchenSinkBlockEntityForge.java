@@ -3,20 +3,20 @@ package juuxel.adorn.platform.forge.block.entity;
 import juuxel.adorn.block.entity.KitchenSinkBlockEntity;
 import juuxel.adorn.fluid.FluidReference;
 import juuxel.adorn.platform.forge.util.FluidTankReference;
-import net.minecraft.block.BlockState;
-import net.minecraft.component.type.PotionContentsComponent;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.potion.Potions;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -36,7 +36,7 @@ public final class KitchenSinkBlockEntityForge extends KitchenSinkBlockEntity im
     private final FluidStacksResourceHandler tank = new FluidStacksResourceHandler(1, CAPACITY) {
         @Override
         public int extract(int index, FluidResource resource, int amount, TransactionContext transaction) {
-            if (index == 0 && resource.equals(getResource(0)) && getWorld() instanceof ServerWorld world && supportsInfiniteExtraction(world, resource.getFluid())) {
+            if (index == 0 && resource.equals(getResource(0)) && getLevel() instanceof ServerLevel world && supportsInfiniteExtraction(world, resource.getFluid())) {
                 return Math.min(getAmountAsInt(0), amount);
             }
 
@@ -65,8 +65,8 @@ public final class KitchenSinkBlockEntityForge extends KitchenSinkBlockEntity im
     }
 
     @Override
-    public boolean interactWithItem(ItemStack stack, PlayerEntity player, Hand hand) {
-        if (FluidUtil.interactWithFluidHandler(player, hand, pos, tank)) {
+    public boolean interactWithItem(ItemStack stack, Player player, InteractionHand hand) {
+        if (FluidUtil.interactWithFluidHandler(player, hand, worldPosition, tank)) {
             markDirtyAndSync();
             return true;
         }
@@ -74,18 +74,18 @@ public final class KitchenSinkBlockEntityForge extends KitchenSinkBlockEntity im
         var tankFluid = fluidReference.createSnapshot();
 
         // Special case bottles since they don't have a fluid handler.
-        if (stack.isOf(Items.GLASS_BOTTLE)) {
+        if (stack.is(Items.GLASS_BOTTLE)) {
             try (var tx = Transaction.open(null)) {
                 var drainingResult = tank.extract(BOTTLE_WATER, BOTTLE_LITRES, tx);
                 if (drainingResult >= BOTTLE_LITRES) {
                     tx.commit();
                     onPickUp(tankFluid, stack, player);
-                    var bottle = PotionContentsComponent.createStack(Items.POTION, Potions.WATER);
+                    var bottle = PotionContents.createItemStack(Items.POTION, Potions.WATER);
                     setStackOrInsert(player, hand, bottle);
                     return true;
                 }
             }
-        } else if (stack.isOf(Items.POTION) && isWaterBottle(stack)) {
+        } else if (stack.is(Items.POTION) && isWaterBottle(stack)) {
             try (var tx = Transaction.open(null)) {
                 int inserted = tank.insert(BOTTLE_WATER, BOTTLE_LITRES, tx);
                 if (inserted >= BOTTLE_LITRES) {
@@ -101,20 +101,20 @@ public final class KitchenSinkBlockEntityForge extends KitchenSinkBlockEntity im
         return false;
     }
 
-    private void setStackOrInsert(PlayerEntity player, Hand hand, ItemStack stack) {
-        var current = player.getStackInHand(hand);
-        current.decrement(1);
+    private void setStackOrInsert(Player player, InteractionHand hand, ItemStack stack) {
+        var current = player.getItemInHand(hand);
+        current.shrink(1);
 
         if (current.isEmpty()) {
-            player.setStackInHand(hand, stack);
+            player.setItemInHand(hand, stack);
         } else {
-            player.getInventory().offerOrDrop(stack);
+            player.getInventory().placeItemBackInInventory(stack);
         }
     }
 
     @Override
     public boolean clearFluidsWithSponge() {
-        if (!tank.getResource(0).getFluid().isIn(FluidTags.WATER) || tank.getAmountAsInt(0) == 0) return false;
+        if (!tank.getResource(0).getFluid().is(FluidTags.WATER) || tank.getAmountAsInt(0) == 0) return false;
 
         tank.set(0, FluidResource.EMPTY, 0);
         markDirtyAndSync();
@@ -134,20 +134,20 @@ public final class KitchenSinkBlockEntityForge extends KitchenSinkBlockEntity im
     }
 
     @Override
-    protected void readData(ReadView view) {
-        super.readData(view);
+    protected void loadAdditional(ValueInput view) {
+        super.loadAdditional(view);
         tank.deserialize(view);
     }
 
     @Override
-    protected void writeData(WriteView view) {
-        super.writeData(view);
+    protected void saveAdditional(ValueOutput view) {
+        super.saveAdditional(view);
         tank.serialize(view);
     }
 
     @Override
     public int calculateComparatorOutput() {
         int amount = tank.getAmountAsInt(0);
-        return amount == 0 ? 0 : 1 + MathHelper.floor(14 * (float) amount / (float) CAPACITY);
+        return amount == 0 ? 0 : 1 + Mth.floor(14 * (float) amount / (float) CAPACITY);
     }
 }

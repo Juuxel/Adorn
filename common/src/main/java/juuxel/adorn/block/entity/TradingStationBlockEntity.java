@@ -8,50 +8,50 @@ import juuxel.adorn.trading.Trade;
 import juuxel.adorn.trading.TradeOwner;
 import juuxel.adorn.util.AdornUtil;
 import juuxel.adorn.util.InventoryComponent;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.component.ComponentMap;
-import net.minecraft.component.ComponentsAccess;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.menu.Menu;
-import net.minecraft.menu.NamedMenuFactory;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.text.Text;
-import net.minecraft.text.TextCodecs;
-import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.Uuids;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.world.Containers;
+import net.minecraft.core.UUIDUtil;
+import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public final class TradingStationBlockEntity extends BlockEntity implements NamedMenuFactory, TradingStation {
+public final class TradingStationBlockEntity extends BlockEntity implements MenuProvider, TradingStation {
     public static final int STORAGE_SIZE = 12;
     public static final String NBT_TRADING_OWNER = "TradingOwner";
     public static final String NBT_TRADING_OWNER_NAME = "TradingOwnerName";
     public static final String NBT_TRADE = "Trade";
     public static final String NBT_STORAGE = "Storage";
-    public static final Text UNKNOWN_OWNER = Text.literal("???");
+    public static final Component UNKNOWN_OWNER = Component.literal("???");
 
     private @Nullable UUID owner = null;
-    private Text ownerName = UNKNOWN_OWNER;
+    private Component ownerName = UNKNOWN_OWNER;
     private final Trade trade = Trade.empty();
     private final InventoryComponent storage = new InventoryComponent(STORAGE_SIZE);
 
     public TradingStationBlockEntity(BlockPos pos, BlockState state) {
         super(AdornBlockEntities.TRADING_STATION.get(), pos, state);
 
-        trade.addListener(sender -> markDirty());
-        storage.addListener(sender -> markDirty());
+        trade.addListener(sender -> setChanged());
+        storage.addListener(sender -> setChanged());
     }
 
     public UUID getOwner() {
@@ -62,13 +62,13 @@ public final class TradingStationBlockEntity extends BlockEntity implements Name
         this.owner = owner;
     }
 
-    public void setOwner(PlayerEntity player) {
+    public void setOwner(Player player) {
         owner = player.getGameProfile().id();
-        ownerName = Text.literal(player.getGameProfile().name());
-        markDirty();
+        ownerName = Component.literal(player.getGameProfile().name());
+        setChanged();
     }
 
-    public void setOwnerIfMissing(PlayerEntity player) {
+    public void setOwnerIfMissing(Player player) {
         if (owner == null) {
             setOwner(player);
         }
@@ -78,26 +78,26 @@ public final class TradingStationBlockEntity extends BlockEntity implements Name
         return storage.getCountWithComponents(trade.getSelling()) >= trade.getSelling().getCount();
     }
 
-    public boolean isOwner(PlayerEntity player) {
+    public boolean isOwner(Player player) {
         return player.getGameProfile().id().equals(owner);
     }
 
     @Override
-    public Menu createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int syncId, Inventory playerInventory, Player player) {
         return new TradingStationMenu(syncId, playerInventory, AdornUtil.menuContextOf(this));
     }
 
     @Override
-    public Text getDisplayName() {
-        return getCachedState().getBlock().getName();
+    public Component getDisplayName() {
+        return getBlockState().getBlock().getName();
     }
 
     @Override
-    public Text getOwnerName() {
+    public Component getOwnerName() {
         return ownerName;
     }
 
-    public void setOwnerName(Text ownerName) {
+    public void setOwnerName(Component ownerName) {
         this.ownerName = ownerName;
     }
 
@@ -112,42 +112,42 @@ public final class TradingStationBlockEntity extends BlockEntity implements Name
     }
 
     @Override
-    protected void readData(ReadView view) {
-        super.readData(view);
+    protected void loadAdditional(ValueInput view) {
+        super.loadAdditional(view);
 
-        owner = view.read(NBT_TRADING_OWNER, Uuids.INT_STREAM_CODEC).orElse(null);
-        ownerName = view.read(NBT_TRADING_OWNER_NAME, TextCodecs.CODEC).orElse(UNKNOWN_OWNER);
-        trade.readData(view.getReadView(NBT_TRADE));
-        storage.readData(view.getReadView(NBT_STORAGE));
+        owner = view.read(NBT_TRADING_OWNER, UUIDUtil.CODEC).orElse(null);
+        ownerName = view.read(NBT_TRADING_OWNER_NAME, ComponentSerialization.CODEC).orElse(UNKNOWN_OWNER);
+        trade.readData(view.childOrEmpty(NBT_TRADE));
+        storage.readData(view.childOrEmpty(NBT_STORAGE));
     }
 
     @Override
-    protected void writeData(WriteView view) {
-        super.writeData(view);
+    protected void saveAdditional(ValueOutput view) {
+        super.saveAdditional(view);
 
-        view.putNullable(NBT_TRADING_OWNER, Uuids.INT_STREAM_CODEC, owner);
-        view.put(NBT_TRADING_OWNER_NAME, TextCodecs.CODEC, ownerName);
+        view.storeNullable(NBT_TRADING_OWNER, UUIDUtil.CODEC, owner);
+        view.store(NBT_TRADING_OWNER_NAME, ComponentSerialization.CODEC, ownerName);
 
-        trade.writeData(view.get(NBT_TRADE));
-        storage.writeData(view.get(NBT_STORAGE));
+        trade.writeData(view.child(NBT_TRADE));
+        storage.writeData(view.child(NBT_STORAGE));
     }
 
     @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registries) {
-        return createComponentlessNbt(registries);
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return saveCustomOnly(registries);
     }
 
     @Override
-    protected void readComponents(ComponentsAccess components) {
-        super.readComponents(components);
+    protected void applyImplicitComponents(DataComponentGetter components) {
+        super.applyImplicitComponents(components);
 
         trade.copyFrom(components.get(AdornComponentTypes.TRADE.get()));
-        storage.copyFrom(components.get(DataComponentTypes.CONTAINER));
+        storage.copyFrom(components.get(DataComponents.CONTAINER));
 
         var owner = components.get(AdornComponentTypes.TRADE_OWNER.get());
         if (owner != null) {
@@ -157,30 +157,30 @@ public final class TradingStationBlockEntity extends BlockEntity implements Name
     }
 
     @Override
-    protected void addComponents(ComponentMap.Builder builder) {
-        super.addComponents(builder);
+    protected void collectImplicitComponents(DataComponentMap.Builder builder) {
+        super.collectImplicitComponents(builder);
 
-        builder.add(AdornComponentTypes.TRADE.get(), trade);
-        builder.add(DataComponentTypes.CONTAINER, storage.toContainerComponent());
+        builder.set(AdornComponentTypes.TRADE.get(), trade);
+        builder.set(DataComponents.CONTAINER, storage.toContainerComponent());
 
         if (owner != null) {
-            builder.add(AdornComponentTypes.TRADE_OWNER.get(), new TradeOwner(owner, ownerName));
+            builder.set(AdornComponentTypes.TRADE_OWNER.get(), new TradeOwner(owner, ownerName));
         }
     }
 
     @Override
-    public void removeFromCopiedStackData(WriteView view) {
-        super.removeFromCopiedStackData(view);
-        view.remove(NBT_TRADE);
-        view.remove(NBT_STORAGE);
-        view.remove(NBT_TRADING_OWNER);
-        view.remove(NBT_TRADING_OWNER_NAME);
+    public void removeComponentsFromTag(ValueOutput view) {
+        super.removeComponentsFromTag(view);
+        view.discard(NBT_TRADE);
+        view.discard(NBT_STORAGE);
+        view.discard(NBT_TRADING_OWNER);
+        view.discard(NBT_TRADING_OWNER_NAME);
     }
 
     @Override
-    public void onBlockReplaced(BlockPos pos, BlockState oldState) {
-        if (world instanceof ServerWorld serverWorld && !serverWorld.getGameRules().getValue(AdornGameRules.DROP_LOCKED_TRADING_STATIONS.get())) {
-            ItemScatterer.spawn(world, pos, getStorage());
+    public void preRemoveSideEffects(BlockPos pos, BlockState oldState) {
+        if (level instanceof ServerLevel serverWorld && !serverWorld.getGameRules().get(AdornGameRules.DROP_LOCKED_TRADING_STATIONS.get())) {
+            Containers.dropContents(level, pos, getStorage());
         }
     }
 }

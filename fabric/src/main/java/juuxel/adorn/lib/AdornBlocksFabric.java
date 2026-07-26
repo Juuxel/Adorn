@@ -18,11 +18,11 @@ import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.render.BlockRenderLayer;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import net.minecraft.util.ActionResult;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.world.InteractionResult;
 
 public final class AdornBlocksFabric {
     public static void init() {
@@ -32,10 +32,10 @@ public final class AdornBlocksFabric {
             // - the block is a sneak-click handler
             // - the player is sneaking
             // - the player isn't holding an item (for block item and bucket support)
-            if (state.getBlock() instanceof SneakClickHandler handler && player.isSneaking() && player.getStackInHand(hand).isEmpty()) {
+            if (state.getBlock() instanceof SneakClickHandler handler && player.isShiftKeyDown() && player.getItemInHand(hand).isEmpty()) {
                 return handler.onSneakClick(state, world, hitResult.getBlockPos(), player, hand, hitResult);
             } else {
-                return ActionResult.PASS;
+                return InteractionResult.PASS;
             }
         });
 
@@ -69,13 +69,13 @@ public final class AdornBlocksFabric {
     @Environment(EnvType.CLIENT)
     public static void initClient() {
         // BlockEntityRenderers
-        BlockEntityRendererFactories.register(AdornBlockEntities.TRADING_STATION.get(), TradingStationRenderer::new);
-        BlockEntityRendererFactories.register(AdornBlockEntities.SHELF.get(), ShelfRenderer::new);
-        BlockEntityRendererFactories.register(AdornBlockEntities.KITCHEN_SINK.get(), KitchenSinkRenderer::new);
+        BlockEntityRenderers.register(AdornBlockEntities.TRADING_STATION.get(), TradingStationRenderer::new);
+        BlockEntityRenderers.register(AdornBlockEntities.SHELF.get(), ShelfRenderer::new);
+        BlockEntityRenderers.register(AdornBlockEntities.KITCHEN_SINK.get(), KitchenSinkRenderer::new);
 
         // RenderLayers
         BlockRenderLayerMap.putBlocks(
-            BlockRenderLayer.CUTOUT,
+            ChunkSectionLayer.CUTOUT,
             AdornBlocks.TRADING_STATION.get(),
             AdornBlocks.STONE_TORCH_GROUND.get(),
             AdornBlocks.STONE_TORCH_WALL.get(),
@@ -85,11 +85,11 @@ public final class AdornBlocksFabric {
         );
 
         for (var block : AdornBlocks.DYED_CANDLELIT_LANTERNS.get().values()) {
-            BlockRenderLayerMap.putBlock(block, BlockRenderLayer.CUTOUT);
+            BlockRenderLayerMap.putBlock(block, ChunkSectionLayer.CUTOUT);
         }
 
         for (var coffeeTable : BlockVariantSets.get(BlockKind.COFFEE_TABLE)) {
-            BlockRenderLayerMap.putBlock(coffeeTable.get(), BlockRenderLayer.TRANSLUCENT);
+            BlockRenderLayerMap.putBlock(coffeeTable.get(), ChunkSectionLayer.TRANSLUCENT);
         }
     }
 

@@ -1,41 +1,41 @@
 package juuxel.adorn.util;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.menu.MenuContext;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.Direction;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.core.Direction;
 import org.slf4j.Logger;
 
 public final class AdornUtil {
     private static final Logger LOGGER = Logging.logger();
 
-    public static MutableText toTextWithCount(ItemStack stack) {
-        return Text.translatable("text.adorn.item_stack_with_count", stack.getCount(), stack.toHoverableText());
+    public static MutableComponent toTextWithCount(ItemStack stack) {
+        return Component.translatable("text.adorn.item_stack_with_count", stack.getCount(), stack.getDisplayName());
     }
 
-    public static AbstractBlock.Settings copySettingsSafely(Block block) {
-        var settings = AbstractBlock.Settings.create();
-        caughtProperty(block, "mapColor", () -> settings.mapColor(block.getDefaultMapColor()));
+    public static BlockBehaviour.Properties copySettingsSafely(Block block) {
+        var settings = BlockBehaviour.Properties.of();
+        caughtProperty(block, "mapColor", () -> settings.mapColor(block.defaultMapColor()));
         caughtProperty(block, "luminance", () -> {
-            int luminance = block.getDefaultState().getLuminance();
-            settings.luminance(state -> luminance);
+            int luminance = block.defaultBlockState().getLightEmission();
+            settings.lightLevel(state -> luminance);
         });
-        caughtProperty(block, "hardness", () -> settings.hardness(block.getDefaultState().getHardness(null, null)));
-        caughtProperty(block, "resistance", () -> settings.resistance(block.getBlastResistance()));
-        caughtProperty(block, "velocityMultiplier", () -> settings.velocityMultiplier(block.getVelocityMultiplier()));
-        caughtProperty(block, "jumpVelocityMultiplier", () -> settings.jumpVelocityMultiplier(block.getJumpVelocityMultiplier()));
-        caughtProperty(block, "slipperiness", () -> settings.slipperiness(block.getSlipperiness()));
-        caughtProperty(block, "soundGroup", () -> settings.sounds(block.getDefaultState().getSoundGroup()));
+        caughtProperty(block, "hardness", () -> settings.destroyTime(block.defaultBlockState().getDestroySpeed(null, null)));
+        caughtProperty(block, "resistance", () -> settings.explosionResistance(block.getExplosionResistance()));
+        caughtProperty(block, "velocityMultiplier", () -> settings.speedFactor(block.getSpeedFactor()));
+        caughtProperty(block, "jumpVelocityMultiplier", () -> settings.jumpFactor(block.getJumpFactor()));
+        caughtProperty(block, "slipperiness", () -> settings.friction(block.getFriction()));
+        caughtProperty(block, "soundGroup", () -> settings.sound(block.defaultBlockState().getSoundType()));
         caughtProperty(block, "burnable", () -> {
-            if (block.getDefaultState().isBurnable()) {
-                settings.burnable();
+            if (block.defaultBlockState().ignitedByLava()) {
+                settings.ignitedByLava();
             }
         });
         return settings;
@@ -45,7 +45,7 @@ public final class AdornUtil {
         try {
             fn.run();
         } catch (Exception e) {
-            LOGGER.warn("[Adorn] Could not get block property {} from {}", name, Registries.BLOCK.getId(block), e);
+            LOGGER.warn("[Adorn] Could not get block property {} from {}", name, BuiltInRegistries.BLOCK.getKey(block), e);
         }
     }
 
@@ -57,11 +57,11 @@ public final class AdornUtil {
         };
     }
 
-    public static MenuContext menuContextOf(BlockEntity blockEntity) {
-        return MenuContext.create(blockEntity.getWorld(), blockEntity.getPos());
+    public static ContainerLevelAccess menuContextOf(BlockEntity blockEntity) {
+        return ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos());
     }
 
-    public static <T> Iterable<RegistryEntry.Reference<T>> iterateEntries(RegistryWrapper<T> registry) {
-        return () -> registry.streamEntries().iterator();
+    public static <T> Iterable<Holder.Reference<T>> iterateEntries(HolderLookup<T> registry) {
+        return () -> registry.listElements().iterator();
     }
 }

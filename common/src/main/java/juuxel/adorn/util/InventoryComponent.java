@@ -1,30 +1,30 @@
 package juuxel.adorn.util;
 
-import net.minecraft.component.type.ContainerComponent;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.InventoryChangedListener;
-import net.minecraft.item.ItemStack;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Container;
+import net.minecraft.world.ContainerListener;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.core.NonNullList;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryComponent implements Inventory, DataConvertible {
+public class InventoryComponent implements Container, DataConvertible {
     private final int size;
-    private final List<InventoryChangedListener> listeners = new ArrayList<>();
-    private final DefaultedList<ItemStack> items;
+    private final List<ContainerListener> listeners = new ArrayList<>();
+    private final NonNullList<ItemStack> items;
 
     public InventoryComponent(int size) {
         this.size = size;
-        items = DefaultedList.ofSize(size, ItemStack.EMPTY);
+        items = NonNullList.withSize(size, ItemStack.EMPTY);
     }
 
-    private InventoryComponent(DefaultedList<ItemStack> items) {
+    private InventoryComponent(NonNullList<ItemStack> items) {
         this(items.size());
         for (int i = 0; i < items.size(); i++) {
             this.items.set(i, items.get(i));
@@ -45,7 +45,7 @@ public class InventoryComponent implements Inventory, DataConvertible {
         int remainingAmount = stack.getCount();
 
         for (var invStack : items) {
-            if (ItemStack.areItemsEqual(invStack, stack)) {
+            if (ItemStack.isSameItem(invStack, stack)) {
                 remainingAmount -= invStack.getCount();
                 if (remainingAmount <= 0) return true;
             }
@@ -63,9 +63,9 @@ public class InventoryComponent implements Inventory, DataConvertible {
         int remainingAmount = stack.getCount();
 
         for (var invStack : items) {
-            if (ItemStack.areItemsAndComponentsEqual(invStack, stack)) {
+            if (ItemStack.isSameItemSameComponents(invStack, stack)) {
                 int invStackAmount = invStack.getCount();
-                invStack.decrement(Math.min(invStackAmount, remainingAmount));
+                invStack.shrink(Math.min(invStackAmount, remainingAmount));
                 remainingAmount -= invStackAmount;
                 if (remainingAmount <= 0) return true;
             }
@@ -81,8 +81,8 @@ public class InventoryComponent implements Inventory, DataConvertible {
         int remainingAmount = stack.getCount();
 
         for (var invStack : items) {
-            if (ItemStack.areItemsAndComponentsEqual(invStack, stack) && invStack.getCount() < invStack.getMaxCount()) {
-                int insertionAmount = Math.min(invStack.getMaxCount() - invStack.getCount(), remainingAmount);
+            if (ItemStack.isSameItemSameComponents(invStack, stack) && invStack.getCount() < invStack.getMaxStackSize()) {
+                int insertionAmount = Math.min(invStack.getMaxStackSize() - invStack.getCount(), remainingAmount);
                 remainingAmount -= insertionAmount;
                 if (remainingAmount <= 0) return true;
             } else if (invStack.isEmpty()) {
@@ -103,10 +103,10 @@ public class InventoryComponent implements Inventory, DataConvertible {
 
         for (int slot = 0; slot < items.size(); slot++) {
             var invStack = items.get(slot);
-            if (ItemStack.areItemsAndComponentsEqual(invStack, stack) && invStack.getCount() < invStack.getMaxCount()) {
-                int insertionAmount = Math.min(invStack.getMaxCount() - invStack.getCount(), remainingAmount);
+            if (ItemStack.isSameItemSameComponents(invStack, stack) && invStack.getCount() < invStack.getMaxStackSize()) {
+                int insertionAmount = Math.min(invStack.getMaxStackSize() - invStack.getCount(), remainingAmount);
                 remainingAmount -= insertionAmount;
-                invStack.increment(insertionAmount);
+                invStack.grow(insertionAmount);
                 if (remainingAmount <= 0) return true;
             } else if (invStack.isEmpty()) {
                 items.set(slot, stack.copy());
@@ -122,7 +122,7 @@ public class InventoryComponent implements Inventory, DataConvertible {
      * Ignores the stack's count.
      */
     public int getCountWithComponents(ItemStack stack) {
-        return CollectionUtil.sumOf(items, it -> ItemStack.areItemsAndComponentsEqual(stack, it) ? it.getCount() : 0);
+        return CollectionUtil.sumOf(items, it -> ItemStack.isSameItemSameComponents(stack, it) ? it.getCount() : 0);
     }
 
     // ------
@@ -130,22 +130,22 @@ public class InventoryComponent implements Inventory, DataConvertible {
     // ------
 
     @Override
-    public void writeData(WriteView view) {
-        Inventories.writeData(view, items);
+    public void writeData(ValueOutput view) {
+        ContainerHelper.saveAllItems(view, items);
     }
 
     @Override
-    public void readData(ReadView view) {
-        Inventories.readData(view, items);
+    public void readData(ValueInput view) {
+        ContainerHelper.loadAllItems(view, items);
     }
 
-    public ContainerComponent toContainerComponent() {
-        return ContainerComponent.fromStacks(items);
+    public ItemContainerContents toContainerComponent() {
+        return ItemContainerContents.fromItems(items);
     }
 
-    public void copyFrom(@Nullable ContainerComponent component) {
+    public void copyFrom(@Nullable ItemContainerContents component) {
         if (component == null) return;
-        component.copyTo(items);
+        component.copyInto(items);
     }
 
     // -------------------------------
@@ -153,40 +153,40 @@ public class InventoryComponent implements Inventory, DataConvertible {
     // -------------------------------
 
     @Override
-    public ItemStack getStack(int slot) {
+    public ItemStack getItem(int slot) {
         return items.get(slot);
     }
 
     @Override
-    public void clear() {
+    public void clearContent() {
         items.clear();
-        markDirty();
+        setChanged();
     }
 
     @Override
-    public void setStack(int slot, ItemStack stack) {
+    public void setItem(int slot, ItemStack stack) {
         items.set(slot, stack);
     }
 
     @Override
-    public ItemStack removeStack(int slot) {
-        return Inventories.removeStack(items, slot);
+    public ItemStack removeItemNoUpdate(int slot) {
+        return ContainerHelper.takeItem(items, slot);
     }
 
     @Override
-    public boolean canPlayerUse(PlayerEntity player) {
+    public boolean stillValid(Player player) {
         return true;
     }
 
     @Override
-    public int size() {
+    public int getContainerSize() {
         return size;
     }
 
     @Override
-    public ItemStack removeStack(int slot, int count) {
-        var stack = Inventories.splitStack(items, slot, count);
-        if (!stack.isEmpty()) markDirty();
+    public ItemStack removeItem(int slot, int count) {
+        var stack = ContainerHelper.removeItem(items, slot, count);
+        if (!stack.isEmpty()) setChanged();
         return stack;
     }
 
@@ -204,13 +204,13 @@ public class InventoryComponent implements Inventory, DataConvertible {
     // -----------
 
     @Override
-    public void markDirty() {
+    public void setChanged() {
         for (var listener : listeners) {
-            listener.onInventoryChanged(this);
+            listener.containerChanged(this);
         }
     }
 
-    public void addListener(InventoryChangedListener listener) {
+    public void addListener(ContainerListener listener) {
         listeners.add(listener);
     }
 }

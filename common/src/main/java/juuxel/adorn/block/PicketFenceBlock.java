@@ -1,93 +1,94 @@
 package juuxel.adorn.block;
 
-import juuxel.adorn.util.Shapes;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.StringIdentifiable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+import juuxel.adorn.util.ShapeRotation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 import java.util.Map;
 
-public final class PicketFenceBlock extends Block implements Waterloggable, BlockWithDescription {
-    public static final EnumProperty<Shape> SHAPE = EnumProperty.of("shape", Shape.class);
-    public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
-    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+public final class PicketFenceBlock extends Block implements SimpleWaterloggedBlock, BlockWithDescription {
+    public static final EnumProperty<Shape> SHAPE = EnumProperty.create("shape", Shape.class);
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    private static final Map<Direction, VoxelShape> STRAIGHT_OUTLINE_SHAPES = Shapes.buildShapeRotationsFromNorth(0, 0, 7, 16, 16, 9);
-    private static final Map<Direction, VoxelShape> CORNER_OUTLINE_SHAPES = Shapes.mergeIntoShapeMap(
-        Shapes.mergeShapeMaps(
-            Shapes.buildShapeRotationsFromNorth(0, 0, 7, 9, 16, 9),
-            Shapes.buildShapeRotationsFromNorth(7, 0, 9, 9, 16, 16)
+    private static final Map<Direction, VoxelShape> STRAIGHT_OUTLINE_SHAPES = ShapeRotation.buildShapeRotationsFromNorth(0, 0, 7, 16, 16, 9);
+    private static final Map<Direction, VoxelShape> CORNER_OUTLINE_SHAPES = ShapeRotation.mergeIntoShapeMap(
+        ShapeRotation.mergeShapeMaps(
+            ShapeRotation.buildShapeRotationsFromNorth(0, 0, 7, 9, 16, 9),
+            ShapeRotation.buildShapeRotationsFromNorth(7, 0, 9, 9, 16, 16)
         ),
         PostBlock.Y_SHAPE
     );
-    private static final Map<Direction, VoxelShape> STRAIGHT_COLLISION_SHAPES = Shapes.buildShapeRotationsFromNorth(0, 0, 7, 16, 24, 9);
-    private static final Map<Direction, VoxelShape> CORNER_COLLISION_SHAPES = Shapes.mergeIntoShapeMap(
-        Shapes.mergeShapeMaps(
-            Shapes.buildShapeRotationsFromNorth(0, 0, 7, 9, 24, 9),
-            Shapes.buildShapeRotationsFromNorth(7, 0, 9, 9, 24, 16)
+    private static final Map<Direction, VoxelShape> STRAIGHT_COLLISION_SHAPES = ShapeRotation.buildShapeRotationsFromNorth(0, 0, 7, 16, 24, 9);
+    private static final Map<Direction, VoxelShape> CORNER_COLLISION_SHAPES = ShapeRotation.mergeIntoShapeMap(
+        ShapeRotation.mergeShapeMaps(
+            ShapeRotation.buildShapeRotationsFromNorth(0, 0, 7, 9, 24, 9),
+            ShapeRotation.buildShapeRotationsFromNorth(7, 0, 9, 9, 24, 16)
         ),
-        createCuboidShape(6.0, 0.0, 6.0, 10.0, 24.0, 10.0)
+        box(6.0, 0.0, 6.0, 10.0, 24.0, 10.0)
     );
     
-    public PicketFenceBlock(Settings settings) {
+    public PicketFenceBlock(Properties settings) {
         super(settings);
 
-        setDefaultState(getDefaultState().with(WATERLOGGED, false));
+        registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(SHAPE, FACING, WATERLOGGED);
     }
 
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        var state = getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite())
-            .with(WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER);
-        return updateShape(ctx.getWorld(), ctx.getBlockPos(), state);
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        var state = defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite())
+            .setValue(WATERLOGGED, ctx.getLevel().getFluidState(ctx.getClickedPos()).getType() == Fluids.WATER);
+        return updateShape(ctx.getLevel(), ctx.getClickedPos(), state);
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
-        if (direction.getAxis() == state.get(FACING).getAxis()) {
+    protected BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        if (direction.getAxis() == state.getValue(FACING).getAxis()) {
             return updateShape(world, pos, state);
         }
 
         return state;
     }
 
-    private BlockState updateShape(BlockView world, BlockPos pos, BlockState state) {
-        var fenceFacing = state.get(FACING);
+    private BlockState updateShape(BlockGetter world, BlockPos pos, BlockState state) {
+        var fenceFacing = state.getValue(FACING);
         for (var side : new Direction[] { fenceFacing.getOpposite(), fenceFacing }) {
             var inner = side == fenceFacing;
-            var neighborState = world.getBlockState(pos.offset(side));
+            var neighborState = world.getBlockState(pos.relative(side));
             var neighborBlock = neighborState.getBlock();
-            var neighborFacing = neighborBlock instanceof PicketFenceBlock ? neighborState.get(FACING) : null;
+            var neighborFacing = neighborBlock instanceof PicketFenceBlock ? neighborState.getValue(FACING) : null;
 
             Shape shape;
-            if (neighborFacing == fenceFacing.rotateYClockwise()) {
+            if (neighborFacing == fenceFacing.getClockWise()) {
                 shape = inner ? Shape.CLOCKWISE_INNER_CORNER : Shape.CLOCKWISE_CORNER;
-            } else if (neighborFacing == fenceFacing.rotateYCounterclockwise()) {
+            } else if (neighborFacing == fenceFacing.getCounterClockWise()) {
                 shape = inner ? Shape.COUNTERCLOCKWISE_INNER_CORNER : Shape.COUNTERCLOCKWISE_CORNER;
             } else {
                 shape = Shape.STRAIGHT;
@@ -99,73 +100,73 @@ public final class PicketFenceBlock extends Block implements Waterloggable, Bloc
             }
 
             if (shape != Shape.STRAIGHT) {
-                return state.with(SHAPE, shape);
+                return state.setValue(SHAPE, shape);
             }
         }
 
-        return state.with(SHAPE, Shape.STRAIGHT);
+        return state.setValue(SHAPE, Shape.STRAIGHT);
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return switch (state.get(SHAPE)) {
-            case STRAIGHT -> STRAIGHT_OUTLINE_SHAPES.get(state.get(FACING));
-            case CLOCKWISE_CORNER -> CORNER_OUTLINE_SHAPES.get(state.get(FACING));
-            case COUNTERCLOCKWISE_CORNER -> CORNER_OUTLINE_SHAPES.get(state.get(FACING).rotateYCounterclockwise());
-            case CLOCKWISE_INNER_CORNER -> CORNER_OUTLINE_SHAPES.get(state.get(FACING).getOpposite());
-            case COUNTERCLOCKWISE_INNER_CORNER -> CORNER_OUTLINE_SHAPES.get(state.get(FACING).rotateYClockwise());
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return switch (state.getValue(SHAPE)) {
+            case STRAIGHT -> STRAIGHT_OUTLINE_SHAPES.get(state.getValue(FACING));
+            case CLOCKWISE_CORNER -> CORNER_OUTLINE_SHAPES.get(state.getValue(FACING));
+            case COUNTERCLOCKWISE_CORNER -> CORNER_OUTLINE_SHAPES.get(state.getValue(FACING).getCounterClockWise());
+            case CLOCKWISE_INNER_CORNER -> CORNER_OUTLINE_SHAPES.get(state.getValue(FACING).getOpposite());
+            case COUNTERCLOCKWISE_INNER_CORNER -> CORNER_OUTLINE_SHAPES.get(state.getValue(FACING).getClockWise());
         };
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return switch (state.get(SHAPE)) {
-            case STRAIGHT -> STRAIGHT_COLLISION_SHAPES.get(state.get(FACING));
-            case CLOCKWISE_CORNER -> CORNER_COLLISION_SHAPES.get(state.get(FACING));
-            case COUNTERCLOCKWISE_CORNER -> CORNER_COLLISION_SHAPES.get(state.get(FACING).rotateYCounterclockwise());
-            case CLOCKWISE_INNER_CORNER -> CORNER_COLLISION_SHAPES.get(state.get(FACING).getOpposite());
-            case COUNTERCLOCKWISE_INNER_CORNER -> CORNER_COLLISION_SHAPES.get(state.get(FACING).rotateYClockwise());
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return switch (state.getValue(SHAPE)) {
+            case STRAIGHT -> STRAIGHT_COLLISION_SHAPES.get(state.getValue(FACING));
+            case CLOCKWISE_CORNER -> CORNER_COLLISION_SHAPES.get(state.getValue(FACING));
+            case COUNTERCLOCKWISE_CORNER -> CORNER_COLLISION_SHAPES.get(state.getValue(FACING).getCounterClockWise());
+            case CLOCKWISE_INNER_CORNER -> CORNER_COLLISION_SHAPES.get(state.getValue(FACING).getOpposite());
+            case COUNTERCLOCKWISE_INNER_CORNER -> CORNER_COLLISION_SHAPES.get(state.getValue(FACING).getClockWise());
         };
     }
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return state.with(FACING, rotation.rotate(state.get(FACING)));
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.with(FACING, mirror.apply(state.get(FACING)));
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.setValue(FACING, mirror.mirror(state.getValue(FACING)));
     }
 
     @Override
-    public boolean canPathfindThrough(BlockState state, NavigationType type) {
+    public boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
     }
 
     public boolean sideCoversSmallSquare(BlockState state) {
-        return state.get(SHAPE) != Shape.STRAIGHT;
+        return state.getValue(SHAPE) != Shape.STRAIGHT;
     }
 
     private boolean connectsTo(BlockState state, Direction direction) {
         if (!direction.getAxis().isHorizontal()) return false;
 
-        var facing = state.get(FACING);
-        return switch (state.get(SHAPE)) {
+        var facing = state.getValue(FACING);
+        return switch (state.getValue(SHAPE)) {
             case STRAIGHT -> facing.getAxis() != direction.getAxis();
-            case CLOCKWISE_CORNER -> direction == facing.rotateYCounterclockwise() || direction == facing.getOpposite();
-            case COUNTERCLOCKWISE_CORNER -> direction == facing.rotateYClockwise() || direction == facing.getOpposite();
-            case CLOCKWISE_INNER_CORNER -> direction == facing.rotateYClockwise() || direction == facing;
-            case COUNTERCLOCKWISE_INNER_CORNER -> direction == facing.rotateYCounterclockwise() || direction == facing;
+            case CLOCKWISE_CORNER -> direction == facing.getCounterClockWise() || direction == facing.getOpposite();
+            case COUNTERCLOCKWISE_CORNER -> direction == facing.getClockWise() || direction == facing.getOpposite();
+            case CLOCKWISE_INNER_CORNER -> direction == facing.getClockWise() || direction == facing;
+            case COUNTERCLOCKWISE_INNER_CORNER -> direction == facing.getCounterClockWise() || direction == facing;
         };
     }
 
-    public enum Shape implements StringIdentifiable {
+    public enum Shape implements StringRepresentable {
         STRAIGHT("straight"),
         CLOCKWISE_CORNER("clockwise_corner"),
         COUNTERCLOCKWISE_CORNER("counterclockwise_corner"),
@@ -179,7 +180,7 @@ public final class PicketFenceBlock extends Block implements Waterloggable, Bloc
         }
 
         @Override
-        public String asString() {
+        public String getSerializedName() {
             return id;
         }
     }

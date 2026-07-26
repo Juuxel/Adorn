@@ -1,8 +1,8 @@
 package juuxel.adorn.recipe;
 
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.recipe.book.RecipeBookCategory;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.RecipeBookCategory;
 
 public sealed interface BrewingRecipe extends Recipe<BrewerInput> permits FluidBrewingRecipe, ItemBrewingRecipe {
     @Override
@@ -11,7 +11,7 @@ public sealed interface BrewingRecipe extends Recipe<BrewerInput> permits FluidB
     }
 
     @Override
-    default RecipeBookCategory getRecipeBookCategory() {
+    default RecipeBookCategory recipeBookCategory() {
         return AdornRecipeBookCategories.BREWING.get();
     }
 }

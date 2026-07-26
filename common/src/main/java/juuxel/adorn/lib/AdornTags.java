@@ -1,10 +1,10 @@
 package juuxel.adorn.lib;
 
 import juuxel.adorn.AdornCommon;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Item;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
 
 public final class AdornTags {
     public static final TagPair CHAIRS = blockAndItem("chairs");
@@ -65,17 +65,18 @@ public final class AdornTags {
     }
 
     private static TagKey<Block> block(String path) {
-        return TagKey.of(RegistryKeys.BLOCK, AdornCommon.id(path));
+        return TagKey.create(Registries.BLOCK, AdornCommon.id(path));
     }
 
     private static TagKey<Item> item(String path) {
-        return TagKey.of(RegistryKeys.ITEM, AdornCommon.id(path));
+        return TagKey.create(Registries.ITEM, AdornCommon.id(path));
     }
 
     private static TagPair blockAndItem(String path) {
         return new TagPair(block(path), item(path));
     }
 
-    public record TagPair(TagKey<Block> block, TagKey<Item> item) {
+    public record TagPair(
+        TagKey<Block> block, TagKey<Item> item) {
     }
 }

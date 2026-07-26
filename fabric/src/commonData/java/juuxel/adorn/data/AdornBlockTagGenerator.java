@@ -7,20 +7,20 @@ import juuxel.adorn.block.variant.BlockVariantSets;
 import juuxel.adorn.lib.AdornTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.block.Block;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 
 import java.util.concurrent.CompletableFuture;
 
 public final class AdornBlockTagGenerator extends FabricTagProvider.BlockTagProvider {
-    public AdornBlockTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    public AdornBlockTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
     @Override
-    protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+    protected void addTags(HolderLookup.Provider wrapperLookup) {
         valueLookupBuilder(AdornTags.PAINTED_PLANKS.block())
             .add(AdornBlocks.PAINTED_PLANKS.values().toArray(Block[]::new));
         valueLookupBuilder(AdornTags.PAINTED_WOOD_SLABS.block())

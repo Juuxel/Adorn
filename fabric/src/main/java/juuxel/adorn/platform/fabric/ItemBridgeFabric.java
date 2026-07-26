@@ -1,7 +1,7 @@
 package juuxel.adorn.platform.fabric;
 
 import juuxel.adorn.platform.ItemBridge;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public final class ItemBridgeFabric implements ItemBridge {
     @Override

@@ -8,14 +8,14 @@ import juuxel.adorn.client.renderer.ShelfRenderer;
 import juuxel.adorn.client.renderer.TradingStationRenderer;
 import juuxel.adorn.entity.AdornEntities;
 import juuxel.adorn.platform.neo.client.renderer.ConeFeatureRenderer;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.client.render.entity.LivingEntityRenderer;
-import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
-import net.minecraft.client.render.entity.feature.FeatureRenderer;
-import net.minecraft.client.render.entity.feature.FeatureRendererContext;
-import net.minecraft.entity.EntityType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.world.entity.EntityType;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 public final class AdornRenderers {
@@ -47,13 +47,13 @@ public final class AdornRenderers {
     @SuppressWarnings({"unchecked", "rawtypes"})
     private static void addConeFeatureRendererIfApplicable(EntityRenderer<?, ?> renderer) {
         if (renderer instanceof LivingEntityRenderer<?, ?, ?> living && shouldAddConeFeatureRenderer(living)) {
-            living.addFeature(new ConeFeatureRenderer<>((FeatureRendererContext) living));
+            living.addLayer(new ConeFeatureRenderer<>((RenderLayerParent) living));
         }
     }
 
     private static boolean shouldAddConeFeatureRenderer(LivingEntityRenderer<?, ?, ?> renderer) {
-        for (FeatureRenderer<?, ?> feature : renderer.features) {
-            if (feature instanceof ArmorFeatureRenderer<?, ?, ?>) {
+        for (RenderLayer<?, ?> feature : renderer.layers) {
+            if (feature instanceof HumanoidArmorLayer<?, ?, ?>) {
                 // Assumes that the state is a subtype of BipedEntityRenderState
                 // if the armor feature is able to be on the entity renderer.
                 return true;

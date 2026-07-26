@@ -3,17 +3,17 @@ package juuxel.adorn.trading;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import juuxel.adorn.util.DataConvertible;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipData;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public final class Trade implements DataConvertible, TooltipData {
+public final class Trade implements DataConvertible, TooltipComponent {
     public static final Codec<Trade> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         ItemStack.OPTIONAL_CODEC.fieldOf("selling").forGetter(Trade::getSelling),
         ItemStack.OPTIONAL_CODEC.fieldOf("price").forGetter(Trade::getPrice)
@@ -56,15 +56,15 @@ public final class Trade implements DataConvertible, TooltipData {
     }
 
     @Override
-    public void readData(ReadView view) {
+    public void readData(ValueInput view) {
         selling = view.read(NBT_SELLING, ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY);
         price = view.read(NBT_PRICE, ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY);
     }
 
     @Override
-    public void writeData(WriteView view) {
-        view.put(NBT_SELLING, ItemStack.OPTIONAL_CODEC, selling);
-        view.put(NBT_PRICE, ItemStack.OPTIONAL_CODEC, price);
+    public void writeData(ValueOutput view) {
+        view.store(NBT_SELLING, ItemStack.OPTIONAL_CODEC, selling);
+        view.store(NBT_PRICE, ItemStack.OPTIONAL_CODEC, price);
     }
 
     public void copyFrom(@Nullable Trade trade) {
@@ -106,7 +106,7 @@ public final class Trade implements DataConvertible, TooltipData {
         return new Trade(ItemStack.EMPTY, ItemStack.EMPTY);
     }
 
-    public static Trade fromDataView(ReadView view) {
+    public static Trade fromDataView(ValueInput view) {
         var trade = empty();
         trade.readData(view);
         return trade;

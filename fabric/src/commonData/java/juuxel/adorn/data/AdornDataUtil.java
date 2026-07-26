@@ -8,7 +8,7 @@ import com.google.gson.stream.JsonWriter;
 import com.mojang.serialization.JsonOps;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.client.resources.ColorManager;
-import net.minecraft.data.DataWriter;
+import net.minecraft.data.CachedOutput;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -19,7 +19,7 @@ import java.nio.file.Path;
 public final class AdornDataUtil {
     private static final Gson GSON = new Gson();
 
-    public static void writeIterationOrderedJson(DataWriter dataWriter, Path path, JsonElement json) throws IOException {
+    public static void writeIterationOrderedJson(CachedOutput dataWriter, Path path, JsonElement json) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         HashingOutputStream hashing = new HashingOutputStream(Hashing.sha256(), baos);
         OutputStreamWriter writer = new OutputStreamWriter(hashing, StandardCharsets.UTF_8);
@@ -28,6 +28,6 @@ public final class AdornDataUtil {
         GSON.toJson(json, jsonWriter);
         writer.append('\n');
         writer.close();
-        dataWriter.write(path, baos.toByteArray(), hashing.hash());
+        dataWriter.writeIfNeeded(path, baos.toByteArray(), hashing.hash());
     }
 }

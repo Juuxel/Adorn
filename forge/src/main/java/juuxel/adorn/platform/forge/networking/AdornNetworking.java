@@ -7,7 +7,7 @@ import juuxel.adorn.networking.BrewerFluidSyncS2CMessage;
 import juuxel.adorn.networking.OpenBookS2CMessage;
 import juuxel.adorn.networking.SetTradeStackC2SMessage;
 import juuxel.adorn.platform.forge.client.AdornClient;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -24,14 +24,14 @@ public final class AdornNetworking {
     }
 
     private static void handleBrewerFluidSync(BrewerFluidSyncS2CMessage message, IPayloadContext context) {
-        BrewerScreen.setFluidFromPacket(MinecraftClient.getInstance(), message.syncId(), message.fluid());
+        BrewerScreen.setFluidFromPacket(Minecraft.getInstance(), message.syncId(), message.fluid());
     }
 
     private static void handleSetTradeStack(SetTradeStackC2SMessage message, IPayloadContext context) {
         var sender = context.player();
-        var menu = sender.menu;
+        var menu = sender.containerMenu;
 
-        if (menu.syncId == message.syncId() && menu instanceof TradingStationMenu tradingStationMenu) {
+        if (menu.containerId == message.syncId() && menu instanceof TradingStationMenu tradingStationMenu) {
             tradingStationMenu.updateTradeStack(message.slotId(), message.stack(), sender);
         }
     }

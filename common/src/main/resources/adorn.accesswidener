@@ -1,52 +1,52 @@
 accessWidener	v1	named
 
 # Blocks
-accessible method net/minecraft/block/AbstractCandleBlock spawnCandleParticles (Lnet/minecraft/world/World;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/random/Random;)V
-accessible method net/minecraft/block/Blocks copyLootTable (Lnet/minecraft/block/Block;Z)Lnet/minecraft/block/AbstractBlock$Settings;
-accessible method net/minecraft/block/Blocks createButtonSettings ()Lnet/minecraft/block/AbstractBlock$Settings;
-accessible method net/minecraft/block/BlockSetType register (Lnet/minecraft/block/BlockSetType;)Lnet/minecraft/block/BlockSetType;
-accessible method net/minecraft/block/ButtonBlock <init> (Lnet/minecraft/block/BlockSetType;ILnet/minecraft/block/AbstractBlock$Settings;)V
-extendable method net/minecraft/block/PaneBlock connectsTo (Lnet/minecraft/block/BlockState;Z)Z
-accessible method net/minecraft/block/PressurePlateBlock <init> (Lnet/minecraft/block/BlockSetType;Lnet/minecraft/block/AbstractBlock$Settings;)V
-accessible method net/minecraft/block/StairsBlock <init> (Lnet/minecraft/block/BlockState;Lnet/minecraft/block/AbstractBlock$Settings;)V
-accessible method net/minecraft/block/TallPlantBlock onBreakInCreative (Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/player/PlayerEntity;)V
-accessible method net/minecraft/block/TorchBlock <init> (Lnet/minecraft/particle/SimpleParticleType;Lnet/minecraft/block/AbstractBlock$Settings;)V
-accessible method net/minecraft/block/WallTorchBlock <init> (Lnet/minecraft/particle/SimpleParticleType;Lnet/minecraft/block/AbstractBlock$Settings;)V
-accessible method net/minecraft/block/WoodType register (Lnet/minecraft/block/WoodType;)Lnet/minecraft/block/WoodType;
+accessible method net/minecraft/world/level/block/AbstractCandleBlock addParticlesAndSound (Lnet/minecraft/world/level/Level;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/util/RandomSource;)V
+accessible method net/minecraft/world/level/block/Blocks wallVariant (Lnet/minecraft/world/level/block/Block;Z)Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+accessible method net/minecraft/world/level/block/Blocks buttonProperties ()Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+accessible method net/minecraft/world/level/block/state/properties/BlockSetType register (Lnet/minecraft/world/level/block/state/properties/BlockSetType;)Lnet/minecraft/world/level/block/state/properties/BlockSetType;
+accessible method net/minecraft/world/level/block/ButtonBlock <init> (Lnet/minecraft/world/level/block/state/properties/BlockSetType;ILnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+extendable method net/minecraft/world/level/block/IronBarsBlock attachsTo (Lnet/minecraft/world/level/block/state/BlockState;Z)Z
+accessible method net/minecraft/world/level/block/PressurePlateBlock <init> (Lnet/minecraft/world/level/block/state/properties/BlockSetType;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+accessible method net/minecraft/world/level/block/StairBlock <init> (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+accessible method net/minecraft/world/level/block/DoublePlantBlock preventDropFromBottomPart (Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/entity/player/Player;)V
+accessible method net/minecraft/world/level/block/TorchBlock <init> (Lnet/minecraft/core/particles/SimpleParticleType;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+accessible method net/minecraft/world/level/block/WallTorchBlock <init> (Lnet/minecraft/core/particles/SimpleParticleType;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+accessible method net/minecraft/world/level/block/state/properties/WoodType register (Lnet/minecraft/world/level/block/state/properties/WoodType;)Lnet/minecraft/world/level/block/state/properties/WoodType;
 
 # Items
-accessible field net/minecraft/item/ItemGroups BUILDING_BLOCKS Lnet/minecraft/registry/RegistryKey;
-accessible field net/minecraft/item/ItemGroups COLORED_BLOCKS Lnet/minecraft/registry/RegistryKey;
-accessible field net/minecraft/item/ItemGroups FUNCTIONAL Lnet/minecraft/registry/RegistryKey;
-accessible field net/minecraft/item/ItemGroups FOOD_AND_DRINK Lnet/minecraft/registry/RegistryKey;
-accessible field net/minecraft/item/ItemGroups INGREDIENTS Lnet/minecraft/registry/RegistryKey;
-accessible field net/minecraft/item/ItemGroups TOOLS Lnet/minecraft/registry/RegistryKey;
+accessible field net/minecraft/world/item/CreativeModeTabs BUILDING_BLOCKS Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs COLORED_BLOCKS Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs FUNCTIONAL_BLOCKS Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs FOOD_AND_DRINKS Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs INGREDIENTS Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs TOOLS_AND_UTILITIES Lnet/minecraft/resources/ResourceKey;
 
 # Fluids
-accessible method net/minecraft/fluid/FlowableFluid isInfinite (Lnet/minecraft/server/world/ServerWorld;)Z
+accessible method net/minecraft/world/level/material/FlowingFluid canConvertToSource (Lnet/minecraft/server/level/ServerLevel;)Z
 
 # Menus
-accessible class net/minecraft/menu/MenuType$Factory
-accessible method net/minecraft/menu/MenuType <init> (Lnet/minecraft/menu/MenuType$Factory;Lnet/minecraft/resource/featuretoggle/FeatureSet;)V
-accessible class net/minecraft/client/gui/screen/ingame/MenuScreens$Provider
-accessible method net/minecraft/client/gui/screen/ingame/MenuScreens register (Lnet/minecraft/menu/MenuType;Lnet/minecraft/client/gui/screen/ingame/MenuScreens$Provider;)V
+accessible class net/minecraft/world/inventory/MenuType$MenuSupplier
+accessible method net/minecraft/world/inventory/MenuType <init> (Lnet/minecraft/world/inventory/MenuType$MenuSupplier;Lnet/minecraft/world/flag/FeatureFlagSet;)V
+accessible class net/minecraft/client/gui/screens/MenuScreens$ScreenConstructor
+accessible method net/minecraft/client/gui/screens/MenuScreens register (Lnet/minecraft/world/inventory/MenuType;Lnet/minecraft/client/gui/screens/MenuScreens$ScreenConstructor;)V
 
 # Texts
-accessible method net/minecraft/text/TextCodecs combine (Ljava/util/List;)Lnet/minecraft/text/MutableText;
+accessible method net/minecraft/network/chat/ComponentSerialization createFromList (Ljava/util/List;)Lnet/minecraft/network/chat/MutableComponent;
 
 # Block entities
-accessible class net/minecraft/block/entity/BlockEntityType$BlockEntityFactory
-accessible method net/minecraft/block/entity/BlockEntityType <init> (Lnet/minecraft/block/entity/BlockEntityType$BlockEntityFactory;Ljava/util/Set;)V
+accessible class net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier
+accessible method net/minecraft/world/level/block/entity/BlockEntityType <init> (Lnet/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier;Ljava/util/Set;)V
 
 # Screens
-accessible method net/minecraft/client/gui/DrawContext drawTexturedQuad (Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/util/Identifier;IIIIFFFFI)V
-accessible method net/minecraft/client/gui/screen/recipebook/GhostRecipe addInputs (Lnet/minecraft/menu/slot/Slot;Lnet/minecraft/util/context/ContextParameterMap;Lnet/minecraft/recipe/display/SlotDisplay;)V
-accessible method net/minecraft/client/gui/screen/recipebook/GhostRecipe addResults (Lnet/minecraft/menu/slot/Slot;Lnet/minecraft/util/context/ContextParameterMap;Lnet/minecraft/recipe/display/SlotDisplay;)V
-accessible field net/minecraft/client/gui/widget/EntryListWidget MENU_LIST_BACKGROUND_TEXTURE Lnet/minecraft/util/Identifier;
-accessible field net/minecraft/client/gui/widget/EntryListWidget INWORLD_MENU_LIST_BACKGROUND_TEXTURE Lnet/minecraft/util/Identifier;
+accessible method net/minecraft/client/gui/GuiGraphics innerBlit (Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIIIFFFFI)V
+accessible method net/minecraft/client/gui/screens/recipebook/GhostSlots setInput (Lnet/minecraft/world/inventory/Slot;Lnet/minecraft/util/context/ContextMap;Lnet/minecraft/world/item/crafting/display/SlotDisplay;)V
+accessible method net/minecraft/client/gui/screens/recipebook/GhostSlots setResult (Lnet/minecraft/world/inventory/Slot;Lnet/minecraft/util/context/ContextMap;Lnet/minecraft/world/item/crafting/display/SlotDisplay;)V
+accessible field net/minecraft/client/gui/components/AbstractSelectionList MENU_LIST_BACKGROUND Lnet/minecraft/resources/Identifier;
+accessible field net/minecraft/client/gui/components/AbstractSelectionList INWORLD_MENU_LIST_BACKGROUND Lnet/minecraft/resources/Identifier;
 
 # Entity rendering
-accessible field net/minecraft/client/render/entity/LivingEntityRenderer features Ljava/util/List;
+accessible field net/minecraft/client/renderer/entity/LivingEntityRenderer layers Ljava/util/List;
 
 # Data generation
-accessible field net/minecraft/data/MetadataProvider metadata Ljava/util/Map;
+accessible field net/minecraft/data/metadata/PackMetadataGenerator elements Ljava/util/Map;

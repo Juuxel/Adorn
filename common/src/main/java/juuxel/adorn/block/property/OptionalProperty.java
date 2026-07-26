@@ -1,8 +1,8 @@
 package juuxel.adorn.block.property;
 
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Property;
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public final class OptionalProperty<T extends Enum<T> & StringIdentifiable> extends Property<OptionalProperty.Value<T>> {
+public final class OptionalProperty<T extends Enum<T> & StringRepresentable> extends Property<OptionalProperty.Value<T>> {
     private static final String NONE_NAME = "none";
 
     private final EnumProperty<T> delegate;
@@ -25,8 +25,8 @@ public final class OptionalProperty<T extends Enum<T> & StringIdentifiable> exte
 
         values = new LinkedHashMap<>();
         values.put(null, none);
-        for (T value : delegate.getValues()) {
-            if (NONE_NAME.equals(value.asString())) {
+        for (T value : delegate.getPossibleValues()) {
+            if (NONE_NAME.equals(value.getSerializedName())) {
                 throw new IllegalArgumentException("Delegate has a 'none' value");
             }
 
@@ -36,23 +36,23 @@ public final class OptionalProperty<T extends Enum<T> & StringIdentifiable> exte
     }
 
     @Override
-    public Optional<Value<T>> parse(String name) {
-        return NONE_NAME.equals(name) ? Optional.of(none) : delegate.parse(name).map(values::get);
+    public Optional<Value<T>> getValue(String name) {
+        return NONE_NAME.equals(name) ? Optional.of(none) : delegate.getValue(name).map(values::get);
     }
 
     @Override
-    public List<Value<T>> getValues() {
+    public List<Value<T>> getPossibleValues() {
         return boxedValues;
     }
 
     @Override
-    public int ordinal(Value<T> value) {
+    public int getInternalIndex(Value<T> value) {
         return boxedValues.indexOf(value);
     }
 
     @Override
-    public String name(Value<T> value) {
-        return value instanceof Value.Some<T>(T inner) ? inner.asString() : NONE_NAME;
+    public String getName(Value<T> value) {
+        return value instanceof Value.Some<T>(T inner) ? inner.getSerializedName() : NONE_NAME;
     }
 
     public EnumProperty<T> getDelegate() {
@@ -75,7 +75,7 @@ public final class OptionalProperty<T extends Enum<T> & StringIdentifiable> exte
         boolean isPresent();
         @Nullable T value();
 
-        record Some<T extends Enum<T> & StringIdentifiable>(T value) implements Value<T> {
+        record Some<T extends Enum<T> & StringRepresentable>(T value) implements Value<T> {
             @Override
             public boolean isPresent() {
                 return true;
@@ -90,7 +90,7 @@ public final class OptionalProperty<T extends Enum<T> & StringIdentifiable> exte
             }
         }
 
-        final class None<T extends Enum<T> & StringIdentifiable> implements Value<T> {
+        final class None<T extends Enum<T> & StringRepresentable> implements Value<T> {
             @Override
             public @Nullable T value() {
                 return null;

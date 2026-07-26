@@ -2,29 +2,29 @@ package juuxel.adorn.criterion;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.advancement.criterion.AbstractCriterion;
-import net.minecraft.item.ItemStack;
-import net.minecraft.predicate.entity.EntityPredicate;
-import net.minecraft.predicate.entity.LootContextPredicate;
-import net.minecraft.predicate.item.ItemPredicate;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.dynamic.Codecs;
+import net.minecraft.advancements.criterion.SimpleCriterionTrigger;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.ContextAwarePredicate;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.ExtraCodecs;
 
 import java.util.Optional;
 
-public final class BoughtFromTradingStationCriterion extends AbstractCriterion<BoughtFromTradingStationCriterion.Conditions> {
+public final class BoughtFromTradingStationCriterion extends SimpleCriterionTrigger<BoughtFromTradingStationCriterion.Conditions> {
     @Override
-    public Codec<Conditions> getConditionsCodec() {
+    public Codec<Conditions> codec() {
         return Conditions.CODEC;
     }
 
-    public void trigger(ServerPlayerEntity player, ItemStack soldItem) {
+    public void trigger(ServerPlayer player, ItemStack soldItem) {
         trigger(player, conditions -> conditions.matches(soldItem));
     }
 
-    public record Conditions(Optional<LootContextPredicate> player, Optional<ItemPredicate> soldItem) implements AbstractCriterion.Conditions {
+    public record Conditions(Optional<ContextAwarePredicate> player, Optional<ItemPredicate> soldItem) implements SimpleCriterionTrigger.SimpleInstance {
         public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            EntityPredicate.LOOT_CONTEXT_PREDICATE_CODEC.optionalFieldOf("player")
+            EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player")
                 .forGetter(Conditions::player),
             ItemPredicate.CODEC.optionalFieldOf("item")
                 .forGetter(Conditions::soldItem)

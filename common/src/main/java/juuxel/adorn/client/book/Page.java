@@ -3,14 +3,14 @@ package juuxel.adorn.client.book;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import juuxel.adorn.util.EntryOrTag;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.text.Text;
-import net.minecraft.text.TextCodecs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -18,16 +18,16 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public record Page(List<Icon> icons, Text title, Text text, @Nullable Image image) {
+public record Page(List<Icon> icons, Component title, Component text, @Nullable Image image) {
     public static final Codec<Page> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         Icon.CODEC.listOf().fieldOf("icons").forGetter(Page::icons),
-        TextCodecs.CODEC.fieldOf("title").forGetter(Page::title),
-        TextCodecs.CODEC.optionalFieldOf("text", Text.empty()).forGetter(Page::text),
+        ComponentSerialization.CODEC.fieldOf("title").forGetter(Page::title),
+        ComponentSerialization.CODEC.optionalFieldOf("text", Component.empty()).forGetter(Page::text),
         Image.CODEC.optionalFieldOf("image").forGetter(page -> Optional.ofNullable(page.image))
     ).apply(instance, Page::new));
 
     // For DFU
-    private Page(List<Icon> icons, Text title, Text text, Optional<Image> image) {
+    private Page(List<Icon> icons, Component title, Component text, Optional<Image> image) {
         this(icons, title, text, image.orElse(null));
     }
 
@@ -37,14 +37,14 @@ public record Page(List<Icon> icons, Text title, Text text, @Nullable Image imag
 
     public static final class Builder {
         private final List<Icon> icons = new ArrayList<>();
-        private @Nullable Text title;
-        private @Nullable Text text;
+        private @Nullable Component title;
+        private @Nullable Component text;
         private @Nullable Image image;
 
         private Builder() {
         }
 
-        public Builder icon(ItemConvertible item) {
+        public Builder icon(ItemLike item) {
             icons.add(new Icon(new EntryOrTag.OfEntry<>(item.asItem())));
             return this;
         }
@@ -54,12 +54,12 @@ public record Page(List<Icon> icons, Text title, Text text, @Nullable Image imag
             return this;
         }
 
-        public Builder title(Text title) {
+        public Builder title(Component title) {
             this.title = title;
             return this;
         }
 
-        public Builder content(Text text) {
+        public Builder content(Component text) {
             this.text = text;
             return this;
         }
@@ -78,15 +78,15 @@ public record Page(List<Icon> icons, Text title, Text text, @Nullable Image imag
     }
 
     public record Icon(EntryOrTag<Item> items) {
-        public static final Codec<Icon> CODEC = EntryOrTag.codec(RegistryKeys.ITEM).xmap(Icon::new, Icon::items);
+        public static final Codec<Icon> CODEC = EntryOrTag.codec(Registries.ITEM).xmap(Icon::new, Icon::items);
 
         public List<ItemStack> createStacks() {
             return switch (items) {
-                case EntryOrTag.OfEntry(var item) -> List.of(item.getDefaultStack());
-                case EntryOrTag.OfTag(var tag) -> Registries.ITEM.getOptional(tag).map(entries -> {
+                case EntryOrTag.OfEntry(var item) -> List.of(item.getDefaultInstance());
+                case EntryOrTag.OfTag(var tag) -> BuiltInRegistries.ITEM.get(tag).map(entries -> {
                     List<ItemStack> result = new ArrayList<>(entries.size());
                     for (var entry : entries) {
-                        result.add(entry.value().getDefaultStack());
+                        result.add(entry.value().getDefaultInstance());
                     }
                     return result;
                 }).orElse(List.of());

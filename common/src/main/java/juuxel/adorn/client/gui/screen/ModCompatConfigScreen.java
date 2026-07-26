@@ -4,11 +4,11 @@ import juuxel.adorn.client.gui.widget.Panel;
 import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.platform.ModBridge;
 import juuxel.adorn.util.PropertyRef;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.screen.ScreenTexts;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -21,7 +21,7 @@ public final class ModCompatConfigScreen extends AbstractConfigScreen {
     private final List<String> installedMods = new ArrayList<>();
 
     public ModCompatConfigScreen(Screen parent) {
-        super(Text.translatable("gui.adorn.config.toggle_mod_compatibility"), parent, LAYOUT);
+        super(Component.translatable("gui.adorn.config.toggle_mod_compatibility"), parent, LAYOUT);
 
         for (String mod : ConfigManager.config().compat.keySet()) {
             allMods.add(mod);
@@ -40,9 +40,9 @@ public final class ModCompatConfigScreen extends AbstractConfigScreen {
     @Override
     protected void init() {
         super.init();
-        addDrawableChild(
-            ButtonWidget.builder(ScreenTexts.BACK, button -> close())
-                .position(width / 2 - 100, height - BACK_BUTTON_Y_FROM_BOTTOM)
+        addRenderableWidget(
+            Button.builder(CommonComponents.GUI_BACK, button -> onClose())
+                .pos(width / 2 - 100, height - BACK_BUTTON_Y_FROM_BOTTOM)
                 .size(200, 20)
                 .build()
         );
@@ -58,19 +58,19 @@ public final class ModCompatConfigScreen extends AbstractConfigScreen {
     }
 
     @Override
-    protected Text getOptionLabel(String name) {
+    protected Component getOptionLabel(String name) {
         if (installedMods.contains(name)) {
-            return Text.literal(ModBridge.get().getModName(name));
+            return Component.literal(ModBridge.get().getModName(name));
         }
 
-        return Text.translatable(
+        return Component.translatable(
             "gui.adorn.config.toggle_mod_compatibility.uninstalled_mod",
-            Text.literal(name).formatted(Formatting.WHITE)
-        ).formatted(Formatting.GRAY);
+            Component.literal(name).withStyle(ChatFormatting.WHITE)
+        ).withStyle(ChatFormatting.GRAY);
     }
 
     @Override
-    protected Text getOptionTooltip(String name) {
-        return Text.translatable("gui.adorn.config.toggle_mod_compatibility.description", ModBridge.get().getModName(name));
+    protected Component getOptionTooltip(String name) {
+        return Component.translatable("gui.adorn.config.toggle_mod_compatibility.description", ModBridge.get().getModName(name));
     }
 }

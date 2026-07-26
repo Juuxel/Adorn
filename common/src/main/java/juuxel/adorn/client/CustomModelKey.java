@@ -1,7 +1,7 @@
 package juuxel.adorn.client;
 
-import net.minecraft.client.render.model.BlockStateModel;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.renderer.block.model.BlockStateModel;
+import net.minecraft.resources.Identifier;
 
 public interface CustomModelKey<T> {
     Type<BlockStateModel> BLOCK_STATE_MODEL = new Type<>();

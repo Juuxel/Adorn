@@ -1,9 +1,9 @@
 package juuxel.adorn.menu;
 
-import net.minecraft.inventory.Inventory;
-import net.minecraft.menu.MenuContext;
+import net.minecraft.world.Container;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 
 public interface ContainerBlockMenu {
-    Inventory getInventory();
-    MenuContext getContext();
+    Container getInventory();
+    ContainerLevelAccess getContext();
 }

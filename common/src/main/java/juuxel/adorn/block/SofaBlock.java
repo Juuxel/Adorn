@@ -2,66 +2,67 @@ package juuxel.adorn.block;
 
 import juuxel.adorn.block.property.FrontConnection;
 import juuxel.adorn.lib.AdornStats;
-import juuxel.adorn.util.Shapes;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
+import juuxel.adorn.util.ShapeRotation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.attribute.BedRule;
 import net.minecraft.world.attribute.EnvironmentAttributes;
-import net.minecraft.world.tick.ScheduledTickView;
+import net.minecraft.world.level.ScheduledTickAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SofaBlock extends SeatBlock implements Waterloggable, SneakClickHandler, BlockWithDescription {
-    public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
-    public static final BooleanProperty CONNECTED_LEFT = BooleanProperty.of("connected_left");
-    public static final BooleanProperty CONNECTED_RIGHT = BooleanProperty.of("connected_right");
-    public static final EnumProperty<FrontConnection> FRONT_CONNECTION = EnumProperty.of("front", FrontConnection.class);
-    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock, SneakClickHandler, BlockWithDescription {
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final BooleanProperty CONNECTED_LEFT = BooleanProperty.create("connected_left");
+    public static final BooleanProperty CONNECTED_RIGHT = BooleanProperty.create("connected_right");
+    public static final EnumProperty<FrontConnection> FRONT_CONNECTION = EnumProperty.create("front", FrontConnection.class);
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     private static final VoxelShape[] OUTLINE_SHAPES = buildShapes(false);
     private static final VoxelShape[] COLLISION_SHAPES = buildShapes(true);
     private static final String DESCRIPTION_KEY = "block.adorn.sofa.description";
 
-    public SofaBlock(Settings settings) {
+    public SofaBlock(Properties settings) {
         super(settings);
-        setDefaultState(getDefaultState()
-            .with(FRONT_CONNECTION, FrontConnection.NONE)
-            .with(CONNECTED_LEFT, false)
-            .with(CONNECTED_RIGHT, false)
-            .with(WATERLOGGED, false));
+        registerDefaultState(defaultBlockState()
+            .setValue(FRONT_CONNECTION, FrontConnection.NONE)
+            .setValue(CONNECTED_LEFT, false)
+            .setValue(CONNECTED_RIGHT, false)
+            .setValue(WATERLOGGED, false));
     }
 
     @Override
@@ -75,90 +76,90 @@ public class SofaBlock extends SeatBlock implements Waterloggable, SneakClickHan
     }
 
     @Override
-    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (stack.getItem() instanceof DyeItem dye) {
-            world.setBlockState(pos, AdornBlocks.SOFAS.getEager(dye.getColor()).getStateWithProperties(state));
-            world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.8f);
-            if (!player.getAbilities().creativeMode) stack.decrement(1);
-            if (!world.isClient()) player.incrementStat(AdornStats.DYE_SOFA);
-            return ActionResult.SUCCESS;
+            world.setBlockAndUpdate(pos, AdornBlocks.SOFAS.getEager(dye.getDyeColor()).withPropertiesOf(state));
+            world.playSound(player, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1f, 0.8f);
+            if (!player.getAbilities().instabuild) stack.shrink(1);
+            if (!world.isClientSide()) player.awardStat(AdornStats.DYE_SOFA);
+            return InteractionResult.SUCCESS;
         }
 
-        return super.onUseWithItem(stack, state, world, pos, player, hand, hit);
+        return super.useItemOn(stack, state, world, pos, player, hand, hit);
     }
 
     @Override
-    public ActionResult onSneakClick(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hitResult) {
+    public InteractionResult onSneakClick(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         var sleepingDirection = getSleepingDirection(world, pos);
 
-        if (state.get(OCCUPIED)) {
-            player.sendMessage(Text.translatable("block.adorn.sofa.occupied"), true);
-            return ActionResult.SUCCESS;
+        if (state.getValue(OCCUPIED)) {
+            player.displayClientMessage(Component.translatable("block.adorn.sofa.occupied"), true);
+            return InteractionResult.SUCCESS;
         }
 
         var bedRule = modifyBedRuleForSofas(
-            world.getEnvironmentAttributes().getAttributeValue(EnvironmentAttributes.BED_RULE_GAMEPLAY, pos)
+            world.environmentAttributes().getValue(EnvironmentAttributes.BED_RULE, pos)
         );
         if (bedRule.canSleep(world) && sleepingDirection != null) {
-            if (!world.isClient()) {
-                player.trySleep(pos).ifLeft(reason -> {
+            if (!world.isClientSide()) {
+                player.startSleepInBed(pos).ifLeft(reason -> {
                     if (reason.message() != null) {
-                        player.sendMessage(reason.message(), true);
+                        player.displayClientMessage(reason.message(), true);
                     }
                 });
             }
 
-            return ActionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         } else {
-            return ActionResult.PASS;
+            return InteractionResult.PASS;
         }
     }
 
     public static BedRule modifyBedRuleForSofas(BedRule rule) {
-        return rule.canSleep() == BedRule.Condition.WHEN_DARK ? new BedRule(BedRule.Condition.ALWAYS, rule.canSetSpawn(), rule.explodes(), rule.errorMessage()) : rule;
+        return rule.canSleep() == BedRule.Rule.WHEN_DARK ? new BedRule(BedRule.Rule.ALWAYS, rule.canSetSpawn(), rule.explodes(), rule.errorMessage()) : rule;
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(FACING, CONNECTED_LEFT, CONNECTED_RIGHT, FRONT_CONNECTION, WATERLOGGED);
     }
 
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         return updateConnections(
-            getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite())
-                .with(WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER),
-            ctx.getWorld(),
-            ctx.getBlockPos()
+            defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite())
+                .setValue(WATERLOGGED, ctx.getLevel().getFluidState(ctx.getClickedPos()).getType() == Fluids.WATER),
+            ctx.getLevel(),
+            ctx.getClickedPos()
         );
     }
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
-        if (state.get(WATERLOGGED)) {
-            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+    protected BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        if (state.getValue(WATERLOGGED)) {
+            tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
         }
 
         return updateConnections(state, world, pos);
     }
 
-    private BlockState updateConnections(BlockState state, BlockView world, BlockPos pos) {
-        var direction = state.get(FACING);
-        var leftState = world.getBlockState(pos.offset(direction.rotateYClockwise()));
-        var rightState = world.getBlockState(pos.offset(direction.rotateYCounterclockwise()));
-        var frontState = world.getBlockState(pos.offset(direction));
+    private BlockState updateConnections(BlockState state, BlockGetter world, BlockPos pos) {
+        var direction = state.getValue(FACING);
+        var leftState = world.getBlockState(pos.relative(direction.getClockWise()));
+        var rightState = world.getBlockState(pos.relative(direction.getCounterClockWise()));
+        var frontState = world.getBlockState(pos.relative(direction));
 
-        var connectedLeft = leftState.getBlock() instanceof SofaBlock && (leftState.get(FACING) == direction || (leftState.get(FACING) == direction.rotateYCounterclockwise() && leftState.get(FRONT_CONNECTION) != FrontConnection.NONE));
-        var connectedRight = rightState.getBlock() instanceof SofaBlock && (rightState.get(FACING) == direction || (rightState.get(FACING) == direction.rotateYClockwise() && rightState.get(FRONT_CONNECTION) != FrontConnection.NONE));
+        var connectedLeft = leftState.getBlock() instanceof SofaBlock && (leftState.getValue(FACING) == direction || (leftState.getValue(FACING) == direction.getCounterClockWise() && leftState.getValue(FRONT_CONNECTION) != FrontConnection.NONE));
+        var connectedRight = rightState.getBlock() instanceof SofaBlock && (rightState.getValue(FACING) == direction || (rightState.getValue(FACING) == direction.getClockWise() && rightState.getValue(FRONT_CONNECTION) != FrontConnection.NONE));
         var connectedFront = frontState.getBlock() instanceof SofaBlock;
-        var connectedFrontLeft = connectedFront && !connectedLeft && frontState.get(FACING) == direction.rotateYCounterclockwise();
-        var connectedFrontRight = connectedFront && !connectedRight && frontState.get(FACING) == direction.rotateYClockwise();
+        var connectedFrontLeft = connectedFront && !connectedLeft && frontState.getValue(FACING) == direction.getCounterClockWise();
+        var connectedFrontRight = connectedFront && !connectedRight && frontState.getValue(FACING) == direction.getClockWise();
         var frontConnection = FrontConnection.NONE;
         if (connectedFrontLeft) {
             frontConnection = FrontConnection.LEFT;
@@ -167,75 +168,75 @@ public class SofaBlock extends SeatBlock implements Waterloggable, SneakClickHan
         }
 
         return state
-            .with(CONNECTED_LEFT, connectedLeft)
-            .with(CONNECTED_RIGHT, connectedRight)
-            .with(FRONT_CONNECTION, frontConnection);
+            .setValue(CONNECTED_LEFT, connectedLeft)
+            .setValue(CONNECTED_RIGHT, connectedRight)
+            .setValue(FRONT_CONNECTION, frontConnection);
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return OUTLINE_SHAPES[
             getShapeKey(
-                state.get(FACING),
-                state.get(CONNECTED_LEFT),
-                state.get(CONNECTED_RIGHT),
-                state.get(FRONT_CONNECTION)
+                state.getValue(FACING),
+                state.getValue(CONNECTED_LEFT),
+                state.getValue(CONNECTED_RIGHT),
+                state.getValue(FRONT_CONNECTION)
             )
         ];
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return COLLISION_SHAPES[
             getShapeKey(
-                state.get(FACING),
-                state.get(CONNECTED_LEFT),
-                state.get(CONNECTED_RIGHT),
-                state.get(FRONT_CONNECTION)
+                state.getValue(FACING),
+                state.getValue(CONNECTED_LEFT),
+                state.getValue(CONNECTED_RIGHT),
+                state.getValue(FRONT_CONNECTION)
             )
         ];
     }
 
     @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation(state.get(FACING)));
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
     @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return state.with(FACING, rotation.rotate(state.get(FACING)));
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
-    public boolean canPathfindThrough(BlockState state, NavigationType type) {
+    public boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
     }
 
     @Override
-    public double getSittingOffset(World world, BlockState state, BlockPos pos) {
+    public double getSittingOffset(Level world, BlockState state, BlockPos pos) {
         return 0.4375; // 7/16
     }
 
     @Override
     public Direction getPreferredDismountDirection(BlockState state, Entity passenger) {
-        return state.get(FACING);
+        return state.getValue(FACING);
     }
 
     private static VoxelShape[] buildShapes(boolean thin) {
-        var bottom = createCuboidShape(0.0, 2.0, 0.0, 16.0, 7.0, 16.0);
-        var leftArms = Shapes.buildShapeRotations(5, 7, 13, 16, 13, 16);
-        var rightArms = Shapes.buildShapeRotations(5, 7, 0, 16, 13, 3);
-        var thinLeftArms = Shapes.buildShapeRotations(5, 7, 14, 16, 13, 16);
-        var thinRightArms = Shapes.buildShapeRotations(5, 7, 0, 16, 13, 2);
-        var backs = Shapes.buildShapeRotations(0, 7, 0, 5, 16, 16);
-        var leftCorners = Shapes.buildShapeRotations(5, 7, 11, 16, 16, 16);
-        var rightCorners = Shapes.buildShapeRotations(5, 7, 0, 16, 16, 5);
+        var bottom = box(0.0, 2.0, 0.0, 16.0, 7.0, 16.0);
+        var leftArms = ShapeRotation.buildShapeRotations(5, 7, 13, 16, 13, 16);
+        var rightArms = ShapeRotation.buildShapeRotations(5, 7, 0, 16, 13, 3);
+        var thinLeftArms = ShapeRotation.buildShapeRotations(5, 7, 14, 16, 13, 16);
+        var thinRightArms = ShapeRotation.buildShapeRotations(5, 7, 0, 16, 13, 2);
+        var backs = ShapeRotation.buildShapeRotations(0, 7, 0, 5, 16, 16);
+        var leftCorners = ShapeRotation.buildShapeRotations(5, 7, 11, 16, 16, 16);
+        var rightCorners = ShapeRotation.buildShapeRotations(5, 7, 0, 16, 16, 5);
         var booleans = new boolean[] { true, false };
         var result = new VoxelShape[48];
-        for (var facing : FACING.getValues()) {
+        for (var facing : FACING.getPossibleValues()) {
             for (var left : booleans) {
                 for (var right : booleans) {
-                    for (var front : FRONT_CONNECTION.getValues()) {
+                    for (var front : FRONT_CONNECTION.getPossibleValues()) {
                         List<VoxelShape> parts = new ArrayList<>();
                         parts.add(backs.get(facing));
 
@@ -252,7 +253,7 @@ public class SofaBlock extends SeatBlock implements Waterloggable, SneakClickHan
                         }
 
                         int key = getShapeKey(facing, left, right, front);
-                        var shape = VoxelShapes.union(bottom, parts.toArray(VoxelShape[]::new));
+                        var shape = Shapes.or(bottom, parts.toArray(VoxelShape[]::new));
                         result[key] = shape;
                     }
                 }
@@ -262,24 +263,24 @@ public class SofaBlock extends SeatBlock implements Waterloggable, SneakClickHan
     }
 
     private static int getShapeKey(Direction facing, boolean left, boolean right, FrontConnection front) {
-        return front.ordinal() << 4 | (left ? 1 : 0) << 3 | (right ? 1 : 0) << 2 | facing.getHorizontalQuarterTurns();
+        return front.ordinal() << 4 | (left ? 1 : 0) << 3 | (right ? 1 : 0) << 2 | facing.get2DDataValue();
     }
 
-    public static @Nullable Direction getSleepingDirection(BlockView world, BlockPos pos) {
+    public static @Nullable Direction getSleepingDirection(BlockGetter world, BlockPos pos) {
         return getSleepingDirection(world, pos, false);
     }
 
     // TODO: Is the ignoreNeighbors = false state ever needed??
-    public static @Nullable Direction getSleepingDirection(BlockView world, BlockPos pos, boolean ignoreNeighbors) {
+    public static @Nullable Direction getSleepingDirection(BlockGetter world, BlockPos pos, boolean ignoreNeighbors) {
         var state = world.getBlockState(pos);
         if (!(state.getBlock() instanceof SofaBlock)) return null;
 
-        boolean connectedLeft = state.get(CONNECTED_LEFT);
-        boolean connectedRight = state.get(CONNECTED_RIGHT);
-        var frontConnection = state.get(FRONT_CONNECTION);
-        var facing = state.get(FACING);
+        boolean connectedLeft = state.getValue(CONNECTED_LEFT);
+        boolean connectedRight = state.getValue(CONNECTED_RIGHT);
+        var frontConnection = state.getValue(FRONT_CONNECTION);
+        var facing = state.getValue(FACING);
 
-        if ((!connectedLeft && !connectedRight && frontConnection == FrontConnection.NONE) || (!ignoreNeighbors && state.get(OCCUPIED))) {
+        if ((!connectedLeft && !connectedRight && frontConnection == FrontConnection.NONE) || (!ignoreNeighbors && state.getValue(OCCUPIED))) {
             return null;
         }
 
@@ -287,9 +288,9 @@ public class SofaBlock extends SeatBlock implements Waterloggable, SneakClickHan
         if (frontConnection != FrontConnection.NONE) {
             result = facing;
         } else if (connectedLeft) {
-            result = facing.rotateYClockwise();
+            result = facing.getClockWise();
         } else if (connectedRight) {
-            result = facing.rotateYCounterclockwise();
+            result = facing.getCounterClockWise();
         } else {
             result = null;
         }
@@ -298,8 +299,8 @@ public class SofaBlock extends SeatBlock implements Waterloggable, SneakClickHan
             if (ignoreNeighbors) {
                 return result;
             }
-            var neighborState = world.getBlockState(pos.offset(result));
-            if (neighborState.getBlock() instanceof SofaBlock && !neighborState.get(OCCUPIED)) {
+            var neighborState = world.getBlockState(pos.relative(result));
+            if (neighborState.getBlock() instanceof SofaBlock && !neighborState.getValue(OCCUPIED)) {
                 return result;
             }
         }

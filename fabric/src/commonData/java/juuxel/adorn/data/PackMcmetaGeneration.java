@@ -6,9 +6,9 @@ import com.google.gson.JsonObject;
 import juuxel.adorn.datagen.GeneratorConfig;
 import juuxel.adorn.datagen.GeneratorConfigLoader;
 import juuxel.adorn.datagen.Overlay;
-import net.minecraft.data.DataOutput;
-import net.minecraft.data.MetadataProvider;
-import net.minecraft.text.Text;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.metadata.PackMetadataGenerator;
+import net.minecraft.network.chat.Component;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -21,10 +21,10 @@ public final class PackMcmetaGeneration {
     private static final String FABRIC_CONFIG_DIRS_PROPERTY = "adorn.data.fabricConfigDirs";
     private static final String NEOFORGE_CONFIG_DIRS_PROPERTY = "adorn.data.neoforgeConfigDirs";
 
-    public static MetadataProvider create(DataOutput output) {
-        var provider = MetadataProvider.create(output, Text.literal("Adorn resources."));
-        provider.metadata.put("fabric:overlays", PackMcmetaGeneration::generateFabricOverlays);
-        provider.metadata.put("neoforge:overlays", PackMcmetaGeneration::generateNeoForgeOverlays);
+    public static PackMetadataGenerator create(PackOutput output) {
+        var provider = PackMetadataGenerator.forFeaturePack(output, Component.literal("Adorn resources."));
+        provider.elements.put("fabric:overlays", PackMcmetaGeneration::generateFabricOverlays);
+        provider.elements.put("neoforge:overlays", PackMcmetaGeneration::generateNeoForgeOverlays);
         return provider;
     }
 

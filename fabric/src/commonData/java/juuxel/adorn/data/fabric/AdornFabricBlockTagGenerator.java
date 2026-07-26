@@ -4,24 +4,24 @@ import juuxel.adorn.block.AdornBlocks;
 import net.fabricmc.fabric.api.block.v1.BlockFunctionalityTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.TagKey;
+import net.minecraft.resources.Identifier;
 
 import java.util.concurrent.CompletableFuture;
 
 public final class AdornFabricBlockTagGenerator extends FabricTagProvider.BlockTagProvider {
-    public AdornFabricBlockTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    public AdornFabricBlockTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
     @Override
-    protected void configure(RegistryWrapper.WrapperLookup registries) {
+    protected void addTags(HolderLookup.Provider registries) {
         valueLookupBuilder(BlockFunctionalityTags.CAN_CLIMB_TRAPDOOR_ABOVE)
             .add(AdornBlocks.STONE_LADDER.get());
 
-        valueLookupBuilder(TagKey.of(RegistryKeys.BLOCK, Identifier.of("towelette", "displaceable")))
+        valueLookupBuilder(TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("towelette", "displaceable")))
             .add(AdornBlocks.STONE_TORCH_GROUND.get());
     }
 }

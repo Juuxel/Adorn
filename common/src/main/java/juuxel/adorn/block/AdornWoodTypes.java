@@ -2,9 +2,9 @@ package juuxel.adorn.block;
 
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.util.Dyes;
-import net.minecraft.block.BlockSetType;
-import net.minecraft.block.WoodType;
-import net.minecraft.util.DyeColor;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.util.Util;
 
 import java.util.EnumMap;
@@ -13,7 +13,7 @@ import java.util.Map;
 public final class AdornWoodTypes {
     public static final Map<DyeColor, WoodType> PAINTED_WOODS = Util.make(new EnumMap<>(DyeColor.class), map -> {
         for (DyeColor color : Dyes.ALL_DYES) {
-            map.put(color, register(color.getId() + "_wood", AdornBlockSetTypes.PAINTED_WOODS.get(color)));
+            map.put(color, register(color.getName() + "_wood", AdornBlockSetTypes.PAINTED_WOODS.get(color)));
         }
     });
 

@@ -3,22 +3,22 @@ package juuxel.adorn.recipe;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.fluid.FluidIngredient;
 import juuxel.adorn.item.AdornItems;
-import net.minecraft.advancement.Advancement;
-import net.minecraft.advancement.AdvancementCriterion;
-import net.minecraft.advancement.AdvancementRequirements;
-import net.minecraft.advancement.AdvancementRewards;
-import net.minecraft.advancement.criterion.RecipeUnlockedCriterion;
-import net.minecraft.data.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.AdvancementRequirements;
+import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
+import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -26,54 +26,54 @@ import java.util.Map;
 import java.util.Optional;
 
 public final class BrewingRecipeJsonBuilder {
-    private final RegistryEntryLookup<Item> itemLookup;
+    private final HolderGetter<Item> itemLookup;
     private final ItemStack result;
-    private Ingredient input = Ingredient.ofItem(AdornItems.MUG.get());
+    private Ingredient input = Ingredient.of(AdornItems.MUG.get());
     private @Nullable Ingredient firstIngredient;
     private @Nullable Ingredient secondIngredient;
     private @Nullable FluidIngredient fluid;
-    private final Map<String, AdvancementCriterion<?>> criteria = new HashMap<>();
+    private final Map<String, Criterion<?>> criteria = new HashMap<>();
 
-    private BrewingRecipeJsonBuilder(RegistryEntryLookup<Item> itemLookup, ItemStack result) {
+    private BrewingRecipeJsonBuilder(HolderGetter<Item> itemLookup, ItemStack result) {
         this.itemLookup = itemLookup;
         this.result = result;
     }
 
-    public static BrewingRecipeJsonBuilder create(RegistryEntryLookup<Item> itemLookup, ItemConvertible item) {
+    public static BrewingRecipeJsonBuilder create(HolderGetter<Item> itemLookup, ItemLike item) {
         return create(itemLookup, item, 1);
     }
 
-    public static BrewingRecipeJsonBuilder create(RegistryEntryLookup<Item> itemLookup, ItemConvertible item, int count) {
+    public static BrewingRecipeJsonBuilder create(HolderGetter<Item> itemLookup, ItemLike item, int count) {
         return new BrewingRecipeJsonBuilder(itemLookup, new ItemStack(item, count));
     }
 
-    public BrewingRecipeJsonBuilder input(ItemConvertible item) {
-        input = Ingredient.ofItem(item);
+    public BrewingRecipeJsonBuilder input(ItemLike item) {
+        input = Ingredient.of(item);
         return this;
     }
 
     public BrewingRecipeJsonBuilder input(TagKey<Item> tag) {
-        input = Ingredient.ofTag(itemLookup.getOrThrow(tag));
+        input = Ingredient.of(itemLookup.getOrThrow(tag));
         return this;
     }
 
-    public BrewingRecipeJsonBuilder first(ItemConvertible item) {
-        firstIngredient = Ingredient.ofItem(item);
+    public BrewingRecipeJsonBuilder first(ItemLike item) {
+        firstIngredient = Ingredient.of(item);
         return this;
     }
 
     public BrewingRecipeJsonBuilder first(TagKey<Item> tag) {
-        firstIngredient = Ingredient.ofTag(itemLookup.getOrThrow(tag));
+        firstIngredient = Ingredient.of(itemLookup.getOrThrow(tag));
         return this;
     }
 
-    public BrewingRecipeJsonBuilder second(ItemConvertible item) {
-        secondIngredient = Ingredient.ofItem(item);
+    public BrewingRecipeJsonBuilder second(ItemLike item) {
+        secondIngredient = Ingredient.of(item);
         return this;
     }
 
     public BrewingRecipeJsonBuilder second(TagKey<Item> tag) {
-        secondIngredient = Ingredient.ofTag(itemLookup.getOrThrow(tag));
+        secondIngredient = Ingredient.of(itemLookup.getOrThrow(tag));
         return this;
     }
 
@@ -82,36 +82,36 @@ public final class BrewingRecipeJsonBuilder {
         return this;
     }
 
-    public BrewingRecipeJsonBuilder criterion(String name, AdvancementCriterion<?> criterion) {
+    public BrewingRecipeJsonBuilder criterion(String name, Criterion<?> criterion) {
         criteria.put(name, criterion);
         return this;
     }
 
-    public void offerTo(RecipeExporter exporter) {
-        offerTo(exporter, CraftingRecipeJsonBuilder.getItemId(result.getItem()).getPath());
+    public void offerTo(RecipeOutput exporter) {
+        offerTo(exporter, RecipeBuilder.getDefaultRecipeId(result.getItem()).getPath());
     }
 
-    public void offerTo(RecipeExporter exporter, String recipeName) {
-        var key = RegistryKey.of(RegistryKeys.RECIPE, AdornCommon.id("brewing/" + recipeName));
+    public void offerTo(RecipeOutput exporter, String recipeName) {
+        var key = ResourceKey.create(Registries.RECIPE, AdornCommon.id("brewing/" + recipeName));
         validate(key);
-        Advancement.Builder advancementBuilder = exporter.getAdvancementBuilder()
-            .criterion("has_the_recipe", RecipeUnlockedCriterion.create(key))
-            .rewards(AdvancementRewards.Builder.recipe(key))
-            .criteriaMerger(AdvancementRequirements.CriterionMerger.OR);
-        criteria.forEach(advancementBuilder::criterion);
+        Advancement.Builder advancementBuilder = exporter.advancement()
+            .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(key))
+            .rewards(net.minecraft.advancements.AdvancementRewards.Builder.recipe(key))
+            .requirements(AdvancementRequirements.Strategy.OR);
+        criteria.forEach(advancementBuilder::addCriterion);
         BrewingRecipe recipe = fluid != null
             ? new FluidBrewingRecipe(input, firstIngredient, Optional.ofNullable(secondIngredient), fluid, result)
             : new ItemBrewingRecipe(input, firstIngredient, Optional.ofNullable(secondIngredient), result);
-        exporter.accept(key, recipe, advancementBuilder.build(key.getValue().withPrefixedPath("recipes/")));
+        exporter.accept(key, recipe, advancementBuilder.build(key.identifier().withPrefix("recipes/")));
     }
 
-    private void validate(RegistryKey<Recipe<?>> key) {
+    private void validate(ResourceKey<Recipe<?>> key) {
         if (firstIngredient == null) {
             throw new NullPointerException("First ingredient of brewing recipe " + key + " not set");
         }
 
         if (criteria.isEmpty()) {
-            throw new IllegalStateException("No way of obtaining recipe " + key.getValue());
+            throw new IllegalStateException("No way of obtaining recipe " + key.identifier());
         }
     }
 }

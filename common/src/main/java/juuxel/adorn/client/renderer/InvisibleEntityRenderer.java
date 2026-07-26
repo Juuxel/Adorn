@@ -1,12 +1,12 @@
 package juuxel.adorn.client.renderer;
 
-import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.state.EntityRenderState;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.world.entity.Entity;
 
 public final class InvisibleEntityRenderer extends EntityRenderer<Entity, EntityRenderState> {
-    public InvisibleEntityRenderer(EntityRendererFactory.Context ctx) {
+    public InvisibleEntityRenderer(EntityRendererProvider.Context ctx) {
         super(ctx);
     }
 

@@ -1,7 +1,7 @@
 package juuxel.adorn.client.resources;
 
 import juuxel.adorn.AdornCommon;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 
 import java.util.Map;
 

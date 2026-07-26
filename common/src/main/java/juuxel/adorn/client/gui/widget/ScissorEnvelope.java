@@ -1,8 +1,8 @@
 package juuxel.adorn.client.gui.widget;
 
 import juuxel.adorn.client.gui.Scissors;
-import net.minecraft.client.gui.Click;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.gui.GuiGraphics;
 
 public abstract class ScissorEnvelope extends WidgetEnvelope {
     protected final int x;
@@ -37,19 +37,19 @@ public abstract class ScissorEnvelope extends WidgetEnvelope {
     }
 
     @Override
-    public boolean mouseClicked(Click click, boolean doubled) {
+    public boolean mouseClicked(MouseButtonEvent click, boolean doubled) {
         if (!isMouseWithinScissorForInput(click.x(), click.y())) return false;
         return super.mouseClicked(click, doubled);
     }
 
     @Override
-    public boolean mouseReleased(Click click) {
+    public boolean mouseReleased(MouseButtonEvent click) {
         if (!isMouseWithinScissorForInput(click.x(), click.y())) return false;
         return super.mouseReleased(click);
     }
 
     @Override
-    public boolean mouseDragged(Click click, double offsetX, double offsetY) {
+    public boolean mouseDragged(MouseButtonEvent click, double offsetX, double offsetY) {
         if (!isMouseWithinScissorForInput(click.x(), click.y())) return false;
         return super.mouseDragged(click, offsetX, offsetY);
     }
@@ -61,13 +61,13 @@ public abstract class ScissorEnvelope extends WidgetEnvelope {
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
         Scissors.push(context, x, y, width, height);
         renderContent(context, mouseX, mouseY, delta);
         Scissors.pop(context);
     }
 
-    protected void renderContent(DrawContext context, int mouseX, int mouseY, float delta) {
+    protected void renderContent(GuiGraphics context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
     }
 }

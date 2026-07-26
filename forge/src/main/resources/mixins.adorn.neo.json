@@ -6,11 +6,11 @@
 
   "mixins": [
     "ItemStackMixin",
-    "PlayerEntityMixin",
-    "ServerPlayerEntityMixin"
+    "PlayerMixin",
+    "ServerPlayerMixin"
   ],
   "client": [
-    "client.BipedEntityRendererMixin",
+    "client.HumanoidMobRendererMixin",
     "client.LivingEntityRendererMixin"
   ],
 

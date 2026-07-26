@@ -11,12 +11,12 @@ import juuxel.adorn.lib.AdornTags;
 import juuxel.adorn.util.Vec2i;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricCodecDataProvider;
-import net.minecraft.data.DataOutput;
-import net.minecraft.item.Items;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
+import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Items;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
+import net.minecraft.resources.Identifier;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -25,98 +25,98 @@ import java.util.function.BiConsumer;
 public final class BookGenerator extends FabricCodecDataProvider<Book> {
     private static final String DIRECTORY = BookManager.DATA_TYPE;
 
-    public BookGenerator(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-        super(dataOutput, registriesFuture, DataOutput.OutputType.RESOURCE_PACK, DIRECTORY, Book.CODEC);
+    public BookGenerator(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        super(dataOutput, registriesFuture, PackOutput.Target.RESOURCE_PACK, DIRECTORY, Book.CODEC);
     }
 
     @Override
-    protected void configure(BiConsumer<Identifier, Book> consumer, RegistryWrapper.WrapperLookup lookup) {
+    protected void configure(BiConsumer<Identifier, Book> consumer, HolderLookup.Provider lookup) {
         consumer.accept(
             AdornCommon.id("guide"),
             Book.builder()
-                .title(Text.literal("Adorn"))
+                .title(Component.literal("Adorn"))
                 .titleScale(1.5f)
-                .subtitle(AdornItems.GUIDE_BOOK.get().getName().copy().formatted(Formatting.ITALIC))
-                .author(Text.translatable("item.adorn.guide_book.author"))
+                .subtitle(AdornItems.GUIDE_BOOK.get().getName().copy().withStyle(ChatFormatting.ITALIC))
+                .author(Component.translatable("item.adorn.guide_book.author"))
                 .pageTree(pageTree -> pageTree
                     .page(Page.builder()
                         .icon(AdornTags.TABLES.item())
-                        .title(Text.translatable("guide.adorn.topic.table.title"))
-                        .content(Text.translatable("guide.adorn.topic.table.text"))
+                        .title(Component.translatable("guide.adorn.topic.table.title"))
+                        .content(Component.translatable("guide.adorn.topic.table.text"))
                         .build())
                     .page(Page.builder()
                         .icon(AdornTags.CHAIRS.item())
-                        .title(Text.translatable("guide.adorn.topic.chair.title"))
-                        .content(Text.translatable("guide.adorn.topic.chair.text"))
+                        .title(Component.translatable("guide.adorn.topic.chair.title"))
+                        .content(Component.translatable("guide.adorn.topic.chair.text"))
                         .build())
                     .sublevel()
                     .page(Page.builder()
                         .icon(AdornTags.POSTS.item())
-                        .title(Text.translatable("guide.adorn.topic.post.title"))
-                        .content(Text.translatable("guide.adorn.topic.post.text"))
+                        .title(Component.translatable("guide.adorn.topic.post.title"))
+                        .content(Component.translatable("guide.adorn.topic.post.text"))
                         .build())
                     .page(Page.builder()
                         .icon(AdornTags.PLATFORMS.item())
-                        .title(Text.translatable("guide.adorn.topic.platform.title"))
-                        .content(Text.translatable("guide.adorn.topic.platform.text"))
+                        .title(Component.translatable("guide.adorn.topic.platform.title"))
+                        .content(Component.translatable("guide.adorn.topic.platform.text"))
                         .build())
                     .page(Page.builder()
                         .icon(AdornTags.STEPS.item())
-                        .title(Text.translatable("guide.adorn.topic.step.title"))
-                        .content(Text.translatable("guide.adorn.topic.step.text"))
+                        .title(Component.translatable("guide.adorn.topic.step.title"))
+                        .content(Component.translatable("guide.adorn.topic.step.text"))
                         .build())
                     .end(content -> Page.builder()
                         .icon(AdornTags.POSTS.item())
                         .icon(AdornTags.STEPS.item())
                         .icon(AdornTags.PLATFORMS.item())
-                        .title(Text.translatable("guide.adorn.topic.building_blocks.title"))
+                        .title(Component.translatable("guide.adorn.topic.building_blocks.title"))
                         .content(content)
                         .build())
                     .page(Page.builder()
                         .icon(AdornTags.KITCHEN_COUNTERS.item())
                         .icon(AdornTags.KITCHEN_CUPBOARDS.item())
-                        .title(Text.translatable("guide.adorn.topic.kitchen.title"))
-                        .content(Text.translatable("guide.adorn.topic.kitchen.text"))
+                        .title(Component.translatable("guide.adorn.topic.kitchen.title"))
+                        .content(Component.translatable("guide.adorn.topic.kitchen.text"))
                         .build())
                     .page(Page.builder()
                         .icon(AdornTags.KITCHEN_SINKS.item())
-                        .title(Text.translatable("guide.adorn.topic.kitchen_sink.title"))
-                        .content(Text.translatable("guide.adorn.topic.kitchen_sink.text"))
+                        .title(Component.translatable("guide.adorn.topic.kitchen_sink.title"))
+                        .content(Component.translatable("guide.adorn.topic.kitchen_sink.text"))
                         .build())
                     .page(Page.builder()
                         .icon(AdornTags.SOFAS.item())
-                        .title(Text.translatable("guide.adorn.topic.sofa.title"))
-                        .content(Text.translatable("guide.adorn.topic.sofa.text"))
+                        .title(Component.translatable("guide.adorn.topic.sofa.title"))
+                        .content(Component.translatable("guide.adorn.topic.sofa.text"))
                         .build())
                     .page(Page.builder()
                         .icon(AdornBlocks.TRADING_STATION.get())
-                        .title(Text.translatable("guide.adorn.topic.trading_station.title"))
-                        .content(Text.translatable("guide.adorn.topic.trading_station.text"))
+                        .title(Component.translatable("guide.adorn.topic.trading_station.title"))
+                        .content(Component.translatable("guide.adorn.topic.trading_station.text"))
                         .build())
                     .page(Page.builder()
                         .icon(AdornTags.SHELVES.item())
-                        .title(Text.translatable("guide.adorn.topic.shelf.title"))
-                        .content(Text.translatable("guide.adorn.topic.shelf.text"))
+                        .title(Component.translatable("guide.adorn.topic.shelf.title"))
+                        .content(Component.translatable("guide.adorn.topic.shelf.text"))
                         .build())
                     .page(Page.builder()
                         .icon(AdornTags.DRAWERS.item())
-                        .title(Text.translatable("guide.adorn.topic.drawer.title"))
-                        .content(Text.translatable("guide.adorn.topic.drawer.text"))
+                        .title(Component.translatable("guide.adorn.topic.drawer.title"))
+                        .content(Component.translatable("guide.adorn.topic.drawer.text"))
                         .build())
                     .page(Page.builder()
                         .icon(AdornTags.REGULAR_CHIMNEYS.item())
-                        .title(Text.translatable("guide.adorn.topic.chimney.title"))
-                        .content(Text.translatable("guide.adorn.topic.chimney.text"))
+                        .title(Component.translatable("guide.adorn.topic.chimney.title"))
+                        .content(Component.translatable("guide.adorn.topic.chimney.text"))
                         .build())
                     .page(Page.builder()
                         .icon(AdornTags.PRISMARINE_CHIMNEYS.item())
-                        .title(Text.translatable("guide.adorn.topic.prismarine_chimney.title"))
-                        .content(Text.translatable("guide.adorn.topic.prismarine_chimney.text"))
+                        .title(Component.translatable("guide.adorn.topic.prismarine_chimney.title"))
+                        .content(Component.translatable("guide.adorn.topic.prismarine_chimney.text"))
                         .build())
                     .page(Page.builder()
                         .icon(AdornBlocks.BREWER.get())
-                        .title(Text.translatable("guide.adorn.topic.brewer.title"))
-                        .content(Text.translatable("guide.adorn.topic.brewer.text"))
+                        .title(Component.translatable("guide.adorn.topic.brewer.title"))
+                        .content(Component.translatable("guide.adorn.topic.brewer.text"))
                         .image(new Image(
                             AdornCommon.id("textures/gui/brewer_guide.png"),
                             new Vec2i(113, 61),
@@ -125,34 +125,34 @@ public final class BookGenerator extends FabricCodecDataProvider<Book> {
                                 new Image.HoverArea(
                                     new Vec2i(1, 1),
                                     new Vec2i(16, 16),
-                                    Text.translatable("guide.adorn.topic.brewer.input_slot")
+                                    Component.translatable("guide.adorn.topic.brewer.input_slot")
                                 ),
                                 new Image.HoverArea(
                                     new Vec2i(61, 1),
                                     new Vec2i(16, 16),
-                                    Text.translatable("guide.adorn.topic.brewer.input_slot")
+                                    Component.translatable("guide.adorn.topic.brewer.input_slot")
                                 ),
                                 new Image.HoverArea(
                                     new Vec2i(27, 36),
                                     new Vec2i(24, 24),
-                                    Text.translatable("guide.adorn.topic.brewer.mug_slot")
+                                    Component.translatable("guide.adorn.topic.brewer.mug_slot")
                                 ),
                                 new Image.HoverArea(
                                     new Vec2i(74, 44),
                                     new Vec2i(16, 16),
-                                    Text.translatable("guide.adorn.topic.brewer.tank_slot")
+                                    Component.translatable("guide.adorn.topic.brewer.tank_slot")
                                 ),
                                 new Image.HoverArea(
                                     new Vec2i(96, 1),
                                     new Vec2i(16, 59),
-                                    Text.translatable("guide.adorn.topic.brewer.tank")
+                                    Component.translatable("guide.adorn.topic.brewer.tank")
                                 )
                             )
                         ))
                         .build())
                     .end(body -> Page.builder()
                         .icon(Items.BOOK)
-                        .title(Text.translatable("guide.adorn.contents.title"))
+                        .title(Component.translatable("guide.adorn.contents.title"))
                         .content(body)
                         .build())
                 )
@@ -161,18 +161,18 @@ public final class BookGenerator extends FabricCodecDataProvider<Book> {
         consumer.accept(
             AdornCommon.id("traders_manual"),
             Book.builder()
-                .title(AdornItems.TRADERS_MANUAL.get().getName().copy().formatted(Formatting.UNDERLINE, Formatting.BOLD))
-                .subtitle(Text.translatable("item.adorn.traders_manual.subtitle").formatted(Formatting.ITALIC))
-                .author(Text.translatable("item.adorn.traders_manual.author"))
+                .title(AdornItems.TRADERS_MANUAL.get().getName().copy().withStyle(ChatFormatting.UNDERLINE, ChatFormatting.BOLD))
+                .subtitle(Component.translatable("item.adorn.traders_manual.subtitle").withStyle(ChatFormatting.ITALIC))
+                .author(Component.translatable("item.adorn.traders_manual.author"))
                 .page(Page.builder()
                     .icon(Items.EMERALD)
-                    .title(Text.translatable("item.adorn.traders_manual.buying.title"))
-                    .content(Text.translatable("item.adorn.traders_manual.buying.text"))
+                    .title(Component.translatable("item.adorn.traders_manual.buying.title"))
+                    .content(Component.translatable("item.adorn.traders_manual.buying.text"))
                     .build())
                 .page(Page.builder()
                     .icon(Items.GOLD_INGOT)
-                    .title(Text.translatable("item.adorn.traders_manual.selling.title"))
-                    .content(Text.translatable("item.adorn.traders_manual.selling.text"))
+                    .title(Component.translatable("item.adorn.traders_manual.selling.title"))
+                    .content(Component.translatable("item.adorn.traders_manual.selling.text"))
                     .build())
                 .build()
         );

@@ -4,81 +4,82 @@ import com.google.common.base.Predicates;
 import juuxel.adorn.criterion.AdornCriteria;
 import juuxel.adorn.entity.AdornEntities;
 import juuxel.adorn.entity.SeatEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class SeatBlock extends Block {
-    public static final BooleanProperty OCCUPIED = Properties.OCCUPIED;
+    public static final BooleanProperty OCCUPIED = BlockStateProperties.OCCUPIED;
 
-    public SeatBlock(Settings settings) {
+    public SeatBlock(Properties settings) {
         super(settings);
 
         if (isSittingEnabled()) {
-            setDefaultState(getDefaultState().with(OCCUPIED, false));
+            registerDefaultState(defaultBlockState().setValue(OCCUPIED, false));
         }
     }
 
     public abstract @Nullable Identifier getSittingStat();
 
     @Override
-    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
         if (!isSittingEnabled()) {
-            return super.onUse(state, world, pos, player, hit);
+            return super.useWithoutItem(state, world, pos, player, hit);
         }
 
         var actualPos = getActualSeatPos(world, state, pos);
         var actualState = pos.equals(actualPos) ? state : world.getBlockState(actualPos);
 
         if (state != actualState && !(actualState.getBlock() instanceof SeatBlock)) {
-            return ActionResult.PASS;
+            return InteractionResult.PASS;
         }
 
-        var occupied = actualState.get(OCCUPIED);
+        var occupied = actualState.getValue(OCCUPIED);
 
         if (!occupied) {
-            if (!world.isClient()) {
+            if (!world.isClientSide()) {
                 var entity = new SeatEntity(AdornEntities.SEAT.get(), world);
                 entity.setPos(actualPos);
-                world.spawnEntity(entity);
-                world.setBlockState(actualPos, actualState.with(OCCUPIED, true));
+                world.addFreshEntity(entity);
+                world.setBlockAndUpdate(actualPos, actualState.setValue(OCCUPIED, true));
                 player.startRiding(entity);
 
                 var sittingStat = getSittingStat();
                 if (sittingStat != null) {
-                    player.incrementStat(sittingStat);
+                    player.awardStat(sittingStat);
                 }
 
-                if (player instanceof ServerPlayerEntity serverPlayer) {
+                if (player instanceof ServerPlayer serverPlayer) {
                     AdornCriteria.SIT_ON_BLOCK.get().trigger(serverPlayer, pos);
                 }
             }
-            return ActionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
-        return ActionResult.PASS;
+        return InteractionResult.PASS;
     }
 
     @Override
-    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean moved) {
         if (isSittingEnabled()) {
-            var seats = world.getEntitiesByType(
+            var seats = world.getEntities(
                 AdornEntities.SEAT.get(),
-                new Box(getActualSeatPos(world, state, pos)),
+                new AABB(getActualSeatPos(world, state, pos)),
                 Predicates.alwaysTrue()
             );
             for (var seat : seats) {
@@ -87,13 +88,13 @@ public abstract class SeatBlock extends Block {
         }
     }
 
-    protected BlockPos getActualSeatPos(World world, BlockState state, BlockPos pos) {
+    protected BlockPos getActualSeatPos(Level world, BlockState state, BlockPos pos) {
         return pos;
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         if (isSittingEnabled()) builder.add(OCCUPIED);
     }
 
@@ -101,11 +102,11 @@ public abstract class SeatBlock extends Block {
         return true;
     }
 
-    public double getSittingOffset(World world, BlockState state, BlockPos pos) {
-        return state.getCollisionShape(world, pos).getMax(Direction.Axis.Y);
+    public double getSittingOffset(Level world, BlockState state, BlockPos pos) {
+        return state.getCollisionShape(world, pos).max(Direction.Axis.Y);
     }
 
     public Direction getPreferredDismountDirection(BlockState state, Entity passenger) {
-        return passenger.getHorizontalFacing();
+        return passenger.getDirection();
     }
 }

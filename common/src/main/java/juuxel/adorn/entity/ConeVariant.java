@@ -5,27 +5,27 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.lib.registry.AdornRegistryKeys;
 import juuxel.adorn.util.Dyes;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.registry.Registerable;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryCodecs;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.LazyRegistryEntryReference;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.entry.RegistryEntryList;
-import net.minecraft.registry.entry.RegistryFixedCodec;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
-import net.minecraft.util.DyeColor;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.RegistryCodecs;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.EitherHolder;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
+import net.minecraft.resources.RegistryFixedCodec;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.util.Util;
-import net.minecraft.util.dynamic.Codecs;
+import net.minecraft.util.ExtraCodecs;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -38,41 +38,41 @@ import java.util.Optional;
 
 public record ConeVariant(
     float weight,
-    RegistryEntryList<Fluid> floatsIn,
+    HolderSet<Fluid> floatsIn,
     boolean canBurn,
-    RegistryEntry<SoundEvent> placeSound,
-    Optional<RegistryKey<ConeVariant>> appearance
+    Holder<SoundEvent> placeSound,
+    Optional<ResourceKey<ConeVariant>> appearance
 ) {
-    private static final RegistryEntry<SoundEvent> DEFAULT_PLACE_SOUND = Registries.SOUND_EVENT.getEntry(SoundEvents.BLOCK_WOOD_PLACE);
-    private static final RegistryEntry<SoundEvent> STONE_PLACE_SOUND = Registries.SOUND_EVENT.getEntry(SoundEvents.BLOCK_STONE_PLACE);
+    private static final Holder<SoundEvent> DEFAULT_PLACE_SOUND = BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.WOOD_PLACE);
+    private static final Holder<SoundEvent> STONE_PLACE_SOUND = BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.STONE_PLACE);
 
     public static final Codec<ConeVariant> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-        Codecs.NON_NEGATIVE_FLOAT.optionalFieldOf("weight", 1f).forGetter(ConeVariant::weight),
-        RegistryCodecs.entryList(RegistryKeys.FLUID).optionalFieldOf("floats_in", RegistryEntryList.empty()).forGetter(ConeVariant::floatsIn),
+        ExtraCodecs.NON_NEGATIVE_FLOAT.optionalFieldOf("weight", 1f).forGetter(ConeVariant::weight),
+        RegistryCodecs.homogeneousList(Registries.FLUID).optionalFieldOf("floats_in", HolderSet.empty()).forGetter(ConeVariant::floatsIn),
         Codec.BOOL.optionalFieldOf("can_burn", true).forGetter(ConeVariant::canBurn),
-        SoundEvent.ENTRY_CODEC.optionalFieldOf("place_sound", DEFAULT_PLACE_SOUND).forGetter(ConeVariant::placeSound),
-        RegistryKey.createCodec(AdornRegistryKeys.CONE_VARIANT).optionalFieldOf("appearance").forGetter(ConeVariant::appearance)
+        SoundEvent.CODEC.optionalFieldOf("place_sound", DEFAULT_PLACE_SOUND).forGetter(ConeVariant::placeSound),
+        ResourceKey.codec(AdornRegistryKeys.CONE_VARIANT).optionalFieldOf("appearance").forGetter(ConeVariant::appearance)
     ).apply(instance, ConeVariant::new));
 
-    public static final Codec<RegistryEntry<ConeVariant>> REGISTRY_CODEC = RegistryFixedCodec.of(AdornRegistryKeys.CONE_VARIANT);
+    public static final Codec<Holder<ConeVariant>> REGISTRY_CODEC = RegistryFixedCodec.create(AdornRegistryKeys.CONE_VARIANT);
 
-    public static final PacketCodec<RegistryByteBuf, ConeVariant> PACKET_CODEC = PacketCodec.tuple(
-        PacketCodecs.FLOAT, ConeVariant::weight,
-        PacketCodecs.registryEntryList(RegistryKeys.FLUID), ConeVariant::floatsIn,
-        PacketCodecs.BOOLEAN, ConeVariant::canBurn,
-        SoundEvent.ENTRY_PACKET_CODEC, ConeVariant::placeSound,
-        PacketCodecs.optional(RegistryKey.createPacketCodec(AdornRegistryKeys.CONE_VARIANT)), ConeVariant::appearance,
+    public static final StreamCodec<RegistryFriendlyByteBuf, ConeVariant> PACKET_CODEC = StreamCodec.composite(
+        ByteBufCodecs.FLOAT, ConeVariant::weight,
+        ByteBufCodecs.holderSet(Registries.FLUID), ConeVariant::floatsIn,
+        ByteBufCodecs.BOOL, ConeVariant::canBurn,
+        SoundEvent.STREAM_CODEC, ConeVariant::placeSound,
+        ByteBufCodecs.optional(ResourceKey.streamCodec(AdornRegistryKeys.CONE_VARIANT)), ConeVariant::appearance,
         ConeVariant::new
     );
 
-    public static final PacketCodec<RegistryByteBuf, RegistryEntry<ConeVariant>> ENTRY_PACKET_CODEC =
-        PacketCodecs.registryEntry(AdornRegistryKeys.CONE_VARIANT, PACKET_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<ConeVariant>> ENTRY_PACKET_CODEC =
+        ByteBufCodecs.holder(AdornRegistryKeys.CONE_VARIANT, PACKET_CODEC);
 
-    public static final String DEFAULT_TRANSLATION_KEY = Util.createTranslationKey("entity", AdornCommon.id("cone"));
-    public static final Text DEFAULT_NAME = Text.translatable(DEFAULT_TRANSLATION_KEY);
+    public static final String DEFAULT_TRANSLATION_KEY = Util.makeDescriptionId("entity", AdornCommon.id("cone"));
+    public static final Component DEFAULT_NAME = Component.translatable(DEFAULT_TRANSLATION_KEY);
 
-    public static void bootstrap(Registerable<ConeVariant> registerable) {
-        var fluidRegistry = registerable.getRegistryLookup(RegistryKeys.FLUID);
+    public static void bootstrap(BootstrapContext<ConeVariant> registerable) {
+        var fluidRegistry = registerable.lookup(Registries.FLUID);
         registerable.register(Keys.WHITE, createDefault(fluidRegistry));
         registerable.register(Keys.ORANGE, createDefault(fluidRegistry));
         registerable.register(Keys.MAGENTA, createDefault(fluidRegistry));
@@ -92,45 +92,45 @@ public record ConeVariant(
         registerable.register(Keys.OBSIDIAN, new ConeVariant(2f, fluidRegistry.getOrThrow(FluidTags.LAVA), false, STONE_PLACE_SOUND, Optional.empty()));
     }
 
-    private static ConeVariant createDefault(RegistryEntryLookup<Fluid> fluidRegistry) {
+    private static ConeVariant createDefault(HolderGetter<Fluid> fluidRegistry) {
         return new ConeVariant(1f, fluidRegistry.getOrThrow(FluidTags.WATER), true, DEFAULT_PLACE_SOUND, Optional.empty());
     }
 
-    public static Text getName(RegistryKey<ConeVariant> variant) {
-        return Text.translatable(Util.createTranslationKey("entity", variant.getValue().withSuffixedPath("_cone")));
+    public static Component getName(ResourceKey<ConeVariant> variant) {
+        return Component.translatable(Util.makeDescriptionId("entity", variant.identifier().withSuffix("_cone")));
     }
 
-    public static Text getName(RegistryEntry<ConeVariant> variant) {
-        return variant.getKey().map(ConeVariant::getName).orElse(DEFAULT_NAME);
+    public static Component getName(Holder<ConeVariant> variant) {
+        return variant.unwrapKey().map(ConeVariant::getName).orElse(DEFAULT_NAME);
     }
 
-    public static Text getName(LazyRegistryEntryReference<ConeVariant> variant) {
-        return variant.getKey().map(ConeVariant::getName).orElse(DEFAULT_NAME);
+    public static Component getName(EitherHolder<ConeVariant> variant) {
+        return variant.key().map(ConeVariant::getName).orElse(DEFAULT_NAME);
     }
 
     public static final class Keys {
-        private static final List<RegistryKey<ConeVariant>> ALL_BUILTIN = new ArrayList<>();
-        private static final Map<RegistryKey<ConeVariant>, DyeColor> COLORS_BY_VARIANT = new IdentityHashMap<>();
+        private static final List<ResourceKey<ConeVariant>> ALL_BUILTIN = new ArrayList<>();
+        private static final Map<ResourceKey<ConeVariant>, DyeColor> COLORS_BY_VARIANT = new IdentityHashMap<>();
 
-        public static final RegistryKey<ConeVariant> WHITE = of("white", DyeColor.WHITE);
-        public static final RegistryKey<ConeVariant> ORANGE = of("orange", DyeColor.ORANGE);
-        public static final RegistryKey<ConeVariant> MAGENTA = of("magenta", DyeColor.MAGENTA);
-        public static final RegistryKey<ConeVariant> LIGHT_BLUE = of("light_blue", DyeColor.LIGHT_BLUE);
-        public static final RegistryKey<ConeVariant> YELLOW = of("yellow", DyeColor.YELLOW);
-        public static final RegistryKey<ConeVariant> LIME = of("lime", DyeColor.LIME);
-        public static final RegistryKey<ConeVariant> PINK = of("pink", DyeColor.PINK);
-        public static final RegistryKey<ConeVariant> GRAY = of("gray", DyeColor.GRAY);
-        public static final RegistryKey<ConeVariant> LIGHT_GRAY = of("light_gray", DyeColor.LIGHT_GRAY);
-        public static final RegistryKey<ConeVariant> CYAN = of("cyan", DyeColor.CYAN);
-        public static final RegistryKey<ConeVariant> PURPLE = of("purple", DyeColor.PURPLE);
-        public static final RegistryKey<ConeVariant> BLUE = of("blue", DyeColor.BLUE);
-        public static final RegistryKey<ConeVariant> BROWN = of("brown", DyeColor.BROWN);
-        public static final RegistryKey<ConeVariant> GREEN = of("green", DyeColor.GREEN);
-        public static final RegistryKey<ConeVariant> RED = of("red", DyeColor.RED);
-        public static final RegistryKey<ConeVariant> BLACK = of("black", DyeColor.BLACK);
-        public static final RegistryKey<ConeVariant> OBSIDIAN = of("obsidian");
+        public static final ResourceKey<ConeVariant> WHITE = of("white", DyeColor.WHITE);
+        public static final ResourceKey<ConeVariant> ORANGE = of("orange", DyeColor.ORANGE);
+        public static final ResourceKey<ConeVariant> MAGENTA = of("magenta", DyeColor.MAGENTA);
+        public static final ResourceKey<ConeVariant> LIGHT_BLUE = of("light_blue", DyeColor.LIGHT_BLUE);
+        public static final ResourceKey<ConeVariant> YELLOW = of("yellow", DyeColor.YELLOW);
+        public static final ResourceKey<ConeVariant> LIME = of("lime", DyeColor.LIME);
+        public static final ResourceKey<ConeVariant> PINK = of("pink", DyeColor.PINK);
+        public static final ResourceKey<ConeVariant> GRAY = of("gray", DyeColor.GRAY);
+        public static final ResourceKey<ConeVariant> LIGHT_GRAY = of("light_gray", DyeColor.LIGHT_GRAY);
+        public static final ResourceKey<ConeVariant> CYAN = of("cyan", DyeColor.CYAN);
+        public static final ResourceKey<ConeVariant> PURPLE = of("purple", DyeColor.PURPLE);
+        public static final ResourceKey<ConeVariant> BLUE = of("blue", DyeColor.BLUE);
+        public static final ResourceKey<ConeVariant> BROWN = of("brown", DyeColor.BROWN);
+        public static final ResourceKey<ConeVariant> GREEN = of("green", DyeColor.GREEN);
+        public static final ResourceKey<ConeVariant> RED = of("red", DyeColor.RED);
+        public static final ResourceKey<ConeVariant> BLACK = of("black", DyeColor.BLACK);
+        public static final ResourceKey<ConeVariant> OBSIDIAN = of("obsidian");
 
-        public static final Comparator<RegistryKey<ConeVariant>> COMPARATOR = (a, b) -> {
+        public static final Comparator<ResourceKey<ConeVariant>> COMPARATOR = (a, b) -> {
             @Nullable DyeColor colorA = COLORS_BY_VARIANT.get(a);
             @Nullable DyeColor colorB = COLORS_BY_VARIANT.get(b);
 
@@ -140,20 +140,20 @@ public record ConeVariant(
                 return 1;
             }
 
-            return a.getValue().compareTo(b.getValue());
+            return a.identifier().compareTo(b.identifier());
         };
 
-        public static List<RegistryKey<ConeVariant>> getAllBuiltinVariants() {
+        public static List<ResourceKey<ConeVariant>> getAllBuiltinVariants() {
             return Collections.unmodifiableList(ALL_BUILTIN);
         }
 
-        private static RegistryKey<ConeVariant> of(String id) {
-            var key = RegistryKey.of(AdornRegistryKeys.CONE_VARIANT, AdornCommon.id(id));
+        private static ResourceKey<ConeVariant> of(String id) {
+            var key = ResourceKey.create(AdornRegistryKeys.CONE_VARIANT, AdornCommon.id(id));
             ALL_BUILTIN.add(key);
             return key;
         }
 
-        private static RegistryKey<ConeVariant> of(String id, DyeColor color) {
+        private static ResourceKey<ConeVariant> of(String id, DyeColor color) {
             var key = of(id);
             COLORS_BY_VARIANT.put(key, color);
             return key;

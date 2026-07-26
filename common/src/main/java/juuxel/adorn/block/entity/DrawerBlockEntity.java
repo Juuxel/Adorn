@@ -3,10 +3,10 @@ package juuxel.adorn.block.entity;
 import juuxel.adorn.block.AdornBlockEntities;
 import juuxel.adorn.menu.DrawerMenu;
 import juuxel.adorn.util.AdornUtil;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.menu.Menu;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.core.BlockPos;
 
 public final class DrawerBlockEntity extends SimpleContainerBlockEntity {
     public DrawerBlockEntity(BlockPos pos, BlockState state) {
@@ -14,7 +14,7 @@ public final class DrawerBlockEntity extends SimpleContainerBlockEntity {
     }
 
     @Override
-    protected Menu createMenu(int syncId, PlayerInventory inv) {
+    protected AbstractContainerMenu createMenu(int syncId, Inventory inv) {
         return new DrawerMenu(syncId, inv, this, AdornUtil.menuContextOf(this));
     }
 }

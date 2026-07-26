@@ -1,7 +1,7 @@
 package juuxel.adorn.util;
 
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
-import net.minecraft.registry.Registry;
+import net.minecraft.core.Registry;
 
 import java.util.function.Consumer;
 

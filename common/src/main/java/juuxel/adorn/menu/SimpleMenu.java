@@ -1,21 +1,21 @@
 package juuxel.adorn.menu;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.menu.Menu;
-import net.minecraft.menu.MenuContext;
-import net.minecraft.menu.MenuType;
-import net.minecraft.menu.slot.Slot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
 
-public abstract class SimpleMenu extends Menu implements ContainerBlockMenu {
+public abstract class SimpleMenu extends AbstractContainerMenu implements ContainerBlockMenu {
     private final int width;
     private final int height;
-    private final Inventory inventory;
-    private final MenuContext context;
+    private final Container inventory;
+    private final ContainerLevelAccess context;
 
-    public SimpleMenu(MenuType<?> type, int syncId, int width, int height, Inventory inventory, PlayerInventory playerInventory, MenuContext context) {
+    public SimpleMenu(MenuType<?> type, int syncId, int width, int height, Container inventory, Inventory playerInventory, ContainerLevelAccess context) {
         super(type, syncId);
         this.width = width;
         this.height = height;
@@ -23,7 +23,7 @@ public abstract class SimpleMenu extends Menu implements ContainerBlockMenu {
         this.context = context;
 
         int offset = (9 - width) / 2;
-        checkSize(inventory, width * height);
+        checkContainerSize(inventory, width * height);
 
         int slot = 18;
 
@@ -48,42 +48,42 @@ public abstract class SimpleMenu extends Menu implements ContainerBlockMenu {
     }
 
     @Override
-    public Inventory getInventory() {
+    public Container getInventory() {
         return inventory;
     }
 
     @Override
-    public MenuContext getContext() {
+    public ContainerLevelAccess getContext() {
         return context;
     }
 
     @Override
-    public boolean canUse(PlayerEntity player) {
-        return inventory.canPlayerUse(player);
+    public boolean stillValid(Player player) {
+        return inventory.stillValid(player);
     }
 
     @Override
-    public ItemStack quickMove(PlayerEntity player, int index) {
+    public ItemStack quickMoveStack(Player player, int index) {
         var result = ItemStack.EMPTY;
         var slot = slots.get(index);
 
-        if (slot != null && slot.hasStack()) {
+        if (slot != null && slot.hasItem()) {
             var containerSize = width * height;
-            var stack = slot.getStack();
+            var stack = slot.getItem();
             result = stack.copy();
 
             if (index < containerSize) {
-                if (!insertItem(stack, containerSize, slots.size(), true)) {
+                if (!moveItemStackTo(stack, containerSize, slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!insertItem(stack, 0, containerSize, false)) {
+            } else if (!moveItemStackTo(stack, 0, containerSize, false)) {
                 return ItemStack.EMPTY;
             }
 
             if (stack.isEmpty()) {
-                slot.setStack(ItemStack.EMPTY);
+                slot.setByPlayer(ItemStack.EMPTY);
             } else {
-                slot.markDirty();
+                slot.setChanged();
             }
         }
 

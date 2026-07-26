@@ -1,50 +1,50 @@
 package juuxel.adorn.block;
 
 import juuxel.adorn.lib.AdornTags;
-import juuxel.adorn.util.Shapes;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+import juuxel.adorn.util.ShapeRotation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class CopperPipeBlock extends Block implements Waterloggable, BlockWithDescription {
-    public static final BooleanProperty NORTH = Properties.NORTH;
-    public static final BooleanProperty EAST = Properties.EAST;
-    public static final BooleanProperty SOUTH = Properties.SOUTH;
-    public static final BooleanProperty WEST = Properties.WEST;
-    public static final BooleanProperty UP = Properties.UP;
-    public static final BooleanProperty DOWN = Properties.DOWN;
-    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+public class CopperPipeBlock extends Block implements SimpleWaterloggedBlock, BlockWithDescription {
+    public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
+    public static final BooleanProperty EAST = BlockStateProperties.EAST;
+    public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
+    public static final BooleanProperty WEST = BlockStateProperties.WEST;
+    public static final BooleanProperty UP = BlockStateProperties.UP;
+    public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     private static final String DESCRIPTION_KEY = "block.adorn.copper_pipe.description";
     private static final VoxelShape[] SHAPES = new VoxelShape[64];
 
     static {
-        var center = createCuboidShape(6.0, 6.0, 6.0, 10.0, 10.0, 10.0);
-        var pipes = Shapes.buildShapeRotationsFromNorth(7, 7, 0, 9, 9, 8);
-        pipes.put(Direction.UP, createCuboidShape(7.0, 8.0, 7.0, 9.0, 16.0, 9.0));
-        pipes.put(Direction.DOWN, createCuboidShape(7.0, 0.0, 7.0, 9.0, 8.0, 9.0));
-        var ringX = createCuboidShape(7.0, 6.0, 6.0, 9.0, 10.0, 10.0);
-        var ringY = createCuboidShape(6.0, 7.0, 6.0, 10.0, 9.0, 10.0);
-        var ringZ = createCuboidShape(6.0, 6.0, 7.0, 10.0, 10.0, 9.0);
+        var center = box(6.0, 6.0, 6.0, 10.0, 10.0, 10.0);
+        var pipes = ShapeRotation.buildShapeRotationsFromNorth(7, 7, 0, 9, 9, 8);
+        pipes.put(Direction.UP, box(7.0, 8.0, 7.0, 9.0, 16.0, 9.0));
+        pipes.put(Direction.DOWN, box(7.0, 0.0, 7.0, 9.0, 8.0, 9.0));
+        var ringX = box(7.0, 6.0, 6.0, 9.0, 10.0, 10.0);
+        var ringY = box(6.0, 7.0, 6.0, 10.0, 9.0, 10.0);
+        var ringZ = box(6.0, 6.0, 7.0, 10.0, 10.0, 9.0);
 
         var booleans = new boolean[] { true, false };
         for (var north : booleans) {
@@ -85,12 +85,12 @@ public class CopperPipeBlock extends Block implements Waterloggable, BlockWithDe
                                     shape = ringZ;
                                 }
 
-                                if (north) shape = VoxelShapes.union(shape, pipes.get(Direction.NORTH));
-                                if (east) shape = VoxelShapes.union(shape, pipes.get(Direction.EAST));
-                                if (south) shape = VoxelShapes.union(shape, pipes.get(Direction.SOUTH));
-                                if (west) shape = VoxelShapes.union(shape, pipes.get(Direction.WEST));
-                                if (up) shape = VoxelShapes.union(shape, pipes.get(Direction.UP));
-                                if (down) shape = VoxelShapes.union(shape, pipes.get(Direction.DOWN));
+                                if (north) shape = Shapes.or(shape, pipes.get(Direction.NORTH));
+                                if (east) shape = Shapes.or(shape, pipes.get(Direction.EAST));
+                                if (south) shape = Shapes.or(shape, pipes.get(Direction.SOUTH));
+                                if (west) shape = Shapes.or(shape, pipes.get(Direction.WEST));
+                                if (up) shape = Shapes.or(shape, pipes.get(Direction.UP));
+                                if (down) shape = Shapes.or(shape, pipes.get(Direction.DOWN));
 
                                 SHAPES[getShapeKey(north, east, south, west, up, down)] = shape;
                             }
@@ -101,10 +101,10 @@ public class CopperPipeBlock extends Block implements Waterloggable, BlockWithDe
         }
     }
 
-    public CopperPipeBlock(Settings settings) {
+    public CopperPipeBlock(Properties settings) {
         super(settings);
 
-        setDefaultState(getDefaultState().with(WATERLOGGED, false));
+        registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
     }
 
     @Override
@@ -113,8 +113,8 @@ public class CopperPipeBlock extends Block implements Waterloggable, BlockWithDe
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPES[getShapeKey(state.get(NORTH), state.get(EAST), state.get(SOUTH), state.get(WEST), state.get(UP), state.get(DOWN))];
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return SHAPES[getShapeKey(state.getValue(NORTH), state.getValue(EAST), state.getValue(SOUTH), state.getValue(WEST), state.getValue(UP), state.getValue(DOWN))];
     }
 
     private static int getShapeKey(boolean north, boolean east, boolean south, boolean west, boolean up, boolean down) {
@@ -129,20 +129,20 @@ public class CopperPipeBlock extends Block implements Waterloggable, BlockWithDe
     }
 
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        var state = getDefaultState().with(WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER);
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        var state = defaultBlockState().setValue(WATERLOGGED, ctx.getLevel().getFluidState(ctx.getClickedPos()).getType() == Fluids.WATER);
 
         for (var direction : Direction.values()) {
-            state = updateConnection(state, ctx.getWorld().getBlockState(ctx.getBlockPos().offset(direction)), direction);
+            state = updateConnection(state, ctx.getLevel().getBlockState(ctx.getClickedPos().relative(direction)), direction);
         }
 
         return state;
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
-        if (state.get(WATERLOGGED)) {
-            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+    protected BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        if (state.getValue(WATERLOGGED)) {
+            tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
         }
 
         return updateConnection(state, neighborState, direction);
@@ -157,25 +157,25 @@ public class CopperPipeBlock extends Block implements Waterloggable, BlockWithDe
             case WEST -> WEST;
             case EAST -> EAST;
         };
-        return state.with(property, shouldConnectTo(neighborState));
+        return state.setValue(property, shouldConnectTo(neighborState));
     }
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
-    public boolean canPathfindThrough(BlockState state, NavigationType type) {
+    protected boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(NORTH, EAST, SOUTH, WEST, UP, DOWN, WATERLOGGED);
     }
 
     private static boolean shouldConnectTo(BlockState state) {
-        return state.isIn(AdornTags.COPPER_PIPES_CONNECT_TO);
+        return state.is(AdornTags.COPPER_PIPES_CONNECT_TO);
     }
 }

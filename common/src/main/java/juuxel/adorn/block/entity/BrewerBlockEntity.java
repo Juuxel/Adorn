@@ -10,32 +10,32 @@ import juuxel.adorn.recipe.AdornRecipeTypes;
 import juuxel.adorn.recipe.BrewerInput;
 import juuxel.adorn.recipe.FluidBrewingRecipe;
 import juuxel.adorn.recipe.InventoryWrappingRecipeInput;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.SidedInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.menu.Menu;
-import net.minecraft.menu.property.PropertyDelegate;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.recipe.RecipeFinder;
-import net.minecraft.recipe.RecipeInputProvider;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.dynamic.Codecs;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.entity.player.StackedItemContents;
+import net.minecraft.world.inventory.StackedContentsCompatible;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.Containers;
+import net.minecraft.util.ExtraCodecs;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 import java.util.Optional;
 
-public abstract class BrewerBlockEntity extends BaseContainerBlockEntity implements SidedInventory, RecipeInputProvider, BrewerMenu.BrewerInputProvider {
+public abstract class BrewerBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, StackedContentsCompatible, BrewerMenu.BrewerInputProvider {
     private static final String NBT_PROGRESS = "Progress";
     private static final String NBT_CURRENT_RECIPE = "CurrentRecipe";
     public static final int CONTAINER_SIZE = 4;
@@ -47,8 +47,8 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
     public static final int FLUID_CAPACITY_IN_BUCKETS = 2;
 
     private int progress = 0;
-    private @Nullable RegistryKey<Recipe<?>> currentRecipe;
-    private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
+    private @Nullable ResourceKey<Recipe<?>> currentRecipe;
+    private final ContainerData propertyDelegate = new ContainerData() {
         @Override
         public int get(int index) {
             return switch (index) {
@@ -66,7 +66,7 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
         }
 
         @Override
-        public int size() {
+        public int getCount() {
             return 1;
         }
     };
@@ -76,31 +76,31 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
     }
 
     @Override
-    protected Menu createMenu(int syncId, PlayerInventory inv) {
+    protected AbstractContainerMenu createMenu(int syncId, Inventory inv) {
         return new BrewerMenu(syncId, inv, this, propertyDelegate, getFluidReference());
     }
 
     @Override
-    protected void writeData(WriteView view) {
-        super.writeData(view);
+    protected void saveAdditional(ValueOutput view) {
+        super.saveAdditional(view);
         view.putInt(NBT_PROGRESS, progress);
-        view.put(NBT_CURRENT_RECIPE, Codecs.optional(RegistryKey.createCodec(RegistryKeys.RECIPE)), Optional.ofNullable(currentRecipe));
+        view.store(NBT_CURRENT_RECIPE, ExtraCodecs.optionalEmptyMap(ResourceKey.codec(Registries.RECIPE)), Optional.ofNullable(currentRecipe));
     }
 
     @Override
-    protected void readData(ReadView view) {
-        super.readData(view);
-        progress = view.getInt(NBT_PROGRESS, 0);
-        currentRecipe = view.read(NBT_CURRENT_RECIPE, Codecs.optional(RegistryKey.createCodec(RegistryKeys.RECIPE))).flatMap(x -> x).orElse(null);
+    protected void loadAdditional(ValueInput view) {
+        super.loadAdditional(view);
+        progress = view.getIntOr(NBT_PROGRESS, 0);
+        currentRecipe = view.read(NBT_CURRENT_RECIPE, ExtraCodecs.optionalEmptyMap(ResourceKey.codec(Registries.RECIPE))).flatMap(x -> x).orElse(null);
     }
 
     @Override
-    public int[] getAvailableSlots(Direction side) {
-        var facing = getCachedState().get(BrewerBlock.FACING);
+    public int[] getSlotsForFace(Direction side) {
+        var facing = getBlockState().getValue(BrewerBlock.FACING);
 
-        if (side == facing.rotateYClockwise()) {
+        if (side == facing.getClockWise()) {
             return new int[] { LEFT_INGREDIENT_SLOT };
-        } else if (side == facing.rotateYCounterclockwise()) {
+        } else if (side == facing.getCounterClockWise()) {
             return new int[] { RIGHT_INGREDIENT_SLOT };
         } else if (side == facing.getOpposite()) {
             return new int[] { FLUID_CONTAINER_SLOT };
@@ -114,32 +114,32 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
     }
 
     @Override
-    public boolean isValid(int slot, ItemStack stack) {
-        if (slot == INPUT_SLOT && !(stack.isIn(AdornTags.BREWING_INPUTS) && getStack(slot).isEmpty())) return false;
-        if (slot == FLUID_CONTAINER_SLOT && !getStack(slot).isEmpty()) return false;
+    public boolean canPlaceItem(int slot, ItemStack stack) {
+        if (slot == INPUT_SLOT && !(stack.is(AdornTags.BREWING_INPUTS) && getItem(slot).isEmpty())) return false;
+        if (slot == FLUID_CONTAINER_SLOT && !getItem(slot).isEmpty()) return false;
         return true;
     }
 
     @Override
-    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
-        return dir != Direction.DOWN && isValid(slot, stack);
+    public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction dir) {
+        return dir != Direction.DOWN && canPlaceItem(slot, stack);
     }
 
     @Override
-    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+    public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dir) {
         return dir == Direction.DOWN && (slot != FLUID_CONTAINER_SLOT || canExtractFluidContainer());
     }
 
     public int calculateComparatorOutput() {
         // If brewing has finished
-        var mugStack = getStack(INPUT_SLOT);
-        if (!mugStack.isEmpty() && !mugStack.isIn(AdornTags.BREWING_INPUTS)) {
+        var mugStack = getItem(INPUT_SLOT);
+        if (!mugStack.isEmpty() && !mugStack.is(AdornTags.BREWING_INPUTS)) {
             return 15;
         }
 
         var progressFraction = (float) progress / MAX_PROGRESS;
         var level = progressFraction * 14;
-        return MathHelper.ceil(level);
+        return Mth.ceil(level);
     }
 
     public abstract FluidReference getFluidReference();
@@ -155,40 +155,40 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
     }
 
     @Override
-    public void provideRecipeInputs(RecipeFinder finder) {
-        finder.addInput(getStack(INPUT_SLOT));
-        finder.addInput(getStack(LEFT_INGREDIENT_SLOT));
-        finder.addInput(getStack(RIGHT_INGREDIENT_SLOT));
+    public void fillStackedContents(StackedItemContents finder) {
+        finder.accountStack(getItem(INPUT_SLOT));
+        finder.accountStack(getItem(LEFT_INGREDIENT_SLOT));
+        finder.accountStack(getItem(RIGHT_INGREDIENT_SLOT));
     }
 
     private static void decrementIngredient(BrewerBlockEntity brewer, int slot) {
-        var stack = brewer.getStack(slot);
+        var stack = brewer.getItem(slot);
         var remainder = ItemBridge.get().getRecipeRemainder(stack);
-        stack.decrement(1);
+        stack.shrink(1);
 
         if (!remainder.isEmpty()) {
             if (stack.isEmpty()) {
-                brewer.setStack(slot, remainder);
+                brewer.setItem(slot, remainder);
             } else {
-                ItemScatterer.spawn(brewer.world, brewer.pos.getX() + 0.5, brewer.pos.getY() + 0.5, brewer.pos.getZ() + 0.5, remainder);
+                Containers.dropItemStack(brewer.level, brewer.worldPosition.getX() + 0.5, brewer.worldPosition.getY() + 0.5, brewer.worldPosition.getZ() + 0.5, remainder);
             }
         }
     }
 
-    public static void tick(ServerWorld world, BlockPos pos, BlockState state, BrewerBlockEntity brewer) {
+    public static void tick(ServerLevel world, BlockPos pos, BlockState state, BrewerBlockEntity brewer) {
         var originallyActive = brewer.isActive();
         brewer.tryExtractFluidContainer();
 
         var dirty = false;
-        var hasMug = !brewer.getStack(INPUT_SLOT).isEmpty();
+        var hasMug = !brewer.getItem(INPUT_SLOT).isEmpty();
 
-        if (hasMug != state.get(BrewerBlock.HAS_MUG)) {
-            world.setBlockState(pos, state.with(BrewerBlock.HAS_MUG, hasMug));
+        if (hasMug != state.getValue(BrewerBlock.HAS_MUG)) {
+            world.setBlockAndUpdate(pos, state.setValue(BrewerBlock.HAS_MUG, hasMug));
         }
 
         var input = brewer.createRecipeInput();
-        var recipeEntry = world.getRecipeManager().getFirstMatch(AdornRecipeTypes.BREWING.get(), input, world);
-        var key = recipeEntry.map(RecipeEntry::id).orElse(null);
+        var recipeEntry = world.recipeAccess().getRecipeFor(AdornRecipeTypes.BREWING.get(), input, world);
+        var key = recipeEntry.map(RecipeHolder::id).orElse(null);
 
         if (!Objects.equals(key, brewer.currentRecipe)) {
             brewer.currentRecipe = key;
@@ -196,12 +196,12 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
             dirty = true;
         }
 
-        var recipe = recipeEntry.map(RecipeEntry::value).orElse(null);
+        var recipe = recipeEntry.map(RecipeHolder::value).orElse(null);
         if (recipe != null) {
             if (brewer.progress++ >= MAX_PROGRESS) {
                 decrementIngredient(brewer, LEFT_INGREDIENT_SLOT);
                 decrementIngredient(brewer, RIGHT_INGREDIENT_SLOT);
-                brewer.setStack(INPUT_SLOT, recipe.craft(input, world.getRegistryManager()));
+                brewer.setItem(INPUT_SLOT, recipe.assemble(input, world.registryAccess()));
 
                 if (recipe instanceof FluidBrewingRecipe fluidRecipe) {
                     brewer.getFluidReference().decrement(fluidRecipe.fluid().amount(), fluidRecipe.fluid().unit());
@@ -214,12 +214,12 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
         var activeNow = brewer.isActive();
         if (originallyActive != activeNow) {
             dirty = true;
-            var newState = state.with(BrewerBlock.ACTIVE, activeNow);
-            world.setBlockState(pos, newState);
+            var newState = state.setValue(BrewerBlock.ACTIVE, activeNow);
+            world.setBlockAndUpdate(pos, newState);
         }
 
         if (dirty) {
-            markDirty(world, pos, state);
+            setChanged(world, pos, state);
         }
     }
 

@@ -4,20 +4,20 @@ import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.lib.AdornTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.item.Items;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.world.item.Items;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 
 import java.util.concurrent.CompletableFuture;
 
 public final class AdornItemTagGenerator extends FabricTagProvider.ItemTagProvider {
-    public AdornItemTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture, FabricTagProvider.BlockTagProvider blockTagProvider) {
+    public AdornItemTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, FabricTagProvider.BlockTagProvider blockTagProvider) {
         super(output, registriesFuture, blockTagProvider);
     }
 
     @Override
-    protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+    protected void addTags(HolderLookup.Provider wrapperLookup) {
         copy(AdornTags.PAINTED_PLANKS);
         copy(AdornTags.PAINTED_WOOD_SLABS);
         copy(AdornTags.PAINTED_WOOD_STAIRS);

@@ -3,18 +3,18 @@ package juuxel.adorn.fluid;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import juuxel.adorn.util.EntryOrTag;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.entry.RegistryEntryList;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 final class FluidKeyImpl {
-    private static final Codec<Simple> SIMPLE_CODEC = EntryOrTag.codec(RegistryKeys.FLUID).xmap(Simple::new, Simple::fluids);
+    private static final Codec<Simple> SIMPLE_CODEC = EntryOrTag.codec(Registries.FLUID).xmap(Simple::new, Simple::fluids);
 
     public static final Codec<FluidKey> CODEC = Codec.either(
         SIMPLE_CODEC,
@@ -32,10 +32,10 @@ final class FluidKeyImpl {
         public Set<Fluid> getFluids() {
             return switch (fluids) {
                 case EntryOrTag.OfEntry(var fluid) -> Set.of(fluid);
-                case EntryOrTag.OfTag(var tag) -> Registries.FLUID.getOptional(tag)
+                case EntryOrTag.OfTag(var tag) -> BuiltInRegistries.FLUID.get(tag)
                     .stream()
-                    .flatMap(RegistryEntryList::stream)
-                    .map(RegistryEntry::value)
+                    .flatMap(HolderSet::stream)
+                    .map(Holder::value)
                     .collect(Collectors.toSet());
             };
         }
@@ -43,8 +43,8 @@ final class FluidKeyImpl {
         @Override
         public boolean matches(Fluid fluid) {
             return switch (fluids) {
-                case EntryOrTag.OfEntry(var keyFluid) -> fluid.matchesType(keyFluid);
-                case EntryOrTag.OfTag(var tag) -> fluid.isIn(tag);
+                case EntryOrTag.OfEntry(var keyFluid) -> fluid.isSame(keyFluid);
+                case EntryOrTag.OfTag(var tag) -> fluid.is(tag);
             };
         }
     }

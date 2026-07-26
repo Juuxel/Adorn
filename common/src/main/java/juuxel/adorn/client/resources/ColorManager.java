@@ -12,11 +12,11 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.util.Colors;
 import juuxel.adorn.util.Logging;
-import net.minecraft.resource.ResourceFinder;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.resource.SinglePreparationResourceReloader;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.profiler.Profiler;
+import net.minecraft.resources.FileToIdConverter;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.profiling.ProfilerFiller;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class ColorManager extends SinglePreparationResourceReloader<Map<Identifier, List<JsonObject>>> {
+public class ColorManager extends SimplePreparableReloadListener<Map<Identifier, List<JsonObject>>> {
     public static final Identifier ID = AdornCommon.id("color_manager");
     private static final Logger LOGGER = Logging.logger();
     private static final Identifier FALLBACK = AdornCommon.id("fallback");
@@ -38,21 +38,21 @@ public class ColorManager extends SinglePreparationResourceReloader<Map<Identifi
     private final Map<Identifier, ColorPalette> palettes = new HashMap<>();
 
     @Override
-    protected Map<Identifier, List<JsonObject>> prepare(ResourceManager manager, Profiler profiler) {
+    protected Map<Identifier, List<JsonObject>> prepare(ResourceManager manager, ProfilerFiller profiler) {
         var gson = new Gson();
-        var resourceFinder = ResourceFinder.json(PREFIX);
+        var resourceFinder = FileToIdConverter.json(PREFIX);
         Map<Identifier, List<JsonObject>> result = new HashMap<>();
 
-        for (var entry : resourceFinder.findAllResources(manager).entrySet()) {
-            var id = resourceFinder.toResourceId(entry.getKey());
+        for (var entry : resourceFinder.listMatchingResourceStacks(manager).entrySet()) {
+            var id = resourceFinder.fileToId(entry.getKey());
             List<JsonObject> jsons = new ArrayList<>();
             result.put(id, jsons);
 
             for (var resource : entry.getValue()) {
-                try (var in = resource.getReader()) {
+                try (var in = resource.openAsReader()) {
                     jsons.add(gson.fromJson(in, JsonObject.class));
                 } catch (IOException | JsonParseException e) {
-                    LOGGER.error("[Adorn] Could not load color palette resource {} from {}", entry.getKey(), resource.getPackId(), e);
+                    LOGGER.error("[Adorn] Could not load color palette resource {} from {}", entry.getKey(), resource.sourcePackId(), e);
                 }
             }
         }
@@ -61,7 +61,7 @@ public class ColorManager extends SinglePreparationResourceReloader<Map<Identifi
     }
 
     @Override
-    protected void apply(Map<Identifier, List<JsonObject>> prepared, ResourceManager manager, Profiler profiler) {
+    protected void apply(Map<Identifier, List<JsonObject>> prepared, ResourceManager manager, ProfilerFiller profiler) {
         palettes.clear();
         prepared.forEach((id, jsons) -> {
             var palette = new HashMap<Identifier, ColorPair>();

@@ -1,41 +1,41 @@
 package juuxel.adorn;
 
 import juuxel.adorn.block.CarpetedBlock;
-import net.minecraft.block.DyedCarpetBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.WoolCarpetBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.level.Level;
 
 public final class CommonEventHandlers {
-    public static ActionResult handleCarpets(PlayerEntity player, World world, Hand hand, BlockHitResult hit) {
-        var stack = player.getStackInHand(hand);
+    public static InteractionResult handleCarpets(Player player, Level world, InteractionHand hand, BlockHitResult hit) {
+        var stack = player.getItemInHand(hand);
 
         if (stack.getItem() instanceof BlockItem blockItem) {
-            if (blockItem.getBlock() instanceof DyedCarpetBlock carpet) {
-                var pos = hit.getBlockPos().offset(hit.getSide());
+            if (blockItem.getBlock() instanceof WoolCarpetBlock carpet) {
+                var pos = hit.getBlockPos().relative(hit.getDirection());
                 var state = world.getBlockState(pos);
 
                 if (state.getBlock() instanceof CarpetedBlock carpeted && carpeted.canStateBeCarpeted(state)) {
-                    world.setBlockState(pos, state.with(CarpetedBlock.CARPET, CarpetedBlock.CARPET.wrapOrNone(carpet.getDyeColor())));
-                    var soundGroup = carpet.getDefaultState().getSoundGroup();
+                    world.setBlockAndUpdate(pos, state.setValue(CarpetedBlock.CARPET, CarpetedBlock.CARPET.wrapOrNone(carpet.getColor())));
+                    var soundGroup = carpet.defaultBlockState().getSoundType();
                     world.playSound(
-                        player, pos, soundGroup.getPlaceSound(), SoundCategory.BLOCKS,
+                        player, pos, soundGroup.getPlaceSound(), SoundSource.BLOCKS,
                         (soundGroup.volume + 1f) * 0.5f, soundGroup.pitch * 0.8f
                     );
 
-                    if (!player.getAbilities().creativeMode) {
-                        stack.decrement(1);
+                    if (!player.getAbilities().instabuild) {
+                        stack.shrink(1);
                     }
-                    player.swingHand(hand);
-                    return ActionResult.SUCCESS;
+                    player.swing(hand);
+                    return InteractionResult.SUCCESS;
                 }
             }
         }
 
-        return ActionResult.PASS;
+        return InteractionResult.PASS;
     }
 }

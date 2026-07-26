@@ -1,14 +1,15 @@
 package juuxel.adorn.client.gui.widget;
 
-import net.minecraft.client.gui.Click;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.Drawable;
-import net.minecraft.client.gui.Element;
-import net.minecraft.client.gui.Narratable;
-import net.minecraft.client.gui.Selectable;
-import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
-import net.minecraft.client.input.CharInput;
-import net.minecraft.client.input.KeyInput;
+import net.minecraft.client.gui.narration.NarratableEntry.NarrationPriority;
+import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.narration.NarrationSupplier;
+import net.minecraft.client.gui.narration.NarratableEntry;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.input.CharacterEvent;
+import net.minecraft.client.input.KeyEvent;
 
 /**
  * A wrapper for a widget (obtained by calling {@link #current()}).
@@ -17,12 +18,12 @@ import net.minecraft.client.input.KeyInput;
  * such as {@linkplain FlipBook pagination}, {@linkplain ScissorEnvelope scissoring} or
  * {@linkplain ScrollEnvelope scrolling}.
  */
-public abstract class WidgetEnvelope implements Element, Drawable, Selectable, TickingElement, Draggable {
-    protected abstract Element current();
+public abstract class WidgetEnvelope implements GuiEventListener, Renderable, NarratableEntry, TickingElement, Draggable {
+    protected abstract GuiEventListener current();
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        if (current() instanceof Drawable drawable) {
+    public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
+        if (current() instanceof Renderable drawable) {
             drawable.render(context, mouseX, mouseY, delta);
         }
     }
@@ -33,17 +34,17 @@ public abstract class WidgetEnvelope implements Element, Drawable, Selectable, T
     }
 
     @Override
-    public boolean mouseClicked(Click click, boolean doubled) {
+    public boolean mouseClicked(MouseButtonEvent click, boolean doubled) {
         return current().mouseClicked(click, doubled);
     }
 
     @Override
-    public boolean mouseReleased(Click click) {
+    public boolean mouseReleased(MouseButtonEvent click) {
         return current().mouseReleased(click);
     }
 
     @Override
-    public boolean mouseDragged(Click click, double offsetX, double offsetY) {
+    public boolean mouseDragged(MouseButtonEvent click, double offsetX, double offsetY) {
         return current().mouseDragged(click, offsetX, offsetY);
     }
 
@@ -53,17 +54,17 @@ public abstract class WidgetEnvelope implements Element, Drawable, Selectable, T
     }
 
     @Override
-    public boolean keyPressed(KeyInput input) {
+    public boolean keyPressed(KeyEvent input) {
         return current().keyPressed(input);
     }
 
     @Override
-    public boolean keyReleased(KeyInput input) {
+    public boolean keyReleased(KeyEvent input) {
         return current().keyReleased(input);
     }
 
     @Override
-    public boolean charTyped(CharInput input) {
+    public boolean charTyped(CharacterEvent input) {
         return current().charTyped(input);
     }
 
@@ -83,15 +84,15 @@ public abstract class WidgetEnvelope implements Element, Drawable, Selectable, T
     }
 
     @Override
-    public void appendNarrations(NarrationMessageBuilder builder) {
-        if (current() instanceof Narratable narratable) {
-            narratable.appendNarrations(builder);
+    public void updateNarration(NarrationElementOutput builder) {
+        if (current() instanceof NarrationSupplier narratable) {
+            narratable.updateNarration(builder);
         }
     }
 
     @Override
-    public SelectionType getType() {
-        return current() instanceof Selectable selectable ? selectable.getType() : SelectionType.NONE;
+    public NarrationPriority narrationPriority() {
+        return current() instanceof NarratableEntry selectable ? selectable.narrationPriority() : NarrationPriority.NONE;
     }
 
     @Override

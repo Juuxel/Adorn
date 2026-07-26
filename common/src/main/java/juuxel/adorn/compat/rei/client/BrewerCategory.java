@@ -14,9 +14,9 @@ import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.minecraft.client.gl.RenderPipelines;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +31,8 @@ public final class BrewerCategory implements DisplayCategory<BrewerDisplay> {
     }
 
     @Override
-    public Text getTitle() {
-        return Text.translatable("category.adorn.brewer");
+    public Component getTitle() {
+        return Component.translatable("category.adorn.brewer");
     }
 
     @Override
@@ -52,10 +52,10 @@ public final class BrewerCategory implements DisplayCategory<BrewerDisplay> {
         widgets.add(Widgets.createRecipeBase(bounds));
         widgets.add(
             Widgets.createDrawableWidget((context, _0, _1, _2) -> {
-                context.drawTexture(RenderPipelines.GUI_TEXTURED, currentTexture(), topLeft.x, topLeft.y, 49, 16, 105, 61, 256, 256);
+                context.blit(RenderPipelines.GUI_TEXTURED, currentTexture(), topLeft.x, topLeft.y, 49, 16, 105, 61, 256, 256);
                 float progressFraction = (System.currentTimeMillis() % 4000) / 4000f;
                 int height = Math.round(progressFraction * 25);
-                context.drawTexture(RenderPipelines.GUI_TEXTURED, currentTexture(), topLeft.x + 35, topLeft.y + 8, 176, 0, 8, height, 256, 256);
+                context.blit(RenderPipelines.GUI_TEXTURED, currentTexture(), topLeft.x + 35, topLeft.y + 8, 176, 0, 8, height, 256, 256);
             })
         );
         widgets.add(
@@ -91,10 +91,10 @@ public final class BrewerCategory implements DisplayCategory<BrewerDisplay> {
         // Fluid scale for empty fluid slots
         widgets.add(
             Widgets.createDrawableWidget((context, _0, _1, _2) -> {
-                context.getMatrices().pushMatrix();
-                context.getMatrices().translate(0f, 0f);
-                context.drawTexture(RenderPipelines.GUI_TEXTURED, currentTexture(), topLeft.x + 88, topLeft.y + 1, 154, 17, 16, BrewerScreen.FLUID_AREA_HEIGHT, 256, 256);
-                context.getMatrices().popMatrix();
+                context.pose().pushMatrix();
+                context.pose().translate(0f, 0f);
+                context.blit(RenderPipelines.GUI_TEXTURED, currentTexture(), topLeft.x + 88, topLeft.y + 1, 154, 17, 16, BrewerScreen.FLUID_AREA_HEIGHT, 256, 256);
+                context.pose().popMatrix();
             })
         );
         return widgets;

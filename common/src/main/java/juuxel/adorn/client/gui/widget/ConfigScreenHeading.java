@@ -1,25 +1,26 @@
 package juuxel.adorn.client.gui.widget;
 
 import juuxel.adorn.util.Colors;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.Drawable;
-import net.minecraft.text.Text;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.network.chat.Component;
 
-public record ConfigScreenHeading(Text text, int x, int y, int width) implements Drawable {
+public record ConfigScreenHeading(
+    Component text, int x, int y, int width) implements Renderable {
     public static final int HEIGHT = 18;
     private static final int OUTER_GAP_WIDTH = 5;
     private static final int INNER_GAP_WIDTH = 5;
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        var client = MinecraftClient.getInstance();
-        var textRenderer = client.textRenderer;
-        var textWidth = textRenderer.getWidth(text);
+    public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
+        var client = Minecraft.getInstance();
+        var textRenderer = client.font;
+        var textWidth = textRenderer.width(text);
         var lineWidth = width / 2 - OUTER_GAP_WIDTH - INNER_GAP_WIDTH - textWidth / 2;
         var lineY = HEIGHT / 2 - 2;
 
-        var matrices = context.getMatrices();
+        var matrices = context.pose();
         matrices.pushMatrix();
         matrices.translate(x, y);
 
@@ -39,8 +40,8 @@ public record ConfigScreenHeading(Text text, int x, int y, int width) implements
 
         // Label
         var textX = (width - textWidth) * 0.5f;
-        var textY = (HEIGHT - textRenderer.fontHeight) / 2;
-        context.drawText(textRenderer, text, (int) textX, textY, Colors.WHITE, false);
+        var textY = (HEIGHT - textRenderer.lineHeight) / 2;
+        context.drawString(textRenderer, text, (int) textX, textY, Colors.WHITE, false);
         matrices.popMatrix();
     }
 }

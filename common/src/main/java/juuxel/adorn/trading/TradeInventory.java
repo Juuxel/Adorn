@@ -9,12 +9,12 @@ public final class TradeInventory extends InventoryComponent {
         super(2);
         this.trade = trade;
 
-        setStack(0, trade.getSelling());
-        setStack(1, trade.getPrice());
+        setItem(0, trade.getSelling());
+        setItem(1, trade.getPrice());
 
         addListener(sender -> {
-            trade.setSelling(getStack(0));
-            trade.setPrice(getStack(1));
+            trade.setSelling(getItem(0));
+            trade.setPrice(getItem(1));
             trade.callListeners();
         });
     }

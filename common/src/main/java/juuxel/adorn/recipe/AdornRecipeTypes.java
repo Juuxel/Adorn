@@ -4,12 +4,12 @@ import juuxel.adorn.AdornCommon;
 import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.registry.RegistryKeys;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.core.registries.Registries;
 
 public final class AdornRecipeTypes {
-    public static final Registrar<RecipeType<?>> RECIPE_TYPES = RegistrarFactory.get().create(RegistryKeys.RECIPE_TYPE);
+    public static final Registrar<RecipeType<?>> RECIPE_TYPES = RegistrarFactory.get().create(Registries.RECIPE_TYPE);
 
     public static final Registered<RecipeType<BrewingRecipe>> BREWING = registerRecipeType("brewing");
 

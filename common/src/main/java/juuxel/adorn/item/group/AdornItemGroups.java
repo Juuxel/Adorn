@@ -17,18 +17,18 @@ import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
 import juuxel.adorn.platform.ItemGroupBridge;
 import juuxel.adorn.util.Dyes;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.text.Text;
-import net.minecraft.util.DyeColor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.util.Util;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Optional;
 
 public final class AdornItemGroups {
-    public static final Registrar<ItemGroup> ITEM_GROUPS = RegistrarFactory.get().create(RegistryKeys.ITEM_GROUP);
+    public static final Registrar<CreativeModeTab> ITEM_GROUPS = RegistrarFactory.get().create(Registries.CREATIVE_MODE_TAB);
 
     // Block kinds for each vanilla item group
     private static final List<BlockKind> BUILDING_KINDS = List.of(
@@ -60,25 +60,25 @@ public final class AdornItemGroups {
     );
 
     private static final String GROUP_ID = "items";
-    public static final Registered<ItemGroup> GROUP = ITEM_GROUPS.register(GROUP_ID,
+    public static final Registered<CreativeModeTab> GROUP = ITEM_GROUPS.register(GROUP_ID,
         () -> ItemGroupBridge.get().builder()
-            .displayName(Text.translatable(Util.createTranslationKey("itemGroup", AdornCommon.id(GROUP_ID))))
+            .title(Component.translatable(Util.makeDescriptionId("itemGroup", AdornCommon.id(GROUP_ID))))
             .icon(() -> new ItemStack(AdornBlocks.SOFAS.getEager(DyeColor.LIME)))
-            .entries((displayContext, entries) -> {
+            .displayItems((displayContext, entries) -> {
                 ItemGroupBuildContext context = new ItemGroupBuildContext() {
                     @Override
-                    public void add(ItemConvertible item) {
-                        entries.add(item);
+                    public void add(ItemLike item) {
+                        entries.accept(item);
                     }
 
                     @Override
                     public void add(ItemStack stack) {
-                        entries.add(stack);
+                        entries.accept(stack);
                     }
 
                     @Override
-                    public RegistryWrapper.WrapperLookup getRegistries() {
-                        return displayContext.lookup();
+                    public HolderLookup.Provider getRegistries() {
+                        return displayContext.holders();
                     }
                 };
                 switch (ConfigManager.config().groupItems) {
@@ -122,7 +122,7 @@ public final class AdornItemGroups {
 
     private static void addToVanillaItemGroups() {
         var itemGroups = ItemGroupBridge.get();
-        itemGroups.addItems(ItemGroups.BUILDING_BLOCKS, context -> {
+        itemGroups.addItems(CreativeModeTabs.BUILDING_BLOCKS, context -> {
             for (var variant : BlockVariantSets.allVariants()) {
                 // Skip painted woods, they're added to the coloured blocks group instead.
                 if (variant instanceof BlockVariant.PaintedWood) continue;
@@ -130,7 +130,7 @@ public final class AdornItemGroups {
                 var after = findLastBuildingBlockEntry(variant);
 
                 if (after != null) {
-                    List<ItemConvertible> items = new ArrayList<>();
+                    List<ItemLike> items = new ArrayList<>();
                     for (var kind : BUILDING_KINDS) {
                         var block = BlockVariantSets.get(kind, variant);
                         if (block != null) items.add(block.get());
@@ -150,8 +150,8 @@ public final class AdornItemGroups {
             context.addAfter(Items.WAXED_WEATHERED_CUT_COPPER_SLAB, AdornBlocks.WAXED_WEATHERED_COPPER_PIPE);
             context.addAfter(Items.WAXED_OXIDIZED_CUT_COPPER_SLAB, AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE);
         });
-        itemGroups.addItems(ItemGroups.COLORED_BLOCKS, context -> addColoredBlocks(context, true));
-        itemGroups.addItems(ItemGroups.FUNCTIONAL, context -> {
+        itemGroups.addItems(CreativeModeTabs.COLORED_BLOCKS, context -> addColoredBlocks(context, true));
+        itemGroups.addItems(CreativeModeTabs.FUNCTIONAL_BLOCKS, context -> {
             addByKinds(context, FUNCTIONAL_KINDS);
             addColoredBlocks(context, false);
             addChimneys(context);
@@ -162,9 +162,9 @@ public final class AdornItemGroups {
             context.add(AdornBlocks.TRADING_STATION);
             context.add(AdornBlocks.BREWER);
         });
-        itemGroups.addItems(ItemGroups.FOOD_AND_DRINK, AdornItemGroups::addFoodAndDrink);
-        itemGroups.addItems(ItemGroups.INGREDIENTS, AdornItemGroups::addIngredients);
-        itemGroups.addItems(ItemGroups.TOOLS, AdornItemGroups::addTools);
+        itemGroups.addItems(CreativeModeTabs.FOOD_AND_DRINKS, AdornItemGroups::addFoodAndDrink);
+        itemGroups.addItems(CreativeModeTabs.INGREDIENTS, AdornItemGroups::addIngredients);
+        itemGroups.addItems(CreativeModeTabs.TOOLS_AND_UTILITIES, AdornItemGroups::addTools);
     }
 
     private static void addByKinds(ItemGroupBuildContext context, List<BlockKind> kinds) {
@@ -218,9 +218,9 @@ public final class AdornItemGroups {
 
     private static void addCones(ItemGroupBuildContext context) {
         var coneVariantIter = context.getRegistries()
-            .getOrThrow(AdornRegistryKeys.CONE_VARIANT)
-            .streamEntries()
-            .sorted(Comparator.comparing(RegistryEntry.Reference::registryKey, ConeVariant.Keys.COMPARATOR))
+            .lookupOrThrow(AdornRegistryKeys.CONE_VARIANT)
+            .listElements()
+            .sorted(Comparator.comparing(Holder.Reference::key, ConeVariant.Keys.COMPARATOR))
             .iterator();
 
         while (coneVariantIter.hasNext()) {
@@ -231,7 +231,7 @@ public final class AdornItemGroups {
         }
     }
 
-    private static void addColored(ItemGroupBuildContext context, RegisteredMap<DyeColor, ? extends ItemConvertible> items) {
+    private static void addColored(ItemGroupBuildContext context, RegisteredMap<DyeColor, ? extends ItemLike> items) {
         for (DyeColor color : Dyes.DYES_IN_CREATIVE_INVENTORY_ORDER) {
             context.add(items.get(color));
         }
@@ -326,8 +326,8 @@ public final class AdornItemGroups {
         context.add(AdornBlocks.STONE_LADDER);
     }
 
-    private static List<ItemConvertible> getPaintedWood() {
-        List<ItemConvertible> items = new ArrayList<>();
+    private static List<ItemLike> getPaintedWood() {
+        List<ItemLike> items = new ArrayList<>();
 
         for (DyeColor color : Dyes.DYES_IN_CREATIVE_INVENTORY_ORDER) {
             items.add(AdornBlocks.PAINTED_PLANKS.getEager(color));
@@ -354,10 +354,10 @@ public final class AdornItemGroups {
 
     private static Optional<Block> findBaseBlock(BlockVariant variant, @Nullable String suffix) {
         var variantId = variant.nameAsIdentifier();
-        var buttonId = suffix != null ? variantId.withSuffixedPath("_" + suffix) : variantId;
+        var buttonId = suffix != null ? variantId.withSuffix("_" + suffix) : variantId;
 
-        if (Registries.BLOCK.containsId(buttonId)) {
-            return Optional.of(Registries.BLOCK.get(buttonId));
+        if (BuiltInRegistries.BLOCK.containsKey(buttonId)) {
+            return Optional.of(BuiltInRegistries.BLOCK.getValue(buttonId));
         }
 
         return Optional.empty();

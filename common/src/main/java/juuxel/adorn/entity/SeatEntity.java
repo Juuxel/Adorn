@@ -2,85 +2,86 @@ package juuxel.adorn.entity;
 
 import juuxel.adorn.block.SeatBlock;
 import juuxel.adorn.platform.PlatformBridges;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Dismounting;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity.RemovalReason;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.vehicle.DismountHelper;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // TODO: Rewrite using BlockAttachedEntity
 public final class SeatEntity extends Entity {
-    private static final TrackedData<BlockPos> SEAT_POS = DataTracker.registerData(SeatEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
+    private static final EntityDataAccessor<BlockPos> SEAT_POS = SynchedEntityData.defineId(SeatEntity.class, EntityDataSerializers.BLOCK_POS);
     private static final String NBT_SEAT_POS = "SeatPos";
     private BlockPos seatPos;
 
-    public SeatEntity(EntityType<?> type, World world) {
+    public SeatEntity(EntityType<?> type, Level world) {
         super(type, world);
-        noClip = true;
+        noPhysics = true;
         setInvulnerable(true);
-        seatPos = BlockPos.ofFloored(getEntityPos());
+        seatPos = BlockPos.containing(position());
     }
 
     private void setSeatPos(BlockPos seatPos) {
         this.seatPos = seatPos;
-        dataTracker.set(SEAT_POS, seatPos);
+        entityData.set(SEAT_POS, seatPos);
     }
 
     public void setPos(BlockPos pos) {
-        if (getEntityWorld().isClient()) {
+        if (level().isClientSide()) {
             throw new IllegalStateException("setPos must be called on the logical server");
         }
-        updatePosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+        absSnapTo(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
         setSeatPos(pos);
     }
 
     @Override
-    public ActionResult interact(PlayerEntity player, Hand hand) {
+    public InteractionResult interact(Player player, InteractionHand hand) {
         player.startRiding(this);
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    public boolean damage(ServerWorld world, DamageSource source, float amount) {
+    public boolean hurtServer(ServerLevel world, DamageSource source, float amount) {
         return false;
     }
 
     @Override
     public void remove(RemovalReason reason) {
-        removeAllPassengers();
-        if (!getEntityWorld().isClient()) {
-            PlatformBridges.get().getNetwork().sendToTracking(this, new EntityPassengersSetS2CPacket(this));
+        ejectPassengers();
+        if (!level().isClientSide()) {
+            PlatformBridges.get().getNetwork().sendToTracking(this, new ClientboundSetPassengersPacket(this));
         }
-        var state = getEntityWorld().getBlockState(seatPos);
+        var state = level().getBlockState(seatPos);
         if (state.getBlock() instanceof SeatBlock) {
-            getEntityWorld().setBlockState(seatPos, state.with(SeatBlock.OCCUPIED, false));
+            level().setBlockAndUpdate(seatPos, state.setValue(SeatBlock.OCCUPIED, false));
         }
         super.remove(reason);
     }
 
     @Override
-    public boolean hasNoGravity() {
+    public boolean isNoGravity() {
         return true;
     }
 
@@ -90,49 +91,49 @@ public final class SeatEntity extends Entity {
     }
 
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-        builder.add(SEAT_POS, BlockPos.ORIGIN);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        builder.define(SEAT_POS, BlockPos.ZERO);
     }
 
     @Override
-    protected void readCustomData(ReadView view) {
-        seatPos = view.read(NBT_SEAT_POS, BlockPos.CODEC).orElse(BlockPos.ORIGIN);
+    protected void readAdditionalSaveData(ValueInput view) {
+        seatPos = view.read(NBT_SEAT_POS, BlockPos.CODEC).orElse(BlockPos.ZERO);
     }
 
     @Override
-    protected void writeCustomData(WriteView view) {
-        view.put(NBT_SEAT_POS, BlockPos.CODEC, seatPos);
+    protected void addAdditionalSaveData(ValueOutput view) {
+        view.store(NBT_SEAT_POS, BlockPos.CODEC, seatPos);
     }
 
     @Override
-    protected Vec3d getPassengerAttachmentPos(Entity passenger, EntityDimensions dimensions, float scaleFactor) {
-        var seatPos = dataTracker.get(SEAT_POS);
-        var state = getEntityWorld().getBlockState(seatPos);
+    protected Vec3 getPassengerAttachmentPoint(Entity passenger, EntityDimensions dimensions, float scaleFactor) {
+        var seatPos = entityData.get(SEAT_POS);
+        var state = level().getBlockState(seatPos);
         var block = state.getBlock();
 
         // Add the offset that comes from the block's shape
-        var blockOffset = block instanceof SeatBlock seat ? seat.getSittingOffset(getEntityWorld(), state, seatPos) : 0.0;
+        var blockOffset = block instanceof SeatBlock seat ? seat.getSittingOffset(level(), state, seatPos) : 0.0;
         // Remove the inherent offset that comes from this entity not being directly where the block is
         var posOffset = getY() - seatPos.getY();
 
-        return new Vec3d(0, blockOffset - posOffset, 0);
+        return new Vec3(0, blockOffset - posOffset, 0);
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (!hasPassengers()) {
+        if (!isVehicle()) {
             discard();
         }
     }
 
     @Override
-    public Vec3d updatePassengerForDismount(LivingEntity passenger) {
-        BlockPos seatPos = dataTracker.get(SEAT_POS);
-        BlockState state = getEntityWorld().getBlockState(seatPos);
+    public Vec3 getDismountLocationForPassenger(LivingEntity passenger) {
+        BlockPos seatPos = entityData.get(SEAT_POS);
+        BlockState state = level().getBlockState(seatPos);
         Block block = state.getBlock();
-        Direction preferred = block instanceof SeatBlock seat ? seat.getPreferredDismountDirection(state, passenger) : passenger.getHorizontalFacing();
+        Direction preferred = block instanceof SeatBlock seat ? seat.getPreferredDismountDirection(state, passenger) : passenger.getDirection();
 
         // try the following, in order
         // 1. at the seat pos
@@ -146,29 +147,29 @@ public final class SeatEntity extends Entity {
         Direction[] directions = {
             null,
             preferred,
-            preferred.rotateYClockwise(),
-            preferred.rotateYCounterclockwise(),
+            preferred.getClockWise(),
+            preferred.getCounterClockWise(),
             preferred.getOpposite()
         };
-        BlockPos.Mutable pos = new BlockPos.Mutable();
-        List<Vec3d> positionCandidates = new ArrayList<>(10);
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+        List<Vec3> positionCandidates = new ArrayList<>(10);
 
         for (int y = 0; y <= 1; y++) {
             for (Direction direction : directions) {
                 pos.set(seatPos.getX(), seatPos.getY() + y, seatPos.getZ());
                 if (direction != null) pos.move(direction);
 
-                double height = getEntityWorld().getDismountHeight(pos);
+                double height = level().getBlockFloorHeight(pos);
 
-                if (Dismounting.canDismountInBlock(height)) {
-                    positionCandidates.add(Vec3d.ofCenter(pos, height));
+                if (DismountHelper.isBlockFloorValid(height)) {
+                    positionCandidates.add(Vec3.upFromBottomCenterOf(pos, height));
                 }
             }
         }
 
-        for (EntityPose pose : passenger.getPoses()) {
-            for (Vec3d candidate : positionCandidates) {
-                if (Dismounting.canPlaceEntityAt(getEntityWorld(), candidate, passenger, pose)) {
+        for (Pose pose : passenger.getDismountPoses()) {
+            for (Vec3 candidate : positionCandidates) {
+                if (DismountHelper.canDismountTo(level(), candidate, passenger, pose)) {
                     passenger.setPose(pose);
                     return candidate;
                 }
@@ -176,14 +177,14 @@ public final class SeatEntity extends Entity {
         }
 
         // Horizontal center pos of the block above
-        return Vec3d.ofCenter(seatPos, 1.0);
+        return Vec3.upFromBottomCenterOf(seatPos, 1.0);
     }
 
     // Should be called when the player logs out (incl. closing a singleplayer world)
     // to remove any seat entities they're riding. Otherwise, the game will recreate
     // an invalid seat entity when the player relogs.
     public static void stopSitting(Entity entity) {
-        while (entity.hasVehicle()) {
+        while (entity.isPassenger()) {
             var vehicle = entity.getVehicle();
             assert vehicle != null;
             if (vehicle instanceof SeatEntity) {

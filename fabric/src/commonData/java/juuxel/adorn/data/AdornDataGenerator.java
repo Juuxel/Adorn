@@ -9,7 +9,7 @@ import juuxel.adorn.util.Logging;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.JsonKeySortOrderCallback;
-import net.minecraft.registry.RegistryBuilder;
+import net.minecraft.core.RegistrySetBuilder;
 import org.slf4j.Logger;
 
 public final class AdornDataGenerator implements DataGeneratorEntrypoint {
@@ -17,8 +17,8 @@ public final class AdornDataGenerator implements DataGeneratorEntrypoint {
     private static final String COMMON_MODE_PROPERTY = "adorn.data.commonMode";
 
     @Override
-    public void buildRegistry(RegistryBuilder registryBuilder) {
-        registryBuilder.addRegistry(AdornRegistryKeys.CONE_VARIANT, ConeVariant::bootstrap);
+    public void buildRegistry(RegistrySetBuilder registryBuilder) {
+        registryBuilder.add(AdornRegistryKeys.CONE_VARIANT, ConeVariant::bootstrap);
     }
 
     @Override

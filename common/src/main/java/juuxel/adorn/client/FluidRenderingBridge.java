@@ -3,20 +3,20 @@ package juuxel.adorn.client;
 import juuxel.adorn.fluid.FluidReference;
 import juuxel.adorn.util.InlineServices;
 import juuxel.adorn.util.Services;
-import net.minecraft.client.texture.Sprite;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockRenderView;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockAndTintGetter;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 @InlineServices
 public interface FluidRenderingBridge {
-    @Nullable Sprite getStillSprite(FluidReference volume);
+    @Nullable TextureAtlasSprite getStillSprite(FluidReference volume);
 
-    int getColor(FluidReference volume, @Nullable BlockRenderView world, @Nullable BlockPos pos);
+    int getColor(FluidReference volume, @Nullable BlockAndTintGetter world, @Nullable BlockPos pos);
 
     default int getColor(FluidReference volume) {
         return getColor(volume, null, null);
@@ -24,7 +24,7 @@ public interface FluidRenderingBridge {
 
     boolean fillsFromTop(FluidReference volume);
 
-    List<Text> getTooltip(FluidReference volume, TooltipType type, @Nullable Integer maxAmountInLitres);
+    List<Component> getTooltip(FluidReference volume, TooltipFlag type, @Nullable Integer maxAmountInLitres);
 
     @InlineServices.Getter
     static FluidRenderingBridge get() {

@@ -1,64 +1,65 @@
 package juuxel.adorn.block;
 
 import juuxel.adorn.lib.AdornStats;
-import juuxel.adorn.util.Shapes;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.DyeColor;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+import juuxel.adorn.util.ShapeRotation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 
 import java.util.Map;
 
-public final class TableLampBlock extends Block implements Waterloggable, BlockWithDescription {
-    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    public static final BooleanProperty LIT = Properties.LIT;
-    public static final EnumProperty<Direction> FACING = Properties.FACING;
+public final class TableLampBlock extends Block implements SimpleWaterloggedBlock, BlockWithDescription {
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
     private static final String DESCRIPTION_KEY = "block.adorn.table_lamp.description";
-    private static final Map<Direction, VoxelShape> SHAPES = Shapes.buildShapeRotationsFromNorth(3, 3, 2, 13, 13, 16);
+    private static final Map<Direction, VoxelShape> SHAPES = ShapeRotation.buildShapeRotationsFromNorth(3, 3, 2, 13, 13, 16);
 
     static {
-        SHAPES.put(Direction.UP, createCuboidShape(
+        SHAPES.put(Direction.UP, box(
             3.0, 0.0, 3.0,
             13.0, 14.0, 13.0
         ));
-        SHAPES.put(Direction.DOWN, createCuboidShape(
+        SHAPES.put(Direction.DOWN, box(
             3.0, 2.0, 3.0,
             13.0, 16.0, 13.0
         ));
     }
 
-    public TableLampBlock(Settings settings) {
+    public TableLampBlock(Properties settings) {
         super(settings);
-        setDefaultState(getDefaultState()
-            .with(LIT, true)
-            .with(WATERLOGGED, false)
-            .with(FACING, Direction.UP));
+        registerDefaultState(defaultBlockState()
+            .setValue(LIT, true)
+            .setValue(WATERLOGGED, false)
+            .setValue(FACING, Direction.UP));
     }
 
     @Override
@@ -67,76 +68,76 @@ public final class TableLampBlock extends Block implements Waterloggable, BlockW
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(LIT, WATERLOGGED, FACING);
     }
 
     @Override
-    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (stack.getItem() instanceof DyeItem dye) {
-            world.setBlockState(pos, AdornBlocks.TABLE_LAMPS.getEager(dye.getColor()).getStateWithProperties(state));
-            world.playSound(player, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1f, 0.8f);
-            if (!player.getAbilities().creativeMode) stack.decrement(1);
-            if (!world.isClient()) player.incrementStat(AdornStats.DYE_TABLE_LAMP);
+            world.setBlockAndUpdate(pos, AdornBlocks.TABLE_LAMPS.getEager(dye.getDyeColor()).withPropertiesOf(state));
+            world.playSound(player, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1f, 0.8f);
+            if (!player.getAbilities().instabuild) stack.shrink(1);
+            if (!world.isClientSide()) player.awardStat(AdornStats.DYE_TABLE_LAMP);
         } else {
-            var wasLit = state.get(LIT);
-            world.setBlockState(pos, state.with(LIT, !wasLit));
+            var wasLit = state.getValue(LIT);
+            world.setBlockAndUpdate(pos, state.setValue(LIT, !wasLit));
             var pitch = wasLit ? 0.5f : 0.6f;
-            world.playSound(player, pos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 0.3f, pitch);
-            if (!world.isClient()) player.incrementStat(AdornStats.INTERACT_WITH_TABLE_LAMP);
+            world.playSound(player, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3f, pitch);
+            if (!world.isClientSide()) player.awardStat(AdornStats.INTERACT_WITH_TABLE_LAMP);
         }
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getDefaultState()
-            .with(WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER)
-            .with(FACING, ctx.getSide());
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        return defaultBlockState()
+            .setValue(WATERLOGGED, ctx.getLevel().getFluidState(ctx.getClickedPos()).getType() == Fluids.WATER)
+            .setValue(FACING, ctx.getClickedFace());
     }
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPES.get(state.get(FACING));
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return SHAPES.get(state.getValue(FACING));
     }
 
     @Override
-    public boolean hasComparatorOutput(BlockState state) {
+    public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
     @Override
-    protected int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction) {
-        return state.get(LIT) ? 15 : 0;
+    protected int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos, Direction direction) {
+        return state.getValue(LIT) ? 15 : 0;
     }
 
     @Override
-    public boolean canPathfindThrough(BlockState state, NavigationType type) {
+    public boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
-        if (state.get(WATERLOGGED)) {
-            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+    protected BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        if (state.getValue(WATERLOGGED)) {
+            tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
         }
 
-        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
+        return super.updateShape(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
 
-    public static Settings createBlockSettings(DyeColor color) {
-        return Settings.create()
+    public static Properties createBlockSettings(DyeColor color) {
+        return Properties.of()
             .mapColor(color)
-            .solid()
-            .hardness(0.3f)
-            .resistance(0.3f)
-            .sounds(BlockSoundGroup.WOOL)
-            .luminance(state -> state.get(LIT) ? 15 : 0);
+            .forceSolidOn()
+            .destroyTime(0.3f)
+            .explosionResistance(0.3f)
+            .sound(SoundType.WOOL)
+            .lightLevel(state -> state.getValue(LIT) ? 15 : 0);
     }
 }

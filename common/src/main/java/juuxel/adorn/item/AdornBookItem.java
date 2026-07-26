@@ -2,45 +2,47 @@ package juuxel.adorn.item;
 
 import juuxel.adorn.networking.OpenBookS2CMessage;
 import juuxel.adorn.platform.PlatformBridges;
-import net.minecraft.component.type.TooltipDisplayComponent;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.stat.Stats;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
+import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.Item.TooltipContext;
+import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.stats.Stats;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.ChatFormatting;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.Level;
 
 import java.util.function.Consumer;
 
 public final class AdornBookItem extends Item {
     private final Identifier bookId;
 
-    public AdornBookItem(Identifier bookId, Settings settings) {
+    public AdornBookItem(Identifier bookId, Properties settings) {
         super(settings);
         this.bookId = bookId;
     }
 
     @Override
-    public ActionResult use(World world, PlayerEntity user, Hand hand) {
-        if (!world.isClient()) {
+    public InteractionResult use(Level world, Player user, InteractionHand hand) {
+        if (!world.isClientSide()) {
             PlatformBridges.get().getNetwork().sendToClient(user, new OpenBookS2CMessage(bookId));
         }
-        user.incrementStat(Stats.USED.getOrCreateStat(this));
+        user.awardStat(Stats.ITEM_USED.get(this));
 
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
-        super.appendTooltip(stack, context, displayComponent, textConsumer, type);
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay displayComponent, Consumer<Component> textConsumer, TooltipFlag type) {
+        super.appendHoverText(stack, context, displayComponent, textConsumer, type);
         var bookManager = PlatformBridges.get().getResources().getBookManager();
         if (bookManager.contains(bookId)) {
-            textConsumer.accept(Text.translatable("book.byAuthor", bookManager.get(bookId).author()).formatted(Formatting.GRAY));
+            textConsumer.accept(Component.translatable("book.byAuthor", bookManager.get(bookId).author()).withStyle(ChatFormatting.GRAY));
         }
     }
 }

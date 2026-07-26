@@ -5,8 +5,8 @@ import juuxel.adorn.block.entity.KitchenSinkBlockEntity;
 import juuxel.adorn.platform.BlockEntityBridge;
 import juuxel.adorn.platform.forge.block.entity.BrewerBlockEntityForge;
 import juuxel.adorn.platform.forge.block.entity.KitchenSinkBlockEntityForge;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
 
 public final class BlockEntityBridgeForge implements BlockEntityBridge {
     public static final BlockEntityBridgeForge INSTANCE = new BlockEntityBridgeForge();

@@ -1,12 +1,12 @@
 package juuxel.adorn.client.gui.widget;
 
-import net.minecraft.client.gui.Element;
+import net.minecraft.client.gui.components.events.GuiEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class FlipBook extends WidgetEnvelope implements PageContainer<Element> {
-    private final List<Element> pages = new ArrayList<>();
+public final class FlipBook extends WidgetEnvelope implements PageContainer<GuiEventListener> {
+    private final List<GuiEventListener> pages = new ArrayList<>();
     private final Runnable pageUpdateListener;
     private int currentPage = 0;
 
@@ -31,16 +31,16 @@ public final class FlipBook extends WidgetEnvelope implements PageContainer<Elem
     }
 
     @Override
-    public Element getCurrentPageValue() {
+    public GuiEventListener getCurrentPageValue() {
         return current();
     }
 
     @Override
-    protected Element current() {
+    protected GuiEventListener current() {
         return pages.get(currentPage);
     }
 
-    public void add(Element page) {
+    public void add(GuiEventListener page) {
         pages.add(page);
     }
 

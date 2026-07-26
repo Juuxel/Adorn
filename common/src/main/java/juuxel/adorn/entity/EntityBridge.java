@@ -2,7 +2,7 @@ package juuxel.adorn.entity;
 
 import juuxel.adorn.util.InlineServices;
 import juuxel.adorn.util.Services;
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 
 @InlineServices
 public interface EntityBridge {

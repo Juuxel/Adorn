@@ -4,10 +4,10 @@ import juuxel.adorn.block.AdornBlockEntities;
 import juuxel.adorn.block.variant.BlockKind;
 import juuxel.adorn.block.variant.BlockVariantSets;
 import juuxel.adorn.platform.forge.block.entity.BlockEntityWithFluidTank;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.SidedInventory;
-import net.minecraft.util.math.Direction;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.Container;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.core.Direction;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.capabilities.ICapabilityProvider;
@@ -21,9 +21,9 @@ import org.jetbrains.annotations.Nullable;
 
 public final class AdornCapabilities {
     private static final IBlockCapabilityProvider<ResourceHandler<ItemResource>, @Nullable Direction> INVENTORY_WRAPPER_FOR_BLOCK =
-        (world, pos, state, blockEntity, side) -> blockEntity instanceof Inventory inventory ? getInventoryWrapper(inventory, side) : null;
+        (world, pos, state, blockEntity, side) -> blockEntity instanceof Container inventory ? getInventoryWrapper(inventory, side) : null;
     private static final ICapabilityProvider<BlockEntity, @Nullable Direction, ResourceHandler<ItemResource>> INVENTORY_WRAPPER_FOR_BLOCK_ENTITY =
-        (blockEntity, side) -> blockEntity instanceof Inventory inventory ? getInventoryWrapper(inventory, side) : null;
+        (blockEntity, side) -> blockEntity instanceof Container inventory ? getInventoryWrapper(inventory, side) : null;
     private static final IBlockCapabilityProvider<ResourceHandler<FluidResource>, @Nullable Direction> FLUID_TANK_FOR_BLOCK =
         (world, pos, state, blockEntity, side) -> blockEntity instanceof BlockEntityWithFluidTank withTank ? withTank.getTank() : null;
     private static final ICapabilityProvider<BlockEntity, @Nullable Direction, ResourceHandler<FluidResource>> FLUID_TANK_FOR_BLOCK_ENTITY =
@@ -51,7 +51,7 @@ public final class AdornCapabilities {
         }
     }
 
-    private static ResourceHandler<ItemResource> getInventoryWrapper(Inventory inventory, @Nullable Direction side) {
-        return side != null && inventory instanceof SidedInventory sided ? new WorldlyContainerWrapper(sided, side) : VanillaContainerWrapper.of(inventory);
+    private static ResourceHandler<ItemResource> getInventoryWrapper(Container inventory, @Nullable Direction side) {
+        return side != null && inventory instanceof WorldlyContainer sided ? new WorldlyContainerWrapper(sided, side) : VanillaContainerWrapper.of(inventory);
     }
 }

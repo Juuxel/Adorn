@@ -23,43 +23,43 @@ import net.fabricmc.fabric.api.resource.conditions.v1.ResourceCondition;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalFluidTags;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
-import net.minecraft.advancement.AdvancementCriterion;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.data.recipe.StonecuttingRecipeJsonBuilder;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.DyeColor;
-import net.minecraft.util.Identifier;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.resources.Identifier;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public final class AdornRecipeGenerator extends RecipeGenerator {
-    private final RegistryEntryLookup<Item> itemLookup;
+public final class AdornRecipeGenerator extends RecipeProvider {
+    private final HolderGetter<Item> itemLookup;
     private final ConditionApplier conditions;
 
-    private AdornRecipeGenerator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter, ConditionApplier conditions) {
+    private AdornRecipeGenerator(net.minecraft.core.HolderLookup.Provider registries, RecipeOutput exporter, ConditionApplier conditions) {
         super(registries, exporter);
-        this.itemLookup = registries.getOrThrow(RegistryKeys.ITEM);
+        this.itemLookup = registries.lookupOrThrow(Registries.ITEM);
         this.conditions = conditions;
     }
 
     @Override
-    public void generate() {
+    public void buildRecipes() {
         generateChimneys();
         generateBooks();
         generateBrewing();
@@ -74,532 +74,532 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
     }
 
     private void generateChimneys() {
-        offerChimneyRecipe(exporter, AdornBlocks.BRICK_CHIMNEY.get(), new EntryOrTag.OfTag<>(ConventionalItemTags.NORMAL_BRICKS), false);
-        offerChimneyRecipe(exporter, AdornBlocks.BRICK_CHIMNEY.get(), new EntryOrTag.OfEntry<>(Items.BRICKS), true, true);
-        offerChimneyRecipe(exporter, AdornBlocks.COBBLESTONE_CHIMNEY.get(), new EntryOrTag.OfTag<>(ConventionalItemTags.COBBLESTONES), true);
-        offerChimneyRecipe(exporter, AdornBlocks.NETHER_BRICK_CHIMNEY.get(), new EntryOrTag.OfTag<>(ConventionalItemTags.NETHER_BRICKS), false);
-        offerChimneyRecipe(exporter, AdornBlocks.NETHER_BRICK_CHIMNEY.get(), new EntryOrTag.OfEntry<>(Items.NETHER_BRICKS), true, true);
-        offerChimneyRecipe(exporter, AdornBlocks.RED_NETHER_BRICK_CHIMNEY.get(), new EntryOrTag.OfEntry<>(Items.RED_NETHER_BRICKS), true);
-        offerChimneyRecipe(exporter, AdornBlocks.STONE_BRICK_CHIMNEY.get(), new EntryOrTag.OfEntry<>(Items.STONE_BRICKS), true);
-        offerChimneyRecipe(exporter, AdornBlocks.PRISMARINE_CHIMNEY.get(), new EntryOrTag.OfEntry<>(Items.PRISMARINE_SHARD), false);
-        offerModifiedPrismarineChimneyRecipe(exporter, AdornBlocks.MAGMATIC_PRISMARINE_CHIMNEY.get(), Blocks.MAGMA_BLOCK);
-        offerModifiedPrismarineChimneyRecipe(exporter, AdornBlocks.SOULFUL_PRISMARINE_CHIMNEY.get(), Blocks.SOUL_SAND);
+        offerChimneyRecipe(output, AdornBlocks.BRICK_CHIMNEY.get(), new EntryOrTag.OfTag<>(ConventionalItemTags.NORMAL_BRICKS), false);
+        offerChimneyRecipe(output, AdornBlocks.BRICK_CHIMNEY.get(), new EntryOrTag.OfEntry<>(Items.BRICKS), true, true);
+        offerChimneyRecipe(output, AdornBlocks.COBBLESTONE_CHIMNEY.get(), new EntryOrTag.OfTag<>(ConventionalItemTags.COBBLESTONES), true);
+        offerChimneyRecipe(output, AdornBlocks.NETHER_BRICK_CHIMNEY.get(), new EntryOrTag.OfTag<>(ConventionalItemTags.NETHER_BRICKS), false);
+        offerChimneyRecipe(output, AdornBlocks.NETHER_BRICK_CHIMNEY.get(), new EntryOrTag.OfEntry<>(Items.NETHER_BRICKS), true, true);
+        offerChimneyRecipe(output, AdornBlocks.RED_NETHER_BRICK_CHIMNEY.get(), new EntryOrTag.OfEntry<>(Items.RED_NETHER_BRICKS), true);
+        offerChimneyRecipe(output, AdornBlocks.STONE_BRICK_CHIMNEY.get(), new EntryOrTag.OfEntry<>(Items.STONE_BRICKS), true);
+        offerChimneyRecipe(output, AdornBlocks.PRISMARINE_CHIMNEY.get(), new EntryOrTag.OfEntry<>(Items.PRISMARINE_SHARD), false);
+        offerModifiedPrismarineChimneyRecipe(output, AdornBlocks.MAGMATIC_PRISMARINE_CHIMNEY.get(), Blocks.MAGMA_BLOCK);
+        offerModifiedPrismarineChimneyRecipe(output, AdornBlocks.SOULFUL_PRISMARINE_CHIMNEY.get(), Blocks.SOUL_SAND);
     }
 
     private void generateBooks() {
-        createShapeless(RecipeCategory.MISC, AdornItems.GUIDE_BOOK.get())
-            .criterion("has_book", conditionsFromItem(Items.BOOK))
-            .input(Items.BOOK)
-            .input(ItemTags.WOOL)
-            .input(ItemTags.WOOL)
-            .offerTo(exporter);
-        createShapeless(RecipeCategory.MISC, AdornItems.TRADERS_MANUAL.get())
-            .criterion("has_book", conditionsFromItem(Items.BOOK))
-            .input(Items.BOOK)
-            .input(ConventionalItemTags.GOLD_INGOTS)
-            .input(ConventionalItemTags.EMERALD_GEMS)
-            .offerTo(exporter);
+        shapeless(RecipeCategory.MISC, AdornItems.GUIDE_BOOK.get())
+            .unlockedBy("has_book", has(Items.BOOK))
+            .requires(Items.BOOK)
+            .requires(ItemTags.WOOL)
+            .requires(ItemTags.WOOL)
+            .save(output);
+        shapeless(RecipeCategory.MISC, AdornItems.TRADERS_MANUAL.get())
+            .unlockedBy("has_book", has(Items.BOOK))
+            .requires(Items.BOOK)
+            .requires(ConventionalItemTags.GOLD_INGOTS)
+            .requires(ConventionalItemTags.EMERALD_GEMS)
+            .save(output);
     }
 
     private void generateBrewing() {
-        createShaped(RecipeCategory.DECORATIONS, AdornBlocks.BREWER.get())
-            .criterion("has_mug", conditionsFromItem(AdornItems.MUG.get()))
+        shaped(RecipeCategory.DECORATIONS, AdornBlocks.BREWER.get())
+            .unlockedBy("has_mug", has(AdornItems.MUG.get()))
             .pattern("II")
             .pattern("MI")
             .pattern("II")
-            .input('I', ConventionalItemTags.IRON_INGOTS)
-            .input('M', AdornItems.MUG.get())
-            .offerTo(exporter);
+            .define('I', ConventionalItemTags.IRON_INGOTS)
+            .define('M', AdornItems.MUG.get())
+            .save(output);
 
         BrewingRecipeJsonBuilder.create(itemLookup, AdornItems.GLOW_BERRY_TEA.get())
             .first(MoreConventionalItemTags.GLOW_BERRY_FOODS)
-            .criterion("has_brewer", conditionsFromItem(AdornBlocks.BREWER.get()))
-            .offerTo(exporter);
+            .criterion("has_brewer", has(AdornBlocks.BREWER.get()))
+            .offerTo(output);
         BrewingRecipeJsonBuilder.create(itemLookup, AdornItems.HOT_CHOCOLATE.get())
             .first(ConventionalItemTags.COCOA_BEAN_CROPS)
             .second(MoreConventionalItemTags.MILK_FOODS)
-            .criterion("has_brewer", conditionsFromItem(AdornBlocks.BREWER.get()))
-            .offerTo(exporter);
+            .criterion("has_brewer", has(AdornBlocks.BREWER.get()))
+            .offerTo(output);
         BrewingRecipeJsonBuilder.create(itemLookup, AdornItems.HOT_CHOCOLATE.get())
             .first(ConventionalItemTags.COCOA_BEAN_CROPS)
             .fluid(new FluidIngredient(FluidKey.of(ConventionalFluidTags.MILK), 250, FluidUnit.LITRE))
-            .criterion("has_brewer", conditionsFromItem(AdornBlocks.BREWER.get()))
+            .criterion("has_brewer", has(AdornBlocks.BREWER.get()))
             .offerTo(
-                conditions.apply(exporter, ResourceConditions.tagsPopulated(ConventionalFluidTags.MILK)),
-                getItemPath(AdornItems.HOT_CHOCOLATE.get()) + "_from_fluid"
+                conditions.apply(output, ResourceConditions.tagsPopulated(ConventionalFluidTags.MILK)),
+                getItemName(AdornItems.HOT_CHOCOLATE.get()) + "_from_fluid"
             );
         BrewingRecipeJsonBuilder.create(itemLookup, AdornItems.NETHER_WART_COFFEE.get())
             .first(ConventionalItemTags.NETHER_WART_CROPS)
             .fluid(new FluidIngredient(FluidKey.of(Fluids.WATER), 250, FluidUnit.LITRE))
-            .criterion("has_brewer", conditionsFromItem(AdornBlocks.BREWER.get()))
-            .offerTo(exporter);
+            .criterion("has_brewer", has(AdornBlocks.BREWER.get()))
+            .offerTo(output);
         BrewingRecipeJsonBuilder.create(itemLookup, AdornItems.NETHER_WART_COFFEE.get())
             .first(ConventionalItemTags.NETHER_WART_CROPS)
             .second(Items.WATER_BUCKET)
-            .criterion("has_brewer", conditionsFromItem(AdornBlocks.BREWER.get()))
-            .offerTo(exporter, convertBetween(AdornItems.NETHER_WART_COFFEE.get(), Items.WATER_BUCKET));
+            .criterion("has_brewer", has(AdornBlocks.BREWER.get()))
+            .offerTo(output, getConversionRecipeName(AdornItems.NETHER_WART_COFFEE.get(), Items.WATER_BUCKET));
         BrewingRecipeJsonBuilder.create(itemLookup, AdornItems.SWEET_BERRY_JUICE.get())
             .first(MoreConventionalItemTags.SWEET_BERRY_FOODS)
-            .criterion("has_brewer", conditionsFromItem(AdornBlocks.BREWER.get()))
-            .offerTo(exporter);
+            .criterion("has_brewer", has(AdornBlocks.BREWER.get()))
+            .offerTo(output);
     }
 
     private void generateCrates() {
-        createShaped(RecipeCategory.DECORATIONS, AdornBlocks.CRATE.get(), 4)
-            .criterion("has_planks", conditionsFromTag(ItemTags.PLANKS))
+        shaped(RecipeCategory.DECORATIONS, AdornBlocks.CRATE.get(), 4)
+            .unlockedBy("has_planks", has(ItemTags.PLANKS))
             .pattern("psp")
             .pattern("s s")
             .pattern("psp")
-            .input('p', ItemTags.PLANKS)
-            .input('s', ConventionalItemTags.WOODEN_RODS)
-            .offerTo(exporter, "crates/crate");
+            .define('p', ItemTags.PLANKS)
+            .define('s', ConventionalItemTags.WOODEN_RODS)
+            .save(output, "crates/crate");
 
-        offerCrates(exporter, AdornBlocks.APPLE_CRATE.get(), Items.APPLE);
-        offerCrates(exporter, AdornBlocks.BEETROOT_CRATE.get(), Items.BEETROOT);
-        offerCrates(exporter, AdornBlocks.BEETROOT_SEED_CRATE.get(), Items.BEETROOT_SEEDS);
-        offerCrates(exporter, AdornBlocks.CARROT_CRATE.get(), Items.CARROT);
-        offerCrates(exporter, AdornBlocks.COCOA_BEAN_CRATE.get(), Items.COCOA_BEANS);
-        offerCrates(exporter, AdornBlocks.EGG_CRATE.get(), Items.EGG);
-        offerCrates(exporter, AdornBlocks.HONEYCOMB_CRATE.get(), Items.HONEYCOMB);
-        offerCrates(exporter, AdornBlocks.MELON_CRATE.get(), Items.MELON_SLICE);
-        offerCrates(exporter, AdornBlocks.MELON_SEED_CRATE.get(), Items.MELON_SEEDS);
-        offerCrates(exporter, AdornBlocks.NETHER_WART_CRATE.get(), Items.NETHER_WART);
-        offerCrates(exporter, AdornBlocks.POTATO_CRATE.get(), Items.POTATO);
-        offerCrates(exporter, AdornBlocks.PUMPKIN_SEED_CRATE.get(), Items.PUMPKIN_SEEDS);
-        offerCrates(exporter, AdornBlocks.SUGAR_CANE_CRATE.get(), Items.SUGAR_CANE);
-        offerCrates(exporter, AdornBlocks.SWEET_BERRY_CRATE.get(), Items.SWEET_BERRIES);
-        offerCrates(exporter, AdornBlocks.WHEAT_CRATE.get(), Items.WHEAT);
-        offerCrates(exporter, AdornBlocks.WHEAT_SEED_CRATE.get(), Items.WHEAT_SEEDS);
+        offerCrates(output, AdornBlocks.APPLE_CRATE.get(), Items.APPLE);
+        offerCrates(output, AdornBlocks.BEETROOT_CRATE.get(), Items.BEETROOT);
+        offerCrates(output, AdornBlocks.BEETROOT_SEED_CRATE.get(), Items.BEETROOT_SEEDS);
+        offerCrates(output, AdornBlocks.CARROT_CRATE.get(), Items.CARROT);
+        offerCrates(output, AdornBlocks.COCOA_BEAN_CRATE.get(), Items.COCOA_BEANS);
+        offerCrates(output, AdornBlocks.EGG_CRATE.get(), Items.EGG);
+        offerCrates(output, AdornBlocks.HONEYCOMB_CRATE.get(), Items.HONEYCOMB);
+        offerCrates(output, AdornBlocks.MELON_CRATE.get(), Items.MELON_SLICE);
+        offerCrates(output, AdornBlocks.MELON_SEED_CRATE.get(), Items.MELON_SEEDS);
+        offerCrates(output, AdornBlocks.NETHER_WART_CRATE.get(), Items.NETHER_WART);
+        offerCrates(output, AdornBlocks.POTATO_CRATE.get(), Items.POTATO);
+        offerCrates(output, AdornBlocks.PUMPKIN_SEED_CRATE.get(), Items.PUMPKIN_SEEDS);
+        offerCrates(output, AdornBlocks.SUGAR_CANE_CRATE.get(), Items.SUGAR_CANE);
+        offerCrates(output, AdornBlocks.SWEET_BERRY_CRATE.get(), Items.SWEET_BERRIES);
+        offerCrates(output, AdornBlocks.WHEAT_CRATE.get(), Items.WHEAT);
+        offerCrates(output, AdornBlocks.WHEAT_SEED_CRATE.get(), Items.WHEAT_SEEDS);
     }
 
     private void generateMaterials() {
-        createShaped(RecipeCategory.MISC, AdornItems.STONE_ROD.get(), 4)
-            .criterion("has_stone", conditionsFromTag(ConventionalItemTags.STONES))
+        shaped(RecipeCategory.MISC, AdornItems.STONE_ROD.get(), 4)
+            .unlockedBy("has_stone", has(ConventionalItemTags.STONES))
             .pattern("#")
             .pattern("#")
-            .input('#', ConventionalItemTags.STONES)
-            .offerTo(exporter);
-        StonecuttingRecipeJsonBuilder.createStonecutting(
-            Ingredient.ofTag(itemLookup.getOrThrow(ConventionalItemTags.STONES)),
+            .define('#', ConventionalItemTags.STONES)
+            .save(output);
+        SingleItemRecipeBuilder.stonecutting(
+            Ingredient.of(itemLookup.getOrThrow(ConventionalItemTags.STONES)),
             RecipeCategory.MISC,
             AdornItems.STONE_ROD.get(),
             2
         )
-            .criterion("has_stone", conditionsFromTag(ConventionalItemTags.STONES))
-            .offerTo(exporter, "stonecutting/" + getItemPath(AdornItems.STONE_ROD.get()));
-        createShaped(RecipeCategory.MISC, AdornItems.MUG.get(), 3)
-            .criterion("has_quartz", conditionsFromTag(ConventionalItemTags.QUARTZ_GEMS))
+            .unlockedBy("has_stone", has(ConventionalItemTags.STONES))
+            .save(output, "stonecutting/" + getItemName(AdornItems.STONE_ROD.get()));
+        shaped(RecipeCategory.MISC, AdornItems.MUG.get(), 3)
+            .unlockedBy("has_quartz", has(ConventionalItemTags.QUARTZ_GEMS))
             .pattern("Q Q")
             .pattern(" Q ")
-            .input('Q', ConventionalItemTags.QUARTZ_GEMS)
-            .offerTo(exporter);
-        createShapeless(RecipeCategory.MISC, AdornItems.COPPER_NUGGET.get(), 9)
-            .criterion("has_copper_ingot", conditionsFromTag(ConventionalItemTags.COPPER_INGOTS))
-            .input(ConventionalItemTags.COPPER_INGOTS)
-            .offerTo(exporter);
-        createShaped(RecipeCategory.MISC, Items.COPPER_INGOT)
-            .criterion("has_copper_nugget", conditionsFromTag(MoreConventionalItemTags.COPPER_NUGGETS))
+            .define('Q', ConventionalItemTags.QUARTZ_GEMS)
+            .save(output);
+        shapeless(RecipeCategory.MISC, AdornItems.COPPER_NUGGET.get(), 9)
+            .unlockedBy("has_copper_ingot", has(ConventionalItemTags.COPPER_INGOTS))
+            .requires(ConventionalItemTags.COPPER_INGOTS)
+            .save(output);
+        shaped(RecipeCategory.MISC, Items.COPPER_INGOT)
+            .unlockedBy("has_copper_nugget", has(MoreConventionalItemTags.COPPER_NUGGETS))
             .pattern("###")
             .pattern("###")
             .pattern("###")
-            .input('#', MoreConventionalItemTags.COPPER_NUGGETS)
-            .offerTo(exporter, getItemPath(Items.COPPER_INGOT) + "_from_nuggets");
+            .define('#', MoreConventionalItemTags.COPPER_NUGGETS)
+            .save(output, getItemName(Items.COPPER_INGOT) + "_from_nuggets");
     }
 
     private void generatePaintedWood() {
-        AdornBlocks.PAINTED_PLANKS.forEach((color, block) -> offerPlankDyeingRecipe(exporter, block, color));
-        AdornBlocks.PAINTED_WOOD_SLABS.forEach((color, block) -> offerPaintedSlabRecipe(exporter, block, color));
-        AdornBlocks.PAINTED_WOOD_SLABS.forEach((color, block) -> offerSlabDyeingRecipe(exporter, block, color));
-        AdornBlocks.PAINTED_WOOD_STAIRS.forEach((color, block) -> offerPaintedStairsRecipe(exporter, block, color));
-        AdornBlocks.PAINTED_WOOD_STAIRS.forEach((color, block) -> offerStairDyeingRecipe(exporter, block, color));
-        AdornBlocks.PAINTED_WOOD_FENCES.forEach((color, block) -> offerPaintedFenceRecipe(exporter, block, color));
-        AdornBlocks.PAINTED_WOOD_FENCES.forEach((color, block) -> offerFenceDyeingRecipe(exporter, block, color));
-        AdornBlocks.PAINTED_WOOD_FENCE_GATES.forEach((color, block) -> offerPaintedFenceGateRecipe(exporter, block, color));
-        AdornBlocks.PAINTED_WOOD_FENCE_GATES.forEach((color, block) -> offerFenceGateDyeingRecipe(exporter, block, color));
-        AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.forEach((color, block) -> offerPaintedPressurePlateRecipe(exporter, block, color));
-        AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.forEach((color, block) -> offerPressurePlateDyeingRecipe(exporter, block, color));
-        AdornBlocks.PAINTED_WOOD_BUTTONS.forEach((color, block) -> offerPaintedButtonRecipe(exporter, block, color));
-        AdornBlocks.PAINTED_WOOD_BUTTONS.forEach((color, block) -> offerButtonDyeingRecipe(exporter, block, color));
+        AdornBlocks.PAINTED_PLANKS.forEach((color, block) -> offerPlankDyeingRecipe(output, block, color));
+        AdornBlocks.PAINTED_WOOD_SLABS.forEach((color, block) -> offerPaintedSlabRecipe(output, block, color));
+        AdornBlocks.PAINTED_WOOD_SLABS.forEach((color, block) -> offerSlabDyeingRecipe(output, block, color));
+        AdornBlocks.PAINTED_WOOD_STAIRS.forEach((color, block) -> offerPaintedStairsRecipe(output, block, color));
+        AdornBlocks.PAINTED_WOOD_STAIRS.forEach((color, block) -> offerStairDyeingRecipe(output, block, color));
+        AdornBlocks.PAINTED_WOOD_FENCES.forEach((color, block) -> offerPaintedFenceRecipe(output, block, color));
+        AdornBlocks.PAINTED_WOOD_FENCES.forEach((color, block) -> offerFenceDyeingRecipe(output, block, color));
+        AdornBlocks.PAINTED_WOOD_FENCE_GATES.forEach((color, block) -> offerPaintedFenceGateRecipe(output, block, color));
+        AdornBlocks.PAINTED_WOOD_FENCE_GATES.forEach((color, block) -> offerFenceGateDyeingRecipe(output, block, color));
+        AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.forEach((color, block) -> offerPaintedPressurePlateRecipe(output, block, color));
+        AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.forEach((color, block) -> offerPressurePlateDyeingRecipe(output, block, color));
+        AdornBlocks.PAINTED_WOOD_BUTTONS.forEach((color, block) -> offerPaintedButtonRecipe(output, block, color));
+        AdornBlocks.PAINTED_WOOD_BUTTONS.forEach((color, block) -> offerButtonDyeingRecipe(output, block, color));
 
         for (DyeColor color : Dyes.ALL_DYES) {
-            offerDyeingRecipe(exporter, color, AdornTags.CHAIRS.item(), BlockKind.CHAIR);
-            offerDyeingRecipe(exporter, color, AdornTags.TABLES.item(), BlockKind.TABLE);
-            offerDyeingRecipe(exporter, color, AdornTags.DRAWERS.item(), BlockKind.DRAWER);
-            offerDyeingRecipe(exporter, color, AdornTags.KITCHEN_COUNTERS.item(), BlockKind.KITCHEN_COUNTER);
-            offerDyeingRecipe(exporter, color, AdornTags.KITCHEN_CUPBOARDS.item(), BlockKind.KITCHEN_CUPBOARD);
-            offerDyeingRecipe(exporter, color, AdornTags.KITCHEN_SINKS.item(), BlockKind.KITCHEN_SINK);
-            offerDyeingRecipe(exporter, color, AdornTags.WOODEN_POSTS.item(), BlockKind.POST);
-            offerDyeingRecipe(exporter, color, AdornTags.WOODEN_PLATFORMS.item(), BlockKind.PLATFORM);
-            offerDyeingRecipe(exporter, color, AdornTags.WOODEN_STEPS.item(), BlockKind.STEP);
-            offerDyeingRecipe(exporter, color, AdornTags.WOODEN_SHELVES.item(), BlockKind.SHELF);
-            offerDyeingRecipe(exporter, color, AdornTags.COFFEE_TABLES.item(), BlockKind.COFFEE_TABLE);
-            offerDyeingRecipe(exporter, color, AdornTags.BENCHES.item(), BlockKind.BENCH);
+            offerDyeingRecipe(output, color, AdornTags.CHAIRS.item(), BlockKind.CHAIR);
+            offerDyeingRecipe(output, color, AdornTags.TABLES.item(), BlockKind.TABLE);
+            offerDyeingRecipe(output, color, AdornTags.DRAWERS.item(), BlockKind.DRAWER);
+            offerDyeingRecipe(output, color, AdornTags.KITCHEN_COUNTERS.item(), BlockKind.KITCHEN_COUNTER);
+            offerDyeingRecipe(output, color, AdornTags.KITCHEN_CUPBOARDS.item(), BlockKind.KITCHEN_CUPBOARD);
+            offerDyeingRecipe(output, color, AdornTags.KITCHEN_SINKS.item(), BlockKind.KITCHEN_SINK);
+            offerDyeingRecipe(output, color, AdornTags.WOODEN_POSTS.item(), BlockKind.POST);
+            offerDyeingRecipe(output, color, AdornTags.WOODEN_PLATFORMS.item(), BlockKind.PLATFORM);
+            offerDyeingRecipe(output, color, AdornTags.WOODEN_STEPS.item(), BlockKind.STEP);
+            offerDyeingRecipe(output, color, AdornTags.WOODEN_SHELVES.item(), BlockKind.SHELF);
+            offerDyeingRecipe(output, color, AdornTags.COFFEE_TABLES.item(), BlockKind.COFFEE_TABLE);
+            offerDyeingRecipe(output, color, AdornTags.BENCHES.item(), BlockKind.BENCH);
         }
     }
 
     private void generateCopperPipes() {
-        createShaped(RecipeCategory.DECORATIONS, AdornBlocks.COPPER_PIPE.get(), 3)
-            .criterion("has_copper_ingot", conditionsFromTag(ConventionalItemTags.COPPER_INGOTS))
+        shaped(RecipeCategory.DECORATIONS, AdornBlocks.COPPER_PIPE.get(), 3)
+            .unlockedBy("has_copper_ingot", has(ConventionalItemTags.COPPER_INGOTS))
             .pattern(".-.")
-            .input('.', MoreConventionalItemTags.COPPER_NUGGETS)
-            .input('-', ConventionalItemTags.COPPER_INGOTS)
-            .offerTo(exporter);
-        offerWaxingRecipe(exporter, AdornBlocks.WAXED_COPPER_PIPE.get(), AdornBlocks.COPPER_PIPE.get(), "copper_pipes");
-        offerWaxingRecipe(exporter, AdornBlocks.WAXED_EXPOSED_COPPER_PIPE.get(), AdornBlocks.EXPOSED_COPPER_PIPE.get(), "copper_pipes");
-        offerWaxingRecipe(exporter, AdornBlocks.WAXED_WEATHERED_COPPER_PIPE.get(), AdornBlocks.WEATHERED_COPPER_PIPE.get(), "copper_pipes");
-        offerWaxingRecipe(exporter, AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE.get(), AdornBlocks.OXIDIZED_COPPER_PIPE.get(), "copper_pipes");
+            .define('.', MoreConventionalItemTags.COPPER_NUGGETS)
+            .define('-', ConventionalItemTags.COPPER_INGOTS)
+            .save(output);
+        offerWaxingRecipe(output, AdornBlocks.WAXED_COPPER_PIPE.get(), AdornBlocks.COPPER_PIPE.get(), "copper_pipes");
+        offerWaxingRecipe(output, AdornBlocks.WAXED_EXPOSED_COPPER_PIPE.get(), AdornBlocks.EXPOSED_COPPER_PIPE.get(), "copper_pipes");
+        offerWaxingRecipe(output, AdornBlocks.WAXED_WEATHERED_COPPER_PIPE.get(), AdornBlocks.WEATHERED_COPPER_PIPE.get(), "copper_pipes");
+        offerWaxingRecipe(output, AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE.get(), AdornBlocks.OXIDIZED_COPPER_PIPE.get(), "copper_pipes");
     }
 
     private void generateMiscDecorations() {
-        createShaped(RecipeCategory.DECORATIONS, AdornBlocks.CANDLELIT_LANTERN.get())
-            .criterion("has_candle", conditionsFromItem(Items.CANDLE))
+        shaped(RecipeCategory.DECORATIONS, AdornBlocks.CANDLELIT_LANTERN.get())
+            .unlockedBy("has_candle", has(Items.CANDLE))
             .group(AdornCommon.NAMESPACE + ":candlelit_lantern")
             .pattern("***")
             .pattern("*|*")
             .pattern("***")
-            .input('*', ConventionalItemTags.IRON_NUGGETS)
-            .input('|', Items.CANDLE)
-            .offerTo(exporter);
-        createShaped(RecipeCategory.DECORATIONS, AdornBlocks.CHAIN_LINK_FENCE.get(), 4)
-            .criterion("has_iron_ingot", conditionsFromTag(ConventionalItemTags.IRON_INGOTS))
+            .define('*', ConventionalItemTags.IRON_NUGGETS)
+            .define('|', Items.CANDLE)
+            .save(output);
+        shaped(RecipeCategory.DECORATIONS, AdornBlocks.CHAIN_LINK_FENCE.get(), 4)
+            .unlockedBy("has_iron_ingot", has(ConventionalItemTags.IRON_INGOTS))
             .pattern(". .")
             .pattern(" - ")
             .pattern(". .")
-            .input('.', ConventionalItemTags.IRON_NUGGETS)
-            .input('-', ConventionalItemTags.IRON_INGOTS)
-            .offerTo(exporter);
-        createShaped(RecipeCategory.DECORATIONS, AdornBlocks.PICKET_FENCE.get(), 3)
-            .criterion("has_sticks", conditionsFromTag(ConventionalItemTags.WOODEN_RODS))
+            .define('.', ConventionalItemTags.IRON_NUGGETS)
+            .define('-', ConventionalItemTags.IRON_INGOTS)
+            .save(output);
+        shaped(RecipeCategory.DECORATIONS, AdornBlocks.PICKET_FENCE.get(), 3)
+            .unlockedBy("has_sticks", has(ConventionalItemTags.WOODEN_RODS))
             .pattern("|o|")
             .pattern("|||")
-            .input('o', ConventionalItemTags.WHITE_DYES)
-            .input('|', ConventionalItemTags.WOODEN_RODS)
-            .offerTo(exporter);
-        createShaped(RecipeCategory.DECORATIONS, AdornBlocks.STONE_LADDER.get(), 3)
-            .criterion("has_stone", conditionsFromTag(ConventionalItemTags.STONES))
+            .define('o', ConventionalItemTags.WHITE_DYES)
+            .define('|', ConventionalItemTags.WOODEN_RODS)
+            .save(output);
+        shaped(RecipeCategory.DECORATIONS, AdornBlocks.STONE_LADDER.get(), 3)
+            .unlockedBy("has_stone", has(ConventionalItemTags.STONES))
             .pattern("/ /")
             .pattern("///")
             .pattern("/ /")
-            .input('/', MoreConventionalItemTags.STONE_RODS)
-            .offerTo(exporter);
-        createShaped(RecipeCategory.DECORATIONS, AdornItems.STONE_TORCH.get(), 4)
-            .criterion("has_stone", conditionsFromTag(ConventionalItemTags.STONES))
+            .define('/', MoreConventionalItemTags.STONE_RODS)
+            .save(output);
+        shaped(RecipeCategory.DECORATIONS, AdornItems.STONE_TORCH.get(), 4)
+            .unlockedBy("has_stone", has(ConventionalItemTags.STONES))
             .pattern("C")
             .pattern("R")
-            .input('C', ItemTags.COALS)
-            .input('R', MoreConventionalItemTags.STONE_RODS)
-            .offerTo(exporter);
-        createShaped(RecipeCategory.DECORATIONS, BlockVariantSets.get(BlockKind.SHELF, BlockVariant.IRON).get(), 3)
-            .criterion("has_iron_ingot", conditionsFromTag(ConventionalItemTags.IRON_INGOTS))
+            .define('C', ItemTags.COALS)
+            .define('R', MoreConventionalItemTags.STONE_RODS)
+            .save(output);
+        shaped(RecipeCategory.DECORATIONS, BlockVariantSets.get(BlockKind.SHELF, BlockVariant.IRON).get(), 3)
+            .unlockedBy("has_iron_ingot", has(ConventionalItemTags.IRON_INGOTS))
             .pattern("---")
             .pattern("/ /")
-            .input('-', ConventionalItemTags.IRON_INGOTS)
-            .input('/', MoreConventionalItemTags.STONE_RODS)
-            .offerTo(exporter);
-        createShapeless(RecipeCategory.DECORATIONS, AdornBlocks.TRADING_STATION.get(), 1)
-            .criterion("has_emerald", conditionsFromTag(ConventionalItemTags.EMERALD_GEMS))
-            .input(AdornTags.TABLES.item())
-            .input(ConventionalItemTags.EMERALD_GEMS)
-            .input(ConventionalItemTags.EMERALD_GEMS)
-            .offerTo(exporter);
-        createShaped(RecipeCategory.DECORATIONS, AdornBlocks.BARRICADE.get(), 4)
-            .criterion("has_iron", conditionsFromTag(ConventionalItemTags.IRON_INGOTS))
+            .define('-', ConventionalItemTags.IRON_INGOTS)
+            .define('/', MoreConventionalItemTags.STONE_RODS)
+            .save(output);
+        shapeless(RecipeCategory.DECORATIONS, AdornBlocks.TRADING_STATION.get(), 1)
+            .unlockedBy("has_emerald", has(ConventionalItemTags.EMERALD_GEMS))
+            .requires(AdornTags.TABLES.item())
+            .requires(ConventionalItemTags.EMERALD_GEMS)
+            .requires(ConventionalItemTags.EMERALD_GEMS)
+            .save(output);
+        shaped(RecipeCategory.DECORATIONS, AdornBlocks.BARRICADE.get(), 4)
+            .unlockedBy("has_iron", has(ConventionalItemTags.IRON_INGOTS))
             .pattern("---")
             .pattern("| |")
             .pattern("| |")
-            .input('-', ItemTags.PLANKS)
-            .input('|', ConventionalItemTags.IRON_INGOTS)
-            .offerTo(exporter);
+            .define('-', ItemTags.PLANKS)
+            .define('|', ConventionalItemTags.IRON_INGOTS)
+            .save(output);
     }
 
     private void generateTools() {
-        createShaped(RecipeCategory.TOOLS, AdornItems.WATERING_CAN.get())
-            .criterion("has_copper_ingot", conditionsFromTag(ConventionalItemTags.COPPER_INGOTS))
+        shaped(RecipeCategory.TOOLS, AdornItems.WATERING_CAN.get())
+            .unlockedBy("has_copper_ingot", has(ConventionalItemTags.COPPER_INGOTS))
             .pattern(" I ")
             .pattern("IBI")
             .pattern(" II")
-            .input('I', ConventionalItemTags.COPPER_INGOTS)
-            .input('B', ConventionalItemTags.EMPTY_BUCKETS)
-            .offerTo(exporter);
+            .define('I', ConventionalItemTags.COPPER_INGOTS)
+            .define('B', ConventionalItemTags.EMPTY_BUCKETS)
+            .save(output);
     }
 
     private void generateCones() {
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.WHITE, ConventionalItemTags.WHITE_DYES);
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.ORANGE, ConventionalItemTags.ORANGE_DYES);
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.MAGENTA, ConventionalItemTags.MAGENTA_DYES);
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.LIGHT_BLUE, ConventionalItemTags.LIGHT_BLUE_DYES);
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.YELLOW, ConventionalItemTags.YELLOW_DYES);
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.LIME, ConventionalItemTags.LIME_DYES);
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.PINK, ConventionalItemTags.PINK_DYES);
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.GRAY, ConventionalItemTags.GRAY_DYES);
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.LIGHT_GRAY, ConventionalItemTags.LIGHT_GRAY_DYES);
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.CYAN, ConventionalItemTags.CYAN_DYES);
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.PURPLE, ConventionalItemTags.PURPLE_DYES);
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.BLUE, ConventionalItemTags.BLUE_DYES);
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.BROWN, ConventionalItemTags.BROWN_DYES);
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.GREEN, ConventionalItemTags.GREEN_DYES);
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.RED, ConventionalItemTags.RED_DYES);
-        offerWoodenConeRecipe(exporter, ConeVariant.Keys.BLACK, ConventionalItemTags.BLACK_DYES);
-        offerStoneConeRecipe(exporter, ConeVariant.Keys.OBSIDIAN, ConventionalItemTags.NORMAL_OBSIDIANS);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.WHITE, ConventionalItemTags.WHITE_DYES);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.ORANGE, ConventionalItemTags.ORANGE_DYES);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.MAGENTA, ConventionalItemTags.MAGENTA_DYES);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.LIGHT_BLUE, ConventionalItemTags.LIGHT_BLUE_DYES);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.YELLOW, ConventionalItemTags.YELLOW_DYES);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.LIME, ConventionalItemTags.LIME_DYES);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.PINK, ConventionalItemTags.PINK_DYES);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.GRAY, ConventionalItemTags.GRAY_DYES);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.LIGHT_GRAY, ConventionalItemTags.LIGHT_GRAY_DYES);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.CYAN, ConventionalItemTags.CYAN_DYES);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.PURPLE, ConventionalItemTags.PURPLE_DYES);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.BLUE, ConventionalItemTags.BLUE_DYES);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.BROWN, ConventionalItemTags.BROWN_DYES);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.GREEN, ConventionalItemTags.GREEN_DYES);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.RED, ConventionalItemTags.RED_DYES);
+        offerWoodenConeRecipe(output, ConeVariant.Keys.BLACK, ConventionalItemTags.BLACK_DYES);
+        offerStoneConeRecipe(output, ConeVariant.Keys.OBSIDIAN, ConventionalItemTags.NORMAL_OBSIDIANS);
     }
 
     private void generateCautionSigns() {
-        createShaped(RecipeCategory.DECORATIONS, AdornBlocks.CAUTION_SIGN.get())
-            .criterion("has_iron_ingot", conditionsFromTag(ConventionalItemTags.IRON_INGOTS))
+        shaped(RecipeCategory.DECORATIONS, AdornBlocks.CAUTION_SIGN.get())
+            .unlockedBy("has_iron_ingot", has(ConventionalItemTags.IRON_INGOTS))
             .pattern(" I ")
             .pattern("IDI")
             .pattern(" I ")
-            .input('I' ,ConventionalItemTags.IRON_INGOTS)
-            .input('D' ,ConventionalItemTags.YELLOW_DYES)
-            .offerTo(exporter);
+            .define('I' ,ConventionalItemTags.IRON_INGOTS)
+            .define('D' ,ConventionalItemTags.YELLOW_DYES)
+            .save(output);
 
-        offerCautionSignRecipe(exporter, AdornBlocks.BEE_CAUTION_SIGN.get(), MoreConventionalItemTags.HONEYCOMBS);
-        offerCautionSignRecipe(exporter, AdornBlocks.BOOK_CAUTION_SIGN.get(), MoreConventionalItemTags.BOOKS);
-        offerCautionSignRecipe(exporter, AdornBlocks.CLIFF_CAUTION_SIGN.get(), ConventionalItemTags.COBBLESTONES);
-        offerCautionSignRecipe(exporter, AdornBlocks.FORBIDDEN_CAUTION_SIGN.get(), ConventionalItemTags.FENCES);
-        offerCautionSignRecipe(exporter, AdornBlocks.HELMET_CAUTION_SIGN.get(), ItemTags.HEAD_ARMOR);
-        offerCautionSignRecipe(exporter, AdornBlocks.RAILS_CAUTION_SIGN.get(), ItemTags.RAILS);
-        offerCautionSignRecipe(exporter, AdornBlocks.SURPRISE_CAUTION_SIGN.get(), ConventionalItemTags.EGGS);
+        offerCautionSignRecipe(output, AdornBlocks.BEE_CAUTION_SIGN.get(), MoreConventionalItemTags.HONEYCOMBS);
+        offerCautionSignRecipe(output, AdornBlocks.BOOK_CAUTION_SIGN.get(), MoreConventionalItemTags.BOOKS);
+        offerCautionSignRecipe(output, AdornBlocks.CLIFF_CAUTION_SIGN.get(), ConventionalItemTags.COBBLESTONES);
+        offerCautionSignRecipe(output, AdornBlocks.FORBIDDEN_CAUTION_SIGN.get(), ConventionalItemTags.FENCES);
+        offerCautionSignRecipe(output, AdornBlocks.HELMET_CAUTION_SIGN.get(), ItemTags.HEAD_ARMOR);
+        offerCautionSignRecipe(output, AdornBlocks.RAILS_CAUTION_SIGN.get(), ItemTags.RAILS);
+        offerCautionSignRecipe(output, AdornBlocks.SURPRISE_CAUTION_SIGN.get(), ConventionalItemTags.EGGS);
     }
 
-    private void offerChimneyRecipe(RecipeExporter exporter, ItemConvertible output, EntryOrTag<Item> ingredient, boolean fromBlock) {
+    private void offerChimneyRecipe(RecipeOutput exporter, ItemLike output, EntryOrTag<Item> ingredient, boolean fromBlock) {
         offerChimneyRecipe(exporter, output, ingredient, fromBlock, false);
     }
 
-    private void offerChimneyRecipe(RecipeExporter exporter, ItemConvertible output, EntryOrTag<Item> ingredient, boolean fromBlock, boolean suffix) {
-        var builder = createShaped(RecipeCategory.DECORATIONS, output, fromBlock ? 4 : 1)
-            .criterion(has(ingredient), conditionsFrom(ingredient))
+    private void offerChimneyRecipe(RecipeOutput exporter, ItemLike output, EntryOrTag<Item> ingredient, boolean fromBlock, boolean suffix) {
+        var builder = shaped(RecipeCategory.DECORATIONS, output, fromBlock ? 4 : 1)
+            .unlockedBy(has(ingredient), conditionsFrom(ingredient))
             .pattern(" # ")
             .pattern("#.#")
             .pattern(" # ")
-            .input('.', ConventionalItemTags.IGNITER_TOOLS);
+            .define('.', ConventionalItemTags.IGNITER_TOOLS);
         switch (ingredient) {
-            case EntryOrTag.OfEntry(var item) -> builder.input('#', item);
-            case EntryOrTag.OfTag(var tag) -> builder.input('#', tag);
+            case EntryOrTag.OfEntry(var item) -> builder.define('#', item);
+            case EntryOrTag.OfTag(var tag) -> builder.define('#', tag);
         }
 
         if (suffix) {
-            builder.offerTo(exporter, getItemPath(output) + "_from_block");
+            builder.save(exporter, getItemName(output) + "_from_block");
         } else {
-            builder.offerTo(exporter);
+            builder.save(exporter);
         }
     }
 
-    private void offerModifiedPrismarineChimneyRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible ingredient) {
-        createShaped(RecipeCategory.DECORATIONS, output, 1)
-            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
+    private void offerModifiedPrismarineChimneyRecipe(RecipeOutput exporter, ItemLike output, ItemLike ingredient) {
+        shaped(RecipeCategory.DECORATIONS, output, 1)
+            .unlockedBy(getHasName(ingredient), has(ingredient))
             .pattern(" - ")
             .pattern("-#-")
             .pattern(" - ")
-            .input('#', ingredient)
-            .input('-', Items.PRISMARINE_SHARD)
-            .offerTo(exporter);
+            .define('#', ingredient)
+            .define('-', Items.PRISMARINE_SHARD)
+            .save(exporter);
     }
 
-    private void offerCrates(RecipeExporter exporter, ItemConvertible crate, ItemConvertible contents) {
+    private void offerCrates(RecipeOutput exporter, ItemLike crate, ItemLike contents) {
         offerCratePack(exporter, crate, contents);
         offerCrateUnpack(exporter, crate, contents);
     }
 
-    private void offerCratePack(RecipeExporter exporter, ItemConvertible crate, ItemConvertible contents) {
-        createShaped(RecipeCategory.DECORATIONS, crate)
-            .criterion("has_crate", conditionsFromItem(AdornBlocks.CRATE.get()))
+    private void offerCratePack(RecipeOutput exporter, ItemLike crate, ItemLike contents) {
+        shaped(RecipeCategory.DECORATIONS, crate)
+            .unlockedBy("has_crate", has(AdornBlocks.CRATE.get()))
             .group(AdornCommon.NAMESPACE + ":pack_crate")
             .pattern("...")
             .pattern(".#.")
             .pattern("...")
-            .input('.', contents)
-            .input('#', AdornBlocks.CRATE.get())
-            .offerTo(exporter, "crates/pack/" + getItemPath(contents));
+            .define('.', contents)
+            .define('#', AdornBlocks.CRATE.get())
+            .save(exporter, "crates/pack/" + getItemName(contents));
     }
 
-    private void offerCrateUnpack(RecipeExporter exporter, ItemConvertible crate, ItemConvertible contents) {
-        createShapeless(RecipeCategory.DECORATIONS, contents, 8)
-            .criterion(hasItem(crate), conditionsFromItem(crate))
+    private void offerCrateUnpack(RecipeOutput exporter, ItemLike crate, ItemLike contents) {
+        shapeless(RecipeCategory.DECORATIONS, contents, 8)
+            .unlockedBy(getHasName(crate), has(crate))
             .group(AdornCommon.NAMESPACE + ":unpack_crate")
-            .input(crate)
-            .offerTo(exporter, "crates/unpack/" + getItemPath(contents));
+            .requires(crate)
+            .save(exporter, "crates/unpack/" + getItemName(contents));
     }
 
-    private void offerPlankDyeingRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color) {
+    private void offerPlankDyeingRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
         offerDyeingRecipe(exporter, output, color, ItemTags.PLANKS, "planks", false);
     }
 
-    private void offerPaintedSlabRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color) {
+    private void offerPaintedSlabRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
         var planks = AdornBlocks.PAINTED_PLANKS.getEager(color);
-        createSlabRecipe(RecipeCategory.BUILDING_BLOCKS, output, Ingredient.ofItems(planks))
+        slabBuilder(RecipeCategory.BUILDING_BLOCKS, output, Ingredient.of(planks))
             .group("wooden_slabs")
-            .criterion("has_planks", conditionsFromItem(planks))
-            .offerTo(exporter);
+            .unlockedBy("has_planks", has(planks))
+            .save(exporter);
     }
 
-    private void offerSlabDyeingRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color) {
+    private void offerSlabDyeingRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
         offerDyeingRecipe(exporter, output, color, ItemTags.WOODEN_SLABS, "slab", true);
     }
 
-    private void offerPaintedStairsRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color) {
+    private void offerPaintedStairsRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
         var planks = AdornBlocks.PAINTED_PLANKS.getEager(color);
-        createStairsRecipe(output, Ingredient.ofItems(planks))
+        stairBuilder(output, Ingredient.of(planks))
             .group("wooden_stairs")
-            .criterion("has_planks", conditionsFromItem(planks))
-            .offerTo(exporter);
+            .unlockedBy("has_planks", has(planks))
+            .save(exporter);
     }
 
-    private void offerStairDyeingRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color) {
+    private void offerStairDyeingRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
         offerDyeingRecipe(exporter, output, color, ItemTags.WOODEN_STAIRS, "stairs", true);
     }
 
-    private void offerPaintedFenceRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color) {
+    private void offerPaintedFenceRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
         var planks = AdornBlocks.PAINTED_PLANKS.getEager(color);
-        createFenceRecipe(output, Ingredient.ofItems(planks))
+        fenceBuilder(output, Ingredient.of(planks))
             .group("wooden_fence")
-            .criterion("has_planks", conditionsFromItem(planks))
-            .offerTo(exporter);
+            .unlockedBy("has_planks", has(planks))
+            .save(exporter);
     }
 
-    private void offerFenceDyeingRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color) {
+    private void offerFenceDyeingRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
         offerDyeingRecipe(exporter, output, color, ItemTags.WOODEN_FENCES, "fence", true);
     }
 
-    private void offerPaintedFenceGateRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color) {
+    private void offerPaintedFenceGateRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
         var planks = AdornBlocks.PAINTED_PLANKS.getEager(color);
-        createFenceGateRecipe(output, Ingredient.ofItems(planks))
+        fenceGateBuilder(output, Ingredient.of(planks))
             .group("wooden_fence")
-            .criterion("has_planks", conditionsFromItem(planks))
-            .offerTo(exporter);
+            .unlockedBy("has_planks", has(planks))
+            .save(exporter);
     }
 
-    private void offerFenceGateDyeingRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color) {
+    private void offerFenceGateDyeingRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
         offerDyeingRecipe(exporter, output, color, ItemTags.FENCE_GATES, "fence_gate", true);
     }
 
-    private void offerPaintedPressurePlateRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color) {
+    private void offerPaintedPressurePlateRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
         var planks = AdornBlocks.PAINTED_PLANKS.getEager(color);
-        createPressurePlateRecipe(RecipeCategory.REDSTONE, output, Ingredient.ofItems(planks))
+        pressurePlateBuilder(RecipeCategory.REDSTONE, output, Ingredient.of(planks))
             .group("wooden_pressure_plate")
-            .criterion("has_planks", conditionsFromItem(planks))
-            .offerTo(exporter);
+            .unlockedBy("has_planks", has(planks))
+            .save(exporter);
     }
 
-    private void offerPressurePlateDyeingRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color) {
+    private void offerPressurePlateDyeingRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
         offerDyeingRecipe(exporter, output, color, ItemTags.WOODEN_PRESSURE_PLATES, "pressure_plate", true);
     }
 
-    private void offerPaintedButtonRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color) {
+    private void offerPaintedButtonRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
         var planks = AdornBlocks.PAINTED_PLANKS.getEager(color);
-        createButtonRecipe(output, Ingredient.ofItems(planks))
+        buttonBuilder(output, Ingredient.of(planks))
             .group("wooden_button")
-            .criterion("has_planks", conditionsFromItem(planks))
-            .offerTo(exporter);
+            .unlockedBy("has_planks", has(planks))
+            .save(exporter);
     }
 
-    private void offerButtonDyeingRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color) {
+    private void offerButtonDyeingRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
         offerDyeingRecipe(exporter, output, color, ItemTags.WOODEN_BUTTONS, "button", true);
     }
 
-    private void offerDyeingRecipe(RecipeExporter exporter, DyeColor color, TagKey<Item> ingredient, BlockKind kind) {
+    private void offerDyeingRecipe(RecipeOutput exporter, DyeColor color, TagKey<Item> ingredient, BlockKind kind) {
         var variant = BlockVariant.PAINTED_WOODS.get(color);
         var group = AdornCommon.NAMESPACE + ':' + kind.id();
         offerDyeingRecipe(exporter, BlockVariantSets.get(kind, variant).get(), color, ingredient, kind.id(), group, true);
     }
 
-    private void offerDyeingRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color, TagKey<Item> ingredient, String kind, boolean suffix) {
+    private void offerDyeingRecipe(RecipeOutput exporter, ItemLike output, DyeColor color, TagKey<Item> ingredient, String kind, boolean suffix) {
         offerDyeingRecipe(exporter, output, color, ingredient, kind, "wooden_" + kind, suffix);
     }
 
-    private void offerDyeingRecipe(RecipeExporter exporter, ItemConvertible output, DyeColor color, TagKey<Item> ingredient, String kind, String group, boolean suffix) {
-        var builder = createShaped(RecipeCategory.BUILDING_BLOCKS, output, 8)
-            .input('*', TagKey.of(RegistryKeys.ITEM, Identifier.of("c", "dyes/" + color.asString())))
-            .input('#', ingredient)
+    private void offerDyeingRecipe(RecipeOutput exporter, ItemLike output, DyeColor color, TagKey<Item> ingredient, String kind, String group, boolean suffix) {
+        var builder = shaped(RecipeCategory.BUILDING_BLOCKS, output, 8)
+            .define('*', TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("c", "dyes/" + color.getSerializedName())))
+            .define('#', ingredient)
             .pattern("###")
             .pattern("#*#")
             .pattern("###")
             .group(group)
-            .criterion("has_" + kind, conditionsFromTag(ingredient));
+            .unlockedBy("has_" + kind, has(ingredient));
 
         if (suffix) {
-            builder.offerTo(exporter, getItemPath(output) + "_from_dyeing");
+            builder.save(exporter, getItemName(output) + "_from_dyeing");
         } else {
-            builder.offerTo(exporter);
+            builder.save(exporter);
         }
     }
 
-    private void offerWaxingRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input, String group) {
-        createShapeless(RecipeCategory.DECORATIONS, output)
-            .criterion(hasItem(input), conditionsFromItem(input))
+    private void offerWaxingRecipe(RecipeOutput exporter, ItemLike output, ItemLike input, String group) {
+        shapeless(RecipeCategory.DECORATIONS, output)
+            .unlockedBy(getHasName(input), has(input))
             .group(AdornCommon.NAMESPACE + ":waxed_" + group)
-            .input(input)
-            .input(MoreConventionalItemTags.HONEYCOMBS)
-            .offerTo(exporter, "waxing/" + getItemPath(output));
+            .requires(input)
+            .requires(MoreConventionalItemTags.HONEYCOMBS)
+            .save(exporter, "waxing/" + getItemName(output));
     }
 
-    private void offerWoodenConeRecipe(RecipeExporter exporter, RegistryKey<ConeVariant> variant, TagKey<Item> dyeTag) {
-        var builder = createShaped(RecipeCategory.DECORATIONS, AdornItems.CONE.get())
-            .criterion("has_slab", conditionsFromTag(ItemTags.WOODEN_SLABS))
+    private void offerWoodenConeRecipe(RecipeOutput exporter, ResourceKey<ConeVariant> variant, TagKey<Item> dyeTag) {
+        var builder = shaped(RecipeCategory.DECORATIONS, AdornItems.CONE.get())
+            .unlockedBy("has_slab", has(ItemTags.WOODEN_SLABS))
             .group(AdornCommon.NAMESPACE + ":wooden_cones")
             .pattern("D")
             .pattern("|")
             .pattern("-")
-            .input('D', dyeTag)
-            .input('|', AdornTags.WOODEN_POSTS.item())
-            .input('-', ItemTags.WOODEN_SLABS);
+            .define('D', dyeTag)
+            .define('|', AdornTags.WOODEN_POSTS.item())
+            .define('-', ItemTags.WOODEN_SLABS);
         ((ShapedRecipeJsonBuilderExtension) builder).adorn_setOutputModifier(stack -> {
             stack.set(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(variant));
             return stack;
         });
-        builder.offerTo(exporter, variant.getValue().getPath() + "_cone");
+        builder.save(exporter, variant.identifier().getPath() + "_cone");
     }
 
-    private void offerStoneConeRecipe(RecipeExporter exporter, RegistryKey<ConeVariant> variant, TagKey<Item> input) {
-        var builder = createShaped(RecipeCategory.DECORATIONS, AdornItems.CONE.get(), 4)
-            .criterion(hasTag(input), conditionsFromTag(input))
+    private void offerStoneConeRecipe(RecipeOutput exporter, ResourceKey<ConeVariant> variant, TagKey<Item> input) {
+        var builder = shaped(RecipeCategory.DECORATIONS, AdornItems.CONE.get(), 4)
+            .unlockedBy(hasTag(input), has(input))
             .pattern("|")
             .pattern("-")
-            .input('|', input)
-            .input('-', Items.SMOOTH_STONE_SLAB);
+            .define('|', input)
+            .define('-', Items.SMOOTH_STONE_SLAB);
         ((ShapedRecipeJsonBuilderExtension) builder).adorn_setOutputModifier(stack -> {
             stack.set(AdornComponentTypes.CONE_VARIANT.get(), new ConeVariantComponent(variant));
             return stack;
         });
-        builder.offerTo(exporter, variant.getValue().getPath() + "_cone");
+        builder.save(exporter, variant.identifier().getPath() + "_cone");
     }
 
-    private void offerCautionSignRecipe(RecipeExporter exporter, ItemConvertible output, TagKey<Item> ingredient) {
-        createShapeless(RecipeCategory.DECORATIONS, output)
-            .criterion(hasItem(AdornBlocks.CAUTION_SIGN.get()), conditionsFromItem(AdornBlocks.CAUTION_SIGN.get()))
+    private void offerCautionSignRecipe(RecipeOutput exporter, ItemLike output, TagKey<Item> ingredient) {
+        shapeless(RecipeCategory.DECORATIONS, output)
+            .unlockedBy(getHasName(AdornBlocks.CAUTION_SIGN.get()), has(AdornBlocks.CAUTION_SIGN.get()))
             .group(AdornCommon.NAMESPACE + ":caution_signs")
-            .input(AdornBlocks.CAUTION_SIGN.get())
-            .input(ingredient)
-            .offerTo(exporter);
+            .requires(AdornBlocks.CAUTION_SIGN.get())
+            .requires(ingredient)
+            .save(exporter);
     }
 
     private String has(EntryOrTag<Item> ingredient) {
         return switch (ingredient) {
-            case EntryOrTag.OfEntry(var item) -> hasItem(item);
+            case EntryOrTag.OfEntry(var item) -> getHasName(item);
             case EntryOrTag.OfTag(var tag) -> hasTag(tag);
         };
     }
 
     private String hasTag(TagKey<Item> tag) {
-        List<String> components = Arrays.asList(tag.id().getPath().split("/"));
+        List<String> components = Arrays.asList(tag.location().getPath().split("/"));
         Collections.reverse(components);
         return "has_" + String.join("_", components);
     }
 
-    private AdvancementCriterion<?> conditionsFrom(EntryOrTag<Item> ingredient) {
+    private Criterion<?> conditionsFrom(EntryOrTag<Item> ingredient) {
         return switch (ingredient) {
-            case EntryOrTag.OfEntry(var item) -> conditionsFromItem(item);
-            case EntryOrTag.OfTag(var tag) -> conditionsFromTag(tag);
+            case EntryOrTag.OfEntry(var item) -> has(item);
+            case EntryOrTag.OfTag(var tag) -> has(tag);
         };
     }
 
     public static final class Provider extends FabricRecipeProvider {
-        public Provider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        public Provider(FabricDataOutput output, CompletableFuture<net.minecraft.core.HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
 
         @Override
-        protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+        protected RecipeProvider createRecipeProvider(net.minecraft.core.HolderLookup.Provider registries, RecipeOutput exporter) {
             return new AdornRecipeGenerator(registries, exporter, this::withConditions);
         }
 
@@ -611,6 +611,6 @@ public final class AdornRecipeGenerator extends RecipeGenerator {
 
     @FunctionalInterface
     public interface ConditionApplier {
-        RecipeExporter apply(RecipeExporter exporter, ResourceCondition... conditions);
+        RecipeOutput apply(RecipeOutput exporter, ResourceCondition... conditions);
     }
 }

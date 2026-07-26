@@ -1,11 +1,11 @@
 package juuxel.adorn.lib.registry;
 
 import juuxel.adorn.block.BlockWithItemComponents;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceKey;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -26,7 +26,7 @@ public final class RegistryHelper {
     /**
      * Registers a block with the name and an item with default settings.
      */
-    public <T extends Block> Registered<T> registerBlock(String name, Function<AbstractBlock.Settings, T> block, BlockSettingsProvider settings) {
+    public <T extends Block> Registered<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> block, BlockSettingsProvider settings) {
         return registerBlock(name, ItemSettingsProvider.DEFAULT, block, settings);
     }
 
@@ -36,7 +36,7 @@ public final class RegistryHelper {
     public <T extends Block> Registered<T> registerBlock(
         String name,
         ItemSettingsProvider itemSettings,
-        Function<AbstractBlock.Settings, T> block,
+        Function<BlockBehaviour.Properties, T> block,
         BlockSettingsProvider settings
     ) {
         return registerBlock(name, RegistryHelper::makeItemForBlock, itemSettings, block, settings);
@@ -47,8 +47,8 @@ public final class RegistryHelper {
      */
     public <T extends Block> Registered<T> registerBlock(
         String name,
-        BiFunction<T, Item.Settings, Item> itemProvider,
-        Function<AbstractBlock.Settings, T> block,
+        BiFunction<T, net.minecraft.world.item.Item.Properties, Item> itemProvider,
+        Function<BlockBehaviour.Properties, T> block,
         BlockSettingsProvider settings
     ) {
         return registerBlock(name, itemProvider, ItemSettingsProvider.DEFAULT, block, settings);
@@ -59,9 +59,9 @@ public final class RegistryHelper {
      */
     public <T extends Block> Registered<T> registerBlock(
         String name,
-        BiFunction<T, Item.Settings, Item> itemProvider,
+        BiFunction<T, net.minecraft.world.item.Item.Properties, Item> itemProvider,
         ItemSettingsProvider itemSettings,
-        Function<AbstractBlock.Settings, T> block,
+        Function<BlockBehaviour.Properties, T> block,
         BlockSettingsProvider settings
     ) {
         var registered = registerBlockWithoutItem(name, block, settings);
@@ -72,10 +72,10 @@ public final class RegistryHelper {
         return registered;
     }
 
-    private static Item.Settings createBlockItemSettings(Block block, RegistryKey<Item> key, ItemSettingsProvider provider) {
+    private static net.minecraft.world.item.Item.Properties createBlockItemSettings(Block block, ResourceKey<Item> key, ItemSettingsProvider provider) {
         var settings = provider.createItemSettings()
-            .registryKey(key)
-            .useBlockPrefixedTranslationKey();
+            .setId(key)
+            .useBlockDescriptionPrefix();
 
         if (block instanceof BlockWithItemComponents withItemComponents) {
             withItemComponents.addItemComponents(settings::component);
@@ -87,11 +87,11 @@ public final class RegistryHelper {
     /**
      * Registers a block with the name and without an item.
      */
-    public <T extends Block> Registered<T> registerBlockWithoutItem(String name, Function<AbstractBlock.Settings, T> block, BlockSettingsProvider settings) {
-        return blocks.register(name, key -> block.apply(settings.createBlockSettings().registryKey(key)));
+    public <T extends Block> Registered<T> registerBlockWithoutItem(String name, Function<BlockBehaviour.Properties, T> block, BlockSettingsProvider settings) {
+        return blocks.register(name, key -> block.apply(settings.createBlockSettings().setId(key)));
     }
 
-    private static Item makeItemForBlock(Block block, Item.Settings itemSettings) {
+    private static Item makeItemForBlock(Block block, net.minecraft.world.item.Item.Properties itemSettings) {
         return new BlockItem(block, itemSettings);
     }
 
@@ -99,23 +99,23 @@ public final class RegistryHelper {
     // Functions for registering other content
     // -----------------------------------------
 
-    public <T extends Item> Registered<T> registerItem(String name, Function<Item.Settings, T> factory) {
+    public <T extends Item> Registered<T> registerItem(String name, Function<net.minecraft.world.item.Item.Properties, T> factory) {
         return registerItem(name, factory, ItemSettingsProvider.DEFAULT);
     }
 
-    public <T extends Item> Registered<T> registerItem(String name, Function<Item.Settings, T> factory, ItemSettingsProvider settings) {
-        return items.register(name, key -> factory.apply(settings.createItemSettings().registryKey(key)));
+    public <T extends Item> Registered<T> registerItem(String name, Function<net.minecraft.world.item.Item.Properties, T> factory, ItemSettingsProvider settings) {
+        return items.register(name, key -> factory.apply(settings.createItemSettings().setId(key)));
     }
 
     @FunctionalInterface
     public interface BlockSettingsProvider {
-        AbstractBlock.Settings createBlockSettings();
+        BlockBehaviour.Properties createBlockSettings();
     }
 
     @FunctionalInterface
     public interface ItemSettingsProvider {
-        ItemSettingsProvider DEFAULT = Item.Settings::new;
+        ItemSettingsProvider DEFAULT = net.minecraft.world.item.Item.Properties::new;
 
-        Item.Settings createItemSettings();
+        net.minecraft.world.item.Item.Properties createItemSettings();
     }
 }

@@ -4,8 +4,8 @@ import juuxel.adorn.fluid.FluidReference;
 import juuxel.adorn.fluid.FluidUnit;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
-import net.minecraft.component.ComponentChanges;
-import net.minecraft.fluid.Fluid;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.world.level.material.Fluid;
 
 /**
  * A {@linkplain FluidReference fluid reference} to a {@link SingleVariantStorage}.
@@ -27,7 +27,7 @@ public final class FluidStorageReference extends FluidReference {
     }
 
     @Override
-    public void setFluid(Fluid fluid, long amount, ComponentChanges components) {
+    public void setFluid(Fluid fluid, long amount, DataComponentPatch components) {
         storage.variant = FluidVariant.of(fluid, components);
         setAmount(amount);
     }
@@ -43,7 +43,7 @@ public final class FluidStorageReference extends FluidReference {
     }
 
     @Override
-    public ComponentChanges getComponents() {
+    public DataComponentPatch getComponents() {
         return storage.variant.getComponents();
     }
 

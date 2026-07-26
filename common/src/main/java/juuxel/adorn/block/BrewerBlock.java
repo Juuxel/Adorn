@@ -3,90 +3,91 @@ package juuxel.adorn.block;
 import com.mojang.serialization.MapCodec;
 import juuxel.adorn.block.entity.BrewerBlockEntity;
 import juuxel.adorn.lib.AdornStats;
-import juuxel.adorn.util.Shapes;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import juuxel.adorn.util.ShapeRotation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.Containers;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
 public final class BrewerBlock extends VisibleBlockWithEntity implements BlockWithDescription {
-    public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
-    public static final BooleanProperty HAS_MUG = BooleanProperty.of("has_mug");
-    public static final BooleanProperty ACTIVE = BooleanProperty.of("active");
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final BooleanProperty HAS_MUG = BooleanProperty.create("has_mug");
+    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 
-    private static final Map<Direction, VoxelShape> SHAPES = Shapes.mergeShapeMaps(
-        Shapes.buildShapeRotationsFromNorth(4, 0, 2, 12, 2, 12),
-        Shapes.buildShapeRotationsFromNorth(4, 2, 8, 12, 8, 12),
-        Shapes.buildShapeRotationsFromNorth(4, 8, 2, 12, 14, 12)
+    private static final Map<Direction, VoxelShape> SHAPES = ShapeRotation.mergeShapeMaps(
+        ShapeRotation.buildShapeRotationsFromNorth(4, 0, 2, 12, 2, 12),
+        ShapeRotation.buildShapeRotationsFromNorth(4, 2, 8, 12, 8, 12),
+        ShapeRotation.buildShapeRotationsFromNorth(4, 8, 2, 12, 14, 12)
     );
     private static final double RANDOM_CLOUD_OFFSET = 0.0625;
     private static final double FACING_CLOUD_OFFSET = 0.2;
 
-    public BrewerBlock(Settings settings) {
+    public BrewerBlock(Properties settings) {
         super(settings);
-        setDefaultState(getDefaultState().with(HAS_MUG, false).with(ACTIVE, false));
+        registerDefaultState(defaultBlockState().setValue(HAS_MUG, false).setValue(ACTIVE, false));
     }
 
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        return defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
     }
 
     @Override
-    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if (world.isClient()) return ActionResult.SUCCESS;
+    protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        if (world.isClientSide()) return InteractionResult.SUCCESS;
 
         if (world.getBlockEntity(pos) instanceof BrewerBlockEntity brewer) {
             player.openMenu(brewer);
-            player.incrementStat(AdornStats.OPEN_BREWER);
+            player.awardStat(AdornStats.OPEN_BREWER);
         }
 
-        return ActionResult.CONSUME;
+        return InteractionResult.CONSUME;
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPES.get(state.get(FACING));
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return SHAPES.get(state.getValue(FACING));
     }
 
     @Override
-    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
-        ItemScatterer.onStateReplaced(state, world, pos);
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean moved) {
+        Containers.updateNeighboursAfterDestroy(state, world, pos);
     }
 
     @Override
-    public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return AdornBlockEntities.BREWER.get().instantiate(pos, state);
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return AdornBlockEntities.BREWER.get().create(pos, state);
     }
 
     @Override
-    public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(World world, BlockState stateUnused, BlockEntityType<T> type) {
-        return world instanceof ServerWorld serverWorld ? validateTicker(
+    public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(Level world, BlockState stateUnused, BlockEntityType<T> type) {
+        return world instanceof ServerLevel serverWorld ? createTickerHelper(
             type,
             AdornBlockEntities.BREWER.get(),
             (worldUnused, pos, state, blockEntity) -> BrewerBlockEntity.tick(serverWorld, pos, state, blockEntity)
@@ -94,43 +95,43 @@ public final class BrewerBlock extends VisibleBlockWithEntity implements BlockWi
     }
 
     @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return state.with(FACING, rotation.rotate(state.get(FACING)));
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation(state.get(FACING)));
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, HAS_MUG, ACTIVE);
     }
 
     @Override
-    public boolean hasComparatorOutput(BlockState state) {
+    public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
     @Override
-    protected int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction) {
+    protected int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos, Direction direction) {
         return world.getBlockEntity(pos) instanceof BrewerBlockEntity brewer ? brewer.calculateComparatorOutput() : 0;
     }
 
     @Override
-    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (state.get(ACTIVE) && random.nextInt(3) == 0) {
-            var facing = state.get(FACING);
-            double x = pos.getX() + 0.5 + random.nextDouble() * RANDOM_CLOUD_OFFSET + facing.getOffsetX() * FACING_CLOUD_OFFSET;
+    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
+        if (state.getValue(ACTIVE) && random.nextInt(3) == 0) {
+            var facing = state.getValue(FACING);
+            double x = pos.getX() + 0.5 + random.nextDouble() * RANDOM_CLOUD_OFFSET + facing.getStepX() * FACING_CLOUD_OFFSET;
             double y = pos.getY() + 0.37 + random.nextDouble() * RANDOM_CLOUD_OFFSET;
-            double z = pos.getZ() + 0.5 + random.nextDouble() * RANDOM_CLOUD_OFFSET + facing.getOffsetZ() * FACING_CLOUD_OFFSET;
-            world.addParticleClient(ParticleTypes.CLOUD, x, y, z, 0.0, 0.0, 0.0);
+            double z = pos.getZ() + 0.5 + random.nextDouble() * RANDOM_CLOUD_OFFSET + facing.getStepZ() * FACING_CLOUD_OFFSET;
+            world.addParticle(ParticleTypes.CLOUD, x, y, z, 0.0, 0.0, 0.0);
         }
     }
 
     @Override
-    protected MapCodec<? extends BlockWithEntity> getCodec() {
+    protected MapCodec<? extends BaseEntityBlock> codec() {
         throw new UnsupportedOperationException();
     }
 }

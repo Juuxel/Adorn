@@ -54,17 +54,7 @@ public final class MinecraftSetupPlugin implements Plugin<Project> {
 
         // Set the Minecraft dependency. The rootProject.property calls read from gradle.properties (and a variety of other sources).
         project.getDependencies().add("minecraft", extension.getMinecraftVersion().map(version -> "net.minecraft:minecraft:" + version));
-
-        // Set up the layered mappings with Yarn, a NeoForge compatibility patch and my Menu mappings.
-        project.getDependencies().add("mappings", extension.getMinecraftVersion().map(gameVersion -> loom.layered(spec -> {
-            spec.mappings("net.fabricmc:yarn:%s+%s:v2".formatted(gameVersion, rootProject.property("yarn-mappings")));
-            spec.mappings("dev.architectury:yarn-mappings-patch-neoforge:" + rootProject.property("neoforge-mappings-patch-version"));
-            var menuVersion = rootProject.property("menu-mappings").toString();
-            spec.mappings("io.github.juuxel:menu:" + menuVersion, m -> {
-                m.enigmaMappings();
-                m.mappingPath("Menu-%s/mappings".formatted(menuVersion.replace('+', '-')));
-            });
-        })));
+        project.getDependencies().add("mappings", loom.officialMojangMappings());
     }
 
     private static BasePluginExtension getBase(Project project) {

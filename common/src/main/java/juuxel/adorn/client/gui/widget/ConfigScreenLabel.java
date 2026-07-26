@@ -1,29 +1,30 @@
 package juuxel.adorn.client.gui.widget;
 
 import juuxel.adorn.util.Colors;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.Drawable;
-import net.minecraft.client.gui.ScreenRect;
-import net.minecraft.client.gui.tooltip.TooltipState;
-import net.minecraft.text.Text;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.navigation.ScreenRectangle;
+import net.minecraft.client.gui.components.WidgetTooltipHolder;
+import net.minecraft.network.chat.Component;
 
-public record ConfigScreenLabel(Text text, TooltipState tooltipState, int x, int y, int width) implements Drawable {
+public record ConfigScreenLabel(
+    Component text, WidgetTooltipHolder tooltipState, int x, int y, int width) implements Renderable {
     public static final int HEIGHT = 20;
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        var client = MinecraftClient.getInstance();
-        var textRenderer = client.textRenderer;
-        var matrices = context.getMatrices();
+    public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
+        var client = Minecraft.getInstance();
+        var textRenderer = client.font;
+        var matrices = context.pose();
         matrices.pushMatrix();
         matrices.translate(x, y);
-        var textY = (HEIGHT - textRenderer.fontHeight) / 2;
-        context.drawText(textRenderer, text, 0, textY, Colors.WHITE, false);
+        var textY = (HEIGHT - textRenderer.lineHeight) / 2;
+        context.drawString(textRenderer, text, 0, textY, Colors.WHITE, false);
         matrices.popMatrix();
 
         if (x <= mouseX && mouseX <= x + width && y <= mouseY && mouseY <= y + HEIGHT) {
-            tooltipState.render(context, mouseX, mouseY, true, false, new ScreenRect(x, y, width, HEIGHT));
+            tooltipState.refreshTooltipForNextRenderPass(context, mouseX, mouseY, true, false, new ScreenRectangle(x, y, width, HEIGHT));
         }
     }
 }

@@ -9,9 +9,9 @@ import me.shedaniel.rei.api.client.registry.entry.CollapsibleEntryRegistry;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.minecraft.item.Item;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.text.Text;
+import net.minecraft.world.item.Item;
+import net.minecraft.tags.TagKey;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Util;
 
 public class AdornReiClient implements REIClientPlugin {
@@ -52,8 +52,8 @@ public class AdornReiClient implements REIClientPlugin {
 
     private static void add(CollapsibleEntryRegistry registry, TagKey<Item> tag) {
         // matches the translation keys used by EMI as well
-        var name = Text.translatable(Util.createTranslationKey("tag.item", tag.id()));
-        registry.group(tag.id(), name, EntryIngredients.ofItemTag(tag));
+        var name = Component.translatable(Util.makeDescriptionId("tag.item", tag.location()));
+        registry.group(tag.location(), name, EntryIngredients.ofItemTag(tag));
     }
 
     @Override

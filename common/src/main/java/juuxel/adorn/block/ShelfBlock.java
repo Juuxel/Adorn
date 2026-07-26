@@ -3,54 +3,55 @@ package juuxel.adorn.block;
 import com.mojang.serialization.MapCodec;
 import juuxel.adorn.lib.AdornStats;
 import juuxel.adorn.platform.PlatformBridges;
-import juuxel.adorn.util.Shapes;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.menu.Menu;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+import juuxel.adorn.util.ShapeRotation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.Containers;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public final class ShelfBlock extends VisibleBlockWithEntity implements Waterloggable, BlockWithDescription {
-    public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
-    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+public final class ShelfBlock extends VisibleBlockWithEntity implements SimpleWaterloggedBlock, BlockWithDescription {
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final String DESCRIPTION_KEY = "block.adorn.shelf.description";
-    private static final Map<Direction, VoxelShape> SHAPES = Shapes.buildShapeRotations(0, 5, 0, 7, 6, 16);
+    private static final Map<Direction, VoxelShape> SHAPES = ShapeRotation.buildShapeRotations(0, 5, 0, 7, 6, 16);
 
-    public ShelfBlock(Settings settings) {
+    public ShelfBlock(Properties settings) {
         super(settings);
-        setDefaultState(getDefaultState().with(WATERLOGGED, false));
+        registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
     }
 
     @Override
@@ -59,33 +60,33 @@ public final class ShelfBlock extends VisibleBlockWithEntity implements Waterlog
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(FACING, WATERLOGGED);
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPES.get(state.get(FACING));
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return SHAPES.get(state.getValue(FACING));
     }
 
     // Based on WallTorchBlock.canPlaceAt
     @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        var facing = state.get(FACING);
-        var neighborPos = pos.offset(facing.getOpposite());
-        return world.getBlockState(neighborPos).isSideSolidFullSquare(world, neighborPos, facing);
+    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+        var facing = state.getValue(FACING);
+        var neighborPos = pos.relative(facing.getOpposite());
+        return world.getBlockState(neighborPos).isFaceSturdy(world, neighborPos, facing);
     }
 
     // Based on WallTorchBlock.getPlacementState
     @Override
-    public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
-        var waterlogged = ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        for (var direction : ctx.getPlacementDirections()) {
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        var waterlogged = ctx.getLevel().getFluidState(ctx.getClickedPos()).getType() == Fluids.WATER;
+        for (var direction : ctx.getNearestLookingDirections()) {
             if (!direction.getAxis().isHorizontal()) continue;
 
-            var state = getDefaultState().with(FACING, direction.getOpposite()).with(WATERLOGGED, waterlogged);
-            if (state.canPlaceAt(ctx.getWorld(), ctx.getBlockPos())) {
+            var state = defaultBlockState().setValue(FACING, direction.getOpposite()).setValue(WATERLOGGED, waterlogged);
+            if (state.canSurvive(ctx.getLevel(), ctx.getClickedPos())) {
                 return state;
             }
         }
@@ -95,54 +96,54 @@ public final class ShelfBlock extends VisibleBlockWithEntity implements Waterlog
 
     // Based on WallTorchBlock.getStateForNeighborUpdate
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
-        if (state.get(WATERLOGGED)) {
-            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+    protected BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        if (state.getValue(WATERLOGGED)) {
+            tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
         }
 
-        return state.get(FACING).getOpposite() == direction && !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : state;
+        return state.getValue(FACING).getOpposite() == direction && !state.canSurvive(world, pos) ? Blocks.AIR.defaultBlockState() : state;
     }
 
     @Override
-    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         var be = world.getBlockEntity(pos);
-        if (!(be instanceof Inventory inventory)) return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        if (!(be instanceof Container inventory)) return InteractionResult.TRY_WITH_EMPTY_HAND;
 
         int slot = getSlot(state, hit);
-        var existing = inventory.getStack(slot);
+        var existing = inventory.getItem(slot);
 
         if (existing.isEmpty()) {
             if (!stack.isEmpty()) {
                 var copy = stack.copy();
                 copy.setCount(1);
-                inventory.setStack(slot, copy);
-                be.markDirty();
-                if (!world.isClient()) {
+                inventory.setItem(slot, copy);
+                be.setChanged();
+                if (!world.isClientSide()) {
                     PlatformBridges.get().getNetwork().syncBlockEntity(be);
-                    player.incrementStat(AdornStats.INTERACT_WITH_SHELF);
+                    player.awardStat(AdornStats.INTERACT_WITH_SHELF);
                 }
 
-                if (!player.getAbilities().creativeMode) {
-                    stack.decrement(1);
+                if (!player.getAbilities().instabuild) {
+                    stack.shrink(1);
                 }
             }
         } else {
-            if (!world.isClient()) {
-                if (player.getStackInHand(hand).isEmpty()) {
-                    player.setStackInHand(hand, existing);
+            if (!world.isClientSide()) {
+                if (player.getItemInHand(hand).isEmpty()) {
+                    player.setItemInHand(hand, existing);
                 } else {
-                    ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), existing);
+                    Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), existing);
                 }
             }
-            inventory.setStack(slot, ItemStack.EMPTY);
-            be.markDirty();
-            if (!world.isClient()) {
+            inventory.setItem(slot, ItemStack.EMPTY);
+            be.setChanged();
+            if (!world.isClientSide()) {
                 PlatformBridges.get().getNetwork().syncBlockEntity(be);
-                player.incrementStat(AdornStats.INTERACT_WITH_SHELF);
+                player.awardStat(AdornStats.INTERACT_WITH_SHELF);
             }
         }
 
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     /**
@@ -150,11 +151,11 @@ public final class ShelfBlock extends VisibleBlockWithEntity implements Waterlog
      */
     private int getSlot(BlockState state, BlockHitResult hitResult) {
         var blockPos = hitResult.getBlockPos();
-        var pos = hitResult.getPos();
+        var pos = hitResult.getLocation();
         var xo = pos.x - blockPos.getX();
         var zo = pos.z - blockPos.getZ();
-        var facing = state.get(FACING);
-        var side = hitResult.getSide();
+        var facing = state.getValue(FACING);
+        var side = hitResult.getDirection();
 
         if (side == facing || side == Direction.UP || side == Direction.DOWN || side == facing.getOpposite()) {
             return switch (facing) {
@@ -164,10 +165,10 @@ public final class ShelfBlock extends VisibleBlockWithEntity implements Waterlog
                 case SOUTH -> xo <= 0.5 ? 1 : 0;
                 default -> -1;
             };
-        } else if (side == facing.rotateYCounterclockwise()) {
+        } else if (side == facing.getCounterClockWise()) {
             // Right side of shelf
             return 1;
-        } else if (side == facing.rotateYClockwise()) {
+        } else if (side == facing.getClockWise()) {
             // Left side of shelf
             return 0;
         } else {
@@ -177,46 +178,46 @@ public final class ShelfBlock extends VisibleBlockWithEntity implements Waterlog
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
-    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
-        ItemScatterer.onStateReplaced(state, world, pos);
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean moved) {
+        Containers.updateNeighboursAfterDestroy(state, world, pos);
     }
 
     @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation(state.get(FACING)));
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
     @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return state.with(FACING, rotation.rotate(state.get(FACING)));
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
-    public boolean hasComparatorOutput(BlockState state) {
+    public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
     @Override
-    protected int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction) {
-        return Menu.calculateComparatorOutput(world.getBlockEntity(pos));
+    protected int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos, Direction direction) {
+        return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(world.getBlockEntity(pos));
     }
 
     @Override
-    public boolean canPathfindThrough(BlockState state, NavigationType type) {
+    public boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
     }
 
     @Override
-    public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return AdornBlockEntities.SHELF.get().instantiate(pos, state);
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return AdornBlockEntities.SHELF.get().create(pos, state);
     }
 
     @Override
-    protected MapCodec<? extends BlockWithEntity> getCodec() {
+    protected MapCodec<? extends BaseEntityBlock> codec() {
         throw new UnsupportedOperationException();
     }
 }
