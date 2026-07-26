@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-// TODO (26.1): Migrate to ItemStackTemplate
 public final class Trade implements DataConvertible, TooltipComponent {
     public static final Codec<Trade> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         ItemStack.OPTIONAL_CODEC.fieldOf("selling").forGetter(Trade::getSelling),
