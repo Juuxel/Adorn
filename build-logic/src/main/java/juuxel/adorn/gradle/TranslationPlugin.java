@@ -1,9 +1,11 @@
 package juuxel.adorn.gradle;
 
 import juuxel.adorn.gradle.translation.TranslationExtension;
+import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.tasks.JavaExec;
+import org.gradle.api.tasks.TaskProvider;
 
 public final class TranslationPlugin implements Plugin<Project> {
     @SuppressWarnings("unchecked")
@@ -20,24 +22,22 @@ public final class TranslationPlugin implements Plugin<Project> {
         );
         project.getDependencies().addProvider(kelp.getName(), extension.getKelpVersion().map(v -> "io.github.juuxel:kelp:" + v));
 
-        project.getTasks().register("reformatTranslations", JavaExec.class, task -> {
+        registerKelpTask(project, "reformatTranslations", kelpCp, extension, task -> task.args("--reformat"));
+        registerKelpTask(project, "editTranslations", kelpCp, extension, task -> {});
+        var lintTask = registerKelpTask(project, "lintTranslations", kelpCp, extension, task -> task.args("--lint"));
+        project.getTasks().named("check", task -> task.dependsOn(lintTask));
+    }
+
+    private static TaskProvider<JavaExec> registerKelpTask(Project project, String name, Object classpath, TranslationExtension extension, Action<? super JavaExec> config) {
+        return project.getTasks().register(name, JavaExec.class, task -> {
             task.setGroup(CorePlugin.TASK_GROUP);
-            task.classpath(kelpCp);
+            task.classpath(classpath);
             task.getMainModule().set("io.github.juuxel.translationtool");
 
             extension.getTranslationDir().finalizeValue();
             var dir = extension.getTranslationDir().get().getAsFile().getAbsolutePath();
-            task.args("--reformat", dir);
-        });
-
-        project.getTasks().register("editTranslations", JavaExec.class, task -> {
-            task.setGroup(CorePlugin.TASK_GROUP);
-            task.classpath(kelpCp);
-            task.getMainModule().set("io.github.juuxel.translationtool");
-
-            extension.getTranslationDir().finalizeValue();
-            var dir = extension.getTranslationDir().get().getAsFile().getAbsolutePath();
-            task.args(dir);
+            config.execute(task);
+            task.args(dir); // last arg
         });
     }
 }
