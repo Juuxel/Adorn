@@ -22,17 +22,17 @@ public final class PlatformModulePlugin implements Plugin<Project> {
         var extension = CorePlugin.registerExtension(project, "platformModule", PlatformModuleExtension.class);
         var loom = project.getExtensions().getByType(LoomGradleExtensionAPI.class);
 
-        // Include common files into platform jars
         project.getTasks().named(JavaPlugin.JAR_TASK_NAME, Jar.class, task -> {
+            // Include common files
             var commonSourceSets = getSourceSets(project.project(":common"));
             task.from(commonSourceSets.named("main").map(SourceSet::getOutput));
+
+            // Add platform classifier
+            task.getArchiveClassifier().set(extension.getPlatformName());
         });
 
         // TODO: Re-enable service loader inlining and json minification
         // project.getTasks().named("remapJar", RemapJarTask.class, task -> {
-        //     // Add platform classifier to final jar
-        //     task.getArchiveClassifier().set(extension.getPlatformName());
-        //
         //     // Inline platform services
         //     task.doLast(new InlineServiceLoader());
         //
