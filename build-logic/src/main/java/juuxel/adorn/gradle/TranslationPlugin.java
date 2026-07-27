@@ -24,7 +24,12 @@ public final class TranslationPlugin implements Plugin<Project> {
 
         registerKelpTask(project, "reformatTranslations", kelpCp, extension, task -> task.args("--reformat"));
         registerKelpTask(project, "editTranslations", kelpCp, extension, task -> {});
-        var lintTask = registerKelpTask(project, "lintTranslations", kelpCp, extension, task -> task.args("--lint"));
+        var lintTask = registerKelpTask(project, "lintTranslations", kelpCp, extension, task -> {
+            task.getInputs().dir(extension.getTranslationDir());
+            // only check inputs for up-to-date checks as we have no outputs
+            task.getOutputs().upToDateWhen(t -> true);
+            task.args("--lint");
+        });
         project.getTasks().named("check", task -> task.dependsOn(lintTask));
     }
 
