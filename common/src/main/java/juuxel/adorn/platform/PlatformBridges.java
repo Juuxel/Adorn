@@ -9,7 +9,6 @@ public interface PlatformBridges {
     BlockFactory getBlockFactory();
     MenuBridge getMenus();
     NetworkBridge getNetwork();
-    ResourceBridge getResources();
 
     @InlineServices.Getter
     static PlatformBridges get() {

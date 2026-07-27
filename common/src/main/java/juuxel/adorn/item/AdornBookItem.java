@@ -1,5 +1,6 @@
 package juuxel.adorn.item;
 
+import juuxel.adorn.client.resources.ResourceBridge;
 import juuxel.adorn.networking.OpenBookS2CMessage;
 import juuxel.adorn.platform.PlatformBridges;
 import net.minecraft.ChatFormatting;
@@ -38,7 +39,8 @@ public final class AdornBookItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay displayComponent, Consumer<Component> textConsumer, TooltipFlag type) {
         super.appendHoverText(stack, context, displayComponent, textConsumer, type);
-        var bookManager = PlatformBridges.get().getResources().getBookManager();
+        // TODO: Move BookManager to common-sided code
+        var bookManager = ResourceBridge.get().getBookManager();
         if (bookManager.contains(bookId)) {
             textConsumer.accept(Component.translatable("book.byAuthor", bookManager.get(bookId).author()).withStyle(ChatFormatting.GRAY));
         }

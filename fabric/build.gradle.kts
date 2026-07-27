@@ -5,7 +5,15 @@ plugins {
     id("adorn-data-generator")
 }
 
+loom {
+    splitEnvironmentSourceSets()
+}
+
 adorn {
+    minecraft {
+        generatePackageInfos(sourceSets.getByName("client"))
+    }
+
     platformModule {
         setupVersionTemplating("fabric.mod.json")
     }
@@ -13,10 +21,13 @@ adorn {
 
 sourceSets {
     create("commonData") {
-        compileClasspath += main.get().compileClasspath
-        runtimeClasspath += main.get().runtimeClasspath
-        compileClasspath += main.get().output
-        runtimeClasspath += main.get().output
+        for (parentName in listOf("main", "client")) {
+            val parent = getByName(parentName)
+            compileClasspath += parent.compileClasspath
+            runtimeClasspath += parent.runtimeClasspath
+            compileClasspath += parent.output
+            runtimeClasspath += parent.output
+        }
     }
 }
 
@@ -81,7 +92,7 @@ dependencies {
 
     // Mod compat
     // compileOnly(libs.towelette)
-    compileOnly(libs.modmenu)
+    "clientCompileOnly"(libs.modmenu)
     localRuntime(libs.modmenu)
 }
 

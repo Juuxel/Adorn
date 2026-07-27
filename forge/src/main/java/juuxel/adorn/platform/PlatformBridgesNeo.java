@@ -24,9 +24,4 @@ public final class PlatformBridgesNeo implements PlatformBridges {
     public NetworkBridge getNetwork() {
         return NetworkBridgeNeo.INSTANCE;
     }
-
-    @Override
-    public ResourceBridge getResources() {
-        return ResourceBridgeNeo.INSTANCE;
-    }
 }

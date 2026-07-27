@@ -1,8 +1,8 @@
 package juuxel.adorn.client.gui.screen;
 
 import juuxel.adorn.client.resources.ColorManager;
+import juuxel.adorn.client.resources.ResourceBridge;
 import juuxel.adorn.menu.ContainerBlockMenu;
-import juuxel.adorn.platform.PlatformBridges;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -24,7 +24,7 @@ public abstract class PalettedMenuScreen<M extends AbstractContainerMenu & Conta
     protected abstract Identifier getPaletteId();
 
     private ColorManager.ColorPair getPalette() {
-        return PlatformBridges.get().getResources().getColorManager().getColors(getPaletteId()).get(blockId);
+        return ResourceBridge.get().getColorManager().getColors(getPaletteId()).get(blockId);
     }
 
     @Override
