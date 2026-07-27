@@ -89,7 +89,7 @@ tasks {
     register<CheckModDataCompat>("checkModDataCompat") {
         configs.addAll(adorn.dataGenerator.settings.named("adorn").map { it.configs })
         mod("biomesoplenty", "biomes-o-plenty")
-        mod("biomeswevegone", "oh-the-biomes-weve-gone")
+        // mod("biomeswevegone", "oh-the-biomes-weve-gone")
         mod("blockus")
         mod("cinderscapes")
         mod("ecologics")
