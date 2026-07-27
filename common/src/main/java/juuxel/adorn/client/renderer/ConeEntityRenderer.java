@@ -39,7 +39,7 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEnt
     private static final BlockDisplayContext BLOCK_DISPLAY_CONTEXT = BlockDisplayContext.create();
     private static final Matrix4fc IDENTITY_MATRIX = new Matrix4f();
     private static final RenderType DEFAULT_RENDER_TYPE = Sheets.cutoutBlockSheet();
-    private static final List<RenderType> RENDER_TYPES_WTIHOUT_FOIL = List.of(DEFAULT_RENDER_TYPE);
+    private static final List<RenderType> RENDER_TYPES_WITHOUT_FOIL = List.of(DEFAULT_RENDER_TYPE);
     private static final List<RenderType> RENDER_TYPES_WITH_FOIL = List.of(DEFAULT_RENDER_TYPE, ItemFeatureRenderer.getFoilRenderType(DEFAULT_RENDER_TYPE, false));
     private static final float SIZE = 0.8f;
     private final ModelManager modelManager;
@@ -91,7 +91,7 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEnt
         matrices.translate(-SIZE * 0.5f, headSize, -SIZE * 0.5f);
         matrices.scale(SIZE, SIZE, SIZE);
         for (int i = 0; i < renderLayers.size(); i++) {
-            modelRenderState.submit(matrices, queue, light, OverlayTexture.NO_OVERLAY, outline);
+            modelRenderState.submitModel(renderLayers.get(i), matrices, queue, light, OverlayTexture.NO_OVERLAY, outline);
         }
         matrices.popPose();
     }
@@ -111,7 +111,7 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEnt
 
     // TODO (26.1): Fix glint not rendering once again
     private static List<RenderType> getFoilRenderTypes(boolean hasFoil) {
-        return hasFoil ? RENDER_TYPES_WITH_FOIL : RENDER_TYPES_WTIHOUT_FOIL;
+        return hasFoil ? RENDER_TYPES_WITH_FOIL : RENDER_TYPES_WITHOUT_FOIL;
     }
 
     private static Optional<ResourceKey<ConeVariant>> getEffectiveVariant(RegistryAccess registryManager, Holder<ConeVariant> variant) {

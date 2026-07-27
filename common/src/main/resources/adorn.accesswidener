@@ -48,6 +48,7 @@ accessible field net/minecraft/client/gui/components/AbstractSelectionList INWOR
 
 # World rendering
 accessible field net/minecraft/client/renderer/block/BlockModelResolver modelManager Lnet/minecraft/client/resources/model/ModelManager;
+accessible method net/minecraft/client/renderer/block/BlockModelRenderState submitModel (Lnet/minecraft/client/renderer/rendertype/RenderType;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;III)V
 accessible field net/minecraft/client/renderer/blockentity/state/BlockEntityRenderState blockState Lnet/minecraft/world/level/block/state/BlockState;
 accessible field net/minecraft/client/renderer/entity/LivingEntityRenderer layers Ljava/util/List;
 
