@@ -8,16 +8,10 @@ import juuxel.adorn.block.entity.BrewerBlockEntityFabric;
 import juuxel.adorn.block.entity.KitchenSinkBlockEntityFabric;
 import juuxel.adorn.block.variant.BlockKind;
 import juuxel.adorn.block.variant.BlockVariantSets;
-import juuxel.adorn.client.renderer.KitchenSinkRenderer;
-import juuxel.adorn.client.renderer.ShelfRenderer;
-import juuxel.adorn.client.renderer.TradingStationRenderer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.block.WeatheringCopperBlocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -67,14 +61,6 @@ public final class AdornBlocksFabric {
         for (var kitchenSink : BlockVariantSets.get(BlockKind.KITCHEN_SINK)) {
             FluidStorage.SIDED.registerForBlocks(KitchenSinkBlockEntityFabric.FLUID_STORAGE_PROVIDER, kitchenSink.get());
         }
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static void initClient() {
-        // BlockEntityRenderers
-        BlockEntityRenderers.register(AdornBlockEntities.TRADING_STATION.get(), TradingStationRenderer::new);
-        BlockEntityRenderers.register(AdornBlockEntities.SHELF.get(), ShelfRenderer::new);
-        BlockEntityRenderers.register(AdornBlockEntities.KITCHEN_SINK.get(), KitchenSinkRenderer::new);
     }
 
     @SuppressWarnings("unchecked")

@@ -1,19 +1,26 @@
 package juuxel.adorn.client.renderer;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import juuxel.adorn.block.AdornBlockEntities;
 import juuxel.adorn.entity.AdornEntities;
 import juuxel.adorn.item.AdornItems;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
-public final class AdornEntityRenderers {
+public final class AdornRenderers {
     public static void init() {
+        BlockEntityRenderers.register(AdornBlockEntities.TRADING_STATION.get(), TradingStationRenderer::new);
+        BlockEntityRenderers.register(AdornBlockEntities.SHELF.get(), ShelfRenderer::new);
+        BlockEntityRenderers.register(AdornBlockEntities.KITCHEN_SINK.get(), KitchenSinkRenderer::new);
+
+        // TODO: remove use of deprecated api
         EntityRendererRegistry.register(AdornEntities.SEAT.get(), InvisibleEntityRenderer::new);
         EntityRendererRegistry.register(AdornEntities.CONE.get(), ConeEntityRenderer::new);
 

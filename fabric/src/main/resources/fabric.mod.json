@@ -19,7 +19,7 @@
       "juuxel.adorn.Adorn::init"
     ],
     "client": [
-      "juuxel.adorn.Adorn::initClient"
+      "juuxel.adorn.client.AdornClientInit"
     ],
     "modmenu": [
       "juuxel.adorn.compat.modmenu.AdornModMenuPlugin"

@@ -17,7 +17,7 @@ loom {
 dependencies {
     implementation(libs.jankson)
 
-    // Just for @Environment and mixin deps :)
+    // Just for mixin deps :)
     implementation(libs.fabric.loader)
 
     // Add a mod dependency on some APIs for compat code.

@@ -5,11 +5,6 @@ import juuxel.adorn.block.AdornBlockSetTypes;
 import juuxel.adorn.block.AdornBlocks;
 import juuxel.adorn.block.AdornWoodTypes;
 import juuxel.adorn.block.variant.BlockVariantSets;
-import juuxel.adorn.client.AdornClientNetworking;
-import juuxel.adorn.client.AdornModels;
-import juuxel.adorn.client.ClientEvents;
-import juuxel.adorn.client.gui.screen.AdornMenuScreens;
-import juuxel.adorn.client.renderer.AdornEntityRenderers;
 import juuxel.adorn.compat.Compat;
 import juuxel.adorn.component.AdornComponentTypes;
 import juuxel.adorn.config.ConfigManager;
@@ -36,10 +31,7 @@ import juuxel.adorn.recipe.AdornRecipeDisplays;
 import juuxel.adorn.recipe.AdornRecipeSerializers;
 import juuxel.adorn.recipe.AdornRecipeTypes;
 import juuxel.adorn.recipe.AdornSlotDisplays;
-import juuxel.adorn.resources.AdornResources;
 import juuxel.adorn.util.Dyes;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 
 public final class Adorn {
@@ -81,16 +73,5 @@ public final class Adorn {
         if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
             Dyes.checkInDev();
         }
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static void initClient() {
-        AdornBlocksFabric.initClient();
-        AdornEntityRenderers.init();
-        AdornMenuScreens.register();
-        AdornClientNetworking.init();
-        AdornResources.initClient();
-        ClientEvents.init();
-        AdornModels.init();
     }
 }
