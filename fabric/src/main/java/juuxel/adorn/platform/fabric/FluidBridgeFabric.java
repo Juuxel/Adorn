@@ -7,13 +7,13 @@ import juuxel.adorn.platform.FluidBridge;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.core.component.DataComponentPatch;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import org.jspecify.annotations.Nullable;
 
 public final class FluidBridgeFabric implements FluidBridge {
     @Override

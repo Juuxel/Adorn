@@ -25,7 +25,6 @@ import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.Util;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.material.Fluid;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -126,8 +125,8 @@ public record ConeVariant(
         public static final ResourceKey<ConeVariant> OBSIDIAN = of("obsidian");
 
         public static final Comparator<ResourceKey<ConeVariant>> COMPARATOR = (a, b) -> {
-            @Nullable DyeColor colorA = COLORS_BY_VARIANT.get(a);
-            @Nullable DyeColor colorB = COLORS_BY_VARIANT.get(b);
+            DyeColor colorA = COLORS_BY_VARIANT.get(a);
+            DyeColor colorB = COLORS_BY_VARIANT.get(b);
 
             if (colorA != null) {
                 return colorB != null ? Dyes.DYES_IN_CREATIVE_INVENTORY_ORDER.indexOf(colorA) - Dyes.DYES_IN_CREATIVE_INVENTORY_ORDER.indexOf(colorB) : -1;

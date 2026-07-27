@@ -17,7 +17,6 @@ import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
 import net.neoforged.neoforge.transfer.item.WorldlyContainerWrapper;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
-import org.jetbrains.annotations.Nullable;
 
 public final class BrewerBlockEntityNeo extends BrewerBlockEntity implements BlockEntityWithFluidTank {
     private static final int CAPACITY = FLUID_CAPACITY_IN_BUCKETS * FluidType.BUCKET_VOLUME;
@@ -47,7 +46,7 @@ public final class BrewerBlockEntityNeo extends BrewerBlockEntity implements Blo
     private boolean moveFromFluidContainer(boolean commit) {
         try (var tx = Transaction.open(null)) {
             ItemAccess itemAccess = ItemAccess.forHandlerIndex(new WorldlyContainerWrapper(this, null), FLUID_CONTAINER_SLOT);
-            @Nullable ResourceHandler<FluidResource> itemFluidHandler =
+            ResourceHandler<FluidResource> itemFluidHandler =
                 getItem(FLUID_CONTAINER_SLOT).getCapability(Capabilities.Fluid.ITEM, itemAccess);
 
             if (itemFluidHandler != null) {

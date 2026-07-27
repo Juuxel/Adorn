@@ -22,7 +22,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.AtlasIds;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 
 public final class KitchenSinkRenderer implements BlockEntityRenderer<KitchenSinkBlockEntity, KitchenSinkRenderState> {
@@ -63,7 +63,7 @@ public final class KitchenSinkRenderer implements BlockEntityRenderer<KitchenSin
     }
 
     @Override
-    public void extractRenderState(KitchenSinkBlockEntity blockEntity, KitchenSinkRenderState state, float tickProgress, Vec3 cameraPos, @Nullable ModelFeatureRenderer.CrumblingOverlay crumblingOverlay) {
+    public void extractRenderState(KitchenSinkBlockEntity blockEntity, KitchenSinkRenderState state, float tickProgress, Vec3 cameraPos, ModelFeatureRenderer.@Nullable CrumblingOverlay crumblingOverlay) {
         BlockEntityRenderer.super.extractRenderState(blockEntity, state, tickProgress, cameraPos, crumblingOverlay);
         state.fluid = blockEntity.getFluidReference().createSnapshot();
         state.fluidColor = getFluidColor(blockEntity);

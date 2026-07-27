@@ -5,12 +5,12 @@ import juuxel.adorn.fluid.FluidUnit;
 import juuxel.adorn.fluid.FluidVolume;
 import juuxel.adorn.util.InlineServices;
 import juuxel.adorn.util.Services;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import org.jspecify.annotations.Nullable;
 
 @InlineServices
 public interface FluidBridge {

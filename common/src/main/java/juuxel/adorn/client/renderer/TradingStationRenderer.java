@@ -18,7 +18,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public final class TradingStationRenderer implements BlockEntityRenderer<TradingStationBlockEntity, TradingStationRenderState> {
     private static final float SELLING_ROTATION_MULTIPLIER = 1.2f;
@@ -41,7 +41,7 @@ public final class TradingStationRenderer implements BlockEntityRenderer<Trading
     }
 
     @Override
-    public void extractRenderState(TradingStationBlockEntity blockEntity, TradingStationRenderState state, float tickProgress, Vec3 cameraPos, @Nullable ModelFeatureRenderer.CrumblingOverlay crumblingOverlay) {
+    public void extractRenderState(TradingStationBlockEntity blockEntity, TradingStationRenderState state, float tickProgress, Vec3 cameraPos, ModelFeatureRenderer.@Nullable CrumblingOverlay crumblingOverlay) {
         BlockEntityRenderer.super.extractRenderState(blockEntity, state, tickProgress, cameraPos, crumblingOverlay);
         state.trade.setFrom(blockEntity.getTrade(), itemModelManager, blockEntity.getLevel(), (int) blockEntity.getBlockPos().asLong());
         state.ownerName = blockEntity.getOwnerName().copy().withStyle(ChatFormatting.GOLD);

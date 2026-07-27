@@ -1,6 +1,6 @@
 package juuxel.adorn.gradle.util;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.io.IOException;
 import java.nio.file.FileVisitResult;

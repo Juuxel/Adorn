@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.BubbleColumnBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.redstone.Orientation;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class PrismarineChimneyBlock extends AbstractChimneyBlock implements BlockWithDescription {
     private static final String DESCRIPTION_KEY = "block.adorn.prismarine_chimney.description";

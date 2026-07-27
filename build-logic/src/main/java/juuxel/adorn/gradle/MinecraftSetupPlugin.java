@@ -7,6 +7,7 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.plugins.BasePluginExtension;
 import org.gradle.api.plugins.JavaPluginExtension;
+import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.bundling.AbstractArchiveTask;
 import org.gradle.api.tasks.bundling.Jar;
 import org.gradle.api.tasks.compile.JavaCompile;
@@ -52,6 +53,9 @@ public final class MinecraftSetupPlugin implements Plugin<Project> {
 
         // Set the Minecraft dependency.
         project.getDependencies().add("minecraft", extension.getMinecraftVersion().map(version -> "net.minecraft:minecraft:" + version));
+
+        // Generate package-info files with the @NullMarked annotation for the main source set.
+        extension.generatePackageInfos(java.getSourceSets().getByName(SourceSet.MAIN_SOURCE_SET_NAME));
     }
 
     private static BasePluginExtension getBase(Project project) {

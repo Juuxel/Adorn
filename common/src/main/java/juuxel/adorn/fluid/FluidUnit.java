@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import juuxel.adorn.util.Displayable;
 import juuxel.adorn.util.MixedFraction;
 import net.minecraft.network.chat.Component;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Locale;

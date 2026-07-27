@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public final class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity, ShelfRenderState> {
     private static final float ITEM_SCALE = 0.5f;
@@ -34,7 +34,7 @@ public final class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity
     }
 
     @Override
-    public void extractRenderState(ShelfBlockEntity blockEntity, ShelfRenderState state, float tickProgress, Vec3 cameraPos, @Nullable ModelFeatureRenderer.CrumblingOverlay crumblingOverlay) {
+    public void extractRenderState(ShelfBlockEntity blockEntity, ShelfRenderState state, float tickProgress, Vec3 cameraPos, ModelFeatureRenderer.@Nullable CrumblingOverlay crumblingOverlay) {
         BlockEntityRenderer.super.extractRenderState(blockEntity, state, tickProgress, cameraPos, crumblingOverlay);
 
         int seed = (int) blockEntity.getBlockPos().asLong();

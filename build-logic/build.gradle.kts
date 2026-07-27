@@ -14,6 +14,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.14.0")
     implementation("org.ow2.asm:asm-tree:9.4")
     implementation("io.github.juuxel:adorn-data-generator")
+    implementation("org.jspecify:jspecify:1.0.0")
 
     // Must match the version in settings.gradle.kts!
     implementation("dev.architectury:architectury-loom:1.17.+")

@@ -1,12 +1,12 @@
 package juuxel.adorn.platform.fabric;
 
 import juuxel.adorn.platform.BlockBridge;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.WeatheringCopper;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelReader;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jspecify.annotations.Nullable;
 
 public final class BlockBridgeFabric implements BlockBridge {
     @Override
