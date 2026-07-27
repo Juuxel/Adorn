@@ -1,5 +1,8 @@
 package juuxel.adorn.gradle;
 
+import juuxel.adorn.gradle.action.ZipTransformerAction;
+import juuxel.adorn.gradle.util.zip.InlineServiceLoader;
+import juuxel.adorn.gradle.util.zip.MinifyJson;
 import juuxel.adorn.gradle.xplat.PlatformModuleExtension;
 import net.fabricmc.loom.api.LoomGradleExtensionAPI;
 import net.fabricmc.loom.api.ModSettings;
@@ -29,16 +32,15 @@ public final class PlatformModulePlugin implements Plugin<Project> {
 
             // Add platform classifier
             task.getArchiveClassifier().set(extension.getPlatformName());
-        });
 
-        // TODO: Re-enable service loader inlining and json minification
-        // project.getTasks().named("remapJar", RemapJarTask.class, task -> {
-        //     // Inline platform services
-        //     task.doLast(new InlineServiceLoader());
-        //
-        //     // Minify JSON files
-        //     task.doLast(new MinifyJson());
-        // });
+            task.doLast(new ZipTransformerAction(transformer -> {
+                // Inline platform services
+                transformer.addStep(new InlineServiceLoader());
+
+                // Minify JSON files
+                transformer.addStep(new MinifyJson());
+            }));
+        });
 
         // Generate IDE run configs for each run config.
         loom.getRuns().configureEach(run -> run.getGenerateRunConfig().set(true));
