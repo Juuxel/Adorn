@@ -34,8 +34,6 @@ jobs:
         run: ./gradlew :fabric:runData
       - name: Generate resources (mod compatibility)
         run: ./gradlew generateAllData
-      - name: Reformat translations
-        run: ./gradlew :common:reformatTranslations
       - name: Check for changes
         run: python ./build-logic/check_and_package_git_diff.py
       - name: Upload changed resources
