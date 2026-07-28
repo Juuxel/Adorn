@@ -1,14 +1,15 @@
 package juuxel.adorn.client.book;
 
 import juuxel.adorn.AdornCommon;
-import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.resources.FileToIdConverter;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 
 import java.util.Map;
 
+// TODO: Use one global instance declared in common code
 public class BookManager extends SimpleJsonResourceReloadListener<Book> {
     public static final Identifier ID = AdornCommon.id("book_manager");
     public static final String DATA_TYPE = "adorn/books";

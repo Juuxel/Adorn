@@ -1,13 +1,13 @@
 package juuxel.adorn.client.resources;
 
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import juuxel.adorn.client.book.BookManager;
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.minecraft.server.packs.PackType;
 
 public final class AdornClientResources {
     public static void init() {
-        // TODO: remove use of deprecated api
-        var resourceManagerHelper = ResourceManagerHelper.get(PackType.CLIENT_RESOURCES);
-        resourceManagerHelper.registerReloadListener(ColorManagerFabric.INSTANCE);
-        resourceManagerHelper.registerReloadListener(BookManagerFabric.INSTANCE);
+        var resourceLoader = ResourceLoader.get(PackType.CLIENT_RESOURCES);
+        resourceLoader.registerReloadListener(ColorManager.ID, ColorManagerFabric.INSTANCE);
+        resourceLoader.registerReloadListener(BookManager.ID, BookManagerFabric.INSTANCE);
     }
 }

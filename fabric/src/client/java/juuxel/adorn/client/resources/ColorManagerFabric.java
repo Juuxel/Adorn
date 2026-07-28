@@ -1,13 +1,5 @@
 package juuxel.adorn.client.resources;
 
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
-import net.minecraft.resources.Identifier;
-
-public final class ColorManagerFabric extends ColorManager implements IdentifiableResourceReloadListener {
+public final class ColorManagerFabric extends ColorManager {
     public static final ColorManagerFabric INSTANCE = new ColorManagerFabric();
-
-    @Override
-    public Identifier getFabricId() {
-        return ID;
-    }
 }

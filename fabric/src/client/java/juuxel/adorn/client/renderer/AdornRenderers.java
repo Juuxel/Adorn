@@ -5,10 +5,10 @@ import juuxel.adorn.block.AdornBlockEntities;
 import juuxel.adorn.entity.AdornEntities;
 import juuxel.adorn.item.AdornItems;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,9 +20,8 @@ public final class AdornRenderers {
         BlockEntityRenderers.register(AdornBlockEntities.SHELF.get(), ShelfRenderer::new);
         BlockEntityRenderers.register(AdornBlockEntities.KITCHEN_SINK.get(), KitchenSinkRenderer::new);
 
-        // TODO: remove use of deprecated api
-        EntityRendererRegistry.register(AdornEntities.SEAT.get(), InvisibleEntityRenderer::new);
-        EntityRendererRegistry.register(AdornEntities.CONE.get(), ConeEntityRenderer::new);
+        EntityRenderers.register(AdornEntities.SEAT.get(), InvisibleEntityRenderer::new);
+        EntityRenderers.register(AdornEntities.CONE.get(), ConeEntityRenderer::new);
 
         ArmorRenderer.register(new ConeArmorRenderer(), AdornItems.CONE.get());
     }

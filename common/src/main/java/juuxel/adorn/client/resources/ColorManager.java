@@ -13,9 +13,9 @@ import juuxel.adorn.AdornCommon;
 import juuxel.adorn.util.Colors;
 import juuxel.adorn.util.Logging;
 import net.minecraft.resources.FileToIdConverter;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
-import net.minecraft.resources.Identifier;
 import net.minecraft.util.profiling.ProfilerFiller;
 import org.slf4j.Logger;
 
@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+// TODO: Use one global instance declared in common code
 public class ColorManager extends SimplePreparableReloadListener<Map<Identifier, List<JsonObject>>> {
     public static final Identifier ID = AdornCommon.id("color_manager");
     private static final Logger LOGGER = Logging.logger();
