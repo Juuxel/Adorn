@@ -16,6 +16,7 @@ loom {
 adorn {
     hoard {
         addResources(sourceSets.main.get(), project(":common").file("src/generated/resources"))
+        addResources(sourceSets.main.get(), project(":common").file("src/hoard/other"))
         injectToNeoForgeMod()
     }
 

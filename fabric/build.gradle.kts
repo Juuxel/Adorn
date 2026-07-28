@@ -28,6 +28,7 @@ adorn {
         addResources(sourceSets.main.get(), "src/generated/resources")
         addResources(sourceSets.main.get(), "src/hoard/other")
         addResources(sourceSets.main.get(), project(":common").file("src/generated/resources"))
+        addResources(sourceSets.main.get(), project(":common").file("src/hoard/other"))
         injectToFabricMod()
     }
 
