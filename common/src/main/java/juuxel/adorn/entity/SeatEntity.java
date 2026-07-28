@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,7 +144,7 @@ public final class SeatEntity extends Entity {
         // 6. the same steps but y shifted up
         // 7. if nothing else works, seatPos.up()
 
-        Direction[] directions = {
+        @Nullable Direction[] directions = {
             null,
             preferred,
             preferred.getClockWise(),

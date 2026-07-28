@@ -54,14 +54,6 @@ public final class TradingStationBlockEntity extends BlockEntity implements Menu
         storage.addListener(this::setChanged);
     }
 
-    public UUID getOwner() {
-        return owner;
-    }
-
-    public void setOwner(@Nullable UUID owner) {
-        this.owner = owner;
-    }
-
     public void setOwner(Player player) {
         owner = player.getGameProfile().id();
         ownerName = Component.literal(player.getGameProfile().name());

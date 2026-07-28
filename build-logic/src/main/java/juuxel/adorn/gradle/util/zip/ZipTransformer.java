@@ -1,5 +1,7 @@
 package juuxel.adorn.gradle.util.zip;
 
+import org.jspecify.annotations.Nullable;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -68,7 +70,7 @@ public final class ZipTransformer {
 
     @FunctionalInterface
     public interface Filer {
-        byte[] readFile(String path) throws IOException;
+        byte @Nullable [] readFile(String path) throws IOException;
     }
 
     public interface Step {
