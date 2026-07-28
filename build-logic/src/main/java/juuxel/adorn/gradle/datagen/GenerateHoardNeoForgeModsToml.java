@@ -20,12 +20,16 @@ public abstract class GenerateHoardNeoForgeModsToml extends DefaultTask {
     private static final String MODS_TOML =
         """
         license = "%s"
+        issueTrackerURL = "%s"
 
         [[mods]]
         modId = "%s"
         version = "%s"
         displayName = "Adorn Resources"
         description = "Adorn resources."
+        authors = "Juuz"
+        logoFile = "%s"
+        logoBlur = false
         """;
 
     @Input
@@ -37,6 +41,12 @@ public abstract class GenerateHoardNeoForgeModsToml extends DefaultTask {
     @Input
     public abstract Property<String> getLicense();
 
+    @Input
+    public abstract Property<String> getLogoPath();
+
+    @Input
+    public abstract Property<String> getIssueTrackerUrl();
+
     @OutputFile
     public abstract RegularFileProperty getOutputFile();
 
@@ -45,6 +55,8 @@ public abstract class GenerateHoardNeoForgeModsToml extends DefaultTask {
 
     public GenerateHoardNeoForgeModsToml() {
         getLicense().convention("MIT");
+        getLogoPath().convention(getModId().map(id -> "assets/" + id + "/icon.png"));
+        getIssueTrackerUrl().convention("https://github.com/Juuxel/Adorn/issues");
     }
 
     @TaskAction
@@ -54,6 +66,8 @@ public abstract class GenerateHoardNeoForgeModsToml extends DefaultTask {
             parameters.getModId().set(getModId());
             parameters.getVersion().set(getVersion());
             parameters.getLicense().set(getLicense());
+            parameters.getLogoPath().set(getLogoPath());
+            parameters.getIssueTrackerUrl().set(getIssueTrackerUrl());
             parameters.getOutputFile().set(getOutputFile());
         });
     }
@@ -67,6 +81,12 @@ public abstract class GenerateHoardNeoForgeModsToml extends DefaultTask {
 
         @Input
         Property<String> getLicense();
+
+        @Input
+        Property<String> getLogoPath();
+
+        @Input
+        Property<String> getIssueTrackerUrl();
 
         @OutputFile
         RegularFileProperty getOutputFile();
@@ -84,7 +104,13 @@ public abstract class GenerateHoardNeoForgeModsToml extends DefaultTask {
 
         private void run() throws IOException {
             var params = getParameters();
-            var toml = MODS_TOML.formatted(params.getLicense().get(), params.getModId().get(), params.getVersion().get());
+            var toml = MODS_TOML.formatted(
+                params.getLicense().get(),
+                params.getIssueTrackerUrl().get(),
+                params.getModId().get(),
+                params.getVersion().get(),
+                params.getLogoPath().get()
+            );
             Files.writeString(params.getOutputFile().get().getAsFile().toPath(), toml, StandardCharsets.UTF_8);
         }
     }

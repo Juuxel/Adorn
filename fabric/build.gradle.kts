@@ -118,6 +118,18 @@ tasks {
             name = "Adorn Resources"
             version = adorn.hoard.version
             description = "Adorn resources."
+            author("Juuz")
+            licenses.add("MIT")
+            icon {
+                path = modId.map { "assets/$it/icon.png" }
+            }
+            contactInformation.putAll(
+                mapOf(
+                    "homepage" to "https://modrinth.com/mod/adorn",
+                    "sources" to "https://github.com/Juuxel/Adorn",
+                    "issues" to "https://github.com/Juuxel/Adorn/issues",
+                )
+            )
             customData.put("modmenu", mapOf("parent" to "adorn"))
         }
         outputFile.set(file("build/hoard.fabric.mod.json"))
@@ -126,6 +138,10 @@ tasks {
     hoardJar {
         from(hoardFmj.flatMap { it.outputFile }) {
             rename { "fabric.mod.json" }
+        }
+
+        from(project(":common").file("src/main/resources/assets/adorn/icon.png")) {
+            into(adorn.hoard.modId.map { "assets/$it" })
         }
     }
 

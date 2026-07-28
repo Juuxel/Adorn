@@ -60,6 +60,10 @@ tasks {
             into("META-INF")
             rename { "neoforge.mods.toml" }
         }
+
+        from(project(":common").file("src/main/resources/assets/adorn/icon.png")) {
+            into(adorn.hoard.modId.map { "assets/$it" })
+        }
     }
 
     check {

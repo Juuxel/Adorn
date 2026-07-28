@@ -9,7 +9,8 @@ version = "${version}"
 displayName = "Adorn"
 description = "Decorate your home!"
 authors = "Juuz"
-logoFile = "icon.png"
+logoFile = "assets/adorn/icon.png"
+logoBlur = false
 
 [[mixins]]
 config = "mixins.adorn.common.json"
