@@ -4,6 +4,8 @@ import juuxel.adorn.gradle.action.ZipTransformerAction;
 import juuxel.adorn.gradle.util.zip.InjectJijMetadata;
 import net.fabricmc.loom.api.LoomGradleExtensionAPI;
 import org.gradle.api.Project;
+import org.gradle.api.file.ConfigurableFileCollection;
+import org.gradle.api.file.FileCollection;
 import org.gradle.api.plugins.JavaPlugin;
 import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.provider.Property;
@@ -12,6 +14,8 @@ import org.gradle.api.tasks.TaskProvider;
 import org.gradle.jvm.tasks.Jar;
 
 import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public abstract class HoardExtension {
@@ -23,6 +27,7 @@ public abstract class HoardExtension {
     protected abstract Project getProject();
 
     private final TaskProvider<? extends Jar> hoardJarTask;
+    private final Map<String, ConfigurableFileCollection> directoriesBySourceSet = new HashMap<>();
 
     public HoardExtension(TaskProvider<? extends Jar> hoardJarTask) {
         this.hoardJarTask = hoardJarTask;
@@ -39,6 +44,8 @@ public abstract class HoardExtension {
     /// Adds resources untracked by a `ProcessResources` task to a source set.
     /// Using this for large directories speeds up compiling in dev considerably.
     public void addResources(SourceSet sourceSet, Object resourceDir) {
+        getMutableDirectoriesForSourceSet(sourceSet).from(resourceDir);
+
         // Add to runtime classpath
         addResourcesToRuntimeClasspath(sourceSet, resourceDir);
 
@@ -63,6 +70,14 @@ public abstract class HoardExtension {
 
     private void addResourcesToRuntimeClasspath(SourceSet sourceSet, Object resourceDir) {
         sourceSet.setRuntimeClasspath(sourceSet.getRuntimeClasspath().plus(getProject().files(resourceDir)));
+    }
+
+    public FileCollection getDirectoriesForSourceSet(SourceSet sourceSet) {
+        return getMutableDirectoriesForSourceSet(sourceSet);
+    }
+
+    private ConfigurableFileCollection getMutableDirectoriesForSourceSet(SourceSet sourceSet) {
+        return directoriesBySourceSet.computeIfAbsent(sourceSet.getName(), name -> getProject().getObjects().fileCollection());
     }
 
     public void injectToFabricMod() {

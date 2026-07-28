@@ -44,7 +44,8 @@ public final class ModularDataGeneratorPlugin implements Plugin<Project> {
         });
         project.getTasks().named("generateAllData", task -> task.dependsOn(generateData));
 
-        CorePlugin.getExtension(project, HoardExtension.class).addResources(sourceSet, generatedResources);
+        var hoard = CorePlugin.getExtension(project, HoardExtension.class);
+        hoard.addResources(sourceSet, generatedResources);
 
         if (settings.getGenerateEmiFiles().get()) {
             var generateEmi = project.getTasks().register(sourceSet.getTaskName("generate", "Emi"), GenerateEmi.class, task -> {
@@ -57,6 +58,8 @@ public final class ModularDataGeneratorPlugin implements Plugin<Project> {
                 if (settings.getIncludeCommonFilesInEmi().get()) {
                     resourceDirs.addAll(getSourceSets(project.project(":common")).getByName("main").getResources().getSrcDirs());
                 }
+
+                resourceDirs.addAll(hoard.getDirectoriesForSourceSet(sourceSet).getFiles());
 
                 for (File dir : resourceDirs) {
                     task.getRecipes().from(project.fileTree(dir, tree -> {
