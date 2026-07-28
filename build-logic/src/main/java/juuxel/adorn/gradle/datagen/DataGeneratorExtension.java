@@ -15,7 +15,7 @@ public abstract class DataGeneratorExtension {
 
     @Inject
     public DataGeneratorExtension(Project project) {
-        settings = project.container(Settings.class);
+        settings = project.getObjects().domainObjectContainer(Settings.class);
     }
 
     public NamedDomainObjectContainer<Settings> getSettings() {
@@ -31,7 +31,7 @@ public abstract class DataGeneratorExtension {
 
         @Inject
         public Settings(Project project) {
-            configs = project.container(DataConfig.class);
+            configs = project.getObjects().domainObjectContainer(DataConfig.class);
             getGeneratedSources().convention(getSourceSet().flatMap(sourceSet -> project.getLayout().getBuildDirectory().dir("%sDataGeneratedSources".formatted(sourceSet.getName()))));
             getGeneratedResources().convention(getSourceSet().map(sourceSet -> project.getLayout().getProjectDirectory().dir("src/%s/generatedResources".formatted(sourceSet.getName()))));
             getGenerateTags().convention(false);
