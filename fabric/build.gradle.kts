@@ -9,16 +9,6 @@ loom {
     splitEnvironmentSourceSets()
 }
 
-adorn {
-    minecraft {
-        generatePackageInfos(sourceSets.getByName("client"))
-    }
-
-    platformModule {
-        setupVersionTemplating("fabric.mod.json")
-    }
-}
-
 sourceSets {
     create("commonData") {
         for (parentName in listOf("main", "client")) {
@@ -28,6 +18,17 @@ sourceSets {
             compileClasspath += parent.output
             runtimeClasspath += parent.output
         }
+    }
+}
+
+adorn {
+    minecraft {
+        generatePackageInfos(sourceSets.getByName("client"))
+        generatePackageInfos(sourceSets.getByName("commonData"))
+    }
+
+    platformModule {
+        setupVersionTemplating("fabric.mod.json")
     }
 }
 
