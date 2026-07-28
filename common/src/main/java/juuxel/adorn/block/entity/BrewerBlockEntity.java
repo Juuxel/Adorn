@@ -163,7 +163,8 @@ public abstract class BrewerBlockEntity extends BaseContainerBlockEntity impleme
 
     private static void decrementIngredient(BrewerBlockEntity brewer, int slot) {
         var stack = brewer.getItem(slot);
-        var remainder = ItemBridge.get().getRecipeRemainder(stack).create();
+        var remainderTemplate = ItemBridge.get().getRecipeRemainder(stack);
+        var remainder = remainderTemplate != null ? remainderTemplate.create() : ItemStack.EMPTY;
         stack.shrink(1);
 
         if (!remainder.isEmpty()) {
