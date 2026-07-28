@@ -22,6 +22,8 @@ sourceSets {
 }
 
 adorn {
+    addResources(sourceSets.main.get(), "src/generated/resources")
+
     minecraft {
         generatePackageInfos(sourceSets.getByName("client"))
         generatePackageInfos(sourceSets.getByName("commonData"))
@@ -62,14 +64,6 @@ fun registerDataGenerator(name: String, displayName: String, common: Boolean) {
 
 registerDataGenerator("commonData", "Common Data Generator", common = true)
 registerDataGenerator("data", "Fabric Data Generator", common = false)
-
-sourceSets {
-    main {
-        resources {
-            srcDir("src/generated/resources")
-        }
-    }
-}
 
 loom {
     mods {

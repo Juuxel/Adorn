@@ -12,11 +12,15 @@ public final class CorePlugin implements Plugin<Project> {
         project.getExtensions().create("adorn", AdornExtension.class);
     }
 
+    public static AdornExtension getExtension(Project project) {
+        return project.getExtensions().getByType(AdornExtension.class);
+    }
+
     public static <T> T getExtension(Project project, Class<T> extensionClass) {
-        return project.getExtensions().getByType(AdornExtension.class).getExtensions().getByType(extensionClass);
+        return getExtension(project).getExtensions().getByType(extensionClass);
     }
 
     public static <T> T registerExtension(Project project, String name, Class<T> extensionClass) {
-        return project.getExtensions().getByType(AdornExtension.class).getExtensions().create(name, extensionClass);
+        return getExtension(project).getExtensions().create(name, extensionClass);
     }
 }

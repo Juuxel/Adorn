@@ -41,9 +41,8 @@ public final class ModularDataGeneratorPlugin implements Plugin<Project> {
             task.dependsOn(generateMainData);
         });
         project.getTasks().named("generateAllData", task -> task.dependsOn(generateData));
-        project.getTasks().named(sourceSet.getProcessResourcesTaskName(), task -> task.mustRunAfter(generateData));
-        sourceSet.getResources().srcDir(generatedResources);
-        sourceSet.getResources().exclude(".cache");
+
+        CorePlugin.getExtension(project).addResources(sourceSet, generatedResources);
 
         if (settings.getGenerateEmiFiles().get()) {
             var generateEmi = project.getTasks().register(sourceSet.getTaskName("generate", "Emi"), GenerateEmi.class, task -> {
