@@ -109,7 +109,6 @@ public final class ConeEntityRenderer extends EntityRenderer<ConeEntity, ConeEnt
         modelWrapper.update(state, Blocks.AIR.defaultBlockState(), BLOCK_DISPLAY_CONTEXT, 42);
     }
 
-    // TODO (26.1): Fix glint not rendering once again
     private static List<RenderType> getFoilRenderTypes(boolean hasFoil) {
         return hasFoil ? RENDER_TYPES_WITH_FOIL : RENDER_TYPES_WITHOUT_FOIL;
     }
