@@ -287,7 +287,7 @@ public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock, Snea
             return null;
         }
 
-        @Nullable Direction result;
+        Direction result;
         if (frontConnection != FrontConnection.NONE) {
             result = facing;
         } else if (connectedLeft) {
