@@ -1,4 +1,5 @@
 import juuxel.adorn.gradle.compatchecker.CheckModDataCompat
+import juuxel.adorn.gradle.datagen.GenerateHoardNeoForgeModsToml
 
 plugins {
     id("adorn-platform-module")
@@ -13,6 +14,11 @@ loom {
 }
 
 adorn {
+    hoard {
+        addResources(sourceSets.main.get(), project(":common").file("src/generated/resources"))
+        injectToNeoForgeMod()
+    }
+
     platformModule {
         platformName = "neoforge"
         setupVersionTemplating("META-INF/neoforge.mods.toml")
@@ -41,6 +47,19 @@ tasks {
         mod("biomesoplenty", "biomes-o-plenty")
         // mod("biomeswevegone", "oh-the-biomes-weve-gone")
         mod("ecologics")
+    }
+
+    val generateModsToml = register<GenerateHoardNeoForgeModsToml>("generateHoardModsToml") {
+        modId = adorn.hoard.modId
+        version = adorn.hoard.version
+        outputFile.set(file("build/hoard.neoforge.mods.toml"))
+    }
+
+    hoardJar {
+        from(generateModsToml.flatMap { it.outputFile }) {
+            into("META-INF")
+            rename { "neoforge.mods.toml" }
+        }
     }
 
     check {

@@ -20,7 +20,7 @@ public final class CorePlugin implements Plugin<Project> {
         return getExtension(project).getExtensions().getByType(extensionClass);
     }
 
-    public static <T> T registerExtension(Project project, String name, Class<T> extensionClass) {
-        return getExtension(project).getExtensions().create(name, extensionClass);
+    public static <T> T registerExtension(Project project, String name, Class<T> extensionClass, Object... args) {
+        return getExtension(project).getExtensions().create(name, extensionClass, args);
     }
 }

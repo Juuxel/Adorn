@@ -4,6 +4,7 @@ import juuxel.adorn.gradle.datagen.DataGeneratorExtension;
 import juuxel.adorn.gradle.datagen.GenerateData;
 import juuxel.adorn.gradle.datagen.GenerateDataCode;
 import juuxel.adorn.gradle.datagen.GenerateEmi;
+import juuxel.adorn.gradle.xplat.HoardExtension;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.plugins.JavaPluginExtension;
@@ -16,6 +17,7 @@ public final class ModularDataGeneratorPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
         project.getPlugins().apply(CorePlugin.class);
+        project.getPlugins().apply(HoardPlugin.class);
         var extension = CorePlugin.registerExtension(project, "dataGenerator", DataGeneratorExtension.class);
 
         project.getTasks().register("generateAllData", task -> task.setGroup(CorePlugin.TASK_GROUP));
@@ -42,7 +44,7 @@ public final class ModularDataGeneratorPlugin implements Plugin<Project> {
         });
         project.getTasks().named("generateAllData", task -> task.dependsOn(generateData));
 
-        CorePlugin.getExtension(project).addResources(sourceSet, generatedResources);
+        CorePlugin.getExtension(project, HoardExtension.class).addResources(sourceSet, generatedResources);
 
         if (settings.getGenerateEmiFiles().get()) {
             var generateEmi = project.getTasks().register(sourceSet.getTaskName("generate", "Emi"), GenerateEmi.class, task -> {

@@ -1,4 +1,6 @@
+import juuxel.adorn.gradle.CorePlugin
 import juuxel.adorn.gradle.compatchecker.CheckModDataCompat
+import net.fabricmc.loom.task.FabricModJsonV1Task
 
 plugins {
     id("adorn-platform-module")
@@ -22,7 +24,12 @@ sourceSets {
 }
 
 adorn {
-    addResources(sourceSets.main.get(), "src/generated/resources")
+    hoard {
+        addResources(sourceSets.main.get(), "src/generated/resources")
+        addResources(sourceSets.main.get(), "src/hoard/other")
+        addResources(sourceSets.main.get(), project(":common").file("src/generated/resources"))
+        injectToFabricMod()
+    }
 
     minecraft {
         generatePackageInfos(sourceSets.getByName("client"))
@@ -102,6 +109,24 @@ tasks {
         mod("promenade")
         mod("terrestria")
         mod("traverse")
+    }
+
+    val hoardFmj = register<FabricModJsonV1Task>("generateHoardFabricModJson") {
+        group = CorePlugin.TASK_GROUP
+        json {
+            modId = adorn.hoard.modId
+            name = "Adorn Resources"
+            version = adorn.hoard.version
+            description = "Adorn resources."
+            customData.put("modmenu", mapOf("parent" to "adorn"))
+        }
+        outputFile.set(file("build/hoard.fabric.mod.json"))
+    }
+
+    hoardJar {
+        from(hoardFmj.flatMap { it.outputFile }) {
+            rename { "fabric.mod.json" }
+        }
     }
 
     check {
