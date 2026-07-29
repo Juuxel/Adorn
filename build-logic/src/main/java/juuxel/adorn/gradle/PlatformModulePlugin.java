@@ -19,6 +19,11 @@ import org.gradle.api.tasks.bundling.Jar;
 import java.util.Map;
 
 public final class PlatformModulePlugin implements Plugin<Project> {
+    public static final String COMMON_CONFIGURATION_NAME = "common";
+    public static final String COMMON_CLASSES_CONFIGURATION_NAME = "commonClasses";
+    public static final String COMMON_RESOURCES_CONFIGURATION_NAME = "commonResources";
+
+    @SuppressWarnings("unchecked")
     @Override
     public void apply(Project project) {
         project.getPlugins().apply(MinecraftSetupPlugin.class);
@@ -27,12 +32,12 @@ public final class PlatformModulePlugin implements Plugin<Project> {
 
         // Set up configurations to depend on common
         var objects = project.getObjects();
-        var common = project.getConfigurations().dependencyScope("common");
-        var commonClasses = project.getConfigurations().resolvable("commonClasses", config -> {
+        var common = project.getConfigurations().dependencyScope(COMMON_CONFIGURATION_NAME);
+        var commonClasses = project.getConfigurations().resolvable(COMMON_CLASSES_CONFIGURATION_NAME, config -> {
             config.getAttributes().attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements.class, LibraryElements.CLASSES));
             config.extendsFrom(common);
         });
-        var commonResources = project.getConfigurations().resolvable("commonResources", config -> {
+        var commonResources = project.getConfigurations().resolvable(COMMON_RESOURCES_CONFIGURATION_NAME, config -> {
             config.getAttributes().attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements.class, LibraryElements.RESOURCES));
             config.extendsFrom(common);
         });
@@ -82,8 +87,8 @@ public final class PlatformModulePlugin implements Plugin<Project> {
             project.getDependencies().add(JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME, createCommonClientDependency(project));
         }
 
-        project.getDependencies().add(common.getName(), createCommonDependency(project));
-        project.getDependencies().add(common.getName(), createCommonClientDependency(project));
+        project.getDependencies().add(COMMON_CONFIGURATION_NAME, createCommonDependency(project));
+        project.getDependencies().add(COMMON_CONFIGURATION_NAME, createCommonClientDependency(project));
     }
 
     private static Dependency createCommonDependency(Project project) {

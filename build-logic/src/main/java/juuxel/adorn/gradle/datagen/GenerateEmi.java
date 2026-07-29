@@ -2,8 +2,6 @@ package juuxel.adorn.gradle.datagen;
 
 import groovy.json.JsonOutput;
 import groovy.json.JsonSlurper;
-import org.gradle.api.DefaultTask;
-import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.file.Directory;
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.file.RegularFileProperty;
@@ -11,10 +9,8 @@ import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.provider.SetProperty;
 import org.gradle.api.tasks.Input;
-import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.OutputFile;
-import org.gradle.api.tasks.PathSensitive;
-import org.gradle.api.tasks.PathSensitivity;
+import org.gradle.api.tasks.SourceTask;
 import org.gradle.api.tasks.TaskAction;
 import org.jspecify.annotations.Nullable;
 
@@ -26,12 +22,8 @@ import java.util.Map;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-public abstract class GenerateEmi extends DefaultTask {
+public abstract class GenerateEmi extends SourceTask {
     private static final String RECIPE_DIR = "/data/adorn/recipe/";
-
-    @InputFiles
-    @PathSensitive(PathSensitivity.ABSOLUTE)
-    public abstract ConfigurableFileCollection getRecipes();
 
     @Input
     public abstract SetProperty<String> getPreferredRecipes();
@@ -55,7 +47,7 @@ public abstract class GenerateEmi extends DefaultTask {
     public void generateRecipeDefaults() throws IOException {
         var recipesByResult = new HashMap<RecipeResult, RecipeData>();
         var preferredRecipes = getPreferredRecipes().get();
-        for (var recipeFile : getRecipes()) {
+        for (var recipeFile : getSource()) {
             var json = (Map<String, ?>) new JsonSlurper().parse(recipeFile);
             var result = getResult(json);
             if (result == null) continue;

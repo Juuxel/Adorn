@@ -15,8 +15,8 @@ loom {
 
 adorn {
     hoard {
-        addResources(sourceSets.main.get(), project(":common").file("src/generated/resources"))
-        addResources(sourceSets.main.get(), project(":common").file("src/hoard/other"))
+        addResources(sourceSets.main.get(), project(":common").projectDir.resolve("src/generated/resources"))
+        addResources(sourceSets.main.get(), project(":common").projectDir.resolve("src/hoard/other"))
         injectToNeoForgeMod()
     }
 
@@ -62,7 +62,7 @@ tasks {
             rename { "neoforge.mods.toml" }
         }
 
-        from(project(":common").file("src/main/resources/assets/adorn/icon.png")) {
+        from(project(":common").projectDir.resolve("src/main/resources/assets/adorn/icon.png")) {
             into(adorn.hoard.modId.map { "assets/$it" })
         }
     }

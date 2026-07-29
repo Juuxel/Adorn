@@ -20,8 +20,8 @@ public abstract class PlatformModuleExtension {
         getPlatformName().convention(project.getName());
 
         Project common = project.project(":common");
-        Provider<File> defaultAwFile = common.provider(() -> common.file("src/main/resources/adorn.accesswidener"));
-        getAccessWidenerFile().convention(common.getLayout().file(defaultAwFile));
+        Provider<File> defaultAwFile = project.provider(() -> new File(common.getProjectDir(), "src/main/resources/adorn.accesswidener"));
+        getAccessWidenerFile().convention(project.getLayout().file(defaultAwFile));
     }
 
     public abstract Property<String> getPlatformName();

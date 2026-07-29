@@ -10,9 +10,6 @@ import org.gradle.api.Project;
 import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.tasks.SourceSetContainer;
 
-import java.io.File;
-import java.util.ArrayList;
-
 public final class ModularDataGeneratorPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
@@ -53,23 +50,19 @@ public final class ModularDataGeneratorPlugin implements Plugin<Project> {
                 task.mustRunAfter(generateMainData);
                 task.getOutput().convention(GenerateEmi.getOutputFile(generateMainData.flatMap(GenerateData::getOutput), task.getModId()));
                 task.getModId().set(settings.getModId());
-                var resourceDirs = new ArrayList<>(sourceSet.getResources().getSrcDirs());
+
+                task.source(sourceSet.getResources().getSrcDirs());
+                task.source(hoard.getDirectoriesForSourceSet(sourceSet));
 
                 if (settings.getIncludeCommonFilesInEmi().get()) {
-                    resourceDirs.addAll(getSourceSets(project.project(":common")).getByName("main").getResources().getSrcDirs());
+                    task.source(project.getConfigurations().named(PlatformModulePlugin.COMMON_RESOURCES_CONFIGURATION_NAME));
                 }
 
-                resourceDirs.addAll(hoard.getDirectoriesForSourceSet(sourceSet).getFiles());
+                task.include("**/data/adorn/recipe/**/*.json");
 
-                for (File dir : resourceDirs) {
-                    task.getRecipes().from(project.fileTree(dir, tree -> {
-                        tree.include("**/data/adorn/recipe/**");
-
-                        // The unpacking recipes create "uncraftable" vanilla items like
-                        // nether wart, so exclude them.
-                        tree.exclude("**/data/adorn/recipe/crates/unpack/**");
-                    }));
-                }
+                // The unpacking recipes create "uncraftable" vanilla items like
+                // nether wart, so exclude them.
+                task.exclude("data/adorn/recipe/crates/unpack/**");
             });
             generateData.configure(task -> task.dependsOn(generateEmi));
             generateMainData.configure(task -> {

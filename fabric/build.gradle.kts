@@ -24,8 +24,8 @@ adorn {
     hoard {
         addResources(sourceSets.main.get(), "src/generated/resources")
         addResources(sourceSets.main.get(), "src/hoard/other")
-        addResources(sourceSets.main.get(), project(":common").file("src/generated/resources"))
-        addResources(sourceSets.main.get(), project(":common").file("src/hoard/other"))
+        addResources(sourceSets.main.get(), project(":common").projectDir.resolve("src/generated/resources"))
+        addResources(sourceSets.main.get(), project(":common").projectDir.resolve("src/hoard/other"))
         injectToFabricMod()
     }
 
@@ -40,27 +40,28 @@ adorn {
 }
 
 fun registerDataGenerator(name: String, displayName: String, common: Boolean) {
-    val targetProject = if (common) {
+    val projectDir = if (common) {
         project(":common")
     } else {
         project
-    }
+    }.projectDir
 
     loom.runs.register(name) {
         inherit(loom.runs.getByName("client"))
         this.displayName = displayName
         sourceSet = "commonData"
         systemProperties.put("fabric-api.datagen", "")
-        systemProperties.put("fabric-api.datagen.output-dir", targetProject.file("src/generated/resources").absolutePath)
+        systemProperties.put("fabric-api.datagen.output-dir", projectDir.resolve("src/generated/resources").absolutePath)
         runDirectory = file("build/$name")
 
         if (common) {
             systemProperties.put("adorn.data.commonMode", "true")
-            systemProperties.put("adorn.data.mainConfigs", targetProject.file("src/data/vanilla.xml").absolutePath)
-            val tagConfigDirs = rootProject.subprojects.map { it.file("src/data") }
-            systemProperties.put("adorn.data.tagConfigDirs", tagConfigDirs.joinToString(File.pathSeparator) { it.absolutePath })
-            systemProperties.put("adorn.data.fabricConfigDirs", project(":fabric").file("src/data").absolutePath)
-            systemProperties.put("adorn.data.neoforgeConfigDirs", project(":forge").file("src/data").absolutePath)
+            systemProperties.put("adorn.data.mainConfigs", projectDir.resolve("src/data/vanilla.xml").absolutePath)
+            systemProperties.put("adorn.data.tagConfigDirs", rootProject.subprojects.joinToString(File.pathSeparator) {
+                it.projectDir.resolve("src/data").absolutePath
+            })
+            systemProperties.put("adorn.data.fabricConfigDirs", file("src/data").absolutePath)
+            systemProperties.put("adorn.data.neoforgeConfigDirs", project(":forge").projectDir.resolve("src/data").absolutePath)
         } else {
             systemProperties.put("adorn.data.mainConfigs", file("src/data").absolutePath)
         }
@@ -138,7 +139,7 @@ tasks {
             rename { "fabric.mod.json" }
         }
 
-        from(project(":common").file("src/main/resources/assets/adorn/icon.png")) {
+        from(project(":common").projectDir.resolve("src/main/resources/assets/adorn/icon.png")) {
             into(adorn.hoard.modId.map { "assets/$it" })
         }
     }

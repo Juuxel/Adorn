@@ -5,12 +5,13 @@ import net.fabricmc.loom.api.LoomGradleExtensionAPI;
 import org.gradle.api.JavaVersion;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
-import org.gradle.api.plugins.BasePluginExtension;
 import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.bundling.AbstractArchiveTask;
 import org.gradle.api.tasks.bundling.Jar;
 import org.gradle.api.tasks.compile.JavaCompile;
+
+import java.io.File;
 
 public final class MinecraftSetupPlugin implements Plugin<Project> {
     @Override
@@ -18,12 +19,6 @@ public final class MinecraftSetupPlugin implements Plugin<Project> {
         project.getPlugins().apply("dev.architectury.loom-no-remap");
         project.getPlugins().apply(CorePlugin.class);
         var extension = CorePlugin.registerExtension(project, "minecraft", MinecraftExtension.class);
-
-        // Copy the artifact metadata from the root project.
-        Project rootProject = project.getRootProject();
-        project.setGroup(rootProject.getGroup());
-        project.setVersion(rootProject.getVersion());
-        getBase(project).getArchivesName().set(getBase(rootProject).getArchivesName());
 
         extension.getMinecraftVersion().convention(project.getProviders().gradleProperty("minecraft-version"));
 
@@ -43,7 +38,7 @@ public final class MinecraftSetupPlugin implements Plugin<Project> {
 
         // Include the license in the jar files.
         project.getTasks().named("jar", Jar.class, task -> {
-            task.from(rootProject.file("LICENSE"));
+            task.from(new File(project.getRootDir(), "LICENSE"));
         });
 
         var loom = project.getExtensions().getByType(LoomGradleExtensionAPI.class);
@@ -56,9 +51,5 @@ public final class MinecraftSetupPlugin implements Plugin<Project> {
 
         // Generate package-info files with the @NullMarked annotation for the main source set.
         extension.generatePackageInfos(java.getSourceSets().getByName(SourceSet.MAIN_SOURCE_SET_NAME));
-    }
-
-    private static BasePluginExtension getBase(Project project) {
-        return project.getExtensions().getByType(BasePluginExtension.class);
     }
 }
