@@ -1,6 +1,6 @@
 {
   "parent": "adorn:block/templates/table_leg",
   "textures": {
-    "log": "techreborn:block/rubber_log_side"
+    "log": "techreborn:block/misc/rubber_log"
   }
 }

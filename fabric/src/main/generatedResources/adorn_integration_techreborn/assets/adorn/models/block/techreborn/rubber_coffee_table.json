@@ -1,8 +1,8 @@
 {
   "parent": "adorn:block/templates/coffee_table",
   "textures": {
-    "planks": "techreborn:block/rubber_planks",
-    "leg": "techreborn:block/rubber_log_side",
-    "rim": "techreborn:block/rubber_log_side"
+    "planks": "techreborn:block/misc/rubber_planks",
+    "leg": "techreborn:block/misc/rubber_log",
+    "rim": "techreborn:block/misc/rubber_log"
   }
 }
