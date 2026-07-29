@@ -1,7 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#c:buckets/milk",
-    { "id": "#c:milks", "required": false }
-  ]
-}

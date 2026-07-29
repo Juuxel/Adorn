@@ -1,0 +1,17 @@
+{
+  "values": [
+    "#adorn:chimneys",
+    "#adorn:stone_platforms",
+    "#adorn:stone_posts",
+    "#adorn:stone_steps",
+    "#adorn:table_lamps",
+    "#adorn:candlelit_lanterns",
+    "#adorn:copper_pipes",
+    "#adorn:caution_signs",
+    "adorn:chain_link_fence",
+    "adorn:iron_shelf",
+    "adorn:stone_ladder",
+    "adorn:brewer",
+    "adorn:barricade"
+  ]
+}

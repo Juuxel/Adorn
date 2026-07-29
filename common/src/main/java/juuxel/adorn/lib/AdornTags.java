@@ -31,9 +31,11 @@ public final class AdornTags {
     public static final TagPair REGULAR_CHIMNEYS = blockAndItem("regular_chimneys");
     public static final TagPair PRISMARINE_CHIMNEYS = blockAndItem("prismarine_chimneys");
     public static final TagPair CRATES = blockAndItem("crates");
+    public static final TagPair FILLED_CRATES = blockAndItem("filled_crates");
     public static final TagPair COFFEE_TABLES = blockAndItem("coffee_tables");
     public static final TagPair TABLE_LAMPS = blockAndItem("table_lamps");
     public static final TagPair CANDLELIT_LANTERNS = blockAndItem("candlelit_lanterns");
+    public static final TagPair DYED_CANDLELIT_LANTERNS = blockAndItem("dyed_candlelit_lanterns");
     public static final TagPair COPPER_PIPES = blockAndItem("copper_pipes");
     public static final TagPair PAINTED_PLANKS = blockAndItem("painted_planks");
     public static final TagPair PAINTED_WOOD_SLABS = blockAndItem("painted_wood_slabs");
