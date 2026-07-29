@@ -3,12 +3,18 @@ package juuxel.adorn.gradle;
 import net.fabricmc.loom.api.LoomGradleExtensionAPI;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.artifacts.type.ArtifactTypeDefinition;
+import org.gradle.api.attributes.Bundling;
+import org.gradle.api.attributes.Category;
+import org.gradle.api.attributes.LibraryElements;
 import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.tasks.bundling.Jar;
 
 import java.io.File;
 
 public final class SplitSourcesSetupPlugin implements Plugin<Project> {
+    public static final String CLIENT_OUTPUTS_CONFIGURATION_NAME = "clientOutputs";
+
     @Override
     public void apply(Project project) {
         project.getPlugins().apply(MinecraftSetupPlugin.class);
@@ -26,18 +32,35 @@ public final class SplitSourcesSetupPlugin implements Plugin<Project> {
         });
 
         var objects = project.getObjects();
-        project.getConfigurations().consumable("clientOutputs", config -> {
-            config.getOutgoing().artifact(clientJar);
-
-            config.getOutgoing().artifact(client.getOutput().getResourcesDir(), artifact -> {
-                artifact.builtBy(client.getProcessResourcesTaskName());
+        project.getConfigurations().consumable(CLIENT_OUTPUTS_CONFIGURATION_NAME, config -> {
+            config.attributes(attrs -> {
+                attrs.attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category.class, Category.LIBRARY));
+                attrs.attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.class, Bundling.EXTERNAL));
+                attrs.attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements.class, LibraryElements.JAR));
             });
 
-            for (File dir : client.getOutput().getClassesDirs()) {
-                config.getOutgoing().artifact(dir, artifact -> {
-                    artifact.builtBy(client.getClassesTaskName());
+            config.getOutgoing().artifact(clientJar, artifact -> artifact.setType(ArtifactTypeDefinition.JAR_TYPE));
+
+            var variants = config.getOutgoing().getVariants();
+
+            variants.create("classes", variant -> {
+                variant.getAttributes().attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements.class, LibraryElements.CLASSES));
+
+                for (File dir : client.getOutput().getClassesDirs()) {
+                    variant.artifact(dir, artifact -> {
+                        artifact.builtBy(client.getClassesTaskName());
+                        artifact.setType(ArtifactTypeDefinition.JVM_CLASS_DIRECTORY);
+                    });
+                }
+            });
+
+            variants.create("resources", variant -> {
+                variant.getAttributes().attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements.class, LibraryElements.RESOURCES));
+                variant.artifact(client.getOutput().getResourcesDir(), artifact -> {
+                    artifact.builtBy(client.getProcessResourcesTaskName());
+                    artifact.setType(ArtifactTypeDefinition.JVM_RESOURCES_DIRECTORY);
                 });
-            }
+            });
         });
     }
 }

@@ -10,11 +10,10 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
+import org.gradle.api.attributes.LibraryElements;
 import org.gradle.api.file.DuplicatesStrategy;
 import org.gradle.api.plugins.JavaPlugin;
-import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.tasks.SourceSet;
-import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.api.tasks.bundling.Jar;
 
 import java.util.Map;
@@ -26,10 +25,22 @@ public final class PlatformModulePlugin implements Plugin<Project> {
         var extension = CorePlugin.registerExtension(project, "platformModule", PlatformModuleExtension.class);
         var loom = project.getExtensions().getByType(LoomGradleExtensionAPI.class);
 
+        // Set up configurations to depend on common
+        var objects = project.getObjects();
+        var common = project.getConfigurations().dependencyScope("common");
+        var commonClasses = project.getConfigurations().resolvable("commonClasses", config -> {
+            config.getAttributes().attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements.class, LibraryElements.CLASSES));
+            config.extendsFrom(common);
+        });
+        var commonResources = project.getConfigurations().resolvable("commonResources", config -> {
+            config.getAttributes().attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements.class, LibraryElements.RESOURCES));
+            config.extendsFrom(common);
+        });
+
         project.getTasks().named(JavaPlugin.JAR_TASK_NAME, Jar.class, task -> {
             // Include common files
-            var commonSourceSets = getSourceSets(project.project(":common"));
-            task.from(commonSourceSets.named("main").map(SourceSet::getOutput));
+            task.from(commonClasses);
+            task.from(commonResources);
 
             task.filesMatching("**/package-info.class", details -> {
                 details.setDuplicatesStrategy(DuplicatesStrategy.EXCLUDE); // these are all the same anyway
@@ -70,6 +81,9 @@ public final class PlatformModulePlugin implements Plugin<Project> {
         } else {
             project.getDependencies().add(JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME, createCommonClientDependency(project));
         }
+
+        project.getDependencies().add(common.getName(), createCommonDependency(project));
+        project.getDependencies().add(common.getName(), createCommonClientDependency(project));
     }
 
     private static Dependency createCommonDependency(Project project) {
@@ -79,12 +93,8 @@ public final class PlatformModulePlugin implements Plugin<Project> {
     }
 
     private static Dependency createCommonClientDependency(Project project) {
-        var commonDependency = project.getDependencies().project(Map.of("path", ":common", "configuration", "clientOutputs"));
+        var commonDependency = project.getDependencies().project(Map.of("path", ":common", "configuration", SplitSourcesSetupPlugin.CLIENT_OUTPUTS_CONFIGURATION_NAME));
         ((ModuleDependency) commonDependency).setTransitive(false);
         return commonDependency;
-    }
-
-    private static SourceSetContainer getSourceSets(Project project) {
-        return project.getExtensions().getByType(JavaPluginExtension.class).getSourceSets();
     }
 }
