@@ -103,10 +103,10 @@ tasks {
         mod("biomesoplenty", "biomes-o-plenty")
         // mod("biomeswevegone", "oh-the-biomes-weve-gone")
         mod("blockus")
-        mod("cinderscapes")
+        // mod("cinderscapes")
         mod("ecologics")
-        mod("promenade")
-        mod("terrestria")
+        // mod("promenade")
+        // mod("terrestria")
         mod("traverse")
     }
 
