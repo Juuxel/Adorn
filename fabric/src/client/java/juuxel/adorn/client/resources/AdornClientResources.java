@@ -7,7 +7,7 @@ import net.minecraft.server.packs.PackType;
 public final class AdornClientResources {
     public static void init() {
         var resourceLoader = ResourceLoader.get(PackType.CLIENT_RESOURCES);
-        resourceLoader.registerReloadListener(ColorManager.ID, ColorManagerFabric.INSTANCE);
-        resourceLoader.registerReloadListener(BookManager.ID, BookManagerFabric.INSTANCE);
+        resourceLoader.registerReloadListener(ColorManager.ID, ColorManager.INSTANCE);
+        resourceLoader.registerReloadListener(BookManager.ID, BookManager.INSTANCE);
     }
 }

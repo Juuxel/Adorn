@@ -1,9 +1,7 @@
 package juuxel.adorn.item;
 
-import juuxel.adorn.client.resources.ResourceBridge;
 import juuxel.adorn.networking.OpenBookS2CMessage;
 import juuxel.adorn.platform.PlatformBridges;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.stats.Stats;
@@ -19,6 +17,8 @@ import net.minecraft.world.level.Level;
 import java.util.function.Consumer;
 
 public final class AdornBookItem extends Item {
+    public static BookTooltipProvider tooltipProvider = (_, _) -> {};
+
     private final Identifier bookId;
 
     public AdornBookItem(Identifier bookId, Properties settings) {
@@ -39,10 +39,11 @@ public final class AdornBookItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay displayComponent, Consumer<Component> textConsumer, TooltipFlag type) {
         super.appendHoverText(stack, context, displayComponent, textConsumer, type);
-        // TODO: Move BookManager to common-sided code
-        var bookManager = ResourceBridge.get().getBookManager();
-        if (bookManager.contains(bookId)) {
-            textConsumer.accept(Component.translatable("book.byAuthor", bookManager.get(bookId).author()).withStyle(ChatFormatting.GRAY));
-        }
+        tooltipProvider.appendTooltip(bookId, textConsumer);
+    }
+
+    @FunctionalInterface
+    public interface BookTooltipProvider {
+        void appendTooltip(Identifier bookId, Consumer<Component> builder);
     }
 }

@@ -1,5 +1,6 @@
 package juuxel.adorn.client;
 
+import juuxel.adorn.client.book.BookManager;
 import juuxel.adorn.client.gui.screen.AdornMenuScreens;
 import juuxel.adorn.client.renderer.AdornRenderers;
 import juuxel.adorn.client.resources.AdornClientResources;
@@ -14,5 +15,6 @@ public final class AdornClientInit implements ClientModInitializer {
         AdornClientResources.init();
         ClientEvents.init();
         AdornModels.init();
+        BookManager.setupTooltipProvider();
     }
 }

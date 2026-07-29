@@ -27,9 +27,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-// TODO: Use one global instance declared in common code
-public class ColorManager extends SimplePreparableReloadListener<Map<Identifier, List<JsonObject>>> {
+public final class ColorManager extends SimplePreparableReloadListener<Map<Identifier, List<JsonObject>>> {
     public static final Identifier ID = AdornCommon.id("color_manager");
+    public static final ColorManager INSTANCE = new ColorManager();
     private static final Logger LOGGER = Logging.logger();
     private static final Identifier FALLBACK = AdornCommon.id("fallback");
     private static final String PREFIX = "adorn/color_palettes";
@@ -37,6 +37,9 @@ public class ColorManager extends SimplePreparableReloadListener<Map<Identifier,
     private static final Codec<Map<Identifier, ColorPair>> PALETTE_CODEC = Codec.unboundedMap(Identifier.CODEC, ColorPair.CODEC);
 
     private final Map<Identifier, ColorPalette> palettes = new HashMap<>();
+
+    private ColorManager() {
+    }
 
     @Override
     protected Map<Identifier, List<JsonObject>> prepare(ResourceManager manager, ProfilerFiller profiler) {

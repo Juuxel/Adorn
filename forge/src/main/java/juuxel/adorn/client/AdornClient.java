@@ -7,7 +7,6 @@ import juuxel.adorn.client.gui.screen.AdornMenuScreens;
 import juuxel.adorn.client.gui.screen.GuideBookScreen;
 import juuxel.adorn.client.gui.screen.MainConfigScreen;
 import juuxel.adorn.client.resources.ColorManager;
-import juuxel.adorn.client.resources.ResourceBridge;
 import juuxel.adorn.trading.Trade;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
@@ -36,13 +35,13 @@ public final class AdornClient {
     }
 
     private static void registerReloaders(AddClientReloadListenersEvent event) {
-        ResourceBridge resources = ResourceBridge.get();
-        event.addListener(BookManager.ID, resources.getBookManager());
-        event.addListener(ColorManager.ID, resources.getColorManager());
+        event.addListener(BookManager.ID, BookManager.INSTANCE);
+        event.addListener(ColorManager.ID, ColorManager.INSTANCE);
     }
 
     private static void setup(FMLClientSetupEvent event) {
         AdornMenuScreens.register();
+        BookManager.setupTooltipProvider();
     }
 
     private static void registerTooltipComponent(RegisterClientTooltipComponentFactoriesEvent event) {
@@ -50,6 +49,6 @@ public final class AdornClient {
     }
 
     public static void openBookScreen(Identifier bookId) {
-        Minecraft.getInstance().setScreen(new GuideBookScreen(ResourceBridge.get().getBookManager().get(bookId)));
+        Minecraft.getInstance().setScreen(new GuideBookScreen(BookManager.INSTANCE.get(bookId)));
     }
 }
