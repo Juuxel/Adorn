@@ -1353,10 +1353,8 @@
   "tag.item.adorn.wooden_steps": "Gradini di legno",
   "tag.item.c.foods.berry.glow": "Bacche luminose",
   "tag.item.c.foods.berry.sweet": "Bacche dolci",
-  "tag.item.c.foods.coffee": "Caffè",
-  "tag.item.c.foods.juice": "Succhi",
-  "tag.item.c.foods.milk": "Latte",
-  "tag.item.c.foods.tea": "Tè",
+  "tag.item.c.drinks.coffee": "Caffè",
+  "tag.item.c.drinks.tea": "Tè",
   "tag.item.c.lanterns": "Lanterne",
   "tag.item.c.rods.stone": "Barre di pietra",
 

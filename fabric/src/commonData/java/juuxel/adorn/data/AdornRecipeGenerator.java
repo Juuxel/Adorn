@@ -120,7 +120,7 @@ public final class AdornRecipeGenerator extends RecipeProvider {
             .offerTo(output);
         BrewingRecipeJsonBuilder.create(itemLookup, AdornItems.HOT_CHOCOLATE.get())
             .first(ConventionalItemTags.COCOA_BEAN_CROPS)
-            .second(MoreConventionalItemTags.MILK_FOODS)
+            .second(ConventionalItemTags.MILK_DRINKS)
             .criterion("has_brewer", has(AdornBlocks.BREWER.get()))
             .offerTo(output);
         BrewingRecipeJsonBuilder.create(itemLookup, AdornItems.HOT_CHOCOLATE.get())

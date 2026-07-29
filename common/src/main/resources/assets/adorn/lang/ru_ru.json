@@ -1329,10 +1329,8 @@
   "tag.item.adorn.wooden_steps": "Деревянные ступени",
   "tag.item.c.foods.berry.glow": "Светящиеся ягоды",
   "tag.item.c.foods.berry.sweet": "Сладкие ягоды",
-  "tag.item.c.foods.coffee": "Кофе",
-  "tag.item.c.foods.juice": "Соки",
-  "tag.item.c.foods.milk": "Молоко",
-  "tag.item.c.foods.tea": "Чай",
+  "tag.item.c.drinks.coffee": "Кофе",
+  "tag.item.c.drinks.tea": "Чай",
   "tag.item.c.lanterns": "Фонари",
   "tag.item.c.rods.stone": "Каменные стержни",
 

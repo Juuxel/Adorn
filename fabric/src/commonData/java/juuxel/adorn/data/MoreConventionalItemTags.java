@@ -9,13 +9,10 @@ import net.minecraft.world.item.Item;
 public final class MoreConventionalItemTags {
     private static final String NAMESPACE = "c";
 
-    // TODO (26.1): Replace the liquid foods with drink tags
     public static final TagKey<Item> GLOW_BERRY_FOODS = of("foods/berry/glow");
     public static final TagKey<Item> SWEET_BERRY_FOODS = of("foods/berry/sweet");
-    public static final TagKey<Item> MILK_FOODS = of("foods/milk");
-    public static final TagKey<Item> COFFEE_FOODS = of("foods/coffee");
-    public static final TagKey<Item> TEA_FOODS = of("foods/tea");
-    public static final TagKey<Item> JUICE_FOODS = of("foods/juice");
+    public static final TagKey<Item> COFFEE_DRINKS = of("drinks/coffee");
+    public static final TagKey<Item> TEA_DRINKS = of("drinks/tea");
     public static final TagKey<Item> HONEYCOMBS = of("honeycombs");
     public static final TagKey<Item> COPPER_NUGGETS = of("nuggets/copper");
     public static final TagKey<Item> STONE_RODS = of("rods/stone");

@@ -1369,10 +1369,8 @@
   "tag.item.adorn.wooden_steps": "Degraus de madeira",
   "tag.item.c.foods.berry.glow": "Bagas luminescentes",
   "tag.item.c.foods.berry.sweet": "Bagas doces",
-  "tag.item.c.foods.coffee": "Cafés",
-  "tag.item.c.foods.juice": "Sucos",
-  "tag.item.c.foods.milk": "Leites",
-  "tag.item.c.foods.tea": "Chá",
+  "tag.item.c.drinks.coffee": "Cafés",
+  "tag.item.c.drinks.tea": "Chá",
   "tag.item.c.lanterns": "Lanternas",
   "tag.item.c.rods.stone": "Hastes de pedra",
 

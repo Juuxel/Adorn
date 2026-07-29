@@ -6,11 +6,8 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
 
 import java.util.concurrent.CompletableFuture;
@@ -109,24 +106,18 @@ public final class AdornItemTagGenerator extends FabricTagsProvider.ItemTagsProv
         valueLookupBuilder(MoreConventionalItemTags.SWEET_BERRY_FOODS)
             .add(Items.SWEET_BERRIES);
 
-        valueLookupBuilder(MoreConventionalItemTags.COFFEE_FOODS)
+        valueLookupBuilder(MoreConventionalItemTags.COFFEE_DRINKS)
             .add(AdornItems.NETHER_WART_COFFEE.get());
 
-        valueLookupBuilder(MoreConventionalItemTags.TEA_FOODS)
+        valueLookupBuilder(MoreConventionalItemTags.TEA_DRINKS)
             .add(AdornItems.GLOW_BERRY_TEA.get());
 
-        valueLookupBuilder(MoreConventionalItemTags.JUICE_FOODS)
+        valueLookupBuilder(ConventionalItemTags.JUICE_DRINKS)
             .add(AdornItems.SWEET_BERRY_JUICE.get());
 
-        builder(MoreConventionalItemTags.MILK_FOODS)
-            .forceAddTag(ConventionalItemTags.MILK_BUCKETS)
-            .addOptionalTag(TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("c", "milks")));
-
-        valueLookupBuilder(ConventionalItemTags.FOODS)
-            .addTag(MoreConventionalItemTags.COFFEE_FOODS)
-            .addTag(MoreConventionalItemTags.JUICE_FOODS)
-            .addTag(MoreConventionalItemTags.MILK_FOODS)
-            .addTag(MoreConventionalItemTags.TEA_FOODS);
+        valueLookupBuilder(ConventionalItemTags.DRINKS)
+            .addTag(MoreConventionalItemTags.COFFEE_DRINKS)
+            .addTag(MoreConventionalItemTags.TEA_DRINKS);
 
         valueLookupBuilder(MoreConventionalItemTags.STONE_RODS)
             .add(AdornItems.STONE_ROD.get());

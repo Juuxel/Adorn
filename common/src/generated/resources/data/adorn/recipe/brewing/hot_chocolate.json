@@ -5,5 +5,5 @@
   "result": {
     "id": "adorn:hot_chocolate"
   },
-  "second_ingredient": "#c:foods/milk"
+  "second_ingredient": "#c:drinks/milk"
 }
