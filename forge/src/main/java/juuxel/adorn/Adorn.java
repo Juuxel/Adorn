@@ -85,7 +85,9 @@ public final class Adorn {
         BlockVariantSets.register();
         NeoForgeMod.enableMilkFluid();
 
-        if (!FMLEnvironment.isProduction()) {
+        if (FMLEnvironment.isProduction()) {
+            Dyes.checkInProduction();
+        } else {
             Dyes.checkInDev();
         }
     }

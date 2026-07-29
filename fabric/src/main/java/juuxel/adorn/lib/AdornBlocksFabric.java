@@ -8,12 +8,12 @@ import juuxel.adorn.block.entity.BrewerBlockEntityFabric;
 import juuxel.adorn.block.entity.KitchenSinkBlockEntityFabric;
 import juuxel.adorn.block.variant.BlockKind;
 import juuxel.adorn.block.variant.BlockVariantSets;
+import juuxel.adorn.lib.registry.Registered;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.level.block.WeatheringCopperBlocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
@@ -38,17 +38,7 @@ public final class AdornBlocksFabric {
             AdornBlockEntities.BREWER.get()
         );
 
-        var copperPipeBlocks = new WeatheringCopperBlocks(
-            AdornBlocks.COPPER_PIPE.get(),
-            AdornBlocks.EXPOSED_COPPER_PIPE.get(),
-            AdornBlocks.WEATHERED_COPPER_PIPE.get(),
-            AdornBlocks.OXIDIZED_COPPER_PIPE.get(),
-            AdornBlocks.WAXED_COPPER_PIPE.get(),
-            AdornBlocks.WAXED_EXPOSED_COPPER_PIPE.get(),
-            AdornBlocks.WAXED_WEATHERED_COPPER_PIPE.get(),
-            AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE.get()
-        );
-        OxidizableBlocksRegistry.registerWeatheringCopperBlocks(copperPipeBlocks);
+        OxidizableBlocksRegistry.registerWeatheringCopperBlocks(AdornBlocks.COPPER_PIPES.map(Registered::get));
 
         FlammableBlockRegistry.getDefaultInstance().add(AdornTags.PAINTED_PLANKS.block(), 5, 20);
         FlammableBlockRegistry.getDefaultInstance().add(AdornTags.PAINTED_WOOD_SLABS.block(), 5, 20);

@@ -22,7 +22,7 @@ import net.fabricmc.fabric.api.resource.conditions.v1.ResourceCondition;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalFluidTags;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
-import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.triggers.Criterion;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
@@ -44,6 +44,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ColorCollection;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.Arrays;
@@ -199,19 +200,19 @@ public final class AdornRecipeGenerator extends RecipeProvider {
     }
 
     private void generatePaintedWood() {
-        AdornBlocks.PAINTED_PLANKS.forEach((color, block) -> offerPlankDyeingRecipe(output, block, color));
-        AdornBlocks.PAINTED_WOOD_SLABS.forEach((color, block) -> offerPaintedSlabRecipe(output, block, color));
-        AdornBlocks.PAINTED_WOOD_SLABS.forEach((color, block) -> offerSlabDyeingRecipe(output, block, color));
-        AdornBlocks.PAINTED_WOOD_STAIRS.forEach((color, block) -> offerPaintedStairsRecipe(output, block, color));
-        AdornBlocks.PAINTED_WOOD_STAIRS.forEach((color, block) -> offerStairDyeingRecipe(output, block, color));
-        AdornBlocks.PAINTED_WOOD_FENCES.forEach((color, block) -> offerPaintedFenceRecipe(output, block, color));
-        AdornBlocks.PAINTED_WOOD_FENCES.forEach((color, block) -> offerFenceDyeingRecipe(output, block, color));
-        AdornBlocks.PAINTED_WOOD_FENCE_GATES.forEach((color, block) -> offerPaintedFenceGateRecipe(output, block, color));
-        AdornBlocks.PAINTED_WOOD_FENCE_GATES.forEach((color, block) -> offerFenceGateDyeingRecipe(output, block, color));
-        AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.forEach((color, block) -> offerPaintedPressurePlateRecipe(output, block, color));
-        AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.forEach((color, block) -> offerPressurePlateDyeingRecipe(output, block, color));
-        AdornBlocks.PAINTED_WOOD_BUTTONS.forEach((color, block) -> offerPaintedButtonRecipe(output, block, color));
-        AdornBlocks.PAINTED_WOOD_BUTTONS.forEach((color, block) -> offerButtonDyeingRecipe(output, block, color));
+        ColorCollection.zipApply(ColorCollection.VALUES, AdornBlocks.PAINTED_PLANKS, (color, block) -> offerPlankDyeingRecipe(output, block.get(), color));
+        ColorCollection.zipApply(ColorCollection.VALUES, AdornBlocks.PAINTED_WOOD_SLABS, (color, block) -> offerPaintedSlabRecipe(output, block.get(), color));
+        ColorCollection.zipApply(ColorCollection.VALUES, AdornBlocks.PAINTED_WOOD_SLABS, (color, block) -> offerSlabDyeingRecipe(output, block.get(), color));
+        ColorCollection.zipApply(ColorCollection.VALUES, AdornBlocks.PAINTED_WOOD_STAIRS, (color, block) -> offerPaintedStairsRecipe(output, block.get(), color));
+        ColorCollection.zipApply(ColorCollection.VALUES, AdornBlocks.PAINTED_WOOD_STAIRS, (color, block) -> offerStairDyeingRecipe(output, block.get(), color));
+        ColorCollection.zipApply(ColorCollection.VALUES, AdornBlocks.PAINTED_WOOD_FENCES, (color, block) -> offerPaintedFenceRecipe(output, block.get(), color));
+        ColorCollection.zipApply(ColorCollection.VALUES, AdornBlocks.PAINTED_WOOD_FENCES, (color, block) -> offerFenceDyeingRecipe(output, block.get(), color));
+        ColorCollection.zipApply(ColorCollection.VALUES, AdornBlocks.PAINTED_WOOD_FENCE_GATES, (color, block) -> offerPaintedFenceGateRecipe(output, block.get(), color));
+        ColorCollection.zipApply(ColorCollection.VALUES, AdornBlocks.PAINTED_WOOD_FENCE_GATES, (color, block) -> offerFenceGateDyeingRecipe(output, block.get(), color));
+        ColorCollection.zipApply(ColorCollection.VALUES, AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES, (color, block) -> offerPaintedPressurePlateRecipe(output, block.get(), color));
+        ColorCollection.zipApply(ColorCollection.VALUES, AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES, (color, block) -> offerPressurePlateDyeingRecipe(output, block.get(), color));
+        ColorCollection.zipApply(ColorCollection.VALUES, AdornBlocks.PAINTED_WOOD_BUTTONS, (color, block) -> offerPaintedButtonRecipe(output, block.get(), color));
+        ColorCollection.zipApply(ColorCollection.VALUES, AdornBlocks.PAINTED_WOOD_BUTTONS, (color, block) -> offerButtonDyeingRecipe(output, block.get(), color));
 
         for (DyeColor color : Dyes.ALL_DYES) {
             offerDyeingRecipe(output, color, AdornTags.CHAIRS.item(), BlockKind.CHAIR);
@@ -230,16 +231,14 @@ public final class AdornRecipeGenerator extends RecipeProvider {
     }
 
     private void generateCopperPipes() {
-        shaped(RecipeCategory.DECORATIONS, AdornBlocks.COPPER_PIPE.get(), 3)
+        shaped(RecipeCategory.DECORATIONS, AdornBlocks.COPPER_PIPES.weathering().unaffected().get(), 3)
             .unlockedBy("has_copper_ingot", has(ConventionalItemTags.COPPER_INGOTS))
             .pattern(".-.")
             .define('.', MoreConventionalItemTags.COPPER_NUGGETS)
             .define('-', ConventionalItemTags.COPPER_INGOTS)
             .save(output);
-        offerWaxingRecipe(output, AdornBlocks.WAXED_COPPER_PIPE.get(), AdornBlocks.COPPER_PIPE.get(), "copper_pipes");
-        offerWaxingRecipe(output, AdornBlocks.WAXED_EXPOSED_COPPER_PIPE.get(), AdornBlocks.EXPOSED_COPPER_PIPE.get(), "copper_pipes");
-        offerWaxingRecipe(output, AdornBlocks.WAXED_WEATHERED_COPPER_PIPE.get(), AdornBlocks.WEATHERED_COPPER_PIPE.get(), "copper_pipes");
-        offerWaxingRecipe(output, AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE.get(), AdornBlocks.OXIDIZED_COPPER_PIPE.get(), "copper_pipes");
+
+        AdornBlocks.COPPER_PIPES.zipUnwaxedWaxed((unwaxed, waxed) -> offerWaxingRecipe(output, waxed.get(), unwaxed.get(), "copper_pipes"));
     }
 
     private void generateMiscDecorations() {
@@ -418,7 +417,7 @@ public final class AdornRecipeGenerator extends RecipeProvider {
     }
 
     private void offerPaintedSlabRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
-        var planks = AdornBlocks.PAINTED_PLANKS.getEager(color);
+        var planks = AdornBlocks.PAINTED_PLANKS.pick(color).get();
         slabBuilder(RecipeCategory.BUILDING_BLOCKS, output, Ingredient.of(planks))
             .group("wooden_slabs")
             .unlockedBy("has_planks", has(planks))
@@ -430,7 +429,7 @@ public final class AdornRecipeGenerator extends RecipeProvider {
     }
 
     private void offerPaintedStairsRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
-        var planks = AdornBlocks.PAINTED_PLANKS.getEager(color);
+        var planks = AdornBlocks.PAINTED_PLANKS.pick(color).get();
         stairBuilder(output, Ingredient.of(planks))
             .group("wooden_stairs")
             .unlockedBy("has_planks", has(planks))
@@ -442,7 +441,7 @@ public final class AdornRecipeGenerator extends RecipeProvider {
     }
 
     private void offerPaintedFenceRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
-        var planks = AdornBlocks.PAINTED_PLANKS.getEager(color);
+        var planks = AdornBlocks.PAINTED_PLANKS.pick(color).get();
         fenceBuilder(output, Ingredient.of(planks))
             .group("wooden_fence")
             .unlockedBy("has_planks", has(planks))
@@ -454,7 +453,7 @@ public final class AdornRecipeGenerator extends RecipeProvider {
     }
 
     private void offerPaintedFenceGateRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
-        var planks = AdornBlocks.PAINTED_PLANKS.getEager(color);
+        var planks = AdornBlocks.PAINTED_PLANKS.pick(color).get();
         fenceGateBuilder(output, Ingredient.of(planks))
             .group("wooden_fence")
             .unlockedBy("has_planks", has(planks))
@@ -466,7 +465,7 @@ public final class AdornRecipeGenerator extends RecipeProvider {
     }
 
     private void offerPaintedPressurePlateRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
-        var planks = AdornBlocks.PAINTED_PLANKS.getEager(color);
+        var planks = AdornBlocks.PAINTED_PLANKS.pick(color).get();
         pressurePlateBuilder(RecipeCategory.REDSTONE, output, Ingredient.of(planks))
             .group("wooden_pressure_plate")
             .unlockedBy("has_planks", has(planks))
@@ -478,7 +477,7 @@ public final class AdornRecipeGenerator extends RecipeProvider {
     }
 
     private void offerPaintedButtonRecipe(RecipeOutput exporter, ItemLike output, DyeColor color) {
-        var planks = AdornBlocks.PAINTED_PLANKS.getEager(color);
+        var planks = AdornBlocks.PAINTED_PLANKS.pick(color).get();
         buttonBuilder(output, Ingredient.of(planks))
             .group("wooden_button")
             .unlockedBy("has_planks", has(planks))

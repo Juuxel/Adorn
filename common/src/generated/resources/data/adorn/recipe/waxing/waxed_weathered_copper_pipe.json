@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "adorn:waxed_copper_pipes",
   "ingredients": [
     "adorn:weathered_copper_pipe",

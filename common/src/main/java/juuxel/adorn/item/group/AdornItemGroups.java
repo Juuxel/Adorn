@@ -11,7 +11,6 @@ import juuxel.adorn.entity.ConeVariant;
 import juuxel.adorn.item.AdornItems;
 import juuxel.adorn.lib.registry.AdornRegistryKeys;
 import juuxel.adorn.lib.registry.Registered;
-import juuxel.adorn.lib.registry.RegisteredMap;
 import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
 import juuxel.adorn.platform.ItemGroupBridge;
@@ -29,6 +28,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ColorCollection;
+import net.minecraft.world.level.block.WeatheringCopperCollection;
 import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public final class AdornItemGroups {
     public static final Registered<CreativeModeTab> GROUP = ITEM_GROUPS.register(GROUP_ID,
         () -> ItemGroupBridge.get().builder()
             .title(Component.translatable(Util.makeDescriptionId("itemGroup", AdornCommon.id(GROUP_ID))))
-            .icon(() -> new ItemStack(AdornBlocks.SOFAS.getEager(DyeColor.LIME)))
+            .icon(() -> new ItemStack(AdornBlocks.SOFAS.pick(DyeColor.LIME)))
             .displayItems((displayContext, entries) -> {
                 ItemGroupBuildContext context = new ItemGroupBuildContext() {
                     @Override
@@ -140,14 +141,7 @@ public final class AdornItemGroups {
                 }
             }
 
-            context.addAfter(Items.CUT_COPPER_SLAB, AdornBlocks.COPPER_PIPE);
-            context.addAfter(Items.EXPOSED_CUT_COPPER_SLAB, AdornBlocks.EXPOSED_COPPER_PIPE);
-            context.addAfter(Items.WEATHERED_CUT_COPPER_SLAB, AdornBlocks.WEATHERED_COPPER_PIPE);
-            context.addAfter(Items.OXIDIZED_CUT_COPPER_SLAB, AdornBlocks.OXIDIZED_COPPER_PIPE);
-            context.addAfter(Items.WAXED_CUT_COPPER_SLAB, AdornBlocks.WAXED_COPPER_PIPE);
-            context.addAfter(Items.WAXED_EXPOSED_CUT_COPPER_SLAB, AdornBlocks.WAXED_EXPOSED_COPPER_PIPE);
-            context.addAfter(Items.WAXED_WEATHERED_CUT_COPPER_SLAB, AdornBlocks.WAXED_WEATHERED_COPPER_PIPE);
-            context.addAfter(Items.WAXED_OXIDIZED_CUT_COPPER_SLAB, AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE);
+            WeatheringCopperCollection.zipApply(Items.CUT_COPPER_SLAB, AdornBlocks.COPPER_PIPES, context::addAfter);
         });
         itemGroups.addItems(CreativeModeTabs.COLORED_BLOCKS, context -> addColoredBlocks(context, true));
         itemGroups.addItems(CreativeModeTabs.FUNCTIONAL_BLOCKS, context -> {
@@ -171,13 +165,13 @@ public final class AdornItemGroups {
 
         for (var variant : BlockVariantSets.allVariants()) {
             if (hasAllKinds && variant instanceof BlockVariant.PaintedWood(var color)) {
-                context.add(AdornBlocks.PAINTED_PLANKS.get(color));
-                context.add(AdornBlocks.PAINTED_WOOD_STAIRS.get(color));
-                context.add(AdornBlocks.PAINTED_WOOD_SLABS.get(color));
-                context.add(AdornBlocks.PAINTED_WOOD_FENCES.get(color));
-                context.add(AdornBlocks.PAINTED_WOOD_FENCE_GATES.get(color));
-                context.add(AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.get(color));
-                context.add(AdornBlocks.PAINTED_WOOD_BUTTONS.get(color));
+                context.add(AdornBlocks.PAINTED_PLANKS.pick(color));
+                context.add(AdornBlocks.PAINTED_WOOD_STAIRS.pick(color));
+                context.add(AdornBlocks.PAINTED_WOOD_SLABS.pick(color));
+                context.add(AdornBlocks.PAINTED_WOOD_FENCES.pick(color));
+                context.add(AdornBlocks.PAINTED_WOOD_FENCE_GATES.pick(color));
+                context.add(AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.pick(color));
+                context.add(AdornBlocks.PAINTED_WOOD_BUTTONS.pick(color));
             }
 
             addByKinds(context, variant, kinds);
@@ -230,9 +224,9 @@ public final class AdornItemGroups {
         }
     }
 
-    private static void addColored(ItemGroupBuildContext context, RegisteredMap<DyeColor, ? extends ItemLike> items) {
+    private static <T, R extends Registered<T> & ItemLike> void addColored(ItemGroupBuildContext context, ColorCollection<R> items) {
         for (DyeColor color : Dyes.DYES_IN_CREATIVE_INVENTORY_ORDER) {
-            context.add(items.get(color));
+            context.add(items.pick(color));
         }
     }
 
@@ -286,14 +280,7 @@ public final class AdornItemGroups {
     }
 
     private static void addCopperPipes(ItemGroupBuildContext context) {
-        context.add(AdornBlocks.COPPER_PIPE);
-        context.add(AdornBlocks.EXPOSED_COPPER_PIPE);
-        context.add(AdornBlocks.WEATHERED_COPPER_PIPE);
-        context.add(AdornBlocks.OXIDIZED_COPPER_PIPE);
-        context.add(AdornBlocks.WAXED_COPPER_PIPE);
-        context.add(AdornBlocks.WAXED_EXPOSED_COPPER_PIPE);
-        context.add(AdornBlocks.WAXED_WEATHERED_COPPER_PIPE);
-        context.add(AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE);
+        AdornBlocks.COPPER_PIPES.forEach(context::add);
     }
 
     private static void addFoodAndDrink(ItemGroupBuildContext context) {
@@ -327,13 +314,13 @@ public final class AdornItemGroups {
         List<ItemLike> items = new ArrayList<>();
 
         for (DyeColor color : Dyes.DYES_IN_CREATIVE_INVENTORY_ORDER) {
-            items.add(AdornBlocks.PAINTED_PLANKS.getEager(color));
-            items.add(AdornBlocks.PAINTED_WOOD_SLABS.getEager(color));
-            items.add(AdornBlocks.PAINTED_WOOD_STAIRS.getEager(color));
-            items.add(AdornBlocks.PAINTED_WOOD_FENCES.getEager(color));
-            items.add(AdornBlocks.PAINTED_WOOD_FENCE_GATES.getEager(color));
-            items.add(AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.getEager(color));
-            items.add(AdornBlocks.PAINTED_WOOD_BUTTONS.getEager(color));
+            items.add(AdornBlocks.PAINTED_PLANKS.pick(color).get());
+            items.add(AdornBlocks.PAINTED_WOOD_SLABS.pick(color).get());
+            items.add(AdornBlocks.PAINTED_WOOD_STAIRS.pick(color).get());
+            items.add(AdornBlocks.PAINTED_WOOD_FENCES.pick(color).get());
+            items.add(AdornBlocks.PAINTED_WOOD_FENCE_GATES.pick(color).get());
+            items.add(AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.pick(color).get());
+            items.add(AdornBlocks.PAINTED_WOOD_BUTTONS.pick(color).get());
         }
 
         return items;

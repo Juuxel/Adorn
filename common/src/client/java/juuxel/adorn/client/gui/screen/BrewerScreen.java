@@ -72,7 +72,7 @@ public final class BrewerScreen extends AbstractRecipeBookScreen<BrewerMenu> {
     }
 
     public static void setFluidFromPacket(Minecraft client, int syncId, FluidVolume fluid) {
-        if (client.screen instanceof MenuAccess<?> menuProvider) {
+        if (client.gui.screen() instanceof MenuAccess<?> menuProvider) {
             var menu = menuProvider.getMenu();
             if (menu.containerId == syncId && menu instanceof BrewerMenu brewerMenu) {
                 brewerMenu.setFluid(fluid);

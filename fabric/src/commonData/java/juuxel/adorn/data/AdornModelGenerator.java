@@ -36,6 +36,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ColorCollection;
 
 import java.util.Comparator;
 import java.util.Optional;
@@ -141,14 +142,14 @@ public final class AdornModelGenerator extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators generator) {
-        AdornBlocks.PAINTED_PLANKS.forEach((color, planks) -> {
-            generator.family(planks)
-                .slab(AdornBlocks.PAINTED_WOOD_SLABS.getEager(color))
-                .stairs(AdornBlocks.PAINTED_WOOD_STAIRS.getEager(color))
-                .fence(AdornBlocks.PAINTED_WOOD_FENCES.getEager(color))
-                .fenceGate(AdornBlocks.PAINTED_WOOD_FENCE_GATES.getEager(color))
-                .pressurePlate(AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.getEager(color))
-                .button(AdornBlocks.PAINTED_WOOD_BUTTONS.getEager(color));
+        ColorCollection.zipApply(ColorCollection.VALUES, AdornBlocks.PAINTED_PLANKS, (color, planks) -> {
+            generator.family(planks.get())
+                .slab(AdornBlocks.PAINTED_WOOD_SLABS.pick(color).get())
+                .stairs(AdornBlocks.PAINTED_WOOD_STAIRS.pick(color).get())
+                .fence(AdornBlocks.PAINTED_WOOD_FENCES.pick(color).get())
+                .fenceGate(AdornBlocks.PAINTED_WOOD_FENCE_GATES.pick(color).get())
+                .pressurePlate(AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.pick(color).get())
+                .button(AdornBlocks.PAINTED_WOOD_BUTTONS.pick(color).get());
         });
 
         forwardBlockModel(generator, BlockVariantSets.get(BlockKind.SHELF, BlockVariant.IRON));
@@ -184,10 +185,7 @@ public final class AdornModelGenerator extends FabricModelProvider {
         generator.registerSimpleFlatItemModel(AdornBlocks.CHAIN_LINK_FENCE.get());
         generator.registerSimpleFlatItemModel(AdornBlocks.STONE_LADDER.get());
         generator.registerSimpleFlatItemModel(AdornBlocks.STONE_TORCH_GROUND.get());
-        registerCopperPipe(generator, AdornBlocks.COPPER_PIPE, AdornBlocks.WAXED_COPPER_PIPE);
-        registerCopperPipe(generator, AdornBlocks.EXPOSED_COPPER_PIPE, AdornBlocks.WAXED_EXPOSED_COPPER_PIPE);
-        registerCopperPipe(generator, AdornBlocks.WEATHERED_COPPER_PIPE, AdornBlocks.WAXED_WEATHERED_COPPER_PIPE);
-        registerCopperPipe(generator, AdornBlocks.OXIDIZED_COPPER_PIPE, AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE);
+        AdornBlocks.COPPER_PIPES.zipUnwaxedWaxed((unwaxed, waxed) -> registerCopperPipe(generator, unwaxed, waxed));
 
         var coneVariantRegistry = registries.lookupOrThrow(AdornRegistryKeys.CONE_VARIANT);
         // Sort the keys in order to get a consistent and reproducible output.

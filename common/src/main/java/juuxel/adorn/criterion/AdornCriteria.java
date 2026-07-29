@@ -3,7 +3,7 @@ package juuxel.adorn.criterion;
 import juuxel.adorn.lib.registry.Registered;
 import juuxel.adorn.lib.registry.Registrar;
 import juuxel.adorn.lib.registry.RegistrarFactory;
-import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.registries.Registries;
 
 public final class AdornCriteria {

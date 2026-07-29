@@ -5,4 +5,5 @@ import net.minecraft.client.renderer.entity.state.EntityRenderState;
 
 public final class ConeEntityRenderState extends EntityRenderState {
     public final BlockModelRenderState coneModel = new BlockModelRenderState();
+    public boolean translucentModel;
 }

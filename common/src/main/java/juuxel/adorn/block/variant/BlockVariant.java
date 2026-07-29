@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
     char MOD_ID_SEPARATOR = '/';
 
-    Map<DyeColor, BlockVariant> WOOLS = createBy(Dyes.ALL_DYES, color -> variant(color.getSerializedName(), Blocks.WHITE_WOOL));
+    Map<DyeColor, BlockVariant> WOOLS = createBy(Dyes.ALL_DYES, color -> variant(color.getSerializedName(), Blocks.WOOL.pick(color)));
     Map<DyeColor, BlockVariant> PAINTED_WOODS = createBy(Dyes.ALL_DYES, PaintedWood::new);
 
     BlockVariant IRON = variant("iron", Blocks.IRON_BARS);
@@ -156,7 +156,7 @@ public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
 
         @Override
         public BlockBehaviour.Properties createBlockSettings() {
-            return AdornUtil.copySettingsSafely(AdornBlocks.PAINTED_PLANKS.getEager(color));
+            return AdornUtil.copySettingsSafely(AdornBlocks.PAINTED_PLANKS.pick(color).get());
         }
     }
 }

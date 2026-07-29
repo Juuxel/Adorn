@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "adorn:pack_crate",
   "key": {
     "#": "adorn:crate",

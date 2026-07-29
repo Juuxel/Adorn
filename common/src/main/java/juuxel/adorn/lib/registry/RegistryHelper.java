@@ -11,10 +11,10 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public final class RegistryHelper {
-    private final KeyedRegistrar<Block> blocks;
-    private final KeyedRegistrar<Item> items;
+    private final BlockRegistrar blocks;
+    private final ItemRegistrar items;
 
-    public RegistryHelper(KeyedRegistrar<Block> blocks, KeyedRegistrar<Item> items) {
+    public RegistryHelper(BlockRegistrar blocks, ItemRegistrar items) {
         this.blocks = blocks;
         this.items = items;
     }
@@ -26,14 +26,14 @@ public final class RegistryHelper {
     /**
      * Registers a block with the name and an item with default settings.
      */
-    public <T extends Block> Registered<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> block, BlockSettingsProvider settings) {
+    public <T extends Block> RegisteredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> block, BlockSettingsProvider settings) {
         return registerBlock(name, ItemSettingsProvider.DEFAULT, block, settings);
     }
 
     /**
      * Registers a block with the name and the item settings.
      */
-    public <T extends Block> Registered<T> registerBlock(
+    public <T extends Block> RegisteredBlock<T> registerBlock(
         String name,
         ItemSettingsProvider itemSettings,
         Function<BlockBehaviour.Properties, T> block,
@@ -45,7 +45,7 @@ public final class RegistryHelper {
     /**
      * Registers a block with the name and an item created by the item provider with default settings.
      */
-    public <T extends Block> Registered<T> registerBlock(
+    public <T extends Block> RegisteredBlock<T> registerBlock(
         String name,
         BiFunction<T, Item.Properties, Item> itemProvider,
         Function<BlockBehaviour.Properties, T> block,
@@ -57,7 +57,7 @@ public final class RegistryHelper {
     /**
      * Registers a block with the name and an item created by the item provider.
      */
-    public <T extends Block> Registered<T> registerBlock(
+    public <T extends Block> RegisteredBlock<T> registerBlock(
         String name,
         BiFunction<T, Item.Properties, Item> itemProvider,
         ItemSettingsProvider itemSettings,
@@ -87,7 +87,7 @@ public final class RegistryHelper {
     /**
      * Registers a block with the name and without an item.
      */
-    public <T extends Block> Registered<T> registerBlockWithoutItem(String name, Function<BlockBehaviour.Properties, T> block, BlockSettingsProvider settings) {
+    public <T extends Block> RegisteredBlock<T> registerBlockWithoutItem(String name, Function<BlockBehaviour.Properties, T> block, BlockSettingsProvider settings) {
         return blocks.register(name, key -> block.apply(settings.createBlockSettings().setId(key)));
     }
 
@@ -99,11 +99,11 @@ public final class RegistryHelper {
     // Functions for registering other content
     // -----------------------------------------
 
-    public <T extends Item> Registered<T> registerItem(String name, Function<Item.Properties, T> factory) {
+    public <T extends Item> RegisteredItem<T> registerItem(String name, Function<Item.Properties, T> factory) {
         return registerItem(name, factory, ItemSettingsProvider.DEFAULT);
     }
 
-    public <T extends Item> Registered<T> registerItem(String name, Function<Item.Properties, T> factory, ItemSettingsProvider settings) {
+    public <T extends Item> RegisteredItem<T> registerItem(String name, Function<Item.Properties, T> factory, ItemSettingsProvider settings) {
         return items.register(name, key -> factory.apply(settings.createItemSettings().setId(key)));
     }
 

@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "adorn:unpack_crate",
   "ingredients": [
     "adorn:apple_crate"

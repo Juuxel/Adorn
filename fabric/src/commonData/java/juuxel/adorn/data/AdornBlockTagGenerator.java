@@ -5,6 +5,7 @@ import juuxel.adorn.block.variant.BlockKind;
 import juuxel.adorn.block.variant.BlockVariant;
 import juuxel.adorn.block.variant.BlockVariantSets;
 import juuxel.adorn.lib.AdornTags;
+import juuxel.adorn.lib.registry.RegisteredBlock;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
@@ -21,20 +22,20 @@ public final class AdornBlockTagGenerator extends FabricTagsProvider.BlockTagsPr
 
     @Override
     protected void addTags(HolderLookup.Provider wrapperLookup) {
-        valueLookupBuilder(AdornTags.PAINTED_PLANKS.block())
-            .add(AdornBlocks.PAINTED_PLANKS.values().toArray(Block[]::new));
-        valueLookupBuilder(AdornTags.PAINTED_WOOD_SLABS.block())
-            .add(AdornBlocks.PAINTED_WOOD_SLABS.values().toArray(Block[]::new));
-        valueLookupBuilder(AdornTags.PAINTED_WOOD_STAIRS.block())
-            .add(AdornBlocks.PAINTED_WOOD_STAIRS.values().toArray(Block[]::new));
-        valueLookupBuilder(AdornTags.PAINTED_WOOD_FENCES.block())
-            .add(AdornBlocks.PAINTED_WOOD_FENCES.values().toArray(Block[]::new));
-        valueLookupBuilder(AdornTags.PAINTED_WOOD_FENCE_GATES.block())
-            .add(AdornBlocks.PAINTED_WOOD_FENCE_GATES.values().toArray(Block[]::new));
-        valueLookupBuilder(AdornTags.PAINTED_WOOD_PRESSURE_PLATES.block())
-            .add(AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.values().toArray(Block[]::new));
-        valueLookupBuilder(AdornTags.PAINTED_WOOD_BUTTONS.block())
-            .add(AdornBlocks.PAINTED_WOOD_BUTTONS.values().toArray(Block[]::new));
+        builder(AdornTags.PAINTED_PLANKS.block())
+            .addAll(AdornBlocks.PAINTED_PLANKS.map(RegisteredBlock::key));
+        builder(AdornTags.PAINTED_WOOD_SLABS.block())
+            .addAll(AdornBlocks.PAINTED_WOOD_SLABS.map(RegisteredBlock::key));
+        builder(AdornTags.PAINTED_WOOD_STAIRS.block())
+            .addAll(AdornBlocks.PAINTED_WOOD_STAIRS.map(RegisteredBlock::key));
+        builder(AdornTags.PAINTED_WOOD_FENCES.block())
+            .addAll(AdornBlocks.PAINTED_WOOD_FENCES.map(RegisteredBlock::key));
+        builder(AdornTags.PAINTED_WOOD_FENCE_GATES.block())
+            .addAll(AdornBlocks.PAINTED_WOOD_FENCE_GATES.map(RegisteredBlock::key));
+        builder(AdornTags.PAINTED_WOOD_PRESSURE_PLATES.block())
+            .addAll(AdornBlocks.PAINTED_WOOD_PRESSURE_PLATES.map(RegisteredBlock::key));
+        builder(AdornTags.PAINTED_WOOD_BUTTONS.block())
+            .addAll(AdornBlocks.PAINTED_WOOD_BUTTONS.map(RegisteredBlock::key));
         addPaintedVariants(AdornTags.PAINTED_CHAIRS.block(), BlockKind.CHAIR);
         addPaintedVariants(AdornTags.PAINTED_TABLES.block(), BlockKind.TABLE);
         addPaintedVariants(AdornTags.PAINTED_DRAWERS.block(), BlockKind.DRAWER);
@@ -47,24 +48,24 @@ public final class AdornBlockTagGenerator extends FabricTagsProvider.BlockTagsPr
         addPaintedVariants(AdornTags.PAINTED_WOOD_STEPS.block(), BlockKind.STEP);
         addPaintedVariants(AdornTags.PAINTED_WOOD_SHELVES.block(), BlockKind.SHELF);
         addPaintedVariants(AdornTags.PAINTED_COFFEE_TABLES.block(), BlockKind.COFFEE_TABLE);
-        valueLookupBuilder(AdornTags.STANDING_CAUTION_SIGNS)
-            .add(AdornBlocks.CAUTION_SIGN.get())
-            .add(AdornBlocks.BEE_CAUTION_SIGN.get())
-            .add(AdornBlocks.BOOK_CAUTION_SIGN.get())
-            .add(AdornBlocks.CLIFF_CAUTION_SIGN.get())
-            .add(AdornBlocks.FORBIDDEN_CAUTION_SIGN.get())
-            .add(AdornBlocks.HELMET_CAUTION_SIGN.get())
-            .add(AdornBlocks.RAILS_CAUTION_SIGN.get())
-            .add(AdornBlocks.SURPRISE_CAUTION_SIGN.get());
-        valueLookupBuilder(AdornTags.WALL_CAUTION_SIGNS)
-            .add(AdornBlocks.WALL_CAUTION_SIGN.get())
-            .add(AdornBlocks.BEE_WALL_CAUTION_SIGN.get())
-            .add(AdornBlocks.BOOK_WALL_CAUTION_SIGN.get())
-            .add(AdornBlocks.CLIFF_WALL_CAUTION_SIGN.get())
-            .add(AdornBlocks.FORBIDDEN_WALL_CAUTION_SIGN.get())
-            .add(AdornBlocks.HELMET_WALL_CAUTION_SIGN.get())
-            .add(AdornBlocks.RAILS_WALL_CAUTION_SIGN.get())
-            .add(AdornBlocks.SURPRISE_WALL_CAUTION_SIGN.get());
+        builder(AdornTags.STANDING_CAUTION_SIGNS)
+            .add(AdornBlocks.CAUTION_SIGN.key())
+            .add(AdornBlocks.BEE_CAUTION_SIGN.key())
+            .add(AdornBlocks.BOOK_CAUTION_SIGN.key())
+            .add(AdornBlocks.CLIFF_CAUTION_SIGN.key())
+            .add(AdornBlocks.FORBIDDEN_CAUTION_SIGN.key())
+            .add(AdornBlocks.HELMET_CAUTION_SIGN.key())
+            .add(AdornBlocks.RAILS_CAUTION_SIGN.key())
+            .add(AdornBlocks.SURPRISE_CAUTION_SIGN.key());
+        builder(AdornTags.WALL_CAUTION_SIGNS)
+            .add(AdornBlocks.WALL_CAUTION_SIGN.key())
+            .add(AdornBlocks.BEE_WALL_CAUTION_SIGN.key())
+            .add(AdornBlocks.BOOK_WALL_CAUTION_SIGN.key())
+            .add(AdornBlocks.CLIFF_WALL_CAUTION_SIGN.key())
+            .add(AdornBlocks.FORBIDDEN_WALL_CAUTION_SIGN.key())
+            .add(AdornBlocks.HELMET_WALL_CAUTION_SIGN.key())
+            .add(AdornBlocks.RAILS_WALL_CAUTION_SIGN.key())
+            .add(AdornBlocks.SURPRISE_WALL_CAUTION_SIGN.key());
         builder(AdornTags.CAUTION_SIGNS.block())
             .addTag(AdornTags.STANDING_CAUTION_SIGNS)
             .addTag(AdornTags.WALL_CAUTION_SIGNS);
@@ -77,60 +78,53 @@ public final class AdornBlockTagGenerator extends FabricTagsProvider.BlockTagsPr
         builder(AdornTags.STEPS.block())
             .forceAddTag(AdornTags.WOODEN_STEPS.block())
             .forceAddTag(AdornTags.STONE_STEPS.block());
-        valueLookupBuilder(AdornTags.SHELVES.block())
+        builder(AdornTags.SHELVES.block())
             .forceAddTag(AdornTags.WOODEN_SHELVES.block())
-            .add(BlockVariantSets.get(BlockKind.SHELF, BlockVariant.IRON).get());
-        valueLookupBuilder(AdornTags.CANDLELIT_LANTERNS.block())
-            .add(AdornBlocks.CANDLELIT_LANTERN.get())
+            .add(BlockVariantSets.get(BlockKind.SHELF, BlockVariant.IRON).key());
+        builder(AdornTags.CANDLELIT_LANTERNS.block())
+            .add(AdornBlocks.CANDLELIT_LANTERN.key())
             .forceAddTag(AdornTags.DYED_CANDLELIT_LANTERNS.block());
-        valueLookupBuilder(AdornTags.COPPER_PIPES.block())
-            .add(AdornBlocks.COPPER_PIPE.get())
-            .add(AdornBlocks.EXPOSED_COPPER_PIPE.get())
-            .add(AdornBlocks.WEATHERED_COPPER_PIPE.get())
-            .add(AdornBlocks.OXIDIZED_COPPER_PIPE.get())
-            .add(AdornBlocks.WAXED_COPPER_PIPE.get())
-            .add(AdornBlocks.WAXED_EXPOSED_COPPER_PIPE.get())
-            .add(AdornBlocks.WAXED_WEATHERED_COPPER_PIPE.get())
-            .add(AdornBlocks.WAXED_OXIDIZED_COPPER_PIPE.get());
+        builder(AdornTags.COPPER_PIPES.block())
+            .addAll(AdornBlocks.COPPER_PIPES.map(RegisteredBlock::key));
         builder(AdornTags.KITCHEN_BLOCKS.block())
             .forceAddTag(AdornTags.KITCHEN_COUNTERS.block())
             .forceAddTag(AdornTags.KITCHEN_CUPBOARDS.block())
             .forceAddTag(AdornTags.KITCHEN_SINKS.block());
-        valueLookupBuilder(AdornTags.REGULAR_CHIMNEYS.block())
-            .add(AdornBlocks.BRICK_CHIMNEY.get())
-            .add(AdornBlocks.STONE_BRICK_CHIMNEY.get())
-            .add(AdornBlocks.NETHER_BRICK_CHIMNEY.get())
-            .add(AdornBlocks.RED_NETHER_BRICK_CHIMNEY.get())
-            .add(AdornBlocks.COBBLESTONE_CHIMNEY.get());
-        valueLookupBuilder(AdornTags.PRISMARINE_CHIMNEYS.block())
-            .add(AdornBlocks.PRISMARINE_CHIMNEY.get())
-            .add(AdornBlocks.MAGMATIC_PRISMARINE_CHIMNEY.get())
-            .add(AdornBlocks.SOULFUL_PRISMARINE_CHIMNEY.get());
+        builder(AdornTags.REGULAR_CHIMNEYS.block())
+            .add(AdornBlocks.BRICK_CHIMNEY.key())
+            .add(AdornBlocks.STONE_BRICK_CHIMNEY.key())
+            .add(AdornBlocks.NETHER_BRICK_CHIMNEY.key())
+            .add(AdornBlocks.RED_NETHER_BRICK_CHIMNEY.key())
+            .add(AdornBlocks.COBBLESTONE_CHIMNEY.key());
+        builder(AdornTags.PRISMARINE_CHIMNEYS.block())
+            .add(AdornBlocks.PRISMARINE_CHIMNEY.key())
+            .add(AdornBlocks.MAGMATIC_PRISMARINE_CHIMNEY.key())
+            .add(AdornBlocks.SOULFUL_PRISMARINE_CHIMNEY.key());
         builder(AdornTags.CHIMNEYS.block())
             .addTag(AdornTags.REGULAR_CHIMNEYS.block())
             .addTag(AdornTags.PRISMARINE_CHIMNEYS.block());
         builder(AdornTags.COPPER_PIPES_CONNECT_TO)
             .addTag(AdornTags.COPPER_PIPES.block());
-        valueLookupBuilder(AdornTags.FILLED_CRATES.block())
-            .add(AdornBlocks.APPLE_CRATE.get())
-            .add(AdornBlocks.WHEAT_CRATE.get())
-            .add(AdornBlocks.CARROT_CRATE.get())
-            .add(AdornBlocks.POTATO_CRATE.get())
-            .add(AdornBlocks.MELON_CRATE.get())
-            .add(AdornBlocks.WHEAT_SEED_CRATE.get())
-            .add(AdornBlocks.MELON_SEED_CRATE.get())
-            .add(AdornBlocks.PUMPKIN_SEED_CRATE.get())
-            .add(AdornBlocks.BEETROOT_CRATE.get())
-            .add(AdornBlocks.BEETROOT_SEED_CRATE.get())
-            .add(AdornBlocks.SWEET_BERRY_CRATE.get())
-            .add(AdornBlocks.COCOA_BEAN_CRATE.get())
-            .add(AdornBlocks.NETHER_WART_CRATE.get())
-            .add(AdornBlocks.SUGAR_CANE_CRATE.get())
-            .add(AdornBlocks.EGG_CRATE.get())
-            .add(AdornBlocks.HONEYCOMB_CRATE.get())
-            .add(AdornBlocks.LIL_TATER_CRATE.get());
-        valueLookupBuilder(AdornTags.CRATES.block())
-            .add(AdornBlocks.CRATE.get())
+        builder(AdornTags.FILLED_CRATES.block())
+            .add(AdornBlocks.APPLE_CRATE.key())
+            .add(AdornBlocks.WHEAT_CRATE.key())
+            .add(AdornBlocks.CARROT_CRATE.key())
+            .add(AdornBlocks.POTATO_CRATE.key())
+            .add(AdornBlocks.MELON_CRATE.key())
+            .add(AdornBlocks.WHEAT_SEED_CRATE.key())
+            .add(AdornBlocks.MELON_SEED_CRATE.key())
+            .add(AdornBlocks.PUMPKIN_SEED_CRATE.key())
+            .add(AdornBlocks.BEETROOT_CRATE.key())
+            .add(AdornBlocks.BEETROOT_SEED_CRATE.key())
+            .add(AdornBlocks.SWEET_BERRY_CRATE.key())
+            .add(AdornBlocks.COCOA_BEAN_CRATE.key())
+            .add(AdornBlocks.NETHER_WART_CRATE.key())
+            .add(AdornBlocks.SUGAR_CANE_CRATE.key())
+            .add(AdornBlocks.EGG_CRATE.key())
+            .add(AdornBlocks.HONEYCOMB_CRATE.key())
+            .add(AdornBlocks.LIL_TATER_CRATE.key());
+        builder(AdornTags.CRATES.block())
+            .add(AdornBlocks.CRATE.key())
             .addTag(AdornTags.FILLED_CRATES.block());
 
         addVanillaTags();
@@ -146,11 +140,11 @@ public final class AdornBlockTagGenerator extends FabricTagsProvider.BlockTagsPr
         builder(BlockTags.WOODEN_PRESSURE_PLATES).addTag(AdornTags.PAINTED_WOOD_PRESSURE_PLATES.block());
         builder(BlockTags.WOODEN_BUTTONS).addTag(AdornTags.PAINTED_WOOD_BUTTONS.block());
 
-        valueLookupBuilder(BlockTags.CLIMBABLE)
-            .add(AdornBlocks.CHAIN_LINK_FENCE.get())
-            .add(AdornBlocks.STONE_LADDER.get());
+        builder(BlockTags.CLIMBABLE)
+            .add(AdornBlocks.CHAIN_LINK_FENCE.key())
+            .add(AdornBlocks.STONE_LADDER.key());
 
-        valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE)
+        builder(BlockTags.MINEABLE_WITH_AXE)
             .forceAddTag(AdornTags.CHAIRS.block())
             .forceAddTag(AdornTags.TABLES.block())
             .addTag(AdornTags.KITCHEN_BLOCKS.block())
@@ -163,10 +157,10 @@ public final class AdornBlockTagGenerator extends FabricTagsProvider.BlockTagsPr
             .forceAddTag(AdornTags.BENCHES.block())
             .addTag(AdornTags.CRATES.block())
             .forceAddTag(AdornTags.SOFAS.block())
-            .add(AdornBlocks.PICKET_FENCE.get())
-            .add(AdornBlocks.TRADING_STATION.get());
+            .add(AdornBlocks.PICKET_FENCE.key())
+            .add(AdornBlocks.TRADING_STATION.key());
 
-        valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
+        builder(BlockTags.MINEABLE_WITH_PICKAXE)
             .addTag(AdornTags.CHIMNEYS.block())
             .forceAddTag(AdornTags.STONE_PLATFORMS.block())
             .forceAddTag(AdornTags.STONE_POSTS.block())
@@ -175,11 +169,11 @@ public final class AdornBlockTagGenerator extends FabricTagsProvider.BlockTagsPr
             .addTag(AdornTags.CANDLELIT_LANTERNS.block())
             .addTag(AdornTags.COPPER_PIPES.block())
             .addTag(AdornTags.CAUTION_SIGNS.block())
-            .add(AdornBlocks.CHAIN_LINK_FENCE.get())
-            .add(BlockVariantSets.get(BlockKind.SHELF, BlockVariant.IRON).get())
-            .add(AdornBlocks.STONE_LADDER.get())
-            .add(AdornBlocks.BREWER.get())
-            .add(AdornBlocks.BARRICADE.get());
+            .add(AdornBlocks.CHAIN_LINK_FENCE.key())
+            .add(BlockVariantSets.get(BlockKind.SHELF, BlockVariant.IRON).key())
+            .add(AdornBlocks.STONE_LADDER.key())
+            .add(AdornBlocks.BREWER.key())
+            .add(AdornBlocks.BARRICADE.key());
     }
 
     private void addConventionalTags() {
@@ -188,11 +182,11 @@ public final class AdornBlockTagGenerator extends FabricTagsProvider.BlockTagsPr
     }
 
     private void addPaintedVariants(TagKey<Block> tag, BlockKind kind) {
-        var builder = valueLookupBuilder(tag);
+        var builder = builder(tag);
 
         for (BlockVariant variant : BlockVariant.PAINTED_WOODS.values()) {
             var block = BlockVariantSets.get(kind, variant);
-            if (block != null) builder.add(block.get());
+            if (block != null) builder.add(block.key());
         }
     }
 }

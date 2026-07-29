@@ -1,11 +1,11 @@
 [versions]
 emi = "1.1.10+1.21"
 fabric-loader = "0.19.3"
-fabric-api = "0.155.2+26.1.2"
+fabric-api = "0.156.0+26.2"
 jankson = "1.2.1"
-modmenu = "18.0.0"
-neoforge = "26.1.2.87"
-rei = "26.1.819"
+modmenu = "20.0.1"
+neoforge = "26.2.0.37-beta"
+rei = "26.2.820"
 towelette = "e5e39eb"
 
 [libraries]

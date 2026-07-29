@@ -80,7 +80,7 @@ public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock, Snea
         if (stack.is(AdornTags.FURNITURE_DYES)) {
             var dye = stack.get(DataComponents.DYE);
             if (dye != null) {
-                world.setBlockAndUpdate(pos, AdornBlocks.SOFAS.getEager(dye).withPropertiesOf(state));
+                world.setBlockAndUpdate(pos, AdornBlocks.SOFAS.pick(dye).get().withPropertiesOf(state));
                 world.playSound(player, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1f, 0.8f);
                 if (!player.getAbilities().instabuild) stack.shrink(1);
                 if (!world.isClientSide()) player.awardStat(AdornStats.DYE_SOFA);

@@ -78,7 +78,7 @@ public final class TableLampBlock extends Block implements SimpleWaterloggedBloc
         if (stack.is(AdornTags.FURNITURE_DYES)) {
             var dye = stack.get(DataComponents.DYE);
             if (dye != null) {
-                world.setBlockAndUpdate(pos, AdornBlocks.TABLE_LAMPS.getEager(dye).withPropertiesOf(state));
+                world.setBlockAndUpdate(pos, AdornBlocks.TABLE_LAMPS.pick(dye).get().withPropertiesOf(state));
                 world.playSound(player, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1f, 0.8f);
                 if (!player.getAbilities().instabuild) stack.shrink(1);
                 if (!world.isClientSide()) player.awardStat(AdornStats.DYE_TABLE_LAMP);

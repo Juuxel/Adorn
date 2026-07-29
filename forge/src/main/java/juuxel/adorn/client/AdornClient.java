@@ -49,6 +49,6 @@ public final class AdornClient {
     }
 
     public static void openBookScreen(Identifier bookId) {
-        Minecraft.getInstance().setScreen(new GuideBookScreen(BookManager.INSTANCE.get(bookId)));
+        Minecraft.getInstance().gui.setScreen(new GuideBookScreen(BookManager.INSTANCE.get(bookId)));
     }
 }

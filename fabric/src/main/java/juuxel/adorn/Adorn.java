@@ -72,6 +72,8 @@ public final class Adorn {
 
         if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
             Dyes.checkInDev();
+        } else {
+            Dyes.checkInProduction();
         }
     }
 }

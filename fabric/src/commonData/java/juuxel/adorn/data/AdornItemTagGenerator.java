@@ -6,9 +6,10 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.references.BlockItemIds;
+import net.minecraft.references.ItemIds;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Items;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -51,18 +52,18 @@ public final class AdornItemTagGenerator extends FabricTagsProvider.ItemTagsProv
         copy(AdornTags.CRATES);
         copy(AdornTags.FILLED_CRATES);
 
-        valueLookupBuilder(AdornTags.CAUTION_SIGNS.item())
-            .add(AdornItems.CAUTION_SIGN.get())
-            .add(AdornItems.BEE_CAUTION_SIGN.get())
-            .add(AdornItems.BOOK_CAUTION_SIGN.get())
-            .add(AdornItems.CLIFF_CAUTION_SIGN.get())
-            .add(AdornItems.FORBIDDEN_CAUTION_SIGN.get())
-            .add(AdornItems.HELMET_CAUTION_SIGN.get())
-            .add(AdornItems.RAILS_CAUTION_SIGN.get())
-            .add(AdornItems.SURPRISE_CAUTION_SIGN.get());
+        builder(AdornTags.CAUTION_SIGNS.item())
+            .add(AdornItems.CAUTION_SIGN.key())
+            .add(AdornItems.BEE_CAUTION_SIGN.key())
+            .add(AdornItems.BOOK_CAUTION_SIGN.key())
+            .add(AdornItems.CLIFF_CAUTION_SIGN.key())
+            .add(AdornItems.FORBIDDEN_CAUTION_SIGN.key())
+            .add(AdornItems.HELMET_CAUTION_SIGN.key())
+            .add(AdornItems.RAILS_CAUTION_SIGN.key())
+            .add(AdornItems.SURPRISE_CAUTION_SIGN.key());
 
-        valueLookupBuilder(AdornTags.BREWING_INPUTS)
-            .add(AdornItems.MUG.get());
+        builder(AdornTags.BREWING_INPUTS)
+            .add(AdornItems.MUG.key());
 
         builder(AdornTags.FURNITURE_DYES)
             .forceAddTag(ItemTags.DYES);
@@ -83,50 +84,50 @@ public final class AdornItemTagGenerator extends FabricTagsProvider.ItemTagsProv
         copy(BlockTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_PRESSURE_PLATES);
         copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
 
-        valueLookupBuilder(ItemTags.BOOKSHELF_BOOKS)
-            .add(AdornItems.GUIDE_BOOK.get(), AdornItems.TRADERS_MANUAL.get());
+        builder(ItemTags.BOOKSHELF_BOOKS)
+            .add(AdornItems.GUIDE_BOOK.key(), AdornItems.TRADERS_MANUAL.key());
     }
 
     private void addConventionalTags() {
         copy(MoreConventionalBlockTags.LANTERNS, MoreConventionalItemTags.LANTERNS);
 
-        valueLookupBuilder(MoreConventionalItemTags.BOOKS)
+        builder(MoreConventionalItemTags.BOOKS)
             // Vanilla items
-            .add(Items.BOOK, Items.ENCHANTED_BOOK, Items.WRITABLE_BOOK, Items.WRITTEN_BOOK)
+            .add(ItemIds.BOOK, ItemIds.ENCHANTED_BOOK, ItemIds.WRITABLE_BOOK, ItemIds.WRITTEN_BOOK)
             // Adorn items
-            .add(AdornItems.GUIDE_BOOK.get(), AdornItems.TRADERS_MANUAL.get());
+            .add(AdornItems.GUIDE_BOOK.key(), AdornItems.TRADERS_MANUAL.key());
 
         builder(ConventionalItemTags.BERRY_FOODS)
             .addTag(MoreConventionalItemTags.GLOW_BERRY_FOODS)
             .addTag(MoreConventionalItemTags.SWEET_BERRY_FOODS);
 
-        valueLookupBuilder(MoreConventionalItemTags.GLOW_BERRY_FOODS)
-            .add(Items.GLOW_BERRIES);
+        builder(MoreConventionalItemTags.GLOW_BERRY_FOODS)
+            .add(BlockItemIds.GLOW_BERRY_CROP);
 
-        valueLookupBuilder(MoreConventionalItemTags.SWEET_BERRY_FOODS)
-            .add(Items.SWEET_BERRIES);
+        builder(MoreConventionalItemTags.SWEET_BERRY_FOODS)
+            .add(BlockItemIds.SWEET_BERRY_CROP);
 
-        valueLookupBuilder(MoreConventionalItemTags.COFFEE_DRINKS)
-            .add(AdornItems.NETHER_WART_COFFEE.get());
+        builder(MoreConventionalItemTags.COFFEE_DRINKS)
+            .add(AdornItems.NETHER_WART_COFFEE.key());
 
-        valueLookupBuilder(MoreConventionalItemTags.TEA_DRINKS)
-            .add(AdornItems.GLOW_BERRY_TEA.get());
+        builder(MoreConventionalItemTags.TEA_DRINKS)
+            .add(AdornItems.GLOW_BERRY_TEA.key());
 
-        valueLookupBuilder(ConventionalItemTags.JUICE_DRINKS)
-            .add(AdornItems.SWEET_BERRY_JUICE.get());
+        builder(ConventionalItemTags.JUICE_DRINKS)
+            .add(AdornItems.SWEET_BERRY_JUICE.key());
 
-        valueLookupBuilder(ConventionalItemTags.DRINKS)
+        builder(ConventionalItemTags.DRINKS)
             .addTag(MoreConventionalItemTags.COFFEE_DRINKS)
             .addTag(MoreConventionalItemTags.TEA_DRINKS);
 
-        valueLookupBuilder(MoreConventionalItemTags.STONE_RODS)
-            .add(AdornItems.STONE_ROD.get());
+        builder(MoreConventionalItemTags.STONE_RODS)
+            .add(AdornItems.STONE_ROD.key());
 
         builder(ConventionalItemTags.RODS)
             .addTag(MoreConventionalItemTags.STONE_RODS);
 
-        valueLookupBuilder(MoreConventionalItemTags.HONEYCOMBS)
-            .add(Items.HONEYCOMB);
+        builder(MoreConventionalItemTags.HONEYCOMBS)
+            .add(ItemIds.HONEYCOMB);
     }
 
     private void copy(AdornTags.TagPair tagPair) {

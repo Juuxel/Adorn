@@ -22,33 +22,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 
 public abstract class CarpetedBlock extends SeatBlock {
     public static final OptionalProperty<DyeColor> CARPET = new OptionalProperty<>(EnumProperty.create("carpet", DyeColor.class, Dyes.ALL_DYES));
     public static final VoxelShape CARPET_SHAPE = box(0.0, 0.0, 0.0, 16.0, 1.0, 16.0);
-    private static final Map<DyeColor, Block> COLORS_TO_BLOCKS = new EnumMap<>(DyeColor.class);
-
-    static {
-        COLORS_TO_BLOCKS.put(DyeColor.WHITE, Blocks.WHITE_CARPET);
-        COLORS_TO_BLOCKS.put(DyeColor.ORANGE, Blocks.ORANGE_CARPET);
-        COLORS_TO_BLOCKS.put(DyeColor.MAGENTA, Blocks.MAGENTA_CARPET);
-        COLORS_TO_BLOCKS.put(DyeColor.LIGHT_BLUE, Blocks.LIGHT_BLUE_CARPET);
-        COLORS_TO_BLOCKS.put(DyeColor.YELLOW, Blocks.YELLOW_CARPET);
-        COLORS_TO_BLOCKS.put(DyeColor.LIME, Blocks.LIME_CARPET);
-        COLORS_TO_BLOCKS.put(DyeColor.PINK, Blocks.PINK_CARPET);
-        COLORS_TO_BLOCKS.put(DyeColor.GRAY, Blocks.GRAY_CARPET);
-        COLORS_TO_BLOCKS.put(DyeColor.LIGHT_GRAY, Blocks.LIGHT_GRAY_CARPET);
-        COLORS_TO_BLOCKS.put(DyeColor.CYAN, Blocks.CYAN_CARPET);
-        COLORS_TO_BLOCKS.put(DyeColor.PURPLE, Blocks.PURPLE_CARPET);
-        COLORS_TO_BLOCKS.put(DyeColor.BLUE, Blocks.BLUE_CARPET);
-        COLORS_TO_BLOCKS.put(DyeColor.BROWN, Blocks.BROWN_CARPET);
-        COLORS_TO_BLOCKS.put(DyeColor.GREEN, Blocks.GREEN_CARPET);
-        COLORS_TO_BLOCKS.put(DyeColor.RED, Blocks.RED_CARPET);
-        COLORS_TO_BLOCKS.put(DyeColor.BLACK, Blocks.BLACK_CARPET);
-    }
 
     public CarpetedBlock(Properties settings) {
         super(settings);
@@ -78,7 +56,7 @@ public abstract class CarpetedBlock extends SeatBlock {
         if (!isCarpetingEnabled()) return;
         var carpet = state.getValue(CARPET);
         if (carpet.isPresent()) {
-            var carpetBlock = COLORS_TO_BLOCKS.get(carpet.value());
+            var carpetBlock = getCarpetBlock(carpet.value());
             if (!carpetBlock.defaultBlockState().canSurvive(world, pos)) {
                 carpetBlock.playerWillDestroy(world, pos, state, null);
                 dropResources(carpetBlock.defaultBlockState(), world, pos);
@@ -91,7 +69,7 @@ public abstract class CarpetedBlock extends SeatBlock {
     protected BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
         if (isCarpetingEnabled()) {
             var carpet = state.getValue(CARPET);
-            if (carpet.isPresent() && !COLORS_TO_BLOCKS.get(carpet.value()).defaultBlockState().canSurvive(world, pos)) {
+            if (carpet.isPresent() && !getCarpetBlock(carpet.value()).defaultBlockState().canSurvive(world, pos)) {
                 tickView.scheduleTick(pos, this, 1);
             }
         }
@@ -103,7 +81,7 @@ public abstract class CarpetedBlock extends SeatBlock {
     protected List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         if (isCarpetingEnabled() && state.getValue(CARPET).isPresent()) {
             var stacks = new ArrayList<>(super.getDrops(state, builder));
-            stacks.addAll(COLORS_TO_BLOCKS.get(state.getValue(CARPET).value()).defaultBlockState().getDrops(builder));
+            stacks.addAll(getCarpetBlock(state.getValue(CARPET).value()).defaultBlockState().getDrops(builder));
             return stacks;
         }
 
@@ -121,5 +99,9 @@ public abstract class CarpetedBlock extends SeatBlock {
     private static @Nullable DyeColor getCarpetColor(BlockPlaceContext context) {
         var block = context.getLevel().getBlockState(context.getClickedPos()).getBlock();
         return block instanceof WoolCarpetBlock carpet ? carpet.getColor() : null;
+    }
+
+    private static Block getCarpetBlock(DyeColor color) {
+        return Blocks.CARPET.pick(color);
     }
 }

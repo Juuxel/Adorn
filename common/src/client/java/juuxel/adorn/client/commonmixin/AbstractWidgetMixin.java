@@ -13,7 +13,7 @@ abstract class AbstractWidgetMixin {
         return ScrollEnvelope.getRealMouseY(y);
     }
 
-    @ModifyArg(method = "extractRenderState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/WidgetTooltipHolder;refreshTooltipForNextRenderPass(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IIZZLnet/minecraft/client/gui/navigation/ScreenRectangle;)V"), index = 2)
+    @ModifyArg(method = "extractRenderState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/AbstractWidget;extractTooltipForNextRenderPass(Lnet/minecraft/client/gui/GuiGraphicsExtractor;II)V"), index = 2)
     private int modifyYForTooltip(int y) {
         return ScrollEnvelope.getRealMouseY(y);
     }

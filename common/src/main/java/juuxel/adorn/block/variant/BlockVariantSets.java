@@ -17,12 +17,11 @@ import juuxel.adorn.block.StepBlock;
 import juuxel.adorn.block.TableBlock;
 import juuxel.adorn.item.ChairBlockItem;
 import juuxel.adorn.item.TableBlockItem;
-import juuxel.adorn.lib.registry.KeyedRegistrar;
-import juuxel.adorn.lib.registry.Registered;
+import juuxel.adorn.lib.registry.BlockRegistrar;
+import juuxel.adorn.lib.registry.ItemRegistrar;
+import juuxel.adorn.lib.registry.RegisteredBlock;
 import juuxel.adorn.lib.registry.RegistrarFactory;
 import juuxel.adorn.lib.registry.RegistryHelper;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.Nullable;
 
@@ -34,20 +33,20 @@ import java.util.Map;
 import java.util.Set;
 
 public final class BlockVariantSets {
-    public static final KeyedRegistrar<Block> BLOCKS = RegistrarFactory.get().create(Registries.BLOCK);
-    public static final KeyedRegistrar<Item> ITEMS = RegistrarFactory.get().create(Registries.ITEM);
+    public static final BlockRegistrar BLOCKS = RegistrarFactory.get().createBlocks();
+    public static final ItemRegistrar ITEMS = RegistrarFactory.get().createItems();
     private static final RegistryHelper HELPER = new RegistryHelper(BLOCKS, ITEMS);
 
     private static final List<BlockVariantSet> variantSets = new ArrayList<>();
-    private static final ListMultimap<BlockKind, Registered<Block>> blocksByKind =
+    private static final ListMultimap<BlockKind, RegisteredBlock<Block>> blocksByKind =
         MultimapBuilder.enumKeys(BlockKind.class)
             .arrayListValues()
             .build();
-    private static final ListMultimap<BlockVariant, Registered<Block>> blocksByVariant =
+    private static final ListMultimap<BlockVariant, RegisteredBlock<Block>> blocksByVariant =
         MultimapBuilder.linkedHashKeys()
             .arrayListValues()
             .build();
-    private static final Map<Pair<BlockKind, BlockVariant>, Registered<Block>> blocksByKindVariant = new LinkedHashMap<>();
+    private static final Map<Pair<BlockKind, BlockVariant>, RegisteredBlock<Block>> blocksByKindVariant = new LinkedHashMap<>();
 
     static {
         variantSets.add(new MinecraftBlockVariants());
@@ -69,11 +68,11 @@ public final class BlockVariantSets {
         variantSets.add(variantSet);
     }
 
-    public static List<Registered<Block>> get(BlockKind kind) {
+    public static List<RegisteredBlock<Block>> get(BlockKind kind) {
         return blocksByKind.get(kind);
     }
 
-    public static @Nullable Registered<Block> get(BlockKind kind, BlockVariant variant) {
+    public static @Nullable RegisteredBlock<Block> get(BlockKind kind, BlockVariant variant) {
         return blocksByKindVariant.get(Pair.of(kind, variant));
     }
 
@@ -131,51 +130,51 @@ public final class BlockVariantSets {
         blocksByKindVariant.put(Pair.of(kind, variant), registered);
     }
 
-    private static Registered<Block> registerPost(BlockVariant variant) {
+    private static RegisteredBlock<Block> registerPost(BlockVariant variant) {
         return HELPER.registerBlock(variant.name() + "_post", PostBlock::new, variant);
     }
 
-    private static Registered<Block> registerPlatform(BlockVariant variant) {
+    private static RegisteredBlock<Block> registerPlatform(BlockVariant variant) {
         return HELPER.registerBlock(variant.name() + "_platform", PlatformBlock::new, variant);
     }
 
-    private static Registered<Block> registerStep(BlockVariant variant) {
+    private static RegisteredBlock<Block> registerStep(BlockVariant variant) {
         return HELPER.registerBlock(variant.name() + "_step", StepBlock::new, variant);
     }
 
-    private static Registered<Block> registerDrawer(BlockVariant variant) {
+    private static RegisteredBlock<Block> registerDrawer(BlockVariant variant) {
         return HELPER.registerBlock(variant.name() + "_drawer", DrawerBlock::new, variant);
     }
 
-    private static Registered<Block> registerChair(BlockVariant variant) {
+    private static RegisteredBlock<Block> registerChair(BlockVariant variant) {
         return HELPER.registerBlock(variant.name() + "_chair", ChairBlockItem::new, ChairBlock::new, variant);
     }
 
-    private static Registered<Block> registerTable(BlockVariant variant) {
+    private static RegisteredBlock<Block> registerTable(BlockVariant variant) {
         return HELPER.registerBlock(variant.name() + "_table", TableBlockItem::new, TableBlock::new, variant);
     }
 
-    private static Registered<Block> registerKitchenCounter(BlockVariant variant) {
+    private static RegisteredBlock<Block> registerKitchenCounter(BlockVariant variant) {
         return HELPER.registerBlock(variant.name() + "_kitchen_counter", KitchenCounterBlock::new, variant);
     }
 
-    private static Registered<Block> registerKitchenCupboard(BlockVariant variant) {
+    private static RegisteredBlock<Block> registerKitchenCupboard(BlockVariant variant) {
         return HELPER.registerBlock(variant.name() + "_kitchen_cupboard", KitchenCupboardBlock::new, variant);
     }
 
-    private static Registered<Block> registerKitchenSink(BlockVariant variant) {
+    private static RegisteredBlock<Block> registerKitchenSink(BlockVariant variant) {
         return HELPER.registerBlock(variant.name() + "_kitchen_sink", KitchenSinkBlock::new, variant);
     }
 
-    private static Registered<Block> registerShelf(BlockVariant variant) {
+    private static RegisteredBlock<Block> registerShelf(BlockVariant variant) {
         return HELPER.registerBlock(variant.name() + "_shelf", ShelfBlock::new, variant);
     }
 
-    private static Registered<Block> registerCoffeeTable(BlockVariant variant) {
+    private static RegisteredBlock<Block> registerCoffeeTable(BlockVariant variant) {
         return HELPER.registerBlock(variant.name() + "_coffee_table", CoffeeTableBlock::new, variant);
     }
 
-    private static Registered<Block> registerBench(BlockVariant variant) {
+    private static RegisteredBlock<Block> registerBench(BlockVariant variant) {
         return HELPER.registerBlock(variant.name() + "_bench", BenchBlock::new, variant);
     }
 }

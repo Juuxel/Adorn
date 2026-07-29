@@ -10,7 +10,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 public final class AdornClientNetworking {
     public static void init() {
         ClientPlayNetworking.registerGlobalReceiver(OpenBookS2CMessage.ID, (payload, context) -> {
-            context.client().setScreen(new GuideBookScreen(BookManager.INSTANCE.get(payload.bookId())));
+            context.client().gui.setScreen(new GuideBookScreen(BookManager.INSTANCE.get(payload.bookId())));
         });
 
         ClientPlayNetworking.registerGlobalReceiver(BrewerFluidSyncS2CMessage.ID, (payload, context) -> {

@@ -143,8 +143,8 @@ public abstract class AbstractConfigScreen extends Screen {
 
     @Override
     public void onClose() {
-        minecraft.setScreen(restartRequired ? new AlertScreen(
-            () -> minecraft.setScreen(parent),
+        minecraft.gui.setScreen(restartRequired ? new AlertScreen(
+            () -> minecraft.gui.setScreen(parent),
             Component.translatable("gui.adorn.config.restart_required.title"),
             Component.translatable("gui.adorn.config.restart_required.message"),
             Component.translatable("gui.ok"),
@@ -270,7 +270,7 @@ public abstract class AbstractConfigScreen extends Screen {
 
     protected void addSubscreenButton(Component label, UnaryOperator<Screen> factory) {
         mainPanel.add(
-            Button.builder(label, widget -> minecraft.setScreen(factory.apply(this)))
+            Button.builder(label, widget -> minecraft.gui.setScreen(factory.apply(this)))
                 .pos(computeLeftMarginX(), nextChildY)
                 .size(layout.totalWidth(), BUTTON_HEIGHT)
                 .build()

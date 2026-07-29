@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "adorn:candlelit_lantern",
   "key": {
     "*": "#c:nuggets/iron",

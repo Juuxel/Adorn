@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "adorn:wooden_cones",
   "key": {
     "-": "#minecraft:wooden_slabs",
