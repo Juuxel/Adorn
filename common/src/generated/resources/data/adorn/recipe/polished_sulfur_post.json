@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "minecraft:polished_sulfur",
+    "/": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:polished_sulfur_post",
+    "count": 4
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "minecraft:polished_sulfur_slab",
+    "P": "adorn:polished_sulfur_post"
+  },
+  "result": {
+    "id": "adorn:polished_sulfur_platform",
+    "count": 2
+  }
+}

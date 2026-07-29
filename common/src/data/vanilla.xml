@@ -32,6 +32,8 @@
     </stone>
     <stone id="minecraft:blackstone"/>
     <stone id="minecraft:brick" bricks="true"/>
+    <stone id="minecraft:cinnabar"/>
+    <stone id="minecraft:cinnabar_brick" bricks="true"/>
     <stone id="minecraft:cobbled_deepslate"/>
     <stone id="minecraft:cobblestone"/>
     <stone id="minecraft:cut_red_sandstone" sided_texture="true">
@@ -63,9 +65,11 @@
     <stone id="minecraft:polished_andesite"/>
     <stone id="minecraft:polished_blackstone"/>
     <stone id="minecraft:polished_blackstone_brick" bricks="true"/>
+    <stone id="minecraft:polished_cinnabar"/>
     <stone id="minecraft:polished_deepslate"/>
     <stone id="minecraft:polished_diorite"/>
     <stone id="minecraft:polished_granite"/>
+    <stone id="minecraft:polished_sulfur"/>
     <stone id="minecraft:polished_tuff"/>
     <stone id="minecraft:prismarine"/>
     <stone id="minecraft:prismarine_brick" bricks="true"/>
@@ -99,6 +103,8 @@
     <stone id="minecraft:smooth_stone"/>
     <stone id="minecraft:stone_brick" bricks="true"/>
     <stone id="minecraft:stone"/>
+    <stone id="minecraft:sulfur"/>
+    <stone id="minecraft:sulfur_brick" bricks="true"/>
     <stone id="minecraft:tuff"/>
     <stone id="minecraft:tuff_brick" bricks="true"/>
 </data_generators>

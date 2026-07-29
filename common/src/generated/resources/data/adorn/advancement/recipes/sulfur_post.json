@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:sulfur_post"
+    ]
+  },
+  "criteria": {
+    "has_sulfur": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:sulfur"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:sulfur_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_sulfur",
+      "has_the_recipe"
+    ]
+  ]
+}

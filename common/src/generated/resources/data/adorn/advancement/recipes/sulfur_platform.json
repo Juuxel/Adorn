@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:sulfur_platform"
+    ]
+  },
+  "criteria": {
+    "has_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:sulfur_slab"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:sulfur_platform"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_slab",
+      "has_the_recipe"
+    ]
+  ]
+}

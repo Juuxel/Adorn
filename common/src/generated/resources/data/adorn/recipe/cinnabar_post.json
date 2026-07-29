@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:post",
+  "pattern": [
+    "/",
+    "/",
+    "#"
+  ],
+  "key": {
+    "#": "minecraft:cinnabar",
+    "/": "#c:rods/stone"
+  },
+  "result": {
+    "id": "adorn:cinnabar_post",
+    "count": 4
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "minecraft:polished_sulfur",
+  "result": {
+    "id": "adorn:polished_sulfur_post",
+    "count": 2
+  }
+}

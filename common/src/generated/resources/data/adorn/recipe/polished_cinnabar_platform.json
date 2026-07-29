@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "group": "adorn:platform",
+  "pattern": [
+    "S",
+    "P"
+  ],
+  "key": {
+    "S": "minecraft:polished_cinnabar_slab",
+    "P": "adorn:polished_cinnabar_post"
+  },
+  "result": {
+    "id": "adorn:polished_cinnabar_platform",
+    "count": 2
+  }
+}

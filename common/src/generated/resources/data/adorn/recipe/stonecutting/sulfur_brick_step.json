@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "minecraft:sulfur_bricks",
+  "result": {
+    "id": "adorn:sulfur_brick_step",
+    "count": 2
+  }
+}

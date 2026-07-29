@@ -1,0 +1,8 @@
+{
+  "type": "stonecutting",
+  "ingredient": "minecraft:sulfur_bricks",
+  "result": {
+    "id": "adorn:sulfur_brick_platform",
+    "count": 1
+  }
+}

@@ -79,6 +79,12 @@ public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
     BlockVariant TUFF_BRICK = variant("tuff_brick", Blocks.TUFF_BRICKS);
     BlockVariant MUD_BRICK = variant("mud_brick", Blocks.MUD_BRICKS);
     BlockVariant RESIN_BRICK = variant("resin_brick", Blocks.RESIN_BRICKS);
+    BlockVariant CINNABAR = variant("cinnabar", Blocks.CINNABAR);
+    BlockVariant POLISHED_CINNABAR = variant("polished_cinnabar", Blocks.POLISHED_CINNABAR);
+    BlockVariant CINNABAR_BRICK = variant("cinnabar_brick", Blocks.CINNABAR_BRICKS);
+    BlockVariant SULFUR = variant("sulfur", Blocks.SULFUR);
+    BlockVariant POLISHED_SULFUR = variant("polished_sulfur", Blocks.POLISHED_SULFUR);
+    BlockVariant SULFUR_BRICK = variant("sulfur_brick", Blocks.SULFUR_BRICKS);
 
     /**
      * The name of this variant. Must be a valid identifier path.

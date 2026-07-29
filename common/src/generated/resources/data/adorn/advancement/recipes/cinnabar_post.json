@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "adorn:cinnabar_post"
+    ]
+  },
+  "criteria": {
+    "has_cinnabar": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:cinnabar"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "adorn:cinnabar_post"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cinnabar",
+      "has_the_recipe"
+    ]
+  ]
+}
