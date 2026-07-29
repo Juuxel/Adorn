@@ -14,7 +14,7 @@ public abstract class TranslationExtension {
     protected abstract Project getProject();
 
     public TranslationExtension() {
-        getKelpVersion().convention("1.1.0");
+        getKelpVersion().convention("1.1.1");
         getTranslationDir().convention(
             getProject().getLayout().dir(
                 getProject().provider(() -> getProject().file("src/main/resources/assets/adorn/lang"))
