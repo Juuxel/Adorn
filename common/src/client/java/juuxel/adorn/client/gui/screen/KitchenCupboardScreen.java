@@ -2,9 +2,9 @@ package juuxel.adorn.client.gui.screen;
 
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.menu.KitchenCupboardMenu;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.player.Inventory;
 
 public final class KitchenCupboardScreen extends PalettedMenuScreen<KitchenCupboardMenu> {
     private static final Identifier BACKGROUND_TEXTURE = AdornCommon.id("textures/gui/kitchen_cupboard.png");

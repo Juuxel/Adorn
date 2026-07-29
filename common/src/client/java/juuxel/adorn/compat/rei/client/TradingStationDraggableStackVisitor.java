@@ -10,8 +10,8 @@ import me.shedaniel.rei.api.client.gui.drag.DraggedAcceptorResult;
 import me.shedaniel.rei.api.client.gui.drag.DraggingContext;
 import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.stream.Stream;
 

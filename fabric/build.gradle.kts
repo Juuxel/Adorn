@@ -3,12 +3,9 @@ import juuxel.adorn.gradle.compatchecker.CheckModDataCompat
 import net.fabricmc.loom.task.FabricModJsonV1Task
 
 plugins {
+    id("adorn-split-sources")
     id("adorn-platform-module")
     id("adorn-data-generator")
-}
-
-loom {
-    splitEnvironmentSourceSets()
 }
 
 sourceSets {

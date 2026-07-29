@@ -1,0 +1,14 @@
+{
+  "compatibilityLevel": "JAVA_16",
+  "minVersion": "0.8",
+  "package": "juuxel.adorn.client.commonmixin",
+  "required": true,
+
+  "client": [
+    "AbstractWidgetMixin"
+  ],
+
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

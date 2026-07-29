@@ -4,11 +4,11 @@ import juuxel.adorn.client.gui.widget.Panel;
 import juuxel.adorn.config.ConfigManager;
 import juuxel.adorn.platform.ModBridge;
 import juuxel.adorn.util.PropertyRef;
-import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.Comparator;

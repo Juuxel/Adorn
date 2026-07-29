@@ -56,5 +56,15 @@ gradlePlugin {
             id = "adorn-translations"
             implementationClass = "juuxel.adorn.gradle.TranslationPlugin"
         }
+
+        register("adorn-hoards") {
+            id = "adorn-hoards"
+            implementationClass = "juuxel.adorn.gradle.HoardPlugin"
+        }
+
+        register("adorn-split-sources") {
+            id = "adorn-split-sources"
+            implementationClass = "juuxel.adorn.gradle.SplitSourcesSetupPlugin"
+        }
     }
 }

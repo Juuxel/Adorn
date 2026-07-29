@@ -60,13 +60,26 @@ public final class PlatformModulePlugin implements Plugin<Project> {
         ModSettings mod = loom.getMods().maybeCreate("main");
         mod.sourceSet(SourceSet.MAIN_SOURCE_SET_NAME);
         mod.sourceSet(SourceSet.MAIN_SOURCE_SET_NAME, ":common");
+        mod.sourceSet("client", ":common");
 
         // Depend on the common project.
         project.getDependencies().add(JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME, createCommonDependency(project));
+
+        if (project.getPlugins().hasPlugin(SplitSourcesSetupPlugin.class)) {
+            project.getDependencies().add("clientImplementation", createCommonClientDependency(project));
+        } else {
+            project.getDependencies().add(JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME, createCommonClientDependency(project));
+        }
     }
 
     private static Dependency createCommonDependency(Project project) {
         var commonDependency = project.getDependencies().project(Map.of("path", ":common"));
+        ((ModuleDependency) commonDependency).setTransitive(false);
+        return commonDependency;
+    }
+
+    private static Dependency createCommonClientDependency(Project project) {
+        var commonDependency = project.getDependencies().project(Map.of("path", ":common", "configuration", "clientOutputs"));
         ((ModuleDependency) commonDependency).setTransitive(false);
         return commonDependency;
     }

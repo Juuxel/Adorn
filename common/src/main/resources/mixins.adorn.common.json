@@ -11,9 +11,6 @@
     "FenceGateBlockMixin",
     "PlayerMixin"
   ],
-  "client": [
-    "client.AbstractWidgetMixin"
-  ],
 
   "injectors": {
     "defaultRequire": 1

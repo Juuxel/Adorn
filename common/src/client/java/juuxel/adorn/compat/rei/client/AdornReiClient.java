@@ -9,10 +9,10 @@ import me.shedaniel.rei.api.client.registry.entry.CollapsibleEntryRegistry;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.minecraft.world.item.Item;
-import net.minecraft.tags.TagKey;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Util;
+import net.minecraft.world.item.Item;
 
 public class AdornReiClient implements REIClientPlugin {
     @Override

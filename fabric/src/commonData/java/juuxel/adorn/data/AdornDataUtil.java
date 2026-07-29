@@ -5,9 +5,6 @@ import com.google.common.hash.HashingOutputStream;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.stream.JsonWriter;
-import com.mojang.serialization.JsonOps;
-import juuxel.adorn.AdornCommon;
-import juuxel.adorn.client.resources.ColorManager;
 import net.minecraft.data.CachedOutput;
 
 import java.io.ByteArrayOutputStream;

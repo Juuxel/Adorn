@@ -2,9 +2,9 @@ package juuxel.adorn.client.gui.screen;
 
 import juuxel.adorn.AdornCommon;
 import juuxel.adorn.menu.DrawerMenu;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.player.Inventory;
 
 public final class DrawerScreen extends PalettedMenuScreen<DrawerMenu> {
     private static final Identifier BACKGROUND_TEXTURE = AdornCommon.id("textures/gui/drawer.png");

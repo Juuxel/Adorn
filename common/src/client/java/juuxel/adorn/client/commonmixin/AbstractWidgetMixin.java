@@ -1,4 +1,4 @@
-package juuxel.adorn.commonmixin.client;
+package juuxel.adorn.client.commonmixin;
 
 import juuxel.adorn.client.gui.widget.ScrollEnvelope;
 import net.minecraft.client.gui.components.AbstractWidget;

@@ -38,7 +38,7 @@
     ]
   },
 
-  "mixins": ["mixins.adorn.json", "mixins.adorn.common.json"],
+  "mixins": ["mixins.adorn.json", "mixins.adorn.common.json", "mixins.adorn.common.client.json"],
   "accessWidener": "adorn.accesswidener",
 
   "depends": {

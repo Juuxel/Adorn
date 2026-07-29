@@ -16,6 +16,9 @@ logoBlur = false
 config = "mixins.adorn.common.json"
 
 [[mixins]]
+config = "mixins.adorn.common.client.json"
+
+[[mixins]]
 config = "mixins.adorn.neo.json"
 
 [[dependencies.adorn]]
