@@ -196,13 +196,6 @@ public final class AdornRecipeGenerator extends RecipeProvider {
             .pattern(" Q ")
             .define('Q', ConventionalItemTags.QUARTZ_GEMS)
             .save(output);
-        shaped(RecipeCategory.MISC, Items.COPPER_INGOT)
-            .unlockedBy("has_copper_nugget", has(MoreConventionalItemTags.COPPER_NUGGETS))
-            .pattern("###")
-            .pattern("###")
-            .pattern("###")
-            .define('#', MoreConventionalItemTags.COPPER_NUGGETS)
-            .save(output, getItemName(Items.COPPER_INGOT) + "_from_nuggets");
     }
 
     private void generatePaintedWood() {
