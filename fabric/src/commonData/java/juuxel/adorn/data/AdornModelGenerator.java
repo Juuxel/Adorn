@@ -270,7 +270,6 @@ public final class AdornModelGenerator extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerators generator) {
         registerFlat(generator, AdornBlocks.PICKET_FENCE);
 
-        registerFlat(generator, AdornItems.COPPER_NUGGET);
         registerFlat(generator, AdornItems.GLOW_BERRY_TEA);
         registerFlat(generator, AdornItems.GUIDE_BOOK);
         registerFlat(generator, AdornItems.HOT_CHOCOLATE);

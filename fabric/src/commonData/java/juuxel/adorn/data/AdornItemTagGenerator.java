@@ -128,9 +128,6 @@ public final class AdornItemTagGenerator extends FabricTagsProvider.ItemTagsProv
             .addTag(MoreConventionalItemTags.MILK_FOODS)
             .addTag(MoreConventionalItemTags.TEA_FOODS);
 
-        valueLookupBuilder(ConventionalItemTags.COPPER_NUGGETS)
-            .add(AdornItems.COPPER_NUGGET.get());
-
         valueLookupBuilder(MoreConventionalItemTags.STONE_RODS)
             .add(AdornItems.STONE_ROD.get());
 

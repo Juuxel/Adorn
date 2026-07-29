@@ -196,10 +196,6 @@ public final class AdornRecipeGenerator extends RecipeProvider {
             .pattern(" Q ")
             .define('Q', ConventionalItemTags.QUARTZ_GEMS)
             .save(output);
-        shapeless(RecipeCategory.MISC, AdornItems.COPPER_NUGGET.get(), 9)
-            .unlockedBy("has_copper_ingot", has(ConventionalItemTags.COPPER_INGOTS))
-            .requires(ConventionalItemTags.COPPER_INGOTS)
-            .save(output);
         shaped(RecipeCategory.MISC, Items.COPPER_INGOT)
             .unlockedBy("has_copper_nugget", has(MoreConventionalItemTags.COPPER_NUGGETS))
             .pattern("###")

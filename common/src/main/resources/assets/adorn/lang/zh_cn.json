@@ -1663,8 +1663,6 @@
   "item.adorn.glow_berry_tea.description": "明亮的饮料",
   "item.adorn.nether_wart_coffee": "下界疣咖啡",
   "item.adorn.nether_wart_coffee.description": "比月黑风高还要黑…",
-  "item.adorn.copper_nugget": "铜粒",
-  "item.adorn.copper_nugget.description": "合成原料",
   "item.adorn.watering_can": "喷水壶",
   "item.adorn.watering_can.description": "便携式水源",
   "item.adorn.watering_can.fertilizer": "已装入：%s/%s",
@@ -1880,7 +1878,6 @@
   "tag.item.c.foods.tea": "茶",
   "tag.item.c.honeycombs": "蜜脾",
   "tag.item.c.lanterns": "灯笼",
-  "tag.item.c.nuggets.copper": "铜粒",
   "tag.item.c.rods.stone": "石棒",
 
   "category.adorn.brewer": "酿造台",

@@ -73,8 +73,6 @@ public final class AdornItems {
     public static final Registered<Item> TRADERS_MANUAL = register("traders_manual",
         settings -> new AdornBookItem(AdornCommon.id("traders_manual"), settings));
 
-    // TODO: DELETE
-    public static final Registered<Item> COPPER_NUGGET = registerWithDescription("copper_nugget", Item::new);
     public static final Registered<Item> WATERING_CAN = registerWithDescription("watering_can",
         WateringCanItem::new,
         () -> new Item.Properties()

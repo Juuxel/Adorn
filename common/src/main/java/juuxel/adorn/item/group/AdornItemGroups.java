@@ -307,10 +307,8 @@ public final class AdornItemGroups {
     private static void addIngredients(ItemGroupBuildContext context) {
         if (context instanceof ItemGroupModifyContext modifyContext) {
             modifyContext.addAfter(Items.STICK, AdornItems.STONE_ROD);
-            modifyContext.addAfter(Items.IRON_NUGGET, AdornItems.COPPER_NUGGET);
         } else {
             context.add(AdornItems.STONE_ROD);
-            context.add(AdornItems.COPPER_NUGGET);
         }
     }
 
