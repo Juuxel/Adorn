@@ -1,4 +1,5 @@
 <data_generators class_name="juuxel.adorn.platform.forge.compat.BwgCompat">
+    <overlay directory="adorn_integration_biomeswevegone" mod_id="biomeswevegone"/>
     <replace key="wood_texture_separator" with="/"/>
     <wood id="biomeswevegone:aspen"/>
     <wood id="biomeswevegone:baobab"/>
