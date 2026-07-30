@@ -22,7 +22,24 @@ import java.util.stream.Collectors;
 public interface BlockVariant extends RegistryHelper.BlockSettingsProvider {
     char MOD_ID_SEPARATOR = '/';
 
-    Map<DyeColor, BlockVariant> WOOLS = createBy(Dyes.ALL_DYES, color -> variant(color.asString(), Blocks.WHITE_WOOL));
+    Map<DyeColor, BlockVariant> WOOLS = createBy(Dyes.ALL_DYES, color -> variant(color.asString(), switch (color) {
+        case WHITE -> Blocks.WHITE_WOOL;
+        case ORANGE -> Blocks.ORANGE_WOOL;
+        case MAGENTA -> Blocks.MAGENTA_WOOL;
+        case LIGHT_BLUE -> Blocks.LIGHT_BLUE_WOOL;
+        case YELLOW -> Blocks.YELLOW_WOOL;
+        case LIME -> Blocks.LIME_WOOL;
+        case PINK -> Blocks.PINK_WOOL;
+        case GRAY -> Blocks.GRAY_WOOL;
+        case LIGHT_GRAY -> Blocks.LIGHT_GRAY_WOOL;
+        case CYAN -> Blocks.CYAN_WOOL;
+        case PURPLE -> Blocks.PURPLE_WOOL;
+        case BLUE -> Blocks.BLUE_WOOL;
+        case BROWN -> Blocks.BROWN_WOOL;
+        case GREEN -> Blocks.GREEN_WOOL;
+        case RED -> Blocks.RED_WOOL;
+        case BLACK -> Blocks.BLACK_WOOL;
+    }));
     Map<DyeColor, BlockVariant> PAINTED_WOODS = createBy(Dyes.ALL_DYES, PaintedWood::new);
 
     BlockVariant IRON = variant("iron", Blocks.IRON_BARS);
