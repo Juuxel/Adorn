@@ -130,7 +130,13 @@ tasks {
                     "issues" to "https://github.com/Juuxel/Adorn/issues",
                 )
             )
-            customData.put("modmenu", mapOf("parent" to "adorn"))
+            customData.put(
+                "modmenu",
+                mapOf(
+                    "parent" to "adorn",
+                    "badges" to listOf("library"),
+                )
+            )
         }
         outputFile.set(file("build/hoard.fabric.mod.json"))
     }
