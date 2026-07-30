@@ -106,6 +106,7 @@ tasks {
         mod("cinderscapes")
         mod("ecologics")
         mod("promenade")
+        mod("techreborn")
         mod("terrestria")
         mod("traverse")
     }

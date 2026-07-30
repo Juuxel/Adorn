@@ -1,6 +1,8 @@
 <data_generators class_name="juuxel.adorn.compat.TechRebornCompat">
     <overlay directory="adorn_integration_techreborn" mod_id="techreborn"/>
     <wood id="techreborn:rubber">
-        <replace key="log_side" with="techreborn:block/rubber_log_side"/>
+        <replace key="main-texture" with="techreborn:block/misc/rubber_planks"/>
+        <replace key="log_side" with="techreborn:block/misc/rubber_log"/>
+        <replace key="log_end" with="techreborn:block/misc/rubber_log_top"/>
     </wood>
 </data_generators>
