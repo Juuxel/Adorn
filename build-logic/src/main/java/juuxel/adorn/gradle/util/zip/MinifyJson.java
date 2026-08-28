@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 public final class MinifyJson implements ZipTransformer.Step {
     @Override
     public boolean shouldApply(String name) {
-        return name.endsWith(".json");
+        return name.endsWith(".json") || name.endsWith(".mcmeta");
     }
 
     @Override
